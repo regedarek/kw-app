@@ -1,0 +1,29 @@
+.column.row
+  h3.subheader Twoje rezerwacje w tym okresie
+  table
+    thead
+      tr
+        th Przedmiot
+        th Akcje
+    tbody
+      - current_user.reservations.select { |reservation| (reservation.start_date..reservation.end_date).include?(params[:start_date].to_date) }.each do |reservation|
+        tr
+          td
+            = reservation.item.try(:name)
+          td
+            = link_to 'Zrezygnuj', reservation_path(reservation), method: :delete
+
+.column.row
+  h3.subheader Dostepne przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}
+  table
+    thead
+      tr
+        th Przedmiot
+        th Akcje
+    tbody
+      - @available_items.each do |item|
+        tr
+          td
+            = item.try(:name)
+          td
+            = link_to 'Zarezerwuj', reservations_path(item_id: item, start_date: params[:start_date]), method: :post

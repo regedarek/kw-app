@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    models:
+      db/route: 'Przejscie'
+    attributes:
+      db/route:
+        name: 'Nazwa'
+        climbing_date: "Data przejscia"

@@ -1,0 +1,78 @@
+.column.row
+  .row
+    br
+    a data-open="new_reservation" class='button large expanded'  Dodaj nową rezerwacje
+    #new_reservation.callout.reveal data-reveal=''
+      button.close-button aria-label=("Close modal") data-close="" type="button" 
+        span aria-hidden="true"  &times;
+
+      = form_for Admin::ReservationsForm.new, url: admin_reservations_path do |f|
+        .row
+          .large-12.columns
+            = f.label :kw_id, 'Numer klubowy'
+            = f.text_field :kw_id
+
+        .row
+          .large-12.columns
+            = f.label :item_id, 'Przedmiot'
+            = f.select :item_id, options_from_collection_for_select(Db::Item.all, :id, :name), {}
+
+        .row
+          .large-12.columns
+            = f.label :end_date, 'Poczatkowa data(od czwartku)'
+            = f.date_field :start_date
+
+        .row
+          .large-12.columns
+            = f.label :end_date, 'Koncowa data(do czwartku)'
+            = f.date_field :end_date
+
+        .row
+          .large-12.columns
+            = f.label :description, 'Opis'
+            = f.text_area :description
+
+        .row
+          .large-12.columns
+            = f.submit 'Dodaj rezerwacje', class: 'button'
+
+  .row
+    - if params[:state] == 'archived'
+      = link_to 'Pokaz tylko niezarchiwizowane', admin_reservations_path
+    - else
+      = link_to 'Pokaz tylko zarchiwizowane', admin_reservations_path(state: :archived)
+
+  .row
+    table
+      thead
+        tr
+          th Kto?
+          th Przedmiot
+          th Na ktory tydzien?
+          th Kiedy zarezerwowano
+          th Zapłacono?
+          th Status
+          th Akcje
+      tbody
+        - @reservations.each do |reservation|
+          tr
+            td
+              = [reservation.user.first_name, reservation.user.last_name].join(' ')
+            td
+              = reservation.item.name
+            td
+              = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
+            td
+              = reservation.created_at.strftime("%d-%m-%Y")
+            td style=(reservation.paid? ? 'background-color: green' : 'background-color: red')
+              = I18n.t(reservation.paid?.to_s)
+            td style=(reservation.holding? ? 'background-color: yellow' : '')
+              - on_change = %Q[$('#edit_db_reservation_#{reservation.id}').submit()].html_safe
+              = form_for reservation, url: update_state_admin_reservation_path(reservation), method: :put do |f|
+                = f.select :state, Reservations::StatePresenter.to_options, {}, onChange: on_change
+            td
+              = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
+              = ' | '
+              = link_to 'Usun', admin_reservation_path(reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+              = ' | '
+              = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post

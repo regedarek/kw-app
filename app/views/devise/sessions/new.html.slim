@@ -1,0 +1,20 @@
+.column.row
+  h2 Zaloguj sie
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .row
+      .large-12.columns
+        = f.label :email
+        = f.email_field :email, autofocus: true
+
+    .row
+      .large-12.columns
+        = f.label :password, 'Haslo'
+        = f.password_field :password, autocomplete: "off"
+
+    .row
+      .large-12.columns
+        = f.submit "Zaloguj sie", class: 'button'
+
+    .row
+      .large-12.columns
+        = render "devise/shared/links"

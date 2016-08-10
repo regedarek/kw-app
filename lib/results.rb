@@ -1,0 +1,2 @@
+require 'success'
+require 'failure'

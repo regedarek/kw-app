@@ -1,0 +1,61 @@
+= form_for @route, as: :route, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if @route.errors.any?
+        .callout.alert
+          ul
+            - @route.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :peak_id
+      = f.grouped_collection_select :peak_id, @valleys, :peaks, :name, :id, :name, class: 'large'
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :difficulty
+      = f.text_field :difficulty
+
+  .row
+    .large-12.columns
+      = f.label :time
+      = f.text_field :time
+
+  .row
+    .large-12.columns
+      = f.label :partners
+      = f.text_field :partners
+
+  .row
+    .large-12.columns
+      = f.label :climbing_date
+      = f.date_field :climbing_date
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .large-12.columns
+      fieldset.fieldset
+        .legend Subiektywna ocena urody drogi
+
+        = f.radio_button :rating, 1
+        = f.label :rating_one, 'Fuj, nie polecam'
+
+        = f.radio_button :rating, 2
+        = f.label :rating_two, 'Warta przejscia'
+
+        = f.radio_button :rating, 3
+        = f.label :rating_three, 'Piekna droga'
+
+  .row
+    .large-12.columns
+      = f.submit class: 'button'

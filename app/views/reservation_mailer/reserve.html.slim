@@ -1,0 +1,27 @@
+h3= "Rezerwacja ##{@reservation.id}"
+
+b Kto: 
+= "#{@reservation.user.first_name} #{@reservation.user.last_name}"
+br
+b Co: 
+= @reservation.item.name
+br
+b Na kiedy: 
+= "#{@reservation.start_date} - #{@reservation.end_date}"
+br
+br
+= "Potwierdzamy ze zarezerwowales "
+b= @reservation.item.name
+br
+= "Prosimy Cie abys przestrzegal naszego regulaminu."
+br
+br
+= "Aby odebrac przedmiot skontaktuj sie z opiekunem wypozyczalni we czwartek."
+br
+= "Aby skontaktowac sie z opiekunem mozesz po prostu odpowiedziec na ten email."
+br
+= '----------------------------------------------------------'
+br
+i
+  small
+    = 'Wypozyczalnia Klubu Wysokogorskiego Krakow'

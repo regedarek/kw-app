@@ -1,0 +1,17 @@
+default: &default
+  pool: 5
+  timeout: 5000
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: kw-app_development
+  username: rege
+  password: z
+
+test:
+  <<: *default
+  database: kw-app_test
+  username: rege
+  password: z

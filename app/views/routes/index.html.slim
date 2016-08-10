@@ -1,0 +1,37 @@
+.column.row
+  br
+  .row
+    .large-12.columns
+      = link_to 'Dodaj nowe przejscie', new_route_path, class: 'large expanded button'
+  table
+    thead
+      tr
+        th width='130' Kiedy?
+        th Kto?
+        th Nazwa
+        th Dolina
+        th Szczyt
+        th width='50' Wycena
+        th width='200'
+    tbody
+      - @routes.each do |route|
+        tr
+          td align='left'
+            = route.climbing_date
+          td
+            = route.partners
+          td
+            = route.name
+          td
+            = route.peak.valley.name
+          td
+            = route.peak.name
+          td align='center'
+            = route.difficulty
+          td align='right'
+            = link_to 'Szczegoly', route_path(route)
+            - if user_signed_in? && current_user.admin?
+              = ' | '
+              = link_to 'Edytuj', edit_route_path(route)
+              = ' | '
+              = link_to 'Usun', route_path(route), method: :delete

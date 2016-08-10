@@ -1,0 +1,48 @@
+.column.row
+  br
+  .row
+    .large-6.columns
+      .callout
+        = form_for @valley, as: :valley, url: admin_valleys_path do |f|
+          - if @valley.errors.any?
+            .callout.alert
+              ul
+                - @valley.errors.full_messages.each do |msg|
+                  li= msg
+          = f.label :name
+          = f.text_field :name
+          = f.submit 'Utworz Doline', class: 'button'
+
+    .large-6.columns
+      .callout
+        = form_for @peak, as: :peak, url: admin_peaks_path do |f|
+          - if @peak.errors.any?
+            .callout.alert
+              ul
+                - @peak.errors.full_messages.each do |msg|
+                  li= msg
+          = f.label :name
+          = f.text_field :name
+
+          = f.label :valley_id
+          = f.select :valley_id, options_from_collection_for_select(Db::Valley.order(:name), :id, :name), {}
+          = f.submit class: 'button'
+
+  .row
+    hr
+
+  .row
+    table
+      tbody
+        - Db::Valley.order(:name).each do |valley|
+          tr align='left'
+            th scope='colgroup'
+              = valley.name
+            th
+              = link_to 'Usun', admin_valley_path(valley.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+          - valley.peaks.each do |peak|
+            tr
+              td
+                = peak.name
+              td
+                = link_to 'Usun', admin_peak_path(peak.id), method: :delete, data: { confirm: 'Jestes pewien?' }

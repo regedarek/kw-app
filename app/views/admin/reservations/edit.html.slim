@@ -1,0 +1,41 @@
+.column.row
+  br
+  = form_for Admin::ReservationsForm.new(@reservation.slice(:kw_id, :item_id, :paid, :end_date, :start_date, :description)), url: admin_reservation_path(params[:id]), method: :put, html: { class: 'form-horizontal' } do |f|
+    .row
+      .large-12.columns
+        = f.label :kw_id, 'Numer klubowy'
+        = f.text_field :kw_id
+
+    .row
+      .large-12.columns
+        = f.label :item_id, 'Przedmiot', class: 'col-sm-2 control-label'
+        = f.select :item_id, options_from_collection_for_select(Db::Item.all, :id, :name, selected: @reservation.item_id), {}
+
+    .row
+      .large-12.columns
+        = f.label :end_date, 'Poczatkowa data(od czwartku)'
+        = f.date_field :start_date
+
+    .row
+      .large-12.columns
+        = f.label :end_date, 'Koncowa data(do czwartku)'
+        = f.date_field :end_date
+
+    .row
+      .large-12.columns
+        = f.label :description, 'Opis'
+        = f.text_area :description
+
+    .row
+      .large-12.columns
+        = f.label :paid, 'Zapłacono?'
+        = f.check_box :paid
+
+    = f.submit 'Zaktualizuj rezerwacje', class: 'button'
+
+    .row
+      .large-12.columns
+        = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
+        = " (#{@reservation.user.warnings}) "
+        = link_to 'Usun upomnienie', give_back_warning_admin_reservation_path(@reservation), method: :post
+    br

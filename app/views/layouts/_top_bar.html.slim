@@ -1,0 +1,28 @@
+.title-bar data-hide-for="medium" data-responsive-toggle="top-bar" 
+  button.menu-icon data-toggle="" type="button" 
+  .title-bar-title Menu
+
+#top-bar.top-bar
+  .top-bar-left
+    ul.dropdown.menu data-dropdown-menu="" 
+      li.menu-text Klub Wysokogorski Krakow
+      - if user_signed_in?
+        li= link_to "Start", home_path
+        li= link_to 'Moje konto', edit_user_registration_path
+        - if current_user.admin?
+          li
+            = link_to 'Panel Administracyjny', admin_path
+            ul.menu.vertical
+              li= link_to 'Uzytkownicy', admin_users_path
+              li= link_to 'Skladki', admin_payments_path
+              li= link_to 'Przedmioty', admin_items_path
+              li= link_to 'Rezerwacje', admin_reservations_path
+              li= link_to 'Przejscia', routes_path
+              li= link_to 'Doliny i szczyty', admin_valleys_path
+  .top-bar-right
+    ul.dropdown.menu
+      - if user_signed_in?
+        li= link_to 'Wyloguj', destroy_user_session_path
+      - else
+        li= link_to 'Zaloguj', new_user_session_path
+        li= link_to 'Zarejestruj', new_user_registration_path

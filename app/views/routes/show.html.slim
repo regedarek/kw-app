@@ -1,0 +1,46 @@
+.column.row
+  .large-12.columns
+    h3 = @route.name
+
+  - if @route.description.present?
+    .large-12.columns
+      .callout.small
+        = @route.description
+
+  .large-12.columns
+    b Dolina: 
+    = @route.peak.valley.name
+
+  .large-12.columns
+    b Szczyt: 
+    = @route.peak.name
+
+  - if @route.difficulty.present?
+    .large-12.columns
+      b Wycena: 
+      = @route.difficulty
+
+  .large-12.columns
+    b Partnerzy: 
+    = @route.partners
+
+  - if @route.time?
+    .large-12.columns
+      b Czas przejscia:  
+      = @route.time
+
+  .large-12.columns
+    b Data przejscia: 
+    = @route.climbing_date
+
+  - if @route.rating?
+    .large-12.columns
+      b Subiektywna ocena: 
+      = "#{@route.rating} / 3"
+
+  .large-12.columns
+    hr
+    = link_to 'Powrot', routes_path
+    - if user_signed_in? && current_user.admin?
+      = ' | '
+      = link_to 'Edytuj', edit_route_path(@route)

@@ -1,0 +1,49 @@
+.column.row
+  .row
+    = form_for Admin::PaymentsForm.new, url: admin_payments_path do |f|
+      .row
+        .columns.large-12
+          = f.label :kw_id, 'Numer klubowy'
+          = f.text_field :kw_id
+
+      .row
+        .columns.large-12
+          = f.label :year, 'Oplata za rok'
+          = f.text_field :year
+
+      .row
+        .columns.large-12
+          = f.submit 'Dodaj skladke', class: 'button'
+
+  .row
+    hr
+
+  .row
+    table
+      thead
+        tr
+          th Imie
+          th Nazwisko
+          th 
+            = form_for Admin::PaymentsForm.new, url: admin_payments_path, method: :get do |f|
+              = f.text_field :kw_id,
+                value: params.fetch(:admin_payments_form, {}).fetch(:kw_id, nil),
+                placeholder: 'Numer klubowy'
+          th Rok
+          th Kiedy
+          th Akcje
+      tbody
+        - @payments.each do |payment|
+          tr style=(payment.year == Date.today.year ? 'background-color: green' : '')
+            td
+              = payment.user.try(:first_name)
+            td
+              = payment.user.try(:last_name)
+            td
+              = payment.kw_id
+            td
+              = payment.year
+            td
+              = payment.created_at.strftime("%d-%m-%Y")
+            td
+              = link_to 'Usun', admin_payment_path(payment.id), method: :delete, data: { confirm: 'Jestes pewien?' }

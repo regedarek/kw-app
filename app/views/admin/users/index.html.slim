@@ -1,0 +1,25 @@
+.column.row
+  .row
+    h3.subheader Klubowicze
+    table
+      thead
+        tr
+          th Number Klubowy
+          th Imie
+          th Nazwisko
+          th Email
+          th Ostrzezenia
+          th Akcje
+      tbody
+        - @users.each do |user|
+          tr
+            td= user.kw_id
+            td= user.first_name
+            td= user.last_name
+            td= user.email
+            td= user.warnings
+            td
+              - if user.admin?
+                = link_to 'Zdegraduj', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
+              - else
+                = link_to 'Zrob adminem', make_admin_admin_user_path(user)

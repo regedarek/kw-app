@@ -1,0 +1,54 @@
+.column.row
+  br
+  - if user_signed_in?
+    - if current_user.payments.find_by(year: Date.today.year).present?
+      .callout.primary
+          | Wybierz tydzien i zobacz dostepnosc przedmiotow
+
+      .callout
+        = form_for Availability::Form.new, url: availability_reservations_path do |f|
+          .row
+            .large-12.columns
+              = f.label :start_date, 'Tydzien'
+              = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
+            //.large-4.columns
+              // = f.label :start_date, 'Od kiedy potrzebujesz?'
+              // = f.date_field :start_date, include_blank: true
+          .row
+            .large-12.columns
+              = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
+
+      
+    - else
+      .callout.alert
+          | Konto nieaktywne, aby zarezerwowac musisz zaplacic skladke za rok biezacy.
+          br
+          | Udaj sie do klubu lub napisz na adres: 
+          = mail_to 'kw@kw.krakow.pl'
+          |  jezeli zaplaciles skladke.
+
+    h3 Twoje rezerwacje
+    table
+      thead
+        tr
+          th Przedmiot
+          th Od
+          th Do
+          th Status
+          th Informacja od opiekuna
+      tbody
+        - current_user.reservations.each do |reservation|
+          tr
+            td
+              = reservation.item.try(:name)
+            td
+              = reservation.start_date 
+            td
+              = reservation.end_date 
+            td
+              = Reservations::StatePresenter.new(reservation.current_state).to_s
+            td
+              = reservation.description
+  - else
+    .callout.warrning
+      | Aby uzywac wypozyczalni zarejestruj swoje konto w ktorym podaj email kontaktowy oraz numer legitymacji klubowej. Twoja skladka powinna zostac automatycznie pobrana. W przypadku problemow skontaktuj sie z opiekunem wypozyczalni.
