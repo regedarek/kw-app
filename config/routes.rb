@@ -3,6 +3,14 @@ Rails.application.routes.draw do
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
 
+  namespace :api do
+    resources :payments, only: [] do
+      collection do
+        get :status
+      end
+    end
+  end
+
   resources :routes
   resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create, :destroy] do
