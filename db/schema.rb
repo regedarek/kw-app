@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160823174538) do
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "item_id"
     t.string   "state"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
