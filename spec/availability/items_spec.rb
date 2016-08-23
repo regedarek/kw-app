@@ -31,6 +31,8 @@ describe Availability::Items do
 
   context 'start_date is thursday' do
     xit 'returns available items for proper week'
+    xit 'excludes instructor items'
+    xit 'excludes not rentable items'
   end
 
   it { expect(subject).not_to include(item1) }
