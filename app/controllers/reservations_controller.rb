@@ -10,12 +10,12 @@ class ReservationsController < ApplicationController
   def create
     reservation_params_from_url = HashWithIndifferentAccess.new(
       kw_id: current_user.kw_id,
-      item_id: params[:item_id],
+      item_ids: [params[:item_id]],
       start_date: params[:start_date],
       end_date: (params[:start_date].to_date + 7)
     )
     result = Reservations::Reserve.new(reservation_params_from_url).create
-    result.success { redirect_to :back, notice: 'Zarezerwowano' }
+    result.success { redirect_to reservations_path, notice: 'Zarezerwowano' }
     result.invalid { |form:| redirect_to home_path, alert: "Nie dodano: #{form.errors.messages}" }
     result.invalid_period { |message:| redirect_to home_path, alert: message }
     result.else_fail!
@@ -29,6 +29,6 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservations_form).permit(:kw_id, :item_id, :start_date, :end_date)
+    params.require(:reservations_form).permit(:kw_id, :item_ids, :start_date, :end_date)
   end
 end

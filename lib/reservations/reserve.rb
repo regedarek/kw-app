@@ -9,7 +9,8 @@ module Reservations
 
     def create
       if form.valid?
-        reservation = Db::Reservation.new(form.params)
+        reservation = Db::Reservation.where(start_date: form.params.fetch(:start_date)).first_or_initialize(form.params)
+        reservation.items << Db::Item.where(id: form.params.fetch(:item_ids))
 
         if reservation.start_date > reservation.end_date
           return Failure.new(:invalid_period, message: 'Data poczatkowa musi byc przed koncowa')
@@ -18,10 +19,10 @@ module Reservations
         if Date.today > reservation.start_date || Date.today > reservation.end_date
           return Failure.new(:invalid_period, message: 'Rezerwowac mozna tylko po dzisiejszej dacie')
         end
-
+        
         reservation.save
         reservation.reserve!
-        ReservationMailer.reserve(reservation).deliver
+        ReservationMailer.reserve(reservation).deliver_now
         Success.new
       else
         Failure.new(:invalid, form: form)

@@ -4,14 +4,14 @@ b Kto:
 = "#{@reservation.user.first_name} #{@reservation.user.last_name}"
 br
 b Co: 
-= @reservation.item.name
+= @reservation.items.map(&:name)
 br
 b Na kiedy: 
 = "#{@reservation.start_date} - #{@reservation.end_date}"
 br
 br
 = "Potwierdzamy ze zarezerwowales "
-b= @reservation.item.name
+b= @reservation.items.map(&:name)
 br
 = "Prosimy Cie abys przestrzegal naszego regulaminu."
 br

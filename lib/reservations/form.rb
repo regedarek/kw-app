@@ -6,14 +6,14 @@ module Reservations
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
 
-    attr_accessor :kw_id, :item_id, :start_date, :end_date
+    attr_accessor :kw_id, :item_ids, :start_date, :end_date
 
-    validates :kw_id, :item_id, :start_date, :end_date, presence: { message: 'nie moze byc pusty'}
+    validates :kw_id, :item_ids, :start_date, :end_date, presence: { message: 'nie moze byc pusty'}
 
     def params
       HashWithIndifferentAccess.new(
         user_id: user.id,
-        item_id: item_id,
+        item_ids: item_ids,
         start_date: start_date_of_the_week,
         end_date: end_date_of_the_week
       )
