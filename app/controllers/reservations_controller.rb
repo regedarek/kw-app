@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   def index
+    return redirect_to reservations_path(start_date: Date.today.end_of_week(:thursday) + 1) unless params[:start_date].present?
     @available_items = Availability::Items.new(start_date: params[:start_date]).collect
   end
 
