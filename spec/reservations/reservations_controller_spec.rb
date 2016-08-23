@@ -31,6 +31,7 @@ describe ReservationsController, type: :controller do
       reservation = Db::Reservation.last
 
       expect(reservation.items).to eq([item_1])
+      expect(reservation.user_id).to eq(1)
       expect(response).to redirect_to reservations_path
     end
 

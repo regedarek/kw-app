@@ -26,7 +26,7 @@ describe Availability::Items do
   end
 
   context 'start_date is not thursday' do
-    xit 'returns available items for week since next thursday'
+    xit 'returns warning'
   end
 
   context 'start_date is thursday' do

@@ -28,15 +28,6 @@ module Reservations
       end
     end
 
-    def self.destroy(reservation_id)
-      reservation = Db::Reservation.find(reservation_id)
-      if reservation.destroy
-        Success.new
-      else
-        Failure.new(:failure)
-      end
-    end
-
     def form
       @form ||= Reservations::Form.new(@allowed_params)
     end

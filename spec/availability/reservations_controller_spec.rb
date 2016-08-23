@@ -6,15 +6,15 @@ describe ReservationsController, type: :controller do
 
   describe '#index' do
     context 'without start_date param' do
-      xit 'shows only available items for current week'
+      xit 'redirects to page with next thursday with warning'
     end
 
     context 'with start_date in the past' do
-      xit 'shows warning'
+      xit 'shows warning and redirects to next thursday'
     end
 
     context 'with start_date which is not thursday' do
-      xit 'shows avaliable items from next thursday'
+      xit 'redirects to page with next thursday with warning'
     end
 
     context 'with proper start_date' do
