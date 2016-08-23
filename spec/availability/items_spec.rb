@@ -21,6 +21,18 @@ describe Availability::Items do
   end
   subject { described_class.new(start_date: '2016-09-01').collect }
 
+  context 'start_date in the past' do
+    xit 'returns warning'
+  end
+
+  context 'start_date is not thursday' do
+    xit 'returns available items for week since next thursday'
+  end
+
+  context 'start_date is thursday' do
+    xit 'returns available items for proper week'
+  end
+
   it { expect(subject).not_to include(item1) }
   it { expect(subject).to include(item2) }
   it { expect(subject).to include(item3) }

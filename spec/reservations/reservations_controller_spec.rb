@@ -14,8 +14,8 @@ describe ReservationsController, type: :controller do
   let!(:item_1) { Db::Item.create(name: 'czekan') }
   let!(:item_2) { Db::Item.create(name: 'raki') }
 
-  describe '#index' do
-    xit 'returns available items'
+  describe '#new' do
+    xit 'shows all my reservations'
   end
 
   describe '#create' do
@@ -41,5 +41,8 @@ describe ReservationsController, type: :controller do
       expect(reservation.items.map(&:id)).to eq([item_1.id, item_2.id])
       expect(response).to redirect_to reservations_path
     end
+  end
+
+  describe '#remove_item' do
   end
 end

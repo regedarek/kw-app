@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :routes
   resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create, :destroy] do
+    member do
+      delete :remove_item
+    end
     collection do
       post :availability
     end
