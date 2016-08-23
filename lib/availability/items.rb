@@ -16,11 +16,7 @@ module Availability
     private
 
     def not_available_items
-      reservations_in_given_week.collect(&:item)
-    end
-
-    def reservations_in_given_week
-      Db::Reservation.select { |reservation| week.include?(reservation.start_date..reservation.end_date) }  
+      Db::Reservation.find_by(start_date: @start_date).try(:items) || []
     end
   end
 end

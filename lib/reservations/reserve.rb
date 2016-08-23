@@ -21,7 +21,6 @@ module Reservations
         end
         
         reservation.save
-        reservation.reserve!
         ReservationMailer.reserve(reservation).deliver_now
         Success.new
       else

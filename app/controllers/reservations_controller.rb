@@ -15,7 +15,7 @@ class ReservationsController < ApplicationController
       end_date: (params[:start_date].to_date + 7)
     )
     result = Reservations::Reserve.new(reservation_params_from_url).create
-    result.success { redirect_to reservations_path, notice: 'Zarezerwowano' }
+    result.success { redirect_to reservations_path(start_date: params[:start_date]), notice: 'Zarezerwowano' }
     result.invalid { |form:| redirect_to home_path, alert: "Nie dodano: #{form.errors.messages}" }
     result.invalid_period { |message:| redirect_to home_path, alert: message }
     result.else_fail!

@@ -6,12 +6,14 @@
         th Przedmiot
         th Akcje
     tbody
-      - current_user.reservations.select { |reservation| (reservation.start_date..reservation.end_date).include?(params[:start_date].to_date) }.each do |reservation|
+      - reservation = current_user.reservations.find_by(start_date: params[:start_date])
+      - if reservation
+        - reservation.items.each do |item|
         tr
           td
-            = reservation.item.try(:name)
+            = item.name
           td
-            = link_to 'Zrezygnuj', reservation_path(reservation), method: :delete
+            = link_to 'Zrezygnuj', '#'
 
 .column.row
   h3.subheader Dostepne przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}
