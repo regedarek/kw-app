@@ -14,6 +14,10 @@ describe ReservationsController, type: :controller do
   let!(:item_1) { Db::Item.create(name: 'czekan') }
   let!(:item_2) { Db::Item.create(name: 'raki') }
 
+  describe '#index' do
+    xit 'redirects to next thursday if start_date is not thursday'
+  end
+
   describe '#new' do
     xit 'shows all my reservations'
   end
