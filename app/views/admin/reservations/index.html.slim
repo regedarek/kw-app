@@ -14,8 +14,8 @@
 
         .row
           .large-12.columns
-            = f.label :item_id, 'Przedmiot'
-            = f.select :item_id, options_from_collection_for_select(Db::Item.all, :id, :name), {}
+            = f.label :item_ids, 'Przedmiot'
+            = f.text_field :item_ids
 
         .row
           .large-12.columns
@@ -50,7 +50,6 @@
           th Przedmiot
           th Na ktory tydzien?
           th Kiedy zarezerwowano
-          th Zapłacono?
           th Status
           th Akcje
       tbody
@@ -59,13 +58,11 @@
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
-              = reservation.item.name
+              = reservation.items.map(&:name)
             td
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
             td
               = reservation.created_at.strftime("%d-%m-%Y")
-            td style=(reservation.paid? ? 'background-color: green' : 'background-color: red')
-              = I18n.t(reservation.paid?.to_s)
             td style=(reservation.holding? ? 'background-color: yellow' : '')
               - on_change = %Q[$('#edit_db_reservation_#{reservation.id}').submit()].html_safe
               = form_for reservation, url: update_state_admin_reservation_path(reservation), method: :put do |f|
