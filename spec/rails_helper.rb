@@ -1,5 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
+require 'factories'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'support/controller_helper'
@@ -8,6 +9,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
+
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.before :suite do
     File.open("#{Rails.root}/log/test.log", 'w') { |file| file.truncate(0) }

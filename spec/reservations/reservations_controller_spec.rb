@@ -1,18 +1,10 @@
 require 'rails_helper'
 
 describe ReservationsController, type: :controller do
-  before do
-    user = Db::User.new(
-      kw_id: 1, email: 'test@test.pl',
-      first_name: 'Test', last_name: 'Test'
-    )
-    user.password = 'test'
-    user.save
-    sign_in(user)
-  end
-  let(:user) { Db::User.first }
+  let!(:user)   { Factories::User.create!(first_name: 'Olek') }
   let!(:item_1) { Db::Item.create(name: 'czekan') }
   let!(:item_2) { Db::Item.create(name: 'raki') }
+  before { sign_in(user) }
 
   describe '#index' do
     xit 'redirects to next thursday if start_date is not thursday'
