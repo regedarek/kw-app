@@ -13,10 +13,6 @@ describe ReservationsController, type: :controller do
     end
   end
 
-  describe '#new' do
-    xit 'shows all my reservations'
-  end
-
   describe '#create' do
     it 'creates reservation with available items' do
       expect {
@@ -25,9 +21,9 @@ describe ReservationsController, type: :controller do
 
       reservation = Db::Reservation.last
 
-      expect(reservation.items).to eq([item_1])
-      expect(reservation.user_id).to eq(1)
-      expect(response).to redirect_to reservations_path
+      expect(reservation.items).to match_array([item_1])
+      expect(reservation.user_id).to eq(user.id)
+      expect(response).to redirect_to reservations_path(start_date: '2016-10-10')
     end
 
     it 'adds item to reservation if already exists' do
@@ -37,12 +33,28 @@ describe ReservationsController, type: :controller do
       }.to change { Db::Reservation.count }.by(0)
 
       reservation = Db::Reservation.last
-
-      expect(reservation.items.map(&:id)).to eq([item_1.id, item_2.id])
-      expect(response).to redirect_to reservations_path
+      expect(reservation.items).to match_array([item_1, item_2])
+      expect(response).to redirect_to reservations_path(start_date: '2016-10-06')
     end
   end
 
   describe '#remove_item' do
+    let!(:reservation) { Db::Reservation.create(start_date: '2016-10-06', end_date: '2016-10-13', user: user) }
+    before do
+      reservation.items << [item_1, item_2]
+    end
+
+    it 'removes item from registration or registration if it was last one' do
+      expect {
+        delete :delete_item, { id: reservation.id, item_id: item_1.id }
+      }.to change { reservation.items.count }.from(2).to(1)
+
+      expect(response).to redirect_to reservations_path
+
+      expect {
+        delete :delete_item, { id: reservation.id, item_id: item_2.id }
+      }.to change { Db::Reservation.count }.from(1).to(0)
+      expect(response).to redirect_to reservations_path
+    end
   end
 end
