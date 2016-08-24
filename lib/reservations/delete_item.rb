@@ -11,7 +11,7 @@ module Reservations
     def delete(item_id:)
       @reservation.items.delete(Db::Item.find(item_id))
       @reservation.destroy if @reservation.items.empty?
-      Success.new
+      Success.new(start_date: @reservation.start_date)
     end
   end
 end

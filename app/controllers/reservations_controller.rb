@@ -25,7 +25,9 @@ class ReservationsController < ApplicationController
 
   def delete_item
     result = Reservations::DeleteItem.from(reservation_id: params[:id]).delete(item_id: params[:item_id])
-    result.success { redirect_to reservations_path(start_date: params[:start_date]), notice: 'Zrezygnowano' }
+    result.success do |start_date:|
+      redirect_to reservations_path(start_date: start_date), notice: 'Zrezygnowano'
+    end
   end
 
   private

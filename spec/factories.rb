@@ -20,6 +20,7 @@ module Factories
       load_fixture('items').each do |item_json|
         Db::Item.create!(item_json)
       end
+      Db::Item.all
     end
   end
 

@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe ReservationsController, type: :controller do
   let!(:user)   { Factories::User.create!(first_name: 'Olek') }
-  let!(:item_1) { Db::Item.create(name: 'czekan') }
-  let!(:item_2) { Db::Item.create(name: 'raki') }
+  let!(:items)  { Factories::Item.create_all! }
+  let(:item_1) { items.first }
+  let(:item_2) { items.last }
   before { sign_in(user) }
 
   describe '#index' do
@@ -20,6 +21,7 @@ describe ReservationsController, type: :controller do
       }.to change{ Db::Reservation.count }.by(1)
 
       reservation = Db::Reservation.last
+
 
       expect(reservation.items).to match_array([item_1])
       expect(reservation.user_id).to eq(user.id)
@@ -38,23 +40,20 @@ describe ReservationsController, type: :controller do
     end
   end
 
-  describe '#remove_item' do
-    let!(:reservation) { Db::Reservation.create(start_date: '2016-10-06', end_date: '2016-10-13', user: user) }
-    before do
-      reservation.items << [item_1, item_2]
-    end
+  describe '#delete_item' do
+    let!(:reservation) { Factories::Reservation.create!(start_date: '2016-10-06', items: [item_1, item_2]) }
 
-    it 'removes item from registration or registration if it was last one' do
+    it 'deletes item from registration or registration if it was last one' do
       expect {
-        delete :delete_item, { id: reservation.id, item_id: item_1.id }
+        delete :delete_item, { id: reservation, item_id: item_1 }
       }.to change { reservation.items.count }.from(2).to(1)
 
-      expect(response).to redirect_to reservations_path
+      expect(response).to redirect_to reservations_path(start_date: '2016-10-06')
 
       expect {
-        delete :delete_item, { id: reservation.id, item_id: item_2.id }
+        delete :delete_item, { id: reservation, item_id: item_2 }
       }.to change { Db::Reservation.count }.from(1).to(0)
-      expect(response).to redirect_to reservations_path
+      expect(response).to redirect_to reservations_path(start_date: '2016-10-06')
     end
   end
 end
