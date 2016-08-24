@@ -28,4 +28,10 @@ describe Reservations::CreateReservation do
     xit 'sends email'
     xit 'creates reservation for first item but assigns next to existing one'
   end
+
+  context 'other person reserved item in this time' do
+    xit 'fails'
+  end
+
+  xit 'initialize payment'
 end

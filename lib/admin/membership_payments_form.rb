@@ -1,7 +1,7 @@
 require 'active_model'
 
 module Admin
-  class PaymentsForm
+  class MembershipPaymentsForm
     include ActiveModel::Model
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
@@ -22,7 +22,7 @@ module Admin
     end
 
     def check_uniqueness_of_year
-      errors.add(:year, 'na ten rok juz istnieje') if user.present? && user.payments.find_by(year: year).present?
+      errors.add(:year, 'na ten rok juz istnieje') if user.present? && user.membership_payments.find_by(year: year).present?
     end
 
     def user

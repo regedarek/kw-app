@@ -1,7 +1,7 @@
 .column.row
   br
   - if user_signed_in?
-    - if current_user.payments.find_by(year: Date.today.year).present?
+    - if current_user.membership_payments.find_by(year: Date.today.year).present?
       .callout.primary
           | Wybierz tydzien i zobacz dostepnosc przedmiotow
 

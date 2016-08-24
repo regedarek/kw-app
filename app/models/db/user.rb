@@ -5,5 +5,5 @@ class Db::User < ActiveRecord::Base
   validates :kw_id, :first_name, :last_name, presence: true
 
   has_many :reservations
-  has_many :payments, class_name: 'Db::Payment', foreign_key: :kw_id, primary_key: :kw_id
+  has_many :membership_payments, class_name: 'Db::MembershipPayment', foreign_key: :kw_id, primary_key: :kw_id
 end
