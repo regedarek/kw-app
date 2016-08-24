@@ -2,8 +2,8 @@ require 'date'
 
 module Guards
   class Date
-    def initialize(date: Time.zone.today)
-      @date = date.to_date
+    def initialize(date:)
+      @date = date ? date.to_date : Time.zone.today
     end
 
     def thursday?

@@ -9,11 +9,11 @@
       - reservation = current_user.reservations.find_by(start_date: params[:start_date])
       - if reservation
         - reservation.items.each do |item|
-        tr
-          td
-            = item.name
-          td
-            = link_to 'Zrezygnuj', '#'
+          tr
+            td
+              = item.try(:name)
+            td
+              = link_to 'Zrezygnuj', delete_item_reservation_path(reservation, item_id: item), method: :delete
 
 .column.row
   h3.subheader Dostepne przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}

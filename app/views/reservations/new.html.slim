@@ -11,13 +11,9 @@
             .large-12.columns
               = f.label :start_date, 'Tydzien'
               = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
-            //.large-4.columns
-              // = f.label :start_date, 'Od kiedy potrzebujesz?'
-              // = f.date_field :start_date, include_blank: true
           .row
             .large-12.columns
               = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
-
       
     - else
       .callout.alert
@@ -40,7 +36,7 @@
         - current_user.reservations.each do |reservation|
           tr
             td
-              = reservation.item.try(:name)
+              = reservation.items.map(&:name)
             td
               = reservation.start_date 
             td
