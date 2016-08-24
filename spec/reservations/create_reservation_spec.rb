@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Reservation::CreateReservation do
+describe Reservations::CreateReservation do
   before do
   end
 

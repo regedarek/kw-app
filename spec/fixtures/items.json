@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Czekan",
+      "description": "Taki tam",
+      "rentable": true,
+      "owner": "kw"
+    },
+    {
+      "id": "2",
+      "name": "Czekan",
+      "description": "Taki tam",
+      "rentable": false,
+      "owner": "kw"
+    },
+    {
+      "id": "3",
+      "name": "Raki",
+      "description": "Takie tam",
+      "rentable": true,
+      "owner": "snw"
+    }
+  ]
+}

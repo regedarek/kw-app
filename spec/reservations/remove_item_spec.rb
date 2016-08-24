@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Reservation::RemoveItem do
+describe Reservations::DeleteItem do
   before do
   end
 

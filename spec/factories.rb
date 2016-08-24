@@ -10,4 +10,22 @@ module Factories
       Db::User.create!(load_fixture('users').sample.merge(attrs))
     end
   end
+
+  class Item
+    def self.create!(attrs = {})
+      Db::Item.create!(load_fixture('items').sample.merge(attrs))
+    end
+
+    def self.create_all!
+      load_fixture('items').each do |item_json|
+        Db::Item.create!(item_json)
+      end
+    end
+  end
+
+  class Reservation
+    def self.create!(attrs = {})
+      Db::Reservation.create!(load_fixture('reservations').first.merge(attrs))
+    end
+  end
 end
