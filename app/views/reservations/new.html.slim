@@ -31,6 +31,7 @@
           th Od
           th Do
           th Status
+          th Koszt
           th Informacja od opiekuna
       tbody
         - current_user.reservations.each do |reservation|
@@ -43,6 +44,8 @@
               = reservation.end_date 
             td
               = Reservations::StatePresenter.new(reservation.current_state).to_s
+            td
+              = reservation.items.map(&:cost).reduce(:+)
             td
               = reservation.description
   - else

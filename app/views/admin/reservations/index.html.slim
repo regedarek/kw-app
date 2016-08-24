@@ -48,6 +48,7 @@
         tr
           th Kto?
           th Przedmiot
+          th Koszty
           th Na ktory tydzien?
           th Kiedy zarezerwowano
           th Status
@@ -59,6 +60,8 @@
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
               = reservation.items.map(&:name)
+            td
+              = reservation.items.map(&:cost).reduce(:+)
             td
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
             td
