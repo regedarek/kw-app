@@ -7,7 +7,10 @@ describe ReservationsController, type: :controller do
   before { sign_in(user) }
 
   describe '#index' do
-    xit 'redirects to next thursday if start_date is not thursday'
+    it 'redirects to next thursday if start_date is not thursday' do
+      expect(get :index, start_date: '2016-08-24')
+        .to redirect_to(reservations_path(start_date: '2016-08-25'))
+    end
   end
 
   describe '#new' do
