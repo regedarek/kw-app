@@ -9,6 +9,10 @@ describe ReservationsController, type: :controller do
       xit 'redirects to page with next thursday with warning'
     end
 
+    context 'invalid date' do
+      xit 'shows warning and redirects to next thursday'
+    end
+
     context 'with start_date in the past' do
       xit 'shows warning and redirects to next thursday'
     end
