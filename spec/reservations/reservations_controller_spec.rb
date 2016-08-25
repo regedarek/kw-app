@@ -5,7 +5,11 @@ describe ReservationsController, type: :controller do
   let!(:items)  { Factories::Item.create_all! }
   let(:item_1) { items.first }
   let(:item_2) { items.last }
-  before { sign_in(user) }
+  before do
+    sign_in(user)
+    Timecop.freeze('2016-08-24'.to_date)
+  end
+  after { Timecop.return }
 
   describe '#index' do
     it 'redirects to next thursday if start_date is not thursday' do
@@ -17,7 +21,7 @@ describe ReservationsController, type: :controller do
   describe '#create' do
     it 'creates reservation with available items' do
       expect {
-        post :create, { start_date: '2016-10-10', item_id: item_1.id }
+        post :create, { start_date: '2016-08-25', item_id: item_1.id }
       }.to change{ Db::Reservation.count }.by(1)
 
       reservation = Db::Reservation.last
@@ -25,7 +29,7 @@ describe ReservationsController, type: :controller do
 
       expect(reservation.items).to match_array([item_1])
       expect(reservation.user_id).to eq(user.id)
-      expect(response).to redirect_to reservations_path(start_date: '2016-10-10')
+      expect(response).to redirect_to reservations_path(start_date: '2016-08-25')
     end
 
     it 'adds item to reservation if already exists' do
