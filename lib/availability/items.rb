@@ -12,6 +12,10 @@ module Availability
       Db::Item.rentable - not_available_items - Db::Item.instructors
     end
 
+    def week
+      @start_date..@end_date
+    end
+
     private
 
     def not_available_items
