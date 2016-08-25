@@ -5,8 +5,12 @@ module Reservations
   class CreateReservation
     def self.from(params:)
       form = Reservations::Form.new(params)
+      start_date = form.params.fetch(:start_date).to_date
+      fail 'start date has to be thursday' unless start_date.thursday?
+
       if form.valid?
-        reservation = Db::Reservation.where(start_date: form.params.fetch(:start_date)).first_or_initialize(form.params)
+        reservation = Db::Reservation.where(start_date: start_date)
+                                     .first_or_initialize(form.params)
         new_items = Db::Item.where(id: form.params.fetch(:item_ids))
         new_items.each do |item|
           reservation.items.push(item) unless reservation.items.include?(item)

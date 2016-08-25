@@ -1,11 +1,19 @@
 require 'rails_helper'
 
 describe Reservations::CreateReservation do
-  before do
+  let!(:user) { Factories::User.create! }
+  let(:valid_params) do
+    {
+      start_date: '2016-08-24',
+      end_date: '2016-09-01',
+      kw_id: user.kw_id
+    }
   end
 
   context 'start_date is not thursday' do
-    xit 'fails'
+    it 'does not show warning' do
+      expect{ described_class.from(params: valid_params) }.not_to raise_error('start date has to be thursday')
+    end
   end
 
   context 'start_date is in the past' do
