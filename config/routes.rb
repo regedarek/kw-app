@@ -31,14 +31,14 @@ Rails.application.routes.draw do
       end
     end
     resources :membership_payments, only: %w(index create destroy)
-    resources :items, only: %w(index create destroy) do
+    resources :items do
       member do
         put :update_owner
         post :make_rentable
         post :make_urentable
       end
     end
-    resources :reservations, only: %w(index create edit update destroy) do
+    resources :reservations, only: %w(index edit update destroy) do
       member do
         put :update_state
         post :remind
