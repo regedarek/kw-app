@@ -6,7 +6,10 @@ module Reservations
     def self.from(params:)
       form = Reservations::Form.new(params)
       start_date = form.params.fetch(:start_date).to_date
+      end_date = form.params.fetch(:end_date).to_date
       fail 'start date has to be thursday' unless start_date.thursday?
+      fail 'end date has to be thursday' unless end_date.thursday?
+      fail 'end date has to be one week later' unless end_date == start_date + 7
 
       if form.valid?
         reservation = Db::Reservation.where(start_date: start_date)
@@ -23,7 +26,8 @@ module Reservations
         if Date.today > reservation.start_date || Date.today > reservation.end_date
           return Failure.new(:invalid_period, message: 'Rezerwowac mozna tylko po dzisiejszej dacie')
         end
-        
+
+        reservation.build_reservation_payment(cash: true)
         reservation.save
         ReservationMailer.reserve(reservation).deliver_now
         Success.new

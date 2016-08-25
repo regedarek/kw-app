@@ -2,13 +2,17 @@ require 'rails_helper'
 
 describe Reservations::CreateReservation do
   let!(:user) { Factories::User.create! }
+  let!(:item) { Factories::Item.create! }
   let(:valid_params) do
     {
-      start_date: '2016-08-24',
+      start_date: '2016-08-25',
       end_date: '2016-09-01',
-      kw_id: user.kw_id
+      kw_id: user.kw_id,
+      item_ids: [item.id]
     }
   end
+  before { Timecop.freeze('2016-08-24'.to_date) }
+  after { Timecop.return }
 
   context 'start_date is not thursday' do
     it 'does not show warning' do
@@ -20,13 +24,22 @@ describe Reservations::CreateReservation do
     xit 'fails'
   end
   
-  context 'end_date is not valid' do
-    xit 'fails'
+  context 'end_date is not thursday' do
+    let(:invalid_params) { valid_params.merge(end_date: '2016-08-26') }
+    it 'fails' do
+      expect{ described_class.from(params: invalid_params) }.to raise_error('end date has to be thursday')
+    end
+  end
+
+  context 'end_date is not one week later' do
+    let(:invalid_params) { valid_params.merge(end_date: '2016-09-08') }
+    it 'fails' do
+      expect{ described_class.from(params: invalid_params) }
+        .to raise_error('end date has to be one week later')
+    end
   end
 
   xit 'has to be at least one item'
-
-  xit 'reservation items have to be uniqe'
 
   context 'dates are overlaping' do
     xit 'fails'
@@ -41,5 +54,8 @@ describe Reservations::CreateReservation do
     xit 'fails'
   end
 
-  xit 'initialize payment'
+  it 'initialize payment' do
+    expect{ described_class.from(params: valid_params) }.to change(Db::Reservation, :count).by(1)
+    expect{ described_class.from(params: valid_params) }.to change(Db::ReservationPayment, :count).by(1)
+  end
 end
