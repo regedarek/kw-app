@@ -11,7 +11,7 @@
       "id": "2",
       "name": "Czekan",
       "description": "Taki tam",
-      "rentable": false,
+      "rentable": true,
       "owner": "kw"
     },
     {
@@ -20,6 +20,27 @@
       "description": "Takie tam",
       "rentable": true,
       "owner": "snw"
+    },
+    {
+      "id": "4",
+      "name": "Raki 2",
+      "description": "Takie tam",
+      "rentable": false,
+      "owner": "sww"
+    },
+    {
+      "id": "5",
+      "name": "Raki 3",
+      "description": "Takie tam",
+      "rentable": true,
+      "owner": "instructors"
+    },
+    {
+      "id": "6",
+      "name": "Raki 4",
+      "description": "Takie tam",
+      "rentable": true,
+      "owner": "sww"
     }
   ]
 }

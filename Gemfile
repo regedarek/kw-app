@@ -20,6 +20,7 @@ gem 'workflow'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'timecop'
   gem 'byebug'
   gem 'spring'
 end

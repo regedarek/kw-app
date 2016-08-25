@@ -2,26 +2,42 @@ require 'rails_helper'
 
 describe Availability::Items do
   let!(:items) { Factories::Item.create_all! }
+  let(:start_date) { '2016-08-25' }
   before do
-    Factories::Reservation.create!(id: 1, item_ids: [1])
-    Factories::Reservation.create!(id: 2, item_ids: [2])
-    Factories::Reservation.create!(id: 3, item_ids: [3])
+    Factories::Reservation.create!(
+      id: 1,
+      user_id: 1,
+      item_ids: [1, 2],
+      start_date: start_date,
+      end_date: start_date.to_date + 7
+    )
+    Factories::Reservation.create!(
+      id: 2,
+      user_id: 2,
+      item_ids: [6],
+      start_date: start_date,
+      end_date: start_date.to_date + 7
+    )
   end
-  subject { described_class.new(start_date: '2016-09-01').collect }
+  subject { described_class.new(start_date: start_date).collect }
 
   context 'start_date in the past' do
-    xit 'returns warning'
+    let(:start_date) { '2016-08-01' }
+
+    it 'returns warning' do
+      expect { subject }.to raise_error('start date cannot be in the past')
+    end
   end
 
   context 'start_date is not thursday' do
-    xit 'returns warning'
+    let(:start_date) { '2016-09-24' }
+
+    it 'returns warning' do
+      expect { subject }.to raise_error('start date has to be thursday')
+    end
   end
 
-  context 'start_date is thursday' do
-    xit { expect(subject).not_to include(items[0]) }
-    xit { expect(subject).to include(items[1]) }
-    xit { expect(subject).to include(items[2]) }
-    xit 'excludes instructor items'
-    xit 'excludes not rentable items'
+  it 'excludes not available, instructors and not rentale items' do
+    expect(subject).to match_array([Db::Item.find(3)])
   end
 end

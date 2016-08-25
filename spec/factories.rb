@@ -7,13 +7,13 @@ end
 module Factories
   class User
     def self.create!(attrs = {})
-      Db::User.create!(load_fixture('users').sample.merge(attrs))
+      Db::User.create!(load_fixture('users').first.merge(attrs))
     end
   end
 
   class Item
     def self.create!(attrs = {})
-      Db::Item.create!(load_fixture('items').sample.merge(attrs))
+      Db::Item.create!(load_fixture('items').first.merge(attrs))
     end
 
     def self.create_all!
