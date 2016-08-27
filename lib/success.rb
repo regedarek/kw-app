@@ -8,4 +8,8 @@ class Success < Result
   def initialize(*args)
     super(:success, *args)
   end
+
+  def handled?
+    true # success is always handled so it does not break when its not checked
+  end
 end

@@ -6,15 +6,13 @@ module Admin
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
 
-    attr_accessor :kw_id, :state, :item_id, :paid, :start_date, :end_date, :description
+    attr_accessor :kw_id, :state, :start_date, :end_date, :description
 
-    validates :kw_id, :item_id, presence: { message: 'nie moze byc pusty'}
+    validates :kw_id, presence: { message: 'nie moze byc pusty'}
 
     def params
       HashWithIndifferentAccess.new(
         user_id: user.id,
-        item_id: item_id,
-        paid: paid,
         state: state,
         start_date: start_date_of_the_week,
         end_date: end_date_of_the_week,

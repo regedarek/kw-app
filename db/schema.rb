@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808191833) do
+ActiveRecord::Schema.define(version: 20160824202246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 20160808191833) do
     t.text     "description"
     t.boolean  "rentable",    default: false
     t.integer  "owner",       default: 0
+    t.integer  "cost",        default: 0
   end
 
-  create_table "payments", force: :cascade do |t|
+  create_table "membership_payments", force: :cascade do |t|
     t.integer  "kw_id",      null: false
     t.integer  "year",       null: false
     t.datetime "created_at"
@@ -37,16 +38,30 @@ ActiveRecord::Schema.define(version: 20160808191833) do
     t.integer "valley_id"
   end
 
+  create_table "reservation_checkouts", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "reservation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reservation_payments", force: :cascade do |t|
+    t.integer  "reservation_id"
+    t.boolean  "cash",           default: false
+    t.string   "dotpay_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "state"
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "item_id"
     t.string   "state"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.date     "start_date"
     t.date     "end_date"
     t.text     "description"
-    t.boolean  "paid"
   end
 
   create_table "routes", force: :cascade do |t|

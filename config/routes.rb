@@ -3,9 +3,20 @@ Rails.application.routes.draw do
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
 
+  namespace :api do
+    resources :payments, only: [] do
+      collection do
+        get :status
+      end
+    end
+  end
+
   resources :routes
   resources :users, only: [:show]
-  resources :reservations, only: [:index, :new, :create, :destroy] do
+  resources :reservations, only: [:index, :new, :create] do
+    member do
+      delete :delete_item
+    end
     collection do
       post :availability
     end
@@ -19,17 +30,18 @@ Rails.application.routes.draw do
         get :cancel_admin
       end
     end
-    resources :payments, only: %w(index create destroy)
-    resources :items, only: %w(index create destroy) do
+    resources :membership_payments, only: %w(index create destroy)
+    resources :items do
       member do
         put :update_owner
         post :make_rentable
         post :make_urentable
       end
     end
-    resources :reservations, only: %w(index create edit update destroy) do
+    resources :reservations, only: %w(index edit update destroy) do
       member do
         put :update_state
+        put :charge
         post :remind
         post :give_warning
         post :give_back_warning

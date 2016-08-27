@@ -1,6 +1,6 @@
 .column.row
   br
-  = form_for Admin::ReservationsForm.new(@reservation.slice(:kw_id, :item_id, :paid, :end_date, :start_date, :description)), url: admin_reservation_path(params[:id]), method: :put, html: { class: 'form-horizontal' } do |f|
+  = form_for Admin::ReservationsForm.new(@reservation.slice(:kw_id, :end_date, :start_date, :description)), url: admin_reservation_path(params[:id]), method: :put, html: { class: 'form-horizontal' } do |f|
     .row
       .large-12.columns
         = f.label :kw_id, 'Numer klubowy'
@@ -8,8 +8,15 @@
 
     .row
       .large-12.columns
-        = f.label :item_id, 'Przedmiot', class: 'col-sm-2 control-label'
-        = f.select :item_id, options_from_collection_for_select(Db::Item.all, :id, :name, selected: @reservation.item_id), {}
+        = f.label 'Przedmioty'
+        .callout
+          = @reservation.items.map(&:name)
+
+    .row
+      .large-12.columns
+        = f.label 'Koszt'
+        .callout
+          = @reservation.items.map(&:cost).reduce(:+)
 
     .row
       .large-12.columns
@@ -28,10 +35,8 @@
 
     .row
       .large-12.columns
-        = f.label :paid, 'Zapłacono?'
-        = f.check_box :paid
-
-    = f.submit 'Zaktualizuj rezerwacje', class: 'button'
+        = f.submit 'Zaktualizuj rezerwacje', class: 'button'
+        = link_to 'Wroc', admin_reservations_path, class: 'button secondary'
 
     .row
       .large-12.columns
