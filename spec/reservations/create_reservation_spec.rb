@@ -89,6 +89,7 @@ describe Reservations::CreateReservation do
       expect(reservation.user).to eq(user)
       expect(reservation.availible?).to eq(true)
       expect(reservation.reservation_payment).to eq(Db::ReservationPayment.first)
+      expect(reservation.reservation_payment.unpaid?).to eq(true)
     end
   end
 end

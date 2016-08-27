@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     resources :reservations, only: %w(index edit update destroy) do
       member do
         put :update_state
+        put :charge
         post :remind
         post :give_warning
         post :give_back_warning
