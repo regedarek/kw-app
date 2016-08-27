@@ -6,6 +6,9 @@ module Availability
     end
 
     def collect
+      fail 'start date cannot be in the past' if @start_date.past?
+      fail 'start date has to be thursday' unless @start_date.thursday?
+
       Db::Item.rentable - not_available_items - Db::Item.instructors
     end
 
@@ -16,11 +19,7 @@ module Availability
     private
 
     def not_available_items
-      reservations_in_given_week.collect(&:item)
-    end
-
-    def reservations_in_given_week
-      Db::Reservation.select { |reservation| week.include?(reservation.start_date..reservation.end_date) }  
+      Db::Reservation.where(start_date: @start_date).map(&:items).flatten.uniq
     end
   end
 end

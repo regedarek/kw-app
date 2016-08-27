@@ -16,6 +16,17 @@ module Admin
       result.else_fail!
     end
 
+    def edit
+      @item = Db::Item.find(params[:id])
+    end
+
+    def update
+      result = Admin::Items.new(item_params).update(params[:id])
+      result.success { redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano' }
+      result.invalid { |form:| redirect_to edit_admin_item_path(params[:id]), alert: "Nie zaktualizowano bo: #{form.errors.messages}" }
+      result.else_fail!
+    end
+
     def destroy
       result = Admin::Items.destroy(params[:id])
       result.success { redirect_to admin_items_path, notice: 'Usunieto' }
@@ -43,7 +54,7 @@ module Admin
     private
 
     def item_params
-      params.require(:admin_items_form).permit(:name, :description, :rentable, :owner)
+      params.require(:admin_items_form).permit(:name, :cost, :description, :rentable, :owner)
     end
   end
 end

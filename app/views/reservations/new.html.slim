@@ -1,7 +1,7 @@
 .column.row
   br
   - if user_signed_in?
-    - if current_user.payments.find_by(year: Date.today.year).present?
+    - if current_user.membership_payments.find_by(year: Date.today.year).present?
       .callout.primary
           | Wybierz tydzien i zobacz dostepnosc przedmiotow
 
@@ -11,13 +11,9 @@
             .large-12.columns
               = f.label :start_date, 'Tydzien'
               = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
-            //.large-4.columns
-              // = f.label :start_date, 'Od kiedy potrzebujesz?'
-              // = f.date_field :start_date, include_blank: true
           .row
             .large-12.columns
               = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
-
       
     - else
       .callout.alert
@@ -35,12 +31,13 @@
           th Od
           th Do
           th Status
+          th Koszt
           th Informacja od opiekuna
       tbody
         - current_user.reservations.each do |reservation|
           tr
             td
-              = reservation.item.try(:name)
+              = reservation.items.map(&:name)
             td
               = reservation.start_date 
             td
@@ -48,7 +45,18 @@
             td
               = Reservations::StatePresenter.new(reservation.current_state).to_s
             td
+              = reservation.items.map(&:cost).reduce(:+)
+              |  zl
+            td
               = reservation.description
+
+      a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
+      #reservation-charge.callout.reveal data-reveal=''		
+        button.close-button aria-label=("Close modal") data-close="" type="button" 		
+          span aria-hidden="true"  &times;
+        
+        callout.primary
+        | Zaplac gotowka opiekunowi a on odznaczy to w systemie.
   - else
     .callout.warrning
       | Aby uzywac wypozyczalni zarejestruj swoje konto w ktorym podaj email kontaktowy oraz numer legitymacji klubowej. Twoja skladka powinna zostac automatycznie pobrana. W przypadku problemow skontaktuj sie z opiekunem wypozyczalni.

@@ -17,6 +17,17 @@ module Admin
       end
     end
 
+    def update(item_id)
+      if form.valid?
+        item = Db::Item.find(item_id)
+        item.update(form.params)
+        item.save
+        Success.new
+      else
+        Failure.new(:invalid, form: form)
+      end
+    end
+
     def self.destroy(item_id)
       item = Db::Item.find(item_id)
       if item.destroy

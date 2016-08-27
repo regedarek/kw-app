@@ -1,17 +1,34 @@
 .column.row
-  h3.subheader Twoje rezerwacje w tym okresie
+  h3.subheader Chcesz zarezerwowac ponizsze przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}
   table
     thead
       tr
         th Przedmiot
-        th Akcje
+        th
     tbody
-      - current_user.reservations.select { |reservation| (reservation.start_date..reservation.end_date).include?(params[:start_date].to_date) }.each do |reservation|
-        tr
-          td
-            = reservation.item.try(:name)
-          td
-            = link_to 'Zrezygnuj', reservation_path(reservation), method: :delete
+      - reservation = current_user.reservations.find_by(start_date: params[:start_date])
+      - if reservation
+        - reservation.items.each do |item|
+          tr
+            td
+              = item.try(:name)
+            td align='right'
+              = link_to 'Zrezygnuj', delete_item_reservation_path(reservation, item_id: item), method: :delete
+
+- if reservation && reservation.items.any?
+  .row
+    .large-6.columns
+      | Calkowity koszt za rezerwacje: 
+      = reservation.items.map(&:cost).reduce(:+)
+      |  zl  
+    .large-6.columns style='text-align: right'
+      a data-open="reservation-charge" class='button large expanded' Zaplac i potwierdz rezerwacje
+      #reservation-charge.callout.reveal data-reveal=''		
+        button.close-button aria-label=("Close modal") data-close="" type="button" 		
+          span aria-hidden="true"  &times;
+        
+        callout.primary
+        | Zaplac gotowka opiekunowi a on odznaczy to w systemie.
 
 .column.row
   h3.subheader Dostepne przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}
@@ -19,11 +36,11 @@
     thead
       tr
         th Przedmiot
-        th Akcje
+        th
     tbody
       - @available_items.each do |item|
         tr
           td
             = item.try(:name)
-          td
-            = link_to 'Zarezerwuj', reservations_path(item_id: item, start_date: params[:start_date]), method: :post
+          td align='right'
+            = link_to 'Zarezerwuj', reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post

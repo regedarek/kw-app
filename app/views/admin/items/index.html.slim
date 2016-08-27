@@ -19,6 +19,11 @@
 
         .row
           .large-12.columns
+            = f.label :cost, 'Koszt(zl)'
+            = f.number_field :cost
+
+        .row
+          .large-12.columns
             = f.label :owner, 'Wlasnosc'
             = f.select :owner, Items::OwnerPresenter.to_options
 
@@ -51,6 +56,7 @@
         th Id
         th Nazwa
         th Opis
+        th Koszt
         th Mozna wypozyczyc?
         th Wlasnosc
         th Akcje
@@ -60,9 +66,13 @@
           td= item.id
           td= item.name
           td= item.description
+          td= item.cost.to_s + ' zl'
           td= item.rentable? ? (link_to 'Tak', make_urentable_admin_item_path(item), method: :post) : (link_to 'Nie', make_rentable_admin_item_path(item), method: :post)
           td
             - on_change = %Q[$('#edit_db_item_#{item.id}').submit()].html_safe
             = form_for item, url: update_owner_admin_item_path(item), method: :put do |f|
               = f.select :owner, Items::OwnerPresenter.to_options, {selected: item[:owner]}, { onChange: on_change }
-          td= link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+          td
+            = link_to 'Edytuj', edit_admin_item_path(item)
+            = " | "
+            = link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }

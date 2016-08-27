@@ -34,6 +34,13 @@ module Admin
       redirect_to admin_reservations_path, notice: "Ustawiono status na #{::Reservations::StatePresenter.new(reservation.current_state).to_s}"
     end
 
+    def charge
+      reservation = Db::Reservation.find(params[:id])
+      reservation.reservation_payment.charge!
+
+      redirect_to admin_reservations_path, notice: "Oplacono"
+    end
+
     def remind
       reservation = Db::Reservation.find(params[:id])
       ReservationMailer.remind(reservation).deliver
@@ -64,7 +71,7 @@ module Admin
     private
 
     def reservation_params
-      params.require(:admin_reservations_form).permit(:kw_id, :item_id, :paid, :start_date, :end_date, :description)
+      params.require(:admin_reservations_form).permit(:kw_id, :item_id, :start_date, :end_date, :description)
     end
   end
 end
