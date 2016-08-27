@@ -1,25 +1,30 @@
 require 'net/http'
 require 'net/https'
 require 'uri'
+require 'results'
 
 module Payments
-  class Create
+  class InitializeDotPay
     def self.uri
       URI.parse('https://ssl.dotpay.pl/t2/')
     end
 
-    def initialize(fee: Payments::Fee.new)
+    def initialize(reservation_id:, fee: Payments::Fee.new)
       @fee = fee
+      @reservation_id = reservation_id
     end
 
-    def call
+    def create
       request = Net::HTTP::Post.new(self.class.uri.path)
       request.set_form_data(@fee.to_h.merge(api_version: 'dev'))
 
       if @fee.valid?
-        https.request(request)
+        response = https.request(request)
+        reservation_payment = Db::Reservation.find(@reservation_id).reservation_payment
+        reservation_payment.update(dot_pay_id: response.fetch('dot_pay_id'))
+        Success.new
       else
-        @fee.errors
+        Failure.new(errors: @fee.errors)
       end
     end
 
