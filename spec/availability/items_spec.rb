@@ -3,6 +3,8 @@ require 'rails_helper'
 describe Availability::Items do
   let!(:items) { Factories::Item.create_all! }
   let(:start_date) { '2016-08-25' }
+  before { Timecop.freeze('2016-08-14'.to_date) }
+  after { Timecop.return }
   before do
     Factories::Reservation.create!(
       id: 1,

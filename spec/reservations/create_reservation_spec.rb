@@ -73,11 +73,13 @@ describe Reservations::CreateReservation do
   context 'start_date is thursday in the future' do
     it 'creates reservation and sends email' do
       form = Factories::Reservation.build_form
-      result = Reservations::CreateReservation.create(form: form, user: user)
+      result = nil
+      expect do
+        result = Reservations::CreateReservation.create(form: form, user: user)
+      end.to change(ActionMailer::Base.deliveries, :count).by(1)
 
       expect(Db::Reservation.count).to eq(1)
       expect(Db::ReservationPayment.count).to eq(1)
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
       expect(result.success?).to eq(true)
 
       reservation = Db::Reservation.first

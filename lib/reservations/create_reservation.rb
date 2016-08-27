@@ -15,10 +15,8 @@ module Reservations
           .first_or_initialize(form.attributes)
         reservation.user = user
 
-        new_items = Db::Item.where(id: form.item_ids)
-        new_items.each do |item|
-          reservation.items.push(item) unless reservation.items.include?(item)
-        end
+        items_to_add = (reservation.items + form.items).uniq
+        reservation.items = items_to_add
 
         reservation.build_reservation_payment(cash: true)
         reservation.save

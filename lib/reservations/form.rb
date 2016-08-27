@@ -2,8 +2,8 @@ require 'form_object'
 
 module Reservations
   class Form < FormObject
-    attribute :start_date, DateTime
-    attribute :end_date, DateTime
+    attribute :start_date, String
+    attribute :end_date, String
     attribute :item_ids, Array
 
     validates :item_ids, :start_date, :end_date, presence: true
@@ -11,6 +11,18 @@ module Reservations
     validate :start_date_is_in_the_past, :end_date_is_in_the_past
     validate :end_date_is_before_start_date
     validate :end_date_is_not_one_week_later
+
+    def start_date
+      @start_date.to_date
+    end
+
+    def end_date
+      @end_date.to_date
+    end
+
+    def items
+      Db::Item.where(id: item_ids)
+    end
 
     def start_date_is_not_thursday
       unless start_date.thursday?
