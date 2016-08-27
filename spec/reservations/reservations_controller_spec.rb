@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ReservationsController, type: :controller do
+  render_views
+
   let!(:user)   { Factories::User.create!(first_name: 'Olek') }
   let!(:items)  { Factories::Item.create_all! }
   let(:item_1) { items.first }

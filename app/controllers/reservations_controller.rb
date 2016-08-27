@@ -14,6 +14,7 @@ class ReservationsController < ApplicationController
     result = Reservations::CreateReservation.create(form: form, user: current_user)
     result.success { redirect_to reservations_path(start_date: form.start_date.to_s), notice: 'Zarezerwowano' }
     result.form_invalid { |form:| redirect_to home_path, alert: "Nie dodano: #{form.errors.messages}" }
+    result.item_already_reserved { |form:| redirect_to reservations_path(start_date: form.start_date.to_s), alert: 'Przedmiot juz zarezerwowany w tym okresie'}
     result.else_fail!
   end
 
@@ -22,5 +23,8 @@ class ReservationsController < ApplicationController
     result.success do |start_date:|
       redirect_to reservations_path(start_date: start_date), notice: 'Zrezygnowano'
     end
+    result.item_not_exist { redirect_to :back, notice: 'Przedmiot nie istnieje' }
+    result.reservation_not_exist { redirect_to :back, notice: 'Przedmiot nie istnieje' }
+    result.else_fail!
   end
 end

@@ -28,4 +28,4 @@
           td
             = item.try(:name)
           td
-            = link_to 'Zarezerwuj', reservations_path(item_id: item, start_date: params[:start_date]), method: :post
+            = link_to 'Zarezerwuj', reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post

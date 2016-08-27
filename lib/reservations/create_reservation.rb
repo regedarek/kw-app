@@ -7,7 +7,7 @@ module Reservations
       def create(user:, form:)
         return Failure.new(:form_invalid, form: form) unless form.valid?
         if (items_reserved_in_period(form.start_date) & form.item_ids).any?
-          return Failure.new(:item_already_reserved)
+          return Failure.new(:item_already_reserved, form: form)
         end
 
         reservation = Db::Reservation
