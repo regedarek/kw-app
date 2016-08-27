@@ -3,59 +3,90 @@ require 'rails_helper'
 describe Reservations::CreateReservation do
   let!(:user) { Factories::User.create! }
   let!(:item) { Factories::Item.create! }
-  let(:valid_params) do
-    {
-      start_date: '2016-08-25',
-      end_date: '2016-09-01',
-      kw_id: user.kw_id,
-      item_ids: [item.id]
-    }
-  end
-  before { Timecop.freeze('2016-08-24'.to_date) }
+
+  before { Timecop.freeze('2016-08-14'.to_date) }
   after { Timecop.return }
 
   context 'start_date is not thursday' do
-    it 'does not show warning' do
-      expect{ described_class.from(params: valid_params) }.not_to raise_error('start date has to be thursday')
+    it 'fails' do
+      form = Factories::Reservation.build_form(start_date: '2016-10-10')
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(result.form_invalid?).to eq(true)
     end
   end
 
   context 'start_date is in the past' do
-    xit 'fails'
+    it 'fails' do
+      form = Factories::Reservation.build_form(start_date: '2016-08-04')
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(result.form_invalid?).to eq(true)
+    end
   end
   
   context 'end_date is not thursday' do
-    let(:invalid_params) { valid_params.merge(end_date: '2016-08-26') }
     it 'fails' do
-      expect{ described_class.from(params: invalid_params) }.to raise_error('end date has to be thursday')
+      form = Factories::Reservation.build_form(end_date: '2016-09-10')
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(result.form_invalid?).to eq(true)
+    end
+  end
+
+  context 'end_date is before start_date' do
+    it 'fails' do
+      form = Factories::Reservation.build_form(start_date: '2016-09-15', end_date: '2016-09-08')
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(result.form_invalid?).to eq(true)
     end
   end
 
   context 'end_date is not one week later' do
-    let(:invalid_params) { valid_params.merge(end_date: '2016-09-08') }
     it 'fails' do
-      expect{ described_class.from(params: invalid_params) }
-        .to raise_error('end date has to be one week later')
+      form = Factories::Reservation.build_form(start_date: '2016-08-18', end_date: '2016-09-08')
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(result.form_invalid?).to eq(true)
     end
   end
 
-  xit 'has to be at least one item'
+  it 'has to be at least one item' do
+    form = Factories::Reservation.build_form(item_ids: [])
+    result = Reservations::CreateReservation.create(form: form, user: user)
 
-  context 'dates are overlaping' do
-    xit 'fails'
-  end
-
-  context 'start_date is thursday in the future' do
-    xit 'sends email'
-    xit 'creates reservation for first item but assigns next to existing one'
+    expect(result.form_invalid?).to eq(true)
   end
 
   context 'other person reserved item in this time' do
-    xit 'fails'
+    before { Factories::Reservation.create! }
+
+    it 'fails' do
+      form = Factories::Reservation.build_form
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(result.item_already_reserved?).to eq(true)
+    end
   end
 
-  it 'initialize payment' do
-    expect{ described_class.from(params: valid_params) }.to change(Db::Reservation, :count).by(1)
-    expect{ described_class.from(params: valid_params) }.to change(Db::ReservationPayment, :count).by(1)
+  context 'start_date is thursday in the future' do
+    it 'creates reservation and sends email' do
+      form = Factories::Reservation.build_form
+      result = Reservations::CreateReservation.create(form: form, user: user)
+
+      expect(Db::Reservation.count).to eq(1)
+      expect(Db::ReservationPayment.count).to eq(1)
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      expect(result.success?).to eq(true)
+
+      reservation = Db::Reservation.first
+      expect(reservation.start_date).to eq('2016-08-18'.to_date)
+      expect(reservation.end_date).to eq('2016-08-25'.to_date)
+      expect(reservation.items).to match_array([item])
+      expect(reservation.user).to eq(user)
+      expect(reservation.availible?).to eq(true)
+      expect(reservation.reservation_payment).to eq(Db::ReservationPayment.first)
+    end
   end
 end

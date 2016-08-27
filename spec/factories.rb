@@ -28,5 +28,13 @@ module Factories
     def self.create!(attrs = {})
       Db::Reservation.create!(load_fixture('reservations').first.merge(attrs))
     end
+
+    def self.build_form(attrs = {})
+      ::Reservations::Form.new({
+        start_date: '2016-08-18',
+        end_date: '2016-08-25',
+        item_ids: [1]
+      }.merge(attrs))
+    end
   end
 end

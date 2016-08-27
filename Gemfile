@@ -17,6 +17,7 @@ gem 'high_voltage', '~> 2.3.0'
 gem 'devise'
 gem 'slim-rails'
 gem 'workflow'
+gem 'virtus'
 
 group :development, :test do
   gem 'rspec-rails'

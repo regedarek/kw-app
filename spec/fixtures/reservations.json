@@ -4,8 +4,8 @@
       "id": "1",
       "user_id": "1",
       "state": "reserved",
-      "start_date": "2016-10-10",
-      "end_date": "2016-10-17",
+      "start_date": "2016-08-18",
+      "end_date": "2016-08-25",
       "description": "some description",
       "item_ids": ["1"]
     },
