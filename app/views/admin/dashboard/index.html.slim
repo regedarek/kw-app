@@ -12,7 +12,7 @@
       - Db::Reservation.limit(5).each do |reservation|
         tr
           td
-            = reservation.item.try(:name)
+            = reservation.items.map(&:name)
           td
             = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
           td
@@ -23,7 +23,7 @@
   .col-xs-6.col-sm-6
     h3 5 ostatnich skladek
     table.table.table-striped
-      - Db::Payment.limit(5).each do |payment|
+      - Db::MembershipPayment.limit(5).each do |payment|
         tr
           td
             = payment.year
