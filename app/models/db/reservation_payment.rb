@@ -9,4 +9,8 @@ class Db::ReservationPayment < ActiveRecord::Base
     end
     state :prepaid
   end
+
+  def description
+    "Oplata za rezerwacje: ##{reservation.id}"
+  end
 end
