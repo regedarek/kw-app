@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
-  def create
-    result = Payments::InitializeDotPay.new(reservation_id: params[:reservation_id]).create
-    result.success { }
-    result.failure { }
+  def charge
+    payment = Db::ReservationPayment.find(params[:id])
+
+    Payments::ProcessPayment.new(payment: payment, type: :dotpay).call
   end
 end

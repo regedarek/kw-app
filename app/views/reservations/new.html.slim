@@ -49,11 +49,13 @@
               |  zl
             td
               = reservation.description
+              = link_to 'Zaplac', charge_payment_path(reservation.id), method: :post
 
       a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
       #reservation-charge.callout.reveal data-reveal=''		
         button.close-button aria-label=("Close modal") data-close="" type="button" 		
           span aria-hidden="true"  &times;
+
         
         callout.primary
         | Zaplac gotowka opiekunowi a on odznaczy to w systemie.

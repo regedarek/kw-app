@@ -21,6 +21,11 @@ Rails.application.routes.draw do
       post :availability
     end
   end
+  resources :payments, only: [] do
+    member do
+      post :charge
+    end
+  end
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
