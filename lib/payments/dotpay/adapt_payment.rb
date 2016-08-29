@@ -7,15 +7,19 @@ module Payments
 
       def to_params
         {
-          amount: 10,
+          amount: reservation.items.map(&:cost).reduce(:+),
           currency: 'PLN',
-          description: 'Platnosc za rezerwacje',
-          control: 1234,
+          description: "Platnosc za rezerwacje ##{reservation.id}",
+          control: @payment.dotpay_id,
           language: 'pl',
           redirection_type: 0,
           url: 'https://e346eada.ngrok.io/api/payments/thank_you',
           urlc: 'https://e346eada.ngrok.io/api/payments/status'
         }
+      end
+
+      def reservation
+        @payment.reservation
       end
     end
   end

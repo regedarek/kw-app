@@ -48,7 +48,8 @@
               = reservation.items.map(&:cost).reduce(:+)
               |  zl
             td
-              = link_to 'Zaplac', charge_reservation_payment_path(reservation.reservation_payment.id), method: :post
+              - if reservation.reservation_payment.unpaid?
+                = link_to 'Zaplac', charge_reservation_payment_path(reservation.reservation_payment.id), method: :post
 
       a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
       #reservation-charge.callout.reveal data-reveal=''		
