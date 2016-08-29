@@ -13,8 +13,8 @@ module Payments
         end
       end
 
-      def self.request(fee:)
-        request = Net::HTTP::Post.new(self.class.uri.path)
+      def request(fee:)
+        request = Net::HTTP::Post.new('https://ssl.dotpay.pl/test_payment/')
         request.set_form_data(fee.to_h.merge(api_version: 'dev'))
 
         if fee.valid?

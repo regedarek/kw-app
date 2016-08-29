@@ -49,7 +49,18 @@
               |  zl
             td
               = reservation.description
-              = link_to 'Zaplac', charge_payment_path(reservation.id), method: :post
+              = link_to 'Zaplac', charge_payment_path(reservation.reservation_payment.id), method: :post
+              - form = Payments::DotPay::Form.new
+              = form_for form, url: form.request_url do |f|
+                = f.text_field :id, name: :id
+                = f.text_field :amount, name: :amount
+                = f.text_field :currency, name: :currency
+                = f.text_field :control, name: :control
+                = f.text_field :url, name: :url
+                = f.text_field :urlc, name: :urlc
+                = f.text_field :email, name: :email
+                = f.text_field :description, name: :description
+                = f.submit
 
       a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
       #reservation-charge.callout.reveal data-reveal=''		

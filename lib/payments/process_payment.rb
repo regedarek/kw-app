@@ -6,13 +6,13 @@ module Payments
     end
 
     def call
-      fee_class.new(
-        email: payment.reservation.user.email,
-        amount: payment.amount,
-        description: payment.description
+      fee = fee_class.new(
+        email: @payment.reservation.user.email,
+        amount: 10,
+        description: @payment.description
       )
 
-      initiate_payment_class.request(fee: fee_class)
+      initiate_payment_class.new.request(fee: fee)
     end
 
     def fee_class
