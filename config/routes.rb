@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :payments, only: [] do
       collection do
-        get :status
+        post :status
+        post :thank_you
       end
     end
   end
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
       post :availability
     end
   end
-  resources :payments, only: [] do
+  resources :reservation_payments, only: [] do
     member do
       post :charge
     end
