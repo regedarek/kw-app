@@ -1,7 +1,5 @@
 module Api
   class PaymentsController < Api::BaseController
-    protect_from_forgery with: :null_session
-
     def status
       notification = Payments::Dotpay::Notification.new(params)
       result = Payments::Dotpay::Status.new(notification: notification).process

@@ -9,7 +9,9 @@ module Payments
       end
 
       def execute
-        uri = URI.parse("https://ssl.dotpay.pl/test_seller/api/accounts/727029/payment_links/?format=json")
+        account_id = Rails.application.secrets.dotpay_id
+        uri = URI.parse("https://ssl.dotpay.pl/test_seller/api/accounts/#{account_id}/payment_links/?format=json")
+
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
