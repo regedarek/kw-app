@@ -32,7 +32,7 @@
           th Do
           th Status
           th Koszt
-          th Informacja od opiekuna
+          th
       tbody
         - current_user.reservations.each do |reservation|
           tr
@@ -49,18 +49,17 @@
               |  zl
             td
               = reservation.description
-              = link_to 'Zaplac', charge_payment_path(reservation.reservation_payment.id), method: :post
               - form = Payments::DotPay::Form.new
               = form_for form, url: form.request_url do |f|
-                = f.text_field :id, name: :id
-                = f.text_field :amount, name: :amount
-                = f.text_field :currency, name: :currency
-                = f.text_field :control, name: :control
-                = f.text_field :url, name: :url
-                = f.text_field :urlc, name: :urlc
-                = f.text_field :email, name: :email
-                = f.text_field :description, name: :description
-                = f.submit
+                = f.hidden_field :id, name: :'dp-id'
+                = f.hidden_field :amount, name: :'dp-amount'
+                = f.hidden_field :currency, name: :'dp-currency'
+                = f.hidden_field :control, name: :'dp-control'
+                = f.hidden_field :url, name: :'dp-url'
+                = f.hidden_field :urlc, name: :'dp-urlc'
+                = f.hidden_field :email, name: :'dp-email'
+                = f.hidden_field :description, name: :'dp-description'
+                = f.submit 'Zaplac', class: 'button'
 
       a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
       #reservation-charge.callout.reveal data-reveal=''		
