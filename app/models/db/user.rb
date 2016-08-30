@@ -5,4 +5,5 @@ class Db::User < ActiveRecord::Base
   validates :kw_id, :first_name, :last_name, presence: true
 
   has_many :reservations
+  has_many :orders
 end

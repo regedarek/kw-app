@@ -1,9 +1,9 @@
 class Db::Reservation < ActiveRecord::Base
   include Workflow
   belongs_to :user
-  has_many :items, through: :reservation_checkouts
-  has_many :reservation_checkouts
-  has_one :payment, class_name: 'Db::Payments::ReservationFee', foreign_key: :resource_id
+  has_many :items, through: :reservation_items
+  has_one :service, as: :serviceable
+  has_one :order, through: :services
 
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }

@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830133030) do
+ActiveRecord::Schema.define(version: 20160830170052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "course_applications", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone_number"
+    t.text   "living_address"
+    t.string "birthday"
+    t.string "birthplace"
+    t.string "pesel"
+    t.text   "main_adress"
+    t.text   "description"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -26,14 +39,19 @@ ActiveRecord::Schema.define(version: 20160830133030) do
     t.integer  "cost",        default: 0
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "payments", force: :cascade do |t|
-    t.integer  "resource_id"
-    t.boolean  "cash",        default: false
+    t.integer  "order_id"
+    t.boolean  "cash",       default: false
     t.string   "dotpay_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",       default: "unpaid"
-    t.string   "type"
+    t.string   "state",      default: "unpaid"
   end
 
   create_table "peaks", force: :cascade do |t|
@@ -41,7 +59,7 @@ ActiveRecord::Schema.define(version: 20160830133030) do
     t.integer "valley_id"
   end
 
-  create_table "reservation_checkouts", force: :cascade do |t|
+  create_table "reservation_items", force: :cascade do |t|
     t.integer  "item_id"
     t.integer  "reservation_id"
     t.datetime "created_at"
@@ -69,6 +87,12 @@ ActiveRecord::Schema.define(version: 20160830133030) do
     t.string  "peak"
     t.string  "time"
     t.integer "peak_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string  "serviceable_type"
+    t.integer "serviceable_id"
+    t.integer "order_id"
   end
 
   create_table "users", force: :cascade do |t|
