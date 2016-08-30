@@ -51,14 +51,6 @@
               - if reservation.order && reservation.order.payment.unpaid? && reservation.items.map(&:cost).reduce(:+) > 0
                 = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post
 
-      a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
-      #reservation-charge.callout.reveal data-reveal=''		
-        button.close-button aria-label=("Close modal") data-close="" type="button" 		
-          span aria-hidden="true"  &times;
-
-        
-        callout.primary
-        | Zaplac gotowka opiekunowi a on odznaczy to w systemie.
   - else
     .callout.warrning
       | Aby uzywac wypozyczalni zarejestruj swoje konto w ktorym podaj email kontaktowy oraz numer legitymacji klubowej. Twoja skladka powinna zostac automatycznie pobrana. W przypadku problemow skontaktuj sie z opiekunem wypozyczalni.
