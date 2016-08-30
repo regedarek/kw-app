@@ -30,7 +30,6 @@
           th Przedmiot
           th Od
           th Do
-          th Status
           th Koszt
           th
       tbody
@@ -42,8 +41,6 @@
               = reservation.start_date 
             td
               = reservation.end_date 
-            td
-              = Reservations::StatePresenter.new(reservation.current_state).to_s
             td
               = reservation.items.map(&:cost).reduce(:+)
               |  zl
