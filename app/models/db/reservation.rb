@@ -1,27 +1,22 @@
 class Db::Reservation < ActiveRecord::Base
   include Workflow
   belongs_to :user
-  has_many :items, through: :reservation_checkouts
-  has_many :reservation_checkouts
-  has_one :reservation_payment
+  has_many :reservation_items
+  has_many :items, through: :reservation_items
+  has_one :service, as: :serviceable
+  has_one :order, through: :service
 
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }
   scope :expire_tomorrow, -> { where(end_date: 1.day.ago.to_date) }
+  scope :reserved, -> { where(state: :reserved) }
   
   delegate :kw_id, to: :user
 
   workflow_column :state
   workflow do
-    state :availible do
-      event :reserve, :transitions_to => :reserved
-      event :archive, :transitions_to => :archived
-    end
     state :reserved do
-      event :give, :transitions_to => :holding
-    end
-    state :holding do
-      event :give_back, :transitions_to => :availible
+      event :archive, :transitions_to => :archived
     end
     state :archived
   end

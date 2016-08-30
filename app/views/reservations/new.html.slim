@@ -1,7 +1,7 @@
 .column.row
   br
   - if user_signed_in?
-    - if current_user.membership_payments.find_by(year: Date.today.year).present?
+    - if current_user.membership_fees.find_by(year: Date.today.year).present?
       .callout.primary
           | Wybierz tydzien i zobacz dostepnosc przedmiotow
 
@@ -32,7 +32,7 @@
           th Do
           th Status
           th Koszt
-          th Informacja od opiekuna
+          th
       tbody
         - current_user.reservations.each do |reservation|
           tr
@@ -48,12 +48,14 @@
               = reservation.items.map(&:cost).reduce(:+)
               |  zl
             td
-              = reservation.description
+              - if reservation.order && reservation.order.payment.unpaid?
+                = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post
 
       a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
       #reservation-charge.callout.reveal data-reveal=''		
         button.close-button aria-label=("Close modal") data-close="" type="button" 		
           span aria-hidden="true"  &times;
+
         
         callout.primary
         | Zaplac gotowka opiekunowi a on odznaczy to w systemie.

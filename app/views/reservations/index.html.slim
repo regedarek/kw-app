@@ -22,13 +22,8 @@
       = reservation.items.map(&:cost).reduce(:+)
       |  zl  
     .large-6.columns style='text-align: right'
-      a data-open="reservation-charge" class='button large expanded' Zaplac i potwierdz rezerwacje
-      #reservation-charge.callout.reveal data-reveal=''		
-        button.close-button aria-label=("Close modal") data-close="" type="button" 		
-          span aria-hidden="true"  &times;
-        
-        callout.primary
-        | Zaplac gotowka opiekunowi a on odznaczy to w systemie.
+      - if reservation.order && reservation.order.payment.unpaid?
+        = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post, class: 'button large'
 
 .column.row
   h3.subheader Dostepne przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}

@@ -1,7 +1,7 @@
 require 'active_model'
 
 module Admin
-  class MembershipPaymentsForm
+  class MembershipFeesForm
     include ActiveModel::Model
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
@@ -13,7 +13,7 @@ module Admin
 
     def params
       HashWithIndifferentAccess.new(
-        kw_id: kw_id, year: year
+        user_id: user.id, kw_id: kw_id, year: year
       )
     end
 
@@ -22,7 +22,7 @@ module Admin
     end
 
     def check_uniqueness_of_year
-      errors.add(:year, 'na ten rok juz istnieje') if user.present? && user.membership_payments.find_by(year: year).present?
+      errors.add(:year, 'na ten rok juz istnieje') if user.present? && user.membership_fees.find_by(year: year).present?
     end
 
     def user

@@ -1,28 +1,39 @@
-== README
+app/models/db
+  reservation
+  payment
+  payments
+    reservation_fee
+    membership_fee
+    course_fee
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Db::Payments::ReservationFee
+Db::Payments::MembershipFee
 
-Things you may want to cover:
+              Items -> ReservationWithItems -> Checkout -> Payment -> User
+Course -> Attendes -> RegistrationForCourse -> Checkout -> Payment -> User
+                                  YearlyFee -> Checkout -> Payment -> User
 
-* Ruby version
+Db::Item(name:, cost:)
+  has_many :reservations, through: :reservations_items
 
-* System dependencies
+Db::Reservation(description:, state:, start_date:, end_date:)
+  has_many :items, through: :reservations_items
+  belong_to :payable, polymorphic: true
 
-* Configuration
+Db::ReservationsItems
+  belongs_to :item
+  belongs_to :reservation
 
-* Database creation
+Db::Checkout
+  has_many :reservations, as: :payable
+  has_many :yearly_fees, as: :payable
+  has_one :payment
+  belongs_to :user
 
-* Database initialization
+Db::Payment
+  belongs_to :checkout
 
-* How to run the test suite
+-----
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Db::YearlyFee(cost:, :year)
+  belong_to :payable, polymorphic: true

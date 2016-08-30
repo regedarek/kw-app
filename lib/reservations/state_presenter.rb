@@ -14,7 +14,7 @@ module Reservations
     end
 
     def to_s
-      case @state.name
+      case @state
       when :availible
         'dostepny'
       when :reserved

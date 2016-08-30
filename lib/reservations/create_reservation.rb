@@ -15,11 +15,15 @@ module Reservations
           .first_or_initialize(form.attributes)
         reservation.user = user
 
-        items_to_add = (reservation.items + form.items).uniq
-        reservation.items = items_to_add
+        if reservation.order && reservation.order.payment.prepaid?
+          reservation.save
+        else
+          items_to_add = (reservation.items + form.items).uniq
+          reservation.items = items_to_add
+          reservation.save
+        end
 
-        reservation.build_reservation_payment(cash: true)
-        reservation.save
+        Orders::CreateOrder.new(service: reservation).create
         ReservationMailer.reserve(reservation).deliver_now
         Success.new
       end

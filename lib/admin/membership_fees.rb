@@ -1,14 +1,12 @@
-require 'results'
-
 module Admin
-  class MembershipPayments
+  class MembershipFees
     def initialize(allowed_params)
       @allowed_params = allowed_params
     end
 
     def create
       if form.valid?
-        payment = Db::MembershipPayment.new(form.params)
+        payment = Db::MembershipFee.new(form.params)
         payment.save
         Success.new
       else
@@ -17,7 +15,7 @@ module Admin
     end
 
     def self.destroy(payment_id)
-      payment = Db::MembershipPayment.find(payment_id)
+      payment = Db::MembershipFee.find(payment_id)
       if payment.destroy
         Success.new
       else
@@ -26,7 +24,7 @@ module Admin
     end
 
     def form
-      @form ||= Admin::MembershipPaymentsForm.new(@allowed_params)
+      @form ||= Admin::MembershipFeesForm.new(@allowed_params)
     end
   end
 end
