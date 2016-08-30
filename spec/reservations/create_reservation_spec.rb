@@ -79,7 +79,8 @@ describe Reservations::CreateReservation do
       end.to change(ActionMailer::Base.deliveries, :count).by(1)
 
       expect(Db::Reservation.count).to eq(1)
-      expect(Db::ReservationPayment.count).to eq(1)
+      expect(Db::Order.count).to eq(1)
+      expect(Db::Payment.count).to eq(1)
       expect(result.success?).to eq(true)
 
       reservation = Db::Reservation.first
@@ -87,9 +88,9 @@ describe Reservations::CreateReservation do
       expect(reservation.end_date).to eq('2016-08-25'.to_date)
       expect(reservation.items).to match_array([item])
       expect(reservation.user).to eq(user)
-      expect(reservation.availible?).to eq(true)
-      expect(reservation.reservation_payment).to eq(Db::ReservationPayment.first)
-      expect(reservation.reservation_payment.unpaid?).to eq(true)
+      expect(reservation.reserved?).to eq(true)
+      expect(reservation.order).to eq(Db::Order.first)
+      expect(reservation.order.payment.unpaid?).to eq(true)
     end
   end
 end
