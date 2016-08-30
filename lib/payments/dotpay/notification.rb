@@ -10,7 +10,7 @@ module Payments
       end
 
       def payment
-        Db::ReservationPayment.find_by(dotpay_id: @params.fetch(:control))
+        Db::Payment.find_by(dotpay_id: @params.fetch(:control))
       end
     end
   end

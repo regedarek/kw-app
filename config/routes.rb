@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       post :availability
     end
   end
-  resources :reservation_payments, only: [] do
+  resources :payments, only: [] do
     member do
       post :charge
     end

@@ -11,15 +11,15 @@ module Reservations
         end
 
         reservation = Db::Reservation
-          .where(start_date: form.start_date, state: :open)
+          .where(start_date: form.start_date)
           .first_or_initialize(form.attributes)
         reservation.user = user
 
         items_to_add = (reservation.items + form.items).uniq
         reservation.items = items_to_add
 
-        reservation.build_reservation_payment(cash: true, dotpay_id: SecureRandom.hex(13))
         reservation.save
+        Orders::CreateOrder.new(service: reservation).create
         ReservationMailer.reserve(reservation).deliver_now
         Success.new
       end

@@ -1,27 +1,18 @@
 .column.row
   br
   - if user_signed_in?
-    - if current_user.membership_payments.find_by(year: Date.today.year).present?
-      .callout.primary
-          | Wybierz tydzien i zobacz dostepnosc przedmiotow
+    .callout.primary
+        | Wybierz tydzien i zobacz dostepnosc przedmiotow
 
-      .callout
-        = form_for Availability::Form.new, url: availability_reservations_path do |f|
-          .row
-            .large-12.columns
-              = f.label :start_date, 'Tydzien'
-              = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
-          .row
-            .large-12.columns
-              = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
-      
-    - else
-      .callout.alert
-          | Konto nieaktywne, aby zarezerwowac musisz zaplacic skladke za rok biezacy.
-          br
-          | Udaj sie do klubu lub napisz na adres: 
-          = mail_to 'kw@kw.krakow.pl'
-          |  jezeli zaplaciles skladke.
+    .callout
+      = form_for Availability::Form.new, url: availability_reservations_path do |f|
+        .row
+          .large-12.columns
+            = f.label :start_date, 'Tydzien'
+            = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
+        .row
+          .large-12.columns
+            = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
 
     h3 Twoje rezerwacje
     table
@@ -48,8 +39,8 @@
               = reservation.items.map(&:cost).reduce(:+)
               |  zl
             td
-              - if reservation.reservation_payment.unpaid?
-                = link_to 'Zaplac', charge_reservation_payment_path(reservation.reservation_payment.id), method: :post
+              - if reservation.order && reservation.order.payment.unpaid?
+                = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post
 
       a data-open="reservation-charge" class='button large expanded warning' Zaplac i potwierdz rezerwacje
       #reservation-charge.callout.reveal data-reveal=''		

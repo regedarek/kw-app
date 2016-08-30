@@ -1,9 +1,10 @@
 class Db::Reservation < ActiveRecord::Base
   include Workflow
   belongs_to :user
+  has_many :reservation_items
   has_many :items, through: :reservation_items
   has_one :service, as: :serviceable
-  has_one :order, through: :services
+  has_one :order, through: :service
 
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }

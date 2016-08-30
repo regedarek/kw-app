@@ -7,7 +7,7 @@ module Payments
 
       def to_params
         {
-          amount: reservation.items.map(&:cost).reduce(:+),
+          amount: @payment.order.cost,
           currency: 'PLN',
           description: @payment.description,
           control: @payment.dotpay_id,
@@ -16,10 +16,6 @@ module Payments
           url: Rails.application.secrets.dotpay_url,
           urlc: Rails.application.secrets.dotpay_urlc,
         }
-      end
-
-      def reservation
-        @payment.reservation
       end
     end
   end
