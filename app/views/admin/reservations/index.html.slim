@@ -15,7 +15,6 @@
           th Na ktory tydzien?
           th Kiedy zarezerwowano
           th Platnosc
-          th Status
           th Akcje
       tbody
         - @reservations.each do |reservation|
@@ -31,15 +30,11 @@
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
             td
               = reservation.created_at.strftime("%d-%m-%Y")
-            td style=(reservation.reservation_payment.prepaid? ? 'background-color: green' : 'background-color: red')
-              - if reservation.reservation_payment.prepaid?
+            td style=((reservation.order && reservation.order.payment.prepaid?) ? 'background-color: green' : 'background-color: red')
+              - if reservation.order.payment.prepaid?
                 | Oplacono  
               - else
                 = link_to 'Nieoplacono', charge_admin_reservation_path(reservation), method: :put
-            td style=(reservation.holding? ? 'background-color: yellow' : '')
-              - on_change = %Q[$('#edit_db_reservation_#{reservation.id}').submit()].html_safe
-              = form_for reservation, url: update_state_admin_reservation_path(reservation), method: :put do |f|
-                = f.select :state, Reservations::StatePresenter.to_options, {}, onChange: on_change
             td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
               = ' | '

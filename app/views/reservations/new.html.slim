@@ -1,18 +1,27 @@
 .column.row
   br
   - if user_signed_in?
-    .callout.primary
-        | Wybierz tydzien i zobacz dostepnosc przedmiotow
+    - if current_user.membership_fees.find_by(year: Date.today.year).present?
+      .callout.primary
+          | Wybierz tydzien i zobacz dostepnosc przedmiotow
 
-    .callout
-      = form_for Availability::Form.new, url: availability_reservations_path do |f|
-        .row
-          .large-12.columns
-            = f.label :start_date, 'Tydzien'
-            = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
-        .row
-          .large-12.columns
-            = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
+      .callout
+        = form_for Availability::Form.new, url: availability_reservations_path do |f|
+          .row
+            .large-12.columns
+              = f.label :start_date, 'Tydzien'
+              = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
+          .row
+            .large-12.columns
+              = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
+      
+    - else
+      .callout.alert
+          | Konto nieaktywne, aby zarezerwowac musisz zaplacic skladke za rok biezacy.
+          br
+          | Udaj sie do klubu lub napisz na adres: 
+          = mail_to 'kw@kw.krakow.pl'
+          |  jezeli zaplaciles skladke.
 
     h3 Twoje rezerwacje
     table

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
         get :cancel_admin
       end
     end
-    resources :membership_payments, only: %w(index create destroy)
+    resources :membership_fees, only: %w(index create destroy)
     resources :items do
       member do
         put :update_owner

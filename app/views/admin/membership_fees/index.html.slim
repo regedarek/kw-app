@@ -1,6 +1,6 @@
 .column.row
   .row
-    = form_for Admin::MembershipPaymentsForm.new, url: admin_membership_payments_path do |f|
+    = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path do |f|
       .row
         .columns.large-12
           = f.label :kw_id, 'Numer klubowy'
@@ -25,15 +25,15 @@
           th Imie
           th Nazwisko
           th 
-            = form_for Admin::MembershipPaymentsForm.new, url: admin_membership_payments_path, method: :get do |f|
+            = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path, method: :get do |f|
               = f.text_field :kw_id,
-                value: params.fetch(:admin_membership_payments_form, {}).fetch(:kw_id, nil),
+                value: params.fetch(:admin_membership_fees_form, {}).fetch(:kw_id, nil),
                 placeholder: 'Numer klubowy'
           th Rok
           th Kiedy
           th Akcje
       tbody
-        - @membership_payments.each do |payment|
+        - @membership_fees.each do |payment|
           tr style=(payment.year == Date.today.year ? 'background-color: green' : '')
             td
               = payment.user.try(:first_name)
@@ -46,4 +46,4 @@
             td
               = payment.created_at.strftime("%d-%m-%Y")
             td
-              = link_to 'Usun', admin_membership_payment_path(payment.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+              = link_to 'Usun', admin_membership_fee_path(payment.id), method: :delete, data: { confirm: 'Jestes pewien?' }
