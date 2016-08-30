@@ -22,7 +22,7 @@
       = reservation.items.map(&:cost).reduce(:+)
       |  zl  
     .large-6.columns style='text-align: right'
-      - if reservation.order && reservation.order.payment.unpaid?
+      - if reservation.order && reservation.order.payment.unpaid? && reservation.items.map(&:cost).reduce(:+) > 0
         = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post, class: 'button large'
 
 .column.row
