@@ -24,7 +24,7 @@ module Reservations
         end
 
         Orders::CreateOrder.new(service: reservation).create
-        #ReservationMailer.reserve(reservation).deliver
+        ReservationMailer.reserve(reservation).deliver_later
         Success.new
       end
 
