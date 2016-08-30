@@ -9,17 +9,14 @@ class Db::Reservation < ActiveRecord::Base
   scope :archived, -> { where(state: :archived) }
   scope :expire_tomorrow, -> { where(end_date: 1.day.ago.to_date) }
   scope :reserved, -> { where(state: :reserved) }
-  scope :opened, -> { where(state: :open) }
   
   delegate :kw_id, to: :user
 
   workflow_column :state
   workflow do
-    state :open do
-      event :reserve, :transitions_to => :reserved
+    state :reserved do
       event :archive, :transitions_to => :archived
     end
-    state :reserved
     state :archived
   end
 end
