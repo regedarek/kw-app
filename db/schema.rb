@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824202246) do
+ActiveRecord::Schema.define(version: 20160830133030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,14 @@ ActiveRecord::Schema.define(version: 20160824202246) do
     t.integer  "cost",        default: 0
   end
 
-  create_table "membership_payments", force: :cascade do |t|
-    t.integer  "kw_id",      null: false
-    t.integer  "year",       null: false
+  create_table "payments", force: :cascade do |t|
+    t.integer  "resource_id"
+    t.boolean  "cash",        default: false
+    t.string   "dotpay_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state",       default: "unpaid"
+    t.string   "type"
   end
 
   create_table "peaks", force: :cascade do |t|
@@ -45,20 +48,11 @@ ActiveRecord::Schema.define(version: 20160824202246) do
     t.datetime "updated_at"
   end
 
-  create_table "reservation_payments", force: :cascade do |t|
-    t.integer  "reservation_id"
-    t.boolean  "cash",           default: false
-    t.string   "dotpay_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "state"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "state"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "state",       default: "reserved"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.date     "start_date"
     t.date     "end_date"
     t.text     "description"
@@ -102,6 +96,12 @@ ActiveRecord::Schema.define(version: 20160824202246) do
 
   create_table "valleys", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "yearly_fees", force: :cascade do |t|
+    t.string  "year"
+    t.integer "cost",    default: 100
+    t.integer "user_id"
   end
 
 end

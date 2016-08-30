@@ -9,12 +9,12 @@ module Payments
         {
           amount: reservation.items.map(&:cost).reduce(:+),
           currency: 'PLN',
-          description: "Platnosc za rezerwacje ##{reservation.id}",
+          description: @payment.description,
           control: @payment.dotpay_id,
           language: 'pl',
           redirection_type: 0,
-          url: 'https://e346eada.ngrok.io/api/payments/thank_you',
-          urlc: 'https://e346eada.ngrok.io/api/payments/status'
+          url: Rails.application.secrets.dotpay_url,
+          urlc: Rails.application.secrets.dotpay_urlc,
         }
       end
 

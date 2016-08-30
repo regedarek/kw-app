@@ -3,7 +3,7 @@ class Db::Reservation < ActiveRecord::Base
   belongs_to :user
   has_many :items, through: :reservation_checkouts
   has_many :reservation_checkouts
-  has_one :reservation_payment
+  has_one :payment, class_name: 'Db::Payments::ReservationFee', foreign_key: :resource_id
 
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }
