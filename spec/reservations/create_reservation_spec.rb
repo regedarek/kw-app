@@ -93,4 +93,19 @@ describe Reservations::CreateReservation do
       expect(reservation.order.payment.unpaid?).to eq(true)
     end
   end
+
+  context 'reservation has already been prepaid in this period' do
+    it 'creates antoher reservation' do
+      Factories::Item.create!(id: 2)
+      reservation = Factories::Reservation.create!(start_date: '2016-08-18', end_date: '2016-08-25')
+      order = Orders::CreateOrder.new(service: reservation).create
+      order.payment.charge!
+      form = Factories::Reservation.build_form(item_ids: [2])
+
+      result = nil
+      expect do
+        result = Reservations::CreateReservation.create(form: form, user: user)
+      end.to change(Db::Reservation, :count).from(1).to(2)
+    end
+  end
 end

@@ -13,16 +13,15 @@ module Reservations
         reservation = Db::Reservation
           .where(start_date: form.start_date)
           .first_or_initialize(form.attributes)
-        reservation.user = user
 
-        if reservation.order && reservation.order.payment.prepaid?
-          reservation.save
-        else
-          items_to_add = (reservation.items + form.items).uniq
-          reservation.items = items_to_add
-          reservation.save
+        if reservation.order.present? && reservation.order.payment.prepaid?
+          reservation = Db::Reservation.new(form.attributes)
         end
 
+        reservation.user = user
+        items_to_add = (reservation.items + form.items).uniq
+        reservation.items = items_to_add
+        reservation.save
         Orders::CreateOrder.new(service: reservation).create
         ReservationMailer.reserve(reservation).deliver_later
         Success.new

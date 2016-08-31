@@ -12,8 +12,8 @@ module Factories
   end
 
   class Item
-    def self.create!(attrs = {})
-      Db::Item.create!(load_fixture('items').first.merge(attrs))
+    def self.create!(attrs = {}, id: 1)
+      Db::Item.create!(load_fixture('items')[id - 1].merge(attrs))
     end
 
     def self.create_all!
