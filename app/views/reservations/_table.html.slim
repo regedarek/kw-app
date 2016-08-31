@@ -19,7 +19,7 @@
               span class=('alert label')
                 =t('unpaid')
           th
-            - if reservation.order && reservation.order.payment.unpaid? && reservation.items.map(&:cost).reduce(:+) > 0
+            - if reservation.order && !(reservation.order.payment.cash? || reservation.order.payment.prepaid?) && reservation.items.map(&:cost).reduce(:+) > 0
               = link_to t('pay'), charge_payment_path(reservation.order.payment.id), method: :post
       tbody
         - reservation.items.each do |item|

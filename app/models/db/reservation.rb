@@ -6,6 +6,7 @@ class Db::Reservation < ActiveRecord::Base
   has_one :service, as: :serviceable
   has_one :order, through: :service
 
+  default_scope { order('start_date') } 
   scope :not_prepaid, -> { joins(order: :payment).where.not(payments: { state: 'prepaid' }) }
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }

@@ -14,7 +14,7 @@ module Payments
           language: 'pl',
           redirection_type: 0,
           url: Rails.application.secrets.dotpay_url,
-          urlc: Rails.application.secrets.dotpay_urlc,
+          urlc: Rails.application.secrets.dotpay_urlc
         }
       end
     end
