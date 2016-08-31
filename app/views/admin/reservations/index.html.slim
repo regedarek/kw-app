@@ -30,11 +30,16 @@
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
             td
               = reservation.created_at.strftime("%d-%m-%Y")
-            td style=((reservation.order && reservation.order.payment.prepaid?) ? 'background-color: green' : 'background-color: red')
+            td
               - if reservation.order.payment.prepaid?
-                | Oplacono  
+                span class='label success'
+                  | Zapłacono
+              - elsif reservation.order.payment.cash?
+                span class='label success'
+                  | Zapłacono gotówką
               - else
-                = link_to 'Nieoplacono', charge_admin_reservation_path(reservation), method: :put
+                span class='label warning'
+                  | Oczekuje na płatność
             td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
               = ' | '

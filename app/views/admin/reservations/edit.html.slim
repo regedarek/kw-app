@@ -35,6 +35,15 @@
 
     .row
       .large-12.columns
+        - if @reservation.order.payment.cash?
+          span class='label success'
+            | Zapłacono gotówką
+        - else
+          = link_to 'Oznacz jako zapłacone gotówką', charge_admin_reservation_path(@reservation), method: :put, class: 'button'
+    br
+
+    .row
+      .large-12.columns
         = f.submit 'Zaktualizuj rezerwacje', class: 'button'
         = link_to 'Wroc', admin_reservations_path, class: 'button secondary'
 

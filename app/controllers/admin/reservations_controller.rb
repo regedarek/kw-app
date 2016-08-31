@@ -36,9 +36,9 @@ module Admin
 
     def charge
       reservation = Db::Reservation.find(params[:id])
-      reservation.reservation_payment.charge!
+      reservation.order.payment.update(cash: true)
 
-      redirect_to admin_reservations_path, notice: "Oplacono"
+      redirect_to edit_admin_reservation_path(reservation), notice: "Oznaczono jako zapłacone gotowką"
     end
 
     def remind
