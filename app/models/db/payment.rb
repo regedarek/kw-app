@@ -12,7 +12,7 @@ module Db
     end
 
     def description
-      "Oplata za zamownienie ##{order.id}"
+      "Opłata za zamówienie ##{order.id}"
     end
   end
 end
