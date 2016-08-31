@@ -17,7 +17,7 @@ class RoutesController < ApplicationController
     @route = Db::Route.new(route_params)
 
     if @route.save
-      redirect_to routes_path, notice: 'Dodano przejscie'
+      redirect_to routes_path, notice: 'Dodano twoje przejście.'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class RoutesController < ApplicationController
     @route = Db::Route.find(params[:id])
 
     if @route.update_attributes(route_params)
-      redirect_to routes_path, notice: 'Zaktualizowano przejscie'
+      redirect_to routes_path, notice: 'Zaktualizowano przejście.'
     else
       render :new
     end
@@ -41,7 +41,7 @@ class RoutesController < ApplicationController
     route = Db::Route.find(params[:id])
     route.destroy
 
-    redirect_to routes_path, notice: 'Usunieto przejscie'
+    redirect_to routes_path, notice: 'Usunięto przejście.'
   end
 
   private

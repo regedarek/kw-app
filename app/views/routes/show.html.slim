@@ -26,11 +26,11 @@
 
   - if @route.time?
     .large-12.columns
-      b Czas przejscia:  
+      b Czas przejścia:  
       = @route.time
 
   .large-12.columns
-    b Data przejscia: 
+    b Data przejścia: 
     = @route.climbing_date
 
   - if @route.rating?
@@ -40,7 +40,7 @@
 
   .large-12.columns
     hr
-    = link_to 'Powrot', routes_path
+    = link_to 'Powrót', routes_path
     - if user_signed_in? && current_user.admin?
       = ' | '
       = link_to 'Edytuj', edit_route_path(@route)

@@ -1,5 +1,5 @@
 .column.row
-  h2 Zaloguj sie
+  h2 Zaloguj się
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .row
       .large-12.columns
@@ -8,12 +8,12 @@
 
     .row
       .large-12.columns
-        = f.label :password, 'Haslo'
+        = f.label :password, 'Hasło'
         = f.password_field :password, autocomplete: "off"
 
     .row
       .large-12.columns
-        = f.submit "Zaloguj sie", class: 'button'
+        = f.submit "Zaloguj się", class: 'button'
 
     .row
       .large-12.columns

@@ -6,7 +6,7 @@ class ReservationMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: 'wypozycz-kw-krakow@googlegroups.com',
-      subject: "Zarezerwowales: #{reservation.items.map(&:name)}"
+      subject: "Zarezerwowano: #{reservation.items.map(&:name)}"
     )
   end
 

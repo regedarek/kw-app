@@ -14,7 +14,7 @@
 
     .row
       .large-12.columns
-        = f.label :first_name, 'Imie'
+        = f.label :first_name, 'Imię'
         = f.text_field :first_name
 
     .row
@@ -30,27 +30,27 @@
     .row
       .large-12.columns
         .callout.warning
-          | musisz podac obecne haslo jezeli chcesz zaakutalizowac profil
+          | musisz podać obecne haslo jeżeli chcesz zaakutalizować profil
 
     .row
       .large-12.columns
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                      Currently waiting confirmation for:
+                      Wyślij ponownie potwierdzajacy email:
                       = resource.unconfirmed_email
 
     .row
       .large-12.columns
-        = f.label 'Nowe haslo'
+        = f.label 'Nowe hasło'
         = f.password_field :password, autocomplete: "off"
 
     .row
       .large-12.columns
-        = f.label 'Potwierdz haslo'
+        = f.label 'Potwierdź hasło'
         = f.password_field :password_confirmation, autocomplete: "off"
 
     .row
       .large-12.columns
-        = f.label 'Obecne haslo'
+        = f.label 'Obecne hasło'
         = f.password_field :current_password, autocomplete: "off"
 
     .row
@@ -63,5 +63,5 @@
 
   .row
     .large-12.columns
-      = link_to "Usun konto", registration_path(resource_name),
-        data: { confirm: "Are you sure?" }, method: :delete, class: 'button alert right'
+      = link_to "Usuń konto", registration_path(resource_name),
+        data: { confirm: "To zatwierdzone przez twój mózg działanie?" }, method: :delete, class: 'button alert right'

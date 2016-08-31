@@ -1,5 +1,5 @@
 .column.row
-  h2 Zarejestruj sie
+  h2 Zarejestruj się
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     - if resource.errors.any?
       .callout.alert
@@ -14,7 +14,7 @@
 
     .row
       .large-12.columns
-        = f.label :first_name, 'Imie'
+        = f.label :first_name, 'Imię'
         = f.text_field :first_name, autofocus: true
 
     .row
@@ -29,14 +29,14 @@
 
     .row
       .large-12.columns
-        = f.label :password, 'Haslo'
+        = f.label :password, 'Hasło'
         = f.password_field :password, autocomplete: "off"
 
     .row
       .large-12.columns
-        = f.label :password_confirmation, 'Potwierdz haslo'
+        = f.label :password_confirmation, 'Potwierdź hasło'
         = f.password_field :password_confirmation, autocomplete: "off"
 
     .row
       .large-12.columns
-        = f.submit "Zarejestruj sie", class: 'button'
+        = f.submit "Zarejestruj się", class: 'button'

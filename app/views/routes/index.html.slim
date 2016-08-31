@@ -2,7 +2,7 @@
   br
   .row
     .large-12.columns
-      = link_to 'Dodaj nowe przejscie', new_route_path, class: 'large expanded button'
+      = link_to 'Dodaj nowe przejście', new_route_path, class: 'large expanded button'
   table
     thead
       tr
@@ -29,9 +29,9 @@
           td align='center'
             = route.difficulty
           td align='right'
-            = link_to 'Szczegoly', route_path(route)
+            = link_to 'Pokaż Szczegóły', route_path(route)
             - if user_signed_in? && current_user.admin?
               = ' | '
               = link_to 'Edytuj', edit_route_path(route)
               = ' | '
-              = link_to 'Usun', route_path(route), method: :delete
+              = link_to 'Usuń', route_path(route), method: :delete
