@@ -4,12 +4,28 @@
     table
       thead
         tr
-          th Number Klubowy
-          th Imie
-          th Nazwisko
-          th Email
-          th Ostrzezenia
-          th Akcje
+          th
+            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
+              = f.text_field :kw_id,
+                value: params.fetch(:admin_users_form, {}).fetch(:kw_id, nil),
+                placeholder: 'Numer klubowy'
+          th
+            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
+              = f.text_field :first_name,
+                value: params.fetch(:admin_users_form, {}).fetch(:first_name, nil),
+                placeholder: 'Imię'
+          th
+            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
+              = f.text_field :last_name,
+                value: params.fetch(:admin_users_form, {}).fetch(:last_name, nil),
+                placeholder: 'Nazwisko'
+          th
+            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
+              = f.text_field :email,
+                value: params.fetch(:admin_users_form, {}).fetch(:email, nil),
+                placeholder: 'E-mail'
+          th Ostrzeżenia
+          th
       tbody
         - @users.each do |user|
           tr
@@ -22,4 +38,4 @@
               - if user.admin?
                 = link_to 'Zdegraduj', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
               - else
-                = link_to 'Zrob adminem', make_admin_admin_user_path(user)
+                = link_to 'Zrób adminem', make_admin_admin_user_path(user)
