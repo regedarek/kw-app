@@ -1,0 +1,35 @@
+pl:
+  activerecord:
+    models:
+      db/route: Przejscie
+      db/peak: Szczyt
+      db/user: Klubowicz
+      db/valley: Dolina
+    attributes:
+      db/valley:
+        name: Nazwa
+      db/user:
+        kw_id: Numer klubowy
+        first_name: Imie
+        last_name: Nazwisko
+        email: E-mail
+        password: Haslo
+        password_confirmation: Potwierdz haslo
+        current_password: Obecne haslo
+      db/peak:
+        name: Nazwa
+        valley_id: Dolina
+      db/route:
+        peak_id: Szczyt
+        name: Nazwa
+        difficulty: Wycena
+        partners: Partnerzy
+        description: Uwagi
+        time: Czas przejscia
+        climbing_date: Data przejscia
+    errors:
+      messages:
+        record_invalid: "Negatywne sprawdzenie poprawności: %{errors}"
+        restrict_dependent_destroy:
+          has_many: Nie może zostać usunięte, gdyż istnieją zależne od niego %{record}
+          has_one: Nie może zostać usunięte, gdyż istnieje zależny od niego %{record}

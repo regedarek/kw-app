@@ -1,0 +1,10 @@
+pl:
+  reservations:
+    new:
+      choose_week_and_show_visibility: Wybierz tydzień i zobacz dostępność przedmiotów
+      check_available_items: Sprawdź dostępność przedmiotów
+      registration_warning: Aby używać wypożyczalni zarejestruj swoje konto w którym podaj email kontaktowy oraz numer legitymacji klubowej. Twoja składka powinna zostać automatycznie pobrana. W przypadku problemów skontaktuj się z opiekunem wypożyczalni.
+    index:
+      given_week: 'Tydzień: '
+      available_items: 'Dostępne przedmioty'
+      item: 'Przedmiot'

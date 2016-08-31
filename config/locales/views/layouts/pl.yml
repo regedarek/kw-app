@@ -1,0 +1,18 @@
+pl:
+  layouts:
+    top_bar:
+      menu: Menu
+      home: Twoj pulpit
+      edit_account: Twoje konto
+      administration:
+        main: Panel Administracyjny
+        users: Użytkownicy
+        items: Przedmioty
+        membership_fees: Składki
+        reservations: Rezerwacje
+        routes: Przejścia
+        valleys: Doliny
+        login: Zaloguj się
+        logout: Wyloguj się
+        signup: Zarejestruj się
+

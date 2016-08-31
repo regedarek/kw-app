@@ -1,38 +1,23 @@
 .column.row
-  h3.subheader Chcesz zarezerwowac ponizsze przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}
+  h3.subheader
+    = t('.given_week')
+    b= Availability::Items.new(start_date: params[:start_date]).week
   - reservations = current_user.reservations.where(start_date: params[:start_date])
-  table
-    - reservations.each do |reservation|
-      thead
-        tr
-          th= "Rezerwacja nr: #{reservation.id}"
-          th style='text-align: right'
-            = "Koszt(#{reservation.items.map(&:cost).reduce(:+)} zl)"
-            = ' | '
-            - if reservation && reservation.items.any?
-              - if reservation.order && reservation.order.payment.unpaid? && reservation.items.map(&:cost).reduce(:+) > 0
-                = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post
-      tbody
-        - reservation.items.each do |item|
-          tr
-            td
-              = item.try(:name)
-            td align='right'
-              = link_to 'Zrezygnuj', delete_item_reservation_path(reservation, item_id: item), method: :delete
-
+  = render 'reservations/table', reservations: reservations
 
 
 .column.row
-  h3.subheader Dostepne przedmioty w tygodniu #{Availability::Items.new(start_date: params[:start_date]).week}
+  h4.subheader
+    = t('.available_items')
   table
     thead
       tr
-        th Przedmiot
+        th=t('.item')
         th
     tbody
       - @available_items.each do |item|
         tr
           td
-            = item.try(:name)
+            = item.name
           td align='right'
-            = link_to 'Zarezerwuj', reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+            = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post

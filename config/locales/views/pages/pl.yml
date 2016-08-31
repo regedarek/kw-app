@@ -1,0 +1,6 @@
+pl:
+  pages:
+    home:
+      new_route: Dodaj nowe przejście
+      last_routes: Ostatnie przejscia
+      new_reservation: Zarezerwuj coś

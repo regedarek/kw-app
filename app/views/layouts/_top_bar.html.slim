@@ -1,28 +1,28 @@
 .title-bar data-hide-for="medium" data-responsive-toggle="top-bar" 
   button.menu-icon data-toggle="" type="button" 
-  .title-bar-title Menu
+  .title-bar-title= t('.menu')
 
 #top-bar.top-bar
   .top-bar-left
     ul.dropdown.menu data-dropdown-menu="" 
-      li.menu-text Klub Wysokogorski Krakow
+      li.menu-text=t('title')
       - if user_signed_in?
-        li= link_to "Start", home_path
-        li= link_to 'Moje konto', edit_user_registration_path
+        li= link_to t('.home'), home_path
+        li= link_to t('.edit_account'), edit_user_registration_path
         - if current_user.admin?
           li
-            = link_to 'Panel Administracyjny', admin_path
+            = link_to t('.administration.main'), admin_path
             ul.menu.vertical
-              li= link_to 'Uzytkownicy', admin_users_path
-              li= link_to 'Skladki', admin_membership_fees_path
-              li= link_to 'Przedmioty', admin_items_path
-              li= link_to 'Rezerwacje', admin_reservations_path
-              li= link_to 'Przejscia', routes_path
-              li= link_to 'Doliny i szczyty', admin_valleys_path
+              li= link_to t('.administration.users'), admin_users_path
+              li= link_to t('.administration.membership_fees'), admin_membership_fees_path
+              li= link_to t('.administration.items'), admin_items_path
+              li= link_to t('.administration.reservations'), admin_reservations_path
+              li= link_to t('.administration.routes'), routes_path
+              li= link_to t('.administration.valleys'), admin_valleys_path
   .top-bar-right
     ul.dropdown.menu
       - if user_signed_in?
-        li= link_to 'Wyloguj', destroy_user_session_path
+        li= link_to t('.administration.logout'), destroy_user_session_path
       - else
-        li= link_to 'Zaloguj', new_user_session_path
-        li= link_to 'Zarejestruj', new_user_registration_path
+        li= link_to t('.administration.login'), new_user_session_path
+        li= link_to t('.administration.signup'), new_user_registration_path

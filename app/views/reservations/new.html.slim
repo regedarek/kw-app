@@ -3,51 +3,26 @@
   - if user_signed_in?
     - if current_user.membership_fees.find_by(year: Date.today.year).present?
       .callout.primary
-          | Wybierz tydzien i zobacz dostepnosc przedmiotow
+          = t('.choose_week_and_show_visibility')
 
       .callout
         = form_for Availability::Form.new, url: availability_reservations_path do |f|
           .row
             .large-12.columns
-              = f.label :start_date, 'Tydzien'
+              = f.label :start_date, 'Tydzień'
               = f.select :start_date, grouped_options_for_select(Availability::WeeksPresenter.to_options)
           .row
             .large-12.columns
-              = f.submit 'Sprawdz dostepnosc przedmiotow', class: 'button'
+              = f.submit t('.check_available_items'), class: 'button'
       
     - else
       .callout.alert
-          | Konto nieaktywne, aby zarezerwowac musisz zaplacic skladke za rok biezacy.
+          | Konto nieaktywne, aby zarezerwować musisz zaplacić składkę za rok bieżący.
           br
           | Udaj sie do klubu lub napisz na adres: 
           = mail_to 'kw@kw.krakow.pl'
-          |  jezeli zaplaciles skladke.
-
-    h3 Twoje rezerwacje
-    table
-      thead
-        tr
-          th Przedmiot
-          th Od
-          th Do
-          th Koszt
-          th
-      tbody
-        - current_user.reservations.each do |reservation|
-          tr
-            td
-              = reservation.items.map(&:name)
-            td
-              = reservation.start_date 
-            td
-              = reservation.end_date 
-            td
-              = reservation.items.map(&:cost).reduce(:+)
-              |  zl
-            td
-              - if reservation.order && reservation.order.payment.unpaid? && reservation.items.map(&:cost).reduce(:+) > 0
-                = link_to 'Zaplac', charge_payment_path(reservation.order.payment.id), method: :post
+          |  jeżeli zapłaciłeś składkę.
 
   - else
-    .callout.warrning
-      | Aby uzywac wypozyczalni zarejestruj swoje konto w ktorym podaj email kontaktowy oraz numer legitymacji klubowej. Twoja skladka powinna zostac automatycznie pobrana. W przypadku problemow skontaktuj sie z opiekunem wypozyczalni.
+    .callout.alert
+      = t('.registration_warning')

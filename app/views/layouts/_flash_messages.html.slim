@@ -1,20 +1,20 @@
 - if flash[:warn] || flash[:alert]		
   .callout.warning data-closable=""
     | #{flash[:warn]} #{flash[:alert]}		
-    button.close-button aria-label=("Dismiss alert") data-close="" type="button" 
+    button.close-button aria-label=t('close_alert') data-close="" type="button" 
       span aria-hidden="true"  &times;
 - if flash[:notice] || flash[:success]		
   .callout.success data-closable=""
     | #{flash[:notice]} #{flash[:success]}
-    button.close-button aria-label=("Dismiss alert") data-close="" type="button" 
+    button.close-button aria-label=t('close_alert') data-close="" type="button" 
       span aria-hidden="true"  &times;
 - if flash[:info]		
   .callout.info data-closable=""
     | #{flash[:info]}		
-    button.close-button aria-label=("Dismiss alert") data-close="" type="button" 
+    button.close-button aria-label=t('close_alert') data-close="" type="button" 
       span aria-hidden="true"  &times;
 - if flash[:error]		
   .callout.alert data-closable=""
     | #{flash[:error]}
-    button.close-button aria-label=("Dismiss alert") data-close="" type="button" 
+    button.close-button aria-label=t('close_alert') data-close="" type="button" 
       span aria-hidden="true"  &times;
