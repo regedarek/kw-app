@@ -3,6 +3,7 @@ pl:
     top_bar:
       menu: Menu
       home: Twoj pulpit
+      rules: Regulamin
       edit_account: Twoje konto
       administration:
         main: Panel Administracyjny

@@ -9,6 +9,7 @@
       - if user_signed_in?
         li= link_to t('.home'), home_path
         li= link_to t('.edit_account'), edit_user_registration_path
+        li= link_to t('.rules'), page_path('rules')
         - if current_user.admin?
           li
             = link_to t('.administration.main'), admin_path
