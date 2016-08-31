@@ -45,4 +45,6 @@
               = ' | '
               = link_to 'Usun', admin_reservation_path(reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }
               = ' | '
+              = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
+              = ' | '
               = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post

@@ -27,11 +27,11 @@ module Admin
       result.else_fail!
     end
 
-    def update_state
+    def archive
       reservation = Db::Reservation.find(params[:id])
-      reservation.update_column(:state, params[:db_reservation].fetch(:state))
+      reservation.archive!
 
-      redirect_to admin_reservations_path, notice: "Ustawiono status na #{::Reservations::StatePresenter.new(reservation.current_state).to_s}"
+      redirect_to admin_reservations_path, notice: 'Zarchiwizowano rezerwację'
     end
 
     def charge
