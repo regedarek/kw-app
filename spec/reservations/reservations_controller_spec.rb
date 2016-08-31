@@ -35,7 +35,8 @@ describe ReservationsController, type: :controller do
     end
 
     it 'adds item to reservation if already exists' do
-      Factories::Reservation.create!(item_ids: [item_1.id])
+      reservation = Factories::Reservation.create!(item_ids: [item_1.id])
+      Orders::CreateOrder.new(service: reservation).create
       form = Factories::Reservation.build_form(item_ids: [item_2.id])
       expect {
         post :create, reservations_form: form.attributes
