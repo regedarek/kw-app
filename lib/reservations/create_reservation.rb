@@ -12,6 +12,7 @@ module Reservations
 
         reservation = Db::Reservation
           .where(start_date: form.start_date)
+          .not_prepaid
           .first_or_initialize(form.attributes)
 
         if reservation.order.present? && reservation.order.payment.prepaid?
