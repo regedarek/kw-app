@@ -12,6 +12,13 @@
         .callout
           = @reservation.items.map(&:name)
 
+    - if @reservation.user.phone.present?
+      .row
+        .large-12.columns
+          = f.label 'Telefon'
+          .callout
+            = @reservation.user.phone
+
     .row
       .large-12.columns
         = f.label 'Koszt'

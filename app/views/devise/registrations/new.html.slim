@@ -24,6 +24,11 @@
 
     .row
       .large-12.columns
+        = f.label :phone, 'Telefon'
+        = f.text_field :phone, autofocus: true
+
+    .row
+      .large-12.columns
         = f.label :email, 'Email'
         = f.email_field :email, autofocus: true
 
