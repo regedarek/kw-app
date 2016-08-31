@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830183120) do
+ActiveRecord::Schema.define(version: 20160831180312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "course_applications", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone_number"
+    t.text   "living_address"
+    t.string "birthday"
+    t.string "birthplace"
+    t.string "pesel"
+    t.text   "main_adress"
+    t.text   "description"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -29,11 +42,12 @@ ActiveRecord::Schema.define(version: 20160830183120) do
   create_table "membership_fees", force: :cascade do |t|
     t.string   "year"
     t.integer  "cost",       default: 100
-    t.integer  "user_id"
     t.integer  "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "membership_fees", ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
