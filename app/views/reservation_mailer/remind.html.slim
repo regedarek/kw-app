@@ -1,12 +1,12 @@
 h3= "Rezerwacja ##{@reservation.id}"
 
-h2= "Kiedy powinienies oddac przedmiot: #{@reservation.end_date}"
+h2= "Kiedy powinienieś oddać przedmiot: #{@reservation.end_date}"
 
 b Kto: 
 = "#{@reservation.user.first_name} #{@reservation.user.last_name}"
 br
 b Co: 
-= @reservation.item.name
+= @reservation.items.map(&:name)
 br
 b Na kiedy: 
 = "#{@reservation.start_date} - #{@reservation.end_date}"
@@ -14,10 +14,10 @@ br
 br
 = "Przypominamy o oddaniu przedmiotu w terminie."
 br
-= "Aby skontaktowac sie z opiekunem mozesz po prostu odpowiedziec na ten email."
+= "Aby skontaktować się z opiekunem możesz po prostu odpowiedzieć na ten email."
 br
 = '----------------------------------------------------------'
 br
 i
   small
-    = 'Wypozyczalnia Klubu Wysokogorskiego Krakow'
+    = 'Wypożyczalnia Klubu Wysokogórskiego Kraków'

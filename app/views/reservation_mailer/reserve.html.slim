@@ -10,18 +10,21 @@ b Na kiedy:
 = "#{@reservation.start_date} - #{@reservation.end_date}"
 br
 br
-= "Potwierdzamy ze zarezerwowales "
+= "Potwierdzamy ze zarezerwowałeś "
 b= @reservation.items.map(&:name)
 br
-= "Prosimy Cie abys przestrzegal naszego regulaminu."
+= "Prosimy Cię abyś przestrzegał naszego regulaminu."
 br
 br
-= "Aby odebrac przedmiot skontaktuj sie z opiekunem wypozyczalni we czwartek."
+b= "Prosimy teraz abyś opłacił rezerwację w ciągu 48h po tym czasie zostanie ona anulowana."
 br
-= "Aby skontaktowac sie z opiekunem mozesz po prostu odpowiedziec na ten email."
+br
+= "Aby odebrać przedmiot skontaktuj sie z opiekunem wypożyczalni we czwartek w siedzibie klubu."
+br
+= "Aby skontaktować się z opiekunem możesz po prostu odpowiedzieć na ten email."
 br
 = '----------------------------------------------------------'
 br
 i
   small
-    = 'Wypozyczalnia Klubu Wysokogorskiego Krakow'
+    = 'Wypożyczalnia Klubu Wysokogórskiego Kraków'
