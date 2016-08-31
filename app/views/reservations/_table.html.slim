@@ -12,6 +12,9 @@
             - if reservation.order.payment.prepaid?
               span class=('success label')
                 =t('prepaid')
+            - elsif reservation.order.payment.cash?
+              span class='label success'
+                | Zapłacono gotówką
             - else
               span class=('alert label')
                 =t('unpaid')
