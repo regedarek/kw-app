@@ -25,8 +25,8 @@ module Factories
   end
 
   class Reservation
-    def self.create!(attrs = {})
-      Db::Reservation.create!(load_fixture('reservations').first.merge(attrs))
+    def self.create!(attrs = {}, id: 1)
+      Db::Reservation.create!(load_fixture('reservations')[id - 1].merge(attrs))
     end
 
     def self.build_form(attrs = {})
