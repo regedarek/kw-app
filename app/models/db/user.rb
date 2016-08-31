@@ -6,5 +6,5 @@ class Db::User < ActiveRecord::Base
 
   has_many :reservations
   has_many :orders
-  has_many :membership_fees
+  has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id
 end
