@@ -3,7 +3,7 @@ class Db::User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :kw_id, :first_name, :last_name, presence: true
+  validates :phone, :kw_id, :first_name, :last_name, presence: true
 
   scope :first_name, -> (name) { where first_name: name }
   scope :last_name, -> (name) { where last_name: name }
