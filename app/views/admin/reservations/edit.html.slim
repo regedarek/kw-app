@@ -55,6 +55,7 @@
         = link_to 'Wroc', admin_reservations_path, class: 'button secondary'
         - if @reservation.reserved?
           = link_to 'Zarchiwizuj', archive_admin_reservation_path(@reservation), method: :put, class: 'button warning'
+        = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button'
 
     .row
       .large-12.columns

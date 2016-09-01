@@ -6,7 +6,6 @@ module Reservations
 
     def self.to_options
       [
-        ['dostepny', :available],
         ['zarezerwowany', :reserved],
         ['wypozyczony', :holding],
         ['zarchiwizowany', :archived]
@@ -15,14 +14,12 @@ module Reservations
 
     def to_s
       case @state
-      when :availible
-        'dostepny'
       when :reserved
         'zarezerwowany'
       when :archived
         'zarchiwizowany'
       when :holding
-        'wypozyczony'
+        'w posiadaniu'
       else
         'nie wiem'
       end
