@@ -2,10 +2,11 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default_url_options = { host:'kw-krakow.herokuapp.com' }
   config.action_mailer.smtp_settings = {
     :address => "smtp.gmail.com",
     :port => 25,
-    :domain => 'localhost:3000',
+    :domain => 'kw-krakow.herokuapp.com',
     :user_name => "wypozyczalnia.kw.krakow@gmail.com",
     :password => ENV["GMAIL_PASSWORD"],
     :authentication => :plain,
