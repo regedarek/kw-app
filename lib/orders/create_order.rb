@@ -13,6 +13,7 @@ module Orders
         order.reservations << @service if @service.is_a? Db::Reservation
         order.save
         order
+        ReservationMailer.reserve(@service).deliver_later
       end
     end
   end

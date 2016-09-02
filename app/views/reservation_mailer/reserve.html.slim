@@ -3,15 +3,10 @@ h3= "Rezerwacja ##{@reservation.id}"
 b Kto: 
 = "#{@reservation.user.first_name} #{@reservation.user.last_name}"
 br
-b Co: 
-= @reservation.items.map(&:name)
 br
 b Na kiedy: 
 = "#{@reservation.start_date} - #{@reservation.end_date}"
 br
-br
-= "Potwierdzamy ze zarezerwowałeś "
-b= @reservation.items.map(&:name)
 br
 = "Prosimy Cię abyś przestrzegał naszego regulaminu."
 br
@@ -19,7 +14,7 @@ br
 b= "Prosimy teraz abyś opłacił rezerwację w ciągu 48h po tym czasie zostanie ona anulowana."
 br
 br
-= "Aby odebrać przedmiot skontaktuj sie z opiekunem wypożyczalni we czwartek w siedzibie klubu."
+= "Aby odebrać przedmioty skontaktuj sie z opiekunem wypożyczalni we czwartek w siedzibie klubu."
 br
 = "Aby skontaktować się z opiekunem możesz po prostu odpowiedzieć na ten email."
 br

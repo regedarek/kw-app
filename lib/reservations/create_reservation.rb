@@ -13,9 +13,10 @@ module Reservations
         reservation = Db::Reservation
           .where(start_date: form.start_date)
           .not_prepaid
+          .not_cash
           .first_or_initialize(form.attributes)
 
-        if reservation.order.present? && reservation.order.payment.prepaid?
+        if reservation.order.present? && (reservation.order.payment.prepaid? || reservation.order.payment.cash?)
           reservation = Db::Reservation.new(form.attributes)
         end
 
@@ -24,7 +25,7 @@ module Reservations
         reservation.items = items_to_add
         reservation.save
         Orders::CreateOrder.new(service: reservation).create
-        ReservationMailer.reserve(reservation).deliver_later
+
         Success.new
       end
 
