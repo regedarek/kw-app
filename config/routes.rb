@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       member do
         put :archive
         put :charge
+        put :give
         post :remind
         post :give_warning
         post :give_back_warning

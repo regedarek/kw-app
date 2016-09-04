@@ -15,6 +15,7 @@
           th Na ktory tydzien?
           th Kiedy zarezerwowano
           th Platnosc
+          th Status
           th Akcje
       tbody
         - @reservations.each do |reservation|
@@ -41,11 +42,20 @@
                 span class='label warning'
                   | Oczekuje na płatność
             td
+              - if reservation.holding?
+                span class='label secondary'
+                  | w posiadaniu
+              - if reservation.reserved?
+                span class='label secondary'
+                  | zarezerwowano
+            td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
-              = ' | '
-              = link_to 'Usun', admin_reservation_path(reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }
               - if reservation.reserved?
                 = ' | '
                 = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
-              = ' | '
-              = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post
+              - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding?
+                = ' | '
+                = link_to 'Przekaż', give_admin_reservation_path(reservation), method: :put
+              - if reservation.holding?
+                = ' | '
+                = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post

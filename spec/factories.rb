@@ -7,7 +7,7 @@ end
 module Factories
   class User
     def self.create!(attrs = {})
-      Db::User.create!(load_fixture('users').first.merge(attrs))
+      Db::User.create!(load_fixture('users')[attrs.fetch('id', 1) - 1].merge(attrs))
     end
   end
 

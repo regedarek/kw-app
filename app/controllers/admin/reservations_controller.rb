@@ -34,6 +34,13 @@ module Admin
       redirect_to admin_reservations_path, notice: 'Zarchiwizowano rezerwację'
     end
 
+    def give
+      reservation = Db::Reservation.find(params[:id])
+      reservation.give!
+
+      redirect_to admin_reservations_path, notice: "Oznaczono jako w posiadaniu."
+    end
+
     def charge
       reservation = Db::Reservation.find(params[:id])
       reservation.order.payment.update(cash: true)
@@ -43,7 +50,7 @@ module Admin
 
     def remind
       reservation = Db::Reservation.find(params[:id])
-      ReservationMailer.remind(reservation).deliver
+      ReservationMailer.remind(reservation).deliver_later
       redirect_to admin_reservations_path, notice: 'Przypomniano i wyslano email'
     end
 

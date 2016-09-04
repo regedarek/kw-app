@@ -1,5 +1,5 @@
 .column.row
-  h2 Zapomniales hasla?
+  h2 Zapomniałeś hasła?
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = devise_error_messages!
 
@@ -10,4 +10,4 @@
 
     .row
       .large-12.columns
-        = f.submit "Wyslij mi nowe haslo", class: 'button'
+        = f.submit "Wyślij mi nowe hasło", class: 'button'
