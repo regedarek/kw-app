@@ -9,6 +9,7 @@ class Db::Reservation < ActiveRecord::Base
   default_scope { order('start_date') } 
   scope :not_prepaid, -> { joins(order: :payment).where.not(payments: { state: 'prepaid' }) }
   scope :not_cash, -> { joins(order: :payment).where(payments: { cash: false }) }
+  scope :cash_prepaid, -> { joins(order: :payment).where(payments: { cash: true }) }
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }
   scope :expire_tomorrow, -> { where(end_date: 1.day.ago.to_date) }
