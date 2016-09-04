@@ -8,7 +8,7 @@ module Api
 
     def thank_you
       if params[:status] == 'OK'
-        redirect_to new_reservation_path, notice: 'Oplacono'
+        redirect_to root_path, notice: 'Oplacono rezerwacje.'
       end
     end
   end
