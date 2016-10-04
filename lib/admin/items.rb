@@ -21,7 +21,6 @@ module Admin
       if form.valid?
         item = Db::Item.find(item_id)
         item.update(form.params)
-        item.save
         Success.new
       else
         Failure.new(:invalid, form: form)

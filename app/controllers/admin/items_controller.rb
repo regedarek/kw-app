@@ -54,7 +54,7 @@ module Admin
     private
 
     def item_params
-      params.require(:admin_items_form).permit(:name, :cost, :description, :rentable, :owner)
+      params.require(:admin_items_form).permit(:name, :cost, :description, :owner, :rentable)
     end
   end
 end
