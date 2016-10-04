@@ -8,8 +8,12 @@ module Admin
       if Db::User.exists?(curator: true)
         redirect_to admin_users_path, alert: 'Może być tylko jeden władca!'
       else
-        Db::User.find(params[:id]).update(curator: true)
-        redirect_to admin_users_path, notice: 'Mianowałeś opiekuna'
+        user = Db::User.find(params[:id])
+        if user.update(curator: true)
+          redirect_to admin_users_path, notice: 'Mianowałeś opiekuna'
+        else
+          redirect_to admin_users_path, alert: user.errors
+        end
       end
     end
 
