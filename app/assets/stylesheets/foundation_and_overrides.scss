@@ -1,21 +1,3 @@
-
-.no-js .top-bar {
-  display: none;
-}
-
-@media screen and (min-width: 40em) {
-  .no-js {
-    .top-bar {
-      display: block;
-    }
-    .title-bar {
-      display: none;
-    }
-  }
-}
-.no-js [data-responsive-toggle] {
-  display: none;
-}
 @charset 'utf-8';
 
 @import 'settings';
@@ -68,20 +50,3 @@
 //
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
-.no-js .top-bar {
-  display: none;
-}
-
-@media screen and (min-width: 40em) {
-  .no-js {
-    .top-bar {
-      display: block;
-    }
-    .title-bar {
-      display: none;
-    }
-  }
-}
-.no-js [data-responsive-toggle] {
-  display: none;
-}
