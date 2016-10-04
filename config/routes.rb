@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       member do
         get :make_admin
         get :cancel_admin
+        get :make_curator
+        get :cancel_curator
       end
     end
     resources :membership_fees, only: %w(index create destroy)

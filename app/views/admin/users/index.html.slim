@@ -26,7 +26,8 @@
                 placeholder: 'E-mail'
           th Telefon
           th Ostrzeżenia
-          th
+          th Adminitrator
+          th Opiekun wypożyczalni
       tbody
         - @users.each do |user|
           tr
@@ -38,6 +39,11 @@
             td= user.warnings
             td
               - if user.admin?
-                = link_to 'Zdegraduj', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
+                = link_to '[ Zdegraduj ]', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
               - else
-                = link_to 'Zrób adminem', make_admin_admin_user_path(user)
+                = link_to '[ Awansuj ]', make_admin_admin_user_path(user)
+            td
+              - if user.curator?
+                = link_to '[ Zdegraduj ]', cancel_curator_admin_user_path(user)
+              - else
+                = link_to '[ Awansuj ]', make_curator_admin_user_path(user)

@@ -2,6 +2,16 @@
   br
   - if user_signed_in?
     - if current_user.membership_fees.find_by(year: Date.today.year).present?
+      - user = Db::User.find_by(curator: true)
+      - if user_signed_in? && user.present?
+        .callout.alert
+          b Opiekun wypożyczalni w tym tygodniu
+          br
+          = "#{user.first_name} #{user.last_name} (#{user.email})"
+          br
+          | Kontakt telefoniczny w przypadku pytań i problemów
+          b= ": #{user.phone}"
+
       .callout.primary
           = t('.choose_week_and_show_visibility')
 

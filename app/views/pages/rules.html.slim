@@ -1,6 +1,15 @@
 .column.row
   .row.columns
     h3.subheader Wypożyczalnia sprzętu Klubu Wysokogórskiego Kraków
+    - user = Db::User.find_by(curator: true)
+    - if user_signed_in? && user.present?
+      .callout.alert
+        b Opiekun wypożyczalni w tym tygodniu
+        br
+        = "#{user.first_name} #{user.last_name} (#{user.email})"
+        br
+        | Kontakt telefoniczny w przypadku pytań i problemów
+        b= ": #{user.phone}"
 
     .callout
       | Wypożyczenia dokonuje się na podstawie wcześniejszej rezerwacji.
