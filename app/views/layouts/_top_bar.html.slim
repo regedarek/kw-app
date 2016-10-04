@@ -5,11 +5,12 @@
 #top-bar.top-bar
   .top-bar-left
     ul.dropdown.menu data-dropdown-menu="" 
-      li.menu-text=t('title')
+      li=link_to t('title'), 'http://kw.krakow.pl'
+      li= link_to t('reserve'), new_reservation_path
+      li= link_to t('.rules'), page_path('rules')
       - if user_signed_in?
         li= link_to t('.home'), home_path
         li= link_to t('.edit_account'), edit_user_registration_path
-        li= link_to t('.rules'), page_path('rules')
         - if current_user.admin?
           li
             = link_to t('.administration.main'), admin_path
