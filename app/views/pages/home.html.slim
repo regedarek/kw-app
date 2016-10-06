@@ -1,9 +1,9 @@
 .column.row
   br
   .row.button-group
-    = link_to t('.last_routes'), routes_path, class: 'primary button'
-    = link_to t('.new_route'), new_route_path, class: 'success button'
-    = link_to t('.new_reservation'), new_reservation_path, class: 'secondary button'
+    - if user_signed_in?
+      = link_to t('.last_routes'), routes_path, class: 'primary button'
+      = link_to t('.new_route'), new_route_path, class: 'success button'
   
   - if user_signed_in?
     .row
