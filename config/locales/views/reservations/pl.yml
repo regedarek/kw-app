@@ -3,7 +3,8 @@ pl:
     new:
       choose_week_and_show_visibility: Wybierz tydzień i zobacz dostępność przedmiotów
       check_available_items: Sprawdź dostępność przedmiotów
-      registration_warning: Aby używać wypożyczalni zarejestruj swoje konto w którym podaj email kontaktowy oraz numer legitymacji klubowej. Twoja składka powinna zostać automatycznie pobrana. W przypadku problemów skontaktuj się z opiekunem wypożyczalni. Dane opiekuna pojawią się tylko dla zalogowanych użytkowników. Jeżeli masz problem z rejestracją napisz na wypozyczalnia.kw.krakow@gmail.com
+      registration_warning_html: Aby używać wypożyczalni zarejestruj swoje konto w którym podaj <b>email</b> kontaktowy oraz <b>numer legitymacji klubowej</b>.</br>Twoja <b>składka</b> powinna zostać automatycznie pobrana. W przypadku problemów lub pytan skontaktuj się z <b>opiekunem</b> wypożyczalni.</br>Jego dane pojawią się tylko dla zalogowanych użytkowników.
+      registration_problem_html: Jeżeli masz problem z rejestracją napisz na %{email}
     index:
       given_week: 'Tydzień: '
       available_items: 'Dostępne przedmioty'

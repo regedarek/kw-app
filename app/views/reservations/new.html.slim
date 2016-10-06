@@ -38,4 +38,7 @@
 
   - else
     .callout.alert
-      = t('.registration_warning')
+      = t('.registration_warning_html')
+    .callout.warning
+      - mailto = mail_to 'wypozyczalnia.kw.krakow@gmail.com'
+      = t('.registration_problem_html', email: mailto)
