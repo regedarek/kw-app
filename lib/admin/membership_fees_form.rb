@@ -13,7 +13,7 @@ module Admin
 
     def params
       HashWithIndifferentAccess.new(
-        user_id: user.id, kw_id: kw_id, year: year
+        kw_id: kw_id, year: year
       )
     end
 
