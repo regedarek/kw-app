@@ -1,20 +1,19 @@
-.column.row
-  .row
+.row
+  .columns
     - if params[:state] == 'archived'
-      = link_to 'Pokaz tylko niezarchiwizowane', admin_reservations_path
+      = link_to 'Pokaż tylko niezarchiwizowane', admin_reservations_path
     - else
-      = link_to 'Pokaz tylko zarchiwizowane', admin_reservations_path(state: :archived)
+      = link_to 'Pokaż tylko zarchiwizowane', admin_reservations_path(state: :archived)
 
-  .row
     table.responsive
       thead
         tr
           th Kto?
           th Przedmiot
           th Koszt
-          th Na ktory tydzien?
+          th Na który tydzień?
           th Kiedy zarezerwowano
-          th Platnosc
+          th Płatność
           th Status
           th Akcje
       tbody

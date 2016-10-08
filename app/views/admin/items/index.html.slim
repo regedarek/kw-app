@@ -1,74 +1,58 @@
-.column.row
-  .row
+.row
+  .columns
     a data-open="new_item" class='button large expanded'  Dodaj nowy przedmiot
     #new_item.callout.reveal data-reveal=''
       button.close-button aria-label=("Close modal") data-close="" type="button" 
         span aria-hidden="true"  &times;
 
       = form_for @items_form, url: admin_items_path do |f|
-        .row
-          .large-12.columns
-            = f.label :name, 'Nazwa'
-            = f.text_field :name
-        .row
-          .large-12.columns
-            = f.label :name, 'Opis'
-            = f.text_area :description
-        .row
-          .large-12.columns
-            = f.label :cost, 'Koszt(zl)'
-            = f.number_field :cost
-        .row
-          .large-12.columns
-            = f.label :owner, 'Wlasnosc'
-            = f.select :owner, Items::OwnerPresenter.to_options
-        .row
-          .large-12.columns
-            = f.label :name, 'Mozna wypozyczyc?'
-            = f.check_box :rentable
-        .row
-          .large-12.columns
-            = f.submit 'Dodaj przedmiot', class: 'button'
-  .row
-    hr
+        = f.label :name, 'Nazwa'
+        = f.text_field :name
+        = f.label :name, 'Opis'
+        = f.text_area :description
+        = f.label :cost, 'Koszt(zl)'
+        = f.number_field :cost
+        = f.label :owner, 'Wlasnosc'
+        = f.select :owner, Items::OwnerPresenter.to_options
+        = f.label :name, 'Mozna wypozyczyc?'
+        = f.check_box :rentable
+        = f.submit 'Dodaj przedmiot', class: 'button'
 
-.row
-  = link_to 'Wszystkie', admin_items_path
-  = ' | '
-  = link_to 'Klub', admin_items_path(owner: :kw)
-  = ' | '
-  = link_to 'Narciarze', admin_items_path(owner: :snw)
-  = ' | '
-  = link_to 'Wspinacze', admin_items_path(owner: :sww)
-  = ' | '
-  = link_to 'Instruktorzy', admin_items_path(owner: :instructors)
+    = link_to 'Wszystkie', admin_items_path
+    = ' | '
+    = link_to 'Klub', admin_items_path(owner: :kw)
+    = ' | '
+    = link_to 'Narciarze', admin_items_path(owner: :snw)
+    = ' | '
+    = link_to 'Wspinacze', admin_items_path(owner: :sww)
+    = ' | '
+    = link_to 'Instruktorzy', admin_items_path(owner: :instructors)
 
-.row
-  table.responsive
-    thead
-      tr
-        th Id
-        th Nazwa
-        th Opis
-        th Koszt
-        th Mozna wypozyczyc?
-        th Wlasnosc
-        th Akcje
-    tbody
-      - @items.each do |item|
+    table.responsive
+      thead
         tr
-          td= item.id
-          td= item.name
-          td= item.description
-          td= item.cost.to_s + ' zl'
-          td= item.rentable? ? (link_to 'Tak', make_urentable_admin_item_path(item), method: :post) : (link_to 'Nie', make_rentable_admin_item_path(item), method: :post)
-          td
-            - on_change = %Q[$('#edit_db_item_#{item.id}').submit()].html_safe
-            = form_for item, url: update_owner_admin_item_path(item), method: :put do |f|
-              = f.select :owner, Items::OwnerPresenter.to_options, {selected: item[:owner]}, { onChange: on_change }
-          td
-            = link_to 'Edytuj', edit_admin_item_path(item)
-            = " | "
-            = link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+          th Id
+          th Nazwa
+          th Opis
+          th Koszt
+          th Mozna wypozyczyc?
+          th Wlasnosc
+          th Akcje
+      tbody
+        - @items.each do |item|
+          tr
+            td= item.id
+            td= item.name
+            td= item.description
+            td= item.cost.to_s + ' zl'
+            td= item.rentable? ? (link_to 'Tak', make_urentable_admin_item_path(item), method: :post) : (link_to 'Nie', make_rentable_admin_item_path(item), method: :post)
+            td
+              - on_change = %Q[$('#edit_db_item_#{item.id}').submit()].html_safe
+              = form_for item, url: update_owner_admin_item_path(item), method: :put do |f|
+                = f.select :owner, Items::OwnerPresenter.to_options, {selected: item[:owner]}, { onChange: on_change }
+            td
+              = link_to 'Edytuj', edit_admin_item_path(item)
+              = " | "
+              = link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }
 
-  = paginate @items
+    = paginate @items

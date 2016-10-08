@@ -1,6 +1,7 @@
-.column.row
-  .row
-    h3.subheader Klubowicze
+.row
+  .columns
+    h2 Klubowicze
+
     table.responsive
       thead
         tr
@@ -47,3 +48,4 @@
                 = link_to '[ Zdegraduj ]', cancel_curator_admin_user_path(user)
               - else
                 = link_to '[ Awansuj ]', make_curator_admin_user_path(user)
+    = paginate @users
