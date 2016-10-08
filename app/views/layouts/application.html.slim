@@ -7,7 +7,7 @@ html lang="en"
     title == content_for?(:title) ? yield(:title) : t('title')
 
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+
     = csrf_meta_tag
 
   body
@@ -15,3 +15,5 @@ html lang="en"
     = render 'layouts/flash_messages'
 
     == yield
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+
