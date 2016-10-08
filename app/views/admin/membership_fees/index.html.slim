@@ -47,3 +47,4 @@
               = payment.created_at.strftime("%d-%m-%Y")
             td
               = link_to 'Usun', admin_membership_fee_path(payment.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+  = paginate @membership_fees
