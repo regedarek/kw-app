@@ -5,8 +5,6 @@
   - reservations = current_user.reservations.where(start_date: params[:start_date])
   = render 'reservations/table', reservations: reservations
 
-
-.column.row
   h4.subheader
     = t('.available_items')
   table

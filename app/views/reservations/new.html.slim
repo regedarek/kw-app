@@ -1,5 +1,4 @@
 .column.row
-  br
   - if user_signed_in?
     - if current_user.membership_fees.find_by(year: Date.today.year).present?
       - user = Db::User.find_by(curator: true)
