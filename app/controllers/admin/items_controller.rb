@@ -1,14 +1,12 @@
+require 'admin/items_form'
 require 'items'
 
 module Admin
   class ItemsController < Admin::BaseController
     def index
-      items = Db::Item.order(:id)
-      @items = if params[:owner]
-                 items.send(params[:owner])
-               else
-                 items
-               end
+      @items = Db::Item.order(:id).page(params[:page])
+      @items = @items.send(params[:owner]) if params[:owner]
+      @items_form = Admin::ItemsForm.new
     end
 
     def create
@@ -40,7 +38,7 @@ module Admin
       item = Db::Item.find(params[:id])
       item.update_column(:owner, params[:db_item].fetch(:owner).to_i)
 
-      redirect_to :back, notice: "Ustawiono wlasciciela przedmiotu na #{Items::OwnerPresenter.new(item.owner).to_s}"
+      redirect_to :back, notice: "Ustawiono wlasciciela przedmiotu na #{::Items::OwnerPresenter.new(item.owner).to_s}"
     end
 
     def make_rentable

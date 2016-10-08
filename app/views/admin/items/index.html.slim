@@ -1,12 +1,11 @@
 .column.row
   .row
-    br
     a data-open="new_item" class='button large expanded'  Dodaj nowy przedmiot
     #new_item.callout.reveal data-reveal=''
       button.close-button aria-label=("Close modal") data-close="" type="button" 
         span aria-hidden="true"  &times;
 
-      = form_for Admin::ItemsForm.new, url: admin_items_path do |f|
+      = form_for @items_form, url: admin_items_path do |f|
         .row
           .large-12.columns
             = f.label :name, 'Nazwa'
@@ -76,3 +75,5 @@
             = link_to 'Edytuj', edit_admin_item_path(item)
             = " | "
             = link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+
+  = paginate @items

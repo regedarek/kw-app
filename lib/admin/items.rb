@@ -1,5 +1,4 @@
 require 'results'
-require 'admin/items_form'
 
 module Admin
   class Items

@@ -17,6 +17,7 @@ gem 'devise'
 gem 'slim-rails'
 gem 'workflow'
 gem 'virtus'
+gem 'kaminari'
 
 group :development, :test do
   gem 'rspec-rails'
