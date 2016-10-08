@@ -9,6 +9,19 @@
 
   .row
     .large-12.columns
+      fieldset.fieldset
+        .legend Wybierz kategorię, do jakiej chcesz dodać przejście
+
+        = f.radio_button :route_type, 0
+        = f.label :type_one, 'Narciarskie'
+
+        = f.radio_button :route_type, 1
+        = f.label :type_two, 'Wspinanie letnie'
+
+        = f.radio_button :route_type, 2
+        = f.label :type_three, 'Wspinanie zimowe'
+  .row
+    .large-12.columns
       = f.label :peak_id
       = f.grouped_collection_select :peak_id, @valleys, :peaks, :name, :id, :name, class: 'large'
 

@@ -50,7 +50,7 @@
             td
               - on_change = %Q[$('#edit_db_item_#{item.id}').submit()].html_safe
               = form_for item, url: update_owner_admin_item_path(item), method: :put do |f|
-                = f.select :owner, Items::OwnerPresenter.to_options, {selected: item[:owner]}, { onChange: on_change }
+                = f.select :owner, Items::OwnerPresenter.to_options, { selected: Db::Item.owners[item.owner] }, { onChange: on_change }
             td
               = link_to 'Edytuj', edit_admin_item_path(item)
               = " | "
