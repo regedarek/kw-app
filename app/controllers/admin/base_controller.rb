@@ -1,5 +1,3 @@
-require 'admin'
-
 module Admin
 	class BaseController < ApplicationController
 		before_filter :authorize_admin

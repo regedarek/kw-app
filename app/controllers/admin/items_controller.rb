@@ -1,12 +1,12 @@
+require 'admin/items'
 require 'admin/items_form'
-require 'items'
+require 'items/owner_presenter'
 
 module Admin
   class ItemsController < Admin::BaseController
     def index
       @items = Db::Item.order(:id).page(params[:page])
       @items = @items.send(params[:owner]) if params[:owner]
-      @items_form = Admin::ItemsForm.new
     end
 
     def create

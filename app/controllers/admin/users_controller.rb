@@ -1,3 +1,5 @@
+require 'admin/users_form'
+
 module Admin
   class UsersController < Admin::BaseController
     def index

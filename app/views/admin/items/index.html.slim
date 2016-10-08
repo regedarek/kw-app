@@ -5,7 +5,7 @@
       button.close-button aria-label=("Close modal") data-close="" type="button" 
         span aria-hidden="true"  &times;
 
-      = form_for @items_form, url: admin_items_path do |f|
+      = form_for ::Admin::ItemsForm.new, url: admin_items_path do |f|
         = f.label :name, 'Nazwa'
         = f.text_field :name
         = f.label :name, 'Opis'

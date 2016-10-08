@@ -1,3 +1,6 @@
+require 'admin/membership_fees'
+require 'admin/membership_fees_form'
+
 module Admin
   class MembershipFeesController < Admin::BaseController
     def index
