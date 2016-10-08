@@ -20,7 +20,7 @@
           = reservation.end_date
 .row
   h3 5 ostatnich skladek
-  table.table.table-striped
+  table.responsive
     - Db::MembershipFee.limit(5).each do |payment|
       tr
         td

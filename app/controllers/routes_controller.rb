@@ -1,6 +1,6 @@
 class RoutesController < ApplicationController
   def index
-    @routes = Db::Route.order(climbing_date: :desc)
+    @routes = Db::Route.order(climbing_date: :desc).page(params[:page])
   end
 
   def new
@@ -15,6 +15,7 @@ class RoutesController < ApplicationController
 
   def create
     @route = Db::Route.new(route_params)
+    @valleys = Db::Valley.order(:name)
 
     if @route.save
       redirect_to routes_path, notice: 'Dodano twoje przejście.'
@@ -25,6 +26,7 @@ class RoutesController < ApplicationController
 
   def update
     @route = Db::Route.find(params[:id])
+    @valleys = Db::Valley.order(:name)
 
     if @route.update_attributes(route_params)
       redirect_to routes_path, notice: 'Zaktualizowano przejście.'

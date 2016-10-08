@@ -1,10 +1,11 @@
 .row
-  - if user_signed_in?
-    .button-bar
-      .button-group.radius
-        = link_to t('.last_routes'), routes_path, class: 'small button success'
-        = link_to t('.new_route'), new_route_path, class: 'small success button'
+  .columns
+    - if user_signed_in?
+      .button-bar
+        .button-group.radius
+          = link_to t('.last_routes'), routes_path, class: 'small button success'
+          = link_to t('.new_route'), new_route_path, class: 'small success button'
 
-    - if current_user.reservations.any?
-      h3= t('reservations.table.title')
-      = render 'reservations/table', reservations: current_user.reservations
+      - if current_user.reservations.any?
+        h3= t('reservations.table.title')
+        = render 'reservations/table', reservations: current_user.reservations

@@ -1,32 +1,15 @@
-.column.row
-  br
-  = form_for Admin::ItemsForm.new(@item.slice(:name, :cost, :description, :owner, :rentable)), url: admin_item_path(params[:id]), method: :put do |f|
-    .row
-      .large-12.columns
-        = f.label :name
-        = f.text_field :name
-
-    .row
-      .large-3.columns
-        = f.label :cost, 'Koszt w zlotowkach'
-        = f.number_field :cost
-
-    .row
-      .large-3.columns
-        = f.label :owner, 'Właściciel'
-        = f.select :owner, Db::Item.owners, selected: Db::Item.owners[@item.owner]
-
-    .row
-      .large-3.columns
-        = f.label :owner, 'Wypożyczalne?'
-        = f.check_box :rentable
-
-    .row
-      .large-3.columns
-        = f.label :description, 'Opis'
-        = f.text_area :description
-
-    .row
-      .large-6.columns
-        = f.submit 'Zaktualizuj przedmiot', class: 'button'
-        = link_to 'Wroc', admin_items_path, class: 'button secondary'
+.row
+  .columns
+    = form_for Admin::ItemsForm.new(@item.slice(:name, :cost, :description, :owner, :rentable)), url: admin_item_path(params[:id]), method: :put do |f|
+      = f.label :name
+      = f.text_field :name
+      = f.label :cost, 'Koszt w zlotowkach'
+      = f.number_field :cost
+      = f.label :owner, 'Właściciel'
+      = f.select :owner, Db::Item.owners, selected: Db::Item.owners[@item.owner]
+      = f.label :owner, 'Wypożyczalne?'
+      = f.check_box :rentable
+      = f.label :description, 'Opis'
+      = f.text_area :description
+      = f.submit 'Zaktualizuj przedmiot', class: 'button'
+      = link_to 'Wroc', admin_items_path(owner: @item.owner), class: 'button secondary'
