@@ -6,7 +6,7 @@ module Admin
                     Db::MembershipFee.where(kw_id: kw_id).order(:kw_id)
                   else
                     Db::MembershipFee.order(:kw_id)
-                  end
+                  end.page(params[:page])
     end
 
     def create
