@@ -1,6 +1,6 @@
 class RoutesController < ApplicationController
   def index
-    @routes = Db::Route.order(climbing_date: :desc)
+    @routes = Db::Route.order(climbing_date: :desc).page(params[:page])
   end
 
   def new

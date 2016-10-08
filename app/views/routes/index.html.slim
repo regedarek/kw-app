@@ -28,9 +28,10 @@
           td align='center'
             = route.difficulty
           td align='right'
-            = link_to 'Pokaż Szczegóły', route_path(route)
+            = link_to 'Szczegóły', route_path(route)
             - if user_signed_in? && current_user.admin?
               = ' | '
               = link_to 'Edytuj', edit_route_path(route)
               = ' | '
               = link_to 'Usuń', route_path(route), method: :delete
+  = paginate @routes

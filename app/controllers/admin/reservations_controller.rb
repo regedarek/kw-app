@@ -6,7 +6,7 @@ module Admin
         reservations.archived
       else
         reservations.not_archived
-      end
+      end.page(params[:page])
     end
 
     def create
