@@ -16,7 +16,8 @@
         = f.select :owner, Items::OwnerPresenter.to_options
         = f.label :name, 'Mozna wypozyczyc?'
         = f.check_box :rentable
-        = f.submit 'Dodaj przedmiot', class: 'button'
+        .row
+          = f.submit 'Dodaj przedmiot', class: 'button'
 
     = link_to 'Wszystkie', admin_items_path
     = ' | '
