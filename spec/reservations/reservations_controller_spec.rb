@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'reservations'
+require 'orders'
 
 describe ReservationsController, type: :controller do
   render_views

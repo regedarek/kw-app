@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'reservations'
+require 'orders'
 
 describe Reservations::CreateReservation do
   let!(:user) { Factories::User.create! }
@@ -73,10 +75,13 @@ describe Reservations::CreateReservation do
   context 'start_date is thursday in the future' do
     it 'creates reservation and sends email' do
       form = Factories::Reservation.build_form
-      result = nil
-      expect do
-        result = Reservations::CreateReservation.create(form: form, user: user)
-      end.to change(ActionMailer::Base.deliveries, :count).by(1)
+
+      message_delivery = instance_double(ActionMailer::MessageDelivery)
+      expect(ReservationMailer).to receive(:reserve)
+        .with(an_instance_of(Db::Reservation)).and_return(message_delivery)
+      expect(message_delivery).to receive(:deliver_later)
+
+      result = Reservations::CreateReservation.create(form: form, user: user)
 
       expect(Db::Reservation.count).to eq(1)
       expect(Db::Order.count).to eq(1)

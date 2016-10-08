@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'reservations'
 
 describe Reservations::CancelItem do
   let!(:item) { Factories::Item.create! }

@@ -1,3 +1,5 @@
+require 'payments'
+
 module Api
   class PaymentsController < Api::BaseController
     def status

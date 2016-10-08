@@ -1,6 +1,6 @@
 .column.row
   br
-  = form_for Admin::ReservationsForm.new(@reservation.slice(:kw_id, :end_date, :start_date, :description)), url: admin_reservation_path(params[:id]), method: :put, html: { class: 'form-horizontal' } do |f|
+  = form_for @reservation_form, url: admin_reservation_path(params[:id]), method: :put, html: { class: 'form-horizontal' } do |f|
     .row
       .large-12.columns
         = f.label :kw_id, 'Numer klubowy'

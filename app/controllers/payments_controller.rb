@@ -1,3 +1,5 @@
+require 'payments'
+
 class PaymentsController < ApplicationController
   def charge
     unless current_user.kw_id == 2345

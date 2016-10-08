@@ -1,3 +1,5 @@
+require 'results'
+
 module Reservations
   class CancelItem
     def initialize(reservation_id:)

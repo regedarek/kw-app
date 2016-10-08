@@ -18,6 +18,7 @@ module Admin
 
     def edit
       @reservation = Db::Reservation.find(params[:id])
+      @reservation_form = Admin::ReservationsForm.new(@reservation.slice(:kw_id, :end_date, :start_date, :description))
     end
 
     def update

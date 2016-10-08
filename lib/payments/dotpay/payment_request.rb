@@ -1,5 +1,6 @@
-require "net/https"
-require "uri"
+require 'net/https'
+require 'uri'
+require 'results'
 
 module Payments
   module Dotpay
