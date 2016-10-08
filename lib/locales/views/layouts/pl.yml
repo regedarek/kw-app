@@ -1,7 +1,9 @@
 pl:
   layouts:
     top_bar:
-      menu: Menu
+      menu:
+        toggle: Nawigacja
+        title: KW Kraków
       home: Twoj pulpit
       rules: Regulamin
       edit_account: Twoje konto

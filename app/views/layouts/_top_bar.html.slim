@@ -1,12 +1,13 @@
 .no-js
   .title-bar data-hide-for='medium' data-responsive-toggle='top-bar' 
     button.menu-icon data-toggle='' type='button' 
-    .title-bar-title= t('.menu')
+    .title-bar-title= t('.menu.toggle')
+    .title-bar-right= t('.menu.title')
 
-  .top-bar
+  #top-bar.top-bar
     .top-bar-left
-      ul.dropdown.menu data-dropdown-menu=''
-        li=link_to t('title'), 'http://kw.krakow.pl'
+      ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
+        li.show-for-medium =link_to t('title'), 'http://kw.krakow.pl'
         li= link_to t('reserve'), new_reservation_path
         li= link_to t('.rules'), page_path('rules')
         - if user_signed_in?
