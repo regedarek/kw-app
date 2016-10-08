@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require_tree .
+//= kw_app
+//= inline_form
 
 $(function(){ $(document).foundation(); });

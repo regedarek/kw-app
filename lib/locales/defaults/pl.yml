@@ -1,4 +1,6 @@
 pl:
+  'true': Tak
+  'false': Nie
   date:
     abbr_day_names:
     - nie

@@ -41,12 +41,12 @@
           th Akcje
       tbody
         - @items.each do |item|
-          tr
+          tr.js-item-row
             td= item.id
             td= item.name
             td= item.description
             td= item.cost.to_s + ' zl'
-            td= item.rentable? ? (link_to 'Tak', make_urentable_admin_item_path(item), method: :post) : (link_to 'Nie', make_rentable_admin_item_path(item), method: :post)
+            td= link_to I18n.t(item.rentable?.to_s), toggle_rentable_admin_item_path(item), method: :put, class: 'js-item-rentable'
             td
               - on_change = %Q[$('#edit_db_item_#{item.id}').submit()].html_safe
               = form_for item, url: update_owner_admin_item_path(item), method: :put do |f|
