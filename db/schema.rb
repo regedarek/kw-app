@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004174404) do
+ActiveRecord::Schema.define(version: 20161008201802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +24,10 @@ ActiveRecord::Schema.define(version: 20161004174404) do
     t.string   "author_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "course_applications", force: :cascade do |t|
     t.string "first_name"
@@ -67,9 +65,8 @@ ActiveRecord::Schema.define(version: 20161004174404) do
     t.integer  "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
   end
-
-  add_index "membership_fees", ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -119,6 +116,7 @@ ActiveRecord::Schema.define(version: 20161004174404) do
     t.string  "peak"
     t.string  "time"
     t.integer "peak_id"
+    t.integer "type",          default: 0
   end
 
   create_table "services", force: :cascade do |t|
@@ -147,10 +145,9 @@ ActiveRecord::Schema.define(version: 20161004174404) do
     t.integer  "warnings",               default: 0
     t.string   "phone"
     t.boolean  "curator",                default: false, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "valleys", force: :cascade do |t|
     t.string "name"
