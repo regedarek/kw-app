@@ -57,8 +57,8 @@ class KwApp.UpdateItemRow
       setTimeout (=>
         @$el.css('background-color', '')
       ), 2000
+      new KwApp.UpdateItemRow(@$el)
     )
-    new KwApp.UpdateItemRow(@$el)
     false
 
 $ ->
