@@ -6,5 +6,6 @@ class Db::Item < ActiveRecord::Base
 
   scope :display_name, -> (name) { where('display_name ~* ?', name) }
   scope :rentable_id, -> (id) { where(rentable_id: id) }
+  scope :owner, -> (type) { where(owner: type) }
   scope :rentable, -> { where(rentable: true) }
 end

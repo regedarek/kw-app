@@ -61,7 +61,7 @@ module Admin
     private
 
     def filterable_params
-      params.fetch('admin_items_form', {}).slice(:display_name, :rentable_id)
+      params.fetch('admin_items_form', {}).slice(:owner, :display_name, :rentable_id)
     end
 
     def item_params

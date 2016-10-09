@@ -34,11 +34,13 @@
         tr
           th style='width:70px'
             = form_for Admin::ItemsForm.new, url: admin_items_path, method: :get do |f|
+              = f.hidden_field :owner, value: params[:owner] || params.fetch(:admin_items_form, {}).fetch(:owner, nil)
               = f.text_field :rentable_id,
                 value: params.fetch(:admin_items_form, {}).fetch(:rentable_id, nil),
                 placeholder: 'ID'
           th
             = form_for Admin::ItemsForm.new, url: admin_items_path, method: :get do |f|
+              = f.hidden_field :owner, value: params[:owner] || params.fetch(:admin_items_form, {}).fetch(:owner, nil)
               = f.text_field :display_name,
                 value: params.fetch(:admin_items_form, {}).fetch(:display_name, nil),
                 placeholder: 'Nazwa'
