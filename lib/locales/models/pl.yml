@@ -22,6 +22,10 @@ pl:
       db/route:
         peak_id: Szczyt
         name: Nazwa
+        route_type:
+          ski: Narciarstwo
+          regular_climbing: Wspinacza letnia
+          winter_climbing: Wspinacza zimowa
         difficulty: Wycena
         partners: Partnerzy
         description: Uwagi

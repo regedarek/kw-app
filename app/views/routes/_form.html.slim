@@ -12,7 +12,10 @@
       .callout
         .legend Wybierz kategorię, do jakiej chcesz dodać przejście
 
-        = f.collection_radio_buttons :route_type, Db::Route.route_types, :first, :first, selected: @route.route_type
+        = f.collection_radio_buttons :route_type, Db::Route.route_types, :first, :first, { selected: @route.route_type } do |b|
+          = b.label do
+            = b.radio_button + I18n.t(b.text)
+        end
 
   .row.js-routes-peak
     .large-12.columns
