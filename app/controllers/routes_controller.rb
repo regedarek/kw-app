@@ -29,7 +29,7 @@ class RoutesController < ApplicationController
     @valleys = Db::Valley.order(:name)
 
     if @route.update_attributes(route_params)
-      redirect_to routes_path, notice: 'Zaktualizowano przejście.'
+      redirect_to edit_route_path(@route), notice: 'Zaktualizowano przejście.'
     else
       render :new
     end
@@ -49,6 +49,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:name, :description, :difficulty, :partners, :peak_id, :time, :climbing_date, :rating)
+    params.require(:route).permit(:route_type, :name, :description, :difficulty, :partners, :peak_id, :time, :climbing_date, :rating)
   end
 end
