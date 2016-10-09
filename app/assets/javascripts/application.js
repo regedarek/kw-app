@@ -5,9 +5,6 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-$(document).on('turbolinks:load', function() {
-  $(function(){ $(document).foundation(); });
-});
 
 $(document).ready(function(){
 	$('#dp1').fdatepicker({
