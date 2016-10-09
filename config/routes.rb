@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     resources :items do
       member do
         put :update_owner
+        put :update_editable
         put :toggle_rentable
       end
     end

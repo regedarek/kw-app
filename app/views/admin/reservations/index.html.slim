@@ -22,7 +22,7 @@
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
-              = reservation.items.map(&:name)
+              = reservation.items.map{ |i| "#{i.name} #{i.rentable_id}" }
             td
               = reservation.items.map(&:cost).reduce(:+)
               |  zl

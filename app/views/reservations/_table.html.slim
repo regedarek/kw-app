@@ -3,7 +3,7 @@
     - reservations.each do |reservation|
       thead
         tr
-          th
+          th colspan=2
             =t('reservations.table.id', id: reservation.id)
           th
             =t('reservations.table.period', start_date: reservation.start_date, end_date: reservation.end_date)
@@ -27,6 +27,8 @@
       tbody
         - reservation.items.each do |item|
           tr
+            td
+              = item.rentable_id
             td
               = item.name
             td

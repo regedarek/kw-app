@@ -20,9 +20,18 @@ module Admin
       @item = Db::Item.find(params[:id])
     end
 
+    def update_editable
+      item = Db::Item.find(params[:id])
+      item.update(item_params)
+      render partial: 'admin/items/item_row', locals: { item: item }
+    end
+
     def update
       result = Admin::Items.new(item_params).update(params[:id])
-      result.success { redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano' }
+      result.success do |item:|
+        redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano'
+        render partial: 'admin/items/item_row', locals: { item: item }
+      end
       result.invalid { |form:| redirect_to edit_admin_item_path(params[:id]), alert: "Nie zaktualizowano bo: #{form.errors.messages}" }
       result.else_fail!
     end
@@ -51,7 +60,7 @@ module Admin
     private
 
     def item_params
-      params.require(:admin_items_form).permit(:name, :cost, :description, :owner, :rentable)
+      params.require(:admin_items_form).permit(:rentable_id, :name, :cost, :description, :owner, :rentable)
     end
   end
 end
