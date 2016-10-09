@@ -1,3 +1,6 @@
+require 'admin/reservations_form'
+require 'admin/reservations'
+
 module Admin
   class ReservationsController < Admin::BaseController
     def index
@@ -6,7 +9,7 @@ module Admin
         reservations.archived
       else
         reservations.not_archived
-      end
+      end.page(params[:page])
     end
 
     def create

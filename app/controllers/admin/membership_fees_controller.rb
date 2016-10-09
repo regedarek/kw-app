@@ -1,3 +1,6 @@
+require 'admin/membership_fees'
+require 'admin/membership_fees_form'
+
 module Admin
   class MembershipFeesController < Admin::BaseController
     def index
@@ -6,7 +9,7 @@ module Admin
                     Db::MembershipFee.where(kw_id: kw_id).order(:kw_id)
                   else
                     Db::MembershipFee.order(:kw_id)
-                  end
+                  end.page(params[:page])
     end
 
     def create

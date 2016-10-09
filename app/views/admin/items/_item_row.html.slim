@@ -1,0 +1,32 @@
+td.js-item-editable-cell
+  .js-item-editable-text= item.rentable_id
+  = form_for item, as: :admin_items_form, url: update_editable_admin_item_path(item),
+    html: { class: 'js-item-editable-form', style: 'display: none' }, method: :put do |f|
+      = f.text_field :rentable_id
+td.js-item-editable-cell
+  .js-item-editable-text= item.display_name
+  = form_for item, as: :admin_items_form, url: update_editable_admin_item_path(item),
+    html: { class: 'js-item-editable-form', style: 'display: none' }, method: :put do |f|
+      = f.text_field :display_name
+td.js-item-editable-cell
+  .js-item-editable-text= item.description
+  = form_for item, as: :admin_items_form, url: update_editable_admin_item_path(item),
+    html: { class: 'js-item-editable-form', style: 'display: none' }, method: :put do |f|
+      = f.text_area :description
+td.js-item-editable-cell
+  .js-item-editable-text= item.cost.to_s + ' zł'
+  = form_for item, as: :admin_items_form, url: update_editable_admin_item_path(item),
+    html: { class: 'js-item-editable-form', style: 'display: none' }, method: :put do |f|
+      = f.text_field :cost
+td
+  = link_to I18n.t(item.rentable?.to_s),
+    toggle_rentable_admin_item_path(item),
+    method: :put,
+    class: 'js-item-rentable'
+td
+  = form_for item, url: update_owner_admin_item_path(item), html: { class: 'js-item-owner' }, method: :put do |f|
+    = f.select :owner, Items::OwnerPresenter.to_options, { selected: Db::Item.owners[item.owner] }
+td
+  = link_to 'Edytuj', edit_admin_item_path(item)
+  = " | "
+  = link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }

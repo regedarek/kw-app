@@ -9,7 +9,7 @@ module Availability
       fail 'start date cannot be in the past' if @start_date.past?
       fail 'start date has to be thursday' unless @start_date.thursday?
 
-      Db::Item.rentable - not_available_items - Db::Item.instructors
+      Db::Item.order(:rentable_id).rentable - not_available_items - Db::Item.instructors
     end
 
     def week

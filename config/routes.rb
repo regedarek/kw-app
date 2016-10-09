@@ -43,8 +43,8 @@ Rails.application.routes.draw do
     resources :items do
       member do
         put :update_owner
-        post :make_rentable
-        post :make_urentable
+        put :update_editable
+        put :toggle_rentable
       end
     end
     resources :reservations, only: %w(index edit update destroy) do

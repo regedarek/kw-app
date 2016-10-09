@@ -2,42 +2,42 @@
   "items": [
     {
       "id": "1",
-      "name": "Czekan",
+      "display_name": "Czekan",
       "description": "Taki tam",
       "rentable": true,
       "owner": "kw"
     },
     {
       "id": "2",
-      "name": "Czekan",
+      "display_name": "Czekan",
       "description": "Taki tam",
       "rentable": true,
       "owner": "kw"
     },
     {
       "id": "3",
-      "name": "Raki",
+      "display_name": "Raki",
       "description": "Takie tam",
       "rentable": true,
       "owner": "snw"
     },
     {
       "id": "4",
-      "name": "Raki 2",
+      "display_name": "Raki 2",
       "description": "Takie tam",
       "rentable": false,
       "owner": "sww"
     },
     {
       "id": "5",
-      "name": "Raki 3",
+      "display_name": "Raki 3",
       "description": "Takie tam",
       "rentable": true,
       "owner": "instructors"
     },
     {
       "id": "6",
-      "name": "Raki 4",
+      "display_name": "Raki 4",
       "description": "Takie tam",
       "rentable": true,
       "owner": "sww"

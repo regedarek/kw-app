@@ -1,5 +1,4 @@
 require 'results'
-require 'admin/items_form'
 
 module Admin
   class Items
@@ -21,7 +20,7 @@ module Admin
       if form.valid?
         item = Db::Item.find(item_id)
         item.update(form.params)
-        Success.new
+        Success.new(item: item)
       else
         Failure.new(:invalid, form: form)
       end

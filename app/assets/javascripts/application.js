@@ -1,10 +1,10 @@
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require foundation
 //= require foundation-datepicker
 //= require_tree .
 
+$(function(){ $(document).foundation(); });
 $(document).on('turbolinks:load', function() {
   $(function(){ $(document).foundation(); });
 });

@@ -1,65 +1,45 @@
-.column.row
-  br
-  = form_for @reservation_form, url: admin_reservation_path(params[:id]), method: :put, html: { class: 'form-horizontal' } do |f|
+.row
+  .columns
     .row
-      .large-12.columns
+      = form_for @reservation_form, url: admin_reservation_path(params[:id]), method: :put do |f|
         = f.label :kw_id, 'Numer klubowy'
         = f.text_field :kw_id
 
-    .row
-      .large-12.columns
         = f.label 'Przedmioty'
         .callout
-          = @reservation.items.map(&:name)
+          ul
+            - @reservation.items.each do |i|
+              li= "<b>#{i.rentable_id}</b> #{i.name}".html_safe
 
-    - if @reservation.user.phone.present?
-      .row
-        .large-12.columns
+        - if @reservation.user.phone.present?
           = f.label 'Telefon'
           .callout
             = @reservation.user.phone
 
-    .row
-      .large-12.columns
-        = f.label 'Koszt'
-        .callout
-          = @reservation.items.map(&:cost).reduce(:+)
+          = f.label 'Koszt'
+          .callout
+            = @reservation.items.map(&:cost).reduce(:+)
+
+          = f.label :end_date, 'Poczatkowa data(od czwartku)'
+          = f.date_field :start_date
+
+          = f.label :end_date, 'Koncowa data(do czwartku)'
+          = f.date_field :end_date
+
+          = f.label :description, 'Opis'
+          = f.text_area :description
+          = f.submit 'Zaktualizuj rezerwacje', class: 'button'
+          - if @reservation.order.payment.cash?
+            span class='label success'
+              | Zapłacono gotówką
+          - else
+            = link_to 'Oznacz jako zapłacone gotówką', charge_admin_reservation_path(@reservation), method: :put, class: 'button success'
+          - if @reservation.reserved?
+            = link_to 'Zarchiwizuj', archive_admin_reservation_path(@reservation), method: :put, class: 'button warning'
+          = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button alert'
+          = link_to 'Wroć', :back, class: 'button secondary'
 
     .row
-      .large-12.columns
-        = f.label :end_date, 'Poczatkowa data(od czwartku)'
-        = f.date_field :start_date
-
-    .row
-      .large-12.columns
-        = f.label :end_date, 'Koncowa data(do czwartku)'
-        = f.date_field :end_date
-
-    .row
-      .large-12.columns
-        = f.label :description, 'Opis'
-        = f.text_area :description
-
-    .row
-      .large-12.columns
-        - if @reservation.order.payment.cash?
-          span class='label success'
-            | Zapłacono gotówką
-        - else
-          = link_to 'Oznacz jako zapłacone gotówką', charge_admin_reservation_path(@reservation), method: :put, class: 'button'
-    br
-
-    .row
-      .large-12.columns
-        = f.submit 'Zaktualizuj rezerwacje', class: 'button'
-        = link_to 'Wroc', admin_reservations_path, class: 'button secondary'
-        - if @reservation.reserved?
-          = link_to 'Zarchiwizuj', archive_admin_reservation_path(@reservation), method: :put, class: 'button warning'
-        = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button'
-
-    .row
-      .large-12.columns
-        = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
-        = " (#{@reservation.user.warnings}) "
-        = link_to 'Usun upomnienie', give_back_warning_admin_reservation_path(@reservation), method: :post
-    br
+      = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
+      = " (#{@reservation.user.warnings}) "
+      = link_to 'Usun upomnienie', give_back_warning_admin_reservation_path(@reservation), method: :post

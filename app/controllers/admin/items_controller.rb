@@ -1,14 +1,13 @@
-require 'items'
+require 'admin/items'
+require 'admin/items_form'
+require 'items/owner_presenter'
 
 module Admin
   class ItemsController < Admin::BaseController
     def index
-      items = Db::Item.order(:id)
-      @items = if params[:owner]
-                 items.send(params[:owner])
-               else
-                 items
-               end
+      items = Db::Item.order(:rentable_id)
+      items = items.send(params[:owner]) if params[:owner]
+      @items = items.filter(filterable_params).page(params[:page])
     end
 
     def create
@@ -22,9 +21,18 @@ module Admin
       @item = Db::Item.find(params[:id])
     end
 
+    def update_editable
+      item = Db::Item.find(params[:id])
+      item.update(item_params)
+      render partial: 'admin/items/item_row', locals: { item: item }
+    end
+
     def update
       result = Admin::Items.new(item_params).update(params[:id])
-      result.success { redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano' }
+      result.success do |item:|
+        redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano'
+        render partial: 'admin/items/item_row', locals: { item: item }
+      end
       result.invalid { |form:| redirect_to edit_admin_item_path(params[:id]), alert: "Nie zaktualizowano bo: #{form.errors.messages}" }
       result.else_fail!
     end
@@ -40,23 +48,24 @@ module Admin
       item = Db::Item.find(params[:id])
       item.update_column(:owner, params[:db_item].fetch(:owner).to_i)
 
-      redirect_to :back, notice: "Ustawiono wlasciciela przedmiotu na #{Items::OwnerPresenter.new(item.owner).to_s}"
+      render partial: 'admin/items/item_row', locals: { item: item }
     end
 
-    def make_rentable
-      Db::Item.find(params[:id]).update(rentable: true)
-      redirect_to :back, notice: 'Udostepniono'
-    end
-
-    def make_urentable
-      Db::Item.find(params[:id]).update(rentable: false)
-      redirect_to :back, notice: 'Zablokowano udostepnianie'
+    def toggle_rentable
+      item = Db::Item.find(params[:id])
+      item.toggle!(:rentable)
+      
+      render partial: 'admin/items/item_row', locals: { item: item }
     end
 
     private
 
+    def filterable_params
+      params.fetch('admin_items_form', {}).slice(:owner, :display_name, :rentable_id)
+    end
+
     def item_params
-      params.require(:admin_items_form).permit(:name, :cost, :description, :owner, :rentable)
+      params.require(:admin_items_form).permit(:rentable_id, :display_name, :cost, :description, :owner, :rentable)
     end
   end
 end

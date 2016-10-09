@@ -1,20 +1,19 @@
-.column.row
-  .row
+.row
+  .columns
     - if params[:state] == 'archived'
-      = link_to 'Pokaz tylko niezarchiwizowane', admin_reservations_path
+      = link_to 'Pokaż tylko niezarchiwizowane', admin_reservations_path
     - else
-      = link_to 'Pokaz tylko zarchiwizowane', admin_reservations_path(state: :archived)
+      = link_to 'Pokaż tylko zarchiwizowane', admin_reservations_path(state: :archived)
 
-  .row
-    table
+    table.responsive
       thead
         tr
           th Kto?
           th Przedmiot
           th Koszt
-          th Na ktory tydzien?
+          th Na który tydzień?
           th Kiedy zarezerwowano
-          th Platnosc
+          th Płatność
           th Status
           th Akcje
       tbody
@@ -23,7 +22,7 @@
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
-              = reservation.items.map(&:name)
+              = reservation.items.map{ |i| "#{i.name} #{i.rentable_id}" }
             td
               = reservation.items.map(&:cost).reduce(:+)
               |  zl
@@ -50,12 +49,13 @@
                   | zarezerwowano
             td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
-              - if reservation.reserved?
+              - if !reservation.archived?
                 = ' | '
                 = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
-              - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding?
+              - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
                 = ' | '
                 = link_to 'Przekaż', give_admin_reservation_path(reservation), method: :put
-              - if reservation.holding?
+              - if reservation.holding? && !reservation.archived?
                 = ' | '
                 = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post
+    = paginate @reservations

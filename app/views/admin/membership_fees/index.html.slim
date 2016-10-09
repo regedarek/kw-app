@@ -1,25 +1,15 @@
-.column.row
-  .row
+.row
+  .columns
     = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path do |f|
-      .row
-        .columns.large-12
-          = f.label :kw_id, 'Numer klubowy'
-          = f.text_field :kw_id
+      = f.label :kw_id, 'Numer klubowy'
+      = f.text_field :kw_id
 
-      .row
-        .columns.large-12
-          = f.label :year, 'Oplata za rok'
-          = f.text_field :year
+      = f.label :year, 'Opłata za rok'
+      = f.text_field :year
 
-      .row
-        .columns.large-12
-          = f.submit 'Dodaj skladke', class: 'button'
+      = f.submit 'Dodaj składkę', class: 'button expanded'
 
-  .row
-    hr
-
-  .row
-    table
+    table.responsive
       thead
         tr
           th Imie
@@ -47,3 +37,4 @@
               = payment.created_at.strftime("%d-%m-%Y")
             td
               = link_to 'Usun', admin_membership_fee_path(payment.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+    = paginate @membership_fees
