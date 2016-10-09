@@ -1,3 +1,6 @@
+require 'admin/reservations_form'
+require 'admin/reservations'
+
 module Admin
   class ReservationsController < Admin::BaseController
     def index

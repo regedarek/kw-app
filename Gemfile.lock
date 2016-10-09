@@ -184,9 +184,6 @@ GEM
     thread_safe (0.3.5)
     tilt (2.0.5)
     timecop (0.8.1)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.2)
@@ -222,7 +219,6 @@ DEPENDENCIES
   slim-rails
   spring
   timecop
-  turbolinks
   uglifier
   virtus
   workflow

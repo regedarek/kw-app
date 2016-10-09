@@ -49,12 +49,13 @@
                   | zarezerwowano
             td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
-              - if reservation.reserved?
+              - if !reservation.archived?
                 = ' | '
                 = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
-              - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding?
+              - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
                 = ' | '
                 = link_to 'Przekaż', give_admin_reservation_path(reservation), method: :put
-              - if reservation.holding?
+              - if reservation.holding? && !reservation.archived?
                 = ' | '
                 = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post
+    = paginate @reservations

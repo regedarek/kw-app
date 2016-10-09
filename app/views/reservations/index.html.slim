@@ -1,21 +1,25 @@
-.column.row
-  h3.subheader
-    = t('.given_week')
-    b= Availability::Items.new(start_date: params[:start_date]).week
-  - reservations = current_user.reservations.where(start_date: params[:start_date])
-  = render 'reservations/table', reservations: reservations
+.row
+  .columns
+    h3.subheader
+      = t('.given_week')
+      b= Availability::Items.new(start_date: params[:start_date]).week
+    - reservations = current_user.reservations.where(start_date: params[:start_date])
+    = render 'reservations/table', reservations: reservations
 
-  h4.subheader
-    = t('.available_items')
-  table
-    thead
-      tr
-        th=t('.item')
-        th
-    tbody
-      - @available_items.each do |item|
+    h4.subheader
+      = t('.available_items')
+    table
+      thead
         tr
-          td
-            = item.name
-          td align='right'
-            = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+          th ID
+          th=t('.item')
+          th
+      tbody
+        - @available_items.each do |item|
+          tr
+            td
+              = item.id
+            td
+              = item.name
+            td
+              = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post

@@ -38,17 +38,14 @@ module Admin
       item = Db::Item.find(params[:id])
       item.update_column(:owner, params[:db_item].fetch(:owner).to_i)
 
-      redirect_to :back, notice: "Ustawiono wlasciciela przedmiotu na #{::Items::OwnerPresenter.new(item.owner).to_s}"
+      render partial: 'admin/items/item_row', locals: { item: item }
     end
 
-    def make_rentable
-      Db::Item.find(params[:id]).update(rentable: true)
-      redirect_to :back, notice: 'Udostepniono'
-    end
-
-    def make_urentable
-      Db::Item.find(params[:id]).update(rentable: false)
-      redirect_to :back, notice: 'Zablokowano udostepnianie'
+    def toggle_rentable
+      item = Db::Item.find(params[:id])
+      item.toggle!(:rentable)
+      
+      render partial: 'admin/items/item_row', locals: { item: item }
     end
 
     private

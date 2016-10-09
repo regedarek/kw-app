@@ -7,7 +7,6 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'turbolinks'
 
 gem 'foundation-icons-sass-rails'
 gem 'foundation-rails'

@@ -41,19 +41,5 @@
           th Akcje
       tbody
         - @items.each do |item|
-          tr.js-item-row
-            td= item.id
-            td= item.name
-            td= item.description
-            td= item.cost.to_s + ' zl'
-            td= link_to I18n.t(item.rentable?.to_s), toggle_rentable_admin_item_path(item), method: :put, class: 'js-item-rentable'
-            td
-              - on_change = %Q[$('#edit_db_item_#{item.id}').submit()].html_safe
-              = form_for item, url: update_owner_admin_item_path(item), method: :put do |f|
-                = f.select :owner, Items::OwnerPresenter.to_options, { selected: Db::Item.owners[item.owner] }, { onChange: on_change }
-            td
-              = link_to 'Edytuj', edit_admin_item_path(item)
-              = " | "
-              = link_to 'Usun', admin_item_path(item.id), method: :delete, data: { confirm: 'Jestes pewien?' }
-
+          tr.js-item-row= render 'admin/items/item_row', item: item
     = paginate @items
