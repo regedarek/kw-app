@@ -12,6 +12,7 @@ class KwApp.UpdateItemRow
     form.find('input').focus()
     form.find('textarea').focus()
     form.on 'focusout', @updateItemCell
+    form.on 'submit', @updateItemCell
 
   updateItemCell: (e) =>
     e.preventDefault()
