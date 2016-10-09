@@ -5,8 +5,9 @@ require 'items/owner_presenter'
 module Admin
   class ItemsController < Admin::BaseController
     def index
-      @items = Db::Item.order(:id).page(params[:page])
-      @items = @items.send(params[:owner]) if params[:owner]
+      items = Db::Item.order(:rentable_id)
+      items = items.send(params[:owner]) if params[:owner]
+      @items = items.filter(filterable_params).page(params[:page])
     end
 
     def create
@@ -59,8 +60,12 @@ module Admin
 
     private
 
+    def filterable_params
+      params.fetch('admin_items_form', {}).slice(:display_name, :rentable_id)
+    end
+
     def item_params
-      params.require(:admin_items_form).permit(:rentable_id, :name, :cost, :description, :owner, :rentable)
+      params.require(:admin_items_form).permit(:rentable_id, :display_name, :cost, :description, :owner, :rentable)
     end
   end
 end

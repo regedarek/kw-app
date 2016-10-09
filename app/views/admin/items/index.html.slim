@@ -6,9 +6,9 @@
         span aria-hidden="true"  &times;
 
       = form_for ::Admin::ItemsForm.new, url: admin_items_path do |f|
-        = f.label :name, 'Nazwa'
-        = f.text_field :name
-        = f.label :name, 'Opis'
+        = f.label :display_name, 'Nazwa'
+        = f.text_field :display_name
+        = f.label :description, 'Opis'
         = f.text_area :description
         = f.label :cost, 'Koszt(zl)'
         = f.number_field :cost
@@ -32,8 +32,16 @@
     table.responsive
       thead
         tr
-          th Id
-          th Nazwa
+          th style='width:70px'
+            = form_for Admin::ItemsForm.new, url: admin_items_path, method: :get do |f|
+              = f.text_field :rentable_id,
+                value: params.fetch(:admin_items_form, {}).fetch(:rentable_id, nil),
+                placeholder: 'ID'
+          th
+            = form_for Admin::ItemsForm.new, url: admin_items_path, method: :get do |f|
+              = f.text_field :display_name,
+                value: params.fetch(:admin_items_form, {}).fetch(:display_name, nil),
+                placeholder: 'Nazwa'
           th Opis
           th Koszt
           th Mozna wypozyczyc?
