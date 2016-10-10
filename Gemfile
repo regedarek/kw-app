@@ -23,4 +23,5 @@ group :development, :test do
   gem 'timecop'
   gem 'byebug'
   gem 'spring'
+  gem 'webmock'
 end
