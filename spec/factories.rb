@@ -37,4 +37,16 @@ module Factories
       }.merge(attrs))
     end
   end
+
+  class Payment
+    def self.create!(attrs = {})
+      Db::Payment.create!(load_fixture('payments')[attrs.fetch('id', 1) - 1].merge(attrs))
+    end
+  end
+
+  class Order
+    def self.create!(attrs = {})
+      Db::Order.create!(load_fixture('orders')[attrs.fetch('id', 1) - 1].merge(attrs))
+    end
+  end
 end

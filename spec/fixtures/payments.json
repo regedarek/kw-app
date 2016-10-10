@@ -1,0 +1,18 @@
+{
+  "payments": [
+    {
+      "id": "1",
+      "order_id": "1",
+      "cash": "false",
+      "dotpay_id": "4352b0b9f9577f216103ce9cc9",
+      "state": "unpaid"
+    },
+    {
+      "id": "2",
+      "order_id": "2",
+      "cash": "true",
+      "dotpay_id": "4352b0b9f9577f216103ce9cc0",
+      "state": "prepaid"
+    }
+  ]
+}

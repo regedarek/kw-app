@@ -24,8 +24,19 @@ module Payments
         )
         request.set_form_data(@params)
         response = http.request(request)
-        payment_url = JSON.parse(response.body).fetch('payment_url')
-        Success.new(payment_url: payment_url)
+
+        case response
+        when Net::HTTPSuccess, Net::HTTPRedirection
+          payment_url = JSON.parse(response.body).fetch('payment_url')
+          if payment_url.present?
+            Success.new(payment_url: payment_url)
+          else
+            Failure.new(:wrong_payment_url, message: 'Błędny link płatności, skonktaktuj się z opiekunem')
+          end
+        else
+          Failure.new(:dotpay_request_error, message: 'Błąd podczas generowania linka płatności skontaktuj sie z opiekunem')
+        end
+
       end
     end
   end
