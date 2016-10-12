@@ -9,7 +9,7 @@
         .callout
           ul
             - @reservation.items.each do |i|
-              li= "<b>#{i.rentable_id}</b> #{i.name}".html_safe
+              li= "<b>#{i.rentable_id}</b> #{i.display_name}".html_safe
 
         - if @reservation.user.phone.present?
           = f.label 'Telefon'
