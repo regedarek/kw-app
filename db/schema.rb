@@ -15,40 +15,6 @@ ActiveRecord::Schema.define(version: 20161009102019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace"
-    t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
-  end
-
-  create_table "course_applications", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "phone_number"
-    t.text   "living_address"
-    t.string "birthday"
-    t.string "birthplace"
-    t.string "pesel"
-    t.text   "main_adress"
-    t.text   "description"
-  end
-
-  create_table "courses", force: :cascade do |t|
-    t.string "name"
-    t.text   "description"
-    t.string "payment_url"
-    t.string "state"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string   "display_name"
     t.datetime "created_at",                   null: false

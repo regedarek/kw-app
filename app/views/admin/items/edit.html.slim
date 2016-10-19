@@ -1,6 +1,6 @@
 .row
   .columns
-    = form_for Admin::ItemsForm.new(@item.slice(:name, :cost, :description, :owner, :rentable)), url: admin_item_path(params[:id]), method: :put do |f|
+    = form_for Admin::ItemsForm.new(@item.slice(:display_name, :cost, :description, :owner, :rentable)), url: admin_item_path(params[:id]), method: :put do |f|
       = f.label :display_name, 'Nazwa'
       = f.text_field :display_name
       = f.label :rentable_id, 'Numer katalogowy'
