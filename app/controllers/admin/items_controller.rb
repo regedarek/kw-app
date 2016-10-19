@@ -30,8 +30,11 @@ module Admin
     def update
       result = Admin::Items.new(item_params).update(params[:id])
       result.success do |item:|
-        redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano'
-        render partial: 'admin/items/item_row', locals: { item: item }
+        if request.xhr?
+          render partial: 'admin/items/item_row', locals: { item: item }
+        else
+          redirect_to edit_admin_item_path(params[:id]), notice: 'Zaktualizowano'
+        end
       end
       result.invalid { |form:| redirect_to edit_admin_item_path(params[:id]), alert: "Nie zaktualizowano bo: #{form.errors.messages}" }
       result.else_fail!
