@@ -37,13 +37,13 @@ module Reservations
     end
 
     def start_date_is_in_the_past
-      unless Time.zone.now < start_date
+      unless Time.zone.now.to_date <= start_date
         errors.add(:start_date, "cannot be in the past")
       end
     end
 
     def end_date_is_in_the_past
-      unless Time.zone.now < end_date
+      unless Time.zone.now.to_date < end_date
         errors.add(:end_date, "cannot be in the past")
       end
     end
