@@ -11,7 +11,7 @@
     - Db::Reservation.limit(5).each do |reservation|
       tr
         td
-          = reservation.items.map(&:name)
+          = reservation.items.map(&:display_name)
         td
           = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
         td
