@@ -25,5 +25,5 @@
             td
               = item.cost
               = ' zł'
-            td
+            td style='text-align: right; width: 150px'
               = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post

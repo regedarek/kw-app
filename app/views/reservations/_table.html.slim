@@ -27,12 +27,11 @@
       tbody
         - reservation.items.each do |item|
           tr
-            td
+            td colspan=2
               = item.rentable_id
             td
               = item.display_name
             td
             td=t('reservations.table.item.cost', cost: item.cost)
-            td
-            td
+            td style='text-align: right; width: 150px'
               = link_to t('resign'), delete_item_reservation_path(reservation, item_id: item), method: :delete
