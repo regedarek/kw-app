@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
+  get '/', to: 'reservations#new', constraints: { subdomain: 'wypozyczalnia' }
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
   get 'pages/rules' => 'high_voltage/pages#show', id: 'rules'
