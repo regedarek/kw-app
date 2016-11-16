@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
-  get '/photos', to: 'reservations#new', constraints: { subdomain: 'wypozyczalnia' }
+
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
+  get '/', to: 'routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
   get 'pages/rules' => 'high_voltage/pages#show', id: 'rules'
