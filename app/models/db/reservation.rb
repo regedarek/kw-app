@@ -31,11 +31,34 @@ class Db::Reservation < ActiveRecord::Base
   end
 
   def self.to_csv
-    CSV.generate do |csv|
-      csv << column_names
+    attributes = %w{order_id user_name items_display cost when state}
+
+    CSV.generate(headers: true) do |csv|
+      csv << ['Nr zamówienia', 'Użytkownik', 'Przedmioty', 'Koszt', 'Kiedy?', 'Status']
+
       all.each do |reservation|
-        csv << reservation.attributes.values_at(*column_names)
+        csv << attributes.map{ |attr| reservation.send(attr) }
       end
     end
+  end
+
+  def order_id
+    order.id
+  end
+
+  def user_name
+    [user.first_name, user.last_name].join(' ')
+  end
+
+  def items_display
+    items.map{ |i| "#{i.display_name} #{i.rentable_id}" }
+  end
+
+  def cost
+    items.map(&:cost).reduce(:+)
+  end
+
+  def when
+    [start_date.strftime("%d"), end_date.strftime("%d/%m/%Y")].join('-')
   end
 end
