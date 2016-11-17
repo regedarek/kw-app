@@ -39,8 +39,10 @@
           br
           br
           = f.submit 'Zaktualizuj rezerwacje', class: 'button'
-          - unless @reservation.holding? || @reservation.archived?
+          - if @reservation.holding? && !@reservation.archived?
             = link_to 'Zarchiwizuj', archive_admin_reservation_path(@reservation), method: :put, class: 'button warning'
+          - if (@reservation.order.payment.prepaid? || @reservation.order.payment.cash?) && !@reservation.holding? && !@reservation.archived?
+            = link_to 'Przekaż', give_admin_reservation_path(@reservation), method: :put, class: 'button info'
           = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button alert'
           = link_to 'Wroć', admin_reservations_path, class: 'button secondary'
 
