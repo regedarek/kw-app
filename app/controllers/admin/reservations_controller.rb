@@ -13,7 +13,7 @@ module Admin
       end.page(params[:page])
       respond_to do |format|
         format.html
-        format.csv { render text: @reservations.to_csv }
+        format.csv { render text: Db::Reservation.all.to_csv }
       end
     end
 

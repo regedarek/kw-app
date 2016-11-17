@@ -45,12 +45,12 @@
                 span class='label warning'
                   | Oczekuje na płatność
             td
-              - if reservation.holding?
-                span class='label secondary'
-                  | w posiadaniu
               - if reservation.reserved?
-                span class='label secondary'
+                span class='label info'
                   | zarezerwowano
+              - if reservation.holding?
+                span class='label warning'
+                  | w posiadaniu
             td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
               - if reservation.holding? && !reservation.archived?
