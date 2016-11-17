@@ -28,16 +28,21 @@
 
           = f.label :description, 'Opis'
           = f.text_area :description
-          = f.submit 'Zaktualizuj rezerwacje', class: 'button'
           - if @reservation.order.payment.cash?
+            - if @reservation.archived?
+              span class='label warning'
+                | Zarchiwizowano
             span class='label success'
               | Zapłacono gotówką
           - else
             = link_to 'Oznacz jako zapłacone gotówką', charge_admin_reservation_path(@reservation), method: :put, class: 'button success'
-          - if @reservation.reserved?
+          br
+          br
+          = f.submit 'Zaktualizuj rezerwacje', class: 'button'
+          - unless @reservation.holding? || @reservation.archived?
             = link_to 'Zarchiwizuj', archive_admin_reservation_path(@reservation), method: :put, class: 'button warning'
           = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button alert'
-          = link_to 'Wroć', :back, class: 'button secondary'
+          = link_to 'Wroć', admin_reservations_path, class: 'button secondary'
 
     .row
       = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
