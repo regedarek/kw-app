@@ -51,7 +51,7 @@
                   | zarezerwowano
             td
               = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
-              - unless reservation.holding? || reservation.archived?
+              - if reservation.holding? && !reservation.archived?
                 = ' | '
                 = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
               - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?

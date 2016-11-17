@@ -13,18 +13,10 @@ module Admin
     def params
       HashWithIndifferentAccess.new(
         user_id: user.id,
-        start_date: start_date_of_the_week,
-        end_date: end_date_of_the_week,
+        start_date: start_date,
+        end_date: end_date,
         description: description
       )
-    end
-
-    def start_date_of_the_week
-      start_date.to_date.at_beginning_of_week(:thursday)
-    end
-
-    def end_date_of_the_week
-      end_date.to_date.at_end_of_week(:thursday)
     end
 
     def user
