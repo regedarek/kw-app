@@ -8,6 +8,7 @@
     table.responsive
       thead
         tr
+          th Nr.
           th Kto?
           th Przedmiot
           th Koszt
@@ -19,6 +20,7 @@
       tbody
         - @reservations.each do |reservation|
           tr
+            td = reservation.order.id
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
