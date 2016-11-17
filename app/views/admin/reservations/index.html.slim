@@ -4,6 +4,8 @@
       = link_to 'Pokaż tylko niezarchiwizowane', admin_reservations_path
     - else
       = link_to 'Pokaż tylko zarchiwizowane', admin_reservations_path(state: :archived)
+    |  | 
+    = link_to "Raport csv", admin_reservations_path(format: "csv")
 
     table.responsive
       thead

@@ -1,5 +1,6 @@
 require 'admin/reservations_form'
 require 'admin/reservations'
+require 'csv'
 
 module Admin
   class ReservationsController < Admin::BaseController
@@ -10,6 +11,10 @@ module Admin
       else
         reservations.not_archived
       end.page(params[:page])
+      respond_to do |format|
+        format.html
+        format.csv { render text: @reservations.to_csv }
+      end
     end
 
     def create
