@@ -22,7 +22,7 @@
       tbody
         - @reservations.each do |reservation|
           tr
-            td = reservation.order.id
+            td = link_to reservation.order.id, edit_admin_reservation_path(reservation.id)
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
@@ -52,9 +52,7 @@
                 span class='label warning'
                   | w posiadaniu
             td
-              = link_to 'Edytuj', edit_admin_reservation_path(reservation.id)
               - if reservation.holding? && !reservation.archived?
-                = ' | '
                 = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
               - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
                 = ' | '
