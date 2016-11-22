@@ -15,7 +15,6 @@
           th Przedmiot
           th Koszt
           th Na który tydzień?
-          th Kiedy zarezerwowano
           th Płatność
           th Status
           th Akcje
@@ -32,8 +31,6 @@
               |  zl
             td
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
-            td
-              = reservation.created_at.strftime("%d-%m-%Y")
             td
               - if reservation.order.payment.prepaid?
                 span class='label success'
@@ -53,11 +50,9 @@
                   | w posiadaniu
             td
               - if reservation.holding? && !reservation.archived?
-                = link_to 'Zarchiwizuj', archive_admin_reservation_path(reservation.id), method: :put
+                = link_to 'Zarchiwizuj ', archive_admin_reservation_path(reservation.id), method: :put
               - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
-                = ' | '
-                = link_to 'Przekaż', give_admin_reservation_path(reservation), method: :put
+                = link_to ' Przekaż', give_admin_reservation_path(reservation), method: :put
               - if reservation.holding? && !reservation.archived?
-                = ' | '
-                = link_to 'Przypomnij', remind_admin_reservation_path(reservation), method: :post
+                = link_to ' Przypomnij', remind_admin_reservation_path(reservation), method: :post
     = paginate @reservations
