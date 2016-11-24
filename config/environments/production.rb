@@ -56,11 +56,11 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "kw_app_#{Rails.env}"
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'kw-krakow.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'wypozyczalnia.kw.krakow.pl' }
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 25,
-    domain: 'kw-krakow.herokuapp.com',
+    domain: 'wypozyczalnia.kw.krakow.pl',
     user_name: 'wypozyczalnia.kw.krakow@gmail.com',
     password: ENV['GMAIL_PASSWORD'],
     authentication: :plain,
