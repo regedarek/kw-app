@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('.js-datepicker').fdatepicker({
-    format: 'mm-dd-yyyy',
+    format: 'dd-mm-yyyy',
     disableDblClickSelection: true
   });
 });
