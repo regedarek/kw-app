@@ -1,7 +1,8 @@
 .column.row
   .row
     .large-12.columns
-      = link_to 'Dodaj nowe przejście', new_route_path, class: 'large expanded button'
+      - if user_signed_in?
+        = link_to 'Dodaj nowe przejście', new_route_path, class: 'large expanded button'
   table.responsive
     thead
       tr
