@@ -7,9 +7,8 @@ module Db
     has_one :payment
     belongs_to :user
 
-    def cost
-      # todo: right now we have only reservations
-      reservations.map(&:items).flatten.map(&:cost).reduce(:+)
+    def update_cost
+      update(cost: reservations.map(&:items).flatten.map(&:cost).reduce(:+))
     end
   end
 end

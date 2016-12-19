@@ -18,7 +18,7 @@
 
           = f.label 'Koszt'
           .callout
-            = @reservation.items.map(&:cost).reduce(:+)
+            = @reservation.order.try(:cost)
 
           = f.label :end_date, 'Poczatkowa data(od czwartku)'
           = f.date_field :start_date
@@ -28,7 +28,7 @@
 
           = f.label :description, 'Opis'
           = f.text_area :description
-          - if @reservation.order.payment.cash?
+          - if @reservation.order && @reservation.order.payment.cash?
             - if @reservation.archived?
               span class='label warning'
                 | Zarchiwizowano
@@ -41,7 +41,7 @@
           = f.submit 'Zaktualizuj rezerwacje', class: 'button'
           - if @reservation.holding? && !@reservation.archived?
             = link_to 'Zarchiwizuj', archive_admin_reservation_path(@reservation), method: :put, class: 'button warning'
-          - if (@reservation.order.payment.prepaid? || @reservation.order.payment.cash?) && !@reservation.holding? && !@reservation.archived?
+          - if (@reservation.order && @reservation.order.payment.prepaid? || reservation.order && @reservation.order.payment.cash?) && !@reservation.holding? && !@reservation.archived?
             = link_to 'Przekaż', give_admin_reservation_path(@reservation), method: :put, class: 'button info'
           = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button alert'
           = link_to 'Wroć', admin_reservations_path, class: 'button secondary'

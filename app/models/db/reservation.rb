@@ -55,7 +55,7 @@ class Db::Reservation < ActiveRecord::Base
   end
 
   def cost
-    items.map(&:cost).reduce(:+)
+    order.cost
   end
 
   def when

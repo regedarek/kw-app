@@ -21,21 +21,21 @@
       tbody
         - @reservations.each do |reservation|
           tr
-            td = link_to reservation.order.id, edit_admin_reservation_path(reservation.id)
+            td = link_to reservation.order.try(:id), edit_admin_reservation_path(reservation.id)
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
               = reservation.items.map(&:display_name).to_sentence
             td
-              = reservation.items.map(&:cost).reduce(:+)
+              = reservation.order.try(:cost)
               |  zl
             td
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
             td
-              - if reservation.order.payment.prepaid?
+              - if reservation.order && reservation.order.payment.prepaid?
                 span class='label success'
                   | Zapłacono
-              - elsif reservation.order.payment.cash?
+              - elsif reservation.order && reservation.order.payment.cash?
                 span class='label success'
                   | Zapłacono gotówką
               - else
@@ -51,7 +51,7 @@
             td
               - if reservation.holding? && !reservation.archived?
                 = link_to 'Zarchiwizuj ', archive_admin_reservation_path(reservation.id), method: :put
-              - if (reservation.order.payment.prepaid? || reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
+              - if (reservation.order && reservation.order.payment.prepaid? || reservation.order && reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
                 = link_to ' Przekaż', give_admin_reservation_path(reservation), method: :put
               - if reservation.holding? && !reservation.archived?
                 = link_to ' Przypomnij', remind_admin_reservation_path(reservation), method: :post
