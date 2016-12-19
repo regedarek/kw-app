@@ -17,7 +17,7 @@ class RoutesController < ApplicationController
     @route = Db::Route.new(route_params)
     @valleys = Db::Valley.order(:name)
 
-    redirect_to routes_path, alert: 'Musisz być zalogowany.' unless user_signed_in?
+    return redirect_to routes_path, alert: 'Musisz być zalogowany.' unless user_signed_in?
 
     if @route.save
       redirect_to routes_path, notice: 'Dodano twoje przejście.'
