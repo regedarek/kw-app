@@ -4,7 +4,7 @@ require 'guards'
 
 class ReservationsController < ApplicationController
   def index
-    return redirect_to reservations_url, alert: 'Wypożyczalnia czasowo zamknięta.'
+    return redirect_to root_path, alert: 'Wypożyczalnia czasowo zamknięta.'
 
     guarded_date = Guards::Date.new(date: params[:start_date])
     return redirect_to reservations_path(start_date: guarded_date.nearest_thursday) unless guarded_date.thursday?
@@ -12,7 +12,6 @@ class ReservationsController < ApplicationController
   end
 
   def availability
-    return redirect_to reservations_url, alert: 'Wypożyczalnia czasowo zamknięta.'
     redirect_to reservations_path(start_date: params.fetch('availability_form').fetch('start_date'))
   end
 
