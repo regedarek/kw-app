@@ -29,8 +29,9 @@ class RoutesController < ApplicationController
 
   def update
     @route = Db::Route.find(params[:id])
-    @route.user_id = current_user.id
     @valleys = Db::Valley.order(:name)
+
+    return redirect_to routes_path, alert: 'Nie jesteś autorem przejścia.' unless @route.user_id == current_user.id
 
     if @route.update_attributes(route_params)
       redirect_to edit_route_path(@route), notice: 'Zaktualizowano przejście.'
