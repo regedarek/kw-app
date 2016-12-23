@@ -34,4 +34,5 @@
             td
             td=t('reservations.table.item.cost', cost: item.cost)
             td style='text-align: right; width: 150px'
-              = link_to t('resign'), delete_item_reservation_path(reservation, item_id: item), method: :delete
+              - if reservation.start_date.to_date > Date.today
+                = link_to t('resign'), delete_item_reservation_path(reservation, item_id: item), method: :delete
