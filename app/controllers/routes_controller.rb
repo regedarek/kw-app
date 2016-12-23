@@ -15,6 +15,7 @@ class RoutesController < ApplicationController
 
   def create
     @route = Db::Route.new(route_params)
+    @route.user_id = current_user.id
     @valleys = Db::Valley.order(:name)
 
     return redirect_to routes_path, alert: 'Musisz być zalogowany.' unless user_signed_in?
@@ -28,6 +29,7 @@ class RoutesController < ApplicationController
 
   def update
     @route = Db::Route.find(params[:id])
+    @route.user_id = current_user.id
     @valleys = Db::Valley.order(:name)
 
     if @route.update_attributes(route_params)
