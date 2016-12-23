@@ -51,6 +51,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.6)
+    chronic (0.10.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.1)
@@ -211,6 +212,8 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
     workflow (1.2.0)
 
 PLATFORMS
@@ -236,6 +239,7 @@ DEPENDENCIES
   uglifier
   virtus
   webmock
+  whenever
   workflow
 
 RUBY VERSION

@@ -17,6 +17,7 @@ gem 'slim-rails'
 gem 'workflow'
 gem 'virtus'
 gem 'kaminari'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'rspec-rails'
