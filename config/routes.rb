@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :routes
+  resources :products
   resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create] do
     member do

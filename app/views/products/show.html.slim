@@ -1,0 +1,12 @@
+.column.row
+  .large-12.columns
+    h3 = @product.name
+
+  - if @product.description.present?
+    .large-12.columns
+      .callout.small
+        = @product.description
+
+  .large-12.columns
+    hr
+    = link_to 'Powrót', products_path
