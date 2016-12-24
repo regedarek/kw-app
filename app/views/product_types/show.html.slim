@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @product_type.name
+
+= link_to 'Edit', edit_product_type_path(@product_type)
+'|
+= link_to 'Back', product_types_path

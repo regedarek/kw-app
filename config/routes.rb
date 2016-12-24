@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :product_types
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
