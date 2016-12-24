@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161224150559) do
+ActiveRecord::Schema.define(version: 20161224151042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 20161224150559) do
   create_table "peaks", force: :cascade do |t|
     t.string  "name"
     t.integer "valley_id"
+  end
+
+  create_table "product_fields", force: :cascade do |t|
+    t.string   "name"
+    t.string   "field_type"
+    t.boolean  "required"
+    t.integer  "product_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["product_type_id"], name: "index_product_fields_on_product_type_id", using: :btree
   end
 
   create_table "product_types", force: :cascade do |t|
@@ -133,4 +143,5 @@ ActiveRecord::Schema.define(version: 20161224150559) do
     t.string "name"
   end
 
+  add_foreign_key "product_fields", "product_types"
 end
