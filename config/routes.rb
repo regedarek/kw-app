@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+  root to: 'pages#show', id: 'home'
+
   resources :product_types
+
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
