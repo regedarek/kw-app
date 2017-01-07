@@ -1,0 +1,27 @@
+.column.row
+  .large-12.columns
+    h3 = @auction.name
+
+  - if @auction.description.present?
+    .large-12.columns
+      .callout.small
+        = @auction.description
+  
+  - @auction.auction_products.each do |product|
+    .large-12.columns
+      .callout.small
+        = product.name
+        br
+        = product.description
+        br
+        = product.price
+        br
+        - if product.sold?
+          span class='label warning'
+            | Sprzedane
+        - else
+          = link_to 'Oznacz jako sprzedane', mark_sold_auction_product_path(product), method: :post
+
+  .large-12.columns
+    hr
+    = link_to 'Powrót', auctions_path

@@ -1,0 +1,8 @@
+= f.fields_for :auction_products do |product_form|
+  = product_form.label :name
+  = product_form.text_field :name
+  = product_form.label :description
+  = product_form.text_area :description
+  = product_form.label :price
+  = product_form.number_field :price
+= link_to 'Add', '#', class: 'js-add-auction-product-link'

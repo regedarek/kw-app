@@ -19,3 +19,4 @@
 .ruby-version
 .byebug_history
 .env
+cron_log.log

@@ -3,11 +3,22 @@ Rails.application.routes.draw do
   root to: 'pages#show', id: 'home'
 
   resources :product_types
+  resources :auctions do
+    member do
+      post :mark_archived
+    end
+  end
+  resources :auction_products do
+    member do
+      post :mark_sold
+    end
+  end
 
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
+  get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
   get 'pages/rules' => 'high_voltage/pages#show', id: 'rules'

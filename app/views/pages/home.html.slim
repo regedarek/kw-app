@@ -4,3 +4,7 @@
       - if current_user.reservations.any?
         h3= t('reservations.table.title')
         = render 'reservations/table', reservations: current_user.reservations
+      - if current_user.auctions.any?
+        h3
+          | Twoje aukcje
+        = render 'auctions/table', auctions: current_user.auctions

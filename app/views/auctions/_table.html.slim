@@ -1,0 +1,25 @@
+table.responsive
+  thead
+    tr
+      th Nazwa
+      th Opis
+      th Kto?
+      th
+  tbody
+    - auctions.each do |auction|
+      tr
+        td
+          = auction.name
+        td
+          = auction.description
+        td
+          = auction.user.display_name
+        td align='right'
+          = link_to 'Szczegóły', auction_path(auction)
+          |  | 
+          - if user_signed_in? && current_user.auctions.include?(auction)
+            - if auction.archived?
+              span class='label warning'
+                | Zarchiwizowana
+            - else
+              = link_to 'Zarchiwizuj', mark_archived_auction_path(auction), method: :post

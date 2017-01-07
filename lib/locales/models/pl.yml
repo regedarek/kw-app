@@ -2,10 +2,19 @@ pl:
   activerecord:
     models:
       db/route: Przejscie
+      db/auction: Aukcja
+      db/auction_product: Przedmiot
       db/peak: Szczyt
       db/user: Klubowicz
       db/valley: Dolina
     attributes:
+      db/auction:
+        name: Nazwa aukcji
+        description: Opis aukcji
+      db/auction_product:
+        name: Nazwa przedmiotu
+        description: Opis przedmiotu
+        price: Cena
       db/valley:
         name: Nazwa
       db/user:

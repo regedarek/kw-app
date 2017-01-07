@@ -1,0 +1,6 @@
+.column.row
+  .row
+    .large-12.columns
+      - if user_signed_in?
+        = link_to 'Dodaj aukcję', new_auction_path, class: 'large expanded button'
+  = render 'auctions/table', auctions: @auctions

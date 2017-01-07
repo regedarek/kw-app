@@ -1,0 +1,28 @@
+= form_for @auction, as: :auction, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if @auction.errors.any?
+        .callout.alert
+          ul
+            - @auction.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .large-12.columns
+      .callout
+        = f.fields_for :auction_products do |p|
+          = render 'auction_product_fields', f: p
+        = link_to_add_fields 'Dodaj przedmiot', f, :auction_products 
+  .row
+    .large-12.columns
+      = f.submit class: 'button'

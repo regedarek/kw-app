@@ -10,7 +10,12 @@ class Db::User < ActiveRecord::Base
   scope :email, -> (email) { where email: email }
   scope :kw_id, -> (id) { where kw_id: id }
 
+  has_many :auctions
   has_many :reservations
   has_many :orders
   has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id
+
+  def display_name
+    "#{first_name} #{last_name}"
+  end
 end
