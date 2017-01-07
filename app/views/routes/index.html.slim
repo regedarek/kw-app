@@ -3,36 +3,5 @@
     .large-12.columns
       - if user_signed_in?
         = link_to 'Dodaj nowe przejście', new_route_path, class: 'large expanded button'
-  table.responsive
-    thead
-      tr
-        th width='130' Kiedy?
-        th Kto?
-        th Nazwa
-        th Dolina
-        th Szczyt
-        th width='50' Wycena
-        th width='200'
-    tbody
-      - @routes.each do |route|
-        tr
-          td align='left'
-            = route.climbing_date
-          td
-            = route.partners
-          td
-            = route.name
-          td
-            = route.peak.valley.name
-          td
-            = route.peak.name
-          td align='center'
-            = route.difficulty
-          td align='right'
-            = link_to 'Szczegóły', route_path(route)
-            - if user_signed_in? && (route.user_id == current_user.id || current_user.admin?)
-              = ' | '
-              = link_to 'Edytuj', edit_route_path(route)
-              = ' | '
-              = link_to 'Usuń', route_path(route), method: :delete
+  = render 'routes/table', routes: @routes
   = paginate @routes

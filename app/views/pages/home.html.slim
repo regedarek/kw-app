@@ -1,10 +1,26 @@
 .row
   .columns
     - if user_signed_in?
+      .row
+        .large-12.columns
+          - if user_signed_in?
+            = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
       - if current_user.reservations.any?
         h3= t('reservations.table.title')
         = render 'reservations/table', reservations: current_user.reservations
+      .row
+        .large-12.columns
+          - if user_signed_in?
+            = link_to 'Dodaj aukcję', new_auction_path, class: 'large expanded button'
       - if current_user.auctions.any?
         h3
           | Twoje aukcje
         = render 'auctions/table', auctions: current_user.auctions
+      .row
+        .large-12.columns
+          - if user_signed_in?
+            = link_to 'Dodaj nowe przejście', new_route_path, class: 'large expanded button'
+      - if current_user.routes.any?
+        h3
+          | Twoje przejscia
+        = render 'routes/table', routes: current_user.routes
