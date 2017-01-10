@@ -10,14 +10,11 @@
   - @auction.auction_products.each do |product|
     .large-12.columns
       .callout.small
-        = product.name
-        hr
         = product.description
         br
         br
-        = product.price
-        b= "zł"
-        br
+        b= "#{product.price} zł"
+        hr
         - if product.sold?
           span class='label warning'
             | Sprzedane
