@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get "/pages/*id" => 'pages#show', as: :page, format: false
-  root to: 'pages#show', id: 'home'
+
 
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
 
@@ -10,6 +9,9 @@ Rails.application.routes.draw do
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
   get 'pages/rules' => 'high_voltage/pages#show', id: 'rules'
+
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+  root to: 'pages#show', id: 'home'
 
   namespace :api do
     resources :payments, only: [] do
