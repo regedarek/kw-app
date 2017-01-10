@@ -11,10 +11,12 @@
     .large-12.columns
       .callout.small
         = product.name
-        br
+        hr
         = product.description
         br
+        br
         = product.price
+        b=zł
         br
         - if product.sold?
           span class='label warning'
