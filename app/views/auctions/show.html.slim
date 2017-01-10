@@ -20,7 +20,8 @@
           span class='label warning'
             | Sprzedane
         - else
-          = link_to 'Oznacz jako sprzedane', mark_sold_auction_product_path(product), method: :post
+          - if user_signed_in? && (@auction.user == current_user || current_user.admin?)
+            = link_to 'Oznacz jako sprzedane', mark_sold_auction_product_path(product), method: :post
 
   .large-12.columns
     hr
