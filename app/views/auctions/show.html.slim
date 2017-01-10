@@ -10,7 +10,7 @@
   - @auction.auction_products.each do |product|
     .large-12.columns
       .callout.small
-        = product.description
+        = simple_format(product.description)
         br
         br
         b= "#{product.price} zł"
