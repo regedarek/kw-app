@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
-
-
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
-r get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
+  get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
   get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
 
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
-
   get "/pages/*id" => 'pages#show', as: :page, format: false
   root to: 'pages#show', id: 'home'
 
