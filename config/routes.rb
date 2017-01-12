@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
+  get '/', to: 'high_voltage/pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
   get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
