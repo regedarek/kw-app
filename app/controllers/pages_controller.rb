@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   private
 
   def layout_for_page
-    case params[:id]
+    case params[:id] || request.env['SERVER_NAME'].match('strzelecki')
     when 'strzelecki'
       'strzelecki'
     else
