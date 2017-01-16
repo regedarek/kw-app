@@ -19,7 +19,7 @@ class ProductTypesController < ApplicationController
     @product_type = Db::ProductType.new(product_type_params)
 
     if @product_type.save
-      redirect_to @product_type, notice: 'Product type was successfully created.'
+      redirect_to product_type_path(@product_type), notice: 'Product type was successfully created.'
     else
       render :new
     end
@@ -44,6 +44,6 @@ class ProductTypesController < ApplicationController
     end
 
     def product_type_params
-      params.require(:product_type).permit(:name)
+      params.require(:product_type).permit(:name, fields: [:name, :field_type, :required])
     end
 end
