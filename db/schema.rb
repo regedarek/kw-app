@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107131655) do
+ActiveRecord::Schema.define(version: 20170120215346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,35 @@ ActiveRecord::Schema.define(version: 20170107131655) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.boolean  "archived",    default: false
+  end
+
+  create_table "competitions_question_fields", force: :cascade do |t|
+    t.string  "name"
+    t.string  "field_type"
+    t.boolean "required"
+    t.integer "competitions_question_type_id"
+  end
+
+  create_table "competitions_registrations", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.string   "place"
+    t.date     "event_date"
+    t.integer  "manager_kw_id"
+    t.string   "participants"
+    t.string   "application_list_url"
+    t.integer  "price_for_members"
+    t.integer  "price_for_non_members"
+    t.date     "application_date"
+    t.date     "payment_date"
+    t.string   "account_number"
+    t.string   "event_rules_url"
+    t.string   "google_group_discussion_url"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "items", force: :cascade do |t|
