@@ -1,0 +1,15 @@
+table.responsive
+  thead
+    tr
+      th Nazwa
+      th Kto?
+      th
+  tbody
+    - events.each do |event|
+      tr
+        td
+          = event.name
+        td
+          = event.user.display_name
+        td align='right'
+          = link_to 'Szczegóły', event_path(event)

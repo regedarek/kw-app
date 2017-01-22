@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
   get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('mjs')}
   get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
+  get '/', to: 'events#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
 
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :product_types
+  resources :events, only: [:index, :show]
 
   resources :auctions do
     member do
