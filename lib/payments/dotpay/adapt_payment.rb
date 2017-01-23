@@ -9,7 +9,7 @@ module Payments
         {
           amount: @payment.order.cost,
           currency: 'PLN',
-          description: @payment.description,
+          description: @payment.order.description,
           control: @payment.dotpay_id,
           language: 'pl',
           redirection_type: 0,
