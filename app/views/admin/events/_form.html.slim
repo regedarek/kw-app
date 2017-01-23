@@ -1,0 +1,14 @@
+= form_for form, url: admin_events_path do |f|
+  = f.text_field :name
+  = f.text_field :place
+  = f.date_field :event_date
+  = f.text_field :participants
+  = f.text_field :application_list_url
+  = f.number_field :price_for_members
+  = f.number_field :price_for_non_members
+  = f.date_field :application_date
+  = f.date_field :payment_date
+  = f.text_field :account_number
+  = f.text_field :event_rules_url
+  = f.text_field :google_group_discussion_url
+  = f.submit
