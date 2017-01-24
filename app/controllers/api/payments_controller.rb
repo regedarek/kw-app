@@ -10,7 +10,7 @@ module Api
 
     def thank_you
       if params[:status] == 'OK'
-        redirect_to root_path, notice: 'Oplacono rezerwacje.'
+        redirect_to root_path, notice: 'Płatność została zrealizowana.'
       end
     end
   end
