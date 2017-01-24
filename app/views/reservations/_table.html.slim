@@ -23,7 +23,7 @@
               span class=('alert label')
                 | w posiadaniu
             - if reservation.order && !(reservation.order.payment.cash? || reservation.order.payment.prepaid?) && reservation.order.cost > 0
-              = link_to t('pay'), charge_payment_path(reservation.order.payment.id), method: :post
+              = link_to t('pay'), charge_payment_path(reservation.order.payment.id)
       tbody
         - reservation.items.each do |item|
           tr

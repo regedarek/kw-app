@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   end
   resources :payments, only: [] do
     member do
-      post :charge
+      get :charge
     end
   end
 

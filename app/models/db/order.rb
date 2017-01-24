@@ -11,5 +11,11 @@ module Db
     def update_cost
       update(cost: reservations.map(&:items).flatten.map(&:cost).reduce(:+))
     end
+
+    def description
+      return "Rezerwacja nr: #{services.first.id}" if services.first.serviceable.is_a? Db::Reservation
+      return "Zapis na zawody nr: #{services.first.id}" if services.first.serviceable.is_a? Db::Strzelecki::SignUp
+      return "Zamówienie nr: #{id}"
+    end
   end
 end

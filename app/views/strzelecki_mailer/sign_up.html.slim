@@ -1,0 +1,20 @@
+h3= "Zgłoszenie ##{@sign_up.id}"
+
+b Kto: 
+= @sign_up.names
+br
+b Zespół: 
+= @sign_up.team? ? ' Tak' : ' Nie'
+br
+= link_to 'Strona zawodów Strzeleckiego', 'http://strzelecki.kw.krakow.pl'
+br
+br
+b= "Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online."
+br
+= link_to 'przejdź do płatności online', charge_payment_url(@sign_up.service.order.payment.id)
+br
+= '----------------------------------------------------------'
+br
+i
+  small
+    = 'Sekcja Narciarstwa Wysokogórskiego KW Kraków'
