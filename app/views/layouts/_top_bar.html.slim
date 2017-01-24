@@ -8,7 +8,8 @@
     .top-bar-left
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         li.show-for-medium =link_to t('title'), 'http://kw.krakow.pl'
-        li= link_to t('.rules'), page_path('rules')
+        - unless controller_name == 'sign_ups'
+          li= link_to t('.rules'), page_path('rules')
         - if user_signed_in?
           li= link_to t('.home'), page_path('home')
           li= link_to t('.edit_account'), edit_user_registration_path
