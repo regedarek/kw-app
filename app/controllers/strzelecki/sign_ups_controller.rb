@@ -12,7 +12,7 @@ module Strzelecki
     def create
       form = Strzelecki::SignUpForm.new(strzelecki_params)
       result = Strzelecki::Edition2017.sign_up(form: form)
-      result.success { redirect_to strzelecki_sign_ups_path, notice: 'Zapisano.' }
+      result.success { redirect_to strzelecki_sign_ups_path, notice: 'Zapisano. Otrzymasz na podany email informacje jak dokonać płatności.' }
       result.invalid { |form:| redirect_to strzelecki_sign_ups_path, alert: "Nie dodano z powodu: #{form.errors.messages}" }
       result.else_fail!
     end
