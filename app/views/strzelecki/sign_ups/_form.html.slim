@@ -1,5 +1,25 @@
 = form_for form, url: strzelecki_sign_ups_path do |f|
-  = f.text_field :names
-  = f.email_field :email
-  = f.check_box :team
-  = f.submit
+  .row
+    .large-12.columns
+      - if form.errors.any?
+        .callout.alert
+          ul
+            - form.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :names, 'Kto startuje'
+      = f.text_field :names
+
+  .row
+    .large-12.columns
+      = f.label :email, 'E-mail'
+      = f.email_field :email
+
+  .row
+    .large-12.columns
+      = f.label :team, 'Zgłoszenie zespołu?(kupno podwojnego pakietu)'
+      = f.check_box :team
+
+  = f.submit 'Zapisz się', class: 'button'

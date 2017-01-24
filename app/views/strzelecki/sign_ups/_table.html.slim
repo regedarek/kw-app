@@ -6,6 +6,7 @@
           th Imiona i nazwiska zawodnika/ów
           th Email kontaktowy
           th Koszt pakietu
+          th Zespół
           th Zapłacono
 
       tbody
@@ -14,8 +15,9 @@
             td= sign_up.names  
             td= sign_up.email
             td= sign_up.order.try(:cost)
+            td= sign_up.team? ? 'Tak' : 'Nie'
             td
-              - if !sign_up.order.payment.prepaid?
+              - if sign_up.order.payment.prepaid?
                 span class=('success label')
                   =t('prepaid')
               - else

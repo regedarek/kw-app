@@ -1,3 +1,9 @@
-= link_to 'Zapisz się', new_strzelecki_sign_up_path, class: 'button'
+.row
+  .columns
+    h3.subheader
+     | Zapisy na Strzelecki 2017
+
+    = link_to 'Zapisz się', new_strzelecki_sign_up_path, class: 'button large expanded'
+
 = render 'strzelecki/sign_ups/table', sign_ups: @sign_ups
 
