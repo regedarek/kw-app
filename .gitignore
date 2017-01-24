@@ -21,3 +21,5 @@
 .env
 cron_log.log
 latest.dump
+
+.DS_Store
