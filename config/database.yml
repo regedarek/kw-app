@@ -6,6 +6,11 @@ default: &default
   username: <%= ENV['PGUSER'] %>
   password: <%= ENV['PGPASSWORD'] %>
 
+staging:
+  <<: *default
+  host: <%= ENV['PGHOST'] %>
+  database: <%= ENV['PGDATABASE'] %>
+
 production:
   <<: *default
   host: <%= ENV['PGHOST'] %>
