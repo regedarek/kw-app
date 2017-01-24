@@ -4,8 +4,9 @@ class StrzeleckiMailer < ApplicationMailer
 
     mail(
       to: @sign_up.email,
+      from: 'dariusz.finster@gmail.com',
       cc: 'dariusz.finster@gmail.com',
-      subject: "Zapisano do Strzeleckiego 2017"
+      subject: "Strzelecki 2017 - zapisy"
     )
   end
 end
