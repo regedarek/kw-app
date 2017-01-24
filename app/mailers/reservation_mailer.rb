@@ -5,6 +5,7 @@ class ReservationMailer < ApplicationMailer
 
     mail(
       to: @user.email,
+      from: 'wypozyczalnia.kw.krakow@gmail.com',
       cc: 'wypozyczalnia.kw.krakow@gmail.com',
       subject: "Zarezerwowano: #{reservation.items.map(&:name)}"
     )
@@ -17,6 +18,7 @@ class ReservationMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: 'wypozyczalnia.kw.krakow@gmail.com',
+      from: 'wypozyczalnia.kw.krakow@gmail.com',
       subject: "Przypominamy o oddaniu: #{reservation.items.map(&:name)}"
     )
   end

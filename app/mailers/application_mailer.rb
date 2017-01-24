@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "Wypożyczalnia KW Kraków <wypozyczalnia.kw.krakow@gmail.com>"
+  default from: 'Klub Wysokogórski Kraków <postmaster@kw.krakow.pl>'
 
   layout 'mailer'
 end
