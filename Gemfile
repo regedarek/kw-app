@@ -22,6 +22,7 @@ gem 'whenever', require: false
 group :development, :test do
   gem 'rspec-rails'
   gem 'timecop'
+  gem 'dotenv-rails'
   gem 'byebug'
   gem 'spring'
   gem 'webmock'

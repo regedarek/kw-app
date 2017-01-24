@@ -59,10 +59,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'wypozyczalnia.kw.krakow.pl' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:                 "127.0.0.1",
-    port:                    25,
-    domain: 'kw.krakow.pl',
-    enable_starttls_auto:    false
+    authentication: :plain,
+    address: 'smtp.mailgun.org',
+    port: 587,
+    domain: Rails.application.secrets.mailgun_domain,
+    user_name: Rails.application.secrets.mailgun_login,
+    password: Rails.application.secrets.mailgun_password
   }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
