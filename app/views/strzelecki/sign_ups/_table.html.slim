@@ -15,9 +15,9 @@
             td= sign_up.email
             td= sign_up.order.try(:cost)
             td
-              - if sign_up.order.payment.prepaid?
+              - if !sign_up.order.payment.prepaid?
                 span class=('success label')
-                =t('prepaid')
+                  =t('prepaid')
               - else
                 span class=('alert label')
                   =t('unpaid')
