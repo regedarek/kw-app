@@ -20,3 +20,4 @@
 .byebug_history
 .env
 cron_log.log
+latest.dump
