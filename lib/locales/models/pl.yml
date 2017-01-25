@@ -1,4 +1,14 @@
 pl:
+  activemodel:
+    strzelecki_sign_up_form: Formularz zapisów
+    attributes:
+      strzelecki_sign_up_form:
+        names: Kto startuje?
+        birth_year: Rok urodzenia
+        email: E-mail
+        vege: posiłek wegetariański?
+        team: zgłaszam zespół?
+        organization: Przynależność klubowa
   activerecord:
     models:
       db/route: Przejscie
@@ -7,7 +17,23 @@ pl:
       db/peak: Szczyt
       db/user: Klubowicz
       db/valley: Dolina
+      db/strzelecki/sign_up: Zapis na zawody
+      strzelecki_sign_up_form: Formularz zapisów
     attributes:
+      strzelecki_sign_up_form:
+        names: Kto startuje?
+        birth_year: Rok urodzenia
+        email: E-mail
+        vege: posiłek wegetariański?
+        team: zgłaszam zespół?
+        organization: Przynależność klubowa
+      db/strzelecki/sign_up:
+        names: Kto startuje?
+        birth_year: Rok urodzenia
+        email: E-mail
+        vege: posiłek wegetariański?
+        team: zgłaszam zespół?
+        organization: Przynależność klubowa
       db/auction:
         name: Nazwa aukcji
         description: Opis aukcji

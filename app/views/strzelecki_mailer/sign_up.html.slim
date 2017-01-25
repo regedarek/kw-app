@@ -1,12 +1,22 @@
 h3= "Zgłoszenie ##{@sign_up.id}"
 
-b Kto: 
+b Kto startuje?: 
 = @sign_up.names
+br
+b Rok urodzenia: 
+= @sign_up.birth_year
+br
+- if @sign_up.organization.present?
+  b Przynależność klubowa: 
+  = @sign_up.organization
+  br
+b Posiłek wegetariański: 
+= @sign_up.vege? ? ' Tak' : ' Nie'
 br
 b Zespół: 
 = @sign_up.team? ? ' Tak' : ' Nie'
 br
-= link_to 'Strona zawodów Strzeleckiego', 'http://strzelecki.kw.krakow.pl'
+= link_to 'Strona zawodów Strzeleckiego', page_url('strzelecki')
 br
 br
 b= "Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online."

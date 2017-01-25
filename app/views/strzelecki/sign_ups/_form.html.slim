@@ -9,18 +9,33 @@
 
   .row
     .large-12.columns
-      = f.label :names, 'Kto startuje'
+      = f.label :names
       = f.text_field :names
 
   .row
     .large-12.columns
-      = f.label :email, 'E-mail'
+      = f.label :email
       = f.email_field :email
 
   .row
     .large-12.columns
-      = f.label :team, 'Zgłoszenie zespołu?(kupno podwojnego pakietu)'
+      = f.label :organization, 'Przynależność klubowa (opcjonalnie)'
+      = f.text_field :organization
+
+  .row
+    .large-12.columns
+      = f.label :birth_year
+      = f.number_field :birth_year
+
+  .row
+    .large-12.columns
+      = f.check_box :vege
+      = f.label :vege, 'posiłek wegetariański?'
+
+  .row
+    .large-12.columns
       = f.check_box :team
+      = f.label :team, 'zgłaszam zespół? (płacę za dwie osoby)'
 
   = f.submit 'Zapisz się', class: 'button'
   = link_to 'Wróć do strony zapisów', strzelecki_sign_ups_path, class: 'button warning'
