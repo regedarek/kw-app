@@ -18,4 +18,5 @@ table.responsive
         td
           = event.place
         td align='right'
-          = link_to 'Szczegóły', event_path(event)
+          - if user_signed_in?
+            = link_to 'Szczegóły', event_path(event)
