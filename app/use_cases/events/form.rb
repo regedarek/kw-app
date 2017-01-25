@@ -7,8 +7,8 @@ module Events
                   :price_for_members, :price_for_non_members, :application_date, :payment_date,
                   :account_number, :event_rules_url, :google_group_discussion_url
 
-    validates :name, :place, :application_list_url, :google_group_discussion_url,
-      presence: true 
+    validates :name, :place, :application_date, :application_list_url, :google_group_discussion_url,
+      :participants, presence: true 
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "Event")

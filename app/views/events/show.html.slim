@@ -6,9 +6,10 @@
     h5
       = "Miejsce wydarzenia: #{@event.place}"
 
-  .large-12.columns
-    h5
-      = "Data wydarzenia: #{@event.event_date}"
+  - if @event.event_date.present?
+    .large-12.columns
+      h5
+        = "Data wydarzenia: #{@event.event_date}"
 
   - if @event.application_list_url.present?
     .large-12.columns
@@ -27,7 +28,7 @@
 
   .large-12.columns
     h5
-      = "Data: #{@event.user.display_name}"
+      = "Koordynator: #{@event.user.display_name}"
 
   .large-12.columns
     h5
@@ -41,17 +42,20 @@
     h5
       = "Cena dla klubowiczów: #{@event.price_for_members}"
 
-  .large-12.columns
-    h5
-      = "Cena dla pozostałych: #{@event.price_for_non_members}"
+  - if @event.price_for_non_members.present?
+    .large-12.columns
+      h5
+        = "Cena dla pozostałych: #{@event.price_for_non_members}"
 
-  .large-12.columns
-    h5
-      = "Płatność do: #{@event.application_date}"
+  - if @event.payment_date.present?
+    .large-12.columns
+      h5
+        = "Płatność do: #{@event.payment_date}"
 
-  .large-12.columns
-    h5
-      = "Nr konta: #{@event.account_number}"
+  - if @event.account_number.present?
+    .large-12.columns
+      h5
+        = "Nr konta: #{@event.account_number}"
 
   .large-12.columns
     = link_to "wróć do wydarzeń", events_path, class: 'button warning'
