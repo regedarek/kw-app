@@ -1,14 +1,73 @@
 = form_for form, url: admin_events_path do |f|
-  = f.text_field :name
-  = f.text_field :place
-  = f.date_field :event_date
-  = f.text_field :participants
-  = f.text_field :application_list_url
-  = f.number_field :price_for_members
-  = f.number_field :price_for_non_members
-  = f.date_field :application_date
-  = f.date_field :payment_date
-  = f.text_field :account_number
-  = f.text_field :event_rules_url
-  = f.text_field :google_group_discussion_url
-  = f.submit
+  .row
+    .large-12.columns
+      - if form.errors.any?
+        .callout.alert
+          ul
+            - form.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name, 'Nazwa'
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :place, 'Miejsce'
+      = f.text_field :place
+
+  .row
+    .large-12.columns
+      = f.label :event_date, 'Data wydarzenia'
+      = f.date_field :event_date
+
+  .row
+    .large-12.columns
+      = f.label :participants, 'Kto moze uczestniczyc'
+      = f.text_field :participants
+
+  .row
+    .large-12.columns
+      = f.label :application_list_url, 'Link do zapisow'
+      = f.text_field :application_list_url
+
+  .row
+    .large-12.columns
+      = f.label :price_for_members, 'Cena dla klubowiczow'
+      = f.text_field :price_for_members
+
+  .row
+    .large-12.columns
+      = f.label :price_for_non_members, 'Cena dla pozostalych'
+      = f.text_field :price_for_non_members
+
+  .row
+    .large-12.columns
+      = f.label :application_date, 'Data zapisow'
+      = f.date_field :application_date
+
+  .row
+    .large-12.columns
+      = f.label :payment_date, 'Data platnosci'
+      = f.date_field :payment_date
+
+  .row
+    .large-12.columns
+      = f.label :account_number, 'Nr konta bankowego'
+      = f.text_field :account_number
+
+  .row
+    .large-12.columns
+      = f.label :event_rules_url, 'Link do regulaminu'
+      = f.text_field :event_rules_url
+
+  .row
+    .large-12.columns
+      = f.label :google_group_discussion_url, 'Link do watku na grupie dyskusyjnej'
+      = f.text_field :google_group_discussion_url
+
+  .row
+    .large-12.columns
+      = f.submit 'Dodaj wydarzenie', class: 'button'
+      = link_to "wróć do wydarzeń", events_path, class: 'button warning'

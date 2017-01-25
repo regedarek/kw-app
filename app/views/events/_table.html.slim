@@ -2,7 +2,9 @@ table.responsive
   thead
     tr
       th Nazwa
-      th Kto?
+      th Kiedy?
+      th Koordynator
+      th Gdzie?
       th
   tbody
     - events.each do |event|
@@ -10,6 +12,10 @@ table.responsive
         td
           = event.name
         td
+          = event.event_date
+        td
           = event.user.display_name
+        td
+          = event.place
         td align='right'
           = link_to 'Szczegóły', event_path(event)
