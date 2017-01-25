@@ -10,7 +10,7 @@
         li.show-for-medium =link_to t('title'), 'http://kw.krakow.pl'
         - if controller_name == 'sign_ups'
           li= link_to 'Strzelecki 2017', 'http://strzelecki.kw.krakow.pl'
-        - else
+        - if controller_name == 'reservations'
           li= link_to t('.rules'), page_path('rules')
         - if user_signed_in?
           li= link_to t('.home'), page_path('home')
