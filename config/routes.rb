@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/', to: 'routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
   get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
   get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('mjs')}
-  get '/zapisy', to: 'strzelecki/sign_ups#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
+  get '/strzelecki', to: 'strzelecki/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
   get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
   get '/', to: 'events#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
 
