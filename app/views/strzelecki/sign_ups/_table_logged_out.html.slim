@@ -1,0 +1,15 @@
+.row
+  .columns
+    table.responsive
+      thead
+        tr
+          th Nr.
+          th Zawodnik/Zespół
+          th Klub
+
+      tbody
+        - sign_ups.each_with_index do |sign_up, i|
+          tr
+            td= i + 1
+            td= sign_up.names  
+            td= sign_up.organization

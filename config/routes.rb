@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   end
 
   namespace :strzelecki do
-    resources :sign_ups, only: [:index, :new, :create]
+    resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
   end
 
   resources :product_types

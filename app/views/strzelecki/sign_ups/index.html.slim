@@ -1,9 +1,16 @@
 .row
   .columns
     h3.subheader
-     | Zapisy na Strzelecki 2017
+     | Zapisy na Memoriał Jana Strzeleckiego - 11 marca 2017
 
-    = link_to 'Zapisz się', new_strzelecki_sign_up_path, class: 'button large expanded'
+    .callout.primary
+      | Koszt pakietu dla jednego zawodnika: 100 zł
+      br
+      b Zawartość pakietu:
 
-= render 'strzelecki/sign_ups/table', sign_ups: @sign_ups
+    = link_to 'Zapisz się aby zdąrzyć przed innymi', new_strzelecki_sign_up_path, class: 'button large expanded'
 
+    - if user_signed_in? && current_user.admin?
+      = render 'strzelecki/sign_ups/table', sign_ups: @sign_ups
+    - else
+      = render 'strzelecki/sign_ups/table_logged_out', sign_ups: @sign_ups
