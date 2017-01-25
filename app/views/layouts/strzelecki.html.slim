@@ -9,3 +9,14 @@ html lang="en"
   body
     == yield
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    .top_bar
+      .bar
+      .left
+        | Memoriał Jana Strzeleckiego
+      nav.top_bar_menu
+        ul
+          li Nagrody
+          li Program
+          li Trasa
+          li=link_to 'Zapisy', new_strzelecki_sign_up_path
+    
