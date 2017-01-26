@@ -9,6 +9,8 @@ pl:
         vege: posiłek wegetariański?
         team: zgłaszam zespół?
         organization: Przynależność klubowa
+        package_type: Pakiet startowy
+        category_type: Kategoria
   activerecord:
     models:
       db/route: Przejscie
@@ -20,13 +22,6 @@ pl:
       db/strzelecki/sign_up: Zapis na zawody
       strzelecki_sign_up_form: Formularz zapisów
     attributes:
-      strzelecki_sign_up_form:
-        names: Kto startuje?
-        birth_year: Rok urodzenia
-        email: E-mail
-        vege: posiłek wegetariański?
-        team: zgłaszam zespół?
-        organization: Przynależność klubowa
       db/strzelecki/sign_up:
         names: Kto startuje?
         birth_year: Rok urodzenia
@@ -34,6 +29,16 @@ pl:
         vege: posiłek wegetariański?
         team: zgłaszam zespół?
         organization: Przynależność klubowa
+        package_type: Pakiet startowy
+        package_types:
+          kw: Członek KW Kraków (75 zł)
+          junior: Kadet (65 zł)
+          standard: Standart (95 zł) 
+        category_type: Kategoria
+        category_types:
+          mix: Mieszana
+          male: Męska
+          female: Żeńska
       db/auction:
         name: Nazwa aukcji
         description: Opis aukcji

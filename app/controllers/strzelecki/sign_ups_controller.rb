@@ -20,7 +20,9 @@ module Strzelecki
     private
 
     def strzelecki_params
-      params.require(:strzelecki_sign_up_form).permit(:names, :email, :team, :birth_year, :organization, :vege)
+      params
+        .require(:strzelecki_sign_up_form)
+        .permit(:names, :email, :team, :birth_year, :organization, :vege, :category_type, :package_type)
     end
   end
 end

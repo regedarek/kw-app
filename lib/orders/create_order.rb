@@ -18,10 +18,20 @@ module Orders
         end
         if @service.is_a? Db::Strzelecki::SignUp
           order.strzelecki_sign_ups << @service
-          if @service.team?
-            order.cost = 200
+          package_cost = case @service.package_type
+          when 'kw'
+            75
+          when 'junior'
+            65
+          when 'standard'
+            95
           else
-            order.cost = 100
+            fail 'wrong payment'
+          end
+          if @service.team?
+            order.cost = package_cost * 2
+          else
+            order.cost = package_cost
           end
         end
         order.save

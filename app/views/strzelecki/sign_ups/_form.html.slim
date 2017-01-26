@@ -1,3 +1,6 @@
+.callout.primary
+  | Możesz zgłosić zespół, aby to zrobić zaznacz stosowną opcję, a płatność zostanie powiększona dwukrotnie
+
 = form_for form, url: strzelecki_sign_ups_path do |f|
   .row
     .large-12.columns
@@ -18,6 +21,15 @@
       = f.email_field :email
 
   .row
+    .large-6.columns
+      = f.label :category_type
+      = f.select :category_type, options_for_select(Db::Strzelecki::SignUp.category_types_attributes_for_select), include_blank: true
+
+    .large-6.columns
+      = f.label :package_type
+      = f.select :package_type, options_for_select(Db::Strzelecki::SignUp.package_types_attributes_for_select), include_blank: true
+
+  .row
     .large-12.columns
       = f.label :organization, 'Przynależność klubowa (opcjonalnie)'
       = f.text_field :organization
@@ -25,7 +37,7 @@
   .row
     .large-12.columns
       = f.label :birth_year
-      = f.number_field :birth_year
+      = f.number_field :birth_year, min: 1950, max: 2010
 
   .row
     .large-12.columns

@@ -13,6 +13,15 @@ br
 b Posiłek wegetariański: 
 = @sign_up.vege? ? ' Tak' : ' Nie'
 br
+b Kategoria:
+= ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.category_types.#{@sign_up.category_type}")
+br
+b Pakiet startowy:
+- if @sign_up.team?
+  = ' 2 razy ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type}")
+- else
+  = ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type}")
+br
 b Zespół: 
 = @sign_up.team? ? ' Tak' : ' Nie'
 br
