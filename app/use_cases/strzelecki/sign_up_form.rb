@@ -4,9 +4,10 @@ module Strzelecki
     include ActiveModel::Validations
 
     attr_accessor :names, :email, :team, :organization, :vege, :birth_year,
-                  :category_type, :package_type
+                  :category_type, :package_type, :remarks
 
-    validates :names, :email, :team, :birth_year, :category_type, :package_type, presence: true
+    validates :names, :email, :team, :birth_year, :category_type, :package_type, :remarks,
+      presence: true
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "StrzeleckiSignUpForm")
@@ -20,7 +21,7 @@ module Strzelecki
       HashWithIndifferentAccess.new(
         names: names, email: email, team: team, organization: organization,
         vege: vege, birth_year: birth_year, category_type: category_type,
-        package_type: package_type
+        package_type: package_type, remarks: remarks
       )
     end
   end

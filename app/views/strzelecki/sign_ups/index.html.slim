@@ -6,7 +6,7 @@
     .callout.primary
       | Koszt pakietu dla jednego zawodnika: Kadet: 65 zł, Członek KW Kraków: 75 zł, Standard: 95zł
 
-    = link_to 'Zapisz się aby zdąrzyć przed innymi', new_strzelecki_sign_up_path, class: 'button large expanded'
+    = link_to 'Zapisz się aby zdążyć przed innymi!', new_strzelecki_sign_up_path, class: 'button large expanded'
 
     - if user_signed_in? && current_user.admin?
       = render 'strzelecki/sign_ups/table', sign_ups: @sign_ups

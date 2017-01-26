@@ -1,5 +1,5 @@
 .callout.primary
-  | Możesz zgłosić zespół, aby to zrobić zaznacz stosowną opcję, a płatność zostanie powiększona dwukrotnie
+  | Możesz zgłosić zespół, aby to zrobić zaznacz stosowną opcję, a płatność zostanie powiększona dwukrotnie.
 
 = form_for form, url: strzelecki_sign_ups_path do |f|
   .row
@@ -48,5 +48,10 @@
     .large-12.columns
       = f.check_box :team
       = f.label :team, 'zgłaszam zespół? (płacę za dwie osoby)'
+
+  .row
+    .large-12.columns
+      = f.label :remarks
+      = f.text_area :remarks
 
   = f.submit 'Zapisz się', class: 'button expanded large'
