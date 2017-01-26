@@ -6,7 +6,7 @@ module Strzelecki
     attr_accessor :names, :email, :team, :organization, :vege, :birth_year,
                   :category_type, :package_type, :remarks
 
-    validates :names, :email, :team, :birth_year, :category_type, :package_type, :remarks,
+    validates :names, :email, :team, :birth_year, :category_type, :package_type,
       presence: true
 
     def self.model_name
