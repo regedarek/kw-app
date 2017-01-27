@@ -1,10 +1,13 @@
 .row
   .columns
-    h3.subheader
-     | Zapisy na Memoriał Jana Strzeleckiego - 11 marca 2017
+    = image_tag 'baner.png'
 
     .callout.primary
-      | Koszt pakietu dla jednego zawodnika: Kadet: 65 zł, Członek KW Kraków: 75 zł, Standard: 95zł
+      | Koszt pakietu dla jednego zawodnika:
+      ul
+        li Kadet: 65 zł
+        li Członek KW Kraków: 75 zł
+        li Standard: 95zł
 
     = link_to 'Zapisz się aby zdążyć przed innymi!', new_strzelecki_sign_up_path, class: 'button large expanded'
 
