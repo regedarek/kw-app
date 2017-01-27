@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( strzelecki.css )
 Rails.application.config.assets.precompile += %w( strzelecki-bg.jpg )
 Rails.application.config.assets.precompile += %w( baner.png )
+Rails.application.config.assets.precompile += %w( images/baner.png )
