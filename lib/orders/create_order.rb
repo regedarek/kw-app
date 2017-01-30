@@ -28,10 +28,10 @@ module Orders
           else
             fail 'wrong payment'
           end
-          if @service.team?
-            order.cost = package_cost * 2
-          else
+          if @service.single?
             order.cost = package_cost
+          else
+            order.cost = package_cost * 2
           end
         end
         order.save

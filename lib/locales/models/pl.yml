@@ -3,11 +3,14 @@ pl:
     strzelecki_sign_up_form: Formularz zapisów
     attributes:
       strzelecki_sign_up_form:
-        names: Kto startuje?
-        birth_year: Rok urodzenia
+        name_1: Zawodnik 1
+        birth_year_1: Rok urodzenia 1
+        vege_1: posiłek wegetariański 1?
+        name_2: Zawodnik 2
+        birth_year_2: Rok urodzenia 2
+        vege_2: posiłek wegetariański 2?
+        single: szukam partnera?
         email: E-mail
-        vege: posiłek wegetariański?
-        team: zgłaszam zespół?
         organization: Przynależność klubowa
         package_type: Pakiet startowy
         category_type: Kategoria
@@ -24,11 +27,14 @@ pl:
       strzelecki_sign_up_form: Formularz zapisów
     attributes:
       db/strzelecki/sign_up:
-        names: Kto startuje?
-        birth_year: Rok urodzenia
+        name_1: Zawodnik
+        birth_year_1: Rok urodzenia
+        vege_1: posiłek wegetariański?
+        name_2: Zawodnik
+        birth_year_2: Rok urodzenia
+        vege_2: posiłek wegetariański?
+        single: szukam partnera?
         email: E-mail
-        vege: posiłek wegetariański?
-        team: zgłaszam zespół?
         organization: Przynależność klubowa
         remarks: Uwagi do wiadomości organizatorów
         package_type: Pakiet startowy

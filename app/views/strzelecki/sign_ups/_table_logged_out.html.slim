@@ -11,5 +11,9 @@
         - sign_ups.each_with_index do |sign_up, i|
           tr
             td= i + 1
-            td= sign_up.names  
+            td
+              - if sign_up.single?
+                = sign_up.name_1
+              - else
+                = "#{sign_up.name_1} oraz #{sign_up.name_2}"
             td= sign_up.organization

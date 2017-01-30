@@ -6,8 +6,8 @@
           th Imiona i nazwiska zawodnika/ów
           th Email kontaktowy
           th Klub
-          th Posiłek wegetariański?
-          th Rok urodzenia
+          th Posiłki wegetariańskie?
+          th Lata urodziń
           th Koszt pakietu
           th Zespół
           th Zapłacono
@@ -15,15 +15,27 @@
       tbody
         - sign_ups.each do |sign_up|
           tr
-            td= sign_up.names  
+            td
+              - if sign_up.single?
+                = sign_up.name_1
+              - else
+                = "#{sign_up.name_1} oraz #{sign_up.name_2}"
             td= sign_up.email
             td= sign_up.organization
-            td= sign_up.vege? ? 'Tak' : 'Nie'
-            td= sign_up.birth_year
-            td= sign_up.order.try(:cost)
-            td= sign_up.team? ? 'Tak' : 'Nie'
             td
-              - if sign_up.order.payment.prepaid?
+              - if sign_up.single?
+                = sign_up.vege_1?
+              - else
+                = "#{sign_up.vege_1?}/#{sign_up.vege_2?}"
+            td
+              - if sign_up.single?
+                = sign_up.birth_year_1?
+              - else
+                = "#{sign_up.birth_year_1}/#{sign_up.birth_year_2}"
+            td= sign_up.order.try(:cost)
+            td= sign_up.single? ? 'Szuka partnera' : 'Zespół'
+            td
+              - if sign_up.order.present? && sign_up.order.payment.prepaid?
                 span class=('success label')
                   =t('prepaid')
               - else
