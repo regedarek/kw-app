@@ -9,5 +9,4 @@ class KwApp.StrzeleckiSignUpForm
 
 $ ->
   for el in $('.js-strzelecki-sign-up-form')
-    console.log '1'
     new KwApp.StrzeleckiSignUpForm($(el))

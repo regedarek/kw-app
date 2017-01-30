@@ -1,5 +1,5 @@
 .callout.primary
-  | Możesz zgłosić zespół, aby to zrobić zaznacz stosowną opcję, a płatność zostanie powiększona dwukrotnie.
+  | Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję 'szukam partnera'.
 
 = form_for form, html: { class: 'js-strzelecki-sign-up-form' }, url: strzelecki_sign_ups_path do |f|
   .row
@@ -10,41 +10,43 @@
             - form.errors.full_messages.each do |msg|
               li= msg
 
-  .row
-    .large-12.columns
-      = f.label :name_1
-      = f.text_field :name_1
+  .callout
+    .row
+      .large-12.columns
+        = f.label :name_1
+        = f.text_field :name_1
 
-  .row
-    .large-12.columns
-      = f.label :birth_year_1
-      = f.number_field :birth_year_1, min: 1950, max: 2010
+    .row
+      .large-12.columns
+        = f.label :birth_year_1
+        = f.number_field :birth_year_1, min: 1950, max: 2010
 
-  .row
-    .large-12.columns
-      = f.check_box :vege_1
-      = f.label :vege_1, 'posiłek wegetariański?'
+    .row
+      .large-12.columns
+        = f.check_box :vege_1
+        = f.label :vege_1, 'posiłek wegetariański?'
 
-  .row
-    .large-12.columns
-      = f.check_box :single, class: 'js-single-check-box'
-      = f.label :single, 'szukam partnera?'
+    .row
+      .large-12.columns
+        = f.check_box :single, class: 'js-single-check-box'
+        = f.label :single, 'szukam partnera?'
 
   .js-player-2
-    .row
-      .large-12.columns
-        = f.label :name_2
-        = f.text_field :name_2
+    .callout
+      .row
+        .large-12.columns
+          = f.label :name_2
+          = f.text_field :name_2
 
-    .row
-      .large-12.columns
-        = f.label :birth_year_2
-        = f.number_field :birth_year_2, min: 1950, max: 2010
+      .row
+        .large-12.columns
+          = f.label :birth_year_2
+          = f.number_field :birth_year_2, min: 1950, max: 2010
 
-    .row
-      .large-12.columns
-        = f.check_box :vege_2
-        = f.label :vege_2, 'posiłek wegetariański?'
+      .row
+        .large-12.columns
+          = f.check_box :vege_2
+          = f.label :vege_2, 'posiłek wegetariański?'
 
   .row
     .large-12.columns
