@@ -1,29 +1,34 @@
 h3= "Zgłoszenie ##{@sign_up.id}"
 
 b Kto startuje?: 
-= @sign_up.names
+= @sign_up.name_1
 br
 b Rok urodzenia: 
-= @sign_up.birth_year
+= @sign_up.birth_year_1
 br
-- if @sign_up.organization.present?
+- if @sign_up.organization_1.present?
   b Przynależność klubowa: 
-  = @sign_up.organization
+  = @sign_up.organization_1
+  br
+br
+- if @sign_up.city_1.present?
+  b Miasto: 
+  = @sign_up.city_1
   br
 b Posiłek wegetariański: 
-= @sign_up.vege? ? ' Tak' : ' Nie'
+= @sign_up.vege_1? ? ' Tak' : ' Nie'
 br
 b Kategoria:
 = ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.category_types.#{@sign_up.category_type}")
 br
 b Pakiet startowy:
-- if @sign_up.team?
+- if !@sign_up.single?
   = ' 2 razy ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type}")
 - else
   = ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type}")
 br
 b Zespół: 
-= @sign_up.team? ? ' Tak' : ' Nie'
+= !@sign_up.single? ? ' Tak' : ' Nie'
 br
 = link_to 'przejdź do strony zawodów', Rails.application.secrets.strzelecki_page
 br

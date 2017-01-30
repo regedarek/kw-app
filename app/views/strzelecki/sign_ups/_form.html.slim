@@ -23,8 +23,22 @@
 
     .row
       .large-12.columns
+        = f.label :email_1, 'E-mail (wymagany, zostanie na niego wysłany link do płatności)'
+        = f.email_field :email_1
+
+    .row
+      .large-12.columns
         = f.check_box :vege_1
         = f.label :vege_1, 'posiłek wegetariański?'
+
+    .row
+      .large-6.columns
+        = f.label :city_1, 'Miasto (opcjonalnie)'
+        = f.text_field :city_1
+
+      .large-6.columns
+        = f.label :organization_1, 'Przynależność klubowa (opcjonalnie)'
+        = f.text_field :organization_1
 
     .row
       .large-12.columns
@@ -45,13 +59,22 @@
 
       .row
         .large-12.columns
+          = f.label :email_2, 'E-mail (opcjonalnie)'
+          = f.email_field :email_2
+
+      .row
+        .large-12.columns
           = f.check_box :vege_2
           = f.label :vege_2, 'posiłek wegetariański?'
 
-  .row
-    .large-12.columns
-      = f.label :email
-      = f.email_field :email
+      .row
+        .large-6.columns
+          = f.label :city_2, 'Miasto (opcjonalnie)'
+          = f.text_field :city_2
+
+        .large-6.columns
+          = f.label :organization_2, 'Przynależność klubowa (opcjonalnie)'
+          = f.text_field :organization_2
 
   .row
     .large-6.columns
@@ -61,11 +84,6 @@
     .large-6.columns
       = f.label :package_type
       = f.select :package_type, options_for_select(Db::Strzelecki::SignUp.package_types_attributes_for_select), include_blank: true
-
-  .row
-    .large-12.columns
-      = f.label :organization, 'Przynależność klubowa (opcjonalnie)'
-      = f.text_field :organization
 
   .row
     .large-12.columns

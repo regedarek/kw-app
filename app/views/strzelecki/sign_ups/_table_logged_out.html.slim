@@ -6,6 +6,7 @@
           th Nr.
           th Zawodnik/Zespół
           th Klub
+          th Miasto
 
       tbody
         - sign_ups.each_with_index do |sign_up, i|
@@ -16,4 +17,13 @@
                 = sign_up.name_1
               - else
                 = "#{sign_up.name_1} oraz #{sign_up.name_2}"
-            td= sign_up.organization
+            td
+              - if sign_up.single?
+                = sign_up.organization_1
+              - else
+                = "#{sign_up.organization_1}/#{sign_up.organization_2}"
+            td
+              - if sign_up.single?
+                = sign_up.city_1
+              - else
+                = "#{sign_up.city_1}/#{sign_up.city_2}"

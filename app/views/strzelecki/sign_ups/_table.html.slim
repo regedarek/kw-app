@@ -4,12 +4,12 @@
       thead
         tr
           th Imiona i nazwiska zawodnika/ów
-          th Email kontaktowy
-          th Klub
-          th Posiłki wegetariańskie?
-          th Lata urodziń
+          th Emaile
+          th Rok urodzenia
           th Koszt pakietu
           th Zespół
+          th Klub
+          th Miasto
           th Zapłacono
 
       tbody
@@ -19,20 +19,28 @@
               - if sign_up.single?
                 = sign_up.name_1
               - else
-                = "#{sign_up.name_1} oraz #{sign_up.name_2}"
-            td= sign_up.email
-            td= sign_up.organization
+                = "#{sign_up.name_1}/#{sign_up.name_2}"
             td
               - if sign_up.single?
-                = sign_up.vege_1?
+                = sign_up.email_1
               - else
-                = "#{sign_up.vege_1?}/#{sign_up.vege_2?}"
+                = "#{sign_up.email_1}/#{sign_up.try(:email_2)}"
             td
               - if sign_up.single?
-                = sign_up.birth_year_1?
+                = sign_up.birth_year_1
               - else
                 = "#{sign_up.birth_year_1}/#{sign_up.birth_year_2}"
             td= sign_up.order.try(:cost)
+            td
+              - if sign_up.single?
+                = sign_up.organization_1
+              - else
+                = "#{sign_up.organization_1}/#{sign_up.organization_2}"
+            td
+              - if sign_up.single?
+                = sign_up.city_1
+              - else
+                = "#{sign_up.city_1}/#{sign_up.city_2}"
             td= sign_up.single? ? 'Szuka partnera' : 'Zespół'
             td
               - if sign_up.order.present? && sign_up.order.payment.prepaid?
