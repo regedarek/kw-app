@@ -33,7 +33,7 @@
 
       .large-6.columns
         = f.label :package_type_1
-        = f.select :package_type_1, options_for_select(Db::Strzelecki::SignUp.package_type_1_attributes_for_select, f.object.package_type_1), include_blank: true
+        = f.select :package_type_1, options_for_select(Db::Strzelecki::SignUp.package_type_1_attributes_for_select, f.object.package_type_1), include_blank: 'Nie wybrano'
 
     .row
       .large-6.columns
