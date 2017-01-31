@@ -1,4 +1,4 @@
-.callout.primary
+.callout.warning
   | Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję 'szukam partnera'.
 
 = form_for form, html: { class: 'js-strzelecki-sign-up-form' }, url: strzelecki_sign_ups_path do |f|
@@ -10,7 +10,7 @@
             - form.errors.full_messages.each do |msg|
               li= msg
 
-  .callout
+  .callout.primary
     .row
       .large-12.columns
         = f.label :name_1
@@ -50,7 +50,7 @@
         = f.label :single, 'szukam partnera?'
 
   .js-player-2
-    .callout
+    .callout.secondary
       .row
         .large-12.columns
           = f.label :name_2
@@ -84,14 +84,15 @@
           = f.label :organization_2, 'Przynależność klubowa (opcjonalnie)'
           = f.text_field :organization_2
 
-  .row
-    .large-12.columns
-      = f.label :category_type
-      = f.select :category_type, options_for_select(Db::Strzelecki::SignUp.category_types_attributes_for_select, f.object.category_type), include_blank: true
+  .callout
+    .row
+      .large-12.columns
+        = f.label :category_type
+        = f.select :category_type, options_for_select(Db::Strzelecki::SignUp.category_types_attributes_for_select, f.object.category_type), include_blank: true
 
-  .row
-    .large-12.columns
-      = f.label :remarks
-      = f.text_area :remarks
+    .row
+      .large-12.columns
+        = f.label :remarks
+        = f.text_area :remarks
 
   = f.submit 'Zapisz się', class: 'button expanded large'
