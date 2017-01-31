@@ -12,7 +12,8 @@ pl:
         single: szukam partnera?
         email: E-mail
         organization: Przynależność klubowa
-        package_type: Pakiet startowy
+        package_type_1: Pakiet startowy 1
+        package_type_2: Pakiet startowy 2
         category_type: Kategoria
         remarks: Uwagi do wiadomości organizatorów
   activerecord:
@@ -37,8 +38,10 @@ pl:
         email: E-mail
         organization: Przynależność klubowa
         remarks: Uwagi do wiadomości organizatorów
-        package_type: Pakiet startowy
+        package_type_1: Pakiet startowy
+        package_type_2: Pakiet startowy
         package_types:
+          none: Nie wybrano
           kw: Członek KW Kraków (75 zł)
           junior: Kadet (65 zł)
           standard: Standard (95 zł) 

@@ -27,9 +27,13 @@
         = f.email_field :email_1
 
     .row
-      .large-12.columns
+      .large-6.columns
         = f.check_box :vege_1
         = f.label :vege_1, 'posiłek wegetariański?'
+
+      .large-6.columns
+        = f.label :package_type_1
+        = f.select :package_type_1, options_for_select(Db::Strzelecki::SignUp.package_type_1_attributes_for_select, f.object.package_type_1), include_blank: true
 
     .row
       .large-6.columns
@@ -63,9 +67,13 @@
           = f.email_field :email_2
 
       .row
-        .large-12.columns
+        .large-6.columns
           = f.check_box :vege_2
           = f.label :vege_2, 'posiłek wegetariański?'
+
+        .large-6.columns
+          = f.label :package_type_2
+          = f.select :package_type_2, options_for_select(Db::Strzelecki::SignUp.package_type_2_attributes_for_select, f.object.package_type_2)
 
       .row
         .large-6.columns
@@ -77,13 +85,9 @@
           = f.text_field :organization_2
 
   .row
-    .large-6.columns
+    .large-12.columns
       = f.label :category_type
-      = f.select :category_type, options_for_select(Db::Strzelecki::SignUp.category_types_attributes_for_select), include_blank: true
-
-    .large-6.columns
-      = f.label :package_type
-      = f.select :package_type, options_for_select(Db::Strzelecki::SignUp.package_types_attributes_for_select), include_blank: true
+      = f.select :category_type, options_for_select(Db::Strzelecki::SignUp.category_types_attributes_for_select, f.object.category_type), include_blank: true
 
   .row
     .large-12.columns
