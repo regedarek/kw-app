@@ -18,13 +18,17 @@
 
     .row
       .large-12.columns
+        = f.label :email_1, 'E-mail (zostanie na niego wysłany link do płatności online)'
+        = f.email_field :email_1
+
+    .row
+      .large-6.columns
         = f.label :birth_year_1
         = f.number_field :birth_year_1, min: 1950, max: 2010
 
-    .row
-      .large-12.columns
-        = f.label :email_1, 'E-mail (wymagany, zostanie na niego wysłany link do płatności)'
-        = f.email_field :email_1
+      .large-6.columns
+        = f.label :phone_1
+        = f.text_field :phone_1
 
     .row
       .large-6.columns
@@ -60,13 +64,17 @@
 
       .row
         .large-12.columns
+          = f.label :email_2, 'E-mail (opcjonalnie)'
+          = f.email_field :email_2
+
+      .row
+        .large-6.columns
           = f.label :birth_year_2
           = f.number_field :birth_year_2, min: 1950, max: 2010
 
-      .row
-        .large-12.columns
-          = f.label :email_2, 'E-mail (opcjonalnie)'
-          = f.email_field :email_2
+        .large-6.columns
+          = f.label :phone_2
+          = f.text_field :phone_2
 
       .row
         .large-6.columns
