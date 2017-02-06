@@ -11,13 +11,14 @@ pl:
         vege_2: posiłek wegetariański 2?
         single: szukam partnera?
         email: E-mail
-        phone_1: Numer telefonu 1 (w celach bezpieczeństwa)
-        phone_2: Numer telefonu 2 (w celach bezpieczeństwa)
+        phone_1: Numer telefonu 1 (opcjonalnie w celach bezpieczeństwa)
+        phone_2: Numer telefonu 2 (opcjonalnie w celach bezpieczeństwa)
         organization: Przynależność klubowa
         package_type_1: Pakiet startowy 1
         package_type_2: Pakiet startowy 2
         category_type: Kategoria
         remarks: Uwagi do wiadomości organizatorów
+        terms_of_service: Akceptuję regulamin
   activerecord:
     models:
       db/route: Przejscie
