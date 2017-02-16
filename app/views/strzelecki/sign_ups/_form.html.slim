@@ -31,7 +31,7 @@
 
       .large-6.columns
         = f.label :gender_1
-        = f.select :gender_1, options_for_select(Db::Strzelecki::SignUp.gender_attributes_for_select, f.object.gender_1), include_blank: 'Nie wybrano'
+        = f.select :gender_1, options_for_select(Db::Strzelecki::SignUp.gender_attributes_for_select, f.object.gender_1), include_blank: true
 
     .row
       .large-6.columns
@@ -40,7 +40,7 @@
 
       .large-6.columns
         = f.label :package_type_1
-        = f.select :package_type_1, options_for_select(Db::Strzelecki::SignUp.package_type_1_attributes_for_select, f.object.package_type_1), include_blank: 'Nie wybrano'
+        = f.select :package_type_1, options_for_select(Db::Strzelecki::SignUp.package_type_1_attributes_for_select, f.object.package_type_1), include_blank: true
 
     .row
       .large-6.columns
@@ -79,7 +79,7 @@
 
         .large-6.columns
           = f.label :gender_2
-          = f.select :gender_2, options_for_select(Db::Strzelecki::SignUp.gender_attributes_for_select, f.object.gender_2), include_blank: 'Nie wybrano'
+          = f.select :gender_2, options_for_select(Db::Strzelecki::SignUp.gender_attributes_for_select, f.object.gender_2), include_blank: true 
 
       .row
         .large-6.columns
