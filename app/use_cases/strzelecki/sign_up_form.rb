@@ -14,9 +14,19 @@ module Strzelecki
     validates :package_type_2, inclusion: { in: %w(kw junior standard) }, if: :team?
     validates :phone_1, :phone_2, numericality: { only_integer: true, allow_blank: true }
     validates_acceptance_of :terms_of_service
+    validates :birth_year_1, numericality: { greater_than_or_equal_to: 2000 }, if: :junior_one?
+    validates :birth_year_2, numericality: { greater_than_or_equal_to: 2000 }, if: :junior_two?
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "StrzeleckiSignUpForm")
+    end
+
+    def junior_one?
+      package_type_1 == 'junior'
+    end
+
+    def junior_two?
+      package_type_2 == 'junior'
     end
 
     def persisted?
