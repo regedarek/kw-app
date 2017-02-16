@@ -1,10 +1,10 @@
-pl:
+sk:
   layouts:
     top_bar:
       menu:
         toggle: Nawigacja
         title: Klub Wysokogórski Kraków
-        strzelecki_sign_up: powrót do strony zawodów
+        strzelecki_sign_up: späť do súťaže
       home: Twoj pulpit
       rules: Regulamin
       edit_account: Twoje konto
@@ -16,7 +16,7 @@ pl:
         reservations: Rezerwacje
         routes: Przejścia
         valleys: Doliny
-        login: Prihlásiť
-        logout: Odhlásiť
-        signup: Zaregistruj sa
+        login: Zaloguj się
+        logout: Wyloguj się
+        signup: Zarejestruj się
 

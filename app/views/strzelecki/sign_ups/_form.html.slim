@@ -1,5 +1,8 @@
 .callout.warning
-  | Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję 'szukam partnera'.
+  - if params[:locale] == 'sk'
+    | Nakoniec, tím hlásenia a platiť za oba balíčky začínajúci, ak hľadáte partnera, vyberte "Hľadám partnera."
+  - else
+    | Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję 'szukam partnera'.
 
 = form_for form, html: { class: 'js-strzelecki-sign-up-form' }, url: strzelecki_sign_ups_path do |f|
   .row
@@ -18,7 +21,7 @@
 
     .row
       .large-12.columns
-        = f.label :email_1, 'E-mail (zostanie na niego wysłany link do płatności online)'
+        = f.label :email_1
         = f.email_field :email_1
 
     .row
@@ -41,17 +44,17 @@
 
     .row
       .large-6.columns
-        = f.label :city_1, 'Miasto (opcjonalnie)'
+        = f.label :city_1
         = f.text_field :city_1
 
       .large-6.columns
-        = f.label :organization_1, 'Przynależność klubowa (opcjonalnie)'
+        = f.label :organization_1
         = f.text_field :organization_1
 
     .row
       .large-6.columns
         = f.check_box :vege_1
-        = f.label :vege_1, 'posiłek wegetariański?'
+        = f.label :vege_1
 
       .large-6.columns
         = f.check_box :single, class: 'js-single-check-box'
@@ -66,7 +69,7 @@
 
       .row
         .large-12.columns
-          = f.label :email_2, 'E-mail (opcjonalnie)'
+          = f.label :email_2
           = f.email_field :email_2
 
       .row
@@ -89,17 +92,17 @@
 
       .row
         .large-6.columns
-          = f.label :city_2, 'Miasto (opcjonalnie)'
+          = f.label :city_2
           = f.text_field :city_2
 
         .large-6.columns
-          = f.label :organization_2, 'Przynależność klubowa (opcjonalnie)'
+          = f.label :organization_2
           = f.text_field :organization_2
 
       .row
         .large-6.columns
           = f.check_box :vege_2
-          = f.label :vege_2, 'posiłek wegetariański?'
+          = f.label :vege_2
 
   .callout
     .row
@@ -111,11 +114,14 @@
     .row
       .large-12.columns
         span.terms_of_service
-          | Zawodnicy informują, że znają regulamin i zobowiązują się do jego przestrzegania.   
-          | Oświadczają, również że są zdolni do udziału w zawodach i startują na własną odpowiedzialność (podstawa prawna: Rozporządzenie Ministra Edukacji Narodowej z dnia 12.09.2001 r. Dz. U. Nr 101 poz. 1095). 
-          | Zawodnicy wyrażają zgodę na przetwarzanie swoich danych osobowych dla potrzeb związanych z organizacją imprezy. 
-          | Zawodnicy wyrażają zgodę na wykorzystanie swojego wizerunku, znajdującego się na zdjęciach wykonanych podczas i w związku z udziałem w XXIX Memoriale Strzeleckiego 11.03.2017, organizowanym przez Klub Wysokogórski Kraków do wszystkich celów związanych z działalnością Klubu, w tym w szczególności działalnością promocyjną Klubu oraz wszystkich imprez, zawodów i wydarzeń organizowanych przez Klub, a także na jego publikację w szczególności na stronach internetowych Klubu oraz w artykułach prasowych i materiałach dotyczących Klubu."
+          - if params[:locale] == 'sk'
+            | Súhlasím s pravidlami?
+          - else
+            | Zawodnicy informują, że znają regulamin i zobowiązują się do jego przestrzegania.   
+            | Oświadczają, również że są zdolni do udziału w zawodach i startują na własną odpowiedzialność (podstawa prawna: Rozporządzenie Ministra Edukacji Narodowej z dnia 12.09.2001 r. Dz. U. Nr 101 poz. 1095). 
+            | Zawodnicy wyrażają zgodę na przetwarzanie swoich danych osobowych dla potrzeb związanych z organizacją imprezy. 
+            | Zawodnicy wyrażają zgodę na wykorzystanie swojego wizerunku, znajdującego się na zdjęciach wykonanych podczas i w związku z udziałem w XXIX Memoriale Strzeleckiego 11.03.2017, organizowanym przez Klub Wysokogórski Kraków do wszystkich celów związanych z działalnością Klubu, w tym w szczególności działalnością promocyjną Klubu oraz wszystkich imprez, zawodów i wydarzeń organizowanych przez Klub, a także na jego publikację w szczególności na stronach internetowych Klubu oraz w artykułach prasowych i materiałach dotyczących Klubu."
           |  
         = f.check_box :terms_of_service
 
-  = f.submit 'Zapisz się', class: 'button expanded large'
+  = f.submit t('.sign_in'), class: 'button expanded large'

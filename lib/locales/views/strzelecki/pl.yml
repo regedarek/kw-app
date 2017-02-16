@@ -1,0 +1,7 @@
+pl:
+  strzelecki:
+    sign_ups:
+      form:
+        sign_in: Zapisz się
+      new:
+        strzelecki_sign_ups_path: przejdź aby zobaczyć rywali

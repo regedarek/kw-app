@@ -1,30 +1,30 @@
-pl:
+sk:
   activemodel:
-    strzelecki_sign_up_form: Formularz zapisów
+    strzelecki_sign_up_form: Forma záznamov
     attributes:
       strzelecki_sign_up_form:
-        name_1: Zawodnik 1
-        birth_year_1: Rok urodzenia 1
-        vege_1: posiłek wegetariański?
-        name_2: Zawodnik 2
-        email_1: E-mail 1 (zostanie na niego wysłany link do płatności online)
-        birth_year_2: Rok urodzenia 2
-        vege_2: posiłek wegetariański?
-        single: szukam partnera?
-        email_2: E-mail 2 (opcjonalnie)
-        phone_1: Numer telefonu 1 (opcjonalnie w celach bezpieczeństwa)
-        phone_2: Numer telefonu 2 (opcjonalnie w celach bezpieczeństwa)
-        organization_1: Przynależność klubowa 1 (opcjonalnie)
-        organization_2: Przynależność klubowa 2 (opcjonalnie)
-        city_1: Miasto 1
-        city_2: Miasto 2
-        package_type_1: Pakiet startowy 1
-        package_type_2: Pakiet startowy 2
-        category_type: Kategoria
-        gender_1: Płeć 1
-        gender_2: Płeć 2
-        remarks: Uwagi do wiadomości organizatorów
-        terms_of_service: Akceptuję regulamin
+        name_1: Prehrávač 1
+        birth_year_1: Rok narodenia 1
+        vege_1: vegetariánske jedlo 1?
+        name_2: Prehrávač 2
+        email_1: E-mail 1 (Vám zašleme odkaz na on-line platieb)
+        birth_year_2: Rok narodenia 2
+        vege_2: vegetariánske jedlo 2?
+        single: hľadám partnera?
+        email_2: E-mail (voliteľné)
+        phone_1: Telefónne číslo 1 (voliteľné príslušenstvo pre bezpečnostné účely)
+        phone_2: Telefónne číslo 2 (voliteľné príslušenstvo pre bezpečnostné účely)
+        organization_1: členstvo v klube 1 (voliteľné)
+        organization_2: členstvo v klube 2 (voliteľné)
+        package_type_1: štartovací balíček 1
+        package_type_2: štartovací balíček 2
+        city_1: Veľkomesto 1
+        city_2: Veľkomesto 2
+        category_type: kategórie
+        gender_1: Sex 1
+        gender_2: Sex 2
+        remarks: Pripomienky k usporiadateľovi
+        terms_of_service: súhlasím s podmienkami
   activerecord:
     models:
       db/route: Przejscie
@@ -43,7 +43,7 @@ pl:
         name_2: Zawodnik
         birth_year_2: Rok urodzenia
         vege_2: posiłek wegetariański?
-        single: szukam partnera?
+        single: hľadám partnera?
         email: E-mail
         organization: Przynależność klubowa
         remarks: Uwagi do wiadomości organizatorów

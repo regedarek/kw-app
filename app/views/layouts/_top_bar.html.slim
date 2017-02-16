@@ -7,9 +7,9 @@
   #top-bar.top-bar
     .top-bar-left
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
-        li.show-for-medium =link_to t('title'), 'http://kw.krakow.pl'
+        li.show-for-medium =link_to t('.menu.title'), 'http://kw.krakow.pl'
         - if controller_name == 'sign_ups'
-          li= link_to 'powrót do strony zawodów', Rails.application.secrets.strzelecki_page
+          li= link_to t('.menu.strzelecki_sign_up'), Rails.application.secrets.strzelecki_page
         - if controller_name == 'reservations'
           li= link_to t('.rules'), page_path('rules')
         - if user_signed_in?
