@@ -18,10 +18,10 @@
               = Db::Strzelecki::SignUp.where(single: true).count
             li
               | Mężczyzn: 
-              = Db::Strzelecki::SignUp.where(gender_1: 'male').or(Db::Strzelecki::SignUp.where(gender_2: 'male')).count
+              = Db::Strzelecki::SignUp.where(gender_1: '0').or(Db::Strzelecki::SignUp.where(gender_2: '0')).count
             li
               | Kobiet: 
-              = Db::Strzelecki::SignUp.where(gender_1: 'female').or(Db::Strzelecki::SignUp.where(gender_2: 'female')).count
+              = Db::Strzelecki::SignUp.where(gender_1: '1').or(Db::Strzelecki::SignUp.where(gender_2: '1')).count
 
     = link_to 'Zapisz się na XXIX Memoriał Jana Strzeleckiego!', new_strzelecki_sign_up_path, class: 'button large expanded'
 
