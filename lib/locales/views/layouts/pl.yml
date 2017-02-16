@@ -16,7 +16,8 @@ pl:
         reservations: Rezerwacje
         routes: Przejścia
         valleys: Doliny
-        login: Prihlásiť
-        logout: Odhlásiť
-        signup: Zaregistruj sa
+        login: Zaloguj się
+        logout: Wyloguj się
+        signup: Zarejestruj się
+
 
