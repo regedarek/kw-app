@@ -27,15 +27,13 @@
         = f.number_field :birth_year_1, min: 1940, max: 2010
 
       .large-6.columns
-        = f.label :phone_1
-        = f.text_field :phone_1
+        = f.label :gender_1
+        = f.select :gender_1, options_for_select(Db::Strzelecki::SignUp.gender_attributes_for_select, f.object.gender_1), include_blank: 'Nie wybrano'
 
     .row
       .large-6.columns
-        .show-for-large
-          br
-        = f.check_box :vege_1
-        = f.label :vege_1, 'posiłek wegetariański?'
+        = f.label :phone_1
+        = f.text_field :phone_1
 
       .large-6.columns
         = f.label :package_type_1
@@ -51,7 +49,11 @@
         = f.text_field :organization_1
 
     .row
-      .large-12.columns
+      .large-6.columns
+        = f.check_box :vege_1
+        = f.label :vege_1, 'posiłek wegetariański?'
+
+      .large-6.columns
         = f.check_box :single, class: 'js-single-check-box'
         = f.label :single, 'szukam partnera?'
 
@@ -73,15 +75,13 @@
           = f.number_field :birth_year_2, min: 1950, max: 2010
 
         .large-6.columns
-          = f.label :phone_2
-          = f.text_field :phone_2
+          = f.label :gender_2
+          = f.select :gender_2, options_for_select(Db::Strzelecki::SignUp.gender_attributes_for_select, f.object.gender_2), include_blank: 'Nie wybrano'
 
       .row
         .large-6.columns
-          .show-for-large
-            br
-          = f.check_box :vege_2
-          = f.label :vege_2, 'posiłek wegetariański?'
+          = f.label :phone_2
+          = f.text_field :phone_2
 
         .large-6.columns
           = f.label :package_type_2
@@ -96,12 +96,12 @@
           = f.label :organization_2, 'Przynależność klubowa (opcjonalnie)'
           = f.text_field :organization_2
 
-  .callout
-    .row
-      .large-12.columns
-        = f.label :category_type
-        = f.select :category_type, options_for_select(Db::Strzelecki::SignUp.category_types_attributes_for_select, f.object.category_type), include_blank: true
+      .row
+        .large-6.columns
+          = f.check_box :vege_2
+          = f.label :vege_2, 'posiłek wegetariański?'
 
+  .callout
     .row
       .large-12.columns
         = f.label :remarks
