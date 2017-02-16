@@ -1,7 +1,8 @@
 .column.row
-  .callout.primary.text-center
-    = link_to image_tag('pl.png'), new_strzelecki_sign_up_path(locale: :pl)
-    |    
-    = link_to image_tag('sk.png'), new_strzelecki_sign_up_path(locale: :sk)
+  - if action_name == 'new'
+    .callout.primary.text-center
+      = link_to image_tag('pl.png'), new_strzelecki_sign_up_path(locale: :pl)
+      |    
+      = link_to image_tag('sk.png'), new_strzelecki_sign_up_path(locale: :sk)
   = render 'strzelecki/sign_ups/form', form: @form
   = link_to t('.strzelecki_sign_ups_path'), strzelecki_sign_ups_path, class: 'button warning expanded large'
