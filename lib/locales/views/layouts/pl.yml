@@ -4,7 +4,8 @@ pl:
       menu:
         toggle: Nawigacja
         title: Klub Wysokogórski Kraków
-        strzelecki_sign_up: powrót do strony zawodów
+        strzelecki_link: powrót do strony zawodów
+        strzelecki_rules_link: Regulamin
       home: Twoj pulpit
       rules: Regulamin
       edit_account: Twoje konto
