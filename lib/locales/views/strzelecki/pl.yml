@@ -6,6 +6,7 @@ pl:
         pricing_kw: 'KW Kraków: %{price} PLN'
         pricing_junior: 'Kadet: %{price} PLN'
         pricing_standard: 'Standard: %{price} PLN'
+        pricing_other: 'W biurze zawodów: 125 PLN'
         statistic_title: Statystyka
         statistic_single: 'Szukam partnera: %{amount}'
         statistic_male: 'Mężczyzn: %{amount}'

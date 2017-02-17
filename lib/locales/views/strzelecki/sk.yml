@@ -6,6 +6,7 @@ sk:
         pricing_kw: 'KW Kraków: %{price} PLN'
         pricing_junior: 'Junior: %{price} PLN'
         pricing_standard: 'Standard: %{price} PLN'
+        pricing_other: 'Kancelária súťaž: 125 PLN'
         statistic_title: Štatistika
         statistic_single: 'Hľadám partnera: %{amount}'
         statistic_male: 'Muži: %{amount}'
