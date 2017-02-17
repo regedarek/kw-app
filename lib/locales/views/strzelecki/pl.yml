@@ -24,3 +24,11 @@ pl:
       create:
         signed_up: Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.
         order_has_not_been_created: Problem z utworzeniem płatności, skontaktuj się z organizatorem.
+  strzelecki_mailer:
+    sign_up:
+      subject: "Memoriał Jana Strzeleckiego 2017 - Rejestracja na zawody: #%{id}"
+      title: "Zgłoszenie #%{id}"
+      back_to_sign_ups_link: wróć do strony zapisów na zawody
+      payment: "Płatność online: %{price} PLN"
+      charge_payment_link: przejdź do płatności online
+      payment_info: Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online.

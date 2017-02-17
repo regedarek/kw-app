@@ -5,12 +5,12 @@ pl:
       strzelecki_sign_up_form:
         name_1: Zawodnik 1
         birth_year_1: Rok urodzenia 1
-        vege_1: posiłek wegetariański?
+        vege_1: Posiłek wegetariański?
         name_2: Zawodnik 2
         email_1: E-mail 1 (zostanie na niego wysłany link do płatności online)
         birth_year_2: Rok urodzenia 2
-        vege_2: posiłek wegetariański?
-        single: szukam partnera?
+        vege_2: Posiłek wegetariański?
+        single: Szukam partnera?
         email_2: E-mail 2 (opcjonalnie)
         phone_1: Numer telefonu 1 (opcjonalnie w celach bezpieczeństwa)
         phone_2: Numer telefonu 2 (opcjonalnie w celach bezpieczeństwa)
@@ -39,11 +39,11 @@ pl:
       db/strzelecki/sign_up:
         name_1: Zawodnik
         birth_year_1: Rok urodzenia
-        vege_1: posiłek wegetariański?
+        vege_1: Posiłek wegetariański?
         name_2: Zawodnik
         birth_year_2: Rok urodzenia
-        vege_2: posiłek wegetariański?
-        single: szukam partnera?
+        vege_2: Posiłek wegetariański?
+        single: Szukam partnera?
         email: E-mail
         organization: Przynależność klubowa
         remarks: Uwagi do wiadomości organizatorów
@@ -52,7 +52,7 @@ pl:
         phone_1: Numer telefonu 1 (w celach bezpieczeństwa)
         phone_2: Numer telefonu 2 (w celach bezpieczeństwa)
         package_types:
-          none: Nie wybrano
+          none: ''
           kw: KW Kraków (%{price} PLN)
           junior: Kadet (%{price} PLN)
           standard: Standard (%{price} PLN) 

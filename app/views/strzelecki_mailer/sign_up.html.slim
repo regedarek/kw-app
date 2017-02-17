@@ -1,64 +1,67 @@
-h3= "Zgłoszenie ##{@sign_up.id}"
+h3= t('.title', id: @sign_up.id)
 
-b Zawodnik 1: 
+b = t('activerecord.attributes.db/strzelecki/sign_up.name_1') + ': '
 = @sign_up.name_1
 br
-b Rok urodzenia: 
+b = t('activerecord.attributes.db/strzelecki/sign_up.birth_year_1') + ': '
 = @sign_up.birth_year_1
 br
 - if @sign_up.organization_1.present?
-  b Przynależność klubowa: 
+  b = t('activerecord.attributes.db/strzelecki/sign_up.organization_1') + ': ' 
   = @sign_up.organization_1
 br
 - if @sign_up.city_1.present?
-  b Miasto: 
+  b = t('activerecord.attributes.db/strzelecki/sign_up.city_1') + ': ' 
   = @sign_up.city_1
   br
-b Posiłek wegetariański: 
-= @sign_up.vege_1? ? ' Tak' : ' Nie'
+b = t('activerecord.attributes.db/strzelecki/sign_up.vege_1') + ': ' 
+= t("#{@sign_up.vege_1?}_value")
 br
-b Pakiet startowy:
-= ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_1])
+- if @sign_up.single?
+  b = t('activerecord.attributes.db/strzelecki/sign_up.single') + ': '
+  = t("#{@sign_up.single?}_value")
+  br
+b = t('activerecord.attributes.db/strzelecki/sign_up.package_type_1') + ': ' 
+= ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_1.to_sym])
 - if !@sign_up.single?
   hr
-  b Zawodnik 2: 
+  b = t('activerecord.attributes.db/strzelecki/sign_up.name_2') + ': '
   = @sign_up.name_2
   br
-  b Rok urodzenia: 
+  b = t('activerecord.attributes.db/strzelecki/sign_up.birth_year_2') + ': '
   = @sign_up.birth_year_2
   br
   - if @sign_up.organization_2.present?
-    b Przynależność klubowa: 
+    b = t('activerecord.attributes.db/strzelecki/sign_up.organization_2') + ': '
     = @sign_up.organization_2
   br
   - if @sign_up.city_2.present?
-    b Miasto: 
+    b = t('activerecord.attributes.db/strzelecki/sign_up.city_2') + ': '
     = @sign_up.city_2
     br
-  b Posiłek wegetariański: 
-  = @sign_up.vege_2? ? ' Tak' : ' Nie'
+  b = t('activerecord.attributes.db/strzelecki/sign_up.vege_2') + ': '
+  = t("#{@sign_up.vege_2?}_value")
   br
-  b Pakiet startowy:
-  = ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type_2}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_2])
+  b = t('activerecord.attributes.db/strzelecki/sign_up.package_type_2') + ': '
+  = ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type_2}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_2.to_sym])
 hr
-b Zespół: 
-= !@sign_up.single? ? ' Tak' : ' Nie'
-br
-b Płatność: 
-= @sign_up.service.order.try(:cost).try(:to_s) + ' zł'
-br
-= link_to 'przejdź do płatności online', charge_payment_url(@sign_up.service.order.payment.id)
-br
-b color='red'= "Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online."
-hr
+span style='font-size: 120%'
+  b = t('.payment', price: @sign_up.service.order.try(:cost).try(:to_s))
+  br
+  = link_to t('.charge_payment_link'), charge_payment_url(@sign_up.service.order.payment.id)
+  br
+  b style='color: red'= t('.payment_info')
 - if @sign_up.remarks.present?
+  hr
   br
-  b Uwagi do organizatorów:
+  b = t('activerecord.attributes.db/strzelecki/sign_up.remarks') + ': '
+  br
   = ' ' + @sign_up.remarks
-br
-= link_to 'przejdź do strony zawodów', Rails.application.secrets.strzelecki_page
+  br
 br
 = '----------------------------------------------------------'
+br
+= link_to t('.back_to_sign_ups_link'), Rails.application.secrets.strzelecki_page
 br
 i
   small

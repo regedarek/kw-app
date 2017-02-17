@@ -9,27 +9,48 @@ sk:
         birth_year_2: Rok narodenia 2
         email_1: E-mail 1 (Vám zašleme odkaz na on-line platieb)
         email_2: E-mail (voliteľné)
-        vege_1: vegetariánske jedlo 1?
-        vege_2: vegetariánske jedlo 2?
+        vege_1: Vegetariánske jedlo 1?
+        vege_2: Vegetariánske jedlo 2?
         phone_1: Telefónne číslo 1 (voliteľné príslušenstvo pre bezpečnostné účely)
         phone_2: Telefónne číslo 2 (voliteľné príslušenstvo pre bezpečnostné účely)
-        organization_1: členstvo v klube 1 (voliteľné)
-        organization_2: členstvo v klube 2 (voliteľné)
-        package_type_1: štartovací balíček 1
-        package_type_2: štartovací balíček 2
+        organization_1: Členstvo v klube 1 (voliteľné)
+        organization_2: Členstvo v klube 2 (voliteľné)
+        package_type_1: Štartovací balíček 1
+        package_type_2: Štartovací balíček 2
         city_1: Veľkomesto 1
         city_2: Veľkomesto 2
         gender_1: Pohlavie 1
         gender_2: Pohlavie 2
-        single: hľadám partnera?
+        single: Hľadám partnera?
         category_type: Kategórie
         remarks: Pripomienky k usporiadateľovi
         terms_of_service: Súhlasím s pravidlami?
   activerecord:
     attributes:
       db/strzelecki/sign_up:
+        name_1: Súťažiaci
+        name_2: Súťažiaci
+        birth_year_1: Rok narodenia
+        birth_year_2: Rok narodenia
+        email_1: E-mail
+        email_2: E-mail
+        vege_1: Vegetariánske jedlo
+        vege_2: Vegetariánske jedlo
+        phone_1: Telefónne číslo
+        phone_2: Telefónne číslo
+        organization_1: Členstvo v klube
+        organization_2: Členstvo v klube
+        package_type_1: Štartovací balíček
+        package_type_2: Štartovací balíček
+        city_1: Veľkomesto
+        city_2: Veľkomesto
+        gender_1: Pohlavie
+        gender_2: Pohlavie
+        single: Hľadám partnera
+        category_type: Kategórie
+        remarks: Pripomienky k usporiadateľovi
         package_types:
-          none: nie je vybraté
+          none: ''
           kw: KW Kraków (%{price} PLN)
           junior: Junior (%{price} PLN)
           standard: Standard (%{price} PLN) 

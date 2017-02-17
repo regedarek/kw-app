@@ -1,4 +1,6 @@
 sk:
+  true_value: Áno
+  false_value: Nie
   ski: 'Narciarstwo'
   regular_climbing: 'Wspinaczka letnia'
   winter_climbing: 'Wspinaczka zimowa'
