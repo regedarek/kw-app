@@ -1,6 +1,21 @@
 sk:
   strzelecki:
     sign_ups:
+      index:
+        pricing_title: Cenník
+        pricing_kw: 'KW Kraków: %{price} PLN'
+        pricing_junior: 'Junior: %{price} PLN'
+        pricing_standard: 'Standard: %{price} PLN'
+        statistic_title: Štatistika
+        statistic_single: 'Hľadám partnera: %{amount}'
+        statistic_male: 'Muži: %{amount}'
+        statistic_female: 'Ženy: %{amount}'
+        sign_up_link: Zaregistrujte sa na XXIX Memorial Jana Strzeleckiego!
+      table_logged_out:
+        table_nr: Nr.
+        table_names: Tím/Súťažiaci
+        table_organization: Organizácie
+        table_city: Veľkomesto
       form:
         send: Zaregistruj sa
         top_info: 'Prihlasuješ vašu družinu a platíš za obidva štartovacie balíčky, ak potrebuješ partnera do družiny, zaznač "hľadám partnera"'

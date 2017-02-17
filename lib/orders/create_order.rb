@@ -20,11 +20,11 @@ module Orders
           order.strzelecki_sign_ups << @service
           package_cost_1 = case @service.package_type_1
           when 'kw'
-            75
+            Db::Strzelecki::SignUp::PRICES[:kw]
           when 'junior'
-            65
+            Db::Strzelecki::SignUp::PRICES[:junior]
           when 'standard'
-            95
+            Db::Strzelecki::SignUp::PRICES[:standard]
           else
             fail 'wrong payment'
           end
@@ -32,11 +32,11 @@ module Orders
           when 'none'
             0
           when 'kw'
-            75
+            Db::Strzelecki::SignUp::PRICES[:kw]
           when 'junior'
-            65
+            Db::Strzelecki::SignUp::PRICES[:junior]
           when 'standard'
-            95
+            Db::Strzelecki::SignUp::PRICES[:standard]
           else
             fail 'wrong payment'
           end

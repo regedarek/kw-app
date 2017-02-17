@@ -1,8 +1,23 @@
 pl:
   strzelecki:
     sign_ups:
+      index:
+        pricing_kw: 'KW Kraków: %{price} PLN'
+        pricing_junior: 'Kadet: %{price} PLN'
+        pricing_standard: 'Standard: %{price} PLN'
+        statistic_title: Statystyka
+        statistic_single: 'Szukam partnera: %{amount}'
+        statistic_male: 'Mężczyzn: %{amount}'
+        statistic_female: 'Kobiet: %{amount}'
+        sign_up_link: Zapisz się na XXIX Memoriał Jana Strzeleckiego!
+      table_logged_out:
+        table_nr: Nr.
+        table_names: Zespół/Zawodnik
+        table_organization: Organizacja
+        table_city: Miasto
       form:
         send: Zapisz się!
         top_info: 'Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję "szukam partnera".'
       new:
         link_to_index: przejdź aby zobaczyć rywali
+

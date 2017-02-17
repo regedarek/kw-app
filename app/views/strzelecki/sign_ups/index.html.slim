@@ -4,26 +4,23 @@
     .row
       .large-6.columns
         .callout.primary
-          b Koszt pakietu dla jednego zawodnika:
+          b = t('.pricing_title')
           ul
-            li Kadet: 65 zł
-            li Członek KW Kraków: 75 zł
-            li Standard: 95zł
+            li = t('.pricing_kw', price: Db::Strzelecki::SignUp::PRICES[:junior])
+            li = t('.pricing_junior', price: Db::Strzelecki::SignUp::PRICES[:kw])
+            li = t('.pricing_standard', price: Db::Strzelecki::SignUp::PRICES[:standard])
       .large-6.columns
         .callout.primary
-          b Statystyki
+          b = t('.statistic_title')
           ul
             li
-              | Szuka partnera: 
-              = Db::Strzelecki::SignUp.where(single: true).count
+              = t('.statistic_single', amount: Db::Strzelecki::SignUp.where(single: true).count)
             li
-              | Mężczyzn: 
-              = Db::Strzelecki::SignUp.where(gender_1: '0').or(Db::Strzelecki::SignUp.where(gender_2: '0')).count
+              = t('.statistic_male', amount: Db::Strzelecki::SignUp.where(gender_1: '0').or(Db::Strzelecki::SignUp.where(gender_2: '0')).count)
             li
-              | Kobiet: 
-              = Db::Strzelecki::SignUp.where(gender_1: '1').or(Db::Strzelecki::SignUp.where(gender_2: '1')).count
+              = t('.statistic_female', amount: Db::Strzelecki::SignUp.where(gender_1: '1').or(Db::Strzelecki::SignUp.where(gender_2: '1')).count)
 
-    = link_to 'Zapisz się na XXIX Memoriał Jana Strzeleckiego!', new_strzelecki_sign_up_path, class: 'button large expanded'
+    = link_to t('.sign_up_link'), new_strzelecki_sign_up_path, class: 'button large expanded'
 
     - if user_signed_in? && current_user.admin?
       = render 'strzelecki/sign_ups/table', sign_ups: @sign_ups

@@ -1,6 +1,7 @@
 module Db
   module Strzelecki
     class SignUp < ActiveRecord::Base
+      PRICES = { junior: 75, kw: 95, standard: 125 }
       self.table_name = "strzelecki_sign_ups"
       enum gender_1: [:male, :female], _suffix: :one
       enum gender_2: [:male, :female], _suffix: :two
@@ -24,13 +25,13 @@ module Db
 
       def self.package_type_1_attributes_for_select
         [:kw, :junior, :standard].map do |type|
-          [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}"), type]
+          [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}", price: Db::Strzelecki::SignUp::PRICES[type]), type]
         end
       end
 
       def self.package_type_2_attributes_for_select
         [:none, :kw, :junior, :standard].map do |type|
-          [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}"), type]
+          [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}", price: Db::Strzelecki::SignUp::PRICES[type]), type]
         end
       end
     end

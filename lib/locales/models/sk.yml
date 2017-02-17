@@ -53,9 +53,9 @@ sk:
         phone_2: Numer telefonu 2 (w celach bezpieczeństwa)
         package_types:
           none: nie je vybraté
-          kw: ćlenské KW Kraków (75 PLN)
-          junior: junior (65 PLN)
-          standard: štandard (95 PLN) 
+          kw: KW Kraków (%{price} PLN)
+          junior: Junior (%{price} PLN)
+          standard: Standard (%{price} PLN) 
         category_type: Kategoria
         gender_1: Płeć 1
         gender_2: Płeć 2

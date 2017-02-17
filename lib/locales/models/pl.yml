@@ -53,9 +53,9 @@ pl:
         phone_2: Numer telefonu 2 (w celach bezpieczeństwa)
         package_types:
           none: Nie wybrano
-          kw: Członek KW Kraków (75 zł)
-          junior: Kadet (65 zł)
-          standard: Standard (95 zł) 
+          kw: KW Kraków (%{price} PLN)
+          junior: Kadet (%{price} PLN)
+          standard: Standard (%{price} PLN) 
         category_type: Kategoria
         gender_1: Płeć 1
         gender_2: Płeć 2
