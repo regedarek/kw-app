@@ -19,6 +19,8 @@ gem 'virtus'
 gem 'kaminari'
 gem 'whenever', require: false
 
+gem 'letter_opener', group: :development
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'timecop'
