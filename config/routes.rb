@@ -53,7 +53,7 @@ Rails.application.routes.draw do
       post :availability
     end
   end
-  resources :payments, only: [] do
+  resources :payments, only: [:index] do
     member do
       get :charge
     end

@@ -10,7 +10,7 @@ module Api
 
     def thank_you
       if params[:status] == 'OK'
-        redirect_to root_path, notice: 'Płatność została zrealizowana.'
+        redirect_to payments_path, notice: 'Twoja płatność została zrealizowana. Your payment proccess has been finished successfully.'
       end
     end
   end

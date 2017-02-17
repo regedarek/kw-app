@@ -1,6 +1,9 @@
 require 'payments'
 
 class PaymentsController < ApplicationController
+  def index
+  end
+
   def charge
     payment = Db::Payment.find(params[:id])
     result = Payments::CreatePayment.new(payment: payment).create
