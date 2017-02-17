@@ -10,7 +10,7 @@ sk:
         statistic_single: 'Hľadám partnera: %{amount}'
         statistic_male: 'Muži: %{amount}'
         statistic_female: 'Ženy: %{amount}'
-        sign_up_link: Zaregistrujte sa na XXIX Memorial Jana Strzeleckiego!
+        sign_up_link: Zaregistrujte sa na XXIX Memoriál Jána Strzeleckého!
       table:
         table_nr: Nr.
         table_names: Tím/Súťažiaci
@@ -23,13 +23,13 @@ sk:
       new:
         link_to_index: Prejdi ďalej a ukáž súperov
       create:
-        signed_up: Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.
-        order_has_not_been_created: Problem z utworzeniem płatności, skontaktuj się z organizatorem.
+        signed_up: Zaregistroval/a si są na preteky. Na mail ti pošleme informácie o tom, ako vykonať platbu online.
+        order_has_not_been_created: Problém s vykonaním platby. Skontaktuj sa s organizátorom.
   strzelecki_mailer:
     sign_up:
-      subject: "Memoriał Jana Strzeleckiego 2017 - Rejestracja na zawody: #%{id}"
-      title: "Zgłoszenie #%{id}"
-      back_to_sign_ups_link: wróć do strony zapisów na zawody
-      payment: "Płatność online: %{price} PLN"
-      charge_payment_link: przejdź do płatności online
-      payment_info: Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online.
+      subject: "Memoriál Jána Strzeleckého 2017 – Registrácia na preteky: #%{id}"
+      title: "Prihláška #%{id}"
+      back_to_sign_ups_link: Vráť sa na stranu prihlasovania na preteky
+      payment: "Online platba: %{price} PLN"
+      charge_payment_link: Prejdi na online platbu
+      payment_info: Teraz prosíme o uhradenie prihlášky pomocou online platby.
