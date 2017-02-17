@@ -23,8 +23,10 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :strzelecki do
-    resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
+  scope "(:locale)", locale: /pl|sk/ do
+    namespace :strzelecki do
+      resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
+    end
   end
 
   resources :product_types

@@ -2,6 +2,7 @@ pl:
   strzelecki:
     sign_ups:
       form:
-        sign_in: Zapisz się
+        send: Zapisz się!
+        top_info: 'Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję "szukam partnera".'
       new:
-        strzelecki_sign_ups_path: przejdź aby zobaczyć rywali
+        link_to_index: przejdź aby zobaczyć rywali
