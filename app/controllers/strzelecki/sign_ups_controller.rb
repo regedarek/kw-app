@@ -14,6 +14,7 @@ module Strzelecki
       result = Strzelecki::Edition2017.sign_up(form: @form)
       result.success { redirect_to strzelecki_sign_ups_path, notice: t('.signed_up') }
       result.invalid { |form:| render(:new) }
+      result.invalid_order { redirect_to strzelecki_sign_ups_path, alert: t('.order_has_not_been_created') }
       result.else_fail!
     end
 

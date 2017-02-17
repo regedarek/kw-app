@@ -23,3 +23,4 @@ pl:
         link_to_index: przejdź aby zobaczyć rywali
       create:
         signed_up: Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.
+        order_has_not_been_created: Problem z utworzeniem płatności, skontaktuj się z organizatorem.

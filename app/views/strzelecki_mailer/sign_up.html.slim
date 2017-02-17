@@ -45,17 +45,16 @@ b Zespół:
 = !@sign_up.single? ? ' Tak' : ' Nie'
 br
 b Płatność: 
-= @sign_up.order.try(:cost).try(:to_s) + ' zł'
+= @sign_up.service.order.try(:cost).try(:to_s) + ' zł'
 br
 = link_to 'przejdź do płatności online', charge_payment_url(@sign_up.service.order.payment.id)
+br
+b color='red'= "Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online."
 hr
 - if @sign_up.remarks.present?
   br
   b Uwagi do organizatorów:
   = ' ' + @sign_up.remarks
-br
-br
-b= "Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online."
 br
 = link_to 'przejdź do strony zawodów', Rails.application.secrets.strzelecki_page
 br
