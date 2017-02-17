@@ -2,6 +2,7 @@ sk:
   strzelecki:
     sign_ups:
       form:
-        sign_in: Zaregistruj sa
+        send: Zaregistruj sa
+        top_info: 'Prihlasuješ vašu družinu a platíš za obidva štartovacie balíčky, ak potrebuješ partnera do družiny, zaznač "hľadám partnera"'
       new:
-        strzelecki_sign_ups_path: ísť vidieť súpera
+        link_to_index: Prejdi ďalej a ukáž súperov

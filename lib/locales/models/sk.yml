@@ -3,15 +3,14 @@ sk:
     strzelecki_sign_up_form: Forma záznamov
     attributes:
       strzelecki_sign_up_form:
-        name_1: Prehrávač 1
+        name_1: Súťažiaci 1
+        name_2: Súťažiaci 2
         birth_year_1: Rok narodenia 1
-        vege_1: vegetariánske jedlo 1?
-        name_2: Prehrávač 2
-        email_1: E-mail 1 (Vám zašleme odkaz na on-line platieb)
         birth_year_2: Rok narodenia 2
-        vege_2: vegetariánske jedlo 2?
-        single: hľadám partnera?
+        email_1: E-mail 1 (Vám zašleme odkaz na on-line platieb)
         email_2: E-mail (voliteľné)
+        vege_1: vegetariánske jedlo 1?
+        vege_2: vegetariánske jedlo 2?
         phone_1: Telefónne číslo 1 (voliteľné príslušenstvo pre bezpečnostné účely)
         phone_2: Telefónne číslo 2 (voliteľné príslušenstvo pre bezpečnostné účely)
         organization_1: členstvo v klube 1 (voliteľné)
@@ -20,11 +19,12 @@ sk:
         package_type_2: štartovací balíček 2
         city_1: Veľkomesto 1
         city_2: Veľkomesto 2
-        category_type: kategórie
-        gender_1: Sex 1
-        gender_2: Sex 2
+        gender_1: Pohlavie 1
+        gender_2: Pohlavie 2
+        single: hľadám partnera?
+        category_type: Kategórie
         remarks: Pripomienky k usporiadateľovi
-        terms_of_service: súhlasím s podmienkami
+        terms_of_service: Súhlasím s pravidlami?
   activerecord:
     models:
       db/route: Przejscie
@@ -60,8 +60,8 @@ sk:
         gender_1: Płeć 1
         gender_2: Płeć 2
         gender:
-          male: človeče
-          female: žena
+          male: Muž
+          female: Žena
         category_types:
           mix: Mix
           male: človeče

@@ -1,8 +1,5 @@
 .callout.warning
-  - if params[:locale] == 'sk'
-    | Nakoniec, tím hlásenia a platiť za oba balíčky začínajúci, ak hľadáte partnera, vyberte "Hľadám partnera."
-  - else
-    | Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję 'szukam partnera'.
+  = t('.top_info')
 
 = form_for form, html: { class: 'js-strzelecki-sign-up-form' }, url: strzelecki_sign_ups_path do |f|
   .row
@@ -113,15 +110,7 @@
   .callout.warning
     .row
       .large-12.columns
-        span.terms_of_service
-          - if params[:locale] == 'sk'
-            | Súhlasím s pravidlami?
-          - else
-            | Zawodnicy informują, że znają regulamin i zobowiązują się do jego przestrzegania.   
-            | Oświadczają, również że są zdolni do udziału w zawodach i startują na własną odpowiedzialność (podstawa prawna: Rozporządzenie Ministra Edukacji Narodowej z dnia 12.09.2001 r. Dz. U. Nr 101 poz. 1095). 
-            | Zawodnicy wyrażają zgodę na przetwarzanie swoich danych osobowych dla potrzeb związanych z organizacją imprezy. 
-            | Zawodnicy wyrażają zgodę na wykorzystanie swojego wizerunku, znajdującego się na zdjęciach wykonanych podczas i w związku z udziałem w XXIX Memoriale Strzeleckiego 11.03.2017, organizowanym przez Klub Wysokogórski Kraków do wszystkich celów związanych z działalnością Klubu, w tym w szczególności działalnością promocyjną Klubu oraz wszystkich imprez, zawodów i wydarzeń organizowanych przez Klub, a także na jego publikację w szczególności na stronach internetowych Klubu oraz w artykułach prasowych i materiałach dotyczących Klubu."
-          |  
         = f.check_box :terms_of_service
+        = f.label :terms_of_service
 
-  = f.submit t('.sign_in'), class: 'button expanded large'
+  = f.submit t('.send'), class: 'button expanded large'
