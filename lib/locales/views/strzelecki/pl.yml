@@ -2,6 +2,7 @@ pl:
   strzelecki:
     sign_ups:
       index:
+        pricing_title: Wpisowe
         pricing_kw: 'KW Kraków: %{price} PLN'
         pricing_junior: 'Kadet: %{price} PLN'
         pricing_standard: 'Standard: %{price} PLN'
@@ -20,4 +21,5 @@ pl:
         top_info: 'Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję "szukam partnera".'
       new:
         link_to_index: przejdź aby zobaczyć rywali
-
+      create:
+        signed_up: Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.

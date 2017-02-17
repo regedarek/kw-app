@@ -1,6 +1,13 @@
 .row
   .columns
-    = image_tag asset_path('baner.png')
+    .row
+      .large-12.columns
+        = image_tag asset_path('baner.png')
+    .show-for-small-only
+      .callout.primary.text-center
+        = link_to image_tag('pl.png'), { locale: :pl }
+        |    
+        = link_to image_tag('sk.png'), { locale: :sk }
     .row
       .large-6.columns
         .callout.primary

@@ -21,3 +21,5 @@ sk:
         top_info: 'Prihlasuješ vašu družinu a platíš za obidva štartovacie balíčky, ak potrebuješ partnera do družiny, zaznač "hľadám partnera"'
       new:
         link_to_index: Prejdi ďalej a ukáž súperov
+      create:
+        signed_up: Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.

@@ -27,9 +27,15 @@
                 li= link_to t('.administration.valleys'), admin_valleys_path
                 li= link_to 'Dodaj wydarzenie', new_admin_event_path
     .top-bar-right
-      ul.dropdown.menu
-        - if user_signed_in?
-          li= link_to t('.administration.logout'), destroy_user_session_path
-        - else
-          li= link_to t('.administration.login'), new_user_session_path
-          li= link_to t('.administration.signup'), new_user_registration_path
+      - if controller_name == 'sign_ups'
+        .show-for-medium style='margin-top: 5px'
+          = link_to image_tag('pl.png'), { locale: :pl }
+          |    
+          = link_to image_tag('sk.png'), { locale: :sk }
+      - else
+        ul.dropdown.menu
+          - if user_signed_in?
+            li= link_to t('.administration.logout'), destroy_user_session_path
+          - else
+            li= link_to t('.administration.login'), new_user_session_path
+            li= link_to t('.administration.signup'), new_user_registration_path

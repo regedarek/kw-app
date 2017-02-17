@@ -26,81 +26,19 @@ sk:
         remarks: Pripomienky k usporiadateľovi
         terms_of_service: Súhlasím s pravidlami?
   activerecord:
-    models:
-      db/route: Przejscie
-      db/auction: Aukcja
-      db/auction_product: Przedmiot
-      db/peak: Szczyt
-      db/user: Klubowicz
-      db/valley: Dolina
-      db/strzelecki/sign_up: Zapis na zawody
-      strzelecki_sign_up_form: Formularz zapisów
     attributes:
       db/strzelecki/sign_up:
-        name_1: Zawodnik
-        birth_year_1: Rok urodzenia
-        vege_1: posiłek wegetariański?
-        name_2: Zawodnik
-        birth_year_2: Rok urodzenia
-        vege_2: posiłek wegetariański?
-        single: hľadám partnera?
-        email: E-mail
-        organization: Przynależność klubowa
-        remarks: Uwagi do wiadomości organizatorów
-        package_type_1: Pakiet startowy
-        package_type_2: Pakiet startowy
-        phone_1: Numer telefonu 1 (w celach bezpieczeństwa)
-        phone_2: Numer telefonu 2 (w celach bezpieczeństwa)
         package_types:
           none: nie je vybraté
           kw: KW Kraków (%{price} PLN)
           junior: Junior (%{price} PLN)
           standard: Standard (%{price} PLN) 
-        category_type: Kategoria
-        gender_1: Płeć 1
-        gender_2: Płeć 2
         gender:
           male: Muž
           female: Žena
-        category_types:
-          mix: Mix
-          male: človeče
-          female: žena
-      db/auction:
-        name: Nazwa aukcji
-        description: Opis aukcji
-      db/auction_product:
-        name: Nazwa przedmiotu
-        description: Opis przedmiotu
-        price: Cena
-      db/valley:
-        name: Nazwa
-      db/user:
-        kw_id: Numer klubowy
-        first_name: Imie
-        last_name: Nazwisko
-        email: E-mail
-        password: Haslo
-        password_confirmation: Potwierdz haslo
-        current_password: Obecne haslo
-      db/peak:
-        name: Nazwa
-        valley_id: Dolina
-      db/route:
-        peak_id: Szczyt
-        name: Nazwa
-        route_type:
-          ski: Narciarstwo
-          regular_climbing: Wspinacza letnia
-          winter_climbing: Wspinacza zimowa
-        difficulty: Wycena
-        partners: Partnerzy
-        description: Uwagi
-        time: Czas przejscia
-        climbing_date: Data przejscia
     errors:
       messages:
-        record_invalid: "Negatywne sprawdzenie poprawności: %{errors}"
+        record_invalid: "Negatívne validácia: %{errors}"
         restrict_dependent_destroy:
-          has_many: Nie może zostać usunięte, gdyż istnieją zależne od niego %{record}
-          has_one: Nie może zostać usunięte, gdyż istnieje zależny od niego %{record}
+          has_many: To nemôže byť odstránený, pretože tam sú aspekty ním %{record}
+          has_one: To nemôže byť odstránený, pretože tam sú na ňom závislé %{record}
