@@ -44,6 +44,13 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.1.7)
+    axlsx_rails (0.5.0)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -91,6 +98,7 @@ GEM
       activesupport (>= 4.1.0)
     hashdiff (0.3.0)
     high_voltage (3.0.0)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     ice_nine (0.11.2)
     jquery-rails (4.2.1)
@@ -165,6 +173,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -224,6 +233,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  axlsx (= 2.1.0.pre)
+  axlsx_rails
   byebug
   coffee-rails
   devise
@@ -237,6 +248,7 @@ DEPENDENCIES
   pg
   rails (= 5.0.0.1)
   rspec-rails
+  rubyzip (~> 1.1.0)
   sass-rails
   slim-rails
   spring

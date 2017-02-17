@@ -1,0 +1,27 @@
+wb = xlsx_package.workbook
+sign_up_attributes = %i(
+  name_1 name_2
+  email_1 email_2
+  phone_1 phone_2
+  organization_1 organization_2
+  vege_1 vege_2
+  birth_year_1 birth_year_2
+  city_1 city_2
+  gender_1 gender_2
+  package_type_1 package_type_2
+  remarks single created_at
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "Zapisy 2017") do |sheet|
+    sheet.add_row(sign_up_attributes.map { |attr| Db::Strzelecki::SignUp.human_attribute_name(attr) }, style: style.add_style(highlight_cell_options))
+    @sign_ups.each do |sign_up|
+      sheet.add_row sign_up_attributes.map { |attr| sign_up.read_attribute(attr) }
+    end
+  end
+end

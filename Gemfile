@@ -18,13 +18,15 @@ gem 'workflow'
 gem 'virtus'
 gem 'kaminari'
 gem 'whenever', require: false
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'
 
 gem 'letter_opener', group: :development
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'timecop'
-  gem 'dotenv-rails'
   gem 'byebug'
   gem 'spring'
   gem 'webmock'

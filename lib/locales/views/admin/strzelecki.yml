@@ -1,0 +1,11 @@
+pl:
+  admin:
+    strzelecki:
+      index:
+        export_to_xlsx_link: Export do XLSX
+      table:
+        table_nr: Nr
+        table_team: Zespół
+        table_email: E-mail
+        table_phone: Telefon
+        table_payment: Płatność

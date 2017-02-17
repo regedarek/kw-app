@@ -3,33 +3,19 @@
     table.responsive
       thead
         tr
-          th Imiona i nazwiska zawodnika/ów
-          th Emaile
-          th Rok urodzenia
-          th Koszt pakietu
-          th Klub
-          th Miasto
-          th Zapłacono
-
+          th =t('.table_nr')
+          th =t('.table_team')
+          th =t('.table_organization')
+          th =t('.table_city')
       tbody
-        - sign_ups.each do |sign_up|
+        - sign_ups.each_with_index do |sign_up, i|
           tr
+            td= i + 1
             td
               - if sign_up.single?
                 = sign_up.name_1
               - else
-                = "#{sign_up.name_1}/#{sign_up.name_2}"
-            td
-              - if sign_up.single?
-                = sign_up.email_1
-              - else
-                = "#{sign_up.email_1}/#{sign_up.try(:email_2)}"
-            td
-              - if sign_up.single?
-                = sign_up.birth_year_1
-              - else
-                = "#{sign_up.birth_year_1}/#{sign_up.birth_year_2}"
-            td= "#{sign_up.order.try(:cost)} zł"
+                = "#{sign_up.name_1} oraz #{sign_up.name_2}"
             td
               - if sign_up.single?
                 = sign_up.organization_1
@@ -40,10 +26,3 @@
                 = sign_up.city_1
               - else
                 = "#{sign_up.city_1}/#{sign_up.city_2}"
-            td
-              - if sign_up.order.present? && sign_up.order.payment.prepaid?
-                span class=('success label')
-                  =t('prepaid')
-              - else
-                span class=('alert label')
-                  =t('unpaid')

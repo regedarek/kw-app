@@ -29,7 +29,4 @@
 
     = link_to t('.sign_up_link'), new_strzelecki_sign_up_path, class: 'button large expanded'
 
-    - if user_signed_in? && current_user.admin?
-      = render 'strzelecki/sign_ups/table', sign_ups: @sign_ups
-    - else
-      = render 'strzelecki/sign_ups/table_logged_out', sign_ups: @sign_ups
+    = render 'strzelecki/sign_ups/table', sign_ups: @sign_ups

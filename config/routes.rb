@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :events, only: [:new, :create]
+    resources :strzelecki, only: [:index]
     resources :users, only: [:index, :create] do
       member do
         get :make_admin

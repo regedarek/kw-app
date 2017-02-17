@@ -37,23 +37,24 @@ pl:
       strzelecki_sign_up_form: Formularz zapisów
     attributes:
       db/strzelecki/sign_up:
-        name_1: Zawodnik
-        name_2: Zawodnik
-        birth_year_1: Rok urodzenia
-        birth_year_2: Rok urodzenia
-        vege_1: Posiłek wegetariański
-        vege_2: Posiłek wegetariański
-        city_1: Miasto
-        city_2: Miasto
+        name_1: Zawodnik 1
+        name_2: Zawodnik 2
+        birth_year_1: Rok urodzenia 1
+        birth_year_2: Rok urodzenia 2
+        vege_1: Posiłek wegetariański 1
+        vege_2: Posiłek wegetariański 2
+        city_1: Miasto 1
+        city_2: Miasto 2
         single: Szukam partnera
-        email: E-mail
-        organization_1: Przynależność klubowa
-        organization_2: Przynależność klubowa
+        email_1: E-mail 1
+        email_2: E-mail 2
+        organization_1: Przynależność klubowa 1
+        organization_2: Przynależność klubowa 2
         remarks: Uwagi do wiadomości organizatorów
-        package_type_1: Pakiet startowy
-        package_type_2: Pakiet startowy
-        phone_1: Numer telefonu
-        phone_2: Numer telefonu
+        package_type_1: Pakiet startowy 1
+        package_type_2: Pakiet startowy 2
+        phone_1: Numer telefonu 1
+        phone_2: Numer telefonu 2
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN)
@@ -69,6 +70,7 @@ pl:
           mix: Mieszana
           male: Męska
           female: Żeńska
+        created_at: Utworzono
       db/auction:
         name: Nazwa aukcji
         description: Opis aukcji
