@@ -4,7 +4,7 @@ module Strzelecki
       if form.valid?
         strzelecki_sign_up = Db::Strzelecki::SignUp.create(form.params)
         Orders::CreateOrder.new(service: strzelecki_sign_up).create
-        StrzeleckiMailer.sign_up(strzelecki_sign_up).deliver_later
+        StrzeleckiMailer.sign_up(strzelecki_sign_up).deliver_now
         Success.new
       else
         Failure.new(:invalid, form: form)

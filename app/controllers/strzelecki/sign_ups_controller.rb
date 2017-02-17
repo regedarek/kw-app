@@ -12,7 +12,6 @@ module Strzelecki
     def create
       @form = Strzelecki::SignUpForm.new(strzelecki_params)
       result = Strzelecki::Edition2017.sign_up(form: @form)
-      # 'Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.'
       result.success { redirect_to strzelecki_sign_ups_path, notice: t('.signed_up') }
       result.invalid { |form:| render(:new) }
       result.else_fail!
