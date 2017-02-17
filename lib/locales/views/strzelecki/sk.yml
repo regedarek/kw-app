@@ -14,7 +14,7 @@ sk:
         sign_up_link: Zaregistrujte sa na XXIX Memoriál Jána Strzeleckého!
       table:
         table_nr: Nr.
-        table_names: Tím/Súťažiaci
+        table_team: Tím/Súťažiaci
         table_organization: Organizácie
         table_city: Veľkomesto
       form:

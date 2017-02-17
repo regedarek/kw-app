@@ -14,7 +14,7 @@ pl:
         sign_up_link: Zapisz się na XXIX Memoriał Jana Strzeleckiego!
       table:
         table_nr: Nr.
-        table_names: Zespół/Zawodnik
+        table_team: Zespół/Zawodnik
         table_organization: Organizacja
         table_city: Miasto
       form:
