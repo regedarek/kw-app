@@ -1,1 +1,66 @@
 h3= "Zgłoszenie ##{@sign_up.id}"
+
+b Zawodnik 1: 
+= @sign_up.name_1
+br
+b Rok urodzenia: 
+= @sign_up.birth_year_1
+br
+- if @sign_up.organization_1.present?
+  b Przynależność klubowa: 
+  = @sign_up.organization_1
+br
+- if @sign_up.city_1.present?
+  b Miasto: 
+  = @sign_up.city_1
+  br
+b Posiłek wegetariański: 
+= @sign_up.vege_1? ? ' Tak' : ' Nie'
+br
+b Pakiet startowy:
+= ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_1])
+- if !@sign_up.single?
+  hr
+  b Zawodnik 2: 
+  = @sign_up.name_2
+  br
+  b Rok urodzenia: 
+  = @sign_up.birth_year_2
+  br
+  - if @sign_up.organization_2.present?
+    b Przynależność klubowa: 
+    = @sign_up.organization_2
+  br
+  - if @sign_up.city_2.present?
+    b Miasto: 
+    = @sign_up.city_2
+    br
+  b Posiłek wegetariański: 
+  = @sign_up.vege_2? ? ' Tak' : ' Nie'
+  br
+  b Pakiet startowy:
+  = ' ' + I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{@sign_up.package_type_2}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_2])
+hr
+b Zespół: 
+= !@sign_up.single? ? ' Tak' : ' Nie'
+br
+b Płatność: 
+= @sign_up.order.try(:cost).try(:to_s) + ' zł'
+br
+= link_to 'przejdź do płatności online', charge_payment_url(@sign_up.service.order.payment.id)
+hr
+- if @sign_up.remarks.present?
+  br
+  b Uwagi do organizatorów:
+  = ' ' + @sign_up.remarks
+br
+br
+b= "Prosimy teraz abyś opłacił zgłoszenie za pomocą płatności online."
+br
+= link_to 'przejdź do strony zawodów', Rails.application.secrets.strzelecki_page
+br
+= '----------------------------------------------------------'
+br
+i
+  small
+    = 'Sekcja Narciarstwa Wysokogórskiego KW Kraków'
