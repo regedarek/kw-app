@@ -3,6 +3,7 @@ sk:
     sign_ups:
       index:
         pricing_title: Cenník
+        pricing_info: 'PL: W cenę wpisowego wliczony jest udział w zawodach, atrakcyjny pakiet startowy, posiłek regeneracyjny po zawodach oraz opłata w wysokości 50 zł od każdego zawodnika na rzecz TPN.'
         pricing_kw: 'KW Kraków: %{price} PLN'
         pricing_junior: 'Junior: %{price} PLN'
         pricing_standard: 'Standard: %{price} PLN'
