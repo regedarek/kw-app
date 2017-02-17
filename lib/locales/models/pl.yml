@@ -38,19 +38,22 @@ pl:
     attributes:
       db/strzelecki/sign_up:
         name_1: Zawodnik
-        birth_year_1: Rok urodzenia
-        vege_1: Posiłek wegetariański?
         name_2: Zawodnik
+        birth_year_1: Rok urodzenia
         birth_year_2: Rok urodzenia
-        vege_2: Posiłek wegetariański?
-        single: Szukam partnera?
+        vege_1: Posiłek wegetariański
+        vege_2: Posiłek wegetariański
+        city_1: Miasto
+        city_2: Miasto
+        single: Szukam partnera
         email: E-mail
-        organization: Przynależność klubowa
+        organization_1: Przynależność klubowa
+        organization_2: Przynależność klubowa
         remarks: Uwagi do wiadomości organizatorów
         package_type_1: Pakiet startowy
         package_type_2: Pakiet startowy
-        phone_1: Numer telefonu 1 (w celach bezpieczeństwa)
-        phone_2: Numer telefonu 2 (w celach bezpieczeństwa)
+        phone_1: Numer telefonu
+        phone_2: Numer telefonu
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN)

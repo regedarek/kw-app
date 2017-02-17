@@ -48,7 +48,7 @@ sk:
         gender_2: Pohlavie
         single: Hľadám partnera
         category_type: Kategórie
-        remarks: Pripomienky k usporiadateľovi
+        remarks: Pripomienky k usporiadateľovi (jeżeli nie możesz zapłacić kartą kredytową lub przelewem napisz tutaj, że zapłacisz gotówką)
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN)
