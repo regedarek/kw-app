@@ -9,7 +9,7 @@ sign_up_attributes = %i(
   city_1 city_2
   gender_1 gender_2
   package_type_1 package_type_2
-  remarks single created_at
+  remarks single
 )
 wb.styles do |style|
   highlight_cell_options = {
@@ -19,9 +19,15 @@ wb.styles do |style|
     alignment: { horizontal: :center, vertical: :center, wrap_text: true }
   }
   wb.add_worksheet(name: "Zapisy 2017") do |sheet|
-    sheet.add_row(sign_up_attributes.map { |attr| Db::Strzelecki::SignUp.human_attribute_name(attr) }, style: style.add_style(highlight_cell_options))
+    default_attributes = sign_up_attributes.map do |attr|
+      Db::Strzelecki::SignUp.human_attribute_name(attr)
+    end.push('Płatność', 'Kategoria', 'Utworzono')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     @sign_ups.each do |sign_up|
-      sheet.add_row sign_up_attributes.map { |attr| sign_up.read_attribute(attr) }
+      default_values = sign_up_attributes.map do |attr|
+        sign_up.read_attribute(attr)
+      end.push(sign_up.prepaid?, sign_up.category, sign_up.created_at)
+      sheet.add_row(default_values)
     end
   end
 end

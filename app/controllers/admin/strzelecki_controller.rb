@@ -6,7 +6,7 @@ module Admin
       respond_to do |format|
         format.html
         format.xlsx do
-          disposition = "attachment; filename='strzelecki_#{Time.now.to_s(:short)}.xlsx'"
+          disposition = "attachment; filename='strzelecki_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
           response.headers['Content-Disposition'] = disposition
         end
       end
