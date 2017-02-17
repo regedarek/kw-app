@@ -11,7 +11,7 @@ pl:
         statistic_male: 'Mężczyzn: %{amount}'
         statistic_female: 'Kobiet: %{amount}'
         sign_up_link: Zapisz się na XXIX Memoriał Jana Strzeleckiego!
-      table_logged_out:
+      table:
         table_nr: Nr.
         table_names: Zespół/Zawodnik
         table_organization: Organizacja
@@ -19,6 +19,7 @@ pl:
       form:
         send: Zapisz się!
         top_info: 'Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję "szukam partnera".'
+        rules_html: "Regulamin dostępny na stronie: <a target='blank' href=http://strzelecki.kw.krakow.pl/regulamin>http://strzelecki.kw.krakow.pl/regulamin</a>"
       new:
         link_to_index: przejdź aby zobaczyć rywali
       create:

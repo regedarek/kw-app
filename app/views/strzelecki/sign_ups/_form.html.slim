@@ -112,5 +112,7 @@
       .large-12.columns
         = f.check_box :terms_of_service
         = f.label :terms_of_service
+        br
+        = t('.rules_html')
 
   = f.submit t('.send'), class: 'button expanded large'
