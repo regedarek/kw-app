@@ -27,15 +27,24 @@ pl:
         terms_of_service: Akceptuję regulamin
   activerecord:
     models:
-      db/route: Przejscie
+      db/activities/mountain_route: Przejście
       db/auction: Aukcja
       db/auction_product: Przedmiot
-      db/peak: Szczyt
-      db/user: Klubowicz
       db/valley: Dolina
       db/strzelecki/sign_up: Zapis na zawody
       strzelecki_sign_up_form: Formularz zapisów
     attributes:
+      db/activities/mountain_route:
+        name: Nazwa drogi/zjazdu
+        difficulty: Wycena
+        partners: Partnerzy
+        description: Uwagi
+        time: Czas przejscia
+        climbing_date: Data przejscia
+        area: Rejon przejścia
+        rating_one: Fuj, nie polecam
+        rating_two: Warta przejścia
+        rating_three: Piękna droga
       db/strzelecki/sign_up:
         name_1: Zawodnik 1
         name_2: Zawodnik 2
@@ -78,8 +87,6 @@ pl:
         name: Nazwa przedmiotu
         description: Opis przedmiotu
         price: Cena
-      db/valley:
-        name: Nazwa
       db/user:
         kw_id: Numer klubowy
         first_name: Imie
@@ -88,21 +95,6 @@ pl:
         password: Haslo
         password_confirmation: Potwierdz haslo
         current_password: Obecne haslo
-      db/peak:
-        name: Nazwa
-        valley_id: Dolina
-      db/route:
-        peak_id: Szczyt
-        name: Nazwa
-        route_type:
-          ski: Narciarstwo
-          regular_climbing: Wspinacza letnia
-          winter_climbing: Wspinacza zimowa
-        difficulty: Wycena
-        partners: Partnerzy
-        description: Uwagi
-        time: Czas przejscia
-        climbing_date: Data przejscia
     errors:
       messages:
         record_invalid: "Negatywne sprawdzenie poprawności: %{errors}"

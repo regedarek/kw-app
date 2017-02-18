@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/jgroeneveld/attributed_object.git
+  revision: 417274abd9cf3559791fec3e116c809ec9ae8ed6
+  specs:
+    attributed_object (0.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -233,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attributed_object!
   axlsx (= 2.1.0.pre)
   axlsx_rails
   byebug

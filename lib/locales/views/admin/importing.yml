@@ -1,0 +1,9 @@
+pl:
+  admin:
+    importing:
+      index:
+        title: Importer przejść
+        submit: Zaimportuj
+      import:
+        not_imported: "Błąd podczas importowania: %{message}"
+        imported: "Zapimportowano"

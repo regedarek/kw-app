@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218084024) do
+ActiveRecord::Schema.define(version: 20170218114045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170218084024) do
     t.string  "time"
     t.integer "peak_id"
     t.integer "route_type",    default: 0
+    t.string  "area"
   end
 
   create_table "orders", force: :cascade do |t|
