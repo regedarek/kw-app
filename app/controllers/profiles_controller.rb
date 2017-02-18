@@ -10,7 +10,6 @@ class ProfilesController < ApplicationController
     result.success { redirect_to root_path, notice: t('.success') }
     result.invalid { |form:| render :new, form: form }
     result.invalid_records do |form:, user:, profile:|
-      byebug
       render :new, form: form
     end
     result.else_fail!
@@ -22,8 +21,8 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(
       :email, :kw_id, :pesel, :first_name, :last_name, :phone,
       :birth_date, :birth_place, :city, :postal_code, :main_address,
-      :optional_address, :recommended_by, :acomplished_course,
-      :main_discussion_group, :sections
+      :optional_address, :main_discussion_group, :terms_of_service,
+      recommended_by: [], acomplished_courses: [], sections: []
     )
   end
 end 

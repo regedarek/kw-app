@@ -2,6 +2,41 @@ pl:
   activemodel:
     strzelecki_sign_up_form: Formularz zapisów
     attributes:
+      user_management_profile_form:
+        kw_id: Numer klubowy
+        email: E-mail
+        first_name: Imię
+        last_name: Nazwisko
+        birth_date: Data urodzin
+        birth_place: Miejsce urodzin
+        pesel: Pesel
+        city: Miasto
+        postal_code: Kod pocztowy
+        main_address: Adres zameldowania
+        optional_address: Adres kontaktowy
+        phone: Telefon
+        main_discussion_group: Czy chcesz się zapisać do głównej grupy dyskusyjnej?
+        recommended_by: Skąd dowiedziałeś się o Klubie
+        acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
+        sections: Proszę wskazać w których Sekcjach KW chciałbyś/chciałabyś działać.
+        profile_sections_snw: Sekcja Narciarstwa Wysokogórskiego
+        profile_sections_stj: Sekcja Taternictwa Wysokogórskiego
+        profile_sections_sww: Sekcja Wspinaczki Wysokogórskiej
+        profile_sections_gtw: Grupa Turystyki Wysokogórskiej
+        profile_sections_kts: Koło Taterników Seniorów
+        profile_recommended_by_google: poprzez wyszukiwarkę internetową
+        profile_recommended_by_facebook: na Facebook'u
+        profile_recommended_by_friends: od znajomych
+        profile_recommended_by_festival: na Festiwalu Górskim
+        profile_recommended_by_poster: z ulotek
+        profile_acomplished_courses_basic: Podstawowy kurs wspinaczki w skałkach
+        profile_acomplished_courses_second: Kurs taternicki
+        profile_acomplished_courses_second_winter: Kurs zimowy taternicki
+        profile_acomplished_courses_cave: Kurs taternictwa jaskiniowego
+        profile_acomplished_courses_ski: Kurs narciarstwa wysokogórskiego
+        profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.
+        terms_of_service: Akceptuję postanowienia Statutu Klubu Wysokogórskiego Kraków
+        terms_of_service_info: "Oświadczam, że znam postanowienia Statutu Klubu Wysokogórskiego Kraków i zobowiązuje się do ich przestrzegania. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w imprezach organizowanych przez Klub podejmuję na własne ryzyko i odpowiedzialność. Równocześnie wyrażam zgodę na przetwarzanie moich danych osobowych dla celów statutowych zgodnie z ustawą z dnia 29 sierpnia 1997r. o ochronie danych osobowych (Dz. U. Nr 133, poz. 883 z 1997 r. z późniejszymi zmianami)."
       strzelecki_sign_up_form:
         name_1: Zawodnik 1
         birth_year_1: Rok urodzenia 1
@@ -32,8 +67,11 @@ pl:
       db/auction_product: Przedmiot
       db/valley: Dolina
       db/strzelecki/sign_up: Zapis na zawody
+      db/profile: Profil
       strzelecki_sign_up_form: Formularz zapisów
     attributes:
+      db/profile:
+        kw_id: Numer klubowy
       db/activities/mountain_route:
         name: Nazwa drogi/zjazdu
         difficulty: Wycena

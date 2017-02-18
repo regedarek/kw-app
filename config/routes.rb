@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
-  devise_scope :user do
-    get 'zaloguj', to: 'devise/sessions#new'
-  end
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
@@ -11,6 +8,7 @@ Rails.application.routes.draw do
   get '/strzelecki', to: 'strzelecki/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
   get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
   get '/', to: 'events#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
+  get '/zarejestruj', to: 'profiles#new'
 
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'

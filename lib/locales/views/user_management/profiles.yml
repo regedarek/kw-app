@@ -1,5 +1,7 @@
 pl:
   profiles:
+    new:
+      profiles: Zarejestruj się
     form:
       register: Zarejestruj
     create:

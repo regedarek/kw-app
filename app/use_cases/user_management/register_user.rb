@@ -24,7 +24,7 @@ module UserManagement
           main_address: form.main_address,
           optional_address: form.optional_address,
           recommended_by: form.recommended_by,
-          acomplished_course: form.acomplished_course,
+          acomplished_courses: form.acomplished_courses,
           main_discussion_group: form.main_discussion_group,
           sections: form.sections
         )
