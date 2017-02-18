@@ -1,0 +1,26 @@
+wb = xlsx_package.workbook
+user_attributes = %i(
+  first_name last_name
+  email
+  phone
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "Profile") do |sheet|
+    human_user_attributes = user_attributes.map do |attr|
+      Db::User.human_attribute_name(attr)
+    end
+    sheet.add_row(human_user_attributes, style: style.add_style(highlight_cell_options))
+    @profiles.each do |profile|
+      user_values = user_attributes.map do |attr|
+        profile.user.read_attribute(attr)
+      end
+      sheet.add_row(user_values)
+    end
+  end
+end
