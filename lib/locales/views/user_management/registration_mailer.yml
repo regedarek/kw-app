@@ -1,0 +1,9 @@
+pl:
+  registration_mailer:
+    welcome:
+      subject: Witamy w Klubie Wysokogórskim Kraków!
+      title: Zarejestrowałeś się w aplikacji Klubu Wysokogórskiego Kraków.
+      login: "Twój login: %{login}"
+      password: "Twoje hasło: %{password}"
+      link_to_login: przejdź do strony logowania
+      footer: Klub Wysokogórski Kraków

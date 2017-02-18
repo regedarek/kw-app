@@ -1,0 +1,6 @@
+pl:
+  profiles:
+    form:
+      register: Zarejestruj
+    create:
+      success: Utworzono użytkownika, na email otrzymasz swój login i hasło.

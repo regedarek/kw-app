@@ -1,0 +1,75 @@
+= form_for form, as: :profile, url: profiles_path do |f|
+  - if form.errors.any?
+    .callout.alert
+      ul
+        - form.errors.full_messages.each do |msg|
+          li= msg
+
+  .row
+    .large-12.columns
+      = f.label :kw_id
+      = f.text_field :kw_id
+
+  .row
+    .large-12.columns
+      = f.label :email
+      = f.email_field :email
+
+  .row
+    .large-12.columns
+      = f.label :first_name
+      = f.text_field :first_name
+
+  .row
+    .large-12.columns
+      = f.label :last_name
+      = f.text_field :last_name
+
+  .row
+    .large-12.columns
+      = f.label :birth_place
+      = f.text_field :birth_place
+
+  .row
+    .large-12.columns
+      = f.label :birth_date
+      = f.date_field :birth_date
+
+  .row
+    .large-12.columns
+      = f.label :pesel
+      = f.text_field :pesel
+
+  .row
+    .large-12.columns
+      = f.label :city
+      = f.text_field :city
+
+  .row
+    .large-12.columns
+      = f.label :postal_code
+      = f.text_field :postal_code
+
+  .row
+    .large-12.columns
+      = f.label :main_address
+      = f.text_field :main_address
+
+  .row
+    .large-12.columns
+      = f.label :phone
+      = f.text_field :phone
+
+  .row
+    .large-12.columns
+      = f.label :pesel
+      = f.text_field :pesel
+
+  .row
+    .large-12.columns
+      = f.label :main_discussion_group
+      = f.check_box :main_discussion_group
+
+  .row
+    .large-12.columns
+      = f.submit t('.register'), class: 'button'

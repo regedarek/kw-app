@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218131404) do
+ActiveRecord::Schema.define(version: 20170218154417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170218131404) do
     t.text    "recommended_by",        default: [],                 array: true
     t.integer "acomplished_course",    default: [],                 array: true
     t.boolean "main_discussion_group", default: false
-    t.text    "section",               default: [],                 array: true
+    t.text    "sections",              default: [],                 array: true
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true, using: :btree
   end
 

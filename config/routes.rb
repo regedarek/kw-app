@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
+  devise_scope :user do
+    get 'zaloguj', to: 'devise/sessions#new'
+  end
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
@@ -29,8 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_types
   resources :events, only: [:index, :show]
+  resources :profiles, only: [:index, :new, :create]
 
   resources :auctions do
     member do
@@ -45,7 +48,6 @@ Rails.application.routes.draw do
   namespace :activities do
     resources :mountain_routes
   end
-  resources :products
   resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create] do
     member do

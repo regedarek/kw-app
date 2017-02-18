@@ -1,0 +1,10 @@
+h3 = t('.title')
+
+= t('.login', login: @user.email)
+br
+= t('.password', password: @password)
+br
+= link_to t('.link_to_login'), zaloguj_url
+br
+hr
+= t('.footer')
