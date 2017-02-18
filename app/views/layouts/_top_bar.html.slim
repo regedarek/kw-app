@@ -27,7 +27,7 @@
                 li= link_to t('.administration.routes'), routes_path
                 li= link_to t('.administration.valleys'), admin_valleys_path
                 li= link_to t('.administration.strzelecki'), admin_strzelecki_index_path
-                li= link_to 'Dodaj wydarzenie', new_admin_event_path
+                li= link_to t('.administration.events'), new_admin_event_path
     .top-bar-right
       - if controller_name == 'sign_ups'
         .show-for-medium style='margin-top: 5px'
