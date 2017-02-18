@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216123354) do
+ActiveRecord::Schema.define(version: 20170218084024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,20 @@ ActiveRecord::Schema.define(version: 20170216123354) do
     t.index ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
   end
 
+  create_table "mountain_routes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "name"
+    t.text    "description"
+    t.string  "difficulty"
+    t.string  "partners"
+    t.integer "rating"
+    t.date    "climbing_date"
+    t.string  "peak"
+    t.string  "time"
+    t.integer "peak_id"
+    t.integer "route_type",    default: 0
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at"
@@ -130,20 +144,6 @@ ActiveRecord::Schema.define(version: 20170216123354) do
     t.date     "end_date"
     t.text     "description"
     t.boolean  "canceled",    default: false
-  end
-
-  create_table "routes", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "name"
-    t.text    "description"
-    t.string  "difficulty"
-    t.string  "partners"
-    t.integer "rating"
-    t.date    "climbing_date"
-    t.string  "peak"
-    t.string  "time"
-    t.integer "peak_id"
-    t.integer "route_type",    default: 0
   end
 
   create_table "services", force: :cascade do |t|

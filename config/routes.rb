@@ -42,7 +42,9 @@ Rails.application.routes.draw do
       post :mark_sold
     end
   end
-  resources :routes
+  namespace :activities do
+    resources :mountain_routes
+  end
   resources :products
   resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create] do

@@ -1,7 +1,0 @@
-.column.row
-  .row
-    .large-12.columns
-      - if user_signed_in?
-        = link_to 'Dodaj nowe przejście', new_route_path, class: 'large expanded button'
-  = render 'routes/table', routes: @routes
-  = paginate @routes

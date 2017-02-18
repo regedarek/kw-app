@@ -10,17 +10,12 @@
   .row
     .large-12.columns
       .callout
-        .legend Wybierz kategorię, do jakiej chcesz dodać przejście
+        .legend t('.route_type_info')
 
         = f.collection_radio_buttons :route_type, Db::Route.route_types, :first, :first, { selected: @route.route_type } do |b|
           = b.label do
             = b.radio_button + I18n.t(b.text)
         end
-
-  .row.js-routes-peak
-    .large-12.columns
-      = f.label :peak_id
-      = f.grouped_collection_select :peak_id, @valleys, :peaks, :name, :id, :name, class: 'large'
 
   .row
     .large-12.columns
@@ -55,16 +50,16 @@
   .row
     .large-12.columns
       fieldset.fieldset
-        .legend Subiektywna ocena urody drogi
+        .legend t('.rating')
 
         = f.radio_button :rating, 1
-        = f.label :rating_one, 'Fuj, nie polecam'
+        = f.label :rating_one
 
         = f.radio_button :rating, 2
-        = f.label :rating_two, 'Warta przejścia'
+        = f.label :rating_two
 
         = f.radio_button :rating, 3
-        = f.label :rating_three, 'Piękna droga'
+        = f.label :rating_three
 
   .row
     .large-12.columns
