@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20170218131404) do
   end
 
   create_table "profiles", force: :cascade do |t|
+    t.integer "kw_id",                                 null: false
     t.date    "birth_date",                            null: false
     t.string  "birth_place",                           null: false
     t.string  "pesel",                                 null: false
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(version: 20170218131404) do
     t.integer "acomplished_course",    default: [],                 array: true
     t.boolean "main_discussion_group", default: false
     t.text    "section",               default: [],                 array: true
+    t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true, using: :btree
   end
 
   create_table "reservation_items", force: :cascade do |t|

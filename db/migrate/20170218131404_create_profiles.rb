@@ -1,6 +1,7 @@
 class CreateProfiles < ActiveRecord::Migration[5.0]
   def change
     create_table :profiles do |t|
+      t.integer :kw_id, null: false
       t.date :birth_date, null: false
       t.string :birth_place, null: false
       t.string :pesel, null: false
@@ -13,5 +14,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
       t.boolean :main_discussion_group, default: false
       t.text :section, array: true, default: []
     end
+
+    add_index :profiles, :kw_id, unique: true
   end
 end
