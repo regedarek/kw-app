@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218172922) do
+ActiveRecord::Schema.define(version: 20170218183057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,18 +130,20 @@ ActiveRecord::Schema.define(version: 20170218172922) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer "kw_id",                                 null: false
-    t.date    "birth_date",                            null: false
-    t.string  "birth_place",                           null: false
-    t.string  "pesel",                                 null: false
-    t.string  "city",                                  null: false
-    t.string  "postal_code",                           null: false
-    t.string  "main_address",                          null: false
-    t.string  "optional_address"
-    t.text    "recommended_by",        default: [],                 array: true
-    t.integer "acomplished_courses",   default: [],                 array: true
-    t.boolean "main_discussion_group", default: false
-    t.text    "sections",              default: [],                 array: true
+    t.integer  "kw_id",                                 null: false
+    t.date     "birth_date",                            null: false
+    t.string   "birth_place",                           null: false
+    t.string   "pesel",                                 null: false
+    t.string   "city",                                  null: false
+    t.string   "postal_code",                           null: false
+    t.string   "main_address",                          null: false
+    t.string   "optional_address"
+    t.text     "recommended_by",        default: [],                 array: true
+    t.integer  "acomplished_courses",   default: [],                 array: true
+    t.boolean  "main_discussion_group", default: false
+    t.text     "sections",              default: [],                 array: true
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true, using: :btree
   end
 

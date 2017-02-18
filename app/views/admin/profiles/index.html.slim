@@ -1,0 +1,7 @@
+.columns
+  .row
+    h3 = t('.title')
+
+  .row
+    = link_to t('.export_to_xlsx_link'), admin_profiles_path(format: :xlsx), class: 'button expanded large'
+    = render 'table', profiles: @profiles

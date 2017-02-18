@@ -13,6 +13,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
       t.integer :acomplished_course, array: true, default: []
       t.boolean :main_discussion_group, default: false
       t.text :section, array: true, default: []
+      t.timestamps
     end
 
     add_index :profiles, :kw_id, unique: true

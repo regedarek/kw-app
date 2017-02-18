@@ -1,0 +1,15 @@
+table.responsive
+  thead
+    tr
+      th =t('.table_nr')
+      th =t('.table_name')
+      th =t('.table_email')
+      th =t('.table_phone')
+  tbody
+    - profiles.each_with_index do |profile, i|
+      tr
+        td= i + 1
+        td
+          = "#{profile.user.first_name} #{profile.user.last_name}"
+        td = profile.user.email
+        td = profile.user.phone

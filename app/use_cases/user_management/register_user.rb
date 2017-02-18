@@ -15,7 +15,6 @@ module UserManagement
         )
         profile = Db::Profile.new(
           kw_id: form.kw_id,
-          pesel: form.pesel,
           birth_date: form.birth_date,
           birth_place: form.birth_place,
           pesel: form.pesel,
