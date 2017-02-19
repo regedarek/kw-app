@@ -3,12 +3,13 @@ lock "3.7.2"
 
 set :application, "kw-app"
 set :repo_url, "git@github.com:regedarek/kw-app.git"
+set :passenger_restart_with_touch, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/kw-app"
+set :deploy_to, "/home/deploy/kw-app"
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
