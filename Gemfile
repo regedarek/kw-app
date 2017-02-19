@@ -23,7 +23,7 @@ gem 'axlsx', '2.1.0.pre'
 gem 'axlsx_rails'
 gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'letter_opener', group: :development
-gem 'activerecord-session_store'
+gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
   gem 'rspec-rails'
