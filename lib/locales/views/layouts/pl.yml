@@ -12,6 +12,7 @@ pl:
       administration:
         main: Panel Administracyjny
         users: Użytkownicy
+        profiles: Profile
         items: Przedmioty
         membership_fees: Składki
         reservations: Rezerwacje
