@@ -1,13 +1,16 @@
-.column.row
-  h2 Zapomniałeś hasła?
-  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-    = devise_error_messages!
+.columns
+  .row
+    .large-12.columns
+      h3 Zapomniałeś hasła?
 
-    .row
-      .large-12.columns
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        - if resource.errors.any?
+          .callout.alert
+            ul
+              - resource.errors.full_messages.each do |msg|
+                li= msg
+
         = f.label :email
         = f.email_field :email, autofocus: true
 
-    .row
-      .large-12.columns
-        = f.submit "Wyślij mi nowe hasło", class: 'button'
+        = f.submit "Wyślij mi nowe hasło", class: 'button large'

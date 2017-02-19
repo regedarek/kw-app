@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, class_name: 'Db::User', controllers: {registrations: 'registrations'}
+  devise_scope :user do
+    get '/zaloguj', to: 'devise/sessions#new'
+  end
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}

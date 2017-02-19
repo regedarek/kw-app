@@ -1,20 +1,14 @@
 .column.row
-  h2 Zaloguj się
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .row
-      .large-12.columns
-        = f.label :email
-        = f.email_field :email, autofocus: true
+  .large-12.columns
+    h2 Zaloguj się
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.label :email
+      = f.email_field :email, autofocus: true
 
-    .row
-      .large-12.columns
-        = f.label :password, 'Hasło'
-        = f.password_field :password, autocomplete: "off"
+      = f.label :password, 'Hasło'
+      = f.password_field :password, autocomplete: "off"
 
-    .row
-      .large-12.columns
-        = f.submit "Zaloguj się", class: 'button'
-
-    .row
-      .large-12.columns
-        = render "devise/shared/links"
+      = f.submit "Zaloguj się", class: 'button large'
+      |   
+      - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+        = link_to "Zapomniałeś hasła?", new_password_path(resource_name), class: 'button warning large'
