@@ -38,6 +38,19 @@ module Importing
         return Success.new
       end
 
+      def store_membership_fee(parsed_objects)
+        Db::MembershipFee.transaction do
+          parsed_objects.each do |parsed_data|
+            Db::MembershipFee.new.update(
+              year: parsed_data.year,
+              kw_id: parsed_data.kw_id
+            )
+          end
+        end
+
+        return Success.new
+      end
+
       def store_profile(parsed_objects)
         Db::Profile.transaction do
           parsed_objects.each do |parsed_data|
