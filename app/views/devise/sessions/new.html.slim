@@ -1,16 +1,19 @@
-.column.row
-  .large-12.columns
-    h2 Zaloguj się
-    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      = f.label :email
-      = f.email_field :email, autofocus: true
+.column
+  .row
+    .large-12.columns
+      h2 Zaloguj się
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = f.label :email
+        = f.email_field :email, autofocus: true
 
-      = f.label :password, 'Hasło'
-      = f.password_field :password, autocomplete: "off"
+        = f.label :password, 'Hasło'
+        = f.password_field :password, autocomplete: "off"
 
-      = f.submit "Zaloguj się", class: 'button large'
-      |   
-      = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path, class: 'button secondary large'
-      |   
-      - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-        = link_to "Zapomniałeś hasła?", new_password_path(resource_name), class: 'button warning large'
+        = f.submit "Zaloguj się", class: 'button large expanded'
+        - unless Rails.env.development?
+          p.text-center
+            | lub
+          = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path, class: 'button secondary large expanded'
+        |   
+        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+          = link_to "Zapomniałeś hasła?", new_password_path(resource_name), class: 'button warning large expanded'
