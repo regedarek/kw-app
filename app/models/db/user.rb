@@ -1,7 +1,8 @@
 class Db::User < ActiveRecord::Base
   include Filterable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :phone, :kw_id, :first_name, :last_name, presence: true
   validates :kw_id, :email, uniqueness: true
