@@ -1,9 +1,9 @@
 .columns
   .row
     h3=t('.title')
-  .row
-    = image_tag('mountain_routes_csv.png')
+
   .row
     = form_tag import_admin_importing_index_path, multipart: true do
       = file_field_tag :file
+      = select_tag :type, options_for_select([['Składka', :membership_fee], ['Profil', :profile], ['Użytkownik', :user], ['Przejście', :mountain_route]], :mountain_route)
       = submit_tag t('.submit')

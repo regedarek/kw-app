@@ -8,7 +8,8 @@ module Importing
     attribute :last_name, :string
     attribute :email, :string
     attribute :phone, :string
+    attribute :password, :string
 
-    validates :kw_id, :first_name, :last_name, :email, :phone, presence: true
+    validates :kw_id, :first_name, :last_name, :email, :password, presence: true
   end
 end

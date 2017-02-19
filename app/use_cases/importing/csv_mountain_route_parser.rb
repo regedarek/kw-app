@@ -1,9 +1,10 @@
 module Importing
-  class CsvParser
+  class CsvMountainRouteParser
     class << self
       REQUIRED_MOUNTAIN_ROUTE_HEADERS = %w(
         route_type name description difficulty partners time climbing_date rating area
       )
+
       def parse(file:)
         parsed_data = []
         invalid_lines = {}

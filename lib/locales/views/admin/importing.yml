@@ -2,7 +2,7 @@ pl:
   admin:
     importing:
       index:
-        title: Importer przejść
+        title: Importer
         submit: Zaimportuj
       import:
         not_imported: "Błąd podczas importowania: %{message}"

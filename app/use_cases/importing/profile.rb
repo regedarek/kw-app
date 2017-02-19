@@ -3,6 +3,17 @@ module Importing
     include ActiveModel::Model
     include AttributedObject::Strict
 
+    attribute :kw_id, :integer
+    attribute :birth_date, :string
+    attribute :birth_place, :string
+    attribute :pesel, :string
+    attribute :city, :string
+    attribute :postal_code, :string
+    attribute :main_address, :string
+    attribute :optional_address, :string
+    attribute :recommended_by, ArrayOf(:string)
+    attribute :acomplished_courses, ArrayOf(:string)
+    attribute :main_discussion_group, :string
     attribute :sections, ArrayOf(:string)
   end
 end
