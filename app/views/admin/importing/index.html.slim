@@ -9,4 +9,4 @@
         = form_tag import_admin_importing_index_path, multipart: true do
           = select_tag :type, options_for_select([['Składki', :membership_fee], ['Profile', :profile], ['Użytkowników', :user], ['Przejścia', :mountain_route]], :mountain_route)
           = file_field_tag :file
-          = submit_tag t('.submit')
+          = submit_tag t('.submit'), class: 'button large expanded'
