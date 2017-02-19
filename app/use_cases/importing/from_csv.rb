@@ -18,7 +18,7 @@ module Importing
         result.success do |parsed_data:|
           case type.to_sym
           when :mountain_route
-            return Importing::Store.store_mountain_type(parsed_data)
+            return Importing::Store.store_mountain_route(parsed_data)
           when :user
             return Importing::Store.store_user(parsed_data)
           when :profile
