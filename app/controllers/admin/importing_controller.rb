@@ -4,12 +4,17 @@ module Admin
     end
 
     def import
-      result = Importing::FromCsv.import(file: import_params.fetch(:file), type: import_params.fetch(:type))
+      uploader = CsvUploader.new
+      uploader.cache!(import_params.fetch(:file))
+
+      result = Importing::FromCsv.import(file: uploader.file, type: import_params.fetch(:type))
       result.success { redirect_to admin_importing_index_path, notice: t('.imported') }
       result.invalid do |message|
         redirect_to admin_importing_index_path, alert: t('.not_imported', message: message.fetch(:message))
       end
       result.else_fail!
+
+      uploader.remove!
     end
 
     private

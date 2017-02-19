@@ -1,9 +1,12 @@
 .columns
   .row
-    h3=t('.title')
+    .large-12.columns
+      h3=t('.title')
 
   .row
-    = form_tag import_admin_importing_index_path, multipart: true do
-      = file_field_tag :file
-      = select_tag :type, options_for_select([['Składka', :membership_fee], ['Profil', :profile], ['Użytkownik', :user], ['Przejście', :mountain_route]], :mountain_route)
-      = submit_tag t('.submit')
+    .large-4.columns
+      .callout
+        = form_tag import_admin_importing_index_path, multipart: true do
+          = select_tag :type, options_for_select([['Składki', :membership_fee], ['Profile', :profile], ['Użytkowników', :user], ['Przejścia', :mountain_route]], :mountain_route)
+          = file_field_tag :file
+          = submit_tag t('.submit')
