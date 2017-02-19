@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 # setup
-ruby '2.3.1'
+ruby '2.4.0'
 gem 'rails', '5.0.0.1'
 gem 'pg'
 gem 'sass-rails'
@@ -33,4 +33,8 @@ group :development, :test do
   gem 'spring'
   gem 'webmock'
   gem 'dotenv-rails'
+  gem 'capistrano', '~> 3.7', '>= 3.7.1'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rbenv', '~> 2.1'
 end
