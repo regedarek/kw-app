@@ -24,6 +24,7 @@ gem 'axlsx_rails'
 gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'letter_opener', group: :development
 gem 'carrierwave', '~> 1.0'
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   gem 'rspec-rails'
