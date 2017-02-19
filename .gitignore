@@ -24,3 +24,5 @@ cron_log.log
 latest.dump
 
 .DS_Store
+config/database.yml
+config/secrets.yml
