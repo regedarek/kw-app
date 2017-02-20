@@ -27,9 +27,9 @@
             li
               = t('.statistic_single', amount: Db::Strzelecki::SignUp.where(single: true).count)
             li
-              = t('.statistic_male', amount: Db::Strzelecki::SignUp.where(gender_1: '0').or(Db::Strzelecki::SignUp.where(gender_2: '0')).count)
+              = t('.statistic_male', amount: Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('male'))
             li
-              = t('.statistic_female', amount: Db::Strzelecki::SignUp.where(gender_1: '1').or(Db::Strzelecki::SignUp.where(gender_2: '1')).count)
+              = t('.statistic_female', amount: Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('female'))
 
     = link_to t('.sign_up_link'), new_strzelecki_sign_up_path, class: 'button large expanded'
 
