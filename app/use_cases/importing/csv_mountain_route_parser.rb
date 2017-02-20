@@ -2,7 +2,7 @@ module Importing
   class CsvMountainRouteParser
     class << self
       REQUIRED_MOUNTAIN_ROUTE_HEADERS = %w(
-        route_type name description difficulty partners time climbing_date rating area
+        route_type name description difficulty partners time climbing_date rating area peak length mountains
       )
 
       def parse(file:)
@@ -22,6 +22,9 @@ module Importing
             route_type: row['route_type'],
             name: row['name'],
             area: row['area'],
+            peak: row['peak'],
+            length: row['length'].to_i,
+            mountains: row['mountains'],
             description: row['description'],
             difficulty: row['difficulty'],
             partners: row['partners'],
@@ -48,7 +51,7 @@ module Importing
         errors = []
 
         invalid_lines.each do |key, value|
-          errors << "Line #{key}: #{value.keys.join(', ')}"
+          errors << "Line #{key}: #{value}"
         end
 
         Failure.new(:invalid, message: "Invalid fields: #{errors.join('; ')}")

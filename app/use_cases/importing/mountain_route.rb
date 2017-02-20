@@ -10,9 +10,12 @@ module Importing
     attribute :difficulty, :string
     attribute :partners, :string
     attribute :time, :string
+    attribute :peak, :string
+    attribute :mountains, :string
+    attribute :length, :integer
     attribute :climbing_date, :string
     attribute :rating, :string
 
-    validates :name, :partners, presence: true
+    validates :partners, presence: true
   end
 end

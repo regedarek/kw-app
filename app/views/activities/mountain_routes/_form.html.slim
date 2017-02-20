@@ -19,8 +19,18 @@
 
   .row
     .large-12.columns
+      = f.label :mountains
+      = f.text_field :mountains
+
+  .row
+    .large-12.columns
       = f.label :name
       = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :peak
+      = f.text_field :peak
 
   .row
     .large-12.columns
@@ -36,6 +46,11 @@
     .large-12.columns
       = f.label :time
       = f.text_field :time
+
+  .row
+    .large-12.columns
+      = f.label :length
+      = f.text_field :length
 
   .row
     .large-12.columns

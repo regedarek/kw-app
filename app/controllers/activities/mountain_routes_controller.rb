@@ -24,7 +24,7 @@ module Activities
     private
 
     def route_params
-      params.require(:route).permit(:route_type, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating)
+      params.require(:route).permit(:route_type, :peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating)
     end
   end
 end

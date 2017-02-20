@@ -1,21 +1,22 @@
-table.responsive
+table.scoll.stack
   thead
     tr
-      th width='130' = t('.when')
-      th = t('.who')
-      th = t('.where')
-      th = t('.name')
-      th width='50' = t('.difficulty')
+      th width='130' kiedy?
+      th góry
+      th rejon/dolina
+      th szczyt, przełęcz, ściana
+      th nazwa drogi
+      th width='50' wycena
+      th długość drogi
+      th skład zespołu
   tbody
     - routes.each do |route|
       tr
-        td align='left'
-          = route.climbing_date
-        td
-          = route.partners
-        td
-          = route.area
-        td
-          = route.name
-        td align='center'
-          = route.difficulty
+        td = route.climbing_date
+        td = route.mountains
+        td = route.area
+        td = route.peak
+        td = route.name
+        td align='center' = route.difficulty
+        td align='center' = route.length
+        td = route.partners

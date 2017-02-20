@@ -8,12 +8,15 @@ module Importing
               route_type: parsed_data.route_type,
               name: parsed_data.name,
               area: parsed_data.area,
+              length: parsed_data.length,
+              peak: parsed_data.peak,
+              mountains: parsed_data.mountains,
               description: parsed_data.description,
               difficulty: parsed_data.difficulty,
               partners: parsed_data.partners,
               time: parsed_data.time,
               climbing_date: parsed_data.climbing_date,
-              rating: parsed_data.rating,
+              rating: parsed_data.rating
             )
           end
         end
