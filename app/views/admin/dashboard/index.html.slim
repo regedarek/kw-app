@@ -1,10 +1,12 @@
 .row
   h3 5 ostatnich klubowiczow
   table.table.table-striped
-    - Db::User.limit(5).each do |user|
+    - Db::User.order(last_sign_in_at: :asc).limit(5).each do |user|
       tr
         td
           = "#{user.first_name} #{user.last_name}"
+        td
+          = user.last_sign_in_at
 
   h3 5 ostatnich rezerwacji
   table.table.table-striped
