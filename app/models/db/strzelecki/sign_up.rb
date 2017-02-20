@@ -24,13 +24,13 @@ module Db
       end
 
       def self.package_type_1_attributes_for_select
-        [:kw, :junior, :standard].map do |type|
+        [:standard, :junior, :kw].map do |type|
           [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}", price: Db::Strzelecki::SignUp::PRICES[type]), type]
         end
       end
 
       def self.package_type_2_attributes_for_select
-        [:none, :kw, :junior, :standard].map do |type|
+        [:none, :standard, :junior, :kw].map do |type|
           [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}", price: Db::Strzelecki::SignUp::PRICES[type]), type]
         end
       end
