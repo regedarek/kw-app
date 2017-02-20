@@ -72,6 +72,21 @@ pl:
     attributes:
       db/profile:
         kw_id: Numer klubowy
+        email: E-mail
+        first_name: Imię
+        last_name: Nazwisko
+        birth_date: Data urodzin
+        birth_place: Miejsce urodzin
+        pesel: Pesel
+        city: Miasto
+        postal_code: Kod pocztowy
+        main_address: Adres zameldowania
+        optional_address: Adres kontaktowy
+        phone: Telefon
+        main_discussion_group: Czy chcesz się zapisać do głównej grupy dyskusyjnej?
+        recommended_by: Skąd dowiedziałeś się o Klubie
+        acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
+        sections: Proszę wskazać w których Sekcjach KW chciałbyś/chciałabyś działać.
       db/activities/mountain_route:
         name: Nazwa drogi/zjazdu
         difficulty: Wycena

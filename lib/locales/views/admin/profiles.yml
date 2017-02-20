@@ -1,0 +1,6 @@
+pl:
+  admin:
+    profiles:
+      index:
+        title: Profile kandydatów oraz członków
+        export_to_xlsx_link: Exportuj do arkusza

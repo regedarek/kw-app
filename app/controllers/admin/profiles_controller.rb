@@ -1,7 +1,7 @@
 module Admin
   class ProfilesController < Admin::BaseController
     def index
-      @profiles = Db::Profile.all
+      @profiles = Db::Profile.page(params[:page])
 
       respond_to do |format|
         format.html

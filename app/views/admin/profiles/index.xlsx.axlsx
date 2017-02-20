@@ -4,6 +4,20 @@ user_attributes = %i(
   email
   phone
 )
+profile_attributes = %i(
+  birth_date
+  birth_place
+  pesel
+  city
+  postal_code
+  main_address
+  optional_address
+  recommended_by
+  acomplished_courses
+  main_discussion_group
+  sections
+  accepted
+)
 wb.styles do |style|
   highlight_cell_options = {
     fg_color: 'FFFFFF',
@@ -15,12 +29,18 @@ wb.styles do |style|
     human_user_attributes = user_attributes.map do |attr|
       Db::User.human_attribute_name(attr)
     end
-    sheet.add_row(human_user_attributes, style: style.add_style(highlight_cell_options))
+    human_profile_attributes = profile_attributes.map do |attr|
+      Db::Profile.human_attribute_name(attr)
+    end
+    sheet.add_row(human_user_attributes + human_profile_attributes, style: style.add_style(highlight_cell_options))
     @profiles.each do |profile|
       user_values = user_attributes.map do |attr|
-        profile.user.read_attribute(attr)
+        profile.user.read_attribute(attr) if profile.user.present?
       end
-      sheet.add_row(user_values)
+      profile_values = profile_attributes.map do |attr|
+        profile.read_attribute(attr)
+      end
+      sheet.add_row(user_values + profile_values)
     end
   end
 end

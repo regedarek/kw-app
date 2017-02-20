@@ -1,15 +1,40 @@
-table.responsive
+table.scroll.stack
   thead
     tr
-      th =t('.table_nr')
-      th =t('.table_name')
-      th =t('.table_email')
-      th =t('.table_phone')
+      th Numer klubowy
+      th Imię i nazwisko
+      th E-mail
+      th Telefon
+      th=Db::Profile.human_attribute_name :birth_date
+      th=Db::Profile.human_attribute_name :birth_place
+      th=Db::Profile.human_attribute_name :pesel
+      th=Db::Profile.human_attribute_name :city
+      th=Db::Profile.human_attribute_name :postal_code
+      th=Db::Profile.human_attribute_name :main_address
+      th=Db::Profile.human_attribute_name :optional_address
+      th=Db::Profile.human_attribute_name :recommended_by
+      th=Db::Profile.human_attribute_name :acomplished_courses
+      th=Db::Profile.human_attribute_name :main_discussion_group
+      th=Db::Profile.human_attribute_name :sections
+      th=Db::Profile.human_attribute_name :accepted
   tbody
     - profiles.each_with_index do |profile, i|
       tr
-        td= i + 1
+        td = profile.kw_id
         td
-          = "#{profile.user.first_name} #{profile.user.last_name}"
-        td = profile.user.email
-        td = profile.user.phone
+          - if profile.user.present?
+            b = "#{profile.user.first_name} #{profile.user.last_name}"
+        td = profile.user.try :email
+        td = profile.user.try :phone
+        td = profile.birth_date
+        td = profile.birth_place
+        td = profile.pesel
+        td = profile.city
+        td = profile.postal_code
+        td = profile.main_address
+        td = profile.optional_address
+        td = profile.recommended_by
+        td = profile.acomplished_courses
+        td = profile.main_discussion_group
+        td = profile.sections
+        td = profile.accepted
