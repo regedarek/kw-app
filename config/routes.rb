@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/zaloguj', to: 'devise/sessions#new'
   end
+  namespace :activities do
+    resources :mountain_routes
+  end
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
@@ -46,9 +49,7 @@ Rails.application.routes.draw do
       post :mark_sold
     end
   end
-  namespace :activities do
-    resources :mountain_routes
-  end
+
   resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create] do
     member do
