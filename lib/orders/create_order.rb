@@ -14,11 +14,11 @@ module Orders
         if @service.is_a? Db::MembershipFee
           order.membership_fees << @service
           cost = if @service.reactivation?
-           @service.cost + 150
+                   @service.cost + 150
                  else
                    @service.cost
                  end
-          @order.cost = cost
+          order.cost = cost
         end
         if @service.is_a? Db::Reservation
           order.reservations << @service
