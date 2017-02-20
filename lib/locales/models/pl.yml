@@ -95,6 +95,9 @@ pl:
         time: Czas przejscia
         climbing_date: Data przejscia
         area: Rejon przejścia
+        peak: szczyt, przełęcz, ściana
+        mountains: góry
+        length: długość drogi
         rating_one: Fuj, nie polecam
         rating_two: Warta przejścia
         rating_three: Piękna droga
