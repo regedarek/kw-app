@@ -5,8 +5,9 @@ module UserManagement
         return Failure.new(:invalid, form: form) if !form.valid?
 
         generated_password = Devise.friendly_token.first(4)
+        last_kw_id_number = Db::User.maximum(:kw_id).to_i + 1
         user = Db::User.new(
-          kw_id: form.kw_id,
+          kw_id: last_kw_id_number,
           first_name: form.first_name,
           last_name: form.last_name,
           email: form.email,
@@ -14,7 +15,7 @@ module UserManagement
           password: generated_password
         )
         profile = Db::Profile.new(
-          kw_id: form.kw_id,
+          kw_id: last_kw_id_number,
           birth_date: form.birth_date,
           birth_place: form.birth_place,
           pesel: form.pesel,

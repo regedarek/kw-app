@@ -1,6 +1,5 @@
 module UserManagement
   class ProfileForm < FormObject
-    attribute :kw_id, :integer, default: nil
     attribute :first_name, :string
     attribute :last_name, :string
     attribute :email, :string
@@ -18,7 +17,7 @@ module UserManagement
     attribute :sections, ArrayOf(:string), default: []
     attribute :terms_of_service, :boolean, default: false
 
-    validates :first_name, :last_name, :kw_id, :email, :pesel, :birth_date, :birth_place,
+    validates :first_name, :last_name, :email, :pesel, :birth_date, :birth_place,
               :city, :postal_code, :main_address, presence: true
     validates :terms_of_service, acceptance: true
 
