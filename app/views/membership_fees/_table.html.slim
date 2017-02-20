@@ -4,11 +4,15 @@ table.stack
       th
         | Rok
       th
+        | Reaktywacja
+      th
         | Opłacono
   tbody
     - fees.each do |fee|
       tr
         td
           = fee.year
+        td
+          = fee.reactivation? ? "Tak" : "Nie"
         td
           = fee.order && fee.order.payment.prepaid? ? "Zapłacone" : "Nie zapłacone"
