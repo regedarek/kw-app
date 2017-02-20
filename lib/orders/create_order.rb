@@ -11,6 +11,10 @@ module Orders
       else
         order = Db::Order.new
         order.build_payment(dotpay_id: SecureRandom.hex(13))
+        if @service.is_a? Db::MembershipFee
+          order.membership_fees << @service
+          order.cost = @service.cost
+        end
         if @service.is_a? Db::Reservation
           order.reservations << @service
           order.update_cost

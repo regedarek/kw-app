@@ -1,0 +1,9 @@
+= form_for form, url: membership_fees_path do |f|
+  - if form.errors.any?
+    .callout.alert
+      ul
+        - form.errors.full_messages.each do |msg|
+          li= msg
+  = f.label :year, 'Rok'
+  = f.number_field :year, placeholder: Date.today.year, min: 2000
+  = f.submit 'Zapłać', class: 'button'

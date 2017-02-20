@@ -15,6 +15,7 @@ module Db
     def description
       return "Rezerwacja nr: #{services.first.serviceable.id}" if services.first.serviceable.is_a? Db::Reservation
       return "Zapis na zawody MJS 2017 nr #{services.first.serviceable.id} od #{services.first.serviceable.name_1}" if services.first.serviceable.is_a? Db::Strzelecki::SignUp
+      return "Składka za rok: #{services.first.serviceable.year} od #{services.first.serviceable.user.first_name} #{services.first.serviceable.user.last_name}" if services.first.serviceable.is_a? Db::MembershipFee
     end
   end
 end
