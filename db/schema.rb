@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219080323) do
+ActiveRecord::Schema.define(version: 20170220140949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,10 +65,11 @@ ActiveRecord::Schema.define(version: 20170219080323) do
 
   create_table "membership_fees", force: :cascade do |t|
     t.string   "year"
-    t.integer  "cost",       default: 100
+    t.integer  "cost",         default: 100
     t.integer  "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "reactivation", default: false
     t.index ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
   end
 

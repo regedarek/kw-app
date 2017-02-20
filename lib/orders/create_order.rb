@@ -13,7 +13,12 @@ module Orders
         order.build_payment(dotpay_id: SecureRandom.hex(13))
         if @service.is_a? Db::MembershipFee
           order.membership_fees << @service
-          order.cost = @service.cost
+          cost = if @service.reactivation?
+           @service.cost + 150
+                 else
+                   @service.cost
+                 end
+          @order.cost = cost
         end
         if @service.is_a? Db::Reservation
           order.reservations << @service

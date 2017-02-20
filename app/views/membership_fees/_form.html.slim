@@ -6,4 +6,7 @@
           li= msg
   = f.label :year, 'Rok'
   = f.number_field :year, placeholder: Date.today.year, min: 2000
+  = f.label :reactivation, 'Reaktywacja? (150zł)'
+  = f.check_box :reactivation
+  br
   = f.submit 'Zapłać', class: 'button'
