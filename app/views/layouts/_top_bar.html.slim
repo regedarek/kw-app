@@ -40,5 +40,5 @@
           - if user_signed_in?
             li= link_to t('.administration.logout'), destroy_user_session_path
           - else
-            li= link_to t('.administration.login'), new_user_session_path
+            li= link_to t('.administration.login'), Rails.env.production? ? 'http://panel.kw.krakow.pl/zaloguj' : new_user_session_path
             li= link_to t('.administration.signup'), zarejestruj_path
