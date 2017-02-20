@@ -15,4 +15,5 @@ table.stack
         td
           = fee.reactivation? ? "Tak" : "Nie"
         td
-          = fee.order && fee.order.payment.prepaid? ? "Zapłacone" : "Nie zapłacone"
+          - if fee.order && fee.order.payment
+            = fee.order.payment.prepaid? || fee.order.payment.cash? ? "Zapłacone" : "Nie zapłacone"

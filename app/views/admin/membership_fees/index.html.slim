@@ -21,20 +21,24 @@
                 placeholder: 'Numer klubowy'
           th Rok
           th Kiedy
+          th Opłacono
           th Akcje
       tbody
-        - @membership_fees.each do |payment|
-          tr style=(payment.year == Date.today.year ? 'background-color: green' : '')
+        - @membership_fees.each do |fee|
+          tr style=(fee.year == Date.today.year ? 'background-color: green' : '')
             td
-              = payment.user.try(:first_name)
+              = fee.user.try(:first_name)
             td
-              = payment.user.try(:last_name)
+              = fee.user.try(:last_name)
             td
-              = payment.kw_id
+              = fee.kw_id
             td
-              = payment.year
+              = fee.year
             td
-              = payment.created_at.strftime("%d-%m-%Y")
+              = fee.created_at.strftime("%d-%m-%Y")
             td
-              = link_to 'Usun', admin_membership_fee_path(payment.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+              - if fee.order && fee.order.payment
+                = fee.order.payment.prepaid? || fee.order.payment.cash? ? "Zapłacone" : "Nie zapłacone"
+            td
+              = link_to 'Usun', admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' }
     = paginate @membership_fees

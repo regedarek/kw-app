@@ -41,10 +41,12 @@ module Importing
       def store_membership_fee(parsed_objects)
         Db::MembershipFee.transaction do
           parsed_objects.each do |parsed_data|
-            Db::MembershipFee.new.update(
-              year: parsed_data.year,
-              kw_id: parsed_data.kw_id
-            )
+           fee = Db::MembershipFee.create(
+             year: parsed_data.year,
+             kw_id: parsed_data.kw_id
+           )
+           order = Orders::CreateOrder.new(service: fee).create
+           order.payment.update(cash: true)
           end
         end
 
