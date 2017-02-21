@@ -3,5 +3,8 @@
     .large-12.columns
       - if user_signed_in?
         = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+      .text-center
+        = paginate @routes
       = render 'table', routes: @routes
-      = paginate @routes
+      .text-center
+        = paginate @routes
