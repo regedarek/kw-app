@@ -1,33 +1,63 @@
 .row
-  h3 5 ostatnich klubowiczow
-  table.table.table-striped
-    - Db::User.order(last_sign_in_at: :asc).limit(5).each do |user|
-      tr
-        td
-          = "#{user.first_name} #{user.last_name}"
-        td
-          = user.last_sign_in_at
+  .large-4.columns
+    h3 5 wizyt
+    table.stack
+      - Db::User.order(last_sign_in_at: :desc).limit(5).each do |user|
+        tr
+          td
+            = "#{user.first_name} #{user.last_name}"
+          td
+            = user.last_sign_in_at
 
-  h3 5 ostatnich rezerwacji
-  table.table.table-striped
-    - Db::Reservation.limit(5).each do |reservation|
-      tr
-        td
-          = reservation.items.map(&:display_name)
-        td
-          = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
-        td
-          = reservation.start_date
-        td
-          = reservation.end_date
+  .large-4.columns
+    h3 5 ostatnich rezerwacji
+    table.stack
+      - Db::Reservation.limit(5).each do |reservation|
+        tr
+          td
+            = reservation.items.map(&:display_name)
+          td
+            = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
+          td
+            = reservation.start_date
+          td
+            = reservation.end_date
+
+  .large-4.columns
+    h3 5 ostatnich skladek
+    table.stack
+      - Db::MembershipFee.order(created_at: :desc).limit(5).each do |payment|
+        tr
+          td
+            = payment.year
+          td
+            = payment.kw_id
+          td
+            = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
+
 .row
-  h3 5 ostatnich skladek
-  table.responsive
-    - Db::MembershipFee.limit(5).each do |payment|
-      tr
-        td
-          = payment.year
-        td
-          = payment.kw_id
-        td
-          = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
+  .large-4.columns
+    h3 5 ostatnich przejść
+    table.stack
+      - Db::Activities::MountainRoute.order(climbing_date: :desc).limit(5).each do |route|
+        tr
+          td
+            = route.name
+          td
+            = route.partners
+
+  .large-4.columns
+    h3 5 ostatnich zapisów
+    table.stack
+      - Db::Strzelecki::SignUp.order(created_at: :desc).limit(5).each do |sign_in|
+        tr
+          td
+            = "#{sign_in.name_1} #{sign_in.name_2}"
+
+  .large-4.columns
+    h3 5 ostatnich zgłoszeń
+    table.stack
+      - Db::Profile.order(created_at: :desc).limit(5).each do |profile|
+        tr
+          td = "#{profile.user.try(:first_name)} #{profile.user.try(:last_name)}"
+          td = profile.user.try(:email)
