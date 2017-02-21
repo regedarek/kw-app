@@ -1,7 +1,7 @@
 module Activities
   class MountainRoutesController < ApplicationController
     def index
-      @routes = Db::Activities::MountainRoute.order('climbing_date DESC NULLS LAST').page(params[:page])
+      @routes = Db::Activities::MountainRoute.order('climbing_date DESC NULLS LAST').page(params[:page]).per(10)
     end
 
     def new
