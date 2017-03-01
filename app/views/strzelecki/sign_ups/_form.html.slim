@@ -17,9 +17,13 @@
         = f.text_field :name_1
 
     .row
-      .large-12.columns
+      .large-9.columns
         = f.label :email_1
         = f.email_field :email_1
+
+      .large-3.columns
+        = f.label :tshirt_size_1
+        = f.select :tshirt_size_1, options_for_select(Db::Strzelecki::SignUp.tshirt_sizes_attributes_for_select, f.object.tshirt_size_1), include_blank: true
 
     .row
       .large-6.columns
@@ -65,9 +69,13 @@
           = f.text_field :name_2
 
       .row
-        .large-12.columns
+        .large-9.columns
           = f.label :email_2
           = f.email_field :email_2
+
+        .large-3.columns
+          = f.label :tshirt_size_2
+          = f.select :tshirt_size_2, options_for_select(Db::Strzelecki::SignUp.tshirt_sizes_attributes_for_select, f.object.tshirt_size_2), include_blank: true
 
       .row
         .large-6.columns
@@ -97,7 +105,7 @@
           = f.text_field :organization_2
 
       .row
-        .large-6.columns
+        .large-12.columns
           = f.check_box :vege_2
           = f.label :vege_2
 

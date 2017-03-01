@@ -55,6 +55,8 @@ pl:
         city_2: Miasto 2
         package_type_1: Pakiet startowy 1
         package_type_2: Pakiet startowy 2
+        tshirt_size_1: Rozmiar koszulki 1
+        tshirt_size_2: Rozmiar koszulki 2
         category_type: Kategoria
         gender_1: Płeć 1
         gender_2: Płeć 2
@@ -118,8 +120,15 @@ pl:
         remarks: Uwagi do wiadomości organizatorów
         package_type_1: Pakiet startowy 1
         package_type_2: Pakiet startowy 2
+        tshirt_size_1: Rozmiar koszulki 1
+        tshirt_size_2: Rozmiar koszulki 2
         phone_1: Numer telefonu 1
         phone_2: Numer telefonu 2
+        tshirt_sizes:
+          s: S
+          m: M
+          l: L
+          xl: XL
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN)

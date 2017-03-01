@@ -9,6 +9,7 @@ sign_up_attributes = %i(
   city_1 city_2
   gender_1 gender_2
   package_type_1 package_type_2
+  tshirt_size_1 tshirt_size_2
   remarks single
 )
 wb.styles do |style|

@@ -5,6 +5,8 @@ module Db
       self.table_name = 'strzelecki_sign_ups'
       enum gender_1: [:male, :female], _suffix: :one
       enum gender_2: [:male, :female], _suffix: :two
+      enum tshirt_size_1: [:s, :m, :l, :xl], _suffix: :one
+      enum tshirt_size_2: [:s, :m, :l, :xl], _suffix: :two
       enum package_type_1: [:kw, :junior, :standard], _suffix: :one
       enum package_type_2: [:none, :kw, :junior, :standard], _suffix: :two
 
@@ -32,6 +34,12 @@ module Db
       def self.package_type_2_attributes_for_select
         [:none, :standard, :junior, :kw].map do |type|
           [I18n.t("activerecord.attributes.db/strzelecki/sign_up.package_types.#{type}", price: Db::Strzelecki::SignUp::PRICES[type]), type]
+        end
+      end
+
+      def self.tshirt_sizes_attributes_for_select
+        tshirt_size_1s.map do |type, _|
+          [I18n.t("activerecord.attributes.#{model_name.i18n_key}.tshirt_sizes.#{type}"), type]
         end
       end
 
