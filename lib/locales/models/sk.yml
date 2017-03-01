@@ -17,6 +17,8 @@ sk:
         organization_2: Členstvo v klube 2 (voliteľné)
         package_type_1: Štartovací balíček 1
         package_type_2: Štartovací balíček 2
+        tshirt_size_1: Rozmiar koszulki 1
+        tshirt_size_2: Rozmiar koszulki 2
         city_1: Veľkomesto 1
         city_2: Veľkomesto 2
         gender_1: Pohlavie 1
@@ -42,6 +44,8 @@ sk:
         organization_2: Členstvo v klube
         package_type_1: Štartovací balíček
         package_type_2: Štartovací balíček
+        tshirt_size_1: Rozmiar koszulki 1
+        tshirt_size_2: Rozmiar koszulki 2
         city_1: Veľkomesto
         city_2: Veľkomesto
         gender_1: Pohlavie
@@ -49,6 +53,11 @@ sk:
         single: Hľadám partnera
         category_type: Kategórie
         remarks: Pripomienky k usporiadateľovi (V prípade, že nemôžeš zaplatiť kreditnou kartou alebo bankovým prevodom, napíš tu, že platíš v hotovosti.)
+        tshirt_sizes:
+          s: S
+          m: M
+          l: L
+          xl: XL
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN)

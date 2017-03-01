@@ -22,6 +22,7 @@ sk:
         send: Zaregistruj sa
         top_info: 'Prihlasuješ vašu družinu a platíš za obidva štartovacie balíčky, ak potrebuješ partnera do družiny, zaznač "hľadám partnera"'
         rules_html: "Podmienky sú k dispozícii v poľštine na <a href=http://strzelecki.kw.krakow.pl/regulamin>http://strzelecki.kw.krakow.pl/regulamin</a> keď sa spýtate na otázku: <a href=mailto:strzelecki@kw.krakow.pl>strzelecki@kw.krakow.pl</a>"
+        tshirt_size_html: "T-shirt (<a target='blank' href=http://strzelecki.kw.krakow.pl/edycja-2017/rozmiary-koszulek/>Veľkosť</a>)"
       new:
         link_to_index: Prejdi ďalej a ukáž súperov
       create:

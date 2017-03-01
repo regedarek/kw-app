@@ -22,6 +22,7 @@ pl:
         send: Zapisz się!
         top_info: 'Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję "szukam partnera".'
         rules_html: "Regulamin dostępny na stronie: <a target='blank' href=http://strzelecki.kw.krakow.pl/regulamin>http://strzelecki.kw.krakow.pl/regulamin</a>"
+        tshirt_size_html: "Rozmiar koszulki (<a target='blank' href=http://strzelecki.kw.krakow.pl/edycja-2017/rozmiary-koszulek/>Rozmiarówka</a>)"
       new:
         link_to_index: przejdź aby zobaczyć rywali
       create:

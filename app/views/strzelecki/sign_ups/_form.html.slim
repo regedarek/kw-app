@@ -22,7 +22,7 @@
         = f.email_field :email_1
 
       .large-3.columns
-        = f.label :tshirt_size_1
+        = f.label :tshirt_size_1, t('.tshirt_size_html')
         = f.select :tshirt_size_1, options_for_select(Db::Strzelecki::SignUp.tshirt_sizes_attributes_for_select, f.object.tshirt_size_1), include_blank: true
 
     .row
@@ -74,7 +74,7 @@
           = f.email_field :email_2
 
         .large-3.columns
-          = f.label :tshirt_size_2
+          = f.label :tshirt_size_2, t('.tshirt_size_html')
           = f.select :tshirt_size_2, options_for_select(Db::Strzelecki::SignUp.tshirt_sizes_attributes_for_select, f.object.tshirt_size_2), include_blank: true
 
       .row
