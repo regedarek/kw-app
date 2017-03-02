@@ -2,6 +2,8 @@ pl:
   activemodel:
     strzelecki_sign_up_form: Formularz zapisów
     attributes:
+      membership/fee_form:
+        year: Rok
       user_management_profile_form:
         kw_id: Numer klubowy
         email: E-mail
@@ -69,9 +71,12 @@ pl:
       db/auction_product: Przedmiot
       db/valley: Dolina
       db/strzelecki/sign_up: Zapis na zawody
+      db/membership_fee: Składka
       db/profile: Profil
       strzelecki_sign_up_form: Formularz zapisów
     attributes:
+      db/membership_fee:
+        year: Rok
       db/profile:
         kw_id: Numer klubowy
         email: E-mail
