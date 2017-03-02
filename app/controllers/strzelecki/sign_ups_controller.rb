@@ -1,7 +1,7 @@
 module Strzelecki
   class SignUpsController < ApplicationController
     def index
-      @sign_ups = Db::Strzelecki::SignUp.all
+      @sign_ups = Db::Strzelecki::SignUp.order(:created_at)
     end
 
     def new
