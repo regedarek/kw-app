@@ -1,7 +1,7 @@
 module Admin
   class StrzeleckiController < Admin::BaseController
     def index
-      @sign_ups = Db::Strzelecki::SignUp.all
+      @sign_ups = Db::Strzelecki::SignUp.order(:created_at)
 
       respond_to do |format|
         format.html
