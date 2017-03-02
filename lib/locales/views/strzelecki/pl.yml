@@ -12,6 +12,7 @@ pl:
         statistic_single: 'Szukam partnera: %{amount}'
         statistic_male: 'Mężczyzn: %{amount}'
         statistic_female: 'Kobiet: %{amount}'
+        statistic_all: 'Razem: %{amount}'
         sign_up_link: Zapisz się na XXIX Memoriał Jana Strzeleckiego!
       table:
         table_nr: Nr.

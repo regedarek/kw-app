@@ -12,6 +12,7 @@ sk:
         statistic_single: 'Hľadám partnera: %{amount}'
         statistic_male: 'Muži: %{amount}'
         statistic_female: 'Ženy: %{amount}'
+        statistic_all: 'Spolu: %{amount}'
         sign_up_link: Zaregistrujte sa na XXIX Memoriál Jána Strzeleckého!
       table:
         table_nr: Nr.

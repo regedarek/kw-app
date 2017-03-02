@@ -23,13 +23,18 @@
       .large-6.columns
         .callout.primary
           b = t('.statistic_title')
+          - single = Db::Strzelecki::SignUp.where(single: true).count
+          - male = Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('male')
+          - female = Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('female')
           ul
             li
-              = t('.statistic_single', amount: Db::Strzelecki::SignUp.where(single: true).count)
+              = t('.statistic_single', amount: single)
             li
-              = t('.statistic_male', amount: Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('male'))
+              = t('.statistic_male', amount: male)
             li
-              = t('.statistic_female', amount: Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('female'))
+              = t('.statistic_female', amount: female)
+            li
+              = t('.statistic_all', amount: male + female)
 
     = link_to t('.sign_up_link'), new_strzelecki_sign_up_path, class: 'button large expanded'
 
