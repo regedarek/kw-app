@@ -54,10 +54,17 @@ sk:
         category_type: Kategórie
         remarks: Pripomienky k usporiadateľovi (V prípade, že nemôžeš zaplatiť kreditnou kartou alebo bankovým prevodom, napíš tu, že platíš v hotovosti.)
         tshirt_sizes:
-          s: S
-          m: M
-          l: L
-          xl: XL
+          ms: Męska S
+          mm: Męska M
+          ml: Męska L
+          mxl: Męska XL
+          mxxl: Męska XL
+          mxxl: Męska MXL
+          wxs: Damska XS
+          ws: Damska S
+          wm: Damska M
+          wl: Damska L
+          wxl: Damska XL
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN)
