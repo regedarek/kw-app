@@ -5,11 +5,13 @@ module Strzelecki
     end
 
     def new
+      return redirect_to strzelecki_sign_ups_path, alert: 'Zapisy zamknięte, zapisz się w biurze zawodów, więcej informacji na stronie http://strzelecki.kw.krakow.pl'
       @sign_up = Db::Strzelecki::SignUp.new
       @form = Strzelecki::SignUpForm.new
     end
 
     def create
+      return redirect_to strzelecki_sign_ups_path, alert: 'Zapisy zamknięte, zapisz się w biurze zawodów, więcej informacji na stronie http://strzelecki.kw.krakow.pl'
       @form = Strzelecki::SignUpForm.new(strzelecki_params)
       result = Strzelecki::Edition2017.sign_up(form: @form)
       result.success { redirect_to strzelecki_sign_ups_path, notice: t('.signed_up') }
