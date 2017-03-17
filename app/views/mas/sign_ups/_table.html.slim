@@ -1,0 +1,40 @@
+.row
+  .columns
+    table.responsive
+      thead
+        tr
+          th =t('.table_nr')
+          th =t('.table_team')
+          th =t('.table_organization')
+          th =t('.table_city')
+      tbody
+        - sign_ups.each_with_index do |sign_up, i|
+          tr
+            td= i + 1
+            td
+              - if sign_up.single?
+                = sign_up.name_1
+              - else
+                = "#{sign_up.name_1} oraz #{sign_up.name_2}"
+            td
+              - if sign_up.single?
+                = sign_up.organization_1
+              - else
+                - if !sign_up.organization_2.present? || !sign_up.organization_1.present?
+                  - if sign_up.organization_2.present?
+                    = sign_up.organization_2
+                  - if sign_up.organization_1.present?
+                    = sign_up.organization_1
+                - else
+                  = "#{sign_up.organization_1}/#{sign_up.organization_2}"
+            td
+              - if sign_up.single?
+                = sign_up.city_1
+              - else
+                - if !sign_up.city_2.present? || !sign_up.city_1.present?
+                  - if sign_up.city_1.present?
+                    = sign_up.city_1
+                  - if sign_up.city_2.present?
+                    = sign_up.city_2
+                - else
+                  = "#{sign_up.city_1}/#{sign_up.city_2}"

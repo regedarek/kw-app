@@ -1,5 +1,5 @@
 pl:
-  strzelecki:
+  mas:
     sign_ups:
       index:
         pricing_title: Wpisowe
@@ -29,7 +29,7 @@ pl:
       create:
         signed_up: Zarejestrowałeś się na zawody. Na podany email otrzymasz informacje jak dokonać płatności online.
         order_has_not_been_created: Problem z utworzeniem płatności, skontaktuj się z organizatorem.
-  strzelecki_mailer:
+  mas_mailer:
     sign_up:
       subject: "Memoriał Jana Strzeleckiego 2017 - Rejestracja na zawody: #%{id}"
       title: "Zgłoszenie #%{id}"

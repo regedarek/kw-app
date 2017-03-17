@@ -1,0 +1,4 @@
+.row
+  .columns
+    = link_to t('.export_to_xlsx_link'), admin_competitions_path(format: :xlsx), class: 'button expanded large'
+    = render 'table', sign_ups: @sign_ups

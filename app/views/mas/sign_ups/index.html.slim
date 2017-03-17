@@ -1,0 +1,33 @@
+.row
+  .columns
+    .row
+      .large-12.columns
+        .callout.warning
+          = t('.pricing_info')
+      .large-6.columns
+        .callout.primary
+          b = t('.pricing_title')
+          ul
+            li = t('.pricing_standard', price: Db::Strzelecki::SignUp::PRICES[:standard])
+            li = t('.pricing_junior', price: Db::Strzelecki::SignUp::PRICES[:junior])
+            li = t('.pricing_other')
+            li = t('.pricing_kw', price: Db::Strzelecki::SignUp::PRICES[:kw])
+      .large-6.columns
+        .callout.primary
+          b = t('.statistic_title')
+          - single = Db::Strzelecki::SignUp.where(single: true).count
+          - male = Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('male')
+          - female = Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('female')
+          ul
+            li
+              = t('.statistic_single', amount: single)
+            li
+              = t('.statistic_male', amount: male)
+            li
+              = t('.statistic_female', amount: female)
+            li
+              = t('.statistic_all', amount: male + female)
+
+    = link_to t('.sign_up_link'), new_mas_sign_up_path, class: 'button large expanded'
+
+    = render 'mas/sign_ups/table', sign_ups: @sign_ups

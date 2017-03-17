@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301085832) do
+ActiveRecord::Schema.define(version: 20170317104900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,30 @@ ActiveRecord::Schema.define(version: 20170301085832) do
     t.integer  "owner",        default: 0
     t.integer  "cost",         default: 0
     t.integer  "rentable_id"
+  end
+
+  create_table "mas_sign_ups", force: :cascade do |t|
+    t.string   "name_1"
+    t.string   "name_2"
+    t.string   "email_1"
+    t.string   "email_2"
+    t.string   "organization_1"
+    t.string   "organization_2"
+    t.string   "city_1"
+    t.string   "city_2"
+    t.integer  "package_type_1"
+    t.integer  "package_type_2"
+    t.integer  "gender_1"
+    t.integer  "gender_2"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.integer  "tshirt_size_1"
+    t.integer  "tshirt_size_2"
+    t.text     "remarks"
+    t.integer  "birth_year_1"
+    t.integer  "birth_year_2"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "membership_fees", force: :cascade do |t|

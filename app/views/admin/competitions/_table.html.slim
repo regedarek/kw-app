@@ -1,8 +1,8 @@
-table.responsive
+table.stack
   thead
     tr
       th =t('.table_nr')
-      th =t('.table_team')
+      th =t('.table_name')
       th =t('.table_email')
       th =t('.table_phone')
       th =t('.table_payment')
@@ -11,20 +11,11 @@ table.responsive
       tr
         td= sign_up.id
         td
-          - if sign_up.single?
-            = sign_up.name_1
-          - else
-            = "#{sign_up.name_1} oraz #{sign_up.name_2}"
+          = "#{sign_up.name_1} oraz #{sign_up.name_2}"
         td
-          - if sign_up.single?
-            = sign_up.email_1
-          - else
-            = "#{sign_up.email_1}/#{sign_up.email_2}"
+          = "#{sign_up.email_1}/#{sign_up.email_2}"
         td
-          - if sign_up.single?
-            = sign_up.phone_1
-          - else
-            = "#{sign_up.phone_1}/#{sign_up.phone_2}"
+          = "#{sign_up.phone_1}/#{sign_up.phone_2}"
         td
           - if sign_up.order && sign_up.order.payment.prepaid?
             span class='label success'

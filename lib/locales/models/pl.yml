@@ -1,6 +1,6 @@
 pl:
   activemodel:
-    strzelecki_sign_up_form: Formularz zapisów
+    mas_sign_up_form: Formularz zapisów
     attributes:
       membership/fee_form:
         year: Rok
@@ -39,14 +39,12 @@ pl:
         profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.
         terms_of_service: Akceptuję postanowienia Statutu Klubu Wysokogórskiego Kraków
         terms_of_service_info: "Oświadczam, że znam postanowienia Statutu Klubu Wysokogórskiego Kraków i zobowiązuje się do ich przestrzegania. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w imprezach organizowanych przez Klub podejmuję na własne ryzyko i odpowiedzialność. Równocześnie wyrażam zgodę na przetwarzanie moich danych osobowych dla celów statutowych zgodnie z ustawą z dnia 29 sierpnia 1997r. o ochronie danych osobowych (Dz. U. Nr 133, poz. 883 z 1997 r. z późniejszymi zmianami)."
-      strzelecki_sign_up_form:
+      mas_sign_up_form:
         name_1: Zawodnik 1
         birth_year_1: Rok urodzenia 1
-        vege_1: Posiłek wegetariański?
         name_2: Zawodnik 2
         email_1: E-mail 1 (zostanie na niego wysłany link do płatności online)
         birth_year_2: Rok urodzenia 2
-        vege_2: Posiłek wegetariański?
         single: Szukam partnera?
         email_2: E-mail 2 (opcjonalnie)
         phone_1: Numer telefonu 1 (opcjonalnie w celach bezpieczeństwa)
@@ -70,10 +68,10 @@ pl:
       db/auction: Aukcja
       db/auction_product: Przedmiot
       db/valley: Dolina
-      db/strzelecki/sign_up: Zapis na zawody
+      db/mas/sign_up: Zapis na zawody
       db/membership_fee: Składka
       db/profile: Profil
-      strzelecki_sign_up_form: Formularz zapisów
+      mas_sign_up_form: Formularz zapisów
     attributes:
       db/membership_fee:
         year: Rok
@@ -108,7 +106,7 @@ pl:
         rating_one: Fuj, nie polecam
         rating_two: Warta przejścia
         rating_three: Piękna droga
-      db/strzelecki/sign_up:
+      db/mas/sign_up:
         name_1: Zawodnik 1
         name_2: Zawodnik 2
         birth_year_1: Rok urodzenia 1

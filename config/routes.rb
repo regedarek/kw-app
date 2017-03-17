@@ -9,9 +9,7 @@ Rails.application.routes.draw do
 
   get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
-  get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('strzelecki')}
-  get '/', to: 'pages#show', id: 'strzelecki', constraints: lambda{|request|request.env['SERVER_NAME'].match('mjs')}
-  get '/strzelecki', to: 'strzelecki/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
+  get '/mas', to: 'mas/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
   get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
   get '/', to: 'events#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
   get '/zarejestruj', to: 'profiles#new'
@@ -30,10 +28,8 @@ Rails.application.routes.draw do
     end
   end
 
-  scope "(:locale)", locale: /pl|sk/ do
-    namespace :strzelecki do
-      resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
-    end
+  namespace :mas do
+    resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
   end
 
   resources :events, only: [:index, :show]
@@ -76,7 +72,7 @@ Rails.application.routes.draw do
         post :import
       end
     end
-    resources :strzelecki, only: [:index]
+    resources :competitions, only: [:index]
     resources :users, only: [:index, :create] do
       member do
         get :make_admin

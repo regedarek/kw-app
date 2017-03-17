@@ -9,8 +9,7 @@
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         li.show-for-medium =link_to t('.menu.title'), 'http://kw.krakow.pl'
         - if controller_name == 'sign_ups'
-          li= link_to t('.menu.strzelecki_link'), Rails.application.secrets.strzelecki_page
-          li= link_to t('.menu.strzelecki_rules_link'), Rails.application.secrets.strzelecki_page + '/regulamin', target: :_blank
+          li= link_to 'MAS 2017', 'http://mas.kw.krakow.pl'
         - if controller_name == 'reservations'
           li= link_to t('.rules'), page_path('rules')
         - if user_signed_in?
@@ -26,7 +25,7 @@
                 li= link_to t('.administration.items'), admin_items_path
                 li= link_to t('.administration.reservations'), admin_reservations_path
                 li= link_to t('.administration.routes'), activities_mountain_routes_path
-                li= link_to t('.administration.strzelecki'), admin_strzelecki_index_path
+                li= link_to t('.administration.competitions'), admin_competitions_path
                 li= link_to t('.administration.importing'), admin_importing_index_path
                 li= link_to t('.administration.events'), new_admin_event_path
     .top-bar-right
