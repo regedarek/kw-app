@@ -3,7 +3,7 @@ pl:
     sign_ups:
       index:
         pricing_title: Wpisowe
-        pricing_info: W cenę wpisowego wliczony jest udział w zawodach, atrakcyjny pakiet startowy, posiłek regeneracyjny po zawodach oraz opłata w wysokości 50 zł od każdego zawodnika na rzecz TPN.
+        pricing_info: Super zawody blabla
         pricing_kw: 'KW Kraków: %{price} PLN'
         pricing_junior: 'Kadet: %{price} PLN'
         pricing_standard: 'Standard: %{price} PLN'
