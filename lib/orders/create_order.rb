@@ -25,15 +25,13 @@ module Orders
           order.update_cost
           ReservationMailer.reserve(@service).deliver_later
         end
-        if @service.is_a? Db::Strzelecki::SignUp
-          order.strzelecki_sign_ups << @service
+        if @service.is_a? Db::Mas::SignUp
+          order.mas_sign_ups << @service
           package_cost_1 = case @service.package_type_1
           when 'kw'
-            Db::Strzelecki::SignUp::PRICES[:kw]
-          when 'junior'
-            Db::Strzelecki::SignUp::PRICES[:junior]
+            Db::Mas::SignUp::PRICES[:kw]
           when 'standard'
-            Db::Strzelecki::SignUp::PRICES[:standard]
+            Db::Mas::SignUp::PRICES[:standard]
           else
             fail 'wrong payment'
           end
@@ -41,11 +39,9 @@ module Orders
           when 'none'
             0
           when 'kw'
-            Db::Strzelecki::SignUp::PRICES[:kw]
-          when 'junior'
-            Db::Strzelecki::SignUp::PRICES[:junior]
+            Db::Mas::SignUp::PRICES[:kw]
           when 'standard'
-            Db::Strzelecki::SignUp::PRICES[:standard]
+            Db::Mas::SignUp::PRICES[:standard]
           else
             fail 'wrong payment'
           end
