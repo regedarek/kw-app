@@ -24,6 +24,6 @@
             li
               = t('.statistic_all', amount: male + female)
 
-    = link_to t('.sign_up_link'), new_mas_sign_up_path, class: 'button large expanded'
+    = link_to 'Zapisz sie na MAS 2017', new_mas_sign_up_path, class: 'button large expanded'
 
     = render 'mas/sign_ups/table', sign_ups: @sign_ups
