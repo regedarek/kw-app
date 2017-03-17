@@ -8,19 +8,15 @@
         .callout.primary
           b = t('.pricing_title')
           ul
-            li = t('.pricing_standard', price: Db::Strzelecki::SignUp::PRICES[:standard])
-            li = t('.pricing_junior', price: Db::Strzelecki::SignUp::PRICES[:junior])
+            li = t('.pricing_standard', price: Db::Mas::SignUp::PRICES[:standard])
             li = t('.pricing_other')
-            li = t('.pricing_kw', price: Db::Strzelecki::SignUp::PRICES[:kw])
+            li = t('.pricing_kw', price: Db::Mas::SignUp::PRICES[:kw])
       .large-6.columns
         .callout.primary
           b = t('.statistic_title')
-          - single = Db::Strzelecki::SignUp.where(single: true).count
-          - male = Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('male')
-          - female = Db::Strzelecki::SignUp.pluck(:gender_1, :gender_2).flatten.count('female')
+          - male = Db::Mas::SignUp.pluck(:gender_1, :gender_2).flatten.count('male')
+          - female = Db::Mas::SignUp.pluck(:gender_1, :gender_2).flatten.count('female')
           ul
-            li
-              = t('.statistic_single', amount: single)
             li
               = t('.statistic_male', amount: male)
             li
