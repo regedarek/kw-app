@@ -1,29 +1,12 @@
 .row
   .columns
     .row
-      .large-12.columns
-        .callout.warning
-          = t('.pricing_info')
-      .large-6.columns
-        .callout.primary
-          b = t('.pricing_title')
-          ul
-            li = t('.pricing_standard', price: Db::Mas::SignUp::PRICES[:standard])
-            li = t('.pricing_other')
-            li = t('.pricing_kw', price: Db::Mas::SignUp::PRICES[:kw])
-      .large-6.columns
-        .callout.primary
-          b = t('.statistic_title')
-          - male = Db::Mas::SignUp.pluck(:gender_1, :gender_2).flatten.count('male')
-          - female = Db::Mas::SignUp.pluck(:gender_1, :gender_2).flatten.count('female')
-          ul
-            li
-              = t('.statistic_male', amount: male)
-            li
-              = t('.statistic_female', amount: female)
-            li
-              = t('.statistic_all', amount: male + female)
+      .large-12.columns style='text-align: center'
+        = image_tag asset_path('baner-mas.jpg')
 
-    = link_to 'Zapisz sie na MAS 2017', new_mas_sign_up_path, class: 'button large expanded'
+    .row
+      .large-12.columns
+        br
+        = link_to 'Zapisz sie na MAS 2017', new_mas_sign_up_path, class: 'button large expanded'
 
     = render 'mas/sign_ups/table', sign_ups: @sign_ups

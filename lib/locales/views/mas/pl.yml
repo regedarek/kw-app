@@ -3,7 +3,6 @@ pl:
     sign_ups:
       index:
         pricing_title: Wpisowe
-        pricing_info: Super zawody blabla
         pricing_kw: 'KW Kraków: %{price} PLN'
         pricing_junior: 'Kadet: %{price} PLN'
         pricing_standard: 'Standard: %{price} PLN'
@@ -13,7 +12,6 @@ pl:
         statistic_male: 'Mężczyzn: %{amount}'
         statistic_female: 'Kobiet: %{amount}'
         statistic_all: 'Razem: %{amount}'
-        sign_up_link: Zapisz się na XXIX Memoriał Jana Strzeleckiego!
       table:
         table_nr: Nr.
         table_team: Zespół/Zawodnik
@@ -21,8 +19,8 @@ pl:
         table_city: Miasto
       form:
         send: Zapisz się!
-        top_info: 'Docelowo zgłaszasz zespół i płacisz za obydwa pakiety startowe, jeżeli szukasz partnera zaznacz opcję "szukam partnera".'
-        rules_html: "Regulamin dostępny na stronie: <a target='blank' href=http://strzelecki.kw.krakow.pl/regulamin>http://strzelecki.kw.krakow.pl/regulamin</a>"
+        top_info: 'Zgłoś zespół i zapłać za obydwa pakiety startowe.'
+        rules_html: "Regulamin dostępny na stronie: <a target='blank' href=http://mas.kw.krakow.pl/regulamin>http://mas.kw.krakow.pl/regulamin</a>"
         tshirt_size_html: "Rozmiar koszulki (<a target='blank' href=http://strzelecki.kw.krakow.pl/edycja-2017/rozmiary-koszulek/>Rozmiarówka</a>)"
       new:
         link_to_index: przejdź aby zobaczyć rywali
