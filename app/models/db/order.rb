@@ -21,6 +21,7 @@ module Db
         else
           return "Składka za rok: #{services.first.serviceable.year} od #{services.first.serviceable.user.first_name} #{services.first.serviceable.user.last_name} o numerze klubowym: #{services.first.serviceable.user.kw_id}"
         end
+      end
     end
   end
 end
