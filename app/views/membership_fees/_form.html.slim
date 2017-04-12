@@ -8,7 +8,7 @@
     span.input-group-label
       - last_year_fee = current_user.membership_fees.find_by(year: Date.today.last_year.year)
       - if last_year_fee.present?
-        - if last_year_fee.order.payment.prepaid? || last_year_fee.order.payment.cash?
+        - if last_year_fee.order.payment.prepaid? || last_year_fee.order.present? && last_year_fee.order.payment.cash?
           | 100 zł
         - else
           | 150 zł
