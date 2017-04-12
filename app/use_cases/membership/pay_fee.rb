@@ -3,9 +3,19 @@ module Membership
     class << self
       def pay(kw_id:, form:)
         if form.valid?
+          cost = 150
+          last_year_fee = Db::MembershipFee.where(kw_id: kw_id, year: Date.today.last_year.year).first
+          if last_year_fee.present?
+            if last_year_fee.order.present?
+              if last_year_fee.order.payment.try(:cash) || last_year_fee.order.payment.try(:prepaid?)
+                cost = 100
+              end
+            end
+          end
           membership_fee = Db::MembershipFee.create(
             kw_id: kw_id,
-            year: form.year
+            year: form.year,
+            cost: cost
           )
           order = Orders::CreateOrder.new(service: membership_fee).create
           return Failure.new(:wrong_payment) unless order.payment.present?
