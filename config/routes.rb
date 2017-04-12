@@ -2,20 +2,17 @@ Rails.application.routes.draw do
   devise_for :users, class_name: 'Db::User', controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
     get '/zaloguj', to: 'devise/sessions#new'
+    get '/zarejestruj', to: 'devise/registrations#new'
   end
 
   namespace :activities do
     resources :mountain_routes
   end
   get '/przejscia', to: 'activities/mountain_routes#index'
-
   get '/mas', to: 'mas/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
-  get '/zarejestruj', to: 'profiles#new'
-
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
   get "/pages/*id" => 'pages#show', as: :page, format: false
-
 
   namespace :api do
     resources :payments, only: [] do
