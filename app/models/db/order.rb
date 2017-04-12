@@ -17,9 +17,9 @@ module Db
       return "Wpisowe na zawody MAS 2017 nr #{services.first.serviceable.id} od #{services.first.serviceable.name_1}" if services.first.serviceable.is_a? Db::Mas::SignUp
       if services.first.serviceable.is_a? Db::MembershipFee
         if services.first.serviceable.cost == 150
-          return "Składka za rok: #{services.first.serviceable.year} oraz opłata reaktywacyjna od #{services.first.serviceable.user.first_name} #{services.first.serviceable.user.last_name} o numerze klubowym: #{services.first.serviceable.user.kw_id}"
+          return "Składka członkowska za rok #{services.first.serviceable.year} oraz opłata reaktywacyjna od #{services.first.serviceable.user.first_name} #{services.first.serviceable.user.last_name} nr legitymacji klubowej: #{services.first.serviceable.user.kw_id}"
         else
-          return "Składka za rok: #{services.first.serviceable.year} od #{services.first.serviceable.user.first_name} #{services.first.serviceable.user.last_name} o numerze klubowym: #{services.first.serviceable.user.kw_id}"
+          return "Składka członkowska za rok #{services.first.serviceable.year} od #{services.first.serviceable.user.first_name} #{services.first.serviceable.user.last_name} nr legitymacji klubowej: #{services.first.serviceable.user.kw_id}"
         end
       end
     end
