@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   def new
     @profile_form = UserManagement::ProfileForm.new
-    return redirect_to root_path, alert: 'Rejestracja narazie możliwa tylko poprzez import profilu ze starej bazy danych. Skontaktuj się ze mną: dariusz.finster@gmail.com'
+    return redirect_to root_path, alert: 'Rejestracja narazie możliwa tylko poprzez import profilu ze starej bazy danych. Skontaktuj się ze mną: dariusz.finster@gmail.com' unless Rails.env.development?
   end
 
   def create

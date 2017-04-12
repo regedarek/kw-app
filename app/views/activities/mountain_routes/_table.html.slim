@@ -9,7 +9,7 @@ table.scoll.stack
       th width='50' wycena
       th długość drogi
       th skład zespołu
-      - if user_signed_in? && current_user.admin?
+      - if user_signed_in?
         th
   tbody
     - routes.each do |route|
@@ -22,6 +22,7 @@ table.scoll.stack
         td align='center' = route.difficulty
         td align='center' = route.length
         td = route.partners
-        - if user_signed_in? && current_user.admin?
+        - if user_signed_in?
           td
-            = link_to 'X', activities_mountain_route_path(route), method: :delete
+            - if current_user.admin? || current_user.id == route.user_id
+              = link_to 'X', activities_mountain_route_path(route), method: :delete
