@@ -23,6 +23,6 @@ class MembershipFeesController < ApplicationController
   private
 
   def fee_params
-    params.require(:membership_fee_form).permit(:year, :reactivation)
+    params.require(:membership_fee_form).permit(:year)
   end
 end

@@ -2,7 +2,6 @@ module Membership
   class FeeForm < FormObject
     attribute :kw_id, :integer
     attribute :year, :string
-    attribute :reactivation, :boolean, default: false
 
     validates :year,
       presence: true,

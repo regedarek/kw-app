@@ -4,7 +4,7 @@ table.stack
       th
         | Rok
       th
-        | Reaktywacja
+        | Kwota
       th
         | Opłacono
   tbody
@@ -13,7 +13,7 @@ table.stack
         td
           = fee.year
         td
-          = fee.reactivation? ? "Tak" : "Nie"
+          = fee.cost
         td
           - if fee.order && fee.order.payment
             = fee.order.payment.prepaid? || fee.order.payment.cash? ? "Zapłacone" : "Nie zapłacone"

@@ -5,8 +5,7 @@ module Membership
         if form.valid?
           membership_fee = Db::MembershipFee.create(
             kw_id: kw_id,
-            year: form.year,
-            reactivation: form.reactivation
+            year: form.year
           )
           order = Orders::CreateOrder.new(service: membership_fee).create
           return Failure.new(:wrong_payment) unless order.payment.present?

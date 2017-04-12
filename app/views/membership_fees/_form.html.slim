@@ -4,9 +4,16 @@
       ul
         - form.errors.full_messages.each do |msg|
           li= msg
-  = f.label :year, 'Rok'
-  = f.number_field :year, placeholder: Date.today.year, min: 2000
-  = f.label :reactivation, 'Reaktywacja? (50zł)'
-  = f.check_box :reactivation
-  br
-  = f.submit 'Zapłać', class: 'button'
+  .input-group
+    span.input-group-label
+      - last_year_fee = current_user.membership_fees.find_by(year: Date.today.last_year.year)
+      - if last_year_fee.present?
+        - if last_year_fee.order.payment.prepaid? || last_year_fee.order.payment.cash?
+          | 100 zł
+        - else
+          | 150 zł
+      - else
+        | 150 zł
+    = f.number_field :year, placeholder: Date.today.year, min: 2000, class: 'input-group-field'
+    .input-group-button
+      = f.submit 'Zapłać', class: 'button'
