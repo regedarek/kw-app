@@ -21,7 +21,7 @@ pl:
         send: Zapisz się!
         top_info: 'Zgłoś zespół i zapłać za obydwa pakiety startowe.'
         rules_html: "Regulamin dostępny na stronie: <a target='blank' href=http://mas.kw.krakow.pl/regulamin>http://mas.kw.krakow.pl/regulamin</a>"
-        tshirt_size_html: "Rozmiar koszulki (<a target='blank' href=http://strzelecki.kw.krakow.pl/edycja-2017/rozmiary-koszulek/>Rozmiarówka</a>)"
+        tshirt_size_html: "Rozmiar koszulki (<a target='blank' href=http://www.mas.kw.krakow.pl/rozmiarowka-2017/>Rozmiarówka</a>)"
       new:
         link_to_index: przejdź aby zobaczyć rywali
       create:
