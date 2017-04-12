@@ -15,6 +15,8 @@
             | 150 zł
         - else
           | 150 zł
+      - else
+        | 150 zł
     = f.number_field :year, placeholder: Date.today.year, min: 2000, class: 'input-group-field'
     .input-group-button
       = f.submit 'Zapłać', class: 'button'
