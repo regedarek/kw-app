@@ -3,15 +3,13 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/zaloguj', to: 'devise/sessions#new'
   end
+
   namespace :activities do
     resources :mountain_routes
   end
+  get '/przejscia', to: 'activities/mountain_routes#index'
 
-  get '/', to: 'reservations#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('wypozyczalnia')}
-  get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
   get '/mas', to: 'mas/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
-  get '/', to: 'auctions#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('kiermasz')}
-  get '/', to: 'events#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
   get '/zarejestruj', to: 'profiles#new'
 
   get 'pages/home' => 'pages#show', id: 'home'
