@@ -1,32 +1,36 @@
 .row
   .columns
     - if user_signed_in?
-      .row
-        .large-12.columns
-          = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
+      - if user_signed_in? && current_user.admin?
+        .row
+          .large-12.columns
+            = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
 
-      - if current_user.reservations.any?
-        h3= t('reservations.table.title')
-        = render 'reservations/table', reservations: current_user.reservations
+        - if current_user.reservations.any?
+          h3= t('reservations.table.title')
+          = render 'reservations/table', reservations: current_user.reservations
 
-      .row
-        .large-12.columns
-          = link_to 'Dodaj aukcję', new_auction_path, class: 'large expanded button'
+      - if user_signed_in? && current_user.admin?
+        .row
+          .large-12.columns
+            = link_to 'Dodaj aukcję', new_auction_path, class: 'large expanded button'
 
-      - if current_user.auctions.any?
-        h3
-          | Twoje aukcje
-        = render 'auctions/table', auctions: current_user.auctions
+        - if current_user.auctions.any?
+          h3
+            | Twoje aukcje
+          = render 'auctions/table', auctions: current_user.auctions
 
       .row
         .large-12.columns
           = link_to 'Dodaj nowe przejście', new_activities_mountain_route_path, class: 'large expanded button'
+          = link_to 'Zobacz przejścia', activities_mountain_routes_path, class: 'large expanded button'
 
       - if current_user.mountain_routes.any?
         h3
           | Twoje przejscia
         = render 'activities/mountain_routes/table', routes: current_user.mountain_routes
 
-      .row
-        .large-12.columns
-          = link_to 'Sprawdź swoje składki', membership_fees_path, class: 'large expanded button'
+      - if user_signed_in? && current_user.admin?
+        .row
+          .large-12.columns
+            = link_to 'Sprawdź swoje składki', membership_fees_path, class: 'large expanded button'
