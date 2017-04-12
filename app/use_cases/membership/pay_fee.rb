@@ -5,7 +5,15 @@ module Membership
         if form.valid?
           cost = 150
           last_year_fee = Db::MembershipFee.where(kw_id: kw_id, year: Date.today.last_year.year).first
+          this_year_fee = Db::MembershipFee.where(kw_id: kw_id, year: Date.today.year).first
           if last_year_fee.present?
+            if this_year_fee.present?
+              if this_year_fee.order.present?
+                if this_year_fee.order.payment.try(:cash) || this_year_fee.order.payment.try(:prepaid?)
+                  cost = 100
+                end
+              end
+            end
             if last_year_fee.order.present?
               if last_year_fee.order.payment.try(:cash) || last_year_fee.order.payment.try(:prepaid?)
                 cost = 100
