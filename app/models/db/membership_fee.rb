@@ -7,7 +7,7 @@ module Db
 
     def cost
       if order.present?
-        if order.payment.try(:cash) || last_year_fee.order.payment.try(:prepaid?)
+        if order.payment.try(:cash) || order.payment.try(:prepaid?)
           return 100
         end
       end
