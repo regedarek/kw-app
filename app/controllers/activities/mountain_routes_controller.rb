@@ -21,6 +21,14 @@ module Activities
       end
     end
 
+    def destroy
+      route = Db::Activities::MountainRoute.find(params[:id])
+      fail 'not admin' unless user_signed_in? && current_user.admin?
+      route.destroy
+
+      redirect_to activities_mountain_routes_path, notice: t('.removed_successfully')
+    end
+
     private
 
     def route_params

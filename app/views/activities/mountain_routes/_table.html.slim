@@ -9,6 +9,8 @@ table.scoll.stack
       th width='50' wycena
       th długość drogi
       th skład zespołu
+      - if user_signed_in? && current_user.admin?
+        th
   tbody
     - routes.each do |route|
       tr
@@ -20,3 +22,6 @@ table.scoll.stack
         td align='center' = route.difficulty
         td align='center' = route.length
         td = route.partners
+        - if user_signed_in? && current_user.admin?
+          td
+            = link_to 'X', activities_mountain_route_path(route), method: :delete
