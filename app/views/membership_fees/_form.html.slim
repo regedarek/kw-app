@@ -8,18 +8,13 @@
     span.input-group-label
       - last_year_fee = current_user.membership_fees.find_by(year: Date.today.last_year.year)
       - if last_year_fee.present?
-        - if last_year_fee.order.payment.prepaid?
-          - if last_year_fee.order.present?
-            - if last_year_fee.order.payment.try(:cash)
-              | 100 zł
-            - else
-              | 150 zł
+        - if last_year_fee.order.present?
+          - if last_year_fee.order.payment.try(:cash) || last_year_fee.order.payment.try(:prepaid?)
+            | 100 zł
           - else
             | 150 zł
         - else
           | 150 zł
-      - else
-        | 150 zł
     = f.number_field :year, placeholder: Date.today.year, min: 2000, class: 'input-group-field'
     .input-group-button
       = f.submit 'Zapłać', class: 'button'
