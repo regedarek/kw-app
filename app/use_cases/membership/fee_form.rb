@@ -1,3 +1,5 @@
+require 'form_object'
+
 module Membership
   class FeeForm < FormObject
     attribute :kw_id, :integer

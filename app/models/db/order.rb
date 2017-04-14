@@ -8,6 +8,12 @@ module Db
     has_one :payment
     belongs_to :user
 
+    def prepaid?
+      return false if payment.nil?
+
+      payment.prepaid? || payment.cash?
+    end
+
     def update_cost
       update(cost: reservations.map(&:items).flatten.map(&:cost).reduce(:+))
     end

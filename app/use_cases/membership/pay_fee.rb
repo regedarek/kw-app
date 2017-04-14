@@ -1,25 +1,17 @@
+require 'orders'
+require 'results'
+
 module Membership
   class PayFee
     class << self
       def pay(kw_id:, form:)
         if form.valid?
-          cost = 150
-          last_year_fee = Db::MembershipFee.where(kw_id: kw_id, year: Date.today.last_year.year).first
-          this_year_fee = Db::MembershipFee.where(kw_id: kw_id, year: Date.today.year).first
-          if last_year_fee.present?
-            if this_year_fee.present?
-              if this_year_fee.order.present?
-                if this_year_fee.order.payment.try(:cash) || this_year_fee.order.payment.try(:prepaid?)
-                  cost = 100
-                end
-              end
-            end
-            if last_year_fee.order.present?
-              if last_year_fee.order.payment.try(:cash) || last_year_fee.order.payment.try(:prepaid?)
-                cost = 100
-              end
-            end
-          end
+          last_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
+          cost = if last_year_fee.present? && last_year_fee.order.present? && last_year_fee.order.prepaid?
+                   100
+                 else
+                   150
+                 end
           membership_fee = Db::MembershipFee.create(
             kw_id: kw_id,
             year: form.year,
