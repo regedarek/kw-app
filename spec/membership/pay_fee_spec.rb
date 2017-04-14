@@ -32,6 +32,18 @@ describe Membership::PayFee do
       expect(Db::MembershipFee.find_by(kw_id: 1111).cost).to eq(100)
     end
 
+    it 'current payment, pay for next year' do
+      fee = Db::MembershipFee.create!(kw_id: 1111, year: 2017)
+      order = Orders::CreateOrder.new(service: fee).create
+      order.payment.charge!
+
+      form = Membership::FeeForm.new(year: 2018)
+      expect(Db::MembershipFee.count).to eq(1)
+      Membership::PayFee.pay(kw_id: 1111, form: form)
+      expect(Db::MembershipFee.count).to eq(2)
+      expect(Db::MembershipFee.find_by(kw_id: 1111).cost).to eq(100)
+    end
+
     it 'last year payment by cash, pay for current' do
       fee = Db::MembershipFee.create!(kw_id: 1111, year: 2016)
       order = Orders::CreateOrder.new(service: fee).create
