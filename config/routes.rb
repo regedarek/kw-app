@@ -56,7 +56,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :membership_fees, only: [:index, :create]
+  resources :membership_fees, path: 'skladki', only: [:index, :create]
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
