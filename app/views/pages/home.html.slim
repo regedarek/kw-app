@@ -26,10 +26,9 @@
         .large-6.columns
           = link_to 'Zobacz przejścia', activities_mountain_routes_path, class: 'large expanded button secondary'
 
-      - if current_user.mountain_routes.any?
-        h3
-          | Twoje przejscia
-        = render 'activities/mountain_routes/table', routes: current_user.mountain_routes
+        - if current_user.mountain_routes.any?
+          .large-12.columns
+            = render 'activities/mountain_routes/table', routes: current_user.mountain_routes
 
       - if user_signed_in?
         .row
