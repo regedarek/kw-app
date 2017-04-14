@@ -1,7 +1,7 @@
 .row
   .columns
     - if user_signed_in?
-      - if user_signed_in? && current_user.admin?
+      - if false
         .row
           .large-12.columns
             = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
@@ -10,7 +10,7 @@
           h3= t('reservations.table.title')
           = render 'reservations/table', reservations: current_user.reservations
 
-      - if user_signed_in? && current_user.admin?
+      - if false
         .row
           .large-12.columns
             = link_to 'Dodaj aukcję', new_auction_path, class: 'large expanded button'
@@ -21,9 +21,10 @@
           = render 'auctions/table', auctions: current_user.auctions
 
       .row
-        .large-12.columns
+        .large-6.columns
           = link_to 'Dodaj nowe przejście', new_activities_mountain_route_path, class: 'large expanded button'
-          = link_to 'Zobacz przejścia', activities_mountain_routes_path, class: 'large expanded button'
+        .large-6.columns
+          = link_to 'Zobacz przejścia', activities_mountain_routes_path, class: 'large expanded button secondary'
 
       - if current_user.mountain_routes.any?
         h3

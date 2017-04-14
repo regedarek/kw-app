@@ -6,8 +6,10 @@ module Admin
 
     def create
       if form.valid?
-        payment = Db::MembershipFee.new(form.params)
-        payment.save
+        fee = Db::MembershipFee.new(form.params)
+        fee.save
+        order = Orders::CreateOrder.new(service: fee).create
+        order.payment.update(cash: true) if order.payment.present?
         Success.new
       else
         Failure.new(:invalid, form: form)
@@ -15,8 +17,8 @@ module Admin
     end
 
     def self.destroy(payment_id)
-      payment = Db::MembershipFee.find(payment_id)
-      if payment.destroy
+      fee = Db::MembershipFee.find(payment_id)
+      if fee.destroy
         Success.new
       else
         Failure.new(:failure)
