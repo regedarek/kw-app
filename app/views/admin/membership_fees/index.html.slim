@@ -1,13 +1,22 @@
 .row
-  .columns
+  .large-12.columns
     = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path do |f|
-      = f.label :kw_id, 'Numer klubowy'
-      = f.text_field :kw_id
+      .row
+        .large-12.columns
+          = f.label :kw_id, 'Numer klubowy'
+          = f.text_field :kw_id
 
-      = f.label :year, 'Opłata za rok'
-      = f.text_field :year
+      .row
+        .large-12.columns
+          = f.label :year, 'Opłata za rok'
+          = f.text_field :year
 
-      = f.submit 'Dodaj składkę', class: 'button expanded'
+      .row
+        .large-6.columns
+          = f.submit 'Dodaj składkę', class: 'button expanded'
+
+        .large-6.columns
+          = link_to 'Eksportuj do Excela', admin_membership_fees_path(format: :xlsx), class: 'button expanded secondary'
 
     table.responsive
       thead

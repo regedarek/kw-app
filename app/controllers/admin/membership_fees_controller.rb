@@ -10,6 +10,14 @@ module Admin
                   else
                     Db::MembershipFee.order(:kw_id)
                   end.page(params[:page])
+
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          disposition = "attachment; filename='mas_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+          response.headers['Content-Disposition'] = disposition
+        end
+      end
     end
 
     def create
