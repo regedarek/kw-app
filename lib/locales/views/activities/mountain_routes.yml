@@ -16,6 +16,8 @@ pl:
         rating: Subiektywna ocena urody drogi
       create:
         created_successfully: Dodano twoje przejście!
+      update:
+        updated_successfully: Zaktualizowano twoje przejście!
       destroy:
         removed_successfully: Usunięto przejście.
 

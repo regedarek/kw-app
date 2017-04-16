@@ -7,6 +7,24 @@ module Activities
     def new
       @route = Db::Activities::MountainRoute.new
     end
+    
+    def show
+      @route = Db::Activities::MountainRoute.find(params[:id])
+    end
+
+    def edit
+      @route = Db::Activities::MountainRoute.find(params[:id])
+    end
+
+    def update
+      route = Db::Activities::MountainRoute.find(params[:id])
+
+      if route.update(route_params)
+        redirect_to activities_mountain_route_path(route), notice: t('.updated_successfully')
+      else
+        render :edit
+      end
+    end
 
     def create
       @route = Db::Activities::MountainRoute.new(route_params)

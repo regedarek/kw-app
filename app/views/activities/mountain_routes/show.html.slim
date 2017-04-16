@@ -8,12 +8,8 @@
         = @route.description
 
   .large-12.columns
-    b Dolina: 
-    = @route.peak.valley.name
-
-  .large-12.columns
     b Szczyt: 
-    = @route.peak.name
+    = @route.peak
 
   - if @route.difficulty.present?
     .large-12.columns
@@ -40,7 +36,7 @@
 
   .large-12.columns
     hr
-    = link_to 'Powrót', routes_path
+    = link_to 'Powrót', activities_mountain_routes_path
     - if user_signed_in? && current_user.admin?
       = ' | '
-      = link_to 'Edytuj', edit_route_path(@route)
+      = link_to 'Edytuj', edit_activities_mountain_route_path(@route)
