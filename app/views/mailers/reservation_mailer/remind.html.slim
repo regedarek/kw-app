@@ -1,14 +1,14 @@
 h3= "Rezerwacja ##{@reservation.id}"
 
-h2= "Kiedy powinienieś oddać przedmiot: #{@reservation.end_date}"
+h2= "Do kiedy powinienieś oddać przedmiot: #{@reservation.end_date}"
 
 b Kto: 
 = "#{@reservation.user.first_name} #{@reservation.user.last_name}"
 br
 b Co: 
-= @reservation.items.map(&:name)
+= @reservation.items.map(&:display_name).to_sentence
 br
-b Na kiedy: 
+b Okres wypożyczenia: 
 = "#{@reservation.start_date} - #{@reservation.end_date}"
 br
 br
