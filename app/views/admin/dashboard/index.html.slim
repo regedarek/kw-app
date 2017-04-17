@@ -49,10 +49,10 @@
   .large-4.columns
     h3 5 ostatnich zapisów
     table.stack
-      - Db::Strzelecki::SignUp.order('created_at  DESC NULLS LAST').limit(5).each do |sign_in|
+      - Db::Mas::SignUp.order('created_at  DESC NULLS LAST').limit(5).each do |sign_in|
         tr
           td
-            = "#{sign_in.name_1} #{sign_in.name_2}"
+            = "#{sign_in.name_1} oraz #{sign_in.name_2}"
 
   .large-4.columns
     h3 5 ostatnich zgłoszeń
