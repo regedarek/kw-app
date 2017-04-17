@@ -20,8 +20,9 @@ module Membership
             year: form.year,
             cost: cost
           )
+          membership_fee.create_payment(dotpay_id: SecureRandom.hex(13))
 
-          return Failure.new(:wrap_payment) if membership_fee.payment.present?
+          return Failure.new(:wrap_payment) unless membership_fee.payment.present?
 
           Payments::CreatePayment.new(payment: membership_fee.payment).create
 
