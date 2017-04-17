@@ -3,8 +3,25 @@ module Membership
     before_action :authenticate_user!, except: [:show]
 
     def index
-      @fees = current_user.membership_fees
-      @form = Membership::FeeForm.new(kw_id: current_user.kw_id)
+      if params[:ids].present?
+        kw_ids = params[:ids].split(',').map(&:to_i)
+        fees = Db::Membership::Fee.where(kw_id: kw_ids, year: Date.today.year)
+        unpaid_fees = fees.select do |fee|
+          !fee.payment.paid?
+        end
+        paid_fees = fees.select do |fee|
+          fee.payment.paid?
+        end
+        other_ids = kw_ids - fees.pluck(:kw_id)
+        render json: {
+          'opłacone' => paid_fees.pluck(:kw_id),
+          'nieopłacone' => unpaid_fees.pluck(:kw_id),
+          'brak' => other_ids
+          }
+      else
+        @fees = current_user.membership_fees
+        @form = Membership::FeeForm.new(kw_id: current_user.kw_id)
+      end
     end
 
     def show
