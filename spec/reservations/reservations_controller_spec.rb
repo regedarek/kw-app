@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'reservations'
 
 describe ReservationsController, type: :controller do
   render_views

@@ -16,7 +16,14 @@ module Reservations
       reservation = Db::Reservation.find(@reservation_id)
 
       reservation.items.delete(Db::Item.find(item_id))
-      reservation.destroy if reservation.items.empty?
+
+      if reservation.items.empty?
+        if !reservation.payment.paid?
+          reservation.payment.destroy
+          reservation.destroy
+        end
+      end
+
       Success.new(start_date: reservation.start_date)
     end
   end

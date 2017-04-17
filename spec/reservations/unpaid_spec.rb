@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'reservations'
 
 describe Reservations::Unpaid do
   before(:each) do

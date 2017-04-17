@@ -4,15 +4,13 @@
       = link_to 'Pokaż tylko niezarchiwizowane', admin_reservations_path
     - else
       = link_to 'Pokaż tylko zarchiwizowane', admin_reservations_path(state: :archived)
-    |  | 
-    = link_to "Raport csv", admin_reservations_path(format: "csv")
 
     table
       thead
         tr
           th Nr.
           th Kto?
-          th Przedmiot
+          th Przedmioty
           th Koszt
           th Na który tydzień?
           th Płatność
@@ -21,26 +19,26 @@
       tbody
         - @reservations.each do |reservation|
           tr
-            td = link_to reservation.order.try(:id), edit_admin_reservation_path(reservation.id)
+            td = link_to reservation.id, edit_admin_reservation_path(reservation.id)
             td
               = [reservation.user.first_name, reservation.user.last_name].join(' ')
             td
               = reservation.items.map(&:display_name).to_sentence
             td
-              = reservation.order.try(:cost)
-              |  zl
+              = reservation.cost
+              |  zł
             td
               = [reservation.start_date.strftime("%d"), reservation.end_date.strftime("%d/%m/%Y")].join('-')
             td
-              - if reservation.order && reservation.order.payment.prepaid?
+              - if reservation.payment.present? && reservation.payment.prepaid?
                 span class='label success'
-                  | Zapłacono
-              - elsif reservation.order && reservation.order.payment.cash?
+                  | online
+              - elsif reservation.payment.present? && reservation.payment.cash?
                 span class='label success'
-                  | Zapłacono gotówką
+                  | gotówka
               - else
                 span class='label warning'
-                  | Oczekuje na płatność
+                  | oczekuje
             td
               - if reservation.reserved?
                 span class='label info'
@@ -51,7 +49,7 @@
             td
               - if reservation.holding? && !reservation.archived?
                 = link_to 'Zarchiwizuj ', archive_admin_reservation_path(reservation.id), method: :put
-              - if (reservation.order && reservation.order.payment.prepaid? || reservation.order && reservation.order.payment.cash?) && !reservation.holding? && !reservation.archived?
+              - if (reservation.payment.present? && reservation.payment.paid?) && !reservation.holding? && !reservation.archived?
                 = link_to ' Przekaż', give_admin_reservation_path(reservation), method: :put, data: { confirm: 'Jesteś pewien?' }
               - if reservation.holding? && !reservation.archived?
                 = link_to ' Przypomnij', remind_admin_reservation_path(reservation), method: :post

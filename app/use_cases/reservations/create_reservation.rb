@@ -15,7 +15,7 @@ module Reservations
           .not_cash
           .first_or_initialize(form.attributes)
 
-        if reservation.order.present? && (reservation.order.payment.prepaid? || reservation.order.payment.cash?)
+        if reservation.payment.present? && reservation.payment.paid?
           reservation = Db::Reservation.new(form.attributes)
         end
 
@@ -23,7 +23,7 @@ module Reservations
         items_to_add = (reservation.items + form.items).uniq
         reservation.items = items_to_add
         reservation.save
-        Orders::CreateOrder.new(service: reservation).create
+        reservation.create_payment(dotpay_id: SecureRandom.hex(13))
 
         Success.new
       end

@@ -1,7 +1,3 @@
-require 'reservations'
-require 'availability'
-require 'guards'
-
 class ReservationsController < ApplicationController
   def index
     guarded_date = Guards::Date.new(date: params[:start_date])

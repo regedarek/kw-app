@@ -52,7 +52,7 @@ module Admin
 
     def charge
       reservation = Db::Reservation.find(params[:id])
-      reservation.order.payment.update(cash: true)
+      reservation.payment.update(cash: true) if reservation.payment
 
       redirect_to edit_admin_reservation_path(reservation), notice: "Oznaczono jako zapłacone gotowką"
     end
@@ -60,7 +60,7 @@ module Admin
     def remind
       reservation = Db::Reservation.find(params[:id])
       ReservationMailer.remind(reservation).deliver_later
-      redirect_to admin_reservations_path, notice: 'Przypomniano i wyslano email'
+      redirect_to admin_reservations_path, notice: 'Przypomniano i wysłano email'
     end
 
     def give_warning

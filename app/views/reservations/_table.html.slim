@@ -7,12 +7,12 @@
             =t('reservations.table.id', id: reservation.id)
           th
             =t('reservations.table.period', start_date: reservation.start_date, end_date: reservation.end_date)
-          th=t('reservations.table.cost', cost: reservation.order.try(:cost))
+          th=t('reservations.table.cost', cost: reservation.cost)
           th
-            - if reservation.order && reservation.order.payment.prepaid?
+            - if reservation.payment.present? && reservation.payment.prepaid?
               span class=('success label')
                 =t('prepaid')
-            - elsif reservation.order && reservation.order.payment.cash?
+            - elsif reservation.payment.present? && reservation.payment.cash?
               span class='label success'
                 | Zapłacono gotówką
             - else
@@ -22,8 +22,8 @@
             - if reservation.holding?
               span class=('alert label')
                 | w posiadaniu
-            - if reservation.order && !(reservation.order.payment.cash? || reservation.order.payment.prepaid?) && reservation.order.cost > 0
-              = link_to t('pay'), charge_payment_path(reservation.order.payment.id)
+            - if reservation.payment.present? && !reservation.payment.paid? && reservation.cost > 0
+              = link_to t('pay'), charge_payment_path(reservation.payment.id)
       tbody
         - reservation.items.each do |item|
           tr

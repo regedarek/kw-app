@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'reservations'
 
 describe Reservations::CreateReservation do
   let!(:user) { Factories::User.create! }

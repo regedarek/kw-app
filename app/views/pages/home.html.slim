@@ -6,14 +6,12 @@
           = link_to 'Sprawdź swoje składki', membership_fees_path, class: 'large expanded button'
 
     - if user_signed_in?
-      - if false
-        .row
-          .large-12.columns
-            = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
+      .row
+        .large-12.columns
+          = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
 
-        - if current_user.reservations.any?
-          h3= t('reservations.table.title')
-          = render 'reservations/table', reservations: current_user.reservations
+      - if current_user.reservations.any?
+        = render 'reservations/table', reservations: current_user.reservations.not_archived
 
       - if false
         .row

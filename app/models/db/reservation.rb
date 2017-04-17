@@ -3,13 +3,12 @@ class Db::Reservation < ActiveRecord::Base
   belongs_to :user
   has_many :reservation_items
   has_many :items, through: :reservation_items
-  has_one :service, as: :serviceable
-  has_one :order, through: :service
+  has_one :payment, as: :payable
 
   default_scope { order('start_date') } 
-  scope :not_prepaid, -> { joins(order: :payment).where.not(payments: { state: 'prepaid' }) }
-  scope :not_cash, -> { joins(order: :payment).where(payments: { cash: false }) }
-  scope :cash_prepaid, -> { joins(order: :payment).where(payments: { cash: true }) }
+  scope :not_prepaid, -> { joins(:payment).where.not(payments: { state: 'prepaid' }) }
+  scope :not_cash, -> { joins(:payment).where(payments: {cash: false}) }
+  scope :cash_prepaid, -> { joins(:payment).where(payments: {cash: true}) }
   scope :not_archived, -> { where.not(state: :archived) }
   scope :archived, -> { where(state: :archived) }
   scope :expire_tomorrow, -> { where(end_date: 1.day.ago.to_date) }
@@ -30,32 +29,16 @@ class Db::Reservation < ActiveRecord::Base
     state :archived
   end
 
-  def self.to_csv
-    attributes = %w{order_id user_name items_display cost when state}
-
-    CSV.generate(headers: true) do |csv|
-      csv << ['Nr zamówienia', 'Użytkownik', 'Przedmioty', 'Koszt', 'Kiedy?', 'Status']
-
-      all.each do |reservation|
-        csv << attributes.map{ |attr| reservation.send(attr) }
-      end
-    end
-  end
-
-  def order_id
-    order.id
-  end
-
-  def user_name
-    [user.first_name, user.last_name].join(' ')
-  end
-
   def items_display
     items.map{ |i| "#{i.display_name} #{i.rentable_id}" }
   end
 
   def cost
-    order.cost
+    items.map(&:cost).reduce(:+)
+  end
+
+  def description
+    "Rezerwacja ##{id} dla #{user.display_name}"
   end
 
   def when
