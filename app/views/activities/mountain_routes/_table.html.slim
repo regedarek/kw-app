@@ -18,8 +18,8 @@ table.scoll.stack
         td = route.mountains
         td = route.area
         td = route.peak
-        - if user_signed_in?
-          td
+        td
+          - if user_signed_in?
             - if current_user.admin? || current_user.id == route.user_id
               = link_to route.name, edit_activities_mountain_route_path(route)
             - else
