@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :membership do
+  namespace :membership, path: 'klub' do
     resources :fees, path: 'skladki', only: [:index, :create]
   end
 
