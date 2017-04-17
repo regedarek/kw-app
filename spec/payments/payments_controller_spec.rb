@@ -1,11 +1,9 @@
 require 'rails_helper'
-require 'payments'
 
 xdescribe PaymentsController, type: :controller do
   render_views
   let!(:user)      { Factories::User.create!(first_name: 'Olek') }
-  let!(:order)   { Factories::Order.create! }
-  let!(:payment)   { Factories::Payment.create!(order_id: order.id) }
+  let!(:payment)   { Factories::Payment.create! }
   let(:code)   { 200 }
   let(:body)   { '' }
 

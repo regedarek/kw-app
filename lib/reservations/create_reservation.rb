@@ -1,5 +1,4 @@
 require 'results'
-require 'orders'
 
 module Reservations
   class CreateReservation

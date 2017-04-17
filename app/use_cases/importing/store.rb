@@ -48,8 +48,8 @@ module Importing
              year: parsed_data.year,
              kw_id: parsed_data.kw_id
            )
-           order = Orders::CreateOrder.new(service: fee).create
-           order.payment.update(cash: true)
+           payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
+           payment.update(cash: true)
           end
         end
 

@@ -1,5 +1,3 @@
-require 'payments'
-
 class PaymentsController < ApplicationController
   def index
   end

@@ -1,4 +1,3 @@
-require 'orders'
 require 'results'
 
 module Membership
