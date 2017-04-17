@@ -23,15 +23,15 @@
         tr
           th Imie
           th Nazwisko
-          th 
+          th width='20%'
             = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path, method: :get do |f|
               = f.text_field :kw_id,
                 value: params.fetch(:admin_membership_fees_form, {}).fetch(:kw_id, nil),
-                placeholder: 'Numer klubowy'
-          th Rok
-          th Kiedy
-          th Opłacono
-          th Akcje
+                placeholder: 'Nr klubowy'
+          th width='10%' Rok
+          th width='10%' Kiedy
+          th width='10%' Opłacono
+          th width='2%' align='right'
       tbody
         - @membership_fees.each do |fee|
           tr style=(fee.year == Date.today.year ? 'background-color: green' : '')
@@ -46,7 +46,13 @@
             td
               = fee.created_at.strftime("%d-%m-%Y")
             td
-              = fee.payment.prepaid? || fee.payment.cash? ? "Zapłacone" : "Nie zapłacone"
+              - if fee.payment.paid?
+                - if fee.payment.cash?
+                  span.label.success gotówka
+                - else
+                  span.label.success przelew
+              - else
+                span.label.warning brak
             td
-              = link_to 'Usun', admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+              = link_to 'X', admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' }
     = paginate @membership_fees
