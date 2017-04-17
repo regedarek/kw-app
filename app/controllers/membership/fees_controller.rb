@@ -9,7 +9,7 @@ module Membership
 
     def show
       fee = Db::Membership::Fee.where(kw_id: params[:id], year: Date.today.year).first
-      render text: { fee.present? && fee.payment.paid? ? "#{Date.today.year}: TAK" : "#{Date.today.year}: NIE" }
+      render text: fee.present? && fee.payment.paid? ? "#{Date.today.year}: TAK" : "#{Date.today.year}: NIE"
     end
 
     def create
