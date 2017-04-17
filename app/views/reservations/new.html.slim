@@ -1,6 +1,7 @@
 .column.row
   - if user_signed_in?
-    - if current_user.membership_fees.find_by(year: Date.today.year).present?
+    - current_fee = current_user.membership_fees.find_by(year: Date.today.year)
+    - if current_fee.present? && current_fee.payment.present? && current_fee.payment.paid?
       - user = Db::User.find_by(curator: true)
       - if user_signed_in? && user.present?
         .callout.alert
@@ -32,12 +33,12 @@
           | Konto nieaktywne, aby zarezerwować musisz zaplacić składkę za rok bieżący.
           br
           | Udaj sie do klubu lub napisz na adres: 
-          = mail_to 'wypozyczalnia.kw.krakow@gmail.com'
+          = mail_to 'kw@kw.krakow.pl'
           |  jeżeli zapłaciłeś składkę.
 
   - else
     .callout.alert
       = t('.registration_warning_html')
     .callout.warning
-      - mailto = mail_to 'wypozyczalnia.kw.krakow@gmail.com'
+      - mailto = mail_to 'kw@kw.krakow.pl'
       = t('.registration_problem_html', email: mailto)
