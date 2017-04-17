@@ -18,7 +18,12 @@ table.scoll.stack
         td = route.mountains
         td = route.area
         td = route.peak
-        td = link_to route.name, edit_activities_mountain_route_path(route)
+        - if user_signed_in?
+          td
+            - if current_user.admin? || current_user.id == route.user_id
+              = link_to route.name, edit_activities_mountain_route_path(route)
+            - else
+              = route.name
         td align='center' = route.difficulty
         td align='center' = route.length
         td = route.partners
