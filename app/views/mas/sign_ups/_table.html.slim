@@ -6,6 +6,7 @@
           th =t('.table_team')
           th =t('.table_organization')
           th =t('.table_city')
+          th Płatność
       tbody
         - sign_ups.each_with_index do |sign_up, i|
           tr
@@ -15,3 +16,8 @@
               = "#{sign_up.organization_1}/#{sign_up.organization_2}"
             td
               = "#{sign_up.city_1}/#{sign_up.city_2}"
+            td
+              - if sign_up.payment.prepaid?
+                span.label.success zapłacono
+              - else
+                span.label.warning oczekuje na płatność
