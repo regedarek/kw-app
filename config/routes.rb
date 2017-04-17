@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   end
 
   get '/*id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('skladki')}
-  get '/*id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
 
   namespace :activities do
     resources :mountain_routes
