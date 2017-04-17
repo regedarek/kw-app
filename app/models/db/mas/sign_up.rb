@@ -5,8 +5,8 @@ module Db
       self.table_name = 'mas_sign_ups'
       enum gender_1: [:male, :female], _suffix: :one
       enum gender_2: [:male, :female], _suffix: :two
-      enum tshirt_size_1: [:wxs, :ws, :wm, :wl, :wxl, :ms, :mm, :ml, :mxl, :mxxl, :mxxxl], _suffix: :one
-      enum tshirt_size_2: [:wxs, :ws, :wm, :wl, :wxl, :ms, :mm, :ml, :mxl, :mxxl, :mxxxl], _suffix: :two
+      enum tshirt_size_1: [:wxs, :ws, :wm, :wl, :wxl, :w2xl, :ms, :mm, :ml, :mxl, :m2xl, :m3xl, :m4xl], _suffix: :one
+      enum tshirt_size_2: [:wxs, :ws, :wm, :wl, :wxl, :w2xl, :ms, :mm, :ml, :mxl, :m2xl, :m3xl, :m4xl], _suffix: :two
       enum package_type_1: [:kw, :junior, :standard], _suffix: :one
       enum package_type_2: [:none, :kw, :junior, :standard], _suffix: :two
 

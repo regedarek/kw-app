@@ -132,14 +132,15 @@ pl:
           mm: Męska M
           ml: Męska L
           mxl: Męska XL
-          mxxl: Męska XL
-          mxxl: Męska XXL
-          mxxxl: Męska XXXL
+          m2xl: Męska 2XL
+          m3xl: Męska 3XL
+          m4xl: Męska 4XL
           wxs: Damska XS
           ws: Damska S
           wm: Damska M
           wl: Damska L
           wxl: Damska XL
+          w2xl: Damska 2XL
         package_types:
           none: ''
           kw: KW Kraków (%{price} PLN) - podaj numer klubowy w uwagach

@@ -94,9 +94,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'mas' => 'mas/sign_ups#new'
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
-  get "/pages/*id" => 'pages#show', as: :page, format: false
+  get "pages/*id" => 'pages#show', as: :page, format: false
 
   root to: 'pages#show', id: 'home'
 end
