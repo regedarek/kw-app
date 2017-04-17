@@ -8,9 +8,9 @@ module Membership
         if form.valid?
           last_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
           current_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.year)
-          cost = if last_year_fee.present? && last_year_fee.payment.prepaid?
+          cost = if last_year_fee.present? && last_year_fee.payment.paid?
                    100
-                 elsif current_year_fee.present? && current_year_fee.payment.prepaid?
+                 elsif current_year_fee.present? && current_year_fee.payment.paid?
                    100
                  else
                    150

@@ -10,5 +10,9 @@ module Db
       end
       state :prepaid
     end
+
+    def paid?
+      prepaid? || cash?
+    end
   end
 end
