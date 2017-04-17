@@ -1,7 +1,7 @@
 module Db
   class Payment < ActiveRecord::Base
     include Workflow
-    belongs_to :order
+    belongs_to :payable, polymorphic: true
 
     workflow_column :state
     workflow do

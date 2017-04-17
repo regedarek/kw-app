@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417081431) do
+ActiveRecord::Schema.define(version: 20170417094726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20170417081431) do
     t.integer  "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "payment_id"
+    t.integer  "payment_id",               null: false
     t.index ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
   end
 
@@ -147,11 +147,13 @@ ActiveRecord::Schema.define(version: 20170417081431) do
 
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id"
-    t.boolean  "cash",       default: false
+    t.boolean  "cash",         default: false
     t.string   "dotpay_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",      default: "unpaid"
+    t.string   "state",        default: "unpaid"
+    t.string   "payable_type"
+    t.integer  "payable_id"
   end
 
   create_table "peaks", force: :cascade do |t|
