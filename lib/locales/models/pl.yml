@@ -142,7 +142,7 @@ pl:
           wxl: Damska XL
         package_types:
           none: ''
-          kw: KW Kraków (%{price} PLN)
+          kw: KW Kraków (%{price} PLN) - podaj numer klubowy w uwagach
           junior: Kadet (%{price} PLN)
           standard: Standard (%{price} PLN) 
         category_type: Kategoria

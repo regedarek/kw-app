@@ -22,17 +22,12 @@
                 li= link_to t('.administration.users'), admin_users_path
                 li= link_to t('.administration.membership_fees'), admin_membership_fees_path
                 li= link_to t('.administration.items'), admin_items_path
+                li= link_to t('.administration.competitions'), admin_competitions_path
                 li= link_to t('.administration.importing'), admin_importing_index_path
     .top-bar-right
-      - if controller_name == 'sign_ups'
-        .show-for-medium style='margin-top: 5px'
-          = link_to image_tag('pl.png'), { locale: :pl }
-          |    
-          = link_to image_tag('sk.png'), { locale: :sk }
-      - else
-        ul.dropdown.menu
-          - if user_signed_in?
-            li= link_to t('.administration.logout'), destroy_user_session_path
-          - else
-            li= link_to t('.administration.login'), Rails.env.production? ? 'http://panel.kw.krakow.pl/zaloguj' : new_user_session_path
-            li= link_to t('.administration.signup'), zarejestruj_path
+      ul.dropdown.menu
+        - if user_signed_in?
+          li= link_to t('.administration.logout'), destroy_user_session_path
+        - else
+          li= link_to t('.administration.login'), Rails.env.production? ? 'http://panel.kw.krakow.pl/zaloguj' : new_user_session_path
+          li= link_to t('.administration.signup'), zarejestruj_path

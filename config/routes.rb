@@ -73,6 +73,7 @@ Rails.application.routes.draw do
         get :cancel_curator
       end
     end
+    resources :competitions
     resources :membership_fees, only: %w(index create destroy)
     resources :items do
       member do
@@ -93,8 +94,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/przejscia', to: 'activities/mountain_routes#index'
-  get '/mas', to: 'mas/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
   get "/pages/*id" => 'pages#show', as: :page, format: false

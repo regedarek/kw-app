@@ -29,7 +29,7 @@ pl:
         order_has_not_been_created: Problem z utworzeniem płatności, skontaktuj się z organizatorem.
   mas_mailer:
     sign_up:
-      subject: "Memoriał Jana Strzeleckiego 2017 - Rejestracja na zawody: #%{id}"
+      subject: "Memoriał Andrzeja Skwirczyńskiego 2017 - Rejestracja na zawody: #%{id}"
       title: "Zgłoszenie #%{id}"
       back_to_sign_ups_link: wróć do strony zapisów na zawody
       payment: "Płatność online: %{price} PLN"

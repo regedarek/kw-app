@@ -1,0 +1,63 @@
+h3= t('.title', id: @sign_up.id)
+
+b = t('activerecord.attributes.db/mas/sign_up.name_1') + ': '
+= @sign_up.name_1
+br
+b = t('activerecord.attributes.db/mas/sign_up.birth_year_1') + ': '
+= @sign_up.birth_year_1
+br
+- if @sign_up.organization_1.present?
+  b = t('activerecord.attributes.db/mas/sign_up.organization_1') + ': ' 
+  = @sign_up.organization_1
+br
+- if @sign_up.city_1.present?
+  b = t('activerecord.attributes.db/mas/sign_up.city_1') + ': ' 
+  = @sign_up.city_1
+  br
+b = t('activerecord.attributes.db/mas/sign_up.tshirt_size_1') + ': '
+= @sign_up.tshirt_size_1
+br
+b = t('activerecord.attributes.db/mas/sign_up.package_type_1') + ': ' 
+= ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_1.to_sym])
+hr
+b = t('activerecord.attributes.db/mas/sign_up.name_2') + ': '
+= @sign_up.name_2
+br
+b = t('activerecord.attributes.db/mas/sign_up.tshirt_size_2') + ': '
+= @sign_up.tshirt_size_2
+br
+b = t('activerecord.attributes.db/mas/sign_up.birth_year_2') + ': '
+= @sign_up.birth_year_2
+br
+- if @sign_up.organization_2.present?
+  b = t('activerecord.attributes.db/mas/sign_up.organization_2') + ': '
+  = @sign_up.organization_2
+br
+- if @sign_up.city_2.present?
+  b = t('activerecord.attributes.db/mas/sign_up.city_2') + ': '
+  = @sign_up.city_2
+  br
+b = t('activerecord.attributes.db/mas/sign_up.package_type_2') + ': '
+= ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_2}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_2.to_sym])
+hr
+span style='font-size: 120%'
+  b = t('.payment', price: @sign_up.try(:cost).try(:to_s))
+  br
+  = link_to t('.charge_payment_link'), charge_payment_url(@sign_up.payment.id)
+  br
+  b style='color: red'= t('.payment_info')
+- if @sign_up.remarks.present?
+  hr
+  br
+  b = t('activerecord.attributes.db/mas/sign_up.remarks') + ': '
+  br
+  = ' ' + @sign_up.remarks
+  br
+br
+= '----------------------------------------------------------'
+br
+= link_to t('.back_to_sign_ups_link'), Rails.application.secrets.mas_page
+br
+i
+  small
+    = 'Sekcja Narciarstwa Wysokogórskiego KW Kraków'

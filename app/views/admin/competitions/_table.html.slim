@@ -1,11 +1,11 @@
 table.stack
   thead
     tr
-      th =t('.table_nr')
-      th =t('.table_name')
-      th =t('.table_email')
-      th =t('.table_phone')
-      th =t('.table_payment')
+      th ID
+      th Kto?
+      th E-maile
+      th Telefony
+      th Płatność
   tbody
     - sign_ups.each_with_index do |sign_up, i|
       tr
@@ -17,12 +17,9 @@ table.stack
         td
           = "#{sign_up.phone_1}/#{sign_up.phone_2}"
         td
-          - if sign_up.order && sign_up.order.payment.prepaid?
+          - if sign_up.payment.present? && sign_up.payment.prepaid?
             span class='label success'
               | Zapłacono
-          - elsif sign_up.order && sign_up.order.payment.cash?
-            span class='label success'
-              | Zapłacono gotówką
           - else
             span class='label warning'
               | Oczekuje na płatność

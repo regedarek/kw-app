@@ -26,7 +26,7 @@ wb.styles do |style|
     @sign_ups.each do |sign_up|
       default_values = sign_up_attributes.map do |attr|
         sign_up.read_attribute(attr)
-      end.push(sign_up.prepaid?, sign_up.category, sign_up.created_at)
+      end.push(sign_up.payment.prepaid?, sign_up.category, sign_up.created_at)
       sheet.add_row(default_values)
     end
   end

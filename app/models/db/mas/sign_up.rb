@@ -10,8 +10,15 @@ module Db
       enum package_type_1: [:kw, :junior, :standard], _suffix: :one
       enum package_type_2: [:none, :kw, :junior, :standard], _suffix: :two
 
-      has_one :service, as: :serviceable
-      has_one :order, through: :service
+      has_one :payment, as: :payable, dependent: :destroy
+
+      def cost
+        Db::Mas::SignUp::PRICES[package_type_1.to_sym] + Db::Mas::SignUp::PRICES[package_type_2.to_sym]
+      end
+
+      def description
+        "Wpisowe nr #{id} na zawody VIII Memoriał Andrzeja Skwirczyńskiego 2017 od #{name_1} oraz #{name_2}"
+      end
 
       def self.gender_attributes_for_select
         gender_1s.map do |type, _|
@@ -43,23 +50,11 @@ module Db
         end
       end
 
-      def prepaid?
-        if order.present? && order.payment.present?
-          order.payment.prepaid?
-        else
-          false
-        end
-      end
-
       def category
-        if single?
-         return ''
+        if gender_1 == gender_2
+          return gender_1
         else
-          if gender_1 == gender_2
-            return gender_1
-          else
-            return 'mix'
-          end
+          return 'mix'
         end
       end
     end

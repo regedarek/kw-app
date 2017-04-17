@@ -16,9 +16,14 @@ module Mas
     validates_acceptance_of :terms_of_service
     validates :birth_year_1, numericality: { greater_than_or_equal_to: 2000 }, if: :junior_one?
     validates :birth_year_2, numericality: { greater_than_or_equal_to: 2000 }, if: :junior_two?
+    validates :remarks, presence: { message: 'musi posiadać numer klubowy' }, if: :kw_any?
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "MasSignUpForm")
+    end
+
+    def kw_any?
+      package_type_1 == 'kw' || package_type_2 == 'kw'
     end
 
     def junior_one?
