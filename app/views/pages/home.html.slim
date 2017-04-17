@@ -1,6 +1,11 @@
 .row
   .columns
     - if user_signed_in?
+      .row
+        .large-12.columns
+          = link_to 'Sprawdź swoje składki', membership_fees_path, class: 'large expanded button'
+
+    - if user_signed_in?
       - if false
         .row
           .large-12.columns
@@ -29,8 +34,3 @@
         - if current_user.mountain_routes.any?
           .large-12.columns
             = render 'activities/mountain_routes/table', routes: current_user.mountain_routes
-
-      - if user_signed_in?
-        .row
-          .large-12.columns
-            = link_to 'Sprawdź swoje składki', membership_fees_path, class: 'large expanded button'

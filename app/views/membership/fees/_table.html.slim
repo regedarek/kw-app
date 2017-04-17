@@ -1,18 +1,16 @@
 table.stack
   thead
     tr
-      th
-        | Rok
-      th
-        | Kwota
-      th
+      th Rok
+      th Kwota
+      th Płatność
   tbody
     - fees.each do |fee|
       tr
         td
           = fee.year
         td
-          = fee.cost
+          = "#{fee.cost} zł"
         td
           - if fee.payment.prepaid? || fee.payment.cash?
             span.label.success Zapłacone
