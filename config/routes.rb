@@ -96,6 +96,7 @@ Rails.application.routes.draw do
   end
 
   get 'mas' => 'mas/sign_ups#new'
+  get 'zarezerwuj' => 'reservations#new', as: :reserve
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
   get "pages/*id" => 'pages#show', as: :page, format: false
