@@ -94,8 +94,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get ':id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('skladki')}
-  get ':id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
+  get '/*id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('skladki')}
+  get '/:id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('wydarzenia')}
   get 'mas' => 'mas/sign_ups#new'
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
