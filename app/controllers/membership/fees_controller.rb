@@ -7,6 +7,11 @@ module Membership
       @form = Membership::FeeForm.new(kw_id: current_user.kw_id)
     end
 
+    def show
+      fee = Db::Membership::Fee.where(kw_id: params[:id], year: Date.today.year).first
+      render text: { fee.present? && fee.payment.paid? ? "#{Date.today.year}: TAK" : "#{Date.today.year}: NIE" }
+    end
+
     def create
       @fees = current_user.membership_fees
       @form = Membership::FeeForm.new(fee_params.merge(kw_id: current_user.kw_id))
