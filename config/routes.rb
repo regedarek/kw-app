@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   namespace :activities do
     resources :mountain_routes
   end
-  get '/przejscia', to: 'activities/mountain_routes#index'
-  get '/mas', to: 'mas/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
-  get 'pages/home' => 'pages#show', id: 'home'
-  get 'pages/rules' => 'pages#show', id: 'rules'
-  get "/pages/*id" => 'pages#show', as: :page, format: false
+
 
   namespace :api do
     resources :payments, only: [] do
@@ -50,24 +46,25 @@ Rails.application.routes.draw do
       post :availability
     end
   end
+
   resources :payments, only: [:index] do
     member do
       get :charge
     end
   end
 
-  resources :membership_fees, path: 'skladki', only: [:index, :create]
+  namespace :membership do
+    resources :fees, path: 'skladki', only: [:index, :create]
+  end
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :events, only: [:new, :create]
-    resources :profiles, only: [:index]
     resources :importing, only: [:index] do
       collection do
         post :import
       end
     end
-    resources :competitions, only: [:index]
     resources :users, only: [:index, :create] do
       member do
         get :make_admin
@@ -95,5 +92,12 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '/przejscia', to: 'activities/mountain_routes#index'
+  get '/mas', to: 'mas/sign_ups#new', constraints: lambda{|request|request.env['SERVER_NAME'].match('zapisy')}
+  get 'pages/home' => 'pages#show', id: 'home'
+  get 'pages/rules' => 'pages#show', id: 'rules'
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+
   root to: 'pages#show', id: 'home'
 end

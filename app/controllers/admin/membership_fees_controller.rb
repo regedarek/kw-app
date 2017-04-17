@@ -6,9 +6,9 @@ module Admin
     def index
       kw_id = params.fetch(:admin_membership_fees_form, {}).fetch(:kw_id) if params[:admin_membership_fees_form]
       @membership_fees = if kw_id.present?
-                    Db::MembershipFee.where(kw_id: kw_id).order(created_at: :desc)
+                    Db::Membership::Fee.where(kw_id: kw_id).order(created_at: :desc)
                   else
-                    Db::MembershipFee.order(created_at: :desc)
+                    Db::Membership::Fee.order(created_at: :desc)
                   end.page(params[:page])
 
       respond_to do |format|

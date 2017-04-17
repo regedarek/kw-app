@@ -12,7 +12,7 @@ module Membership
     validate :year_existance
 
     def year_existance
-      if Db::MembershipFee.exists?(kw_id: kw_id, year: year)
+      if Db::Membership::Fee.exists?(kw_id: kw_id, year: year)
         errors.add(:year, "już istnieje")
       end
     end

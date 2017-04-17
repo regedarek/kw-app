@@ -5,8 +5,8 @@ module Membership
     class << self
       def pay(kw_id:, form:)
         if form.valid?
-          last_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
-          current_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.year)
+          last_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
+          current_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.year)
           cost = if last_year_fee.present? && last_year_fee.payment.paid?
                    100
                  elsif current_year_fee.present? && current_year_fee.payment.paid?
@@ -14,7 +14,7 @@ module Membership
                  else
                    150
                  end
-          membership_fee = Db::MembershipFee.create(
+          membership_fee = Db::Membership::Fee.create(
             kw_id: kw_id,
             year: form.year,
             cost: cost

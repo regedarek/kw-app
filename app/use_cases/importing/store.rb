@@ -42,9 +42,9 @@ module Importing
       end
 
       def store_membership_fee(parsed_objects)
-        Db::MembershipFee.transaction do
+        Db::Membership::Fee.transaction do
           parsed_objects.each do |parsed_data|
-           fee = Db::MembershipFee.create(
+           fee = Db::Membership::Fee.create(
              year: parsed_data.year,
              kw_id: parsed_data.kw_id
            )
