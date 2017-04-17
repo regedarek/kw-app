@@ -8,9 +8,9 @@ module Membership
         if form.valid?
           last_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
           current_year_fee = Db::MembershipFee.find_by(kw_id: kw_id, year: Date.today.year)
-          cost = if last_year_fee.present? && last_year_fee.order.present? && last_year_fee.order.prepaid?
+          cost = if last_year_fee.present? && last_year_fee.payment.prepaid?
                    100
-                 elsif current_year_fee.present? && current_year_fee.order.present? && current_year_fee.order.prepaid?
+                 elsif current_year_fee.present? && current_year_fee.payment.prepaid?
                    100
                  else
                    150
@@ -20,9 +20,12 @@ module Membership
             year: form.year,
             cost: cost
           )
-          order = Orders::CreateOrder.new(service: membership_fee).create
-          return Failure.new(:wrong_payment) unless order.payment.present?
-          Success.new(payment: order.payment)
+
+          return Failure.new(:wrap_payment) if membership_fee.payment.present?
+
+          Payments::CreatePayment.new(payment: membership_fee.payment).create
+
+          Success.new(payment: membership_fee.payment)
         else
           return Failure.new(:invalid, form: form)
         end

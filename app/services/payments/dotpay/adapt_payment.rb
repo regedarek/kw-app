@@ -7,9 +7,9 @@ module Payments
 
       def to_params
         {
-          amount: @payment.order.cost,
+          amount: @payment.payable.cost,
           currency: 'PLN',
-          description: @payment.order.description,
+          description: @payment.payable.description,
           control: @payment.dotpay_id,
           language: 'pl',
           redirection_type: 0,
