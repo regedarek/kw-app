@@ -6,7 +6,7 @@ module Admin
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
 
-    attr_accessor :kw_id, :start_date, :end_date, :description
+    attr_accessor :kw_id, :start_date, :end_date, :remarks
 
     validates :kw_id, presence: { message: 'nie moze byc pusty'}
 
@@ -15,7 +15,7 @@ module Admin
         user_id: user.id,
         start_date: start_date,
         end_date: end_date,
-        description: description
+        remarks: remarks
       )
     end
 

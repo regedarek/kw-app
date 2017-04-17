@@ -1,7 +1,3 @@
-require 'admin/reservations_form'
-require 'admin/reservations'
-require 'csv'
-
 module Admin
   class ReservationsController < Admin::BaseController
     def index
@@ -13,7 +9,6 @@ module Admin
       end.page(params[:page])
       respond_to do |format|
         format.html
-        format.csv { render text: Db::Reservation.all.to_csv }
       end
     end
 
@@ -26,7 +21,7 @@ module Admin
 
     def edit
       @reservation = Db::Reservation.find(params[:id])
-      @reservation_form = Admin::ReservationsForm.new(@reservation.slice(:kw_id, :end_date, :start_date, :description))
+      @reservation_form = Admin::ReservationsForm.new(@reservation.slice(:kw_id, :end_date, :start_date, :remarks))
     end
 
     def update
@@ -87,7 +82,7 @@ module Admin
     private
 
     def reservation_params
-      params.require(:admin_reservations_form).permit(:kw_id, :item_id, :start_date, :end_date, :description)
+      params.require(:admin_reservations_form).permit(:kw_id, :item_id, :start_date, :end_date, :remarks)
     end
   end
 end

@@ -1,5 +1,4 @@
 require 'results'
-require 'admin/reservations_form'
 
 module Admin
   class Reservations
