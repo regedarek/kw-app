@@ -46,10 +46,7 @@
             td
               = fee.created_at.strftime("%d-%m-%Y")
             td
-              - if fee.order.present?
-                = fee.order.prepaid? ? "Zapłacone" : "Nie zapłacone"
-              - else
-                | błąd
+              = fee.payment.prepaid? || fee.payment.cash? ? "Zapłacone" : "Nie zapłacone"
             td
               = link_to 'Usun', admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' }
     = paginate @membership_fees

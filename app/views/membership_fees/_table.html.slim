@@ -14,8 +14,7 @@ table.stack
         td
           = fee.cost
         td
-          - if fee.order && fee.order.payment
-            - if fee.order.payment.prepaid? || fee.order.payment.cash?
-              span.label.success Zapłacone
-            - else
-              = link_to "Zapłać", charge_payment_path(fee.order.payment)
+          - if fee.payment.prepaid? || fee.payment.cash?
+            span.label.success Zapłacone
+          - else
+            = link_to "Zapłać", charge_payment_path(fee.payment)

@@ -11,7 +11,7 @@ wb.styles do |style|
     sheet.add_row(attributes, style: style.add_style(highlight_cell_options))
     Db::MembershipFee.find_each do |fee|
       user = fee.user
-      values = [fee.kw_id, fee.year, user.try(:first_name), fee.user.try(:last_name), fee.user.try(:email), fee.order.try(:prepaid?), fee.order.try(:payment).try(:cash), fee.created_at]
+      values = [fee.kw_id, fee.year, user.try(:first_name), fee.user.try(:last_name), fee.user.try(:email), fee.payment.prepaid?, fee.payment.cash?, fee.created_at]
       sheet.add_row(values)
     end
   end
