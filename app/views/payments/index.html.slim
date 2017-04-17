@@ -1,6 +1,13 @@
 .column.row
   .row
     .large-12.columns
-      h3 Płatności
-      
-      | Dziękujemy za dokonanie płatności!
+      .callout.success
+        h3 Płatności
+        
+        | Dziękujemy za dokonanie płatności! Została ona zapisana i odznaczona w systemie!
+
+  .row
+    .large-12.columns
+      ul
+       li = link_to 'wróć do strony zapisów na VIII Memoriał Andrzeja Skwirczyńskiego', 'http://zapisy.kw.krakow.pl/mas/zapisy'
+       li = link_to 'wróć do strony składek', 'http://panel.kw.krakow.pl/klub/skladki'
