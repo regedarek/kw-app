@@ -38,6 +38,8 @@ table.stack
                 = link_to truncate(route.name, length: 25), edit_activities_mountain_route_path(route)
               - else
                 = link_to truncate(route.name, length: 25), activities_mountain_route_path(route)
+            - else
+              = link_to truncate(route.name, length: 25), activities_mountain_route_path(route)
         td align='center'
           = truncate(route.difficulty, length: 10)
         td align='center' = route.length

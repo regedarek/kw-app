@@ -6,6 +6,8 @@
     .large-6.columns
       - if user_signed_in?
         = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+      - else
+        = link_to t('.new_route_link'), '#', class: 'large disabled expanded button'
 
   .row
     .large-12.columns
