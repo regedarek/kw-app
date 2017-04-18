@@ -5,6 +5,14 @@ module Activities
         .text_search(params[:query])
         .order(sort_column + ' ' + sort_direction + ' NULLS LAST')
         .page(params[:page]).per(10)
+
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          disposition = "attachment; filename='przejscia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+          response.headers['Content-Disposition'] = disposition
+        end
+      end
     end
 
     def new

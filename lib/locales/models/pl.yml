@@ -103,6 +103,7 @@ pl:
         peak: szczyt, przełęcz, ściana
         mountains: góry
         length: długość drogi
+        rating: subiektywna ocena drogi
         rating_one: fuj, nie polecam
         rating_two: warta przejścia
         rating_three: piękna droga

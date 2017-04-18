@@ -1,0 +1,48 @@
+wb = xlsx_package.workbook
+attributes = %i(
+  description name difficulty partners rating climbing_date peak time area length mountains
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "przejścia narciarskie") do |sheet|
+    default_attributes = attributes.map do |attr|
+      Db::Activities::MountainRoute.human_attribute_name(attr)
+    end.push('Kto dodał?')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
+    @routes.where(route_type: 'ski').each do |route|
+      default_values = attributes.map do |attr|
+        route.read_attribute(attr)
+      end.push(route.user.try(:display_name))
+      sheet.add_row(default_values)
+    end
+  end
+  wb.add_worksheet(name: "przejścia wspinaczkowe zimowe") do |sheet|
+    default_attributes = attributes.map do |attr|
+      Db::Activities::MountainRoute.human_attribute_name(attr)
+    end.push('Kto dodał?')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
+    @routes.where(route_type: 'winter_climbing').each do |route|
+      default_values = attributes.map do |attr|
+        route.read_attribute(attr)
+      end.push(route.user.try(:display_name))
+      sheet.add_row(default_values)
+    end
+  end
+  wb.add_worksheet(name: "przejścia wspinaczkowe letnie") do |sheet|
+    default_attributes = attributes.map do |attr|
+      Db::Activities::MountainRoute.human_attribute_name(attr)
+    end.push('Kto dodał?')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
+    @routes.where(route_type: 'regular_climbing').each do |route|
+      default_values = attributes.map do |attr|
+        route.read_attribute(attr)
+      end.push(route.user.try(:display_name))
+      sheet.add_row(default_values)
+    end
+  end
+end
