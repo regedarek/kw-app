@@ -22,7 +22,7 @@ table.stack
   tbody
     - routes.each do |route|
       tr
-        td = route.climbing_date
+        td style='min-width: 105px;'= route.climbing_date
         td
           .truncated
             = truncate(route.mountains, length: 25)
