@@ -14,7 +14,7 @@ wb.styles do |style|
       Db::Activities::MountainRoute.human_attribute_name(attr)
     end.push('Kto dodał?')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
-    @routes.where(route_type: 'ski').each do |route|
+    Db::Activities::MountainRoute.where(route_type: 'ski').order('climbing_date DESC NULLS LAST').each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
       end.push(route.user.try(:display_name))
@@ -26,7 +26,7 @@ wb.styles do |style|
       Db::Activities::MountainRoute.human_attribute_name(attr)
     end.push('Kto dodał?')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
-    @routes.where(route_type: 'winter_climbing').each do |route|
+    Db::Activities::MountainRoute.where(route_type: 'winter_climbing').order('climbing_date DESC NULLS LAST').each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
       end.push(route.user.try(:display_name))
@@ -38,7 +38,7 @@ wb.styles do |style|
       Db::Activities::MountainRoute.human_attribute_name(attr)
     end.push('Kto dodał?')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
-    @routes.where(route_type: 'regular_climbing').each do |route|
+    Db::Activities::MountainRoute.where(route_type: 'regular_climbing').order('climbing_date DESC NULLS LAST').each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
       end.push(route.user.try(:display_name))
