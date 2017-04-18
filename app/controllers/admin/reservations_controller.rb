@@ -9,6 +9,10 @@ module Admin
       end.page(params[:page])
       respond_to do |format|
         format.html
+        format.xlsx do
+          disposition = "attachment; filename='rezerwacje_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+          response.headers['Content-Disposition'] = disposition
+        end
       end
     end
 

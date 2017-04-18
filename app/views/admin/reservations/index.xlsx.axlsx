@@ -1,0 +1,24 @@
+wb = xlsx_package.workbook
+attributes = %i(
+  id state start_date end_date remarks canceled created_at updated_at
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "rezerwacje") do |sheet|
+    default_attributes = attributes.map do |attr|
+      Db::Reservation.human_attribute_name(attr)
+    end.push('Kto?', 'Co?', 'Opłacono?', 'Gotówka')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
+    Db::Reservation.order(:created_at).each do |reservation|
+      default_values = attributes.map do |attr|
+        reservation.read_attribute(attr)
+      end.push(reservation.user.display_name, reservation.items.map(&:display_name).to_sentence, reservation.payment.paid?, reservation.payment.cash?)
+      sheet.add_row(default_values)
+    end
+  end
+end

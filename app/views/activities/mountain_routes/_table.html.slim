@@ -12,8 +12,9 @@ table.stack
       th = link_to activities_mountain_routes_path(query: params[:query], sort: 'name', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
         | nazwa drogi/zjazdu 
       th wycena
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'length', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | długość 
+      - unless params[:route_type] == 'ski'
+        th = link_to activities_mountain_routes_path(query: params[:query], sort: 'length', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
+          | długość 
       th = link_to activities_mountain_routes_path(query: params[:query], sort: 'rating', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
         | ocena 
       th skład zespołu
@@ -42,7 +43,8 @@ table.stack
               = link_to truncate(route.name, length: 25), activities_mountain_route_path(route)
         td align='center'
           = truncate(route.difficulty, length: 10)
-        td align='center' = route.length
+        - unless params[:route_type] == 'ski'
+          td align='center' = route.length
         td align='center'
           - if route.rating.present?
             - route.rating.times do

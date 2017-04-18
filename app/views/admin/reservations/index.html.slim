@@ -1,11 +1,14 @@
-.row
-  .columns
+.column
+  .large-6.columns
     - if params[:state] == 'archived'
-      = link_to 'Pokaż tylko niezarchiwizowane', admin_reservations_path
+      = link_to 'Pokaż tylko niezarchiwizowane', admin_reservations_path, class: 'button large expanded'
     - else
-      = link_to 'Pokaż tylko zarchiwizowane', admin_reservations_path(state: :archived)
+      = link_to 'Pokaż tylko zarchiwizowane', admin_reservations_path(state: :archived), class: 'button large expanded'
+  .large-6.columns
+    = link_to 'Exportuj do Excela', admin_reservations_path(format: :xlsx), class: 'button large expanded secondary'
 
-    table
+  .large-12.columns
+    table.stack
       thead
         tr
           th Nr.
