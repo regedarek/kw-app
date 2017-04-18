@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.0.0-p247
+services:
+  - postgresql
+script: 
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
+before_script:
+  - psql -c 'create database kw-app_test;' -U postgres
+bundler_args: --binstubs=./bundler_stubs
+before_install:
+  - gem update --system
+  - gem --version
