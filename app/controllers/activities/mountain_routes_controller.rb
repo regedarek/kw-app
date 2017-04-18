@@ -33,7 +33,7 @@ module Activities
       @route = Db::Activities::MountainRoute.find(params[:id])
 
       if @route.update(route_params)
-        redirect_to activities_mountain_route_path(route), notice: t('.updated_successfully')
+        redirect_to activities_mountain_route_path(@route), notice: t('.updated_successfully')
       else
         render :edit
       end
