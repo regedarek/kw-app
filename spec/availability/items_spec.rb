@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'availability'
 
 describe Availability::Items do
   let!(:items) { Factories::Item.create_all! }

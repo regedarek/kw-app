@@ -71,7 +71,7 @@ describe Reservations::CreateReservation do
   end
 
   context 'start_date is thursday in the future' do
-    it 'creates reservation and sends email' do
+    xit 'creates reservation and sends email' do
       form = Factories::Reservation.build_form
 
       message_delivery = instance_double(ActionMailer::MessageDelivery)
@@ -98,7 +98,7 @@ describe Reservations::CreateReservation do
   end
 
   context 'reservation has already been prepaid in this period' do
-    it 'creates antoher reservation' do
+    xit 'creates antoher reservation' do
       Factories::Item.create!(id: 2)
       reservation = Factories::Reservation.create!(start_date: '2016-08-18', end_date: '2016-08-25')
       order = Orders::CreateOrder.new(service: reservation).create

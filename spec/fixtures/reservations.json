@@ -6,7 +6,7 @@
       "state": "reserved",
       "start_date": "2016-08-18",
       "end_date": "2016-08-25",
-      "description": "some description",
+      "remarks": "some remarks",
       "item_ids": ["1"]
     },
     {
@@ -15,7 +15,7 @@
       "state": "reserved",
       "start_date": "2016-10-10",
       "end_date": "2016-10-17",
-      "description": "some description",
+      "remarks": "some remarks",
       "item_ids": ["1"]
     },
     {
@@ -24,7 +24,7 @@
       "state": "reserved",
       "start_date": "2016-08-18",
       "end_date": "2016-08-25",
-      "description": "some description",
+      "remarks": "some remarks",
       "item_ids": ["1"]
     }
   ]

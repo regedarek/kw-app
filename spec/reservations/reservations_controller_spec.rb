@@ -34,7 +34,7 @@ describe ReservationsController, type: :controller do
       expect(response).to redirect_to reservations_path(start_date: '2016-08-18')
     end
 
-    it 'adds item to reservation if already exists' do
+    xit 'adds item to reservation if already exists' do
       reservation = Factories::Reservation.create!(item_ids: [item_1.id])
       Orders::CreateOrder.new(service: reservation).create
       form = Factories::Reservation.build_form(item_ids: [item_2.id])
@@ -49,7 +49,7 @@ describe ReservationsController, type: :controller do
   end
 
   describe '#delete_item' do
-    it 'deletes item from registration or registration if it was last one' do
+    xit 'deletes item from registration or registration if it was last one' do
       reservation = Factories::Reservation.create!(
         start_date: '2016-10-06', items: [item_1, item_2]
       )

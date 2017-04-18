@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'guards'
 
 describe Guards::Date do
   describe '#nearest_thursday' do
