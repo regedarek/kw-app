@@ -14,12 +14,12 @@
     .row
       .large-12.columns
         = f.label :name_1
-        = f.text_field :name_1
+        = f.text_field :name_1, value: user_signed_in? ? current_user.display_name : nil
 
     .row
       .large-9.columns
         = f.label :email_1
-        = f.email_field :email_1
+        = f.email_field :email_1, value: user_signed_in? ? current_user.email : nil
 
       .large-3.columns
         = f.label :tshirt_size_1, t('.tshirt_size_html')
@@ -37,7 +37,7 @@
     .row
       .large-6.columns
         = f.label :phone_1
-        = f.text_field :phone_1
+        = f.text_field :phone_1, value: user_signed_in? ? current_user.phone : nil
 
       .large-6.columns
         = f.label :package_type_1
@@ -50,7 +50,7 @@
 
       .large-6.columns
         = f.label :organization_1
-        = f.text_field :organization_1
+        = f.text_field :organization_1, value: user_signed_in? ? 'KW Kraków' : nil
 
   .js-player-2
     .callout.secondary
@@ -75,7 +75,7 @@
 
         .large-6.columns
           = f.label :gender_2
-          = f.select :gender_2, options_for_select(Db::Mas::SignUp.gender_attributes_for_select, f.object.gender_2), include_blank: true 
+          = f.select :gender_2, options_for_select(Db::Mas::SignUp.gender_attributes_for_select, f.object.gender_2), include_blank: true
 
       .row
         .large-6.columns
@@ -99,7 +99,7 @@
     .row
       .large-12.columns
         = f.label :remarks
-        = f.text_area :remarks
+        = f.text_area :remarks, value: user_signed_in? ? ('numer klubowy zawodnika 1: ' + current_user.kw_id.to_s) : nil
   
   .callout.warning
     .row
