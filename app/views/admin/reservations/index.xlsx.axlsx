@@ -12,12 +12,12 @@ wb.styles do |style|
   wb.add_worksheet(name: "rezerwacje") do |sheet|
     default_attributes = attributes.map do |attr|
       Db::Reservation.human_attribute_name(attr)
-    end.push('Kto?', 'Co?', 'Opłacono?', 'Gotówka')
+    end.push('Kto?', 'Numer klubowy', 'Numer telefonu', 'Co?', 'Opłacono?', 'Gotówka')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     Db::Reservation.order(:created_at).each do |reservation|
       default_values = attributes.map do |attr|
         reservation.read_attribute(attr)
-      end.push(reservation.user.display_name, reservation.items.map(&:display_name).to_sentence, reservation.payment.paid?, reservation.payment.cash?)
+      end.push(reservation.user.display_name, reservation.user.kw_id, reservation.user.phone, reservation.items.map(&:display_name).to_sentence, reservation.payment.paid?, reservation.payment.cash?)
       sheet.add_row(default_values)
     end
   end
