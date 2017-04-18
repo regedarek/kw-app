@@ -1,23 +1,55 @@
 .columns
   .row
     - if user_signed_in? && current_user.admin?
-      .large-4.columns
+      .large-3.columns
         = form_tag activities_mountain_routes_path, method: :get do
           = text_field_tag :query, params[:query], style: 'height: 55px', placeholder: 'wyszukaj drogę, przejście, rejon, osobę'
 
-      .large-4.columns
+      .large-3.columns
         = link_to 'Eksportuj do Excela', activities_mountain_routes_path(format: :xlsx), class: 'large expanded secondary button'
 
       .large-4.columns
         = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+
+      .large-2.columns
+        .text-right.show-for-medium
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'ski' do
+            = image_tag 'ski.png', style: 'height: 55px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'regular_climbing' do
+            = image_tag 'regular-climbing.png', style: 'height: 55px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'winter_climbing' do
+            = image_tag 'winter-climbing.svg', style: 'height: 55px'
+        .text-center.show-for-small-only
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'ski' do
+            = image_tag 'ski.png', style: 'height: 40px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'regular_climbing' do
+            = image_tag 'regular-climbing.png', style: 'height: 40px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'winter_climbing' do
+            = image_tag 'winter-climbing.svg', style: 'height: 40px'
     - else
-      .large-6.columns
+      .large-4.columns
         = form_tag activities_mountain_routes_path, method: :get do
           = text_field_tag :query, params[:query], style: 'height: 55px', placeholder: 'wyszukaj drogę, przejście, rejon, osobę'
 
       .large-6.columns
         - if user_signed_in?
           = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+
+      .large-2.columns
+        .text-right.show-for-medium
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'ski' do
+            = image_tag 'ski.png', style: 'height: 55px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'regular_climbing' do
+            = image_tag 'regular-climbing.png', style: 'height: 55px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'winter_climbing' do
+            = image_tag 'winter-climbing.svg', style: 'height: 55px'
+        .text-center.show-for-small-only
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'ski' do
+            = image_tag 'ski.png', style: 'height: 40px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'regular_climbing' do
+            = image_tag 'regular-climbing.png', style: 'height: 40px'
+          = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'winter_climbing' do
+            = image_tag 'winter-climbing.svg', style: 'height: 40px'
 
   .row
     .large-12.columns

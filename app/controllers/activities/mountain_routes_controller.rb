@@ -2,7 +2,7 @@ module Activities
   class MountainRoutesController < ApplicationController
     def index
       @routes = Db::Activities::MountainRoute
-        .text_search(params[:query])
+        .text_search(params[:query], route_type: params[:route_type])
         .order(sort_column + ' ' + sort_direction + ' NULLS LAST')
         .page(params[:page]).per(10)
 
