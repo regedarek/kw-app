@@ -14,7 +14,8 @@ script:
   - bundle exec rspec spec/
 
 before_script:
-  - psql -c 'create database kw-app_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 before_install:
   - gem update --system
