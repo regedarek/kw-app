@@ -1,13 +1,14 @@
-table.scoll.stack
+table.stack
   thead
     tr
-      th width='130' kiedy?
+      th width='110' kiedy?
       th góry
       th rejon/dolina
       th szczyt, przełęcz, ściana
       th nazwa drogi/zjazdu
-      th width='50' wycena
-      th długość drogi
+      th width='30' wycena
+      th width='30' długość
+      th width='30' ocena
       th skład zespołu
       - if user_signed_in?
         th
@@ -26,8 +27,13 @@ table.scoll.stack
               = link_to route.name, activities_mountain_route_path(route)
         td align='center' = route.difficulty
         td align='center' = route.length
+        td align='center'
+          - if route.rating.present?
+            - route.rating.times do
+              i.fi-star
         td = route.partners
         - if user_signed_in?
           td
             - if current_user.admin? || current_user.id == route.user_id
-              = link_to 'X', activities_mountain_route_path(route), method: :delete
+              = link_to activities_mountain_route_path(route), method: :delete do
+                i.fi-trash

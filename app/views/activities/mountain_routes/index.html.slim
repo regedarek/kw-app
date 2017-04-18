@@ -1,10 +1,18 @@
-.column.row
+.columns
   .row
     .large-12.columns
       - if user_signed_in?
         = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+  .row
+    .large-12.columns
       .text-center
         = paginate @routes
+
+  .row
+    .large-12.columns
       = render 'table', routes: @routes
+
+  .row
+    .large-12.columns
       .text-center
         = paginate @routes
