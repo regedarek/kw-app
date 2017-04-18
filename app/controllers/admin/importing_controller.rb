@@ -1,3 +1,5 @@
+require 'csv'
+
 module Admin
   class ImportingController < Admin::BaseController
     def index
