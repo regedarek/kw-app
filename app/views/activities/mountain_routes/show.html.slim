@@ -8,16 +8,38 @@
         = @route.description
 
   .large-12.columns
-    b Szczyt: 
+    b rodzaj przejścia: 
+    = I18n.t(@route.route_type)
+
+  .large-12.columns
+    b góry: 
+    = @route.mountains
+
+  .large-12.columns
+    b szczyt, przełęcz, ściana: 
     = @route.peak
+
+  .large-12.columns
+    b rejon przejścia: 
+    = @route.area
 
   - if @route.difficulty.present?
     .large-12.columns
-      b Wycena: 
+      b wycena: 
       = @route.difficulty
 
+  - if @route.time.present?
+    .large-12.columns
+      b czas przejścia: 
+      = @route.time
+
+  - if @route.length.present?
+    .large-12.columns
+      b długość drogi/zjazdu/tury(m/km): 
+      = @route.length
+
   .large-12.columns
-    b Partnerzy: 
+    b skład zespołu: 
     = @route.partners
 
   - if @route.time?
@@ -25,18 +47,16 @@
       b Czas przejścia:  
       = @route.time
 
-  .large-12.columns
-    b Data przejścia: 
-    = @route.climbing_date
-
-  - if @route.rating?
+  - if @route.climbing_date.present?
     .large-12.columns
-      b Subiektywna ocena: 
+      b data przejścia: 
+      = @route.climbing_date
+
+  - if @route.rating.present?
+    .large-12.columns
+      b subiektywna ocena: 
       = "#{@route.rating} / 3"
 
   .large-12.columns
     hr
     = link_to 'Powrót', activities_mountain_routes_path
-    - if user_signed_in? && current_user.admin?
-      = ' | '
-      = link_to 'Edytuj', edit_activities_mountain_route_path(@route)

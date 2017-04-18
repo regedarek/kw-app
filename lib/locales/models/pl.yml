@@ -93,19 +93,20 @@ pl:
         acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
         sections: Proszę wskazać w których Sekcjach KW chciałbyś/chciałabyś działać.
       db/activities/mountain_route:
-        name: Nazwa drogi/zjazdu
-        difficulty: Wycena
-        partners: Partnerzy
-        description: Uwagi
-        time: Czas przejscia
-        climbing_date: Data przejscia
-        area: Rejon przejścia
+        name: nazwa drogi/zjazdu/tury
+        difficulty: wycena
+        partners: skład zespołu
+        description: uwagi
+        time: czas przejscia
+        climbing_date: data przejscia
+        area: rejon przejścia
         peak: szczyt, przełęcz, ściana
         mountains: góry
         length: długość drogi
-        rating_one: Fuj, nie polecam
-        rating_two: Warta przejścia
-        rating_three: Piękna droga
+        rating_one: fuj, nie polecam
+        rating_two: warta przejścia
+        rating_three: piękna droga
+        topo: topo drogi(link)
       db/mas/sign_up:
         name_1: Zawodnik 1
         name_2: Zawodnik 2

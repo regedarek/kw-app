@@ -5,7 +5,7 @@ table.scoll.stack
       th góry
       th rejon/dolina
       th szczyt, przełęcz, ściana
-      th nazwa drogi
+      th nazwa drogi/zjazdu
       th width='50' wycena
       th długość drogi
       th skład zespołu
@@ -23,7 +23,7 @@ table.scoll.stack
             - if current_user.admin? || current_user.id == route.user_id
               = link_to route.name, edit_activities_mountain_route_path(route)
             - else
-              = route.name
+              = link_to route.name, activities_mountain_route_path(route)
         td align='center' = route.difficulty
         td align='center' = route.length
         td = route.partners
