@@ -1,20 +1,20 @@
 table.stack
   thead
     tr
-      th = link_to sort: 'climbing_date', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'climbing_date', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | kiedy?
-      th = link_to sort: 'mountains', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'mountains', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | góry 
-      th = link_to sort: 'area', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'area', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | rejon/dolina 
-      th = link_to sort: 'peak', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'peak', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | szczyt, przełęcz, ściana 
-      th = link_to sort: 'name', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'name', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | nazwa drogi/zjazdu 
       th wycena
-      th = link_to sort: 'length', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'length', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | długość 
-      th = link_to sort: 'rating', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+      th = link_to query: params[:query], sort: 'rating', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
         | ocena 
       th skład zespołu
       - if user_signed_in?
