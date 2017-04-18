@@ -1,8 +1,12 @@
 .columns
   .row
-    .large-12.columns
+    .large-6.columns
+      = form_tag activities_mountain_routes_path, method: :get do
+        = text_field_tag :query, params[:query], style: 'height: 55px', placeholder: 'wyszukaj drogę, przejście, rejon'
+    .large-6.columns
       - if user_signed_in?
         = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+
   .row
     .large-12.columns
       .text-center

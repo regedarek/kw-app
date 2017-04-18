@@ -1,14 +1,21 @@
 table.stack
   thead
     tr
-      th width='110' kiedy?
-      th góry
-      th rejon/dolina
-      th szczyt, przełęcz, ściana
-      th nazwa drogi/zjazdu
-      th width='30' wycena
-      th width='30' długość
-      th width='30' ocena
+      th = link_to sort: 'climbing_date', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | kiedy?
+      th = link_to sort: 'mountains', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | góry 
+      th = link_to sort: 'area', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | rejon/dolina 
+      th = link_to sort: 'peak', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | szczyt, przełęcz, ściana 
+      th = link_to sort: 'name', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | nazwa drogi/zjazdu 
+      th wycena
+      th = link_to sort: 'length', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | długość 
+      th = link_to sort: 'rating', direction: params[:direction] == 'asc' ? 'desc' : 'asc' do
+        | ocena 
       th skład zespołu
       - if user_signed_in?
         th
@@ -16,22 +23,30 @@ table.stack
     - routes.each do |route|
       tr
         td = route.climbing_date
-        td = route.mountains
-        td = route.area
-        td = route.peak
         td
-          - if user_signed_in?
-            - if current_user.admin? || current_user.id == route.user_id
-              = link_to route.name, edit_activities_mountain_route_path(route)
-            - else
-              = link_to route.name, activities_mountain_route_path(route)
-        td align='center' = route.difficulty
+          .truncated
+            = truncate(route.mountains, length: 25)
+        td
+          = truncate(route.area, length: 25)
+        td
+          .truncated
+            = truncate(route.peak, length: 25)
+        td
+          .truncated
+            - if user_signed_in?
+              - if current_user.admin? || current_user.id == route.user_id
+                = link_to truncate(route.name, length: 25), edit_activities_mountain_route_path(route)
+              - else
+                = link_to truncate(route.name, length: 25), activities_mountain_route_path(route)
+        td align='center'
+          = truncate(route.difficulty, length: 10)
         td align='center' = route.length
         td align='center'
           - if route.rating.present?
             - route.rating.times do
               i.fi-star
-        td = route.partners
+        td
+          .truncated = truncate(route.partners, length: 25)
         - if user_signed_in?
           td
             - if current_user.admin? || current_user.id == route.user_id

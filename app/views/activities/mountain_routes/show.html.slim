@@ -28,11 +28,6 @@
       b wycena: 
       = @route.difficulty
 
-  - if @route.time.present?
-    .large-12.columns
-      b czas przejścia: 
-      = @route.time
-
   - if @route.length.present?
     .large-12.columns
       b długość drogi/zjazdu/tury(m/km): 
@@ -44,7 +39,7 @@
 
   - if @route.time?
     .large-12.columns
-      b Czas przejścia:  
+      b czas przejścia:  
       = @route.time
 
   - if @route.climbing_date.present?
@@ -55,7 +50,8 @@
   - if @route.rating.present?
     .large-12.columns
       b subiektywna ocena: 
-      = "#{@route.rating} / 3"
+      - @route.rating.times do
+        i.fi-star
 
   .large-12.columns
     hr

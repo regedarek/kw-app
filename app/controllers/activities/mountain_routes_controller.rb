@@ -1,7 +1,10 @@
 module Activities
   class MountainRoutesController < ApplicationController
     def index
-      @routes = Db::Activities::MountainRoute.order('climbing_date DESC NULLS LAST').page(params[:page]).per(10)
+      @routes = Db::Activities::MountainRoute
+        .text_search(params[:query])
+        .order(sort_column + ' ' + sort_direction + ' NULLS LAST')
+        .page(params[:page]).per(10)
     end
 
     def new
@@ -53,6 +56,14 @@ module Activities
 
     def route_params
       params.require(:route).permit(:route_type, :peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating)
+    end
+
+    def sort_column
+      Db::Activities::MountainRoute.column_names.include?(params[:sort]) ? params[:sort] : 'climbing_date'
+    end
+
+    def sort_direction
+      %w(asc desc).include?(params[:direction]) ? params[:direction] : 'desc'
     end
   end
 end
