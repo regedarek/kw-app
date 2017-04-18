@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418161209) do
+ActiveRecord::Schema.define(version: 20170418163613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,8 +135,8 @@ ActiveRecord::Schema.define(version: 20170418161209) do
     t.string   "area"
     t.integer  "length"
     t.string   "mountains"
-    t.datetime "created_at",    default: '2017-04-18 16:22:19', null: false
-    t.datetime "updated_at",    default: '2017-04-18 16:22:19', null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "payments", force: :cascade do |t|

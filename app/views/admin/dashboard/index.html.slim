@@ -39,7 +39,7 @@
   .large-4.columns
     h3 5 ostatnich przejść
     table.stack
-      - Db::Activities::MountainRoute.order('created_at DESC').limit(5).each do |route|
+      - Db::Activities::MountainRoute.order(created_at: :desc).limit(5).each do |route|
         tr
           td
             = route.name
