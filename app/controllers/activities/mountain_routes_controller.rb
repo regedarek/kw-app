@@ -2,6 +2,7 @@ module Activities
   class MountainRoutesController < ApplicationController
     def index
       @q = Db::Activities::MountainRoute.ransack(params[:q])
+      @q.sorts = 'climbing_date desc' if @q.sorts.empty?
       @routes = @q.result.includes(:user).page(params[:page])
 
       respond_to do |format|
