@@ -5,4 +5,4 @@ pl:
     form:
       register: Zarejestruj
     create:
-      success: Utworzono użytkownika, na email otrzymasz swój login i hasło.
+      success: Zarejestrowaliśmy twoje zgłoszenie. Na podany e-mail niebawem otrzymasz deklarację członkowską.

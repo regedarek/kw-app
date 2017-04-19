@@ -2,9 +2,13 @@ module UserManagement
   class UserApplication
     class << self
       def create(form:)
-        return Failure.new(:invalid, form: form) if !form.valid?
+        return Failure.new(:invalid, form: form) if form.invalid?
 
         profile = Db::Profile.create(
+          first_name: form.first_name,
+          last_name: form.last_name,
+          email: form.email,
+          phone: form.phone,
           birth_date: form.birth_date,
           birth_place: form.birth_place,
           pesel: form.pesel,

@@ -22,10 +22,9 @@ table.scroll.stack
       tr
         td = profile.kw_id
         td
-          - if profile.user.present?
-            b = "#{profile.user.first_name} #{profile.user.last_name}"
-        td = profile.user.try :email
-        td = profile.user.try :phone
+          b = "#{profile.first_name} #{profile.last_name}"
+        td = profile.email
+        td = profile.phone
         td = profile.birth_date
         td = profile.birth_place
         td = profile.pesel
