@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419220913) do
+ActiveRecord::Schema.define(version: 20170419230437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(version: 20170419220913) do
     t.date     "climbing_date"
     t.string   "peak"
     t.string   "time"
-    t.integer  "peak_id"
     t.integer  "route_type",    default: 0
     t.string   "area"
     t.integer  "length"
