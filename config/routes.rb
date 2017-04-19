@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :events, only: [:new, :create]
+    resources :profiles
     resources :importing, only: [:index] do
       collection do
         post :import
@@ -99,6 +100,7 @@ Rails.application.routes.draw do
 
   get 'mas' => 'mas/sign_ups#new'
   get 'zarezerwuj' => 'reservations#new', as: :reserve
+  get 'zgloszenie' => 'profiles#new'
   get 'przejscia' => 'activities/mountain_routes#index'
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'

@@ -1,21 +1,10 @@
 module UserManagement
-  class RegisterUser
+  class UserApplication
     class << self
-      def register(form:)
+      def create(form:)
         return Failure.new(:invalid, form: form) if !form.valid?
 
-        generated_password = Devise.friendly_token.first(4)
-        last_kw_id_number = Db::User.maximum(:kw_id).to_i + 1
-        user = Db::User.new(
-          kw_id: last_kw_id_number,
-          first_name: form.first_name,
-          last_name: form.last_name,
-          email: form.email,
-          phone: form.phone,
-          password: generated_password
-        )
-        profile = Db::Profile.new(
-          kw_id: last_kw_id_number,
+        profile = Db::Profile.create(
           birth_date: form.birth_date,
           birth_place: form.birth_place,
           pesel: form.pesel,
@@ -28,14 +17,6 @@ module UserManagement
           main_discussion_group: form.main_discussion_group,
           sections: form.sections
         )
-
-        if user.save && profile.save
-          RegistrationMailer.welcome(user, generated_password).deliver_later
-        else
-          form.errors.messages.merge!(user.errors.messages)
-          form.errors.messages.merge!(profile.errors.messages)
-          return Failure.new(:invalid, form: form)
-        end
 
         return Success.new
       end

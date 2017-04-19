@@ -1,18 +1,14 @@
 class ProfilesController < ApplicationController
   def new
     @profile_form = UserManagement::ProfileForm.new
-    return redirect_to root_path, alert: 'Rejestracja narazie możliwa tylko poprzez import profilu ze starej bazy danych. Skontaktuj się ze mną: dariusz.finster@gmail.com' unless Rails.env.development?
   end
 
   def create
     @profile_form = UserManagement::ProfileForm.build_cleaned(profile_params)
     
-    result = UserManagement::RegisterUser.register(form: @profile_form)
+    result = UserManagement::UserApplication.create(form: @profile_form)
     result.success { redirect_to root_path, notice: t('.success') }
     result.invalid { |form:| render :new, form: form }
-    result.invalid_records do |form:, user:, profile:|
-      render :new, form: form
-    end
     result.else_fail!
   end
 
