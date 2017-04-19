@@ -1,5 +1,4 @@
 class Db::Item < ActiveRecord::Base
-  include Filterable
   enum owner: [:kw, :snw, :sww, :instructors]
   has_many :reservations, through: :reservation_items
   has_many :reservation_items

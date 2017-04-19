@@ -1,52 +1,36 @@
-.row
-  .columns
-    a data-open="new_item" class='button large expanded'  Dodaj nowy przedmiot
-    #new_item.callout.reveal data-reveal=''
-      button.close-button aria-label=("Close modal") data-close="" type="button" 
-        span aria-hidden="true"  &times;
+column
+  .row
+    large-6.columns
+      a data-open="new_item" class='button large expanded'  Dodaj nowy przedmiot
+      #new_item.callout.reveal data-reveal=''
+        button.close-button aria-label=("Close modal") data-close="" type="button" 
+          span aria-hidden="true"  &times;
 
-      = form_for ::Admin::ItemsForm.new, url: admin_items_path do |f|
-        = f.label :display_name, 'Nazwa'
-        = f.text_field :display_name
-        = f.label :description, 'Opis'
-        = f.text_area :description
-        = f.label :cost, 'Koszt(zl)'
-        = f.number_field :cost
-        = f.label :owner, 'Wlasnosc'
-        = f.select :owner, Items::OwnerPresenter.to_options
-        = f.label :name, 'Mozna wypozyczyc?'
-        = f.check_box :rentable
-        .row
+        = form_for ::Admin::ItemsForm.new, url: admin_items_path do |f|
+          = f.label :display_name, 'Nazwa'
+          = f.text_field :display_name
+          = f.label :description, 'Opis'
+          = f.text_area :description
+          = f.label :cost, 'Koszt(zl)'
+          = f.number_field :cost
+          = f.label :owner, 'Wlasnosc'
+          = f.select :owner, Items::OwnerPresenter.to_options
+          = f.label :name, 'Mozna wypozyczyc?'
+          = f.check_box :rentable
           = f.submit 'Dodaj przedmiot', class: 'button'
 
-    = link_to 'Wszystkie', admin_items_path
-    = ' | '
-    = link_to 'Klub', admin_items_path(owner: :kw)
-    = ' | '
-    = link_to 'Narciarze', admin_items_path(owner: :snw)
-    = ' | '
-    = link_to 'Wspinacze', admin_items_path(owner: :sww)
-    = ' | '
-    = link_to 'Instruktorzy', admin_items_path(owner: :instructors)
+    large-6.columns
+      = search_form_for @q, url: admin_items_path do |f|
+        = f.search_field :display_name_or_description_cont, style: 'height: 55px;', placeholder: 'opis, nazwa'
 
     table.responsive
       thead
         tr
-          th style='width:70px'
-            = form_for Admin::ItemsForm.new, url: admin_items_path, method: :get do |f|
-              = f.hidden_field :owner, value: params[:owner] || params.fetch(:admin_items_form, {}).fetch(:owner, nil)
-              = f.text_field :rentable_id,
-                value: params.fetch(:admin_items_form, {}).fetch(:rentable_id, nil),
-                placeholder: 'ID'
-          th
-            = form_for Admin::ItemsForm.new, url: admin_items_path, method: :get do |f|
-              = f.hidden_field :owner, value: params[:owner] || params.fetch(:admin_items_form, {}).fetch(:owner, nil)
-              = f.text_field :display_name,
-                value: params.fetch(:admin_items_form, {}).fetch(:display_name, nil),
-                placeholder: 'Nazwa'
+          th ID
+          th Nazwa
           th Opis
-          th style='width:70px' Koszt
-          th style='width:70px' Wolno?
+          th Koszt
+          th Wolno?
           th Wlasnosc
           th Akcje
       tbody

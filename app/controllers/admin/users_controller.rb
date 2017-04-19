@@ -34,11 +34,5 @@ module Admin
       Db::User.find(params[:id]).update(admin: false)
       redirect_to admin_users_path, notice: 'Zdegradowałes'
     end
-
-    private
-
-    def filterable_params
-      params.fetch('admin_users_form', {}).slice(:kw_id, :first_name, :last_name, :email)
-    end
   end
 end
