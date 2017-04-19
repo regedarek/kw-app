@@ -33,12 +33,12 @@
           | Konto nieaktywne, aby zarezerwować musisz zaplacić składkę za rok bieżący.
           br
           | Udaj sie do klubu lub napisz na adres: 
-          = mail_to 'kw@kw.krakow.pl'
+          = mail_to 'wypozyczalnia@kw.krakow.pl'
           |  jeżeli zapłaciłeś składkę.
 
   - else
     .callout.alert
       = t('.registration_warning_html')
     .callout.warning
-      - mailto = mail_to 'kw@kw.krakow.pl'
+      - mailto = mail_to 'wypozyczalnia@kw.krakow.pl'
       = t('.registration_problem_html', email: mailto)
