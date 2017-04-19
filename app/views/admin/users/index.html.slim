@@ -1,51 +1,63 @@
-.row
-  .columns
-    h2 Klubowicze
-
-    table.responsive
-      thead
-        tr
-          th
-            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
-              = f.text_field :kw_id,
-                value: params.fetch(:admin_users_form, {}).fetch(:kw_id, nil),
-                placeholder: 'Numer klubowy'
-          th
-            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
-              = f.text_field :first_name,
-                value: params.fetch(:admin_users_form, {}).fetch(:first_name, nil),
-                placeholder: 'Imię'
-          th
-            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
-              = f.text_field :last_name,
-                value: params.fetch(:admin_users_form, {}).fetch(:last_name, nil),
-                placeholder: 'Nazwisko'
-          th
-            = form_for Admin::UsersForm.new, url: admin_users_path, method: :get do |f|
-              = f.text_field :email,
-                value: params.fetch(:admin_users_form, {}).fetch(:email, nil),
-                placeholder: 'E-mail'
-          th Telefon
-          th Ostrzeżenia
-          th Adminitrator
-          th Opiekun wypożyczalni
-      tbody
-        - @users.each do |user|
+.column
+  .row
+    .large-12.columns
+      .callout
+        = search_form_for @q, url: admin_users_path, class: 'js-send-on-enter' do |f|
+          .row
+            .large-4.columns
+              = f.label :first_name_cont, 'Imię'
+              = f.search_field :first_name_cont
+            .large-4.columns
+              = f.label :last_name_cont, 'Nazwisko'
+              = f.search_field :last_name_cont
+            .large-4.columns
+              = f.label :kw_id_eq, 'Numer klubowy'
+              = f.search_field :kw_id_eq
+            .large-3.columns
+              = f.label :email_cont, 'E-mail'
+              = f.search_field :email_cont
+            .large-3.columns
+              = f.label :phone_cont, 'Telefon'
+              = f.search_field :phone_cont
+            .large-3.columns
+              = f.label :admin_true, 'Administrator'
+              = f.select :admin_true, [nil, ['Tak', true], ['Nie', 'false']]
+            .large-3.columns
+              = f.label :curator_true, 'Opiekun'
+              = f.select :curator_true, [nil, ['Tak', true], ['Nie', 'false']]
+          .row.show-for-small-only
+            .large-12.columns
+              = f.submit 'Szukaj', class: 'button expanded large'
+  .row
+    .large-12.columns
+      table.stack
+        thead
           tr
-            td= user.kw_id
-            td= user.first_name
-            td= user.last_name
-            td= user.email
-            td= user.phone
-            td= user.warnings
-            td
-              - if user.admin?
-                = link_to '[ Zdegraduj ]', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
-              - else
-                = link_to '[ Awansuj ]', make_admin_admin_user_path(user)
-            td
-              - if user.curator?
-                = link_to '[ Zdegraduj ]', cancel_curator_admin_user_path(user)
-              - else
-                = link_to '[ Awansuj ]', make_curator_admin_user_path(user)
-    = paginate @users
+            th width='3%' Numer klubowy
+            th width='20%' Imię
+            th width='20%' Nazwisko
+            th width='20%' E-mail
+            th width='20%' Telefon
+            th width='2%' Problemy
+            th width='10%' Admin
+            th width='5%' Opiekun
+        tbody
+          - @users.each do |user|
+            tr
+              td= user.kw_id
+              td= user.first_name
+              td= user.last_name
+              td= user.email
+              td= user.phone
+              td= user.warnings
+              td
+                - if user.admin?
+                  = link_to '[ - ]', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
+                - else
+                  = link_to '[ + ]', make_admin_admin_user_path(user)
+              td
+                - if user.curator?
+                  = link_to '[ - ]', cancel_curator_admin_user_path(user)
+                - else
+                  = link_to '[ + ]', make_curator_admin_user_path(user)
+      = paginate @users

@@ -3,7 +3,8 @@ require 'admin/users_form'
 module Admin
   class UsersController < Admin::BaseController
     def index
-      @users = Db::User.order(:kw_id).filter(filterable_params).page(params[:page])
+      @q = Db::User.ransack(params[:q])
+      @users = @q.result.page(params[:page])
     end
 
     def make_curator
