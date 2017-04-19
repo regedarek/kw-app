@@ -19,12 +19,12 @@ gem 'workflow'
 gem 'virtus'
 gem 'kaminari'
 gem 'whenever', require: false
-gem 'rubyzip', '~> 1.1.0'
-gem 'axlsx', '2.1.0.pre'
+gem 'rubyzip'
+gem 'axlsx'
 gem 'axlsx_rails'
 gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'letter_opener', group: :development
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
 gem 'omniauth-google-oauth2'
 
 group :development do
@@ -38,8 +38,8 @@ group :development, :test do
   gem 'spring'
   gem 'webmock'
   gem 'dotenv-rails'
-  gem 'capistrano', '~> 3.7', '>= 3.7.1'
-  gem 'capistrano-rails', '~> 1.2'
-  gem 'capistrano-passenger', '~> 0.2.0'
-  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rbenv'
 end
