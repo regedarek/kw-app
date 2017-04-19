@@ -1,14 +1,14 @@
 module Db
   module Mas
     class SignUp < ActiveRecord::Base
-      PRICES = { junior: 65, kw: 75, standard: 95 }
+      PRICES = { kw: 30, standard: 60 }
       self.table_name = 'mas_sign_ups'
       enum gender_1: [:male, :female], _suffix: :one
       enum gender_2: [:male, :female], _suffix: :two
       enum tshirt_size_1: [:wxs, :ws, :wm, :wl, :wxl, :w2xl, :ms, :mm, :ml, :mxl, :m2xl, :m3xl, :m4xl], _suffix: :one
       enum tshirt_size_2: [:wxs, :ws, :wm, :wl, :wxl, :w2xl, :ms, :mm, :ml, :mxl, :m2xl, :m3xl, :m4xl], _suffix: :two
-      enum package_type_1: [:kw, :junior, :standard], _suffix: :one
-      enum package_type_2: [:none, :kw, :junior, :standard], _suffix: :two
+      enum package_type_1: [:kw, :standard], _suffix: :one
+      enum package_type_2: [:kw, :standard], _suffix: :two
 
       has_one :payment, as: :payable, dependent: :destroy
 
@@ -33,13 +33,13 @@ module Db
       end
 
       def self.package_type_1_attributes_for_select
-        [:standard, :junior, :kw].map do |type|
+        [:standard, :kw].map do |type|
           [I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{type}", price: Db::Mas::SignUp::PRICES[type]), type]
         end
       end
 
       def self.package_type_2_attributes_for_select
-        [:none, :standard, :junior, :kw].map do |type|
+        [:standard, :kw].map do |type|
           [I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{type}", price: Db::Mas::SignUp::PRICES[type]), type]
         end
       end

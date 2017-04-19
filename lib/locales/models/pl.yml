@@ -49,6 +49,8 @@ pl:
         email_2: E-mail 2 (opcjonalnie)
         phone_1: Numer telefonu 1 (opcjonalnie w celach bezpieczeństwa)
         phone_2: Numer telefonu 2 (opcjonalnie w celach bezpieczeństwa)
+        kw_id_1: Numer klubowy 1 (wymagane przy pakiecie klubowym)
+        kw_id_2: Numer klubowy 2 (wymagane przy pakiecie klubowym)
         organization_1: Przynależność klubowa 1 (opcjonalnie)
         organization_2: Przynależność klubowa 2 (opcjonalnie)
         city_1: Miasto 1
@@ -143,10 +145,10 @@ pl:
           wl: Damska L
           wxl: Damska XL
           w2xl: Damska 2XL
+        kw_id_1: Numer klubowy 1
+        kw_id_2: Numer klubowy 2
         package_types:
-          none: ''
-          kw: KW Kraków (%{price} PLN) - podaj numer klubowy w uwagach
-          junior: Kadet (%{price} PLN)
+          kw: KW Kraków (%{price} PLN)
           standard: Standard (%{price} PLN) 
         category_type: Kategoria
         gender_1: Płeć 1

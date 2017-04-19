@@ -26,7 +26,7 @@ module Mas
         .permit(
           :name_1, :birth_year_1, :organization_1, :city_1, :email_1, :package_type_1, :phone_1, :gender_1, :tshirt_size_1,
           :name_2, :birth_year_2, :organization_2, :city_2, :email_2, :package_type_2, :phone_2, :gender_2, :tshirt_size_2,
-          :remarks, :terms_of_service
+          :remarks, :terms_of_service, :kw_id_1, :kw_id_2
         )
     end
   end

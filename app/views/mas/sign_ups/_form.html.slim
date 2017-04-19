@@ -35,13 +35,17 @@
         = f.select :gender_1, options_for_select(Db::Mas::SignUp.gender_attributes_for_select, f.object.gender_1), include_blank: true
 
     .row
-      .large-6.columns
+      .large-4.columns
         = f.label :phone_1
         = f.text_field :phone_1, value: user_signed_in? ? current_user.phone : nil
 
-      .large-6.columns
+      .large-4.columns
         = f.label :package_type_1
         = f.select :package_type_1, options_for_select(Db::Mas::SignUp.package_type_1_attributes_for_select, f.object.package_type_1), include_blank: true
+
+      .large-4.columns
+        = f.label :kw_id_1
+        = f.text_field :kw_id_1, value: user_signed_in? ? current_user.kw_id : nil
 
     .row
       .large-6.columns
@@ -78,13 +82,17 @@
           = f.select :gender_2, options_for_select(Db::Mas::SignUp.gender_attributes_for_select, f.object.gender_2), include_blank: true
 
       .row
-        .large-6.columns
+        .large-4.columns
           = f.label :phone_2
           = f.text_field :phone_2
 
-        .large-6.columns
+        .large-4.columns
           = f.label :package_type_2
-          = f.select :package_type_2, options_for_select(Db::Mas::SignUp.package_type_2_attributes_for_select, f.object.package_type_2)
+          = f.select :package_type_2, options_for_select(Db::Mas::SignUp.package_type_2_attributes_for_select, f.object.package_type_2), include_blank: true
+
+        .large-4.columns
+          = f.label :kw_id_2
+          = f.text_field :kw_id_2
 
       .row
         .large-6.columns
@@ -99,7 +107,7 @@
     .row
       .large-12.columns
         = f.label :remarks
-        = f.text_area :remarks, value: user_signed_in? ? ('numer klubowy zawodnika 1: ' + current_user.kw_id.to_s) : nil
+        = f.text_area :remarks
   
   .callout.warning
     .row
