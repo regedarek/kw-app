@@ -31,6 +31,11 @@ group :development do
   gem 'brakeman', require: false
 end
 
+group :test do
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
+end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'timecop'
