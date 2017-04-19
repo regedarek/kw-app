@@ -4,12 +4,8 @@ require 'admin/membership_fees_form'
 module Admin
   class MembershipFeesController < Admin::BaseController
     def index
-      kw_id = params.fetch(:admin_membership_fees_form, {}).fetch(:kw_id) if params[:admin_membership_fees_form]
-      @membership_fees = if kw_id.present?
-                    Db::Membership::Fee.where(kw_id: kw_id).order(created_at: :desc)
-                  else
-                    Db::Membership::Fee.order(created_at: :desc)
-                  end.page(params[:page])
+      @q = Db::Membership::Fee.ransack(params[:q])
+      @membership_fees = @q.result.includes(:user, :payment).page(params[:page])
 
       respond_to do |format|
         format.html

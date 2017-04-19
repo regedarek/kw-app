@@ -6,3 +6,9 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$('.js-send-on-enter').keypress(function(e){
+  if(e.which == 13){
+       $(this).closest('form').submit();
+   }
+});

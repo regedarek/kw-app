@@ -1,36 +1,58 @@
+.column
+  .row
+    .large-6.columns
+      .callout
+        = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path do |f|
+          .row
+            .large-6.columns
+              = f.label :kw_id, 'Numer klubowy'
+              = f.text_field :kw_id
+
+            .large-6.columns
+              = f.label :year, 'Opłata za rok'
+              = f.text_field :year
+
+          .row
+            .large-6.columns
+              = f.submit 'Dodaj składkę', class: 'button large expanded'
+
+            .large-6.columns
+              = link_to 'Eksportuj do Excela', admin_membership_fees_path(format: :xlsx), class: 'button large expanded secondary'
+
+    .large-6.columns
+      .callout
+        = search_form_for @q, url: admin_membership_fees_path, class: 'js-send-on-enter' do |f|
+          .row
+            .large-4.columns
+              = f.label :user_first_name_cont, 'Imię'
+              = f.search_field :user_first_name_cont
+            .large-4.columns
+              = f.label :user_last_name_cont, 'Nazwisko'
+              = f.search_field :user_last_name_cont
+            .large-4.columns
+              = f.label :kw_id_eq, 'Numer klubowy'
+              = f.search_field :kw_id_eq
+          .row
+            .large-4.columns
+              = f.label :year_eq, 'Rok'
+              = f.search_field :year_eq
+            .large-4.columns
+              = f.label :payment_cash_true, 'Gotówka'
+              = f.select :payment_cash_true, [nil, ['Tak', true], ['Nie', 'false']]
+            .large-4.columns
+              = f.label :payment_state_eq, 'Status'
+              = f.select :payment_state_eq, [nil, ['Online', 'prepaid'], ['nie', 'unpaid']]
 .row
   .large-12.columns
-    = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path do |f|
-      .row
-        .large-12.columns
-          = f.label :kw_id, 'Numer klubowy'
-          = f.text_field :kw_id
-
-      .row
-        .large-12.columns
-          = f.label :year, 'Opłata za rok'
-          = f.text_field :year
-
-      .row
-        .large-6.columns
-          = f.submit 'Dodaj składkę', class: 'button expanded'
-
-        .large-6.columns
-          = link_to 'Eksportuj do Excela', admin_membership_fees_path(format: :xlsx), class: 'button expanded secondary'
-
-    table.responsive
+    table.stack
       thead
         tr
-          th Imie
-          th Nazwisko
-          th width='20%'
-            = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path, method: :get do |f|
-              = f.text_field :kw_id,
-                value: params.fetch(:admin_membership_fees_form, {}).fetch(:kw_id, nil),
-                placeholder: 'Nr klubowy'
-          th width='10%' Rok
-          th width='10%' Kiedy
-          th width='10%' Opłacono
+          th = sort_link(@q, :user_first_name, 'Imię')
+          th = sort_link(@q, :user_last_name, 'Nazwisko')
+          th width='20%' = sort_link(@q, :kw_id, 'Numer klubowy')
+          th width='10%' = sort_link(@q, :year, 'Rok')
+          th width='10%' = sort_link(@q, :created_at, 'Utworzono')
+          th width='10%' = sort_link(@q, :payment_cash, 'Gotówka')
           th width='2%' align='right'
       tbody
         - @membership_fees.each do |fee|
