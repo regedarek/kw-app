@@ -37,7 +37,7 @@
               = f.select :payment_cash_true, [nil, ['Tak', true], ['Nie', 'false']]
             .large-4.columns
               = f.label :payment_state_eq, 'Status'
-              = f.select :payment_state_eq, [nil, ['prepaid', 'prepaid'], ['unpaid', 'unpaid']]
+              = f.select :payment_state_eq, [nil, ['opłacone', 'prepaid'], ['nieopłacone', 'unpaid']]
           .row.show-for-small-only
             .large-12.columns
               = f.submit 'Szukaj', class: 'button expanded large'
