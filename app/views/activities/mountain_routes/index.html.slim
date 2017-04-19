@@ -1,7 +1,7 @@
 .column
   .row
     .large-4.columns
-      = search_form_for @q, url: activities_mountain_routes_path do |f|
+      = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
         = f.search_field :name_or_description_or_partners_or_peak_or_area_or_mountains_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
 
     - if user_signed_in? && current_user.admin?
@@ -10,15 +10,6 @@
 
       .large-3.columns
         = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
-
-    .large-2.columns
-      .text-center style='height: 40px;margin-top: 5px;'
-        = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'ski' do
-          = image_tag 'ski.png', style: 'max-height: 100%;'
-        = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'regular_climbing' do
-          = image_tag 'regular-climbing.png', style: 'max-height: 100%;'
-        = link_to query: params[:query], direction: params[:direction], sort: params[:sort], route_type: 'winter_climbing' do
-          = image_tag 'winter-climbing.svg', style: 'max-height: 100%;'
 
   .row
     .large-12.columns

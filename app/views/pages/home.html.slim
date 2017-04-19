@@ -3,11 +3,6 @@
     - if user_signed_in?
       .row
         .large-12.columns
-          = link_to 'Sprawdź swoje składki', membership_fees_path, class: 'large expanded button'
-
-    - if user_signed_in?
-      .row
-        .large-12.columns
           = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
 
       - if current_user.reservations.any?
