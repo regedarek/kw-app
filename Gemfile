@@ -11,7 +11,7 @@ gem 'jquery-rails'
 
 gem 'foundation-icons-sass-rails'
 gem 'foundation-rails'
-
+gem 'airbrake', '~> 5.0'
 gem 'high_voltage'
 gem 'devise'
 gem 'slim-rails'
