@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419230437) do
+ActiveRecord::Schema.define(version: 20170419232520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170419230437) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "kw_id",                                 null: false
+    t.integer  "kw_id"
     t.date     "birth_date",                            null: false
     t.string   "birth_place",                           null: false
     t.string   "pesel",                                 null: false
