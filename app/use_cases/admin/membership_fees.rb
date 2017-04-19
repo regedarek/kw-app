@@ -9,7 +9,7 @@ module Admin
         fee = Db::Membership::Fee.new(form.params)
         fee.save
         payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
-        payment.update(cash: true) if payment.present?
+        payment.update(cash: true, state: 'prepaid') if payment.present?
         Success.new
       else
         Failure.new(:invalid, form: form)
