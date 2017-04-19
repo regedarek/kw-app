@@ -2,8 +2,7 @@
   .row
     .large-4.columns
       = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
-        = f.search_field :name_or_description_or_partners_or_peak_or_area_or_mountains_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
-        = f.select :route_type_eq, [nil, ['narciarstwo', 'ski'], ['wspinaczka letnia', 'regular_climbing'],['wspinaczka zimowa', 'winter_climbing']]
+        = f.search_field :name_or_description_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
 
     - if user_signed_in? && current_user.admin?
       .large-3.columns
