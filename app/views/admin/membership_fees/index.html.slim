@@ -52,7 +52,7 @@
           th width='25%' = sort_link(@q, :user_last_name, 'Nazwisko')
           th width='10%' = sort_link(@q, :year, 'Rok')
           th width='15%' = sort_link(@q, :created_at, 'Utworzono')
-          th width='10%' = sort_link(@q, :payment_cash, 'Gotówka')
+          th width='10%' = sort_link(@q, :payment_cash, 'Płatność')
           th width='5%'
       tbody
         - @membership_fees.each do |fee|

@@ -1,12 +1,9 @@
 module Admin
   class ReservationsController < Admin::BaseController
     def index
-      reservations = Db::Reservation.order(:start_date)
-      @reservations = if params[:state].try(:to_sym) == :archived
-        reservations.archived
-      else
-        reservations.not_archived
-      end.page(params[:page])
+      @q = Db::Reservation.ransack(params[:q])
+      @reservations = @q.result.includes(:user, :items).page(params[:page])
+
       respond_to do |format|
         format.html
         format.xlsx do
