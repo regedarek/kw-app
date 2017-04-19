@@ -12,7 +12,7 @@
           li= link_to 'MAS 2017', 'http://mas.kw.krakow.pl'
         - if controller_name == 'reservations'
           li= link_to t('.rules'), page_path('rules')
-        - if user_signed_in?
+        - if user_signed_in?j
           li= link_to t('.home'), page_path('home')
           li= link_to t('.edit_account'), edit_user_registration_path
           - if current_user.admin?
@@ -25,6 +25,7 @@
                 li= link_to t('.administration.competitions'), admin_competitions_path
                 li= link_to t('.administration.reservations'), admin_reservations_path
                 li= link_to t('.administration.importing'), admin_importing_index_path
+                li= link_to 'Problemy', 'https://kw-app-errbit.herokuapp.com/problems'
     .top-bar-right
       ul.dropdown.menu
         - if user_signed_in?
