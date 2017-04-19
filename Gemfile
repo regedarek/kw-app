@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.4.1'
+
 # setup
-ruby '2.4.0'
-gem 'rails', github: 'rails/rails', branch: "5-0-stable"
+gem 'rails'
 gem 'pg'
 gem 'sass-rails'
 gem 'uglifier'
@@ -25,6 +26,10 @@ gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/
 gem 'letter_opener', group: :development
 gem 'carrierwave', '~> 1.0'
 gem 'omniauth-google-oauth2'
+
+group :development do
+  gem 'brakeman', require: false
+end
 
 group :development, :test do
   gem 'rspec-rails'
