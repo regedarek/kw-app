@@ -47,27 +47,26 @@
     table.stack
       thead
         tr
-          th = sort_link(@q, :user_first_name, 'Imię')
-          th = sort_link(@q, :user_last_name, 'Nazwisko')
-          th width='20%' = sort_link(@q, :kw_id, 'Numer klubowy')
+          th width='10%' = sort_link(@q, :kw_id, 'Numer')
+          th width='25%' = sort_link(@q, :user_first_name, 'Imię')
+          th width='25%' = sort_link(@q, :user_last_name, 'Nazwisko')
           th width='10%' = sort_link(@q, :year, 'Rok')
-          th width='10%' = sort_link(@q, :created_at, 'Utworzono')
+          th width='15%' = sort_link(@q, :created_at, 'Utworzono')
           th width='10%' = sort_link(@q, :payment_cash, 'Gotówka')
-          th width='2%' align='right'
+          th width='5%'
       tbody
         - @membership_fees.each do |fee|
-          tr style=(fee.year == Date.today.year ? 'background-color: green' : '')
+          tr
+            td = fee.kw_id
             td
               = fee.user.try(:first_name)
             td
               = fee.user.try(:last_name)
             td
-              = fee.kw_id
-            td
               = fee.year
             td
               = fee.created_at.strftime("%d-%m-%Y")
-            td
+            td.large-text-center
               - if fee.payment.paid?
                 - if fee.payment.cash?
                   span.label.success gotówka
@@ -75,6 +74,7 @@
                   span.label.success przelew
               - else
                 span.label.warning brak
-            td
-              = link_to 'X', admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' }
+            td.large-text-center
+              = link_to admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' } do
+                i.fi-trash
     = paginate @membership_fees

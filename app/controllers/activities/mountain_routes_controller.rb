@@ -1,10 +1,8 @@
 module Activities
   class MountainRoutesController < ApplicationController
     def index
-      @routes = Db::Activities::MountainRoute
-        .text_search(params[:query], route_type: params[:route_type])
-        .order(sort_column + ' ' + sort_direction + ' NULLS LAST')
-        .page(params[:page]).per(10)
+      @q = Db::Activities::MountainRoute.ransack(params[:q])
+      @routes = @q.result.includes(:user).page(params[:page])
 
       respond_to do |format|
         format.html
@@ -64,14 +62,6 @@ module Activities
 
     def route_params
       params.require(:route).permit(:route_type, :peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating)
-    end
-
-    def sort_column
-      Db::Activities::MountainRoute.column_names.include?(params[:sort]) ? params[:sort] : 'climbing_date'
-    end
-
-    def sort_direction
-      %w(asc desc).include?(params[:direction]) ? params[:direction] : 'desc'
     end
   end
 end

@@ -2,13 +2,15 @@
 @import 'foundation-icons'
 @import 'foundation-datepicker'
 
-.truncated 
-  height: 45px
-  line-height: 45px
-  max-width: 150px
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
+@media screen and (min-width: 1024px)
+  table
+    width: 100%
+
+  td
+    max-width: 0
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
 .pagination li
   display: inline-block

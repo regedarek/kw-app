@@ -1,56 +1,53 @@
 table.stack
   thead
-    tr
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'climbing_date', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | kiedy?
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'mountains', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | góry 
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'area', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | rejon/dolina 
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'peak', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | szczyt, przełęcz, ściana 
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'name', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | nazwa drogi/zjazdu 
-      th wycena
-      - unless params[:route_type] == 'ski'
-        th = link_to activities_mountain_routes_path(query: params[:query], sort: 'length', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-          | długość 
-      th = link_to activities_mountain_routes_path(query: params[:query], sort: 'rating', direction: params[:direction] == 'asc' ? 'desc' : 'asc') do
-        | ocena 
-      th skład zespołu
-      - if user_signed_in?
+    - if @q.present?
+      tr
+        th width='10%' = sort_link(@q, :climbing_date, 'kiedy?')
+        th width='8%' = sort_link(@q, :mountains, 'góry')
+        th width='15%' = sort_link(@q, :area, 'rejon/dolina')
+        th width='15%' = sort_link(@q, :peak, 'szczyt, przełęcz')
+        th width='20%' = sort_link(@q, :name, 'nazwa drogi/zjazdu')
+        th width='2%' wycena
+        th width='5%' = sort_link(@q, :length, 'długość')
+        th width='5%' = sort_link(@q, :rating, 'ocena')
+        th width='15%' = sort_link(@q, :partners, 'skład zespołu')
+        th width='5%'
+    - else
+      tr
+        th kiedy?
+        th góry
+        th rejon/dolina
+        th szczyt, przełęcz, ściana
+        th nazwa drogi/zjazdu
+        th wycena
+        th długość
+        th ocena
+        th skład zespołu
         th
   tbody
     - routes.each do |route|
       tr
-        td style='min-width: 105px;'= route.climbing_date
+        td = route.climbing_date
+        td = route.mountains
+        td = truncate(route.area, length: 25)
+        td = truncate(route.peak, length: 25)
         td
-          .truncated
-            = truncate(route.mountains, length: 25)
-        td
-          = truncate(route.area, length: 25)
-        td
-          .truncated
-            = truncate(route.peak, length: 25)
-        td
-          .truncated
-            - if user_signed_in?
-              - if current_user.admin? || current_user.id == route.user_id
-                = link_to truncate(route.name, length: 25), edit_activities_mountain_route_path(route)
-              - else
-                = link_to truncate(route.name, length: 25), activities_mountain_route_path(route)
+          - if user_signed_in?
+            - if current_user.admin? || current_user.id == route.user_id
+              = link_to route.name, edit_activities_mountain_route_path(route)
             - else
-              = link_to truncate(route.name, length: 25), activities_mountain_route_path(route)
-        td align='center'
-          = truncate(route.difficulty, length: 10)
+              = link_to route.name, activities_mountain_route_path(route)
+          - else
+            = link_to route.name, activities_mountain_route_path(route)
+        td
+          = route.difficulty
         - unless params[:route_type] == 'ski'
-          td align='center' = route.length
-        td align='center'
+          td = route.length
+        td
           - if route.rating.present?
             - route.rating.times do
               i.fi-star
-        td
-          .truncated = truncate(route.partners, length: 25)
+        td = route.partners
         - if user_signed_in?
           td
             - if current_user.admin? || current_user.id == route.user_id
