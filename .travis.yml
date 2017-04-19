@@ -11,12 +11,19 @@ services:
 script: 
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
-  - bundle exec rspec spec/
+  - gemnasium --token 7b57f169c11e883b2d950d561869bb95 autoupdate run
+  - bundle exec rake
 
 before_script:
+  - export GEMNASIUM_TESTSUITE="bundle exec rake"
+  - export GEMNASIUM_PROJECT_SLUG="github.com/regedarek/kw-app"
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
 
 before_install:
   - gem update --system
   - gem --version
+
+addons:
+    code_climate:
+        repo_token: 39fdbbd0132b6163a3bde8af4b1472f3fbbb3ee83c42df1ecaecbc0dd67a4d8b
