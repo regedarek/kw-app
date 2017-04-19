@@ -19,8 +19,8 @@ gem 'workflow'
 gem 'virtus'
 gem 'kaminari'
 gem 'whenever', require: false
-gem 'rubyzip'
-gem 'axlsx'
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', '2.1.0.pre', git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails'
 gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'letter_opener', group: :development
