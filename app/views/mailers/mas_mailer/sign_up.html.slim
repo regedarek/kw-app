@@ -18,7 +18,7 @@ b = t('activerecord.attributes.db/mas/sign_up.tshirt_size_1') + ': '
 = @sign_up.tshirt_size_1
 br
 b = t('activerecord.attributes.db/mas/sign_up.package_type_1') + ': ' 
-= ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_1.to_sym])
+= ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Mas::SignUp::PRICES[@sign_up.package_type_1.to_sym])
 hr
 b = t('activerecord.attributes.db/mas/sign_up.name_2') + ': '
 = @sign_up.name_2
@@ -38,7 +38,7 @@ br
   = @sign_up.city_2
   br
 b = t('activerecord.attributes.db/mas/sign_up.package_type_2') + ': '
-= ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_2}", price: Db::Strzelecki::SignUp::PRICES[@sign_up.package_type_2.to_sym])
+= ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_2}", price: Db::Mas::SignUp::PRICES[@sign_up.package_type_2.to_sym])
 hr
 span style='font-size: 120%'
   b = t('.payment', price: @sign_up.try(:cost).try(:to_s))

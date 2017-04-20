@@ -14,12 +14,12 @@
     .row
       .large-12.columns
         = f.label :name_1
-        = f.text_field :name_1, value: user_signed_in? ? current_user.display_name : nil
+        = f.text_field :name_1
 
     .row
       .large-9.columns
         = f.label :email_1
-        = f.email_field :email_1, value: user_signed_in? ? current_user.email : nil
+        = f.email_field :email_1
 
       .large-3.columns
         = f.label :tshirt_size_1, t('.tshirt_size_html')
@@ -37,7 +37,7 @@
     .row
       .large-4.columns
         = f.label :phone_1
-        = f.text_field :phone_1, value: user_signed_in? ? current_user.phone : nil
+        = f.text_field :phone_1
 
       .large-4.columns
         = f.label :package_type_1
@@ -45,7 +45,7 @@
 
       .large-4.columns
         = f.label :kw_id_1
-        = f.text_field :kw_id_1, value: user_signed_in? ? current_user.kw_id : nil
+        = f.text_field :kw_id_1
 
     .row
       .large-6.columns
@@ -54,7 +54,7 @@
 
       .large-6.columns
         = f.label :organization_1
-        = f.text_field :organization_1, value: user_signed_in? ? 'KW Kraków' : nil
+        = f.text_field :organization_1
 
   .js-player-2
     .callout.secondary

@@ -5,8 +5,14 @@ module Mas
     end
 
     def new
-      @sign_up = Db::Mas::SignUp.new
-      @form = Mas::SignUpForm.new
+      @form = Mas::SignUpForm.new(
+        name_1: user_signed_in? ? current_user.display_name : nil,
+        email_1: user_signed_in? ? current_user.email : nil,
+        package_type_1: user_signed_in? ? 'kw' : nil,
+        kw_id_1: user_signed_in? ? current_user.kw_id : nil,
+        organization_1: user_signed_in? ? 'KW Kraków' : nil,
+        phone_1: user_signed_in? ? current_user.phone : nil
+      )
     end
 
     def create
