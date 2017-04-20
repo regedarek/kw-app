@@ -23,7 +23,7 @@ module Mas
 
     def kw_ids_uniqe
       if kw_id_1.present? && kw_id_2.present? && kw_id_1 == kw_id_2
-        errors.add(:base, "numery klubowe muszą się różnić")
+        errors.add(:base, "Pola numery klubowe muszą się różnić")
       end
     end
 
