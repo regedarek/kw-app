@@ -22,7 +22,7 @@ module Mas
     validate :kw_ids_uniqe, if: proc { package_type_1 == 'kw' && package_type_2 == 'kw' }
 
     def kw_ids_uniqe
-      if fee.kw_id_1.present? && fee.kw_id_2.present? && kw_id_1 == kw_id_2
+      if kw_id_1.present? && kw_id_2.present? && kw_id_1 == kw_id_2
         errors.add(:base, "numery klubowe muszą się różnić")
       end
     end
