@@ -9,7 +9,7 @@ module Mas
 
     validates :name, :last_name_1, :first_name_1, :birth_year_1, :package_type_1, :email_1, :gender_1, :tshirt_size_1,
       presence: true
-    validates :last_name_2, :first_name_2, :name_2, :birth_year_2, :package_type_2, :gender_2, :tshirt_size_2,
+    validates :last_name_2, :first_name_2, :birth_year_2, :package_type_2, :gender_2, :tshirt_size_2,
       presence: true
     validates :package_type_1, :package_type_2, inclusion: { in: %w(kw standard) }
     validates :gender_1, :gender_2, inclusion: { in: %w(male female) }
