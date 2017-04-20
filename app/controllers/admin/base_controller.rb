@@ -4,7 +4,7 @@ module Admin
     layout 'admin'
 		
 		def authorize_admin
-			redirect_to root_url, alert: "Not authorized" unless current_user.admin?
+			redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && current_user.admin?
 		end
 	end
 end
