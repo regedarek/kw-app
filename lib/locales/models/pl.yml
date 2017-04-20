@@ -43,7 +43,7 @@ pl:
         name: Nazwa zespołu(bądźcie kreatywni!)
         first_name_1: Imię 1
         first_name_2: Imię 2
-        last_name_1: Nazwisko 2
+        last_name_1: Nazwisko 1
         last_name_2: Nazwisko 2
         birth_year_1: Rok urodzenia 1
         email_1: E-mail 1 (zostanie na niego wysłany link do płatności online)
@@ -117,7 +117,7 @@ pl:
         name: Nazwa zespołu(bądźcie kreatywni!)
         first_name_1: Imię 1
         first_name_2: Imię 2
-        last_name_1: Nazwisko 2
+        last_name_1: Nazwisko 1
         last_name_2: Nazwisko 2
         birth_year_1: Rok urodzenia 1
         birth_year_2: Rok urodzenia 2
