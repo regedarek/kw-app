@@ -12,6 +12,7 @@ module Mas
     validates :name_2, :birth_year_2, :package_type_2, :gender_2, :tshirt_size_2,
       presence: true
     validates :package_type_1, :package_type_2, inclusion: { in: %w(kw standard) }
+    validates :gender_1, :gender_2, inclusion: { in: %w(male female) }
     validates :phone_1, :phone_2, numericality: { only_integer: true, allow_blank: true }
     validates_acceptance_of :terms_of_service
     validates :kw_id_1, presence: true, if: proc { package_type_1 == 'kw' }
