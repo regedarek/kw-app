@@ -22,7 +22,7 @@ wb.styles do |style|
   }
   wb.add_worksheet(name: "Zapisy MAS 2017") do |sheet|
     default_attributes = sign_up_attributes.map do |attr|
-      Db::Strzelecki::SignUp.human_attribute_name(attr)
+      Db::Mas::SignUp.human_attribute_name(attr)
     end.push('Płatność', 'Kategoria', 'Utworzono')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     @sign_ups.each do |sign_up|
