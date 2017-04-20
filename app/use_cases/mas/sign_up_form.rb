@@ -19,6 +19,13 @@ module Mas
     validates :kw_id_2, presence: true, if: proc { package_type_2 == 'kw' }
     validate :kw_id_1_fee_check, if: proc { package_type_1 == 'kw' }
     validate :kw_id_2_fee_check, if: proc { package_type_2 == 'kw' }
+    validate :kw_ids_uniqe, if: proc { package_type_1 == 'kw' && package_type_2 == 'kw' }
+
+    def kw_ids_uniqe
+      if fee.kw_id_1.present? && fee.kw_id_2.present? && kw_id_1 == kw_id_2
+        errors.add(:base, "numery klubowe muszą się różnić")
+      end
+    end
 
     def kw_id_1_fee_check
       fee = Db::Membership::Fee.find_by(kw_id: kw_id_1, year: 2017)
