@@ -6,7 +6,8 @@ module Mas
 
     def new
       @form = Mas::SignUpForm.new(
-        name_1: user_signed_in? ? current_user.display_name : nil,
+        first_name_1: user_signed_in? ? current_user.first_name : nil,
+        last_name_1: user_signed_in? ? current_user.last_name : nil,
         email_1: user_signed_in? ? current_user.email : nil,
         package_type_1: user_signed_in? ? 'kw' : nil,
         kw_id_1: user_signed_in? ? current_user.kw_id : nil,
@@ -30,9 +31,9 @@ module Mas
       params
         .require(:mas_sign_up_form)
         .permit(
-          :name_1, :birth_year_1, :organization_1, :city_1, :email_1, :package_type_1, :phone_1, :gender_1, :tshirt_size_1,
-          :name_2, :birth_year_2, :organization_2, :city_2, :email_2, :package_type_2, :phone_2, :gender_2, :tshirt_size_2,
-          :remarks, :terms_of_service, :kw_id_1, :kw_id_2
+          :first_name_1, :last_name_1, :birth_year_1, :organization_1, :city_1, :email_1, :package_type_1, :phone_1, :gender_1, :tshirt_size_1,
+          :first_name_2, :last_name_2, :birth_year_2, :organization_2, :city_2, :email_2, :package_type_2, :phone_2, :gender_2, :tshirt_size_2,
+          :remarks, :terms_of_service, :kw_id_1, :kw_id_2, :name
         )
     end
   end

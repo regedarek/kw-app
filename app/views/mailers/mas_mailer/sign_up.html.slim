@@ -1,7 +1,13 @@
 h3= t('.title', id: @sign_up.id)
 
-b = t('activerecord.attributes.db/mas/sign_up.name_1') + ': '
-= @sign_up.name_1
+b = t('activerecord.attributes.db/mas/sign_up.name') + ': '
+= @sign_up.name
+br
+b = t('activerecord.attributes.db/mas/sign_up.first_name_1') + ': '
+= @sign_up.first_name_1
+br
+b = t('activerecord.attributes.db/mas/sign_up.last_name_1') + ': '
+= @sign_up.last_name_1
 br
 b = t('activerecord.attributes.db/mas/sign_up.birth_year_1') + ': '
 = @sign_up.birth_year_1
@@ -20,8 +26,11 @@ br
 b = t('activerecord.attributes.db/mas/sign_up.package_type_1') + ': ' 
 = ' ' + I18n.t("activerecord.attributes.db/mas/sign_up.package_types.#{@sign_up.package_type_1}", price: Db::Mas::SignUp::PRICES[@sign_up.package_type_1.to_sym])
 hr
-b = t('activerecord.attributes.db/mas/sign_up.name_2') + ': '
-= @sign_up.name_2
+b = t('activerecord.attributes.db/mas/sign_up.first_name_2') + ': '
+= @sign_up.first_name_2
+br
+b = t('activerecord.attributes.db/mas/sign_up.last_name_2') + ': '
+= @sign_up.last_name_2
 br
 b = t('activerecord.attributes.db/mas/sign_up.tshirt_size_2') + ': '
 = @sign_up.tshirt_size_2

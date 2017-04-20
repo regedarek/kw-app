@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419233047) do
+ActiveRecord::Schema.define(version: 20170420110654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20170419233047) do
   end
 
   create_table "mas_sign_ups", force: :cascade do |t|
-    t.string   "name_1"
-    t.string   "name_2"
+    t.string   "first_name_1"
+    t.string   "first_name_2"
     t.string   "email_1"
     t.string   "email_2"
     t.string   "organization_1"
@@ -87,6 +87,9 @@ ActiveRecord::Schema.define(version: 20170419233047) do
     t.datetime "updated_at",     null: false
     t.integer  "kw_id_1"
     t.integer  "kw_id_2"
+    t.string   "name"
+    t.string   "last_name_1"
+    t.string   "last_name_2"
   end
 
   create_table "membership_fees", force: :cascade do |t|

@@ -10,11 +10,21 @@
             - form.errors.full_messages.each do |msg|
               li= msg
 
-  .callout.primary
+  .callout.warning
     .row
       .large-12.columns
-        = f.label :name_1
-        = f.text_field :name_1
+        = f.label :name
+        = f.text_field :name
+
+  .callout.primary
+    .row
+      .large-6.columns
+        = f.label :first_name_1
+        = f.text_field :first_name_1
+
+      .large-6.columns
+        = f.label :last_name_1
+        = f.text_field :last_name_1
 
     .row
       .large-9.columns
@@ -59,9 +69,13 @@
   .js-player-2
     .callout.secondary
       .row
-        .large-12.columns
-          = f.label :name_2
-          = f.text_field :name_2
+        .large-6.columns
+          = f.label :first_name_1
+          = f.text_field :first_name_1
+
+        .large-6.columns
+          = f.label :last_name_1
+          = f.text_field :last_name_1
 
       .row
         .large-9.columns
