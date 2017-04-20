@@ -9,7 +9,7 @@ sign_up_attributes = %i(
   gender_1 gender_2
   package_type_1 package_type_2
   tshirt_size_1 tshirt_size_2
-  remarks
+  remarks kw_id_1 kw_id_2
 )
 wb.styles do |style|
   highlight_cell_options = {
@@ -18,7 +18,7 @@ wb.styles do |style|
     bg_color: '004586',
     alignment: { horizontal: :center, vertical: :center, wrap_text: true }
   }
-  wb.add_worksheet(name: "Zapisy 2017") do |sheet|
+  wb.add_worksheet(name: "Zapisy MAS 2017") do |sheet|
     default_attributes = sign_up_attributes.map do |attr|
       Db::Strzelecki::SignUp.human_attribute_name(attr)
     end.push('Płatność', 'Kategoria', 'Utworzono')
