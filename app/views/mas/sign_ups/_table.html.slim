@@ -3,7 +3,7 @@
     table.stack
       thead
         tr
-          th =t('.table_team')
+          th Zespół
           th =t('.table_organization')
           th =t('.table_city')
           th Płatność
@@ -11,7 +11,7 @@
         - sign_ups.each_with_index do |sign_up, i|
           tr
             td
-              = "#{sign_up.name_1} oraz #{sign_up.name_2}"
+              = sign_up.name
             td
               = "#{sign_up.organization_1}/#{sign_up.organization_2}"
             td
