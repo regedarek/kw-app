@@ -65,9 +65,10 @@
     .large-12.columns 
       ul
       b Kursy: 
-      - @profile.acomplished_courses.each do |course|
+      - JSON.parse(@profile.acomplished_courses).each do |course|
         li
-          = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{Db::Profile::ACOMPLISHED_COURSES[course]}")
+          = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
+
       br
 
   .row
