@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421202934) do
+ActiveRecord::Schema.define(version: 20170421204603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,7 +189,6 @@ ActiveRecord::Schema.define(version: 20170421202934) do
     t.string   "main_address",                          null: false
     t.string   "optional_address"
     t.text     "recommended_by",        default: [],                 array: true
-    t.text     "acomplished_courses",   default: "{}"
     t.boolean  "main_discussion_group", default: false
     t.text     "sections",              default: [],                 array: true
     t.datetime "created_at",                            null: false
@@ -199,6 +198,7 @@ ActiveRecord::Schema.define(version: 20170421202934) do
     t.string   "last_name"
     t.string   "email"
     t.string   "phone"
+    t.text     "acomplished_courses",   default: [],                 array: true
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true, using: :btree
   end
 
