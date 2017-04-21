@@ -18,7 +18,7 @@ module UserManagement
     attribute :terms_of_service, :boolean, default: false
 
     validates :first_name, :last_name, :email, :pesel, :birth_date, :birth_place,
-              :city, :postal_code, :main_address, presence: true
+              :city, :postal_code, :acomplished_courses, :phone, :main_address, presence: true
     validates :terms_of_service, acceptance: true
 
     def self.model_name

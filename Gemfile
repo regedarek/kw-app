@@ -27,6 +27,8 @@ gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/
 gem 'letter_opener', group: :development
 gem 'carrierwave'
 gem 'omniauth-google-oauth2'
+gem 'pdfkit'
+gem 'render_anywhere', require: false
 
 group :development do
   gem 'brakeman', require: false

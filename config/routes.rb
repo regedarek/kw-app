@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   resources :events, only: [:index, :show]
-  resources :profiles, only: [:index, :new, :create]
+  resources :profiles, only: [:index, :new, :create, :show]
 
   resources :auctions do
     member do
