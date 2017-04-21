@@ -63,7 +63,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :events, only: [:new, :create]
-    resources :profiles
+    resources :profiles do
+      member do
+        put :accept
+      end
+    end
     resources :importing, only: [:index] do
       collection do
         post :import

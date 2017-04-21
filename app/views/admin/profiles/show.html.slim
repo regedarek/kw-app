@@ -1,0 +1,102 @@
+.column
+  - if @profile.user && @profile.user.kw_id.present?
+    .row
+      .large-12.columns 
+        b Number członkowski: 
+        = @profile.user.kw_id
+
+  .row
+    .large-12.columns 
+      b Imię i nazwisko: 
+      = "#{@profile.first_name} #{@profile.last_name}"
+
+  .row
+    .large-12.columns 
+      b E-mail: 
+      = @profile.email
+
+  .row
+    .large-12.columns 
+      b Telefon: 
+      = @profile.phone
+
+  .row
+    .large-12.columns 
+      b Data urodzenia: 
+      = @profile.birth_date
+
+  .row
+    .large-12.columns 
+      b Miejsce urodzenia: 
+      = @profile.birth_place
+
+  .row
+    .large-12.columns 
+      b Pesel: 
+      = @profile.pesel
+
+  .row
+    .large-12.columns 
+      b Miasto: 
+      = @profile.city
+
+  .row
+    .large-12.columns 
+      b Kod pocztowy: 
+      = @profile.postal_code
+
+  .row
+    .large-12.columns 
+      b Adres zameldowania: 
+      = @profile.main_address
+
+  - if @profile.optional_address.present?
+    .row
+      .large-12.columns 
+        b Adres kontaktowy: 
+        = @profile.optional_address
+
+  .row
+    .large-12.columns 
+      b Dowiedział się od: 
+      = @profile.recommended_by
+
+  .row
+    .large-12.columns 
+      ul
+      b Kursy: 
+      - @profile.acomplished_courses.each do |course|
+        li
+          = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{Db::Profile::ACOMPLISHED_COURSES[course]}")
+      br
+
+  .row
+    .large-12.columns 
+      b Główna grupa dyskusyjna: 
+      = I18n.t @profile.main_discussion_group
+
+  .row
+    .large-12.columns 
+      b Sekcje: 
+      = @profile.sections
+
+  .row
+    .large-12.columns
+      hr
+
+  .row
+    .large-6.columns
+      - if @profile.accepted?
+        span.label.success Zaakceptowano
+      - else
+        = form_for :profile, url: accept_admin_profile_path(@profile.id), method: :put do |f|
+          .input-group
+            span.input-group-label
+              | Numer członkowski
+            = f.text_field :kw_id, class: 'input-group-field'
+            .input-group-button
+              = f.submit 'Nadaj i utwórz konto', class: 'button'
+
+    .large-6.columns
+      .text-right
+        = link_to 'powrót', admin_profiles_path, class: 'button secondary'

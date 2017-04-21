@@ -1,39 +1,26 @@
 table.scroll.stack
   thead
     tr
-      th Numer klubowy
-      th Imię i nazwisko
-      th E-mail
-      th Telefon
-      th=Db::Profile.human_attribute_name :birth_date
-      th=Db::Profile.human_attribute_name :birth_place
-      th=Db::Profile.human_attribute_name :pesel
-      th=Db::Profile.human_attribute_name :city
-      th=Db::Profile.human_attribute_name :postal_code
-      th=Db::Profile.human_attribute_name :main_address
-      th=Db::Profile.human_attribute_name :optional_address
-      th=Db::Profile.human_attribute_name :recommended_by
-      th=Db::Profile.human_attribute_name :acomplished_courses
-      th=Db::Profile.human_attribute_name :main_discussion_group
-      th=Db::Profile.human_attribute_name :sections
-      th=Db::Profile.human_attribute_name :accepted
+      th width='20%' Imię i nazwisko
+      th width='20%' E-mail
+      th width='10%' Telefon
+      th width='5%' Pesel
+      th width='15%' Miasto
+      th width='10%' Sekcje
+      th width='15%'
   tbody
     - profiles.each_with_index do |profile, i|
       tr
-        td = profile.kw_id
         td
           b = "#{profile.first_name} #{profile.last_name}"
         td = profile.email
         td = profile.phone
-        td = profile.birth_date
-        td = profile.birth_place
         td = profile.pesel
         td = profile.city
-        td = profile.postal_code
-        td = profile.main_address
-        td = profile.optional_address
-        td = profile.recommended_by
-        td = profile.acomplished_courses
-        td = profile.main_discussion_group
         td = profile.sections
-        td = profile.accepted
+        td
+          - if profile.accepted?
+            = link_to 'Zobacz', admin_profile_path(profile.id)
+          - else
+            = link_to 'Akceptuj', admin_profile_path(profile.id)
+
