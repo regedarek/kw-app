@@ -10,7 +10,7 @@ module PdfGenerator
 
     def to_pdf
       kit = PDFKit.new(as_html)
-      kit.to_file("tmp/profile_#{profile.id}.pdf")
+      kit.to_file("tmp/profile.pdf")
     end
 
     def filename
