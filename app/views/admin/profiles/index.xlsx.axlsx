@@ -1,10 +1,8 @@
 wb = xlsx_package.workbook
-user_attributes = %i(
+profile_attributes = %i(
   first_name last_name
   email
   phone
-)
-profile_attributes = %i(
   birth_date
   birth_place
   pesel
@@ -26,21 +24,15 @@ wb.styles do |style|
     alignment: { horizontal: :center, vertical: :center, wrap_text: true }
   }
   wb.add_worksheet(name: "Profile") do |sheet|
-    human_user_attributes = user_attributes.map do |attr|
-      Db::User.human_attribute_name(attr)
-    end
     human_profile_attributes = profile_attributes.map do |attr|
       Db::Profile.human_attribute_name(attr)
     end
-    sheet.add_row(human_user_attributes + human_profile_attributes, style: style.add_style(highlight_cell_options))
-    @profiles.each do |profile|
-      user_values = user_attributes.map do |attr|
-        profile.user.read_attribute(attr) if profile.user.present?
-      end
+    sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
+    Db::Profile.all.each do |profile|
       profile_values = profile_attributes.map do |attr|
         profile.read_attribute(attr)
       end
-      sheet.add_row(user_values + profile_values)
+      sheet.add_row(profile_values)
     end
   end
 end
