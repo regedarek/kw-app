@@ -13,28 +13,11 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.pdf { send_profile_pdf }
-    end
+    @profile = Db::Profile.find(params[:id])
+    @filename = "Zgloszenie_#{@profile.first_name}_#{@profile.last_name}.pdf"
   end
 
   private
-
-  def download
-    PdfGenerator::Download.new(Db::Profile.find(params[:id]))
-  end
-
-  def send_profile_pdf
-    send_file download.to_pdf, download_attributes
-  end
-
-  def download_attributes
-    {
-      filename: download.filename,
-      type: "application/pdf",
-      disposition: "inline"
-    }
-  end
 
   def profile_params
     params.require(:profile).permit(
