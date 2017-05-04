@@ -65,7 +65,7 @@
     .large-12.columns 
       ul
       b Kursy: 
-      - @profile.acomplished_courses.each do |course|
+      - @profile.acomplished_courses.present? && @profile.acomplished_courses.each do |course|
         li
           = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
 

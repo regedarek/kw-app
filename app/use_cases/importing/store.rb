@@ -72,9 +72,9 @@ module Importing
               main_address: parsed_data.main_address,
               optional_address: parsed_data.optional_address,
               recommended_by: parsed_data.recommended_by,
-              acomplished_course: parsed_data.acomplished_course,
+              acomplished_courses: parsed_data.acomplished_courses,
               main_discussion_group: parsed_data.main_discussion_group,
-              section: parsed_data.section,
+              sections: parsed_data.sections,
               kw_id: parsed_data.kw_id,
               accepted: true
             )

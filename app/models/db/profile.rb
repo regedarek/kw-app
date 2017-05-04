@@ -4,6 +4,8 @@ module Db
     SECTIONS = %w(snw sww stj gtw kts)
     ACOMPLISHED_COURSES = %w(basic second second_winter cave ski list)
 
+    validates :email, uniqueness: true
+
     ransacker :sections do
       Arel.sql("array_to_string(sections, ',')")
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421204603) do
+ActiveRecord::Schema.define(version: 20170504204136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,12 +181,12 @@ ActiveRecord::Schema.define(version: 20170421204603) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "kw_id"
-    t.date     "birth_date",                            null: false
-    t.string   "birth_place",                           null: false
-    t.string   "pesel",                                 null: false
-    t.string   "city",                                  null: false
-    t.string   "postal_code",                           null: false
-    t.string   "main_address",                          null: false
+    t.date     "birth_date"
+    t.string   "birth_place"
+    t.string   "pesel"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "main_address"
     t.string   "optional_address"
     t.text     "recommended_by",        default: [],                 array: true
     t.boolean  "main_discussion_group", default: false

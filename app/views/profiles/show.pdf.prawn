@@ -38,7 +38,7 @@ prawn_document do |pdf|
   pdf.grid([3,0], [3,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
       pdf.text "Rodzaj ukończonych kursów:", align: :left, size: 9
-      @profile.acomplished_courses.each do |course|
+      @profile.acomplished_courses.present? && @profile.acomplished_courses.each do |course|
         pdf.move_down 3
         pdf.text "• " + I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}"), size: 8, indent_paragraphs: 10
       end

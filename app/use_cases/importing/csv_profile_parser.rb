@@ -22,6 +22,7 @@ module Importing
             birth_date: row['birth_date'],
             birth_place: row['birth_place'],
             phone: row['phone'],
+            pesel: row['pesel'],
             first_name: row['first_name'],
             last_name: row['last_name'],
             email: row['email'],
@@ -30,10 +31,10 @@ module Importing
             main_address: row['main_address'],
             optional_address: row['optional_address'],
             recommended_by: row['recommended_by'],
-            acomplished_course: row['acomplished_course'],
+            acomplished_courses: row['acomplished_courses'],
             main_discussion_group: row['main_discussion_group'],
-            section: row['section'],
-            kw_id: row['kw_id']
+            sections: row['sections'],
+            kw_id: row['kw_id'].to_i
           )
 
           if parsed_object.invalid?
