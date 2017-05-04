@@ -1,7 +1,9 @@
 module Admin
   class ProfilesController < Admin::BaseController
     def index
-      @profiles = Db::Profile.where(accepted: false).page(params[:page])
+      @q = Db::Profile.ransack(params[:q])
+      @q.sorts = ['kw_id desc', 'created_at desc'] if @q.sorts.empty?
+      @profiles = @q.result.page(params[:page])
 
       respond_to do |format|
         format.html

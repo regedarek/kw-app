@@ -1,5 +1,62 @@
 .columns
   .row
+    .callout
+      = search_form_for @q, url: admin_profiles_path, class: 'js-send-on-enter' do |f|
+        .row
+          .large-3.columns
+            = f.label :kw_id_eq, 'Numer klubowy'
+            = f.search_field :kw_id_eq
+          .large-3.columns
+            = f.label :first_name_cont, 'Imię'
+            = f.search_field :first_name_cont
+          .large-3.columns
+            = f.label :last_name_cont, 'Nazwisko'
+            = f.search_field :last_name_cont
+          .large-3.columns
+            = f.label :email_cont, 'E-mail'
+            = f.search_field :email_cont
+        .row
+          .large-2.columns
+            = f.label :birth_date_gteq, 'Data urodzenia od'
+            = f.date_field :birth_date_gteq
+          .large-2.columns
+            = f.label :birth_date_lteq, 'Data urodzenia do'
+            = f.date_field :birth_date_lteq
+          .large-2.columns
+            = f.label :created_at_gteq, 'Utworzono od'
+            = f.date_field :created_at_gteq
+          .large-2.columns
+            = f.label :created_at_lteq, 'Utworzono do'
+            = f.date_field :created_at_lteq
+          .large-4.columns
+            = f.label :birth_place_cont, 'Miejsce urodzin'
+            = f.text_field :birth_place_cont
+        .row
+          .large-3.columns
+            = f.label :pesel_cont, 'Pesel'
+            = f.search_field :pesel_cont
+          .large-3.columns
+            = f.label :main_address_cont, 'Adres zameldowania'
+            = f.search_field :main_address_cont
+          .large-3.columns
+            = f.label :optional_address_cont, 'Adres zamieszkania'
+            = f.search_field :optional_address_cont
+          .large-3.columns
+            = f.label :city_cont, 'Miasto'
+            = f.search_field :city_cont
+        .row
+          .large-3.columns
+            = f.label :phone_cont, 'Telefon'
+            = f.search_field :phone_cont
+          .large-3.columns
+            = f.label :sections_cont, 'Sekcje'
+            = f.search_field :sections_cont
+          .large-3.columns
+            = f.label :acomplished_courses_cont, 'Kursy(basic, second, ski, cave, list...)'
+            = f.search_field :acomplished_courses_cont, placeholder: 'basic second second_winter cave ski list'
+          .large-3.columns
+            br
+            = f.submit 'Szukaj', class: 'button expanded'
     = link_to t('.export_to_xlsx_link'), admin_profiles_path(format: :xlsx), class: 'button expanded large'
     = render 'table', profiles: @profiles
   .row
