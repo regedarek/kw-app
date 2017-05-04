@@ -4,6 +4,7 @@ module Admin
   class UsersController < Admin::BaseController
     def index
       @q = Db::User.ransack(params[:q])
+      @q.sorts = ['kw_id desc', 'created_at desc'] if @q.sorts.empty?
       @users = @q.result.page(params[:page])
     end
 
