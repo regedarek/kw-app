@@ -23,4 +23,6 @@ table.scroll.stack
             = link_to 'Zobacz', admin_profile_path(profile.id)
           - else
             = link_to 'Akceptuj', admin_profile_path(profile.id)
+          |  | 
+          = link_to 'PDF', profile_path(profile.id, format: :pdf)
 

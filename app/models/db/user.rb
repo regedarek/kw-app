@@ -18,6 +18,8 @@ class Db::User < ActiveRecord::Base
   has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'
   has_many :events, foreign_key: :manager_kw_id, primary_key: :kw_id
 
+
+
   def display_name
     "#{first_name} #{last_name}"
   end
