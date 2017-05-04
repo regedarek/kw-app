@@ -32,7 +32,7 @@
             = f.label :birth_place_cont, 'Miejsce urodzin'
             = f.text_field :birth_place_cont
         .row
-          .large-3.columns
+          .large-2.columns
             = f.label :pesel_cont, 'Pesel'
             = f.search_field :pesel_cont
           .large-3.columns
@@ -41,9 +41,12 @@
           .large-3.columns
             = f.label :optional_address_cont, 'Adres zamieszkania'
             = f.search_field :optional_address_cont
-          .large-3.columns
+          .large-2.columns
             = f.label :city_cont, 'Miasto'
             = f.search_field :city_cont
+          .large-2.columns
+            = f.label :accepted_true, 'Zaakceptowany'
+            = f.select :accepted_true, [nil, ['Tak', true], ['Nie', 'false']]
         .row
           .large-3.columns
             = f.label :phone_cont, 'Telefon'
