@@ -5,7 +5,11 @@
         .row
           .large-3.columns
             b Ostatnia legitymacja: 
-            = Db::User.maximum(:kw_id)
+            - profile = Db::Profile.find_by(kw_id: Db::User.maximum(:kw_id))
+            - if profile.present?
+              = link_to Db::User.maximum(:kw_id), admin_profile_path(profile.id)
+            - else
+              = Db::User.maximum(:kw_id)
           .large-3.columns
             b="Aktywni za rok #{Date.today.year}: "
             - this_year = Db::Membership::Fee.where(year: Date.today.year).select{ |f| f.payment.paid?}.count
