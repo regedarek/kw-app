@@ -48,16 +48,19 @@
           .large-3.columns
             = f.label :phone_cont, 'Telefon'
             = f.search_field :phone_cont
-          .large-3.columns
+          .large-2.columns
             = f.label :sections_cont, 'Sekcje'
             = f.search_field :sections_cont
-          .large-3.columns
-            = f.label :acomplished_courses_cont, 'Kursy(basic, second, ski, cave, list...)'
+          .large-2.columns
+            = f.label :acomplished_courses_cont, 'Kursy'
             = f.search_field :acomplished_courses_cont, placeholder: 'basic second second_winter cave ski list'
           .large-3.columns
             br
+            = link_to 'Exportuj do Excela', admin_profiles_path(format: :xlsx), class: 'button expanded'
+          .large-2.columns
+            br
             = f.submit 'Szukaj', class: 'button expanded'
-    = link_to t('.export_to_xlsx_link'), admin_profiles_path(format: :xlsx), class: 'button expanded large'
+
     = render 'table', profiles: @profiles
   .row
     = paginate @profiles

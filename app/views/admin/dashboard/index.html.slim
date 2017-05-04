@@ -1,4 +1,10 @@
 .row
+  .large-12.columns
+    = link_to 'Importowanie', admin_importing_index_path, class: 'button large'
+    = link_to 'Problemy', 'https://kw-app-errbit.herokuapp.com/problems', class: 'button large secondary'
+    = link_to 'Zawody', admin_competitions_path, class: 'button large warning'
+  .large-4.columns
+.row
   .large-4.columns
     h3 5 ostatnich wizyt
     table.stack
