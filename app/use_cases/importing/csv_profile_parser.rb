@@ -2,7 +2,7 @@ module Importing
   class CsvProfileParser
     class << self
       REQUIRED_PROFILE_HEADERS = %w(
-        kw_id birth_date birth_place pesel city postal_code main_address optional_address recommended_by acomplished_courses main_discussion_group sections
+        first_name last_name email phone kw_id birth_date birth_place pesel city postal_code main_address optional_address recommended_by acomplished_courses main_discussion_group sections
       )
 
       def parse(file:)
@@ -21,7 +21,10 @@ module Importing
           parsed_object = Importing::Profile.new(
             birth_date: row['birth_date'],
             birth_place: row['birth_place'],
-            pesel: row['pesel'],
+            phone: row['phone'],
+            first_name: row['first_name'],
+            last_name: row['last_name'],
+            email: row['email'],
             city: row['city'],
             postal_code: row['postal_code'],
             main_address: row['main_address'],

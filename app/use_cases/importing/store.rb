@@ -60,6 +60,10 @@ module Importing
         Db::Profile.transaction do
           parsed_objects.each do |parsed_data|
             Db::Profile.new.update(
+              first_name: parsed_data.first_name,
+              last_name: parsed_data.last_name,
+              email: parsed_data.email,
+              phone: parsed_data.phone,
               birth_date: parsed_data.birth_date,
               birth_place: parsed_data.birth_place,
               pesel: parsed_data.pesel,
@@ -72,6 +76,7 @@ module Importing
               main_discussion_group: parsed_data.main_discussion_group,
               section: parsed_data.section,
               kw_id: parsed_data.kw_id,
+              accepted: true
             )
           end
         end
