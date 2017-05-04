@@ -1,18 +1,38 @@
 .column
   .row
     .large-12.columns
+      .callout.warning
+        .row
+          .large-3.columns
+            b Ostatnia legitymacja: 
+            = Db::User.maximum(:kw_id)
+          .large-3.columns
+            b="Aktywni za rok #{Date.today.year}: "
+            - this_year = Db::Membership::Fee.where(year: Date.today.year).select{ |f| f.payment.paid?}.count
+            = this_year
+          .large-3.columns
+            b="Aktywni za rok #{Date.today.year - 1}: "
+            - last_year = Db::Membership::Fee.where(year: Date.today.year - 1).select{ |f| f.payment.paid?}.count
+            = last_year
+          .large-3.columns
+            b="Suma: "
+            = this_year + last_year
+        
       .callout
         = search_form_for @q, url: admin_users_path, class: 'js-send-on-enter' do |f|
           .row
-            .large-4.columns
-              = f.label :first_name_cont, 'Imię'
-              = f.search_field :first_name_cont
-            .large-4.columns
-              = f.label :last_name_cont, 'Nazwisko'
-              = f.search_field :last_name_cont
-            .large-4.columns
+            .large-3.columns
               = f.label :kw_id_eq, 'Numer klubowy'
               = f.search_field :kw_id_eq
+            .large-3.columns
+              = f.label :first_name_cont, 'Imię'
+              = f.search_field :first_name_cont
+            .large-3.columns
+              = f.label :last_name_cont, 'Nazwisko'
+              = f.search_field :last_name_cont
+            .large-3.columns
+              = f.label :profile_main_address_or_profile_optional_address_or_profile_postal_code_or_profile_city_or_profile_pesel_or_profile_birth_place_cont, 'Szukaj w zgłoszeniu(adres, pesel i inne)'
+              = f.search_field :profile_main_address_or_profile_optional_address_or_profile_postal_code_or_profile_city_or_profile_pesel_or_profile_birth_place_cont
             .large-3.columns
               = f.label :email_cont, 'E-mail'
               = f.search_field :email_cont
@@ -26,13 +46,16 @@
               = f.label :curator_true, 'Opiekun'
               = f.select :curator_true, [nil, ['Tak', true], ['Nie', 'false']]
           .row
-            .large-4.columns
+            .large-3.columns
               = f.label :membership_fees_year_eq, 'Składka za rok'
-              = f.text_field :membership_fees_year_eq
-            .large-4.columns
+              = f.search_field :membership_fees_year_eq
+            .large-3.columns
               = f.label :profile_sections_cont, 'Sekcje'
-              = f.text_field :profile_sections_cont
-            .large-4.columns
+              = f.search_field :profile_sections_cont
+            .large-3.columns
+              = f.label :profile_acomplished_courses_cont, 'Sekcje(basic, second, ski, cave, list...)'
+              = f.search_field :profile_acomplished_courses_cont, placeholder: 'basic second second_winter cave ski list'
+            .large-3.columns
               br
               = f.submit 'Szukaj', class: 'button expanded'
   .row
@@ -40,12 +63,11 @@
       table.stack
         thead
           tr
-            th width='4%' Numer klubowy
+            th width='5%' Numer klubowy
             th width='15%' Imię
             th width='15%' Nazwisko
             th width='15%' E-mail
             th width='15%' Telefon
-            th width='1%' Problemy
             th width='15%' Sekcje
             th width='5%' Uprawnienia
             th width='15%' Ostatnie składki
@@ -61,7 +83,6 @@
               td= user.last_name
               td= mail_to user.email, user.email
               td= user.phone
-              td.text-center= user.warnings
               td.text-center= user.profile.try(:sections).try(:to_sentence)
               td.text-center
                 - if user.admin?
