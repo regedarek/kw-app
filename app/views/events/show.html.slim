@@ -12,7 +12,7 @@
         = I18n.localize @event.event_date, format: :long
         br
 
-      - if @event.application_list_url.present?
+      - if @event.google_group_discussion_url.present?
         = link_to 'link do watku na grupie dyskusyjnej', @event.google_group_discussion_url, target: :_blank
         br
       - if @event.application_list_url.present?
