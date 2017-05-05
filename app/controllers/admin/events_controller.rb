@@ -6,12 +6,16 @@ module Admin
 
     def create
       result = Events::CreateEvent.new(params: event_params, kw_id: current_user.kw_id).create
-      result.success { redirect_to events_path, notice: 'Dodano wydarzenie' }
+      result.success { |event:| redirect_to admin_event_path(event.id), notice: 'Dodano wydarzenie' }
       result.invalid do |form:|
         @form = form
         render :new
       end
       result.else_fail!
+    end
+    
+    def show
+      @event = Db::Event.find(params[:id])
     end
 
     private
@@ -20,7 +24,7 @@ module Admin
       params.require(:event).permit(
         :name, :place, :event_date, :manager_kw_id, :participants, :application_list_url,
         :price_for_members, :price_for_non_members, :application_date, :payment_date,
-        :account_number, :event_rules_url, :google_group_discussion_url
+        :account_number, :event_rules_url, :google_group_discussion_url, :description
       )
     end
   end

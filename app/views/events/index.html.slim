@@ -1,8 +1,5 @@
 .row
   .columns
-    h3.subheader
-     | Najbliższe wydarzenia
-
     - if user_signed_in? && current_user.admin?
       = link_to "Dodaj wydarzenie", new_admin_event_path, class: 'button large expanded'
 

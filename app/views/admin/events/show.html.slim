@@ -1,0 +1,28 @@
+.column.row
+  .large-12.columns
+    .callout
+      = link_to 'Utwórz wydarzenie na Facebooku', 'https://www.facebook.com/pg/KlubWysokogorskiKrakow/events/?ref=page_internal', target: '_blank'
+      br
+      b Nazwa wydarzenia: 
+      = @event.name
+      br
+      b Lokalizacja: 
+      = @event.place
+      br
+      b Początek: 
+      = @event.event_date.strftime('%Y.%m.%d')
+      |  
+      = @event.event_date.strftime('%H:%M')
+      br
+      b Koniec: 
+      = (@event.event_date + 1.hour).strftime('%Y.%m.%d')
+      |  
+      = (@event.event_date + 1.hour).strftime('%H:%M')
+      br
+      b Opis: 
+      br
+      b Adres URL strony z biletami: 
+      = @event.application_list_url
+
+  .large-12.columns
+    = link_to "wróć do wydarzeń", events_path, class: 'button warning'

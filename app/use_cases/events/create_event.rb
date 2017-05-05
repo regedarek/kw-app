@@ -20,10 +20,11 @@ module Events
         cal.create_event do |e|
           e.title = event.name
           e.location = event.place
+          e.description = event.description
           e.start_time = event.event_date
           e.end_time = event.event_date + 1.hour
         end
-        Success.new
+        Success.new(event: event)
       else
         Failure.new(:invalid, form: form)
       end

@@ -28,7 +28,9 @@ gem 'letter_opener', group: :development
 gem 'carrierwave'
 gem 'omniauth-google-oauth2'
 gem 'google_calendar'
+gem 'koala'
 gem 'prawn-rails'
+gem 'chronic'
 
 group :development do
   gem 'brakeman', require: false

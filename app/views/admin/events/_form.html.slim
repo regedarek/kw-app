@@ -1,73 +1,75 @@
-= form_for form, url: admin_events_path do |f|
-  .row
-    .large-12.columns
-      - if form.errors.any?
-        .callout.alert
-          ul
-            - form.errors.full_messages.each do |msg|
-              li= msg
+.column.row
+  = form_for form, url: admin_events_path do |f|
+    .row
+      .large-12.columns
+        - if form.errors.any?
+          .callout.alert
+            ul
+              - form.errors.full_messages.each do |msg|
+                li= msg
 
-  .row
-    .large-12.columns
-      = f.label :name, 'Nazwa'
-      = f.text_field :name
+    .callout.primary
+      .row
+        .large-4.columns
+          = f.label :name, 'Nazwa*'
+          = f.text_field :name
 
-  .row
-    .large-12.columns
-      = f.label :place, 'Miejsce'
-      = f.text_field :place
+        .large-4.columns
+          = f.label :place, 'Lokalizacja*'
+          = f.text_field :place
 
-  .row
-    .large-12.columns
-      = f.label :event_date, 'Data wydarzenia'
-      = f.datetime_field :event_date
+        .large-4.columns
+          = f.label :event_date, 'Data wydarzenia* (po angielsku: 10 may at 12)'
+          = f.text_field :event_date
 
-  .row
-    .large-12.columns
-      = f.label :participants, 'Kto moze uczestniczyc'
-      = f.text_field :participants
+    .callout.secondary
+      .row
+        .large-4.columns
+          = f.label :participants, 'Kto moze uczestniczyć'
+          = f.text_field :participants
 
-  .row
-    .large-12.columns
-      = f.label :application_list_url, 'Link do zapisow'
-      = f.text_field :application_list_url
+        .large-8.columns
+          = f.label :description, 'Opis'
+          = f.text_field :description
 
-  .row
-    .large-12.columns
-      = f.label :price_for_members, 'Cena dla klubowiczow'
-      = f.text_field :price_for_members
+      .row
+        .large-6.columns
+          = f.label :event_rules_url, 'Link do regulaminu'
+          = f.text_field :event_rules_url
 
-  .row
-    .large-12.columns
-      = f.label :price_for_non_members, 'Cena dla pozostalych'
-      = f.text_field :price_for_non_members
+        .large-6.columns
+          = f.label :google_group_discussion_url, 'Link do watku na grupie dyskusyjnej'
+          = f.text_field :google_group_discussion_url
 
-  .row
-    .large-12.columns
-      = f.label :application_date, 'Data zapisow'
-      = f.date_field :application_date
+    .callout.secondary
+      .row
+        .large-6.columns
+          = f.label :application_list_url, 'Link do zapisow'
+          = f.text_field :application_list_url
 
-  .row
-    .large-12.columns
-      = f.label :payment_date, 'Data platnosci'
-      = f.date_field :payment_date
+        .large-6.columns
+          = f.label :account_number, 'Nr konta bankowego'
+          = f.text_field :account_number
 
-  .row
-    .large-12.columns
-      = f.label :account_number, 'Nr konta bankowego'
-      = f.text_field :account_number
+      .row
+        .large-3.columns
+          = f.label :price_for_members, 'Cena dla klubowiczow'
+          = f.text_field :price_for_members
 
-  .row
-    .large-12.columns
-      = f.label :event_rules_url, 'Link do regulaminu'
-      = f.text_field :event_rules_url
+        .large-3.columns
+          = f.label :price_for_non_members, 'Cena dla pozostalych'
+          = f.text_field :price_for_non_members
 
-  .row
-    .large-12.columns
-      = f.label :google_group_discussion_url, 'Link do watku na grupie dyskusyjnej'
-      = f.text_field :google_group_discussion_url
+        .large-3.columns
+          = f.label :application_date, 'Data zapisow (po angielsku: 10 may)'
+          = f.text_field :application_date
 
-  .row
-    .large-12.columns
-      = f.submit 'Dodaj wydarzenie', class: 'button'
-      = link_to "wróć do wydarzeń", events_path, class: 'button warning'
+        .large-3.columns
+          = f.label :payment_date, 'Data platnosci (po angielsku: 10 may)'
+          = f.text_field :payment_date
+
+    .row
+      .large-6.columns
+        = f.submit 'Dodaj wydarzenie', class: 'button large expanded'
+      .large-6.columns
+        = link_to "wróć do wydarzeń", events_path, class: 'button large expanded warning'

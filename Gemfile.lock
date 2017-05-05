@@ -183,6 +183,10 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
+    koala (3.0.0)
+      addressable
+      faraday
+      json (>= 1.8)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -370,6 +374,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   carrierwave
+  chronic
   codeclimate-test-reporter (~> 1.0.0)
   coffee-rails
   devise
@@ -380,6 +385,7 @@ DEPENDENCIES
   high_voltage
   jquery-rails
   kaminari
+  koala
   letter_opener
   omniauth-google-oauth2
   pg

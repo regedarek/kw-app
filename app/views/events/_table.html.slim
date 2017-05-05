@@ -1,22 +1,16 @@
 table.responsive
   thead
     tr
-      th Nazwa
-      th Kiedy?
-      th Koordynator
-      th Gdzie?
-      th
+      th width='30%' Gdzie?
+      th width='20%' Kiedy?
+      th width='50%' Nazwa
   tbody
     - events.each do |event|
       tr
         td
-          = event.name
-        td
-          = event.event_date
-        td
-          = event.user.display_name
-        td
           = event.place
-        td align='right'
+        td
+          = I18n.localize event.event_date, format: :long
+        td
           - if user_signed_in?
-            = link_to 'Szczegóły', event_path(event)
+            = link_to event.name, event_path(event)

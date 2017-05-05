@@ -3,6 +3,10 @@
     - if user_signed_in?
       .row
         .large-12.columns
+          = render 'events/table', events: Db::Event.order(event_date: :asc).limit(3)
+
+      .row
+        .large-12.columns
           = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
 
       - if current_user.reservations.any?
