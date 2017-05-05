@@ -6,7 +6,7 @@ module Events
         client_secret: Rails.application.secrets.google_client_secret,
         calendar: '57vh4rbe6plsa0hdtb6mvhl4cc@group.calendar.google.com',
         redirect_url: "urn:ietf:wg:oauth:2.0:oob",
-        refresh_token: "1/RtmXGtd-SygIV40mM2z-CQVmCvgzTX7sdaroWcIZkTk"
+        refresh_token: Db::User.find_by(kw_id: 2345).try(:refresh_token)
       )
       google_events = cal.find_future_events
       google_events[0..5].each do |event|
