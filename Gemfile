@@ -27,6 +27,7 @@ gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/
 gem 'letter_opener', group: :development
 gem 'carrierwave'
 gem 'omniauth-google-oauth2'
+gem 'google_calendar'
 gem 'prawn-rails'
 
 group :development do

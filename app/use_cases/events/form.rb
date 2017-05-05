@@ -7,8 +7,7 @@ module Events
                   :price_for_members, :price_for_non_members, :application_date, :payment_date,
                   :account_number, :event_rules_url, :google_group_discussion_url
 
-    validates :name, :place, :application_date, :application_list_url, :google_group_discussion_url,
-      :participants, presence: true 
+    validates :name, :place, :event_date, presence: true 
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "Event")
@@ -20,7 +19,7 @@ module Events
 
     def params
       HashWithIndifferentAccess.new(
-        name: name, place: place, event_date: event_date, participants: participants,
+        name: name, place: place, event_date: event_date.in_time_zone('Warsaw'), participants: participants,
         application_list_url: application_list_url, price_for_members: price_for_members, price_for_non_members: price_for_non_members,
         application_date: application_date, payment_date: payment_date, account_number: account_number, event_rules_url: event_rules_url,
         google_group_discussion_url: google_group_discussion_url

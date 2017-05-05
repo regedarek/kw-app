@@ -10,10 +10,9 @@
         = f.password_field :password, autocomplete: "off"
 
         = f.submit "Zaloguj się", class: 'button large expanded'
-        - unless Rails.env.development?
-          p.text-center
-            | lub
-          = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path, class: 'button secondary large expanded'
+        p.text-center
+          | lub
+        = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path, class: 'button secondary large expanded'
         |   
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
           = link_to "Zapomniałeś hasła?", new_password_path(resource_name), class: 'button warning large expanded'
