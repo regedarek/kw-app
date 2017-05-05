@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Db::Event.all
+    @events = Db::Event.order(:event_date)
   end
 
   def show
