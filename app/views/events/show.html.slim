@@ -1,61 +1,62 @@
 .column.row
-  .large-12.columns
-    h2 = @event.name
-
-  .large-12.columns
-    h5
-      = "Miejsce wydarzenia: #{@event.place}"
-
-  - if @event.event_date.present?
+  .row
     .large-12.columns
-      h5
-        = "Data wydarzenia: #{@event.event_date}"
+      h4 = @event.name
 
-  - if @event.application_list_url.present?
-    .large-12.columns
-      .callout.small
+      b Miejsce wydarzenia: 
+      = @event.place
+      br
+
+      - if @event.event_date.present?
+        b Data wydarzenia:  
+        = I18n.localize @event.event_date, format: :long
+        br
+
+      - if @event.application_list_url.present?
         = link_to 'link do watku na grupie dyskusyjnej', @event.google_group_discussion_url, target: :_blank
-
-  - if @event.application_list_url.present?
-    .large-12.columns
-      .callout.small
+        br
+      - if @event.application_list_url.present?
         = link_to 'link do zapisow', @event.application_list_url, target: :_blank
-
-  - if @event.event_rules_url.present?
-    .large-12.columns
-      .callout.small
+        br
+      - if @event.event_rules_url.present?
         = link_to 'link do regulaminu', @event.event_rules_url, target: :_blank
+        br
 
-  .large-12.columns
-    h5
-      = "Koordynator: #{@event.user.display_name}"
+      - if @event.user.present?
+        b Koordynator: 
+        = @event.user.display_name
+        br
 
-  .large-12.columns
-    h5
-      = "Kto moze uczestniczyć: #{@event.participants}"
+      - if @event.participants.present?
+        b Kto moze uczestniczyć: 
+        = @event.participants
+        br
 
-  .large-12.columns
-    h5
-      = "Zapisy do: #{@event.application_date}"
+      - if @event.application_date.present?
+        b Zapisy do:  
+        = @event.application_date
+        br
 
-  .large-12.columns
-    h5
-      = "Cena dla klubowiczów: #{@event.price_for_members}"
+      - if @event.price_for_members.present?
+        b Cena dla klubowiczów: 
+        = @event.price_for_members
+        br
 
-  - if @event.price_for_non_members.present?
+      - if @event.price_for_non_members.present?
+        b Cena dla pozostałych: 
+        = @event.price_for_non_members
+        br
+
+      - if @event.payment_date.present?
+        b Płatność do: 
+        = @event.payment_date
+        br
+
+      - if @event.account_number.present?
+        b Nr konta: 
+        = @event.account_number
+        br
+
+  .row
     .large-12.columns
-      h5
-        = "Cena dla pozostałych: #{@event.price_for_non_members}"
-
-  - if @event.payment_date.present?
-    .large-12.columns
-      h5
-        = "Płatność do: #{@event.payment_date}"
-
-  - if @event.account_number.present?
-    .large-12.columns
-      h5
-        = "Nr konta: #{@event.account_number}"
-
-  .large-12.columns
-    = link_to "wróć do wydarzeń", events_path, class: 'button warning'
+      = link_to "wróć do wydarzeń", events_path, class: 'button warning'
