@@ -20,7 +20,7 @@ module Events
           cal.create_event do |e|
             e.title = event.name
             e.location = event.place
-            e.description = event.description
+            e.description = Rails.application.routes.url_helpers.event_url(Db::Event.first, host: ActionMailer::Base.default_url_options[:host])
             e.start_time = event.event_date
             e.end_time = event.event_date + 1.hour
           end
