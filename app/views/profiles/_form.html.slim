@@ -40,7 +40,7 @@
 
           .large-3.columns
             = f.label :birth_date
-            = f.date_field :birth_date
+            = f.date_field :birth_date, value: form.birth_date.to_date
 
   .row
     .large-12.columns

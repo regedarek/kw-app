@@ -58,7 +58,7 @@
   .row
     .large-12.columns
       = f.label :climbing_date
-      = f.text_field :climbing_date, class: 'js-datepicker'
+      = f.date_field :climbing_date, value: @route.climbing_date
 
   .row
     .large-12.columns

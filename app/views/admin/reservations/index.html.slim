@@ -27,7 +27,7 @@
             tr
               td = link_to reservation.id, edit_admin_reservation_path(reservation.id)
               td
-                = [reservation.user.first_name, reservation.user.last_name].join(' ')
+                = [reservation.user.first_name, reservation.user.last_name].join(' ') if reservation.user
               td
                 = reservation.items.map(&:display_name).to_sentence
               td
