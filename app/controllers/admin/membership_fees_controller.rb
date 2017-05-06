@@ -4,7 +4,8 @@ require 'admin/membership_fees_form'
 module Admin
   class MembershipFeesController < Admin::BaseController
     def index
-      @q = Db::Membership::Fee.ransack(params[:q])
+      @q = Db::Membership::Fee.order(created_at: :desc).ransack(params[:q])
+      @q.sorts = 'created_at desc' if @q.sorts.empty?
       @membership_fees = @q.result.includes(:user, :payment).page(params[:page])
 
       respond_to do |format|
