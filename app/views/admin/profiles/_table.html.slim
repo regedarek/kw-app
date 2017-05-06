@@ -17,7 +17,7 @@ table.scroll.stack
         td = profile.phone
         td = profile.pesel
         td = profile.city
-        td = profile.sections
+        td = profile.sections.try(:to_sentence)
         td
           - if profile.accepted?
             = link_to 'Zobacz', admin_profile_path(profile.id)
