@@ -55,7 +55,7 @@ module Admin
 
     def remind
       reservation = Db::Reservation.find(params[:id])
-      ReservationMailer.remind(reservation).deliver_later
+      ReservationMailer.remind(reservation).deliver_now
       redirect_to admin_reservations_path, notice: 'Przypomniano i wysłano email'
     end
 

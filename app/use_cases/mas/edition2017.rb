@@ -7,7 +7,7 @@ module Mas
 
       if sign_up.save
         sign_up.create_payment(dotpay_id: SecureRandom.hex(13))
-        MasMailer.sign_up(sign_up).deliver_later
+        MasMailer.sign_up(sign_up).deliver_now
         Success.new
       else
         Failure.new(:error, errors: sign_up.errors.full_messages)
