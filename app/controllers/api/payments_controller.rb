@@ -4,6 +4,7 @@ module Api
       notification = Payments::Dotpay::Notification.new(params)
       result = Payments::Dotpay::Status.new(notification: notification).process
       result.success { render text: 'OK' }
+      result.uncompleted { |status:| render text: status }
     end
 
     def thank_you

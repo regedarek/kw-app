@@ -9,6 +9,8 @@ module Payments
         if @notification.completed?
           @notification.payment.charge!
           Success.new
+        else
+          Failure.new(:uncompleted, status: @notification.status)
         end
       end
     end
