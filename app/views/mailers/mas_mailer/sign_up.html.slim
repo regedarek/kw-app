@@ -52,7 +52,7 @@ hr
 span style='font-size: 120%'
   b = t('.payment', price: @sign_up.try(:cost).try(:to_s))
   br
-  = link_to t('.charge_payment_link'), Rails.application.routes.url_helpers.charge_payment_url(@sign_up.payment.id, host: 'http://panel.kw.krakow.pl')
+  = link_to t('.charge_payment_link'), charge_payment_url(@sign_up.payment.id)
   br
   b style='color: red'= t('.payment_info')
 - if @sign_up.remarks.present?

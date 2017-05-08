@@ -17,7 +17,7 @@ module Db
       end
 
       def description
-        "Wpisowe nr #{id} na zawody VIII Memoriał Andrzeja Skwirczyńskiego 2017 od #{name_1} oraz #{name_2}"
+        "Wpisowe nr #{id} na zawody VIII Memoriał Andrzeja Skwirczyńskiego 2017 od #{first_name_1} #{last_name_1} oraz #{first_name_2} #{last_name_2}"
       end
 
       def self.gender_attributes_for_select
