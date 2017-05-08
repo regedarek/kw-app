@@ -21,7 +21,7 @@ module UserManagement
           main_discussion_group: form.main_discussion_group,
           sections: form.sections
         )
-        ProfileMailer.apply(profile).deliver_now
+        ProfileMailer.apply(profile).deliver_later
         return Success.new
       end
     end
