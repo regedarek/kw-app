@@ -28,9 +28,12 @@
           .large-2.columns
             = f.label :created_at_lteq, 'Utworzono do'
             = f.date_field :created_at_lteq, value: (params[:q].fetch(:created_at_lteq) if params[:q])
-          .large-4.columns
+          .large-2.columns
             = f.label :birth_place_cont, 'Miejsce urodzin'
             = f.text_field :birth_place_cont
+          .large-2.columns
+            = f.label :profession_cont, 'Profesja'
+            = f.text_field :profession_cont
         .row
           .large-2.columns
             = f.label :pesel_cont, 'Pesel'
