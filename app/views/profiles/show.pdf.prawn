@@ -40,13 +40,12 @@ prawn_document do |pdf|
       pdf.text "Rodzaj ukończonych kursów:", align: :left, size: 9
       @profile.acomplished_courses.present? && @profile.acomplished_courses.each do |course|
         pdf.move_down 3
-        pdf.text "• " + I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}"), size: 7, indent_paragraphs: 10
+        pdf.text "• " + I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}"), size: 8, indent_paragraphs: 10
       end
     end
   end
   pdf.grid([4,0], [4,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-      pdf.move_down 30
       pdf.text 'Oświadczam, że znam postanowienia Statutu Klubu Wysokogórskiego Kraków i zobowiązuje się do ich przestrzegania. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w imprezach organizowanych przez Klub podejmuję na własne ryzyko i odpowiedzialność. Równocześnie wyrażam zgodę na przetwarzanie moich danych osobowych dla celów statutowych zgodnie z ustawą z dnia 29 sierpnia 1997r. o ochronie danych osobowych (Dz. U. Nr 133, poz. 883 z 1997 r. z późniejszymi zmianami).', size: 7, indent_paragraphs: 10
     end
   end
