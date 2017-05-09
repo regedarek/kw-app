@@ -4,9 +4,8 @@ table.scroll.stack
       th width='20%' Imię i nazwisko
       th width='20%' E-mail
       th width='10%' Telefon
-      th width='5%' Pesel
       th width='15%' Miasto
-      th width='10%' Sekcje
+      th width='15%' Sekcje
       th width='15%'
   tbody
     - profiles.each_with_index do |profile, i|
@@ -15,7 +14,6 @@ table.scroll.stack
           b = "#{profile.first_name} #{profile.last_name}"
         td = profile.email
         td = profile.phone
-        td = profile.pesel
         td = profile.city
         td = profile.sections.try(:to_sentence)
         td
