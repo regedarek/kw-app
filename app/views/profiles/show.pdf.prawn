@@ -40,17 +40,17 @@ prawn_document do |pdf|
       pdf.text "Rodzaj ukończonych kursów:", align: :left, size: 9
       @profile.acomplished_courses.present? && @profile.acomplished_courses.each do |course|
         pdf.move_down 3
-        pdf.text "• " + I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}"), size: 8, indent_paragraphs: 10
+        pdf.text "• " + I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}"), size: 7, indent_paragraphs: 10
       end
     end
   end
-  pdf.grid([3,0], [3,2]).bounding_box do
+  pdf.grid([4,0], [4,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
       pdf.move_down 30
-      pdf.text 'Oświadczam, że znam postanowienia Statutu Klubu Wysokogórskiego Kraków i zobowiązuje się do ich przestrzegania. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w imprezach organizowanych przez Klub podejmuję na własne ryzyko i odpowiedzialność. Równocześnie wyrażam zgodę na przetwarzanie moich danych osobowych dla celów statutowych zgodnie z ustawą z dnia 29 sierpnia 1997r. o ochronie danych osobowych (Dz. U. Nr 133, poz. 883 z 1997 r. z późniejszymi zmianami).', size: 8
+      pdf.text 'Oświadczam, że znam postanowienia Statutu Klubu Wysokogórskiego Kraków i zobowiązuje się do ich przestrzegania. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w imprezach organizowanych przez Klub podejmuję na własne ryzyko i odpowiedzialność. Równocześnie wyrażam zgodę na przetwarzanie moich danych osobowych dla celów statutowych zgodnie z ustawą z dnia 29 sierpnia 1997r. o ochronie danych osobowych (Dz. U. Nr 133, poz. 883 z 1997 r. z późniejszymi zmianami).', size: 7, indent_paragraphs: 10
     end
   end
-  pdf.grid([4,0], [4,2]).bounding_box do
+  pdf.grid([5,0], [5,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
       pdf.move_down 3
       pdf.text 'Załączniki:', size: 9
@@ -62,24 +62,19 @@ prawn_document do |pdf|
       pdf.text "3." + 'Informacje dodatkowe.', indent_paragraphs: 10, size: 9
     end
   end
-  pdf.grid([5,0], [5,2]).bounding_box do
-    pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-      pdf.text 'Kraków, dnia'
-      pdf.move_down 25
-      pdf.text '* w przypadku wysłania deklaracji pocztą e-mail podpis proszę złożyć najpóźniej w dniu odbioru legitymacji.', size: 8
-      pdf.move_down 15
-      pdf.stroke_horizontal_rule
-    end
-  end
+
   pdf.grid([5,2], [5,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-      pdf.text '......................................'
+      pdf.text '.............................................'
       pdf.move_down 3
-      pdf.text 'czytelny podpis wnioskodawcy*', size: 9
+      pdf.text 'data i czytelny podpis wnioskodawcy*', size: 9
+      pdf.text '* w przypadku wysłania deklaracji pocztą e-mail podpis proszę złożyć najpóźniej w dniu odbioru legitymacji.', size: 6
     end
   end
   pdf.grid([6,0], [6,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf" do
+      pdf.stroke_horizontal_rule
+      pdf.move_down 15
       pdf.text 'Decyzja zarządu', align: :center
     end
     pdf.move_down 15
