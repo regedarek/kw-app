@@ -56,18 +56,22 @@
         b Adres kontaktowy: 
         = @profile.optional_address
 
-  .row
-    .large-12.columns 
-      b Dowiedział się od: 
-      = @profile.recommended_by
+  - if @profile.recommended_by.present?
+    .row
+      .large-12.columns 
+        b Dowiedział się od: 
+        = @profile.recommended_by.to_sentence
 
   .row
     .large-12.columns 
       ul
       b Kursy: 
-      - @profile.acomplished_courses.present? && @profile.acomplished_courses.each do |course|
-        li
-          = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
+      - if @profile.acomplished_courses.present?
+        - @profile.acomplished_courses.each do |course|
+          li
+            = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
+      - else
+        | brak
 
       br
 
@@ -79,7 +83,13 @@
   .row
     .large-12.columns 
       b Sekcje: 
-      = @profile.sections
+      = @profile.sections.to_sentence if @profile.sections
+
+  - if @profile.profession.present?
+    .row
+      .large-12.columns 
+        b Profesja: 
+        = @profile.profiession
 
   .row
     .large-12.columns
