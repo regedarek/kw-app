@@ -18,6 +18,14 @@ module Admin
       @event = Db::Event.find(params[:id])
     end
 
+    def destroy
+      event = Db::Event.find(params[:id])
+      event.destroy
+
+      redirect_to events_path, notice: 'Usunięto wydarzenie'
+    end
+
+
     private
 
     def event_params

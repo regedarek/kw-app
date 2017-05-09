@@ -1,9 +1,11 @@
 table.stack
   thead
     tr
-      th width='30%' Gdzie?
+      th width='25%' Gdzie?
       th width='20%' Kiedy?
       th width='50%' Nazwa
+      - if user_signed_in? && current_user.admin?
+        th width='5%'
   tbody
     - events.each do |event|
       tr
@@ -14,3 +16,7 @@ table.stack
         td
           - if user_signed_in?
             = link_to event.name, event_path(event)
+        - if user_signed_in? && current_user.admin?
+          td.text-center
+            = link_to admin_event_path(event), method: :delete do
+              i.fi-trash
