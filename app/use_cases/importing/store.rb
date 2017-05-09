@@ -1,6 +1,21 @@
 module Importing
   class Store
     class << self
+      def store_profile_update(parsed_objects)
+        Db::Profile.transaction do
+          parsed_objects.each do |parsed_data|
+            profile = Db::Profile.find_by(email: parsed_data.email)
+            profile.update(
+              sections: parsed_data.sections,
+              acomplished_courses: parsed_data.acomplished_courses,
+              profession: parsed_data.profession
+            ) if profile
+          end
+        end
+
+        return Success.new
+      end
+
       def store_mountain_route(parsed_objects)
         Db::Activities::MountainRoute.transaction do
           parsed_objects.each do |parsed_data|
