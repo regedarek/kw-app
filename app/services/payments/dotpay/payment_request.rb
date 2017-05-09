@@ -1,4 +1,3 @@
-require 'net/https'
 require 'uri'
 require 'results'
 
@@ -17,12 +16,12 @@ module Payments
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-        request = Net::HTTP::Post.new(uri.request_uri)
+        request = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
         request.basic_auth(
           Rails.application.secrets.dotpay_login,
           Rails.application.secrets.dotpay_password
         )
-        request.set_form_data(@params)
+        request.body = @params.to_json
         response = http.request(request)
 
         case response
