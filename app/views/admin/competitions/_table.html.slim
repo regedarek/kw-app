@@ -13,9 +13,9 @@ table.stack
         td
           = sign_up.name
         td
-          = "#{sign_up.email_1}/#{sign_up.email_2}"
+          [sign_up.email_1, sign_up.email_2].select(&:present?).compact.join('/')
         td
-          = "#{sign_up.phone_1}/#{sign_up.phone_2}"
+          [sign_up.phone_1, sign_up.phone_2].select(&:present?).compact.join('/')
         td
           - if sign_up.payment.present? && sign_up.payment.prepaid?
             span class='label success'
