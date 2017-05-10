@@ -97,6 +97,24 @@ pl:
         recommended_by: Skąd dowiedziałeś się o Klubie
         acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
         sections: Proszę wskazać w których Sekcjach KW chciałbyś/chciałabyś działać.
+        application_date: Data wstąpienia
+        profession: Zawód
+        profile_sections_snw: Sekcja Narciarstwa Wysokogórskiego
+        profile_sections_stj: Sekcja Taternictwa Jaskiniowego
+        profile_sections_sww: Sekcja Wspinaczki Wysokogórskiej
+        profile_sections_gtw: Grupa Turystyki Wysokogórskiej
+        profile_sections_kts: Koło Taterników Seniorów
+        profile_recommended_by_google: poprzez wyszukiwarkę internetową
+        profile_recommended_by_facebook: na Facebook'u
+        profile_recommended_by_friends: od znajomych
+        profile_recommended_by_festival: na Festiwalu Górskim
+        profile_recommended_by_poster: z ulotek
+        profile_acomplished_courses_basic: Podstawowy kurs wspinaczki w skałkach
+        profile_acomplished_courses_second: Kurs taternicki
+        profile_acomplished_courses_second_winter: Kurs zimowy taternicki
+        profile_acomplished_courses_cave: Kurs taternictwa jaskiniowego
+        profile_acomplished_courses_ski: Kurs narciarstwa wysokogórskiego
+        profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.
       db/activities/mountain_route:
         name: nazwa drogi/zjazdu/tury
         difficulty: wycena

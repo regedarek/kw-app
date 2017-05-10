@@ -19,6 +19,20 @@ module Admin
       @profile = Db::Profile.find(params[:id])
     end
 
+    def edit
+      @profile = Db::Profile.find(params[:id])
+    end
+
+    def update
+      @profile = Db::Profile.find(params[:id])
+
+      if @profile.update(profile_params)
+        redirect_to edit_admin_profile_path(@profile.id), notice: 'Zaktualizowano'
+      else
+        render :edit
+      end
+    end
+
     def accept
       profile = Db::Profile.find(params[:id])
       user = Db::User.new(
@@ -47,7 +61,12 @@ module Admin
     private
 
     def profile_params
-      params.require(:profile).permit(:kw_id, :application_date)
+      params.require(:profile).permit(
+        :email, :pesel, :first_name, :last_name, :phone, :profession, :application_date,
+        :birth_date, :birth_place, :city, :postal_code, :main_address,
+        :optional_address, :main_discussion_group, :terms_of_service,
+        recommended_by: [], acomplished_courses: [], sections: []
+      )
     end
   end
 end
