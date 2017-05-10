@@ -3,18 +3,21 @@
     .callout
       = search_form_for @q, url: admin_profiles_path, class: 'js-send-on-enter' do |f|
         .row
-          .large-3.columns
+          .large-2.columns
             = f.label :kw_id_eq, 'Numer klubowy'
             = f.search_field :kw_id_eq
-          .large-3.columns
+          .large-2.columns
             = f.label :first_name_cont, 'Imię'
             = f.search_field :first_name_cont
-          .large-3.columns
+          .large-2.columns
             = f.label :last_name_cont, 'Nazwisko'
             = f.search_field :last_name_cont
           .large-3.columns
             = f.label :email_cont, 'E-mail'
             = f.search_field :email_cont
+          .large-3.columns
+            = f.label :phone_cont, 'Telefon'
+            = f.search_field :phone_cont
         .row
           .large-2.columns
             = f.label :birth_date_gteq, 'Data urodzenia od'
@@ -23,11 +26,11 @@
             = f.label :birth_date_lteq, 'Data urodzenia do'
             = f.date_field :birth_date_lteq, value: (params[:q].fetch(:birth_date_lteq) if params[:q])
           .large-2.columns
-            = f.label :created_at_gteq, 'Utworzono od'
-            = f.date_field :created_at_gteq, value: (params[:q].fetch(:created_at_gteq) if params[:q])
+            = f.label :created_at_gteq, 'Zapisany od'
+            = f.date_field :application_date_gteq, value: (params[:q].fetch(:application_date_gteq) if params[:q])
           .large-2.columns
-            = f.label :created_at_lteq, 'Utworzono do'
-            = f.date_field :created_at_lteq, value: (params[:q].fetch(:created_at_lteq) if params[:q])
+            = f.label :created_at_lteq, 'Zapisany do'
+            = f.date_field :application_date_lteq, value: (params[:q].fetch(:application_date_lteq) if params[:q])
           .large-2.columns
             = f.label :birth_place_cont, 'Miejsce urodzin'
             = f.text_field :birth_place_cont
@@ -48,23 +51,33 @@
             = f.label :city_cont, 'Miasto'
             = f.search_field :city_cont
           .large-2.columns
-            = f.label :accepted_true, 'Zaakceptowany'
-            = f.select :accepted_true, [nil, ['Tak', true], ['Nie', 'false']]
+            = f.label :remarks_cont, 'Uwagi'
+            = f.search_field :remarks_cont
+        .row
+          .large-4.columns
+            = f.label :sections_cont, 'Sekcje'
+            = f.select :sections_cont_all, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
+          .large-4.columns
+            = f.label :position_cont, 'Status członka'
+            = f.select :position_cont_all, [['Kandydat', 'candidate'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Rezygnacja z członkowstwa', 'canceled']], { }, { multiple: true }
+          .large-4.columns
+            = f.label :acomplished_courses_cont, 'Kursy'
+            = f.select :acomplished_courses_cont_all, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list']], {}, { multiple: true }
         .row
           .large-3.columns
-            = f.label :phone_cont, 'Telefon'
-            = f.search_field :phone_cont
-          .large-2.columns
-            = f.label :sections_cont, 'Sekcje'
-            = f.search_field :sections_cont
-          .large-2.columns
-            = f.label :acomplished_courses_cont, 'Kursy'
-            = f.search_field :acomplished_courses_cont, placeholder: 'basic second second_winter cave ski list'
+            = f.label :added_true, 'Dodano do grup dyskusyjnych'
+            = f.select :added_true, [nil, ['Tak', true], ['Nie', 'false']]
           .large-3.columns
-            br
-            = link_to 'Exportuj do Excela', admin_profiles_path(format: :xlsx), class: 'button expanded'
+            = f.label :main_discussion_group_true, 'Główna grupa dyskusyjna'
+            = f.select :main_discussion_group_true, [nil, ['Tak', true], ['Nie', 'false']]
+          .large-2.columns
+            = f.label :accepted_true, 'Zaakceptowany'
+            = f.select :accepted_true, [nil, ['Tak', true], ['Nie', 'false']]
           .large-2.columns
             br
+            = link_to 'Exportuj', admin_profiles_path(format: :xlsx), class: 'secondary button expanded'
+          .large-2.columns
+            br  
             = f.submit 'Szukaj', class: 'button expanded'
 
     = render 'table', profiles: @profiles

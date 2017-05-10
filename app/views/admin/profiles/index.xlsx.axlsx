@@ -14,6 +14,12 @@ profile_attributes = %i(
   acomplished_courses
   main_discussion_group
   sections
+  added
+  application_date
+  position
+  remarks
+  date_of_death
+  profession
   accepted
 )
 wb.styles do |style|

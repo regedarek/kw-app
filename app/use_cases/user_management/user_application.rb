@@ -19,7 +19,8 @@ module UserManagement
           recommended_by: form.recommended_by,
           acomplished_courses: form.acomplished_courses,
           main_discussion_group: form.main_discussion_group,
-          sections: form.sections
+          sections: form.sections,
+          position: ['candidate']
         )
         ProfileMailer.apply(profile).deliver_later
         return Success.new
