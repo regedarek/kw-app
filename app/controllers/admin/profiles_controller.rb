@@ -31,7 +31,11 @@ module Admin
       user.password = SecureRandom.hex(4)
       if user.valid?
         user.save
-        profile.update(kw_id: profile_params.fetch(:kw_id), accepted: true)
+        profile.update(
+          kw_id: profile_params.fetch(:kw_id),
+          application_date: profile_params.fetch(:application_date),
+          accepted: true
+        )
         user.send_reset_password_instructions
 
         redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano'
@@ -43,7 +47,7 @@ module Admin
     private
 
     def profile_params
-      params.require(:profile).permit(:kw_id)
+      params.require(:profile).permit(:kw_id, :application_date)
     end
   end
 end

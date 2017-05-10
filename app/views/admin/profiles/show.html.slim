@@ -96,7 +96,7 @@
       hr
 
   .row
-    .large-6.columns
+    .large-12.columns
       - if @profile.accepted?
         span.label.success Zaakceptowano
       - else
@@ -105,10 +105,12 @@
             span.input-group-label
               | Numer członkowski
             = f.text_field :kw_id, class: 'input-group-field', value: Db::User.maximum(:kw_id) + 1
+            span.input-group-label
+              | Data wstąpienia
+            = f.date_field :kw_id, class: 'input-group-field', value: Date.today
             .input-group-button
               = f.submit 'Nadaj i utwórz konto', class: 'button'
 
-    .large-6.columns
       .text-right
         = link_to 'powrót', admin_profiles_path, class: 'button secondary'
         = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button warning'
