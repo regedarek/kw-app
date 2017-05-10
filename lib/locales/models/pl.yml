@@ -18,6 +18,7 @@ pl:
         main_address: Adres zameldowania
         optional_address: Adres kontaktowy
         phone: Telefon
+        date_of_death: Data śmierci
         main_discussion_group: Czy chcesz się zapisać do głównej grupy dyskusyjnej?
         recommended_by: Skąd dowiedziałeś się o Klubie
         acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
@@ -100,6 +101,7 @@ pl:
         pesel: Pesel
         city: Miasto
         position: Status
+        date_of_death: Data śmierci
         profile_position_candidate: Kandydat
         profile_position_regular: Członek zwyczajny
         profile_position_honorable_kw: Członek honorowy KW
