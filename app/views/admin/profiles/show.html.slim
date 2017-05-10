@@ -24,6 +24,16 @@
     .large-12.columns 
       b Data urodzenia: 
       = @profile.birth_date
+  - if @profile.application_date
+    .row
+      .large-12.columns 
+        b Data wstąpienia do klubu: 
+        = @profile.application_date
+  - if @profile.date_of_death
+    .row
+      .large-12.columns 
+        b Data śmierci: 
+        = @profile.date_of_death
 
   .row
     .large-12.columns 
@@ -64,7 +74,6 @@
 
   .row
     .large-12.columns 
-      ul
       b Kursy: 
       - if @profile.acomplished_courses.present?
         - @profile.acomplished_courses.each do |course|
@@ -73,12 +82,15 @@
       - else
         | brak
 
-      br
-
   .row
     .large-12.columns 
       b Główna grupa dyskusyjna: 
       = I18n.t @profile.main_discussion_group
+
+  .row
+    .large-12.columns 
+      b Dodano do grup dyskusyjnych?: 
+      = @profile.added? ? 'Tak' : "Nie"
 
   .row
     .large-12.columns 
@@ -89,14 +101,28 @@
     .row
       .large-12.columns 
         b Profesja: 
-        = @profile.profiession
+        = @profile.profession
+
+  - if @profile.position.present?
+    .row
+      .large-12.columns 
+        b Status członka: 
+        - @profile.position.each do |course|
+          li
+            = I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}")
+
+  - if @profile.remarks.present?
+    .row
+      .large-12.columns 
+        b Uwagi: 
+        = @profile.remarks
 
   .row
     .large-12.columns
       hr
 
   .row
-    .large-12.columns
+    .large-8.columns
       - if @profile.accepted?
         span.label.success Zaakceptowano
       - else
@@ -111,6 +137,8 @@
             .input-group-button
               = f.submit 'Nadaj i utwórz konto', class: 'button'
 
+    .large-4.columns
       .text-right
-        = link_to 'powrót', admin_profiles_path, class: 'button secondary'
+        = link_to 'edytuj', edit_admin_profile_path(@profile.id), class: 'button alert'
         = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button warning'
+        = link_to 'powrót', admin_profiles_path, class: 'button secondary'

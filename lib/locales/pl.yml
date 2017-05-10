@@ -1,6 +1,7 @@
 pl:
   true_value: Tak
   false_value: Nie
+  'false': Nie
   ski: 'Narciarstwo'
   regular_climbing: 'Wspinaczka letnia'
   winter_climbing: 'Wspinaczka zimowa'
