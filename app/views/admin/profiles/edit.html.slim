@@ -43,12 +43,21 @@
         .medium-6.columns
           = f.label :optional_address
           = f.text_field :optional_address
-
       .row
         .large-6.columns
           = f.check_box :main_discussion_group
           = f.label :main_discussion_group
-
+        .large-6.columns
+          = f.check_box :added
+          = f.label :added
+      .row
+        .large-12.columns
+          .callout.primary
+            = f.label :position
+            - Db::Profile::POSITION.each do |position|
+              = f.check_box :position, { multiple: true, checked: @profile.position.present? && @profile.position.include?(position) }, position.to_sym, nil
+              = f.label "profile_position_#{position}".to_sym
+              br
       .row
         .large-12.columns
           .callout.primary
@@ -57,7 +66,6 @@
               = f.check_box :acomplished_courses, { multiple: true, checked: @profile.acomplished_courses.present? && @profile.acomplished_courses.include?(course) }, course.to_sym, nil
               = f.label "profile_acomplished_courses_#{course}".to_sym
               br
-
       .row
         .large-6.columns
           .callout.primary

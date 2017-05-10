@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510123538) do
+ActiveRecord::Schema.define(version: 20170510163250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,8 @@ ActiveRecord::Schema.define(version: 20170510123538) do
     t.text     "acomplished_courses",   default: [],                 array: true
     t.string   "profession"
     t.date     "application_date"
+    t.boolean  "added",                 default: false
+    t.text     "position",              default: [],                 array: true
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true, using: :btree
   end
 

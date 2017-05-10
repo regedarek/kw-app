@@ -12,6 +12,7 @@ pl:
         birth_date: Data urodzin
         birth_place: Miejsce urodzin
         pesel: Pesel
+        added: Dodano do grup dyskusyjnych
         city: Miasto
         postal_code: Kod pocztowy
         main_address: Adres zameldowania
@@ -21,6 +22,15 @@ pl:
         recommended_by: Skąd dowiedziałeś się o Klubie
         acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
         sections: Proszę wskazać w których Sekcjach KW chciałbyś/chciałabyś działać.
+        position: Status
+        profile_position_candidate: Kandydat
+        profile_position_regular: Członek zwyczajny
+        profile_position_honorable_kw: Członek honorowy KW
+        profile_position_canceled: Rezygnacja z członkowstwa
+        profile_position_instructor: Instruktor
+        profile_position_honorable_pza: Członek honorowy PZA
+        profile_position_management: Członek zarządu, szef sekcji, prezes/wiceprezes
+        profile_position_senior: Członek senior
         profile_sections_snw: Sekcja Narciarstwa Wysokogórskiego
         profile_sections_stj: Sekcja Taternictwa Jaskiniowego
         profile_sections_sww: Sekcja Wspinaczki Wysokogórskiej
@@ -89,7 +99,17 @@ pl:
         birth_place: Miejsce urodzin
         pesel: Pesel
         city: Miasto
+        position: Status
+        profile_position_candidate: Kandydat
+        profile_position_regular: Członek zwyczajny
+        profile_position_honorable_kw: Członek honorowy KW
+        profile_position_instructor: Instruktor
+        profile_position_honorable_pza: Członek honorowy PZA
+        profile_position_canceled: Rezygnacja z członkowstwa
+        profile_position_management: Członek zarządu, szef sekcji, prezes/wiceprezes
+        profile_position_senior: Członek senior
         postal_code: Kod pocztowy
+        added: Dodano do grup dyskusyjnych
         main_address: Adres zameldowania
         optional_address: Adres kontaktowy
         phone: Telefon
