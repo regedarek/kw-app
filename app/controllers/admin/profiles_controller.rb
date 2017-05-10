@@ -64,7 +64,7 @@ module Admin
       params.require(:profile).permit(
         :email, :pesel, :first_name, :last_name, :phone, :profession, :application_date,
         :birth_date, :birth_place, :city, :postal_code, :main_address, :date_of_death,
-        :optional_address, :main_discussion_group, :terms_of_service, :added,
+        :optional_address, :main_discussion_group, :terms_of_service, :added, :remarks,
         recommended_by: [], acomplished_courses: [], sections: [], position: []
       )
     end

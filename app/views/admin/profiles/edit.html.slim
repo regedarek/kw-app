@@ -92,6 +92,10 @@
               = f.label "profile_recommended_by_#{place}".to_sym
               br
       .row
+        .medium-12.columns
+          = f.label :remarks
+          = f.text_area :remarks
+      .row
         .large-4.columns
           = f.submit class: 'button large expanded'
         .large-4.columns

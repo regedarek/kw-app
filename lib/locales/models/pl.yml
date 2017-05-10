@@ -24,6 +24,7 @@ pl:
         acomplished_courses: Proszę wybrać rodzaj ukończonego kursu.
         sections: Proszę wskazać w których Sekcjach KW chciałbyś/chciałabyś działać.
         position: Status
+        remarks: Uwagi
         profile_position_candidate: Kandydat
         profile_position_regular: Członek zwyczajny
         profile_position_honorable_kw: Członek honorowy KW
@@ -101,6 +102,7 @@ pl:
         pesel: Pesel
         city: Miasto
         position: Status
+        remarks: Uwagi
         date_of_death: Data śmierci
         profile_position_candidate: Kandydat
         profile_position_regular: Członek zwyczajny
