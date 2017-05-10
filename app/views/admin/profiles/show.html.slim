@@ -104,7 +104,7 @@
           .input-group
             span.input-group-label
               | Numer członkowski
-            = f.text_field :kw_id, class: 'input-group-field'
+            = f.text_field :kw_id, class: 'input-group-field', value: Db::User.maximum(:kw_id) + 1
             .input-group-button
               = f.submit 'Nadaj i utwórz konto', class: 'button'
 
