@@ -35,19 +35,17 @@ module Admin
 
     def accept
       profile = Db::Profile.find(params[:id])
-      user = Db::User.new(
-        kw_id: profile_params.fetch(:kw_id),
-        first_name: profile.first_name,
-        last_name: profile.last_name,
-        phone: profile.phone,
-        email: profile.email
-      )
+      user = Db::User.first_or_initialize(kw_id: accept_params.fetch(:kw_id))
+      user.first_name = profile.first_name
+      user.last_name = profile.last_name
+      user.phone = profile.phone
+      user.email = profile.email
       user.password = SecureRandom.hex(4)
       if user.valid?
         user.save
         profile.update(
-          kw_id: profile_params.fetch(:kw_id),
-          application_date: profile_params.fetch(:application_date),
+          kw_id: accept_params.fetch(:kw_id),
+          application_date: accept_params.fetch(:application_date),
           accepted: true
         )
         user.send_reset_password_instructions
@@ -59,6 +57,10 @@ module Admin
     end
 
     private
+
+    def accept_params
+      params.require(:profile).permit(:kw_id, :application_date)
+    end
 
     def profile_params
       params.require(:profile).permit(

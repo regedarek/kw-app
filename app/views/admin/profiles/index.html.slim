@@ -41,10 +41,10 @@
           .large-2.columns
             = f.label :pesel_cont, 'Pesel'
             = f.search_field :pesel_cont
-          .large-3.columns
+          .large-2.columns
             = f.label :main_address_cont, 'Adres zameldowania'
             = f.search_field :main_address_cont
-          .large-3.columns
+          .large-2.columns
             = f.label :optional_address_cont, 'Adres zamieszkania'
             = f.search_field :optional_address_cont
           .large-2.columns
@@ -53,26 +53,32 @@
           .large-2.columns
             = f.label :remarks_cont, 'Uwagi'
             = f.search_field :remarks_cont
-        .row
-          .large-4.columns
-            = f.label :sections_cont, 'Sekcje'
-            = f.select :sections_cont_all, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
-          .large-4.columns
-            = f.label :position_cont, 'Status członka'
-            = f.select :position_cont_all, [['Kandydat', 'candidate'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Rezygnacja z członkowstwa', 'canceled']], { }, { multiple: true }
-          .large-4.columns
-            = f.label :acomplished_courses_cont, 'Kursy'
-            = f.select :acomplished_courses_cont_all, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list']], {}, { multiple: true }
-        .row
-          .large-3.columns
-            = f.label :added_true, 'Dodano do grup dyskusyjnych'
-            = f.select :added_true, [nil, ['Tak', true], ['Nie', 'false']]
-          .large-3.columns
-            = f.label :main_discussion_group_true, 'Główna grupa dyskusyjna'
-            = f.select :main_discussion_group_true, [nil, ['Tak', true], ['Nie', 'false']]
           .large-2.columns
             = f.label :accepted_true, 'Zaakceptowany'
             = f.select :accepted_true, [nil, ['Tak', true], ['Nie', 'false']]
+        .row
+          .large-4.columns
+            = f.label :sections_in, 'Sekcje'
+            = f.select :sections_in, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
+          .large-4.columns
+            = f.label :position_in, 'Status członka'
+            = f.select :position_in, [['Kandydat', 'candidate'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Rezygnacja z członkowstwa', 'canceled']], { }, { multiple: true }
+          .large-4.columns
+            = f.label :acomplished_courses_in, 'Kursy'
+            = f.select :acomplished_courses_in, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list']], {}, { multiple: true }
+        .row
+          .large-2.columns
+            = f.label :added_true, 'Dodano do grup'
+            = f.select :added_true, [nil, ['Tak', true], ['Nie', 'false']]
+          .large-2.columns
+            = f.label :main_discussion_group_true, 'Główna grupa'
+            = f.select :main_discussion_group_true, [nil, ['Tak', true], ['Nie', 'false']]
+          .large-2.columns
+            = f.label :user_membership_fees_year_eq, 'Składka za rok'
+            = f.search_field :user_membership_fees_year_eq
+          .large-2.columns
+            = f.label :user_membership_fees_payment_state_eq, 'Płatność'
+            = f.select :user_membership_fees_payment_state_eq, [nil, ['opłacone', 'prepaid'], ['nieopłacone', 'unpaid']]
           .large-2.columns
             br
             = link_to 'Exportuj', admin_profiles_path(format: :xlsx), class: 'secondary button expanded'
