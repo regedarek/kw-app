@@ -58,14 +58,14 @@
             = f.select :accepted_true, [nil, ['Tak', true], ['Nie', 'false']]
         .row
           .large-4.columns
-            = f.label :sections_in, 'Sekcje'
-            = f.select :sections_in, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
+            = f.label :sections_cont_any, 'Sekcje'
+            = f.select :sections_cont_any, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
           .large-4.columns
-            = f.label :position_in, 'Status członka'
-            = f.select :position_in, [['Kandydat', 'candidate'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Rezygnacja z członkowstwa', 'canceled']], { }, { multiple: true }
+            = f.label :position_cont_any, 'Status członka'
+            = f.select :position_cont_any, [['Kandydat', 'candidate'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Rezygnacja z członkowstwa', 'canceled']], { }, { multiple: true }
           .large-4.columns
-            = f.label :acomplished_courses_in, 'Kursy'
-            = f.select :acomplished_courses_in, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list']], {}, { multiple: true }
+            = f.label :acomplished_courses_cont_any, 'Kursy'
+            = f.select :acomplished_courses_cont_any, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list']], {}, { multiple: true }
         .row
           .large-2.columns
             = f.label :added_true, 'Dodano do grup'
