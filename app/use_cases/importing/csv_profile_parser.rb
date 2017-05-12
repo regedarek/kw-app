@@ -34,7 +34,7 @@ module Importing
             acomplished_courses: row['acomplished_courses'].to_s.split(',').map(&:strip),
             main_discussion_group: row['main_discussion_group'],
             sections: row['sections'].to_s.split(',').map(&:strip),
-            kw_id: row['kw_id'].to_i
+            kw_id: row['kw_id']
           )
 
           if parsed_object.invalid?
