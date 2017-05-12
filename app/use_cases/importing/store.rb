@@ -91,7 +91,7 @@ module Importing
               main_discussion_group: parsed_data.main_discussion_group,
               sections: parsed_data.sections,
               kw_id: parsed_data.kw_id,
-              accepted: true
+              accepted: false
             )
           end
         end
