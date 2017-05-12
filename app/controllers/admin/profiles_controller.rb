@@ -35,7 +35,8 @@ module Admin
 
     def accept
       profile = Db::Profile.find(params[:id])
-      user = Db::User.first_or_initialize(kw_id: accept_params.fetch(:kw_id))
+      user = Db::User.new
+      user.kw_id = accept_params.fetch(:kw_id)
       user.first_name = profile.first_name
       user.last_name = profile.last_name
       user.phone = profile.phone
