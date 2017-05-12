@@ -2,7 +2,7 @@ module Importing
   class CsvProfileParser
     class << self
       REQUIRED_PROFILE_HEADERS = %w(
-        first_name last_name email phone kw_id birth_date birth_place pesel city postal_code main_address optional_address recommended_by acomplished_courses main_discussion_group sections
+        first_name last_name email phone birth_date birth_place pesel city postal_code main_address optional_address recommended_by acomplished_courses main_discussion_group sections
       )
 
       def parse(file:)
@@ -31,9 +31,9 @@ module Importing
             main_address: row['main_address'],
             optional_address: row['optional_address'],
             recommended_by: row['recommended_by'],
-            acomplished_courses: row['acomplished_courses'],
+            acomplished_courses: row['acomplished_courses'].to_s.split(',').map(&:strip),
             main_discussion_group: row['main_discussion_group'],
-            sections: row['sections'],
+            sections: row['sections'].to_s.split(',').map(&:strip),
             kw_id: row['kw_id'].to_i
           )
 
