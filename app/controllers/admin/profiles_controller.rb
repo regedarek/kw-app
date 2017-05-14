@@ -56,6 +56,7 @@ module Admin
         user.send_reset_password_instructions
         if profile.payment.present? && profile.payment.paid?
           fee = Db::Membership::Fee.create(year: profile.application_date.year, kw_id: profile.kw_id)
+          fee.create_payment(dotpay_id: SecureRandom.hex(13), cash: true)
         end
 
         redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano'
