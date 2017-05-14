@@ -7,6 +7,6 @@
   .input-group
     span.input-group-label
         | 100 zł
-    = f.number_field :year, min: Date.today.year, max: Date.today.year + 1, class: 'input-group-field', value: Date.today.year
+    = f.number_field :year, min: Date.today.year, max: Date.today.year + 5, class: 'input-group-field', value: Date.today.year
     .input-group-button
       = f.submit 'Zapłać', class: 'button'
