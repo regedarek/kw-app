@@ -16,7 +16,7 @@ table.stack
         td = profile.phone
         td
           - if profile && profile.kw_id
-            - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :desc).last
+            - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
             - if fee
               - if fee.year.to_i != Date.today.year.to_i
                 span.label.alert = fee.year
