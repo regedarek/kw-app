@@ -54,6 +54,9 @@ module Admin
           accepted: true
         )
         user.send_reset_password_instructions
+        if profile.payment.present? && profile.payment.paid?
+          Db::Membership::Fee.create(year: profile.application_date, kw_id: profile.kw_id)
+        end
 
         redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano'
       else

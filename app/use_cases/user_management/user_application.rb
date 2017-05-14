@@ -22,6 +22,7 @@ module UserManagement
           sections: form.sections,
           position: ['candidate']
         )
+        profile.create_payment(dotpay_id: SecureRandom.hex(13))
         ProfileMailer.apply(profile).deliver_later
         return Success.new
       end

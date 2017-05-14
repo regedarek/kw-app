@@ -130,6 +130,12 @@
             - else
               span.label.warning = fee.year
 
+  - if @profile.payment.present?
+    .row
+      .large-12.columns 
+        b Opłacono wpisowe oraz składkę?: 
+        = @profile.payment.paid? ? 'Tak' : 'Nie'
+
   .row
     .large-12.columns
       hr

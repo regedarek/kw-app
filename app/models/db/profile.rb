@@ -5,6 +5,8 @@ module Db
     SECTIONS = %w(snw sww stj gtw kts)
     ACOMPLISHED_COURSES = %w(basic basic_kw basic_without_second second second_winter cave ski list blank)
 
+    has_one :payment, as: :payable, dependent: :destroy
+
     validates :email, uniqueness: true
 
     ransacker :recommended_by do
@@ -21,5 +23,13 @@ module Db
     end
 
     belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
+
+    def cost
+      150
+    end
+
+    def description
+      "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
+    end
   end
 end
