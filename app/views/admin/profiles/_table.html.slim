@@ -2,9 +2,9 @@ table.stack
   thead
     tr
       th width='20%' Imię i nazwisko
-      th width='20%' E-mail
+      th width='20%' Number klubowy
       th width='10%' Telefon
-      th width='10%' Miasto
+      th width='10%' Ostatnia składka
       th width='20%' Sekcje
       th width='20%'
   tbody
@@ -12,9 +12,19 @@ table.stack
       tr
         td
           b = "#{profile.first_name} #{profile.last_name}"
-        td = profile.email
+        td = profile.kw_id
         td = profile.phone
-        td = profile.city
+        td
+          - if profile && profile.kw_id
+            - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :desc).last
+            - if fee
+              - if fee.year.to_i != Date.today.year.to_i
+                span.label.alert = fee.year
+              - else
+                - if fee.payment.paid?
+                  span.label.success = fee.year
+                - else
+                  span.label.warning = fee.year
         td = profile.sections.try(:to_sentence)
         td
           - if profile.accepted?
