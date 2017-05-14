@@ -21,7 +21,7 @@ table.stack
               - if fee.year.to_i != Date.today.year.to_i
                 span.label.alert = fee.year
               - else
-                - if fee.payment.paid?
+                - if fee.payment && fee.payment.paid?
                   span.label.success = fee.year
                 - else
                   span.label.warning = fee.year
