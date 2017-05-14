@@ -4,7 +4,7 @@ module Admin
 
     def index
       @q = Db::Profile.ransack(params[:q])
-      @q.sorts = ['kw_id desc', 'created_at desc'] if @q.sorts.empty?
+      @q.sorts = 'created_at desc' if @q.sorts.empty?
       @profiles_count = @q.result.count
       @profiles = @q.result.page(params[:page])
       @profiles = @profiles.where(accepted: false) unless params[:q]
