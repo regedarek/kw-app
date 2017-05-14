@@ -12,7 +12,7 @@ table.stack
         td
           = "#{fee.cost} zł"
         td
-          - if fee.payment.prepaid? || fee.payment.cash?
+          - if (fee.payment && fee.payment.prepaid?) || fee.payment.cash?
             span.label.success Zapłacone
           - else
             = link_to "Zapłać", charge_payment_path(fee.payment)
