@@ -69,7 +69,7 @@ module Importing
                if fee.valid?
                  fee.save
                  payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
-                 payment.update(cash: true)
+                 payment.update(cash: true, state: 'prepaid')
                end
              end
            else
@@ -80,7 +80,7 @@ module Importing
              if fee.valid?
                fee.save
                payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
-               payment.update(cash: true)
+               payment.update(cash: true, state: 'prepaid')
              else
              end
            end
