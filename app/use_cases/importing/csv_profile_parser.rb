@@ -2,7 +2,7 @@ module Importing
   class CsvProfileParser
     class << self
       REQUIRED_PROFILE_HEADERS = %w(
-        first_name last_name email phone birth_date birth_place pesel city postal_code main_address optional_address recommended_by acomplished_courses main_discussion_group sections
+        kw_id first_name last_name email phone birth_date birth_place pesel city postal_code main_address optional_address recommended_by acomplished_courses main_discussion_group sections date_of_death remarks application_date	profession added position accepted
       )
 
       def parse(file:)
@@ -30,11 +30,18 @@ module Importing
             postal_code: row['postal_code'],
             main_address: row['main_address'],
             optional_address: row['optional_address'],
-            recommended_by: row['recommended_by'],
+            recommended_by: row['recommended_by'].to_s.split(',').map(&:strip),
             acomplished_courses: row['acomplished_courses'].to_s.split(',').map(&:strip),
             main_discussion_group: row['main_discussion_group'],
             sections: row['sections'].to_s.split(',').map(&:strip),
-            kw_id: row['kw_id']
+            kw_id: row['kw_id'].blank? ? nil : row['kw_id'].to_i,
+            position: row['position'].to_s.split(',').map(&:strip),
+            date_of_death: row['date_of_death'],
+            remarks: row['remarks'],
+            application_date: row['application_date'],
+            profession: row['profession'],
+            added: row['added'],
+            accepted: row['accepted']
           )
 
           if parsed_object.invalid?
@@ -55,16 +62,27 @@ module Importing
         Importing::Profile.new(
           birth_date: row['birth_date'],
           birth_place: row['birth_place'],
+          phone: row['phone'],
           pesel: row['pesel'],
+          first_name: row['first_name'],
+          last_name: row['last_name'],
+          email: row['email'],
           city: row['city'],
           postal_code: row['postal_code'],
           main_address: row['main_address'],
           optional_address: row['optional_address'],
-          recommended_by: row['recommended_by'],
-          acomplished_course: row['acomplished_course'],
+          recommended_by: row['recommended_by'].to_s.split(',').map(&:strip),
+          acomplished_courses: row['acomplished_courses'].to_s.split(',').map(&:strip),
           main_discussion_group: row['main_discussion_group'],
-          section: row['section'],
-          kw_id: row['kw_id']
+          sections: row['sections'].to_s.split(',').map(&:strip),
+          kw_id: row['kw_id'].blank? ? nil : row['kw_id'].to_i,
+          position: row['position'].to_s.split(',').map(&:strip),
+          date_of_death: row['date_of_death'],
+          remarks: row['remarks'],
+          application_date: row['application_date'],
+          profession: row['profession'],
+          added: row['added'],
+          accepted: row['accepted']
         )
       end
 

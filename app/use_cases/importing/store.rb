@@ -91,8 +91,14 @@ module Importing
               main_discussion_group: parsed_data.main_discussion_group,
               sections: parsed_data.sections,
               kw_id: parsed_data.kw_id,
-              accepted: false
-            )
+              accepted: parsed_data.accepted,
+              date_of_death: parsed_data.date_of_death,
+              remarks: parsed_data.remarks,
+              application_date: parsed_data.application_date,
+              profession: parsed_data.profession,
+              added: parsed_data.added,
+              position: parsed_data.position
+           )
           end
         end
 

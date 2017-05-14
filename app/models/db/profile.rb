@@ -1,12 +1,15 @@
 module Db
   class Profile < ActiveRecord::Base
-    RECOMMENDED_BY = %w(google facebook friends festival poster)
+    RECOMMENDED_BY = %w(google facebook friends festival poster course)
     POSITION = %w(candidate regular honorable_kw honorable_pza management senior instructor canceled)
     SECTIONS = %w(snw sww stj gtw kts)
-    ACOMPLISHED_COURSES = %w(basic second second_winter cave ski list)
+    ACOMPLISHED_COURSES = %w(basic basic_kw basic_without_second second second_winter cave ski list blank)
 
     validates :email, uniqueness: true
 
+    ransacker :recommended_by do
+      Arel.sql("array_to_string(recommended_by, ',')")
+    end
     ransacker :position do
       Arel.sql("array_to_string(position, ',')")
     end

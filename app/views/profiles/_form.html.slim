@@ -71,7 +71,7 @@
     .large-12.columns
       .callout.primary
         = f.label :acomplished_courses
-        - Db::Profile::ACOMPLISHED_COURSES.each do |course|
+        - (Db::Profile::ACOMPLISHED_COURSES - ['blank', 'basic_without_second']).each do |course|
           = f.check_box :acomplished_courses, { multiple: true, checked: form.acomplished_courses.include?(course) }, course.to_sym, nil
           = f.label "profile_acomplished_courses_#{course}".to_sym
           br

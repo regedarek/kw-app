@@ -19,5 +19,12 @@ module Importing
     attribute :acomplished_courses, ArrayOf(:string)
     attribute :main_discussion_group, :string
     attribute :sections, ArrayOf(:string)
+    attribute :date_of_death, :string
+    attribute :remarks, :string
+    attribute :application_date, :string
+    attribute :profession, :string
+    attribute :added, :string
+    attribute :position, ArrayOf(:string)
+    attribute :accepted, :string
   end
 end
