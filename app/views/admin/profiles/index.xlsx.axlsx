@@ -34,7 +34,7 @@ wb.styles do |style|
       Db::Profile.human_attribute_name(attr)
     end
     sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
-    Db::Profile.all.each do |profile|
+    @results.each do |profile|
       profile_values = profile_attributes.map do |attr|
         profile.read_attribute(attr)
       end
