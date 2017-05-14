@@ -68,7 +68,7 @@
             td
               = fee.created_at.strftime("%d-%m-%Y")
             td.large-text-center
-              - if fee.payment.paid?
+              - if fee.payment && fee.payment.paid?
                 - if fee.payment.cash?
                   span.label.success gotówka
                 - else
