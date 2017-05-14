@@ -59,12 +59,31 @@ module Importing
       def store_membership_fee(parsed_objects)
         Db::Membership::Fee.transaction do
           parsed_objects.each do |parsed_data|
-           fee = Db::Membership::Fee.create(
-             year: parsed_data.year,
-             kw_id: parsed_data.kw_id
-           )
-           payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
-           payment.update(cash: true)
+           if parsed_data.pesel.present?
+             profile = Db::Profile.find_by(pesel: parsed_data.pesel)
+             if profile.present? && profile.kw_id.present?
+               fee = Db::Membership::Fee.new(
+                 year: parsed_data.year,
+                 kw_id: profile.kw_id
+               )
+               if fee.valid?
+                 fee.save
+                 payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
+                 payment.update(cash: true)
+               end
+             end
+           else
+             fee = Db::Membership::Fee.new(
+               year: parsed_data.year,
+               kw_id: parsed_data.kw_id
+             )
+             if fee.valid?
+               fee.save
+               payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
+               payment.update(cash: true)
+             else
+             end
+           end
           end
         end
 

@@ -2,7 +2,7 @@ module Importing
   class CsvMembershipFeeParser
     class << self
       REQUIRED_MEMBERSHIP_FEE_HEADERS = %w(
-        kw_id year
+        kw_id year pesel
       )
 
       def parse(file:)
@@ -19,8 +19,9 @@ module Importing
           end
 
           parsed_object = Importing::MembershipFee.new(
-            kw_id: row['kw_id'].to_i,
-            year: row['year'].to_i,
+            kw_id: row['kw_id'],
+            year: row['year'],
+            pesel: row['pesel']
           )
 
           if parsed_object.invalid?

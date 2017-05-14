@@ -9,16 +9,12 @@ module Admin
     attr_accessor :kw_id, :year
 
     validates :kw_id, :year, presence: { message: 'nie moze byc pusty'}
-    validate :check_user_existance, :check_uniqueness_of_year
+    validate :check_uniqueness_of_year
 
     def params
       HashWithIndifferentAccess.new(
         kw_id: kw_id, year: year
       )
-    end
-
-    def check_user_existance
-      errors.add(:kw_id, 'nie istnieje') unless user.present?
     end
 
     def check_uniqueness_of_year

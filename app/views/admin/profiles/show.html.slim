@@ -85,7 +85,7 @@
   .row
     .large-12.columns 
       b Główna grupa dyskusyjna: 
-      = I18n.t @profile.main_discussion_group
+      = @profile.main_discussion_group? ? 'Tak' : 'Nie'
 
   .row
     .large-12.columns 
@@ -116,6 +116,19 @@
       .large-12.columns 
         b Uwagi: 
         = @profile.remarks
+  
+  - if @profile.kw_id.present?
+    .row
+      .large-12.columns 
+        b Składki: 
+        - Db::Membership::Fee.where(kw_id: @profile.kw_id).order(year: :desc).each_with_index do |fee, i|
+          - if i == 0 && fee.year.to_i != Date.today.year.to_i
+            span.label.alert = fee.year
+          - else
+            - if fee.payment.paid?
+              span.label.success = fee.year
+            - else
+              span.label.warning = fee.year
 
   .row
     .large-12.columns

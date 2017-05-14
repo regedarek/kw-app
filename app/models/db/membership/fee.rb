@@ -5,6 +5,8 @@ module Db
       has_one :payment, as: :payable, dependent: :destroy
       belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
 
+      validates :kw_id, uniqueness: { scope: :year }
+
       def description
         if cost == 150
           "Składka członkowska za rok #{year} oraz opłata reaktywacyjna od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{kw_id}"

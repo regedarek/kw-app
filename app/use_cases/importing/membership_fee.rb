@@ -3,9 +3,10 @@ module Importing
     include ActiveModel::Model
     include AttributedObject::Strict
 
-    attribute :kw_id, :integer
-    attribute :year, :integer
+    attribute :kw_id, :string
+    attribute :year, :string
+    attribute :pesel, :string
 
-    validates :kw_id, :year, presence: true
+    validates :year, presence: true
   end
 end
