@@ -19,7 +19,7 @@ module Membership
           'brak' => other_ids
           }
       else
-        @fees = current_user.membership_fees
+        @fees = current_user.membership_fees.order(:year)
         @form = Membership::FeeForm.new(kw_id: current_user.kw_id)
       end
     end
