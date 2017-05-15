@@ -7,7 +7,3 @@ every 24.hours do
   rake :destroy_unpaid_reservations
   rake :set_regular_members
 end
-
-every 1.hour do
-  rake :fetch_events
-end
