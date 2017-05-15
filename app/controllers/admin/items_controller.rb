@@ -6,7 +6,7 @@ module Admin
   class ItemsController < Admin::BaseController
     def index
       @q = Db::Item.ransack(params[:q])
-      @q.sorts = 'rentable_id desc' if @q.sorts.empty?
+      @q.sorts = 'rentable_id asc' if @q.sorts.empty?
       @items = @q.result.page(params[:page])
     end
 
