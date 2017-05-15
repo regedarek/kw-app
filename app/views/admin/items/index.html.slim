@@ -9,6 +9,8 @@ column
         = form_for ::Admin::ItemsForm.new, url: admin_items_path do |f|
           = f.label :display_name, 'Nazwa'
           = f.text_field :display_name
+          = f.label :rentable_id, 'Numer'
+          = f.text_field :rentable_id
           = f.label :description, 'Opis'
           = f.text_area :description
           = f.label :cost, 'Koszt(zl)'
@@ -24,7 +26,7 @@ column
       = search_form_for @q, url: admin_items_path do |f|
         = f.search_field :display_name_or_description_cont, style: 'height: 55px;', placeholder: 'opis, nazwa'
 
-      table.responsive
+      table.stack
         thead
           tr
             th ID
