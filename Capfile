@@ -1,6 +1,5 @@
 # Load DSL and set up stages
 require "capistrano/setup"
-require "whenever/capistrano"
 
 # Include default deployment tasks
 require "capistrano/deploy"
@@ -43,3 +42,5 @@ set :rbenv_ruby, '2.4.1'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+
+require "whenever/capistrano"
