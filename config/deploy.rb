@@ -33,3 +33,6 @@ append :linked_files,  "config/database.yml", "config/secrets.yml"
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# capistrano
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
