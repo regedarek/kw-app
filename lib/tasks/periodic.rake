@@ -1,5 +1,9 @@
 desc "This task is called by the Heroku scheduler add-on"
 
+task :test_cron => :environment do
+  ProfileMailer.apply(Db::Profile.find_by(kw_id: 2345)).deliver_now
+end
+
 task :send_reminders => :environment do
   Admin::ReservationReminder.send_reminders
 end
