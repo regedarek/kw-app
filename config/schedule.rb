@@ -2,8 +2,12 @@ env :PATH, ENV['PATH']
 env :GEM_PATH, ENV['GEM_PATH']
 set :output, "cron_log.log"
 
-every 2.minutes do
-  rake :test_cron
-  rake "send_reminders"
-  rake "destroy_unpaid_reservations"
+every 24.hours do
+  rake :send_reminders
+  rake :destroy_unpaid_reservations
+  rake :set_regular_members
+end
+
+every 1.hour do
+  rake :fetch_events
 end
