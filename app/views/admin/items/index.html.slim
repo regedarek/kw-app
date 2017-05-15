@@ -1,6 +1,6 @@
 column
   .row
-    large-6.columns
+    .large-12.columns
       a data-open="new_item" class='button large expanded'  Dodaj nowy przedmiot
       #new_item.callout.reveal data-reveal=''
         button.close-button aria-label=("Close modal") data-close="" type="button" 
@@ -17,23 +17,24 @@ column
           = f.select :owner, Items::OwnerPresenter.to_options
           = f.label :name, 'Mozna wypozyczyc?'
           = f.check_box :rentable
+          br
           = f.submit 'Dodaj przedmiot', class: 'button'
 
-    large-6.columns
+    .large-12.columns
       = search_form_for @q, url: admin_items_path do |f|
         = f.search_field :display_name_or_description_cont, style: 'height: 55px;', placeholder: 'opis, nazwa'
 
-    table.responsive
-      thead
-        tr
-          th ID
-          th Nazwa
-          th Opis
-          th Koszt
-          th Wolno?
-          th Wlasnosc
-          th Akcje
-      tbody
-        - @items.each do |item|
-          tr.js-item-row= render 'admin/items/item_row', item: item
-    = paginate @items
+      table.responsive
+        thead
+          tr
+            th ID
+            th Nazwa
+            th Opis
+            th Koszt
+            th Wolno?
+            th Wlasnosc
+            th Akcje
+        tbody
+          - @items.each do |item|
+            tr.js-item-row= render 'admin/items/item_row', item: item
+      = paginate @items
