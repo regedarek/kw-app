@@ -239,7 +239,7 @@ Devise.setup do |config|
     { access_type: "offline",
     prompt: "consent",
     select_account: true,
-    scope: 'userinfo.email,calendar' }
+    scope: 'userinfo.email' }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
