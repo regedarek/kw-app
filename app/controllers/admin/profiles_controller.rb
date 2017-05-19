@@ -50,13 +50,16 @@ module Admin
         user.save
         profile.update(
           kw_id: accept_params.fetch(:kw_id),
-          application_date: accept_params.fetch(:application_date),
-          accepted: true
+          application_date: accept_params.fetch(:application_date)
         )
         user.send_reset_password_instructions
         if profile.payment.present? && profile.payment.paid?
-          fee = Db::Membership::Fee.create(year: profile.application_date.year, kw_id: profile.kw_id)
-          fee.create_payment(dotpay_id: SecureRandom.hex(13), cash: true, state: 'prepaid')
+          fee = Db::Membership::Fee.create(
+            year: profile.application_date.year,
+            kw_id: profile.kw_id,
+            payment: profile.payment
+          )
+          profile.update(accepted: true)
         end
 
         redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano'
