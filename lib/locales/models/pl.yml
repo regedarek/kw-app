@@ -44,11 +44,11 @@ pl:
         profile_recommended_by_festival: na Festiwalu Górskim
         profile_recommended_by_poster: z ulotek
         profile_recommended_by_course: na kursie
-        profile_acomplished_courses_basic_kw: Podstawowy kurs wspinaczki w skałkach ukończony w klubie.
-        profile_acomplished_courses_basic_without_second: Podstawowy kurs wspinaczki w skałkach bez promocji na tatrzański.
+        profile_acomplished_courses_basic_kw: Podstawowy kurs wspinaczki w skałkach (program PZA) z promocją na kurs taternicki, ukończony w KW Kraków.
+        profile_acomplished_courses_basic_without_second: Podstawowy kurs wspinaczki w skałkach bez promocji na taternicki.
+        profile_acomplished_courses_basic: Podstawowy kurs wspinaczki w skałkach (program PZA) z promocją na kurs taternicki, ukończony w innej szkole wspinania.
         profile_acomplished_courses_blank: Brak podstawowego kursu wspinaczki w skałkach.
-        profile_acomplished_courses_basic: Podstawowy kurs wspinaczki w skałkach.
-        profile_acomplished_courses_second: Kurs taternicki.
+        profile_acomplished_courses_second: Kurs letni taternicki.
         profile_acomplished_courses_second_winter: Kurs zimowy taternicki.
         profile_acomplished_courses_cave: Kurs taternictwa jaskiniowego.
         profile_acomplished_courses_ski: Kurs narciarstwa wysokogórskiego.
@@ -138,11 +138,11 @@ pl:
         profile_recommended_by_festival: na Festiwalu Górskim
         profile_recommended_by_poster: z ulotek
         profile_recommended_by_course: na kursie
-        profile_acomplished_courses_basic_kw: Podstawowy kurs wspinaczki w skałkach ukończony w klubie.
-        profile_acomplished_courses_basic_without_second: Podstawowy kurs wspinaczki w skałkach bez promocji na tatrzański.
+        profile_acomplished_courses_basic_kw: Podstawowy kurs wspinaczki w skałkach (program PZA) z promocją na kurs taternicki, ukończony w KW Kraków.
+        profile_acomplished_courses_basic_without_second: Podstawowy kurs wspinaczki w skałkach bez promocji na taternicki.
+        profile_acomplished_courses_basic: Podstawowy kurs wspinaczki w skałkach (program PZA) z promocją na kurs taternicki, ukończony w innej szkole wspinania.
         profile_acomplished_courses_blank: Brak podstawowego kursu wspinaczki w skałkach.
-        profile_acomplished_courses_basic: Podstawowy kurs wspinaczki w skałkach.
-        profile_acomplished_courses_second: Kurs taternicki.
+        profile_acomplished_courses_second: Kurs letni taternicki.
         profile_acomplished_courses_second_winter: Kurs zimowy taternicki.
         profile_acomplished_courses_cave: Kurs taternictwa jaskiniowego.
         profile_acomplished_courses_ski: Kurs narciarstwa wysokogórskiego.
