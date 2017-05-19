@@ -7,7 +7,7 @@ module Db
 
     has_one :payment, as: :payable, dependent: :destroy
 
-    validates :email, uniqueness: true
+    validates :email, uniqueness: true, allow_nil: true
 
     ransacker :recommended_by do
       Arel.sql("array_to_string(recommended_by, ',')")
