@@ -1,7 +1,7 @@
 module Db
   module Mas
     class SignUp < ActiveRecord::Base
-      PRICES = { kw: 30, standard: 60 }
+      PRICES = { kw: 40, standard: 70 }
       self.table_name = 'mas_sign_ups'
       enum gender_1: [:male, :female], _suffix: :one
       enum gender_2: [:male, :female], _suffix: :two
