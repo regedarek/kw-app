@@ -4,8 +4,8 @@
       thead
         tr
           th Zespół
+          th width='30%' Kto?
           th =t('.table_organization')
-          th =t('.table_city')
           th Płatność
       tbody
         - sign_ups.each_with_index do |sign_up, i|
@@ -13,9 +13,9 @@
             td
               = sign_up.name
             td
-              = [sign_up.organization_1, sign_up.organization_2].select(&:present?).compact.join('/')
+              = "#{sign_up.first_name_1} #{sign_up.last_name_1.to_s.first}. oraz #{sign_up.first_name_2} #{sign_up.last_name_2.to_s.first}."
             td
-              = [sign_up.city_1, sign_up.city_2].select(&:present?).compact.join('/')
+              = [sign_up.organization_1, sign_up.organization_2].select(&:present?).compact.join('/')
             td
               - if sign_up.payment.prepaid?
                 span.label.success zapłacono
