@@ -2,6 +2,13 @@
   .large-12.columns
     = form_for @profile, as: :profile, url: admin_profile_path(params[:id]), method: :put do |f|
       .row
+        .large-4.columns
+          = f.submit class: 'button large expanded'
+        .large-4.columns
+          = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button large expanded warning'
+        .large-4.columns
+          = link_to 'wróć', admin_profiles_path, class: 'button large expanded secondary'
+      .row
         .medium-6.columns
           = f.label :kw_id
           = f.text_field :kw_id
@@ -28,7 +35,7 @@
       .row
         .medium-4.columns
           = f.label :birth_place
-          = f.date_field :birth_place
+          = f.text_field :birth_place
         .medium-4.columns
           = f.label :pesel
           = f.text_field :pesel
@@ -95,10 +102,4 @@
         .medium-12.columns
           = f.label :remarks
           = f.text_area :remarks
-      .row
-        .large-4.columns
-          = f.submit class: 'button large expanded'
-        .large-4.columns
-          = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button large expanded warning'
-        .large-4.columns
-          = link_to 'wróć', admin_profiles_path, class: 'button large expanded secondary'
+
