@@ -14,8 +14,7 @@ table.stack
         td
           = I18n.localize event.event_date, format: :long
         td
-          - if user_signed_in?
-            = link_to event.name, event_path(event)
+          = link_to event.name, event_path(event)
         - if user_signed_in? && current_user.admin?
           td.text-center
             = link_to admin_event_path(event), method: :delete do

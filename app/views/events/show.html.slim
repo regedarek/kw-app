@@ -15,7 +15,7 @@
       - if @event.google_group_discussion_url.present?
         = link_to 'link do watku na grupie dyskusyjnej', @event.google_group_discussion_url, target: :_blank
         br
-      - if @event.application_list_url.present?
+      - if @event.application_list_url.present? && user_signed_in?
         = link_to 'link do zapisow', @event.application_list_url, target: :_blank
         br
       - if @event.event_rules_url.present?
