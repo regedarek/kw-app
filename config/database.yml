@@ -1,25 +1,13 @@
-default: &default
-  pool: 5
-  timeout: 5000
+development: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= ENV['PGUSER'] %>
-  password: <%= ENV['PGPASSWORD'] %>
-
-staging:
-  <<: *default
-  host: <%= ENV['PGHOST'] %>
-  database: <%= ENV['PGDATABASE'] %>
-
-production:
-  <<: *default
-  host: <%= ENV['PGHOST'] %>
-  database: <%= ENV['PGDATABASE'] %>
-
-development:
-  <<: *default
-  database: kw-app_development
+  database: myapp_development
+  pool: 5
+  username: postgres
+  password:
+  host: db
 
 test:
   <<: *default
-  database: kw-app_test
+  database: myapp_test
+
