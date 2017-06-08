@@ -28,7 +28,7 @@
 
           = f.label :remarks, 'Opis'
           = f.text_area :remarks
-          - if @reservation.payment.present? && @reservation.payment.cash?
+          - if @reservation.payment.present? && @reservation.payment.prepaid?
             - if @reservation.archived?
               span class='label warning'
                 | Zarchiwizowano
