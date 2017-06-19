@@ -7,6 +7,11 @@
       = @event.place
       br
 
+      - if @event.description.present?
+        b Opis:  
+        = @event.description
+        br
+
       - if @event.event_date.present?
         b Data wydarzenia:  
         = I18n.localize @event.event_date, format: :long
