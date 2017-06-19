@@ -28,12 +28,20 @@
 
           = f.label :remarks, 'Opis'
           = f.text_area :remarks
-          - if @reservation.payment.present? && @reservation.payment.cash?
+          - if @reservation.payment.present? && @reservation.payment.prepaid?
             - if @reservation.archived?
               span class='label warning'
                 | Zarchiwizowano
-            span class='label success'
-              | Zapłacono gotówką
+            - else
+              - if @reservation.payment.present? && @reservation.payment.prepaid?
+                span class='label success'
+                  | online
+              - elsif @reservation.payment.present? && @reservation.payment.cash?
+                span class='label success'
+                  | gotówka
+              - else
+                span class='label warning'
+                  | oczekuje
           - else
             = link_to 'Oznacz jako zapłacone gotówką', charge_admin_reservation_path(@reservation), method: :put, class: 'button success'
           br

@@ -11,6 +11,7 @@
       = f.select :owner, Db::Item.owners, selected: Db::Item.owners[@item.owner]
       = f.label :owner, 'Wypożyczalne?'
       = f.check_box :rentable
+      br
       = f.label :description, 'Opis'
       = f.text_area :description
       = f.submit 'Zaktualizuj przedmiot', class: 'button'
