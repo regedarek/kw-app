@@ -5,7 +5,7 @@ table.stack
       th width='20%' Number klubowy
       th width='10%' Telefon
       th width='10%' Ostatnia składka
-      th width='20%' Sekcje
+      th width='20%' Status
       th width='20%'
   tbody
     - profiles.each_with_index do |profile, i|
@@ -25,7 +25,7 @@ table.stack
                   span.label.success = fee.year
                 - else
                   span.label.warning = fee.year
-        td = profile.sections.try(:to_sentence)
+        td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td
           - if profile.accepted?
             = link_to 'Zobacz', admin_profile_path(profile.id)
