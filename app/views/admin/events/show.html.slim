@@ -20,6 +20,7 @@
       = (@event.event_date + 1.hour).strftime('%H:%M')
       br
       b Opis: 
+      = @event.description
       br
       b Adres URL strony z biletami: 
       = @event.application_list_url
