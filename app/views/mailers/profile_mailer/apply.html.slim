@@ -17,7 +17,7 @@ ul
 - if @profile.payment.present?
   br
   br
-  = link_to 'opłać wpisowe(50zł) oraz składkę(100zł)', charge_payment_url(@profile.payment.id)
+  = link_to 'opłać wpisowe oraz składkę', charge_payment_url(@profile.payment.id)
 br
 br
 | Po spełnieniu wszystkich formalności zostaniesz poinformowany mailowo o przyjęciu Cię do grona członków KW Kraków i możliwości odbioru legitymacji. 

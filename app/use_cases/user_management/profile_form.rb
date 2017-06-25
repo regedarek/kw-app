@@ -23,6 +23,12 @@ module UserManagement
               :city, :postal_code, :acomplished_courses, :phone, :main_address, presence: true
     validates :terms_of_service, acceptance: true
 
+    validate :email_uniq
+
+    def email_uniq
+      errors.add(:email, "zostało już zajęte") if Db::Profile.exists?(email: email)
+    end
+
     def self.model_name
       ActiveModel::Name.new(self, nil, "UserManagementProfileForm")
     end

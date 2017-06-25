@@ -21,8 +21,9 @@ module UserManagement
           main_discussion_group: form.main_discussion_group,
           sections: form.sections,
           position: ['candidate'],
-          cost: UserManagement::ApplicationCost.for(profile: form)
+          cost: UserManagement::ApplicationCost.for(profile: form).sum
         )
+        byebug
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
         ProfileMailer.apply(profile).deliver_later
         return Success.new

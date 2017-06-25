@@ -134,7 +134,7 @@
     .row
       .large-12.columns 
         b Opłacono wpisowe oraz składkę?: 
-        = @profile.payment.paid? ? 'Tak' : 'Nie'
+        = @profile.payment.paid? ? "Tak #{@profile.cost}" : 'Nie'
 
   .row
     .large-12.columns
