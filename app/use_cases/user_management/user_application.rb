@@ -23,7 +23,6 @@ module UserManagement
           position: ['candidate'],
           cost: UserManagement::ApplicationCost.for(profile: form).sum
         )
-        byebug
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
         ProfileMailer.apply(profile).deliver_later
         return Success.new

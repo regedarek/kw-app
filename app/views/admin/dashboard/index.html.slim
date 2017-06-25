@@ -47,12 +47,6 @@
             = route.partners
 
   .large-4.columns
-    h3 5 ostatnich zapisów
-    table.stack
-      - Db::Mas::SignUp.order('created_at  DESC NULLS LAST').limit(5).each do |sign_in|
-        tr
-          td
-            = "#{sign_in.first_name_1} #{sign_in.last_name_1} oraz #{sign_in.first_name_2} #{sign_in.last_name_2}"
 
   .large-4.columns
     h3 5 ostatnich zgłoszeń
