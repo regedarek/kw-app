@@ -25,11 +25,7 @@ module Db
     belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
 
     def description
-      if acomplished_courses.include?('basic_kw')
-        "Składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
-      else
-        "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
-      end
+      "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
     end
   end
 end
