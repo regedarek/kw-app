@@ -3,7 +3,7 @@ module Db
     RECOMMENDED_BY = %w(google facebook friends festival poster course)
     POSITION = %w(candidate regular honorable_kw honorable_pza management senior instructor canceled stj)
     SECTIONS = %w(snw sww stj gtw kts)
-    ACOMPLISHED_COURSES = %w(basic basic_kw basic_without_second second second_winter cave ski list blank)
+    ACOMPLISHED_COURSES = %w(basic basic_kw basic_without_second second second_winter cave ski list blank instructors other_club)
 
     has_one :payment, as: :payable, dependent: :destroy
 
@@ -23,14 +23,6 @@ module Db
     end
 
     belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
-
-    def cost
-      if acomplished_courses.include?('basic_kw')
-        100
-      else
-        150
-      end
-    end
 
     def description
       if acomplished_courses.include?('basic_kw')

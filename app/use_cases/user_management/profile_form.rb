@@ -1,3 +1,5 @@
+require 'form_object'
+
 module UserManagement
   class ProfileForm < FormObject
     attribute :first_name, :string

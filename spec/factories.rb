@@ -49,4 +49,16 @@ module Factories
       Db::Order.create!(load_fixture('orders')[attrs.fetch('id', 1) - 1].merge(attrs))
     end
   end
+
+  class Profile
+    def self.create!(attrs = {})
+      Db::Profile.create!(load_fixture('profiles')[attrs.fetch('id', 1) - 1].merge(attrs))
+    end
+
+    def self.build_form(attrs = {})
+      ::UserManagement::ProfileForm.new(
+        load_fixture('profiles')[0].merge(attrs)
+      )
+    end
+  end
 end

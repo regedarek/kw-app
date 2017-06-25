@@ -1,0 +1,21 @@
+{
+  "profiles": [
+    {
+      "first_name": "Darek",
+      "last_name": "Finster",
+      "email": "darek.finster@gmail.com",
+      "phone": "777777777",
+      "birth_date": "1986-12-13",
+      "birth_place": "Poznan",
+      "city": "Berlin",
+      "pesel": 83838383883,
+      "postal_code": "31-634",
+      "main_address": "warzywna",
+      "optional_address": "",
+      "recommended_by": ["poster", "facebook"],
+      "acomplished_courses": ["basic"],
+      "main_discussion_group": true,
+      "sections": ["sww"]
+    }
+  ]
+}

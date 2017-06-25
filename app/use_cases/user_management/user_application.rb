@@ -20,7 +20,8 @@ module UserManagement
           acomplished_courses: form.acomplished_courses,
           main_discussion_group: form.main_discussion_group,
           sections: form.sections,
-          position: ['candidate']
+          position: ['candidate'],
+          cost: UserManagement::ApplicationCost.for(profile: form)
         )
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
         ProfileMailer.apply(profile).deliver_later
