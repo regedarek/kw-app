@@ -12,6 +12,12 @@
               - else
                 = Db::User.maximum(:kw_id)
             .large-3.columns
+              b = "Opłacone #{Date.today.year - 1}: "
+              = UserManagement::FeeScope.for(year: Date.today.year - 1)
+            .large-3.columns
+              b = "Opłacone #{Date.today.year}: "
+              = UserManagement::FeeScope.for(year: Date.today.year)
+            .large-3.columns
               b Ilość znalezionych: 
               = @profiles_count
   .row
