@@ -133,8 +133,12 @@
   - if @profile.payment.present?
     .row
       .large-12.columns 
-        b Opłacono wpisowe oraz składkę?: 
-        = @profile.payment.paid? ? "Tak #{@profile.cost}" : 'Nie'
+        - if @profile.payment.paid?
+          .callout.success
+            = "Opłacono wpisowe i składkę za rok bieżący w kwocie: #{@profile.cost}"
+        - else
+          .callout.warning
+            = "Nie opłacono jeszcze wpisowego i składki"
 
   .row
     .large-12.columns
