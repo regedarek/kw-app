@@ -61,4 +61,19 @@ module Factories
       )
     end
   end
+
+  module Membership
+    class Fee
+      def self.create!(attrs = {})
+        fee = Db::Membership::Fee.create!(load_fixture('membership_fees')[attrs.fetch('id', 1) - 1].merge(attrs.except(:state, :cash)))
+        fee.create_payment(dotpay_id: SecureRandom.hex(13), cash: attrs.fetch(:cash, false), state: attrs.fetch(:state, 'prepaid'))
+      end
+
+      def self.mass_create!(range: (1..20), cash: true, state: 'prepaid')
+        range.step(1) do |i|
+          Factories::Membership::Fee.create!(state: state, cash: cash, year: [2014, 2015, 2016, 2017].sample, kw_id: i)
+        end
+      end
+    end
+  end
 end

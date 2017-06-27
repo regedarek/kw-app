@@ -31,6 +31,9 @@ gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'
 gem 'chronic'
+group :development, :staging do
+  gem 'faker'
+end
 
 group :development do
   gem 'brakeman', require: false
