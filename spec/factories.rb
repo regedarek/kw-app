@@ -71,7 +71,7 @@ module Factories
 
       def self.mass_create!(range: (1..20), cash: true, state: 'prepaid')
         range.step(1) do |i|
-          Factories::Membership::Fee.create!(state: state, cash: cash, year: [2014, 2015, 2016, 2017].sample, kw_id: i)
+          Factories::Membership::Fee.create!(state: state, cash: cash, year: [2013, 2014, 2015].sample, kw_id: i)
         end
       end
     end

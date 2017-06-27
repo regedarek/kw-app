@@ -19,7 +19,7 @@
               = UserManagement::FeeScope.for(year: Date.today.year)
             .large-3.columns
               b Ilość znalezionych: 
-              = @profiles_count
+              = @q.result.count
   .row
     .large-12.columns
       .callout
@@ -96,11 +96,11 @@
               = f.label :main_discussion_group_true, 'Główna grupa'
               = f.select :main_discussion_group_true, [nil, ['Tak', true], ['Nie', 'false']]
             .large-2.columns
-              = f.label :user_membership_fees_year_eq, 'Składka za rok'
-              = f.search_field :user_membership_fees_year_eq
+              = f.label :membership_fees_year_eq, 'Składka za rok'
+              = f.search_field :membership_fees_year_eq
             .large-2.columns
-              = f.label :user_membership_fees_payment_state_eq, 'Płatność'
-              = f.select :user_membership_fees_payment_state_eq, [nil, ['opłacone', 'prepaid'], ['nieopłacone', 'unpaid']]
+              = f.label :membership_fees_payment_state_eq, 'Płatność'
+              = f.select :membership_fees_payment_state_eq, [nil, ['opłacone', 'prepaid'], ['nieopłacone', 'unpaid']]
             .large-2.columns
               br
               = link_to 'Exportuj', admin_profiles_path(params.permit!.merge(format: "xlsx")), class: 'secondary button expanded'

@@ -4,6 +4,7 @@ module Db
       self.table_name = 'membership_fees'
       has_one :payment, as: :payable, dependent: :destroy
       belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
+      belongs_to :profile, foreign_key: :kw_id, primary_key: :kw_id
 
       validates :kw_id, uniqueness: { scope: :year }
 

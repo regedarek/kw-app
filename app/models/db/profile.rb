@@ -6,6 +6,8 @@ module Db
     ACOMPLISHED_COURSES = %w(basic basic_kw basic_without_second second second_winter cave ski list blank instructors other_club)
 
     has_one :payment, as: :payable, dependent: :destroy
+    has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'
+    belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
 
     validates :email, uniqueness: true, allow_nil: true
 
@@ -21,8 +23,6 @@ module Db
     ransacker :acomplished_courses do
       Arel.sql("array_to_string(acomplished_courses, ',')")
     end
-
-    belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
 
     def description
       "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
