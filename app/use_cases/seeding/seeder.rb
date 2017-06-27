@@ -65,7 +65,7 @@ module Seeding
         end
         Db::User.destroy_all
         Db::Profile.where(kw_id: (81..100)).each do |profile|
-          user = Db::User.create!(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
+          user = Db::User.new(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
           user.password = "test#{profile.id}"
           user.save
         end
@@ -112,7 +112,7 @@ module Seeding
         )
         user2.password = "test"
         user2.save
-        user3 = Db::User.create(
+        user3 = Db::User.new(
           first_name: 'Dariusz',
           last_name: 'Finster',
           email: 'dariusz.finster@gmail.com',
