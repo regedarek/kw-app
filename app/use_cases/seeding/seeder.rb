@@ -8,7 +8,8 @@ module Seeding
         Factories::Membership::Fee.mass_create!(range: (1..20), state: 'prepaid', cash: false)
         Factories::Membership::Fee.mass_create!(range: (21..40), state: 'unpaid', cash: true)
         Factories::Membership::Fee.mass_create!(range: (41..50), state: 'unpaid', cash: false)
-        Factories::Membership::Fee.mass_create!(range: (51..70), state: 'prepaid', cash: true)
+        Factories::Membership::Fee.mass_create!(range: (51..80), state: 'prepaid', cash: true)
+        Factories::Membership::Fee.mass_create!(range: (81..100), state: 'prepaid', cash: false)
         Db::Profile.destroy_all
         (1..80).step(1) do |i|
           profile = Factories::Profile.create!(
