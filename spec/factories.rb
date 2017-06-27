@@ -53,7 +53,6 @@ module Factories
   class Profile
     def self.create!(attrs = {})
       profile = Db::Profile.create!(load_fixture('profiles')[attrs.fetch('id', 1) - 1].merge(attrs))
-      profile.create_payment(dotpay_id: SecureRandom.hex(13))
     end
 
     def self.build_form(attrs = {})

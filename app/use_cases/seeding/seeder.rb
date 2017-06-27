@@ -11,7 +11,7 @@ module Seeding
         Factories::Membership::Fee.mass_create!(range: (51..70), state: 'prepaid', cash: true)
         Db::Profile.destroy_all
         (1..80).step(1) do |i|
-          Factories::Profile.create!(
+          profile = Factories::Profile.create!(
             first_name: Faker::Name.first_name,
             last_name: Faker::Name.last_name,
             email: Faker::Internet.unique.email,
@@ -34,9 +34,10 @@ module Seeding
             main_address: Faker::Address.street_address,
             optional_address: Faker::Address.secondary_address
           )
+          profile.create_payment(dotpay_id: SecureRandom.hex(13))
         end
         (81..100).step(1) do |i|
-          Factories::Profile.create!(
+          profile = Factories::Profile.create!(
             first_name: Faker::Name.first_name,
             last_name: Faker::Name.last_name,
             email: Faker::Internet.unique.email,
@@ -59,6 +60,7 @@ module Seeding
             main_address: Faker::Address.street_address,
             optional_address: Faker::Address.secondary_address
           )
+          profile.create_payment(dotpay_id: SecureRandom.hex(13), cash: false, state: 'prepaid')
         end
         Db::User.destroy_all
         Db::Profile.where(id: (81..100)).each do |profile|
