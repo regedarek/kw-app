@@ -17,6 +17,19 @@ class ProfilesController < ApplicationController
     @filename = "Zgloszenie_#{@profile.first_name}_#{@profile.last_name}.pdf"
   end
 
+  def reactivation
+    @reactivation_form = UserManagement::ReactivationForm.new
+  end
+
+  def reactivate
+    @reactivation_form = UserManagement::ReactivationForm.build_cleaned(profile_params)
+    
+    result = UserManagement::Reactivate.call(form: @reactivation_form)
+    result.success { redirect_to root_path, notice: t('.success') }
+    result.invalid { |form:| render :reactivation, form: @reactivation_form }
+    result.else_fail!
+  end
+
   private
 
   def profile_params

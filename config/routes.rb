@@ -27,7 +27,12 @@ Rails.application.routes.draw do
   end
 
   resources :events, only: [:index, :show], path: 'wydarzenia'
-  resources :profiles, only: [:index, :new, :create, :show]
+  resources :profiles, only: [:index, :new, :create, :show] do
+    collection do
+      get :reactivation
+      put :reactivate
+    end
+  end
 
   resources :auctions do
     member do
@@ -105,6 +110,7 @@ Rails.application.routes.draw do
   get 'mas' => 'mas/sign_ups#new'
   get 'zarezerwuj' => 'reservations#new', as: :reserve
   get 'zgloszenie' => 'profiles#new'
+  get 'reaktywacja' => 'profiles#reactivation'
   get 'przejscia' => 'activities/mountain_routes#index'
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
