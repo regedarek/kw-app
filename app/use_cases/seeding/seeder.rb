@@ -65,7 +65,9 @@ module Seeding
         end
         Db::User.destroy_all
         Db::Profile.where(id: (81..100)).each do |profile|
-          Db::User.create!(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone, password: "test#{profile.id}")
+          user = Db::User.create!(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
+          user.password = "test#{profile.id}"
+          user.save
         end
         Factories::Profile.create!(
           first_name: 'Dariusz',
@@ -90,33 +92,36 @@ module Seeding
           main_address: Faker::Address.street_address,
           optional_address: Faker::Address.secondary_address
         )
-        Db::User.create(
+        user = Db::User.new(
           first_name: 'Małgorzata',
           last_name: 'Kozak',
           email: 'm.kozak1980@gmail.com',
           kw_id: 1720,
           phone: Faker::PhoneNumber.cell_phone,
-          admin: true,
-          password: 'test'
+          admin: true
         )
-        Db::User.create(
+        user.password = "test"
+        user.save
+        user = Db::User.new(
           first_name: 'Bartłomiej',
           last_name: 'Klimas',
           email: 'klimas.bartlomiej@gmail.com',
           kw_id: 1720,
           phone: Faker::PhoneNumber.cell_phone,
-          admin: true,
-          password: 'test'
+          admin: true
         )
-        Db::User.create(
+        user.password = "test"
+        user.save
+        user= Db::User.create(
           first_name: 'Dariusz',
           last_name: 'Finster',
           email: 'dariusz.finster@gmail.com',
           kw_id: 2345,
           phone: Faker::PhoneNumber.cell_phone,
           admin: true,
-          password: 'test'
         )
+        user.password = "test"
+        user.save
         Db::Item.destroy_all
         (1..10).step(1) do |n|
           Factories::Item.create!(id: n, display_name: Faker::Commerce.product_name, owner: ['snw', 'kw'].sample)
