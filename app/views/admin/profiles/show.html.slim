@@ -149,16 +149,17 @@
       - if @profile.accepted?
         span.label.success Zaakceptowano
       - else
-        = form_for :profile, url: accept_admin_profile_path(@profile.id), method: :put do |f|
-          .input-group
-            span.input-group-label
-              | Numer członkowski
-            = f.number_field :kw_id, class: 'input-group-field', value: Db::User.maximum(:kw_id) + 1
-            span.input-group-label
-              | Data wstąpienia
-            = f.date_field :application_date, class: 'input-group-field', value: Date.today
-            .input-group-button
-              = f.submit 'Nadaj i utwórz konto', class: 'button'
+        - if @profile.payment.prepaid?
+          = form_for :profile, url: accept_admin_profile_path(@profile.id), method: :put do |f|
+            .input-group
+              span.input-group-label
+                | Numer członkowski
+              = f.number_field :kw_id, class: 'input-group-field', value: Db::User.maximum(:kw_id) + 1
+              span.input-group-label
+                | Data wstąpienia
+              = f.date_field :application_date, class: 'input-group-field', value: Date.today
+              .input-group-button
+                = f.submit 'Nadaj i utwórz konto', class: 'button'
 
     .large-4.columns
       .text-right
