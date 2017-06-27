@@ -69,9 +69,9 @@ module Factories
         fee.create_payment(dotpay_id: SecureRandom.hex(13), cash: attrs.fetch(:cash, false), state: attrs.fetch(:state, 'prepaid'))
       end
 
-      def self.mass_create!(range: (1..20), cash: true, state: 'prepaid')
+      def self.mass_create!(range: (1..20), years: [2013, 2014, 2015], cash: true, state: 'prepaid')
         range.step(1) do |i|
-          Factories::Membership::Fee.create!(state: state, cash: cash, year: [2013, 2014, 2015].sample, kw_id: i)
+          Factories::Membership::Fee.create!(state: state, cash: cash, year: years.sample, kw_id: i)
         end
       end
     end
