@@ -16,7 +16,10 @@
 
   .row
     .large-4.columns
-      - if @fees.any?
-        = render 'table', fees: @fees
+      - if user_signed_in? && current_user.profile && (current_user.profile.position.include?('senior') || current_user.profile.position.include?('honorable_kw'))
+        | Jesteś zwolniony z płacenia składek.
       - else
-        | Nie masz opłaconych składek
+        - if @fees.any?
+          = render 'table', fees: @fees
+        - else
+          | Nie masz opłaconych składek
