@@ -64,7 +64,7 @@ module Seeding
           profile.create_payment(dotpay_id: SecureRandom.hex(13), cash: false, state: 'prepaid')
         end
         Db::User.destroy_all
-        Db::Profile.where(id: (81..100)).each do |profile|
+        Db::Profile.where(kw_id: (81..100)).each do |profile|
           user = Db::User.create!(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
           user.password = "test#{profile.id}"
           user.save
@@ -92,7 +92,7 @@ module Seeding
           main_address: Faker::Address.street_address,
           optional_address: Faker::Address.secondary_address
         )
-        user = Db::User.new(
+        user1 = Db::User.new(
           first_name: 'Małgorzata',
           last_name: 'Kozak',
           email: 'm.kozak1980@gmail.com',
@@ -100,9 +100,9 @@ module Seeding
           phone: Faker::PhoneNumber.cell_phone,
           admin: true
         )
-        user.password = "test"
-        user.save
-        user = Db::User.new(
+        user1.password = "test"
+        user1.save
+        user2 = Db::User.new(
           first_name: 'Bartłomiej',
           last_name: 'Klimas',
           email: 'klimas.bartlomiej@gmail.com',
@@ -110,9 +110,9 @@ module Seeding
           phone: Faker::PhoneNumber.cell_phone,
           admin: true
         )
-        user.password = "test"
-        user.save
-        user= Db::User.create(
+        user2.password = "test"
+        user2.save
+        user3 = Db::User.create(
           first_name: 'Dariusz',
           last_name: 'Finster',
           email: 'dariusz.finster@gmail.com',
@@ -120,8 +120,8 @@ module Seeding
           phone: Faker::PhoneNumber.cell_phone,
           admin: true,
         )
-        user.password = "test"
-        user.save
+        user3.password = "test"
+        user3.save
         Db::Item.destroy_all
         (1..10).step(1) do |n|
           Factories::Item.create!(id: n, display_name: Faker::Commerce.product_name, owner: ['snw', 'kw'].sample)
