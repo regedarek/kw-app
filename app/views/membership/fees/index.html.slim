@@ -3,22 +3,24 @@
     .large-12.columns
       h3 Twoje składki
 
-  .row
-    .large-12.columns
-      .callout.warning
-        | Informacje o składkach i przywróceniu członkowstwa w klubie znajdziesz 
-        = link_to 'na naszej stronie', 'http://kw.krakow.pl/o-klubie/czlonkowskie/skladki.html'
-        | .
-
-  .row
-    .large-4.columns
-      = render 'form', form: @form
-
-  .row
-    .large-4.columns
-      - if user_signed_in? && current_user.profile && (current_user.profile.position.include?('senior') || current_user.profile.position.include?('honorable_kw'))
+  - if user_signed_in? && current_user.profile && (current_user.profile.position.include?('senior') || current_user.profile.position.include?('honorable_kw'))
+    .row
+      .large-12.columns
         | Jesteś zwolniony z płacenia składek.
-      - else
+  - else
+    .row
+      .large-12.columns
+        .callout.warning
+          | Informacje o składkach i przywróceniu członkowstwa w klubie znajdziesz 
+          = link_to 'na naszej stronie', 'http://kw.krakow.pl/o-klubie/czlonkowskie/skladki.html'
+          | .
+
+    .row
+      .large-4.columns
+        = render 'form', form: @form
+
+    .row
+      .large-4.columns
         - if @fees.any?
           = render 'table', fees: @fees
         - else
