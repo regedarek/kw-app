@@ -2,9 +2,16 @@ version: '3'
 services:
   db:
     image: postgres
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    links:
+      - mailcatcher
     volumes:
       - .:/myapp
     ports:
@@ -12,3 +19,4 @@ services:
     depends_on:
       - db
     stdin_open: true
+    tty: true

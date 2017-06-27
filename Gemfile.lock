@@ -189,10 +189,6 @@ GEM
       addressable
       faraday
       json (>= 1.8)
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    letter_opener (1.4.1)
-      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -389,7 +385,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   koala
-  letter_opener
   omniauth-google-oauth2
   pg
   prawn-rails
