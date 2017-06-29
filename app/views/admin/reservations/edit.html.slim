@@ -42,8 +42,6 @@
               - else
                 span class='label warning'
                   | oczekuje
-          - else
-            = link_to 'Oznacz jako zapłacone gotówką', charge_admin_reservation_path(@reservation), method: :put, class: 'button success'
           br
           br
           = f.submit 'Zaktualizuj rezerwacje', class: 'button'
