@@ -38,7 +38,7 @@ class Db::Reservation < ActiveRecord::Base
   end
 
   def description
-    "Rezerwacja ##{id} dla #{user.display_name}"
+    "Wypożyczenie sprzętu sportowego ##{id} przez #{user.display_name} o nr legitymacji klubowej: #{user.kw_id}"
   end
 
   def when
