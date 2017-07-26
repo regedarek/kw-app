@@ -31,6 +31,7 @@ gem 'koala'
 gem 'prawn-rails'
 gem 'chronic'
 gem 'dry-struct'
+gem 'dry-validation'
 group :development, :staging do
   gem 'faker'
 end
