@@ -30,6 +30,7 @@ gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'
 gem 'chronic'
+gem 'dry-struct'
 group :development, :staging do
   gem 'faker'
 end
