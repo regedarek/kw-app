@@ -39,6 +39,11 @@
           = f.check_box :hidden
           = f.label :hidden
 
+    .row
+      .large-12.columns
+        = f.label :partners
+        = f.text_field :partners
+
   .callout.primary
     .row
       .large-4.columns
@@ -52,11 +57,6 @@
       .large-4.columns
         = f.label :area
         = f.text_field :area
-
-    .row
-      .large-12.columns
-        = f.label :partners
-        = f.text_field :partners
 
   .callout.secondary
     .row
