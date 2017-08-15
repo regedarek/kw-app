@@ -44,8 +44,8 @@ table.stack
         - if user_signed_in?
           - if current_user.admin? || current_user.id == route.user_id
             td.text-center
-              i.fi-list-thumbnails data-toggle="example-dropdown-1" data-auto-focus="true"
-              #example-dropdown-1.dropdown-pane data-dropdown=""
+              i.fi-list-thumbnails data-toggle="example-dropdown-#{route.id}" data-auto-focus="true"
+              div id="example-dropdown-#{route.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical
-                  li= link_to 'Edytuj', edit_activities_mountain_route_path(route)
+                  li= link_to 'Edytuj', edit_activities_mountain_route_path(route.id)
                   li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete
