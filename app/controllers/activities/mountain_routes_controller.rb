@@ -1,7 +1,7 @@
 module Activities
   class MountainRoutesController < ApplicationController
     def index
-      @q = Db::Activities::MountainRoute.ransack(params[:q])
+      @q = Db::Activities::MountainRoute.where(hidden: false).ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
       @routes = @q.result.includes(:user).page(params[:page])
 
