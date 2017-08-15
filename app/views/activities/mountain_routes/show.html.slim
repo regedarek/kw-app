@@ -35,8 +35,10 @@
 
   .large-12.columns
     b skład zespołu: 
-    - if @route.colleagues.any?
+    - if @route.partners.present? && @route.colleagues.any?
       = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+    - elsif @route.colleagues.any?
+      = @route.colleagues.map(&:display_name).to_sentence
     - else
       = @route.partners
 

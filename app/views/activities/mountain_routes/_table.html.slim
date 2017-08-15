@@ -37,8 +37,10 @@ table.stack
             - route.rating.times do
               i.fi-star
         td
-          - if route.colleagues.any?
+          - if route.partners.present? && route.colleagues.any?
             = [route.partners, route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+          - elsif route.colleagues.any?
+            = route.colleagues.map(&:display_name).to_sentence
           - else
             = route.partners
         - if user_signed_in?
