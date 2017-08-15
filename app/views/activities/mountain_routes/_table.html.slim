@@ -29,14 +29,7 @@ table.stack
         td = route.mountains
         td = truncate(route.area, length: 25)
         td = truncate(route.peak, length: 25)
-        td
-          - if user_signed_in?
-            - if current_user.admin? || current_user.id == route.user_id
-              = link_to route.name, edit_activities_mountain_route_path(route)
-            - else
-              = link_to route.name, activities_mountain_route_path(route)
-          - else
-            = link_to route.name, activities_mountain_route_path(route)
+        td = link_to route.name, activities_mountain_route_path(route)
         td
           = route.difficulty
         td
@@ -45,7 +38,10 @@ table.stack
               i.fi-star
         td = route.partners
         - if user_signed_in?
-          td
-            - if current_user.admin? || current_user.id == route.user_id
-              = link_to activities_mountain_route_path(route), method: :delete do
-                i.fi-trash
+          - if current_user.admin? || current_user.id == route.user_id
+            td.text-center
+              i.fi-list-thumbnails data-toggle="example-dropdown-1" data-auto-focus="true"
+              #example-dropdown-1.dropdown-pane data-dropdown=""
+                ul.menu.vertical
+                  li= link_to 'Edytuj', edit_activities_mountain_route_path(route)
+                  li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete
