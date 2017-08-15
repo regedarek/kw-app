@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require foundation-datepicker
+//= require rails-jquery-tokeninput
 //= require kw_app
 //= require_tree .
 

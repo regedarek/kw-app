@@ -7,7 +7,6 @@ html lang="en"
     title == content_for?(:title) ? yield(:title) : t('title')
 
     = stylesheet_link_tag "application"
-
     = csrf_meta_tag
 
   body

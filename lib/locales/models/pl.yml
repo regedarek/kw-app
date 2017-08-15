@@ -156,7 +156,8 @@ pl:
       db/activities/mountain_route:
         name: nazwa drogi/zjazdu/tury
         difficulty: wycena
-        partners: skład zespołu
+        partners: skład zespołu spoza klubu
+        colleagues_names: koledzy z klubu
         hidden: Nie publikuj tego przejścia
         description: uwagi
         time: czas przejscia

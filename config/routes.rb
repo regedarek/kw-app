@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
 
   namespace :api do
+    resources :users, only: [:index]
     resources :payments, only: [] do
       collection do
         post :status

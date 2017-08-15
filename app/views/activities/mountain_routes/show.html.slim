@@ -35,7 +35,10 @@
 
   .large-12.columns
     b skład zespołu: 
-    = @route.partners
+    - if @route.colleagues.any?
+      = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+    - else
+      = @route.partners
 
   - if @route.time?
     .large-12.columns
@@ -52,6 +55,10 @@
       b subiektywna ocena: 
       - @route.rating.times do
         i.fi-star
+
+  .large-12.columns
+    b ukryj na stronie przejść: 
+    = @route.hidden? ? 'Tak' : 'Nie'
 
   .large-12.columns
     hr

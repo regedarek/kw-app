@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815104741) do
+ActiveRecord::Schema.define(version: 20170815145349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,11 @@ ActiveRecord::Schema.define(version: 20170815104741) do
     t.date     "end_date"
     t.text     "remarks"
     t.boolean  "canceled",   default: false
+  end
+
+  create_table "route_colleagues", force: :cascade do |t|
+    t.integer "colleague_id"
+    t.integer "mountain_route_id"
   end
 
   create_table "strzelecki_sign_ups", force: :cascade do |t|

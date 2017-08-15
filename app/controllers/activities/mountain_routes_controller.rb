@@ -15,6 +15,7 @@ module Activities
     end
 
     def new
+      return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
       @route = Db::Activities::MountainRoute.new
     end
     
@@ -62,7 +63,7 @@ module Activities
     private
 
     def route_params
-      params.require(:route).permit(:route_type, :peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating, :hidden)
+      params.require(:route).permit(:route_type, :peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating, :hidden, colleagues_names: [])
     end
   end
 end
