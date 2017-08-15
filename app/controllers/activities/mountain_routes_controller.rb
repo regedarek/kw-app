@@ -3,7 +3,7 @@ module Activities
     def index
       @q = Db::Activities::MountainRoute.where(hidden: false).ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
-      @routes = @q.result.includes(:user).page(params[:page])
+      @routes = @q.result.includes(:user).page(params[:page]).uniq
 
       respond_to do |format|
         format.html
