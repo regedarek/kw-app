@@ -1,3 +1,6 @@
+.callout.warning
+  = t('.activities_top_info')
+
 = form_for @route, as: :route, url: url, html: { class: 'js-routes-form' },  method: method do |f|
   .row
     .large-12.columns
@@ -9,66 +12,75 @@
 
   .row
     .large-12.columns
-      .callout
-        = f.collection_radio_buttons :route_type, Db::Activities::MountainRoute.route_types, :first, :first, { selected: @route.route_type } do |b|
-          = b.label do
-            = b.radio_button + I18n.t(b.text)
-        end
+      fieldset.fieldset
+        legend Wybierz aktywność 
 
-  .row
-    .large-12.columns
-      = f.label :mountains
-      = f.text_field :mountains
+        = f.radio_button :route_type, :regular_climbing
+        = f.label :route_type_regular_climbing
 
-  .row
-    .large-12.columns
-      = f.label :name
-      = f.text_field :name
+        = f.radio_button :route_type, :winter_climbing
+        = f.label :route_type_winter_climbing
 
-  .row
-    .large-12.columns
-      = f.label :peak
-      = f.text_field :peak
+        = f.radio_button :route_type, :ski
+        = f.label :route_type_ski
 
-  .row
-    .large-12.columns
-      = f.label :area
-      = f.text_field :area
+  .callout.success
+    .row
+      .large-6.columns
+        = f.label :name
+        = f.text_field :name
 
-  .row
-    .large-12.columns
-      = f.label :difficulty
-      = f.text_field :difficulty
+      .large-3.columns
+        = f.label :climbing_date
+        = f.date_field :climbing_date, value: @route.climbing_date
 
-  .row
-    .large-12.columns
-      = f.label :time
-      = f.text_field :time
+      .large-3.columns
+        div style='margin-top: 30px'
+          = f.check_box :hidden
+          = f.label :hidden
 
-  .row
-    .large-12.columns
-      = f.label :length
-      = f.text_field :length
+  .callout.primary
+    .row
+      .large-4.columns
+        = f.label :mountains
+        = f.text_field :mountains
 
-  .row
-    .large-12.columns
-      = f.label :partners
-      = f.text_field :partners
+      .large-4.columns
+        = f.label :peak
+        = f.text_field :peak
 
-  .row
-    .large-12.columns
-      = f.label :climbing_date
-      = f.date_field :climbing_date, value: @route.climbing_date
+      .large-4.columns
+        = f.label :area
+        = f.text_field :area
 
-  .row
-    .large-12.columns
-      = f.label :description, 'uwagi dotyczące przejścia, topo, link do galerii zdjęć'
-      = f.text_area :description
+    .row
+      .large-12.columns
+        = f.label :partners
+        = f.text_field :partners
+
+  .callout.secondary
+    .row
+      .large-4.columns
+        = f.label :difficulty
+        = f.text_field :difficulty
+
+      .large-4.columns
+        = f.label :time
+        = f.text_field :time
+
+      .large-4.columns
+        = f.label :length
+        = f.text_field :length
+
+    .row
+      .large-12.columns
+        = f.label :description, 'uwagi dotyczące przejścia, topo, link do galerii zdjęć'
+        = f.text_area :description
 
   .row
     .large-12.columns
       fieldset.fieldset
-        .legend subiektywna ocena urody drogi/zjazdu/tury
+        legend.legend subiektywna ocena urody drogi/zjazdu/tury
 
         = f.radio_button :rating, 1
         = f.label :rating_one
@@ -81,4 +93,4 @@
 
   .row
     .large-12.columns
-      = f.submit class: 'large expanded button'
+      = f.button 'Dodaj przejście', class: 'large expanded button'

@@ -8,7 +8,6 @@ table.stack
         th width='15%' = sort_link(@q, :peak, 'szczyt, przełęcz')
         th width='20%' = sort_link(@q, :name, 'nazwa drogi/zjazdu')
         th width='2%' wycena
-        th width='5%' = sort_link(@q, :length, 'długość')
         th width='5%' = sort_link(@q, :rating, 'ocena')
         th width='15%' = sort_link(@q, :partners, 'skład zespołu')
         th width='5%'
@@ -20,7 +19,6 @@ table.stack
         th szczyt, przełęcz, ściana
         th nazwa drogi/zjazdu
         th wycena
-        th długość
         th ocena
         th skład zespołu
         th
@@ -41,8 +39,6 @@ table.stack
             = link_to route.name, activities_mountain_route_path(route)
         td
           = route.difficulty
-        - unless params[:route_type] == 'ski'
-          td = route.length
         td
           - if route.rating.present?
             - route.rating.times do

@@ -157,6 +157,7 @@ pl:
         name: nazwa drogi/zjazdu/tury
         difficulty: wycena
         partners: skład zespołu
+        hidden: Nie publikuj tego przejścia
         description: uwagi
         time: czas przejscia
         climbing_date: data przejscia
@@ -168,6 +169,9 @@ pl:
         rating_one: fuj, nie polecam
         rating_two: warta przejścia
         rating_three: piękna droga
+        route_type_regular_climbing: Letnie wspinanie
+        route_type_winter_climbing: Zimowe wspinanie
+        route_type_ski: Narciarstwo Wysokogórskie
         topo: topo drogi(link)
       db/mas/sign_up:
         name: Nazwa zespołu(bądźcie kreatywni!)
