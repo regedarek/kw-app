@@ -1,13 +1,14 @@
 class ReservationsController < ApplicationController
   def index
-    redirect_to reservations_path, alert: 'Czasowo wypożyczalnia online została zamknięta'
+    redirect_to new_reservation_path, alert: 'Czasowo wypożyczalnia online została zamknięta'
    #guarded_date = Guards::Date.new(date: params[:start_date])
    #return redirect_to reservations_path(start_date: guarded_date.nearest_thursday) unless guarded_date.thursday?
    #@available_items = Availability::Items.new(start_date: params[:start_date]).collect
   end
 
   def availability
-    redirect_to reservations_path(start_date: params.fetch('availability_form').fetch('start_date'))
+    redirect_to new_reservation_path, alert: 'Czasowo wypożyczalnia online została zamknięta'
+    #redirect_to reservations_path(start_date: params.fetch('availability_form').fetch('start_date'))
   end
 
   def create
