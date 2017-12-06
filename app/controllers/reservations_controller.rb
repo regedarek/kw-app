@@ -8,9 +8,9 @@ class ReservationsController < ApplicationController
   end
 
   def availability
-    redirect_to new_reservation_path, alert: 'Czasowo wypożyczalnia online została zamknięta' unless current_user.admin?
+    redirect_to new_reservation_path, alert: 'Czasowo wypożyczalnia online została zamknięta, wypożyczamy na miejscu w klubie zapisując w zeszycie i płacąc gotówką' unless current_user.admin?
 
-    redirect_to reservations_path(start_date: params.fetch('availability_form').fetch('start_date'))
+    #redirect_to reservations_path(start_date: params.fetch('availability_form').fetch('start_date'))
   end
 
   def create
