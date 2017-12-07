@@ -5,12 +5,14 @@ module Reservations
     class << self
       def create(user:, form:)
         return Failure.new(:form_invalid, form: form) unless form.valid?
+        return Failure.new(:user_has_to_be_present) unless user.present?
+
         if (items_reserved_in_period(form.start_date) & form.item_ids).any?
           return Failure.new(:item_already_reserved, form: form)
         end
 
         reservation = Db::Reservation
-          .where(start_date: form.start_date)
+          .where(start_date: form.start_date, user_id: user.id)
           .not_prepaid
           .not_cash
           .first_or_initialize(form.attributes)

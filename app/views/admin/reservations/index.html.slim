@@ -16,10 +16,10 @@
           tr
             th width='5%' = sort_link(@q, :id, 'Nr')
             th width='15%' Kto?
-            th width='25%' Przedmioty
+            th width='20%' Przedmioty
             th width='5%' Koszt
             th width='15%' = sort_link(@q, :start_date, 'Kiedy?')
-            th width='5%' = sort_link(@q, :payment_state, 'Płatność')
+            th width='10%' = sort_link(@q, :payment_state, 'Płatność')
             th width='12%'= sort_link(@q, :state, 'Status')
             th width='20%'
         tbody
@@ -54,6 +54,9 @@
                 - if reservation.holding?
                   span class='label warning'
                     | w posiadaniu
+                - if reservation.archived?
+                  span class='label secondary'
+                    | zarchiwizowane
               td
                 - if reservation.holding? && !reservation.archived?
                   = link_to 'Zarchiwizuj ', archive_admin_reservation_path(reservation.id), method: :put

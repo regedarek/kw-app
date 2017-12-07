@@ -2,7 +2,7 @@ module Admin
   class ReservationsController < Admin::BaseController
     def index
       @q = Db::Reservation.ransack(params[:q])
-      @reservations = @q.result.where.not(state: 'archived').includes(:user, :items).page(params[:page])
+      @reservations = @q.result.includes(:user, :items).page(params[:page])
 
       respond_to do |format|
         format.html
