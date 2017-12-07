@@ -11,6 +11,10 @@
 
   .row
     .large-12.columns
+      - if params[:archived]
+        = link_to 'Pokaż tylko aktywne', admin_reservations_path
+      - else
+        = link_to 'Pokaż tylko archiwizowane', admin_reservations_path(archived: true)
       table.stack
         thead
           tr
