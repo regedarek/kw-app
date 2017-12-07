@@ -33,14 +33,11 @@
               = f.label :year_eq, 'Rok'
               = f.search_field :year_eq
             .large-4.columns
-              = f.label :payment_cash_true, 'Gotówka'
-              = f.select :payment_cash_true, [nil, ['Tak', true], ['Nie', 'false']]
-            .large-4.columns
               = f.label :payment_state_eq, 'Status'
               = f.select :payment_state_eq, [nil, ['opłacone', 'prepaid'], ['nieopłacone', 'unpaid']]
-          .row.show-for-small-only
-            .large-12.columns
-              = f.submit 'Szukaj', class: 'button expanded large'
+            .large-4.columns
+              br
+              = f.submit 'Szukaj', class: 'button expanded bottom'
             
 .row
   .large-12.columns
@@ -70,11 +67,11 @@
             td.large-text-center
               - if fee.payment && fee.payment.paid?
                 - if fee.payment.cash?
-                  span.label.success gotówka
+                  span.label.success inna
                 - else
-                  span.label.success przelew
+                  span.label.success dotpay
               - else
-                span.label.warning brak
+                span.label.warning nie opłacono
             td.large-text-center = fee.cost
             td.large-text-center
               = link_to admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' } do
