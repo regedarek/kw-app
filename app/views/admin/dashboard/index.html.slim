@@ -18,17 +18,17 @@
   .large-4.columns
     h3 5 ostatnich rezerwacji
     table.stack
-      - Db::Reservation.order('created_at').limit(5).each do |reservation|
+      - Db::Reservation.order(created_at: :desc).limit(5).each do |reservation|
         tr
           td
             = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
           td
-            = reservation.items.map(&:display_name).to_sentence
+            = link_to reservation.items.map(&:display_name).to_sentence, edit_admin_reservation_path(reservation.id)
 
   .large-4.columns
     h3 5 ostatnich skladek
     table.stack
-      - Db::Membership::Fee.order('created_at  DESC NULLS LAST').limit(5).each do |payment|
+      - Db::Membership::Fee.order(created_at: :desc).includes(:payment).where(payments: { state: 'prepaid'}).limit(5).each do |payment|
         tr
           td
             = payment.year
@@ -36,17 +36,17 @@
             = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
 
 .row
-  .large-4.columns
+  .large-8.columns
     h3 5 ostatnich przejść
     table.stack
       - Db::Activities::MountainRoute.order(created_at: :desc).limit(5).each do |route|
         tr
+          td width='20%'
+            = route.climbing_date
+          td
+            = [route.partners, route.colleagues.map(&:display_name).to_sentence].join(', ')
           td
             = route.name
-          td
-            = route.partners
-
-  .large-4.columns
 
   .large-4.columns
     h3 5 ostatnich zgłoszeń
