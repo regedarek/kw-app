@@ -3,17 +3,19 @@
     table.responsive
       thead
         tr
+          th ID
           th Nazwa
           th Opis
           th Instruktor
           th Koszt
       tbody
-        - courses.each_with_index do |course, i|
+        - courses.each_with_index do |course|
           tr
-            td= i + 1
+            td= course.id
             td
-              = course.title
+              = link_to course.title, training_course_path(course)
             td
               = course.description
+            td = course.instructor
             td
               = course.cost

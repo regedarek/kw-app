@@ -12,7 +12,15 @@ Rails.application.routes.draw do
   end
 
   namespace :training do
-    resources :courses
+    resources :courses do
+      member do
+        get :new_participant
+        post :add_participant
+      end
+      collection do
+        get :thanks
+      end
+    end
   end
 
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}

@@ -5,6 +5,7 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :instructor
       t.integer :cost, null: false
+      t.timestamps
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214150317) do
+ActiveRecord::Schema.define(version: 20171214154432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,12 @@ ActiveRecord::Schema.define(version: 20171214150317) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string  "title",       null: false
-    t.text    "description"
-    t.string  "instructor"
-    t.integer "cost",        null: false
+    t.string   "title",       null: false
+    t.text     "description"
+    t.string   "instructor"
+    t.integer  "cost",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -126,6 +128,23 @@ ActiveRecord::Schema.define(version: 20171214150317) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.boolean  "hidden",        default: false, null: false
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "email",                       null: false
+    t.string   "phone"
+    t.string   "prefered_time",  default: [],              array: true
+    t.text     "equipment",      default: [],              array: true
+    t.string   "height"
+    t.text     "recommended_by", default: [],              array: true
+    t.integer  "kw_id"
+    t.integer  "course_id",                   null: false
+    t.date     "birth_date"
+    t.string   "birth_place"
+    t.string   "pre_cost"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "payments", force: :cascade do |t|
