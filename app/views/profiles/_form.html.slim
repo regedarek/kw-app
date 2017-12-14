@@ -46,25 +46,21 @@
     .large-12.columns
       .callout.primary
         .row
-          .large-2.columns
+          .large-4.columns
+            = f.label :optional_address, 'Ulica i numer domu'
+            = f.text_field :optional_address
+
+          .large-4.columns
             = f.label :city
             = f.text_field :city
 
-          .large-2.columns
+          .large-4.columns
             = f.label :postal_code
             = f.text_field :postal_code
 
-          .large-4.columns
-            = f.label :main_address
-            = f.text_field :main_address
-
-          .large-4.columns
-            = f.label :optional_address
-            = f.text_field :optional_address
-
   .row
     .large-6.columns
-      = f.check_box :main_discussion_group
+      = f.check_box :main_discussion_group, checked: true
       = f.label :main_discussion_group
 
   .row
