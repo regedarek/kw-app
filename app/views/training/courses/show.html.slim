@@ -1,8 +1,11 @@
 .row
   .columns
     .row
-      .large-12.columns
+      .large-6.columns
         = link_to 'Kursy', training_courses_path, class: 'button large expanded'
+
+      .large-6.columns
+        = link_to 'Nowe zgłoszenie', new_participant_training_course_path(@course), class: 'button large expanded'
 
     .row
       .large-12.columns

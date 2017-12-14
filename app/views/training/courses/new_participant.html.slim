@@ -1,6 +1,8 @@
 .row
   .columns
     .row
+      h3 = @course.title
+    .row
       = form_for @participant, as: :participant, url: add_participant_training_course_path do |f|
         .row
           .large-12.columns
@@ -13,22 +15,20 @@
         .callout.primary
           .row
             .large-12.columns
-              = f.label :full_name, 'Nazwa'
+              = f.label :full_name, 'Imię i nazwisko'
               = f.text_field :full_name
 
           .row
-            .large-9.columns
+            .large-4.columns
               = f.label :email, 'Email'
               = f.text_field :email
 
-            .large-3.columns
+            .large-4.columns
               = f.label :phone, 'Telefon'
-              = f.number_field :phone
+              = f.text_field :phone
 
-          .row
-            .large-12.columns
+            .large-4.columns
               = f.label :height, 'Wysokość'
-              = f.text_area :height
-
+              = f.number_field :height
 
         = f.submit 'Zgłaszam się', class: 'button expanded large'
