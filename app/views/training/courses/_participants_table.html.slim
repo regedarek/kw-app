@@ -9,6 +9,7 @@
           th Wysokość
           th Data urodzenia
           th Miejsce urodzenia
+          th Ekwipunek
       tbody
         - participants.each_with_index do |participant|
           tr
@@ -18,3 +19,4 @@
             td= participant.height
             td= participant.birth_date
             td= participant.birth_place
+            td= participant.equipment.to_sentence

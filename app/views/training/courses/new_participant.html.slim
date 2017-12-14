@@ -14,9 +14,13 @@
 
         .callout.primary
           .row
-            .large-12.columns
+            .large-6.columns
               = f.label :full_name, 'Imię i nazwisko'
               = f.text_field :full_name
+
+            .large-6.columns
+              = f.label :kw_id, 'Number klubowy(jeśli jesteś członkiem klubu)'
+              = f.text_field :kw_id
 
           .row
             .large-4.columns
@@ -30,5 +34,22 @@
             .large-4.columns
               = f.label :height, 'Wysokość'
               = f.number_field :height
+
+        .row
+          .large-6.columns
+            .callout.secondary
+              = f.label :recommended_by
+              - Training::Db::ParticipantRecord::RECOMMENDED_BY.each do |place|
+                = f.check_box :recommended_by, { multiple: true, checked: @participant.recommended_by.include?(place) }, place.to_sym, nil
+                = f.label "participant_recommended_by_#{place}".to_sym
+              br
+
+          .large-6.columns
+            .callout.secondary
+              = f.label :equipment
+              - Training::Db::ParticipantRecord::EQUIPMENT.each do |place|
+                = f.check_box :recommended_by, { multiple: true, checked: @participant.equipment.include?(place) }, place.to_sym, nil
+                = f.label "participant_equipment_#{place}".to_sym
+              br
 
         = f.submit 'Zgłaszam się', class: 'button expanded large'
