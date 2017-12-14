@@ -168,4 +168,4 @@
       .text-right
         = link_to 'edytuj', edit_admin_profile_path(@profile.id), class: 'button alert'
         = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button warning'
-        = link_to 'powrót', admin_profiles_path, class: 'button secondary'
+        = link_to 'powrót', :back, class: 'button secondary'
