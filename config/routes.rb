@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     resources :mountain_routes
   end
 
+  namespace :training do
+    resources :courses
+  end
+
   get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
 
   namespace :api do

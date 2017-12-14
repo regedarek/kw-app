@@ -1,0 +1,19 @@
+.row
+  .columns
+    table.responsive
+      thead
+        tr
+          th Nazwa
+          th Opis
+          th Instruktor
+          th Koszt
+      tbody
+        - courses.each_with_index do |course, i|
+          tr
+            td= i + 1
+            td
+              = course.title
+            td
+              = course.description
+            td
+              = course.cost

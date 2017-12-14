@@ -1,0 +1,37 @@
+.row
+  .columns
+    .row
+      = link_to 'Kursy', training_courses_path, class: 'button warning expanded large'
+
+    .row
+      = form_for @course, as: :course, url: training_courses_path do |f|
+        .row
+          .large-12.columns
+            - if @course.errors.any?
+              .callout.alert
+                ul
+                  - @course.errors.full_messages.each do |msg|
+                    li= msg
+
+        .callout.primary
+          .row
+            .large-12.columns
+              = f.label :title, 'Nazwa'
+              = f.text_field :title
+
+          .row
+            .large-9.columns
+              = f.label :instructor, 'Instruktor'
+              = f.text_field :instructor
+
+            .large-3.columns
+              = f.label :cost, 'Koszt'
+              = f.number_field :cost
+
+          .row
+            .large-12.columns
+              = f.label :description, 'Opis'
+              = f.text_area :description
+
+
+        = f.submit 'Utwórz', class: 'button expanded large'

@@ -1,0 +1,9 @@
+.row
+  .columns
+    .row
+      .large-12.columns
+        = link_to 'Nowy kurs', new_training_course_path, class: 'button large expanded'
+
+    .row
+      .large-12.columns
+        = render 'training/courses/table', courses: @courses
