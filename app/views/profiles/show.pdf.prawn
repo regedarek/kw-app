@@ -57,8 +57,6 @@ prawn_document do |pdf|
       pdf.text "1." + 'Fotografie 3,5 cm x 4,5 cm - 2 szt.', indent_paragraphs: 10, size: 9
       pdf.move_down 3
       pdf.text "2." + 'Świadectwo ukończenia kursu.', indent_paragraphs: 10, size: 9
-      pdf.move_down 3
-      pdf.text "3." + 'Informacje dodatkowe.', indent_paragraphs: 10, size: 9
     end
   end
 

@@ -15,6 +15,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Db::Profile.find(params[:id])
     @filename = "Zgloszenie_#{@profile.first_name}_#{@profile.last_name}.pdf"
+    return redirect_to root_path, alert: 'Musisz być administratorem!' unless current_user.admin? || current_user.email == @profile.email
   end
 
   def reactivation
