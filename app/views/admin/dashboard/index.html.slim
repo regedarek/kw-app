@@ -44,7 +44,7 @@
           td width='20%'
             = route.climbing_date
           td
-            = [route.partners, route.colleagues.map(&:display_name).to_sentence].join(', ')
+            = [route.partners, route.colleagues.map(&:display_name).to_sentence].to_sentence
           td
             = route.name
 
