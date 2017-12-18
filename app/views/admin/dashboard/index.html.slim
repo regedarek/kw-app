@@ -18,13 +18,12 @@
   .large-4.columns
     h3 5 ostatnich rezerwacji
     table.stack
-      - Db::Reservation.order(created_at: :desc).limit(5).each do |reservation|
+      - Db::Reservation.all.limit(5).sort_by(&:created_at).reverse!.each do |reservation|
         tr
           td
             = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
           td
             = link_to reservation.items.map(&:display_name).to_sentence, edit_admin_reservation_path(reservation.id)
-
   .large-4.columns
     h3 5 ostatnich skladek
     table.stack

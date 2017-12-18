@@ -9,7 +9,9 @@
         = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
 
     - if current_user.reservations.any?
-      = render 'reservations/table', reservations: current_user.reservations.not_archived
+      .row
+        .large-12.columns
+          = render 'reservations/table', reservations: current_user.reservations.not_archived
 
     - if false
       .row

@@ -20,7 +20,7 @@ module UserManagement
     attribute :terms_of_service, :boolean, default: false
 
     validates :first_name, :last_name, :email, :pesel, :birth_date, :birth_place,
-              :city, :postal_code, :acomplished_courses, :phone, :main_address, presence: true
+              :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
     validate :birth_date_is_to_young
     validate :email_uniq
