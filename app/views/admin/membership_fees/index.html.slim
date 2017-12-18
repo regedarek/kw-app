@@ -57,9 +57,15 @@
           tr
             td = fee.kw_id
             td
-              = fee.user.try(:first_name)
+              - if fee.user
+                = fee.user.first_name
+              - else
+                = Db::Profile.find_by(kw_id: fee.kw_id).try(:first_name)
             td
-              = fee.user.try(:last_name)
+              - if fee.user
+                = fee.user.last_name
+              - else
+                = Db::Profile.find_by(kw_id: fee.kw_id).try(:last_name)
             td
               = fee.year
             td
