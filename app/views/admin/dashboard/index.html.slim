@@ -40,7 +40,7 @@
     table.stack
       - Db::Activities::MountainRoute.order(created_at: :desc).limit(5).each do |route|
         tr
-          td width='20%'
+          td width='14%'
             = route.climbing_date
           td
             = route.colleagues.map(&:display_name).compact.push(route.partners).reject(&:empty?).to_sentence
