@@ -18,7 +18,7 @@
   .large-4.columns
     h3 5 ostatnich rezerwacji
     table.stack
-      - Db::Reservation.all.limit(5).sort_by(&:created_at).reverse!.each do |reservation|
+      - Db::Reservation.all.sort_by(&:created_at).reverse!.take(5).each do |reservation|
         tr
           td
             = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
