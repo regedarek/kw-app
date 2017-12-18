@@ -2,32 +2,26 @@ table.stack
   thead
     - if @q.present?
       tr
-        th width='10%' = sort_link(@q, :climbing_date, 'kiedy?')
-        th width='8%' = sort_link(@q, :mountains, 'góry')
-        th width='15%' = sort_link(@q, :area, 'rejon/dolina')
+        th width='8%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='15%' = sort_link(@q, :peak, 'szczyt, przełęcz')
         th width='20%' = sort_link(@q, :name, 'nazwa drogi/zjazdu')
         th width='2%' wycena
-        th width='5%' = sort_link(@q, :rating, 'ocena')
-        th width='15%' = sort_link(@q, :partners, 'skład zespołu')
-        th width='5%'
+        th width='2%' = sort_link(@q, :rating, 'ocena')
+        th width='27%' = sort_link(@q, :partners, 'skład zespołu')
+        th width='3%'
     - else
       tr
-        th width='10%' kiedy?
-        th width='8%' góry
-        th width='15%' rejon/dolina
+        th width='8%' kiedy?
         th width='15%' szczyt, przełęcz
         th width='20%' nazwa drogi/zjazdu
         th width='2%' wycena
-        th width='5%' ocena
-        th width='15%' skład zespołu
-        th width='5%'
+        th width='2%' ocena
+        th width='27%' skład zespołu
+        th width='3%'
   tbody
     - routes.each do |route|
       tr
         td = route.climbing_date
-        td = route.mountains
-        td = truncate(route.area, length: 25)
         td = truncate(route.peak, length: 25)
         td = link_to route.name, activities_mountain_route_path(route)
         td
@@ -37,12 +31,7 @@ table.stack
             - route.rating.times do
               i.fi-star
         td
-          - if route.partners.present? && route.colleagues.any?
-            = [route.partners, route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
-          - elsif route.colleagues.any?
-            = route.colleagues.map(&:display_name).to_sentence
-          - else
-            = route.partners
+          = route.colleagues.map(&:display_name).compact.push(route.partners).reject(&:empty?).to_sentence
         - if user_signed_in?
           - if current_user.admin? || current_user.id == route.user_id
             td.text-center
