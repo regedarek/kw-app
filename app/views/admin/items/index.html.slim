@@ -29,12 +29,12 @@ column
       table.stack
         thead
           tr
-            th ID
+            th = sort_link(@q, :id, 'ID')
             th Nazwa
             th Opis
             th Koszt
-            th Wolno?
-            th Wlasnosc
+            th = sort_link(@q, :rentable, 'Wolno?')
+            th = sort_link(@q, :owner, 'Własność')
             th Akcje
         tbody
           - @items.each do |item|
