@@ -1,5 +1,7 @@
 module Activities
   class MountainRoutesController < ApplicationController
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
+
     def index
       @q = Db::Activities::MountainRoute.where(hidden: false).ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
