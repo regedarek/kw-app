@@ -1,3 +1,5 @@
+require 'attributed_object'
+
 module Importing
   class User
     include ActiveModel::Model

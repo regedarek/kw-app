@@ -1,3 +1,5 @@
+require 'attributed_object'
+
 module UserManagement
   class Cost
     include ActiveModel::Model

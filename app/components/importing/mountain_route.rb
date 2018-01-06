@@ -1,3 +1,5 @@
+require 'attributed_object'
+
 module Importing
   class MountainRoute
     include ActiveModel::Model

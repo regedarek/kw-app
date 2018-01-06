@@ -24,9 +24,9 @@ module Events
       private
 
       def create_record
-        Events::Admin::Competition::Create.new(
+        Events::Admin::Competitions::Create.new(
           Events::Repositories::Competitions.new,
-          Events::Forms::CreateForm.new
+          Events::Admin::Competitions::CreateForm.new
         ).call(raw_inputs: competition_params)
       end
 

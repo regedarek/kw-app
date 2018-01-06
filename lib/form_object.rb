@@ -1,5 +1,6 @@
 require 'active_model'
 require 'input_cleaner'
+require 'attributed_object'
 
 class FormObject
   include ActiveModel::Model # for validations
