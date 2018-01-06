@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :mountain_routes
   end
 
+  load Rails.root.join("app/components/events/routes.rb")
+
   namespace :training do
     resources :courses do
       member do
@@ -90,7 +92,6 @@ Rails.application.routes.draw do
         get :cancel_curator
       end
     end
-    resources :competitions
     resources :membership_fees, only: %w(index create destroy)
     resources :items do
       member do
