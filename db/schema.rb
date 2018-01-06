@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106121002) do
+ActiveRecord::Schema.define(version: 20180106184841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(version: 20180106121002) do
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "edition_sym", null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -66,6 +67,26 @@ ActiveRecord::Schema.define(version: 20180106121002) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.text     "description"
+  end
+
+  create_table "events_sign_ups", force: :cascade do |t|
+    t.text     "remarks"
+    t.integer  "competition_record_id",                    null: false
+    t.string   "participant_name_1"
+    t.string   "participant_name_2"
+    t.string   "participant_email_1"
+    t.string   "participant_email_2"
+    t.string   "participant_birth_year_1"
+    t.string   "participant_birth_year_2"
+    t.string   "participant_city_1"
+    t.string   "participant_city_2"
+    t.string   "participant_team_1"
+    t.string   "participant_team_2"
+    t.string   "participant_gender_1"
+    t.string   "participant_gender_2"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "terms_of_service",         default: false, null: false
   end
 
   create_table "items", force: :cascade do |t|

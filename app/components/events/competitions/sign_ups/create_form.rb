@@ -1,12 +1,12 @@
 require 'dry-validation'
 
 module Events
-  module Admin
-    module Competitions
+  module Competitions
+    module SignUps
       class CreateForm < Dry::Validation::Schema::Form
         define! do
-          required(:name).filled(:str?)
-          required(:edition_sym).filled(:str?)
+          required(:participant_name_1).filled(:str?)
+          required(:terms_of_service).filled(eql?: '1')
         end
       end
     end

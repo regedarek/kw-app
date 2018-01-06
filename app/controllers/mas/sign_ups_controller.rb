@@ -5,7 +5,6 @@ module Mas
     end
 
     def new
-      return redirect_to mas_sign_ups_path, alert: 'Zapisy online zostały zamknięte, możesz jeszcze zapisać się w biurze zawodów na miejscu wpisowe kosztuje 100zł.'
       @form = Mas::SignUpForm.new(
         first_name_1: user_signed_in? ? current_user.first_name : nil,
         last_name_1: user_signed_in? ? current_user.last_name : nil,
@@ -18,7 +17,6 @@ module Mas
     end
 
     def create
-      return redirect_to mas_sign_ups_path, alert: 'Zapisy online zostały zamknięte, możesz jeszcze zapisać się w biurze zawodów na miejscu wpisowe kosztuje 100zł.'
       @form = Mas::SignUpForm.new(mas_params)
       result = Mas::Edition2017.sign_up(form: @form)
       result.success { redirect_to mas_sign_ups_path, notice: t('.signed_up') }

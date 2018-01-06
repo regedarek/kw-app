@@ -1,0 +1,25 @@
+.callout.warning
+  = t('.top_info')
+
+= form_for :sign_up, url: competition_sign_ups_path do |f|
+  .callout.primary
+    .row
+      .large-12.columns
+        = f.label :participant_name_1
+        = f.text_field :participant_name_1
+
+  .callout
+    .row
+      .large-12.columns
+        = f.label :remarks
+        = f.text_area :remarks
+  
+  .callout.warning
+    .row
+      .large-12.columns
+        = f.check_box :terms_of_service
+        = f.label :terms_of_service
+        br
+        = t('.rules_html')
+
+  = f.submit 'Zapisz się', class: 'button expanded large'

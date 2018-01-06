@@ -7,9 +7,13 @@
 
         .callout.primary
           .row
-            .large-12.columns
+            .large-6.columns
               = f.label 'Nazwa'
               = f.text_field :name
+
+            .large-6.columns
+              = f.label 'Edycja'
+              = f.text_field :edition_sym
 
         = f.submit 'Utwórz', class: 'button expanded large'
 

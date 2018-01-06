@@ -1,8 +1,12 @@
 table.stack
   thead
     tr
+      th ID
       th Nazwa
+      th Edycja
   tbody
     - competitions.each do |competition|
       tr
+        td = competition.id
         td = competition.name
+        td = competition.edition_sym

@@ -1,0 +1,7 @@
+.column.row
+  .show-for-small-only
+    .callout.primary.text-center
+      = link_to image_tag('pl.png'), { locale: :pl }
+      |
+      = link_to image_tag('sk.png'), { locale: :sk }
+  = render 'form', form: @form

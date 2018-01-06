@@ -25,7 +25,7 @@ module Events
 
       def create_record
         Events::Admin::Competitions::Create.new(
-          Events::Repositories::Competitions.new,
+          Events::Competitions::Repository.new,
           Events::Admin::Competitions::CreateForm.new
         ).call(raw_inputs: competition_params)
       end
@@ -33,7 +33,7 @@ module Events
       def competition_params
         params
           .require(:competition)
-          .permit(:name)
+          .permit(:name, :edition_sym)
       end
     end
   end
