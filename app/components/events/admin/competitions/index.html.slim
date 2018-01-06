@@ -1,0 +1,18 @@
+.column
+  .row
+    .large-12.columns
+      = form_for :competition, url: admin_competitions_path, method: :post do |f|
+        .row
+          .large-12.columns
+
+        .callout.primary
+          .row
+            .large-12.columns
+              = f.label 'Nazwa'
+              = f.text_field :name
+
+        = f.submit 'Utwórz', class: 'button expanded large'
+
+  .row
+    .large-12.columns
+      = render 'table', competitions: @competitions

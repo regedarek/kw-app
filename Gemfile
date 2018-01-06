@@ -24,15 +24,21 @@ gem 'whenever', require: false
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', '2.1.0.pre', git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails'
-gem 'attributed_object', require: 'attributed_object', git: 'https://github.com/jgroeneveld/attributed_object.git'
+gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'carrierwave'
 gem 'omniauth-google-oauth2'
 gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'
 gem 'chronic'
-gem 'dry-struct'
+
+# Dry-rb
+gem 'dry-container'
+gem 'dry-matcher'
+gem 'dry-monads'
 gem 'dry-validation'
+gem 'dry-struct', require: false
+
 group :development, :staging do
   gem 'faker'
 end

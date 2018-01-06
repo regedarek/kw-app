@@ -153,6 +153,10 @@ GEM
       dry-container (~> 0.2, >= 0.2.6)
       dry-core (~> 0.2)
       dry-equalizer (~> 0.2)
+    dry-matcher (0.6.0)
+    dry-monads (0.3.1)
+      dry-core
+      dry-equalizer
     dry-struct (0.3.0)
       dry-configurable (~> 0.1)
       dry-core (~> 0.3)
@@ -417,6 +421,9 @@ DEPENDENCIES
   coffee-rails
   devise
   dotenv-rails
+  dry-container
+  dry-matcher
+  dry-monads
   dry-struct
   dry-validation
   faker
