@@ -1,16 +1,39 @@
 module Events
   module Admin
     class CompetitionsController < ::Admin::BaseController
-      prepend_view_path 'app/components/events/views'
+      include EitherMatcher
+      append_view_path 'app/components'
 
       def index
         @competitions = Events::Db::CompetitionRecord.all
       end
 
-      def new
+      def create
+        either(create_record) do |result|
+          result.success do
+            redirect_to admin_competitions_path, flash: { notice: 'Utworzono zawody' }
+          end
+
+          result.failure do |errors|
+            flash[:error] = errors.values.join(", ")
+            render(action: :new)
+          end
+        end
       end
 
-      def create
+      private
+
+      def create_record
+        Events::Admin::Competition::Create.new(
+          Events::Repositories::Competitions.new,
+          Events::Forms::CreateForm.new
+        ).call(raw_inputs: competition_params)
+      end
+
+      def competition_params
+        params
+          .require(:competition)
+          .permit(:name)
       end
     end
   end
