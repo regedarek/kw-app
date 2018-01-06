@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users, class_name: 'Db::User', controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users,
+    class_name: 'Db::User',
+    controllers: {
+      registrations: 'registrations',
+      omniauth_callbacks: 'users/omniauth_callbacks'
+    }
+
   devise_scope :user do
     get '/zaloguj', to: 'devise/sessions#new'
     get '/zarejestruj', to: 'devise/registrations#new'
   end
 
-  get '/*id', to: 'membership/fees#show', constraints: lambda{|request|request.env['SERVER_NAME'].match('skladki')}
-
+  get '/', to: 'activities/mountain_routes#index',
+    constraints: lambda { |req| req.env['SERVER_NAME'].match('przejscia') }
   namespace :activities do
     resources :mountain_routes
   end
@@ -23,10 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/', to: 'activities/mountain_routes#index', constraints: lambda{|request|request.env['SERVER_NAME'].match('przejscia')}
-
   namespace :api do
-    resources :users, only: [:index]
     resources :payments, only: [] do
       collection do
         post :status
@@ -47,18 +50,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :auctions do
-    member do
-      post :mark_archived
-    end
-  end
-  resources :auction_products do
-    member do
-      post :mark_sold
-    end
-  end
-
-  resources :users, only: [:show]
   resources :reservations, only: [:index, :new, :create] do
     member do
       delete :delete_item
@@ -123,7 +114,6 @@ Rails.application.routes.draw do
   get 'mas' => 'mas/sign_ups#new'
   get 'zarezerwuj' => 'reservations#new', as: :reserve
   get 'zgloszenie' => 'profiles#new'
-  get 'reaktywacja' => 'profiles#reactivation'
   get 'przejscia' => 'activities/mountain_routes#index'
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
