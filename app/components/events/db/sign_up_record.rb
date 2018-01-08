@@ -3,6 +3,10 @@ module Events
     class SignUpRecord < ActiveRecord::Base
       self.table_name = 'events_sign_ups'
 
+      has_one :payment,
+        as: :payable,
+        dependent: :destroy,
+        class_name: 'Db::Payment'
       belongs_to :competition,
         class_name: 'Events::Db::CompetitionRecord'
 

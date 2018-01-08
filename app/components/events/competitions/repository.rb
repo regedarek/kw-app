@@ -10,6 +10,8 @@ module Events
         attributes = form_outputs
           .to_h.merge(competition_record_id: competition_id)
         record = Events::Db::SignUpRecord.create!(attributes)
+        record.create_payment(dotpay_id: SecureRandom.hex(13))
+
 
         Events::SignUp.from_record(record)
       end

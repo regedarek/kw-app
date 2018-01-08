@@ -13,9 +13,10 @@ module Events
           form_outputs = create_sign_up_form.call(raw_inputs)
           return Left(form_outputs.messages(full: true)) unless form_outputs.success?
 
-          competitions_repository.create_sign_up(
+          sign_up = competitions_repository.create_sign_up(
             competition_id: competition_id, form_outputs: form_outputs
           )
+          Events::Competitions::SignUpMailer.sign_up(sign_up).deliver_later
 
           Right(:success)
         end
