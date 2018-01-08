@@ -13,6 +13,7 @@ module Events
       end
 
       def create
+        @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         either(create_record) do |result|
           result.success do
             redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: 'Zapisano na zawody!' }

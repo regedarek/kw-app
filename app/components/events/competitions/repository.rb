@@ -16,7 +16,6 @@ module Events
         record = Events::Db::SignUpRecord.create!(attributes)
         record.create_payment(dotpay_id: SecureRandom.hex(13))
 
-
         Events::SignUp.from_record(record)
       end
     end
