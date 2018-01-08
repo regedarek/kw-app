@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20180108175828) do
 
   create_table "events_sign_ups", force: :cascade do |t|
     t.text     "remarks"
-    t.integer  "competition_record_id",                    null: false
+    t.integer  "competition_record_id",                         null: false
     t.string   "participant_name_1"
     t.string   "participant_name_2"
     t.string   "participant_email_1"
@@ -92,9 +92,11 @@ ActiveRecord::Schema.define(version: 20180108175828) do
     t.string   "participant_team_2"
     t.string   "participant_gender_1"
     t.string   "participant_gender_2"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.boolean  "terms_of_service",         default: false, null: false
+    t.integer  "competition_package_type_1_id",                 null: false
+    t.integer  "competition_package_type_2_id",                 null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.boolean  "terms_of_service",              default: false, null: false
   end
 
   create_table "items", force: :cascade do |t|

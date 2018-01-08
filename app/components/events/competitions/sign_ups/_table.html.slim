@@ -3,10 +3,12 @@ table.stack
     tr
       th ID
       th Zawodnik 1
+      th Pakiety
       th Uwagi do organizatorów
   tbody
     - sign_ups.each do |sign_up|
       tr
         td = sign_up.id
         td = sign_up.participant_name_1
+        td = sign_up.package_types.map(&:name).to_sentence
         td = sign_up.remarks

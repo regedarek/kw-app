@@ -22,6 +22,8 @@ module Events
     attribute :participant_team_2, Types::Strict::String.optional
     attribute :participant_gender_1, Types::Strict::String.optional
     attribute :participant_gender_2, Types::Strict::String.optional
+    attribute :competition_package_type_1_id, Types::Strict::Int.optional
+    attribute :competition_package_type_2_id, Types::Strict::Int.optional
     attribute :remarks, Types::Strict::String.optional
     attribute :terms_of_service, Types::Strict::Bool
 
@@ -42,6 +44,8 @@ module Events
           participant_team_2: record.participant_team_2,
           participant_gender_1: record.participant_gender_1,
           participant_gender_2: record.participant_gender_2,
+          competition_package_type_1_id: record.competition_package_type_1_id,
+          competition_package_type_2_id: record.competition_package_type_2_id,
           remarks: record.remarks,
           terms_of_service: record.terms_of_service
         )

@@ -5,7 +5,11 @@ module Events
       append_view_path 'app/components'
 
       def index
-        @competition = Events::Db::CompetitionRecord.find_by(params[:competition_record_id])
+        @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+      end
+
+      def new
+        @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
       end
 
       def create
@@ -46,6 +50,8 @@ module Events
             :participant_team_2,
             :participant_gender_1,
             :participant_gender_2,
+            :competition_package_type_1_id,
+            :competition_package_type_2_id,
             :remarks,
             :terms_of_service
           )

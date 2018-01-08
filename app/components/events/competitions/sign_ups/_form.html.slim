@@ -13,9 +13,13 @@
         = f.text_field :participant_name_2
 
     .row
-      .large-4.columns
-        = f.label :package_type
-        = f.select :package_type, options_for_select(Events::Db::CompetitionRecord.package_types, f.object.package_type), include_blank: true
+      .large-6.columns
+        = f.label :competition_package_type_1_id
+        = f.select :competition_package_type_1_id, options_for_select(@competition.package_types.collect {|p| [ p.name, p.id ] }), include_blank: true
+
+      .large-6.columns
+        = f.label :competition_package_type_2_id
+        = f.select :competition_package_type_2_id, options_for_select(@competition.package_types.collect {|p| [ p.name, p.id ] }), include_blank: true
 
   .callout
     .row
