@@ -7,6 +7,8 @@ module Events
 
       def create(form_outputs:)
         record = Events::Db::CompetitionRecord.create!(form_outputs.to_h)
+        record.package_types.create(name: 'KW', cost: 30)
+        record.package_types.create(name: 'poza KW', cost: 60)
         Events::Competition.from_record(record)
       end
 
