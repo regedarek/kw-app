@@ -16,7 +16,7 @@ module Events
 
           result.failure do |errors|
             flash[:error] = errors.values.join(", ")
-            render(action: :new)
+            redirect_to admin_competitions_path, flash: { alert: 'Błąd' }
           end
         end
       end
