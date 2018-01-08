@@ -4,9 +4,18 @@
 = form_for :sign_up, url: competition_sign_ups_path do |f|
   .callout.primary
     .row
-      .large-12.columns
+      .large-6.columns
         = f.label :participant_name_1
         = f.text_field :participant_name_1
+
+      .large-6.columns
+        = f.label :participant_name_2
+        = f.text_field :participant_name_2
+
+    .row
+      .large-4.columns
+        = f.label :package_type
+        = f.select :package_type, options_for_select(Events::Db::CompetitionRecord.package_types, f.object.package_type), include_blank: true
 
   .callout
     .row
