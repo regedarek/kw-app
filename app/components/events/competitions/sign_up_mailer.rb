@@ -3,8 +3,8 @@ module Events
     class SignUpMailer < ApplicationMailer
       append_view_path 'app/components/'
 
-      def sign_up(sign_up)
-        @sign_up = sign_up
+      def sign_up(repository, sign_up_id)
+        @sign_up = repository.find_sign_up(sign_up_id)
 
         mail(
           to: @sign_up.participant_email_1,

@@ -3,7 +3,7 @@ module Events
     class CompetitionRecord < ActiveRecord::Base
       self.table_name = 'competitions'
 
-      has_many :sign_ups,
+      has_many :sign_ups_records,
         class_name: 'Events::Db::SignUpRecord',
         dependent: :destroy
       has_many :package_types,

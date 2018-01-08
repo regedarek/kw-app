@@ -6,6 +6,9 @@ module Events
       class CreateForm < Dry::Validation::Schema::Form
         define! do
           required(:participant_name_1).filled(:str?)
+          required(:participant_email_1).filled(:str?)
+          required(:participant_package_type_1).filled(:str?)
+          required(:participant_package_type_2).filled(:str?)
           required(:terms_of_service).filled(eql?: '1')
         end
       end

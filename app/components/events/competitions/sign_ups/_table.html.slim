@@ -5,6 +5,7 @@ table.stack
       th Zawodnik 1
       th Pakiety
       th Uwagi do organizatorów
+      th Opłacono
   tbody
     - sign_ups.each do |sign_up|
       tr
@@ -12,3 +13,4 @@ table.stack
         td = sign_up.participant_name_1
         td = sign_up.package_types.map(&:name).to_sentence
         td = sign_up.remarks
+        td = sign_up.payment.state

@@ -1,6 +1,10 @@
 module Events
   module Competitions
     class Repository
+      def find_sign_up(id)
+        Events::Db::SignUpRecord.find_by(id: id)
+      end
+
       def create(form_outputs:)
         record = Events::Db::CompetitionRecord.create!(form_outputs.to_h)
         Events::Competition.from_record(record)

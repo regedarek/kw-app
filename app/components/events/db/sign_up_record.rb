@@ -7,7 +7,7 @@ module Events
         as: :payable,
         dependent: :destroy,
         class_name: 'Db::Payment'
-      belongs_to :competition,
+      belongs_to :competition_record,
         class_name: 'Events::Db::CompetitionRecord'
 
       def package_type_1
@@ -20,6 +20,14 @@ module Events
 
       def package_types
         [package_type_1, package_type_2].compact
+      end
+
+      def cost
+        package_types.map(&:cost).reduce(:+)
+      end
+
+      def description
+        "Wpisowe nr #{id} na zawody #{competition_record.name} od #{participant_name_1} oraz #{participant_name_2}"
       end
     end
   end
