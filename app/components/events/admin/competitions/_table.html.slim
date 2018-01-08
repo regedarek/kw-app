@@ -9,6 +9,6 @@ table.stack
     - competitions.each do |competition|
       tr
         td = competition.id
-        td = competition.name
+        td = link_to competition.name, competition_sign_ups_path(competition)
         td = competition.edition_sym
         td = competition.package_types.map(&:name).to_sentence
