@@ -13,4 +13,4 @@ table.stack
         td = link_to competition.name, competition_sign_ups_path(competition)
         td = competition.edition_sym
         td = competition.package_types.map(&:name).to_sentence
-        td = competitions.single? ? 'Nie' : 'Tak'
+        td = competition.single? ? 'Nie' : 'Tak'
