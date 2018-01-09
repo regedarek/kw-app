@@ -201,6 +201,7 @@ GEM
     hashdiff (0.3.2)
     hashie (3.5.5)
     high_voltage (3.0.0)
+    honeybadger (3.2.0)
     htmlentities (4.3.4)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
@@ -431,6 +432,7 @@ DEPENDENCIES
   foundation-rails
   google_calendar
   high_voltage
+  honeybadger (~> 3.1)
   jquery-rails
   kaminari
   koala
