@@ -17,9 +17,13 @@
         = f.select :competition_package_type_1_id,
         options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
 
-      .large-3.columns
-        = f.check_box :single, class: 'js-single-check-box'
-        = f.label :single
+      - if @competition.single?
+        .large-3.columns
+          = f.hidden_field :single, value: '1'
+      - else
+        .large-3.columns
+          = f.check_box :single, class: 'js-single-check-box'
+          = f.label :single
 
     .row
       .large-3.columns
@@ -38,38 +42,39 @@
         = f.label :participant_team_1
         = f.text_field :participant_team_1
 
-  .js-player-2
-    .callout.secondary
-      .row
-        .large-4.columns
-          = f.label :participant_name_2
-          = f.text_field :participant_name_2
+  - if !@competition.single?
+    .js-player-2
+      .callout.secondary
+        .row
+          .large-4.columns
+            = f.label :participant_name_2
+            = f.text_field :participant_name_2
 
-        .large-4.columns
-          = f.label :participant_email_2
-          = f.text_field :participant_email_2
+          .large-4.columns
+            = f.label :participant_email_2
+            = f.text_field :participant_email_2
 
-        .large-4.columns
-          = f.label :competition_package_type_2_id
-          = f.select :competition_package_type_2_id,
-          options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_2_id)), include_blank: true
+          .large-4.columns
+            = f.label :competition_package_type_2_id
+            = f.select :competition_package_type_2_id,
+            options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_2_id)), include_blank: true
 
-      .row
-        .large-3.columns
-          = f.label :participant_kw_id_2
-          = f.text_field :participant_kw_id_2
+        .row
+          .large-3.columns
+            = f.label :participant_kw_id_2
+            = f.text_field :participant_kw_id_2
 
-        .large-3.columns
-          = f.label :participant_birth_year_2
-          = f.number_field :participant_birth_year_2
+          .large-3.columns
+            = f.label :participant_birth_year_2
+            = f.number_field :participant_birth_year_2
 
-        .large-3.columns
-          = f.label :participant_city_2
-          = f.text_field :participant_city_2
+          .large-3.columns
+            = f.label :participant_city_2
+            = f.text_field :participant_city_2
 
-        .large-3.columns
-          = f.label :participant_team_2
-          = f.text_field :participant_team_2
+          .large-3.columns
+            = f.label :participant_team_2
+            = f.text_field :participant_team_2
 
   .callout
     .row
