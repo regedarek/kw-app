@@ -11,6 +11,7 @@ module Reservations
                                        .cash_prepaid
       to_destroy = not_prepaid - prepaid_by_cash
       to_destroy.map(&:destroy)
+      Net::HTTP.get(URI('https://hchk.io/8da144aa-7b69-4cb5-bd7e-031c404d5d04'))
     end
   end
 end
