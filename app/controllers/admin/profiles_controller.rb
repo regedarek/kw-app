@@ -49,7 +49,8 @@ module Admin
         user.save
         profile.update(
           kw_id: accept_params.fetch(:kw_id),
-          application_date: accept_params.fetch(:application_date)
+          application_date: accept_params.fetch(:application_date),
+          accepted: true
         )
         user.send_reset_password_instructions
         if profile.payment.present? && profile.payment.paid?
@@ -59,9 +60,7 @@ module Admin
             payment: profile.payment,
             cost: 100
           )
-          profile.update(accepted: true)
         end
-
         redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano'
       else
         redirect_to admin_profile_path(profile.id), alert: "Błąd: #{user.errors.full_messages}"
