@@ -33,8 +33,8 @@ module Events
       def create_record
         Events::Competitions::SignUps::Create.new(
           Events::Competitions::Repository.new,
-          Events::Competitions::SignUps::CreateForm.new
-        ).call(competition_id: params[:competition_id], raw_inputs: sign_up_params)
+          Events::Competitions::SignUps::CreateForm
+        ).call(competition_id: params[:competition_id], raw_inputs: params_for_build)
       end
 
       def params_for_build
@@ -56,7 +56,8 @@ module Events
           competition_package_type_1_id: sign_up_params[:competition_package_type_1_id].to_i,
           competition_package_type_2_id: sign_up_params[:competition_package_type_2_id].to_i,
           remarks: sign_up_params[:remarks],
-          terms_of_service: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:terms_of_service])
+          terms_of_service: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:terms_of_service]),
+          single: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:single])
         }
       end
 
@@ -79,7 +80,8 @@ module Events
             :competition_package_type_1_id,
             :competition_package_type_2_id,
             :remarks,
-            :terms_of_service
+            :terms_of_service,
+            :single
           )
       end
     end

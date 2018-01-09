@@ -14,8 +14,8 @@ module Events
     attribute :participant_name_2, Types::Strict::String.optional
     attribute :participant_email_1, Types::Strict::String.optional
     attribute :participant_email_2, Types::Strict::String.optional
-    attribute :participant_birth_year_1, Types::Strict::Int.optional
-    attribute :participant_birth_year_2, Types::Strict::Int.optional
+    attribute :participant_birth_year_1, Types::Strict::String.optional
+    attribute :participant_birth_year_2, Types::Strict::String.optional
     attribute :participant_city_1, Types::Strict::String.optional
     attribute :participant_city_2, Types::Strict::String.optional
     attribute :participant_team_1, Types::Strict::String.optional
@@ -26,6 +26,7 @@ module Events
     attribute :competition_package_type_2_id, Types::Strict::Int.optional
     attribute :remarks, Types::Strict::String.optional
     attribute :terms_of_service, Types::Strict::Bool
+    attribute :single, Types::Strict::Bool
 
     class << self
       def from_record(record)
@@ -47,7 +48,8 @@ module Events
           competition_package_type_1_id: record.competition_package_type_1_id,
           competition_package_type_2_id: record.competition_package_type_2_id,
           remarks: record.remarks,
-          terms_of_service: record.terms_of_service
+          terms_of_service: record.terms_of_service,
+          single: record.single
         )
       end
     end
