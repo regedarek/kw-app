@@ -1,0 +1,5 @@
+en:
+  errors:
+    email?:
+      arg:
+        default: "must have proper format"
