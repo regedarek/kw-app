@@ -10,6 +10,8 @@ module Events
 
     attribute :id, Types::Strict::Int
     attribute :competition_id, Types::Strict::Int
+    attribute :participant_kw_id_1, Types::Strict::String.optional
+    attribute :participant_kw_id_2, Types::Strict::String.optional
     attribute :participant_name_1, Types::Strict::String
     attribute :participant_name_2, Types::Strict::String.optional
     attribute :participant_email_1, Types::Strict::String.optional
@@ -33,6 +35,8 @@ module Events
         new(
           id: record.id,
           competition_id: record.competition_record_id,
+          participant_kw_id_1: record.participant_kw_id_1,
+          participant_kw_id_2: record.participant_kw_id_2,
           participant_name_1: record.participant_name_1,
           participant_name_2: record.participant_name_2,
           participant_email_1: record.participant_email_1,
