@@ -39,6 +39,7 @@ gem 'dry-container'
 gem 'dry-matcher'
 gem 'dry-monads'
 gem 'dry-validation'
+gem 'dry-types'
 gem 'dry-struct', require: false
 
 group :development, :staging do

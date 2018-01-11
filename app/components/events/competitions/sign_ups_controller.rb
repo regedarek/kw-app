@@ -33,8 +33,8 @@ module Events
       def create_record
         Events::Competitions::SignUps::Create.new(
           Events::Competitions::Repository.new,
-          Events::Competitions::SignUps::CreateForm
-        ).call(competition_id: params[:competition_id], raw_inputs: params_for_build)
+          Events::Competitions::SignUps::CreateForm.new
+        ).call(competition_id: params[:competition_id], raw_inputs: sign_up_params)
       end
 
       def params_for_build
@@ -47,8 +47,8 @@ module Events
           participant_kw_id_2: sign_up_params[:participant_kw_id_2],
           participant_email_1: sign_up_params[:participant_email_1],
           participant_email_2: sign_up_params[:participant_email_2],
-          participant_birth_year_1: sign_up_params[:participant_birth_year_1],
-          participant_birth_year_2: sign_up_params[:participant_birth_year_2],
+          participant_birth_year_1: params[:sign_up][:participant_birth_year_1],
+          participant_birth_year_2: sign_up_params[:participant_birth_year_2].to_i,
           participant_city_1: sign_up_params[:participant_city_1],
           participant_city_2: sign_up_params[:participant_city_2],
           participant_team_1: sign_up_params[:participant_team_1],

@@ -426,6 +426,7 @@ DEPENDENCIES
   dry-matcher
   dry-monads
   dry-struct
+  dry-types
   dry-validation
   faker
   foundation-icons-sass-rails

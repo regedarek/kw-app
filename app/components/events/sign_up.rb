@@ -1,34 +1,36 @@
+require 'dry-types'
 require 'dry-struct'
 
+Dry::Types.load_extensions(:maybe)
 module Types
   include Dry::Types.module
 end
 
 module Events
   class SignUp < Dry::Struct
-    constructor_type :strict
+    constructor_type(:schema)
 
-    attribute :id, Types::Strict::Int
-    attribute :competition_id, Types::Strict::Int
-    attribute :participant_kw_id_1, Types::Strict::String.optional
-    attribute :participant_kw_id_2, Types::Strict::String.optional
-    attribute :participant_name_1, Types::Strict::String
-    attribute :participant_name_2, Types::Strict::String.optional
-    attribute :participant_email_1, Types::Strict::String.optional
-    attribute :participant_email_2, Types::Strict::String.optional
-    attribute :participant_birth_year_1, Types::Strict::String.optional
-    attribute :participant_birth_year_2, Types::Strict::String.optional
-    attribute :participant_city_1, Types::Strict::String.optional
-    attribute :participant_city_2, Types::Strict::String.optional
-    attribute :participant_team_1, Types::Strict::String.optional
-    attribute :participant_team_2, Types::Strict::String.optional
-    attribute :participant_gender_1, Types::Strict::String.optional
-    attribute :participant_gender_2, Types::Strict::String.optional
-    attribute :competition_package_type_1_id, Types::Strict::Int.optional
-    attribute :competition_package_type_2_id, Types::Strict::Int.optional
-    attribute :remarks, Types::Strict::String.optional
-    attribute :terms_of_service, Types::Strict::Bool
-    attribute :single, Types::Strict::Bool
+    attribute :id, Types::Int.optional
+    attribute :competition_id, Types::Int
+    attribute :participant_kw_id_1, Types::String.optional
+    attribute :participant_kw_id_2, Types::String.optional
+    attribute :participant_name_1, Types::String
+    attribute :participant_name_2, Types::String.optional
+    attribute :participant_email_1, Types::String.optional
+    attribute :participant_email_2, Types::String.optional
+    attribute :participant_birth_year_1, Types::Form::Int.optional
+    attribute :participant_birth_year_2, Types::Coercible::Int.optional
+    attribute :participant_city_1, Types::String.optional
+    attribute :participant_city_2, Types::String.optional
+    attribute :participant_team_1, Types::String.optional
+    attribute :participant_team_2, Types::String.optional
+    attribute :participant_gender_1, Types::String.optional
+    attribute :participant_gender_2, Types::String.optional
+    attribute :competition_package_type_1_id, Types::Int.optional
+    attribute :competition_package_type_2_id, Types::Int.optional
+    attribute :remarks, Types::String.optional
+    attribute :terms_of_service, Types::Bool
+    attribute :single, Types::Bool
 
     class << self
       def from_record(record)

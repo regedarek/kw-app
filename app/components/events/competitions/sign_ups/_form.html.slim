@@ -19,7 +19,7 @@
 
       - if @competition.single?
         .large-3.columns
-          = f.hidden_field :single, value: '1'
+          = f.hidden_field :single, value: 1
       - else
         .large-3.columns
           = f.check_box :single, class: 'js-single-check-box'
@@ -28,7 +28,7 @@
     .row
       .large-3.columns
         = f.label :participant_kw_id_1
-        = f.text_field :participant_kw_id_1
+        = f.number_field :participant_kw_id_1
 
       .large-3.columns
         = f.label :participant_birth_year_1

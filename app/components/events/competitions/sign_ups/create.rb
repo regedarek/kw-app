@@ -10,7 +10,7 @@ module Events
         end
 
         def call(competition_id:, raw_inputs:)
-          form_outputs = create_sign_up_form.call(raw_inputs)
+          form_outputs = create_sign_up_form.call(raw_inputs.to_h)
           return Left(form_outputs.messages(full: true)) unless form_outputs.success?
 
           sign_up = competitions_repository.create_sign_up(
