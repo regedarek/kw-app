@@ -27,7 +27,11 @@ module Events
       end
 
       def description
-        "Wpisowe nr #{id} na zawody #{competition_record.name} od #{participant_name_1} oraz #{participant_name_2}"
+        if single
+          "Wpisowe nr #{id} na zawody #{competition_record.name} #{competition_record.edition_sym} od #{participant_name_1}"
+        else
+          "Wpisowe nr #{id} na zawody #{competition_record.name} #{competition_record.edition_sym} od #{participant_name_1} oraz #{participant_name_2}"
+        end
       end
     end
   end

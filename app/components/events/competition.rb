@@ -10,6 +10,8 @@ module Events
 
     attribute :id, Types::Strict::Int
     attribute :name, Types::Strict::String
+    attribute :team_name, Types::Strict::Bool
+    attribute :single, Types::Strict::Bool
     attribute :edition_sym, Types::Strict::Symbol.constructor(&:to_sym)
 
     class << self
@@ -17,7 +19,9 @@ module Events
         new(
           id: record.id,
           name: record.name,
-          edition_sym: record.edition_sym
+          edition_sym: record.edition_sym,
+          single: record.single,
+          team_name: record.team_name
         )
       end
     end

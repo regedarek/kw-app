@@ -11,6 +11,7 @@ module Events
     constructor_type(:schema)
 
     attribute :id, Types::Int.optional
+    attribute :team_name, Types::String.optional
     attribute :competition_id, Types::Int
     attribute :participant_kw_id_1, Types::String.optional
     attribute :participant_kw_id_2, Types::String.optional
@@ -54,7 +55,6 @@ module Events
           competition_package_type_1_id: record.competition_package_type_1_id,
           competition_package_type_2_id: record.competition_package_type_2_id,
           remarks: record.remarks,
-          terms_of_service: record.terms_of_service,
           single: record.single
         )
       end

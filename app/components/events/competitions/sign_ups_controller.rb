@@ -41,6 +41,7 @@ module Events
         {
           id: params[:id].to_i,
           competition_id: params[:competition_id].to_i,
+          team_name: sign_up_params[:team_name],
           participant_name_1: sign_up_params[:participant_name_1],
           participant_name_2: sign_up_params[:participant_name_2],
           participant_kw_id_1: sign_up_params[:participant_kw_id_1],
@@ -67,6 +68,7 @@ module Events
         params
           .require(:sign_up)
           .permit(
+            :team_name,
             :participant_name_1,
             :participant_name_2,
             :participant_email_1,
