@@ -16,19 +16,40 @@ module Events
         end
 
         define! do
-          if optional(:single).value(:false?)
-            required(:participant_name_2, Types::String).filled
-            required(:participant_email_2, Types::String).filled(format?: /.@.+[.][a-z]{2,}/i)
-            required(:participant_birth_year_2, Types::Form::Int).filled(:int?, lt?: 2003, gt?: 1920)
-            required(:competition_package_type_2_id, Types::Form::Int).filled
-            optional(:participant_kw_id_2, Types::Form::Int).maybe
+          required(:single, Types::Form::Bool).filled(:bool?)
+          required(:participant_name_2, Types::String).maybe(:str?)
+          required(:participant_email_2, Types::String).maybe(:str?)
+          required(:participant_birth_year_2, Types::Form::Int).maybe
+          required(:competition_package_type_2_id, Types::Form::Int).maybe
+          required(:participant_kw_id_2, Types::Form::Int).maybe
+          rule(participant_name_2: [:single, :participant_name_2]) do |single, participant_name_2|
+            single.false?.then(participant_name_2.filled?)
+          end
+          rule(participant_email_2: [:single, :participant_name_2]) do |single, participant_email_2|
+            single.false?.then(
+              required(:participant_email_2).filled(format?: /.@.+[.][a-z]{2,}/i)
+            )
+          end
+          rule(participant_birth_year_2: [:single, :participant_birth_year_2]) do |single, participant_birth_year_2|
+            single.false?.then(
+              required(:participant_birth_year_2).filled(:int?, lt?: 2003, gt?: 1920)
+            )
+          end
+          rule(competition_package_type_2_id: [:single, :competition_package_type_2_id]) do |single, competition_package_type_2_id|
+            single.false?.then(
+              required(:competition_package_type_2_id).filled(:int?)
+            )
+          end
 
-            validate(active_kw_id: [:participant_kw_id_2, :competition_package_type_2_id]) do |kw_id, package_id|
-              if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
-                ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: kw_id)
+          validate(active_kw_id_2: [:single, :participant_kw_id_2, :competition_package_type_2_id]) do |single, participant_kw_id_2, competition_package_type_2_id|
+            if !single && competition_package_type_2_id.present?
+              if Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_2_id).membership?
+                ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: participant_kw_id_2)
               else
                 true
               end
+            else
+              true
             end
           end
 
@@ -39,7 +60,7 @@ module Events
          optional(:participant_kw_id_1, Types::Form::Int).maybe
          required(:terms_of_service, Types::Form::Bool).value(:true?)
 
-         validate(active_kw_id: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
+         validate(active_kw_id_2: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
            if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
              ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: kw_id)
            else

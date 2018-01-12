@@ -3,7 +3,10 @@ en:
     email?:
       arg:
         default: "must have proper format"
-    active_kw_id:
+    active_kw_id_2:
+      arg:
+        default: "must be active"
+    active_kw_id_1:
       arg:
         default: "must be active"
 
