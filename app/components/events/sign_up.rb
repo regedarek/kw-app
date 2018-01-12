@@ -29,7 +29,7 @@ module Events
     attribute :competition_package_type_1_id, Types::Int.optional
     attribute :competition_package_type_2_id, Types::Int.optional
     attribute :remarks, Types::String.optional
-    attribute :terms_of_service, Types::Form::Bool
+    attribute :terms_of_service, Types::Form::Bool.default(false)
     attribute :single, Types::Form::Bool
 
     class << self
