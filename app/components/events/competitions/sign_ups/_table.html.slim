@@ -1,11 +1,11 @@
 table.stack
   thead
     tr
-      th ID
+      th width=50 ID
       th Zawodnik/cy
       th Miasto
       th Organizacja
-      th Opłacono
+      th Płatność
   tbody
     - sign_ups.each do |sign_up|
       tr
@@ -17,6 +17,9 @@ table.stack
             = [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
         td = [sign_up.participant_city_1, sign_up.participant_city_2].compact.reject(&:empty?).to_sentence
         td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
-        td
+        td.text-center
           - if sign_up.payment.prepaid?
             .label.success = t("#{sign_up.payment.state}")
+          -else
+            .label.warning = t("#{sign_up.payment.state}")
+
