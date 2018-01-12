@@ -2,10 +2,23 @@ module Events
   module Admin
     class CompetitionsController < ::Admin::BaseController
       include EitherMatcher
+      respond_to :html, :xlsx
       append_view_path 'app/components'
 
       def index
         @competitions = Events::Db::CompetitionRecord.all
+      end
+
+      def show
+        @competition = Events::Db::CompetitionRecord.find(params[:id])
+
+        respond_with do |format|
+          format.html
+          format.xlsx do
+            disposition = "attachment; filename='#{@competition.edition_sym}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+            response.headers['Content-Disposition'] = disposition
+          end
+        end
       end
 
       def create
@@ -33,7 +46,7 @@ module Events
       def competition_params
         params
           .require(:competition)
-          .permit(:name, :edition_sym)
+          .permit(:name, :edition_sym, :rules, :baner_url, :single, :team_name)
       end
     end
   end

@@ -7,13 +7,30 @@
 
         .callout.primary
           .row
-            .large-6.columns
+            .large-3.columns
               = f.label 'Nazwa'
               = f.text_field :name
 
-            .large-6.columns
+            .large-3.columns
+              = f.label 'Nazwa zespołu?'
+              = f.check_box :team_name
+
+            .large-3.columns
+              = f.label 'Indywidualne?'
+              = f.check_box :single
+
+            .large-3.columns
               = f.label 'Edycja'
               = f.text_field :edition_sym
+
+          .row
+            .large-6.columns
+              = f.label 'Baner'
+              = f.text_field :baner_url
+
+            .large-6.columns
+              = f.label 'Zasady'
+              = f.text_area :rules
 
         = f.submit 'Utwórz', class: 'button expanded large'
 

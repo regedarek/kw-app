@@ -1,7 +1,5 @@
 en:
   errors:
-    participant_name_1:
-      filled?: 'dupa'
     or: "or"
     array?: "must be an array"
 
@@ -102,6 +100,7 @@ pl:
         filled?: Płeć 2 musi zostać wybrana
       participant_email_1:
         filled?: E-mail 1 nie może być pusty
+        format?: E-mail 1 jest nieprawidłowy
       participant_birth_year_1:
         filled?: Musisz podać rok urodzenia 1
         gt?: Rok urodzenia 1 nie może być wcześniej niż %{num}
@@ -112,6 +111,7 @@ pl:
         filled?: Imię i nazwisko 2 nie może być puste
       participant_email_2:
         filled?: E-mail 2 nie może być pusty
+        format?: E-mail 2 jest nieprawidłowy
       participant_birth_year_2:
         filled?: Musisz podać rok urodzenia 2
         gt?: Rok urodzenia 2 nie może być wcześniej niż %{num}

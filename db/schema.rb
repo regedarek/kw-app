@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112173252) do
+ActiveRecord::Schema.define(version: 20180112215613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20180112173252) do
     t.string   "edition_sym",                 null: false
     t.boolean  "single",      default: false, null: false
     t.boolean  "team_name",   default: false, null: false
+    t.string   "baner_url"
+    t.string   "rules"
   end
 
   create_table "courses", force: :cascade do |t|

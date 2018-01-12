@@ -23,6 +23,8 @@ module Events
           required(:competition_package_type_2_id, Types::Form::Int).maybe
           required(:participant_kw_id_2, Types::Form::Int).maybe
           required(:participant_gender_2, Types::Form::Int).maybe
+          required(:participant_city_2, Types::String)
+          required(:participant_team_2, Types::String)
           rule(participant_gender_2: [:single, :participant_gender_2]) do |single, participant_gender_2|
             single.false?.then(participant_gender_2.filled?)
           end
@@ -58,6 +60,10 @@ module Events
           end
 
          required(:participant_name_1, Types::String).filled
+         optional(:participant_city_1, Types::String)
+         optional(:team_name, Types::String)
+         optional(:remarks, Types::String)
+         optional(:participant_team_1, Types::String)
          required(:participant_gender_1, Types::Form::Int).filled
          required(:participant_email_1, Types::String).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1, Types::Form::Int).filled(:int?, lt?: 2003, gt?: 1920)

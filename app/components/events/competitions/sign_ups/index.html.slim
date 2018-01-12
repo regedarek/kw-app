@@ -1,7 +1,11 @@
 .column
   .row
     .large-12.columns
-      h3 = @competition.name
+      - if @competition.baner_url.present?
+        .text-center
+          = image_tag @competition.baner_url
+      - else
+        h3 = @competition.name
   .row
     .large-12.columns
       = link_to  'Zapisz się', new_competition_sign_up_path(@competition),

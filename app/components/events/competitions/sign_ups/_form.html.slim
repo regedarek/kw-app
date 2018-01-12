@@ -1,3 +1,8 @@
+- if @competition.baner_url.present?
+  .text-center
+    = image_tag @competition.baner_url
+- else
+  h3 = @competition.name
 .callout.warning
   = t('.top_info')
 
@@ -11,7 +16,7 @@
 
   .row
     .large-12.columns
-      - if @errors && @errors.values.any?
+      - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?
         .callout.alert
           ul
             - @errors.select { |key, value| key.to_s.include?('_1') }.each do |error|
@@ -108,7 +113,7 @@
             = f.label :participant_city_2, t('.participant_city')
             = f.text_field :participant_city_2
 
-          .large-2.columns
+          .large-4.columns
             = f.label :participant_team_2, t('.participant_team')
             = f.text_field :participant_team_2
 
@@ -131,5 +136,8 @@
       .large-12.columns
         = f.check_box :terms_of_service
         = f.label :terms_of_service, t('.terms_of_service')
+    .row
+      .large-12.columns
+        = @competition.rules
 
   = f.submit t('.submit'), class: 'button expanded large'

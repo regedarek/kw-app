@@ -1,7 +1,6 @@
 table.stack
   thead
     tr
-      th width=50 ID
       th Zawodnik/cy
       th Miasto
       th Organizacja
@@ -9,7 +8,6 @@ table.stack
   tbody
     - sign_ups.each do |sign_up|
       tr
-        td = sign_up.id
         td
           - if sign_up.team_name.present?
             = sign_up.team_name

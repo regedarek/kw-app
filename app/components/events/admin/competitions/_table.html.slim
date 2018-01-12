@@ -5,7 +5,9 @@ table.stack
       th Nazwa
       th Edycja
       th Opcje płatności
+      th Nazwa zespołu?
       th Zespołowe?
+      th Tabelka
   tbody
     - competitions.each do |competition|
       tr
@@ -13,4 +15,6 @@ table.stack
         td = link_to competition.name, competition_sign_ups_path(competition)
         td = competition.edition_sym
         td = competition.package_types.map(&:name).to_sentence
+        td = competition.team_name ? 'Tak' : 'Nie'
         td = competition.single? ? 'Nie' : 'Tak'
+        td = link_to 'XLSX', admin_competition_path(competition, format: :xlsx)
