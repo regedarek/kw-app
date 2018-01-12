@@ -17,7 +17,7 @@ module Events
             competition_id: competition_id, form_outputs: form_outputs
           )
           Events::Competitions::SignUpMailer
-            .sign_up(competitions_repository, sign_up.id).deliver_later
+            .sign_up(sign_up.id).deliver_later
 
           Right(:success)
         end
