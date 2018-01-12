@@ -1,0 +1,18 @@
+pl:
+  events:
+    competitions:
+      sign_ups:
+        form:
+          top_info: Zgłoś zespół i zapłać za obydwa pakiety startowe.
+          team_name: Nazwa zespołu(bądźcie kreatywni!)
+          participant_name: Imię i nazwisko*
+          participant_email: E-mail*
+          competition_package_type_id: Pakiet*
+          single: Poszukuję partnera
+          participant_birth_year: Rok urodzenia*
+          participant_city: Miasto
+          participant_team: Organizacja
+          remarks: Uwagi do organizatorów
+          terms_of_service: Akceptuję regulamin
+          participant_kw_id: Numer legitymacji KW
+          submit: Wyślij zgłoszenie

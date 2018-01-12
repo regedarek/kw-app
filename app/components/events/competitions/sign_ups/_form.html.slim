@@ -6,21 +6,21 @@
     .callout.warning
       .row
         .large-12.columns
-          = f.label :team_name
+          = f.label :team_name, t('.team_name')
           = f.text_field :team_name, required: true
 
   .callout.primary
     .row
       .large-3.columns
-        = f.label :participant_name_1
+        = f.label :participant_name_1, t('.participant_name')
         = f.text_field :participant_name_1
 
       .large-3.columns
-        = f.label :participant_email_1
+        = f.label :participant_email_1, t('.participant_email')
         = f.text_field :participant_email_1
 
       .large-3.columns
-        = f.label :competition_package_type_1_id
+        = f.label :competition_package_type_1_id, t('.competition_package_type_id')
         = f.select :competition_package_type_1_id,
         options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
 
@@ -29,24 +29,25 @@
           = f.hidden_field :single, value: true
       - else
         .large-3.columns
+          br
           = f.check_box :single, class: 'js-single-check-box'
-          = f.label :single
+          = f.label :single, t('.single')
 
     .row
       .large-3.columns
-        = f.label :participant_kw_id_1
+        = f.label :participant_kw_id_1, t('.participant_kw_id')
         = f.number_field :participant_kw_id_1
 
       .large-3.columns
-        = f.label :participant_birth_year_1
+        = f.label :participant_birth_year_1, t('.participant_birth_year')
         = f.number_field :participant_birth_year_1
 
       .large-3.columns
-        = f.label :participant_city_1
+        = f.label :participant_city_1, t('.participant_city')
         = f.text_field :participant_city_1
 
       .large-3.columns
-        = f.label :participant_team_1
+        = f.label :participant_team_1, t('.participant_team')
         = f.text_field :participant_team_1
 
   - if @competition.single?
@@ -60,47 +61,45 @@
       .callout.secondary
         .row
           .large-4.columns
-            = f.label :participant_name_2
+            = f.label :participant_name_2, t('.participant_name')
             = f.text_field :participant_name_2
 
           .large-4.columns
-            = f.label :participant_email_2
+            = f.label :participant_email_2, t('.participant_email')
             = f.text_field :participant_email_2
 
           .large-4.columns
-            = f.label :competition_package_type_2_id
+            = f.label :competition_package_type_2_id, t('.competition_package_type_id')
             = f.select :competition_package_type_2_id,
             options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_2_id)), include_blank: true
 
         .row
           .large-3.columns
-            = f.label :participant_kw_id_2
+            = f.label :participant_kw_id_2, t('.participant_kw_id')
             = f.text_field :participant_kw_id_2
 
           .large-3.columns
-            = f.label :participant_birth_year_2
+            = f.label :participant_birth_year_2, t('.participant_birth_year')
             = f.number_field :participant_birth_year_2
 
           .large-3.columns
-            = f.label :participant_city_2
+            = f.label :participant_city_2, t('.participant_city')
             = f.text_field :participant_city_2
 
           .large-3.columns
-            = f.label :participant_team_2
+            = f.label :participant_team_2, t('.participant_team')
             = f.text_field :participant_team_2
 
   .callout
     .row
       .large-12.columns
-        = f.label :remarks
+        = f.label :remarks, t('.remarks')
         = f.text_area :remarks
   
   .callout.warning
     .row
       .large-12.columns
         = f.check_box :terms_of_service
-        = f.label :terms_of_service
-        br
-        = t('.rules_html')
+        = f.label :terms_of_service, t('.terms_of_service')
 
-  = f.submit 'Zapisz się', class: 'button expanded large'
+  = f.submit t('.submit'), class: 'button expanded large'
