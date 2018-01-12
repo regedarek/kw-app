@@ -41,24 +41,29 @@
           = f.label :single, t('.single')
 
     .row
-      .large-3.columns
+      .large-2.columns
+        = f.label :participant_gender_1, t('.participant_gender')
+        = f.select :participant_gender_1, options_for_select([['Męska', 1], ['Żeńska', 2]], @sign_up.try(:participant_gender_1)), include_blank: true
+
+      .large-2.columns
         = f.label :participant_kw_id_1, t('.participant_kw_id')
         = f.number_field :participant_kw_id_1
 
-      .large-3.columns
+      .large-2.columns
         = f.label :participant_birth_year_1, t('.participant_birth_year')
         = f.number_field :participant_birth_year_1
 
-      .large-3.columns
+      .large-2.columns
         = f.label :participant_city_1, t('.participant_city')
         = f.text_field :participant_city_1
 
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_team_1, t('.participant_team')
         = f.text_field :participant_team_1
 
   - if @competition.single?
     = f.hidden_field :participant_name_2
+    = f.hidden_field :participant_gender_2
     = f.hidden_field :participant_email_2
     = f.hidden_field :participant_kw_id_2
     = f.hidden_field :participant_birth_year_2
@@ -88,19 +93,22 @@
             options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_2_id)), include_blank: true
 
         .row
-          .large-3.columns
+          .large-2.columns
+            = f.label :participant_gender_2, t('.participant_gender')
+            = f.select :participant_gender_2, options_for_select([['Męska', 1], ['Żeńska', 2]], @sign_up.try(:participant_gender_2)), include_blank: true
+          .large-2.columns
             = f.label :participant_kw_id_2, t('.participant_kw_id')
             = f.text_field :participant_kw_id_2
 
-          .large-3.columns
+          .large-2.columns
             = f.label :participant_birth_year_2, t('.participant_birth_year')
             = f.number_field :participant_birth_year_2
 
-          .large-3.columns
+          .large-2.columns
             = f.label :participant_city_2, t('.participant_city')
             = f.text_field :participant_city_2
 
-          .large-3.columns
+          .large-2.columns
             = f.label :participant_team_2, t('.participant_team')
             = f.text_field :participant_team_2
 

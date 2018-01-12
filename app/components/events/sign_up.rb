@@ -25,13 +25,29 @@ module Events
     attribute :participant_city_2, Types::String.optional
     attribute :participant_team_1, Types::String.optional
     attribute :participant_team_2, Types::String.optional
-    attribute :participant_gender_1, Types::String.optional
-    attribute :participant_gender_2, Types::String.optional
+    attribute :participant_gender_1, Types::Int.optional
+    attribute :participant_gender_2, Types::Int.optional
     attribute :competition_package_type_1_id, Types::Int.optional
     attribute :competition_package_type_2_id, Types::Int.optional
     attribute :remarks, Types::String.optional
     attribute :terms_of_service, Types::Form::Bool.default(false)
     attribute :single, Types::Form::Bool
+
+    def gender_1
+      if participant_gender_1 == 1
+        'Męska'
+      else
+        'Żeńska'
+      end
+    end
+
+    def gender_2
+      if participant_gender_2 == 1
+        'Męska'
+      else
+        'Żeńska'
+      end
+    end
 
     class << self
       def from_record(record)

@@ -71,6 +71,8 @@ module Events
             :team_name,
             :participant_name_1,
             :participant_name_2,
+            :participant_gender_1,
+            :participant_gender_2,
             :participant_email_1,
             :participant_email_2,
             :participant_kw_id_1,
