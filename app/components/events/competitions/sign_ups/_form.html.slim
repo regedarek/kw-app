@@ -121,7 +121,7 @@
   
   .row
     .large-12.columns
-      - if @errors && @errors.values.any?
+      - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.any?
         .callout.alert
           ul
             - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.each do |error|

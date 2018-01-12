@@ -10,9 +10,13 @@ table.stack
     - sign_ups.each do |sign_up|
       tr
         td = sign_up.id
-        td = [sign_up.participant_name_1, sign_up.participant_name_2].compact.to_sentence
-        td = [sign_up.participant_city_1, sign_up.participant_city_2].compact.to_sentence
-        td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.to_sentence
+        td
+          - if sign_up.team_name.present?
+            = sign_up.team_name
+          - else
+            = [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
+        td = [sign_up.participant_city_1, sign_up.participant_city_2].compact.reject(&:empty?).to_sentence
+        td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
         td
           - if sign_up.payment.prepaid?
             .label.success = t("#{sign_up.payment.state}")
