@@ -9,6 +9,13 @@
           = f.label :team_name, t('.team_name')
           = f.text_field :team_name, required: true
 
+  .row
+    .large-12.columns
+      - if @errors && @errors.values.any?
+        .callout.alert
+          ul
+            - @errors.select { |key, value| key.to_s.include?('_1') }.each do |error|
+              li= error.last.to_sentence
   .callout.primary
     .row
       .large-3.columns
@@ -58,6 +65,13 @@
     = f.hidden_field :competition_package_type_2_id
   - else
     .js-player-2
+      .row
+        .large-12.columns
+          - if @errors && @errors.values.any?
+            .callout.alert
+              ul
+                - @errors.select { |key, value| key.to_s.include?('_2') }.each do |error|
+                  li= error.last.to_sentence
       .callout.secondary
         .row
           .large-4.columns

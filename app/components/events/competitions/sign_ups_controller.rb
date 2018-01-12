@@ -21,7 +21,7 @@ module Events
           end
 
           result.failure do |errors|
-            flash[:error] = errors.values.join(", ")
+            @errors = errors
             @sign_up = Events::SignUp.new(params_for_build)
             render(action: :new)
           end

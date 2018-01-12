@@ -1,5 +1,7 @@
 en:
   errors:
+    participant_name_1:
+      filled?: 'dupa'
     or: "or"
     array?: "must be an array"
 
@@ -27,7 +29,7 @@ en:
 
     even?: "must be even"
 
-    gt?: "must be greater than %{num}"
+    gt?: "musi być większe niż %{num}"
 
     gteq?: "must be greater than or equal to %{num}"
 
@@ -43,7 +45,7 @@ en:
 
     bool?: "must be boolean"
 
-    true?: "must be true"
+    true?: "musi być zaznaczone"
 
     false?: "must be false"
 
@@ -89,6 +91,31 @@ en:
             range: "length must be within %{size_left} - %{size_right}"
 pl:
   errors:
+    active_kw_id_1: Musisz posiadać opłaconą składkę 1
+    active_kw_id_2: Musisz posiadać opłaconą składkę 2
+    rules:
+      participant_name_1:
+        filled?: Imię i nazwisko 1 nie może być puste
+      participant_email_1:
+        filled?: E-mail 1 nie może być pusty
+      participant_birth_year_1:
+        filled?: Musisz podać rok urodzenia 1
+        gt?: Rok urodzenia 1 nie może być wcześniej niż %{num}
+        lt?: Rok urodzenia 1 nie może być później niż %{num}
+      competition_package_type_1_id:
+        filled?: Musisz wybrać pakiet 1
+      participant_name_2:
+        filled?: Imię i nazwisko 2 nie może być puste
+      participant_email_2:
+        filled?: E-mail 2 nie może być pusty
+      participant_birth_year_2:
+        filled?: Musisz podać rok urodzenia 2
+        gt?: Rok urodzenia 2 nie może być wcześniej niż %{num}
+        lt?: Rok urodzenia 2 nie może być później niż %{num}
+      competition_package_type_2_id:
+        filled?: Musisz wybrać pakiet 2
+      terms_of_service:
+        true?: Musisz zaakceptować regulamin
     or: "or"
     array?: "must be an array"
 
@@ -106,7 +133,7 @@ pl:
 
     not_eql?: "must not be equal to %{left}"
 
-    filled?: "smust be filled"
+    filled?: "nie może być puste"
 
     format?: "is in invalid format"
 
@@ -116,7 +143,7 @@ pl:
 
     even?: "must be even"
 
-    gt?: "must be greater than %{num}"
+    gt?: "musi być większe niż %{num}"
 
     gteq?: "must be greater than or equal to %{num}"
 
@@ -132,7 +159,7 @@ pl:
 
     bool?: "must be boolean"
 
-    true?: "must be true"
+    true?: "musi być zaznaczone"
 
     false?: "must be false"
 
@@ -152,7 +179,7 @@ pl:
 
     attr?: "is missing"
 
-    lt?: "must be less than %{num}"
+    lt?: "musi być mniejsze niż %{num}"
 
     lteq?: "must be less than or equal to %{num}"
 
