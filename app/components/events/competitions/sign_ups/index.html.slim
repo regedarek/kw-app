@@ -1,10 +1,11 @@
 .column
   .row
     .large-12.columns
-      = link_to  'Zapisz się', new_competition_sign_up_path(@competition)
+      h3 = @competition.name
   .row
     .large-12.columns
-      b= @competition.name
+      = link_to  'Zapisz się', new_competition_sign_up_path(@competition),
+      class: 'button large primary expanded'
   .row
     .large-12.columns
       = render 'table', sign_ups: @competition.sign_ups_records
