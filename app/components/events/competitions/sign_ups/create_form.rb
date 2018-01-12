@@ -65,7 +65,7 @@ module Events
          optional(:participant_kw_id_1, Types::Form::Int).maybe
          required(:terms_of_service, Types::Form::Bool).value(:true?)
 
-         validate(active_kw_id_2: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
+         validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
            if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
              ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: kw_id)
            else

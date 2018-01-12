@@ -112,12 +112,20 @@
             = f.label :participant_team_2, t('.participant_team')
             = f.text_field :participant_team_2
 
+
   .callout
     .row
       .large-12.columns
         = f.label :remarks, t('.remarks')
         = f.text_area :remarks
   
+  .row
+    .large-12.columns
+      - if @errors && @errors.values.any?
+        .callout.alert
+          ul
+            - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.each do |error|
+              li= error.last.to_sentence
   .callout.warning
     .row
       .large-12.columns
