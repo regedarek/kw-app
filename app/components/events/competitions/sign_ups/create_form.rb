@@ -16,19 +16,35 @@ module Events
         end
 
         define! do
-          required(:single, Types::Form::Bool).filled(:bool?).when(:false?) do
-            required(:participant_name_2).filled(:str?)
-            required(:participant_email_2).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
-            required(:participant_birth_year_2, Types::Form::Int | Types::String).filled(:int?, lt?: 2003, gt?: 1920)
-            required(:competition_package_type_2_id).filled(:str?)
+          optional(:participant_name_2, Types::Maybe::Strict::String).maybe
+          optional(:participant_email_2, Types::Maybe::Coercible::String).maybe
+          optional(:participant_birth_year_2, Types::Form::Int).maybe
+          optional(:competition_package_type_2_id, Types::Form::Int).maybe
+          optional(:participant_kw_id_2, Types::Form::Int).maybe
+
+          required(:single, Types::Form::Bool).maybe.when(:false?) do
+            required(:participant_name_2, Types::String).filled
+            required(:participant_email_2, Types::String).filled(format?: /.@.+[.][a-z]{2,}/i)
+            required(:participant_birth_year_2, Types::Form::Int).filled(:int?, lt?: 2003, gt?: 1920)
+            required(:competition_package_type_2_id, Types::Form::Int).filled
+            optional(:participant_kw_id_2, Types::Form::Int).maybe
+
+            validate(active_kw_id: [:participant_kw_id_2, :competition_package_type_2_id]) do |kw_id, package_id|
+              byebug
+              if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
+                ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: kw_id)
+              else
+                true
+              end
+            end
           end
 
-         #required(:participant_name_1, Types::Coercible::String).filled
-         #required(:participant_email_1, Types::Coercible::String).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
+         required(:participant_name_1, Types::String).filled
+         required(:participant_email_1, Types::String).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1, Types::Form::Int).filled(:int?, lt?: 2003, gt?: 1920)
-         required(:competition_package_type_1_id, Types::Coercible::Int).filled
-         optional(:participant_kw_id_1).maybe
-         ##required(:terms_of_service, Types::Form::Bool).filled(eql?: true)
+         required(:competition_package_type_1_id, Types::Form::Int).filled
+         optional(:participant_kw_id_1, Types::Form::Int).maybe
+         #required(:terms_of_service, Types::Form::Bool).filled(eql?: true)
          validate(active_kw_id: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
            if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
              ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: kw_id)

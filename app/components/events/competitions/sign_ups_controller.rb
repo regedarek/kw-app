@@ -48,7 +48,7 @@ module Events
           participant_email_1: sign_up_params[:participant_email_1],
           participant_email_2: sign_up_params[:participant_email_2],
           participant_birth_year_1: params[:sign_up][:participant_birth_year_1],
-          participant_birth_year_2: sign_up_params[:participant_birth_year_2].to_i,
+          participant_birth_year_2: params[:sign_up][:participant_birth_year_2],
           participant_city_1: sign_up_params[:participant_city_1],
           participant_city_2: sign_up_params[:participant_city_2],
           participant_team_1: sign_up_params[:participant_team_1],

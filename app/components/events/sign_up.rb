@@ -19,7 +19,7 @@ module Events
     attribute :participant_email_1, Types::String.optional
     attribute :participant_email_2, Types::String.optional
     attribute :participant_birth_year_1, Types::Form::Int.optional
-    attribute :participant_birth_year_2, Types::Coercible::Int.optional
+    attribute :participant_birth_year_2, Types::Form::Int.optional
     attribute :participant_city_1, Types::String.optional
     attribute :participant_city_2, Types::String.optional
     attribute :participant_team_1, Types::String.optional
@@ -29,8 +29,8 @@ module Events
     attribute :competition_package_type_1_id, Types::Int.optional
     attribute :competition_package_type_2_id, Types::Int.optional
     attribute :remarks, Types::String.optional
-    attribute :terms_of_service, Types::Bool
-    attribute :single, Types::Bool
+    attribute :terms_of_service, Types::Form::Bool
+    attribute :single, Types::Form::Bool
 
     class << self
       def from_record(record)
