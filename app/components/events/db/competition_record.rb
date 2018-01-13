@@ -9,6 +9,16 @@ module Events
       has_many :package_types,
         class_name: 'Events::Db::CompetitionPackageTypeRecord',
         dependent: :destroy
+
+      def closed_or_limit_reached?
+        closed? || limit_reached?
+      end
+
+      def limit_reached?
+        return false if limit == 0
+
+        sign_ups_records.count >= limit
+      end
     end
   end
 end
