@@ -29,15 +29,17 @@
         = f.label :participant_email_1, t('.participant_email')
         = f.text_field :participant_email_1
 
-      .large-3.columns
-        = f.label :competition_package_type_1_id, t('.competition_package_type_id')
-        = f.select :competition_package_type_1_id,
-        options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
-
       - if @competition.single?
-        .large-3.columns
+        .large-6.columns
+          = f.label :competition_package_type_1_id, t('.competition_package_type_id')
+          = f.select :competition_package_type_1_id, options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
           = f.hidden_field :single, value: true
       - else
+        .large-3.columns
+          = f.label :competition_package_type_1_id, t('.competition_package_type_id')
+          = f.select :competition_package_type_1_id,
+          options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
+
         .large-3.columns
           br
           = f.check_box :single, class: 'js-single-check-box'
