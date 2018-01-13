@@ -7,6 +7,7 @@ table.stack
       th Opcje płatności
       th Nazwa zespołu?
       th Zespołowe?
+      th Zapisy
       th Tabelka
   tbody
     - competitions.each do |competition|
@@ -17,4 +18,13 @@ table.stack
         td = competition.package_types.map(&:name).to_sentence
         td = competition.team_name ? 'Tak' : 'Nie'
         td = competition.single? ? 'Nie' : 'Tak'
-        td = link_to 'XLSX', admin_competition_path(competition, format: :xlsx)
+        td.text-center
+          - if competition.closed?
+            = link_to 'Zamknięte',
+            toggle_closed_admin_competition_path(competition.id), method: :put,
+            class: 'label alert'
+          - else
+            = link_to 'Otwarte',
+            toggle_closed_admin_competition_path(competition.id), method: :put,
+            class: 'label success'
+        td.text-center = link_to 'XLSX', admin_competition_path(competition, format: :xlsx) 

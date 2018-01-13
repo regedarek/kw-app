@@ -33,6 +33,12 @@ module Events
           end
         end
       end
+      
+      def toggle_closed
+        competition = Events::Db::CompetitionRecord.find(params[:id])
+        competition.toggle!(:closed)
+        redirect_to admin_competitions_path, flash: { success: "Zapisy #{competition.closed? ? 'zamknięte' : 'otwarte'}" }
+      end
 
       private
 

@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :competitions
+      resources :competitions do
+        member do
+          put :toggle_closed
+        end
+      end
     end
   end
 end
