@@ -19,7 +19,7 @@ module Events
 
         either(create_record) do |result|
           result.success do
-            redirect_to '/mrozne/zapisy', flash: { notice: 'Zapisano na zawody!' }
+            redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: 'Zapisano na zawody!' }
           end
 
           result.failure do |errors|
