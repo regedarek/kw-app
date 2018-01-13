@@ -3,8 +3,6 @@
     = image_tag @competition.baner_url
 - else
   h3 = @competition.name
-.callout.warning
-  = t('.top_info')
 
 = form_for :sign_up, html: { class: 'js-strzelecki-sign-up-form' }, url: competition_sign_ups_path do |f|
   - if @competition.team_name
