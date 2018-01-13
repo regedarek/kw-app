@@ -9,6 +9,25 @@ module Events
         @competitions = Events::Db::CompetitionRecord.all
       end
 
+      def edit
+        @competition = Events::Db::CompetitionRecord.find(params[:id])
+      end
+
+      def update
+        @competition = Events::Db::CompetitionRecord.find(params[:id])
+
+        either(update_record(id: @competition.id)) do |result|
+          result.success do
+            redirect_to edit_admin_competition_path(@competition.id), flash: { notice: 'Zaktualizowano zawody' }
+          end
+
+          result.failure do |errors|
+            flash[:error] = errors.values.join(", ")
+            redirect_to admin_competitions_path, flash: { alert: 'Błąd' }
+          end
+        end
+      end
+
       def show
         @competition = Events::Db::CompetitionRecord.find(params[:id])
 
@@ -33,7 +52,7 @@ module Events
           end
         end
       end
-      
+
       def toggle_closed
         competition = Events::Db::CompetitionRecord.find(params[:id])
         competition.toggle!(:closed)
@@ -49,10 +68,17 @@ module Events
         ).call(raw_inputs: competition_params)
       end
 
+      def update_record(id:)
+        Events::Admin::Competitions::Update.new(
+          Events::Competitions::Repository.new,
+          Events::Admin::Competitions::CreateForm.new
+        ).call(id: id, raw_inputs: competition_params)
+      end
+
       def competition_params
         params
           .require(:competition)
-          .permit(:name, :edition_sym, :rules, :baner_url, :single, :team_name)
+          .permit(:name, :edition_sym, :rules, :baner_url, :single, :team_name, :closed, :limit)
       end
     end
   end

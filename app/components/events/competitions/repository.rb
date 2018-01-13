@@ -12,6 +12,12 @@ module Events
         Events::Competition.from_record(record)
       end
 
+      def update(id:, form_outputs:)
+        record = Events::Db::CompetitionRecord.find_by(id: id)
+        record.update(form_outputs.to_h)
+        Events::Competition.from_record(record)
+      end
+
       def create_sign_up(competition_id:, form_outputs:)
         attributes = form_outputs
           .to_h.tap { |hs| hs.delete(:terms_of_service) }.merge(competition_record_id: competition_id)

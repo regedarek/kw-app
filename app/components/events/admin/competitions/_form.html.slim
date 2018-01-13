@@ -1,0 +1,47 @@
+= form_for :competition, url: admin_competition_path(competition), method: :put do |f|
+  .row
+    .large-12.columns
+
+  .callout.primary
+    .row
+      .large-4.columns
+        = f.label 'Nazwa'
+        = f.text_field :name
+
+      .large-4.columns
+        = f.label 'Unikalny symbol zawodów'
+        = f.text_field :edition_sym
+
+      .large-4.columns
+        = f.label 'Limit miejsc na zawodach(0 - brak limitu)'
+        = f.number_field :limit
+
+    .row
+      .large-5.columns
+        = f.label 'Logo nad formularzem'
+        = f.text_field :baner_url
+
+      .large-7.columns
+        = f.label 'Zasady dodane na dole formularza'
+        = f.text_area :rules
+
+    .row
+      .large-2.columns
+        = f.label 'Nazwa zespołu?'
+        = f.check_box :team_name
+
+      .large-2.columns
+        = f.label 'Indywidualne?'
+        = f.check_box :single
+
+      .large-2.columns
+        = f.label 'Zamknięte?'
+        = f.check_box :closed
+
+      .large-6.columns
+
+  .row
+    .large-6.columns
+      = f.submit 'Zapisz', class: 'button expanded large'
+    .large-6.columns
+      = link_to 'powrót', admin_competitions_path, class: 'button expanded large warning'

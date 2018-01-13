@@ -15,6 +15,8 @@ module Events
     attribute :edition_sym, Types::Strict::Symbol.constructor(&:to_sym)
     attribute :baner_url, Types::String
     attribute :rules, Types::String
+    attribute :closed, Types::Strict::Bool
+    attribute :limit, Types::Strict::Int
 
     class << self
       def from_record(record)
@@ -23,6 +25,8 @@ module Events
           name: record.name,
           edition_sym: record.edition_sym,
           single: record.single,
+          limit: record.limit,
+          closed: record.closed,
           team_name: record.team_name,
           rules: record.rules,
           baner_url: record.baner_url

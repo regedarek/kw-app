@@ -2,19 +2,17 @@ table.stack
   thead
     tr
       th ID
-      th Nazwa
-      th Edycja
+      th width=300 Nazwa
       th Opcje płatności
       th Nazwa zespołu?
       th Zespołowe?
       th Zapisy
-      th Tabelka
+      th width=150
   tbody
     - competitions.each do |competition|
       tr
         td = competition.id
         td = link_to competition.name, competition_sign_ups_path(competition)
-        td = competition.edition_sym
         td = competition.package_types.map(&:name).to_sentence
         td = competition.team_name ? 'Tak' : 'Nie'
         td = competition.single? ? 'Nie' : 'Tak'
@@ -27,4 +25,8 @@ table.stack
             = link_to 'Otwarte',
             toggle_closed_admin_competition_path(competition.id), method: :put,
             class: 'label success'
-        td.text-center = link_to 'XLSX', admin_competition_path(competition, format: :xlsx) 
+        td.text-center
+          = link_to 'Edytuj', edit_admin_competition_path(competition) 
+          |  | 
+          = link_to 'XLSX', admin_competition_path(competition, format: :xlsx) 
+
