@@ -8,7 +8,7 @@ module Events
 
         mail(
           to: @sign_up.participant_email_1,
-          from: 'kw@kw.krakow.pl',
+          from: 'mo@kw.krakow.pl',
           subject: "Zapisałeś się na zawody KW Kraków: #{@sign_up.competition_record.name}!"
         )
       end
