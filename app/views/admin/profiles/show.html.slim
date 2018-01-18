@@ -4,6 +4,11 @@
       .large-12.columns 
         b Number członkowski: 
         = @profile.user.kw_id
+  - else
+    .row
+      .large-12.columns 
+        b Number członkowski: 
+        = @profile.kw_id
 
   .row
     .large-12.columns 
