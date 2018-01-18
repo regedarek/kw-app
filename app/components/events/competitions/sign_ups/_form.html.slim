@@ -138,6 +138,6 @@
         = f.label :terms_of_service, t('.terms_of_service')
     .row
       .large-12.columns
-        = @competition.rules
+        = @competition.rules.html_safe
 
   = f.submit t('.submit'), class: 'button expanded large'
