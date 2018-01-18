@@ -2,7 +2,7 @@
   - if user_signed_in?
     .row
       .large-12.columns
-        = render 'events/table', events: Db::Event.order(:event_date).where('event_date > ?', Date.today).limit(3)
+        = render 'events/table', events: Db::Event.order(:event_date).where('event_date > ?', Date.today)
 
     .row
       .large-12.columns
