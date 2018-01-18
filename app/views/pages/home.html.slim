@@ -11,7 +11,7 @@
     - if current_user.reservations.any?
       .row
         .large-12.columns
-          = render 'reservations/table', reservations: current_user.reservations.not_archived
+          = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
 
     - if false
       .row
