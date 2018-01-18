@@ -35,17 +35,17 @@ module Events
 
     def gender_1
       if participant_gender_1 == 1
-        'Męska'
+        'Mężczyzna'
       else
-        'Żeńska'
+        'Kobieta'
       end
     end
 
     def gender_2
       if participant_gender_2 == 1
-        'Męska'
+        'Mężczyzna'
       else
-        'Żeńska'
+        'Kobieta'
       end
     end
 
