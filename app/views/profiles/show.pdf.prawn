@@ -46,7 +46,7 @@ prawn_document do |pdf|
   end
   pdf.grid([4,0], [4,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-      pdf.text 'Oświadczam, że znam postanowienia Statutu Klubu Wysokogórskiego Kraków i zobowiązuje się do ich przestrzegania. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w imprezach organizowanych przez Klub podejmuję na własne ryzyko i odpowiedzialność. Równocześnie wyrażam zgodę na przetwarzanie moich danych osobowych dla celów statutowych zgodnie z ustawą z dnia 29 sierpnia 1997r. o ochronie danych osobowych (Dz. U. Nr 133, poz. 883 z 1997 r. z późniejszymi zmianami).', size: 7, indent_paragraphs: 10
+      pdf.text I18n.t('activemodel.attributes.user_management_profile_form.terms_of_service_info'), size: 7, indent_paragraphs: 10
     end
   end
   pdf.grid([5,0], [5,2]).bounding_box do
