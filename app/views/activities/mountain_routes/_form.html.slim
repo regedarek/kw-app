@@ -15,14 +15,18 @@
       fieldset.fieldset
         legend Wybierz aktywność 
 
-        = f.radio_button :route_type, :regular_climbing
-        = f.label :route_type_regular_climbing
+        - if Date.today.month >= 4 && Date.today.month <= 11
+          = f.radio_button :route_type, :regular_climbing, checked: true
+          = f.label :route_type_regular_climbing
 
-        = f.radio_button :route_type, :winter_climbing
-        = f.label :route_type_winter_climbing
+          = f.radio_button :route_type, :winter_climbing
+          = f.label :route_type_winter_climbing
+        - else
+          = f.radio_button :route_type, :regular_climbing
+          = f.label :route_type_regular_climbing
 
-        = f.radio_button :route_type, :ski
-        = f.label :route_type_ski
+          = f.radio_button :route_type, :winter_climbing, checked: true
+          = f.label :route_type_winter_climbing
 
   .callout.success
     .row
@@ -53,7 +57,7 @@
   .row
     .large-12.columns
       fieldset.fieldset
-        legend.legend subiektywna ocena urody drogi/zjazdu/tury
+        legend.legend subiektywna ocena urody drogi
 
         = f.radio_button :rating, 1
         = f.label :rating_one
@@ -96,8 +100,6 @@
       .large-12.columns
         = f.label :description, 'uwagi dotyczące przejścia, topo, link do galerii zdjęć'
         = f.text_area :description
-
-
 
   .row
     .large-12.columns
