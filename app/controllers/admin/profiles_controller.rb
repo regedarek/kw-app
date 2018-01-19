@@ -20,17 +20,20 @@ module Admin
 
     def show
       @profile = Db::Profile.find(params[:id])
+      session[:original_referrer] = request.env["HTTP_REFERER"]
     end
 
     def edit
       @profile = Db::Profile.find(params[:id])
+      session[:original_referrer] = request.env["HTTP_REFERER"]
     end
 
     def update
       @profile = Db::Profile.find(params[:id])
 
       if @profile.update(profile_params)
-        redirect_to edit_admin_profile_path(@profile.id), notice: 'Zaktualizowano'
+        flash[:notice] = 'Zaktualizowano!'
+        render :edit
       else
         render :edit
       end
