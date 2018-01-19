@@ -11,8 +11,6 @@ Rails.application.routes.draw do
     get '/zarejestruj', to: 'devise/registrations#new'
   end
 
-  get '/', to: 'activities/mountain_routes#index',
-    constraints: lambda { |req| req.env['SERVER_NAME'].match('przejscia') }
   namespace :activities do
     resources :mountain_routes
   end
@@ -111,6 +109,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '/', to: 'activities/mountain_routes#index',
+    constraints: lambda { |req| req.env['SERVER_NAME'].match('przejscia') }
 
   get 'mas' => 'mas/sign_ups#new'
   get 'zarezerwuj' => 'reservations#new', as: :reserve
