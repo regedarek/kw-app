@@ -2,6 +2,13 @@
   .large-12.columns
     = form_for @profile, as: :profile, url: admin_profile_path(params[:id]), method: :put do |f|
       .row
+        .large-12.columns
+          - if @profile.errors.any?
+            .callout.alert
+              ul
+                - @profile.errors.full_messages.each do |msg|
+                  li= msg
+      .row
         .medium-6.columns
           = f.label :kw_id
           = f.text_field :kw_id
