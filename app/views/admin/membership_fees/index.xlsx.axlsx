@@ -6,12 +6,24 @@ wb.styles do |style|
     bg_color: '004586',
     alignment: { horizontal: :center, vertical: :center, wrap_text: true }
   }
-  wb.add_worksheet(name: "Zapisy 2017") do |sheet|
+  wb.add_worksheet(name: "Składki 2017") do |sheet|
     attributes = ['Numer klubowy', 'Rok', 'Imię', 'Nazwisko', 'E-mail', 'Opłacono', 'Gotówka', 'Dotpay ID', 'Kiedy dodano']
     sheet.add_row(attributes, style: style.add_style(highlight_cell_options))
-    Db::Membership::Fee.find_each do |fee|
+    Db::Membership::Fee.where(year: 2017).find_each do |fee|
       user = fee.user
-      values = [fee.kw_id, fee.year, user.try(:first_name), fee.user.try(:last_name), fee.user.try(:email), fee.payment.prepaid?, fee.payment.cash?, fee.payment.dotpay_id, fee.created_at]
+      profile = Db::Profile.find_by(kw_id: fee.kw_id)
+      values = [fee.kw_id, fee.year, user.try(:first_name) || profile.try(:first_name), user.try(:last_name) || profile.try(:last_name), user.try(:email) || profile.try(:email), fee.payment.prepaid?, fee.payment.cash?, fee.payment.dotpay_id, fee.created_at]
+      sheet.add_row(values)
+    end
+  end
+
+  wb.add_worksheet(name: "Składki 2018") do |sheet|
+    attributes = ['Numer klubowy', 'Rok', 'Imię', 'Nazwisko', 'E-mail', 'Opłacono', 'Gotówka', 'Dotpay ID', 'Kiedy dodano']
+    sheet.add_row(attributes, style: style.add_style(highlight_cell_options))
+    Db::Membership::Fee.where(year: 2018).find_each do |fee|
+      user = fee.user
+      profile = Db::Profile.find_by(kw_id: fee.kw_id)
+      values = [fee.kw_id, fee.year, user.try(:first_name) || profile.try(:first_name), user.try(:last_name) || profile.try(:last_name), user.try(:email) || profile.try(:email), fee.payment.prepaid?, fee.payment.cash?, fee.payment.dotpay_id, fee.created_at]
       sheet.add_row(values)
     end
   end
