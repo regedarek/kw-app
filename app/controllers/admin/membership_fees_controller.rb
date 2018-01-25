@@ -4,7 +4,7 @@ require 'admin/membership_fees_form'
 module Admin
   class MembershipFeesController < Admin::BaseController
     def index
-      prepaid_fees = Db::Membership::Fee.includes(:payment).where(payments: { state: 'prepaid' } ).order(created_at: :desc)
+      prepaid_fees = Db::Membership::Fee.includes(:payment).order(created_at: :desc)
       @q = prepaid_fees.ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
       @membership_fees = @q.result.includes(:user, :payment).page(params[:page])
