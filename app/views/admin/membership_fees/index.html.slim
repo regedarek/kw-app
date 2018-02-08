@@ -20,11 +20,11 @@
         = search_form_for @q, url: admin_membership_fees_path, class: 'js-send-on-enter' do |f|
           .row
             .large-4.columns
-              = f.label :user_first_name_cont, 'Imię'
-              = f.search_field :user_first_name_cont
+              = f.label :profile_first_name_or_user_first_name_cont, 'Imię'
+              = f.search_field :profile_first_name_or_user_first_name_cont
             .large-4.columns
-              = f.label :user_last_name_cont, 'Nazwisko'
-              = f.search_field :user_last_name_cont
+              = f.label :profile_last_name_or_user_last_name_cont, 'Nazwisko'
+              = f.search_field :profile_last_name_or_user_last_name_cont
             .large-4.columns
               = f.label :kw_id_eq, 'Numer klubowy'
               = f.search_field :kw_id_eq
