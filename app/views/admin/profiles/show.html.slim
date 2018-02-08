@@ -2,12 +2,12 @@
   - if @profile.user && @profile.user.kw_id.present?
     .row
       .large-12.columns 
-        b Number członkowski: 
+        b Number członkowski(użytkownia): 
         = @profile.user.kw_id
   - else
     .row
       .large-12.columns 
-        b Number członkowski: 
+        b Number członkowski(profilu): 
         = @profile.kw_id
 
   .row
@@ -147,6 +147,9 @@
         - else
           .callout.warning
             = "Nie opłacono jeszcze wpisowego i składki"
+            - if @profile.payment.payment_url.present?
+              p
+                = link_to 'Link do płatności', @profile.payment.payment_url
 
   .row
     .large-12.columns
