@@ -4,7 +4,7 @@ table.stack
       th width='20%' Imię i nazwisko
       th width='20%' Number klubowy
       th width='10%' Telefon
-      th width='10%' Ostatnia składka
+      th width='10%' Płatności
       th width='20%' Status
       th width='20%'
   tbody
@@ -25,6 +25,10 @@ table.stack
                   span.label.success = fee.year
                 - else
                   span.label.warning = fee.year
+          - else
+            - if profile.payment
+              - if profile.payment.prepaid?
+                span.label.success wpisowe i składka
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td
           - if profile.accepted?
