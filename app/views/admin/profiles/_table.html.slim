@@ -28,7 +28,7 @@ table.stack
           - else
             - if profile.payment
               - if profile.payment.prepaid?
-                span.label.success wpisowe i składka
+                span.label.success wpisowe
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td
           - if profile.accepted?
