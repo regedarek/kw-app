@@ -16,7 +16,7 @@ wb.styles do |style|
     bg_color: '004586',
     alignment: { horizontal: :center, vertical: :center, wrap_text: true }
   }
-  wb.add_worksheet(name: "#{@competition.name}") do |sheet|
+  wb.add_worksheet(name: "#{@competition.edition_sym}") do |sheet|
     default_attributes = sign_up_attributes.map do |attr|
       Events::Db::CompetitionRecord.human_attribute_name(attr)
     end.push('Pakiet 1', 'Pakiet 2', 'Płatność', 'Utworzono')
