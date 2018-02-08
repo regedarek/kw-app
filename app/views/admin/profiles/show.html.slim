@@ -116,6 +116,12 @@
           li
             = I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}")
 
+  - if @profile.acceptor_id.present?
+    .row
+      .large-12.columns 
+        b Akceptujący: 
+        = Db::User.find(@profile.acceptor_id).display_name
+
   - if @profile.remarks.present?
     .row
       .large-12.columns 

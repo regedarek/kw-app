@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208153506) do
+ActiveRecord::Schema.define(version: 20180208222041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20180208153506) do
     t.integer  "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "creator_id"
     t.index ["kw_id"], name: "index_membership_fees_on_kw_id", using: :btree
   end
 
@@ -261,6 +262,7 @@ ActiveRecord::Schema.define(version: 20180208153506) do
     t.date     "date_of_death"
     t.text     "remarks"
     t.integer  "cost"
+    t.integer  "acceptor_id"
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true, using: :btree
   end
 

@@ -19,7 +19,7 @@ module Admin
     end
 
     def create
-      result = Admin::MembershipFees.new(payment_params).create
+      result = Admin::MembershipFees.new(creator_id: current_user.id, allowed_params: payment_params).create
       result.success { redirect_to admin_membership_fees_path, notice: 'Dodano' }
       result.invalid { |form:| redirect_to admin_membership_fees_path, alert: "Nie dodano: #{form.errors.messages}" }
       result.else_fail!

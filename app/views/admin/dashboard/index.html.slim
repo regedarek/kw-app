@@ -54,3 +54,23 @@
         tr
           td = "#{profile.first_name} #{profile.last_name}"
           td = profile.email
+.row
+  .large-6.columns
+    h3 dzisiejsze zgłoszenia
+    table.stack
+      - Db::Profile.where(accepted: true, application_date: Date.today.beginning_of_day..Date.today.end_of_day).order('created_at DESC NULLS LAST').each do |profile|
+        tr
+          td = "#{profile.first_name} #{profile.last_name}"
+          td = profile.email
+          td = Db::User.find(profile.acceptor_id).display_name
+
+  .large-6.columns
+    h3 dzisiejsze składki
+    table.stack
+      - Db::Membership::Fee.order(created_at: :desc).includes(:payment).where(created_at: Date.today.beginning_of_day..Date.today.end_of_day, payments: { cash: true, state: 'prepaid'}).each do |payment|
+        tr
+          td
+            = payment.year
+          td = Db::User.find(payment.creator_id).display_name
+          td
+            = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"

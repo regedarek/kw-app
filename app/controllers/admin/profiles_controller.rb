@@ -53,6 +53,7 @@ module Admin
         profile.update(
           kw_id: accept_params.fetch(:kw_id),
           application_date: accept_params.fetch(:application_date),
+          acceptor_id: current_user.id,
           accepted: true
         )
         user.send_reset_password_instructions
@@ -60,6 +61,7 @@ module Admin
           fee = Db::Membership::Fee.create(
             year: profile.application_date.year,
             kw_id: profile.kw_id,
+            creator_id: current_user.id,
             payment: profile.payment,
             cost: 100
           )
