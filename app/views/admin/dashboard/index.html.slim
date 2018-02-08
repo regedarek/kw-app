@@ -56,7 +56,7 @@
           td = profile.email
 .row
   .large-6.columns
-    h3 dzisiejsze zgłoszenia
+    h3 dzisiejsi zaakceptowani
     table.stack
       - Db::Profile.where(accepted: true, application_date: Date.today.beginning_of_day..Date.today.end_of_day).order('created_at DESC NULLS LAST').each do |profile|
         tr
@@ -65,7 +65,7 @@
           td = Db::User.find(profile.acceptor_id).display_name
 
   .large-6.columns
-    h3 dzisiejsze składki
+    h3 dzisiejsze dodane składki
     table.stack
       - Db::Membership::Fee.order(created_at: :desc).includes(:payment).where(created_at: Date.today.beginning_of_day..Date.today.end_of_day, payments: { cash: true, state: 'prepaid'}).each do |payment|
         tr
