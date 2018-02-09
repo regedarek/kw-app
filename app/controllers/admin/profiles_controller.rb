@@ -61,7 +61,6 @@ module Admin
           fee = Db::Membership::Fee.create(
             year: profile.application_date.year,
             kw_id: profile.kw_id,
-            creator_id: current_user.id,
             payment: profile.payment,
             cost: 100
           )
