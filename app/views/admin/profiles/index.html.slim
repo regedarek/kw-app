@@ -107,9 +107,15 @@
             .large-2.columns
               br  
               = f.submit 'Szukaj', class: 'button expanded'
-
   .row
     .large-12.columns
       = render 'table', profiles: @profiles
+
   .row
-    = paginate @profiles
+    .large-12.columns
+      .callout
+        = @profiles.map(&:email).join(', ')
+
+  .row
+    .large-12.columns
+      = paginate @profiles
