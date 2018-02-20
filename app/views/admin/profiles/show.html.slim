@@ -170,7 +170,7 @@
           .input-group
             span.input-group-label
               | Numer członkowski
-            = f.number_field :kw_id, class: 'input-group-field', value: Db::Profile.maximum(:kw_id) + 1
+            = f.number_field :kw_id, class: 'input-group-field', value: Db::Profile.where.not(kw_id: 3884).maximum(:kw_id) + 1
             span.input-group-label
               | Data wstąpienia
             = f.date_field :application_date, class: 'input-group-field', value: Date.today
