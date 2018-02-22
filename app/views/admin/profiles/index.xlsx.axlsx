@@ -1,6 +1,7 @@
 wb = xlsx_package.workbook
 profile_attributes = %i(
   first_name last_name
+  kw_id
   email
   phone
   birth_date
