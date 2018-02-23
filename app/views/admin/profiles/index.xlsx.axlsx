@@ -37,7 +37,14 @@ wb.styles do |style|
     sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
     @results.each do |profile|
       profile_values = profile_attributes.map do |attr|
-        profile.read_attribute(attr)
+        case attr
+        when :position
+          profile.read_attribute(attr).map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
+        when :acomplished_courses
+          profile.read_attribute(attr).map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}") }.to_sentence
+        else
+          profile.read_attribute(attr)
+        end
       end
       sheet.add_row(profile_values)
     end
