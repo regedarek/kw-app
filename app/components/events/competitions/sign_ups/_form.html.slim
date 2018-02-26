@@ -56,7 +56,7 @@
 
       .large-2.columns
         = f.label :participant_birth_year_1, 'Rok urodzenia* (np. 1990)'
-        = f.number_field :participant_birth_year_1
+        = f.text_field :participant_birth_year_1
 
       .large-2.columns
         = f.label :participant_city_1, t('.participant_city')
@@ -107,7 +107,7 @@
 
           .large-2.columns
             = f.label :participant_birth_year_2, 'Rok urodzenia* (np. 1990)'
-            = f.number_field :participant_birth_year_2
+            = f.text_field :participant_birth_year_2
 
           .large-2.columns
             = f.label :participant_city_2, t('.participant_city')
