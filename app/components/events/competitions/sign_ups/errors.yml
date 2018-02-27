@@ -122,6 +122,7 @@ pl:
         true?: Musisz zaakceptować regulamin
     or: "or"
     array?: "must be an array"
+    int?: 'musi być liczbą'
 
     empty?: "must be empty"
 
@@ -166,8 +167,6 @@ pl:
     true?: "musi być zaznaczone"
 
     false?: "must be false"
-
-    int?: "must be an integer"
 
     float?: "must be a float"
 

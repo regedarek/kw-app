@@ -4,6 +4,11 @@
 - else
   h3 = @competition.name
 
+.callout.primary.text-center
+  = link_to image_tag('pl.png'), { locale: :pl }
+  |    
+  = link_to image_tag('en.png'), { locale: :en }
+
 = form_for :sign_up, html: { class: 'js-strzelecki-sign-up-form' }, url: competition_sign_ups_path do |f|
   - if @competition.team_name
     .callout.warning
@@ -48,14 +53,14 @@
     .row
       .large-2.columns
         = f.label :participant_gender_1, t('.participant_gender')
-        = f.select :participant_gender_1, options_for_select([['Mężczyzna', 1], ['Kobieta', 2]], @sign_up.try(:participant_gender_1)), include_blank: true
+        = f.select :participant_gender_1, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_1)), include_blank: true
 
       .large-2.columns
         = f.label :participant_kw_id_1, t('.participant_kw_id')
         = f.number_field :participant_kw_id_1
 
       .large-2.columns
-        = f.label :participant_birth_year_1, 'Rok urodzenia* (np. 1990)'
+        = f.label :participant_birth_year_1, t('.participant_birthyear')
         = f.text_field :participant_birth_year_1
 
       .large-2.columns
@@ -106,7 +111,7 @@
             = f.text_field :participant_kw_id_2
 
           .large-2.columns
-            = f.label :participant_birth_year_2, 'Rok urodzenia* (np. 1990)'
+            = f.label :participant_birth_year_2, t('.participant_birthyear')
             = f.text_field :participant_birth_year_2
 
           .large-2.columns
@@ -122,7 +127,7 @@
     .row
       .large-12.columns
         = f.label :remarks, t('.remarks')
-        = f.text_area :remarks, placeholder: 'Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd. Rozmiary koszulek: M i S'
+        = f.text_area :remarks, placeholder: t('.remarks_placeholder')
   
   .row
     .large-12.columns
