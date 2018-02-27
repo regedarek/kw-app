@@ -21,7 +21,7 @@ module Events
           required(:participant_email_2, Types::String).maybe(:str?)
           required(:participant_birth_year_2, Types::Form::Int).maybe
           required(:competition_package_type_2_id, Types::Form::Int).maybe
-          required(:participant_kw_id_2, Types::Form::Int).maybe
+          required(:participant_kw_id_2, Types::Form::Int).maybe(:int?, gt?: 1, lt?: 9000)
           required(:participant_gender_2, Types::Form::Int).maybe
           required(:participant_city_2, Types::String)
           required(:participant_team_2, Types::String)
@@ -68,7 +68,7 @@ module Events
          required(:participant_email_1, Types::String).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1, Types::Form::Int).filled(:int?, lt?: 2003, gt?: 1920)
          required(:competition_package_type_1_id, Types::Form::Int).filled
-         optional(:participant_kw_id_1, Types::Form::Int).maybe
+         optional(:participant_kw_id_1, Types::Form::Int).maybe(:int?, gt?: 1, lt?: 9000)
          required(:terms_of_service, Types::Form::Bool).value(:true?)
 
          validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
