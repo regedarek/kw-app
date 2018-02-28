@@ -6,7 +6,7 @@
 
 .callout.primary.text-center
   = link_to image_tag('pl.png'), { locale: :pl }
-  |    
+  |
   = link_to image_tag('en.png'), { locale: :en }
 
 = form_for :sign_up, html: { class: 'js-strzelecki-sign-up-form' }, url: competition_sign_ups_path do |f|
@@ -122,13 +122,12 @@
             = f.label :participant_team_2, t('.participant_team')
             = f.text_field :participant_team_2
 
-
   .callout
     .row
       .large-12.columns
         = f.label :remarks, t('.remarks')
         = f.text_area :remarks, placeholder: t('.remarks_placeholder')
-  
+
   .row
     .large-12.columns
       - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.any?

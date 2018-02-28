@@ -87,11 +87,53 @@ en:
           arg:
             default: "length must be %{size}"
             range: "length must be within %{size_left} - %{size_right}"
+
+en:
+  errors:
+    active_kw_id_1: You need to pay your KW fee 1
+    active_kw_id_2: You need to pay your KW fee 2
+    remarks:
+      filled?: Please let us know in Remarks section about accomodation you need
+    rules:
+      remarks:
+        filled?: Please let us know in Remarks section about accomodation you need
+      participant_name_1:
+        filled?: First and last name 1 cannot be empty
+      participant_gender_1:
+        filled?: Choose gender 1
+      participant_gender_2:
+        filled?: Choose gender 2
+      participant_email_1:
+        filled?: E-mail 1 cannot be empty
+        format?: E-mail 1 is invalid
+      participant_birth_year_1:
+        filled?: Fill your brith year in format YYYY
+        gt?: Birth year 1 cannot be above %{num}
+        lt?: Birth year 1 cannot be below %{num}
+      competition_package_type_1_id:
+        filled?: Choose package 1
+      participant_name_2:
+        filled?: First and last name 2 cannot be empty
+      participant_email_2:
+        filled?: E-mail 2 cannot be empty
+        format?: E-mail 2 is invalid
+      participant_birth_year_2:
+        filled?: Fill your brith year 2 in format YYYY
+        gt?: Birth year 2 cannot be above %{num}
+        lt?: Birth year 2 cannot be below %{num}
+      competition_package_type_2_id:
+        filled?: Choose package 2
+      terms_of_service:
+        true?: Accept regulations
 pl:
   errors:
     active_kw_id_1: Musisz posiadać opłaconą składkę 1
     active_kw_id_2: Musisz posiadać opłaconą składkę 2
+    remarks:
+      filled?: Prosimy abyś podał informacje o potrzebnym zakwaterowaniu i rozmiarze koszulek
     rules:
+      remarks:
+        filled?: Prosimy abyś podał informacje o potrzebnym zakwaterowaniu i rozmiarze koszulek
       participant_name_1:
         filled?: Imię i nazwisko 1 nie może być puste
       participant_gender_1:
@@ -103,8 +145,8 @@ pl:
         format?: E-mail 1 jest nieprawidłowy
       participant_birth_year_1:
         filled?: Musisz podać rok urodzenia 1
-        gt?: Rok urodzenia 1 nie może być wcześniej niż %{num}
-        lt?: Rok urodzenia 1 nie może być później niż %{num}
+        gt?: Rok urodzenia 1 nie może być wcześniej niż %{num} w formacie RRRR
+        lt?: Rok urodzenia 1 nie może być później niż %{num} w formacie RRRR
       competition_package_type_1_id:
         filled?: Musisz wybrać pakiet 1
       participant_name_2:

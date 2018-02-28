@@ -62,7 +62,7 @@ module Events
          required(:participant_name_1, Types::String).filled
          optional(:participant_city_1, Types::String)
          optional(:team_name, Types::String)
-         optional(:remarks, Types::String)
+         required(:remarks, Types::String).filled
          optional(:participant_team_1, Types::String)
          required(:participant_gender_1, Types::Form::Int).filled
          required(:participant_email_1, Types::String).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)

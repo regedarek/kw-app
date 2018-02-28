@@ -15,7 +15,7 @@ pl:
           participant_birthyear: Rok urodzenia* (np. 1990)
           participant_city: Miasto
           participant_team: Organizacja
-          remarks: Uwagi do organizatorów
+          remarks: Uwagi do organizatorów*(szary tekst to tylko podpowiedź, prosimy abyś uzupełnił o swoje dane)
           remarks_placeholder: "Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd. Rozmiary koszulek: M i S"
           terms_of_service: Akceptuję regulamin
           participant_kw_id: Numer legitymacji KW
@@ -39,7 +39,7 @@ en:
           participant_birthyear: Birthyear* (ex. 1990)
           participant_city: City
           participant_team: Organization
-          remarks: Remarks to organizers
+          remarks: Remarks to organizers*(please write here your accomodation needs and thirt sizes)
           remarks_placeholder: I want to order two nights friday and sathurday, thirt sizes M and L
           terms_of_service: I accept regulations
           participant_kw_id: ID KW Kraków
