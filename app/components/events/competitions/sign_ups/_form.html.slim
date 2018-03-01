@@ -105,7 +105,7 @@
         .row
           .large-2.columns
             = f.label :participant_gender_2, t('.participant_gender')
-            = f.select :participant_gender_2, options_for_select([['Męska', 1], ['Żeńska', 2]], @sign_up.try(:participant_gender_2)), include_blank: true
+            = f.select :participant_gender_2, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_2)), include_blank: true
           .large-2.columns
             = f.label :participant_kw_id_2, t('.participant_kw_id')
             = f.text_field :participant_kw_id_2
