@@ -15,9 +15,7 @@ module Events
       end
 
       def limit_reached?
-        return false if limit == 0
-
-        sign_ups_records.count >= limit
+        Events::Competitions::SignUps::Limiter.new(self).reached?
       end
     end
   end

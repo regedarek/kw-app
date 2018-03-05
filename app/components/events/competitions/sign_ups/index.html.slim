@@ -1,3 +1,4 @@
+- limiter = Events::Competitions::SignUps::Limiter.new(@competition)
 .column
   .row
     .large-12.columns
@@ -15,27 +16,29 @@
     .large-12.columns
       .callout.primary
         .row
-          .large-4.columns
-            b Limit: 100
-          .large-4.columns
+          .large-3.columns
+            b Limit: 
+            = limiter.limit
+          .large-3.columns
             b Zapisanych osób: 
-            - single = @competition.sign_ups_records.includes(:payment).where(competition_package_type_2_id: nil, payments: { state: 'prepaid' })
-            - teams = @competition.sign_ups_records.includes(:payment).where.not(competition_package_type_2_id: nil).where(payments: { state: 'prepaid' })
-            - waiting = @competition.sign_ups_records.includes(:payment).where(payments: { state: 'unpaid' })
-            = single.count + 2 * teams.count
-          .large-4.columns
+            = limiter.persons
+          .large-3.columns
+            b Zapisanych zespołów: 
+            = limiter.teams.count
+          .large-3.columns
             b Zapisy czekające na wpłatę: 
-            = waiting.count
+            = limiter.waiting.count
   .row
     .large-12.columns
       h3 Zapisane zespoły
-      = render 'table', sign_ups: teams.order('payments.updated_at')
+      = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
 
+  .row
     .large-12.columns
       h3 Zapisani poszukujący
-      = render 'table', sign_ups: single.order('payments.updated_at')
+      = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
 
   .row
     .large-12.columns
       h3 Lista rezerwowa
-      = render 'table', sign_ups: waiting.order(:created_at)
+      = render 'table', sign_ups: limiter.waiting.order(:created_at)
