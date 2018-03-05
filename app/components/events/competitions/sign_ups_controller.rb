@@ -11,7 +11,7 @@ module Events
       def new
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         redirect_to competition_sign_ups_path(params[:competition_id]),
-          flash: { alert: 'Zapisy zamknięte!' } if @competition.closed_or_limit_reached?
+          flash: { alert: 'Zapisy zostały wstrzymane. Jest to spowodowane decyzją organizatora lub wyczerpaniem limitu miejsc.' } if @competition.closed_or_limit_reached?
       end
 
       def create

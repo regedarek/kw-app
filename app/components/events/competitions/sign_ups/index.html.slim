@@ -7,10 +7,15 @@
           = image_tag @competition.baner_url
       - else
         h3 = @competition.name
-  - unless @competition.closed_or_limit_reached?
+  - if @competition.closed_or_limit_reached?
     .row
       .large-12.columns
-        = link_to  'Zapisz się', new_competition_sign_up_path(@competition),
+        .callout.warning
+          | Zapisy zostały wstrzymane. Jest to spowodowane decyzją organizatora lub wyczerpaniem limitu miejsc.
+  - else
+    .row
+      .large-12.columns
+        = link_to t('.sign_up'), new_competition_sign_up_path(@competition),
         class: 'button large primary expanded'
   .row
     .large-12.columns
