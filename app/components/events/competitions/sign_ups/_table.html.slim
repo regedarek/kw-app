@@ -1,13 +1,15 @@
 table.stack
   thead
     tr
+      th Nr
       th Zawodnik/cy
       th Miasto
       th Organizacja
       th Płatność
   tbody
-    - sign_ups.each do |sign_up|
+    - sign_ups.each_with_index do |sign_up, index|
       tr
+        td = index + 1
         td
           - if sign_up.team_name.present?
             = sign_up.team_name
