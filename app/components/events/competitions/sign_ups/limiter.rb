@@ -20,8 +20,19 @@ module Events
             .includes(:payment)
             .where(
               single: true,
+              teammate_id: nil,
               payments: { state: 'prepaid' }
             )
+        end
+
+        def teams_from_singles
+          @competition
+            .sign_ups_records
+            .includes(:payment)
+            .where(
+              single: true,
+              payments: { state: 'prepaid' }
+            ).where.not(teammate_id: nil)
         end
 
         def teams

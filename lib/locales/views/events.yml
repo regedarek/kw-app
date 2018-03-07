@@ -2,6 +2,8 @@ pl:
   events:
     competitions:
       sign_ups:
+        index:
+          sign_up: Zapisz się
         form:
           top_info: Zgłoś zespół i zapłać za obydwa pakiety startowe.
           team_name: Nazwa zespołu(bądźcie kreatywni!)

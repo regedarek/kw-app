@@ -40,6 +40,11 @@
 
   .row
     .large-12.columns
+      h3 Sparowani poszukujący
+      = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
+
+  .row
+    .large-12.columns
       h3 Zapisani poszukujący
       = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
 
