@@ -11,7 +11,7 @@ module Events
         end
 
         def persons
-          singles.count + teams.count * 2
+          singles.count + teams_from_singles.count + teams.count * 2
         end
 
         def singles
