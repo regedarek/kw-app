@@ -4,6 +4,7 @@ class ReservationsController < ApplicationController
   def index
    guarded_date = Guards::Date.new(date: params[:start_date])
    return redirect_to reservations_path(start_date: guarded_date.nearest_thursday) unless guarded_date.thursday?
+   return redirect_to reservations_path, alert: 'Data nie może być w przeszłości' if params[:start_date].to_date.past?
    @available_items = Availability::Items.new(start_date: params[:start_date]).collect
   end
 
