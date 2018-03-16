@@ -26,7 +26,7 @@ module UserManagement
     validate :email_uniq
 
     def birth_date_is_to_young
-      errors.add(:base, "Musisz mieć przynajmniej 16 lat by dołączyć do klubu") if birth_date >= 16.years.ago
+      errors.add(:base, "Musisz mieć przynajmniej 16 lat by dołączyć do klubu") if birth_date.present? && birth_date >= 16.years.ago
     end
 
     def email_uniq
