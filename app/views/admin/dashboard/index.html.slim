@@ -71,6 +71,8 @@
         tr
           td
             = payment.year
-          td = Db::User.find(payment.creator_id).display_name
+          td
+            - if Db::User.exists?(id: payment.creator_id)
+              = Db::User.find(payment.creator_id).display_name
           td
             = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"

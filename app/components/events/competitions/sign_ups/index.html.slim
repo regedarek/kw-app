@@ -38,15 +38,16 @@
       h3 Zapisane zespoły
       = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
 
-  .row
-    .large-12.columns
-      h3 Sparowani poszukujący
-      = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
+  - if !@competition.single?
+    .row
+      .large-12.columns
+        h3 Sparowani poszukujący
+        = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
 
-  .row
-    .large-12.columns
-      h3 Zapisani poszukujący
-      = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
+    .row
+      .large-12.columns
+        h3 Zapisani poszukujący
+        = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
 
   .row
     .large-12.columns

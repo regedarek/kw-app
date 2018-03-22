@@ -41,6 +41,10 @@
       .large-6.columns
         = f.label 'Treść e-maila z linkiem do zapisów'
         = f.text_area :email_text
+  .row
+    .large-12.columns
+      .callout
+        = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
 
   .row
     .large-6.columns
