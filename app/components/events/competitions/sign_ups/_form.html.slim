@@ -9,7 +9,7 @@
   |
   = link_to image_tag('en.png'), { locale: :en }
 
-= form_for :sign_up, html: { class: 'js-strzelecki-sign-up-form' }, url: competition_sign_ups_path do |f|
+= form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: competition_sign_ups_path do |f|
   - if @competition.team_name
     .callout.warning
       .row

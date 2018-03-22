@@ -1,4 +1,4 @@
-class KwApp.StrzeleckiSignUpForm
+class KwApp.EventsSignUpForm
   constructor: ($el) ->
     @$el = $el
     @togglePlayer2()
@@ -8,5 +8,5 @@ class KwApp.StrzeleckiSignUpForm
     @$el.find('.js-player-2').toggle(!@$el.find('.js-single-check-box').prop('checked'))
 
 $ ->
-  for el in $('.js-strzelecki-sign-up-form')
-    new KwApp.StrzeleckiSignUpForm($(el))
+  for el in $('.js-events-sign-up-form')
+    new KwApp.EventsSignUpForm($(el))
