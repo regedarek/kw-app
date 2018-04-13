@@ -1,0 +1,14 @@
+.column
+  .row
+    .large-12.columns
+      h3 Nieopłacone składki
+    .large-12.columns
+      h4 2018
+      = render 'table', profiles: @profile_unpaid_this_year
+      .callout
+        = @profile_unpaid_this_year.map(&:email).join(', ')
+    .large-12.columns
+      h4 2017
+      = render 'table', profiles: @profile_unpaid_last_year
+      .callout
+        = @profile_unpaid_last_year.map(&:email).join(', ')

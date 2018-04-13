@@ -24,6 +24,10 @@ module Db
       Arel.sql("array_to_string(acomplished_courses, ',')")
     end
 
+    def display_name
+      "#{first_name} #{last_name}"
+    end
+
     def description
       "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
     end

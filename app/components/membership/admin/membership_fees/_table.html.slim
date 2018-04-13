@@ -1,0 +1,12 @@
+table.stack
+  thead
+    tr
+      th width=70 KW ID
+      th width=300 Imię i Nazwisko
+      th E-mail
+  tbody
+    - profiles.each do |profile|
+      tr
+        td = profile.kw_id
+        td = link_to profile&.display_name, admin_profile_path(profile)
+        td = profile&.email

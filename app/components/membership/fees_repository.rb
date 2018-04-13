@@ -27,6 +27,10 @@ module Membership
         )
     end
 
+    def get_unpaid_kw_ids_last_year
+      find_paid_two_years_ago.map(&:kw_id) - find_paid_one_year_ago.map(&:kw_id)
+    end
+
     def get_unpaid_kw_ids_this_year
       find_paid_two_years_ago.map(&:kw_id).concat(find_paid_one_year_ago.map(&:kw_id)).uniq - paid_this_year.map(&:kw_id)
     end
