@@ -8,6 +8,6 @@ every 24.hours do
   rake :set_regular_members
 end
 
-every '0 0 1 4 *' do
+every '0 0 1 3 *' do
   rake :send_yearly_fee_reminder
 end
