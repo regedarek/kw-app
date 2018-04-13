@@ -47,12 +47,11 @@
         thead
           tr
             th width='5%' Numer klubowy
-            th width='15%' Imię
-            th width='15%' Nazwisko
-            th width='15%' E-mail
+            th width='15%' Imię i nazwisko
+            th width='20%' E-mail
             th width='15%' Telefon
             th width='15%' Sekcje
-            th width='5%' Uprawnienia
+            th width='10%' Role
             th width='15%' Ostatnie składki
         tbody
           - @users.each do |user|
@@ -62,21 +61,11 @@
                   = link_to user.kw_id, admin_profile_path(user.profile.id)
                 - else
                   = user.kw_id
-              td= user.first_name
-              td= user.last_name
+              td= user.display_name
               td= mail_to user.email, user.email
               td= user.phone
               td.text-center= user.profile.try(:sections).try(:to_sentence)
-              td.text-center
-                - if user.admin?
-                  = link_to '[ - A ]', cancel_admin_admin_user_path(user) unless user.kw_id == 2345
-                - else
-                  = link_to '[ + A ]', make_admin_admin_user_path(user)
-
-                - if user.curator?
-                  = link_to '[ - O ]', cancel_curator_admin_user_path(user)
-                - else
-                  = link_to '[ + O ]', make_curator_admin_user_path(user)
+              td.text-center= user.roles.to_sentence
               td.text-center
                 - if user.membership_fees.any?
                   - user.membership_fees.last(2).each do |fee|

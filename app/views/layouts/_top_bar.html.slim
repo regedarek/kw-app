@@ -23,7 +23,10 @@
                 li= link_to 'Zawody', admin_competitions_path
                 li= link_to t('.administration.reservations'), admin_reservations_path
                 li= link_to t('.administration.items'), admin_items_path
-                li= link_to 'Kursy', training_courses_path
+                - if current_user.roles.include?('courses')
+                  li= link_to 'Kursy', training_courses_path
+                - if current_user.roles.include?('events')
+                  li= link_to 'Wydarzenia', training_courses_path
 
     .top-bar-right
       ul.dropdown.menu
