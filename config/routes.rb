@@ -43,7 +43,6 @@ Rails.application.routes.draw do
     resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
   end
 
-  resources :events, only: [:index, :show], path: 'wydarzenia'
   resources :profiles, only: [:index, :new, :create, :show] do
     collection do
       get :reactivation
@@ -72,7 +71,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
-    resources :events, only: [:new, :create, :show, :destroy]
     resources :profiles do
       member do
         put :accept

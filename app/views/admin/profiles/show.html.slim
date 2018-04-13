@@ -1,30 +1,52 @@
 .column
-  - if @profile.user && @profile.user.kw_id.present?
+  - if @profile.user.present?
     .row
-      .large-12.columns 
-        b Number członkowski(użytkownia): 
-        = @profile.user.kw_id
+      .large-6.columns 
+        .callout.primary
+          b Number członkowski(profilu): 
+          = @profile.kw_id
+          br
+          b Imię i nazwisko: 
+          = "#{@profile.first_name} #{@profile.last_name}"
+          br
+          b E-mail: 
+          = @profile.email
+          br
+          b Telefon: 
+          = @profile.phone
+          br
+          br
+      .large-6.columns 
+        .callout.secondary
+          b Number członkowski(użytkownika): 
+          = @profile.user.kw_id
+          br
+          b Imię i nazwisko: 
+          = "#{@profile.user.first_name} #{@profile.user.last_name}"
+          br
+          b E-mail: 
+          = @profile.user.email
+          br
+          b Telefon: 
+          = @profile.user.phone
+          br
+          b Role: 
+          = @profile.user.roles.to_sentence
   - else
     .row
       .large-12.columns 
-        b Number członkowski(profilu): 
-        = @profile.kw_id
-
-  .row
-    .large-12.columns 
-      b Imię i nazwisko: 
-      = "#{@profile.first_name} #{@profile.last_name}"
-
-  .row
-    .large-12.columns 
-      b E-mail: 
-      = @profile.email
-
-  .row
-    .large-12.columns 
-      b Telefon: 
-      = @profile.phone
-
+        .callout
+          b Number członkowski(profilu): 
+          = @profile.kw_id
+          br
+          b Imię i nazwisko: 
+          = "#{@profile.first_name} #{@profile.last_name}"
+          br
+          b E-mail: 
+          = @profile.email
+          br
+          b Telefon: 
+          = @profile.phone
   .row
     .large-12.columns 
       b Data urodzenia: 
