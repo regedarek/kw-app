@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   load Rails.root.join("app/components/events/routes.rb")
   load Rails.root.join("app/components/membership/admin/routes.rb")
+  load Rails.root.join("app/components/training/routes.rb")
 
   namespace :training do
     resources :courses do

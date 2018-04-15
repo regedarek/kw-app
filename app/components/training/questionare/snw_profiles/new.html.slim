@@ -1,0 +1,25 @@
+.row
+  .large-12.columns
+    h3 Ankieta
+
+= form_for :snw_profile, url: questionare_snw_profiles_path, method: :post do |f|
+  .row
+    .large-5.columns
+      = f.label 'Pytanie 1?'
+      = f.text_field :question_1
+
+  .row
+    .large-12.columns
+      fieldset.fieldset
+        legend Wybierz aktywność 
+        = f.radio_button :question_2, :level_1, checked: true
+        = f.label :question_2_level_1
+
+        = f.radio_button :question_2, :level_2
+        = f.label :question_2_level_2
+
+  .row
+    .large-6.columns
+      = f.submit 'Zapisz', class: 'button expanded large'
+    .large-6.columns
+      = link_to 'powrót', root_path, class: 'button expanded large warning'
