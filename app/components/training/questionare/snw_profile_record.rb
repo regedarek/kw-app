@@ -1,7 +1,6 @@
 module Training
   module Questionare
-    class SnwProfile < Dry::Struct
-      
+    class SnwProfileRecord < ActiveRecord::Base
     end
   end
 end
