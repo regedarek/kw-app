@@ -13,3 +13,11 @@
     = render 'table', profiles: @profile_unpaid_last_year
     .callout
       = @profile_unpaid_last_year.map(&:email).join(', ')
+
+.row
+  .large-12.columns
+    h4 Nieopłacone e-maile
+
+    = form_for :unpaid, url: check_emails_membership_admin_membership_fees_path do |f|
+      = f.text_field :emails
+

@@ -12,6 +12,23 @@ module Membership
           .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_last_year)
           .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'senior')
       end
+
+      def check_emails
+        emails = extract_emails_to_array(unpaid_params.fetch(:emails, ''))
+        unpaid_kw_ids = Membership::FeesRepository.new.find_unpaid_this_year_by_emails(emails)
+        render json: Db::Profile.where(kw_id: unpaid_kw_ids).map(&:email)
+      end
+
+      private
+
+      def unpaid_params
+        params.require(:unpaid_emails).permit(:emails)
+      end
+
+      def extract_emails_to_array(txt)
+        reg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i
+        txt.scan(reg).uniq
+      end
     end
   end
 end
