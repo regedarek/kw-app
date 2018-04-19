@@ -3,18 +3,25 @@
     h3 Nieopłacone składki
 .row
   .large-12.columns
-    h4 = "Nieopłacone emaile(2018) (#{@unpaid_profiles&.count} z #{@emails&.count})"
-    | E-maili: 
-    = @emails&.count
-    |Profili: 
-    = @unpaid_profiles&.count
-    = form_for :unpaid, url: check_emails_membership_admin_membership_fees_path do |f|
-      = f.text_field :emails
+    h4 = "Nieopłacone emaile w tym roku (#{@unpaid_profiles&.count} z #{@emails&.count})"
 
-    - if @unpaid_profiles
-      = render 'table', profiles: @unpaid_profiles
-      .callout
-        = @unpaid_emails
+= form_for :unpaid, url: check_emails_membership_admin_membership_fees_path do |f|
+  .row
+    .large-8.columns
+        = f.text_field :emails
+    .large-4.columns
+        = f.submit 'Sprawdź', class: 'button expanded'
+
+  .row
+    .large-12.columns
+      - if @unpaid_profiles
+        = render 'table', profiles: @unpaid_profiles
+        .callout
+          = @unpaid_emails
+      - if @emails_without_profile.any?
+        h5 = "Nie znaleziono profilu (#{@emails_without_profile&.count})"
+        .callout
+          = @emails_without_profile.join(', ')
 .row
   .large-12.columns
     h4 = "2018 (#{(@profile_unpaid_this_year.count)})"
