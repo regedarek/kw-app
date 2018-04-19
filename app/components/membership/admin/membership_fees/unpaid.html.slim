@@ -18,7 +18,7 @@
         = render 'table', profiles: @unpaid_profiles
         .callout
           = @unpaid_emails
-      - if @emails_without_profile.any?
+      - if @emails_without_profile&.any?
         h5 = "Nie znaleziono profilu (#{@emails_without_profile&.count})"
         .callout
           = @emails_without_profile.join(', ')
