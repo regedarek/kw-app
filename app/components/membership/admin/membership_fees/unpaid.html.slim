@@ -9,9 +9,9 @@
       = f.text_field :emails
 
     - if @unpaid_profiles
+      = render 'table', profiles: @unpaid_profiles
       .callout
         = @unpaid_emails
-        = render 'table', profiles: @unpaid_profiles
 .row
   .large-12.columns
     h4 = "2018 (#{(@profile_unpaid_this_year.count)})"
