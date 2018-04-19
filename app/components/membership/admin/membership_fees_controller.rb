@@ -22,7 +22,7 @@ module Membership
           .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'senior')
         @emails = extract_emails_to_array(unpaid_params.fetch(:emails, ''))
         unpaid_kw_ids = Membership::FeesRepository.new.find_unpaid_this_year_by_emails(@emails)
-        @unpaid_profiles = Db::Profile.where(kw_id: unpaid_kw_ids)
+        @unpaid_profiles = unpaid_kw_ids.any? ? Db::Profile.where(kw_id: unpaid_kw_ids) : []
         @unpaid_emails = @unpaid_profiles.map(&:email).join(' ')
         render :unpaid
       end
