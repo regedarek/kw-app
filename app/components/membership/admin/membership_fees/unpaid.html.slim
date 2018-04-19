@@ -3,13 +3,15 @@
     h3 Nieopłacone składki
 .row
   .large-12.columns
-    h4 Nieopłacone e-maile
+    h4 = "Nieopłacone emaile(2018) (#{@unpaid_profiles ? @unpaid_profiles.count : 0})"
 
     = form_for :unpaid, url: check_emails_membership_admin_membership_fees_path do |f|
       = f.text_field :emails
 
-    .callout
-      = @unpaid_emails
+    - if @unpaid_profiles
+      .callout
+        = @unpaid_emails
+        = render 'table', profiles: @unpaid_profiles
 .row
   .large-12.columns
     h4 = "2018 (#{(@profile_unpaid_this_year.count)})"
