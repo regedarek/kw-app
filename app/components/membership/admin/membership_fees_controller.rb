@@ -14,15 +14,22 @@ module Membership
       end
 
       def check_emails
+        @profile_unpaid_this_year = Db::Profile
+          .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_this_year)
+          .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'senior')
+        @profile_unpaid_last_year = Db::Profile
+          .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_last_year)
+          .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'senior')
         emails = extract_emails_to_array(unpaid_params.fetch(:emails, ''))
         unpaid_kw_ids = Membership::FeesRepository.new.find_unpaid_this_year_by_emails(emails)
-        render json: Db::Profile.where(kw_id: unpaid_kw_ids).map(&:email)
+        @unpaid_emails = Db::Profile.where(kw_id: unpaid_kw_ids).map(&:email).join(' ')
+        render :unpaid
       end
 
       private
 
       def unpaid_params
-        params.require(:unpaid_emails).permit(:emails)
+        params.require(:unpaid).permit(:emails)
       end
 
       def extract_emails_to_array(txt)
