@@ -4,7 +4,10 @@
 .row
   .large-12.columns
     h4 = "Nieopłacone emaile(2018) (#{@unpaid_profiles ? @unpaid_profiles.count : 0})"
-
+    | E-maili: 
+    = @emails&.count
+    |Profili: 
+    = @unpaid_profiles&.count
     = form_for :unpaid, url: check_emails_membership_admin_membership_fees_path do |f|
       = f.text_field :emails
 
