@@ -3,7 +3,7 @@
     h3 Nieopłacone składki
 .row
   .large-12.columns
-    h4 = "Nieopłacone emaile(2018) (#{@unpaid_profiles ? @unpaid_profiles.count : 0})"
+    h4 = "Nieopłacone emaile(2018) (#{@unpaid_profiles&.count} z #{@emails&.count})"
     | E-maili: 
     = @emails&.count
     |Profili: 
