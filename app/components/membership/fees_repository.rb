@@ -1,7 +1,7 @@
 module Membership
   class FeesRepository
     def find_unpaid_this_year_by_emails(emails)
-      Db::Profile.where(email: emails).map(&:kw_id) - paid_this_year.map(&:kw_id)
+      Db::Profile.where(email: emails).select { |p| !paid_this_year.map(&:kw_id).include?(p.kw_id) }.map(&:kw_id)
     end
 
     def find_paid_two_years_ago
