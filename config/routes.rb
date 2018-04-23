@@ -40,10 +40,6 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :mas do
-    resources :sign_ups, path: 'zapisy', only: [:index, :new, :create]
-  end
-
   resources :profiles, only: [:index, :new, :create, :show] do
     collection do
       get :reactivation
@@ -113,7 +109,6 @@ Rails.application.routes.draw do
   get '/', to: 'activities/mountain_routes#index',
     constraints: lambda { |req| req.env['SERVER_NAME'].match('przejscia') }
 
-  get 'mas' => 'mas/sign_ups#new'
   get 'zarezerwuj' => 'reservations#new', as: :reserve
   get 'zgloszenie' => 'profiles#new'
   get 'przejscia' => 'activities/mountain_routes#index'
