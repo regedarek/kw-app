@@ -5,7 +5,11 @@ module Events
       append_view_path 'app/components'
 
       def index
-        @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+        @competition = if slug_params.fetch(:name)
+                         Events::Db::CompetitionRecord.find_by(edition_sym: slug_params.fetch(:name))
+                       else
+                         Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+                       end
       end
 
       def new
@@ -39,6 +43,10 @@ module Events
           Events::Competitions::Repository.new,
           Events::Competitions::SignUps::CreateForm.new
         ).call(competition_id: params[:competition_id], raw_inputs: sign_up_params)
+      end
+
+      def slug_params
+        params.permit(:name)
       end
 
       def params_for_build
