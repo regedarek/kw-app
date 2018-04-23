@@ -5,11 +5,11 @@ module Events
       append_view_path 'app/components'
 
       def index
-        @competition = if slug_params.fetch(:name)
-                         Events::Db::CompetitionRecord.find_by(edition_sym: slug_params.fetch(:name))
-                       else
-                         Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-                       end
+        @competition = if slug_params.fetch(:name, nil)
+          Events::Db::CompetitionRecord.find_by!(edition_sym: slug_params.fetch(:name))
+        else
+          Events::Db::CompetitionRecord.find_by!(id: params[:competition_id])
+        end
       end
 
       def new
