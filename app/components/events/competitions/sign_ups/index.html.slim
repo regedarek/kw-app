@@ -38,7 +38,7 @@
       h3 Zapisane zespoły
       = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
 
-  - if !@competition.single?
+  - if @competition.matrimonial_office?
     .row
       .large-12.columns
         h3 Sparowani poszukujący

@@ -37,18 +37,26 @@
       - if @competition.single?
         .large-6.columns
           = f.label :competition_package_type_1_id, t('.competition_package_type_id')
-          = f.select :competition_package_type_1_id, options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
+          = f.select :competition_package_type_1_id,
+            options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
+            {include_blank: true},
+            {class: 'js-package-1-select'}
           = f.hidden_field :single, value: true
       - else
         .large-3.columns
           = f.label :competition_package_type_1_id, t('.competition_package_type_id')
           = f.select :competition_package_type_1_id,
-          options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_1_id)), include_blank: true
+            options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
+            {include_blank: true},
+            {class: 'js-package-1-select'}
 
         .large-3.columns
           br
-          = f.check_box :single, class: 'js-single-check-box'
-          = f.label :single, t('.single')
+          - if @competition.matrimonial_office?
+            = f.check_box :single, class: 'js-single-check-box'
+            = f.label :single, t('.single')
+          - else
+            = f.hidden_field :single, value: false
 
     .row
       .large-2.columns
@@ -56,8 +64,9 @@
         = f.select :participant_gender_1, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_1)), include_blank: true
 
       .large-2.columns
-        = f.label :participant_kw_id_1, t('.participant_kw_id')
-        = f.number_field :participant_kw_id_1
+        .js-package-1-field style=('display: none')
+          = f.label :participant_kw_id_1, t('.participant_kw_id')
+          = f.number_field :participant_kw_id_1
 
       .large-2.columns
         = f.label :participant_birth_year_1, t('.participant_birthyear')
@@ -100,15 +109,18 @@
           .large-4.columns
             = f.label :competition_package_type_2_id, t('.competition_package_type_id')
             = f.select :competition_package_type_2_id,
-            options_for_select(@competition.package_types.collect {|p| [p.name, p.id] }, @sign_up.try(:competition_package_type_2_id)), include_blank: true
+              options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_2_id)),
+              {include_blank: true},
+              {class: 'js-package-2-select'}
 
         .row
           .large-2.columns
             = f.label :participant_gender_2, t('.participant_gender')
             = f.select :participant_gender_2, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_2)), include_blank: true
           .large-2.columns
-            = f.label :participant_kw_id_2, t('.participant_kw_id')
-            = f.text_field :participant_kw_id_2
+            .js-package-2-field style=('display: none')
+              = f.label :participant_kw_id_2, t('.participant_kw_id')
+              = f.text_field :participant_kw_id_2
 
           .large-2.columns
             = f.label :participant_birth_year_2, t('.participant_birthyear')
