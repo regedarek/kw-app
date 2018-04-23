@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422174624) do
+ActiveRecord::Schema.define(version: 20180423110921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20180422174624) do
     t.integer  "limit",              default: 0,     null: false
     t.text     "email_text",                         null: false
     t.boolean  "matrimonial_office", default: false, null: false
+    t.string   "tshirt_url"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -112,6 +113,8 @@ ActiveRecord::Schema.define(version: 20180422174624) do
     t.string   "participant_phone_1"
     t.string   "participant_phone_2"
     t.integer  "teammate_id"
+    t.string   "tshirt_size_1"
+    t.string   "tshirt_size_2"
   end
 
   create_table "items", force: :cascade do |t|

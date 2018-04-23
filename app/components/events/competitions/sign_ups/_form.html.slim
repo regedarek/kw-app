@@ -44,7 +44,7 @@
           = f.hidden_field :single, value: true
 
         .large-2.columns
-          .js-package-1-field style=('display: none')
+          .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
             = f.label :participant_kw_id_1, t('.participant_kw_id')
             = f.number_field :participant_kw_id_1
       - else
@@ -56,7 +56,7 @@
             {class: 'js-package-1-select'}
 
         .large-2.columns
-          .js-package-1-field style=('display: none')
+          .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
             = f.label :participant_kw_id_1, t('.participant_kw_id')
             = f.number_field :participant_kw_id_1
 
@@ -81,9 +81,18 @@
         = f.label :participant_city_1, t('.participant_city')
         = f.text_field :participant_city_1
 
-      .large-4.columns
+      .large-3.columns
         = f.label :participant_team_1, t('.participant_team')
         = f.text_field :participant_team_1
+
+      .large-3.columns
+        - if @competition.tshirt_url?
+          = f.label :tshirt_size_1 do
+            - if @competition.tshirt_url.present?
+              = "#{t('.tshirt_size_1')} (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
+            - else
+              = t('.tshirt_size_1')
+          = f.text_field :tshirt_size_1
 
   - if @competition.single?
     = f.hidden_field :participant_name_2
@@ -119,7 +128,7 @@
               {class: 'js-package-2-select'}
 
           .large-2.columns
-            .js-package-2-field style=('display: none')
+            .js-package-2-field style=(@sign_up.package_type_2_membership? ? 'display: visible' : 'display: none' )
               = f.label :participant_kw_id_2, t('.participant_kw_id')
               = f.text_field :participant_kw_id_2
 
@@ -136,9 +145,18 @@
             = f.label :participant_city_2, t('.participant_city')
             = f.text_field :participant_city_2
 
-          .large-4.columns
+          .large-3.columns
             = f.label :participant_team_2, t('.participant_team')
             = f.text_field :participant_team_2
+
+          .large-3.columns
+            - if @competition.tshirt_url?
+              = f.label :tshirt_size_2 do
+                - if @competition.tshirt_url.present?
+                  = "#{t('.tshirt_size_2')} (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
+                - else
+                  = t('.tshirt_size_2')
+              = f.text_field :tshirt_size_2
 
   .callout
     .row

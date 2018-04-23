@@ -10,8 +10,9 @@ module Events
 
       def new
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+        @sign_up = Events::SignUp.new
         redirect_to competition_sign_ups_path(params[:competition_id]),
-          flash: { alert: 'Zapisy zostały wstrzymane. Jest to spowodowane decyzją organizatora lub wyczerpaniem limitu miejsc.' } if @competition.closed_or_limit_reached?
+          flash: { alert: t('.closed_or_limit_reached') } if @competition.closed_or_limit_reached?
       end
 
       def create
@@ -19,7 +20,8 @@ module Events
 
         either(create_record) do |result|
           result.success do
-            redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: 'Zapisano na zawody!' }
+            @sign_up = Events::SignUp.new(params_for_build)
+            redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: t('.success') }
           end
 
           result.failure do |errors|
@@ -56,6 +58,8 @@ module Events
           participant_city_2: sign_up_params[:participant_city_2],
           participant_team_1: sign_up_params[:participant_team_1],
           participant_team_2: sign_up_params[:participant_team_2],
+          tshirt_size_1: sign_up_params[:tshirt_size_1],
+          tshirt_size_2: sign_up_params[:tshirt_size_2],
           participant_gender_1: sign_up_params[:participant_gender_1],
           participant_gender_2: sign_up_params[:participant_gender_2],
           competition_package_type_1_id: sign_up_params[:competition_package_type_1_id].to_i,
@@ -89,6 +93,8 @@ module Events
             :participant_gender_2,
             :competition_package_type_1_id,
             :competition_package_type_2_id,
+            :tshirt_size_1,
+            :tshirt_size_2,
             :remarks,
             :terms_of_service,
             :single

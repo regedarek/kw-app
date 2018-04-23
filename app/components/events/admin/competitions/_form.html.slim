@@ -14,7 +14,11 @@
         = f.number_field :limit
 
     .row
-      .large-5.columns
+      .large-3.columns
+        = f.label 'Rozmiarówka'
+        = f.text_field :tshirt_url
+
+      .large-2.columns
         = f.label 'Logo nad formularzem'
         = f.text_field :baner_url
 

@@ -90,8 +90,8 @@ en:
 
 en:
   errors:
-    active_kw_id_1: You need to pay your KW fee 1
-    active_kw_id_2: You need to pay your KW fee 2
+    active_kw_id_1: Opłać skłądkę klubową / Pay membership fee 1
+    active_kw_id_2: Opłać skłądkę klubową / Pay membership fee 2
     remarks:
       filled?: Please let us know in Remarks section about accomodation you need
     rules:

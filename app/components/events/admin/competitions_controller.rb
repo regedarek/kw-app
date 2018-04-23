@@ -78,7 +78,10 @@ module Events
       def competition_params
         params
           .require(:competition)
-          .permit(:name, :edition_sym, :rules, :baner_url, :single, :team_name, :closed, :limit, :email_text, :matrimonial_office)
+          .permit(
+            :name, :edition_sym, :rules, :baner_url, :single, :team_name,
+            :closed, :limit, :email_text, :matrimonial_office, :tshirt_url
+          )
       end
     end
   end

@@ -25,6 +25,8 @@ module Events
     attribute :participant_city_2, Types::String.optional
     attribute :participant_team_1, Types::String.optional
     attribute :participant_team_2, Types::String.optional
+    attribute :tshirt_size_1, Types::String.optional
+    attribute :tshirt_size_2, Types::String.optional
     attribute :participant_gender_1, Types::Int.optional
     attribute :participant_gender_2, Types::Int.optional
     attribute :competition_package_type_1_id, Types::Int.optional
@@ -47,6 +49,16 @@ module Events
       else
         'Kobieta'
       end
+    end
+
+    def package_type_1_membership?
+      return false unless Events::Db::CompetitionPackageTypeRecord.exists?(competition_package_type_1_id)
+      Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_1_id).membership
+    end
+
+    def package_type_2_membership?
+      return false unless Events::Db::CompetitionPackageTypeRecord.exists?(competition_package_type_2_id)
+      Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_2_id).membership
     end
 
     class << self

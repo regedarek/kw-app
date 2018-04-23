@@ -12,13 +12,16 @@ pl:
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
           participant_email: E-mail*
+          tshirt_size_1: Koszulka
+          tshirt_size_2: Koszulka
+          tshirt_url: Rozmiarówka
           competition_package_type_id: Pakiet*
           single: Poszukuję partnera
           participant_birthyear: Rok urodzenia* (np. 1990)
           participant_city: Miasto
           participant_team: Organizacja
-          remarks: Uwagi do organizatorów*(szary tekst to tylko podpowiedź, prosimy abyś uzupełnił o swoje dane)
-          remarks_placeholder: "Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd. Rozmiary koszulek: M i S"
+          remarks: Uwagi do organizatorów (szary tekst to tylko podpowiedź, prosimy abyś uzupełnił o swoje dane)
+          remarks_placeholder: "przykład: Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd."
           terms_of_service: Akceptuję regulamin
           participant_kw_id: Numer legitymacji KW
           submit: Wyślij zgłoszenie
@@ -41,8 +44,11 @@ en:
           participant_birthyear: Birthyear* (ex. 1990)
           participant_city: City
           participant_team: Organization
-          remarks: Remarks to organizers*(please write here your accomodation needs and thirt sizes)
-          remarks_placeholder: I want to order two nights friday and sathurday, thirt sizes M and L
+          remarks: Remarks to organizers (accomodation, etc.)
+          remarks_placeholder: "for example: I want to order two nights friday and sathurday"
           terms_of_service: I accept regulations
           participant_kw_id: ID KW Kraków
+          tshirt_size_1: T-shirt
+          tshirt_size_2: T-shirt
+          tshirt_url: Sizes table
           submit: Sign Up
