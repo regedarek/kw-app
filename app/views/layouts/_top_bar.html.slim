@@ -26,7 +26,7 @@
                 - if current_user.roles.include?('courses')
                   li= link_to 'Kursy', training_courses_path
                 - if current_user.roles.include?('events')
-                  li= link_to 'Wydarzenia', training_courses_path
+                  li= link_to 'Wydarzenia', supplementary_courses_path
 
     .top-bar-right
       ul.dropdown.menu

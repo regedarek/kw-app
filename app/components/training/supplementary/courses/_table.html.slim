@@ -1,0 +1,10 @@
+table.stack
+  thead
+    tr
+      th = t('.name')
+      th = t('.place')
+  tbody
+    - courses.each do |course|
+      tr
+        td = course.name
+        td = course.place

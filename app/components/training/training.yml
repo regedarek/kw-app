@@ -1,0 +1,15 @@
+pl:
+  training:
+    supplementary:
+      courses:
+        form:
+          submit: Utwórz
+          team_name: Nazwa
+          place: Miejsce
+          start_date: Od kiedy
+          end_date: Do kiedy
+          application_date: Orientacyjna data/Data zapisów
+          price_kw: Zaliczka dla członków KW
+          price_non_kw: Zaliczka dla pozostałych
+          remarks: Uwagi od organizatora
+          organizator_id: Kto organizuje(user_id)

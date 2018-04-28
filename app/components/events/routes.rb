@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   get "zawody/*name" => 'events/competitions/sign_ups#index'
 
-  get '/', to: 'events/competitions/sign_ups#index',
-    competition_id: Events::Db::CompetitionRecord.last.id,
-    constraints: lambda { |req| req.env['SERVER_NAME'].match('zapisy') }
-
   scope module: 'events' do
     resources :competitions, only: [] do
       resources :sign_ups, controller: 'competitions/sign_ups'

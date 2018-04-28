@@ -19,18 +19,6 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/membership/admin/routes.rb")
   load Rails.root.join("app/components/training/routes.rb")
 
-  namespace :training do
-    resources :courses do
-      member do
-        get :new_participant
-        post :add_participant
-      end
-      collection do
-        get :thanks
-      end
-    end
-  end
-
   namespace :api do
     resources :payments, only: [] do
       collection do

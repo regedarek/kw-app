@@ -1,0 +1,53 @@
+= form_for course, as: :course, url: supplementary_courses_path do |f|
+  .row
+    .large-12.columns
+      - if @errors
+        .callout.alert
+          ul
+            - @errors.each do |error|
+              li= error.last.to_sentence
+
+  .row
+    .large-12.columns
+      = f.label :name, t('.team_name')
+      = f.text_field :name
+
+  .row
+    .large-8.columns
+      = f.label :place, t('.place')
+      = f.text_field :place
+
+    .large-4.columns
+      = f.label :organizator_id, t('.organizator_id')
+      = f.number_field :organizator_id
+
+  .row
+    .large-4.columns
+      = f.label :start_date, t('.start_date')
+      = f.date_field :start_date
+
+    .large-4.columns
+      = f.label :end_date, t('.end_date')
+      = f.date_field :end_date
+
+    .large-4.columns
+      = f.label :application_date, t('.application_date')
+      = f.date_field :application_date
+
+  .row
+    .large-6.columns
+      = f.label :price_kw, t('.price_kw')
+      = f.number_field :price_kw
+
+    .large-6.columns
+      = f.label :price_non_kw, t('.price_non_kw')
+      = f.number_field :price_non_kw
+
+  .row
+    .large-12.columns
+      = f.label :remarks, t('.remarks')
+      = f.text_field :remarks
+
+  .row
+    .large-12.columns
+      = f.submit t('.submit'), class: 'button expanded large'

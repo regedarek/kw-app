@@ -1,0 +1,11 @@
+.row
+  .large-12.columns
+    h3 Doszkalania i wyjazdy
+
+.row
+  .large-12.columns
+    = link_to 'Dodaj', new_supplementary_course_path
+
+.row
+  .large-12.columns
+    = render 'table', courses: @courses
