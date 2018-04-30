@@ -177,8 +177,9 @@
       .large-12.columns
         = f.check_box :terms_of_service
         = f.label :terms_of_service, t('.terms_of_service')
+
     .row
       .large-12.columns
-        = @competition.rules.html_safe
+        small = @competition.rules.html_safe
 
   = f.submit t('.submit'), class: 'button expanded large'
