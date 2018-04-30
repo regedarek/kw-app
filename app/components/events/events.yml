@@ -2,6 +2,8 @@ pl:
   events:
     competitions:
       sign_ups:
+        create:
+          success: Dziękujemy za zapisanie się na zawody, teraz sprawdź e-mail aby dokończyć rezerwację.
         index:
           sign_up: Zapisz się
         form:
