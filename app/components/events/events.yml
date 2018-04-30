@@ -14,8 +14,8 @@ pl:
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
           participant_email: E-mail*
-          tshirt_size_1: Koszulka
-          tshirt_size_2: Koszulka
+          tshirt_size_1: Koszulka*
+          tshirt_size_2: Koszulka*
           tshirt_url: Rozmiarówka
           competition_package_type_id: Pakiet*
           single: Poszukuję partnera
@@ -50,7 +50,7 @@ en:
           remarks_placeholder: "for example: I want to order two nights friday and sathurday"
           terms_of_service: I accept regulations
           participant_kw_id: ID KW Kraków
-          tshirt_size_1: T-shirt
-          tshirt_size_2: T-shirt
+          tshirt_size_1: T-shirt*
+          tshirt_size_2: T-shirt*
           tshirt_url: Sizes table
           submit: Sign Up

@@ -18,6 +18,7 @@ module Events
         define! do
           required(:single, Types::Form::Bool).filled(:bool?)
           required(:participant_name_2, Types::String).maybe(:str?)
+          required(:tshirt_size_2, Types::String).maybe(:str?)
           required(:participant_email_2, Types::String).maybe(:str?)
           required(:participant_birth_year_2, Types::Form::Int).maybe
           required(:competition_package_type_2_id, Types::Form::Int).maybe
@@ -30,6 +31,10 @@ module Events
           end
           rule(participant_name_2: [:single, :participant_name_2]) do |single, participant_name_2|
             single.false?.then(participant_name_2.filled?)
+          end
+          rule(tshirt_size_2: [:single, :tshirt_size_2]) do |single, tshirt_size_2|
+            byebug
+            single.false?.then(tshirt_size_2.filled?)
           end
           rule(participant_email_2: [:single, :participant_name_2]) do |single, participant_email_2|
             single.false?.then(
@@ -60,6 +65,7 @@ module Events
           end
 
          required(:participant_name_1, Types::String).filled
+         required(:tshirt_size_1, Types::String).filled
          optional(:participant_city_1, Types::String)
          optional(:team_name, Types::String)
          optional(:remarks, Types::String)
