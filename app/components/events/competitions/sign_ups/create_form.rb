@@ -33,7 +33,6 @@ module Events
             single.false?.then(participant_name_2.filled?)
           end
           rule(tshirt_size_2: [:single, :tshirt_size_2]) do |single, tshirt_size_2|
-            byebug
             single.false?.then(tshirt_size_2.filled?)
           end
           rule(participant_email_2: [:single, :participant_name_2]) do |single, participant_email_2|
