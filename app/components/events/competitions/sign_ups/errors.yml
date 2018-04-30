@@ -2,37 +2,23 @@ en:
   errors:
     or: "or"
     array?: "must be an array"
-
     empty?: "must be empty"
-
     excludes?: "must not include %{value}"
-
     excluded_from?:
       arg:
         default: "must not be one of: %{list}"
         range: "must not be one of: %{list_left} - %{list_right}"
     exclusion?: "must not be one of: %{list}"
-
     eql?: "must be equal to %{left}"
-
     not_eql?: "must not be equal to %{left}"
-
-    filled?: "smust be filled"
-
+    filled?: "must be filled"
     format?: "is in invalid format"
-
     number?: "must be a number"
-
     odd?: "must be odd"
-
     even?: "must be even"
-
     gt?: "musi być większe niż %{num}"
-
     gteq?: "must be greater than or equal to %{num}"
-
     hash?: "must be a hash"
-
     included_in?:
       arg:
         default: "must be one of: %{list}"

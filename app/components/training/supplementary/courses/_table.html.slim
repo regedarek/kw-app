@@ -3,8 +3,16 @@ table.stack
     tr
       th = t('.name')
       th = t('.place')
+      - if user_signed_in? && current_user.admin?
+        th
   tbody
     - courses.each do |course|
       tr
         td = course.name
         td = course.place
+        - if user_signed_in? && current_user.admin?
+          td
+            = link_to t('.edit'), edit_supplementary_course_path(course.id)
+            = " | "
+            = link_to t('.destroy'), supplementary_course_path(course.id),
+            method: :delete

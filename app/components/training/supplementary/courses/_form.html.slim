@@ -1,4 +1,4 @@
-= form_for course, as: :course, url: supplementary_courses_path do |f|
+= form_for course, as: :course, url: url do |f|
   .row
     .large-12.columns
       - if @errors
@@ -50,4 +50,7 @@
 
   .row
     .large-12.columns
-      = f.submit t('.submit'), class: 'button expanded large'
+      = f.submit class: 'button expanded large'
+  .row
+    .large-12.columns
+      = link_to t('.back'), supplementary_courses_path, class: 'button large expanded'
