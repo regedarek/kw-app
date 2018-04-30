@@ -22,7 +22,11 @@
         = f.label 'Logo nad formularzem'
         = f.text_field :baner_url
 
-      .large-7.columns
+      .large-2.columns
+        = f.label 'Email organizatora'
+        = f.text_field :organizer_email
+
+      .large-5.columns
         = f.label 'Zasady dodane na dole formularza'
         = f.text_area :rules
 

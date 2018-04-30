@@ -80,7 +80,8 @@ module Events
           .require(:competition)
           .permit(
             :name, :edition_sym, :rules, :baner_url, :single, :team_name,
-            :closed, :limit, :email_text, :matrimonial_office, :tshirt_url
+            :closed, :limit, :email_text, :matrimonial_office, :tshirt_url,
+            :organizer_email
           )
       end
     end
