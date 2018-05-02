@@ -1,4 +1,4 @@
-= form_for @course, as: :course, url: supplementary_courses_path do |f|
+= form_for @course, as: :course, url: supplementary_courses_path, html: { class: 'js-course-form' } do |f|
   = render 'form', f: f
 
   .row

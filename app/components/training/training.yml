@@ -18,9 +18,11 @@ pl:
           category: Kategoria
           place: Miejsce
           start_date: Od kiedy
+          price: Zaliczka?
+          one_day: Jeden dzień?
           end_date: Do kiedy
-          application_date: Orientacyjna data/Data zapisów
+          application_date: Data zapisów
           price_kw: Zaliczka dla członków KW
           price_non_kw: Zaliczka dla pozostałych
           remarks: Uwagi od organizatora
-          organizator_id: Kto organizuje(user_id)
+          organizator_id: Kto organizuje?
