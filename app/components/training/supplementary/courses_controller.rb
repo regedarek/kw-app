@@ -13,7 +13,8 @@ module Training
       end
 
       def show
-        @course = Training::Supplementary::CourseRecord.find(params[:id])
+        record = Training::Supplementary::CourseRecord.find(params[:id])
+        @course = Training::Supplementary::Course.from_record(record)
       end
 
       def edit

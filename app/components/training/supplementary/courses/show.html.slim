@@ -1,0 +1,36 @@
+.column
+  .row
+    .large-12.columns
+      h3 = @course.name
+
+  .row
+    .large-12.columns
+      b = t('.place')
+      = @course&.place
+      br
+      b = t('.start_date')
+      = @course&.start_date&.to_date
+      br
+      b = t('.end_date')
+      = @course&.end_date&.to_date
+      br
+      b = t('.application_date')
+      = @course&.application_date&.to_date
+      br
+      b = t('.price_kw')
+      = @course&.price_kw
+      - if @course.price_kw
+        | zł
+      br
+      b = t('.price_non_kw')
+      = @course&.price_non_kw
+      - if @course.price_non_kw
+        | zł
+      br
+      b = t('.organizer')
+      = @course&.organizer
+      br
+      b = t('.remarks')
+      br
+      .callout
+        = @course&.remarks&.html_safe

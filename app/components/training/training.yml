@@ -17,6 +17,20 @@ pl:
           organizer: Organizator
           price: Cena(zł)
           edit: Edycja
+          show: Szczegóły
+          destroy: Usuń
+        show:
+          category: Kategoria
+          name: Nazwa
+          place: "Miejsce: "
+          start_date: "Od kiedy?: "
+          end_date: "Do kiedy?: "
+          application_date: "Do kiedy zapisy?: "
+          organizer: "Organizator: "
+          remarks: "Uwagi od organizatora"
+          price_kw: "Cena dla klubowiczów: "
+          price_non_kw: "Cena dla nie-klubowiczów: "
+          edit: Edycja
           destroy: Usuń
         new:
           submit: Utwórz
