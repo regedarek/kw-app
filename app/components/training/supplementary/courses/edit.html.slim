@@ -1,1 +1,9 @@
-= render 'form', course: @course, url: supplementary_course_path(@course.id)
+= form_for @course, as: :course, url: supplementary_course_path(@course.id) do |f|
+  = render 'form', f: f
+
+  .row
+    .large-12.columns
+      = f.submit t('.submit'), class: 'button expanded large'
+  .row
+    .large-12.columns
+      = link_to t('.back'), supplementary_courses_path, class: 'button large expanded'

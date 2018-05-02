@@ -2,8 +2,11 @@ pl:
   training:
     supplementary:
       courses:
-        form:
+        new:
           submit: Utwórz
+        edit:
+          submit: Zaktualizuj
+        form:
           team_name: Nazwa
           place: Miejsce
           start_date: Od kiedy
