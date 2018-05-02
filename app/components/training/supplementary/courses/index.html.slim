@@ -2,10 +2,10 @@
   .large-12.columns
     h3 Doszkalania i wyjazdy
 
-.row
-  .large-12.columns
-    = link_to 'Dodaj', new_supplementary_course_path,
-    class: 'button expanded large'
+- if user_signed_in?
+  .row
+    .large-12.columns
+      = link_to 'Dodaj', new_supplementary_course_path, class: 'button expanded large'
 
 .row
   .large-12.columns

@@ -15,6 +15,7 @@ pl:
           place: Miejsce
           date: Data
           organizer: Organizator
+          price: Cena(zł)
           edit: Edycja
           destroy: Usuń
         new:
