@@ -9,6 +9,14 @@ pl:
             snw: Narciarskie
             stj: Jaskiniowe
       courses:
+        table:
+          category: Kategoria
+          name: Nazwa
+          place: Miejsce
+          date: Data
+          organizer: Organizator
+          edit: Edycja
+          destroy: Usuń
         new:
           submit: Utwórz
         edit:
@@ -17,11 +25,11 @@ pl:
           team_name: Nazwa
           category: Kategoria
           place: Miejsce
-          start_date: Od kiedy
+          start_date: Kiedy?
           price: Zaliczka?
           one_day: Jeden dzień?
           end_date: Do kiedy
-          application_date: Data zapisów
+          application_date: Start zapisów
           price_kw: Zaliczka dla członków KW
           price_non_kw: Zaliczka dla pozostałych
           remarks: Uwagi od organizatora

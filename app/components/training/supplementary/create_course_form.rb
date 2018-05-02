@@ -9,6 +9,7 @@ module Training
       define! do
         required(:name).filled(:str?)
         required(:place).filled(:str?)
+        optional(:organizator_id).maybe
       end
     end
   end

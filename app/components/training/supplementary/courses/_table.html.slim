@@ -1,18 +1,30 @@
 table.stack
   thead
     tr
+      th width='5%'
       th = t('.name')
       th = t('.place')
+      th = t('.date')
+      th = t('.organizer')
       - if user_signed_in? && current_user.admin?
         th
   tbody
     - courses.each do |course|
       tr
+        td = image_tag "#{course.category}.png", size: '40x40'
         td = course.name
         td = course.place
-        - if user_signed_in? && current_user.admin?
-          td
-            = link_to t('.edit'), edit_supplementary_course_path(course.id)
-            = " | "
-            = link_to t('.destroy'), supplementary_course_path(course.id),
-            method: :delete
+        td
+          - if course.start_date && course.end_date
+            = [course.start_date&.strftime("%d"), course.end_date&.strftime("%d/%m/%Y")].join('-')
+          - else
+            = course.start_date&.strftime("%d/%m/%Y")
+        td = course.organizer
+        - if user_signed_in?
+          - if current_user.admin? || current_user.id == course.user_id
+            td.text-center
+              i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
+              div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
+                ul.menu.vertical
+                  li= link_to t('.edit'), edit_supplementary_course_path(course.id)
+                  li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete

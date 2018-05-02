@@ -21,8 +21,12 @@ module Training
       attribute :remarks, Types::Strict::String.optional
       attribute :organizator_id, Types::Any.optional
 
-      def organizator_id2
-        byebug
+      def organizer
+        if ::Db::User.exists?(id: organizator_id)
+          ::Db::User.find(organizator_id)&.display_name
+        else
+          ''
+        end
       end
 
       class << self
