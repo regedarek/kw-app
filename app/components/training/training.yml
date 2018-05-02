@@ -1,6 +1,13 @@
 pl:
   training:
     supplementary:
+      course:
+        enums:
+          categories:
+            kw: Ogólne
+            sww: Wspinaczkowe
+            snw: Narciarskie
+            stj: Jaskiniowe
       courses:
         new:
           submit: Utwórz
@@ -8,6 +15,7 @@ pl:
           submit: Zaktualizuj
         form:
           team_name: Nazwa
+          category: Kategoria
           place: Miejsce
           start_date: Od kiedy
           end_date: Do kiedy

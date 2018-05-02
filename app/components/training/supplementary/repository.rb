@@ -8,7 +8,9 @@ module Training
       end
 
       def create(form_outputs:)
-        record = Training::Supplementary::CourseRecord.create!(form_outputs.to_h)
+        o_id = form_outputs[:organizator_id]&.first
+        record = Training::Supplementary::CourseRecord
+          .create!(form_outputs.to_h.merge!(organizator_id: o_id))
         Training::Supplementary::Course.from_record(record)
       end
     end

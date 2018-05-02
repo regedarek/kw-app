@@ -9,8 +9,9 @@ module Training
     class Course < Dry::Struct
       constructor_type :strict
 
-      attribute :id, Types::Strict::Int
-      attribute :name, Types::Strict::String
+      attribute :id, Types::Strict::Int.optional
+      attribute :category, Types::Strict::String
+      attribute :name, Types::Strict::String.optional
       attribute :place, Types::Strict::String.optional
       attribute :start_date, Types::Strict::Date.optional
       attribute :end_date, Types::Strict::Date.optional
@@ -18,12 +19,17 @@ module Training
       attribute :price_kw, Types::Strict::Int.optional
       attribute :price_non_kw, Types::Strict::Int.optional
       attribute :remarks, Types::Strict::String.optional
-      attribute :organizator_id, Types::Strict::Int.optional
+      attribute :organizator_id, Types::Any.optional
+
+      def organizator_id2
+        byebug
+      end
 
       class << self
         def from_record(record)
           new(
             id: record.id,
+            category: record.category,
             name: record.name,
             place: record.place,
             start_date: record.start_date&.to_date,

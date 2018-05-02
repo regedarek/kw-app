@@ -1,51 +1,56 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul
+          - @errors.each do |error|
+            li= error.last.to_sentence
 
-  .row
-    .large-12.columns
-      - if @errors
-        .callout.alert
-          ul
-            - @errors.each do |error|
-              li= error.last.to_sentence
+.row
+  .large-12.columns
+    = f.label :name, t('.team_name')
+    = f.text_field :name
 
-  .row
-    .large-12.columns
-      = f.label :name, t('.team_name')
-      = f.text_field :name
+.row
+  .large-4.columns
+    = f.label :category, t('.category')
+    = f.select :category, @course.categories
 
-  .row
-    .large-8.columns
-      = f.label :place, t('.place')
-      = f.text_field :place
+  .large-4.columns
+    = f.label :place, t('.place')
+    = f.text_field :place
 
-    .large-4.columns
-      = f.label :organizator_id, t('.organizator_id')
-      = f.number_field :organizator_id
+  .large-4.columns
+    = f.label :organizator_id, t('.organizator_id')
+    - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
+    - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil
+    = f.text_field :organizator_id, 'data-tokeninput' => { collection: names, options: { tokenLimit: 1, prePopulate: prepopulate}}.to_json
 
-  .row
-    .large-4.columns
-      = f.label :start_date, t('.start_date')
-      = f.date_field :start_date
+.row
+  .large-4.columns
+    = f.label :start_date, t('.start_date')
+    = f.date_field :start_date
 
-    .large-4.columns
-      = f.label :end_date, t('.end_date')
-      = f.date_field :end_date
+  .large-4.columns
+    = f.label :end_date, t('.end_date')
+    = f.date_field :end_date
 
-    .large-4.columns
-      = f.label :application_date, t('.application_date')
-      = f.date_field :application_date
+  .large-4.columns
+    = f.label :application_date, t('.application_date')
+    = f.date_field :application_date
 
-  .row
-    .large-6.columns
-      = f.label :price_kw, t('.price_kw')
-      = f.number_field :price_kw
+.row
+  .large-6.columns
+    = f.label :price_kw, t('.price_kw')
+    = f.number_field :price_kw
 
-    .large-6.columns
-      = f.label :price_non_kw, t('.price_non_kw')
-      = f.number_field :price_non_kw
+  .large-6.columns
+    = f.label :price_non_kw, t('.price_non_kw')
+    = f.number_field :price_non_kw
 
-  .row
-    .large-12.columns
-      = f.label :remarks, t('.remarks')
-      = f.text_field :remarks
+.row
+  .large-12.columns
+    = f.label :remarks, t('.remarks')
+    = f.text_field :remarks
 
 
