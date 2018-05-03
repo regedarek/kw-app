@@ -49,7 +49,7 @@ table.stack
               i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
               div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical
-                  li= link_to t('.show'), supplementary_course_path(course.id)
+                  li.hide-for-small-only = link_to t('.show'), supplementary_course_path(course.id)
                   li= link_to t('.edit'), edit_supplementary_course_path(course.id)
                   li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete
         - else
