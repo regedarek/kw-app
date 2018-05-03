@@ -1,11 +1,22 @@
 .row
   .large-12.columns
-    h3 Doszkalania i wyjazdy
+    h3 = t('.header')
 
 - if user_signed_in? && current_user.roles.include?('events')
   .row
-    .large-12.columns
+    .large-4.columns
+        = link_to category: :kw do
+          = image_tag "kw.png", size: '50x50'
+        = link_to category: :snw do
+          = image_tag "snw.png", size: '50x50'
+        = link_to category: :sww do
+          = image_tag "sww.png", size: '50x50'
+        = link_to category: :stj do
+          = image_tag "stj.png", size: '50x50'
+    .large-4.columns
       = link_to 'Dodaj', new_supplementary_course_path, class: 'button expanded large'
+    .large-4.columns
+      = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
 
 .row
   .large-12.columns

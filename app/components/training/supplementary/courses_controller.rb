@@ -5,7 +5,7 @@ module Training
       append_view_path 'app/components'
 
       def index
-        @courses = Training::Supplementary::Repository.new.fetch_courses
+        @courses = Training::Supplementary::Repository.new.fetch_courses(category: params[:category])
       end
 
       def new

@@ -30,16 +30,17 @@
       b = t('.organizer')
       = @course&.organizer
       br
+      = link_to t('.rules'), page_path('events_rules')
+      br
       b = t('.remarks')
       br
       .callout
         = @course&.remarks&.html_safe
-      hr
-        b Limit: 
-        = @course.limit
-        br
-        b Zapisani: 
-        = @course.sign_ups.count
+      b Limit: 
+      = @course.limit
+      br
+      b Zapisani: 
+      = @course.sign_ups.count
       - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
         .callout
           = Db::User.where(id: @course&.sign_ups.map(&:user_id)).map(&:email).join(' ,')

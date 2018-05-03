@@ -1,8 +1,8 @@
 module Training
   module Supplementary
     class Repository
-      def fetch_courses
-        Training::Supplementary::CourseRecord.all.order(:application_date).collect do |record|
+      def fetch_courses(category: Training::Supplementary::CourseRecord.categories.keys)
+        Training::Supplementary::CourseRecord.where(category: category).order(:application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
       end

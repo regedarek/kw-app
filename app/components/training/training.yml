@@ -13,6 +13,8 @@ pl:
             snw: Narciarskie
             stj: Jaskiniowe
       courses:
+        index:
+          header: Szkolenia, spotkania i wyjazdy
         table:
           category: Kategoria
           name: Nazwa
@@ -28,6 +30,7 @@ pl:
           sign_up_destroy: Wypisz się!
         show:
           category: Kategoria
+          rules: Link do regulaminu wydarzeń KW Kraków
           name: Nazwa
           place: "Miejsce: "
           start_date: "Od kiedy?: "

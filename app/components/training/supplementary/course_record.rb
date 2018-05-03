@@ -1,7 +1,7 @@
 module Training
   module Supplementary
     class CourseRecord < ActiveRecord::Base
-      enum category: [ :kw, :snw, :sww, :stj ]
+      enum category: [:kw, :snw, :sww, :stj]
 
       has_many :sign_ups, class_name: 'Training::Supplementary::SignUpRecord', foreign_key: :course_id
 
