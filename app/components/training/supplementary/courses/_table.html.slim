@@ -23,7 +23,7 @@ table.stack
           - if course.remarks.present?
             div id="remarks-modal-#{course.id}" class="reveal" data-reveal=''
               p
-                = course.remarks
+                = simple_format course.remarks
               button.close-button aria-label=t('close_alert') data-close="" type="button"
                 span aria-hidden="true"  &times;
             a data-open="remarks-modal-#{course.id}" = course.name
