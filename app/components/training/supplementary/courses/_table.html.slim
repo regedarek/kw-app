@@ -1,29 +1,36 @@
 table.stack
   thead
     tr
-      th width='5%'
-      th = t('.name')
-      th width='20%'
+      th.text-center width='5%'
+      th.text-center = t('.name')
+      th.text-center width='20%'
         = t('.place')
-      th width='15%'
+      th.text-center width='15%'
         = t('.date')
-      th width='15%'
+      th.text-center width='15%'
         = t('.organizer')
-      th width='7%'
+      th.text-center width='7%'
         = t('.price')
-      th width='3%'
+      th.text-center.show-for-small-only
+      th.text-center width='3%'
   tbody
     - courses.each do |course|
       tr
-        td = image_tag "#{course.category}.png", size: '40x40'
-        td = course.name
-        td = course.place
+        td.text-center = image_tag "#{course.category}.png", size: '40x40'
+        td.text-center
+          #remarks-modal.reveal data-reveal=''
+            p
+              = course.remarks
+            button.close-button aria-label=t('close_alert') data-close="" type="button"
+              span aria-hidden="true"  &times;
+          a data-open="remarks-modal" = course.name
+        td.text-center = course.place
         td.text-center
           - if course.start_date && course.end_date
             = [course.start_date&.strftime("%d"), course.end_date&.strftime("%d/%m/%Y")].join('-')
           - else
             = course.start_date&.strftime("%d/%m/%Y")
-        td = course.organizer
+        td.text-center = course.organizer
         td.text-center
           - if course.price_kw && course.price_non_kw
             = "#{course.price_kw}/#{course.price_non_kw}"
@@ -31,6 +38,8 @@ table.stack
             | -
           - else
             = course.price_kw
+        td.text-center.show-for-small-only
+          = course.remarks
         - if user_signed_in?
           - if current_user.admin? || current_user.id == course.user_id
             td.text-center

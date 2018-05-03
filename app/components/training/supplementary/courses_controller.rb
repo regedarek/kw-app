@@ -67,7 +67,7 @@ module Training
           .require(:course)
           .permit(
             :name, :place, :start_date, :end_date, :application_date, :price_kw,
-            :price_non_kw, :remarks, :category, organizator_id: []
+            :price_non_kw, :remarks, :category, :price, organizator_id: []
           )
       end
     end
