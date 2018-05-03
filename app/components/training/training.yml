@@ -4,6 +4,7 @@ pl:
       sign_ups:
         create:
           limit_exceded: Brak miejsc!
+          not_last_fee: Musisz opłacić składkę członkowską!
       course:
         enums:
           categories:
@@ -46,6 +47,7 @@ pl:
           back: Cofnij
         form:
           team_name: Nazwa
+          last_fee_paid: Składka?
           category: Kategoria
           place: Miejsce
           open: Otwarte?

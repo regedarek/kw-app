@@ -68,7 +68,7 @@ module Training
           .permit(
             :name, :place, :start_date, :end_date, :application_date, :price_kw,
             :price_non_kw, :remarks, :category, :price, :one_day, :active,
-            :open, :limit, organizator_id: []
+            :open, :limit, :last_fee_paid, organizator_id: []
           )
       end
     end

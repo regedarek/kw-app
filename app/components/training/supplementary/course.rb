@@ -22,6 +22,7 @@ module Training
       attribute :organizator_id, Types::Any.optional
       attribute :price, Types::Strict::Bool
       attribute :open, Types::Strict::Bool
+      attribute :last_fee_paid, Types::Strict::Bool
       attribute :active, Types::Strict::Bool
       attribute :one_day, Types::Strict::Bool
       attribute :limit, Types::Strict::Int
@@ -56,7 +57,8 @@ module Training
             one_day: record.one_day,
             active: record.active,
             limit: record.limit,
-            open: record.open
+            open: record.open,
+            last_fee_paid: record.last_fee_paid
           )
         end
       end

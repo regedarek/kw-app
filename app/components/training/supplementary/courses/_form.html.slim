@@ -28,14 +28,27 @@
           - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil
           = f.text_field :organizator_id, 'data-tokeninput' => { collection: names, options: { tokenLimit: 1, prePopulate: prepopulate}}.to_json
 
-        .large-1.columns
+        .large-2.columns
+          = f.label :limit, t('.limit')
+          = f.number_field :limit
+
+      .row
+        .large-3.columns
           = f.label :price, t('.price')
-          br
           = f.check_box :price, class: 'js-price'
 
-        .large-1.columns
+        .large-3.columns
+          = f.label :last_fee_paid, t('.last_fee_paid')
+          = f.check_box :last_fee_paid
+
+        .large-3.columns
           = f.label :one_day, t('.one_day')
           = f.check_box :one_day, class: 'js-one-day'
+
+        .large-3.columns
+          = f.label :open, t('.open')
+          = f.check_box :open
+
 
 .row
   .large-8.columns
@@ -45,13 +58,6 @@
           = f.label :application_date, t('.application_date')
           = f.date_field :application_date
 
-        .large-2.columns
-          = f.label :limit, t('.limit')
-          = f.number_field :limit
-
-        .large-1.columns
-          = f.label :open, t('.open')
-          = f.check_box :open
 
         .large-3.columns
           = f.label :start_date, t('.start_date')
@@ -79,5 +85,3 @@
     .callout
       = f.label :remarks, t('.remarks')
       = f.text_area :remarks
-
-
