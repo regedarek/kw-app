@@ -20,6 +20,10 @@ module Training
       attribute :price_non_kw, Types::Strict::Int.optional
       attribute :remarks, Types::Strict::String.optional
       attribute :organizator_id, Types::Any.optional
+      attribute :price, Types::Strict::Bool
+      attribute :active, Types::Strict::Bool
+      attribute :one_day, Types::Strict::Bool
+      attribute :limit, Types::Strict::Int
 
       def organizer
         if ::Db::User.exists?(id: organizator_id)
@@ -42,7 +46,11 @@ module Training
             price_kw: record.price_kw,
             price_non_kw: record.price_non_kw,
             remarks: record.remarks,
-            organizator_id: record.organizator_id
+            organizator_id: record.organizator_id,
+            price: record.price,
+            one_day: record.one_day,
+            active: record.active,
+            limit: record.limit
           )
         end
       end
