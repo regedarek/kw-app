@@ -34,8 +34,10 @@ pl:
           destroy: Usuń
         new:
           submit: Utwórz
+          back: Cofnij
         edit:
           submit: Zaktualizuj
+          back: Cofnij
         form:
           team_name: Nazwa
           category: Kategoria
@@ -45,7 +47,7 @@ pl:
           one_day: Jeden dzień?
           end_date: Do kiedy
           application_date: Start zapisów
-          price_kw: Zaliczka dla członków KW
-          price_non_kw: Zaliczka dla pozostałych
+          price_kw: Zaliczka dla KW
+          price_non_kw: Zaliczka dla reszty
           remarks: Uwagi od organizatora
           organizator_id: Kto organizuje?

@@ -18,12 +18,15 @@ table.stack
       tr
         td.text-center = image_tag "#{course.category}.png", size: '40x40'
         td.text-center
-          #remarks-modal.reveal data-reveal=''
-            p
-              = course.remarks
-            button.close-button aria-label=t('close_alert') data-close="" type="button"
-              span aria-hidden="true"  &times;
-          a data-open="remarks-modal" = course.name
+          - if course.remarks.present?
+            div id="remarks-modal-#{course.id}" class="reveal" data-reveal=''
+              p
+                = course.remarks
+              button.close-button aria-label=t('close_alert') data-close="" type="button"
+                span aria-hidden="true"  &times;
+            a data-open="remarks-modal-#{course.id}" = course.name
+          - else
+            = course.name
         td.text-center = course.place
         td.text-center
           - if course.start_date && course.end_date

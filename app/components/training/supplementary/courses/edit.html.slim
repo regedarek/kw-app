@@ -2,8 +2,7 @@
   = render 'form', f: f
 
   .row
-    .large-12.columns
-      = f.submit t('.submit'), class: 'button expanded large'
-  .row
-    .large-12.columns
-      = link_to t('.back'), supplementary_courses_path, class: 'button large expanded'
+    .large-6.columns
+      = f.submit t('.submit'), class: 'button expanded large success'
+    .large-6.columns
+      = link_to t('.back'), supplementary_courses_path, class: 'secondary button large expanded'
