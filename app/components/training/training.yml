@@ -1,6 +1,9 @@
 pl:
   training:
     supplementary:
+      sign_ups:
+        create:
+          limit_exceded: Brak miejsc!
       course:
         enums:
           categories:
@@ -18,7 +21,10 @@ pl:
           price: Cena(zł)
           edit: Edycja
           show: Szczegóły
+          sign_up: Zapisz się!
+          limit: Zapisy
           destroy: Usuń
+          sign_up_destroy: Wypisz się!
         show:
           category: Kategoria
           name: Nazwa

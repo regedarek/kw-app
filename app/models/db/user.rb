@@ -28,6 +28,10 @@ class Db::User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def rodo_name
+    "#{first_name} #{last_name.first}."
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = Db::User.find_by(email: data['email'])

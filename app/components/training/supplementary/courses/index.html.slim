@@ -2,7 +2,7 @@
   .large-12.columns
     h3 Doszkalania i wyjazdy
 
-- if user_signed_in?
+- if user_signed_in? && current_user.roles.include?('events')
   .row
     .large-12.columns
       = link_to 'Dodaj', new_supplementary_course_path, class: 'button expanded large'

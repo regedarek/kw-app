@@ -25,6 +25,10 @@ module Training
       attribute :one_day, Types::Strict::Bool
       attribute :limit, Types::Strict::Int
 
+      def sign_ups
+        Training::Supplementary::SignUpRecord.where(course_id: id)
+      end
+
       def organizer
         if ::Db::User.exists?(id: organizator_id)
           ::Db::User.find(organizator_id)&.display_name

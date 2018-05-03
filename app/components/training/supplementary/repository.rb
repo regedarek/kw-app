@@ -13,6 +13,16 @@ module Training
           .create!(form_outputs.to_h.merge!(organizator_id: o_id))
         Training::Supplementary::Course.from_record(record)
       end
+
+      def sign_up!(user_id:, course_id:)
+        course = Training::Supplementary::CourseRecord.find(course_id)
+        return if course.limit > 0 && course.sign_ups.count >= course.limit
+
+        Training::Supplementary::SignUpRecord.create!(
+          user_id: user_id,
+          course_id: course_id
+        ) unless Training::Supplementary::SignUpRecord.exists?(user_id: user_id, course_id: course_id)
+      end
     end
   end
 end

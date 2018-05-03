@@ -3,6 +3,8 @@ module Training
     class CourseRecord < ActiveRecord::Base
       enum category: [ :kw, :snw, :sww, :stj ]
 
+      has_many :sign_ups, class_name: 'Training::Supplementary::SignUpRecord', foreign_key: :course_id
+
       self.table_name = 'supplementary_courses'
 
       def categories

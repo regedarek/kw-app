@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     namespace :supplementary do
       resources :courses
+      resources :sign_ups
     end
   end
 end
