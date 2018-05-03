@@ -49,11 +49,15 @@
           = f.label :limit, t('.limit')
           = f.number_field :limit
 
+        .large-1.columns
+          = f.label :open, t('.open')
+          = f.check_box :open
+
         .large-3.columns
           = f.label :start_date, t('.start_date')
           = f.date_field :start_date
 
-        .large-4.columns
+        .large-3.columns
           .js-one-day-row
             = f.label :end_date, t('.end_date')
             = f.date_field :end_date

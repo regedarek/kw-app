@@ -48,6 +48,7 @@ pl:
           team_name: Nazwa
           category: Kategoria
           place: Miejsce
+          open: Otwarte?
           start_date: Kiedy?
           price: Zaliczka?
           one_day: Jeden dzień?

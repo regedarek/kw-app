@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503131609) do
+ActiveRecord::Schema.define(version: 20180503143932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -348,6 +348,7 @@ ActiveRecord::Schema.define(version: 20180503131609) do
     t.integer  "limit",            default: 0,     null: false
     t.boolean  "one_day",          default: true,  null: false
     t.boolean  "active",           default: false, null: false
+    t.boolean  "open",             default: true,  null: false
   end
 
   create_table "supplementary_sign_ups", force: :cascade do |t|
