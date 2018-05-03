@@ -7,7 +7,7 @@ module Training
                      else
           Training::Supplementary::CourseRecord.categories.keys
                      end
-        Training::Supplementary::CourseRecord.where(category: categories).order(:application_date).collect do |record|
+        Training::Supplementary::CourseRecord.where(category: categories).order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
       end
