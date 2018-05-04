@@ -57,13 +57,14 @@ table.stack
         td.text-center.show-for-small-only
           = simple_format course.remarks
           br
-          - if user_signed_in?? && (current_user.admin? || current_user.id == course.user_id)
-            - unless course.open
-              - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
-                - unless course.limit > 0 && course.sign_ups.count >= course.limit
-                  = link_to t('.sign_up'), supplementary_sign_ups_path(course_id: course.id), method: :post
-              - else
-                = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
+          - if user_signed_in?
+            - if current_user.admin? || current_user.id == course.user_id
+              - unless course.open
+                - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
+                  - unless course.limit > 0 && course.sign_ups.count >= course.limit
+                    = link_to t('.sign_up'), supplementary_sign_ups_path(course_id: course.id), method: :post
+                - else
+                  = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
         - if user_signed_in?
           - if current_user.admin? || current_user.id == course.user_id
             td.text-center
