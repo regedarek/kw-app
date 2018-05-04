@@ -57,7 +57,7 @@ table.stack
         td.text-center.show-for-small-only
           = simple_format course.remarks
           br
-          - if current_user.admin? || current_user.id == course.user_id
+          - if user_signed_in?? && (current_user.admin? || current_user.id == course.user_id)
             - unless course.open
               - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
                 - unless course.limit > 0 && course.sign_ups.count >= course.limit
