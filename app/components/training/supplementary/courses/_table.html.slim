@@ -34,7 +34,8 @@ table.stack
           - if course.start_date && course.end_date
             = [course.start_date&.strftime("%d"), course.end_date&.strftime("%d/%m/%Y")].join('-')
           - else
-            = course.start_date&.strftime("%d/%m/%Y")
+            = course.start_date&.strftime("%d/%m/%Y ")
+            b = course.start_date&.strftime("%H:%M")
         td.text-center = course.organizer
         td.text-center
           - if course.price_kw && course.price_non_kw

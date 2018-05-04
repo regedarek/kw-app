@@ -54,16 +54,15 @@
   .large-8.columns
     .callout.secondary
       .row
-        .large-3.columns
+        .large-4.columns
           = f.label :application_date, t('.application_date')
-          = f.date_field :application_date
+          = f.datetime_field :application_date
 
-
-        .large-3.columns
+        .large-4.columns
           = f.label :start_date, t('.start_date')
-          = f.date_field :start_date
+          = f.datetime_field :start_date
 
-        .large-3.columns
+        .large-4.columns
           .js-one-day-row
             = f.label :end_date, t('.end_date')
             = f.date_field :end_date
