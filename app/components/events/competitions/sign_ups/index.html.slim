@@ -11,7 +11,7 @@
     .row
       .large-12.columns
         .callout.warning
-          | Zapisy zostały wstrzymane. Jest to spowodowane decyzją organizatora lub wyczerpaniem limitu miejsc.
+          = t('.closed_or_limit_reached')
   - else
     .row
       .large-12.columns
@@ -21,35 +21,40 @@
     .large-12.columns
       .callout.primary
         .row
+          - if limiter.limit > 0
+            .large-3.columns
+              b = t('.limit')
+              = limiter.limit
           .large-3.columns
-            b Limit: 
-            = limiter.limit
-          .large-3.columns
-            b Zapisanych osób: 
+            b = t('.persons')
             = limiter.persons
           .large-3.columns
-            b Zapisanych zespołów: 
+            b = t('.teams')
             = limiter.teams.count
           .large-3.columns
-            b Zapisy czekające na wpłatę: 
+            b = t('.waiting')
             = limiter.waiting.count
   .row
     .large-12.columns
-      h3 Zapisane zespoły
+      h4
+        - if @competition.single
+          = t('.participants_signed_in')
+        - else
+          = t('.teams_signed_in')
       = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
 
   - if @competition.matrimonial_office?
     .row
       .large-12.columns
-        h3 Sparowani poszukujący
+        h4 = t('.founded_list')
         = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
 
     .row
       .large-12.columns
-        h3 Zapisani poszukujący
+        h4 = t('.looking_list')
         = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
 
   .row
     .large-12.columns
-      h3 Lista rezerwowa
+      h4 = t('.second_list')
       = render 'table', sign_ups: limiter.waiting.order(:created_at)

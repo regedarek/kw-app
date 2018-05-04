@@ -6,6 +6,24 @@ pl:
           success: Dziękujemy za zapisanie się na zawody, teraz sprawdź e-mail aby dokończyć rezerwację.
         index:
           sign_up: Zapisz się
+          closed_or_limit_reached: Zapisy zostały wstrzymane. Jest to spowodowane decyzją organizatora lub wyczerpaniem limitu miejsc.
+          limit: "Limit : "
+          persons: "Zapisanych osób: "
+          teams: "Zapisanych zespołów: "
+          waiting: "Zapisy czekające na wpłatę: "
+          participants_signed_in: Zapisani zawodnicy
+          teams_signed_in: Zapisane zespoły
+          second_list: Lista rezerwowa
+          looking_list: Zapisani poszukujący
+          founded_list: Sparowani poszukujący
+        table:
+          paid: Płatność
+          nr: Nr
+          names: Zawodnicy
+          name: Zawodnik
+          team_name: Zespół
+          city: Miasto
+          organization: Organizacja
         form:
           top_info: Zgłoś zespół i zapłać za obydwa pakiety startowe.
           team_name: Nazwa zespołu(bądźcie kreatywni!)
@@ -54,3 +72,17 @@ en:
           tshirt_size_2: T-shirt*
           tshirt_url: Sizes table
           submit: Sign Up
+        create:
+          success: Thank you for sign up! Check your e-mail and prepaid!
+        index:
+          sign_up: Sign Up
+          closed_or_limit_reached: Limit of sign ups had been reached.
+          limit: "Limit : "
+          persons: "Signed in people: "
+          teams: "Signed in teams: "
+          waiting: "Waiting for payment: "
+          participants_signed_in: Participants signed in
+          teams_signed_in: Teams signed in
+          second_list: Reserve list
+          looking_list: Signed in unpaired
+          founded_list: Signed in paired
