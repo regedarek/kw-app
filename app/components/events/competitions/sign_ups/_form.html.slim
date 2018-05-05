@@ -15,7 +15,7 @@
       .row
         .large-12.columns
           = f.label :team_name, t('.team_name')
-          = f.text_field :team_name, required: true
+          = f.text_field :team_name
 
   .row
     .large-12.columns
@@ -27,11 +27,11 @@
   .callout.primary
     .row
       .large-3.columns
-        = f.label :participant_name_1, t('.participant_name')
+        = f.label :participant_name_1, t('.participant_name_1')
         = f.text_field :participant_name_1
 
       .large-3.columns
-        = f.label :participant_email_1, t('.participant_email')
+        = f.label :participant_email_1, t('.participant_email_1')
         = f.text_field :participant_email_1
 
       - if @competition.single?
@@ -45,11 +45,11 @@
 
         .large-2.columns
           .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
-            = f.label :participant_kw_id_1, t('.participant_kw_id')
+            = f.label :participant_kw_id_1, t('.participant_kw_id_1')
             = f.number_field :participant_kw_id_1
       - else
         .large-2.columns
-          = f.label :competition_package_type_1_id, t('.competition_package_type_id')
+          = f.label :competition_package_type_1_id, t('.competition_package_type_id_1')
           = f.select :competition_package_type_1_id,
             options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
             {include_blank: true},
@@ -57,7 +57,7 @@
 
         .large-2.columns
           .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
-            = f.label :participant_kw_id_1, t('.participant_kw_id')
+            = f.label :participant_kw_id_1, t('.participant_kw_id_1')
             = f.number_field :participant_kw_id_1
 
         .large-2.columns
@@ -70,19 +70,19 @@
 
     .row
       .large-2.columns
-        = f.label :participant_gender_1, t('.participant_gender')
+        = f.label :participant_gender_1, t('.participant_gender_1')
         = f.select :participant_gender_1, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_1)), include_blank: true
 
       .large-2.columns
-        = f.label :participant_birth_year_1, t('.participant_birthyear')
+        = f.label :participant_birth_year_1, t('.participant_birthyear_1')
         = f.text_field :participant_birth_year_1
 
       .large-2.columns
-        = f.label :participant_city_1, t('.participant_city')
+        = f.label :participant_city_1, t('.participant_city_1')
         = f.text_field :participant_city_1
 
       .large-3.columns
-        = f.label :participant_team_1, t('.participant_team')
+        = f.label :participant_team_1, t('.participant_team_1')
         = f.text_field :participant_team_1
 
       .large-3.columns
