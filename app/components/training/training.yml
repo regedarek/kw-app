@@ -55,13 +55,13 @@ pl:
           back: Cofnij
         form:
           team_name: Nazwa
-          last_fee_paid: Składka?
+          last_fee_paid: Wymagaj opłaconej składki?
           category: Kategoria
           place: Miejsce
-          open: Otwarte?
+          open: Otwarte dla wszystkich?
           start_date: Kiedy?
-          price: Zaliczka?
-          one_day: Jeden dzień?
+          price: Wymagaj zaliczki?
+          one_day: Tylko jeden dzień?
           end_date: Do kiedy
           application_date: Start zapisów
           price_kw: Zaliczka dla KW
