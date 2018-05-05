@@ -57,7 +57,7 @@
             - else
               = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}), method: :post
         - else
-          - if @course.open
+          - if @course.open || course.last_fee_paid
           - else
             .row
               .large-3.columns

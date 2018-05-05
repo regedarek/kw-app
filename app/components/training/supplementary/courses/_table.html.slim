@@ -86,7 +86,7 @@ table.stack
               - else
                 - if course.limit > 0 && course.sign_ups.count >= course.limit
                 - else
-                  - if course.open
+                  - if course.open || course.last_fee_paid
                   - else
                     = form_for :sign_up, url: supplementary_sign_ups_path do |f|
                       = f.hidden_field :course_id, value: course.id
