@@ -74,12 +74,14 @@ table.stack
             ul.menu.vertical
               li.hide-for-small-only = link_to t('.show'), supplementary_course_path(course.id)
               - if user_signed_in?
-                - if !course.open
-                  - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
-                    - unless course.limit > 0 && course.sign_ups.count >= course.limit
-                      li= link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: course.id, user_id: current_user.id, email: current_user.email}), method: :post
-                  - else
-                    li= link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
+                - if course.open
+                - else
+                  - if Time.current.to_date >= course.application_date&.to_date
+                    - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
+                      - unless course.limit > 0 && course.sign_ups.count >= course.limit
+                        li= link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: course.id, user_id: current_user.id, email: current_user.email}), method: :post
+                    - else
+                      li= link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
                 - if current_user.admin? || current_user.id == course.organizator_id || current_user.roles.include?('events')
                   li= link_to t('.edit'), edit_supplementary_course_path(course.id)
                   li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete
@@ -88,8 +90,9 @@ table.stack
                 - else
                   - if course.open || course.last_fee_paid
                   - else
-                    = form_for :sign_up, url: supplementary_sign_ups_path do |f|
-                      = f.hidden_field :course_id, value: course.id
-                      = f.hidden_field :user_id, value: nil
-                      = f.email_field :email, placeholder: 'E-mail'
-                      = f.submit t('.submit'), class: "button small expanded"
+                    - if Time.current.to_date >= course.application_date&.to_date
+                      = form_for :sign_up, url: supplementary_sign_ups_path do |f|
+                        = f.hidden_field :course_id, value: course.id
+                        = f.hidden_field :user_id, value: nil
+                        = f.email_field :email, placeholder: 'E-mail'
+                        = f.submit t('.submit'), class: "button small expanded"

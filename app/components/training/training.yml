@@ -38,9 +38,9 @@ pl:
           rules: Link do regulaminu wydarzeń KW Kraków
           name: Nazwa
           place: "Miejsce: "
-          start_date: "Od kiedy?: "
+          start_date: "Kiedy?: "
           end_date: "Do kiedy?: "
-          application_date: "Do kiedy zapisy?: "
+          application_date: "Od kiedy zapisy?: "
           organizer: "Organizator: "
           remarks: "Uwagi od organizatora"
           price_kw: "Cena dla klubowiczów: "

@@ -9,24 +9,27 @@
       = @course&.place
       br
       b = t('.start_date')
-      = @course&.start_date&.to_date
+      = @course.start_date&.strftime("%d/%m/%Y %H:%M")
       br
-      b = t('.end_date')
-      = @course&.end_date&.to_date
-      br
+      - if @course&.end_date.present?
+        b = t('.end_date')
+        = @course&.end_date&.strftime("%d/%m/%Y %H:%M")
+        br
       b = t('.application_date')
-      = @course&.application_date&.to_date
+      = @course&.application_date&.strftime("%d/%m/%Y %H:%M")
       br
-      b = t('.price_kw')
-      = @course&.price_kw
-      - if @course.price_kw
-        | zł
-      br
-      b = t('.price_non_kw')
-      = @course&.price_non_kw
-      - if @course.price_non_kw
-        | zł
-      br
+      - if @course&.price_kw.present?
+        b = t('.price_kw')
+        = @course&.price_kw
+        - if @course.price_kw
+          | zł
+        br
+      - if @course&.price_non_kw.present?
+        b = t('.price_non_kw')
+        = @course&.price_non_kw
+        - if @course.price_non_kw
+          | zł
+        br
       b = t('.organizer')
       = @course&.organizer
       br
@@ -52,18 +55,20 @@
         - if user_signed_in?
           - if @course.open
           - else
-            - if Training::Supplementary::SignUpRecord.exists?(course_id: @course.id, user_id: current_user.id)
-              = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id), method: :delete
-            - else
-              = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}), method: :post
+            - if Time.current.to_date >= @course.application_date&.to_date
+              - if Training::Supplementary::SignUpRecord.exists?(course_id: @course.id, user_id: current_user.id)
+                = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id), method: :delete
+              - else
+                = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}), method: :post
         - else
-          - if @course.open || course.last_fee_paid
+          - if course.open || course.last_fee_paid
           - else
-            .row
-              .large-3.columns
-                = t('.sign_up_remarks')
-                = form_for :sign_up, url: supplementary_sign_ups_path do |f|
-                  = f.hidden_field :course_id, value: @course.id
-                  = f.hidden_field :user_id, value: nil
-                  = f.email_field :email, placeholder: 'E-mail'
-                  = f.submit t('.submit'), class: "button small expanded"
+            - if Time.current.to_date >= @course.application_date&.to_date
+              .row
+                .large-3.columns
+                  = t('.sign_up_remarks')
+                  = form_for :sign_up, url: supplementary_sign_ups_path do |f|
+                    = f.hidden_field :course_id, value: @course.id
+                    = f.hidden_field :user_id, value: nil
+                    = f.email_field :email, placeholder: 'E-mail'
+                    = f.submit t('.submit'), class: "button small expanded"
