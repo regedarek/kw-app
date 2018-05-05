@@ -23,11 +23,12 @@ module Training
         course = Training::Supplementary::CourseRecord.find(course_id)
         return if course.limit > 0 && course.sign_ups.count >= course.limit
 
-        Training::Supplementary::SignUpRecord.create!(
+        sign_up = Training::Supplementary::SignUpRecord.create!(
           user_id: user_id,
           course_id: course_id,
           email: email
         )
+        sign_up
       end
     end
   end

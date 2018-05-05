@@ -23,11 +23,12 @@ module Training
           end
         end
         return Left(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
-        repository.sign_up!(
+        sign_up = repository.sign_up!(
           course_id: form_outputs[:course_id],
           email: form_outputs[:email],
           user_id: form_outputs[:user_id]
         )
+        Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         Right(:success)
       end
 
