@@ -74,7 +74,7 @@ table.stack
             ul.menu.vertical
               li.hide-for-small-only = link_to t('.show'), supplementary_course_path(course.id)
               - if user_signed_in?
-                - if current_user.admin? || current_user.id == course.user_id
+                - if current_user.admin? || current_user.id == course.organizator_id
                   - if !course.open
                     - if user_signed_in?
                       - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
