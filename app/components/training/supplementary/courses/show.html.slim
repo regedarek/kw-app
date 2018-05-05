@@ -55,7 +55,7 @@
         - if user_signed_in?
           - if @course.open
           - else
-            - if Time.current.in_time_zone >= @course.application_date.in_time_zone
+            - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
               - if Training::Supplementary::SignUpRecord.exists?(course_id: @course.id, user_id: current_user.id)
                 = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id), method: :delete
               - else
@@ -63,7 +63,7 @@
         - else
           - if course.open || course.last_fee_paid
           - else
-            - if Time.current.in_time_zone >= @course.application_date&.in_time_zone
+            - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date&.in_time_zone
               .row
                 .large-3.columns
                   = t('.sign_up_remarks')
