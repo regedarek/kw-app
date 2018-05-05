@@ -76,7 +76,7 @@ table.stack
               - if user_signed_in?
                 - if course.open
                 - else
-                  - if Time.current.to_date >= course.application_date&.to_date
+                  - if Time.current.in_time_zone >= course.application_date&.in_time_zone
                     - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
                       - unless course.limit > 0 && course.sign_ups.count >= course.limit
                         li= link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: course.id, user_id: current_user.id, email: current_user.email}), method: :post
@@ -90,7 +90,7 @@ table.stack
                 - else
                   - if course.open || course.last_fee_paid
                   - else
-                    - if Time.current.to_date >= course.application_date&.to_date
+                    - if Time.current.in_time_zone >= course.application_date&.in_time_zone
                       = form_for :sign_up, url: supplementary_sign_ups_path do |f|
                         = f.hidden_field :course_id, value: course.id
                         = f.hidden_field :user_id, value: nil
