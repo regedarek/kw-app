@@ -32,18 +32,38 @@
       br
       = link_to t('.rules'), page_path('events_rules')
       br
-      b = t('.remarks')
-      br
-      .callout
-        = @course&.remarks&.html_safe
+      - if @course.remarks.present?
+        b = t('.remarks')
+        br
+        .callout
+          = @course&.remarks&.html_safe
       b Limit: 
       = @course.limit
       br
-      b Zapisani: 
-      = @course.sign_ups.count
-      - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-        .callout
-          = Db::User.where(id: @course&.sign_ups.map(&:user_id)).map(&:email).join(' ,')
+      - if @course.sign_ups&.any?
+        b Zapisani: 
+        = @course.sign_ups.count
+        - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+          .callout
+            = @course&.sign_ups&.map(&:email).join(', ')
+
+      - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
       - else
-        .callout
-          = Db::User.where(id: @course&.sign_ups.map(&:user_id)).map(&:rodo_name).join(' ,')
+        - if user_signed_in?
+          - if @course.open
+          - else
+            - if Training::Supplementary::SignUpRecord.exists?(course_id: @course.id, user_id: current_user.id)
+              = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id), method: :delete
+            - else
+              = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}), method: :post
+        - else
+          - if @course.open
+          - else
+            .row
+              .large-3.columns
+                = t('.sign_up_remarks')
+                = form_for :sign_up, url: supplementary_sign_ups_path do |f|
+                  = f.hidden_field :course_id, value: @course.id
+                  = f.hidden_field :user_id, value: nil
+                  = f.email_field :email, placeholder: 'E-mail'
+                  = f.submit t('.submit'), class: "button small expanded"

@@ -10,6 +10,7 @@ module Events
     module SignUps
       class CreateForm < Dry::Validation::Schema::Form
         configure do
+          config.messages = :i18n
           config.messages_file = 'app/components/events/competitions/sign_ups/errors.yml'
           config.type_specs = true
         end

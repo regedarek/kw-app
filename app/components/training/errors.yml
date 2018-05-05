@@ -1,3 +1,10 @@
+pl:
+  limit_exceded: 'Niestety nie ma już miejsc!'
+  not_last_fee: 'Brak zapłaconej składki!'
+  email_not_unique: 'Ten e-mail jest już zapisany!'
+  closed_or_open: 'Zapisy zamknięte'
+  errors:
+    filled?: "musi być uzupełniony"
 en:
   errors:
     or: "or"

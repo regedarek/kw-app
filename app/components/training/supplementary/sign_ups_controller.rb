@@ -1,26 +1,39 @@
 module Training
   module Supplementary
     class SignUpsController < ApplicationController
+      include EitherMatcher
+      append_view_path 'app/components'
+
       def create
-        course = Training::Supplementary::CourseRecord.find(params[:course_id])
-        return redirect_to :back, alert: t('.limit_exceded') if course.limit > 0 && course.sign_ups.count >= course.limit
-        fee = ::Db::Membership::Fee.find_by(kw_id: current_user.kw_id, year: Date.today.year)
-        if course.last_fee_paid
-          return redirect_to :back, alert: t('.not_last_fee') if !fee&.payment&.paid?
+        either(create_record) do |result|
+          result.success do
+            redirect_to :back, notice: 'Zapisałeś się!'
+          end
+
+          result.failure do |errors|
+            flash[:error] = errors.values.join(", ")
+            redirect_to supplementary_courses_path
+          end
         end
-
-        Training::Supplementary::Repository.new.sign_up!(
-          course_id: params[:course_id],
-          user_id: current_user.id
-        ) if user_signed_in?
-
-        redirect_to :back, notice: 'Zapisałeś się!'
       end
 
       def destroy
         Training::Supplementary::SignUpRecord.find_by(course_id: params[:id], user_id: current_user.id)&.destroy
 
         redirect_to :back, notice: 'Wypisałeś się!'
+      end
+
+      private
+
+      def create_record
+        Training::Supplementary::CreateSignUp.new(
+          Training::Supplementary::Repository.new,
+          Training::Supplementary::CreateSignUpForm.new
+        ).call(raw_inputs: sign_up_params)
+      end
+
+      def sign_up_params
+        params.require(:sign_up).permit(:email, :user_id, :course_id)
       end
     end
   end

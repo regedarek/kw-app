@@ -17,6 +17,7 @@ pl:
           header: Szkolenia, spotkania i wyjazdy
         table:
           category: Kategoria
+          submit: Zapisz się!
           name: Nazwa
           place: Miejsce
           date: Data
@@ -29,6 +30,10 @@ pl:
           destroy: Usuń
           sign_up_destroy: Wypisz się!
         show:
+          submit: Zapisz się!
+          sign_up_remarks: Twój e-mail zostanie usunięty z naszego systemu 24h po wydarzeniu.
+          sign_up: Zapisz się!
+          sign_up_destroy: Wypisz się!
           category: Kategoria
           rules: Link do regulaminu wydarzeń KW Kraków
           name: Nazwa

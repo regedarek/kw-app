@@ -135,11 +135,11 @@ pl:
         filled?: Musisz wybrać pakiet 2
       terms_of_service:
         true?: Musisz zaakceptować regulamin
-    or: "or"
-    array?: "must be an array"
+    or: "lub"
+    array?: "musi być tablicą"
     int?: 'musi być liczbą'
-    empty?: "must be empty"
-    excludes?: "must not include %{value}"
+    empty?: "musi być puste"
+    excludes?: "nie może zawierać %{value}"
     excluded_from?:
       arg:
         default: "must not be one of: %{list}"
@@ -182,7 +182,6 @@ pl:
       arg:
         default: "size must be %{size}"
         range: "size must be within %{size_left} - %{size_right}"
-
       value:
         string:
           arg:
