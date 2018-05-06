@@ -61,12 +61,14 @@ table.stack
           br
           - if user_signed_in?
             - if current_user.admin? || current_user.id == course.organizator_id
-              - unless course.open
-                - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
-                  - unless course.limit > 0 && course.sign_ups.count >= course.limit
-                    = link_to t('.sign_up'), supplementary_sign_ups_path(course_id: course.id), method: :post
-                - else
-                  = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
+              - if course.open
+              - else
+                - if course.application_date.nil? || Time.current.in_time_zone >= course.application_date&.in_time_zone
+                  - unless Training::Supplementary::SignUpRecord.exists?(course_id: course.id, user_id: current_user.id)
+                    - unless course.limit > 0 && course.sign_ups.count >= course.limit
+                      = link_to t('.sign_up'), supplementary_sign_ups_path(course_id: course.id), method: :post
+                  - else
+                    = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
 
         td.text-center
           i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
