@@ -101,6 +101,7 @@ Rails.application.routes.draw do
   get 'zgloszenie' => 'profiles#new'
   get 'przejscia' => 'activities/mountain_routes#index'
   get 'wydarzenia' => 'training/supplementary/courses#index'
+  get 'wydarzenia/*id' => 'training/supplementary/courses#show'
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
   get "pages/*id" => 'pages#show', as: :page, format: false
