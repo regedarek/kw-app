@@ -17,6 +17,16 @@ module Training
         end
       end
 
+      def cancel
+        sign_up = Training::Supplementary::SignUpRecord.find_by(code: params[:code])
+        if sign_up.present?
+          sign_up.destroy
+          redirect_to supplementary_courses_path, notice: 'Wypisaliśmy Cię z wydarzenia!'
+        else
+          redirect_to supplementary_courses_path, alert: 'Nie znaleziono takiego zapisu, być może już się wypisałeś!'
+        end
+      end
+
       def destroy
         Training::Supplementary::SignUpRecord.find_by(course_id: params[:id], user_id: current_user.id)&.destroy
 

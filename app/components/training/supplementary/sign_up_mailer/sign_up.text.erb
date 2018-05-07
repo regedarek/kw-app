@@ -1,17 +1,20 @@
 Hej!
 
 Zapisałeś się na nasze wydarzenie 
-b = @sign_up.course.name
+b <%= @sign_up.course.name %>
 
 Informujemy że 24h po zakończeniu wydarzenia wykasujemy twój e-mail z naszej bazy.
 
 Data wydarzenia: 
-= @sign_up.course&.start_date&.strftime("%d/%m/%Y %H:%M")
+<%= @sign_up.course&.start_date&.strftime("%d/%m/%Y %H:%M") %>
 
 Miejsce wydarzenia: 
-= @sign_up.course.place
+<%= @sign_up.course.place %>
 
 Więcej informacji znajdziesz na 
-= link_to 'stronie wydarzenia!', supplementary_course_url(@sign_up.course.id)
+<%= link_to 'stronie wydarzenia!', supplementary_course_url(@sign_up.course.id) %>
+
+<%= link_to 'Wypisz się klikając w ten link', polish_event_cancel_url(@sign_up.code) %>
+Poinformuj wcześniej koordynatora.
 
 Do zobaczenia!
