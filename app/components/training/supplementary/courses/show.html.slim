@@ -4,7 +4,7 @@
       h3 = @course.name
 
   .row
-    .large-12.columns
+    .large-6.columns
       b = t('.place')
       = @course&.place
       br
@@ -36,23 +36,24 @@
       b = t('.organizer')
       = @course&.organizer
       br
-      = link_to t('.rules'), page_path('events_rules')
-      br
-      - if @course.remarks.present?
-        b = t('.remarks')
-        br
-        .callout
-          = @course&.remarks&.html_safe
       b Limit: 
       = @course.limit
       br
       - if @course.sign_ups&.any?
         b Zapisani: 
         = @course.sign_ups.count
-        - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-          .callout
-            = @course&.sign_ups&.map(&:email).join(', ')
 
+      - if @course.remarks.present?
+        br
+        b = t('.remarks')
+        br
+        .callout
+          = @course&.remarks&.html_safe
+    .large-6.columns
+      - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+        .callout
+          = @course&.sign_ups&.map(&:email).join(', ')
+      = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
       - else
         - if user_signed_in?
@@ -60,19 +61,21 @@
           - else
             - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
               - if Training::Supplementary::SignUpRecord.exists?(course_id: @course.id, user_id: current_user.id)
-                = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id), method: :delete
+                = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
+                  method: :delete, class: 'button large alert expanded'
               - else
                 = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
                   method: :post, class: 'button large success expanded'
         - else
-          - if @course.open || @course.last_fee_paid
+          - if @course.open 
           - else
             - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date&.in_time_zone
-              .row
-                .large-3.columns
-                  = t('.sign_up_remarks')
-                  = form_for :sign_up, url: supplementary_sign_ups_path do |f|
-                    = f.hidden_field :course_id, value: @course.id
-                    = f.hidden_field :user_id, value: nil
+              = t('.sign_up_remarks')
+              = form_for :sign_up, url: supplementary_sign_ups_path do |f|
+                = f.hidden_field :course_id, value: @course.id
+                = f.hidden_field :user_id, value: nil
+                .row
+                  .large-7.columns
                     = f.email_field :email, placeholder: 'E-mail'
-                    = f.submit t('.submit'), class: "button small expanded"
+                  .large-5.columns
+                    = f.submit t('.submit'), class: "button expanded"

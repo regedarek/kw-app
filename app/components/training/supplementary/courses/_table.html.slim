@@ -74,7 +74,7 @@ table.stack
           i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
           div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
             ul.menu.vertical
-              li.hide-for-small-only = link_to t('.show'), supplementary_course_path(course.id)
+              li.hide-for-small-only = link_to t('.show'), polish_event_path(course.id)
               - if user_signed_in?
                 - if course.open
                 - else

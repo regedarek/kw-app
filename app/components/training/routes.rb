@@ -9,4 +9,7 @@ Rails.application.routes.draw do
       resources :sign_ups
     end
   end
+
+  get 'wydarzenia' => 'training/supplementary/courses#index'
+  get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
 end
