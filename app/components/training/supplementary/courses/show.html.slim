@@ -50,9 +50,6 @@
         .callout
           = @course&.remarks&.html_safe
     .large-6.columns
-      - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-        .callout
-          = @course&.sign_ups&.map(&:email).join(', ')
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
       - else
@@ -79,3 +76,7 @@
                     = f.email_field :email, placeholder: 'E-mail'
                   .large-5.columns
                     = f.submit t('.submit'), class: "button expanded"
+
+      - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+        .callout
+          = @course&.sign_ups&.map(&:email).join(', ')

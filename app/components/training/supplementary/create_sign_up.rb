@@ -28,7 +28,7 @@ module Training
           email: form_outputs[:email],
           user_id: form_outputs[:user_id]
         )
-        Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_now
+        Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         Right(:success)
       end
 
