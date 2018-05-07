@@ -21,7 +21,7 @@ pl:
           name: Nazwa
           place: Miejsce
           date: Data
-          organizer: Organizator
+          organizer: Koordynator
           price: Cena(zł)
           edit: Edycja
           show: Szczegóły
@@ -42,7 +42,7 @@ pl:
           start_date: "Kiedy?: "
           end_date: "Do kiedy?: "
           application_date: "Od kiedy zapisy?: "
-          organizer: "Organizator: "
+          organizer: "Koordynator: "
           remarks: "Uwagi od organizatora"
           price_kw: "Cena dla klubowiczów: "
           price_non_kw: "Cena dla nie-klubowiczów: "
