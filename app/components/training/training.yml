@@ -31,6 +31,7 @@ pl:
           sign_up_destroy: Wypisz się!
         show:
           submit: Zapisz się!
+          later: do ustalenia
           sign_up_remarks: Twój e-mail zostanie usunięty z naszego systemu 24h po wydarzeniu.
           sign_up: Zapisz się!
           sign_up_destroy: Wypisz się!
