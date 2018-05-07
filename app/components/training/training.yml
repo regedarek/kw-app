@@ -43,7 +43,7 @@ pl:
           end_date: "Do kiedy?: "
           application_date: "Od kiedy zapisy?: "
           organizer: "Koordynator: "
-          remarks: "Uwagi od organizatora"
+          remarks: "Uwagi od koordynatora"
           price_kw: "Cena dla klubowiczów: "
           price_non_kw: "Cena dla nie-klubowiczów: "
           edit: Edycja
