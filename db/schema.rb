@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507142148) do
+ActiveRecord::Schema.define(version: 20180515165206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,12 @@ ActiveRecord::Schema.define(version: 20180507142148) do
     t.boolean  "matrimonial_office", default: false,             null: false
     t.string   "tshirt_url"
     t.string   "organizer_email",    default: "kw@kw.krakow.pl", null: false
+  end
+
+  create_table "competiton_photo_sets", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -218,6 +224,14 @@ ActiveRecord::Schema.define(version: 20180507142148) do
   create_table "peaks", force: :cascade do |t|
     t.string  "name"
     t.integer "valley_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "file_filename"
+    t.integer  "file_size"
+    t.string   "file_content_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "product_fields", force: :cascade do |t|
