@@ -1,6 +1,3 @@
-.callout.warning
-  = t('.activities_top_info')
-
 = form_for @route, as: :route, url: url, html: { class: 'js-routes-form' },  method: method do |f|
   .row
     .large-12.columns
@@ -14,7 +11,6 @@
     .large-12.columns
       fieldset.fieldset
         legend Wybierz aktywność 
-
         - if Date.today.month >= 4 && Date.today.month <= 11
           = f.radio_button :route_type, :regular_climbing, checked: true
           = f.label :route_type_regular_climbing
@@ -57,47 +53,44 @@
           = f.radio_button :rating, 3
           = f.label :rating_three
 
-  .callout.secondary
-    .row
-      .large-6.columns
-        = f.label :partners
-        = f.text_field :partners
-
-      .large-6.columns
-        .large-4.columns
-          = f.label :difficulty
-          = f.text_field :difficulty
-
-        .large-4.columns
-          = f.label :time
-          = f.text_field :time
-
-        .large-4.columns
-          = f.label :length
-          = f.text_field :length
-
-    .row
-      .large-6.columns
+      .large-3.columns
         = f.label :colleagues_names
         - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
         - prepopulate = @route.colleagues.map {|u| { id: u.id, name: u.display_name } }
         = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: prepopulate.push({id: current_user.id, name: current_user.display_name}).uniq } }.to_json
 
-      .large-6.columns
-        .large-4.columns
-          = f.label :mountains
-          = f.text_field :mountains
-
-        .large-4.columns
-          = f.label :peak
-          = f.text_field :peak
-
-        .large-4.columns
-          = f.label :area
-          = f.text_field :area
+      .large-3.columns
+        = f.label :partners
+        = f.text_field :partners
 
   .callout.secondary
+    .row
+      .large-4.columns
+        = f.label :difficulty
+        = f.text_field :difficulty
 
+      .large-4.columns
+        = f.label :time
+        = f.text_field :time
+
+      .large-4.columns
+        = f.label :length
+        = f.text_field :length
+
+    .row
+      .large-4.columns
+        = f.label :mountains
+        = f.text_field :mountains
+
+      .large-4.columns
+        = f.label :peak
+        = f.text_field :peak
+
+      .large-4.columns
+        = f.label :area
+        = f.text_field :area
+
+  .callout.secondary
     .row
       .large-12.columns
         = f.label :description, 'uwagi dotyczące przejścia, topo, link do galerii zdjęć'
