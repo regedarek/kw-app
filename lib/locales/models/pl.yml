@@ -155,19 +155,19 @@ pl:
         profile_acomplished_courses_instructors: Jestem instruktorem PZA.
         profile_acomplished_courses_other_club: Przenoszę sie z innego klubu oraz mam ukończony podstawowy kurs wspinaczki w skałkach (program PZA).
       db/activities/mountain_route:
-        name: nazwa drogi/zjazdu/tury
+        name: nazwa drogi/zjazdu/tury*
         difficulty: wycena
         partners: skład zespołu spoza klubu
         colleagues_names: koledzy z klubu
         hidden: Nie publikuj tego przejścia
         description: uwagi
         time: czas przejscia
-        climbing_date: data przejscia
+        climbing_date: data przejscia*
         area: rejon przejścia
         peak: szczyt, przełęcz, ściana
         mountains: góry
         length: długość drogi
-        rating: subiektywna ocena drogi
+        rating: subiektywna ocena drogi*
         rating_one: fuj, nie polecam
         rating_two: warta przejścia
         rating_three: piękna droga

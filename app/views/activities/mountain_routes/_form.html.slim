@@ -28,7 +28,7 @@
           = f.radio_button :route_type, :winter_climbing, checked: true
           = f.label :route_type_winter_climbing
 
-  .callout.success
+  .callout
     .row
       .large-6.columns
         = f.label :name
@@ -45,56 +45,58 @@
 
     .row
       .large-6.columns
+        fieldset.fieldset
+          legend.legend subiektywna ocena urody drogi*
+
+          = f.radio_button :rating, 1
+          = f.label :rating_one
+
+          = f.radio_button :rating, 2
+          = f.label :rating_two
+
+          = f.radio_button :rating, 3
+          = f.label :rating_three
+
+  .callout.secondary
+    .row
+      .large-6.columns
         = f.label :partners
         = f.text_field :partners
 
+      .large-6.columns
+        .large-4.columns
+          = f.label :difficulty
+          = f.text_field :difficulty
+
+        .large-4.columns
+          = f.label :time
+          = f.text_field :time
+
+        .large-4.columns
+          = f.label :length
+          = f.text_field :length
+
+    .row
       .large-6.columns
         = f.label :colleagues_names
         - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
         - prepopulate = @route.colleagues.map {|u| { id: u.id, name: u.display_name } }
         = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: prepopulate.push({id: current_user.id, name: current_user.display_name}).uniq } }.to_json
 
-  .row
-    .large-12.columns
-      fieldset.fieldset
-        legend.legend subiektywna ocena urody drogi
+      .large-6.columns
+        .large-4.columns
+          = f.label :mountains
+          = f.text_field :mountains
 
-        = f.radio_button :rating, 1
-        = f.label :rating_one
+        .large-4.columns
+          = f.label :peak
+          = f.text_field :peak
 
-        = f.radio_button :rating, 2
-        = f.label :rating_two
-
-        = f.radio_button :rating, 3
-        = f.label :rating_three
-
-  .callout.primary
-    .row
-      .large-4.columns
-        = f.label :mountains
-        = f.text_field :mountains
-
-      .large-4.columns
-        = f.label :peak
-        = f.text_field :peak
-
-      .large-4.columns
-        = f.label :area
-        = f.text_field :area
+        .large-4.columns
+          = f.label :area
+          = f.text_field :area
 
   .callout.secondary
-    .row
-      .large-4.columns
-        = f.label :difficulty
-        = f.text_field :difficulty
-
-      .large-4.columns
-        = f.label :time
-        = f.text_field :time
-
-      .large-4.columns
-        = f.label :length
-        = f.text_field :length
 
     .row
       .large-12.columns
@@ -102,5 +104,7 @@
         = f.text_area :description
 
   .row
-    .large-12.columns
+    .large-6.columns
       = f.submit class: 'large expanded button'
+    .large-6.columns
+      = link_to 'wróć do wszystkich przejść', activities_mountain_routes_path, class: 'button warning expanded large'

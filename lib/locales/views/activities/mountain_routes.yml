@@ -14,7 +14,7 @@ pl:
       form:
         activities_top_info: Publikujemy tylko legalne przejścia
         route_type_info: Wybierz rodzaj przejścia
-        rating: Subiektywna ocena urody drogi
+        rating: Subiektywna ocena urody drogi*
       create:
         created_successfully: Dodano twoje przejście!
       update:

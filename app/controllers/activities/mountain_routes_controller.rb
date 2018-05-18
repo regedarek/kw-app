@@ -20,7 +20,7 @@ module Activities
       return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
       @route = Db::Activities::MountainRoute.new
     end
-    
+
     def show
       @route = Db::Activities::MountainRoute.find(params[:id])
     end
@@ -48,7 +48,7 @@ module Activities
       return redirect_to activities_mountain_routes_path, alert: t('.has_to_be_signed_in') unless user_signed_in?
 
       if @route.save
-        redirect_to activities_mountain_routes_path, notice: t('.created_successfully')
+        redirect_to new_activities_mountain_route_path, notice: "Dziękujemy za dodanie przejścia, możesz teraz dodać kolejne ;)"
       else
         render :new
       end
