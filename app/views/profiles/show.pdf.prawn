@@ -46,7 +46,7 @@ prawn_document do |pdf|
   end
   pdf.grid([4,0], [4,2]).bounding_box do
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-      pdf.text I18n.t('activemodel.attributes.user_management_profile_form.terms_of_service_info'), size: 7, indent_paragraphs: 10
+      pdf.text I18n.t('activemodel.attributes.user_management_profile_form.terms_of_service_info'), size: 5, indent_paragraphs: 10
     end
   end
   pdf.grid([5,0], [5,2]).bounding_box do
