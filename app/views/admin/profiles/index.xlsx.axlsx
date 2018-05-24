@@ -45,7 +45,7 @@ wb.styles do |style|
         else
           profile.read_attribute(attr)
         end
-      end.push(profile.membership_fees.select { |f| f.payment.paid? }&.last&.year)
+      end.push(profile.membership_fees.select { |f| f.payment.paid? }&.map(&:year).max)
       sheet.add_row(profile_values)
     end
   end
