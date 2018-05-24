@@ -33,7 +33,7 @@ wb.styles do |style|
   wb.add_worksheet(name: "Profile") do |sheet|
     human_profile_attributes = profile_attributes.map do |attr|
       Db::Profile.human_attribute_name(attr)
-    end
+    end.push('Ostatnia składka')
     sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
     @results.each do |profile|
       profile_values = profile_attributes.map do |attr|
@@ -45,7 +45,7 @@ wb.styles do |style|
         else
           profile.read_attribute(attr)
         end
-      end
+      end.push(profile.membership_fees.select { |f| f.payment.paid? }&.last&.year)
       sheet.add_row(profile_values)
     end
   end
