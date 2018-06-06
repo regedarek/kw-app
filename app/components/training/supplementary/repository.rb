@@ -4,10 +4,13 @@ module Training
       def fetch_courses(category:)
         categories = if category.present?
           category
-                     else
+        else
           Training::Supplementary::CourseRecord.categories.keys
-                     end
-        Training::Supplementary::CourseRecord.where(category: categories).order(:start_date, :application_date).collect do |record|
+        end
+        Training::Supplementary::CourseRecord
+          .where(start_date: 1.day.ago..DateTime::Infinity.new)
+          .where(category: categories)
+          .order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
       end
