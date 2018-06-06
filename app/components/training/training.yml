@@ -45,6 +45,7 @@ pl:
           organizer: "Koordynator: "
           remarks: "Uwagi od koordynatora"
           price_kw: "Cena dla klubowiczów: "
+          application_price_kw: "Zaliczka dla klubowiczów: "
           price_non_kw: "Cena dla nie-klubowiczów: "
           edit: Edycja
           destroy: Usuń

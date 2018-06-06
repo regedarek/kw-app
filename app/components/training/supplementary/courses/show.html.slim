@@ -22,7 +22,7 @@
       = @course&.application_date&.strftime("%d/%m/%Y %H:%M")
       br
       - if @course&.price_kw.present?
-        b = t('.price_kw')
+        b = t('.application_price_kw')
         = @course&.price_kw
         - if @course.price_kw
           | zł
@@ -45,7 +45,7 @@
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
-      = link_to 'pozostałe wydarzenia', page_path('events_rules'), class: 'button expanded large alert'
+      = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large alert'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
       - else
         - if user_signed_in?
