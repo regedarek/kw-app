@@ -48,7 +48,7 @@
         b = t('.remarks')
         br
         .callout
-          = @course&.remarks&.html_safe
+          = simple_format @course&.remarks&.html_safe
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
