@@ -43,12 +43,6 @@
         b Zapisani: 
         = @course.sign_ups.count
 
-      - if @course.remarks.present?
-        br
-        b = t('.remarks')
-        br
-        .callout
-          = simple_format @course&.remarks&.html_safe
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
@@ -80,3 +74,11 @@
       - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
         .callout
           = @course&.sign_ups&.map(&:email).join(', ')
+
+    .large-12.columns
+      - if @course.remarks.present?
+        br
+        b = t('.remarks')
+        br
+        .callout
+          = simple_format @course&.remarks&.html_safe
