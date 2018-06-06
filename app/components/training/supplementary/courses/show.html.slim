@@ -45,6 +45,7 @@
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
+      = link_to 'pozostałe wydarzenia', page_path('events_rules'), class: 'button expanded large alert'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
       - else
         - if user_signed_in?
@@ -72,8 +73,9 @@
                     = f.submit t('.submit'), class: "button expanded"
 
       - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-        .callout
-          = @course&.sign_ups&.map(&:email).join(', ')
+        - if @course&.sign_ups&.any?
+          .callout
+            = @course&.sign_ups&.map(&:email).join(', ')
 
     .large-12.columns
       - if @course.remarks.present?
