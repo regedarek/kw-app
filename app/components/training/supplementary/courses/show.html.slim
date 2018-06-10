@@ -75,6 +75,8 @@
       - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
         - if @course&.sign_ups&.any?
           .callout
+            = @course&.sign_ups.select { |s| s.user_id.present? }.map(&:user).map(&:display_name).join(', ')
+          .callout
             = @course&.sign_ups&.map(&:email).join(', ')
 
     .large-12.columns
