@@ -22,7 +22,7 @@ module Training
           Training::Supplementary::CourseRecord.categories.keys
         end
         Training::Supplementary::CourseRecord
-          .where.not(start_date: nil)
+          .where(start_date: nil)
           .where(category: categories)
           .order(:application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
