@@ -7,8 +7,12 @@ module Training
       belongs_to :user, class_name: 'Db::User', foreign_key: :user_id
       belongs_to :course, class_name: 'Training::Supplementary::CourseRecord', foreign_key: :course_id
 
+      def cost
+        course.price_kw
+      end
+
       def description
-        "Zaliczka od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{user.kw_id} na wydarzenie #{course.title}"
+        "Zaliczka od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{user.kw_id} na wydarzenie #{course.name}"
       end
     end
   end

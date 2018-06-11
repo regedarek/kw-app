@@ -27,12 +27,6 @@
         - if @course.price_kw
           | zł
         br
-      - if @course&.price_non_kw.present?
-        b = t('.price_non_kw')
-        = @course&.price_non_kw
-        - if @course.price_non_kw
-          | zł
-        br
       b = t('.organizer')
       = @course&.organizer
       br
@@ -76,10 +70,15 @@
       - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
         - if @course&.sign_ups&.any?
           .callout
-            = @course&.sign_ups.select { |s| s.user_id.present? }.map(&:user).map(&:display_name).join(', ')
-          .callout
             = @course&.sign_ups&.map(&:email).join(', ')
 
+  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+    - if @course.price
+      .row
+        .large-12.columns
+        = render 'table_participants', sign_ups: @course.sign_ups
+
+  .row
     .large-12.columns
       - if @course.remarks.present?
         br

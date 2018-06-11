@@ -33,6 +33,7 @@ module Training
         o_id = form_outputs[:organizator_id]&.first if form_outputs.to_h.include?(:organizator_id)
         record = Training::Supplementary::CourseRecord
           .create!(form_outputs.to_h.merge!(organizator_id: o_id))
+
         Training::Supplementary::Course.from_record(record)
       end
 
@@ -45,6 +46,7 @@ module Training
           course_id: course_id,
           email: email
         )
+        sign_up.create_payment(dotpay_id: SecureRandom.hex(13))
         sign_up
       end
     end

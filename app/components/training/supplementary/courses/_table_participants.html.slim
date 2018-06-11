@@ -1,0 +1,19 @@
+table.stack
+  thead
+    tr
+      th.text-center Kto?
+      th.text-center Zaliczka?
+      th.text-center
+  tbody
+    - sign_ups.each do |sign_up|
+      tr
+        td.text-center = sign_up.user ? sign_up.user.display_name : sign_up.name
+        td.text-center
+          - if sign_up&.payment&.prepaid?
+            span class='label success'
+              | Opłacona
+          - else
+            = link_to 'Opłać', charge_payment_url(sign_up.payment.id)
+
+        td.text-center
+          = link_to 'Usuń', polish_event_cancel_url(code: sign_up.code)
