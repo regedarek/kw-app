@@ -1,16 +1,30 @@
 module Training
   module Supplementary
     class Repository
-      def fetch_courses(category:)
+      def fetch_active_courses(category:)
         categories = if category.present?
           category
         else
           Training::Supplementary::CourseRecord.categories.keys
         end
         Training::Supplementary::CourseRecord
-          .where(start_date: [nil, 1.day.ago..DateTime::Infinity.new])
+          .where(start_date: 1.day.ago..DateTime::Infinity.new)
           .where(category: categories)
           .order(:start_date, :application_date).collect do |record|
+          Training::Supplementary::Course.from_record(record)
+        end
+      end
+
+      def fetch_inactive_courses(category:)
+        categories = if category.present?
+          category
+        else
+          Training::Supplementary::CourseRecord.categories.keys
+        end
+        Training::Supplementary::CourseRecord
+          .where.not(start_date: nil)
+          .where(category: categories)
+          .order(:application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
       end

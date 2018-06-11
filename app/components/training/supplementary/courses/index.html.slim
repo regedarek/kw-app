@@ -23,4 +23,10 @@
 
 .row
   .large-12.columns
-    = render 'table', courses: @courses
+    h4 Aktywne wydarzenia
+    = render 'table', courses: @active_courses
+
+.row
+  .large-12.columns
+    h4 Nadchodzące wydarzenia
+    = render 'table', courses: @inactive_courses
