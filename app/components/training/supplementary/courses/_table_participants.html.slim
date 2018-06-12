@@ -18,5 +18,6 @@ table.stack
             - else
               span class='label alert'
                 | nieopłacono
+        - if current_user.admin? || current_user.roles.include?('events')
           td.text-center
             = link_to 'Usuń', polish_event_cancel_url(code: sign_up.code)

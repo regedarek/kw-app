@@ -9,6 +9,14 @@ module Training
         @course.limit
       end
 
+      def all_prepaid
+        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid }).or(@course.sign_ups.includes(:payment).where(payments: { cash: true }))
+      end
+
+      def unpaid
+        @course.sign_ups.includes(:payment).where(payments: { state: :unpaid }).or(@course.sign_ups.includes(:payment).where(payments: { cash: false }))
+      end
+
       def prepaid_via_dotpay
         @course.sign_ups.includes(:payment).where(payments: { state: :prepaid })
       end

@@ -70,7 +70,10 @@
   - if user_signed_in?
     .row
       .large-12.columns
-          = render 'table_participants', sign_ups: @course.sign_ups
+          = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).unpaid
+    .row
+      .large-12.columns
+          = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_prepaid
 
   - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
     .row
