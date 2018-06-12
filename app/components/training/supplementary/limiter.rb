@@ -22,6 +22,7 @@ module Training
       end
 
       def reached?
+        return false if @course.open
         return false if limit == 0
 
         sum >= limit

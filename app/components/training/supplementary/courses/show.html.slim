@@ -40,64 +40,23 @@
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large alert'
-      - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
-        - if @course.open
-        - else
-          - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
-            - current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id)
-            - if current_user_sign_up.present?
+      - if Training::Supplementary::Limiter.new(@course).reached?
+      - else
+        - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
+          - if user_signed_in?
+            - if @current_user_sign_up.present?
               - if @course.price
-                - if current_user_sign_up.payment.prepaid?
+                - if @current_user_sign_up.payment.prepaid?
                   span class='label success'
                     | Opłacono
                 - else
-                  = link_to 'Opłać', charge_payment_url(current_user_sign_up.payment.id)
+                  = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button large expanded'
               - else
                 = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
                   method: :delete, class: 'button large alert expanded'
-      - else
-        - if user_signed_in?
-          - if @course.open
-          - else
-            - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
-              - current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id)
-              - if current_user_sign_up.present?
-                - if @course.price
-                  - if current_user_sign_up.payment.prepaid?
-                    span class='label success'
-                      | Opłacono
-                  - else
-                    = link_to 'Opłać', charge_payment_url(current_user_sign_up.payment.id)
-                - else
-                  = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
-                    method: :delete, class: 'button large alert expanded'
-              - else
-                = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
-                  method: :post, class: 'button large success expanded'
-        - else
-          - if @course.open 
-          - else
-            - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date&.in_time_zone
-              = t('.sign_up_remarks')
-              = form_for :sign_up, url: supplementary_sign_ups_path do |f|
-                = f.hidden_field :course_id, value: @course.id
-                = f.hidden_field :user_id, value: nil
-                .row
-                  .large-7.columns
-                    = f.email_field :email, placeholder: 'E-mail'
-                  .large-5.columns
-                    = f.submit t('.submit'), class: "button expanded"
-
-      - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-        - if @course&.sign_ups&.any?
-          .callout
-            = @course&.sign_ups&.map(&:email).join(', ')
-
-  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-    - if @course.price
-      .row
-        .large-12.columns
-        = render 'table_participants', sign_ups: @course.sign_ups
+            - else
+              = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
+                method: :post, class: 'button large success expanded'
 
   .row
     .large-12.columns
@@ -107,3 +66,11 @@
         br
         .callout
           = simple_format @course&.remarks&.html_safe
+
+  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+    .row
+      .large-12.columns
+        - if @course&.sign_ups&.any?
+          .callout
+            = @course&.sign_ups&.map(&:email).join(', ')
+        = render 'table_participants', sign_ups: @course.sign_ups
