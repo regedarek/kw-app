@@ -39,7 +39,7 @@ module Training
 
       def sign_up!(email:, user_id:, course_id:)
         course = Training::Supplementary::CourseRecord.find(course_id)
-        return if course.limit > 0 && course.sign_ups.count >= course.limit
+        return if Training::Supplementary::Limiter.new(course).reached?
 
         sign_up = Training::Supplementary::SignUpRecord.create!(
           user_id: user_id,
