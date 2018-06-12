@@ -67,10 +67,15 @@
         .callout
           = simple_format @course&.remarks&.html_safe
 
+  - if user_signed_in?
+    .row
+      .large-12.columns
+          = render 'table_participants', sign_ups: @course.sign_ups
+
   - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
     .row
       .large-12.columns
         - if @course&.sign_ups&.any?
           .callout
             = @course&.sign_ups&.map(&:email).join(', ')
-        = render 'table_participants', sign_ups: @course.sign_ups
+

@@ -3,7 +3,8 @@ table.stack
     tr
       th.text-center Kto?
       th.text-center Zaliczka?
-      th.text-center
+      - if current_user.admin? || current_user.roles.include?('events')
+        th.text-center
   tbody
     - sign_ups.each do |sign_up|
       tr
@@ -11,9 +12,11 @@ table.stack
         td.text-center
           - if sign_up&.payment&.prepaid?
             span class='label success'
-              | Opłacona
+              | opłacono
           - else
-            = link_to 'Opłać', charge_payment_url(sign_up.payment.id)
-
-        td.text-center
-          = link_to 'Usuń', polish_event_cancel_url(code: sign_up.code)
+            - if current_user.admin? || current_user.roles.include?('events')
+            - else
+              span class='label alert'
+                | nieopłacono
+          td.text-center
+            = link_to 'Usuń', polish_event_cancel_url(code: sign_up.code)
