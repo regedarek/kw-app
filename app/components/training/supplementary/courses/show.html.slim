@@ -41,6 +41,20 @@
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large alert'
       - if @course.limit > 0 && @course.sign_ups.count >= @course.limit
+        - if @course.open
+        - else
+          - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
+            - current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id)
+            - if current_user_sign_up.present?
+              - if @course.price
+                - if current_user_sign_up.payment.prepaid?
+                  span class='label success'
+                    | Opłacono
+                - else
+                  = link_to 'Opłać', charge_payment_url(current_user_sign_up.payment.id)
+              - else
+                = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
+                  method: :delete, class: 'button large alert expanded'
       - else
         - if user_signed_in?
           - if @course.open
