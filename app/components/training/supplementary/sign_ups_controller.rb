@@ -12,7 +12,7 @@ module Training
 
           result.failure do |errors|
             flash[:error] = errors.values.join(", ")
-            redirect_to supplementary_courses_path
+            redirect_to supplementary_course_path(params[:id])
           end
         end
       end
