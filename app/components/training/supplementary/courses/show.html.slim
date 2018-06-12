@@ -35,7 +35,7 @@
       br
       - if @course.sign_ups&.any?
         b Zapisani: 
-        = @course.sign_ups.includes(:payment).where(payments: { state: 'prepaid'}).count
+        = Training::Supplementary::Limiter.new(@course).sum
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
