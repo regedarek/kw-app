@@ -46,8 +46,15 @@
           - if @course.open
           - else
             - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
-              - if Training::Supplementary::SignUpRecord.exists?(course_id: @course.id, user_id: current_user.id)
-                - unless @course.price
+              - current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id)
+              - if current_user_sign_up.present?
+                - if @course.price
+                  - if current_user_sign_up.payment.prepaid?
+                    span class='label success'
+                      | Opłacono
+                  - else
+                    = link_to 'Opłać', charge_payment_url(current_user_sign_up.payment.id)
+                - else
                   = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
                     method: :delete, class: 'button large alert expanded'
               - else
