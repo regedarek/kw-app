@@ -26,7 +26,7 @@ br
   = @sign_up.course.price_kw
   |  zł
   br
-  - if @course.cash
+  - if @sign_up.course.cash
     | Osobnym e-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
   - else
     = link_to 'Aby zapisać się wpłać zaliczkę!', charge_payment_url(@sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@sign_up.course).reached?), class: 'button large expanded'
