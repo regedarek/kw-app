@@ -28,9 +28,13 @@ module Training
       end
 
       def destroy
-        Training::Supplementary::SignUpRecord.find_by(course_id: params[:id], user_id: current_user.id)&.destroy
+        if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+          Training::Supplementary::SignUpRecord.find(params[:id])&.destroy
 
-        redirect_to :back, notice: 'Wypisałeś się!'
+          redirect_to :back, notice: 'Usunięto zapis!'
+        else
+          redirect_to :back, alert: 'Nie masz uprawnień!'
+        end
       end
 
       private

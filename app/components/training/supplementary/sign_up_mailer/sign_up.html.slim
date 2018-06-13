@@ -11,25 +11,19 @@ br/
 b Data wydarzenia: 
 = @sign_up.course&.start_date&.strftime("%d/%m/%Y %H:%M")
 br/
+br/
 b Miejsce wydarzenia: 
 = @sign_up.course.place
 br/
 br/
-- if @sign_up.price
-  = link_to 'Opłać zaliczkę za wydarzenie!', charge_payment_url(@sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@sign_up.course).reached?), class: 'button large expanded'
-  br/
-  br/
-  | Dopiero po opłaceniu zaliczki zostaniesz zapisany.
-  br/
-  br/
 | Więcej informacji znajdziesz na 
 = link_to 'stronie wydarzenia!', supplementary_course_url(@sign_up.course.id)
 - unless @sign_up.course.price
   br/
   br/
   = link_to 'Zrezygnuj z udziału w wydarzeniu', polish_event_cancel_url(@sign_up.code)
-  br/
-  | Poinformuj o tym wcześniej koordynatora aby ustalić na jakich warunkach dokonujesz rezygnacji.
+br/
+| Poinformuj o tym wcześniej koordynatora aby ustalić na jakich warunkach dokonujesz rezygnacji.
 br/
 br/
 | Do zobaczenia!

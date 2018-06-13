@@ -59,8 +59,7 @@
                 - else
                   = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@course).reached?), class: 'button large expanded'
               - else
-                = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
-                  method: :delete, class: 'button large alert expanded'
+                = link_to 'Wypisz się!', polish_event_cancel_url(code: sign_up.code)
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large secondary'
 
   .row
