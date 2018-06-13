@@ -25,4 +25,4 @@ table.stack
                 | nieopłacono
         - if current_user.admin? || current_user.roles.include?('events')
           td.text-center
-            = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete, class: 'button small alert'
+            = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete

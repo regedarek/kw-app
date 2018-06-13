@@ -54,10 +54,7 @@
           - if user_signed_in?
             - if @current_user_sign_up.present?
               - if @course.price
-                - if @current_user_sign_up.payment.paid?
-                  span class='label success'
-                    | Opłacono
-                - else
+                - unless @current_user_sign_up.payment.paid?
                   - if @course.cash
                     .callout
                       | E-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
