@@ -15,7 +15,11 @@ table.stack
               | opłacono
           - else
             - if current_user.admin? || current_user.roles.include?('events')
-              = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put, class: 'button secondary small'
+              - if Training::Supplementary::Limiter.new(@course).reached?
+                span class='label alert'
+                  | nieopłacono
+              - else
+                = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put, class: 'button secondary small'
             - else
               span class='label alert'
                 | nieopłacono

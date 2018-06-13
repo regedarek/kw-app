@@ -21,7 +21,7 @@ module Training
         sign_up = Training::Supplementary::SignUpRecord.find_by(code: params[:code])
         if sign_up.present?
           sign_up.destroy
-          redirect_to supplementary_courses_path, notice: 'Wypisaliśmy Cię z wydarzenia!'
+          redirect_to supplementary_course_path(sign_up.course.id), notice: 'Wypisaliśmy Cię z wydarzenia!'
         else
           redirect_to supplementary_courses_path, alert: 'Nie znaleziono takiego zapisu, być może już się wypisałeś!'
         end

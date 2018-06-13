@@ -23,10 +23,10 @@
 
 .row
   .large-12.columns
-    h4 Aktywne wydarzenia
+    h4.text-center Aktywne wydarzenia
     = render 'table', courses: @active_courses
 
 .row
   .large-12.columns
-    h4 Nadchodzące wydarzenia
+    h4.text-center.subheader Nadchodzące wydarzenia
     = render 'table', courses: @inactive_courses
