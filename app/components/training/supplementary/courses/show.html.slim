@@ -44,7 +44,11 @@
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large alert'
+      - unless @current_user_sign_up.present?
+        = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
+          method: :post, class: 'button large success expanded'
       - if Training::Supplementary::Limiter.new(@course).reached?
+        = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@course).reached?), class: 'button large expanded'
       - else
         - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
           - if user_signed_in?
@@ -54,13 +58,10 @@
                   span class='label success'
                     | Opłacono
                 - else
-                  = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button large expanded'
+                  = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@course).reached?), class: 'button large expanded'
               - else
                 = link_to t('.sign_up_destroy'), supplementary_sign_up_path(@course.id),
                   method: :delete, class: 'button large alert expanded'
-            - else
-              = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
-                method: :post, class: 'button large success expanded'
 
   .row
     .large-12.columns
@@ -88,4 +89,3 @@
         - if @course&.sign_ups&.any?
           .callout
             = @course&.sign_ups&.map(&:email).join(', ')
-
