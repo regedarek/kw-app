@@ -14,7 +14,7 @@ module Training
       end
 
       def all_unpaid
-        @course.sign_ups.includes(:payment).where(payments: { state: :unpaid })
+        @course.sign_ups.includes(:payment).where(payments: { state: :unpaid, cash: false })
       end
 
       def prepaid_via_dotpay

@@ -4,20 +4,22 @@ table.stack
       th.text-center Kto?
       th.text-center Zaliczka?
       - if current_user.admin? || current_user.roles.include?('events')
-        th.text-center
+        th width='15%'
   tbody
     - sign_ups.each do |sign_up|
       tr
         td.text-center = sign_up.user ? sign_up.user.display_name : sign_up.name
         td.text-center
-          - if sign_up&.payment&.prepaid?
+          - if sign_up&.payment&.paid?
             span class='label success'
               | opłacono
           - else
             - if current_user.admin? || current_user.roles.include?('events')
+              = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put, class: 'button secondary small'
             - else
               span class='label alert'
                 | nieopłacono
         - if current_user.admin? || current_user.roles.include?('events')
           td.text-center
             = link_to 'Usuń', polish_event_cancel_url(code: sign_up.code)
+

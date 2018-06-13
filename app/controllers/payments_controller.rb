@@ -2,6 +2,17 @@ class PaymentsController < ApplicationController
   def index
   end
 
+  def mark_as_paid
+    payment = Db::Payment.find(params[:id])
+    if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+      payment.update(cash: true)
+
+      redirect_to :back, notice: 'Oznaczono jako zapłacone'
+    else
+      redirect_to :back, alert: 'Nie masz uprawnień'
+    end
+  end
+
   def charge
     payment = Db::Payment.find(params[:id])
     result = Payments::CreatePayment.new(payment: payment).create

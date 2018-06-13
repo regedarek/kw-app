@@ -36,6 +36,10 @@
       - if @course.sign_ups&.any?
         b Zapisani: 
         = Training::Supplementary::Limiter.new(@course).sum
+      br
+      - if @course.sign_ups&.any?
+        b Rezerwowi:
+        = Training::Supplementary::Limiter.new(@course).all_unpaid&.count
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
@@ -46,7 +50,7 @@
           - if user_signed_in?
             - if @current_user_sign_up.present?
               - if @course.price
-                - if @current_user_sign_up.payment.prepaid?
+                - if @current_user_sign_up.payment.paid?
                   span class='label success'
                     | Opłacono
                 - else
@@ -70,11 +74,13 @@
   - if user_signed_in?
     .row
       .large-12.columns
-        = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_unpaid
+        h4 Zapisani
+        = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_prepaid
 
     .row
       .large-12.columns
-        = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_prepaid
+        h4 Lista rezerwowa
+        = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_unpaid
 
   - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
     .row
