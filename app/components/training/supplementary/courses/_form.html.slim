@@ -33,11 +33,15 @@
           = f.number_field :limit
 
       .row
-        .large-3.columns
+        .large-2.columns
+          = f.label :cash, t('.cash')
+          = f.check_box :cash
+
+        .large-2.columns
           = f.label :price, t('.price')
           = f.check_box :price, class: 'js-price'
 
-        .large-3.columns
+        .large-2.columns
           = f.label :last_fee_paid, t('.last_fee_paid')
           = f.check_box :last_fee_paid
 

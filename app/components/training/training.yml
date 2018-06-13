@@ -23,6 +23,7 @@ pl:
           date: Data
           organizer: Koordynator
           price: Cena(zł)
+          cash: Tylko gotówka?
           edit: Edycja
           show: Szczegóły
           sign_up: Zapisz się!
@@ -31,6 +32,7 @@ pl:
           sign_up_destroy: Wypisz się!
         show:
           submit: Zapisz się!
+          cash: Tylko gotówka?
           later: do ustalenia
           sign_up_remarks: Twój e-mail zostanie usunięty z naszego systemu 24h po zakończeniu wydarzenia.
           sign_up: Zapisz się!
@@ -38,14 +40,14 @@ pl:
           category: Kategoria
           rules: Link do regulaminu wydarzeń KW Kraków
           name: Nazwa
-          place: "Miejsce: "
-          start_date: "Kiedy?: "
-          end_date: "Do kiedy?: "
-          application_date: "Od kiedy zapisy?: "
+          place: "Miejsce wydarzenia: "
+          start_date: "Termin wydarzenia: "
+          end_date: "Do kiedy: "
+          application_date: "Rozpoczęcie zapisów: "
           organizer: "Koordynator: "
           remarks: "Uwagi od koordynatora"
           price_kw: "Cena dla klubowiczów: "
-          application_price_kw: "Zaliczka dla klubowiczów: "
+          application_price_kw: "Zaliczka: "
           price_non_kw: "Cena dla nie-klubowiczów: "
           edit: Edycja
           destroy: Usuń
@@ -66,6 +68,7 @@ pl:
           one_day: Tylko jeden dzień?
           end_date: Do kiedy
           application_date: Start zapisów
+          cash: Tylko gotówka?
           price_kw: Zaliczka dla KW
           price_non_kw: Zaliczka dla reszty
           remarks: Uwagi od organizatora

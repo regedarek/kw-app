@@ -7,6 +7,10 @@ module Training
 
       self.table_name = 'supplementary_courses'
 
+      def organizer
+        ::Db::User.find(organizator_id)
+      end
+
       def categories
         Training::Supplementary::CourseRecord.categories.keys.map do |key,value|
           [

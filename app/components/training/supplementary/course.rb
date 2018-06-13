@@ -21,6 +21,7 @@ module Training
       attribute :remarks, Types::Strict::String.optional
       attribute :organizator_id, Types::Any.optional
       attribute :price, Types::Strict::Bool
+      attribute :cash, Types::Strict::Bool
       attribute :open, Types::Strict::Bool
       attribute :last_fee_paid, Types::Strict::Bool
       attribute :active, Types::Strict::Bool
@@ -54,6 +55,7 @@ module Training
             remarks: record.remarks,
             organizator_id: record.organizator_id,
             price: record.price,
+            cash: record.cash,
             one_day: record.one_day,
             active: record.active,
             limit: record.limit,

@@ -5,6 +5,10 @@ module Training
         @course = course
       end
 
+      def sign_ups_started?
+        @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
+      end
+
       def limit
         @course.limit
       end

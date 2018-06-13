@@ -46,10 +46,11 @@
       - if @current_user_sign_up.present?
       - else
         - if user_signed_in?
-          = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
-            method: :post, class: 'button large success expanded'
+          - if Training::Supplementary::Limiter.new(@course).sign_ups_started?
+            = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
+              method: :post, class: 'button large success expanded'
       - unless Training::Supplementary::Limiter.new(@course).reached?
-        - if @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
+        - if Training::Supplementary::Limiter.new(@course).sign_ups_started?
           - if user_signed_in?
             - if @current_user_sign_up.present?
               - if @course.price
@@ -57,11 +58,17 @@
                   span class='label success'
                     | Opłacono
                 - else
-                  = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@course).reached?), class: 'button large expanded'
+                  - if @course.cash
+                    .callout
+                      | E-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
+                  - else
+                    = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@course).reached?), class: 'button large expanded'
               - else
                 = link_to 'Wypisz się!', polish_event_cancel_url(code: sign_up.code)
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large secondary'
-
+      - if user_signed_in?
+        - if current_user.admin? || current_user.roles.include?('events')
+          = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded large'
   .row
     .large-12.columns
       - if @course.remarks.present?
