@@ -32,6 +32,13 @@ module Training
       def sum
         prepaid_via_dotpay&.count + prepaid_via_cash&.count
       end
+      
+      def sign_ups_reached?
+        return false if @course.open
+        return false if limit == 0
+
+        @course.sign_ups.count >= limit
+      end
 
       def reached?
         return false if @course.open

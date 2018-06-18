@@ -5,6 +5,7 @@ table.stack
       th.text-center Zaliczka?
       - if current_user.admin? || current_user.roles.include?('events')
         th width='15%'
+        th width='15%'
   tbody
     - sign_ups.each do |sign_up|
       tr
@@ -19,10 +20,12 @@ table.stack
                 span class='label alert'
                   | nieopłacono
               - else
-                = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put, class: 'button secondary small'
+                = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put
             - else
               span class='label alert'
                 | nieopłacono
         - if current_user.admin? || current_user.roles.include?('events')
+          td.text-center
+            = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
           td.text-center
             = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete

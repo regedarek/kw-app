@@ -27,6 +27,16 @@ module Training
         end
       end
 
+      def send_email
+        if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+          sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+          Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
+          redirect_to supplementary_course_path(sign_up.course.id), notice: 'Wysłano e-mail z linkiem do płatności!'
+        else
+          redirect_to supplementary_course_path(sign_up.course.id), alert: 'Nie masz uprawnień!'
+        end
+      end
+
       def destroy
         if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
           Training::Supplementary::SignUpRecord.find(params[:id])&.destroy
