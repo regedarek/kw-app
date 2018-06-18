@@ -13,7 +13,6 @@ module Training
         return Left(form_outputs.messages(full: true)) unless form_outputs.success?
 
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
-        return Left(course_id:  I18n.t('.closed_or_open')) if course.open
         if form_outputs[:user_id].present?
           user = ::Db::User.find(form_outputs[:user_id])
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
