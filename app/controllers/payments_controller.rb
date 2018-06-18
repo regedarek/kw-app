@@ -15,7 +15,11 @@ class PaymentsController < ApplicationController
 
   def charge
     payment = Db::Payment.find(params[:id])
-    return redirect_to(:back || supplementary_courses_path), alert: 'Limit zapisów został wykorzystany!' if params[:reached] == 'true'
+    if payment.payable.is_a?(Training::Supplementary::SignUpRecord)
+      if Training::Supplementary::Limiter.new(payment.payable.course).reached?
+        return redirect_to(supplementary_course_path(payment.payable.id), alert: 'Limit zapisów został wykorzystany!'
+      end
+    end
     result = Payments::CreatePayment.new(payment: payment).create
     result.success do |payment_url:|
       payment.update(payment_url: payment_url)
