@@ -29,7 +29,7 @@ br
   - if @sign_up.course.cash
     | Osobnym e-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
   - else
-    = link_to 'Aby zapisać się wpłać zaliczkę!', charge_payment_url(@sign_up.payment.id, reached: Training::Supplementary::Limiter.new(@sign_up.course).reached?), class: 'button large expanded'
+    = link_to 'Aby zapisać się wpłać zaliczkę!', charge_payment_url(@sign_up.payment.id)
   br
 - else
   = link_to 'Zrezygnuj z udziału w wydarzeniu', polish_event_cancel_url(@sign_up.code)

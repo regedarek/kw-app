@@ -59,8 +59,15 @@
                     .callout
                       | E-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
                   - else
-                    .callout.success
-                      | Jeżeli zmieściłeś się w limicie otrzymałeś e-mailem link do płatności, prosimy opłać jak najszybciej.
+                    - if @course.open || @course.limit == 0
+                    - else
+                      - if Training::Supplementary::Limiter.new(@course).in_limit?(@current_user_sign_up)
+                        = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button expanded large'
+                        .callout.success
+                          | Zmieściłeś się w limicie prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
+                      - else
+                        .callout.warning
+                          | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
               - else
                 = link_to 'Wypisz się!', polish_event_cancel_url(code: @current_user_sign_up.code), class: 'button expanded large primary'
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large secondary'
@@ -81,7 +88,7 @@
       .large-12.columns
         h4 Zapisani
         - all_prepaid = Training::Supplementary::Limiter.new(@course).all_prepaid
-        = render 'table_participants', sign_ups: all_prepaid
+        = render 'table_participants', sign_ups: all_prepaid, email: false
 
     - if current_user.admin? || current_user.roles.include?('events')
       .row
@@ -94,7 +101,7 @@
       .large-12.columns
         h4 Lista rezerwowa
         - all_unpaid = Training::Supplementary::Limiter.new(@course).all_unpaid
-        = render 'table_participants', sign_ups: all_unpaid
+        = render 'table_participants', sign_ups: all_unpaid, email: true
 
     - if current_user.admin? || current_user.roles.include?('events')
       .row

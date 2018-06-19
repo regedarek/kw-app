@@ -25,7 +25,8 @@ table.stack
               span class='label alert'
                 | nieopłacono
         - if current_user.admin? || current_user.roles.include?('events')
-          td.text-center
-            = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
+          - if email
+            td.text-center
+              = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
           td.text-center
             = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete
