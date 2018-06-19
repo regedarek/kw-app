@@ -80,16 +80,25 @@
     .row
       .large-12.columns
         h4 Zapisani
-        = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_prepaid
+        - all_prepaid = Training::Supplementary::Limiter.new(@course).all_prepaid
+        = render 'table_participants', sign_ups: all_prepaid
+
+    - if current_user.admin? || current_user.roles.include?('events')
+      .row
+        .large-12.columns
+          - if all_prepaid.any?
+            .callout
+              = all_prepaid.map(&:email).join(', ')
 
     .row
       .large-12.columns
         h4 Lista rezerwowa
-        = render 'table_participants', sign_ups: Training::Supplementary::Limiter.new(@course).all_unpaid
+        - all_unpaid = Training::Supplementary::Limiter.new(@course).all_unpaid
+        = render 'table_participants', sign_ups: all_unpaid
 
-  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-    .row
-      .large-12.columns
-        - if @course&.sign_ups&.any?
-          .callout
-            = @course&.sign_ups&.map(&:email).join(', ')
+    - if current_user.admin? || current_user.roles.include?('events')
+      .row
+        .large-12.columns
+          - if all_unpaid.any?
+            .callout
+              = all_unpaid.map(&:email).join(', ')
