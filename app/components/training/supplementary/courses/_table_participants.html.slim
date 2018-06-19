@@ -10,14 +10,15 @@ table.stack
   tbody
     - sign_ups.each do |sign_up|
       tr
-        td.text-center = sign_up.user ? sign_up.user.display_name : sign_up.name
+        td.text-center style=(@limiter.in_limit?(sign_up) ? 'color: green' : '')
+          = sign_up.user ? sign_up.user.display_name : sign_up.name
         td.text-center
           - if sign_up&.payment&.paid?
             span class='label success'
               | opłacono
           - else
             - if current_user.admin? || current_user.roles.include?('events')
-              - if Training::Supplementary::Limiter.new(@course).reached?
+              - if @limiter.reached?
                 span class='label alert'
                   | nieopłacono
               - else

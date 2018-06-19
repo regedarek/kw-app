@@ -35,41 +35,40 @@
       br
       - if @course.sign_ups&.any?
         b Zapisani: 
-        = Training::Supplementary::Limiter.new(@course).sum
+        = @limiter.sum
       br
       - if @course.sign_ups&.any?
         b Rezerwowi:
-        = Training::Supplementary::Limiter.new(@course).all_unpaid&.count
+        = @limiter.all_unpaid&.count
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @current_user_sign_up.present?
       - else
         - if user_signed_in?
-          - if Training::Supplementary::Limiter.new(@course).sign_ups_started?
+          - if @limiter.sign_ups_started?
             = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
               method: :post, class: 'button large success expanded'
-      - unless Training::Supplementary::Limiter.new(@course).reached?
-        - if Training::Supplementary::Limiter.new(@course).sign_ups_started?
-          - if user_signed_in?
-            - if @current_user_sign_up.present?
-              - if @course.price
-                - unless @current_user_sign_up.payment.paid?
-                  - if @course.cash
-                    .callout
-                      | E-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
+      - if @limiter.sign_ups_started?
+        - if user_signed_in?
+          - if @current_user_sign_up.present?
+            - if @course.price
+              - unless @current_user_sign_up.payment.paid?
+                - if @course.cash
+                  .callout
+                    | E-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
+                - else
+                  - if @course.open || @course.limit == 0
                   - else
-                    - if @course.open || @course.limit == 0
+                    - if @limiter.in_limit?(@current_user_sign_up)
+                      = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button expanded large'
+                      .callout.success
+                        | Zmieściłeś się w limicie prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
                     - else
-                      - if Training::Supplementary::Limiter.new(@course).in_limit?(@current_user_sign_up)
-                        = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button expanded large'
-                        .callout.success
-                          | Zmieściłeś się w limicie prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
-                      - else
-                        .callout.warning
-                          | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
-              - else
-                = link_to 'Wypisz się!', polish_event_cancel_url(code: @current_user_sign_up.code), class: 'button expanded large primary'
+                      .callout.warning
+                        | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
+            - else
+              = link_to 'Wypisz się!', polish_event_cancel_url(code: @current_user_sign_up.code), class: 'button expanded large primary'
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large secondary'
       - if user_signed_in?
         - if current_user.admin? || current_user.roles.include?('events')
@@ -87,7 +86,7 @@
     .row
       .large-12.columns
         h4 Zapisani
-        - all_prepaid = Training::Supplementary::Limiter.new(@course).all_prepaid
+        - all_prepaid = @limiter.all_prepaid
         = render 'table_participants', sign_ups: all_prepaid, email: false
 
     - if current_user.admin? || current_user.roles.include?('events')
@@ -100,7 +99,7 @@
     .row
       .large-12.columns
         h4 Lista rezerwowa
-        - all_unpaid = Training::Supplementary::Limiter.new(@course).all_unpaid
+        - all_unpaid = @limiter.all_unpaid
         = render 'table_participants', sign_ups: all_unpaid, email: true
 
     - if current_user.admin? || current_user.roles.include?('events')

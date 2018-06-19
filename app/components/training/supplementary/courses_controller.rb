@@ -16,6 +16,7 @@ module Training
       def show
         record = Training::Supplementary::CourseRecord.find(params[:id])
         @course = Training::Supplementary::Course.from_record(record)
+        @limiter = Training::Supplementary::Limiter.new(@course)
         @current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id) if user_signed_in?
       end
 
