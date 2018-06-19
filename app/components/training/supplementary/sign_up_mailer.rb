@@ -9,8 +9,7 @@ module Training
 
         mail(
           to: @sign_up.email,
-          cc: organizer&.email,
-          from: (organizer&.email || 'kw@kw.krakow.pl'),
+          from: organizer.email,
           subject: "Zapisałeś się na wydarzenie KW Kraków: #{@sign_up.course.name}!"
         )
       end
