@@ -4,7 +4,8 @@ table.stack
       th.text-center Kto?
       th.text-center Zaliczka?
       - if current_user.admin? || current_user.roles.include?('events')
-        th width='15%'
+        - if email
+          th width='15%'
         th width='15%'
   tbody
     - sign_ups.each do |sign_up|
