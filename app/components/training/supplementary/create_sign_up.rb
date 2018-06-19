@@ -31,7 +31,7 @@ module Training
           email: form_outputs[:email],
           user_id: form_outputs[:user_id]
         )
-        unless Training::Supplementary::Limiter.new(course).sign_ups_reached?
+        if Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         end
         Right(:success)
