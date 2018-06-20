@@ -13,6 +13,10 @@ module Training
         @course.limit
       end
 
+      def open?
+        @course.open || limit == 0
+      end
+
       def all_prepaid
         @course.sign_ups.includes(:payment).where(payments: { state: :prepaid }).or(@course.sign_ups.includes(:payment).where(payments: { cash: true })).order(:created_at)
       end

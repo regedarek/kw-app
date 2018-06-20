@@ -46,7 +46,7 @@
       - if @current_user_sign_up.present?
       - else
         - if user_signed_in?
-          - if @limiter.sign_ups_started?
+          - if @limiter.sign_ups_started? && !@limiter.open?
             = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
               method: :post, class: 'button large success expanded'
       - if @limiter.sign_ups_started?
@@ -67,8 +67,6 @@
                     - else
                       .callout.warning
                         | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
-            - else
-              = link_to 'Wypisz się!', polish_event_cancel_url(code: @current_user_sign_up.code), class: 'button expanded large primary'
       = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large secondary'
       - if user_signed_in?
         - if current_user.admin? || current_user.roles.include?('events')
