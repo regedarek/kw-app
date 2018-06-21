@@ -41,7 +41,7 @@
       - Db::Activities::MountainRoute.order(created_at: :desc).limit(5).each do |route|
         tr
           td width='14%'
-            = route.climbing_date
+            = link_to route.climbing_date, activities_mountain_route_path(route.id)
           td
             = route.colleagues.map(&:display_name).compact.push(route.partners).reject(&:empty?).to_sentence
           td
@@ -52,7 +52,7 @@
     table.stack
       - Db::Profile.where(accepted: false).order('created_at DESC NULLS LAST').limit(5).each do |profile|
         tr
-          td = "#{profile.first_name} #{profile.last_name}"
+          td = link_to profile.display_name, admin_profile_path(profile.id)
           td = profile.email
 .row
   .large-6.columns
@@ -60,8 +60,7 @@
     table.stack
       - Db::Profile.where(accepted: true, application_date: Date.today.beginning_of_day..Date.today.end_of_day).order('created_at DESC NULLS LAST').each do |profile|
         tr
-          td = "#{profile.first_name} #{profile.last_name}"
-          td = profile.email
+          td = link_to profile.display_name, admin_profile_path(profile.id)
           td = Db::User.find(profile.acceptor_id).display_name
 
   .large-6.columns
