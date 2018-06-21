@@ -65,7 +65,8 @@ module Admin
             cost: 100
           )
         end
-        redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano'
+        ProfileMailer.accepted(profile).deliver_later unless Rails.env.production?
+        redirect_to admin_profile_path(profile.id), notice: 'Zaakceptowano!'
       else
         redirect_to admin_profile_path(profile.id), alert: "Błąd: #{user.errors.full_messages}"
       end

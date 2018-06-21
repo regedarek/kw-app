@@ -1,4 +1,17 @@
 class ProfileMailer < ApplicationMailer
+  def accepted(profile)
+    @profile = profile
+    @last_5_events = Training::Supplementary::CourseRecord.all.limit(5)
+
+    I18n.with_locale(I18n.locale) do
+      mail(
+        to: @profile.email,
+        from: 'zgloszenia@kw.krakow.pl',
+        subject: "Zaakceptowano zgłoszenie do KW Kraków od #{@profile.first_name} #{@profile.last_name}"
+      )
+    end
+  end
+
   def apply(profile)
     @profile = profile
     pdf = Prawn::Document.new

@@ -20,7 +20,7 @@ pl:
       confirmation_instructions:
         subject: "Instrukcja aktywacji konta"
       reset_password_instructions:
-        subject: "Instrukcja zresetowania hasła."
+        subject: "Instrukcja zresetowania hasła do panelu Klubu Wysokogórskiego Kraków."
       unlock_instructions:
         subject: "Instrukcja odblokowania konta"
     omniauth_callbacks:
