@@ -57,7 +57,12 @@
       tbody
         - @membership_fees.each do |fee|
           tr
-            td = fee.kw_id
+            td
+              - profile = Db::Profile.find_by(kw_id: fee.kw_id)
+              - if profile.present?
+                = link_to fee.kw_id, admin_profile_path(profile.id)
+              - else
+                = fee.kw_id
             td
               - if fee.user
                 = fee.user.first_name
