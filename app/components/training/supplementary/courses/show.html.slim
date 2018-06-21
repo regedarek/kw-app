@@ -80,7 +80,7 @@
         .callout
           = simple_format @course&.remarks&.html_safe
 
-  - if user_signed_in?
+  - if user_signed_in? && !@limiter.open?
     .row
       .large-12.columns
         h4 Zapisani
