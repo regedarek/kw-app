@@ -12,7 +12,7 @@ module Training
       end
 
       def description
-        "Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{user.kw_id} na wydarzenie #{course.name}"
+        "Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{user.kw_id} na szkolenie #{course.name}"
       end
     end
   end
