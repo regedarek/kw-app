@@ -1,7 +1,7 @@
 module Training
   module Supplementary
     class Repository
-      def fetch_active_courses(category:)
+      def fetch_active_courses(category: nil)
         categories = if category.present?
           category
         else

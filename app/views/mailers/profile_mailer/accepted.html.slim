@@ -4,12 +4,21 @@ br
 | Otrzymujesz ten e-mail ponieważ właśnie zostałeś przyjęty w grono Klubu Wysokogórskiego Kraków.
 br
 br
-| Po pierwsze zapraszamy do zapoznania się z 
+| Wstępujesz do jednego z najstarszych i jednocześnie najbardziej dynamicznego klubu wysokogórskiego w Polsce.
+br
+| Spotkasz u nas zarówno nestorów polskiego wspinania i himalaizmu jak i młodych i dynamicznych ludzi, pełnych inicjatywy i robiących mocne przejścia górskie i skałkowe.
+br
+| Dużo się u nas dzieje i dużo by o tym pisać - niech na tą chwilę wystarczy 
+= link_to 'ten oto film :)', 'https://www.youtube.com/watch?v=ofVtAommBxM'
+br
+br
+b Na początek
+br
+| Po pierwsze zapraszamy Cię do zapoznania się z 
 = link_to 'Wademekum członka', 'https://kw.krakow.pl/o-klubie/czlonkowskie/wademekum-nowego-czlonka.html'
 | .
 br
-br
-| Dane klubu znajdziesz na 
+| Dane naszego klubu znajdziesz na 
 = link_to 'stronie klubowej', 'https://kw.krakow.pl/o-klubie/dane-klubu.html'
 | .
 br
@@ -29,7 +38,8 @@ br
 br
 b Grupy dyskusyjne
 br
-| Jeżeli wyraziłeś chęć dopisania do klubowych grup dyskusyjnych, zostaniesz niebawem(zazwyczaj do tygodnia) do nich dodany.
+| Grupy dyskusyjne są podstawowym elektronicznym środkiem komunikacji wśród naszych członków. 
+| Jeżeli wyraziłeś chęć dopisania, zostaniesz niebawem(zazwyczaj do tygodnia) do nich dodany.
 br
 ul
   li
@@ -50,15 +60,24 @@ ul
   li
     b = link_to 'KTS', 'https://groups.google.com/forum/#!forum/kts-kw-krakow'
     |  - Koło Taterników Seniorów
-
+br
+| Na grupach obowiązuje 
+= link_to 'netykieta', 'https://kw.krakow.pl/media-klubowe/grupy-dyskusyjne/netykieta.html'
+|  i mamy dużą prośbę o zapoznanie się z nią zanim zaczniesz odpowiadać/zakładać nowe wątki. 
+br
+br
 b Podstrony sekcji
+br
+| W naszym klubie działają 3 sekcje i jedna grupa - poniżej znajdziecie ich podstrony: 
 ul
-  li = link_to 'SWW', 'https://kw.krakow.pl/sww-kw-krakow/sww-o-sekcji.html'
-  li = link_to 'SNW', 'https://snw.kw.krakow.pl/'
-  li = link_to 'STJ', 'https://kw.krakow.pl/stj.html'
-  li = link_to 'GTW', 'https://kw.krakow.pl/stw-kw-krakow/o-sekcji.html'
+  li = link_to 'Sekcja Wspinaczki Wysokogórskiej', 'https://kw.krakow.pl/sww-kw-krakow/sww-o-sekcji.html'
+  li = link_to 'Sekcja Narciarstwa Wysokogórskiego', 'https://snw.kw.krakow.pl/'
+  li = link_to 'Sekcja Taternictwa Jaskiniowego', 'https://kw.krakow.pl/stj.html'
+  li = link_to 'Grupa Turystyki Wysokogórskiej', 'https://kw.krakow.pl/stw-kw-krakow/o-sekcji.html'
 
 b Media społecznościowe
+br
+| Poniżej znajdziecie linki do fanpage na Facebook naszego klubu jak i organizowanych przez nas imprez:
 ul
   li = link_to 'Klub Wysokogórski Kraków', 'https://www.facebook.com/KlubWysokogorskiKrakow/'
   li = link_to 'Memoriał Jana Strzeleckiego', 'https://www.facebook.com/MemorialJanaStrzeleckiego/'
@@ -128,6 +147,13 @@ br
 | Więcej informacji znajdziesz na 
 = link_to 'stronie wydarzeń klubowych', 'https://panel.kw.krakow.pl/wydarzenia'
 | .
+br
+br
+b Nadchodzące wydarzenia
+br
+ul
+  - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
+    li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
 br
 br
 b Spotkania
