@@ -1,6 +1,7 @@
 table.stack
   thead
     tr
+      th.text-center width='5%' Lp.
       th.text-center Kto?
       th.text-center Zaliczka?
       - if current_user.admin? || current_user.roles.include?('events')
@@ -8,10 +9,24 @@ table.stack
           th width='15%'
         th width='15%'
   tbody
-    - sign_ups.each do |sign_up|
+    - sign_ups.each_with_index do |sign_up, i|
       tr
+        td.text-center = i + 1
         td.text-center style=(@limiter.in_limit?(sign_up) ? 'color: green' : '')
-          = sign_up.user ? sign_up.user.display_name : sign_up.name
+          - if user_signed_in? && current_user.admin?
+            - if sign_up.user
+              - profile_id = Db::Profile.find_by(kw_id: sign_up.user&.kw_id)&.id
+              - if profile_id
+                = sign_up.user.display_name
+                |  (
+                = link_to sign_up.user.kw_id, admin_profile_path(profile_id)
+                | )
+              - else
+                = sign_up.user.display_name
+            - else
+              = sign_up.name
+          - else
+            = sign_up.name
         td.text-center
           - if sign_up&.payment&.paid?
             span class='label success'
@@ -29,6 +44,9 @@ table.stack
         - if current_user.admin? || current_user.roles.include?('events')
           - if email
             td.text-center
+             small
               = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
+              br
+              = sign_up.email
           td.text-center
             = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete
