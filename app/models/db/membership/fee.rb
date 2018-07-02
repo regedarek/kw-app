@@ -8,6 +8,10 @@ module Db
 
       validates :kw_id, uniqueness: { scope: :year }
 
+      def payment_type
+        :fees
+      end
+
       def description
         if cost == 150
           "Składka członkowska za rok #{year} oraz opłata reaktywacyjna od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{kw_id}"

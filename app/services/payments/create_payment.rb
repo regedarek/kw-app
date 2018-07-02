@@ -8,10 +8,14 @@ module Payments
       return payment_url if @payment.payment_url.present?
 
       params = Payments::Dotpay::AdaptPayment.new(payment: @payment).to_params
-      Payments::Dotpay::PaymentRequest.new(params: params).execute
+      Payments::Dotpay::PaymentRequest.new(params: params, type: payment_type).execute
     end
 
     private
+
+    def payment_type
+      @payment.payable&.payment_type
+    end
 
     def payment_url
       Success.new(payment_url: @payment.payment_url)

@@ -4,8 +4,9 @@ require 'results'
 module Payments
   module Dotpay
     class PaymentRequest
-      def initialize(params:)
+      def initialize(params:, type:)
         @params = params
+        @type = type
       end
 
       def execute
@@ -34,6 +35,21 @@ module Payments
           end
         else
           Failure.new(:dotpay_request_error, message: 'Błąd podczas generowania linka płatności skontaktuj sie z administratorem.')
+        end
+      end
+
+      private
+
+      def account_id
+        case type
+        when :fees
+          Rails.application.secrets.dotpay_fees_id
+        when :reservations
+          Rails.application.secrets.dotpay_reservations_id
+        when :trainings
+          Rails.application.secrets.dotpay_trainings_id
+        else
+          Rails.application.secrets.dotpay_fees_id
         end
       end
     end

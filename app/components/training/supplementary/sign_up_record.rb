@@ -11,6 +11,10 @@ module Training
         course.price_kw
       end
 
+      def payment_type
+        :trainings
+      end
+
       def description
         "Doszkalanie #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
       end

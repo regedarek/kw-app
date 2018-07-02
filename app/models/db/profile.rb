@@ -28,6 +28,10 @@ module Db
       "#{first_name} #{last_name}"
     end
 
+    def payment_type
+      :fees
+    end
+
     def description
       "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
     end

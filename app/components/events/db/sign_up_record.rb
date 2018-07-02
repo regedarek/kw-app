@@ -26,6 +26,10 @@ module Events
         package_types.map(&:cost).reduce(:+)
       end
 
+      def payment_type
+        :trainings
+      end
+
       def description
         if single
           "Wpisowe nr #{id} na zawody #{competition_record.name} od #{participant_name_1}"

@@ -37,6 +37,10 @@ class Db::Reservation < ActiveRecord::Base
     items.map(&:cost).reduce(:+)
   end
 
+  def payment_type
+    :reservations
+  end
+
   def description
     "Wypożyczenie sprzętu sportowego ##{id} przez #{user.display_name} o nr legitymacji klubowej: #{user.kw_id}"
   end
