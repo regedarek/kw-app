@@ -10,7 +10,6 @@ module Payments
       end
 
       def execute
-        account_id = Rails.application.secrets.dotpay_id
         uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/?format=json")
 
         http = Net::HTTP.new(uri.host, uri.port)
@@ -41,7 +40,7 @@ module Payments
       private
 
       def account_id
-        case type
+        case @type
         when :fees
           Rails.application.secrets.dotpay_fees_id
         when :reservations
