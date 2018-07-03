@@ -11,7 +11,6 @@ services:
     tty: true
     stdin_open: true
     build: .
-    command: bundle exec rails s -p 3001 -b '0.0.0.0'
     links:
       - mailcatcher
     volumes:
@@ -20,3 +19,4 @@ services:
       - "3001:3001"
     depends_on:
       - db
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
