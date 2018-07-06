@@ -8,6 +8,8 @@ module Payments
       return payment_url if @payment.payment_url.present?
 
       params = Payments::Dotpay::AdaptPayment.new(payment: @payment).to_params
+      Rails.logger.info "payment_type: #{payment_type}"
+      Rails.logger.info "params: #{payment_type}"
       Payments::Dotpay::PaymentRequest.new(params: params, type: payment_type).execute
     end
 
