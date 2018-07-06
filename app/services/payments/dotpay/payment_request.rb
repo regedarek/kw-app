@@ -10,7 +10,8 @@ module Payments
       end
 
       def execute
-        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/447543/payment_links/?format=json")
+        Rails.logger.info "ACCOUNT_ID: #{account_id}"
+        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/?format=json")
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
