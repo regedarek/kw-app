@@ -1,0 +1,27 @@
+- if @route.length.present?
+  .large-12.columns
+    b przewyższenie tury w metrach: 
+    = @route.length
+
+.large-12.columns
+  b skład zespołu: 
+  - if @route.partners.present? && @route.colleagues.any?
+    = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+  - elsif @route.colleagues.any?
+    = @route.colleagues.map(&:display_name).to_sentence
+  - else
+    = @route.partners
+
+- if @route.climbing_date.present?
+  .large-12.columns
+    b data przejścia: 
+    = @route.climbing_date
+
+- if @route.rating.present?
+  .large-12.columns
+    b subiektywna ocena: 
+    - @route.rating.times do
+      i.fi-star
+.large-12.columns
+  hr
+  = link_to 'powrót do przejść narciarskich', activities_mountain_routes_path, class: 'button warning'
