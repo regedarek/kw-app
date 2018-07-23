@@ -13,7 +13,8 @@ module Training
         routes = ::Db::Activities::MountainRoute
           .where(
             route_type: 'ski',
-            climbing_date: range
+            climbing_date: range,
+            created_at: range
         ).uniq
         users = routes.collect(&:colleagues).flatten.uniq
 
