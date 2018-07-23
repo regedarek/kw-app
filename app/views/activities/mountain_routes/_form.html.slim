@@ -17,12 +17,18 @@
 
           = f.radio_button :route_type, :winter_climbing
           = f.label :route_type_winter_climbing
+
+          = f.radio_button :route_type, :ski
+          = f.label :route_type_ski
         - else
           = f.radio_button :route_type, :regular_climbing
           = f.label :route_type_regular_climbing
 
           = f.radio_button :route_type, :winter_climbing, checked: true
           = f.label :route_type_winter_climbing
+
+          = f.radio_button :route_type, :ski
+          = f.label :route_type_ski
 
   .callout
     .row

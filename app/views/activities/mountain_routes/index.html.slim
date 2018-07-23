@@ -1,4 +1,6 @@
 .column
+  - if params[:route_type] == 'ski'
+    = render 'training/activities/ski_routes/leaderboard'
   .row
     .large-4.columns
       = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|

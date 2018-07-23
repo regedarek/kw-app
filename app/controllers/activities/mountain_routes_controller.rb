@@ -1,11 +1,15 @@
 module Activities
   class MountainRoutesController < ApplicationController
+    append_view_path 'app/components'
     before_action :authenticate_user!, only: [:create, :update, :destroy]
 
     def index
       @q = Db::Activities::MountainRoute.where(hidden: false).ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
       @routes = @q.result.includes(:user).page(params[:page]).uniq
+      @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
+      @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
+      @season_leaders = Training::Activities::Repository.new.fetch_season
 
       respond_to do |format|
         format.html
