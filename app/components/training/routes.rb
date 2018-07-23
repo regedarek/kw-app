@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   scope module: 'training' do
+    namespace :activities do
+      resources :ski_routes
+    end
+
     namespace :questionare do
       resources :snw_profiles, only: [:new, :create]
     end

@@ -1,5 +1,9 @@
 pl:
   training:
+    activities:
+      ski_routes:
+        new:
+          submit: Dodaj turę
     supplementary:
       sign_ups:
         create:
