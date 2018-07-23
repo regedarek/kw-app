@@ -36,7 +36,8 @@ module Training
           .require(:ski_route)
           .permit(
             :name, :climbing_date, :hidden, :rating, :partners,
-            :length, :description, colleagues_names: []
+            :length, :description, colleagues_names: [],
+            photos: []
           )
       end
     end

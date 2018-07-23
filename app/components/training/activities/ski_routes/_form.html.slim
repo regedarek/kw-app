@@ -52,6 +52,10 @@
           = f.label :length, 'całkowite przeywższenie tury'
           = f.number_field :length
 
-        .large-8.columns
+        .large-4.columns
           = f.label :description, 'uwagi dotyczące tury, warunków śniegowych'
           = f.text_area :description
+
+        .large-4.columns
+          br
+          = f.file_field :photos, multiple: true

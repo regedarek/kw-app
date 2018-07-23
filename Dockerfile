@@ -1,7 +1,7 @@
 FROM ruby:2.4.1-alpine
 
 RUN apk update
-RUN apk add --update build-base nodejs postgresql-dev tzdata git
+RUN apk add --update build-base nodejs postgresql-dev tzdata git imagemagick
 
 ENV app /usr/src/kw-app/
 RUN mkdir $app
