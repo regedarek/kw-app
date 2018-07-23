@@ -15,8 +15,9 @@ module Training
           end
 
           result.failure do |errors|
+            @ski_route = ::Db::Activities::MountainRoute.new(ski_route_params)
             flash[:error] = errors.values.join(", ")
-            redirect_to new_activities_ski_route_path
+            render :new
           end
         end
       end

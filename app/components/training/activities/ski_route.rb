@@ -22,6 +22,7 @@ module Training
       class << self
         def from_record(record)
           new(
+            route_type: record.route_type,
             name: record.name,
             climbing_date: record.climbing_date,
             hidden: record.hidden,
