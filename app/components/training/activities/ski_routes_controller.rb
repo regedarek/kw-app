@@ -37,7 +37,7 @@ module Training
           .permit(
             :name, :climbing_date, :hidden, :rating, :partners,
             :length, :description, colleagues_names: [],
-            photos: []
+            attachments: []
           )
       end
     end

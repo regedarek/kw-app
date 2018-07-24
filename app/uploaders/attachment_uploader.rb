@@ -1,4 +1,4 @@
-class PhotoUploader < CarrierWave::Uploader::Base
+class AttachmentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Include RMagick or MiniMagick support:
@@ -49,6 +49,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  #
   protected
 
   def image?(new_file)

@@ -18,6 +18,7 @@ module Training
       attribute :partners, Types::Strict::String.optional
       attribute :length, Types::Strict::Int
       attribute :description, Types::Strict::String
+      attribute :attachments, Types::Coercible::Array
 
       class << self
         def from_record(record)
@@ -30,7 +31,8 @@ module Training
             colleagues_names: record.colleagues_names,
             partners: record.partners,
             length: record.length,
-            description: record.description
+            description: record.description,
+            attachments: record.attachments
           )
         end
       end

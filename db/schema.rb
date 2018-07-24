@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 20180723204720) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.boolean  "hidden",        default: false, null: false
-    t.string   "photos"
+    t.string   "attachments"
   end
 
   create_table "participants", force: :cascade do |t|

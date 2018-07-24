@@ -48,14 +48,15 @@
 
     .callout.secondary
       .row
-        .large-4.columns
-          = f.label :length, 'całkowite przeywższenie tury'
+        .large-3.columns
+          = f.label :length, 'przewyższenie tury w metrach'
           = f.number_field :length
 
-        .large-4.columns
+        .large-3.columns
+          br
+          = f.file_field :attachments, multiple: true
+
+        .large-6.columns
           = f.label :description, 'uwagi dotyczące tury, warunków śniegowych'
           = f.text_area :description
 
-        .large-4.columns
-          br
-          = f.file_field :photos, multiple: true

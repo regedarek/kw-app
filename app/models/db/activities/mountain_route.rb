@@ -2,8 +2,8 @@ module Db
   module Activities
     class MountainRoute < ActiveRecord::Base
       enum route_type: [:ski, :regular_climbing, :winter_climbing]
-      mount_uploaders :photos, PhotoUploader
-      serialize :photos, JSON # If you use SQLite, add this line.
+      mount_uploaders :attachments, AttachmentUploader
+      serialize :attachments, JSON
 
       belongs_to :user
       has_many :colleagues, through: :route_colleagues
