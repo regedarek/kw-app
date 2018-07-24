@@ -3,7 +3,7 @@ pl:
     activities:
       ski_routes:
         new:
-          submit: Dodaj turę
+          submit: dodaj turę
           back: powrót do przejść narciarskich
     supplementary:
       sign_ups:
