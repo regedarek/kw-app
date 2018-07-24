@@ -25,7 +25,12 @@
 
 - if @route.photos.any?
   .large-12.columns
-    - @route.photos.each_with_index do |photo, i|
+    - @route.photos.select{|p| !p.content_type.start_with?('image') }.each do |photo, i|
+      = link_to photo.url, download: photo.file.identifier do
+        = image_tag('file.jpg', class: 'thumbnail')
+        |  
+        = photo.file.identifier
+    - @route.photos.select{|p| p.content_type.start_with?('image') }.each_with_index do |photo, i|
       = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
 
       div id="photo-#{i}" class="full reveal" data-reveal="" 
