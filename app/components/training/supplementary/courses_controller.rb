@@ -7,6 +7,7 @@ module Training
       def index
         @active_courses = Training::Supplementary::Repository.new.fetch_active_courses(category: params[:category])
         @inactive_courses = Training::Supplementary::Repository.new.fetch_inactive_courses(category: params[:category])
+        @archived_courses = Training::Supplementary::Repository.new.fetch_archived_courses(category: params[:category])
       end
 
       def new

@@ -1,0 +1,54 @@
+table.stack
+  tbody
+    - archived_courses.each do |course|
+      tr
+        td.text-center = image_tag "#{course.category}.png", size: '40x40'
+        td.text-center
+          = link_to course.name, polish_event_path(course.id)
+        td.text-center = course.place
+        td.text-center
+          - if course.start_date && course.end_date
+            = [course.start_date&.strftime("%d"), course.end_date&.strftime("%d/%m/%Y")].join('-')
+          - else
+            = course.start_date&.strftime("%d/%m/%Y ")
+            - unless course.start_date&.hour == 00
+              b = course.start_date&.strftime("%H:%M")
+        td.text-center = course.organizer
+        td.text-center
+          - if course.price_kw && course.price_non_kw
+            = "#{course.price_kw}/#{course.price_non_kw}"
+          - elsif course.price_kw.nil?
+            | -
+          - else
+            = course.price_kw
+        td.text-center
+          - if course.open
+            | otwarte
+          - else
+            - if course.sign_ups.any?
+              - if course.limit > 0
+                = "#{course.sign_ups.count}/#{course.limit}"
+              - else
+                = course.sign_ups.count
+            - else
+              | -
+        td.text-center.show-for-small-only
+          = simple_format course.remarks
+          br
+          - if user_signed_in?
+            - if current_user.admin? || current_user.id == course.organizator_id
+              = link_to t('.show'), polish_event_path(course.id)
+              br
+              = link_to t('.edit'), edit_supplementary_course_path(course.id)
+              br
+              = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
+
+        - if user_signed_in?
+          - if current_user.admin? || current_user.id == course.organizator_id || current_user.roles.include?('events')
+            td.text-center.hide-for-small-only
+              i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
+              div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
+                ul.menu.vertical
+                  li= link_to t('.show'), polish_event_path(course.id)
+                  li= link_to t('.edit'), edit_supplementary_course_path(course.id)
+                  li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete

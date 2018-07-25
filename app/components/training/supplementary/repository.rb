@@ -15,6 +15,20 @@ module Training
         end
       end
 
+      def fetch_archived_courses(category: nil)
+        categories = if category.present?
+          category
+        else
+          Training::Supplementary::CourseRecord.categories.keys
+        end
+        Training::Supplementary::CourseRecord
+          .where(start_date: 1.year.ago..Date.current.beginning_of_day)
+          .where(category: categories)
+          .order(:start_date, :application_date).collect do |record|
+          Training::Supplementary::Course.from_record(record)
+        end
+      end
+
       def fetch_inactive_courses(category:)
         categories = if category.present?
           category

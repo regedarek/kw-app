@@ -22,6 +22,9 @@
     = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
 
 .row
+  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+    .large-12.columns
+      = render 'table_archived', archived_courses: @archived_courses
   .large-12.columns
     = render 'table', courses: @active_courses
 
