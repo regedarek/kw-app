@@ -2,11 +2,11 @@ table.stack
   thead
     tr
       th.text-center width='5%'
-      th.text-center
-      th.text-center width='20%'
-      th.text-center width='15%'
-      th.text-center width='15%'
-      th.text-center width='7%'
+      th.text-center Nazwa
+      th.text-center width='20%' Kiedy?
+      th.text-center width='15%' Kto?
+      th.text-center width='15%' Cena
+      th.text-center width='7%' Typ
       th.text-center width='7%'
       th.text-center.show-for-small-only
       th.text-center width='5%'
@@ -55,11 +55,10 @@ table.stack
               = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
 
         - if user_signed_in?
-          - if current_user.admin? || current_user.id == course.organizator_id || current_user.roles.include?('events')
-            td.text-center.hide-for-small-only
-              i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
-              div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
-                ul.menu.vertical
-                  li= link_to t('.show'), polish_event_path(course.id)
-                  li= link_to t('.edit'), edit_supplementary_course_path(course.id)
-                  li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete
+          td.text-center.hide-for-small-only
+            i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
+            div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
+              ul.menu.vertical
+                li= link_to t('.show'), polish_event_path(course.id)
+                li= link_to t('.edit'), edit_supplementary_course_path(course.id)
+                li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete

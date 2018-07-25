@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     end
 
     namespace :supplementary do
-      resources :courses
+      resources :courses do
+        collection do
+          get :archived
+        end
+      end
       resources :sign_ups do
         member do
           put :send_email
