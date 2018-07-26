@@ -41,7 +41,7 @@
         b Rezerwowi:
         = @limiter.all_unpaid&.count
         br
-      - if user_signed_in?
+      - if user_signed_in? && !@limiter.open?
         - if current_user.admin? || current_user.roles.include?('events')
           = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
             = a.email_field :email
