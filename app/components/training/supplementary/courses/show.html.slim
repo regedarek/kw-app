@@ -44,9 +44,9 @@
       - if user_signed_in? && !@limiter.open?
         - if current_user.admin? || current_user.roles.include?('events')
           = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
-            = a.email_field :email
+            = a.email_field :email, placeholder: 'E-mail klubowicza'
             = a.hidden_field :course_id, value: @course.id
-            = a.submit 'Zapisz i wyślij link', class: 'button primary expanded'
+            = a.submit 'Zapisz i wyślij link do płatności', class: 'button primary expanded'
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
