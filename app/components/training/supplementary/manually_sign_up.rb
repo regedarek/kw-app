@@ -15,7 +15,7 @@ module Training
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
         if form_outputs[:email].present?
           user = ::Db::User.find_by(email: form_outputs[:email])
-          Left(email: 'Nie znaleziono użytkownika, sprawdź e-mail!') if user.nil?
+          return Left(email: 'Nie znaleziono użytkownika, sprawdź e-mail!') if user.nil?
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
 
           if course.last_fee_paid
