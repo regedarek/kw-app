@@ -4,6 +4,19 @@ module Training
       include EitherMatcher
       append_view_path 'app/components'
 
+      def manually
+        either(manually_sign_up) do |result|
+          result.success do
+            redirect_to :back, notice: 'Zapisałeś uczestnika i wysłałeś link do płatności!'
+          end
+
+          result.failure do |errors|
+            flash[:error] = errors.values.join(", ")
+            redirect_to :back
+          end
+        end
+      end
+
       def create
         either(create_record) do |result|
           result.success do
@@ -49,11 +62,22 @@ module Training
 
       private
 
+      def manually_sign_up
+        Training::Supplementary::ManuallySignUp.new(
+          Training::Supplementary::Repository.new,
+          Training::Supplementary::ManuallySignUpForm.new
+        ).call(raw_inputs: manually_sign_up_params)
+      end
+
       def create_record
         Training::Supplementary::CreateSignUp.new(
           Training::Supplementary::Repository.new,
           Training::Supplementary::CreateSignUpForm.new
         ).call(raw_inputs: sign_up_params)
+      end
+      
+      def manually_sign_up_params
+        params.require(:manually_sign_up).permit(:email, :course_id)
       end
 
       def sign_up_params

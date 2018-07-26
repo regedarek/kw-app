@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         end
         collection do
           get :cancel
+          put :manually
         end
       end
     end

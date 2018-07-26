@@ -40,6 +40,11 @@
       - if @course.sign_ups&.any?
         b Rezerwowi:
         = @limiter.all_unpaid&.count
+        br
+      = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
+        = a.email_field :email
+        = a.hidden_field :course_id, value: @course.id
+        = a.submit 'Zapisz i wyślij link', class: 'button primary expanded'
 
     .large-6.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
