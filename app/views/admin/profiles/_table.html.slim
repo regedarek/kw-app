@@ -4,7 +4,7 @@ table.stack
       th width='20%' Imię i nazwisko
       th width='10%' Number klubowy
       th width='10%' Telefon
-      th width='10%' Płatności
+      th width='5%' Płatności
       th width='20%' Status
       th width='15%'
   tbody
@@ -12,9 +12,9 @@ table.stack
       tr
         td
           b = "#{profile.first_name} #{profile.last_name}"
-        td = profile.kw_id
-        td = profile.phone
-        td
+        td.text-center = profile.kw_id
+        td.text-center = profile.phone
+        td.text-center
           - if profile && profile.kw_id
             - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
             - if fee
@@ -30,7 +30,7 @@ table.stack
               - if profile.payment.prepaid?
                 span.label.success wpisowe
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
-        td
+        td.text-center
           - if profile.accepted?
             = link_to 'Zobacz', admin_profile_path(profile.id)
           - else
