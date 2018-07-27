@@ -5,3 +5,4 @@
 .row
   .large-12.columns
     = render 'table_archived', archived_courses: @archived_courses
+    = paginate @archived_courses

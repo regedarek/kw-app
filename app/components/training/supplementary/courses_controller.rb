@@ -10,7 +10,7 @@ module Training
       end
 
       def archived
-        @archived_courses = Training::Supplementary::Repository.new.fetch_archived_courses(category: params[:category])
+        @archived_courses = Kaminari.paginate_array(Training::Supplementary::Repository.new.fetch_archived_courses(category: params[:category])).page(params[:page]).per(10)
       end
 
       def new
