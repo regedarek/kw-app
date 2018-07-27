@@ -87,7 +87,7 @@ module Admin
     private
 
     def reservation_params
-      params.require(:admin_reservations_form).permit(:kw_id, :item_id, :start_date, :end_date, :remarks)
+      params.require(:admin_reservations_form).permit(:kw_id, :item_id, :start_date, :end_date, :remarks, photos: [])
     end
   end
 end

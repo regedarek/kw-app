@@ -25,7 +25,6 @@
                   li = link_to admin_item_path(i.id) do
                     = "<b>#{i.rentable_id}</b> #{i.display_name}".html_safe
 
-
           .large-2.columns
             = f.label 'Koszt'
             .callout.primary
@@ -55,6 +54,21 @@
             = f.label :remarks, 'Opis'
             = f.text_area :remarks
 
+        .row
+          .large-12.columns
+            = f.label :photos, 'Zdjęcia przedmiotów'
+            = f.file_field :photos, multiple: true
+
+        - if @reservation.photos.any?
+          .row
+            .large-12.columns
+              - @reservation.photos.each_with_index do |photo, i|
+                = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+                div id="photo-#{i}" class="full reveal" data-reveal="" 
+                  = image_tag photo.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
         .row
           .large-12.columns
             - if @reservation.payment.present? && @reservation.payment.prepaid?
@@ -89,7 +103,6 @@
       = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
       = " (#{@reservation.user.warnings}) "
       = link_to 'Usun upomnienie', give_back_warning_admin_reservation_path(@reservation), method: :post
-
 
   .row
     .large-6.columns

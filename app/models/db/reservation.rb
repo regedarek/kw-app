@@ -1,5 +1,9 @@
 class Db::Reservation < ActiveRecord::Base
   include Workflow
+
+  mount_uploaders :photos, Reservations::PhotoUploader
+  serialize :photos, JSON
+
   belongs_to :user
   has_many :reservation_items
   has_many :items, through: :reservation_items
