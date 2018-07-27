@@ -12,6 +12,22 @@ module Availability
       Db::Item.order(:rentable_id).rentable - not_available_items - Db::Item.instructors
     end
 
+    def collect_abc
+      collect.select {|i| i.display_name.downcase.match?('abc') }
+    end
+
+    def collect_axes
+      collect.select {|i| i.display_name.downcase.match?('czekan') }
+    end
+
+    def collect_crampons
+      collect.select {|i| i.display_name.downcase.match?('raki') }
+    end
+
+    def collect_rest
+      collect - collect_abc - collect_axes - collect_crampons
+    end
+
     def week
       @start_date..@end_date
     end

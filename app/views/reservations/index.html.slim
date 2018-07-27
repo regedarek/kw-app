@@ -1,29 +1,94 @@
-.row
-  .columns
-    h3.subheader
-      = t('.given_week')
-      b= Availability::Items.new(start_date: params[:start_date]).week
-    - reservations = current_user.reservations.where(start_date: params[:start_date])
-    = render 'reservations/table', reservations: reservations
+.column
+  .row
+    .large-12.columns
+      h3.subheader
+        = t('.given_week')
+        b= Availability::Items.new(start_date: params[:start_date]).week
+      -collect.select {|i| i.display_name.downcase.match?('raki') } reservations = current_user.reservations.where(start_date: params[:start_date])
+      = render 'reservations/table', reservations: reservations
 
-    h4.subheader
-      = t('.available_items')
-    table
-      thead
-        tr
-          th ID
-          th=t('.item')
-          th Koszt
-          th
-      tbody
-        - @available_items.each do |item|
-          tr
-            td
-              = item.rentable_id
-            td
-              = item.display_name
-            td
-              = item.cost
-              = ' zł'
-            td style='text-align: right; width: 150px'
-              = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+  .row
+    .large-12.columns
+      h4.subheader
+        = t('.available_items')
+
+      ul.accordion data-accordion="" data-multi-expand="true"
+        li.accordion-item.is-active data-accordion-item="" 
+          a.accordion-title href="#" Zestawy lawinowe
+          .accordion-content data-tab-content="" 
+            table
+              thead
+                tr
+                  th=t('.item')
+                  th width='5%' Koszt
+                  th width='10%' 
+              tbody
+                - @abc.each do |item|
+                  tr
+                    td
+                      = item.display_name
+                    td.text-center
+                      = item.cost
+                      = ' zł'
+                    td.text-center
+                      = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+
+        li.accordion-item data-accordion-item="" 
+          a.accordion-title href="#"  Czekany
+          .accordion-content data-tab-content="" 
+            table
+              thead
+                tr
+                  th=t('.item')
+                  th width='5%' Koszt
+                  th width='10%' 
+              tbody
+                - @axes.each do |item|
+                  tr
+                    td
+                      = item.display_name
+                    td.text-center
+                      = item.cost
+                      = ' zł'
+                    td.text-center
+                      = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+
+        li.accordion-item data-accordion-item="" 
+          a.accordion-title href="#" Raki
+          .accordion-content data-tab-content="" 
+            table
+              thead
+                tr
+                  th=t('.item')
+                  th width='5%' Koszt
+                  th width='10%' 
+              tbody
+                - @crampons.each do |item|
+                  tr
+                    td
+                      = item.display_name
+                    td.text-center
+                      = item.cost
+                      = ' zł'
+                    td.text-center
+                      = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+
+        li.accordion-item data-accordion-item="" 
+          a.accordion-title href="#" Pozostałe
+          .accordion-content data-tab-content="" 
+            table
+              thead
+                tr
+                  th=t('.item')
+                  th width='5%' Koszt
+                  th width='10%' 
+              tbody
+                - @rest.each do |item|
+                  tr
+                    td
+                      = item.display_name
+                    td.text-center
+                      = item.cost
+                      = ' zł'
+                    td.text-center
+                      = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
