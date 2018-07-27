@@ -13,7 +13,7 @@
     .row
       .large-12.columns
         ul.accordion data-accordion="" data-multi-expand="true"
-          - if current_user.reservations.any?
+          - if current_user.reservations.not_archived.any?
             li.accordion-item data-accordion-item="" 
               a.accordion-title href="#" Twoje rezerwacje
               .accordion-content data-tab-content="" 
