@@ -12,6 +12,18 @@ class ProfileMailer < ApplicationMailer
     end
   end
 
+  def list(profile)
+    @profile = profile
+
+    I18n.with_locale(I18n.locale) do
+      mail(
+        to: @profile.email,
+        from: 'zgloszenia@kw.krakow.pl',
+        subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od #{@profile.first_name} #{@profile.last_name}"
+      )
+    end
+  end
+
   def apply(profile)
     @profile = profile
     pdf = Prawn::Document.new

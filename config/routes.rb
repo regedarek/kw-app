@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resources :profiles do
       member do
         put :accept
+        put :send_email
       end
     end
     resources :importing, only: [:index] do

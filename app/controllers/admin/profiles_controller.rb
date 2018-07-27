@@ -39,6 +39,13 @@ module Admin
       end
     end
 
+    def send_email
+      @profile = Db::Profile.find(params[:id])
+      ProfileMailer.apply(@profile).deliver_later
+
+      redirect_to admin_profile_path(@profile.id), notice: 'Wysłano ponownie e-mail zgłoszeniowy!'
+    end
+
     def accept
       profile = Db::Profile.find(params[:id])
       user = Db::User.new

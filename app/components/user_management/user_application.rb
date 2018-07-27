@@ -24,7 +24,11 @@ module UserManagement
           cost: UserManagement::ApplicationCost.for(profile: form).sum
         )
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
-        ProfileMailer.apply(profile).deliver_later
+        if profile.acomplished_courses.include?('list')
+          ProfileMailer.list(profile).deliver_later
+        else
+          ProfileMailer.apply(profile).deliver_later
+        end
         return Success.new
       end
     end

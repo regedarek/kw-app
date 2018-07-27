@@ -184,6 +184,9 @@
       - else
         span.label.warning= @profile.cost
         span.label.warning nie dotyczy
+      br
+      - unless @profile.accepted
+        = link_to 'Wyślij e-mail zgłaszający', send_email_admin_profile_path(@profile.id), method: :put
   .row
     .large-12.columns
       hr
