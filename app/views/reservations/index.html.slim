@@ -4,7 +4,7 @@
       h3.subheader
         = t('.given_week')
         b= Availability::Items.new(start_date: params[:start_date]).week
-      -collect.select {|i| i.display_name.downcase.match?('raki') } reservations = current_user.reservations.where(start_date: params[:start_date])
+      - reservations = current_user.reservations.where(start_date: params[:start_date])
       = render 'reservations/table', reservations: reservations
 
   .row
