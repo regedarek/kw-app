@@ -58,7 +58,7 @@ module Admin
         )
         user.send_reset_password_instructions
         if profile.payment.present? && profile.payment.paid?
-          fee = Db::Membership::Fee.create(
+          fee = Db::Membership::Fee.create!(
             year: profile.application_date.year,
             kw_id: profile.kw_id,
             payment: profile.payment,
