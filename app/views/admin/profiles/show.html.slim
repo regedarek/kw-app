@@ -166,19 +166,23 @@
               - else
                 span.label.warning = fee.year
 
-  - if @profile.payment.present?
-    .row
-      .large-12.columns 
+  .row
+    .large-12.columns 
+      b Wpisowe: 
+      - if @profile.payment.present?
         - if @profile.payment.paid?
-          .callout.success
-            = "Opłacono wpisowe i składkę za rok bieżący w kwocie: #{@profile.cost}"
+          span.label.success= @profile.cost
+          span.label.success opłacone
         - else
-          .callout.warning
-            = "Nie opłacono jeszcze wpisowego i składki"
-            - if @profile.payment.payment_url.present?
-              p
-                = link_to 'Link do płatności', @profile.payment.payment_url
-
+          span.label.alert= @profile.cost
+          span.label.alert nieopłacone
+          br
+          - if @profile.payment.payment_url
+            = link_to 'Link do płatności', @profile.payment.payment_url
+          - else
+            = link_to 'Link do płatności', charge_payment_path(@profile.payment)
+      - else
+        span.label.alert= @profile.cost
   .row
     .large-12.columns
       hr

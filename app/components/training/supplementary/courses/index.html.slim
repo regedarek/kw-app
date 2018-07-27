@@ -23,12 +23,19 @@
   .large-4.columns
     = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
 
-.row
-  .large-12.columns
-    = render 'table', courses: @active_courses
+
 
 .row
   .large-12.columns
-    .text-center
-      h4.text-center Kalendarz wydarzeń
-      iframe frameborder="0" height="600" scrolling="no" src="https://calendar.google.com/calendar/embed?src=57vh4rbe6plsa0hdtb6mvhl4cc%40group.calendar.google.com&ctz=Europe%2FWarsaw" style=("border: 0") width="800" 
+    ul.accordion data-accordion="" data-multi-expand="true"
+      li.accordion-item.is-active data-accordion-item="" 
+        a.accordion-title href="#" Nadchodzące wydarzenia
+        .accordion-content data-tab-content="" 
+          = render 'table', courses: @active_courses
+
+      li.accordion-item data-accordion-item="" 
+        a.accordion-title href="#" Kalendarz klubowy
+        .accordion-content data-tab-content="" 
+          .text-center
+            h4.text-center Kalendarz wydarzeń
+            iframe frameborder="0" height="600" scrolling="no" src="https://calendar.google.com/calendar/embed?src=57vh4rbe6plsa0hdtb6mvhl4cc%40group.calendar.google.com&ctz=Europe%2FWarsaw" style=("border: 0") width="800" 
