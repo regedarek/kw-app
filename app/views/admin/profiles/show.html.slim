@@ -149,6 +149,11 @@
       .large-12.columns 
         b Uwagi: 
         = @profile.remarks
+
+  .row
+    .large-12.columns 
+      b Data zgłoszenia: 
+      = @profile.created_at.strftime("%d-%m-%Y")
   
   - if @profile.kw_id.present?
     .row
