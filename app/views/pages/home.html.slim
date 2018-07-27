@@ -20,7 +20,7 @@
                 = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
 
           - if current_user.mountain_routes.any?
-            li.accordion-item data-accordion-item="" 
+            li.accordion-item.is-active data-accordion-item="" 
               a.accordion-title href="#" Twoje przejścia
               .accordion-content data-tab-content="" 
                 .row
