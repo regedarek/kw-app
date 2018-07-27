@@ -1,4 +1,5 @@
 .column
+
   .row
     .large-12.columns
       = form_for @reservation_form, url: admin_reservation_path(params[:id]), method: :put do |f|
@@ -16,13 +17,14 @@
             = f.date_field :end_date
 
         .row
-          .large-10.columns
+          .large-6.columns
             = f.label 'Przedmioty'
             .callout.primary
               ul
                 - @reservation.items.each do |i|
                   li = link_to admin_item_path(i.id) do
                     = "<b>#{i.rentable_id}</b> #{i.display_name}".html_safe
+
 
           .large-2.columns
             = f.label 'Koszt'
@@ -79,8 +81,14 @@
             = link_to 'Usun', admin_reservation_path(@reservation.id), method: :delete, data: { confirm: 'Jestes pewien?' }, class: 'button alert'
             = link_to 'Wroć', admin_reservations_path, class: 'button secondary'
 
-        .row
-          .large-12.columns
-            = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
-            = " (#{@reservation.user.warnings}) "
-            = link_to 'Usun upomnienie', give_back_warning_admin_reservation_path(@reservation), method: :post
+  .row
+    .large-12.columns
+      = link_to 'Daj upomnienie', give_warning_admin_reservation_path(@reservation), method: :post
+      = " (#{@reservation.user.warnings}) "
+      = link_to 'Usun upomnienie', give_back_warning_admin_reservation_path(@reservation), method: :post
+
+
+  .row
+    .large-6.columns
+      b Zaktualizuj przedmioty tej rezerwacji(numery przedmiotów po spacjach)
+      = render 'update_items_form', reservation: @reservation

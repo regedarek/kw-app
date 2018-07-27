@@ -1,0 +1,4 @@
+= form_for :reservation, url: update_items_path(id: reservation.id), method: :put do |a|
+  = a.text_field :items_ids, value: reservation.items.map(&:rentable_id)
+  = a.hidden_field :id, value: reservation.id
+  = a.submit 'Zmień przedmioty rezerwacji', class: 'button primary expanded'

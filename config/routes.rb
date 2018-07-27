@@ -95,6 +95,8 @@ Rails.application.routes.draw do
     end
   end
 
+  put 'reservations/items', to: 'reservations/items#update', as: :update_items
+
   get '/', to: 'activities/mountain_routes#index',
     constraints: lambda { |req| req.env['SERVER_NAME'].match('przejscia') }
 
