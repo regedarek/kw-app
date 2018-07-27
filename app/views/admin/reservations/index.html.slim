@@ -31,7 +31,10 @@
             tr
               td = link_to reservation.id, edit_admin_reservation_path(reservation.id)
               td
-                = [reservation.user.first_name, reservation.user.last_name].join(' ') if reservation.user
+                - if reservation.user&.profile
+                  = link_to reservation.user.display_name, admin_profile_path(reservation.user&.profile&.id)
+                - else
+                  = reservation.user.display_name
               td
                 = link_to edit_admin_reservation_path(reservation.id) do
                   b= reservation.items.map(&:rentable_id).to_s if reservation.items.present?

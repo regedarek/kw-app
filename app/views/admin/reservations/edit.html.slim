@@ -45,7 +45,10 @@
             .large-4.columns
               = f.label 'Email'
               .callout.secondary
-                = mail_to @reservation.user.email
+                - if @reservation.user&.profile
+                  = link_to @reservation.user.email, admin_profile_path(@reservation.user&.profile&.id)
+                - else
+                  = mail_to @reservation.user.email
 
         .row
           .large-12.columns
