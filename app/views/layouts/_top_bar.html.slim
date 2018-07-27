@@ -25,8 +25,8 @@
                 li= link_to t('.administration.items'), admin_items_path
                 - if current_user.roles.include?('courses')
                   li= link_to 'Kursy', training_courses_path
-                - if current_user.roles.include?('events')
-                  li= link_to 'Wydarzenia', supplementary_courses_path
+                li= link_to 'Przejścia', activities_mountain_routes_path
+                li= link_to 'Wydarzenia', supplementary_courses_path
 
     .top-bar-right
       ul.dropdown.menu
