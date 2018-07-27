@@ -73,7 +73,7 @@ module Training
         params
           .require(:course)
           .permit(
-            :name, :place, :start_date, :end_date, :application_date, :price_kw,
+            :name, :place, :start_date, :end_date, :application_date, :price_kw, :baner,
             :price_non_kw, :remarks, :category, :price, :one_day, :active, :cash,
             :open, :limit, :last_fee_paid, organizator_id: []
           )

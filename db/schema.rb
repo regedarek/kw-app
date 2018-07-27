@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723204720) do
+ActiveRecord::Schema.define(version: 20180727143023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180723204720) do
     t.string   "edition_sym",                                    null: false
     t.boolean  "single",             default: false,             null: false
     t.boolean  "team_name",          default: false,             null: false
-    t.string   "baner_url"
+    t.string   "baner"
     t.string   "rules"
     t.boolean  "closed",             default: false,             null: false
     t.integer  "limit",              default: 0,                 null: false
@@ -366,6 +366,7 @@ ActiveRecord::Schema.define(version: 20180723204720) do
     t.boolean  "open",             default: true,  null: false
     t.boolean  "last_fee_paid",    default: false, null: false
     t.boolean  "cash",             default: false, null: false
+    t.string   "baner"
   end
 
   create_table "supplementary_sign_ups", force: :cascade do |t|

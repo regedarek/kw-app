@@ -1,6 +1,7 @@
 module Events
   module Db
     class CompetitionRecord < ActiveRecord::Base
+      mount_uploader :baner, Events::Competitions::BanerUploader
       self.table_name = 'competitions'
 
       has_many :sign_ups_records,

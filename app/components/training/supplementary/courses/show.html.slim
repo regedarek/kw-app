@@ -80,6 +80,10 @@
           = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded large'
   .row
     .large-12.columns
+      - if @course.baner.present?
+        .text-center
+          = image_tag @course.baner.url
+    .large-12.columns
       - if @course.remarks.present?
         br
         b = t('.remarks')

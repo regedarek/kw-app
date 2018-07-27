@@ -20,7 +20,7 @@
 
       .large-2.columns
         = f.label 'Logo nad formularzem'
-        = f.text_field :baner_url
+        = f.file_field :baner
 
       .large-2.columns
         = f.label 'Email organizatora'
@@ -52,6 +52,8 @@
         = f.text_area :email_text
   .row
     .large-12.columns
+      .text-center
+        = image_tag @competition.baner.url
       .callout
         = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
 

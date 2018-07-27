@@ -15,6 +15,7 @@ module Training
       attribute :place, Types::Strict::String.optional
       attribute :start_date, Types::Strict::DateTime.optional
       attribute :end_date, Types::Strict::Date.optional
+      attribute :baner, Types::Any
       attribute :application_date, Types::Strict::DateTime.optional
       attribute :price_kw, Types::Strict::Int.optional
       attribute :price_non_kw, Types::Strict::Int.optional
@@ -60,7 +61,8 @@ module Training
             active: record.active,
             limit: record.limit,
             open: record.open,
-            last_fee_paid: record.last_fee_paid
+            last_fee_paid: record.last_fee_paid,
+            baner: record.baner
           )
         end
       end
