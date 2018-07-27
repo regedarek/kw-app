@@ -183,6 +183,7 @@
             = link_to 'Link do płatności', charge_payment_path(@profile.payment)
       - else
         span.label.alert= @profile.cost
+        span.label.alert nieopłacone
   .row
     .large-12.columns
       hr
