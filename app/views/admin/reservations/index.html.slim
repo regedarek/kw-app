@@ -33,9 +33,10 @@
               td
                 = [reservation.user.first_name, reservation.user.last_name].join(' ') if reservation.user
               td
-                b= reservation.items.map(&:rentable_id).to_s if reservation.items.present?
-                |  
-                = reservation.items.map(&:display_name).to_sentence
+                = link_to edit_admin_reservation_path(reservation.id) do
+                  b= reservation.items.map(&:rentable_id).to_s if reservation.items.present?
+                  |  
+                  = reservation.items.map(&:display_name).to_sentence
               td
                 = reservation.cost
                 |  zł

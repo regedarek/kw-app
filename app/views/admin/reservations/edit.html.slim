@@ -21,7 +21,8 @@
             .callout.primary
               ul
                 - @reservation.items.each do |i|
-                  li= "<b>#{i.rentable_id}</b> #{i.display_name}".html_safe
+                  li = link_to admin_item_path(i.id) do
+                    = "<b>#{i.rentable_id}</b> #{i.display_name}".html_safe
 
           .large-2.columns
             = f.label 'Koszt'

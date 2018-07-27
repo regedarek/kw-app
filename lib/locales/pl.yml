@@ -2,6 +2,9 @@ pl:
   true_value: Tak
   false_value: Nie
   'false': Nie
+  archived: zarchiwizowane
+  reserved: zarazerwowane
+  holding: w posiadaniu
   ski: Narciarstwo Wysokogórskie
   regular_climbing: Wspinaczka letnia
   winter_climbing: Wspinaczka zimowa

@@ -16,6 +16,15 @@ module Admin
       result.invalid { |form:| redirect_to admin_items_path, alert: "Nie dodano: #{form.errors.messages}" }
       result.else_fail!
     end
+    
+    def show
+      @item = Db::Item.find(params[:id])
+      if params[:all]
+        @reservations = Db::Item.find(params[:id]).reservations
+      else
+        @reservations = Db::Item.find(params[:id]).reservations.not_reserved
+      end
+    end
 
     def edit
       @item = Db::Item.find(params[:id])

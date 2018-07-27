@@ -1,0 +1,66 @@
+.column
+  .row
+    .large-12.columns
+      h4 = @item.display_name
+
+  .row
+    .large-12.columns
+        b Koszt: 
+        = @item.cost
+        br
+        b Numer: 
+        = @item.rentable_id
+        br
+        b Czyje: 
+        = @item.owner
+        br
+        b Wypożyczane: 
+        = @item.rentable
+        br
+        .callout
+          = @item.description
+
+  .row
+    .large-12.columns
+      h5
+        | Historia wypożyczeń (
+        - if params[:all]
+          = link_to admin_item_path(@item.id) do
+            | zrealizowane
+          |)
+        - else
+          = link_to all: true do
+            | wszystkie
+          |)
+
+      table.stack
+        thead
+          tr
+            th Kto?
+            th Kiedy?
+            th Status
+            th width='50%' Opis
+        tbody
+          - @reservations.sort_by(&:end_date).reverse.each do |reservation|
+            tr
+              td.text-center
+                - if reservation&.user&.profile&.present?
+                  = link_to reservation.user.display_name, admin_profile_path(reservation.user.profile.id)
+                - else
+                  = reservation.user.display_name
+              td.text-center
+                = link_to reservation.when, edit_admin_reservation_path(reservation.id)
+              td.text-center
+                - if reservation.archived?
+                  .label.warning= I18n.t("#{reservation.state}")
+                - elsif reservation.reserved?
+                  .label.primary= I18n.t("#{reservation.state}")
+                - else
+                  .label.secondary= I18n.t("#{reservation.state}")
+              td = reservation.remarks
+
+  .row
+    .large-12.columns
+      = link_to 'edytuj', edit_admin_item_path(@item.id), class: 'button alert'
+      = link_to 'wszystkie przedmioty', admin_items_path, class: 'button'
+      = link_to 'wszystkie rezerwacje', admin_reservations_path, class: 'button'
