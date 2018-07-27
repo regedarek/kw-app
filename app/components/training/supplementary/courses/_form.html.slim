@@ -87,5 +87,5 @@
     .callout
       = f.label 'Baner'
       = f.file_field :baner
-      - if @course.baner
+      - if @course.baner&.url
         = image_tag @course.baner.url
