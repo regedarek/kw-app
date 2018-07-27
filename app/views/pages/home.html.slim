@@ -10,13 +10,25 @@
       .large-3.columns
         = link_to 'Zobacz wydarzenia', supplementary_courses_path, class: 'large expanded button success'
 
-    - if current_user.reservations.any?
-      .row
-        .large-12.columns
-          = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
+    .row
+      .large-12.columns
+        ul.accordion data-accordion="" data-multi-expand="true"
+          - if current_user.reservations.any?
+            li.accordion-item data-accordion-item="" 
+              a.accordion-title href="#" Twoje rezerwacje
+              .accordion-content data-tab-content="" 
+                = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
 
-    - if current_user.mountain_routes.any?
-      .row
-        .large-12.columns
-          - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).map(&:mountain_route).compact
-          = render 'activities/mountain_routes/table', routes: (current_user.mountain_routes + routes).uniq
+          - if current_user.mountain_routes.any?
+            li.accordion-item data-accordion-item="" 
+              a.accordion-title href="#" Twoje przejścia
+              .accordion-content data-tab-content="" 
+                .row
+                  .large-12.columns
+                    - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).map(&:mountain_route).compact
+                    - my_routes = Kaminari.paginate_array((current_user.mountain_routes + routes).uniq).page(params[:page]).per(10)
+                    = render 'activities/mountain_routes/table', routes: my_routes
+
+                .row
+                  .large-12.columns
+                    = paginate my_routes
