@@ -18,6 +18,7 @@
           - if current_user.roles.include?('reservations')
             li= link_to t('.administration.reservations'), admin_reservations_path, class: 'button warning'
             li= link_to t('.administration.items'), admin_items_path, class: 'button primary'
+          li.show-for-small-only= link_to 'Pulpit', page_path('home')
           li.show-for-small-only= link_to 'Zarezerwuj', new_reservation_path
           li.show-for-small-only= link_to 'Przejścia', activities_mountain_routes_path
           li.show-for-small-only= link_to 'Wydarzenia', supplementary_courses_path
