@@ -2,6 +2,27 @@
   - if user_signed_in?
     .row
       .large-12.columns
+        .card-profile-stats
+          .card-profile-stats-intro
+            = image_tag 'default-avatar.jpeg', class: 'card-profile-stats-intro-pic'
+            .card-profile-stats-intro-content
+              h3 = current_user.display_name
+              p
+                = "W klubie od #{current_user.created_at.to_date}"
+          hr/
+          .card-profile-stats-container
+            .card-profile-stats-statistic
+              span.stat = current_user.mountain_routes.count
+              p aktywności
+            .card-profile-stats-statistic
+              span.stat  = current_user.mountain_routes.sum(:length)
+              p metrów przewyższenia
+            .card-profile-stats-statistic
+              span.stat = Training::Supplementary::SignUpRecord.where(user_id: current_user.id).count
+              p wydarzeń
+
+    .row
+      .large-12.columns
         ul.accordion data-accordion="" data-multi-expand="true"
           - if current_user.reservations.not_archived.any?
             li.accordion-item data-accordion-item="" 
