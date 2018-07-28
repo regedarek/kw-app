@@ -5,19 +5,6 @@
         .hamburger
       ul.visible-links
         li= link_to 'Klub Wysokogórski Kraków', root_path, class: 'logo'
-        li= link_to 'zarezerwuj', new_reservation_path, class: 'rent'
-        - if controller_name == 'reservations'
-          li= link_to 'regulamin', page_path('rules'), class: 'rent'
-        li
-          = link_to 'dodaj przejście', new_activities_mountain_route_path, class: 'route'
-        li
-          = link_to 'przejścia', activities_mountain_routes_path, class: 'route'
-        li
-          = link_to 'wydarzenia', supplementary_courses_path, class: 'event'
-        li
-          = link_to 'twoje składki', membership_fees_path, class: 'setting'
-        li
-          = link_to 'twoje dane', edit_user_registration_path, class: 'setting'
         - if user_signed_in?
           - if current_user.admin?
             li
@@ -30,6 +17,24 @@
               = link_to 'baza składek', admin_membership_fees_path, class: 'admin'
             li
               = link_to 'rezerwacje', admin_reservations_path, class: 'admin'
+            li
+              = link_to 'wydarzenia', supplementary_courses_path, class: 'event'
+          li= link_to 'zarezerwuj', new_reservation_path, class: 'rent'
+          - if controller_name == 'reservations'
+            li= link_to 'regulamin', page_path('rules'), class: 'rent'
+          li
+            = link_to 'dodaj przejście', new_activities_mountain_route_path, class: 'route'
+          li
+            = link_to 'przejścia', activities_mountain_routes_path, class: 'route'
+          - unless current_user.admin?
+            li
+              = link_to 'wydarzenia', supplementary_courses_path, class: 'event'
+          li
+            = link_to 'twoje składki', membership_fees_path, class: 'setting'
+          li
+            = link_to 'twoje dane', edit_user_registration_path, class: 'setting'
+
+          - if current_user.admin?
             li
               = link_to 'przedmioty', admin_items_path, class: 'admin'
             li
