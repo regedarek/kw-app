@@ -2,21 +2,14 @@
   - if user_signed_in?
     - current_fee = current_user.membership_fees.find_by(year: Date.today.year)
     - if current_fee.present? && current_fee.payment.present? && current_fee.payment.paid?
-      - user = Db::User.find_by(curator: true)
-      - if user_signed_in? && user.present?
-        .callout.alert
-          b Opiekun wypożyczalni w tym tygodniu: 
-          = "#{user.first_name} #{user.last_name}"
-          br
-          - if user.phone.length > 3
-            | Kontakt telefoniczny w przypadku pytań i problemów
-            b= ": #{user.phone}"
-            br
-          | Kontakt e-mailowy w przypadku pytań i problemów
-          b= ": #{user.email}"
-
-      .callout.primary
-          = t('.choose_week_and_show_visibility')
+      - if user_signed_in?
+        .row
+          .large-6.columns
+            .callout.primary
+                = t('.choose_week_and_show_visibility')
+          .large-6.columns
+            .callout.alert
+              = link_to 'Regulamin wypożyczalni', page_path('rules')
 
       .callout
         = form_for Availability::Form.new, url: availability_reservations_path do |f|
