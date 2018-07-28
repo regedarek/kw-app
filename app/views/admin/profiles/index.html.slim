@@ -11,15 +11,17 @@
                 = link_to Db::Profile.where.not(kw_id: 3884).maximum(:kw_id), admin_profile_path(profile.id)
               - else
                 = Db::Profile.where.not(kw_id: 3884).maximum(:kw_id)
-            .large-3.columns
+            .large-2.columns
               b = "Opłacone #{Date.today.year - 1}: "
               = UserManagement::FeeScope.for(year: Date.today.year - 1)
-            .large-3.columns
+            .large-2.columns
               b = "Opłacone #{Date.today.year}: "
               = UserManagement::FeeScope.for(year: Date.today.year)
-            .large-3.columns
-              b Ilość znalezionych: 
+            .large-2.columns
+              b Znaleziono: 
               = @q.result.count
+            .large-2.columns
+              = link_to 'Exportuj bazę', admin_profiles_path(params.permit!.merge(format: "xlsx"))
   .row
     .large-12.columns
       .callout
@@ -40,61 +42,65 @@
             .large-3.columns
               = f.label :user_phone_or_phone_cont, 'Telefon'
               = f.search_field :user_phone_or_phone_cont
+          #panel.hide data-toggler='.hide'
+            .row
+              .large-2.columns
+                = f.label :birth_date_gteq, 'Data urodzenia od'
+                = f.date_field :birth_date_gteq, value: (params[:q].fetch(:birth_date_gteq) if params[:q])
+              .large-2.columns
+                = f.label :birth_date_lteq, 'Data urodzenia do'
+                = f.date_field :birth_date_lteq, value: (params[:q].fetch(:birth_date_lteq) if params[:q])
+              .large-2.columns
+                = f.label :created_at_gteq, 'Zapisany od'
+                = f.date_field :application_date_gteq, value: (params[:q].fetch(:application_date_gteq) if params[:q])
+              .large-2.columns
+                = f.label :created_at_lteq, 'Zapisany do'
+                = f.date_field :application_date_lteq, value: (params[:q].fetch(:application_date_lteq) if params[:q])
+              .large-2.columns
+                = f.label :birth_place_cont, 'Miejsce urodzin'
+                = f.text_field :birth_place_cont
+              .large-2.columns
+                = f.label :profession_cont, 'Profesja'
+                = f.text_field :profession_cont
+            .row
+              .large-2.columns
+                = f.label :pesel_cont, 'Pesel'
+                = f.search_field :pesel_cont
+              .large-2.columns
+                = f.label :main_address_cont, 'Adres zameldowania'
+                = f.search_field :main_address_cont
+              .large-2.columns
+                = f.label :optional_address_cont, 'Adres zamieszkania'
+                = f.search_field :optional_address_cont
+              .large-2.columns
+                = f.label :city_cont, 'Miasto'
+                = f.search_field :city_cont
+              .large-2.columns
+                = f.label :added_true, 'Dodano do grup'
+                = f.select :added_true, [nil, ['Tak', true], ['Nie', 'false']]
+
+              .large-2.columns
+                = f.label :main_discussion_group_true, 'Główna grupa'
+                = f.select :main_discussion_group_true, [nil, ['Tak', true], ['Nie', 'false']]
+
+            .row
+              .large-4.columns
+                = f.label :sections_cont_any, 'Sekcje (użyj CTRL)'
+                = f.select :sections_cont_any, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
+              .large-4.columns
+                = f.label :position_cont_any, 'Status członka (użyj CTRL)'
+                = f.select :position_cont_any, [['Kandydat', 'candidate'], ['Członek STJ', 'stj'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Nieaktywny', 'canceled']], { }, { multiple: true }
+              .large-4.columns
+                = f.label :acomplished_courses_cont_any, 'Kursy (użyj CTRL)'
+                = f.select :acomplished_courses_cont_any, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list'], ['Kurs podstawowy ukończony w klubie.', 'basic_kw'], ['Kurs podstawowy bez promocji na taternicki', 'basic_without_second'], ['Brak ukończonego kursu podstawowego.', 'blank']], {}, { multiple: true }
           .row
-            .large-2.columns
-              = f.label :birth_date_gteq, 'Data urodzenia od'
-              = f.date_field :birth_date_gteq, value: (params[:q].fetch(:birth_date_gteq) if params[:q])
-            .large-2.columns
-              = f.label :birth_date_lteq, 'Data urodzenia do'
-              = f.date_field :birth_date_lteq, value: (params[:q].fetch(:birth_date_lteq) if params[:q])
-            .large-2.columns
-              = f.label :created_at_gteq, 'Zapisany od'
-              = f.date_field :application_date_gteq, value: (params[:q].fetch(:application_date_gteq) if params[:q])
-            .large-2.columns
-              = f.label :created_at_lteq, 'Zapisany do'
-              = f.date_field :application_date_lteq, value: (params[:q].fetch(:application_date_lteq) if params[:q])
-            .large-2.columns
-              = f.label :birth_place_cont, 'Miejsce urodzin'
-              = f.text_field :birth_place_cont
-            .large-2.columns
-              = f.label :profession_cont, 'Profesja'
-              = f.text_field :profession_cont
-          .row
-            .large-2.columns
-              = f.label :pesel_cont, 'Pesel'
-              = f.search_field :pesel_cont
-            .large-2.columns
-              = f.label :main_address_cont, 'Adres zameldowania'
-              = f.search_field :main_address_cont
-            .large-2.columns
-              = f.label :optional_address_cont, 'Adres zamieszkania'
-              = f.search_field :optional_address_cont
-            .large-2.columns
-              = f.label :city_cont, 'Miasto'
-              = f.search_field :city_cont
             .large-2.columns
               = f.label :remarks_cont, 'Uwagi'
               = f.search_field :remarks_cont
+
             .large-2.columns
               = f.label :accepted_true, 'Zaakceptowany'
               = f.select :accepted_true, [nil, ['Tak', true], ['Nie', 'false']]
-          .row
-            .large-4.columns
-              = f.label :sections_cont_any, 'Sekcje (użyj CTRL)'
-              = f.select :sections_cont_any, [['Sekcja Narciarstwa Wysokogórskiego', 'snw'], ['Sekcja Taternictwa Jaskiniowego', 'stj'], ['Klub Taterników Seniorów', 'kts'], ['Grupa Turystyki Wyskogórskiej', 'gtw'], ['Sekcja Wspinaczki Wysokogórskiej', 'sww']], { }, { multiple: true }
-            .large-4.columns
-              = f.label :position_cont_any, 'Status członka (użyj CTRL)'
-              = f.select :position_cont_any, [['Kandydat', 'candidate'], ['Członek STJ', 'stj'], ['Członek zwyczajny', 'regular'], ['Członek honorowy KW', 'honorable_kw'], ['Członek honorowy PZA', 'honorable_pza'], ['Senior', 'senior'], ['Członek zarządu', 'management'], ['Instruktor', 'instructor'], ['Nieaktywny', 'canceled']], { }, { multiple: true }
-            .large-4.columns
-              = f.label :acomplished_courses_cont_any, 'Kursy (użyj CTRL)'
-              = f.select :acomplished_courses_cont_any, [['Podstawowy kurs wspinaczki w skałach', 'basic'], ['Kurs taternicki letni', 'second'], ['Kurs taternictwa jaskiniowego', 'cave'], ['Kurs taternicki zimowy', 'second_winter'], ['Kurs narciarstwa wysokogórskiego', 'ski'], ['Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.', 'list'], ['Kurs podstawowy ukończony w klubie.', 'basic_kw'], ['Kurs podstawowy bez promocji na taternicki', 'basic_without_second'], ['Brak ukończonego kursu podstawowego.', 'blank']], {}, { multiple: true }
-          .row
-            .large-2.columns
-              = f.label :added_true, 'Dodano do grup'
-              = f.select :added_true, [nil, ['Tak', true], ['Nie', 'false']]
-            .large-2.columns
-              = f.label :main_discussion_group_true, 'Główna grupa'
-              = f.select :main_discussion_group_true, [nil, ['Tak', true], ['Nie', 'false']]
             .large-2.columns
               = f.label :membership_fees_year_eq, 'Składka za rok'
               = f.search_field :membership_fees_year_eq
@@ -103,9 +109,9 @@
               = f.select :membership_fees_payment_state_eq, [nil, ['opłacone', 'prepaid'], ['nieopłacone', 'unpaid']]
             .large-2.columns
               br
-              = link_to 'Exportuj', admin_profiles_path(params.permit!.merge(format: "xlsx")), class: 'secondary button expanded'
+              a.hollow.warning.button.expanded data-toggle="panel" Pokaż więcej
             .large-2.columns
-              br  
+              br
               = f.submit 'Szukaj', class: 'button expanded'
   .row
     .large-12.columns
