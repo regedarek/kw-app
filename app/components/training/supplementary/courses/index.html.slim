@@ -15,15 +15,13 @@
       - if params[:category].present?
         = link_to category: nil do
           = ' usuń filtr'
-  - if user_signed_in? && current_user.roles.include?('events')
+  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
     .large-2.columns
       = link_to 'Dodaj', new_supplementary_course_path, class: 'button expanded large'
     .large-3.columns
       = link_to 'Zarchiwizowane', archived_supplementary_courses_path, class: 'button alert expanded large'
   .large-4.columns
     = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
-
-
 
 .row
   .large-12.columns

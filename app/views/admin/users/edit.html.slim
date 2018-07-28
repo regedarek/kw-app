@@ -1,0 +1,36 @@
+= form_for @user, as: :user, url: admin_user_path(params[:id]), method: :put do |f|
+  .row
+    .large-12.columns
+      - if @user.errors.any?
+        .callout.alert
+          ul
+            - @user.errors.full_messages.each do |msg|
+              li= msg
+  .row
+    .large-6.columns
+      = f.label :kw_id
+      = f.text_field :kw_id
+    .large-6.columns
+      = f.label :email
+      = f.text_field :email
+  .row
+    .large-6.columns
+      = f.label :first_name
+      = f.text_field :first_name
+    .large-6.columns
+      = f.label :last_name
+      = f.text_field :last_name
+  .row
+    .large-6.columns
+      = f.label :phone
+      = f.text_field :phone
+    .large-6.columns
+      = f.label :roles, "Role: #{Db::User::ROLES}"
+      = f.text_field :roles
+  .row
+    .large-4.columns
+      = f.submit 'Zaktualizuj użytkownika', class: 'button large expanded'
+    .large-4.columns
+      = link_to 'powiązany profil', admin_profile_path(@user.profile), class: 'button large expanded'
+    .large-4.columns
+      = link_to 'wszyscy użytkownicy', admin_users_path, class: 'button large expanded secondary'

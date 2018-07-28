@@ -1,13 +1,11 @@
 module Reservations
-  class ItemsController < ApplicationController
+  class ItemsController < Admin::BaseController
     include EitherMatcher
 
     def update
-			redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && current_user.admin?
-
       either(update_items) do |result|
         result.success do
-          redirect_to :back, notice: 'Zmieniłeś przedmioty rezerwacji!'
+          redirect_to edit_admin_reservation_path(params[:id]), notice: 'Zmieniłeś przedmioty rezerwacji!'
         end
 
         result.failure do |errors|
@@ -18,6 +16,10 @@ module Reservations
     end
 
     private
+
+    def authorize_admin
+      redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && (current_user.roles.include?('reservations') || current_user.admin?)
+    end
 
     def update_items
       Reservations::UpdateItems.new(

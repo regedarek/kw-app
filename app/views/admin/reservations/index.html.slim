@@ -31,7 +31,7 @@
             tr
               td = link_to reservation.id, edit_admin_reservation_path(reservation.id)
               td
-                - if reservation.user&.profile
+                - if reservation.user&.profile && current_user.roles.include?('office')
                   = link_to reservation.user.display_name, admin_profile_path(reservation.user&.profile&.id)
                 - else
                   = reservation.user.display_name

@@ -1,5 +1,5 @@
 class Db::User < ActiveRecord::Base
-  ROLES = %w(reservations admin events courses competitions)
+  ROLES = %w(reservations admin events courses competitions office tech)
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
@@ -30,6 +30,10 @@ class Db::User < ActiveRecord::Base
 
   def rodo_name
     "#{first_name} #{last_name.first}."
+  end
+
+  def admin?
+    roles.include?('admin')
   end
 
   def self.from_omniauth(access_token)

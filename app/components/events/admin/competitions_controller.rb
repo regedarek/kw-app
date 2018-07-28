@@ -61,6 +61,10 @@ module Events
 
       private
 
+      def authorize_admin
+        redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && (current_user.roles.include?('competitions') || current_user.admin?)
+      end
+
       def create_record
         Events::Admin::Competitions::Create.new(
           Events::Competitions::Repository.new,

@@ -86,6 +86,10 @@ module Admin
 
     private
 
+    def authorize_admin
+      redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && (current_user.roles.include?('reservations') || current_user.admin?)
+    end
+
     def reservation_params
       params.require(:admin_reservations_form).permit(:kw_id, :item_id, :start_date, :end_date, :remarks, photos: [])
     end

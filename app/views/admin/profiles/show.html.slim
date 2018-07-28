@@ -214,6 +214,8 @@
 
     .large-4.columns
       .text-right
-        = link_to 'edytuj', edit_admin_profile_path(@profile.id, original_referrer: session[:original_referrer]), class: 'button alert'
+        - if @profile.user
+          = link_to 'edytuj użytkownika', edit_admin_user_path(@profile.user.id, original_referrer: session[:original_referrer]), class: 'button alert'
+        = link_to 'edytuj profil', edit_admin_profile_path(@profile.id, original_referrer: session[:original_referrer]), class: 'button alert'
         = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button warning'
         = link_to 'powrót', session[:original_referrer] || admin_profiles_path, class: 'button secondary'

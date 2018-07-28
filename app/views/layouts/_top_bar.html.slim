@@ -10,14 +10,20 @@
         li.show-for-medium =link_to t('.menu.title'), page_path('home')
         - if user_signed_in?
           - if current_user.roles.include?('office')
-            li= link_to 'Baza klubowiczów', admin_users_path
-            li= link_to 'Baza składek', admin_membership_fees_path
-          li= link_to 'Zarezerwuj', new_reservation_path
-          li= link_to 'Przejścia', activities_mountain_routes_path
-          li= link_to 'Wydarzenia', supplementary_courses_path
+            li= link_to 'Statystyki', admin_path, class: 'button warning'
+            li= link_to 'Baza klubowiczów', admin_profiles_path, class: 'button warning'
+            li= link_to 'Baza składek', admin_membership_fees_path, class: 'button alert'
+          - if current_user.roles.include?('competitions')
+            li= link_to 'Zawody', admin_competitions_path, class: 'button success'
+          - if current_user.roles.include?('reservations')
+            li= link_to t('.administration.reservations'), admin_reservations_path, class: 'button warning'
+            li= link_to t('.administration.items'), admin_items_path, class: 'button primary'
+          li.show-for-small-only= link_to 'Zarezerwuj', new_reservation_path
+          li.show-for-small-only= link_to 'Przejścia', activities_mountain_routes_path
+          li.show-for-small-only= link_to 'Wydarzenia', supplementary_courses_path
           li.show-for-small-only= link_to 'Twoje dane', edit_user_registration_path
           li.show-for-small-only = link_to 'Twoje składki', membership_fees_path
-          - if current_user.admin?
+          - if current_user.admin? || current_user.roles.include?('office')
             li
               = link_to t('.administration.main'), admin_path
               ul.menu.vertical
@@ -25,11 +31,11 @@
                 - unless current_user.roles.include?('office')
                   li= link_to 'Baza klubowiczów', admin_profiles_path
                   li= link_to 'Baza składek', admin_membership_fees_path
-                - if current_user.roles.include?('competitions')
-                  li= link_to 'Zawody', admin_competitions_path
-                - if current_user.admin? || current_user.roles.include?('reservations')
+                - unless current_user.roles.include?('reservations')
                   li= link_to t('.administration.reservations'), admin_reservations_path
                   li= link_to t('.administration.items'), admin_items_path
+                - unless current_user.roles.include?('competitions')
+                  li= link_to 'Zawody', admin_competitions_path
                 - if current_user.roles.include?('courses')
                   li= link_to 'Kursy', training_courses_path
                 - if current_user.roles.include?('tech')
@@ -39,6 +45,9 @@
     .top-bar-right
       ul.dropdown.menu
         - if user_signed_in?
+          li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path
+          li.show-for-medium= link_to 'Przejścia', activities_mountain_routes_path
+          li.show-for-medium= link_to 'Wydarzenia', supplementary_courses_path
           li.show-for-medium= link_to t('.edit_account'), edit_user_registration_path
           li.show-for-medium = link_to 'Twoje składki', membership_fees_path
           li= link_to t('.administration.logout'), destroy_user_session_path

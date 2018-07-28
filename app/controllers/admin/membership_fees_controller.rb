@@ -34,6 +34,10 @@ module Admin
 
     private
 
+    def authorize_admin
+      redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && (current_user.roles.include?('office') || current_user.admin?)
+    end
+
     def payment_params
       params.require(:admin_membership_fees_form).permit(:kw_id, :year)
     end

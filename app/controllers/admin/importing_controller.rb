@@ -21,6 +21,10 @@ module Admin
 
     private
 
+    def authorize_admin
+      redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && (current_user.roles.include?('tech') || current_user.admin?)
+    end
+
     def import_params
       params.permit(:file, :type)
     end

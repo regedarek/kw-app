@@ -68,7 +68,7 @@ Rails.application.routes.draw do
         post :import
       end
     end
-    resources :users, only: [:index, :create] do
+    resources :users do
       member do
         get :make_admin
         get :cancel_admin

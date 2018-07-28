@@ -50,9 +50,8 @@
             th width='15%' Imię i nazwisko
             th width='20%' E-mail
             th width='15%' Telefon
-            th width='15%' Sekcje
-            th width='10%' Role
-            th width='15%' Ostatnie składki
+            th width='25%' Role
+            th width='10%' Ostatnie składki
         tbody
           - @users.each do |user|
             tr
@@ -61,10 +60,9 @@
                   = link_to user.kw_id, admin_profile_path(user.profile.id)
                 - else
                   = user.kw_id
-              td= user.display_name
+              td= link_to user.display_name, edit_admin_user_path(user)
               td= mail_to user.email, user.email
               td= user.phone
-              td.text-center= user.profile.try(:sections).try(:to_sentence)
               td.text-center= user.roles.to_sentence
               td.text-center
                 - if user.membership_fees.any?

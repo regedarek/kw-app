@@ -6,12 +6,12 @@
       = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
         = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_last_name_or_colleagues_first_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
 
-    - if user_signed_in? && current_user.admin?
+    - if user_signed_in? && current_user.roles.include?('routes')
       .large-3.columns
         = link_to 'Eksportuj do Excela', activities_mountain_routes_path(format: :xlsx), class: 'large expanded secondary button'
 
-      .large-3.columns
-        = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+    .large-3.columns
+      = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
 
   .row
     .large-12.columns
