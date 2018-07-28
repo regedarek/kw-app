@@ -1,6 +1,16 @@
 .column
   - if user_signed_in?
     .row
+      .large-3.columns
+        = link_to 'Zarezerwuj', new_reservation_path, class: 'large expanded button'
+      .large-3.columns
+        = link_to 'Dodaj nowe przejście', new_activities_mountain_route_path, class: 'large expanded button alert'
+      .large-3.columns
+        = link_to 'Zobacz przejścia', activities_mountain_routes_path, class: 'large expanded button warning'
+      .large-3.columns
+        = link_to 'Zobacz wydarzenia', supplementary_courses_path, class: 'large expanded button success'
+
+    .row
       .large-12.columns
         ul.accordion data-accordion="" data-multi-expand="true"
           - if current_user.reservations.not_archived.any?

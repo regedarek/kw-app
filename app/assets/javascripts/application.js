@@ -6,7 +6,7 @@
 //= require kw_app
 //= require_tree .
 
-$(function(){ $(document).foundation(); updateTopBar();});
+$(function(){ $(document).foundation(); });
 
 $('.js-send-on-enter').keypress(function(e){
   if(e.which == 13){
