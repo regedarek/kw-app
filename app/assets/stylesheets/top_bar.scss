@@ -1,0 +1,151 @@
+// Default colors, Change as per your requirement.
+$color-1: $white;
+$color-2: darken($primary-color, 10%);
+$color-3: darken($primary-color, 20%);
+
+$responsive-hidden-nav-min-width: 240px;
+
+/*! CSS for Responsive Hidden Nav */
+.responsive-hidden-nav-container {
+  min-width: $responsive-hidden-nav-min-width;
+  background: $color-1;
+}
+
+.responsive-hidden-nav {
+  margin: 0;
+  padding: 0;
+  background-color: $white;
+  position: relative;
+  min-width: $responsive-hidden-nav-min-width;
+  background: $white;
+
+  a {
+    display: block;
+    padding: 1.25rem 2rem;
+    background: $white;
+    font-size: 1.1em;
+    color: $color-1;
+    text-decoration: none;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  a.logo {
+    background: #0097e6;
+  }
+
+  a.rent {
+    background: #fbc531;
+
+    &:hover {
+      background: #e1b12c;
+    }
+  }
+  a.route {
+    background: #4cd137;
+    &:hover {
+      background: #44bd32;
+    }
+  }
+  a.event {
+    background: #487eb0;
+    &:hover {
+      background: #40739e;
+    }
+  }
+  a.setting {
+    background: #7f8fa6;
+    &:hover {
+      background: #718093;
+    }
+  }
+  a.admin {
+    background: #e84118;
+    &:hover {
+      background: #c23616;
+    }
+  }
+
+  button {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    padding: 0 1rem;
+    border: 0;
+    outline: none;
+    background-color: $color-2;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-3;
+    }
+
+    &::after {
+      content: attr(count);
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      left: -1rem;
+      top: .75rem;
+      text-align: center;
+      background-color: $color-3;
+      color: $white;
+      font-size: .9em;
+      line-height: 1.6;
+      border-radius: 50%;
+      border: .25rem solid $white;
+      font-weight: bold;
+    }
+
+    &:hover::after {
+      transform: scale(1.075);
+    }
+  }
+
+  .hamburger {
+    @include hamburger(
+      $color: $white,
+      $color-hover: $white
+    );
+  }
+
+  .visible-links {
+    display: inline-table;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: table-cell;
+      border-left: 1px solid $color-1;
+
+      &:first-child {
+        font-weight: bold;
+        a {
+          color: #f5f6fa !important;
+        }
+      }
+    }
+  }
+
+  .hidden-links {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+
+    li {
+      display: block;
+      border-top: .0625rem solid $color-1;
+    }
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+}
+

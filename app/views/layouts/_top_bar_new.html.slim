@@ -1,0 +1,41 @@
+#responsive-menu.no-js
+  .responsive-hidden-nav-container
+    nav.top-bar.responsive-hidden-nav data-responsive-hidden-nav="" 
+      button.responsive-hidden-button
+        .hamburger
+      ul.visible-links
+        li= link_to 'Klub Wysokogórski Kraków', root_path, class: 'logo'
+        li= link_to 'zarezerwuj', new_reservation_path, class: 'rent'
+        - if controller_name == 'reservations'
+          li= link_to 'regulamin', page_path('rules'), class: 'rent'
+        li
+          = link_to 'dodaj przejście', new_activities_mountain_route_path, class: 'route'
+        li
+          = link_to 'przejścia', activities_mountain_routes_path, class: 'route'
+        li
+          = link_to 'wydarzenia', supplementary_courses_path, class: 'event'
+        li
+          = link_to 'twoje składki', membership_fees_path, class: 'setting'
+        li
+          = link_to 'twoje dane', edit_user_registration_path, class: 'setting'
+        - if user_signed_in?
+          - if current_user.admin?
+            li
+              = link_to 'panel', admin_path, class: 'admin'
+            li
+              = link_to 'baza użytkowników', admin_users_path, class: 'admin'
+            li
+              = link_to 'baza klubowiczków', admin_profiles_path, class: 'admin'
+            li
+              = link_to 'baza składek', admin_membership_fees_path, class: 'admin'
+            li
+              = link_to 'rezerwacje', admin_reservations_path, class: 'admin'
+            li
+              = link_to 'przedmioty', admin_items_path, class: 'admin'
+            li
+              = link_to 'zawody', admin_competitions_path, class: 'admin'
+            li
+              = link_to 'importowanie', admin_importing_index_path, class: 'admin'
+            li
+              = link_to 'problemy', 'https://app.honeybadger.io/projects/54689/faults?q=-is%3Aresolved+-is%3Aignored', class: 'admin'
+      ul.hidden-links.hidden
