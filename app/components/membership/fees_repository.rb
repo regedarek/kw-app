@@ -1,5 +1,9 @@
 module Membership
   class FeesRepository
+    def find_outdated_not_prepaided_profiles
+      Db::Profile.where('created_at < ? AND accepted = false', 3.months.ago) - Db::Profile.includes(:payment).where(payments: { state: :prepaid }, accepted: false)
+    end
+
     def find_unpaid_profiles_this_year_by_emails(emails)
       Db::Profile.where(email: emails).select { |p| !paid_this_year.map(&:kw_id).include?(p.kw_id) }
     end

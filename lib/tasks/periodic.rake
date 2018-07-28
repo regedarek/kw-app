@@ -12,6 +12,11 @@ task :destroy_unpaid_reservations => :environment do
   Reservations::Unpaid.new.destroy_all
 end
 
+task :destroy_outdated_profiles => :environment do
+  outdated_profiles = Membership::FeesRepository.new.find_outdated_not_prepaided_profiles
+  outdated_profiles.map(&:destroy)
+end
+
 task :set_regular_members => :environment do
   UserManagement::Members.set_regular
 end
