@@ -7,9 +7,8 @@
           .large-6.columns
             .callout.primary
                 = t('.choose_week_and_show_visibility')
-          .large-6.columns
-            .callout.alert
-              = link_to 'Regulamin wypożyczalni', page_path('rules')
+          .large-6.columns.text-right
+            = link_to 'Regulamin wypożyczalni', page_path('rules'), class: 'large button'
 
       .callout
         = form_for Availability::Form.new, url: availability_reservations_path do |f|

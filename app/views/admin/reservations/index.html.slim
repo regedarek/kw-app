@@ -73,5 +73,6 @@
                 - if (reservation.payment.present? && reservation.payment.paid?) && !reservation.holding? && !reservation.archived?
                   = link_to ' Przekaż', give_admin_reservation_path(reservation), method: :put, data: { confirm: 'Jesteś pewien?' }
                 - if reservation.holding? && !reservation.archived?
+                  |  | 
                   = link_to ' Przypomnij', remind_admin_reservation_path(reservation), method: :post
       = paginate @reservations
