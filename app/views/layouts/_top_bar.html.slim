@@ -49,12 +49,14 @@
 
     .top-bar-right
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
-        - if user_signed_in? && !current_user.admin? || !current_user.roles.include?('office')
-          li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button primary'
+        - if user_signed_in?
+          - if !current_user.admin? || !current_user.roles.include?('office')
+            li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button primary'
         li.show-for-medium= link_to 'Przejścia', activities_mountain_routes_path, class: 'button success'
         li.show-for-medium= link_to 'Wydarzenia', supplementary_courses_path, class: 'button alert'
-        - if user_signed_in? && !current_user.admin? || !current_user.roles.include?('office')
-          li.show-for-medium= link_to 'Twoje składki', membership_fees_path, class: 'button warning'
+        - if user_signed_in?
+          - if !current_user.admin? || !current_user.roles.include?('office')
+            li.show-for-medium= link_to 'Twoje składki', membership_fees_path, class: 'button warning'
         li.show-for-medium
           - if user_signed_in?
             = link_to 'Konto', edit_user_registration_path
