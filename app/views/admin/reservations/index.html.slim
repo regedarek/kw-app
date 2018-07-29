@@ -2,11 +2,13 @@
   .row
     .large-4.columns
       = link_to 'Exportuj do Excela', admin_reservations_path(format: :xlsx), class: 'button large expanded secondary'
+    .large-2.columns
+      = link_to 'Zarezerwuj', new_reservation_path, class: 'button large expanded'
 
     = search_form_for @q, url: admin_reservations_path, class: 'js-send-on-enter' do |f|
       .large-2.columns
         = f.search_field :user_kw_id_eq, style: 'height: 55px;', placeholder: 'numer klubowy'
-      .large-6.columns
+      .large-4.columns
         = f.search_field :user_first_name_or_user_last_name_or_items_display_name_cont, style: 'height: 55px;', placeholder: 'opis, data, status, numer klubowy'
 
   .row
