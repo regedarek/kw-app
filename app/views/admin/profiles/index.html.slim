@@ -20,8 +20,10 @@
             .large-2.columns
               b Znaleziono: 
               = @q.result.count
-            .large-2.columns
+            .large-3.columns
               = link_to 'Exportuj bazę', admin_profiles_path(params.permit!.merge(format: "xlsx"))
+              |  |  
+              = link_to 'Dodaj klubowicza', new_admin_profile_path
   .row
     .large-12.columns
       .callout

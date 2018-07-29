@@ -10,6 +10,8 @@ module Db
     belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
 
     validates :email, uniqueness: true, allow_blank: true, allow_nil: true
+    validates :kw_id, uniqueness: true, allow_blank: true, allow_nil: true
+    validate :kw_id_accepted
 
     ransacker :recommended_by do
       Arel.sql("array_to_string(recommended_by, ',')")
@@ -22,6 +24,12 @@ module Db
     end
     ransacker :acomplished_courses do
       Arel.sql("array_to_string(acomplished_courses, ',')")
+    end
+
+    def kw_id_accepted
+      if kw_id.present? && !accepted
+        errors.add(:kw_id, "nie może być podany jeżeli nie zaakceptowano profilu")
+      end
     end
 
     def display_name

@@ -24,9 +24,25 @@ module Admin
 
     def create
       @profile = Db::Profile.new(profile_params)
+      @profile.acceptor_id = current_user.id
 
       if @profile.save(profile_params)
-        flash[:notice] = 'Zaktualizowano!'
+        @profile.create_payment(dotpay_id: SecureRandom.hex(13))
+        if @profile.accepted
+          user = Db::User.new
+          user.kw_id = @profile.kw_id
+          user.first_name = @profile.first_name
+          user.last_name = @profile.last_name
+          user.phone = @profile.phone
+          user.email = @profile.email
+          user.password = SecureRandom.hex(4)
+          if user.valid?
+            user.save
+            user.send_reset_password_instructions
+          end
+        end
+        ProfileMailer.accepted(@profile).deliver_later
+        flash[:notice] = 'Dodano użytkownika!'
         redirect_to admin_profile_path(@profile)
       else
         render :new
@@ -107,8 +123,8 @@ module Admin
     def profile_params
       params.require(:profile).permit(
         :kw_id, :email, :pesel, :first_name, :last_name, :phone, :profession, :application_date,
-        :birth_date, :birth_place, :city, :postal_code, :main_address, :date_of_death,
-        :optional_address, :main_discussion_group, :terms_of_service, :added, :remarks,
+        :birth_date, :birth_place, :city, :postal_code, :main_address, :date_of_death, :cost,
+        :optional_address, :main_discussion_group, :terms_of_service, :added, :remarks, :accepted,
         recommended_by: [], acomplished_courses: [], sections: [], position: []
       )
     end

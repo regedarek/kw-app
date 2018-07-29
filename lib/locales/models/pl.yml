@@ -8,12 +8,14 @@ pl:
         kw_id: Numer klubowy
         email: E-mail
         first_name: Imię
+        cost: Wpisowe
         last_name: Nazwisko
         birth_date: Data urodzenia
         birth_place: Miejsce urodzenia
         pesel: Pesel
         added: Dodano do grup dyskusyjnych
         city: Miejscowość
+        accepted: Zaakceptowano
         postal_code: Kod pocztowy
         main_address: Adres zameldowania
         optional_address: Adres kontaktowy
@@ -108,6 +110,8 @@ pl:
         birth_date: Data urodzenia
         birth_place: Miejsce urodzenia
         pesel: Pesel
+        accepted: Zaakceptowano
+        cost: Wpisowe
         city: Miejscowość
         position: Status
         remarks: Uwagi
