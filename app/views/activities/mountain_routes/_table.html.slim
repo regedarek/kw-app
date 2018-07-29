@@ -34,7 +34,7 @@ table.stack
           = route.colleagues.map(&:display_name).compact.push(route.partners).reject(&:empty?).to_sentence
         td.text-center
           - if user_signed_in?
-            - if current_user.roles.include?('routes') || current_user.id == route.user_id
+            - if current_user.roles.include?('routes') || current_user.id == route.user_id || route.colleagues.include?(current_user)
               i.fi-list-thumbnails data-toggle="example-dropdown-#{route.id}" data-auto-focus="true"
               div id="example-dropdown-#{route.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical

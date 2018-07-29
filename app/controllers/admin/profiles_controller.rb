@@ -18,6 +18,21 @@ module Admin
       end
     end
 
+    def new
+      @profile = Db::Profile.new
+    end
+
+    def create
+      @profile = Db::Profile.new(profile_params)
+
+      if @profile.save(profile_params)
+        flash[:notice] = 'Zaktualizowano!'
+        redirect_to admin_profile_path(@profile)
+      else
+        render :new
+      end
+    end
+
     def show
       @profile = Db::Profile.find(params[:id])
       session[:original_referrer] = request.env["HTTP_REFERER"]
