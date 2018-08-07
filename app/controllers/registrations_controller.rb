@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
@@ -22,6 +23,10 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
+  end
 
   def update_resource(resource, params)
     resource.update_without_password(params)

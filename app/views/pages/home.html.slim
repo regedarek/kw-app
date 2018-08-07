@@ -4,7 +4,10 @@
       .large-12.columns
         .card-profile-stats
           .card-profile-stats-intro
-            = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
+            - if current_user.avatar.present?
+              = image_tag(current_user.avatar, class: 'card-profile-stats-intro-pic')
+            - else
+              = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
             .card-profile-stats-intro-content
               h3 = current_user.display_name
               p

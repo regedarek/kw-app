@@ -8,6 +8,15 @@
             li= msg
 
     .row
+      - if current_user.avatar.present?
+        .large-3.columns
+          = image_tag(current_user.avatar, class: 'card-profile-stats-intro-pic')
+
+      .large-9.columns
+        br
+        = f.file_field :avatar
+
+    .row
       .large-12.columns
         = f.label :kw_id, 'Numer klubowy'
         = f.text_field :kw_id
