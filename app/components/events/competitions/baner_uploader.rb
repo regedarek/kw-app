@@ -2,11 +2,17 @@ module Events
   module Competitions
     class BanerUploader < CarrierWave::Uploader::Base
       include CarrierWave::MiniMagick
-      storage :file
+
+      if Rails.env.production? || Rails.env.staging?
+        storage :fog
+      else
+        storage :file
+      end
+
       process resize_to_limit: [1200, -1]
 
       def store_dir
-        "uploads/competitions/#{model.id}/#{mounted_as}"
+        "competitions/baners/#{model.id}"
       end
     end
   end
