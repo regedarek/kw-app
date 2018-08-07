@@ -12,7 +12,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "mountain_routes/attachements/#{model.id}"
+    "mountain_routes/attachments/#{model.id}"
   end
 
   protected
