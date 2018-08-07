@@ -39,4 +39,4 @@ table.stack
               div id="example-dropdown-#{route.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical
                   li= link_to 'Edytuj', edit_activities_mountain_route_path(route.id)
-                  li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete
+                  li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete, confirm: 'Jesteś pewien?'
