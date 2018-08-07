@@ -6,8 +6,11 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  if Rails.env.production? || Rails.env.staging?
+    storage :fog
+  else
+    storage :file
+  end
 
   version :thumb, :if => :image? do
     process resize_to_fill: [180, 180]
