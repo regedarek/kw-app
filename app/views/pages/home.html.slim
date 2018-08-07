@@ -18,7 +18,7 @@
               span.stat
                 - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).collect(&:mountain_route)
                 - if routes.any?
-                  = routes.inject(0) { |sum, r| sum + r.length.to_i }
+                  = routes.inject(0) { |sum, r| sum + r&.length&.to_i }
               p metrów przewyższenia
             .card-profile-stats-statistic
               span.stat = Training::Supplementary::SignUpRecord.where(user_id: current_user.id).count
