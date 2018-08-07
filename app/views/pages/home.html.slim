@@ -11,7 +11,10 @@
             .card-profile-stats-intro-content
               h3 = current_user.display_name
               p
-                = "W klubie od #{current_user.application_date&.to_date}"
+                - if current_user.profile
+                  = "W klubie od #{current_user.profile&.application_date&.to_date}"
+                - else
+                  = "Dołączył #{current_user.created_at&.to_date}"
           hr/
           .card-profile-stats-container
             .card-profile-stats-statistic
