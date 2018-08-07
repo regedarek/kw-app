@@ -7,37 +7,14 @@
             - @route.errors.full_messages.each do |msg|
               li= msg
 
-  .row
-    .large-12.columns
-      fieldset.fieldset
-        legend Wybierz aktywność 
-        - if Date.today.month >= 4 && Date.today.month <= 11
-          = f.radio_button :route_type, :regular_climbing, checked: true
-          = f.label :route_type_regular_climbing
-
-          = f.radio_button :route_type, :winter_climbing
-          = f.label :route_type_winter_climbing
-
-          = f.radio_button :route_type, :ski
-          = f.label :route_type_ski
-        - else
-          = f.radio_button :route_type, :regular_climbing
-          = f.label :route_type_regular_climbing
-
-          = f.radio_button :route_type, :winter_climbing, checked: true
-          = f.label :route_type_winter_climbing
-
-          = f.radio_button :route_type, :ski
-          = f.label :route_type_ski
-
   .callout
     .row
       .large-6.columns
-        = f.label :name
+        = f.label :name, 'nazwa drogi, grani*'
         = f.text_field :name
 
       .large-3.columns
-        = f.label :climbing_date
+        = f.label :climbing_date, 'data przejścia*'
         = f.date_field :climbing_date, value: @route.climbing_date
 
       .large-3.columns
@@ -51,13 +28,13 @@
           legend.legend subiektywna ocena urody drogi*
 
           = f.radio_button :rating, 1
-          = f.label :rating_one
+          = f.label :rating_one, 'fuj, nie polecam'
 
           = f.radio_button :rating, 2
-          = f.label :rating_two
+          = f.label :rating_two, 'warta przejścia'
 
           = f.radio_button :rating, 3
-          = f.label :rating_three
+          = f.label :rating_three, 'absolutny klasyk'
 
       .large-3.columns
         = f.label :colleagues_names
@@ -72,33 +49,22 @@
   .callout.secondary
     .row
       .large-4.columns
-        = f.label :difficulty
-        = f.text_field :difficulty
-
-      .large-4.columns
-        = f.label :time
-        = f.text_field :time
-
-      .large-4.columns
-        = f.label :length
+        = f.label :length, 'długość drogi w metrach*'
         = f.text_field :length
-
-    .row
-      .large-4.columns
-        = f.label :mountains
-        = f.text_field :mountains
 
       .large-4.columns
         = f.label :peak
         = f.text_field :peak
 
       .large-4.columns
-        = f.label :area
-        = f.text_field :area
+        = f.label :difficulty, 'proponowana wycena'
+        = f.text_field :difficulty
 
-  .callout.secondary
     .row
-      .large-12.columns
+      .large-3.columns
+        br
+        = f.file_field :attachments, multiple: true
+      .large-9.columns
         = f.label :description, 'uwagi dotyczące przejścia, topo, link do galerii zdjęć'
         = f.text_area :description
 

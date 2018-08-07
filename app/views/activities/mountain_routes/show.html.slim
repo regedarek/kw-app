@@ -11,20 +11,18 @@
     b rodzaj przejścia: 
     = I18n.t(@route.route_type)
 
+  - if @route.climbing_date.present?
+    .large-12.columns
+      b data przejścia: 
+      = @route.climbing_date
+
   - if @route.route_type == 'ski'
     = render 'ski_route', ski_route: @route
   - else
-    .large-12.columns
-      b góry: 
-      = @route.mountains
-
-    .large-12.columns
-      b szczyt, przełęcz, ściana: 
-      = @route.peak
-
-    .large-12.columns
-      b rejon przejścia: 
-      = @route.area
+    - if @route.peak.present?
+      .large-12.columns
+        b szczyt, przełęcz, ściana: 
+        = @route.peak
 
     - if @route.difficulty.present?
       .large-12.columns
@@ -33,7 +31,7 @@
 
     - if @route.length.present?
       .large-12.columns
-        b długość drogi/zjazdu/tury(m/km): 
+        b długość drogi w metrach: 
         = @route.length
 
     .large-12.columns
@@ -45,15 +43,7 @@
       - else
         = @route.partners
 
-    - if @route.time?
-      .large-12.columns
-        b czas przejścia:  
-        = @route.time
 
-    - if @route.climbing_date.present?
-      .large-12.columns
-        b data przejścia: 
-        = @route.climbing_date
 
     - if @route.rating.present?
       .large-12.columns
@@ -61,10 +51,22 @@
         - @route.rating.times do
           i.fi-star
 
-    .large-12.columns
-      b ukryj na stronie przejść: 
-      = @route.hidden? ? 'Tak' : 'Nie'
+    - if @route.attachments.any?
+      .large-12.columns
+        - @route.attachments.select{|p| !p.content_type.start_with?('image') }.each do |attachment|
+          = link_to attachment.url, download: attachment.file.identifier do
+            = image_tag('file.jpg', class: 'thumbnail')
+            |  
+            = photo.file.identifier
+        br
+        - @route.attachments.select{|p| p.content_type.start_with?('image') }.each_with_index do |photo, i|
+          = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+          div id="photo-#{i}" class="full reveal" data-reveal="" 
+            = image_tag photo.url
+            button.close-button aria-label=("Close reveal") data-close="" type="button" 
+              span aria-hidden="true"  &times;
 
     .large-12.columns
       hr
-      = link_to 'Powrót', :back
+      = link_to 'powrót do listy przejść', activities_mountain_routes_path, class: 'button warning'
