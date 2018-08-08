@@ -6,4 +6,10 @@
     = image_tag asset_path('biceps.png'), style: 'opacity: 0.3'
 
 .dashboard-table-heart-counter
-  = route.hearts.count
+  - if route.hearts&.count == 0
+    | 0
+  - else
+    - users = route.hearts.collect {|h| "<li>#{h.user.display_name}</li>" }.join('')
+    span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{users}</ul>" data-allow-html="true"
+      = route.hearts.count
+
