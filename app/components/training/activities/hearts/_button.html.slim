@@ -1,9 +1,9 @@
 - if Training::Activities::Hearts.new(current_user).heart?(route)
   = link_to activities_unheart_path(mountain_route_id: route.id), remote: true, method: :delete do
-    = image_tag 'biceps'
+    = image_tag asset_path('biceps')
 - else
   = link_to activities_heart_path(mountain_route_id: route.id), remote: true, method: :post do
-    = image_tag 'biceps', style: 'opacity: 0.3'
+    = image_tag asset_path('biceps'), style: 'opacity: 0.3'
 
 .dashboard-table-heart-counter
   = route.hearts.count
