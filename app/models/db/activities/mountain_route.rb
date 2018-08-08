@@ -6,6 +6,8 @@ module Db
       serialize :attachments, JSON
 
       belongs_to :user
+      has_many :hearts, dependent: :destroy
+      has_many :users, through: :hearts
       has_many :colleagues, through: :route_colleagues
       has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
 

@@ -18,6 +18,9 @@ class Db::User < ActiveRecord::Base
   has_many :reservations
   has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'
 
+  has_many :hearts, dependent: :destroy
+  has_many :fav_mountain_routes, through: :hearts
+
   has_many :mountain_routes, class_name: 'Db::Activities::MountainRoute'
   has_many :colleagues_mountain_routes,
     through: :route_colleagues,

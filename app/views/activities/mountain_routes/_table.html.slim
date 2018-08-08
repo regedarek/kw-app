@@ -8,6 +8,7 @@ table.stack
         th width='2%' = sort_link(@q, :rating, 'ocena')
         th width='27%' = sort_link(@q, :partners, 'skład zespołu')
         th width='10%'
+        th width='5%'
         th width='3%'
     - else
       tr
@@ -17,6 +18,7 @@ table.stack
         th width='2%' ocena
         th width='27%' skład zespołu
         th width='10%'
+        th width='5%'
         th width='3%'
 
   tbody
@@ -37,6 +39,9 @@ table.stack
         td
           - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each do |image|
             = image_tag image.thumb, class: 'dashboard-table-image'
+        td.text-right
+          div id="route_#{route.id}"
+            = render  "training/activities/hearts/button", route: route
         td.text-center
           - if user_signed_in?
             - if current_user.roles.include?('routes') || current_user.id == route.user_id || route.colleagues.include?(current_user)
