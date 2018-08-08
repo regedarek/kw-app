@@ -15,7 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
-public/uploads
+public/*
 .ruby-gemset
 .ruby-version
 .byebug_history

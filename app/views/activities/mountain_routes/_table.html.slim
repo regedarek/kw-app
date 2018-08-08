@@ -3,35 +3,40 @@ table.stack
     - if @q.present?
       tr
         th width='8%' = sort_link(@q, :climbing_date, 'kiedy?')
-        th width='15%' = sort_link(@q, :peak, 'szczyt, przełęcz')
-        th width='20%' = sort_link(@q, :name, 'nazwa drogi/zjazdu')
+        th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
         th width='2%' wycena
         th width='2%' = sort_link(@q, :rating, 'ocena')
         th width='27%' = sort_link(@q, :partners, 'skład zespołu')
+        th width='10%'
         th width='3%'
     - else
       tr
         th width='8%' kiedy?
-        th width='15%' szczyt, przełęcz
-        th width='20%' nazwa drogi/zjazdu
+        th width='20%' nazwa przejścia
         th width='2%' wycena
         th width='2%' ocena
         th width='27%' skład zespołu
+        th width='10%'
         th width='3%'
+
   tbody
     - routes.each do |route|
       tr
         td = route.climbing_date
-        td = truncate(route.peak, length: 25)
-        td = link_to route.name, activities_mountain_route_path(route)
         td
+          h6.dashboard-table-text= link_to route.name, activities_mountain_route_path(route)
+          span.dashboard-table-timestamp= truncate(route.peak, length: 25)
+        td.text-center
           = route.difficulty
-        td
+        td.text-center
           - if route.rating.present?
             - route.rating.times do
               i.fi-star
         td
           = route.colleagues.map(&:display_name).compact.push(route.partners).reject(&:empty?).to_sentence
+        td
+          - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each do |image|
+            = image_tag image.thumb, class: 'dashboard-table-image'
         td.text-center
           - if user_signed_in?
             - if current_user.roles.include?('routes') || current_user.id == route.user_id || route.colleagues.include?(current_user)
