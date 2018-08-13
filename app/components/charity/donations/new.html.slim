@@ -2,6 +2,7 @@
   .large-12.columns
     .callout
       | W związku z tragiczną śmiercią w Tatrach naszego klubowego kolegi Mariusza Norweckiego, ruszamy ze zbiórką pieniędzy na rzecz rodziny Mariusza, żony i dwójki małych dzieci.
+
 = form_for @donation, as: :donation, url: donations_path do |f|
   - if @donation.errors.any?
     .callout.alert

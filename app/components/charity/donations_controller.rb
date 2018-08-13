@@ -23,10 +23,10 @@ module Charity
       Charity::CreateDonation.new(
         Charity::Repository.new,
         Charity::DonationForm.new
-      ).call(raw_inputs: course_params)
+      ).call(raw_inputs: donation_params)
     end
 
-    def course_params
+    def donation_params
       params
         .require(:donation)
         .permit(
