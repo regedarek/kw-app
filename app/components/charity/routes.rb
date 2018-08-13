@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   end
 
   get 'darowizny' => 'charity/donations#new'
-  get 'dla-mariusza' => 'charity/donations#new'
+  get 'dla-mariusza' => 'charity/donations#new', as: :mariusz
 end
