@@ -12,7 +12,7 @@ module Charity
 
         result.failure do |errors|
           flash[:error] = errors.values.join(", ")
-          redirect_to new_donation_path
+          redirect_to mariusz_path
         end
       end
     end
