@@ -9,7 +9,7 @@ module Charity
     end
 
     def description
-      "Darowizna na rzecz rodziny Mariusza Norweckiego"
+      "Darowizna na pomoc społeczną rodziny Mariusza Norweckiego"
     end
   end
 end
