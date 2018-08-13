@@ -1,0 +1,20 @@
+pl:
+  donation_form:
+    cost: Kwota
+  charity/donation:
+    cost: Kwota
+  charity:
+    donation:
+      cost: Kwota
+    donation_form:
+      cost: Kwota
+    donation_form:
+      donation:
+        cost: Kwota
+  activerecord:
+    models:
+      charity/donation_record: Darowizna
+    attributes:
+      charity/donation_record:
+        cost: Kwota
+        display_name: Imię i nazwisko

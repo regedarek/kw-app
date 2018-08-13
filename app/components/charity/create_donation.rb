@@ -8,8 +8,8 @@ module Charity
     end
 
     def call(raw_inputs:)
-      form_outputs = form.call(raw_inputs)
-      return Left(form_outputs.messages(full: true)) unless form_outputs.success?
+      form_outputs = form.call(raw_inputs.to_unsafe_h)
+      return Left(message: 'Kwota nie została uzupełniona') unless form_outputs.success?
 
       donation = repository.create_donation(form_outputs: form_outputs)
       payment = donation.payment

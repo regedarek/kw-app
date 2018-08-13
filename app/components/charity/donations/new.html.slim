@@ -14,11 +14,11 @@
   - else
     .row
       .large-3.columns
-        = f.label :display_name, "Imię i Nazwisko"
+        = f.label :display_name
         = f.text_field :display_name
   .row
     .large-3.columns
-      = f.label :cost, "Kwota"
+      = f.label :cost
       = f.number_field :cost
 
       = f.submit 'Przekaż', class: 'button'
