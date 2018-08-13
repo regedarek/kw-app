@@ -6,6 +6,7 @@
           th ID
           th Opis
           th Koszt
+          th Kto?
           th Płatność
       tbody
         - @donations.each do |donation|
@@ -13,6 +14,11 @@
             td = donation.id
             td = donation.description
             td = donation.cost
+            td
+              - if donation.user_id
+                = donation.user.display_name
+              - else
+                = donation.display_name
             td
               - if donation.payment
                 .label= donation.payment&.state

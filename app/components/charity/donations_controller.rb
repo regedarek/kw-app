@@ -30,7 +30,9 @@ module Charity
       params
         .require(:donation)
         .permit(
-          :cost
+          :cost,
+          :user_id,
+          :display_name
         )
     end
   end

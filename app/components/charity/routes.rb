@@ -5,4 +5,6 @@ Rails.application.routes.draw do
       resources :donations, only: :index
     end
   end
+
+  get 'darowizny' => 'charity/donations#new'
 end

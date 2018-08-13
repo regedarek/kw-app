@@ -40,6 +40,8 @@
                   li= link_to 'Zawody', admin_competitions_path
                 - if current_user.roles.include?('courses')
                   li= link_to 'Kursy', training_courses_path
+                - if current_user.roles.include?('donations')
+                  li= link_to 'Darowizny', admin_donations_path
                 - if current_user.roles.include?('tech')
                   = link_to 'Importowanie', admin_importing_index_path
                   = link_to 'Problemy', 'https://app.honeybadger.io/projects/54689/faults?q=-is%3Aresolved+-is%3Aignored'
