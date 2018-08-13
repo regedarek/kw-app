@@ -1,0 +1,12 @@
+= form_for @donation, as: :donation, url: donations_path do |f|
+  - if @donation.errors.any?
+    .callout.alert
+      ul
+        - form.errors.full_messages.each do |msg|
+          li= msg
+
+  .row
+    .large-3.columns
+      = f.label :cost, "Kwota"
+      = f.number_field :cost
+      = f.submit 'Przekaż', class: 'button'

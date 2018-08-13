@@ -1,0 +1,8 @@
+Rails.application.routes.draw do
+  scope module: 'charity' do
+    resources :donations
+    namespace :admin do
+      resources :donations, only: :index
+    end
+  end
+end

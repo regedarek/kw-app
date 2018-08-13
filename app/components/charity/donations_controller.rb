@@ -1,0 +1,37 @@
+module Charity
+  class DonationsController < ApplicationController
+    include EitherMatcher
+    append_view_path 'app/components'
+    def new
+      @donation = Charity::DonationRecord.new
+    end
+
+    def create
+      either(create_record) do |result|
+        result.success { |payment:| redirect_to charge_payment_path(payment.id) }
+
+        result.failure do |errors|
+          flash[:error] = errors.values.join(", ")
+          redirect_to new_donation_path
+        end
+      end
+    end
+
+    private
+
+    def create_record
+      Charity::CreateDonation.new(
+        Charity::Repository.new,
+        Charity::DonationForm.new
+      ).call(raw_inputs: course_params)
+    end
+
+    def course_params
+      params
+        .require(:donation)
+        .permit(
+          :cost
+        )
+    end
+  end
+end
