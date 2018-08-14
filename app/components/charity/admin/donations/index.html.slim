@@ -9,9 +9,9 @@
           th Kto?
           th width='10%' Płatność
       tbody
-        - @donations.each do |donation|
+        - @donations.each_with_index do |donation, i|
           tr
-            td = donation.id
+            td = i + 1
             td = donation.description
             td = donation.cost
             td
