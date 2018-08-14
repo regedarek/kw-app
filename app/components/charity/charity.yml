@@ -16,5 +16,5 @@ pl:
       charity/donation_record: Darowizna
     attributes:
       charity/donation_record:
-        cost: Kwota
-        display_name: Imię i nazwisko
+        cost: Kwota*
+        display_name: Imię i nazwisko(opcjonalnie)
