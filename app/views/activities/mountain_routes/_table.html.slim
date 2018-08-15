@@ -9,7 +9,7 @@ table.stack
         - if user_signed_in?
           th width='25%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
-        th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków')
+        th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
         - if user_signed_in?
           th width='3%'
     - else
@@ -21,7 +21,7 @@ table.stack
         - if user_signed_in?
           th width='25%' skład zespołu
         th width='12%'
-        th width='7%'
+        th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
         - if user_signed_in?
           th width='3%'
 
