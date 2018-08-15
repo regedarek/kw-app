@@ -13,13 +13,13 @@
           .text-center
             = f.select :route_type_eq,
             Db::Activities::MountainRoute.route_types.keys.map { |w| [I18n.t(w), w]},
-            { include_blank: 'wszystkie aktywności', selected: params[:q][:route_type_eq]}
+            { include_blank: 'wszystkie aktywności', selected: params[:q] && params[:q][:route_type_eq]}
           br
         .show-for-large
           .text-left style='line-height: 55px;'
             = f.select :route_type_eq,
             Db::Activities::MountainRoute.route_types.keys.map { |w| [I18n.t(w), w]},
-            { include_blank: 'wszystkie aktywności', selected: params[:q][:route_type_eq]}
+            { include_blank: 'wszystkie aktywności', selected: params[:q] && params[:q][:route_type_eq]}
 
       .large-3.columns
         - if user_signed_in?
