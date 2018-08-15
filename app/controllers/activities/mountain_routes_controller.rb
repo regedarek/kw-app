@@ -6,7 +6,7 @@ module Activities
     def index
       @q = Db::Activities::MountainRoute.where(hidden: false).ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
-      @routes = @q.result.includes(:user).page(params[:page]).uniq
+      @routes = @q.result(distinct: true).includes(:user).page(params[:page]).uniq
       @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
       @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
       @season_leaders = Training::Activities::Repository.new.fetch_season
