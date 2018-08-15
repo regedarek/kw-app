@@ -26,6 +26,7 @@
           li.show-for-small-only= link_to 'Twoje dane', edit_user_registration_path
           li.show-for-small-only = link_to 'Twoje składki', membership_fees_path
           li.show-for-small-only= link_to t('.administration.logout'), destroy_user_session_path
+
           - if current_user.admin? || current_user.roles.include?('office')
             li
               = link_to t('.administration.main'), admin_path
@@ -47,6 +48,8 @@
                   = link_to 'Importowanie', admin_importing_index_path
                   = link_to 'Problemy', 'https://app.honeybadger.io/projects/54689/faults?q=-is%3Aresolved+-is%3Aignored'
         - else
+          li.show-for-small-only= link_to 'Przejścia', activities_mountain_routes_path
+          li.show-for-small-only= link_to 'Wydarzenia', supplementary_courses_path
           li.show-for-small-only= link_to t('.administration.login'), new_user_session_path
           li.show-for-small-only= link_to t('.administration.signup'), zarejestruj_path
 
@@ -55,7 +58,6 @@
         - if user_signed_in?
           - if !current_user.admin? || !current_user.roles.include?('office')
             li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button primary'
-
         li.show-for-medium= link_to 'Przejścia', activities_mountain_routes_path, class: 'button success'
         li.show-for-medium= link_to 'Wydarzenia', supplementary_courses_path, class: 'button alert'
         - if user_signed_in?
