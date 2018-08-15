@@ -4,7 +4,10 @@ module Activities
     before_action :authenticate_user!, only: [:create, :update, :destroy]
 
     def index
-      @q = Db::Activities::MountainRoute.where(hidden: false).ransack(params[:q])
+      @q = Db::Activities::MountainRoute.where(hidden: false)
+      @q = @q.climbing if params[:route_type] == 'climbing'
+      @q = @q.ski if params[:route_type] == 'ski'
+      @q = @q.ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
       @routes = @q.result(distinct: true).includes(:user).page(params[:page]).uniq
       @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
@@ -70,7 +73,7 @@ module Activities
     private
 
     def route_params
-      params.require(:route).permit(:peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :rating, :hidden, colleagues_names: [], attachments: [])
+      params.require(:route).permit(:peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :route_type, :rating, :hidden, colleagues_names: [], attachments: [])
     end
   end
 end

@@ -5,6 +5,8 @@ module Db
       mount_uploaders :attachments, AttachmentUploader
       serialize :attachments, JSON
 
+      scope :climbing, -> { where(route_type: [:regular_climbing, :winter_climbing]) }
+
       belongs_to :user
       has_many :hearts, dependent: :destroy
       has_many :users, through: :hearts
@@ -12,6 +14,15 @@ module Db
       has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
 
       validates :name, :rating, :climbing_date, presence: true
+
+      def category
+        case route_type.to_sym
+        when :ski
+          :snw
+        else
+          :sww
+        end
+      end
 
       def colleagues_names=(ids)
         self.colleague_ids = ids

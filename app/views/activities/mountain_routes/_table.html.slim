@@ -2,6 +2,7 @@ table.stack
   thead
     - if @q.present?
       tr
+        th width='5%'
         th width='8%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
         th width='2%' wycena
@@ -14,6 +15,7 @@ table.stack
           th width='3%'
     - else
       tr
+        th width='5%'
         th width='8%' kiedy?
         th width='20%' nazwa przejścia
         th width='2%' wycena
@@ -21,13 +23,14 @@ table.stack
         - if user_signed_in?
           th width='25%' skład zespołu
         th width='12%'
-        th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
+        th.text-center width='7%' bicki
         - if user_signed_in?
           th width='3%'
 
   tbody
     - routes.each do |route|
       tr
+        td.text-center = image_tag "#{route.category}.png", size: '40x40'
         td.text-center.large-text-left = route.climbing_date
         td.text-center.large-text-left
           h6.dashboard-table-text= link_to route.name, activities_mountain_route_path(route)

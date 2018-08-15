@@ -7,6 +7,11 @@
             - @route.errors.full_messages.each do |msg|
               li= msg
 
+  - if action_name == 'edit'
+    .row
+      .large-6.columns
+        = f.select :route_type, Db::Activities::MountainRoute.route_types.keys.map { |w| [I18n.t(w), w] }
+
   .callout
     .row
       .large-6.columns

@@ -8,9 +8,39 @@
         = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_last_name_or_colleagues_first_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
       .large-2.columns
         = f.search_field :climbing_date_year_equals, style: 'height: 55px', placeholder: 'Od roku(2018)'
+      .large-3.columns
+        .hide-for-large
+          .text-center
+            = link_to route_type: :ski do
+              = image_tag "snw.png",
+                size: '55x55',
+                class: (params[:route_type] == 'ski' ? '' : 'opacity')
+            = link_to route_type: :climbing do
+              = image_tag "sww.png",
+                size: '55x55',
+                class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+            - if params[:route_type].present?
+              = link_to category: nil do
+                = ' usuń filtr'
+          br
+        .show-for-large
+          = link_to route_type: :ski do
+            = image_tag "snw.png",
+              size: '55x55',
+              class: (params[:route_type] == 'ski' ? '' : 'opacity')
+          = link_to route_type: :climbing do
+            = image_tag "sww.png",
+              size: '55x55',
+              class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+          - if params[:route_type].present?
+            = link_to category: nil do
+              = ' usuń filtr'
 
       .large-3.columns
-        = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+        .button-hover-reveal-wrapper
+          label Dodaj przejście
+          = link_to 'Wspinaczka', new_activities_mountain_route_path, class: 'button-hover-reveal'
+          = link_to 'Narciarstwo', new_activities_ski_route_path, class: 'button-hover-reveal'
 
   .row
     .large-12.columns
