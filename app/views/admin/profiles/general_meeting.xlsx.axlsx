@@ -1,4 +1,6 @@
-wb = xlsx_package.workbook
+p = xlsx_package
+p.use_autowidth = true
+wb = p.workbook
 profile_attributes = %i(
   first_name last_name
   kw_id
@@ -12,6 +14,7 @@ wb.styles do |style|
     bg_color: '004586',
     alignment: { horizontal: :center, vertical: :center, wrap_text: true }
   }
+  border = {:border => { :style => :thick, :color => 'F000000', :name => :top, :edges => [:top, :left, :bottom, :right] },alignment: { horizontal: :center, vertical: :center, wrap_text: true}}
   wb.add_worksheet(name: "Walne zebranie") do |sheet|
     human_profile_attributes = profile_attributes.map do |attr|
       Db::Profile.human_attribute_name(attr)
@@ -26,7 +29,7 @@ wb.styles do |style|
           profile.read_attribute(attr)
         end
       end.push(profile.membership_fees.select { |f| f.payment.paid? }&.map(&:year)&.join(', '))
-      sheet.add_row(profile_values)
+      sheet.add_row(profile_values, style: style.add_style(border), height: 40)
     end
   end
 end
