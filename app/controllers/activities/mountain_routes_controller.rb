@@ -5,6 +5,8 @@ module Activities
 
     def index
       @q = Db::Activities::MountainRoute.where(hidden: false)
+      @q = @q.climbing if params[:route_type] == 'climbing'
+      @q = @q.ski if params[:route_type] == 'ski'
       @q = @q.ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
       @routes = @q.result(distinct: true).includes(:user).page(params[:page]).uniq

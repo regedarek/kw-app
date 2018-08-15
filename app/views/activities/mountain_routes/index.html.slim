@@ -11,15 +11,31 @@
       .large-3.columns
         .hide-for-large
           .text-center
-            = f.select :route_type_eq,
-            Db::Activities::MountainRoute.route_types.keys.map { |w| [I18n.t(w), w]},
-            { include_blank: 'wszystkie aktywności', selected: params[:q] && params[:q][:route_type_eq]}
+            = link_to params.merge({route_type: :ski}).to_unsafe_h do
+              = image_tag "snw.png",
+                size: '55x55',
+                class: (params[:route_type] == 'ski' ? '' : 'opacity')
+            = link_to params.merge({route_type: :climbing}).to_unsafe_h do
+              = image_tag "sww.png",
+                size: '55x55',
+                class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+            - if params[:q] || params[:route_type].present?
+              = link_to category: nil do
+                = ' usuń filtr'
           br
         .show-for-large
-          .text-left style='line-height: 55px;'
-            = f.select :route_type_eq,
-            Db::Activities::MountainRoute.route_types.keys.map { |w| [I18n.t(w), w]},
-            { include_blank: 'wszystkie aktywności', selected: params[:q] && params[:q][:route_type_eq]}
+          .text-left
+            = link_to params.merge({route_type: :ski}).to_unsafe_h do
+              = image_tag "snw.png",
+                size: '55x55',
+                class: (params[:route_type] == 'ski' ? '' : 'opacity')
+            = link_to params.merge({route_type: :climbing}).to_unsafe_h do
+              = image_tag "sww.png",
+                size: '55x55',
+                class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+            - if params[:q] || params[:route_type].present?
+              = link_to category: nil do
+                = ' usuń filtr'
 
       .large-3.columns
         - if user_signed_in?
