@@ -1,17 +1,16 @@
 .column
   - if params[:route_type] == 'ski'
     = render 'training/activities/ski_routes/leaderboard'
-  .row
-    .large-4.columns
-      = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
+
+  = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
+    .row
+      .large-4.columns
         = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_last_name_or_colleagues_first_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
+      .large-2.columns
+        = f.search_field :climbing_date_year_equals, style: 'height: 55px', placeholder: 'Od roku(2018)'
 
-    - if user_signed_in? && current_user.roles.include?('routes')
       .large-3.columns
-        = link_to 'Eksportuj do Excela', activities_mountain_routes_path(format: :xlsx), class: 'large expanded secondary button'
-
-    .large-3.columns
-      = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
+        = link_to t('.new_route_link'), new_activities_mountain_route_path, class: 'large expanded button'
 
   .row
     .large-12.columns
