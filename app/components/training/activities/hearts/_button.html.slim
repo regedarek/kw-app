@@ -1,8 +1,12 @@
-- if Training::Activities::Hearts.new(current_user).heart?(route)
-  = link_to activities_unheart_path(mountain_route_id: route.id), remote: true, method: :delete do
-    = image_tag asset_path('biceps.png')
+- if user_signed_in?
+  - if Training::Activities::Hearts.new(current_user).heart?(route)
+    = link_to activities_unheart_path(mountain_route_id: route.id), remote: true, method: :delete do
+      = image_tag asset_path('biceps.png')
+  - else
+    = link_to activities_heart_path(mountain_route_id: route.id), remote: true, method: :post do
+      = image_tag asset_path('biceps.png'), style: 'opacity: 0.3'
 - else
-  = link_to activities_heart_path(mountain_route_id: route.id), remote: true, method: :post do
+  span data-tooltip='' tabindex="1" title="Musisz być zalogowany aby dodać bicka!" data-allow-html="true"
     = image_tag asset_path('biceps.png'), style: 'opacity: 0.3'
 
 .dashboard-table-heart-counter

@@ -9,8 +9,8 @@ table.stack
         - if user_signed_in?
           th width='25%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
+        th width='7%'
         - if user_signed_in?
-          th width='7%'
           th width='3%'
     - else
       tr
@@ -21,8 +21,8 @@ table.stack
         - if user_signed_in?
           th width='25%' skład zespołu
         th width='12%'
+        th width='7%'
         - if user_signed_in?
-          th width='7%'
           th width='3%'
 
   tbody
@@ -44,10 +44,10 @@ table.stack
         td.text-center
           - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each do |image|
             = image_tag image.thumb, class: 'dashboard-table-image'
+        td.text-center
+          div id="route_#{route.id}"
+            = render  "training/activities/hearts/button", route: route
         - if user_signed_in?
-          td.text-center
-            div id="route_#{route.id}"
-              = render  "training/activities/hearts/button", route: route
           td.text-center
             - if current_user.roles.include?('routes') || current_user.id == route.user_id || route.colleagues.include?(current_user)
               i.fi-list-thumbnails data-toggle="example-dropdown-#{route.id}" data-auto-focus="true"
