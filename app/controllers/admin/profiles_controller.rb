@@ -18,6 +18,16 @@ module Admin
       end
     end
 
+    def general_meeting
+      @results = Db::Profile.all
+      respond_with do |format|
+        format.xlsx do
+          disposition = "attachment; filename='walne_zebranie_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+          response.headers['Content-Disposition'] = disposition
+        end
+      end
+    end
+
     def new
       @profile = Db::Profile.new
     end

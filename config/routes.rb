@@ -59,6 +59,9 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :profiles do
+      collection do
+        get :general_meeting
+      end
       member do
         put :accept
         put :send_email

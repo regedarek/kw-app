@@ -1,0 +1,32 @@
+wb = xlsx_package.workbook
+profile_attributes = %i(
+  first_name last_name
+  kw_id
+  application_date
+  position
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "Walne zebranie") do |sheet|
+    human_profile_attributes = profile_attributes.map do |attr|
+      Db::Profile.human_attribute_name(attr)
+    end.push('Historia składek')
+    sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
+    @results.each do |profile|
+      profile_values = profile_attributes.map do |attr|
+        case attr
+        when :position
+          profile.read_attribute(attr).map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.join(', ')
+        else
+          profile.read_attribute(attr)
+        end
+      end.push(profile.membership_fees.select { |f| f.payment.paid? }&.map(&:year)&.join(', '))
+      sheet.add_row(profile_values)
+    end
+  end
+end
