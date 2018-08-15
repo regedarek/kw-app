@@ -5,6 +5,8 @@ module Training
       append_view_path 'app/components'
 
       def new
+        return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
+
         @ski_route = ::Db::Activities::MountainRoute.new
       end
 
