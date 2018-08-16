@@ -14,12 +14,29 @@ wb.styles do |style|
     :border => { :style => :thick, :color => 'F000000', :name => :top, :edges => [:top, :left, :bottom, :right] },alignment: { horizontal: :center, vertical: :center, wrap_text: true}
   }
   border = {:border => { :style => :thick, :color => 'F000000', :name => :top, :edges => [:top, :left, :bottom, :right] }, alignment: { horizontal: :center, vertical: :center, wrap_text: true}}
-  wb.add_worksheet(name: "Walne zebranie") do |sheet|
+  wb.add_worksheet(name: "Członkowie zwykli") do |sheet|
     human_profile_attributes = profile_attributes.map do |attr|
       Db::Profile.human_attribute_name(attr)
     end.push('Ostatnia składka').push('Historia składek')
     sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
-    @results.each do |profile|
+    @regulars.each do |profile|
+      profile_values = profile_attributes.map do |attr|
+        case attr
+        when :position
+          profile.read_attribute(attr).map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.join(', ')
+        else
+          profile.read_attribute(attr)
+        end
+      end.push(profile.membership_fees.select { |f| f.payment.paid? }&.map(&:year).max).push(profile.membership_fees.select { |f| f.payment.paid? }&.map(&:year)&.join(', '))
+      sheet.add_row(profile_values, style: [style.add_style(border), style.add_style(border), style.add_style(border), style.add_style(border.merge(:format_code => 'yyyy-mm-dd')), style.add_style(border),style.add_style(border),style.add_style(border)], height: 40, types: [:string, :string, :integer, :date, :string, :string, :string])
+    end
+  end
+  wb.add_worksheet(name: "Kandydaci") do |sheet|
+    human_profile_attributes = profile_attributes.map do |attr|
+      Db::Profile.human_attribute_name(attr)
+    end.push('Ostatnia składka').push('Historia składek')
+    sheet.add_row(human_profile_attributes, style: style.add_style(highlight_cell_options))
+    @candidates.each do |profile|
       profile_values = profile_attributes.map do |attr|
         case attr
         when :position

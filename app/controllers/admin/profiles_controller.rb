@@ -19,7 +19,8 @@ module Admin
     end
 
     def general_meeting
-      @results = Db::Profile.all.select{|p| !p.position.include?('candidate') && !p.position.include?('canceled') }
+      @regulars = Db::Profile.all.select{|p| !p.position.include?('candidate') && !p.position.include?('canceled') }
+      @candidates = Db::Profile.where(accepted: true).select{|p| p.position.include?('candidate') && !p.position.include?('canceled') }
       respond_with do |format|
         format.xlsx do
           disposition = "attachment; filename='walne_zebranie_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
