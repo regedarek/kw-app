@@ -20,17 +20,34 @@
             .card-profile-stats-statistic
               span.stat = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).count
               p aktywności
-            .card-profile-stats-statistic
+            .card-profile-stats-statistic style='color: #6a89cc'
+              - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).collect(&:mountain_route)
               span.stat
-                - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).collect(&:mountain_route)
                 - if routes.any?
-                  = routes.compact.inject(0) { |sum, r| sum + r.length.to_i }
+                  - ski_routes = routes.compact.select { |r| r.category == :snw }
+                  - if ski_routes.any?
+                    = ski_routes.inject(0) { |sum, r| sum + r.length.to_i }
+                  - else
+                    | 0
                 - else
                   | 0
-              p metrów przewyższenia
+              p metrów przewyższenia na nartach
+            .card-profile-stats-statistic style='color: #82ccdd'
+              span.stat
+                - if routes.any?
+                  - climbing_routes = routes.compact.select { |r| r.category == :sww }
+                  - if climbing_routes.any?
+                    = climbing_routes.inject(0) { |sum, r| sum + r.length.to_i }
+                  - else
+                    | 0
+                - else
+                  | 0
+              p metrów przewyższenia wspinając się
             .card-profile-stats-statistic
-              span.stat = Training::Supplementary::SignUpRecord.where(user_id: current_user.id).count
-              p wydarzeń
+              span.stat
+                = Db::Heart.where(user_id: current_user.id).count
+                = image_tag asset_path('biceps.png'), style: "height: 39%; margin-left: 2px;"
+              p wyrazy uznania
 
     .row
       .large-12.columns
