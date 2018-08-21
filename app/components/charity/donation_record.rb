@@ -5,7 +5,7 @@ module Charity
     belongs_to :user, class_name: 'Db::User'
 
     def payment_type
-      :fees
+      :donations
     end
 
     def description
