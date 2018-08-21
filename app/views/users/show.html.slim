@@ -1,0 +1,61 @@
+.column
+  .row
+    .large-12.columns
+      .card-profile-stats
+        .card-profile-stats-intro
+          - if @user.avatar.present?
+            = image_tag(@user.avatar, class: 'card-profile-stats-intro-pic')
+          - else
+            = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
+          .card-profile-stats-intro-content
+            h3 = @user.display_name
+            p
+              - if @user.profile
+                = "W klubie od #{@user.profile&.application_date&.to_date}"
+              - else
+                = "Dołączył #{@user.created_at&.to_date}"
+        hr/
+        .card-profile-stats-container
+          .card-profile-stats-statistic
+            span.stat = Db::Activities::RouteColleagues.where(colleague_id: @user.id).count
+            p aktywności
+          .card-profile-stats-statistic style='color: #6a89cc'
+            - routes = Db::Activities::RouteColleagues.where(colleague_id: @user.id).collect(&:mountain_route)
+            span.stat
+              - if routes.any?
+                - ski_routes = routes.compact.select { |r| r.category == :snw }
+                - if ski_routes.any?
+                  = ski_routes.inject(0) { |sum, r| sum + r.length.to_i }
+                - else
+                  | 0
+              - else
+                | 0
+            p metrów przewyższenia na nartach
+          .card-profile-stats-statistic style='color: #82ccdd'
+            span.stat
+              - if routes.any?
+                - climbing_routes = routes.compact.select { |r| r.category == :sww }
+                - if climbing_routes.any?
+                  = climbing_routes.inject(0) { |sum, r| sum + r.length.to_i }
+                - else
+                  | 0
+              - else
+                | 0
+            p metrów przewyższenia wspinając się
+          .card-profile-stats-statistic
+            span.stat
+              = routes.compact.inject(0) { |sum, r| sum + r.hearts_count }
+            p wyrazów uznania
+
+  - if @user.mountain_routes.any?
+    .row
+      .large-12.columns
+        .row
+          .large-12.columns
+            - routes = Db::Activities::RouteColleagues.where(colleague_id: @user.id).map(&:mountain_route).compact
+            - my_routes = Kaminari.paginate_array((@user.mountain_routes + routes).uniq).page(params[:page]).per(10)
+            = render 'activities/mountain_routes/table', routes: my_routes
+
+        .row
+          .large-12.columns
+            = paginate my_routes
