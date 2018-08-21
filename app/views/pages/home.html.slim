@@ -45,9 +45,9 @@
               p metrów przewyższenia wspinając się
             .card-profile-stats-statistic
               span.stat
-                = Db::Heart.where(user_id: current_user.id).count
+                = routes.compact.inject(0) { |sum, r| sum + r.hearts_count }
                 = image_tag asset_path('biceps.png'), style: "height: 39%; margin-left: 2px;"
-              p wyrazy uznania
+              p wyrazów uznania
 
     .row
       .large-12.columns
