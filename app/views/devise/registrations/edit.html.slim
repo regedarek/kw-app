@@ -43,6 +43,11 @@
 
     .row
       .large-12.columns
+        = f.label :hide
+        = f.check_box :hide
+
+    .row
+      .large-12.columns
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
                       Wyślij ponownie potwierdzajacy email:
                       = resource.unconfirmed_email
@@ -51,11 +56,6 @@
       .large-12.columns
         = f.label 'Nowe hasło'
         = f.password_field :password, autocomplete: "off"
-
-    .row
-      .large-12.columns
-        = f.label 'Potwierdź hasło'
-        = f.password_field :password_confirmation, autocomplete: "off"
 
     .row
       .large-12.columns

@@ -6,6 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
     resource_updated = update_resource(resource, account_update_params)
+
     yield resource if block_given?
     if resource_updated
       if is_flashing_format?
@@ -25,11 +26,13 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :hide, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :kw_id])
   end
 
   def update_resource(resource, params)
+    resource.update(password: params.fetch(:password)) if params.fetch(:password, nil)
     resource.update_without_password(params)
+
     profile = Db::Profile.find_by(kw_id: resource_params.fetch(:kw_id))
     profile.update(resource_params.permit(:kw_id, :first_name, :last_name, :email).to_h) if profile.present?
   end

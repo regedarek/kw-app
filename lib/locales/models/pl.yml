@@ -248,6 +248,7 @@ pl:
         password: Haslo
         password_confirmation: Potwierdz haslo
         current_password: Obecne haslo
+        hide: Ukryj moje dane na liście klubowiczów?
     errors:
       messages:
         record_invalid: "Negatywne sprawdzenie poprawności: %{errors}"
