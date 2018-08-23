@@ -13,6 +13,7 @@ class Db::User < ActiveRecord::Base
   scope :last_name, -> (name) { where last_name: name }
   scope :email, -> (email) { where email: email }
   scope :kw_id, -> (id) { where kw_id: id }
+  scope :active, -> { Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { state: 'prepaid'} ).or(Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { cash: true} )) }
 
   has_one  :profile, foreign_key: :kw_id, primary_key: :kw_id
   has_many :reservations
@@ -37,6 +38,10 @@ class Db::User < ActiveRecord::Base
 
   def admin?
     roles.include?('admin')
+  end
+
+  def active?
+    membership_fees.where(year: [(Date.today.year - 1), Date.today.year]).any? {|f| f&.payment&.paid? }
   end
 
   def self.from_omniauth(access_token)
