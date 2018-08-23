@@ -31,6 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update_resource(resource, params)
     resource.update(password: params.fetch(:password)) if params.fetch(:password, nil)
+    params.delete(:password)
     resource.update_without_password(params)
 
     profile = Db::Profile.find_by(kw_id: resource_params.fetch(:kw_id))
