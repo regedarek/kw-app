@@ -59,6 +59,11 @@
 
     .row
       .large-12.columns
+        = f.label 'Potwierdź hasło'
+        = f.password_field :password_confirmation, autocomplete: "off"
+
+    .row
+      .large-12.columns
         = f.submit "Zaktualizuj", class: 'button'
 
   .row

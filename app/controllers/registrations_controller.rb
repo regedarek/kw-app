@@ -26,12 +26,10 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :hide, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :kw_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :hide, :first_name, :last_name, :phone, :email, :kw_id])
   end
 
   def update_resource(resource, params)
-    resource.update(password: params.fetch(:password)) if params.fetch(:password, nil)
-    params.delete(:password)
     resource.update_without_password(params)
 
     profile = Db::Profile.find_by(kw_id: resource_params.fetch(:kw_id))
