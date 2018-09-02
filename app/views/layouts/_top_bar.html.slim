@@ -42,8 +42,6 @@
                   li= link_to 'Walne zebranie', general_meeting_admin_profiles_path(format: :xlsx)
                 - unless current_user.roles.include?('competitions')
                   li= link_to 'Zawody', admin_competitions_path
-                - if current_user.roles.include?('courses')
-                  li= link_to 'Kursy', training_courses_path
                 - if current_user.roles.include?('donations')
                   li= link_to 'Darowizny', admin_donations_path
                 - if current_user.roles.include?('tech')
