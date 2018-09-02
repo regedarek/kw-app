@@ -6,6 +6,7 @@ every 24.hours do
   rake :send_reminders
   rake :destroy_unpaid_reservations
   rake :set_regular_members
+  rake :destroy_outdated_profiles
 end
 
 every '0 0 1 3 *' do
