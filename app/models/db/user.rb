@@ -20,6 +20,7 @@ class Db::User < ActiveRecord::Base
   has_one  :profile, foreign_key: :kw_id, primary_key: :kw_id
   has_many :reservations
   has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'
+  has_many :photo_requests, class_name: 'PhotoCompetition::RequestRecord'
 
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts

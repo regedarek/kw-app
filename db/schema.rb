@@ -255,11 +255,11 @@ ActiveRecord::Schema.define(version: 20180903144309) do
   end
 
   create_table "photo_requests", force: :cascade do |t|
-    t.integer  "photo_competition_id", null: false
-    t.integer  "user_id",              null: false
+    t.integer  "edition_record_id", null: false
+    t.integer  "user_id",           null: false
     t.string   "description"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "photos", force: :cascade do |t|
