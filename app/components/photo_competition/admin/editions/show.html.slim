@@ -15,10 +15,12 @@
           tr
             th width='5%' ID
             th width='45%' Nazwa
-            th width='50%' Symbol
+            th width='10%' Symbol
+            th width='40%' Zdjęcie
         tbody
           - @edition.photo_requests.each_with_index do |request, i|
             tr
               td = i + 1
               td = request.description
               td = request.user.display_name
+              td = image_tag request.file.thumb
