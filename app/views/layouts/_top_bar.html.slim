@@ -38,6 +38,8 @@
                 - unless current_user.roles.include?('reservations')
                   li= link_to t('.administration.reservations'), admin_reservations_path
                   li= link_to t('.administration.items'), admin_items_path
+                - if current_user.roles.include?('photo_competition')
+                  li= link_to 'Konkursy fotograficzne', admin_editions_path
                 - if current_user.roles.include?('office')
                   li= link_to 'Walne zebranie', general_meeting_admin_profiles_path(format: :xlsx)
                 - unless current_user.roles.include?('competitions')

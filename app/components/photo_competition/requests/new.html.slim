@@ -1,0 +1,15 @@
+= form_for @request, as: :request, url: edition_requests_path do |f|
+  - if @request.errors.any?
+    .callout.alert
+      ul
+        - form.errors.full_messages.each do |msg|
+          li= msg
+
+  .row
+    .large-3.columns
+      b= f.label :description
+      = f.text_field :description
+
+  .row
+    .large-3.columns
+      = f.submit 'Przekaż', class: 'button'

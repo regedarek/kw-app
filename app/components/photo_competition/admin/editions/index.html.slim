@@ -1,0 +1,14 @@
+.row
+  .large-12.columns
+    table.stack
+      thead
+        tr
+          th width='5%' ID
+          th width='45%' Nazwa
+          th width='50%' Symbol
+      tbody
+        - @editions.each_with_index do |edition, i|
+          tr
+            td = i + 1
+            td = link_to edition.name, admin_edition_path(edition.id)
+            td = edition.code

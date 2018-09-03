@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/membership/admin/routes.rb")
   load Rails.root.join("app/components/training/routes.rb")
   load Rails.root.join("app/components/charity/routes.rb")
+  load Rails.root.join("app/components/photo_competition/routes.rb")
 
   namespace :api do
     resources :payments, only: [] do
