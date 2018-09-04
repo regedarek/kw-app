@@ -9,11 +9,11 @@ module PhotoCompetition
     end
 
     version :thumb do
-      process resize_to_fill: [180, 180]
+      process resize_to_fill: [100, 100]
     end
 
     def store_dir
-      "photo_competitions/#{model.edition.code}/#{model.user.display_name}"
+      "photo_competitions/#{model.edition.code}/#{model}"
     end
   end
 end
