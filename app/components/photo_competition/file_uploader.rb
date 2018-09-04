@@ -17,7 +17,7 @@ module PhotoCompetition
     end
 
     def filename
-      "#{model.edition.code}-#{Time.now.to_i}.#{file.extension}" if original_filename.present?
+      "#{model.edition.code}-#{SecureRandom.hex(6)}.#{file.extension}" if original_filename.present?
     end
 
     def store_dir
