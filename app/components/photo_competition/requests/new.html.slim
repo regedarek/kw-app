@@ -24,6 +24,6 @@
       = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button large expanded'
 
   .large-6.columns
-    h4 Zgłoszone zdjęcia
-    - current_user.photo_requests.each do |request|
+    h4 Twoje zgłoszone zdjęcia
+    - current_user.photo_requests.where(edition_record_id: @edition.id).each do |request|
       = image_tag request.file.thumb, class: 'thumbnail'

@@ -26,15 +26,23 @@
         thead
           tr
             th width='5%' ID
-            th width='10%' Kategoria
-            th width='35%' Nazwa
-            th width='10%' Zgłaszający
-            th width='40%' Zdjęcie
+            th width='15%' Kategoria
+            th width='30%' Opis
+            th width='30%' Nazwa Pliku
+            th width='30%' Zgłaszający
+            th width='15%' Zdjęcie
         tbody
           - @photo_requests.each_with_index do |request, i|
             tr
               td = i + 1
               td = request.category.name
               td = request.description
+              td = request.file.file.filename
               td = request.user.display_name
-              td = image_tag request.file.thumb
+              td
+                = image_tag request.file.thumb, data: { toggle: "photo-#{i}" }
+
+                div id="photo-#{i}" class="reveal" data-reveal="" 
+                  = image_tag request.file.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
