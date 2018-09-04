@@ -8,4 +8,6 @@ Rails.application.routes.draw do
       resources :editions
     end
   end
+
+  get "konkurs/:edition_id" => 'photo_competition/requests#new'
 end
