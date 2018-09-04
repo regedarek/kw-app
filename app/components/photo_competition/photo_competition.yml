@@ -1,0 +1,11 @@
+pl:
+  photo_competition/request_record:
+    category: Kategoria
+  activerecord:
+    models:
+      photo_competition/request_record: Zgłoszenie zdjęcia
+    attributes:
+      photo_competition/request_record:
+        category: Kategoria
+        description: Opis zdjęcia
+        file: Plik zdjęcia

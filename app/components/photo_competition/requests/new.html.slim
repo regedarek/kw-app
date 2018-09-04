@@ -1,19 +1,29 @@
+.row
+  .large-3.columns
+    h3 = @edition.name
+
 = form_for @request, as: :request, url: edition_requests_path do |f|
-  - if @request.errors.any?
-    .callout.alert
-      ul
-        - form.errors.full_messages.each do |msg|
-          li= msg
+  .row
+    .large-6.columns
+      - if @request.errors.any?
+        .callout.alert
+          ul
+            - @request.errors.full_messages.each do |msg|
+              li= msg
 
   .row
     .large-3.columns
-      b= f.label :description
+      b= f.label :category_record_id, "Kategoria"
+      = f.select :category_record_id, @edition.categories.map {|c| [c.name, c.id]}, include_blank: true
+  .row
+    .large-3.columns
+      b= f.label :description, "Opis zdjęcia"
       = f.text_field :description
   .row
     .large-3.columns
-      b= f.label :file
+      b= f.label :file, "Plik zdjęcia"
       = f.file_field :file
 
   .row
     .large-3.columns
-      = f.submit 'Przekaż', class: 'button'
+      = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button'
