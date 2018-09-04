@@ -8,9 +8,9 @@ module PhotoCompetition
       storage :file
     end
 
-    def filename
-      "#{model.edition.code}-#{model.id}.#{file.extension}" if original_filename.present?
-    end
+   #def filename
+   #  "#{model.edition.code}-#{model.id}.#{file.extension}" if original_filename.present?
+   #end
 
     version :thumb do
       process resize_to_fill: [100, 100]
