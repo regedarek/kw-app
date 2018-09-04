@@ -2,7 +2,11 @@
   .row
     .large-4.columns
       h3 = @edition.name
-    .large-8.columns
+    .large-4.columns
+      = search_form_for @q, url: admin_edition_path(params[:id]), class: 'js-send-on-enter' do |f|
+        = f.search_field :file_cont, placeholder: 'Nazwa pliku'
+
+    .large-4.columns
       .text-right
         = link_to 'Dodaj zdjęcie', new_edition_request_path(edition_id: @edition.code), class: 'button'
 
@@ -27,7 +31,7 @@
             th width='10%' Zgłaszający
             th width='40%' Zdjęcie
         tbody
-          - @edition.photo_requests.each_with_index do |request, i|
+          - @photo_requests.each_with_index do |request, i|
             tr
               td = i + 1
               td = request.category.name
