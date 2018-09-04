@@ -9,7 +9,7 @@ module PhotoCompetition
     end
 
     def filename
-      "#{model.edition.code}-#{SecureRandom.hex(6)}.#{file.extension}" if original_filename.present?
+      "#{model.edition.code}-#{model.id}.#{file.extension}" if original_filename.present?
     end
 
     version :thumb do
