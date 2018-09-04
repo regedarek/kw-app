@@ -8,16 +8,16 @@ module PhotoCompetition
       storage :file
     end
 
+    def filename
+      "#{model.edition.code}-#{SecureRandom.hex(6)}.#{file.extension}" if original_filename.present?
+    end
+
     version :thumb do
       process resize_to_fill: [100, 100]
 
       def store_dir
         "photo_competitions/#{model.edition.code}/thumbs/#{model.category.name.parameterize.underscore}"
       end
-    end
-
-    def filename
-      "#{model.edition.code}-#{SecureRandom.hex(6)}.#{file.extension}" if original_filename.present?
     end
 
     def store_dir
