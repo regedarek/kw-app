@@ -37,7 +37,7 @@
               td = i + 1
               td = request.category.name
               td = request.description
-              td = request.file.file.filename
+              td = File.basename(request.file.path)
               td = request.user.display_name
               td
                 = image_tag request.file.thumb, data: { toggle: "photo-#{i}" }
