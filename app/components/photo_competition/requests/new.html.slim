@@ -2,7 +2,7 @@
   .large-3.columns
     h3 = @edition.name
 
-= form_for @request, as: :request, url: edition_requests_path do |f|
+= form_for @request, as: :request, url: edition_requests_path, html: { multipart: true } do |f|
   .row
     .large-6.columns
       - if @request.errors.any?
@@ -22,8 +22,11 @@
   .row
     .large-3.columns
       b= f.label :file, "Plik zdjęcia"
-      = f.file_field :file
+      - if @request.file?
+        = image_tag(@request.file.thumb, class: 'thumbnail')
+      = f.file_field :file unless @request.file?
+      = f.hidden_field :file_cache
 
   .row
     .large-3.columns
-      = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button'
+      = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button large expanded'
