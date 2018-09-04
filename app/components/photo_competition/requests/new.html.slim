@@ -2,31 +2,28 @@
   .large-3.columns
     h3 = @edition.name
 
-= form_for @request, as: :request, url: edition_requests_path, html: { multipart: true } do |f|
-  .row
-    .large-6.columns
+.row
+  .large-6.columns
+    = form_for @request, as: :request, url: edition_requests_path, html: { multipart: true } do |f|
       - if @request.errors.any?
         .callout.alert
           ul
             - @request.errors.full_messages.each do |msg|
               li= msg
 
-  .row
-    .large-3.columns
       b= f.label :category_record_id, "Kategoria"
       = f.select :category_record_id, @edition.categories.map {|c| [c.name, c.id]}, include_blank: true
-  .row
-    .large-3.columns
       b= f.label :description, "Opis zdjęcia"
       = f.text_field :description
-  .row
-    .large-3.columns
       b= f.label :file, "Plik zdjęcia"
       - if @request.file?
         = image_tag(@request.file.thumb, class: 'thumbnail')
       = f.file_field :file unless @request.file?
       = f.hidden_field :file_cache
 
-  .row
-    .large-3.columns
       = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button large expanded'
+
+  .large-6.columns
+    h4 Zgłoszone zdjęcia
+    - current_user.photo_requests.each do |request|
+      = image_tag request.file.thumb, class: 'thumbnail'
