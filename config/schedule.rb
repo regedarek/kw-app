@@ -12,3 +12,7 @@ end
 every '0 0 1 3 *' do
   rake :send_yearly_fee_reminder
 end
+
+every '0 0 1 9 *' do
+  rake :recalculate_cost
+end

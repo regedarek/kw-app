@@ -1,7 +1,7 @@
 module UserManagement
   class RecalculateCost
     def all
-      Db::Profile.where(accepted: false).each do |profile|
+      Db::Profile.includes(:payment).where(accepted: false, payments: { state: 'unpaid' }).each do |profile|
         profile.update_column(
           :cost, UserManagement::ApplicationCost.for(profile: profile).sum
         )

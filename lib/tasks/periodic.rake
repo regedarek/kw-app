@@ -20,3 +20,7 @@ end
 task :set_regular_members => :environment do
   UserManagement::Members.set_regular
 end
+
+task :recalculate_cost => :environment do
+  UserManagement::RecalculateCost.new.all
+end
