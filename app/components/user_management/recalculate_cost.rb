@@ -2,8 +2,8 @@ module UserManagement
   class RecalculateCost
     def all
       Db::Profile.where(accepted: false).each do |profile|
-        profile.update(
-          cost: UserManagement::ApplicationCost.for(profile: profile).sum
+        profile.update_column(
+          :cost, UserManagement::ApplicationCost.for(profile: profile).sum
         )
         payment = profile.payment
         if payment
