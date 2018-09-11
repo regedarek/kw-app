@@ -1,23 +1,34 @@
-| Serdecznie dziękujemy za chęć wstąpienia do naszego Klubu. 
+b Serdecznie dziękujemy za chęć wstąpienia do naszego Klubu. 
 br
 br
 | W załączniku znajdziesz plik PDF z deklaracją członkowską wraz z danymi podanymi przez Ciebie w formularzu zgłoszeniowym. 
 br
+| Przesyłamy również link do panelu poprzez który należy opłacić składkę i/lub wpisowe: 
+- if @profile.payment.present?
+  = link_to 'link do płatności', charge_payment_url(@profile.payment.id)
 br
-b Wszystkie wymagane dokumenty, czyli:
+br
+b Po dokonaniu płatności wszystkie wymagane dokumenty, czyli:
 ul
   li wydrukowaną i podpisaną deklarację,
   li dwa zdjęcia legitymacyjne,
   li świadectwo ukończenia wymaganego kursu (jeżeli robiłeś go poza naszym Klubem)
 
-| przynieś (lub prześlij) do siedziby KW Kraków w godzinach funkcjonowania sekretariatu Klubu (w każdy czwartek, w godzinach 18-20). 
-- if @profile.payment.present?
-  br
-  br
-  = link_to 'opłać wpisowe oraz składkę', charge_payment_url(@profile.payment.id)
+| przynieś (lub prześlij) do siedziby KW Kraków w godzinach funkcjonowania biura Klubu (w każdy czwartek, w godzinach 18-20). 
+br
+br
+b Przypominamy, że honorujemy tylko kursy ukończone u instruktorów posiadających licencję PZA.
+br
+br
+| Więcej informacji na temat: 
+= link_to 'jak wstąpić do KW Kraków', 'https://kw.krakow.pl/o-klubie/jak-wstapic-do-kw-krakow.html'
+|  znajdziesz na naszej stronie.
 br
 br
 | W przypadku przesłania pocztą deklaracji, o przyjęciu Cię do grona członków KW Kraków i możliwości odbioru legitymacji zostaniesz powiadomiony mailowo.
+br
+br
+i Wypełniona deklaracja jest ważna 3 miesiące od momentu jej przesłania, jeśli do tego czasu nie dopełnisz formalności Twoje dane zostaną automatycznie usunięte z systemu i deklarację trzeba będzie składać ponownie.
 br
 br
 | W razie pytań i wątpliwości, pisz na adres: 
