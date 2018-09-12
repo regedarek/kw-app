@@ -5,6 +5,7 @@ table.stack
       th.text-center Kto?
       th.text-center Zaliczka?
       - if current_user.admin? || current_user.roles.include?('events')
+        th width='15%' Pakiet
         - if email
           th width='15%'
         th width='15%'
@@ -42,6 +43,7 @@ table.stack
               span class='label alert'
                 | nieopłacono
         - if current_user.admin? || current_user.roles.include?('events')
+          td.text-center = sign_up.package_type&.name
           - if email
             td.text-center
              small
