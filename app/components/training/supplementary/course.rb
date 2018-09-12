@@ -34,6 +34,10 @@ module Training
         Training::Supplementary::SignUpRecord.where(course_id: id)
       end
 
+      def package_types
+        Training::Supplementary::PackageTypeRecord.where(supplementary_course_record_id: id)
+      end
+
       def organizer
         if ::Db::User.exists?(id: organizator_id)
           ::Db::User.find(organizator_id)&.display_name

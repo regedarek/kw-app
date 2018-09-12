@@ -22,9 +22,13 @@ b Uczestnicy:
   | Tylko dla członków klubu
 br
 - if @sign_up.course.price
-  b Opłata: 
-  = @sign_up.course.price_kw
-  |  zł
+  - if @sign_up.course.packages
+    b Opłata: 
+    = @sign_up.package_type.name
+  - else
+    b Opłata: 
+    = @sign_up.course.price_kw
+    |  zł
   br
   - if @sign_up.course.cash
     | Osobnym e-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.

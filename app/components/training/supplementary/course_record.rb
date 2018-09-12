@@ -5,6 +5,10 @@ module Training
       enum category: [:kw, :snw, :sww, :stj]
 
       has_many :sign_ups, class_name: 'Training::Supplementary::SignUpRecord', foreign_key: :course_id
+      has_many :package_types,
+        class_name: 'Training::Supplementary::PackageTypeRecord',
+        dependent: :destroy,
+        foreign_key: :supplementary_course_record_id
 
       self.table_name = 'supplementary_courses'
 

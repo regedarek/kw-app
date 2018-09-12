@@ -54,8 +54,13 @@
       - else
         - if user_signed_in?
           - if @limiter.sign_ups_started? && !@limiter.open?
-            = link_to t('.sign_up'), supplementary_sign_ups_path(sign_up: {course_id: @course.id, user_id: current_user.id, email: current_user.email}),
-              method: :post, class: 'button large success expanded'
+            = form_for :sign_up, url: supplementary_sign_ups_path do |z|
+              = z.hidden_field :course_id, value: @course.id
+              = z.hidden_field :user_id, value: current_user.id
+              = z.hidden_field :email, value: current_user.email
+              - if @course.packages
+                = z.select :supplementary_course_package_type_id, @course.package_types.collect {|u| [u.name, u.id]}
+              = z.submit 'Zapisz się', class: 'button large success expanded'
       - if @limiter.sign_ups_started?
         - if user_signed_in?
           - if @current_user_sign_up.present?

@@ -25,16 +25,28 @@ module Training
         @course.sign_ups.includes(:payment).where(payments: { state: :unpaid, cash: false }).order(:created_at)
       end
 
-      def prepaid_via_dotpay
-        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid })
+      def prepaid_via_dotpay_single
+        sign_ups = @course.sign_ups.includes(:payment).where(payments: { state: :prepaid })
+        sign_ups.select{|s| !s.package_type&.increase_limit?}
       end
 
-      def prepaid_via_cash
-        @course.sign_ups.includes(:payment).where(payments: { cash: true })
+      def prepaid_via_dotpay_double
+        sign_ups = @course.sign_ups.includes(:payment).where(payments: { state: :prepaid })
+        sign_ups.select{|s| s.package_type&.increase_limit?}
+      end
+
+      def prepaid_via_cash_double
+        sign_ups = @course.sign_ups.includes(:payment).where(payments: { state: :prepaid })
+        sign_ups.select{|s| s.package_type&.increase_limit?}
+      end
+
+      def prepaid_via_cash_single
+        sign_ups = @course.sign_ups.includes(:payment).where(payments: { cash: true })
+        sign_ups.select{|s| !s.package_type&.increase_limit?}
       end
 
       def sum
-        prepaid_via_dotpay&.count + prepaid_via_cash&.count
+        prepaid_via_dotpay_single&.count + prepaid_via_cash_single&.count + (2 * prepaid_via_dotpay_double&.count) + (2 * prepaid_via_cash_double&.count)
       end
 
       def in_limit?(sign_up)
