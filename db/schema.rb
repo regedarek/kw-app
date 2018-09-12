@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180904100421) do
+ActiveRecord::Schema.define(version: 20180912190936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -389,6 +389,15 @@ ActiveRecord::Schema.define(version: 20180904100421) do
     t.integer  "tshirt_size_2"
   end
 
+  create_table "supplementary_course_package_types", force: :cascade do |t|
+    t.string   "name",                                           null: false
+    t.integer  "supplementary_course_record_id",                 null: false
+    t.integer  "cost",                                           null: false
+    t.boolean  "increase_limit",                 default: false, null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
   create_table "supplementary_courses", force: :cascade do |t|
     t.string   "name"
     t.string   "place"
@@ -412,6 +421,7 @@ ActiveRecord::Schema.define(version: 20180904100421) do
     t.boolean  "last_fee_paid",    default: false, null: false
     t.boolean  "cash",             default: false, null: false
     t.string   "baner"
+    t.boolean  "packages",         default: false
   end
 
   create_table "supplementary_sign_ups", force: :cascade do |t|

@@ -67,7 +67,8 @@ pl:
           last_fee_paid: Wymagaj opłaconej składki?
           category: Kategoria
           place: Miejsce
-          open: Otwarte dla wszystkich?
+          open: Nie wymagaj zapisów
+          packages: Pakiety?
           start_date: Kiedy?
           price: Wymagaj zaliczki?
           one_day: Tylko jeden dzień?

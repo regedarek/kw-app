@@ -24,6 +24,7 @@ module Training
       attribute :price, Types::Strict::Bool
       attribute :cash, Types::Strict::Bool
       attribute :open, Types::Strict::Bool
+      attribute :packages, Types::Strict::Bool
       attribute :last_fee_paid, Types::Strict::Bool
       attribute :active, Types::Strict::Bool
       attribute :one_day, Types::Strict::Bool
@@ -61,6 +62,7 @@ module Training
             active: record.active,
             limit: record.limit,
             open: record.open,
+            packages: record.packages,
             last_fee_paid: record.last_fee_paid,
             baner: record.baner
           )

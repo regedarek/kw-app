@@ -26,12 +26,8 @@
 
 .row
   .large-12.columns
+    = render 'table', courses: @active_courses
     ul.accordion data-accordion="" data-multi-expand="true"
-      li.accordion-item.is-active data-accordion-item="" 
-        a.accordion-title href="#" Nadchodzące wydarzenia
-        .accordion-content data-tab-content="" 
-          = render 'table', courses: @active_courses
-
       li.accordion-item data-accordion-item="" 
         a.accordion-title href="#" Kalendarz klubowy
         .accordion-content data-tab-content="" 

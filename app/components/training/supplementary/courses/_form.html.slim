@@ -45,13 +45,17 @@
           = f.label :last_fee_paid, t('.last_fee_paid')
           = f.check_box :last_fee_paid
 
-        .large-3.columns
+        .large-2.columns
           = f.label :one_day, t('.one_day')
           = f.check_box :one_day, class: 'js-one-day'
 
-        .large-3.columns
+        .large-2.columns
           = f.label :open, t('.open')
           = f.check_box :open
+
+        .large-2.columns
+          = f.label :packages, t('.packages')
+          = f.check_box :packages
 
 .row
   .large-8.columns
