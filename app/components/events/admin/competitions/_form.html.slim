@@ -52,8 +52,9 @@
         = f.text_area :email_text
   .row
     .large-12.columns
-      .text-center
-        = image_tag @competition.baner.url
+      - if @competition.baner
+        .text-center
+          = image_tag @competition&.baner&.url
       .callout
         = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
 
