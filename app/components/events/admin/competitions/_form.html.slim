@@ -52,7 +52,7 @@
         = f.text_area :email_text
   .row
     .large-12.columns
-      - if @competition.baner
+      - if @competition.baner.present?
         .text-center
           = image_tag @competition&.baner&.url
       .callout
