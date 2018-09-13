@@ -17,11 +17,19 @@ module Training
       end
 
       def payment_type
-        :trainings
+        if course.packages
+          :fees
+        else
+          :trainings
+        end
       end
 
       def description
-        "Wydarzenie #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+        if course.packages
+          "Wydarzenie klubowe #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+        else
+          "Doszkalanie #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+        end
       end
     end
   end
