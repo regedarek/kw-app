@@ -46,6 +46,8 @@
           = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
             = a.email_field :email, placeholder: 'E-mail klubowicza'
             = a.hidden_field :course_id, value: @course.id
+            - if @course.packages
+              = a.select :supplementary_course_package_type_id, @course.package_types.collect {|u| [u.name, u.id]}
             = a.submit 'Zapisz i wyślij link do płatności', class: 'button primary expanded'
 
     .large-6.columns

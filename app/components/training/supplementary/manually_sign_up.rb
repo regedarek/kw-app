@@ -32,6 +32,7 @@ module Training
           email: form_outputs[:email],
           user_id: user.id
         )
+        sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         Right(:success)
       end
