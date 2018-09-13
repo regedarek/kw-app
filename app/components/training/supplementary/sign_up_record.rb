@@ -18,7 +18,7 @@ module Training
 
       def payment_type
         if course.packages
-          :fees
+          :reservations
         else
           :trainings
         end
