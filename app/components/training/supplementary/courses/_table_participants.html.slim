@@ -27,7 +27,10 @@ table.stack
             - else
               = sign_up.name
           - else
-            = sign_up.name
+            - if sign_up.user
+              = sign_up.user.display_name
+            - else
+              = sign_up.name
         td.text-center
           - if sign_up&.payment&.paid?
             span class='label success'
