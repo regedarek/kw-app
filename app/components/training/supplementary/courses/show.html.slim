@@ -43,11 +43,11 @@
       = @course.limit
       br
       - if @course.sign_ups&.any?
-        b Zapisanych uczestników: 
+        b Zapisanych: 
         = @limiter.sum
       br
       - if @course.sign_ups&.any?
-        b Rezerwowi uczestnicy: 
+        b Rezerwowych: 
         = @limiter.all_unpaid&.count
 
     .large-4.columns
@@ -107,7 +107,7 @@
     - if user_signed_in?
       .large-6.columns
         - if !@limiter.open?
-          h5 Zapisani
+          h5 Zapisani uczestnicy
           - all_prepaid = @limiter.all_prepaid
           = render 'table_participants', sign_ups: all_prepaid, email: false
 
