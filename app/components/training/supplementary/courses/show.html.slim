@@ -3,8 +3,16 @@
     .large-12.columns
       h3 = @course.name
 
+  - if @course.baner.present?
+    .row
+      .large-12.columns
+        .text-center
+          = image_tag @course.baner.url
+          br
+          br
+
   .row
-    .large-6.columns
+    .large-4.columns
       b = t('.place')
       = @course&.place
       br
@@ -30,27 +38,33 @@
       b = t('.organizer')
       = @course&.organizer
       br
-      b Limit: 
+      br
+      b Limit uczestników: 
       = @course.limit
       br
       - if @course.sign_ups&.any?
-        b Zapisani: 
+        b Zapisanych uczestników: 
         = @limiter.sum
       br
       - if @course.sign_ups&.any?
-        b Rezerwowi:
+        b Rezerwowi uczestnicy: 
         = @limiter.all_unpaid&.count
-        br
-      - if user_signed_in? && !@limiter.open?
-        - if current_user.admin? || current_user.roles.include?('events')
-          = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
-            = a.email_field :email, placeholder: 'E-mail klubowicza'
-            = a.hidden_field :course_id, value: @course.id
-            - if @course.packages
-              = a.select :supplementary_course_package_type_id, @course.package_types.collect {|u| [u.name, u.id]}
-            = a.submit 'Zapisz i wyślij link do płatności', class: 'button primary expanded'
 
-    .large-6.columns
+    .large-4.columns
+      - if user_signed_in?
+        - if current_user.admin? || current_user.roles.include?('events')
+          = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded'
+        - if user_signed_in? && !@limiter.open?
+          - if current_user.admin? || current_user.roles.include?('events')
+            = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
+              = a.email_field :email, placeholder: 'E-mail klubowicza'
+              = a.hidden_field :course_id, value: @course.id
+              - if @course.packages
+                = a.select :supplementary_course_package_type_id, @course.package_types.collect {|u| [u.name, u.id]}
+              = a.submit 'Zapisz i wyślij link do płatności', class: 'button primary expanded'
+
+
+    .large-4.columns
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @current_user_sign_up.present?
       - else
@@ -81,46 +95,32 @@
                     - else
                       .callout.warning
                         | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
-      = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large secondary'
-      - if user_signed_in?
-        - if current_user.admin? || current_user.roles.include?('events')
-          = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded large'
+      = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large hollow'
+
   .row
-    .large-12.columns
-      - if @course.baner.present?
-        .text-center
-          = image_tag @course.baner.url
-    .large-12.columns
+    .large-6.columns
       - if @course.remarks.present?
-        br
-        b = t('.remarks')
-        br
+        h5 = t('.remarks')
         .callout
           = simple_format @course&.remarks&.html_safe
 
-  - if user_signed_in? && !@limiter.open?
-    .row
-      .large-12.columns
-        h4 Zapisani
+    .large-6.columns
+      - if user_signed_in? && !@limiter.open?
+        h5 Zapisani
         - all_prepaid = @limiter.all_prepaid
         = render 'table_participants', sign_ups: all_prepaid, email: false
 
-    - if current_user.admin? || current_user.roles.include?('events')
-      .row
-        .large-12.columns
+        - if current_user.admin? || current_user.roles.include?('events')
           - if all_prepaid.any?
             .callout
               = all_prepaid.map(&:email).join(', ')
 
-    .row
-      .large-12.columns
-        h4 Lista rezerwowa
-        - all_unpaid = @limiter.all_unpaid
-        = render 'table_participants', sign_ups: all_unpaid, email: true
+    .large-6.columns
+      h5 Lista rezerwowa
+      - all_unpaid = @limiter.all_unpaid
+      = render 'table_participants', sign_ups: all_unpaid, email: true
 
-    - if current_user.admin? || current_user.roles.include?('events')
-      .row
-        .large-12.columns
-          - if all_unpaid.any?
-            .callout
-              = all_unpaid.map(&:email).join(', ')
+      - if current_user.admin? || current_user.roles.include?('events')
+        - if all_unpaid.any?
+          .callout
+            = all_unpaid.map(&:email).join(', ')
