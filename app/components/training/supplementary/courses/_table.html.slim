@@ -22,7 +22,7 @@ table.stack
       tr
         td.text-center = image_tag "#{course.category}.png", size: '40x40'
         td.text-center
-          = link_to course.name, polish_event_path(course.id)
+          = link_to course.name, polish_event_path(course.slug)
         td.text-center = course.place
         td.text-center
           - if course.start_date && course.end_date

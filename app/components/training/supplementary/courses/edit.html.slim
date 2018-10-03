@@ -5,6 +5,6 @@
     .large-4.columns
       = f.submit t('.submit'), class: 'button expanded large success'
     .large-4.columns
-      = link_to 'zobacz wydarzenie',supplementary_course_path(@course.id), class: 'button expanded large success'
+      = link_to 'zobacz wydarzenie', polish_event_path(@course.slug), class: 'button expanded large success'
     .large-4.columns
       = link_to t('.back'), :back, class: 'secondary button large expanded'
