@@ -45,7 +45,7 @@ module Training
         @course = Training::Supplementary::CourseRecord.find(params[:id])
 
         if @course.update(course_params.merge(organizator_id: course_params[:organizator_id]&.first))
-          redirect_to edit_wydarzenie_path(@course.id), notice: 'Course updated'
+          redirect_to edit_supplementary_course_path(@course.id), notice: 'Course updated'
         else
           render :edit
         end
@@ -73,7 +73,7 @@ module Training
         params
           .require(:course)
           .permit(
-            :name, :place, :start_date, :end_date, :application_date, :price_kw, :baner,
+            :name, :slug, :place, :start_date, :end_date, :application_date, :price_kw, :baner,
             :price_non_kw, :remarks, :category, :price, :one_day, :active, :cash,
             :open, :packages, :limit, :last_fee_paid, organizator_id: []
           )

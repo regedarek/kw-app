@@ -14,9 +14,13 @@
           = f.label :name, t('.team_name')
           = f.text_field :name
 
-        .large-3.columns
+        .large-2.columns
           = f.label :place, t('.place')
           = f.text_field :place
+
+        .large-2.columns
+          = f.label :slug
+          = f.text_field :slug
 
         .large-2.columns
           = f.label :category, t('.category')
@@ -28,7 +32,7 @@
           - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil
           = f.text_field :organizator_id, 'data-tokeninput' => { collection: names, options: { tokenLimit: 1, prePopulate: prepopulate}}.to_json
 
-        .large-2.columns
+        .large-1.columns
           = f.label :limit, t('.limit')
           = f.number_field :limit
 

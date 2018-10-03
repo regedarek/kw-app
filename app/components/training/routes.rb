@@ -31,6 +31,5 @@ Rails.application.routes.draw do
 
   get 'wydarzenia' => 'training/supplementary/courses#index', as: :wydarzenia
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
-  get 'wydarzenia/*id/edit' => 'training/supplementary/courses#edit', as: :edit_wydarzenie
   get 'wydarzenie/wypisz/*code' => 'training/supplementary/sign_ups#cancel', as: :polish_event_cancel
 end

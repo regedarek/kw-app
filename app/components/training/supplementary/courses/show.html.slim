@@ -84,7 +84,7 @@
       = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large secondary'
       - if user_signed_in?
         - if current_user.admin? || current_user.roles.include?('events')
-          = link_to 'Edytuj', edit_wydarzenie_path(@course.id), class: 'button alert expanded large'
+          = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded large'
   .row
     .large-12.columns
       - if @course.baner.present?

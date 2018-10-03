@@ -10,6 +10,7 @@ module Training
       constructor_type :strict
 
       attribute :id, Types::Strict::Int.optional
+      attribute :slug, Types::Strict::String
       attribute :category, Types::Strict::String
       attribute :name, Types::Strict::String.optional
       attribute :place, Types::Strict::String.optional
@@ -50,6 +51,7 @@ module Training
         def from_record(record)
           new(
             id: record.id,
+            slug: record.slug,
             category: record.category,
             name: record.name,
             place: record.place,
