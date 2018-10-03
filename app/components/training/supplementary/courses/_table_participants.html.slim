@@ -3,7 +3,8 @@ table.stack
     tr
       th.text-left width='5%' Lp.
       th.text-left Kto?
-      th.text-center width='20%' Płatność
+      - if @course.price
+        th.text-center width='20%' Płatność
       - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
         th width='15%'
   tbody
@@ -28,18 +29,19 @@ table.stack
               = sign_up.user.display_name
             - else
               = sign_up.name
-        td.text-center
-          - if sign_up&.payment&.paid?
-            span class='label success'
-              | opłacono
-          - else
-            - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
-              - if @limiter.reached?
+        - if @course.price
+          td.text-center
+            - if sign_up&.payment&.paid?
+              span class='label success'
+                | opłacono
+            - else
+              - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
+                - if @limiter.reached?
+                  span class='label alert'
+                    | nieopłacono
+              - else
                 span class='label alert'
                   | nieopłacono
-            - else
-              span class='label alert'
-                | nieopłacono
         - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
           td.text-right
             i.fi-list-thumbnails data-toggle="example-dropdown-#{sign_up.id}" data-auto-focus="true"
