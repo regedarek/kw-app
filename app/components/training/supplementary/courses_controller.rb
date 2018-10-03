@@ -5,12 +5,12 @@ module Training
       append_view_path 'app/components'
 
       def index
-        @active_courses = Training::Supplementary::Repository.new.fetch_active_courses(category: params[:category])
-        @inactive_courses = Training::Supplementary::Repository.new.fetch_inactive_courses(category: params[:category])
+        @active_courses = Training::Supplementary::Repository.new.fetch_active_courses(category: params[:category], kind: params[:kind])
+        @inactive_courses = Training::Supplementary::Repository.new.fetch_inactive_courses(category: params[:category], kind: params[:kind])
       end
 
       def archived
-        @archived_courses = Kaminari.paginate_array(Training::Supplementary::Repository.new.fetch_archived_courses(category: params[:category])).page(params[:page]).per(10)
+        @archived_courses = Kaminari.paginate_array(Training::Supplementary::Repository.new.fetch_archived_courses(category: params[:category], kind: params[:kind])).page(params[:page]).per(10)
       end
 
       def new
@@ -73,7 +73,7 @@ module Training
         params
           .require(:course)
           .permit(
-            :name, :slug, :place, :start_date, :end_date, :application_date, :price_kw, :baner,
+            :name, :slug, :place, :start_date, :kind, :end_date, :application_date, :price_kw, :baner,
             :price_non_kw, :remarks, :category, :price, :one_day, :active, :cash,
             :open, :packages, :limit, :last_fee_paid, organizator_id: []
           )

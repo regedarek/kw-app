@@ -10,29 +10,33 @@
   .large-12.columns
     .callout.primary
       .row
-        .large-3.columns
+        .large-4.columns
           = f.label :name, t('.team_name')
           = f.text_field :name
 
-        .large-2.columns
+        .large-3.columns
           = f.label :place, t('.place')
           = f.text_field :place
 
-        .large-2.columns
+        .large-3.columns
           = f.label :slug
           = f.text_field :slug
 
         .large-2.columns
           = f.label :category, t('.category')
           = f.select :category, @course.categories
+      .row
+        .large-3.columns
+          = f.label :kind, t('.category')
+          = f.select :kind, @course.kinds
 
-        .large-2.columns
+        .large-4.columns
           = f.label :organizator_id, t('.organizator_id')
           - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
           - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil
           = f.text_field :organizator_id, 'data-tokeninput' => { collection: names, options: { tokenLimit: 1, prePopulate: prepopulate}}.to_json
 
-        .large-1.columns
+        .large-2.columns
           = f.label :limit, t('.limit')
           = f.number_field :limit
 

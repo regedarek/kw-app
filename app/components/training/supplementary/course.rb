@@ -12,6 +12,7 @@ module Training
       attribute :id, Types::Strict::Int.optional
       attribute :slug, Types::Strict::String
       attribute :category, Types::Strict::String
+      attribute :kind, Types::Strict::String
       attribute :name, Types::Strict::String.optional
       attribute :place, Types::Strict::String.optional
       attribute :start_date, Types::Strict::DateTime.optional
@@ -53,6 +54,7 @@ module Training
             id: record.id,
             slug: record.slug,
             category: record.category,
+            kind: record.kind,
             name: record.name,
             place: record.place,
             start_date: record.start_date&.to_datetime,

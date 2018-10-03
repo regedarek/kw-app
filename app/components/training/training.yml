@@ -12,6 +12,13 @@ pl:
           not_last_fee: Musisz opłacić składkę członkowską!
       course:
         enums:
+          kinds:
+            other: Inne
+            slides: Slajdowisko
+            meeting: Spotkanie
+            competitions: Zawody
+            tour: Wycieczka
+            training: Szkolenie
           categories:
             kw: Ogólne
             sww: Wspinaczkowe

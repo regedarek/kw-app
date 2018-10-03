@@ -3,6 +3,7 @@ module Training
     class CourseRecord < ActiveRecord::Base
       mount_uploader :baner, Training::Supplementary::BanerUploader
       enum category: [:kw, :snw, :sww, :stj]
+      enum kind: [:other, :slides, :meeting, :competitions, :tour, :training]
 
       has_many :sign_ups, class_name: 'Training::Supplementary::SignUpRecord', foreign_key: :course_id
       has_many :package_types,
@@ -16,6 +17,14 @@ module Training
         ::Db::User.find(organizator_id)
       end
 
+      def kinds
+        Training::Supplementary::CourseRecord.kinds.keys.map do |key,value|
+          [
+            I18n.t("training.supplementary.course.enums.kinds.#{key}").humanize,
+            key.to_sym
+          ]
+        end
+      end
       def categories
         Training::Supplementary::CourseRecord.categories.keys.map do |key,value|
           [

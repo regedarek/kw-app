@@ -1,43 +1,58 @@
 module Training
   module Supplementary
     class Repository
-      def fetch_active_courses(category: nil)
+      def fetch_active_courses(category: nil, kind: nil)
         categories = if category.present?
           category
         else
           Training::Supplementary::CourseRecord.categories.keys
+        end
+        kinds = if kind.present?
+          kind
+        else
+          Training::Supplementary::CourseRecord.kinds.keys
         end
         Training::Supplementary::CourseRecord
           .where(start_date: Date.current.beginning_of_day..DateTime::Infinity.new)
-          .where(category: categories)
+          .where(category: categories, kind: kinds)
           .order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
       end
 
-      def fetch_archived_courses(category: nil)
+      def fetch_archived_courses(category: nil, kind: nil)
         categories = if category.present?
           category
         else
           Training::Supplementary::CourseRecord.categories.keys
+        end
+        kinds = if kind.present?
+          kind
+        else
+          Training::Supplementary::CourseRecord.kinds.keys
         end
         Training::Supplementary::CourseRecord
           .where(start_date: 1.year.ago..Date.current.beginning_of_day)
-          .where(category: categories)
+          .where(category: categories, kind: kinds)
           .order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
       end
 
-      def fetch_inactive_courses(category:)
+      def fetch_inactive_courses(category:, kind: nil)
         categories = if category.present?
           category
         else
           Training::Supplementary::CourseRecord.categories.keys
         end
+        kinds = if kind.present?
+          kind
+        else
+          Training::Supplementary::CourseRecord.kinds.keys
+        end
         Training::Supplementary::CourseRecord
           .where(start_date: nil)
-          .where(category: categories)
+          .where(category: categories, kind: kinds)
           .order(:application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end

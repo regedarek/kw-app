@@ -3,26 +3,26 @@
     h3 = t('.header')
 
 .row
-  .large-3.columns
-      .text-center.middle
-        = link_to category: :kw do
-          = image_tag "kw.png", size: '50x50'
-        = link_to category: :snw do
-          = image_tag "snw.png", size: '50x50'
-        = link_to category: :sww do
-          = image_tag "sww.png", size: '50x50'
-        = link_to category: :stj do
-          = image_tag "stj.png", size: '50x50'
-        - if params[:category].present?
-          = link_to category: nil do
-            = ' usuń filtr'
-  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-    .large-2.columns
-      = link_to 'Dodaj', new_supplementary_course_path, class: 'button expanded large'
-    .large-3.columns
-      = link_to 'Zarchiwizowane', archived_supplementary_courses_path, class: 'button alert expanded large'
+  .large-6.columns
+    .text-left.left
+      = link_to category: :kw do
+        = image_tag "kw.png", size: '50x50'
+      = link_to category: :snw do
+        = image_tag "snw.png", size: '50x50'
+      = link_to category: :sww do
+        = image_tag "sww.png", size: '50x50'
+      = link_to category: :stj do
+        = image_tag "stj.png", size: '50x50'
+      - if params[:category].present?
+        = link_to category: nil do
+          = ' usuń filtr'
   .large-4.columns
     = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
+  - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+    .large-1.columns
+      = link_to '+', new_supplementary_course_path, class: 'button expanded large'
+    .large-1.columns.right
+      = link_to 'A', archived_supplementary_courses_path, class: 'button alert expanded large'
 
 .row
   .large-12.columns
