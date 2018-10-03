@@ -51,13 +51,18 @@
       b Limit uczestników: 
       = @course.limit
       br
-      - if @course.sign_ups&.any?
-        b Zapisanych: 
-        = @limiter.sum
-      br
-      - if @course.sign_ups&.any?
-        b Rezerwowych: 
-        = @limiter.all_unpaid&.count
+      - if @course.price
+        - if @course.sign_ups&.any?
+          b Zapisanych: 
+          = @limiter.sum
+        br
+        - if @course.sign_ups&.any?
+          b Rezerwowych: 
+          = @limiter.all_unpaid&.count
+      - else
+        - if @course.sign_ups&.any?
+          b Zapisanych: 
+          = @limiter.all_unpaid&.count
 
     .large-4.columns
       - if user_signed_in?
