@@ -5,10 +5,7 @@ table.stack
       th.text-center Kto?
       th.text-center Płatność
       - if user_signed_in? && current_user.admin? && @course.packages || user_signed_in? && current_user.roles.include?('events')
-        th width='15%' Pakiet
-        - if email
-          th width='15%'
-      th width='15%'
+        th width='15%'
   tbody
     - sign_ups.each_with_index do |sign_up, i|
       tr
@@ -45,13 +42,14 @@ table.stack
             - else
               span class='label alert'
                 | nieopłacono
-        - if user_signed_in? && current_user.admin? && @course.packages  || user_signed_in? && current_user.roles.include?('events')
-          td.text-center = sign_up.package_type&.name
-          - if email
-            td.text-center
-             small
-              = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
-              br
-              = sign_up.email
-        td.text-center
-          = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete
+        - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
+          td.text-right
+            i.fi-list-thumbnails data-toggle="example-dropdown-#{sign_up.id}" data-auto-focus="true"
+            div id="example-dropdown-#{sign_up.id}" class="dropdown-pane text-center" data-dropdown=""
+              ul.menu.vertical
+                - if sign_up.course.packages
+                  li = sign_up.package_type&.name
+                - if email
+                  li
+                    = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
+                li = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete
