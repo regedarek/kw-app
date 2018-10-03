@@ -4,7 +4,7 @@ table.stack
       th.text-center width='5%' Lp.
       th.text-center Kto?
       th.text-center Płatność
-      - if current_user.admin? && @course.packages || current_user.roles.include?('events')
+      - if user_signed_in? && current_user.admin? && @course.packages || user_signed_in? && current_user.roles.include?('events')
         th width='15%' Pakiet
         - if email
           th width='15%'
@@ -36,7 +36,7 @@ table.stack
             span class='label success'
               | opłacono
           - else
-            - if current_user.admin? || current_user.roles.include?('events')
+            - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
               - if @limiter.reached?
                 span class='label alert'
                   | nieopłacono
@@ -45,7 +45,7 @@ table.stack
             - else
               span class='label alert'
                 | nieopłacono
-        - if current_user.admin? && @course.packages  || current_user.roles.include?('events')
+        - if user_signed_in? && current_user.admin? && @course.packages  || user_signed_in? && current_user.roles.include?('events')
           td.text-center = sign_up.package_type&.name
           - if email
             td.text-center
