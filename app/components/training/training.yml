@@ -52,7 +52,7 @@ pl:
           organizer: "Koordynator: "
           remarks: "Uwagi od koordynatora"
           price_kw: "Cena dla klubowiczów: "
-          application_price_kw: "Zaliczka: "
+          application_price_kw: "Opłata: "
           price_non_kw: "Cena dla nie-klubowiczów: "
           edit: Edycja
           destroy: Usuń
@@ -75,7 +75,7 @@ pl:
           end_date: Do kiedy
           application_date: Start zapisów
           cash: Tylko gotówka?
-          price_kw: Zaliczka dla KW
-          price_non_kw: Zaliczka dla reszty
+          price_kw: Opłata dla KW
+          price_non_kw: Opłata dla reszty
           remarks: Uwagi od organizatora
           organizator_id: Kto organizuje?

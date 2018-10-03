@@ -3,7 +3,7 @@ table.stack
     tr
       th.text-center width='5%' Lp.
       th.text-center Kto?
-      th.text-center Zaliczka?
+      th.text-center Płatność
       - if current_user.admin? || current_user.roles.include?('events')
         th width='15%' Pakiet
         - if email
