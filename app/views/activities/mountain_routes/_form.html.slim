@@ -12,7 +12,7 @@
       .large-6.columns
         = f.select :route_type, Db::Activities::MountainRoute.route_types.keys.map { |w| [I18n.t(w), w] }
 
-  .callout
+  .callout.primary
     .row
       .large-6.columns
         = f.label :name, 'nazwa drogi, grani*'

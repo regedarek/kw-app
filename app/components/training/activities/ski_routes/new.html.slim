@@ -1,8 +1,10 @@
-= form_for @ski_route, as: :ski_route, url: activities_ski_routes_path, html: { class: 'js-ski-routes-form' } do |f|
-  = render 'form', f: f
+.column.row
+  = image_tag 'ski.jpg'
+  = form_for @ski_route, as: :ski_route, url: activities_ski_routes_path, html: { class: 'js-ski-routes-form' } do |f|
+    = render 'form', f: f
 
-  .row
-    .large-6.columns
-      = f.submit t('.submit'), class: 'button expanded large success'
-    .large-6.columns
-      = link_to 'wróć do poprzedniej strony', :back, class: 'button expanded large warning'
+    .row
+      .large-6.columns
+        = f.submit t('.submit'), class: 'button expanded large success'
+      .large-6.columns
+        = link_to 'wróć do poprzedniej strony', :back, class: 'button expanded large warning'
