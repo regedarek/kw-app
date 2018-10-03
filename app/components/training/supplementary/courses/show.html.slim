@@ -81,10 +81,10 @@
                     - else
                       .callout.warning
                         | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
-      = link_to 'pozostałe wydarzenia', supplementary_courses_path, class: 'button expanded large secondary'
+      = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large secondary'
       - if user_signed_in?
         - if current_user.admin? || current_user.roles.include?('events')
-          = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded large'
+          = link_to 'Edytuj', edit_wydarzenie_path(@course.id), class: 'button alert expanded large'
   .row
     .large-12.columns
       - if @course.baner.present?

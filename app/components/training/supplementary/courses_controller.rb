@@ -31,12 +31,12 @@ module Training
       def create
         either(create_record) do |result|
           result.success do
-            redirect_to supplementary_courses_path, flash: { notice: 'Utworzono wydarzenie' }
+            redirect_to wydarzenia_path, flash: { notice: 'Utworzono wydarzenie' }
           end
 
           result.failure do |errors|
             flash[:error] = errors.values.join(", ")
-            redirect_to new_supplementary_course_path
+            render :new
           end
         end
       end
@@ -45,7 +45,7 @@ module Training
         @course = Training::Supplementary::CourseRecord.find(params[:id])
 
         if @course.update(course_params.merge(organizator_id: course_params[:organizator_id]&.first))
-          redirect_to edit_supplementary_course_path(@course.id), notice: 'Course updated'
+          redirect_to edit_wydarzenie_path(@course.id), notice: 'Course updated'
         else
           render :edit
         end

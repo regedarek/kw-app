@@ -34,9 +34,9 @@ module Training
         sign_up = Training::Supplementary::SignUpRecord.find_by(code: params[:code])
         if sign_up.present?
           sign_up.destroy
-          redirect_to supplementary_course_path(sign_up.course.id), notice: 'Wypisaliśmy Cię z wydarzenia!'
+          redirect_to polish_event_path(sign_up.course.id), notice: 'Wypisaliśmy Cię z wydarzenia!'
         else
-          redirect_to supplementary_courses_path, alert: 'Nie znaleziono takiego zapisu, być może już się wypisałeś!'
+          redirect_to wydarzenia_path, alert: 'Nie znaleziono takiego zapisu, być może już się wypisałeś!'
         end
       end
 
@@ -44,9 +44,9 @@ module Training
         if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
           sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
-          redirect_to supplementary_course_path(sign_up.course.id), notice: 'Wysłano e-mail z linkiem do płatności!'
+          redirect_to polish_event_path(sign_up.course.id), notice: 'Wysłano e-mail z linkiem do płatności!'
         else
-          redirect_to supplementary_course_path(sign_up.course.id), alert: 'Nie masz uprawnień!'
+          redirect_to polish_event_path(sign_up.course.id), alert: 'Nie masz uprawnień!'
         end
       end
 
