@@ -16,7 +16,7 @@ module Training
       attribute :rating,  Types::Strict::Int
       attribute :colleagues_names, Types::Coercible::Array
       attribute :partners, Types::Strict::String.optional
-      attribute :length, Types::Strict::Int
+      attribute :length, Types::Strict::Int.optional
       attribute :description, Types::Strict::String
       attribute :attachments, Types::Coercible::Array
 
