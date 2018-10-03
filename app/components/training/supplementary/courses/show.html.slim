@@ -39,6 +39,15 @@
       = @course&.organizer
       br
       br
+      - if @course.last_fee_paid
+        b Uczestnicy: 
+        Tylko dla członków klubu z opłaconymi składkami
+        br
+      - else
+        b Uczestnicy: 
+        Otwarta dla wszystkich wg dostępności miejsc
+        br
+
       b Limit uczestników: 
       = @course.limit
       br
@@ -98,13 +107,13 @@
       = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large hollow'
 
   .row
-    .large-6.columns
-      - if @course.remarks.present?
-        h5 = t('.remarks')
-        .callout
-          = simple_format @course&.remarks&.html_safe
-
     - if user_signed_in?
+      .large-6.columns
+        - if @course.remarks.present?
+          h5 = t('.remarks')
+          .callout
+            = simple_format @course&.remarks&.html_safe
+
       .large-6.columns
         - if !@limiter.open?
           h5 Zapisani uczestnicy
@@ -125,3 +134,9 @@
           - if all_unpaid.any?
             .callout
               = all_unpaid.map(&:email).join(', ')
+    - else
+      .large-12.columns
+        - if @course.remarks.present?
+          h5 = t('.remarks')
+          .callout
+            = simple_format @course&.remarks&.html_safe
