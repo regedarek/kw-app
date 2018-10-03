@@ -35,6 +35,9 @@ br
   - else
     = link_to 'Aby zapisać się na wydarzenie opłać je tutaj!', charge_payment_url(@sign_up.payment.id)
   br
+  br
+  | Jeżeli chcesz się wypisać z wydarzenia, poproś o to koordynatora.
+  br
 - else
   = link_to 'Zrezygnuj z udziału w wydarzeniu', polish_event_cancel_url(@sign_up.code)
   br
