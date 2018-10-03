@@ -120,7 +120,7 @@
       - all_unpaid = @limiter.all_unpaid
       = render 'table_participants', sign_ups: all_unpaid, email: true
 
-      - if current_user.admin? || current_user.roles.include?('events')
+      - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
         - if all_unpaid.any?
           .callout
             = all_unpaid.map(&:email).join(', ')
