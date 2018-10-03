@@ -114,26 +114,37 @@
           .callout
             = simple_format @course&.remarks&.html_safe
 
-      .large-6.columns
-        - if !@limiter.open?
-          h5 Zapisani uczestnicy
-          - all_prepaid = @limiter.all_prepaid
-          = render 'table_participants', sign_ups: all_prepaid, email: false
+      - if @course.price
+        .large-6.columns
+          - if !@limiter.open?
+            h5 Zapisani uczestnicy
+            - all_prepaid = @limiter.all_prepaid
+            = render 'table_participants', sign_ups: all_prepaid, email: false
+
+            - if current_user.admin? || current_user.roles.include?('events')
+              - if all_prepaid.any?
+                .callout
+                  = all_prepaid.map(&:email).join(', ')
+
+        .large-6.columns
+          h5 Lista rezerwowa
+          - all_unpaid = @limiter.all_unpaid
+          = render 'table_participants', sign_ups: all_unpaid, email: true
 
           - if current_user.admin? || current_user.roles.include?('events')
-            - if all_prepaid.any?
+            - if all_unpaid.any?
               .callout
-                = all_prepaid.map(&:email).join(', ')
+                = all_unpaid.map(&:email).join(', ')
+      - else
+        .large-6.columns
+          h5 Lista uczestników
+          - all_unpaid = @limiter.all_unpaid
+          = render 'table_participants', sign_ups: all_unpaid, email: true
 
-      .large-6.columns
-        h5 Lista rezerwowa
-        - all_unpaid = @limiter.all_unpaid
-        = render 'table_participants', sign_ups: all_unpaid, email: true
-
-        - if current_user.admin? || current_user.roles.include?('events')
-          - if all_unpaid.any?
-            .callout
-              = all_unpaid.map(&:email).join(', ')
+          - if current_user.admin? || current_user.roles.include?('events')
+            - if all_unpaid.any?
+              .callout
+                = all_unpaid.map(&:email).join(', ')
     - else
       .large-12.columns
         - if @course.remarks.present?
