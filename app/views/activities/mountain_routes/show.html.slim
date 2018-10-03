@@ -50,6 +50,11 @@
         - @route.rating.times do
           i.fi-star
 
+    .large-12.columns
+      b
+      div id="route_#{@route.id}"
+        = render  "training/activities/hearts/button", route: @route
+
     - if @route.attachments.any?
       .large-12.columns
         - @route.attachments.select{|p| !p.content_type.start_with?('image') }.each do |attachment|
