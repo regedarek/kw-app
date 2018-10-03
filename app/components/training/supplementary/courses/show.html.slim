@@ -104,23 +104,24 @@
         .callout
           = simple_format @course&.remarks&.html_safe
 
-    .large-6.columns
-      - if user_signed_in? && !@limiter.open?
-        h5 Zapisani
-        - all_prepaid = @limiter.all_prepaid
-        = render 'table_participants', sign_ups: all_prepaid, email: false
+    - if user_signed_in?
+      .large-6.columns
+        - if !@limiter.open?
+          h5 Zapisani
+          - all_prepaid = @limiter.all_prepaid
+          = render 'table_participants', sign_ups: all_prepaid, email: false
+
+          - if current_user.admin? || current_user.roles.include?('events')
+            - if all_prepaid.any?
+              .callout
+                = all_prepaid.map(&:email).join(', ')
+
+      .large-6.columns
+        h5 Lista rezerwowa
+        - all_unpaid = @limiter.all_unpaid
+        = render 'table_participants', sign_ups: all_unpaid, email: true
 
         - if current_user.admin? || current_user.roles.include?('events')
-          - if all_prepaid.any?
+          - if all_unpaid.any?
             .callout
-              = all_prepaid.map(&:email).join(', ')
-
-    .large-6.columns
-      h5 Lista rezerwowa
-      - all_unpaid = @limiter.all_unpaid
-      = render 'table_participants', sign_ups: all_unpaid, email: true
-
-      - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
-        - if all_unpaid.any?
-          .callout
-            = all_unpaid.map(&:email).join(', ')
+              = all_unpaid.map(&:email).join(', ')
