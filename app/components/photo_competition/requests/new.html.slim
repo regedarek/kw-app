@@ -9,7 +9,7 @@
       ul
         li Proporcje zdjęcia: 3:2
         li Rozdzielczość i rozmiar: min 6Mpx
-        li Termin składania prac: 15 listopada 2018
+        li Termin składania prac: 28 października 2018
     = form_for @request, as: :request, url: edition_requests_path, html: { multipart: true } do |f|
       - if @request.errors.any?
         .callout.alert
