@@ -8,6 +8,10 @@ module PhotoCompetition
       storage :file
     end
 
+    def extension_whitelist
+      %w(jpg jpeg png)
+    end
+
     version :thumb do
       process resize_to_fill: [100, 100]
 
