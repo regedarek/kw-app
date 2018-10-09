@@ -30,8 +30,9 @@ Rails.application.routes.draw do
   end
 
   get 'narciarskie-dziki' => 'activities/mountain_routes#index', defaults: { route_type: 'ski' }
-  get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new'
-  get 'przejscia/wspinaczka' => 'activities/mountain_routes#new'
+  get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new', as: :narciarstwo
+  get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
+  get 'przejscia' => 'activities/mountain_routes#index', as: :przejscia
   get 'wydarzenia' => 'training/supplementary/courses#index', as: :wydarzenia
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
   get 'wydarzenia/*slug' => 'training/supplementary/courses#show', as: :polish_event_slug
