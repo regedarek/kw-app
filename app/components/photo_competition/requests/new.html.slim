@@ -26,8 +26,6 @@
         .large-6.columns
           b= f.label :area, "Rejon zdjęcia"
           = f.text_field :area
-      b= f.label :description, "Opis zdjęcia"
-      = f.text_area :description
       b= f.label :file, "Plik zdjęcia"
       - if @request.file?
         = image_tag(@request.file.thumb, class: 'thumbnail')
