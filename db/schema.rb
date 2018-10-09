@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181003194107) do
+ActiveRecord::Schema.define(version: 20181009110950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,10 +86,11 @@ ActiveRecord::Schema.define(version: 20181003194107) do
   end
 
   create_table "edition_categories", force: :cascade do |t|
-    t.integer  "edition_record_id", null: false
-    t.string   "name",              null: false
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "edition_record_id",              null: false
+    t.string   "name",                           null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "mandatory_fields",  default: [],              array: true
   end
 
   create_table "events", force: :cascade do |t|
@@ -269,6 +270,8 @@ ActiveRecord::Schema.define(version: 20181003194107) do
     t.datetime "updated_at",         null: false
     t.string   "file"
     t.integer  "category_record_id", null: false
+    t.string   "area"
+    t.string   "title"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -435,7 +438,7 @@ ActiveRecord::Schema.define(version: 20181003194107) do
     t.datetime "updated_at",                                                        null: false
     t.string   "name"
     t.string   "email"
-    t.string   "code",                                 default: "89e89588843eb33e", null: false
+    t.string   "code",                                 default: "a15088e83eb354d4", null: false
     t.integer  "supplementary_course_package_type_id"
     t.index ["course_id", "user_id"], name: "index_supplementary_sign_ups_on_course_id_and_user_id", unique: true, using: :btree
   end

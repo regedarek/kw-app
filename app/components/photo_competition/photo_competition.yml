@@ -8,4 +8,6 @@ pl:
       photo_competition/request_record:
         category: Kategoria
         description: Opis zdjęcia
+        area: Rejon zdjęcia
+        title: Tytuł zdjęcia
         file: Plik zdjęcia

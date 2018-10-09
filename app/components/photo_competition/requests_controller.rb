@@ -27,7 +27,7 @@ module PhotoCompetition
     private
 
     def request_params
-      params.require(:request).permit(:description, :file, :category_record_id, :file_cache)
+      params.require(:request).permit(:description, :file, :category_record_id, :file_cache, :title, :area)
     end
   end
 end
