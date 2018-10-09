@@ -12,7 +12,7 @@ td.js-item-editable-cell
       = f.text_area :description
 td.js-item-editable-cell
   .js-item-editable-text= item.cost.to_s + ' zł'
-  - if current_user.kw_id == 2345
+  - if user_signed_in? && current_user.kw_id == 2345
     = form_for item, as: :admin_items_form, url: update_editable_admin_item_path(item),
       html: { class: 'js-item-editable-form', style: 'display: none' }, method: :put do |f|
         = f.text_field :cost
