@@ -27,7 +27,7 @@
           tr
             th width='5%' ID
             th width='15%' Kategoria
-            th width='30%' Opis
+            th width='30%' Tytuł
             th width='30%' Nazwa Pliku
             th width='30%' Zgłaszający
             th width='15%' Zdjęcie
@@ -36,7 +36,7 @@
             tr
               td = i + 1
               td = request.category.name
-              td = request.description
+              td = request.title
               td = File.basename(request.file.path)
               td = request.user.display_name
               td
