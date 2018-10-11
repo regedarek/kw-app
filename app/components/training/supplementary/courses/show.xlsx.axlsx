@@ -12,12 +12,12 @@ wb.styles do |style|
   wb.add_worksheet(name: "#{@course.slug}") do |sheet|
     default_attributes = sign_up_attributes.map do |attr|
       Training::Supplementary::SignUpRecord.human_attribute_name(attr)
-    end.push('Kto?', 'Pakiet', 'Płatność', 'Utworzono')
+    end.push('Kto?', 'Pakiet', 'Kwota', 'Płatność', 'Utworzono')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     @course.sign_ups.each do |sign_up|
       default_values = sign_up_attributes.map do |attr|
         sign_up.read_attribute(attr)
-      end.push(sign_up.user.display_name, Training::Supplementary::PackageTypeRecord.find_by(id: sign_up.supplementary_course_package_type_id)&.name, sign_up.payment.prepaid?, sign_up.created_at)
+      end.push(sign_up.user.display_name, Training::Supplementary::PackageTypeRecord.find_by(id: sign_up.supplementary_course_package_type_id)&.name, sign_up.cost, sign_up.payment.paid?, sign_up.created_at)
       sheet.add_row(default_values)
     end
   end
