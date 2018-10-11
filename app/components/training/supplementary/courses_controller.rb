@@ -1,6 +1,7 @@
 module Training
   module Supplementary
     class CoursesController < ApplicationController
+      respond_to :html, :xlsx
       include EitherMatcher
       append_view_path 'app/components'
 
@@ -22,6 +23,14 @@ module Training
         @course = Training::Supplementary::Course.from_record(record)
         @limiter = Training::Supplementary::Limiter.new(@course)
         @current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id) if user_signed_in?
+
+        respond_with do |format|
+          format.html
+          format.xlsx do
+            disposition = "attachment; filename='#{@course.slug}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+            response.headers['Content-Disposition'] = disposition
+          end
+        end
       end
 
       def edit

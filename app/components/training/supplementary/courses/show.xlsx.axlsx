@@ -1,0 +1,24 @@
+wb = xlsx_package.workbook
+sign_up_attributes = %i(
+  email code
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "#{@course.slug}") do |sheet|
+    default_attributes = sign_up_attributes.map do |attr|
+      Training::Supplementary::SignUpRecord.human_attribute_name(attr)
+    end.push('Kto?', 'Pakiet', 'Płatność', 'Utworzono')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
+    @course.sign_ups.each do |sign_up|
+      default_values = sign_up_attributes.map do |attr|
+        sign_up.read_attribute(attr)
+      end.push(sign_up.user.display_name, Training::Supplementary::PackageTypeRecord.find_by(id: sign_up.supplementary_course_package_type_id)&.name, sign_up.payment.prepaid?, sign_up.created_at)
+      sheet.add_row(default_values)
+    end
+  end
+end

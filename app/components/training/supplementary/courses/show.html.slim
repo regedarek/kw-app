@@ -68,6 +68,7 @@
       - if user_signed_in?
         - if current_user.admin? || current_user.roles.include?('events')
           = link_to 'Edytuj', edit_supplementary_course_path(@course.id), class: 'button alert expanded'
+          = link_to 'Export do excela', supplementary_course_path(@course.id, format: :xlsx), class: 'button warning expanded'
         - if user_signed_in? && !@limiter.open?
           - if current_user.admin? || current_user.roles.include?('events')
             = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
