@@ -10,6 +10,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'rails-jquery-tokeninput'
 
+gem 'honeybadger', '~> 3.1'
 
 gem 'foundation-icons-sass-rails'
 gem 'foundation-rails'
