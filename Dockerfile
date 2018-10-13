@@ -12,6 +12,6 @@ ENV BUNDLE_PATH /kw-app-gems
 
 ADD . $app
 
-EXPOSE 3001
+EXPOSE 3002
 
 CMD rm -f tmp/pids/server.pid && bundle exec rails s -p 3002 -b 0.0.0.0
