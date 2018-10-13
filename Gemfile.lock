@@ -111,8 +111,6 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     chronic (0.10.2)
-    codeclimate-test-reporter (1.0.8)
-      simplecov (<= 0.13)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.1)
@@ -135,7 +133,6 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
-    docile (1.1.5)
     dotenv (2.2.0)
     dotenv-rails (2.2.0)
       dotenv (= 2.2.0)
@@ -358,11 +355,6 @@ GEM
       faraday (~> 0.9)
       jwt (~> 1.5)
       multi_json (~> 1.10)
-    simplecov (0.13.0)
-      docile (~> 1.1.0)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
     slim (3.0.7)
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
@@ -430,7 +422,6 @@ DEPENDENCIES
   capistrano-rbenv
   carrierwave
   chronic
-  codeclimate-test-reporter (~> 1.0.0)
   coffee-rails
   devise
   dotenv-rails
@@ -460,7 +451,6 @@ DEPENDENCIES
   rspec-rails
   rubyzip (>= 1.2.1)
   sass-rails
-  simplecov
   slim-rails
   spring
   timecop

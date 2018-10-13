@@ -18,7 +18,7 @@ services:
       - mailcatcher
     volumes:
       - .:/usr/src/kw-app
-      - gems:/gems
+      - gems:/kw-app-gems
     ports:
       - "3002:3002"
     depends_on:
