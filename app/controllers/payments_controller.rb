@@ -16,6 +16,9 @@ class PaymentsController < ApplicationController
   def charge
     payment = Db::Payment.find(params[:id])
     if payment.payable.is_a?(Training::Supplementary::SignUpRecord)
+      unless payment.payable
+        return redirect_to(supplementary_course_path(payment.payable.course.id), alert: 'Twój zapis został usunięty, spróbuj zapisać się ponownie!')
+      end
       if Training::Supplementary::Limiter.new(payment.payable.course).reached?
         return redirect_to(supplementary_course_path(payment.payable.course.id), alert: 'Limit zapisów został wykorzystany!')
       end
