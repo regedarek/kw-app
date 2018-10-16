@@ -40,9 +40,4 @@
               td = File.basename(request.file.path)
               td = request.user.display_name
               td
-                = image_tag request.file.thumb, data: { toggle: "photo-#{i}" }
-
-                div id="photo-#{i}" class="reveal" data-reveal="" 
-                  = image_tag request.file.url
-                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                    span aria-hidden="true"  &times;
+                = image_tag request.file.thumb
