@@ -12,8 +12,16 @@ module Availability
       Db::Item.order(:rentable_id).rentable - not_available_items - Db::Item.instructors
     end
 
-    def collect_abc
+    def collect_abc_1
       collect.select {|i| i.display_name.downcase.match?('detektor') }
+    end
+
+    def collect_abc_3
+      collect.select {|i| i.display_name.downcase.match?('łopata') }
+    end
+
+    def collect_abc_2
+      collect.select {|i| i.display_name.downcase.match?('sonda') }
     end
 
     def collect_axes

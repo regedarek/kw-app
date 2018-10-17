@@ -6,7 +6,9 @@ class ReservationsController < ApplicationController
    return redirect_to reservations_path(start_date: guarded_date.nearest_thursday) unless guarded_date.thursday?
    return redirect_to reservations_path, alert: 'Data nie może być w przeszłości' if params[:start_date].to_date.past?
    @available_items = Availability::Items.new(start_date: params[:start_date]).collect
-   @abc = Availability::Items.new(start_date: params[:start_date]).collect_abc
+   @abc_1 = Availability::Items.new(start_date: params[:start_date]).collect_abc_1
+   @abc_2 = Availability::Items.new(start_date: params[:start_date]).collect_abc_2
+   @abc_2 = Availability::Items.new(start_date: params[:start_date]).collect_abc_3
    @axes = Availability::Items.new(start_date: params[:start_date]).collect_axes
    @crampons = Availability::Items.new(start_date: params[:start_date]).collect_crampons
    @rest = Availability::Items.new(start_date: params[:start_date]).collect_rest

@@ -14,7 +14,7 @@
 
       ul.accordion data-accordion="" data-multi-expand="true"
         li.accordion-item.is-active data-accordion-item="" 
-          a.accordion-title href="#" Zestawy lawinowe
+          a.accordion-title href="#" Detektory
           .accordion-content data-tab-content="" 
             table
               thead
@@ -23,7 +23,49 @@
                   th width='5%' Koszt
                   th width='10%' 
               tbody
-                - @abc.each do |item|
+                - @abc_1.each do |item|
+                  tr
+                    td
+                      = item.display_name
+                    td.text-center
+                      = item.cost
+                      = ' zł'
+                    td.text-center
+                      = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+
+      ul.accordion data-accordion="" data-multi-expand="true"
+        li.accordion-item.is-active data-accordion-item="" 
+          a.accordion-title href="#" Sondy
+          .accordion-content data-tab-content="" 
+            table
+              thead
+                tr
+                  th=t('.item')
+                  th width='5%' Koszt
+                  th width='10%' 
+              tbody
+                - @abc_2.each do |item|
+                  tr
+                    td
+                      = item.display_name
+                    td.text-center
+                      = item.cost
+                      = ' zł'
+                    td.text-center
+                      = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
+
+      ul.accordion data-accordion="" data-multi-expand="true"
+        li.accordion-item.is-active data-accordion-item="" 
+          a.accordion-title href="#" Łopaty
+          .accordion-content data-tab-content="" 
+            table
+              thead
+                tr
+                  th=t('.item')
+                  th width='5%' Koszt
+                  th width='10%' 
+              tbody
+                - @abc_3.each do |item|
                   tr
                     td
                       = item.display_name
