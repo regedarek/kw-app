@@ -2,6 +2,10 @@ class PaymentsController < ApplicationController
   def index
   end
 
+  def destroy
+
+  end
+
   def mark_as_paid
     payment = Db::Payment.find(params[:id])
     if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
