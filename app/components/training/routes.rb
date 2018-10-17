@@ -33,9 +33,9 @@ Rails.application.routes.draw do
   get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new', as: :narciarstwo
   get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
   get 'przejscia' => 'activities/mountain_routes#index', as: :przejscia
+  get 'wydarzenia/narciarskie' => 'training/supplementary/courses#index', defaults: { category: 'snw' }, as: :ski_events
   get 'wydarzenia' => 'training/supplementary/courses#index', as: :wydarzenia
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
   get 'wydarzenia/*slug' => 'training/supplementary/courses#show', as: :polish_event_slug
-  get 'wydarzenia/narciarskie' => 'training/supplementary/courses#index', defaults: { category: 'snw' }, as: :ski_events
   get 'wydarzenie/wypisz/*code' => 'training/supplementary/sign_ups#cancel', as: :polish_event_cancel
 end
