@@ -13,7 +13,7 @@ module Availability
     end
 
     def collect_abc
-      collect.select {|i| i.display_name.downcase.match?('abc') }
+      collect.select {|i| i.display_name.downcase.match?('detektor') }
     end
 
     def collect_axes
