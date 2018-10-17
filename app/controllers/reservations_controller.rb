@@ -8,7 +8,7 @@ class ReservationsController < ApplicationController
    @available_items = Availability::Items.new(start_date: params[:start_date]).collect
    @abc_1 = Availability::Items.new(start_date: params[:start_date]).collect_abc_1
    @abc_2 = Availability::Items.new(start_date: params[:start_date]).collect_abc_2
-   @abc_2 = Availability::Items.new(start_date: params[:start_date]).collect_abc_3
+   @abc_3 = Availability::Items.new(start_date: params[:start_date]).collect_abc_3
    @axes = Availability::Items.new(start_date: params[:start_date]).collect_axes
    @crampons = Availability::Items.new(start_date: params[:start_date]).collect_crampons
    @rest = Availability::Items.new(start_date: params[:start_date]).collect_rest
