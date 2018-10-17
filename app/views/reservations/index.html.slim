@@ -14,7 +14,7 @@
 
       ul.accordion data-accordion="" data-multi-expand="true"
         li.accordion-item.is-active data-accordion-item="" 
-          a.accordion-title href="#" Detektory
+          a.accordion-title href="#" 
           .accordion-content data-tab-content="" 
             table
               thead
@@ -33,8 +33,8 @@
                     td.text-center
                       = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
 
-      ul.accordion data-accordion=""
-        li.accordion-item.is-active data-accordion-item="" 
+      ul.accordion data-accordion="" data-multi-expand="true"
+        li.accordion-item data-accordion-item="" 
           a.accordion-title href="#" Sondy
           .accordion-content data-tab-content="" 
             table
@@ -54,8 +54,8 @@
                     td.text-center
                       = link_to t('reserve'), reservations_path(reservations_form: { item_ids: [item.id], start_date: params[:start_date], end_date: params[:start_date].to_date.next_week(:thursday).to_s }), method: :post
 
-      ul.accordion data-accordion=""
-        li.accordion-item.is-active data-accordion-item="" 
+      ul.accordion data-accordion="" data-multi-expand="true"
+        li.accordion-item data-accordion-item="" 
           a.accordion-title href="#" Łopaty
           .accordion-content data-tab-content="" 
             table
