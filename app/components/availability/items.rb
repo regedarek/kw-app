@@ -33,7 +33,7 @@ module Availability
     end
 
     def collect_rest
-      collect - collect_abc - collect_axes - collect_crampons
+      collect - collect_abc_1 - collect_abc_2 - collect_abc_3 - collect_axes - collect_crampons
     end
 
     def week
