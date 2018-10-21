@@ -57,19 +57,11 @@
 
     - if @route.attachments.any?
       .large-12.columns
-        - @route.attachments.select{|p| !p.content_type.start_with?('image') }.each_with_index do |attachment, i|
-          - if MIME::Types.type_for(attachment.path).any? {|type| type.media_type == 'image' }
-            = image_tag attachment.thumb.url, class: 'thumbnail', data: { toggle: "attachment-#{i}" }
-
-            div id="attachment-#{i}" class="reveal" data-reveal="" 
-              = image_tag attachment.url
-              button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                span aria-hidden="true"  &times;
-          - else
-            = link_to attachment.url, download: attachment.file.identifier do
-              = image_tag('file.jpg', class: 'thumbnail')
-              |  
-              = attachment.file.identifier
+        - @route.attachments.select{|p| !p.content_type.start_with?('image') }.each do |attachment|
+          = link_to attachment.url, download: attachment.file.identifier do
+            = image_tag('file.jpg', class: 'thumbnail')
+            |  
+            = attachment.file.identifier
         br
         - @route.attachments.select{|p| p.content_type.start_with?('image') }.each_with_index do |photo, i|
           = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
