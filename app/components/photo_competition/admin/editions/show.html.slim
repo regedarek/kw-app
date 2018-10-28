@@ -41,3 +41,4 @@
               td = request.user.display_name
               td
                 = image_tag request.file.thumb
+      = paginate @photo_requests
