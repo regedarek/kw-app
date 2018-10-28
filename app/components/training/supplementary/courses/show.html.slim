@@ -35,9 +35,14 @@
         - if @course.price_kw
           | zł
         br
+
+      - if @course&.package_types.present?
+        b Pakiety: 
+        ul
+          - @course.package_types.each do |p|
+            li = "#{p.name} - #{p.cost}"
       b = t('.organizer')
       = @course&.organizer
-      br
       br
       - if @course.last_fee_paid
         b Uczestnicy: 
