@@ -33,8 +33,7 @@ module Training
         )
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         if Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
-          byebug
-          Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_now
+          Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         end
         Right(:success)
       end
