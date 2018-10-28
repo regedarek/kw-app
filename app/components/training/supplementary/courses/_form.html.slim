@@ -64,6 +64,8 @@
         .large-2.columns
           = f.label :packages, t('.packages')
           = f.check_box :packages
+          br
+          = link_to ' Dodaj pakiet', new_supplementary_course_package_path(@course)
 
 .row
   .large-8.columns
