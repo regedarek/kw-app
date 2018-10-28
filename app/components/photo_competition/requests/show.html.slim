@@ -1,0 +1,16 @@
+.column
+  .row
+    .large-12.columns
+      h3 = @request.title
+      = link_to 'wróc', admin_edition_path(@request.edition)
+    .large-12.columns
+      b Kategoria: 
+      = @request.category.name
+    .large-12.columns
+      b Nazwa pliku: 
+      = File.basename(@request.file.path)
+    .large-12.columns
+      b Kto?: 
+      = @request.user.display_name
+    .large-12.columns
+      = image_tag @request.file

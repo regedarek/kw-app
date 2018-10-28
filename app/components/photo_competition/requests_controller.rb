@@ -9,6 +9,13 @@ module PhotoCompetition
       @request = @edition.photo_requests.new
     end
 
+    def show
+      return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in? && current_user.roles.include?('photo_competition')
+
+      @edition = PhotoCompetition::EditionRecord.find_by(code: params[:edition_id])
+      @request = PhotoCompetition::RequestRecord.find(params[:id])
+    end
+
     def create
       return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in?
 
