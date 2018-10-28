@@ -64,10 +64,13 @@ module Activities
 
     def destroy
       route = Db::Activities::MountainRoute.find(params[:id])
-      fail 'not admin' unless user_signed_in? && (current_user.admin? || current_user.id == route.user_id)
-      route.destroy
+      if user_signed_in? && (current_user.admin? || current_user.id == route.user_id)
+        route.destroy
 
-      redirect_to activities_mountain_routes_path, notice: t('.removed_successfully')
+        redirect_to activities_mountain_routes_path, notice: t('.removed_successfully')
+      else
+        redirect_to :back, alert: 'Musisz być właścicielem przejścia lub administratorem'
+      end
     end
 
     private
