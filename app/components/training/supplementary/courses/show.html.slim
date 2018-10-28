@@ -35,7 +35,6 @@
         - if @course.price_kw
           | zł
         br
-
       - if @course&.package_types.present?
         b Pakiety: 
         ul
@@ -150,15 +149,16 @@
               .callout
                 = all_unpaid.map(&:email).join(', ')
       - else
-        .large-6.columns
-          h5 Lista uczestników
-          - all_unpaid = @limiter.all_unpaid
-          = render 'table_participants', sign_ups: all_unpaid, email: true
+        - unless @course.open
+          .large-6.columns
+            h5 Lista uczestników
+            - all_unpaid = @limiter.all_unpaid
+            = render 'table_participants', sign_ups: all_unpaid, email: true
 
-          - if current_user.admin? || current_user.roles.include?('events')
-            - if all_unpaid.any?
-              .callout
-                = all_unpaid.map(&:email).join(', ')
+            - if current_user.admin? || current_user.roles.include?('events')
+              - if all_unpaid.any?
+                .callout
+                  = all_unpaid.map(&:email).join(', ')
     - else
       .large-12.columns
         - if @course.remarks.present?
