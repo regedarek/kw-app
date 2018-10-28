@@ -6,7 +6,7 @@ module Training
       end
       # creates a new heart row with post_id and user_id
       def heart!(route)
-        @user.hearts.create!(mountain_route_id: route.id)
+        @user.hearts.create!(mountain_route_id: route.id) unless heart?(route)
       end
 
       # destroys a heart with matching post_id and user_id
