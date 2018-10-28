@@ -64,7 +64,7 @@
             = attachment.file.identifier
         br
         - @route.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-          - if photo
+          - unless photo.blank? || photo.thumb.blank?
             = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
 
             div id="photo-#{i}" class="reveal" data-reveal="" 
