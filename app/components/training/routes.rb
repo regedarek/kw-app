@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     namespace :supplementary do
       resources :courses do
+        resources :packages, only: [:new, :create]
         collection do
           get :archived
         end

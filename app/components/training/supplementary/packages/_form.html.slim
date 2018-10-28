@@ -1,0 +1,21 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul
+          - @errors.each do |error|
+            li= error.last.to_sentence
+
+.row
+  .large-12.columns
+    .row
+      .large-4.columns
+        = f.label :name, 'Nazwa'
+        = f.text_field :name
+    .row
+      .large-4.columns
+        = f.hidden_field :course_id, value: @course.id
+    .row
+      .large-4.columns
+        = f.label :cost, 'Koszt'
+        = f.number_field :cost

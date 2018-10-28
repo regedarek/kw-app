@@ -75,7 +75,8 @@
               = a.email_field :email, placeholder: 'E-mail klubowicza'
               = a.hidden_field :course_id, value: @course.id
               - if @course.packages
-                = a.select :supplementary_course_package_type_id, @course.package_types.collect {|u| [u.name, u.id]}
+                = a.select :supplementary_course_package_type_id,
+                @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]}
               = a.submit 'Zapisz i wyślij link do płatności', class: 'button primary expanded'
 
 
@@ -90,7 +91,9 @@
               = z.hidden_field :user_id, value: current_user.id
               = z.hidden_field :email, value: current_user.email
               - if @course.packages
-                = z.select :supplementary_course_package_type_id, @course.package_types.collect {|u| [u.name, u.id]}
+                = z.select :supplementary_course_package_type_id,
+                @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
+                include_blank: 'Wybierz pakiet'
               = z.submit 'Zapisz się', class: 'button large success expanded'
       - if @limiter.sign_ups_started?
         - if user_signed_in?

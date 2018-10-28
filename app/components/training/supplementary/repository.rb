@@ -66,6 +66,15 @@ module Training
         Training::Supplementary::Course.from_record(record)
       end
 
+      def create_package(form_outputs:)
+        course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
+
+        course.package_types.create!(
+          name: form_outputs[:name],
+          cost: form_outputs[:cost]
+        )
+      end
+
       def sign_up!(email:, user_id:, course_id:)
         course = Training::Supplementary::CourseRecord.find(course_id)
 

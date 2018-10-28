@@ -10,7 +10,7 @@ module Training
 
       def call(raw_inputs:)
         form_outputs = form.call(raw_inputs)
-        return Left(form_outputs.messages(full: true)) unless form_outputs.success?
+        return Left(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
 
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
         if form_outputs[:user_id].present?
@@ -33,7 +33,8 @@ module Training
         )
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         if Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
-          Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
+          byebug
+          Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_now
         end
         Right(:success)
       end
