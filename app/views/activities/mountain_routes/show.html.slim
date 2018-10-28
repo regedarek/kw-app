@@ -64,12 +64,13 @@
             = attachment.file.identifier
         br
         - @route.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-          = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+          - if photo
+            = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
 
-          div id="photo-#{i}" class="reveal" data-reveal="" 
-            = image_tag photo.url
-            button.close-button aria-label=("Close reveal") data-close="" type="button" 
-              span aria-hidden="true"  &times;
+            div id="photo-#{i}" class="reveal" data-reveal="" 
+              = image_tag photo.url
+              button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                span aria-hidden="true"  &times;
 
     .large-12.columns
       hr
