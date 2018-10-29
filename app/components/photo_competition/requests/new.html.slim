@@ -4,45 +4,48 @@
 
 .row
   .large-6.columns
-    .callout.primary
-      b Najważniejsze uwagi
-      ul
-        li Proporcje zdjęcia: 3:2
-        li Rozdzielczość i rozmiar: min 6Mpx
-        li Termin składania prac: 28 października 2018
-    = form_for @request, as: :request, url: edition_requests_path, html: { multipart: true } do |f|
-      - if @request.errors.any?
-        .callout.alert
-          ul
-            - @request.errors.full_messages.each do |msg|
-              li= msg
+    - if !@edition.closed || params[:closed] == 'false'
+      .callout.primary
+        b Najważniejsze uwagi
+        ul
+          li Proporcje zdjęcia: 3:2
+          li Rozdzielczość i rozmiar: min 6Mpx
+          li Termin składania prac: 28 października 2018
+      = form_for @request, as: :request, url: edition_requests_path, html: { multipart: true } do |f|
+        - if @request.errors.any?
+          .callout.alert
+            ul
+              - @request.errors.full_messages.each do |msg|
+                li= msg
 
-      b= f.label :category_record_id, "Kategoria"
-      = f.select :category_record_id, @edition.categories.map {|c| [c.name, c.id]}, include_blank: true
-      .row
-        .large-6.columns
-          b= f.label :title, "Tytuł zdjęcia"
-          = f.text_field :title
-        .large-6.columns
-          b= f.label :area, "Rejon zdjęcia"
-          = f.text_field :area
-      = f.label :description, "Opis zdjęcia(wymagany tylko dla historii jednego zdjęcia)"
-      = f.text_area :description
-      b= f.label :file, "Plik zdjęcia"
-      - if @request.file?
-        = image_tag(@request.file.thumb, class: 'thumbnail')
-      = f.file_field :file unless @request.file?
-      = f.hidden_field :file_cache
+        b= f.label :category_record_id, "Kategoria"
+        = f.select :category_record_id, @edition.categories.map {|c| [c.name, c.id]}, include_blank: true
+        .row
+          .large-6.columns
+            b= f.label :title, "Tytuł zdjęcia"
+            = f.text_field :title
+          .large-6.columns
+            b= f.label :area, "Rejon zdjęcia"
+            = f.text_field :area
+        = f.label :description, "Opis zdjęcia(wymagany tylko dla historii jednego zdjęcia)"
+        = f.text_area :description
+        b= f.label :file, "Plik zdjęcia"
+        - if @request.file?
+          = image_tag(@request.file.thumb, class: 'thumbnail')
+        = f.file_field :file unless @request.file?
+        = f.hidden_field :file_cache
 
-      .row
-        .large-6.columns
-          = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button large expanded'
-        .large-6.columns
-          = link_to 'Regulamin konkursu', 'https://kw.krakow.pl/dzialalnosc/konkurs-fotograficzny.html', class: 'button large alert'
+        .row
+          .large-6.columns
+            = f.submit 'Zgłoś zdjęcie do konkursu', class: 'button large expanded'
+          .large-6.columns
+            = link_to 'Regulamin konkursu', 'https://kw.krakow.pl/dzialalnosc/konkurs-fotograficzny.html', class: 'button large alert'
+    - else
+      .callout.warning
+        Zgłoszenia do konkursu zostały zamknięte!
+
 
   .large-6.columns
-
-
     h4 Twoje zgłoszone zdjęcia
     - current_user.photo_requests.where(edition_record_id: @edition.id).each do |request|
       = image_tag request.file.thumb, class: 'thumbnail'
