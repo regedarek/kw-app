@@ -10,29 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181029175346) do
+ActiveRecord::Schema.define(version: 20181030210409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "auction_products", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "auction_id"
-    t.integer  "price"
-    t.text     "description"
-    t.boolean  "sold"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "auctions", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "archived",    default: false
-  end
 
   create_table "competition_package_types", force: :cascade do |t|
     t.string   "name",                                  null: false
@@ -64,15 +45,6 @@ ActiveRecord::Schema.define(version: 20181029175346) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "courses", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.text     "description"
-    t.string   "instructor"
-    t.integer  "cost",        null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
   create_table "donations", force: :cascade do |t|
@@ -162,35 +134,6 @@ ActiveRecord::Schema.define(version: 20181029175346) do
     t.integer  "rentable_id"
   end
 
-  create_table "mas_sign_ups", force: :cascade do |t|
-    t.string   "first_name_1"
-    t.string   "first_name_2"
-    t.string   "email_1"
-    t.string   "email_2"
-    t.string   "organization_1"
-    t.string   "organization_2"
-    t.string   "city_1"
-    t.string   "city_2"
-    t.integer  "package_type_1"
-    t.integer  "package_type_2"
-    t.integer  "gender_1"
-    t.integer  "gender_2"
-    t.string   "phone_1"
-    t.string   "phone_2"
-    t.integer  "tshirt_size_1"
-    t.integer  "tshirt_size_2"
-    t.text     "remarks"
-    t.integer  "birth_year_1"
-    t.integer  "birth_year_2"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "kw_id_1"
-    t.integer  "kw_id_2"
-    t.string   "name"
-    t.string   "last_name_1"
-    t.string   "last_name_2"
-  end
-
   create_table "membership_fees", force: :cascade do |t|
     t.string   "year"
     t.integer  "cost",       default: 100, null: false
@@ -248,11 +191,6 @@ ActiveRecord::Schema.define(version: 20181029175346) do
     t.string   "payable_type"
     t.integer  "payable_id"
     t.string   "payment_url"
-  end
-
-  create_table "peaks", force: :cascade do |t|
-    t.string  "name"
-    t.integer "valley_id"
   end
 
   create_table "photo_competitions", force: :cascade do |t|
@@ -471,10 +409,6 @@ ActiveRecord::Schema.define(version: 20181029175346) do
     t.boolean  "hide",                   default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  end
-
-  create_table "valleys", force: :cascade do |t|
-    t.string "name"
   end
 
   add_foreign_key "product_fields", "product_types"
