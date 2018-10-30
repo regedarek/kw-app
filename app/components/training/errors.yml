@@ -7,12 +7,14 @@ pl:
 
   errors:
     package_required: 'Pakiet musi zostać wybrany!'
+    unique?: 'już istnieje'
     filled?: "musi być uzupełniony"
   rules:
     package_required: 'Pakiet musi zostać wybrany!'
 en:
   errors:
     package_required: 'Package must be chosen!'
+    unique?: 'już istnieje'
     or: "or"
     array?: "must be an array"
     empty?: "must be empty"

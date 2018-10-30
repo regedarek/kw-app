@@ -9,7 +9,7 @@ module Training
       end
 
       def call(raw_inputs:)
-        form_outputs = form.call(raw_inputs)
+        form_outputs = form.with(record: Training::Supplementary::CourseRecord.new).call(raw_inputs)
         return Left(form_outputs.messages(full: true)) unless form_outputs.success?
 
         repository.create(form_outputs: form_outputs)
