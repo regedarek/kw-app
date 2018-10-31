@@ -14,7 +14,6 @@ module Training
 
       define! do
         required(:name).filled(:str?)
-        required(:package_type).filled
         required(:slug).filled(unique?: :slug)
         required(:place).filled(:str?)
         required(:organizator_id).filled
