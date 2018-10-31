@@ -5,7 +5,9 @@ module Payments
     end
 
     def delete
+      Rails.logger.info "initialize deletion"
       Payments::Dotpay::DeletePaymentRequest.new(dotpay_id: @payment.dotpay_id, type: payment_type).execute
+      Rails.logger.info "initialize finished"
 
       Success.new
     end

@@ -11,6 +11,8 @@ module Payments
 
       def execute
         uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@dotpay_id}?format=json")
+        Rails.logger.info "delete dotpayid"
+        Rails.logger.info @dotpay_id
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
@@ -21,9 +23,10 @@ module Payments
           Rails.application.secrets.dotpay_login,
           Rails.application.secrets.dotpay_password
         )
-        request.body = {}.to_json
         response = http.request(request)
 
+        Rails.logger.info "delete response"
+        Rails.logger.info response.to_s
         case response
         when Net::HTTPSuccess, Net::HTTPRedirection
           Success.new
