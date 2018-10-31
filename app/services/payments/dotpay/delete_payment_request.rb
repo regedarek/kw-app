@@ -10,7 +10,7 @@ module Payments
       end
 
       def execute
-        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}?format=json")
+        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}/?format=json")
         Rails.logger.info "delete code"
         Rails.logger.info @code
         Rails.logger.info account_id
