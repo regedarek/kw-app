@@ -17,7 +17,7 @@ wb.styles do |style|
     @course.sign_ups.each do |sign_up|
       default_values = sign_up_attributes.map do |attr|
         sign_up.read_attribute(attr)
-      end.push(sign_up.user.display_name,
+      end.push((sign_up.user ? sign_up.user.display_name : sign_up.name),
       Training::Supplementary::PackageTypeRecord.find_by(id: sign_up.supplementary_course_package_type_id)&.name, sign_up.cost, sign_up.payment.paid?.to_s, sign_up.created_at)
       sheet.add_row(default_values)
     end
