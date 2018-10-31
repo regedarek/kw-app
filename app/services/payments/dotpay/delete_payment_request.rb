@@ -24,6 +24,8 @@ module Payments
           Rails.application.secrets.dotpay_login,
           Rails.application.secrets.dotpay_password
         )
+        Rails.logger.info "request"
+        Rails.logger.info request
         response = http.request(request)
 
         Rails.logger.info "delete response"
