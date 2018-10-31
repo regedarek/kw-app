@@ -22,7 +22,7 @@ module Training
 
       def description
         if user
-          case payment_type
+          case payment_type.to_sym
           when :trainings
             "Szkolenie: #{course.name} - Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
           when :club_trips
@@ -31,7 +31,7 @@ module Training
             "Wydarzenie klubowe: #{course.name} - Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
           end
         else
-          case payment_type
+          case payment_type.to_sym
           when :trainings
             "Szkolenie: #{course.name} - Opłata od #{name}"
           when :club_trips
