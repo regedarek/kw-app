@@ -10,10 +10,7 @@ module Payments
       end
 
       def execute
-        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}/")
-        Rails.logger.info "delete code"
-        Rails.logger.info @code
-        Rails.logger.info account_id
+        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}/?format=json")
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
@@ -25,14 +22,7 @@ module Payments
           Rails.application.secrets.dotpay_password
         )
 
-        Rails.logger.info "request"
-        Rails.logger.info uri.request_uri
-        Rails.logger.info request
         response = http.request(request)
-
-        Rails.logger.info "delete response"
-        Rails.logger.info response
-        out = http.set_debug_output(Rails.logger.info($stdout))
         case response
         when Net::HTTPSuccess, Net::HTTPRedirection
           Success.new
