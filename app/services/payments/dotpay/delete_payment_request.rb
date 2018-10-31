@@ -10,7 +10,7 @@ module Payments
       end
 
       def execute
-        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}/?format=json")
+        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}/")
         Rails.logger.info "delete code"
         Rails.logger.info @code
         Rails.logger.info account_id
@@ -32,8 +32,7 @@ module Payments
 
         Rails.logger.info "delete response"
         Rails.logger.info response
-        out = http.set_debug_output($stdout)
-        Rails.logger.info out
+        out = http.set_debug_output(Rails.logger.info($stdout))
         case response
         when Net::HTTPSuccess, Net::HTTPRedirection
           Success.new
