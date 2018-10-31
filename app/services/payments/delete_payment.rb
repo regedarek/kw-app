@@ -7,7 +7,7 @@ module Payments
     def delete
       Rails.logger.info "initialize deletion"
       code = CGI::parse(@payment.payment_url).values.flatten.first
-      Payments::Dotpay::DeletePaymentRequest.new(dotpay_id: code, type: payment_type).execute
+      Payments::Dotpay::DeletePaymentRequest.new(code: code, type: payment_type).execute if code
       Rails.logger.info "initialize finished"
 
       Success.new

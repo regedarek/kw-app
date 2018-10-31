@@ -4,15 +4,15 @@ require 'results'
 module Payments
   module Dotpay
     class DeletePaymentRequest
-      def initialize(dotpay_id:, type:)
-        @dotpay_id = dotpay_id
+      def initialize(code:, type:)
+        @code = code
         @type = type
       end
 
       def execute
-        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@dotpay_id}?format=json")
-        Rails.logger.info "delete dotpayid"
-        Rails.logger.info @dotpay_id
+        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "accounts/#{account_id}/payment_links/#{@code}?format=json")
+        Rails.logger.info "delete code"
+        Rails.logger.info @code
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
