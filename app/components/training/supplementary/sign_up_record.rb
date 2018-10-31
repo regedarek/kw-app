@@ -21,10 +21,14 @@ module Training
       end
 
       def description
-        if course.packages
-          "Wydarzenie klubowe #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+        if user
+          if course.packages
+            "Wydarzenie klubowe #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+          else
+            "Doszkalanie #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+          end
         else
-          "Doszkalanie #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+          "Doszkalanie #{course.name}: Opłata od #{name}"
         end
       end
     end
