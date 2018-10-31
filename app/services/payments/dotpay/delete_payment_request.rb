@@ -24,12 +24,14 @@ module Payments
           Rails.application.secrets.dotpay_login,
           Rails.application.secrets.dotpay_password
         )
+
         Rails.logger.info "request"
+        Rails.logger.info uri.request_uri
         Rails.logger.info request
         response = http.request(request)
 
         Rails.logger.info "delete response"
-        Rails.logger.info response.to_s
+        Rails.logger.info response
         out = http.set_debug_output($stdout)
         Rails.logger.info out
         case response
