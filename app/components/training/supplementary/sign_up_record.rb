@@ -17,11 +17,7 @@ module Training
       end
 
       def payment_type
-        if course.packages
-          :reservations
-        else
-          :trainings
-        end
+        :trainings
       end
 
       def description
