@@ -8,6 +8,7 @@ module Training
       end
 
       define! do
+        required(:name).filled(:str?)
         required(:email).filled(:str?)
         validate(package_required: [:supplementary_course_package_type_id]) do |supplementary_course_package_type_id|
           if supplementary_course_package_type_id.nil?
@@ -17,6 +18,7 @@ module Training
           end
         end
         optional(:supplementary_course_package_type_id).maybe(:str?)
+        optional(:user_id)
       end
     end
   end

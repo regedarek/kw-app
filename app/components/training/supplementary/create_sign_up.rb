@@ -13,7 +13,8 @@ module Training
         return Left(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
 
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
-        if form_outputs[:user_id].present?
+        return Left(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
+        if form_outputs.include?(:user_id)
           user = ::Db::User.find(form_outputs[:user_id])
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
 
@@ -24,12 +25,18 @@ module Training
               return Left(fee: I18n.t('.not_last_fee'))
             end
           end
+          sign_up = repository.sign_up!(
+            course_id: form_outputs[:course_id],
+            email: form_outputs[:email],
+            name: form_outputs[:name],
+            user_id: form_outputs[:user_id]
+          )
         end
-        return Left(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
         sign_up = repository.sign_up!(
           course_id: form_outputs[:course_id],
           email: form_outputs[:email],
-          user_id: form_outputs[:user_id]
+          name: form_outputs[:name],
+          user_id: nil
         )
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         if Training::Supplementary::Limiter.new(course).in_limit?(sign_up)

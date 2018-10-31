@@ -75,10 +75,11 @@ module Training
         )
       end
 
-      def sign_up!(email:, user_id:, course_id:)
+      def sign_up!(name:, email:, user_id:, course_id:)
         course = Training::Supplementary::CourseRecord.find(course_id)
 
         sign_up = Training::Supplementary::SignUpRecord.create!(
+          name: name,
           user_id: user_id,
           course_id: course_id,
           email: email
