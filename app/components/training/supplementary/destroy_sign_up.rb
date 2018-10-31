@@ -7,10 +7,10 @@ module Training
         @repository = repository
       end
 
-      def call(code:)
+      def call(id:)
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
 
-        sign_up = repository.find_sign_up(code)
+        sign_up = repository.find_sign_up(id)
         return Left(email: I18n.t('.not_found')) unless sign_up.present?
         return Left(payment: I18n.t('.not_found')) unless sign_up.payment.present?
         Payments::DeletePayment.new(payment: sign_up.payment).delete

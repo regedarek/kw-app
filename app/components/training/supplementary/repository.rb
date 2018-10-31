@@ -2,8 +2,8 @@ module Training
   module Supplementary
     class Repository
 
-      def find_sign_up(dotpay_id)
-        Training::Supplementary::SignUpRecord.find_by!(dotpay_id: dotpay_id)
+      def find_sign_up(id)
+        Training::Supplementary::SignUpRecord.find(id)
       end
 
       def fetch_active_courses(category: nil, kind: nil)
