@@ -31,13 +31,14 @@ module Training
             name: form_outputs[:name],
             user_id: form_outputs[:user_id]
           )
+        else
+          sign_up = repository.sign_up!(
+            course_id: form_outputs[:course_id],
+            email: form_outputs[:email],
+            name: form_outputs[:name],
+            user_id: nil
+          )
         end
-        sign_up = repository.sign_up!(
-          course_id: form_outputs[:course_id],
-          email: form_outputs[:email],
-          name: form_outputs[:name],
-          user_id: nil
-        )
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         if Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later

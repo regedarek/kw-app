@@ -16,7 +16,7 @@ module Training
         required(:name).filled(:str?)
         required(:slug).filled(unique?: :slug)
         required(:place).filled(:str?)
-        optional(:organizator_id).maybe
+        required(:organizator_id).filled
       end
     end
   end
