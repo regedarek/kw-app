@@ -27,6 +27,10 @@
           = f.select :category, @course.categories
       .row
         .large-3.columns
+          = f.label :payment_type, t('.payment_type')
+          = f.select :payment_type, @course.payment_types
+
+        .large-3.columns
           = f.label :kind, t('.category')
           = f.select :kind, @course.kinds
 

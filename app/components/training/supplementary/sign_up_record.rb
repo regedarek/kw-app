@@ -17,18 +17,28 @@ module Training
       end
 
       def payment_type
-        :trainings
+        course.payment_type
       end
 
       def description
         if user
-          if course.packages
-            "Wydarzenie klubowe #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+          case payment_type
+          when :trainings
+            "Szkolenie: #{course.name} - Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+          when :club_trips
+            "Organizacja wyjazdów klubowych: #{course.name} - Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
           else
-            "Doszkalanie #{course.name}: Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
+            "Wydarzenie klubowe: #{course.name} - Opłata od #{user.first_name} #{user.last_name} nr legitymacji klubowej #{user.kw_id}"
           end
         else
-          "Doszkalanie #{course.name}: Opłata od #{name}"
+          case payment_type
+          when :trainings
+            "Szkolenie: #{course.name} - Opłata od #{name}"
+          when :club_trips
+            "Organizacja wyjazdów klubowych: #{course.name} - Opłata od #{name}"
+          else
+            "Wydarzenie klubowe: #{course.name} - Opłata od #{name}"
+          end
         end
       end
     end

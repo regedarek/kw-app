@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181031194422) do
+ActiveRecord::Schema.define(version: 20181031223825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -368,6 +368,7 @@ ActiveRecord::Schema.define(version: 20181031194422) do
     t.boolean  "packages",         default: false
     t.string   "slug",                             null: false
     t.integer  "kind",             default: 0,     null: false
+    t.integer  "payment_type",     default: 0,     null: false
     t.index ["slug"], name: "index_supplementary_courses_on_slug", unique: true, using: :btree
   end
 

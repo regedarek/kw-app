@@ -18,6 +18,9 @@ pl:
           not_last_fee: Musisz opłacić składkę członkowską!
       course:
         enums:
+          payment_types:
+            trainings: Szkolenia
+            club_trips: Wyjazd klubowy
           kinds:
             other: Inne
             slides: Slajdowisko
@@ -79,6 +82,7 @@ pl:
           team_name: Nazwa
           last_fee_paid: Wymagaj opłaconej składki?
           category: Kategoria
+          payment_type: Konto Dotpay
           place: Miejsce
           open: Nie wymagaj zapisów
           packages: Pakiety?
