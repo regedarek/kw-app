@@ -3,18 +3,14 @@ pl:
   not_last_fee: 'Brak zapłaconej składki!'
   email_not_unique: 'Ten e-mail jest już zapisany!'
   closed_or_open: 'Zapisy zamknięte'
-  package_required: 'Pakiet musi zostać wybrany!'
 
   errors:
-    package_required: 'Pakiet musi zostać wybrany!'
+    package_required: 'musi zostać wybrany!'
     unique?: 'już istnieje'
-    filled?: "musi być uzupełniony"
-  rules:
-    package_required: 'Pakiet musi zostać wybrany!'
+    filled?: "musi być wypełnione"
 en:
   errors:
-    package_required: 'Package must be chosen!'
-    unique?: 'już istnieje'
+    unique?: 'already exists'
     or: "or"
     array?: "must be an array"
     empty?: "must be empty"

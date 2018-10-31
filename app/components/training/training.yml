@@ -1,4 +1,10 @@
 pl:
+  activerecord:
+    attributes:
+      training/supplementary/sign_up_record:
+        name: Imię i nazwisko
+        email: E-mail
+        package_required: Pakiet
   training:
     activities:
       ski_routes:

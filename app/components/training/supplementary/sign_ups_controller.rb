@@ -24,7 +24,7 @@ module Training
           end
 
           result.failure do |errors|
-            flash[:error] = errors.values.join(", ")
+            flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.to_sentence}"}.join(', ')
             redirect_to :back
           end
         end
