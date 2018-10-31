@@ -33,9 +33,7 @@ module Training
       def cancel
         sign_up = Training::Supplementary::SignUpRecord.find_by(code: params[:code])
         if sign_up.present?
-          Training::Supplementary::DestroySignUp.new(
-            Training::Supplementary::Repository.new
-          ).call(code: sign_up.dotpay_id)
+          sign_up.destroy
 
           redirect_to polish_event_path(sign_up.course.id), notice: 'Wypisaliśmy Cię z wydarzenia!'
         else
@@ -55,7 +53,12 @@ module Training
 
       def destroy
         if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-          Training::Supplementary::SignUpRecord.find(params[:id])&.destroy
+          sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+          if sign_up.present?
+            Training::Supplementary::DestroySignUp.new(
+              Training::Supplementary::Repository.new
+            ).call(code: sign_up.dotpay_id)
+          end
 
           redirect_to :back, notice: 'Usunięto zapis!'
         else
