@@ -14,7 +14,7 @@ module Training
 
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
         return Left(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
-        if form_outputs.include?(:user_id)
+        if raw_inputs.include?(:user_id)
           user = ::Db::User.find(form_outputs[:user_id])
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
 
