@@ -57,7 +57,7 @@ module Training
           if sign_up.present?
             Training::Supplementary::DestroySignUp.new(
               Training::Supplementary::Repository.new
-            ).call(sign_up.id)
+            ).call(id: sign_up.id)
           end
 
           redirect_to :back, notice: 'Usunięto zapis!'
