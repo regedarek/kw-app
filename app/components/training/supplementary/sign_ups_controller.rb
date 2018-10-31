@@ -33,7 +33,10 @@ module Training
       def cancel
         sign_up = Training::Supplementary::SignUpRecord.find_by(code: params[:code])
         if sign_up.present?
-          sign_up.destroy
+          Training::Supplementary::DestroySignUp.new(
+            Training::Supplementary::Repository.new
+          ).call(code: sign_up.dotpay_id)
+
           redirect_to polish_event_path(sign_up.course.id), notice: 'Wypisaliśmy Cię z wydarzenia!'
         else
           redirect_to wydarzenia_path, alert: 'Nie znaleziono takiego zapisu, być może już się wypisałeś!'
