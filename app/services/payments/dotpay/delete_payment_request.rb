@@ -30,6 +30,8 @@ module Payments
 
         Rails.logger.info "delete response"
         Rails.logger.info response.to_s
+        out = http.set_debug_output($stdout)
+        Rails.logger.info out
         case response
         when Net::HTTPSuccess, Net::HTTPRedirection
           Success.new
