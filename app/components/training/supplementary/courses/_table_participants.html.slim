@@ -48,11 +48,11 @@ table.stack
             div id="example-dropdown-#{sign_up.id}" class="dropdown-pane text-center" data-dropdown=""
               ul.menu.vertical
                 - unless @limiter.reached?
-                  li = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put
+                  li = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
                 - if sign_up.course.packages
                   li = sign_up.package_type&.name
                 - if email
                   li
                     = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(sign_up.id), method: :put
-                li = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete
+                li = link_to 'Usuń', supplementary_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }
 
