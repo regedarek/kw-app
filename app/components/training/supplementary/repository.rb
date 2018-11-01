@@ -87,7 +87,8 @@ module Training
           name: name,
           user_id: user_id,
           course_id: course_id,
-          email: email
+          email: email,
+          code: SecureRandom.hex(13)
         )
         sign_up.create_payment(dotpay_id: SecureRandom.hex(13))
         sign_up
