@@ -113,6 +113,8 @@
                 .callout.warning
                   | Limit miejsc został wyczerpany.
               - else
+                .callout.secondary
+                  | Twój e-mail wykasujemy z bazy zaraz po zakończeniu wydarzenia.
                 = form_for :sign_up, url: supplementary_sign_ups_path do |x|
                   = x.hidden_field :course_id, value: @course.id
                   = x.text_field :name, placeholder: 'Imię i nazwisko'
