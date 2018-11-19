@@ -16,7 +16,7 @@ b Koordynator wydarzenia:
 = @sign_up.course&.organizer&.display_name
 br
 b Uczestnicy: 
-- if @sign_up.course.last_fee_paid || @sign_up.course.open
+- if !@sign_up.course.last_fee_paid || @sign_up.course.open
   | Otwarte dla wszystkich wg dostępności miejsc
 - else
   | Tylko dla członków klubu z opłaconymi składkami
