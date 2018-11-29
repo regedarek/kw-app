@@ -51,6 +51,13 @@
     .row
       .large-12.columns
         ul.accordion data-accordion="" data-multi-expand="true"
+          - my_sign_ups = Training::Supplementary::Repository.new.future_sign_ups_of_user(current_user)
+          - if my_sign_ups.any?
+            li.accordion-item.is-active data-accordion-item="" 
+              a.accordion-title href="#" Twoje nadchodzące wydarzenia
+              .accordion-content data-tab-content="" 
+                = render 'supplementary/sign_ups/table', sign_ups: my_sign_ups
+
           - if current_user.reservations.not_archived.any?
             li.accordion-item data-accordion-item="" 
               a.accordion-title href="#" Twoje rezerwacje

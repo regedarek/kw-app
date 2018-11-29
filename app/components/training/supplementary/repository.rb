@@ -1,6 +1,11 @@
 module Training
   module Supplementary
     class Repository
+      def future_sign_ups_of_user(user)
+        Training::Supplementary::SignUpRecord
+          .includes(:course)
+          .where(user_id: user.id)
+      end
 
       def find_sign_up(id)
         Training::Supplementary::SignUpRecord.find(id)
