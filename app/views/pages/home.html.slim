@@ -58,12 +58,6 @@
               .accordion-content data-tab-content="" 
                 = render 'supplementary/sign_ups/table', sign_ups: my_sign_ups
 
-          - if current_user.reservations.not_archived.any?
-            li.accordion-item data-accordion-item="" 
-              a.accordion-title href="#" Twoje rezerwacje
-              .accordion-content data-tab-content="" 
-                = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
-
           - if current_user.mountain_routes.any?
             li.accordion-item.is-active data-accordion-item="" 
               a.accordion-title href="#" Twoje przejścia
@@ -77,3 +71,10 @@
                 .row
                   .large-12.columns
                     = paginate my_routes
+
+          - if current_user.reservations.not_archived.any?
+            li.accordion-item.is-active data-accordion-item="" 
+              a.accordion-title href="#" Twoje rezerwacje
+              .accordion-content data-tab-content="" 
+                = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
+

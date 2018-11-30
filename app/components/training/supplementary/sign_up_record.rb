@@ -16,6 +16,14 @@ module Training
         end
       end
 
+      def start_date
+        if course
+          course.start_date
+        else
+          Date.today
+        end
+      end
+
       def payment_type
         course.payment_type.to_sym
       end
