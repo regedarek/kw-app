@@ -45,9 +45,9 @@ module Training
         Training::Supplementary::CourseRecord
           .where(start_date: 1.year.ago..Date.current.beginning_of_day)
           .where(category: categories, kind: kinds)
-          .order(:start_date, :application_date).collect do |record|
-          Training::Supplementary::Course.from_record(record)
-        end
+          .order(start_date: :desc, application_date: :desc).collect do |record|
+            Training::Supplementary::Course.from_record(record)
+          end
       end
 
       def fetch_inactive_courses(category:, kind: nil)
