@@ -3,6 +3,7 @@ table.stack
     tr
       th Rok
       th Kwota
+      th Plastik
       th Płatność
   tbody
     - fees.each do |fee|
@@ -12,7 +13,10 @@ table.stack
         td
           = "#{fee.cost} zł"
         td
-          - if (fee.payment && fee.payment.prepaid?) || fee.payment.cash?
-            span.label.success Zapłacone
-          - else
-            = link_to "Zapłać", charge_payment_path(fee.payment)
+          = fee.plastic ? 'Tak' : 'Nie'
+        td
+          - if fee.payment
+            - if (fee.payment && fee.payment.prepaid?) || fee.payment.cash?
+              span.label.success Zapłacone
+            - else
+              = link_to "Zapłać", charge_payment_path(fee.payment)

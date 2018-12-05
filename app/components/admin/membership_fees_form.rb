@@ -6,14 +6,14 @@ module Admin
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
 
-    attr_accessor :kw_id, :year
+    attr_accessor :kw_id, :year, :plastic
 
     validates :kw_id, :year, presence: { message: 'nie moze byc pusty'}
     validate :check_uniqueness_of_year
 
     def params
       HashWithIndifferentAccess.new(
-        kw_id: kw_id, year: year
+        kw_id: kw_id, year: year, plastic: plastic
       )
     end
 

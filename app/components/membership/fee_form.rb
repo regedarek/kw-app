@@ -4,6 +4,7 @@ module Membership
   class FeeForm < FormObject
     attribute :kw_id, :integer
     attribute :year, :string
+    attribute :plastic, :boolean
 
     validates :year,
       presence: true,

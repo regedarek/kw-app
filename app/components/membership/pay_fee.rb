@@ -7,17 +7,21 @@ module Membership
         if form.valid?
           last_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
           current_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.year)
-          cost = if last_year_fee.present? && last_year_fee.payment.paid?
+          base_cost = if last_year_fee.present? && last_year_fee.payment.paid?
                    100
                  elsif current_year_fee.present? && current_year_fee.payment.paid?
                    100
                  else
                    150
                  end
+          plastic_cost = form.plastic ? 10 : 0
+          cost = base_cost + plastic_cost
+
           membership_fee = Db::Membership::Fee.create(
             kw_id: kw_id,
             year: form.year,
-            cost: cost
+            cost: cost,
+            plastic: form.plastic
           )
           membership_fee.create_payment(dotpay_id: SecureRandom.hex(13))
 

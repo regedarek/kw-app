@@ -39,7 +39,7 @@ module Admin
     end
 
     def payment_params
-      params.require(:admin_membership_fees_form).permit(:kw_id, :year)
+      params.require(:admin_membership_fees_form).permit(:kw_id, :year, :plastic)
     end
   end
 end

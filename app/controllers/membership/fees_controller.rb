@@ -43,7 +43,7 @@ module Membership
     private
 
     def fee_params
-      params.require(:membership_fee_form).permit(:year)
+      params.require(:membership_fee_form).permit(:year, :plastic)
     end
   end
 end
