@@ -27,8 +27,8 @@ module Admin
 
     def destroy
       result = Admin::MembershipFees.destroy(params[:id])
-      result.success { redirect_to admin_membership_fees_path, notice: 'Usunieto' }
-      result.failure { redirect_to admin_membership_fees_path, alert: 'Nie usunieto' }
+      result.success { redirect_to :back, notice: 'Usunieto' }
+      result.failure { redirect_to :back, alert: 'Nie usunieto' }
       result.else_fail!
     end
 
