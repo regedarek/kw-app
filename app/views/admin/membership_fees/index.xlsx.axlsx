@@ -28,7 +28,7 @@ wb.styles do |style|
     end
   end
 
-  wb.add_worksheet(name: "Składki 2018") do |sheet|
+  wb.add_worksheet(name: "Składki 2019") do |sheet|
     attributes = ['Numer klubowy', 'Rok', 'Imię', 'Nazwisko', 'E-mail', 'Opłacono', 'Gotówka', 'Dotpay ID', 'Kiedy dodano', 'Plastik']
     sheet.add_row(attributes, style: style.add_style(highlight_cell_options))
     Db::Membership::Fee.where(year: 2019).find_each do |fee|
