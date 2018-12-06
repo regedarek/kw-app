@@ -27,4 +27,15 @@ wb.styles do |style|
       sheet.add_row(values)
     end
   end
+
+  wb.add_worksheet(name: "Składki 2018") do |sheet|
+    attributes = ['Numer klubowy', 'Rok', 'Imię', 'Nazwisko', 'E-mail', 'Opłacono', 'Gotówka', 'Dotpay ID', 'Kiedy dodano', 'Plastik']
+    sheet.add_row(attributes, style: style.add_style(highlight_cell_options))
+    Db::Membership::Fee.where(year: 2019).find_each do |fee|
+      user = fee.user
+      profile = Db::Profile.find_by(kw_id: fee.kw_id)
+      values = [fee.kw_id, fee.year, user.try(:first_name) || profile.try(:first_name), user.try(:last_name) || profile.try(:last_name), user.try(:email) || profile.try(:email), fee.payment.prepaid?, fee.payment.cash?, fee.payment.dotpay_id, fee.created_at, fee.plastic]
+      sheet.add_row(values)
+    end
+  end
 end
