@@ -56,6 +56,7 @@
           th width='20%' = sort_link(@q, :user_first_name, 'Imię')
           th width='20%' = sort_link(@q, :user_last_name, 'Nazwisko')
           th width='10%' = sort_link(@q, :year, 'Rok')
+          th width='10%' = sort_link(@q, :plastic, 'Plastik')
           th width='10%' = sort_link(@q, :created_at, 'Utworzono')
           th width='15%' = sort_link(@q, :creator_id, 'Kto?')
           th width='5%' = sort_link(@q, :payment_cash, 'Płatność')
@@ -82,6 +83,8 @@
                 = Db::Profile.find_by(kw_id: fee.kw_id).try(:last_name)
             td
               = fee.year
+            td
+              = fee.plastic ? 'Tak' : 'Nie'
             td
               = fee.created_at.strftime("%d-%m-%Y")
             td
