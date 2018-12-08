@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'narciarskie-dziki' => 'activities/mountain_routes#index', defaults: { route_type: 'ski' }
+  get 'narciarskie-dziki' => 'training/activities/ski_routes#index'
   get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new', as: :narciarstwo
   get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
   get 'przejscia' => 'activities/mountain_routes#index', as: :przejscia

@@ -4,6 +4,12 @@ module Training
       include EitherMatcher
       append_view_path 'app/components'
 
+      def index
+        @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
+        @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
+        @season_leaders = Training::Activities::Repository.new.fetch_season
+      end
+
       def new
         return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
 

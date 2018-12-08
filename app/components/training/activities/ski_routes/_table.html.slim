@@ -1,0 +1,17 @@
+
+h5 = "Tabela sezonu #{Training::Activities::Repository.new.start_date.year}/#{Training::Activities::Repository.new.end_date.year}"
+table.stack
+  thead
+    tr
+      th width='5%' Miejsce
+      th width='50%' Kto?
+      th width='45%' Przewyższenie
+
+  tbody
+    - i = 0
+    - routes.each do |name, length|
+      tr
+        td.text-center = i + 1
+        td.text-center.large-text-left = name
+        td.text-center.large-text-left = length
+      - i += 1
