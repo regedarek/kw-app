@@ -18,6 +18,7 @@ module UserManagement
     attribute :main_discussion_group, :boolean
     attribute :sections, ArrayOf(:string), default: []
     attribute :terms_of_service, :boolean, default: false
+    attribute :plastic, :boolean, default: false
 
     validates :first_name, :last_name, :email, :pesel, :birth_date, :birth_place,
               :city, :postal_code, :acomplished_courses, :phone, presence: true

@@ -21,7 +21,8 @@ module UserManagement
           main_discussion_group: form.main_discussion_group,
           sections: form.sections,
           position: ['candidate'],
-          cost: UserManagement::ApplicationCost.for(profile: form).sum
+          cost: UserManagement::ApplicationCost.for(profile: form).sum,
+          plastic: form.plastic
         )
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
         if profile.acomplished_courses.include?('list')

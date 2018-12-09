@@ -111,7 +111,8 @@ module Admin
             year: profile.application_date.year,
             kw_id: profile.kw_id,
             payment: profile.payment,
-            cost: 100
+            cost: profile.plastic ? 110 : 100,
+            plastic: profile.plastic
           )
         end
         ProfileMailer.accepted(profile).deliver_later

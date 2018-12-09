@@ -152,6 +152,11 @@
 
   .row
     .large-12.columns 
+      b Legitymacja plastikowa: 
+      = @profile.plastic ? 'Tak' : 'Nie'
+
+  .row
+    .large-12.columns 
       b Data zgłoszenia: 
       = @profile.created_at.strftime("%d-%m-%Y")
   
