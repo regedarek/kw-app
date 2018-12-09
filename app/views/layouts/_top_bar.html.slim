@@ -9,6 +9,10 @@
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         li.show-for-medium =link_to t('.menu.title'), page_path('home')
         li= link_to 'Dla Mariusza!', mariusz_path, class: 'button warning hollow'
+        - if request.path == '/narciarskie-dziki'
+          li= link_to 'Regulamin programu', dziki_rules_path, class: 'button alert hollow'
+        - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/activities/mountain_routes'
+          li= link_to 'Tabela programu', dziki_path, class: 'button alert hollow'
         - if user_signed_in?
           - if current_user.roles.include?('office')
             li= link_to 'Statystyki', admin_path, class: 'button success'
