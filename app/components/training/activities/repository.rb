@@ -1,9 +1,10 @@
 module Training
   module Activities
     class Repository
-      def create(form_outputs:)
+      def create(form_outputs:, user_id:)
         record = ::Db::Activities::MountainRoute
           .create!(form_outputs.to_h)
+        record.update(user_id: user_id)
 
         Training::Activities::SkiRoute.from_record(record)
       end
