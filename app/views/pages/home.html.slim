@@ -65,7 +65,7 @@
                 .row
                   .large-12.columns
                     - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).map(&:mountain_route).compact
-                    - my_routes = Kaminari.paginate_array((current_user.mountain_routes + routes).uniq).page(params[:page]).per(10)
+                    - my_routes = Kaminari.paginate_array((current_user.mountain_routes + routes).uniq.sort_by(&:climbing_date).reverse!).page(params[:page]).per(10)
                     = render 'activities/mountain_routes/table', routes: my_routes
 
                 .row
