@@ -1,5 +1,3 @@
-require "simplecov"
-SimpleCov.start
 require 'rails_mock'
 require 'webmock/rspec'
 
