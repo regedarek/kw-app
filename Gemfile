@@ -35,6 +35,7 @@ gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'
 gem 'chronic'
+gem 'cancancan', '~> 2.0'
 
 # Dry-rb
 gem 'dry-container'

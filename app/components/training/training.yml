@@ -1,4 +1,8 @@
 pl:
+  activities:
+    mountain_routes:
+      hide:
+        hidden_successfully: Ukryto!
   activerecord:
     attributes:
       training/supplementary/sign_up_record:

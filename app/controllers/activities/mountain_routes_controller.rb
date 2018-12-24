@@ -48,6 +48,15 @@ module Activities
       end
     end
 
+    def hide
+      route = Db::Activities::MountainRoute.find(params[:id])
+
+      authorize! :hide, route
+      route.update(hidden: true)
+
+      redirect_back(fallback_location: activities_mountain_routes_path, notice: t('.hidden_successfully'))
+    end
+
     def create
       @route = Db::Activities::MountainRoute.new(route_params)
       @route.route_type = :regular_climbing

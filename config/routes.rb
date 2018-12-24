@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   end
 
   namespace :activities do
-    resources :mountain_routes
+    resources :mountain_routes do
+      member do
+        put :hide
+      end
+    end
   end
 
   load Rails.root.join("app/components/events/routes.rb")
