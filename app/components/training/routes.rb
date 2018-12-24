@@ -34,7 +34,6 @@ Rails.application.routes.draw do
   get 'narciarskie-dziki/regulamin' => 'training/activities/ski_routes#rules', as: :dziki_rules
   get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new', as: :narciarstwo
   get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
-  get 'przejscia' => 'activities/mountain_routes#index', as: :przejscia
   get 'wydarzenia/narciarskie' => 'training/supplementary/courses#index', defaults: { category: 'snw' }, as: :ski_events
   get 'wydarzenia' => 'training/supplementary/courses#index', as: :wydarzenia
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event

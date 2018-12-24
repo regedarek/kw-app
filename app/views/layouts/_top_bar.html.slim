@@ -11,7 +11,7 @@
         li= link_to 'Dla Mariusza!', mariusz_path, class: 'button warning hollow'
         - if request.path == '/narciarskie-dziki'
           li= link_to 'Regulamin programu', dziki_rules_path, class: 'button alert hollow'
-        - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/activities/mountain_routes'
+        - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/przejscia'
           li= link_to 'Tabela programu', dziki_path, class: 'button alert hollow'
         - if user_signed_in?
           - if current_user.roles.include?('office')

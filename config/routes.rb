@@ -11,19 +11,21 @@ Rails.application.routes.draw do
     get '/zarejestruj', to: 'devise/registrations#new'
   end
 
-  namespace :activities do
-    resources :mountain_routes do
-      member do
-        put :hide
-      end
-    end
-  end
+
 
   load Rails.root.join("app/components/events/routes.rb")
   load Rails.root.join("app/components/membership/admin/routes.rb")
   load Rails.root.join("app/components/training/routes.rb")
   load Rails.root.join("app/components/charity/routes.rb")
   load Rails.root.join("app/components/photo_competition/routes.rb")
+
+  namespace :activities, path: '/' do
+    resources :mountain_routes, path: 'przejscia' do
+      member do
+        put :hide
+      end
+    end
+  end
 
   namespace :api do
     resources :payments, only: [] do
