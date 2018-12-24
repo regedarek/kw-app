@@ -63,4 +63,4 @@ table.stack
                   - if can? :hide, route
                     li= link_to 'Ukryj', hide_activities_mountain_route_path(route.id), method: :put
                   li= link_to 'Edytuj', edit_activities_mountain_route_path(route.id)
-                  li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete, confirm: 'Jesteś pewien?'
+                  li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete, data: { confirm: 'Jesteś pewien?'} 
