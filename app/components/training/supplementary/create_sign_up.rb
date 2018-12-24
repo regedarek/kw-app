@@ -19,12 +19,9 @@ module Training
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
 
           if course.last_fee_paid
-            if fee.present?
-              return Left(fee: I18n.t('.not_last_fee')) if !fee.payment.paid?
-            else
-              return Left(fee: I18n.t('.not_last_fee'))
-            end
+            return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).active?
           end
+
           sign_up = repository.sign_up!(
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],

@@ -11,7 +11,7 @@ module Training
           end
 
           result.failure do |errors|
-            flash[:error] = errors.values.join(", ")
+            flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.kind_of?(Array) ? v.to_sentence : v}"}.join(', ')
             redirect_to :back
           end
         end
@@ -24,7 +24,7 @@ module Training
           end
 
           result.failure do |errors|
-            flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.to_sentence}"}.join(', ')
+            flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.kind_of?(Array) ? v.to_sentence : v}"}.join(', ')
             redirect_to :back
           end
         end

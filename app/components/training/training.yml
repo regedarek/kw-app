@@ -6,6 +6,7 @@ pl:
   activerecord:
     attributes:
       training/supplementary/sign_up_record:
+        fee: Składka członkowska
         name: Imię i nazwisko
         email: E-mail
         package_required: Pakiet

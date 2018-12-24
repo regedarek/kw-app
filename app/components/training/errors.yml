@@ -1,6 +1,6 @@
 pl:
   limit_exceded: 'Niestety nie ma już miejsc!'
-  not_last_fee: 'Brak zapłaconej składki!'
+  not_last_fee: 'nie została opłacona!'
   email_not_unique: 'Ten e-mail jest już zapisany!'
   closed_or_open: 'Zapisy zamknięte'
 
