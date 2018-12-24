@@ -44,7 +44,7 @@ class Db::User < ActiveRecord::Base
   end
 
   def active?
-    membership_fees.where(year: [(Date.today.year - 1), Date.today.year]).any? {|f| f&.payment&.paid? }
+    Membership::Activement.new(user: self).active?
   end
 
   def self.from_omniauth(access_token)

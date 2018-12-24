@@ -41,7 +41,7 @@ module Db
     end
 
     def description
-      "Wpisowe oraz składka członkowska za rok #{Date.today.year} od #{first_name} #{last_name}."
+      "Wpisowe oraz składka członkowska za rok #{Membership::Activement.new.payment_year} od #{first_name} #{last_name}."
     end
   end
 end

@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
   def create
     @profile_form = UserManagement::ProfileForm.build_cleaned(profile_params)
-    
+
     result = UserManagement::UserApplication.create(form: @profile_form)
     result.success { redirect_to root_path, notice: t('.success') }
     result.invalid { |form:| render :new, form: form }
@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
 
   def reactivate
     @reactivation_form = UserManagement::ReactivationForm.build_cleaned(profile_params)
-    
+
     result = UserManagement::Reactivate.call(form: @reactivation_form)
     result.success { redirect_to root_path, notice: t('.success') }
     result.invalid { |form:| render :reactivation, form: @reactivation_form }
@@ -41,4 +41,4 @@ class ProfilesController < ApplicationController
       recommended_by: [], acomplished_courses: [], sections: []
     )
   end
-end 
+end

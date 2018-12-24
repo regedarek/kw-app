@@ -2,8 +2,14 @@ module Membership
   class Activement
     attr_reader :user
 
-    def initialize(user:)
+    def initialize(user: nil)
       @user = user
+    end
+
+    def payment_year
+      return Date.current.next_year.year if Date.current.between?(Date.new(Date.current.year, 11, 15), Date.current.end_of_year)
+
+      return Date.current.year
     end
 
     def active?

@@ -4,6 +4,26 @@ describe Membership::Activement do
   after { Timecop.return }
   let!(:user) { Factories::User.create! }
 
+  describe '#payment_year' do
+    context '01-01 - 15-11' do
+      before { Timecop.freeze('2016-06-19'.to_date) }
+
+      it do
+        result = Membership::Activement.new
+        expect(result.payment_year).to eq(2016)
+      end
+    end
+
+    context '15-11 - 31-12' do
+      before { Timecop.freeze('2016-11-19'.to_date) }
+
+      it do
+        result = Membership::Activement.new
+        expect(result.payment_year).to eq(2017)
+      end
+    end
+  end
+
   describe '#active?' do
     context 'no user' do
       it do

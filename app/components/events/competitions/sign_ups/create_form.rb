@@ -54,7 +54,7 @@ module Events
           validate(active_kw_id_2: [:single, :participant_kw_id_2, :competition_package_type_2_id]) do |single, participant_kw_id_2, competition_package_type_2_id|
             if !single && competition_package_type_2_id.present?
               if Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_2_id).membership?
-                ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: participant_kw_id_2)
+                ::Membership::Activement.new(user: ::Db::User.find_by(kw_id: participant_kw_id_2)).active?
               else
                 true
               end
@@ -78,7 +78,7 @@ module Events
 
          validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
            if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
-             ::Db::Membership::Fee.exists?(year: Date.today.year, kw_id: kw_id)
+             ::Membership::Activement.new(user: ::Db::User.find_by(kw_id: kw_id)).active?
            else
              true
            end
