@@ -56,7 +56,7 @@ table.stack
             = render  "training/activities/hearts/button", route: route
         - if user_signed_in?
           td.text-center
-            - if current_user.roles.include?('routes') || current_user.id == route.user_id || route.colleagues.include?(current_user)
+            - if can?(:manage, route) || route.colleagues.include?(current_user)
               i.fi-list-thumbnails data-toggle="example-dropdown-#{route.id}" data-auto-focus="true"
               div id="example-dropdown-#{route.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical

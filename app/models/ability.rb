@@ -8,6 +8,7 @@ class Ability
 
     default
     admin if role?('admin')
+    routes if role?('routes')
     office if role?('office')
   end
 
@@ -17,10 +18,14 @@ class Ability
 
   def default
     can %i(read create), Db::Activities::MountainRoute
+    can %i(manage hide), Db::Activities::MountainRoute, user_id: user.id
+  end
+
+  def routes
+    can %i(manage hide), Db::Activities::MountainRoute
   end
 
   def admin
-    can %i(manage hide), Db::Activities::MountainRoute
     can :manage, Db::User
   end
 
