@@ -4,7 +4,10 @@
       .callout.success
         .row
           .large-4.columns
-            h5 = I18n.t('date.month_names')[Date.today.month - 1]
+            - if Date.today.month == 1
+              h5 = "grudzień #{Date.today.year - 1}"
+            - else
+              h5 = I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}")
             table.stack
               thead
                 tr
@@ -16,7 +19,7 @@
                     td = name
                     td.text-center = length
           .large-4.columns
-            h5 = I18n.t('date.month_names')[Date.today.month]
+            h5 = I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}")
             table.stack
               thead
                 tr

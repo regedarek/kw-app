@@ -50,16 +50,6 @@ module Training
       end
 
       def fetch_season
-        start_date = if Date.today.month >= 6 && Date.today.month < 11
-                      DateTime.new(Date.today.year - 1, 11, 1)
-                     else
-                      DateTime.new(Date.today.year, 11, 1)
-                     end
-        end_date = if Date.today.month >= 6 && Date.today.month < 11
-                      DateTime.new(Date.today.year, 11, 1)
-                     else
-                      DateTime.new(Date.today.year + 1, 11, 1)
-                     end
         range = start_date..end_date
         routes = ::Db::Activities::MountainRoute
           .where(
@@ -80,19 +70,11 @@ module Training
       end
 
       def start_date
-        start_date = if Date.today.month >= 6 && Date.today.month < 11
-                      DateTime.new(Date.today.year - 1, 11, 1)
-                     else
-                      DateTime.new(Date.today.year, 11, 1)
-                     end
+        start_date = DateTime.new(2018, 11, 1)
       end
 
       def end_date
-        end_date = if Date.today.month >= 6 && Date.today.month < 11
-                      DateTime.new(Date.today.year, 11, 1)
-                     else
-                      DateTime.new(Date.today.year + 1, 11, 1)
-                     end
+        end_date = DateTime.new(2019, 11, 1)
       end
     end
   end
