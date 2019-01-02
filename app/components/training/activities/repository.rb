@@ -15,7 +15,7 @@ module Training
           .where(
             route_type: 'ski',
             climbing_date: range,
-            created_at: range
+            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 6.days)
         ).uniq
         users = routes.collect(&:colleagues).flatten.uniq
 
@@ -74,7 +74,7 @@ module Training
       end
 
       def end_date
-        end_date = DateTime.new(2019, 11, 1)
+        end_date = DateTime.new(2019, 5, 1)
       end
     end
   end
