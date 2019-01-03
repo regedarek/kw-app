@@ -35,7 +35,7 @@ module Activities
     def edit
       @route = Db::Activities::MountainRoute.find(params[:id])
       return redirect_to activities_mountain_routes_path, alert: t('.not_owner') unless user_signed_in?
-      return redirect_to activities_mountain_routes_path, alert: t('.not_owner') unless current_user.admin? || current_user.id == @route.user_id
+      return redirect_to activities_mountain_routes_path, alert: t('.not_owner') unless current_user.admin? || current_user.id == @route.user_id || @route.colleagues.include?(current_user)
     end
 
     def update
