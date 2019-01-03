@@ -9,7 +9,7 @@ module Activities
       @q = @q.ski if params[:route_type] == 'ski'
       @q = @q.ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty?
-      @routes = @q.result(distinct: true).includes(:user).page(params[:page]).uniq
+      @routes = @q.result(distinct: true).includes(:user).page(params[:page]).per(10).uniq
       @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
       @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
       @season_leaders = Training::Activities::Repository.new.fetch_season
