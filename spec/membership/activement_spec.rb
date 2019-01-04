@@ -57,9 +57,9 @@ describe Membership::Activement do
         end
       end
 
-      context 'this year 01.15 - 31.12' do
+      context 'this year 04.01 - 31.12' do
         before do
-          Timecop.freeze('2016-02-19'.to_date)
+          Timecop.freeze('2016-04-01'.to_date)
         end
 
         it do
@@ -186,9 +186,9 @@ describe Membership::Activement do
         end
       end
 
-      context '01.01.next - 15.01.next' do
+      context '01.01.next - 31.03.next' do
         before do
-          Timecop.freeze('2017-01-14'.to_date)
+          Timecop.freeze('2017-03-30'.to_date)
         end
 
         it do
@@ -197,9 +197,9 @@ describe Membership::Activement do
         end
       end
 
-      context '15.01.next and futher' do
+      context '01.04.next and futher' do
         before do
-          Timecop.freeze('2017-01-16'.to_date)
+          Timecop.freeze('2017-04-01'.to_date)
         end
 
         it do

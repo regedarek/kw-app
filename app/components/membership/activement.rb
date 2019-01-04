@@ -24,7 +24,7 @@ module Membership
       end
 
       if prev_year_fee
-        if Date.current.between?(Date.current.prev_year.beginning_of_year, Date.new(Date.current.year, 01, 15))
+        if Date.current.between?(Date.current.prev_year.beginning_of_year, Date.new(Date.current.year, 03, 31))
           return true if prev_year_fee.payment.paid? if prev_year_fee.payment
         end
       end
