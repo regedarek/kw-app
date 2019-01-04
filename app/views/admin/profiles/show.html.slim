@@ -218,7 +218,7 @@
               - if @profile.payment.paid?
                 = f.submit 'Nadaj i utwórz konto', class: 'button'
               - else
-                = f.submit 'Nadaj i utwórz konto', class: 'button', data: { confirm: 'Jesteś pewien, że chcesz zaakceptować kandydata, który nie opłacił wpisowego?' }
+                = f.submit 'Nadaj i utwórz konto', class: 'button', data: { confirm: 'Jesteś pewien, że chcesz zaakceptować kandydata, który nie opłacił wpisowego? Jeżeli zapłacił przelewem tradycyjnym lub wszystko się zgadza, kliknij Ok i zaakceptujesz kandydata :)' }
 
     .large-4.columns
       .text-right
