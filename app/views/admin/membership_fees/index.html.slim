@@ -32,7 +32,7 @@
               = f.search_field :profile_last_name_or_user_last_name_or_profile_first_name_or_user_first_name_or_profile_email_or_user_email_cont
             .large-3.columns
               = f.label :plastic, 'Plastikowa'
-              = f.check_box :plastic_true
+              = f.select :plastic_eq, [['Tak', true], ['Nie', false]], include_blank: ''
             .large-4.columns
               = f.label :kw_id_eq, 'Numer klubowy'
               = f.search_field :kw_id_eq
