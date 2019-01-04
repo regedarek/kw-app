@@ -8,6 +8,8 @@ module Admin
       @profiles = @q.result(distinct: true).page(params[:page])
       @profiles = @profiles.where(accepted: false) unless params[:q]
 
+      authorize! :read, Db::Profile
+
       respond_with do |format|
         format.html
         format.xlsx do
@@ -21,6 +23,9 @@ module Admin
     def general_meeting
       @regulars = Db::Profile.all.select{|p| !p.position.include?('candidate') && !p.position.include?('canceled') }
       @candidates = Db::Profile.where(accepted: true).select{|p| p.position.include?('candidate') && !p.position.include?('canceled') }
+
+      authorize! :read, Db::Profile
+
       respond_with do |format|
         format.xlsx do
           disposition = "attachment; filename='walne_zebranie_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
@@ -36,6 +41,8 @@ module Admin
     def create
       @profile = Db::Profile.new(profile_params)
       @profile.acceptor_id = current_user.id
+
+      authorize! :create, Db::Profile
 
       if @profile.save(profile_params)
         @profile.create_payment(dotpay_id: SecureRandom.hex(13))
@@ -62,16 +69,24 @@ module Admin
 
     def show
       @profile = Db::Profile.find(params[:id])
+
+      authorize! :read, Db::Profile
+
       session[:original_referrer] = request.env["HTTP_REFERER"]
     end
 
     def edit
       @profile = Db::Profile.find(params[:id])
+
+      authorize! :manage, Db::Profile
+
       session[:original_referrer] = request.env["HTTP_REFERER"]
     end
 
     def update
       @profile = Db::Profile.find(params[:id])
+
+      authorize! :manage, Db::Profile
 
       if @profile.update(profile_params)
         flash[:notice] = 'Zaktualizowano!'
@@ -90,6 +105,9 @@ module Admin
 
     def accept
       profile = Db::Profile.find(params[:id])
+
+      authorize! :manage, Db::Profile
+
       user = Db::User.new
       user.kw_id = accept_params.fetch(:kw_id)
       user.first_name = profile.first_name
@@ -123,10 +141,6 @@ module Admin
     end
 
     private
-
-    def authorize_admin
-      redirect_to root_url, alert: 'Nie jestes administratorem!' unless user_signed_in? && (current_user.roles.include?('office') || current_user.admin?)
-    end
 
     def accept_params
       params.require(:profile).permit(:kw_id, :application_date)

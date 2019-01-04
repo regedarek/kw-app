@@ -19,6 +19,7 @@ class Ability
   def default
     can %i(read create), Db::Activities::MountainRoute
     can %i(manage hide), Db::Activities::MountainRoute, user_id: user.id
+    can :create, Db::Profile
   end
 
   def routes
@@ -27,9 +28,11 @@ class Ability
 
   def admin
     can :manage, Db::User
+    can :manage, Db::Profile
   end
 
   def office
     can :manage, Db::User
+    can :manage, Db::Profile
   end
 end
