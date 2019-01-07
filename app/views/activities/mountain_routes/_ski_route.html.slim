@@ -3,14 +3,15 @@
     b przewyższenie tury w metrach: 
     = @route.length
 
-.large-12.columns
-  b skład zespołu: 
-  - if @route.partners.present? && @route.colleagues.any?
-    = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
-  - elsif @route.colleagues.any?
-    = @route.colleagues.map(&:display_name).to_sentence
-  - else
-    = @route.partners
+- if can? :see_user_name, current_user
+  .large-12.columns
+    b skład zespołu: 
+    - if @route.partners.present? && @route.colleagues.any?
+      = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+    - elsif @route.colleagues.any?
+      = @route.colleagues.map(&:display_name).to_sentence
+    - else
+      = @route.partners
 
 - if @route.rating.present?
   .large-12.columns
