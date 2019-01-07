@@ -9,6 +9,16 @@ module Training
         Training::Activities::SkiRoute.from_record(record)
       end
 
+      def choose_winer_from_last_month
+        range = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
+        routes = ::Db::Activities::MountainRoute
+          .where(
+            route_type: 'ski',
+            climbing_date: range,
+            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 6.days)
+        ).select {|r| r.attachments.any? }.collect(&:colleagues).flatten.sample
+      end
+
       def fetch_prev_month
         range = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
         routes = ::Db::Activities::MountainRoute
