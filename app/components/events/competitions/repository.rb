@@ -26,6 +26,15 @@ module Events
 
         Events::SignUp.from_record(record)
       end
+
+      def update_sign_up(sign_up_record_id:, form_outputs:)
+        attributes = form_outputs
+          .to_h.tap { |hs| hs.delete(:terms_of_service) }
+        record = Events::Db::SignUpRecord.find(sign_up_record_id)
+        record.update(attributes)
+
+        Events::SignUp.from_record(record)
+      end
     end
   end
 end

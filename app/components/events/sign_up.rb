@@ -61,6 +61,14 @@ module Events
       Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_2_id).membership
     end
 
+    def payment
+      if id
+        Events::Db::SignUpRecord.find(id).payment
+      else
+        nil
+      end
+    end
+
     class << self
       def from_record(record)
         new(
@@ -82,6 +90,8 @@ module Events
           participant_gender_2: record.participant_gender_2,
           competition_package_type_1_id: record.competition_package_type_1_id,
           competition_package_type_2_id: record.competition_package_type_2_id,
+          tshirt_size_1: record.tshirt_size_1,
+          tshirt_size_2: record.tshirt_size_2,
           remarks: record.remarks,
           single: record.single
         )

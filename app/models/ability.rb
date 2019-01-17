@@ -27,9 +27,14 @@ class Ability
     can %i(manage hide), Db::Activities::MountainRoute
   end
 
+  def competitions
+    can :manage, Events::Db::SignUpRecord
+  end
+
   def admin
     can :manage, Db::User
     can :manage, Db::Profile
+    can :manage, Events::Db::SignUpRecord
   end
 
   def office

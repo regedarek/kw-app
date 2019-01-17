@@ -15,6 +15,8 @@ table.stack
       th = t('.organization')
       th width='15%'
         = t('.paid')
+      - if can? :manage, Events::Db::SignUpRecord
+        th
   tbody
     - sign_ups.each_with_index do |sign_up, index|
       tr
@@ -31,4 +33,10 @@ table.stack
             .label.success = t("#{sign_up.payment.state}")
           -else
             .label.warning = t("#{sign_up.payment.state}")
+        - if can? :manage, Events::Db::SignUpRecord
+          td
+            = link_to edit_competition_sign_up_path(competition_id: @competition, id: sign_up) do
+              i.fi-page-edit
+            = link_to competition_sign_up_path(competition_id: @competition, id: sign_up), method: :delete, data: { confirm: 'Napewno chcesz usunąć?' } do
+              i.fi-trash
 

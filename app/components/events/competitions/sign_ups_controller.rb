@@ -36,6 +36,40 @@ module Events
         end
       end
 
+      def edit
+        @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+        @sign_up = Events::SignUp.from_record(Events::Db::SignUpRecord.find(params[:id]))
+        authorize! :update, Events::Db::SignUpRecord
+      end
+
+      def update
+        @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+        @sign_up = Events::SignUp.from_record(Events::Db::SignUpRecord.find(params[:id]))
+
+        authorize! :update, Events::Db::SignUpRecord
+
+        either(update_record) do |result|
+          result.success do
+            redirect_to edit_competition_sign_up_path(competition_id: params[:competition_id], id: @sign_up.id), flash: { notice: t('.success') }
+          end
+
+          result.failure do |errors|
+            @errors = errors
+            render(action: :edit)
+          end
+        end
+      end
+
+      def destroy
+        sign_up = Events::Db::SignUpRecord.find(params[:id])
+
+        authorize! :destroy, Events::Db::SignUpRecord
+
+        sign_up.destroy
+
+        redirect_to :back, notice: 'Usunięto zapis!'
+      end
+
       private
 
       def create_record
@@ -43,6 +77,13 @@ module Events
           Events::Competitions::Repository.new,
           Events::Competitions::SignUps::CreateForm.new
         ).call(competition_id: params[:competition_id], raw_inputs: sign_up_params)
+      end
+
+      def update_record
+        Events::Competitions::SignUps::Update.new(
+          Events::Competitions::Repository.new,
+          Events::Competitions::SignUps::CreateForm.new
+        ).call(sign_up_record_id: params[:id], raw_inputs: sign_up_params)
       end
 
       def slug_params
