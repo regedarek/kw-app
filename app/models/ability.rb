@@ -10,6 +10,7 @@ class Ability
     admin if role?('admin')
     routes if role?('routes')
     office if role?('office')
+    competitions if role?('competitions')
   end
 
   def role?(name)
