@@ -25,13 +25,10 @@ module Activities
 
     def new
       @route = Db::Activities::MountainRoute.new
-
-      authorize! :create, Db::Activities::MountainRoute
     end
 
     def show
       @route = Db::Activities::MountainRoute.find(params[:id])
-      authorize! :read, @route
     end
 
     def edit
