@@ -14,6 +14,8 @@ module Activities
       @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
       @season_leaders = Training::Activities::Repository.new.fetch_season
 
+      authorize! :read, Db::Activities::MountainRoute
+
       respond_to do |format|
         format.html
         format.xlsx do
@@ -24,12 +26,14 @@ module Activities
     end
 
     def new
-      return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
       @route = Db::Activities::MountainRoute.new
+
+      authorize! :create, Db::Activities::MountainRoute
     end
 
     def show
       @route = Db::Activities::MountainRoute.find(params[:id])
+      authorize! :read, @route
     end
 
     def edit
