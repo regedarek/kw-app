@@ -9,7 +9,7 @@ module Training
       end
 
       def index
-        return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
+        authorize! :read, Db::Activities::MountainRoute
 
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
@@ -17,12 +17,13 @@ module Training
       end
 
       def new
-        return redirect_to activities_mountain_routes_path, alert: 'musisz byc zalogowany' unless user_signed_in?
-
         @ski_route = ::Db::Activities::MountainRoute.new
+        authorize! :create, Db::Activities::MountainRoute
       end
 
       def create
+        authorize! :create, Db::Activities::MountainRoute
+
         either(create_record) do |result|
           result.success do
             redirect_to activities_mountain_routes_path, flash: { notice: 'Dodano przejście' }
