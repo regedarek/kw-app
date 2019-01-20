@@ -14,8 +14,6 @@ module Activities
       @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
       @season_leaders = Training::Activities::Repository.new.fetch_season
 
-      authorize! :read, Db::Activities::MountainRoute
-
       respond_to do |format|
         format.html
         format.xlsx do
