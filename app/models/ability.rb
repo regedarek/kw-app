@@ -19,6 +19,7 @@ class Ability
 
   def default
     can :see_user_name, Db::Activities::MountainRoute if user.persisted?
+    can :read, Db::Activities::MountainRoute
     can %i(manage hide), Db::Activities::MountainRoute, user_id: user.id
     can :create, Db::Profile
   end
