@@ -5,7 +5,7 @@
   = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
     .row
       .large-4.columns
-        = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_last_name_or_colleagues_first_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
+        = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_full_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
       .large-2.columns
         = f.search_field :climbing_date_year_equals, style: 'height: 55px', placeholder: 'Od roku(2018)'
       .large-3.columns

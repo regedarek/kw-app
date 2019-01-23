@@ -25,6 +25,11 @@ module Db
     ransacker :acomplished_courses do
       Arel.sql("array_to_string(acomplished_courses, ',')")
     end
+    ransacker :full_name do |parent|
+      Arel::Nodes::NamedFunction.new('CONCAT_WS', [
+        Arel::Nodes.build_quoted(' '), parent.table[:first_name], parent.table[:last_name]
+      ])
+    end
 
     def kw_id_accepted
       if kw_id.present? && !accepted

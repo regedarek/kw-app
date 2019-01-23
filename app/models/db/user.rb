@@ -31,6 +31,12 @@ class Db::User < ActiveRecord::Base
     class_name: 'Db::Activities::MountainRoute'
   has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
 
+  ransacker :full_name do |parent|
+    Arel::Nodes::NamedFunction.new('CONCAT_WS', [
+      Arel::Nodes.build_quoted(' '), parent.table[:first_name], parent.table[:last_name]
+    ])
+  end
+
   def display_name
     "#{first_name} #{last_name}"
   end
