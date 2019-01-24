@@ -36,7 +36,7 @@
 
       - if @competition.single?
         .large-2.columns
-          = f.label :competition_package_type_1_id, t('.competition_package_type_id')
+          = f.label :competition_package_type_1_id, t('.competition_package_type_id_1')
           = f.select :competition_package_type_1_id,
             options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
             {include_blank: true},

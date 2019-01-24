@@ -64,7 +64,7 @@ module Events
           end
 
          required(:participant_name_1, Types::String).filled
-         required(:tshirt_size_1, Types::String).filled
+         optional(:tshirt_size_1, Types::String).filled
          optional(:participant_city_1, Types::String)
          optional(:team_name, Types::String)
          optional(:remarks, Types::String)
