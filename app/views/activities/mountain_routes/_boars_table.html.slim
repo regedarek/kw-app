@@ -1,0 +1,59 @@
+table.stack
+  thead
+    - if @q.present?
+      tr
+        th width='5%'
+        th width='8%' = sort_link(@q, :climbing_date, 'kiedy?')
+        th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
+        - if user_signed_in?
+          th width='25%' = sort_link(@q, :partners, 'skład zespołu')
+        th width='12%'
+        th width='10%' = sort_link(@q, :created_at, 'dodano?')
+        th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
+        - if user_signed_in?
+          th width='3%'
+    - else
+      tr
+        th width='5%'
+        th width='10%' kiedy?
+        th width='20%' nazwa przejścia
+        - if user_signed_in?
+          th width='25%' skład zespołu
+        th width='12%'
+        th width='10%' kiedy?
+        th.text-center width='7%' bicki
+        - if user_signed_in?
+          th width='3%'
+
+  tbody
+    - routes.each do |route|
+      tr
+        td.text-center = image_tag "#{route.category}.png", size: '40x40'
+        td.text-center.large-text-left = route.climbing_date
+        td.text-center.large-text-left
+          h6.dashboard-table-text= link_to route.name, activities_mountain_route_path(route)
+          span.dashboard-table-timestamp= truncate(route.peak, length: 25)
+        - if user_signed_in?
+          td.text-center.large-text-left
+            = route.colleagues.map(&:display_name).compact.push(route.partners).reject(&:empty?).to_sentence
+        td.text-center
+          - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each_with_index do |image, index|
+            div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
+              button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                span aria-hidden="true"  &times;
+              = image_tag image
+            = image_tag image.thumb, class: 'dashboard-table-image', data: { open: "route-#{route.id}-image-#{index}", 'close-on-click': 'true' }
+        td.text-center.large-text-left = route.created_at.to_date
+        td.text-center
+          div id="route_#{route.id}"
+            = render  "training/activities/hearts/button", route: route
+        - if user_signed_in?
+          td.text-center
+            - if can?(:manage, route) || route.colleagues.include?(current_user)
+              i.fi-list-thumbnails data-toggle="example-dropdown-#{route.id}" data-auto-focus="true"
+              div id="example-dropdown-#{route.id}" class="dropdown-pane" data-dropdown=""
+                ul.menu.vertical
+                  - if can? :hide, route
+                    li= link_to 'Ukryj', hide_activities_mountain_route_path(route.id), method: :put
+                  li= link_to 'Edytuj', edit_activities_mountain_route_path(route.id)
+                  l

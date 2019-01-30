@@ -89,6 +89,7 @@ pl:
           category: Kategoria
           payment_type: Konto Dotpay
           place: Miejsce
+          training: Trening
           open: Nie wymagaj zapisów
           packages: Pakiety?
           start_date: Kiedy?

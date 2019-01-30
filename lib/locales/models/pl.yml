@@ -167,6 +167,7 @@ pl:
         partners: skład zespołu spoza klubu
         colleagues_names: koledzy z klubu
         hidden: Nie publikuj tego przejścia
+        training: Tura treningowa
         description: uwagi
         time: czas przejscia
         climbing_date: data przejscia*

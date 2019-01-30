@@ -1,6 +1,4 @@
 .column
-  - if params[:route_type] == 'ski'
-    = render 'training/activities/ski_routes/leaderboard'
 
   = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
     .row
@@ -19,20 +17,28 @@
               = image_tag "sww.png",
                 size: '55x55',
                 class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+            = link_to params.merge({route_type: :ski, boars: true}).to_unsafe_h do
+              = image_tag "dzik.jpg",
+                size: '55x55',
+                class: (params[:boars] == 'true' ? '' : 'opacity')
             - if params[:q] || params[:route_type].present?
               = link_to category: nil do
                 = ' usuń filtr'
           br
         .show-for-large
           .text-left
-            = link_to params.merge({route_type: :ski}).to_unsafe_h do
+            = link_to params.merge({route_type: :ski}).except(:boars).to_unsafe_h do
               = image_tag "snw.png",
                 size: '55x55',
                 class: (params[:route_type] == 'ski' ? '' : 'opacity')
-            = link_to params.merge({route_type: :climbing}).to_unsafe_h do
+            = link_to params.merge({route_type: :climbing}).except(:boars).to_unsafe_h do
               = image_tag "sww.png",
                 size: '55x55',
                 class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+            = link_to params.merge({route_type: :ski, boars: true}).to_unsafe_h do
+              = image_tag "dzik.jpg",
+                size: '55x55',
+                class: (params[:boars] == 'true' ? '' : 'opacity')
             - if params[:q] || params[:route_type].present?
               = link_to category: nil do
                 = ' usuń filtr'
@@ -46,7 +52,14 @@
 
   .row
     .large-12.columns
-      = render 'table', routes: @routes
+      - if params[:boars]
+        = render 'boars_table', routes: @routes
+      - else
+        = render 'table', routes: @routes
 
       .text-center
         = paginate @routes
+
+      - if params[:boars]
+        = render 'training/activities/ski_routes/leaderboard'
+        = render 'training/activities/ski_routes/table', routes: @season_leaders

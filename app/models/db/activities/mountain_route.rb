@@ -5,8 +5,9 @@ module Db
       mount_uploaders :attachments, AttachmentUploader
       serialize :attachments, JSON
 
-      scope :climbing, -> { where(route_type: [:regular_climbing, :winter_climbing]) }
-      scope :ski, -> { where(route_type: :ski) }
+      scope :climbing, -> { where(route_type: [:regular_climbing, :winter_climbing], training: false) }
+      scope :ski, -> { where(route_type: :ski, training: false) }
+      scope :boars, -> { ski.merge(where(route_type: :ski, training: [false, true])) }
 
       belongs_to :user
       has_many :hearts, dependent: :destroy
