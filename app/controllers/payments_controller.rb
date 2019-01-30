@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
   def mark_as_paid
     payment = Db::Payment.find(params[:id])
     if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
-      payment.update(cash_user_id: current_user.id, cash: true)
+      payment.update(cash_user_id: current_user.id, cash: true, state: 'prepaid')
 
       redirect_to :back, notice: 'Oznaczono jako zapłacone'
     else
