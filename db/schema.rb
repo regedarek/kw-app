@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190130211823) do
+ActiveRecord::Schema.define(version: 20190130231400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20190130211823) do
     t.string   "attachments"
     t.integer  "hearts_count",  default: 0
     t.boolean  "training",      default: false, null: false
+    t.index ["user_id"], name: "index_mountain_routes_on_user_id", using: :btree
   end
 
   create_table "participants", force: :cascade do |t|
@@ -300,6 +301,7 @@ ActiveRecord::Schema.define(version: 20190130211823) do
   create_table "route_colleagues", force: :cascade do |t|
     t.integer "colleague_id"
     t.integer "mountain_route_id"
+    t.index ["colleague_id", "mountain_route_id"], name: "index_route_colleagues_on_colleague_id_and_mountain_route_id", unique: true, using: :btree
   end
 
   create_table "snw_profiles", force: :cascade do |t|
