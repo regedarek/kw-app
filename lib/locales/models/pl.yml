@@ -253,6 +253,7 @@ pl:
         password_confirmation: Potwierdz haslo
         current_password: Obecne haslo
         hide: Ukryj moje dane na liście klubowiczów?
+        boars: Chcę uczestniczyć w programie Narciarskie Dziki
     errors:
       messages:
         record_invalid: "Negatywne sprawdzenie poprawności: %{errors}"

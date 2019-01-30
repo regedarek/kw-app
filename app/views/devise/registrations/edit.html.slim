@@ -48,6 +48,11 @@
 
     .row
       .large-12.columns
+        = f.label :boars
+        = f.check_box :boars
+
+    .row
+      .large-12.columns
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
                       Wyślij ponownie potwierdzajacy email:
                       = resource.unconfirmed_email

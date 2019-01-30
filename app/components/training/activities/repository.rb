@@ -27,7 +27,8 @@ module Training
             climbing_date: range,
             created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 6.days)
         ).uniq
-        users = routes.collect(&:colleagues).flatten.uniq
+        users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
+        users = ::Db::User.where(id: users_ids, boars: true)
 
         hash = Hash.new
         users.each do |user|
@@ -47,7 +48,8 @@ module Training
             climbing_date: range,
             created_at: range
         ).uniq
-        users = routes.collect(&:colleagues).flatten.uniq
+        users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
+        users = ::Db::User.where(id: users_ids, boars: true)
 
         hash = Hash.new
         users.each do |user|
@@ -67,7 +69,8 @@ module Training
             climbing_date: range,
             created_at: range
         ).uniq
-        users = routes.collect(&:colleagues).flatten.uniq
+        users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
+        users = ::Db::User.where(id: users_ids, boars: true)
 
         hash = Hash.new
         users.each do |user|
