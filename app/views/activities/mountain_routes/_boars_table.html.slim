@@ -9,6 +9,7 @@ table.stack
           th width='25%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
         th width='10%' = sort_link(@q, :created_at, 'dodano?')
+        th width='10%' = sort_link(@q, :length, 'przewyższenie')
         th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
         - if user_signed_in?
           th width='3%'
@@ -20,7 +21,8 @@ table.stack
         - if user_signed_in?
           th width='25%' skład zespołu
         th width='12%'
-        th width='10%' kiedy?
+        th width='10%' dodano?
+        th width='10%' przewyższenie
         th.text-center width='7%' bicki
         - if user_signed_in?
           th width='3%'
@@ -42,7 +44,8 @@ table.stack
               button.close-button aria-label=("Close reveal") data-close="" type="button" 
                 span aria-hidden="true"  &times;
             = image_tag image.thumb, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'close-on-click': "true", 'reveal-id': "route-#{route.id}-image-#{index}" }
-        td.text-center.large-text-left = route.created_at.to_date
+        td.text-center = route.created_at.to_date
+        td.text-center = route.length&.present? ? "#{route.length}m" : '-'
         td.text-center
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route
