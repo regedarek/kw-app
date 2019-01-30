@@ -5,16 +5,14 @@ module Activities
 
     def index
       @q = if params[:boars]
-             Db::Activities::MountainRoute.where(hidden: false)
+             Db::Activities::MountainRoute.where(hidden: false).order(created_at: :desc)
            else
-             Db::Activities::MountainRoute.where(hidden: false, training: false)
+             Db::Activities::MountainRoute.where(hidden: false, training: false).order(climbing_date: :desc)
            end
       @q = @q.climbing if params[:route_type] == 'climbing'
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
       @q = @q.boars if params[:boars] == 'true'
       @q = @q.ransack(params[:q])
-      @q.sorts = 'climbing_date desc' if @q.sorts.empty? && params[:boars] == nil
-      @q.sorts = 'created_at desc' if params[:boars]
       @routes = @q.result(distinct: true).page(params[:page])
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
