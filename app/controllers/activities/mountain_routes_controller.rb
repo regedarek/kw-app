@@ -13,7 +13,7 @@ module Activities
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
       @q = @q.boars if params[:boars] == 'true'
       @q = @q.ransack(params[:q])
-      @q.sorts = 'climbing_date desc' if @q.sorts.empty?
+      @q.sorts = 'climbing_date desc' if @q.sorts.empty? && params[:boars] == nil
       @q.sorts = 'created_at desc' if params[:boars]
       @routes = @q.result(distinct: true).includes(:user).page(params[:page]).per(10).uniq
       @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
