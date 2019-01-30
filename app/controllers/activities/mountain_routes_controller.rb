@@ -15,7 +15,7 @@ module Activities
       @q = @q.ransack(params[:q])
       @q.sorts = 'climbing_date desc' if @q.sorts.empty? && params[:boars] == nil
       @q.sorts = 'created_at desc' if params[:boars]
-      @routes = @q.page(params[:page])
+      @routes = @q.result(distinct: true).page(params[:page])
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
