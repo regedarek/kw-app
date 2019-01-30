@@ -178,10 +178,12 @@
 
         .row
           .large-12.columns
-            - if @sign_up.payment.prepaid?
-              .label.success = t("#{@sign_up.payment.state}")
+            - if @sign_up.payment.paid?
+              .label.success = t("prepaid")
             -else
-              .label.warning = t("#{@sign_up.payment.state}")
+               = link_to mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' } do
+                .label.warning = t("#{@sign_up.payment.state}")
+
 
       .row
         .large-6.columns

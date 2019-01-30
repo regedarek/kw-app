@@ -29,8 +29,8 @@ table.stack
         td = [sign_up.participant_city_1, sign_up.participant_city_2].compact.reject(&:empty?).to_sentence
         td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
         td.text-center
-          - if sign_up.payment.prepaid?
-            .label.success = t("#{sign_up.payment.state}")
+          - if sign_up.payment.paid?
+            .label.success = t("prepaid")
           -else
             .label.warning = t("#{sign_up.payment.state}")
         - if can? :manage, Events::Db::SignUpRecord
