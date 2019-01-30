@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190130231400) do
+ActiveRecord::Schema.define(version: 20190130233129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,8 @@ ActiveRecord::Schema.define(version: 20190130231400) do
     t.string   "attachments"
     t.integer  "hearts_count",  default: 0
     t.boolean  "training",      default: false, null: false
+    t.index ["climbing_date"], name: "index_mountain_routes_on_climbing_date", using: :btree
+    t.index ["created_at"], name: "index_mountain_routes_on_created_at", using: :btree
     t.index ["user_id"], name: "index_mountain_routes_on_user_id", using: :btree
   end
 
