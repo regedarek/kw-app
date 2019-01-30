@@ -16,7 +16,10 @@ module Training
             route_type: 'ski',
             climbing_date: range,
             created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 6.days)
-        ).select {|r| r.attachments.any? }.collect(&:colleagues).flatten.sample
+        ).select {|r| r.attachments.any? }
+        users_ids = routes.collect(&:colleagues).flatten.map(&:id)
+        users = ::Db::User.where(id: users_ids, boars: true)
+        users.sample
       end
 
       def fetch_prev_month
