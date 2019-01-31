@@ -15,7 +15,7 @@ module Training
           .where(
             route_type: 'ski',
             climbing_date: range,
-            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 6.days)
+            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)
         ).select {|r| r.attachments.any? }
         users_ids = routes.collect(&:colleagues).flatten.map(&:id)
         users = ::Db::User.where(id: users_ids, boars: true)
@@ -28,7 +28,7 @@ module Training
           .where(
             route_type: 'ski',
             climbing_date: range,
-            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 6.days)
+            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)
         ).uniq
         users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
         users = ::Db::User.where(id: users_ids, boars: true)
