@@ -13,7 +13,7 @@ module Activities
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
       @q = @q.boars if params[:boars] == 'true'
       @q = @q.ransack(params[:q])
-      @routes = @q.result(distinct: true).page(params[:page])
+      @routes = @q.result(distinct: true).page(params[:page]).per(10)
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
@@ -27,6 +27,19 @@ module Activities
           response.headers['Content-Disposition'] = disposition
         end
       end
+    end
+
+    def photos
+      month = Date.new(params[:year].to_i, params[:month].to_i, 1)
+      range = month.beginning_of_month..month.end_of_month
+
+      routes = ::Db::Activities::MountainRoute
+        .where(
+          route_type: 'ski',
+          climbing_date: range,
+          created_at: range
+      ).uniq
+      @photos = routes.map(&:attachments).flatten.select { |a| a.content_type.start_with?('image') }
     end
 
     def new

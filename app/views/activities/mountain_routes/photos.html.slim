@@ -1,0 +1,11 @@
+.column
+  .row
+    .large-12.columns
+      - @photos.each_with_index do |photo, i|
+        - unless photo.blank? || photo.thumb.blank?
+          = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+          div id="photo-#{i}" class="full reveal" data-reveal="" 
+            = image_tag photo.url
+            button.close-button aria-label=("Close reveal") data-close="" type="button" 
+              span aria-hidden="true"  &times;

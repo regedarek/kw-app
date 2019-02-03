@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   namespace :activities, path: '/' do
     resources :mountain_routes, path: 'przejscia' do
+      collection do
+        get 'photos/:year/:month', to: 'mountain_routes#photos'
+      end
       member do
         put :hide
       end
