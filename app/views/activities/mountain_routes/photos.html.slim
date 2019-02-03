@@ -6,6 +6,9 @@
           = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
 
           div id="photo-#{i}" class="full reveal" data-reveal="" 
+            b = link_to photo.model.name, activities_mountain_route_path(photo.model.id)
+            br
+            = photo.model.persons
             = image_tag photo.url
             button.close-button aria-label=("Close reveal") data-close="" type="button" 
               span aria-hidden="true"  &times;

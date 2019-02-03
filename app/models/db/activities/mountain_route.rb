@@ -26,6 +26,10 @@ module Db
         end
       end
 
+      def persons
+        colleagues.map(&:display_name).push(partners).to_sentence
+      end
+
       def colleagues_names=(ids)
         self.colleague_ids = ids
       end
