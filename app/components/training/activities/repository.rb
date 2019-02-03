@@ -22,14 +22,25 @@ module Training
         users.sample
       end
 
+      def fetch_prev_prev_month
+        range = 3.months.ago.beginning_of_month..2.months.ago.end_of_month
+        routes = ::Db::Activities::MountainRoute .where( route_type: 'ski', climbing_date: range, created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)).uniq
+        users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
+        users = ::Db::User.where(id: users_ids, boars: true)
+
+        hash = Hash.new
+        users.each do |user|
+          user_routes = routes.select do |route|
+            route.colleagues.include?(user)
+          end
+          hash[user.display_name] = user_routes.map(&:length).compact.sum
+        end
+        hash.sort_by {|_key, value| value}.reverse
+      end
+
       def fetch_prev_month
         range = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
-        routes = ::Db::Activities::MountainRoute
-          .where(
-            route_type: 'ski',
-            climbing_date: range,
-            created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)
-        ).uniq
+        routes = ::Db::Activities::MountainRoute .where( route_type: 'ski', climbing_date: range, created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)).uniq
         users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
         users = ::Db::User.where(id: users_ids, boars: true)
 
