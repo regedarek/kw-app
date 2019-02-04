@@ -10,6 +10,9 @@ pl:
         name: Imię i nazwisko
         email: E-mail
         package_required: Pakiet
+        user_id: Użytkownik
+        expired_at: Wygasa
+        supplementary_course_package_type_id: Pakiet
   training:
     activities:
       ski_routes:
