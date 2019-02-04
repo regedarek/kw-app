@@ -7,6 +7,7 @@ class Ability
     @user ||= user || Db::User.new
 
     default
+    not_active if @user.persisted?
     active if @user.active?
     admin if role?('admin')
     routes if role?('routes')
@@ -20,6 +21,10 @@ class Ability
 
   def default
     can :create, Db::Profile
+  end
+
+  def not_active
+    can :manage, Db::Activities::MountainRoute
   end
 
   def active
