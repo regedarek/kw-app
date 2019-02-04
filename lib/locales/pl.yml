@@ -1,7 +1,7 @@
 pl:
   unauthorized:
     manage:
-      all: "Nie masz dostępu do tej części panelu: opłać składkę lub skontaktuj się z administratorem!"
+      all: "Nie masz dostępu do tej części panelu: zaloguj się lub opłać składkę, następnie skontaktuj się z administratorem!"
   true_value: Tak
   false_value: Nie
   'false': Nie
