@@ -102,7 +102,12 @@
                       = z.select :supplementary_course_package_type_id,
                       @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
                       include_blank: 'Wybierz pakiet'
-                  = z.submit 'Zapisz się', class: 'button large success expanded'
+                  = z.submit 'Zapisz się na listę rezerwową', class: 'button large secondary expanded'
+                  .callout.secondary
+                    | Limit miejsc został wyczerpany ale możesz zapisać się na 
+                    | listę rezerwową i poczekać na zwiększenie limitu.
+                    br
+                    b Jeżeli zwolni się miejsce zostaniesz powiadomiony e-mailem.
               - else
                 .callout.warning
                   | Limit miejsc został wyczerpany.
