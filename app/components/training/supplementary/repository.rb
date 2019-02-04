@@ -88,16 +88,28 @@ module Training
 
       def sign_up!(name:, email:, user_id:, course_id:)
         course = Training::Supplementary::CourseRecord.find(course_id)
+        expired_at = unless course.expired_hours.zero?
+          Time.zone.now + course.expired_hours.hours
+        end
 
         sign_up = Training::Supplementary::SignUpRecord.create!(
           name: name,
           user_id: user_id,
           course_id: course_id,
           email: email,
-          code: SecureRandom.hex(13)
+          code: SecureRandom.hex(13),
+          expired_at: expired_at
         )
         sign_up.create_payment(dotpay_id: SecureRandom.hex(13))
         sign_up
+      end
+
+      def expired_sign_ups
+        Training::Supplementary::SignUpRecord
+          .joins(:payment)
+          .where.not(expired_at: nil)
+          .where('expired_at < ?', Time.zone.now)
+          .where(payments: { state: 'unpaid' })
       end
     end
   end

@@ -30,11 +30,15 @@
           = f.label :payment_type, t('.payment_type')
           = f.select :payment_type, @course.payment_types
 
-        .large-3.columns
+        .large-2.columns
+          = f.label :expired_hours, t('.expired_hours')
+          = f.number_field :expired_hours
+
+        .large-2.columns
           = f.label :kind, t('.category')
           = f.select :kind, @course.kinds
 
-        .large-4.columns
+        .large-3.columns
           = f.label :organizator_id, t('.organizator_id')
           - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
           - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil

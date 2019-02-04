@@ -17,6 +17,7 @@ module Training
       attribute :place, Types::Strict::String.optional
       attribute :start_date, Types::Strict::DateTime.optional
       attribute :end_date, Types::Strict::Date.optional
+      attribute :expired_hours, Types::Strict::Int
       attribute :baner, Types::Any
       attribute :application_date, Types::Strict::DateTime.optional
       attribute :price_kw, Types::Strict::Int.optional
@@ -68,6 +69,7 @@ module Training
             cash: record.cash,
             one_day: record.one_day,
             active: record.active,
+            expired_hours: record.expired_hours,
             limit: record.limit,
             open: record.open,
             packages: record.packages,

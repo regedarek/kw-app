@@ -35,10 +35,15 @@ br
   - else
     = link_to 'Aby zapisać się na wydarzenie opłać je tutaj!', charge_payment_url(@sign_up.payment.id)
     br
-    b Prosimy abyś dokonał płatności jak najszybciej, gdyż do momentu opłacenia blokujesz miejsce.
-    br
-    b Po 2-3 dniach bez płatności musisz się liczyć z tym, że koordynator wydarzenia anuluje twój zapis.
-  br
+    - if @sign_up.course.expired_hours.zero?
+      .callout.success
+        | Prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
+    - else
+      .callout.success
+        b Opłać zapis do: 
+        = @sign_up.expired_at&.strftime("%d/%m/%Y %R")
+        br
+        b Po tym czasie twój zapis zostanie usunięty.
   br
   | Jeżeli chcesz się wypisać z wydarzenia, poproś o to koordynatora.
   br

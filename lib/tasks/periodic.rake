@@ -17,6 +17,16 @@ task :destroy_outdated_profiles => :environment do
   outdated_profiles.map(&:destroy)
 end
 
+task :destroy_expired_sign_ups => :environment do
+  expired_sign_ups = Training::Supplementary::Repository.new.expired_sign_ups
+  expired_sign_ups.each do |sign_up|
+    Training::Supplementary::DestroySignUp.new(
+      Training::Supplementary::Repository.new
+    ).call(id: sign_up.id)
+  end
+  Net::HTTP.get(URI('https://hc-ping.com/3b87fe26-31d5-442d-985b-baa658254ae8'))
+end
+
 task :set_regular_members => :environment do
   UserManagement::Members.set_regular
 end

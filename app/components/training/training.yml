@@ -89,6 +89,7 @@ pl:
           category: Kategoria
           payment_type: Konto Dotpay
           place: Miejsce
+          expired_hours: Godziny na płatność
           training: Trening
           open: Nie wymagaj zapisów
           packages: Pakiety?
