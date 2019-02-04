@@ -1,0 +1,60 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul
+          - @errors.each do |error|
+            li= error.last.to_sentence
+
+.row
+  .large-12.columns
+    .callout.primary
+      .row
+        .large-4.columns
+          = f.label :name
+          = f.text_field :name
+
+        .large-4.columns
+          = f.label :email
+          = f.text_field :email
+
+        .large-4.columns
+          = f.label :user_id
+          = f.collection_select :user_id, Db::User.all, :id, :display_name
+      .row
+        .large-4.columns
+          = f.label :supplementary_course_package_type_id
+          = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
+
+        .large-2.columns
+          br
+          .text-center
+            - if @sign_up&.payment&.paid?
+              span class='label success'
+                | opłacono
+            - else
+              span class='label alert'
+                | nieopłacono
+
+        .large-2.columns
+          br
+          .text-center
+            - if @limiter.in_limit?(@sign_up)
+              span class='label success'
+                | w limicie
+            - else
+              span class='label alert'
+                | poza limitem
+
+        .large-4.columns
+          = f.label :expired_at
+          = f.datetime_field :expired_at
+
+.row
+  .large-12.columns
+    ul
+      li
+        = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
+      li
+        = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+      li = link_to 'Usuń', supplementary_sign_up_path(@sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }

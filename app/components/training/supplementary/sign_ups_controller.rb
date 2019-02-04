@@ -4,6 +4,26 @@ module Training
       include EitherMatcher
       append_view_path 'app/components'
 
+      def edit
+        @sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+        @limiter = Training::Supplementary::Limiter.new(@sign_up.course)
+      end
+
+      def update
+        @sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+        @limiter = Training::Supplementary::Limiter.new(@sign_up.course)
+        either(update_record) do |result|
+          result.success do
+            redirect_to :back, notice: 'Zaktualizowałeś!'
+          end
+
+          result.failure do |errors|
+            flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.kind_of?(Array) ? v.to_sentence : v}"}.join(', ')
+            redirect_to :back
+          end
+        end
+      end
+
       def manually
         either(manually_sign_up) do |result|
           result.success do
@@ -82,12 +102,19 @@ module Training
         ).call(raw_inputs: sign_up_params)
       end
 
+      def update_record
+        Training::Supplementary::UpdateSignUp.new(
+          Training::Supplementary::Repository.new,
+          Training::Supplementary::CreateSignUpForm.new
+        ).call(id: params[:id], raw_inputs: sign_up_params)
+      end
+
       def manually_sign_up_params
         params.require(:manually_sign_up).permit(:email, :course_id, :supplementary_course_package_type_id)
       end
 
       def sign_up_params
-        params.require(:sign_up).permit(:name, :email, :user_id, :course_id, :supplementary_course_package_type_id)
+        params.require(:sign_up).permit(:name, :email, :user_id, :course_id, :supplementary_course_package_type_id, :expired_at)
       end
     end
   end
