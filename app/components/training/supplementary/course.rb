@@ -26,6 +26,7 @@ module Training
       attribute :organizator_id, Types::Any.optional
       attribute :price, Types::Strict::Bool
       attribute :cash, Types::Strict::Bool
+      attribute :reserve_list, Types::Strict::Bool
       attribute :open, Types::Strict::Bool
       attribute :packages, Types::Strict::Bool
       attribute :last_fee_paid, Types::Strict::Bool
@@ -73,6 +74,7 @@ module Training
             limit: record.limit,
             open: record.open,
             packages: record.packages,
+            reserve_list: record.reserve_list,
             last_fee_paid: record.last_fee_paid,
             baner: record.baner
           )

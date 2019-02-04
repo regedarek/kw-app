@@ -46,7 +46,10 @@ table.stack
           td.text-right
             .icon-bar.five-up
               = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
-                i.fi-mail
+                - if sign_up.sent_at
+                  i.fi-mail style='color: red'
+                - else
+                  i.fi-mail
               = link_to edit_supplementary_sign_up_path(sign_up.id), class: 'item', style: 'margin: 5px' do
                 i.fi-page-edit
               = link_to supplementary_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'item', style: 'margin: 5px' do

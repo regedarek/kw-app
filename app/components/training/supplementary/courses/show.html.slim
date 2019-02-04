@@ -91,8 +91,21 @@
         - if user_signed_in?
           - if @limiter.sign_ups_started? && !@limiter.open?
             - if @limiter.sign_ups_reached?
-              .callout.warning
-                | Limit miejsc został wyczerpany.
+              - if @course.reserve_list
+                = form_for :sign_up, url: supplementary_sign_ups_path do |z|
+                  = z.hidden_field :course_id, value: @course.id
+                  = z.hidden_field :user_id, value: current_user.id
+                  = z.hidden_field :email, value: current_user.email
+                  = z.hidden_field :name, value: current_user.display_name
+                  - if @course.price
+                    - if @course.packages
+                      = z.select :supplementary_course_package_type_id,
+                      @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
+                      include_blank: 'Wybierz pakiet'
+                  = z.submit 'Zapisz się', class: 'button large success expanded'
+              - else
+                .callout.warning
+                  | Limit miejsc został wyczerpany.
             - else
               = form_for :sign_up, url: supplementary_sign_ups_path do |z|
                 = z.hidden_field :course_id, value: @course.id

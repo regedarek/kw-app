@@ -54,6 +54,8 @@
 .row
   .large-12.columns
     ul
+      - if @sign_up.sent_at
+        li = "Wysłano e-mail z linkiem do płatności"#{@sign_up.sent_at}"
       li
         = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
       li
