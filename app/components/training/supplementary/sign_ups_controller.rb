@@ -64,8 +64,13 @@ module Training
       def send_email
         if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
           sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+          expired_at = unless sign_up.course.expired_hours.zero?
+            Time.zone.now + sign_up.course.expired_hours.hours
+          end
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
-          sign_up.update(sent_at: Time.zone.now)
+          sign_up.update(sent_at: Time.zone.now, expired_at: expired_at)
+
+
           redirect_to polish_event_path(sign_up.course.id), notice: 'Wysłano e-mail z linkiem do płatności!'
         else
           redirect_to polish_event_path(sign_up.course.id), alert: 'Nie masz uprawnień!'

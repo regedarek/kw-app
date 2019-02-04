@@ -107,7 +107,7 @@ module Training
       def expired_sign_ups
         Training::Supplementary::SignUpRecord
           .joins(:payment)
-          .where.not(expired_at: nil)
+          .where.not(sent_at: nil, expired_at: nil)
           .where('expired_at < ?', Time.zone.now)
           .where(payments: { state: 'unpaid' })
       end
