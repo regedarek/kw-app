@@ -22,9 +22,10 @@
           = f.label :user_id
           = f.collection_select :user_id, Db::User.all, :id, :display_name
       .row
-        .large-4.columns
-          = f.label :supplementary_course_package_type_id
-          = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
+        - if @sign_up.course.packages?
+          .large-4.columns
+            = f.label :supplementary_course_package_type_id
+            = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
 
         .large-2.columns
           br
