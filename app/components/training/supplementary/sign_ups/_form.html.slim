@@ -58,6 +58,8 @@
         li = "Dodano ręcznie przez #{Db::User.find(@sign_up.admin_id)&.display_name}"
       - if @sign_up.sent_at
         li = "Wysłano e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
+      - else
+        li Nie wysłano jeszcze e-maila z linkiem do płatności
       li
         = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
       li
