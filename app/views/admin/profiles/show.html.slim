@@ -196,7 +196,13 @@
         span.label.warning nie dotyczy
       br
       - unless @profile.accepted
-        = link_to 'Wyślij e-mail zgłaszający', send_email_admin_profile_path(@profile.id), method: :put
+        - if @profile.sent_at
+          = "Wysłano: #{@profile.sent_at}"
+          br
+          = link_to 'Wyślij e-mail z linkiem do płatności powtórnie', send_email_admin_profile_path(@profile.id), method: :put
+        - else
+          = link_to 'Wyślij e-mail zgłaszający pierwszy raz', send_email_admin_profile_path(@profile.id), method: :put
+
   .row
     .large-12.columns
       hr

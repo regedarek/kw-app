@@ -99,6 +99,7 @@ module Admin
     def send_email
       @profile = Db::Profile.find(params[:id])
       ProfileMailer.apply(@profile).deliver_later
+      @profile.update(sent_at: Time.zone.now)
 
       redirect_to admin_profile_path(@profile.id), notice: 'Wysłano ponownie e-mail zgłoszeniowy!'
     end

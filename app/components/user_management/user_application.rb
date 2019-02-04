@@ -29,6 +29,7 @@ module UserManagement
           ProfileMailer.list(profile).deliver_later
         else
           ProfileMailer.apply(profile).deliver_later
+          profile.update(sent_at: Time.zone.now)
         end
         return Success.new
       end
