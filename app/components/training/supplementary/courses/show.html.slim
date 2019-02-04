@@ -76,7 +76,11 @@
         - if user_signed_in? && !@limiter.open?
           - if current_user.admin? || current_user.roles.include?('events')
             = form_for :manually_sign_up, url: manually_supplementary_sign_ups_path, method: :put do |a|
-              = a.email_field :email, placeholder: 'E-mail klubowicza'
+              .row
+                .large-6.columns
+                  = a.text_field :name, placeholder: 'Imię i nazwisko'
+                .large-6.columns
+                  = a.email_field :email, placeholder: 'E-mail'
               = a.hidden_field :course_id, value: @course.id
               - if @course.packages
                 = a.select :supplementary_course_package_type_id,

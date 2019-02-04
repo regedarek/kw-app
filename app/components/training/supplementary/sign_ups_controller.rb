@@ -111,7 +111,7 @@ module Training
       end
 
       def manually_sign_up_params
-        params.require(:manually_sign_up).permit(:email, :course_id, :supplementary_course_package_type_id)
+        params.require(:manually_sign_up).permit(:name, :email, :course_id, :supplementary_course_package_type_id)
       end
 
       def sign_up_params
