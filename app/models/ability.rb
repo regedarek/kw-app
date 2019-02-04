@@ -7,6 +7,7 @@ class Ability
     @user ||= user || Db::User.new
 
     default
+    active if @user.active?
     admin if role?('admin')
     routes if role?('routes')
     office if role?('office')
@@ -18,10 +19,11 @@ class Ability
   end
 
   def default
-    can :see_user_name, Db::Activities::MountainRoute if user.persisted?
-    can :read, Db::Activities::MountainRoute
-    can %i(manage hide), Db::Activities::MountainRoute, user_id: user.id
     can :create, Db::Profile
+  end
+
+  def active
+    can :manage, Db::Activities::MountainRoute
   end
 
   def routes

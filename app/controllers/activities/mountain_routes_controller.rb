@@ -4,6 +4,8 @@ module Activities
     before_action :authenticate_user!, only: [:create, :update, :destroy]
 
     def index
+      authorize! :read, ::Db::Activities::MountainRoute
+
       @q = if params[:boars]
              Db::Activities::MountainRoute.where(hidden: false).order(created_at: :desc)
            else
@@ -43,11 +45,14 @@ module Activities
     end
 
     def new
+      authorize! :create, ::Db::Activities::MountainRoute
+
       @route = Db::Activities::MountainRoute.new
     end
 
     def show
       @route = Db::Activities::MountainRoute.find(params[:id])
+      authorize! :read, @route
     end
 
     def edit

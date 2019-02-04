@@ -9,18 +9,20 @@ module Training
       end
 
       def index
-
-
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
         @season_leaders = Training::Activities::Repository.new.fetch_season
       end
 
       def new
+        authorize! :create, ::Db::Activities::MountainRoute
+
         @ski_route = ::Db::Activities::MountainRoute.new
       end
 
       def create
+        authorize! :create, ::Db::Activities::MountainRoute
+
         either(create_record) do |result|
           result.success do
             redirect_to activities_mountain_routes_path, flash: { notice: 'Dodano przejście' }
