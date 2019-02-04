@@ -8,7 +8,7 @@ module Training
         @form = form
       end
 
-      def call(raw_inputs:)
+      def call(admin_id:, raw_inputs:)
         form_outputs = form.call(raw_inputs)
         return Left(form_outputs.messages(full: true)) unless form_outputs.success?
 
@@ -41,7 +41,7 @@ module Training
             name: user.display_name
           )
         end
-        sign_up.update(sent_at: Time.zone.now, supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
+        sign_up.update(admin_id: admin_id, sent_at: Time.zone.now, supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         Right(:success)
       end

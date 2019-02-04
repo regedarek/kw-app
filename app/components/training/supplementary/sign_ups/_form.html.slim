@@ -54,6 +54,8 @@
 .row
   .large-12.columns
     ul
+      - if @sign_up.admin_id
+        li = "Dodano ręcznie przez #{Db::User.find(@sign_up.admin_id)&.display_name}"
       - if @sign_up.sent_at
         li = "Wysłano e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
       li

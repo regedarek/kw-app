@@ -75,15 +75,16 @@ module Training
       def destroy
         if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
           sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+          course_id = sign_up.course.id
           if sign_up.present?
             Training::Supplementary::DestroySignUp.new(
               Training::Supplementary::Repository.new
             ).call(id: sign_up.id)
           end
 
-          redirect_to :back, notice: 'Usunięto zapis!'
+          redirect_to polish_event_path(course_id), notice: 'Usunięto zapis!'
         else
-          redirect_to :back, alert: 'Nie masz uprawnień!'
+          redirect_to polish_event_path(course_id), alert: 'Nie usunięto zapisu!'
         end
       end
 
@@ -93,7 +94,7 @@ module Training
         Training::Supplementary::ManuallySignUp.new(
           Training::Supplementary::Repository.new,
           Training::Supplementary::ManuallySignUpForm.new
-        ).call(raw_inputs: manually_sign_up_params)
+        ).call(admin_id: current_user&.id, raw_inputs: manually_sign_up_params)
       end
 
       def create_record
