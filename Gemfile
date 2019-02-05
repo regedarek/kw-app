@@ -15,7 +15,7 @@ gem 'listen', '~> 3.0'
 gem 'honeybadger', '~> 3.1'
 
 gem 'foundation-icons-sass-rails'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 6.4.3.0'
 gem 'airbrake'
 gem 'high_voltage'
 gem 'devise'
