@@ -7,7 +7,7 @@ module Payments
 
       def process
         if @notification.completed?
-          @notification.payment.charge!
+          @notification.payment.charge! unless @notification.payment.paid?
           Success.new
         else
           Failure.new(:uncompleted, status: @notification.status)
