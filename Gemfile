@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.4.1'
 
 # setup
+gem 'bootsnap', require: false
 gem 'rails', '>= 5.2.0', '< 6.0'
 gem 'pg'
 gem 'sass-rails'
@@ -9,6 +10,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'rails-jquery-tokeninput'
+gem 'listen', '~> 3.0'
 
 gem 'honeybadger', '~> 3.1'
 
