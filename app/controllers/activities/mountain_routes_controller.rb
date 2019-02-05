@@ -7,7 +7,7 @@ module Activities
       authorize! :read, ::Db::Activities::MountainRoute
 
       @q = if params[:boars]
-             Db::Activities::MountainRoute.where(hidden: false).order(created_at: :desc)
+             Db::Activities::MountainRoute.where(hidden: false).order(climbing_date: :desc)
            else
              Db::Activities::MountainRoute.where(hidden: false, training: false).order(climbing_date: :desc)
            end
