@@ -8,6 +8,8 @@ ENV app /usr/src/kw-app/
 RUN mkdir $app
 WORKDIR $app
 
+RUN bundle config --global github.https true
+
 ENV BUNDLE_PATH /kw-app-gems
 
 ADD . $app
