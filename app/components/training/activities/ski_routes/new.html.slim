@@ -31,10 +31,12 @@
     .large-3.columns
       .callout.secondary
         = f.check_box :hidden
-        = f.label :hidden
+        = f.label :hidden do
+          span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne tylko w na twojej stronie głównej.") Widoczne tylko dla mnie
         br
         = f.check_box :training
-        = f.label :training
+        = f.label :training do
+          span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne na twojej stronie głównej oraz w tabeli dzików, zostanie ukryte na stronie przejść.") Tura treningowa dla dzików
 
 
     .large-4.columns
