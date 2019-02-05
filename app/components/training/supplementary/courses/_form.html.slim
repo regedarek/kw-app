@@ -81,11 +81,11 @@
               = f.number_field :price_kw
 
 .row
-  .large-6.columns
+  .large-8.columns
     .callout
       = f.label :remarks, t('.remarks')
-      = f.text_area :remarks, rows: 12
-  .large-6.columns
+      = f.trix_editor :remarks, style: 'height: 280px'
+  .large-4.columns
     .callout
       = f.label 'Baner'
       = f.file_field :baner
