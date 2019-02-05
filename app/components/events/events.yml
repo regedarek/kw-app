@@ -55,7 +55,7 @@ pl:
           participant_birthyear: Rok urodzenia 2* (RRRR)
           participant_city: Miasto 2
           participant_team: Organizacja 2
-          remarks: Uwagi do organizatorów (szary tekst to tylko podpowiedź, prosimy abyś uzupełnił o swoje dane)
+          remarks: Uwagi do organizatorów
           remarks_placeholder: "przykład: Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd."
           terms_of_service: Akceptuję regulamin
           participant_kw_id: Nr legitymacji klubu 2*
@@ -91,7 +91,7 @@ pl:
           participant_birthyear: Rok urodzenia 2* (RRRR)
           participant_city: Miasto 2
           participant_team: Organizacja 2
-          remarks: Uwagi do organizatorów (szary tekst to tylko podpowiedź, prosimy abyś uzupełnił o swoje dane)
+          remarks: Uwagi do organizatorów
           remarks_placeholder: "przykład: Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd."
           terms_of_service: Akceptuję regulamin
           participant_kw_id: Nr legitymacji klubu 2*

@@ -163,7 +163,9 @@
     .row
       .large-12.columns
         = f.label :remarks, t('.remarks')
-        = f.text_area :remarks, placeholder: t('.remarks_placeholder')
+        = f.hidden_field :remarks, id: 'remarks_body'
+        trix-editor input='remarks_body'
+
 
   .row
     .large-12.columns
@@ -181,6 +183,6 @@
 
     .row
       .large-12.columns
-        small = @competition.rules.html_safe
+        small = sanitize @competition.rules
 
   = f.submit t('.submit'), class: 'button expanded large'

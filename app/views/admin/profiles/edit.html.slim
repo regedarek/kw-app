@@ -101,7 +101,9 @@
       .row
         .medium-12.columns
           = f.label :remarks
-          = f.text_area :remarks
+          = f.hidden_field :remarks, id: 'remarks_body'
+          trix-editor input='remarks_body' style='min-height: 200px'
+          br
 
       .row
         .large-4.columns

@@ -148,7 +148,8 @@
     .row
       .large-12.columns 
         b Uwagi: 
-        = @profile.remarks
+        .callout
+          = sanitize @profile.remarks
 
   .row
     .large-12.columns 

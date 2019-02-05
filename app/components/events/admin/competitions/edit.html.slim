@@ -56,15 +56,15 @@
 
       .row
         .large-12.columns
-          .callout.primary
+          .callout
             = f.label 'Logo nad formularzem'
             = f.file_field :baner
 
             = f.label 'Zasady dodane na dole formularza'
-            = f.text_area :rules
+            = f.trix_editor :rules, style: 'min-height: 280px'
 
             = f.label 'Treść e-maila z linkiem do zapisów'
-            = f.text_area :email_text
+            = f.trix_editor :email_text, style: 'min-height: 280px'
 
       .row
         .large-12.columns

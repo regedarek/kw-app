@@ -182,7 +182,7 @@
         - if @course.remarks.present?
           h5 = t('.remarks')
           .callout
-            = simple_format @course&.remarks&.html_safe
+            = sanitize @course&.remarks
 
       - if @course.price
         .large-6.columns
@@ -221,4 +221,4 @@
         - if @course.remarks.present?
           h5 = t('.remarks')
           .callout
-            = simple_format @course&.remarks&.html_safe
+            = sanitize @course&.remarks
