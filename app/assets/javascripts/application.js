@@ -3,6 +3,7 @@
 //= require foundation
 //= require foundation-datepicker
 //= require rails-jquery-tokeninput
+//= require nested_form_fields
 //= require kw_app
 //= require_tree .
 

@@ -9,7 +9,12 @@ module Events
         dependent: :destroy
       has_many :package_types,
         class_name: 'Events::Db::CompetitionPackageTypeRecord',
-        dependent: :destroy
+        dependent: :destroy,
+        inverse_of: :competition
+
+      accepts_nested_attributes_for :package_types,
+        reject_if: proc { |attributes| attributes[:name].blank? },
+        allow_destroy: true
 
       def closed_or_limit_reached?
         closed? || limit_reached?

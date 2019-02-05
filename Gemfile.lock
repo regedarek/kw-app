@@ -262,6 +262,10 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    nested_form_fields (0.8.2)
+      coffee-rails (>= 3.2.1)
+      jquery-rails
+      rails (>= 3.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
@@ -461,6 +465,7 @@ DEPENDENCIES
   koala
   listen (~> 3.0)
   mini_magick
+  nested_form_fields
   omniauth-google-oauth2
   pg
   prawn-rails

@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'rails-jquery-tokeninput'
 gem 'listen', '~> 3.0'
 
+gem 'nested_form_fields'
 gem 'honeybadger', '~> 3.1'
 
 gem 'foundation-icons-sass-rails'

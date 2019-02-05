@@ -1,2 +1,81 @@
-.column.row
-  = render 'form', form: @form, competition: @competition
+.row
+  .large-12.columns
+    = form_for @competition, as: :competition, url: admin_competition_path(@competition), method: :put do |f|
+      .row
+        .large-12.columns
+          .callout.primary
+            .row
+              .large-3.columns
+                = f.label 'Nazwa'
+                = f.text_field :name
+
+              .large-3.columns
+                = f.label 'Unikalny symbol zawodów'
+                = f.text_field :edition_sym
+
+              .large-2.columns
+                = f.label 'Limit miejsc'
+                = f.number_field :limit
+
+              .large-2.columns
+                = f.label 'Rozmiarówka'
+                = f.text_field :tshirt_url
+
+              .large-2.columns
+                = f.label 'Email organizatora'
+                = f.text_field :organizer_email
+
+      .row
+        .large-3.columns
+          .callout.primary
+            = f.check_box :team_name
+            = f.label 'Nazwa zespołu?'
+            br
+            = f.check_box :single
+            = f.label 'Indywidualne?'
+            br
+            = f.check_box :closed
+            = f.label 'Zamknięte?'
+            br
+            = f.check_box :matrimonial_office
+            = f.label 'Biuro matrymonialne?'
+
+        .large-9.columns
+          .callout.primary
+            = f.nested_fields_for :package_types do |ff|
+              .large-3.columns
+                = ff.text_field :name
+              .large-3.columns
+                = ff.number_field :cost
+              .large-3.columns
+                = ff.check_box :membership
+                = ff.label :membership
+              .large-3.columns
+                = ff.remove_nested_fields_link
+            = f.add_nested_fields_link :package_types
+
+      .row
+        .large-12.columns
+          .callout.primary
+            = f.label 'Logo nad formularzem'
+            = f.file_field :baner
+
+            = f.label 'Zasady dodane na dole formularza'
+            = f.text_area :rules
+
+            = f.label 'Treść e-maila z linkiem do zapisów'
+            = f.text_area :email_text
+
+      .row
+        .large-12.columns
+          - if @competition.baner.present?
+            .text-center
+              = image_tag @competition&.baner&.url
+          .callout
+            = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
+
+      .row
+        .large-6.columns
+          = f.submit 'Zapisz', class: 'button expanded large'
+        .large-6.columns
+          = link_to 'powrót', admin_competitions_path, class: 'button expanded large warning'

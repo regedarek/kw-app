@@ -10,6 +10,7 @@ module Events
         end
 
         def call(raw_inputs:)
+          byebug
           form_outputs = create_competition_form.call(raw_inputs)
           return Left(form_outputs.messages(full: true)) unless form_outputs.success?
 
