@@ -43,7 +43,7 @@ table.stack
             div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
               button.close-button aria-label=("Close reveal") data-close="" type="button" 
                 span aria-hidden="true"  &times;
-            = image_tag image.thumb, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'close-on-click': "true", 'reveal-id': "route-#{route.id}-image-#{index}" }
+            = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'close-on-click': "true", 'reveal-id': "route-#{route.id}-image-#{index}" }
         td.text-center = route.created_at.to_date
         td.text-center = route.length&.present? ? "#{route.length}m" : '-'
         td.text-center

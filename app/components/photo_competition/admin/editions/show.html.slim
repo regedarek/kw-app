@@ -40,5 +40,5 @@
               td = File.basename(request.file.path)
               td = request.user.display_name
               td
-                = image_tag request.file.thumb
+                = image_tag request.file.thumb.url
       = paginate @photo_requests
