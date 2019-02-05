@@ -221,7 +221,7 @@
               | Data wstąpienia
             = f.date_field :application_date, class: 'input-group-field', value: Date.today
             .input-group-button
-              - if @profile.payment.paid?
+              - if @profile.payment&.paid?
                 = f.submit 'Nadaj i utwórz konto', class: 'button'
               - else
                 = f.submit 'Nadaj i utwórz konto', class: 'button', data: { confirm: 'Jesteś pewien, że chcesz zaakceptować kandydata, który nie opłacił wpisowego? Jeżeli zapłacił przelewem tradycyjnym lub wszystko się zgadza, kliknij Ok i zaakceptujesz kandydata :)' }
