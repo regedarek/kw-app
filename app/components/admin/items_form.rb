@@ -11,7 +11,7 @@ module Admin
     validates :display_name, presence: { message: 'nie moze byc pusty'}
 
     def params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         display_name: display_name, cost: cost, description: description, rentable: rentable, owner: owner.to_i,
         rentable_id: rentable_id
       )

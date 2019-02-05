@@ -7,7 +7,7 @@ module Availability
     attr_accessor :start_date
 
     def params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         start_date: start_date
       )
     end

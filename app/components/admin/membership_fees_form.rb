@@ -12,7 +12,7 @@ module Admin
     validate :check_uniqueness_of_year
 
     def params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         kw_id: kw_id, year: year, plastic: plastic
       )
     end

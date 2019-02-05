@@ -11,7 +11,7 @@ module Admin
     validates :kw_id, presence: { message: 'nie moze byc pusty'}
 
     def params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         user_id: user.id,
         start_date: start_date,
         end_date: end_date,
