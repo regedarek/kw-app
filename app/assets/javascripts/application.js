@@ -5,6 +5,7 @@
 //= require rails-jquery-tokeninput
 //= require nested_form_fields
 //= require kw_app
+//= require trix
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

@@ -1,10 +1,80 @@
-.column.row
-  = image_tag 'ski.jpg'
-  = form_for @ski_route, as: :ski_route, url: activities_ski_routes_path, html: { class: 'js-ski-routes-form' } do |f|
-    = render 'form', f: f
+.row
+  .large-12.columns
+    = image_tag 'ski.jpg'
 
-    .row
-      .large-6.columns
-        = f.submit t('.submit'), class: 'button expanded large success'
-      .large-6.columns
-        = link_to 'wróć do poprzedniej strony', :back, class: 'button expanded large warning'
+= form_for @ski_route, as: :ski_route, url: activities_ski_routes_path, html: { class: 'js-ski-routes-form' } do |f|
+  .row
+    .large-12.columns
+      - if @errors
+        .callout.alert
+          ul
+            - @errors.each do |error|
+              li= error.last.to_sentence
+
+  .row
+    .large-12.columns
+      .callout.primary
+        .row
+          .large-6.columns
+            = f.label :name, 'nazwa tury*'
+            = f.text_field :name
+
+          .large-3.columns
+            = f.label :climbing_date, 'data tury*'
+            = f.date_field :climbing_date
+
+          .large-3.columns
+            = f.label :length, 'przewyższenie tury w metrach'
+            = f.number_field :length
+
+  .row
+    .large-3.columns
+      .callout.secondary
+        = f.check_box :hidden
+        = f.label :hidden
+        br
+        = f.check_box :training
+        = f.label :training
+
+
+    .large-4.columns
+      .callout.alert
+        = f.label :attachments, 'Zdjęcia'
+        = f.file_field :attachments, multiple: true
+        br
+
+    .large-5.columns
+      .callout.success
+        legend.legend subiektywna ocena tury*
+
+        = f.radio_button :rating, 1
+        = f.label :rating_one
+
+        = f.radio_button :rating, 2
+        = f.label :rating_two
+
+        = f.radio_button :rating, 3
+        = f.label :rating_three, 'klasyk'
+
+  .row
+    .large-12.columns
+      .callout
+        .row
+          .large-3.columns
+            = f.label :colleagues_names
+            - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
+            = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: [{id: current_user.id, name: current_user.display_name}].uniq } }.to_json
+
+            = f.label :partners
+            = f.text_field :partners
+
+          .large-9.columns
+            = f.label :description, 'uwagi dotyczące tury, warunków śniegowych'
+            = f.trix_editor :description, style: 'height: 150px'
+
+  .row
+    .large-6.columns
+      = f.submit t('.submit'), class: 'button expanded large success'
+
+    .large-6.columns
+      = link_to 'wróć do poprzedniej strony', :back, class: 'button expanded large warning'

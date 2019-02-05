@@ -5,7 +5,7 @@
   - if @route.description.present?
     .large-12.columns
       .callout.small
-        = @route.description
+        = @route.description&.html_safe
 
   .large-12.columns
     b rodzaj przejścia: 

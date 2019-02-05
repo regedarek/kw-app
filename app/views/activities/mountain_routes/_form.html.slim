@@ -26,6 +26,9 @@
         div style='margin-top: 30px'
           = f.check_box :hidden
           = f.label :hidden
+          br
+          = f.check_box :training
+          = f.label :training
 
     .row
       .large-6.columns
@@ -71,7 +74,7 @@
         = f.file_field :attachments, multiple: true
       .large-9.columns
         = f.label :description, 'uwagi dotyczące przejścia, topo, link do galerii zdjęć'
-        = f.text_area :description
+        = f.trix_editor :description, style: 'height: 150px'
 
   .row
     .large-6.columns

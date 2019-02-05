@@ -403,6 +403,8 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.9)
     timecop (0.8.1)
+    trix-rails (2.0.0)
+      rails (> 4.1, < 6.0)
     ttfunk (1.5.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -478,6 +480,7 @@ DEPENDENCIES
   slim-rails
   spring
   timecop
+  trix-rails
   uglifier
   virtus
   webmock
