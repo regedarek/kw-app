@@ -12,12 +12,12 @@ module Training
       def create
         either(create_record) do |result|
           result.success do
-            redirect_to :back, notice: 'Zapisałeś się!'
+            redirect_back(fallback_location: root_path, notice: 'Dodałeś pakiet!')
           end
 
           result.failure do |errors|
             flash[:error] = errors.values.join(", ")
-            redirect_to :back
+            redirect_back(fallback_location: root_path)
           end
         end
       end

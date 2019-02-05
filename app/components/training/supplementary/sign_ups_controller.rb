@@ -14,12 +14,12 @@ module Training
         @limiter = Training::Supplementary::Limiter.new(@sign_up.course)
         either(update_record) do |result|
           result.success do
-            redirect_to :back, notice: 'Zaktualizowałeś!'
+            redirect_back(fallback_location: root_path, notice: 'Zaktualizowałeś!')
           end
 
           result.failure do |errors|
             flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.kind_of?(Array) ? v.to_sentence : v}"}.join(', ')
-            redirect_to :back
+            redirect_back(fallback_location: root_path)
           end
         end
       end
@@ -27,12 +27,12 @@ module Training
       def manually
         either(manually_sign_up) do |result|
           result.success do
-            redirect_to :back, notice: 'Zapisałeś uczestnika i wysłałeś link do płatności!'
+            redirect_back(fallback_location: root_path, notice: 'Zapisałeś uczestnika i wysłałeś link do płatności!')
           end
 
           result.failure do |errors|
             flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.kind_of?(Array) ? v.to_sentence : v}"}.join(', ')
-            redirect_to :back
+            redirect_back(fallback_location: root_path)
           end
         end
       end
@@ -40,12 +40,12 @@ module Training
       def create
         either(create_record) do |result|
           result.success do
-            redirect_to :back, notice: 'Zapisałeś się!'
+            redirect_back(fallback_location: root_path, notice: 'Zapisałeś się!')
           end
 
           result.failure do |errors|
             flash[:error] = errors.map {|k,v| "#{SignUpRecord.human_attribute_name(k)} #{v.kind_of?(Array) ? v.to_sentence : v}"}.join(', ')
-            redirect_to :back
+            redirect_back(fallback_location: root_path)
           end
         end
       end

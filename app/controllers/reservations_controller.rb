@@ -37,8 +37,8 @@ class ReservationsController < ApplicationController
     result.success do |start_date:|
       redirect_to reservations_path(start_date: start_date), notice: 'Zrezygnowano z rezerwacji przedmiotu.'
     end
-    result.item_not_exist { redirect_to :back, alert: 'Przedmiot nie istnieje.' }
-    result.reservation_not_exist { redirect_to :back, alert: 'Przedmiot nie istnieje.' }
+    result.item_not_exist { redirect_back(fallback_location: root_path, alert: 'Przedmiot nie istnieje.') }
+    result.reservation_not_exist { redirect_back(fallback_location: root_path, alert: 'Przedmiot nie istnieje.') }
     result.else_fail!
   end
 end

@@ -11,9 +11,9 @@ class PaymentsController < ApplicationController
     if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
       payment.update(cash_user_id: current_user.id, cash: true, state: 'prepaid')
 
-      redirect_to :back, notice: 'Oznaczono jako zapłacone'
+      redirect_back(fallback_location: root_path, notice: 'Oznaczono jako zapłacone')
     else
-      redirect_to :back, alert: 'Nie masz uprawnień'
+      redirect_back(fallback_location: root_path, alert: 'Nie masz uprawnień')
     end
   end
 

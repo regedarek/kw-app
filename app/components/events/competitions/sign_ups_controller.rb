@@ -67,7 +67,7 @@ module Events
 
         sign_up.destroy
 
-        redirect_to :back, notice: 'Usunięto zapis!'
+        redirect_back(fallback_location: root_path, notice: 'Usunięto zapis!')
       end
 
       private

@@ -101,7 +101,7 @@ module Activities
 
         redirect_to activities_mountain_routes_path, notice: t('.removed_successfully')
       else
-        redirect_to :back, alert: 'Musisz być właścicielem przejścia lub administratorem'
+        redirect_back(fallback_location: root_path, alert: 'Musisz być właścicielem przejścia lub administratorem')
       end
     end
 
