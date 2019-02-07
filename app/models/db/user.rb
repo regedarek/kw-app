@@ -25,11 +25,11 @@ class Db::User < ActiveRecord::Base
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts
 
-  has_many :mountain_routes, class_name: 'Db::Activities::MountainRoute'
-  has_many :colleagues_mountain_routes,
+  has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
+  has_many :mountain_routes,
     through: :route_colleagues,
     class_name: 'Db::Activities::MountainRoute'
-  has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
+
 
   ransacker :full_name do |parent|
     Arel::Nodes::NamedFunction.new('CONCAT_WS', [
