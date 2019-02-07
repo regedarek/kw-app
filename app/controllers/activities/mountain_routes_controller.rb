@@ -9,7 +9,7 @@ module Activities
       @q = if params[:boars]
              Db::Activities::MountainRoute.where(hidden: false).order(climbing_date: :desc)
            else
-             Db::Activities::MountainRoute.where(hidden: false, training: false).order(climbing_date: :desc)
+             Db::Activities::MountainRoute.where(hidden: false, training: false)
            end
       @q = @q.climbing if params[:route_type] == 'climbing'
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
