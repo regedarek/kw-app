@@ -36,8 +36,10 @@ module Training
       end
 
       def fetch_prev_month
-        range = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
-        routes = ::Db::Activities::MountainRoute .where( route_type: 'ski', climbing_date: range, created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)).uniq
+        range_climbing_date = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
+        range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)
+        routes = ::Db::Activities::MountainRoute
+          .where(route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at).distinct
         users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
         users = ::Db::User.where(id: users_ids, boars: true)
 
