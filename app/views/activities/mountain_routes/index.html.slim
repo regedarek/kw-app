@@ -55,6 +55,7 @@
       - if params[:boars]
         = render 'boars_table', routes: @routes
       - else
+        = render 'table', routes: @routes
 
       .text-center
         = paginate @routes
