@@ -23,19 +23,16 @@ module Training
       end
 
       def fetch_prev_prev_month
-        range = 3.months.ago.beginning_of_month..2.months.ago.end_of_month
-        routes = ::Db::Activities::MountainRoute .where( route_type: 'ski', climbing_date: range, created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)).uniq
-        users_ids = routes.collect(&:colleagues).flatten.uniq.map(&:id)
-        users = ::Db::User.where(id: users_ids, boars: true)
-
-        hash = Hash.new
-        users.each do |user|
-          user_routes = routes.select do |route|
-            route.colleagues.include?(user)
-          end
-          hash[user.display_name] = user_routes.map(&:length).compact.sum
-        end
-        hash.sort_by {|_key, value| value}.reverse
+        range_climbing_date = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
+        range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)
+        ::Db::User
+          .joins(:mountain_routes)
+          .where.not(mountain_routes: { id: nil, length: nil })
+          .where(mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
+          .select('users.id, SUM(mountain_routes.length)')
+          .group('users.id')
+          .distinct
+          .order('SUM(mountain_routes.length) DESC')
       end
 
       def fetch_prev_month
