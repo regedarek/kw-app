@@ -14,10 +14,10 @@
                   th kto?
                   th width='15%' przewyższenie
               tbody
-                - @prev_month_leaders.first(5).each do |name, length|
+                - @prev_month_leaders.first(5).each do |user|
                   tr
-                    td = name
-                    td.text-center = length
+                    td = Db::User.find(user.id).display_name
+                    td.text-center = user.sum
           .large-4.columns
             h5 = I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}")
             table.stack
@@ -26,10 +26,10 @@
                   th kto?
                   th width='15%' przewyższenie
               tbody
-                - @current_month_leaders.first(5).each do |name, length|
+                - @current_month_leaders.first(5).each do |user|
                   tr
-                    td = name
-                    td.text-center = length
+                    td = Db::User.find(user.id).display_name
+                    td.text-center = user.sum
 
           .large-4.columns
             h5 = "sezon #{Training::Activities::Repository.new.start_date.year}/#{Training::Activities::Repository.new.end_date.year}"
@@ -39,7 +39,7 @@
                   th kto?
                   th width='15%' przewyższenie
               tbody
-                - @season_leaders.first(5).each do |name, length|
+                - @season_leaders.first(5).each do |user|
                   tr
-                    td = name
-                    td.text-center = length
+                    td = Db::User.find(user.id).display_name
+                    td.text-center = user.sum

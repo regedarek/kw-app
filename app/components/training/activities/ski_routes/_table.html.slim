@@ -8,9 +8,9 @@ table.stack
 
   tbody
     - i = 0
-    - routes.each do |name, length|
+    - routes.each do |user|
       tr
         td.text-center = i + 1
-        td.text-center.large-text-left = name
-        td.text-center.large-text-left = length
+        td.text-center.large-text-left = Db::User.find(user.id).display_name
+        td.text-center.large-text-left = user.sum
       - i += 1
