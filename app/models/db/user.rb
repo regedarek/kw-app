@@ -25,7 +25,8 @@ class Db::User < ActiveRecord::Base
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts
 
-  has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
+  has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues',
+    foreign_key: :colleague_id
   has_many :mountain_routes,
     through: :route_colleagues,
     class_name: 'Db::Activities::MountainRoute'
