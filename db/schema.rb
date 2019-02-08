@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_233646) do
+ActiveRecord::Schema.define(version: 2019_02_08_171211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233646) do
     t.integer "acceptor_id"
     t.boolean "plastic", default: false, null: false
     t.datetime "sent_at"
+    t.datetime "accepted_at"
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true
   end
 

@@ -125,7 +125,8 @@ module Admin
           kw_id: accept_params.fetch(:kw_id),
           application_date: accept_params.fetch(:application_date),
           acceptor_id: current_user.id,
-          accepted: true
+          accepted: true,
+          accepted_at: Time.zone.now
         )
         user.send_reset_password_instructions
         if profile.payment.present? && profile.payment.paid?

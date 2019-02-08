@@ -103,7 +103,7 @@
         - if @profile.acceptor_id.present?
           br
           b Data akceptacji: 
-          = @profile.updated_at.to_s(:db)
+          = @profile.accepted_at&.to_s(:db)
           br
           b Akceptujący: 
           = Db::User.find(@profile.acceptor_id).display_name
