@@ -72,7 +72,7 @@
           b Adres kontaktowy: 
           = @profile.optional_address
     .large-6.columns
-      .callout
+      .callout class="#{['list', 'blank'].any? { |c| @profile.acomplished_courses.include?(c) } ? 'alert' : '' }"
         b Kursy: 
         - if @profile.acomplished_courses.present?
           - @profile.acomplished_courses.each do |course|
