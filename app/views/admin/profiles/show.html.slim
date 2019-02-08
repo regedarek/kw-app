@@ -48,101 +48,117 @@
           b Telefon: 
           = @profile.phone
   .row
-    .large-12.columns 
-      b Data urodzenia: 
-      = @profile.birth_date
-  - if @profile.application_date
-    .row
-      .large-12.columns 
-        b Data wstąpienia do klubu: 
-        = @profile.application_date
-  - if @profile.date_of_death
-    .row
-      .large-12.columns 
-        b Data śmierci: 
-        = @profile.date_of_death
+    .large-6.columns
+      .callout
+        b Data urodzenia: 
+        = @profile.birth_date
+        br
+        b Miejsce urodzenia: 
+        = @profile.birth_place
+        br
+        b Pesel: 
+        = @profile.pesel
+        br
+        b Adres zameldowania: 
+        = @profile.main_address
+        br
+        b Kod pocztowy: 
+        = @profile.postal_code
+        br
+        b Miasto: 
+        = @profile.city
+        br
+        - if @profile.optional_address.present?
+          b Adres kontaktowy: 
+          = @profile.optional_address
+    .large-6.columns
+      .callout
+        b Kursy: 
+        - if @profile.acomplished_courses.present?
+          - @profile.acomplished_courses.each do |course|
+            li
+              = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
+        - else
+          | brak
+        b Sekcje: 
+        - if @profile.sections
+          - @profile.sections.each do |section|
+            li
+              = I18n.t("activemodel.attributes.user_management_profile_form.profile_sections_#{section}")
+  .row
+    .large-6.columns
+      .callout
+        - if @profile.position.present?
+          b Status członka: 
+          - @profile.position.each do |course|
+            li
+              = I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}")
+        - if @profile.date_of_death
+          b Data śmierci: 
+          = @profile.date_of_death
+          br
+        b Data zgłoszenia: 
+        = @profile.created_at&.to_date&.to_s(:db)
+        - if @profile.acceptor_id.present?
+          br
+          b Data akceptacji: 
+          = @profile.updated_at.to_s(:db)
+          br
+          b Akceptujący: 
+          = Db::User.find(@profile.acceptor_id).display_name
+    .large-6.columns
+      .callout
+        - if @profile.recommended_by.present?
+          b Dowiedział się od: 
+          = @profile.recommended_by.to_sentence
+          br
+        b Główna grupa dyskusyjna: 
+        = @profile.main_discussion_group? ? 'Tak' : 'Nie'
+        - if @profile.profession.present?
+          b Profesja: 
+          = @profile.profession
+
 
   .row
     .large-12.columns 
-      b Miejsce urodzenia: 
-      = @profile.birth_place
+      .callout class="#{@activement.active? ? 'success' : 'alert'}"
+        b Legitymacja plastikowa: 
+        = @profile.plastic ? 'Tak' : 'Nie'
 
-  .row
-    .large-12.columns 
-      b Pesel: 
-      = @profile.pesel
+        - if @profile.kw_id.present?
+          .row
+            .large-12.columns 
+              b Składki: 
+              - if (@profile.position.include?('senior') || @profile.position.include?('honorable_kw'))
+                span.label.secondary Zwolniony
+              - else
+                - @fees_repository.for_profile(kw_id: @profile.kw_id).each do |fee|
+                  span.label.success data-tooltip="" tabindex="1" title=("#{fee.payment.cash ? 'Gotówka/Przelew na konto' : 'Dotpay' }: #{fee.cost} zł") = fee.year
+              br
 
-  .row
-    .large-12.columns 
-      b Miasto: 
-      = @profile.city
-
-  .row
-    .large-12.columns 
-      b Kod pocztowy: 
-      = @profile.postal_code
-
-  .row
-    .large-12.columns 
-      b Adres zameldowania: 
-      = @profile.main_address
-
-  - if @profile.optional_address.present?
-    .row
-      .large-12.columns 
-        b Adres kontaktowy: 
-        = @profile.optional_address
-
-  - if @profile.recommended_by.present?
-    .row
-      .large-12.columns 
-        b Dowiedział się od: 
-        = @profile.recommended_by.to_sentence
-
-  .row
-    .large-12.columns 
-      b Kursy: 
-      - if @profile.acomplished_courses.present?
-        - @profile.acomplished_courses.each do |course|
-          li
-            = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
-      - else
-        | brak
-
-  .row
-    .large-12.columns 
-      b Główna grupa dyskusyjna: 
-      = @profile.main_discussion_group? ? 'Tak' : 'Nie'
-
-  .row
-    .large-12.columns 
-      b Dodano do grup dyskusyjnych?: 
-      = @profile.added? ? 'Tak' : "Nie"
-
-  .row
-    .large-12.columns 
-      b Sekcje: 
-      = @profile.sections.to_sentence if @profile.sections
-
-  - if @profile.profession.present?
-    .row
-      .large-12.columns 
-        b Profesja: 
-        = @profile.profession
-
-  - if @profile.position.present?
-    .row
-      .large-12.columns 
-        b Status członka: 
-        - @profile.position.each do |course|
-          li
-            = I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}")
-
-  - if @profile.acceptor_id.present?
-    .row
-      .large-12.columns 
-        b Akceptujący: 
-        = Db::User.find(@profile.acceptor_id).display_name
+              b Wpisowe: 
+              - if @profile.payment.present?
+                - if @profile.payment.paid?
+                  span.label.success= @profile.cost
+                  span.label.success opłacone
+                - else
+                  span.label.alert= @profile.cost
+                  span.label.alert nieopłacone
+                  br
+                  - if @profile.payment.payment_url
+                    = link_to 'Link do płatności', @profile.payment.payment_url
+                  - else
+                    = link_to 'Stwórz link do płatności', charge_payment_path(@profile.payment)
+              - else
+                span.label.alert nie opłacono
+              br
+              - unless @profile.accepted
+                - if @profile.sent_at
+                  = "Wysłano: #{@profile.sent_at}"
+                  br
+                  = link_to 'Wyślij e-mail z linkiem do płatności powtórnie', send_email_admin_profile_path(@profile.id), method: :put
+                - else
+                  = link_to 'Wyślij e-mail zgłaszający pierwszy raz', send_email_admin_profile_path(@profile.id), method: :put
 
   - if @profile.remarks.present?
     .row
@@ -150,59 +166,6 @@
         b Uwagi: 
         .callout
           = sanitize @profile.remarks
-
-  .row
-    .large-12.columns 
-      b Legitymacja plastikowa: 
-      = @profile.plastic ? 'Tak' : 'Nie'
-
-  .row
-    .large-12.columns 
-      b Data zgłoszenia: 
-      = @profile.created_at.strftime("%d-%m-%Y")
-  
-  - if @profile.kw_id.present?
-    .row
-      .large-12.columns 
-        b Składki: 
-        - if (@profile.position.include?('senior') || @profile.position.include?('honorable_kw'))
-          span.label.secondary Zwolniony
-        - else
-          - Db::Membership::Fee.where(kw_id: @profile.kw_id).order(year: :desc).each_with_index do |fee, i|
-            - if i == 0 && fee.year.to_i != Date.today.year.to_i
-              span.label.alert = fee.year
-            - else
-              - if fee.payment && fee.payment.paid?
-                span.label.success = fee.year
-              - else
-                span.label.warning = fee.year
-
-  .row
-    .large-12.columns 
-      b Wpisowe: 
-      - if @profile.payment.present?
-        - if @profile.payment.paid?
-          span.label.success= @profile.cost
-          span.label.success opłacone
-        - else
-          span.label.alert= @profile.cost
-          span.label.alert nieopłacone
-          br
-          - if @profile.payment.payment_url
-            = link_to 'Link do płatności', @profile.payment.payment_url
-          - else
-            = link_to 'Link do płatności', charge_payment_path(@profile.payment)
-      - else
-        span.label.warning= @profile.cost
-        span.label.warning nie dotyczy
-      br
-      - unless @profile.accepted
-        - if @profile.sent_at
-          = "Wysłano: #{@profile.sent_at}"
-          br
-          = link_to 'Wyślij e-mail z linkiem do płatności powtórnie', send_email_admin_profile_path(@profile.id), method: :put
-        - else
-          = link_to 'Wyślij e-mail zgłaszający pierwszy raz', send_email_admin_profile_path(@profile.id), method: :put
 
   .row
     .large-12.columns

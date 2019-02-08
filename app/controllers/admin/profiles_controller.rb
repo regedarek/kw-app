@@ -8,6 +8,7 @@ module Admin
       @profiles = @q.result(distinct: true).page(params[:page])
       @profiles = @profiles.where(accepted: false) unless params[:q]
 
+
       authorize! :read, Db::Profile
 
       respond_with do |format|
@@ -69,6 +70,8 @@ module Admin
 
     def show
       @profile = Db::Profile.find(params[:id])
+      @fees_repository = ::Membership::FeesRepository.new
+      @activement = ::Membership::Activement.new(user: @profile)
 
       authorize! :read, Db::Profile
 

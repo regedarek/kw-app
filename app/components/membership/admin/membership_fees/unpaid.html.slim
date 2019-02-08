@@ -3,7 +3,7 @@
     h3 Nieopłacone składki
 .row
   .large-12.columns
-    h4 = "Nieopłacone emaile w tym roku (#{@unpaid_profiles&.count} z #{@emails&.count})"
+    h4 = "E-maile do skreślenia z listy członków: (#{@unpaid_profiles&.count} z #{@emails&.count})"
 
 = form_for :unpaid, url: check_emails_membership_admin_membership_fees_path do |f|
   .row

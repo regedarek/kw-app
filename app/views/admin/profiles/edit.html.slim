@@ -109,6 +109,6 @@
         .large-4.columns
           = f.submit class: 'button large expanded'
         .large-4.columns
-          = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button large expanded warning'
+          = link_to 'powiązany profil', admin_profile_path(@profile), class: 'button large expanded'
         .large-4.columns
           = link_to 'wróć', params[:original_referrer] || session[:original_referrer] || admin_profiles_path, class: 'button large expanded secondary'

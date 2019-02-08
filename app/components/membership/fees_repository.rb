@@ -1,5 +1,16 @@
 module Membership
   class FeesRepository
+    def for_profile(kw_id: kw_id)
+      Db::Membership::Fee.includes(:payment)
+        .where(
+          kw_id: kw_id,
+          payments: { state: :prepaid }
+      ).or(
+        Db::Membership::Fee.includes(:payment)
+          .where(kw_id: kw_id, payments: { cash: true })
+      ).order(year: :desc)
+    end
+
     def find_outdated_not_prepaided_profiles
       Db::Profile.where('created_at < ? AND accepted = false', 3.months.ago) - Db::Profile.includes(:payment).where(payments: { state: :prepaid }, accepted: false)
     end
