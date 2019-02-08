@@ -6,13 +6,9 @@ module Membership
 
       def unpaid
         @profile_unpaid_this_year = Db::Profile
-          .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_this_year)
           .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'canceled').where.not('position @> array[?]', 'senior').select do |profile|
             !::Membership::Activement.new(user: profile).active?
           end
-        @profile_unpaid_last_year = Db::Profile
-          .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_last_year)
-          .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'canceled').where.not('position @> array[?]', 'senior')
       end
 
       def check_emails

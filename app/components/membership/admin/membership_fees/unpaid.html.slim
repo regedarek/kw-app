@@ -28,9 +28,3 @@
     = render 'table', profiles: @profile_unpaid_this_year
     .callout
       = @profile_unpaid_this_year.map(&:email).join(', ')
-.row
-  .large-12.columns
-    h4 = "2017 (#{(@profile_unpaid_last_year.count)})"
-    = render 'table', profiles: @profile_unpaid_last_year
-    .callout
-      = @profile_unpaid_last_year.map(&:email).join(', ')
