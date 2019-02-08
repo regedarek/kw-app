@@ -21,7 +21,7 @@
               span.stat = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).count
               p aktywności
             .card-profile-stats-statistic style='color: #6a89cc'
-              - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).collect(&:mountain_route)
+              - routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(colleague_id: current_user.id).collect(&:mountain_route)
               span.stat
                 - if routes.any?
                   - ski_routes = routes.compact.select { |r| r.category == :snw }

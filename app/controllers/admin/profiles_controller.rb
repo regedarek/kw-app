@@ -3,7 +3,7 @@ module Admin
     respond_to :html, :xlsx
 
     def index
-      @q = Db::Profile.ransack(params[:q])
+      @q = Db::Profile.includes(:payment).ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
       @profiles = @q.result(distinct: true).page(params[:page])
       @profiles = @profiles.where(accepted: false) unless params[:q]
