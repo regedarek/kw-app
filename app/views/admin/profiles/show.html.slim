@@ -138,29 +138,28 @@
                   span.label.success data-tooltip="" tabindex="1" title=("#{fee.payment.cash ? 'Gotówka/Przelew na konto' : 'Dotpay' }: #{fee.cost} zł") = fee.year
               br
 
-        b Wpisowe oraz pierwsza składka: 
-        - if @profile.payment.present?
-          - if @profile.payment.paid?
-            span.label.success= @profile.cost
-            span.label.success opłacone
-          - else
-            span.label.alert= @profile.cost
-            span.label.alert nieopłacone
-            br
-            - if @profile.payment.payment_url
-              = link_to 'Link do płatności', @profile.payment.payment_url
+        - if !@profile.accepted
+          b Wpisowe oraz pierwsza składka: 
+          - if @profile.payment.present?
+            - if @profile.payment.paid?
+              span.label.success= @profile.cost
+              span.label.success opłacone
             - else
-              = link_to 'Stwórz link do płatności', charge_payment_path(@profile.payment)
-        - else
-          span.label.alert nie opłacono
-        br
-        - unless @profile.accepted
-          - if @profile.sent_at
-            = "Wysłano: #{@profile.sent_at}"
-            br
-            = link_to 'Wyślij e-mail z linkiem do płatności powtórnie', send_email_admin_profile_path(@profile.id), method: :put
-          - else
-            = link_to 'Wyślij e-mail zgłaszający pierwszy raz', send_email_admin_profile_path(@profile.id), method: :put
+              span.label.alert= @profile.cost
+              span.label.alert nieopłacone
+              br
+              - if @profile.payment.payment_url
+                = link_to 'Link do płatności', @profile.payment.payment_url
+              - else
+                = link_to 'Stwórz link do płatności', charge_payment_path(@profile.payment)
+          br
+          - unless @profile.accepted
+            - if @profile.sent_at
+              = "Wysłano: #{@profile.sent_at}"
+              br
+              = link_to 'Wyślij e-mail z linkiem do płatności powtórnie', send_email_admin_profile_path(@profile.id), method: :put
+            - else
+              = link_to 'Wyślij e-mail zgłaszający pierwszy raz', send_email_admin_profile_path(@profile.id), method: :put
 
   - if @profile.remarks.present?
     .row
