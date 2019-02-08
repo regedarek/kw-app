@@ -11,6 +11,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'rails-jquery-tokeninput'
 gem 'listen', '~> 3.0'
+gem 'bullet', group: 'development'
 
 gem 'nested_form_fields'
 gem 'honeybadger', '~> 3.1'
