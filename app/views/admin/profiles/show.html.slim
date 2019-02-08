@@ -80,6 +80,7 @@
               = I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}")
         - else
           | brak
+          br
         b Sekcje: 
         - if @profile.sections
           - @profile.sections.each do |section|
@@ -114,10 +115,10 @@
           br
         b Główna grupa dyskusyjna: 
         = @profile.main_discussion_group? ? 'Tak' : 'Nie'
+        br
         - if @profile.profession.present?
           b Profesja: 
           = @profile.profession
-
 
   .row
     .large-12.columns 
