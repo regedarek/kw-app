@@ -138,7 +138,7 @@
                   span.label.success data-tooltip="" tabindex="1" title=("#{fee.payment.cash ? 'Gotówka/Przelew na konto' : 'Dotpay' }: #{fee.cost} zł") = fee.year
               br
 
-        b Wpisowe: 
+        b Wpisowe oraz pierwsza składka: 
         - if @profile.payment.present?
           - if @profile.payment.paid?
             span.label.success= @profile.cost
