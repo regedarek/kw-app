@@ -24,7 +24,7 @@
           = @emails_without_profile.join(', ')
 .row
   .large-12.columns
-    h4 = "2018 (#{(@profile_unpaid_this_year.count)})"
+    h4 = "Wszystkie nieaktywne profile: (#{(@profile_unpaid_this_year.count)})"
     = render 'table', profiles: @profile_unpaid_this_year
     .callout
       = @profile_unpaid_this_year.map(&:email).join(', ')

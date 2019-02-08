@@ -5,7 +5,7 @@ module Membership
       append_view_path 'app/components'
 
       def unpaid
-        @profile_unpaid_this_year = Db::Profile
+        @profile_unpaid_this_year = Db::Profile.where(accepted: true)
           .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'canceled').where.not('position @> array[?]', 'senior').select do |profile|
             !::Membership::Activement.new(user: profile).active?
           end
@@ -14,9 +14,6 @@ module Membership
       def check_emails
         @profile_unpaid_this_year = Db::Profile
           .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_this_year)
-          .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'senior').where.not('position @> array[?]', 'canceled')
-        @profile_unpaid_last_year = Db::Profile
-          .where(kw_id: Membership::FeesRepository.new.get_unpaid_kw_ids_last_year)
           .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'senior').where.not('position @> array[?]', 'canceled')
         @emails = extract_emails_to_array(unpaid_params.fetch(:emails, ''))
         @emails_without_profile = @emails.select { |e| !Db::Profile.exists?(email: e) }
