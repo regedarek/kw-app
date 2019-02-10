@@ -9,8 +9,8 @@ pl:
   reserved: zarazerwowane
   holding: w posiadaniu
   ski: Narciarstwo Wysokogórskie
-  regular_climbing: Wspinaczka letnia
-  winter_climbing: Wspinaczka zimowa
+  regular_climbing: Wspinaczka
+  winter_climbing: Wspinaczka
   title: Klub Wysokogórski Kraków
   close_alert: Zamknij alert
   pay: Zapłać
