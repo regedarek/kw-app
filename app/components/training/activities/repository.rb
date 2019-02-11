@@ -22,6 +22,45 @@ module Training
         users.sample
       end
 
+      def fetch_autum
+        range_climbing_date = start_date..(start_date.end_of_year + 2.days)
+        range_created_at = start_date..(start_date.end_of_year + 2.days)
+        ::Db::User
+          .joins(:mountain_routes)
+          .where.not(mountain_routes: { id: nil, length: nil })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
+          .select('users.id, SUM(mountain_routes.length)')
+          .group('users.id')
+          .distinct
+          .order('SUM(mountain_routes.length) DESC')
+      end
+
+      def fetch_winter
+        range_climbing_date = start_date.next_year.beginning_of_year..((start_date.next_year.beginning_of_year + 1.month).end_of_month + 2.days)
+        range_created_at = start_date.next_year.beginning_of_year..((start_date.next_year.beginning_of_year + 1.month).end_of_month + 2.days)
+        ::Db::User
+          .joins(:mountain_routes)
+          .where.not(mountain_routes: { id: nil, length: nil })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
+          .select('users.id, SUM(mountain_routes.length)')
+          .group('users.id')
+          .distinct
+          .order('SUM(mountain_routes.length) DESC')
+      end
+
+      def fetch_spring
+        range_climbing_date = (start_date.next_year.beginning_of_year + 2.months).beginning_of_month..((start_date.next_year.beginning_of_year + 3.months).beginning_of_month + 2.days)
+        range_created_at = (start_date.next_year.beginning_of_year + 2.months).beginning_of_month..((start_date.next_year.beginning_of_year + 3.months).beginning_of_month + 2.days)
+        ::Db::User
+          .joins(:mountain_routes)
+          .where.not(mountain_routes: { id: nil, length: nil })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
+          .select('users.id, SUM(mountain_routes.length)')
+          .group('users.id')
+          .distinct
+          .order('SUM(mountain_routes.length) DESC')
+      end
+
       def fetch_prev_prev_month
         range_climbing_date = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
         range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 2.days)

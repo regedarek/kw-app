@@ -15,7 +15,6 @@ module Activities
         end
       end
 
-
       @q = if params[:boars]
              Db::Activities::MountainRoute.includes(:colleagues).where(hidden: false).order(climbing_date: :desc)
            else

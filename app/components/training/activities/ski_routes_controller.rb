@@ -12,6 +12,9 @@ module Training
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
         @season_leaders = Training::Activities::Repository.new.fetch_season
+        @autum_leaders = Training::Activities::Repository.new.fetch_autum
+        @winter_leaders = Training::Activities::Repository.new.fetch_winter
+        @spring_leaders = Training::Activities::Repository.new.fetch_spring
       end
 
       def new
