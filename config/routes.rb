@@ -11,8 +11,6 @@ Rails.application.routes.draw do
     get '/zarejestruj', to: 'devise/registrations#new'
   end
 
-
-
   load Rails.root.join("app/components/events/routes.rb")
   load Rails.root.join("app/components/membership/admin/routes.rb")
   load Rails.root.join("app/components/training/routes.rb")

@@ -35,8 +35,13 @@ Rails.application.routes.draw do
   get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new', as: :narciarstwo
   get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
   get 'wydarzenia/narciarskie' => 'training/supplementary/courses#index', defaults: { category: 'snw' }, as: :ski_events
+  get 'wydarzenia/wspinaczkowe' => 'training/supplementary/courses#index', defaults: { category: 'sww' }, as: :climbing_events
   get 'wydarzenia' => 'training/supplementary/courses#index', as: :wydarzenia
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
   get 'wydarzenia/*slug' => 'training/supplementary/courses#show', as: :polish_event_slug
   get 'wydarzenie/wypisz/*code' => 'training/supplementary/sign_ups#cancel', as: :polish_event_cancel
+
+  authenticated :user, lambda {|u| u&.ski_hater? } do
+    get "/przejscia" => redirect("/przejscia?route_type=climbing"), constraints: lambda{ |req| req.params.empty? }
+  end
 end

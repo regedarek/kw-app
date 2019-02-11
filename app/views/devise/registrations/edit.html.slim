@@ -53,6 +53,11 @@
 
     .row
       .large-12.columns
+        = f.label :ski_hater
+        = f.check_box :ski_hater
+
+    .row
+      .large-12.columns
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
                       Wyślij ponownie potwierdzajacy email:
                       = resource.unconfirmed_email

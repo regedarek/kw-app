@@ -255,6 +255,7 @@ pl:
         current_password: Obecne haslo
         hide: Ukryj moje dane na liście klubowiczów?
         boars: Chcę uczestniczyć w programie Narciarskie Dziki
+        ski_hater: Chcę widzieć przejścia wspinaczkowe domyślnie
     errors:
       messages:
         record_invalid: "Negatywne sprawdzenie poprawności: %{errors}"
