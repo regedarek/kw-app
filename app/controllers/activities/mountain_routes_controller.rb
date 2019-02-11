@@ -6,6 +6,16 @@ module Activities
     def index
       authorize! :read, ::Db::Activities::MountainRoute
 
+      if user_signed_in?
+        if current_user.ski_hater?
+          if params && params.key?(:route_type)
+          else
+            return redirect_to('/przejscia?route_type=climbing')
+          end
+        end
+      end
+
+
       @q = if params[:boars]
              Db::Activities::MountainRoute.includes(:colleagues).where(hidden: false).order(climbing_date: :desc)
            else

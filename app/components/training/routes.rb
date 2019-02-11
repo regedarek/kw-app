@@ -40,8 +40,4 @@ Rails.application.routes.draw do
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
   get 'wydarzenia/*slug' => 'training/supplementary/courses#show', as: :polish_event_slug
   get 'wydarzenie/wypisz/*code' => 'training/supplementary/sign_ups#cancel', as: :polish_event_cancel
-
-  authenticated :user, lambda {|u| u&.ski_hater? } do
-    get "/przejscia" => redirect("/przejscia?route_type=climbing"), constraints: lambda{ |req| req.params.empty? }
-  end
 end
