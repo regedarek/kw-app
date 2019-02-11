@@ -5,7 +5,7 @@ module Membership
     def index
       if params[:ids].present?
         kw_ids = params[:ids].split(',').map(&:to_i)
-        fees = Db::Membership::Fee.where(kw_id: kw_ids, year: Date.today.year)
+        fees = Db::Membership::Fee.includes(:payment).where(kw_id: kw_ids, year: Date.today.year)
         unpaid_fees = fees.select do |fee|
           !fee.payment.paid?
         end
@@ -19,18 +19,18 @@ module Membership
           'brak' => other_ids
           }
       else
-        @fees = current_user.membership_fees.order(:year)
+        @fees = current_user.membership_fees.includes(:payment).order(:year)
         @form = Membership::FeeForm.new(kw_id: current_user.kw_id)
       end
     end
 
     def show
-      fee = Db::Membership::Fee.where(kw_id: params[:id], year: Date.today.year).first
+      fee = Db::Membership::Fee.includes(:payment).where(kw_id: params[:id], year: Date.today.year).first
       render plain: fee.present? && fee.payment.paid? ? "#{Date.today.year}: TAK" : "#{Date.today.year}: NIE"
     end
 
     def create
-      @fees = current_user.membership_fees
+      @fees = current_user.membership_fees.includes(:payment)
       @form = Membership::FeeForm.new(fee_params.merge(kw_id: current_user.kw_id))
 
       result = Membership::PayFee.pay(kw_id: current_user.kw_id, form: @form)

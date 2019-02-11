@@ -1,3 +1,5 @@
+require 'results'
+
 class ProfilesController < ApplicationController
   def new
     @profile_form = UserManagement::ProfileForm.new

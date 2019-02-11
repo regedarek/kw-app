@@ -72,9 +72,10 @@
       = f.check_box :main_discussion_group, checked: true
       = f.label :main_discussion_group
 
-    .large-6.columns
-      = f.check_box :plastic, checked: false
-      = f.label :plastic
+    - if Date.today >= Date.new(2019, 11, 15)
+      .large-6.columns
+        = f.check_box :plastic, checked: false
+        = f.label :plastic
 
   .row
     .large-6.columns

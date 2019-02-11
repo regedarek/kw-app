@@ -4,6 +4,7 @@ pl:
     attributes:
       membership/fee_form:
         year: Rok
+        plastic: Legitymacja plastikowa
       user_management_profile_form:
         kw_id: Numer klubowy
         email: E-mail
