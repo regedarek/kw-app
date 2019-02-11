@@ -28,7 +28,7 @@ module Training
         ::Db::User
           .joins(:mountain_routes)
           .where.not(mountain_routes: { id: nil, length: nil })
-          .where(mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at})
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at})
           .select('users.id, SUM(mountain_routes.length)')
           .group('users.id')
           .distinct
@@ -41,7 +41,7 @@ module Training
         ::Db::User
           .joins(:mountain_routes)
           .where.not(mountain_routes: { id: nil, length: nil })
-          .where(mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
           .select('users.id, SUM(mountain_routes.length)')
           .group('users.id')
           .distinct
@@ -54,7 +54,7 @@ module Training
         ::Db::User
           .joins(:mountain_routes)
           .where.not(mountain_routes: { id: nil, length: nil })
-          .where(mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range_climbing_date, created_at: range_created_at })
           .select('users.id, SUM(mountain_routes.length)')
           .group('users.id')
           .distinct
@@ -92,7 +92,7 @@ module Training
         ::Db::User
           .joins(:mountain_routes)
           .where.not(mountain_routes: { id: nil, length: nil })
-          .where(mountain_routes: { route_type: 'ski', climbing_date: range, created_at: range })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range, created_at: range })
           .select('users.id, SUM(mountain_routes.length)')
           .group('users.id')
           .distinct
@@ -104,7 +104,7 @@ module Training
         ::Db::User
           .joins(:mountain_routes)
           .where.not(mountain_routes: { id: nil, length: nil })
-          .where(mountain_routes: { route_type: 'ski', climbing_date: range, created_at: range })
+          .where(boars: true, mountain_routes: { route_type: 'ski', climbing_date: range, created_at: range })
           .select('users.id, SUM(mountain_routes.length)')
           .group('users.id')
           .distinct
