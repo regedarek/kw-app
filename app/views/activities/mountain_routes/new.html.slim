@@ -1,3 +1,13 @@
-.column.row
-  = image_tag 'climb.jpg'
-  = render 'form', url: activities_mountain_routes_path, method: :post
+.row
+  .large-12.columns
+    = image_tag 'climb.jpg'
+
+= form_for @route, as: :route, url: activities_mountain_routes_path, html: { class: 'js-routes-form' },  method: :post do |f|
+  = render 'form', f: f
+
+  .row
+    .large-6.columns
+      = f.submit t('.submit'), class: 'button expanded large success'
+
+    .large-6.columns
+      = link_to 'wróć do poprzedniej strony', activities_mountain_routes_path, class: 'button expanded large warning'
