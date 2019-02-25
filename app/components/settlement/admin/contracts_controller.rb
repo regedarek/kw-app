@@ -7,7 +7,7 @@ module Settlement
       def index
         authorize! :read, Settlement::ContractRecord
 
-        @contracts = Settlement::ContractRecord.includes(:acceptor).all
+        @contracts = Settlement::ContractRecord.includes([:acceptor, :creator]).accessible_by(current_ability)
       end
 
       def new

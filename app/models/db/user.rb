@@ -23,6 +23,7 @@ class Db::User < ActiveRecord::Base
   has_many :photo_requests, class_name: 'PhotoCompetition::RequestRecord'
 
   has_many :accepted_contracts, class_name: 'Settlement::ContractRecord'
+  has_many :created_contracts, class_name: 'Settlement::ContractRecord'
 
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts

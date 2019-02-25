@@ -49,7 +49,7 @@ class Ability
 
   def events
     can :create, Settlement::ContractRecord
-    can :read, Settlement::ContractRecord
+    can :read, Settlement::ContractRecord, creator_id: user.id
   end
 
   def office_king

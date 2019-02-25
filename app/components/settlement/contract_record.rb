@@ -8,6 +8,7 @@ module Settlement
     self.table_name = 'contracts'
 
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
+    belongs_to :creator, class_name: 'Db::User', foreign_key: :creator_id
 
     workflow_column :state
     workflow do
