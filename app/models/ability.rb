@@ -10,9 +10,12 @@ class Ability
     not_active if @user.persisted?
     active if @user.active?
     admin if role?('admin')
+    management if role?('management')
+    office_king if role?('office_king')
     routes if role?('routes')
     office if role?('office')
     competitions if role?('competitions')
+    events if role?('events')
   end
 
   def role?(name)
@@ -37,6 +40,20 @@ class Ability
 
   def competitions
     can :manage, Events::Db::SignUpRecord
+  end
+
+  def management
+    can :read, Settlement::ContractRecord
+    can :accept, Settlement::ContractRecord
+  end
+
+  def events
+    can :create, Settlement::ContractRecord
+    can :read, Settlement::ContractRecord
+  end
+
+  def office_king
+    can :manage, Settlement::ContractRecord
   end
 
   def admin

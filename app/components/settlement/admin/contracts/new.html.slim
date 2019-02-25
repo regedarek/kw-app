@@ -1,0 +1,23 @@
+.row
+  .large-12.columns
+    = form_for @contract, as: :contract, url: admin_contracts_path do |f|
+      - if @contract.errors.any?
+        .callout.alert
+          ul
+            - @contract.errors.full_messages.each do |msg|
+              li= msg
+
+      b= f.label :title, "Nazwa rozliczenia"
+      = f.text_field :title
+
+      b= f.label :description, "Opis rozliczenia"
+      = f.text_field :description
+
+      b= f.label :cost, "Kwota rozliczenia"
+      = f.number_field :cost, step: 0.01
+
+      b= f.label :attachments, "Pliki"
+      = f.file_field :attachments, multiple: true
+
+      = f.submit 'Utwórz rozliczenie', class: 'button'
+      = link_to 'wróć', admin_contracts_path, class: 'button secondary'

@@ -1,0 +1,46 @@
+.row
+  .large-12.columns
+    = form_for @contract, as: :contract, url: admin_contract_path(@contract), method: :put do |f|
+      - if @contract.errors.any?
+        .callout.alert
+          ul
+            - @contract.errors.full_messages.each do |msg|
+              li= msg
+
+      b= f.label :title, "Nazwa rozliczenia"
+      = f.text_field :title
+
+      b= f.label :state, "Status"
+      = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
+
+      b= f.label :description, "Opis rozliczenia"
+      = f.text_field :description
+
+      b= f.label :cost, "Kwota rozliczenia"
+      = f.number_field :cost, step: 0.01
+
+      b Zaakceptował: 
+      = @contract.acceptor&.display_name
+      br
+
+      b= f.label :attachments, "Pliki"
+      = f.file_field :attachments, multiple: true
+
+      - if @contract.attachments.any?
+        - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+          = link_to attachment.url, download: attachment.file.identifier do
+            = image_tag('file.jpg', class: 'thumbnail')
+            |  
+            = attachment.file.identifier
+        br
+        - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+          - unless photo.blank? || photo.thumb.blank?
+            = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+            div id="photo-#{i}" class="reveal" data-reveal="" 
+              = image_tag photo.url
+              button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                span aria-hidden="true"  &times;
+      br
+
+      = f.submit class: 'button'

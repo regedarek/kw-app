@@ -35,6 +35,11 @@
             li
               = link_to t('.administration.main'), admin_path
               ul.menu.vertical
+                - if can? :read, Settlement::ContractRecord
+                  li= link_to 'Rozliczenia', admin_contracts_path
+                - else
+                  - if can? :create, Settlement::ContractRecord
+                    li= link_to 'Rozlicz', new_admin_contract_path
                 li= link_to 'Baza użytkowników', admin_users_path
                 - unless current_user.roles.include?('office')
                   li= link_to 'Baza klubowiczów', admin_profiles_path
