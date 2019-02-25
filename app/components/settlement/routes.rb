@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   end
 
   get "rozlicz" => 'settlement/admin/contracts#new'
+  get "rozliczenia" => 'settlement/admin/contracts#index'
 end
