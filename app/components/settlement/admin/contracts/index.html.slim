@@ -20,8 +20,8 @@
         - @contracts.each_with_index do |contract, i|
           tr
             td = contract.id
-            td = contract.creator&.display_name
             td = link_to contract.title, edit_admin_contract_path(contract.id)
+            td = contract.creator&.display_name
             td
               span.secondary.label
                 = t contract.state
