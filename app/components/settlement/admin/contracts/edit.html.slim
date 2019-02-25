@@ -7,17 +7,27 @@
             - @contract.errors.full_messages.each do |msg|
               li= msg
 
-      b= f.label :title, "Nazwa rozliczenia"
-      = f.text_field :title
+      .row
+        .medium-6.columns
+          b= f.label :title, "Nazwa rozliczenia"
+          = f.text_field :title
 
-      b= f.label :state, "Status"
-      = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
+        .medium-3.columns
+          b= f.label :state, "Status"
+          = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
 
-      b= f.label :description, "Opis rozliczenia"
-      = f.text_field :description
+        .medium-3.columns
+          b= f.label :cost, "Kwota rozliczenia"
+          .input-group
+            = f.number_field :cost, step: 0.01, class: 'input-group-field'
+            span.input-group-label
+                | zł
 
-      b= f.label :cost, "Kwota rozliczenia"
-      = f.number_field :cost, step: 0.01
+      .row
+        .medium-12.columns
+          = f.label :description, "Uwagi do rozliczenia"
+          = f.hidden_field :description, id: 'description_body'
+          trix-editor input='description_body' style='min-height: 200px'
 
       b Zaakceptował: 
       = @contract.acceptor&.display_name
@@ -43,4 +53,5 @@
                 span aria-hidden="true"  &times;
       br
 
-      = f.submit class: 'button'
+      = f.submit "Zaktualizuj rozliczenie", class: 'button'
+      = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'

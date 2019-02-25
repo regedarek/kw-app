@@ -43,11 +43,13 @@ class Ability
   end
 
   def management
+    can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
   end
 
   def events
+    can :create, Training::Supplementary::CourseRecord
     can :create, Settlement::ContractRecord
     can :read, Settlement::ContractRecord, creator_id: user.id
   end
@@ -57,6 +59,7 @@ class Ability
   end
 
   def admin
+    can :create, Training::Supplementary::CourseRecord
     can :manage, Db::User
     can :manage, Db::Profile
     can :manage, Events::Db::SignUpRecord

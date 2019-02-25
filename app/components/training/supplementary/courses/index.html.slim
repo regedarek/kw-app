@@ -3,7 +3,7 @@
     h3 = t('.header')
 
 .row
-  .large-6.columns
+  .large-5.columns
     .text-left.left
       = link_to category: :kw do
         = image_tag "kw.png", size: '50x50'
@@ -16,13 +16,20 @@
       - if params[:category].present?
         = link_to category: nil do
           = ' usuń filtr'
-  .large-4.columns
+  .large-3.columns
     = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
   - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
     .large-1.columns
       = link_to '+', new_supplementary_course_path, class: 'button expanded large'
     .large-1.columns.right
       = link_to 'A', archived_supplementary_courses_path, class: 'button alert expanded large'
+  - if can? :read, Settlement::ContractRecord
+    .large-2.columns.right
+      = link_to 'Rozliczenia', admin_contracts_path, class: 'button large expanded'
+  - else
+    - if can? :create, Settlement::ContractRecord
+      .large-2.columns.right
+        = link_to 'Rozlicz', new_admin_contract_path, class: 'button large expanded'
 
 .row
   .large-12.columns

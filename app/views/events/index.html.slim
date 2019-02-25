@@ -1,6 +1,12 @@
 .row
   .columns
-    - if user_signed_in? && current_user.admin?
+    - if can? :create, Training::Supplementary::CourseRecord
       = link_to "Dodaj wydarzenie", new_admin_event_path, class: 'button large expanded'
+
+    - if can? :read, Settlement::ContractRecord
+      li= link_to 'Rozliczenia', admin_contracts_path, class: 'button large'
+    - else
+      - if can? :create, Settlement::ContractRecord
+        li= link_to 'Rozlicz', new_admin_contract_path, class: 'button large'
 
     = render 'events/table', events: @events

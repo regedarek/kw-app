@@ -7,14 +7,23 @@
             - @contract.errors.full_messages.each do |msg|
               li= msg
 
-      b= f.label :title, "Nazwa rozliczenia"
-      = f.text_field :title
+      .row
+        .medium-9.columns
+          b= f.label :title, "Nazwa rozliczenia"
+          = f.text_field :title
 
-      b= f.label :description, "Opis rozliczenia"
-      = f.text_field :description
+        .medium-3.columns
+          b= f.label :cost, "Kwota rozliczenia"
+          .input-group
+            = f.number_field :cost, step: 0.01, class: 'input-group-field'
+            span.input-group-label
+                | zł
 
-      b= f.label :cost, "Kwota rozliczenia"
-      = f.number_field :cost, step: 0.01
+      .row
+        .medium-12.columns
+          = f.label :description, "Uwagi do rozliczenia"
+          = f.hidden_field :description, id: 'description_body'
+          trix-editor input='description_body' style='min-height: 200px'
 
       b= f.label :attachments, "Pliki"
       = f.file_field :attachments, multiple: true
