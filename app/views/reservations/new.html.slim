@@ -1,7 +1,6 @@
 .column.row
   - if user_signed_in?
-    - current_fee = current_user.membership_fees.find_by(year: Date.today.year)
-    - if current_fee.present? && current_fee.payment.present? && current_fee.payment.paid?
+    - if Membership::Activement.new(user: current_user).active?
       - if user_signed_in?
         .row
           .large-6.columns

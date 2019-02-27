@@ -128,7 +128,7 @@
                 - @rest.each do |item|
                   tr
                     td
-                      = item.display_name
+                      = "#{item.display_name} (#{item.rentable_id})"
                     td.text-center
                       = item.cost
                       = ' zł'

@@ -8,7 +8,6 @@
 
       define! do
         required(:title).filled
-        required(:description).filled
         required(:cost).filled
       end
     end
