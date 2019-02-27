@@ -48,16 +48,20 @@
         .large-9.columns
           .callout.primary
             = f.nested_fields_for :package_types do |ff|
-              .large-3.columns
+              .large-5.columns
+                = ff.label :name, "Nazwa"
                 = ff.text_field :name
               .large-3.columns
+                = ff.label :name, "Koszt"
                 = ff.number_field :cost
               .large-3.columns
+                br
                 = ff.check_box :membership
-                = ff.label :membership
-              .large-3.columns
+                = ff.label :membership, 'Sprawdź składkę'
+              .large-1.columns
+                br
                 = ff.remove_nested_fields_link
-            = f.add_nested_fields_link :package_types
+            = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
       .row
         .large-12.columns
