@@ -32,7 +32,7 @@ module Settlement
 
       def edit
         @contract = Settlement::ContractRecord.find(params[:id])
-        authorize! :update, @contract
+        authorize! :read, @contract
       end
 
       def update
