@@ -24,18 +24,31 @@
             span.input-group-label
                 | zł
 
-      .row
-        .medium-12.columns
-          = f.label :description, "Uwagi do rozliczenia"
-          = f.hidden_field :description, id: 'description_body'
-          trix-editor input='description_body' style='min-height: 200px'
+      - if can? :update, @contract
+        .row
+          .medium-12.columns
+            = f.label :description, "Uwagi do rozliczenia"
+            = f.hidden_field :description, id: 'description_body'
+            trix-editor input='description_body' style='min-height: 200px'
 
-      .row
-        .medium-12.columns
-          = f.label :users_names, 'Osoby zainteresowane'
-          - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
-          - users = @contract.users.map{|u| { id: u.id, name: u.display_name } }
-          = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
+        .row
+          .medium-12.columns
+            = f.label :users_names, 'Osoby zainteresowane'
+            - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
+            - users = @contract.users.map{|u| { id: u.id, name: u.display_name } }
+            = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
+      - else
+        - if @contract.description
+          .row
+            .medium-12.columns
+              .callout
+                = sanitize @contract.description
+
+        - if @contract.users.any?
+          .row
+            .medium-12.columns
+              .callout
+                = @contract.users.map(&:display_name).to_sentence
 
       b Zaakceptował: 
       = @contract.acceptor&.display_name
