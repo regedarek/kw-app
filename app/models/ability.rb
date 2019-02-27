@@ -32,6 +32,7 @@ class Ability
 
   def active
     can :manage, Db::Activities::MountainRoute
+    can :see_user_name, Db::Activities::MountainRoute
   end
 
   def routes
