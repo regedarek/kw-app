@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_175325) do
+ActiveRecord::Schema.define(version: 2019_02_27_202204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2019_02_27_175325) do
     t.boolean "matrimonial_office", default: false, null: false
     t.string "tshirt_url"
     t.string "organizer_email", default: "kw@kw.krakow.pl", null: false
+    t.datetime "event_date"
+    t.text "alert"
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|

@@ -6,7 +6,11 @@ module Events
       append_view_path 'app/components'
 
       def index
-        @competitions = Events::Db::CompetitionRecord.all
+        if params[:archive]
+          @competitions = Events::Db::CompetitionRecord.all
+        else
+          @competitions = Events::Db::CompetitionRecord.where('event_date >= ?', Time.now)
+        end
       end
 
       def edit
@@ -83,8 +87,8 @@ module Events
         params
           .require(:competition)
           .permit(
-            :name, :edition_sym, :rules, :baner, :single, :team_name,
-            :closed, :limit, :email_text, :matrimonial_office, :tshirt_url,
+            :name, :edition_sym, :rules, :baner, :single, :team_name, :event_date,
+            :closed, :limit, :email_text, :matrimonial_office, :tshirt_url, :alert,
             :organizer_email, package_types_attributes: [:id, :name, :cost, :_destroy]
           )
       end

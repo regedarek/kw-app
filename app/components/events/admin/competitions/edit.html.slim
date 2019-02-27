@@ -40,6 +40,11 @@
             = f.check_box :matrimonial_office
             = f.label 'Biuro matrymonialne?'
 
+          .callout.primary
+            = f.label 'Data wydarzenia'
+            = f.datetime_field :event_date
+
+
         .large-9.columns
           .callout.primary
             = f.nested_fields_for :package_types do |ff|
@@ -65,6 +70,9 @@
 
             = f.label 'Treść e-maila z linkiem do zapisów'
             = f.trix_editor :email_text, style: 'min-height: 280px'
+
+            = f.label 'Aktualności'
+            = f.trix_editor :alert, style: 'min-height: 280px'
 
       .row
         .large-12.columns

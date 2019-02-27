@@ -17,6 +17,7 @@
       .large-12.columns
         = link_to t('.sign_up'), new_competition_sign_up_path(@competition),
         class: 'button large primary expanded'
+
   .row
     .large-12.columns
       .callout.primary
@@ -35,55 +36,27 @@
           .large-3.columns
             b = t('.waiting')
             = limiter.waiting.count
-  - if @competition.id == 7
+  .row
+    .large-12.columns
+      - if @competition.single
+        h4= t('.participants_signed_in')
+        = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
+      - else
+        h4= t('.teams_signed_in')
+        = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
+
+  - if @competition.matrimonial_office?
     .row
       .large-12.columns
-        - if @competition.single
-          h4= t('.participants_signed_in')
-          = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
-        - else
-          h4= t('.teams_signed_in')
-          = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
-
-    - if @competition.matrimonial_office?
-      .row
-        .large-12.columns
-          h4 = t('.founded_list')
-          = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
-
-      .row
-        .large-12.columns
-          h4 = t('.looking_list')
-          = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
+        h4 = t('.founded_list')
+        = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
 
     .row
       .large-12.columns
-        h4 = t('.second_list')
-        = render 'table', sign_ups: limiter.waiting.order(:created_at)
-  - else
-    - if user_signed_in?
-      - if current_user.roles.include?('competitions')
-        .row
-          .large-12.columns
-            - if @competition.single
-              h4= t('.participants_signed_in')
-              = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
-            - else
-              h4= t('.teams_signed_in')
-              = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
+        h4 = t('.looking_list')
+        = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
 
-        - if @competition.matrimonial_office?
-          .row
-            .large-12.columns
-              h4 = t('.founded_list')
-              = render 'table', sign_ups: limiter.teams_from_singles.order('payments.updated_at')
-
-          .row
-            .large-12.columns
-              h4 = t('.looking_list')
-              = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
-
-        .row
-          .large-12.columns
-            h4 = t('.second_list')
-            = render 'table', sign_ups: limiter.waiting.order(:created_at)
+  .row
+    .large-12.columns
+      h4 = t('.second_list')
+      = render 'table', sign_ups: limiter.waiting.order(:created_at)

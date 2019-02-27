@@ -9,6 +9,11 @@
   |
   = link_to image_tag('en.png'), { locale: :en }
 
+- if @competition.alert
+  .row
+    .large-12.columns
+      .callout.alert
+        = sanitize @competition.alert
 = form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: competition_sign_ups_path do |f|
   - if @competition.team_name
     .callout.warning
