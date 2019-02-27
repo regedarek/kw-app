@@ -1,6 +1,6 @@
 module Membership
   class FeesRepository
-    def for_profile(kw_id: kw_id)
+    def for_profile(kw_id:)
       Db::Membership::Fee.includes(:payment)
         .where(
           kw_id: kw_id,
