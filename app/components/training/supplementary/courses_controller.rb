@@ -85,7 +85,7 @@ module Training
           .permit(
             :name, :payment_type, :slug, :place, :start_date, :kind, :end_date, :application_date, :price_kw, :baner,
             :price_non_kw, :remarks, :category, :price, :one_day, :active, :cash, :expired_hours, :reserve_list,
-            :open, :packages, :limit, :last_fee_paid, organizator_id: []
+            :open, :packages, :limit, :last_fee_paid, organizator_id: [], package_types_attributes: [:id, :name, :cost, :_destroy]
           )
       end
     end

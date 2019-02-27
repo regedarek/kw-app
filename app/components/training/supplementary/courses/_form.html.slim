@@ -68,9 +68,22 @@
         .large-3.columns
           = f.label :packages, t('.packages')
           = f.check_box :packages
-          - if @course.persisted?
+
+.row
+  .large-8.columns
+    .callout.secondary
+      = f.nested_fields_for :package_types do |ff|
+        .row
+          .large-1.columns
             br
-            = link_to ' Dodaj pakiet', new_supplementary_course_package_path(@course)
+            = ff.remove_nested_fields_link
+          .large-9.columns
+            = ff.label :name, 'Nazwa'
+            = ff.text_field :name
+          .large-2.columns
+            = ff.label :name, 'Kwota'
+            = ff.number_field :cost
+      = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
   .js-price-row
       .large-4.columns

@@ -12,6 +12,10 @@ module Training
         dependent: :destroy,
         foreign_key: :supplementary_course_record_id
 
+      accepts_nested_attributes_for :package_types,
+        reject_if: proc { |attributes| attributes[:name].blank? },
+        allow_destroy: true
+
       self.table_name = 'supplementary_courses'
 
       def organizer
