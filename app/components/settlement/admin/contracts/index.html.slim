@@ -1,9 +1,10 @@
 .row
   .large-9.columns
     h3 Rozliczenia, faktury, przelewy, umowy wolontariackie
-  .large-3.columns
-    .text-right
-      = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
+  - if can? :create, Settlement::ContractRecord
+    .large-3.columns
+      .text-right
+        = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
 
 .row
   .large-12.columns
@@ -20,14 +21,19 @@
         - @contracts.each_with_index do |contract, i|
           tr
             td = contract.id
-            td = link_to contract.title, edit_admin_contract_path(contract.id)
+            td
+              - if can? :update, contract
+                = link_to contract.title, edit_admin_contract_path(contract.id)
+              - else
+                = contract.title
             td = contract.creator&.display_name
             td
               span.secondary.label
                 = t contract.state
             td = contract.cost
             td
-              - if contract.accepted?
-                = contract.acceptor&.display_name
-              - else
-                = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+              - if can? :accept, Settlement::ContractRecord
+                - if contract.accepted?
+                  = contract.acceptor&.display_name
+                - else
+                  = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put

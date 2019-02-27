@@ -9,6 +9,7 @@
       define! do
         required(:title).filled
         required(:cost).filled
+        required(:users_names).maybe
       end
     end
   end

@@ -12,9 +12,10 @@
           b= f.label :title, "Nazwa rozliczenia"
           = f.text_field :title
 
-        .medium-3.columns
-          b= f.label :state, "Status"
-          = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
+        - if can? :manage, @contract
+          .medium-3.columns
+            b= f.label :state, "Status"
+            = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
 
         .medium-3.columns
           b= f.label :cost, "Kwota rozliczenia"
@@ -28,6 +29,13 @@
           = f.label :description, "Uwagi do rozliczenia"
           = f.hidden_field :description, id: 'description_body'
           trix-editor input='description_body' style='min-height: 200px'
+
+      .row
+        .medium-12.columns
+          = f.label :users_names, 'Osoby zainteresowane'
+          - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
+          - users = @contract.users.map{|u| { id: u.id, name: u.display_name } }
+          = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
 
       b Zaakceptował: 
       = @contract.acceptor&.display_name

@@ -63,7 +63,11 @@
         .large-3.columns
           = f.label :colleagues_names
           - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
-          = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: [{id: current_user.id, name: current_user.display_name}].uniq } }.to_json
+          - if action_name == 'new'
+            - users = [{ id: current_user.id, name: current_user.display_name }]
+          - else
+            - users = @route.colleagues.map{|u| { id: u.id, name: u.display_name } }
+          = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: users.uniq } }.to_json
 
           = f.label :partners
           = f.text_field :partners

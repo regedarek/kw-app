@@ -25,6 +25,9 @@ class Db::User < ActiveRecord::Base
   has_many :accepted_contracts, class_name: 'Settlement::ContractRecord'
   has_many :created_contracts, class_name: 'Settlement::ContractRecord'
 
+  has_many :contract_users, class_name: 'Settlement::ContractUsersRecord', foreign_key: :user_id
+  has_many :contracts, through: :contract_users, foreign_key: :contract_id, dependent: :destroy
+
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts
 

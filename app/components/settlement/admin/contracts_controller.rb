@@ -12,6 +12,7 @@ module Settlement
 
       def new
         authorize! :create, Settlement::ContractRecord
+
         @contract = Settlement::ContractRecord.new
       end
 
@@ -30,19 +31,18 @@ module Settlement
       end
 
       def edit
-        authorize! :read, Settlement::ContractRecord
-
         @contract = Settlement::ContractRecord.find(params[:id])
+        authorize! :update, @contract
       end
 
       def update
-        authorize! :update, Settlement::ContractRecord
+        @contract = Settlement::ContractRecord.find(params[:id])
+        authorize! :update, @contract
 
         either(update_record) do |result|
           result.success { |contract| redirect_to edit_admin_contract_path(contract.id) }
 
           result.failure do |errors|
-            @contract = Settlement::ContractRecord.new(contract_params)
             flash[:error] = errors.values.join(", ")
             render :new
           end
@@ -82,7 +82,7 @@ module Settlement
         params
           .require(:contract)
           .permit(
-            :title, :description, :cost, :state, attachments: []
+            :title, :description, :cost, :state, attachments: [], users_names: []
           )
       end
     end

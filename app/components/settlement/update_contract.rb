@@ -11,10 +11,10 @@ module Settlement
       form_outputs = form.call(raw_inputs)
       return Left(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
 
-      sign_up = Settlement::ContractRecord.find(id)
-      sign_up.update(form_outputs.to_h)
+      contract = Settlement::ContractRecord.find(id)
+      contract.update(form_outputs.to_h)
 
-      Right(:success)
+      Right(contract)
     end
 
     private

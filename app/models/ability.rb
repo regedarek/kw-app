@@ -28,6 +28,8 @@ class Ability
 
   def not_active
     can :manage, Db::Activities::MountainRoute
+    can [:read, :update], Settlement::ContractRecord, creator_id: user.id
+    can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
   end
 
   def active
