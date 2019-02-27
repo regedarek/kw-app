@@ -40,6 +40,12 @@
       b Zaakceptował: 
       = @contract.acceptor&.display_name
       br
+      b Otworzył: 
+      = @contract.creator&.display_name
+      br
+      b Kiedy utworzono: 
+      = @contract.created_at.strftime("%d-%m-%Y %H:%M")
+      br
 
       b= f.label :attachments, "Pliki"
       = f.file_field :attachments, multiple: true
