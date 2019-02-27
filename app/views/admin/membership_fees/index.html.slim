@@ -1,5 +1,10 @@
 .column
   .row
+    .large-12.columns
+      .callout
+        b= "Opłacone #{Date.today.year}: "
+        = Membership::FeesRepository.new.paid_this_year.count
+  .row
     .large-6.columns
       .callout
         = form_for Admin::MembershipFeesForm.new, url: admin_membership_fees_path do |f|
@@ -46,15 +51,15 @@
             .large-4.columns
               br
               = f.submit 'Szukaj', class: 'button expanded bottom'
-            
+
 .row
   .large-12.columns
     table.stack
       thead
         tr
           th width='5%' = sort_link(@q, :kw_id, 'Numer')
-          th width='20%' = sort_link(@q, :user_first_name, 'Imię')
-          th width='20%' = sort_link(@q, :user_last_name, 'Nazwisko')
+          th width='15%' = sort_link(@q, :user_first_name, 'Imię')
+          th width='15%' = sort_link(@q, :user_last_name, 'Nazwisko')
           th width='10%' = sort_link(@q, :year, 'Rok')
           th width='10%' = sort_link(@q, :plastic, 'Plastik')
           th width='10%' = sort_link(@q, :created_at, 'Utworzono')

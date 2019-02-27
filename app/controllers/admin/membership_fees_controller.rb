@@ -1,5 +1,6 @@
 require 'admin/membership_fees'
 require 'admin/membership_fees_form'
+require 'result'
 
 module Admin
   class MembershipFeesController < Admin::BaseController
