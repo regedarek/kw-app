@@ -38,7 +38,7 @@ module Events
         respond_with do |format|
           format.html
           format.xlsx do
-            disposition = "attachment; filename='#{@competition.edition_sym}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+            disposition = "attachment; filename=#{@competition.edition_sym}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
             response.headers['Content-Disposition'] = disposition
           end
         end

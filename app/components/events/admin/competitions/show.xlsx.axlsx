@@ -20,12 +20,12 @@ wb.styles do |style|
   wb.add_worksheet(name: "#{@competition.edition_sym}") do |sheet|
     default_attributes = sign_up_attributes.map do |attr|
       Events::Db::CompetitionRecord.human_attribute_name(attr)
-    end.push('Pakiet 1', 'Pakiet 2', 'Płatność', 'Utworzono')
+    end.push('Pakiet 1', 'Pakiet 2', 'Płatność', 'Utworzono', 'Opłacono')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     @competition.sign_ups_records.each do |sign_up|
       default_values = sign_up_attributes.map do |attr|
         sign_up.read_attribute(attr)
-      end.push(Events::Db::CompetitionPackageTypeRecord.find_by(id: sign_up.competition_package_type_1_id).name, Events::Db::CompetitionPackageTypeRecord.find_by(id: sign_up.competition_package_type_2_id).try(:name), sign_up.payment.prepaid?, sign_up.created_at)
+      end.push(Events::Db::CompetitionPackageTypeRecord.find_by(id: sign_up.competition_package_type_1_id).name, Events::Db::CompetitionPackageTypeRecord.find_by(id: sign_up.competition_package_type_2_id).try(:name), sign_up.payment.prepaid?, sign_up.created_at, sign_up.payment&.updated_at)
       sheet.add_row(default_values)
     end
   end
