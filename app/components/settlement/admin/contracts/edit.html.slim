@@ -61,5 +61,8 @@
                 span aria-hidden="true"  &times;
       br
 
-      = f.submit "Zaktualizuj rozliczenie", class: 'button'
+      - if can? :update, @contract
+        = f.submit "Zaktualizuj rozliczenie", class: 'button'
+      - if can? :accept, @contract
+        = link_to 'Zaakceptuj', accept_admin_contract_path(@contract.id), method: :put, class: 'button success'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'

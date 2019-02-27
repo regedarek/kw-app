@@ -7,7 +7,7 @@ module Settlement
       def index
         authorize! :read, Settlement::ContractRecord
 
-        @contracts = Settlement::ContractRecord.includes([:acceptor, :creator]).accessible_by(current_ability)
+        @contracts = Settlement::ContractRecord.includes([:acceptor, :creator]).where.not(state: :closed).accessible_by(current_ability).order(created_at: :desc)
       end
 
       def new

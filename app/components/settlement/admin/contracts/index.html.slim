@@ -28,8 +28,12 @@
                 = contract.title
             td = contract.creator&.display_name
             td
-              span.secondary.label
-                = t contract.state
+              - if contract.accepted?
+                span.success.label
+                  = t contract.state
+              - else
+                span.secondary.label
+                  = t contract.state
             td = contract.cost
             td
               - if can? :accept, Settlement::ContractRecord
