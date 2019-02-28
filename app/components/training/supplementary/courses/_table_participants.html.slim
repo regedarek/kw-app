@@ -11,7 +11,7 @@ table.stack
     - sign_ups.each_with_index do |sign_up, i|
       tr
         td.text-left = i + 1
-        td.text-left style=(@limiter.in_limit?(sign_up) ? 'color: green' : '')
+        td.text-left
           - if user_signed_in? && current_user.admin?
             - if sign_up.user
               - profile_id = Db::Profile.find_by(kw_id: sign_up.user&.kw_id)&.id
