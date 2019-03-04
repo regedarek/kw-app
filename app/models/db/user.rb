@@ -1,7 +1,7 @@
 class Db::User < ActiveRecord::Base
   mount_uploader :avatar, ::Membership::AvatarUploader
 
-  ROLES = %w(reservations routes admin events courses competitions office tech donations photo_competition)
+  ROLES = %w(reservations routes admin events courses competitions office tech donations photo_competition management)
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]

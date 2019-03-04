@@ -20,6 +20,11 @@
       .callout.primary
         .row
           .large-3.columns
+            = f.label :teammate_id, t('.teammate_id')
+            = f.number_field :teammate_id
+      .callout.primary
+        .row
+          .large-3.columns
             = f.label :participant_name_1, t('.participant_name_1')
             = f.text_field :participant_name_1
 

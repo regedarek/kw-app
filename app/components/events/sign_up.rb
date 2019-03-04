@@ -12,6 +12,7 @@ module Events
 
     attribute :id, Types::Int.optional
     attribute :team_name, Types::String.optional
+    attribute :teammate_id, Types::Int.optional
     attribute :competition_id, Types::Int
     attribute :participant_kw_id_1, Types::String.optional
     attribute :participant_kw_id_2, Types::String.optional
@@ -73,6 +74,7 @@ module Events
       def from_record(record)
         new(
           id: record.id,
+          teammate_id: record.teammate_id,
           competition_id: record.competition_record_id,
           participant_kw_id_1: record.participant_kw_id_1,
           participant_kw_id_2: record.participant_kw_id_2,

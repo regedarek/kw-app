@@ -67,6 +67,7 @@ module Events
          optional(:tshirt_size_1, Types::String).filled
          optional(:participant_city_1, Types::String)
          optional(:team_name, Types::String)
+         optional(:teammate_id, Types::Int)
          optional(:remarks, Types::String)
          optional(:participant_team_1, Types::String)
          required(:participant_gender_1, Types::Form::Int).filled

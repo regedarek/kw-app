@@ -114,6 +114,7 @@ module Events
           competition_package_type_1_id: sign_up_params[:competition_package_type_1_id].to_i,
           competition_package_type_2_id: sign_up_params[:competition_package_type_2_id].to_i,
           remarks: sign_up_params[:remarks],
+          teammate_id: sign_up_params[:teammate_id],
           terms_of_service: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:terms_of_service]),
           single: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:single])
         }
@@ -142,6 +143,7 @@ module Events
             :participant_gender_2,
             :competition_package_type_1_id,
             :competition_package_type_2_id,
+            :teammate_id,
             :tshirt_size_1,
             :tshirt_size_2,
             :remarks,
