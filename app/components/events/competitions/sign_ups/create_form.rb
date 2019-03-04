@@ -42,7 +42,7 @@ module Events
           end
           rule(participant_birth_year_2: [:single, :participant_birth_year_2]) do |single, participant_birth_year_2|
             single.false?.then(
-              required(:participant_birth_year_2).filled(:int?, lt?: 2003, gt?: 1920)
+              required(:participant_birth_year_2).filled(:int?, gt?: 1920)
             )
           end
           rule(competition_package_type_2_id: [:single, :competition_package_type_2_id]) do |single, competition_package_type_2_id|
@@ -67,12 +67,12 @@ module Events
          optional(:tshirt_size_1, Types::String).filled
          optional(:participant_city_1, Types::String)
          optional(:team_name, Types::String)
-         optional(:teammate_id, Types::Int)
+         optional(:teammate_id, Types::String)
          optional(:remarks, Types::String)
          optional(:participant_team_1, Types::String)
          required(:participant_gender_1, Types::Form::Int).filled
          required(:participant_email_1, Types::String).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
-         required(:participant_birth_year_1, Types::Form::Int).filled(:int?, lt?: 2003, gt?: 1920)
+         required(:participant_birth_year_1, Types::Form::Int).filled(:int?, gt?: 1920)
          required(:competition_package_type_1_id, Types::Form::Int).filled
          optional(:participant_kw_id_1, Types::Form::Int).maybe(:int?, gt?: 1, lt?: 9000)
          required(:terms_of_service, Types::Form::Bool).value(:true?)

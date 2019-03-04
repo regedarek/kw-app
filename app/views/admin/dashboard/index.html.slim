@@ -12,7 +12,7 @@
   .large-4.columns
     h3 5 ostatnich rezerwacji
     table.stack
-      - Db::Reservation.includes(:items, :user).order(created_at: :desc).take(5).each do |reservation|
+      - Db::Reservation.includes(:items, :user).order(created_at: :asc).take(5).each do |reservation|
         tr
           td
             = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"
