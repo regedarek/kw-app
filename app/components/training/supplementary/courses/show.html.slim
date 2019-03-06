@@ -39,7 +39,12 @@
         b Pakiety: 
         ul
           - @course.package_types.each do |p|
-            li = "#{p.name} - #{p.cost}"
+            li = "#{p.name} - #{p.cost} zł"
+      - if @course.expired_hours > 0
+        b Czas na płatność: 
+        = @course.expired_hours
+        |  h
+        br
       b = t('.organizer')
       = @course&.organizer
       br
@@ -129,6 +134,7 @@
                 = z.submit 'Zapisz się', class: 'button large success expanded'
         - else
           - if @course.last_fee_paid
+            = button_to 'Zaloguj się aby zapisać!', '/zaloguj', class: 'button large alert expanded disabled', method: :get
           -else
             - if @limiter.sign_ups_started? && !@limiter.open?
               - if @limiter.sign_ups_reached?
