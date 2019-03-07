@@ -35,7 +35,7 @@ gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/at
 gem 'carrierwave'
 gem 'fog-openstack', require: "fog/openstack"
 gem 'mini_magick'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.6.0'
 gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'
