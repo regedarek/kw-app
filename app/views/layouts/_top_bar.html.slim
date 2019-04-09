@@ -17,7 +17,6 @@
           li= link_to 'Tabela programu', dziki_path, class: 'button alert hollow'
         - if user_signed_in?
           - if current_user.roles.include?('office')
-            li= link_to 'Statystyki', admin_path, class: 'button success'
             li= link_to 'Baza klubowiczów', admin_profiles_path, class: 'button warning'
             li= link_to 'Baza składek', admin_membership_fees_path, class: 'button alert'
           - if current_user.roles.include?('competitions')
@@ -25,11 +24,11 @@
           - if current_user.roles.include?('reservations')
             li= link_to t('.administration.reservations'), admin_reservations_path, class: 'button warning'
             li= link_to t('.administration.items'), admin_items_path, class: 'button primary'
-          li.show-for-small-only= link_to 'Pulpit', page_path('home')
           li.show-for-small-only= link_to 'Zarezerwuj', new_reservation_path
           li.show-for-small-only= link_to 'Przejścia', '/przejscia'
           li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path
           li.show-for-small-only= link_to 'Twoje dane', edit_user_registration_path
+          li.show-for-small-only = link_to 'Twoje aktywności', page_path('home')
           li.show-for-small-only = link_to 'Twoje składki', membership_fees_path
           li.show-for-small-only= link_to t('.administration.logout'), destroy_user_session_path
 
@@ -63,6 +62,7 @@
 
     .top-bar-right
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
+        li.show-for-medium = link_to 'Twoje aktywności', page_path('home'), class: 'button hollow'
         - if user_signed_in?
           - if !current_user.admin? || !current_user.roles.include?('office')
             li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button primary'
