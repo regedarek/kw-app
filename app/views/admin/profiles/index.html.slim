@@ -7,7 +7,11 @@
             .large-3.columns
               b Ostatnia legitymacja: 
               - kw_id = Db::Profile.where.not(kw_id: [nil, 3884]).maximum(:kw_id)
-              = kw_id
+              - profile = Db::Profile.find_by(kw_id: kw_id)
+              - if profile.present?
+                = link_to kw_id, admin_profile_path(profile.id)
+              - else
+                = kw_id
             .large-2.columns
               b = "Opłacone #{Date.today.year - 1}: "
               = UserManagement::FeeScope.for(year: Date.today.year - 1)
