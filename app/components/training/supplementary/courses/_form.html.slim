@@ -33,7 +33,7 @@
         .large-3.columns
           span data-tooltip='' tabindex="1" title="Konto płatności na które zostaną przelane pieniądze za zapisy" data-allow-html="true"
             = f.label :payment_type, 'Konto płatności*'
-          = f.select :payment_type, @course.payment_types, include_blank: true, selected: ''
+          = f.select :payment_type, @course.payment_types
 
         .large-2.columns
           span data-tooltip='' tabindex="1" title="Ilość godzin po której, jeżeli zapis nie zostanie opłacony zostanie usunięty i automatycznie zwolni miejsce dla kolejnej osoby" data-allow-html="true"
