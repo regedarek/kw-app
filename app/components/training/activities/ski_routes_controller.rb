@@ -33,6 +33,7 @@ module Training
 
           result.failure do |errors|
             @ski_route = ::Db::Activities::MountainRoute.new(ski_route_params)
+            @route = ::Db::Activities::MountainRoute.new(ski_route_params)
             flash[:error] = errors.values.join(", ")
             render :new
           end
