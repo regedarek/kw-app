@@ -2,12 +2,13 @@
   .row
     .large-4.columns
       .callout
+        b= "Opłacone #{Date.today.year - 1}: "
+        = Membership::FeesRepository.new.find_paid_one_year_ago.count
+    .large-4.columns
+      .callout.success
         b= "Opłacone #{Date.today.year}: "
         = Membership::FeesRepository.new.paid_this_year.count
     .large-4.columns
-      .callout
-        b= "Opłacone #{Date.today.year - 1}: "
-        = Membership::FeesRepository.new.find_paid_one_year_ago.count
   .row
     .large-6.columns
       .callout
