@@ -26,6 +26,13 @@ pl:
           not_last_fee: Musisz opłacić składkę członkowską!
       course:
         enums:
+          baner_types:
+            baner_mountain_climbing: Wspinaczka
+            baner_ice_axes: Czekany
+            baner_party: Impreza
+            baner_ski_route: Tura narciarska
+            baner_ski: Skok na nartach
+            baner_winter_training: Doszkalanie lodowcowe
           payment_types:
             trainings: Szkolenia
             club_trips: Wyjazd klubowy

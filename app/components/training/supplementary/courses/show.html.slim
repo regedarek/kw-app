@@ -10,7 +10,13 @@
           = image_tag @course.baner.url
           br
           br
-
+  - else
+    .row
+      .large-12.columns
+        .text-center
+          = image_tag "#{@course.baner_type}.jpg"
+          br
+          br
   .row
     .large-4.columns
       b = t('.place')

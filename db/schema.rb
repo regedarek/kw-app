@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_202204) do
+ActiveRecord::Schema.define(version: 2019_04_10_145708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -402,6 +402,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_202204) do
     t.integer "payment_type", default: 0, null: false
     t.integer "expired_hours", default: 0, null: false
     t.boolean "reserve_list", default: false, null: false
+    t.integer "baner_type", default: 0, null: false
     t.index ["slug"], name: "index_supplementary_courses_on_slug", unique: true
   end
 

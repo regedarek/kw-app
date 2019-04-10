@@ -19,6 +19,7 @@ module Training
       attribute :end_date, Types::Strict::Date.optional
       attribute :expired_hours, Types::Strict::Int
       attribute :baner, Types::Any
+      attribute :baner_type, Types::Any
       attribute :application_date, Types::Strict::DateTime.optional
       attribute :price_kw, Types::Strict::Int.optional
       attribute :price_non_kw, Types::Strict::Int.optional
@@ -76,7 +77,8 @@ module Training
             packages: record.packages,
             reserve_list: record.reserve_list,
             last_fee_paid: record.last_fee_paid,
-            baner: record.baner
+            baner: record.baner,
+            baner_type: record.baner_type
           )
         end
       end

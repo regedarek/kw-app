@@ -124,7 +124,12 @@
       = f.trix_editor :remarks, style: 'min-height: 280px'
   .large-4.columns
     .callout
-      = f.label 'Baner'
+      = image_tag "#{@course.baner_type}.jpg"
+      span data-tooltip='' tabindex="1" title="Baner widoczny nad wydarzeniem" data-allow-html="true"
+        = f.label :baner_type, 'Baner'
+      = f.select :baner_type, @course.baner_types
+      span data-tooltip='' tabindex="1" title="Zastąpi domyślny baner z listy powtżej" data-allow-html="true"
+        = f.label 'Dodaj własny baner'
       = f.file_field :baner
       - if @course.baner&.url
         = image_tag @course.baner.url
