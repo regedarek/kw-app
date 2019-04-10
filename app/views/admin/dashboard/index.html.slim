@@ -28,7 +28,10 @@
           td
             = payment.year
           td
-            = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
+            - if payment.user
+              = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
+            - else
+              = Db::Profile.find_by(kw_id: payment.kw_id)&.display_name
 
 .row
   .large-8.columns
