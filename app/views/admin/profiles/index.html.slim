@@ -8,11 +8,7 @@
               b Ostatnia legitymacja: 
               = link_to @latest_profile.kw_id, admin_profile_path(@latest_profile)
             .large-2.columns
-              b = "Opłacone #{Date.today.year - 1}: "
-              = UserManagement::FeeScope.for(year: Date.today.year - 1)
             .large-2.columns
-              b = "Opłacone #{Date.today.year}: "
-              = UserManagement::FeeScope.for(year: Date.today.year)
             .large-2.columns
               b Znaleziono: 
               = @q.result.count
