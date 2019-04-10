@@ -25,6 +25,10 @@ module Management
       end
     end
 
+    def show
+      @project = Management::ProjectRecord.find(params[:id])
+    end
+
     private
 
     def create_record
