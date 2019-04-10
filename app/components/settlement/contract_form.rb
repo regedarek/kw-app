@@ -10,6 +10,8 @@
         required(:title).filled
         required(:cost).filled
         required(:users_names).maybe
+        optional(:description).maybe
+        optional(:attachments).maybe
       end
     end
   end
