@@ -1,0 +1,17 @@
+.row
+  .large-6.columns
+    h3 Projekty, pomysły, zadania
+
+  .large-2.columns
+      = link_to 'Dodaj projekt', new_project_path, class: 'button expanded medium'
+
+table.stack
+  thead
+    tr
+      th.text-center Nazwa projektu
+      th.text-center Koordynator
+  tbody
+    - @projects.each do |project|
+      tr
+        td.text-center = project.name
+        td.text-center = project.coordinator_id

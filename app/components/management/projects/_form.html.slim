@@ -1,0 +1,20 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error.to_sentence
+
+.row
+  .large-12.columns
+    .callout.primary
+      .row
+        .large-4.columns
+          span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
+            = f.label :name, "Nazwa projektu*"
+          = f.text_field :name
+
+        .large-8.columns
+          = f.label :description, 'Opis projektu*'
+          = f.text_area :description
