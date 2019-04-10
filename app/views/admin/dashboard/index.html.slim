@@ -10,7 +10,8 @@
             = user.last_sign_in_at
 
   .large-4.columns
-    h3 5 ostatnich rezerwacji
+    = link_to admin_reservations_path do
+      h3 5 ostatnich rezerwacji
     table.stack
       - Db::Reservation.includes(:items, :user).last(5).each do |reservation|
         tr
@@ -19,7 +20,8 @@
           td
             = link_to reservation.items.map(&:display_name).to_sentence, edit_admin_reservation_path(reservation.id)
   .large-4.columns
-    h3 5 ostatnich skladek
+    = link_to admin_membership_fees_path do
+      h3 5 ostatnich skladek
     table.stack
       - Db::Membership::Fee.includes(:user).order(created_at: :desc).includes(:payment).where(payments: { state: 'prepaid'}).limit(5).each do |payment|
         tr
@@ -30,7 +32,8 @@
 
 .row
   .large-8.columns
-    h3 5 ostatnich przejść
+    = link_to activities_mountain_routes_path do
+      h3 5 ostatnich przejść
     table.stack
       - Db::Activities::MountainRoute.includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
         tr
@@ -42,7 +45,8 @@
             = route.name
 
   .large-4.columns
-    h3 5 ostatnich zgłoszeń
+    = link_to admin_profiles_path do
+      h3 5 ostatnich zgłoszeń
     table.stack
       - Db::Profile.where(accepted: false).order('created_at DESC NULLS LAST').limit(5).each do |profile|
         tr
