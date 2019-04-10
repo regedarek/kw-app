@@ -36,6 +36,8 @@
                 - unless current_user.roles.include?('office')
                   li= link_to 'Baza klubowiczów', admin_profiles_path
                   li= link_to 'Baza składek', admin_membership_fees_path
+                - if can? :read, Settlement::ContractRecord
+                  li= link_to 'Rozliczenia', admin_contracts_path
                 - unless current_user.roles.include?('reservations')
                   li= link_to t('.administration.reservations'), admin_reservations_path
                   li= link_to t('.administration.items'), admin_items_path
