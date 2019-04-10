@@ -75,7 +75,10 @@
             - if Db::User.exists?(id: payment.creator_id)
               = Db::User.find(payment.creator_id).display_name
           td
-            = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
+            - if payment.user
+              = "#{payment.user.try(:first_name)} #{payment.user.try(:last_name)}"
+            - else
+              = Db::Profile.find_by(kw_id: payment.kw_id)&.display_name
 
   .large-4.columns
     h3 wykazy do akceptacji
