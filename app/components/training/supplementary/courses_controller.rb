@@ -45,7 +45,7 @@ module Training
 
           result.failure do |errors|
             @course = Training::Supplementary::CourseRecord.new(course_params)
-            flash[:error] = errors.values.join(", ")
+            @errors = errors.values
             render :new
           end
         end

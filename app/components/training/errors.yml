@@ -3,14 +3,28 @@ pl:
   not_last_fee: 'nie została opłacona!'
   email_not_unique: 'Ten e-mail jest już zapisany!'
   closed_or_open: 'Zapisy zamknięte'
+  slug?: 'jest niepoprawny, użyj znaków a-z oraz -'
 
   errors:
     package_required: 'musi zostać wybrany!'
-    unique?: 'już istnieje'
     filled?: "musi być wypełnione"
+    rules:
+      name:
+        filled?: 'Nazwa wydarzenia nie może być puste'
+      place:
+        filled?: 'Miejsce wydarzenia nie może być puste'
+      payment_type:
+        filled?: 'Konto płatności musi zostać wybrane'
+      organizator_id:
+        filled?: 'Koordynator musi zostać wskazany'
+      slug:
+        unique?: 'Adres strony już istnieje'
+        slug?: 'Adres strony jest niepoprawny, użyj znaków a-z oraz -'
+        filled?: 'Adres strony wydarzenia nie może być puste'
 en:
   errors:
     unique?: 'already exists'
+    slug?: 'Adres wydarzenia jest niepoprawny'
     or: "or"
     array?: "must be an array"
     empty?: "must be empty"

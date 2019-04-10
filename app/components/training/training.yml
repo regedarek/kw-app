@@ -37,10 +37,10 @@ pl:
             tour: Wycieczka
             training: Szkolenie
           categories:
-            kw: Ogólne
-            sww: Wspinaczkowe
-            snw: Narciarskie
-            stj: Jaskiniowe
+            kw: Klubowa
+            sww: Wspinaczkowa
+            snw: Narciarskia
+            stj: Jaskiniowa
       courses:
         index:
           header: Szkolenia, spotkania i wyjazdy
@@ -97,6 +97,7 @@ pl:
           open: Nie wymagaj zapisów
           packages: Pakiety?
           start_date: Kiedy?
+          slug: Adres strony
           price: Wymagaj zaliczki?
           one_day: Tylko jeden dzień?
           end_date: Do kiedy

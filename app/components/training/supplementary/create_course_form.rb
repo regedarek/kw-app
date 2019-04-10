@@ -6,17 +6,22 @@ module Training
         config.messages = :i18n
         config.messages_file = 'app/components/training/errors.yml'
         config.type_specs = true
+        config.namespace = :course
 
         def unique?(attr_name, value)
           record.class.where.not(id: record.id).where(attr_name => value).empty?
+        end
+
+        def slug?(value)
+          ! /\A[a-z0-9-]+\z/.match(value).nil?
         end
       end
 
       define! do
         required(:name).filled(:str?)
-        required(:slug).filled(unique?: :slug)
+        required(:slug).filled(:slug?, unique?: :slug)
         required(:place).filled(:str?)
-        required(:organizator_id).filled
+        required(:payment_type).filled
       end
     end
   end

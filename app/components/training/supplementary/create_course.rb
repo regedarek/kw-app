@@ -10,7 +10,7 @@ module Training
 
       def call(raw_inputs:)
         form_outputs = form.with(record: Training::Supplementary::CourseRecord.new).call(raw_inputs)
-        return Left(form_outputs.messages(full: true)) unless form_outputs.success?
+        return Left(form_outputs.messages) unless form_outputs.success?
 
         course = repository.create(form_outputs: form_outputs)
         course.update(packages: true) if course.package_types.any?

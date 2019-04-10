@@ -2,96 +2,120 @@
   .large-12.columns
     - if @errors
       .callout.alert
-        ul
+        ul.circle
           - @errors.each do |error|
-            li= error.last.to_sentence
+            li= error.to_sentence
 
 .row
   .large-12.columns
     .callout.primary
       .row
         .large-4.columns
-          = f.label :name, t('.team_name')
+          span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
+            = f.label :name, "Nazwa wydarzenia*"
           = f.text_field :name
 
         .large-3.columns
-          = f.label :place, t('.place')
+          span data-tooltip='' tabindex="1" title="Miejsce gdzie odbywa się wydarzenie" data-allow-html="true"
+            = f.label :place, 'Miejsce wydarzenia*'
           = f.text_field :place
 
         .large-3.columns
-          = f.label :slug
+          span data-tooltip='' tabindex="1" title="Adres strony wydarzenia, może zawierać tylko znaki a-z oraz -" data-allow-html="true"
+            = f.label :slug, 'Adres strony*'
           = f.text_field :slug
 
         .large-2.columns
-          = f.label :category, t('.category')
+          span data-tooltip='' tabindex="1" title="Pozwala filtrować po aktywnościach narciarskich, wspinaczkowych, jaskiniowych" data-allow-html="true"
+            = f.label :category, 'Typ aktywności'
           = f.select :category, @course.categories
       .row
         .large-3.columns
-          = f.label :payment_type, t('.payment_type')
-          = f.select :payment_type, @course.payment_types
+          span data-tooltip='' tabindex="1" title="Konto płatności na które zostaną przelane pieniądze za zapisy" data-allow-html="true"
+            = f.label :payment_type, 'Konto płatności*'
+          = f.select :payment_type, @course.payment_types, include_blank: true, selected: ''
 
         .large-2.columns
-          = f.label :expired_hours, t('.expired_hours')
-          = f.number_field :expired_hours
+          span data-tooltip='' tabindex="1" title="Ilość godzin po której, jeżeli zapis nie zostanie opłacony zostanie usunięty i automatycznie zwolni miejsce dla kolejnej osoby" data-allow-html="true"
+            = f.label :expired_hours, 'Godziny na płatność*'
+            = f.number_field :expired_hours, value: 24
 
         .large-2.columns
           = f.label :kind, t('.category')
           = f.select :kind, @course.kinds
 
         .large-3.columns
-          = f.label :organizator_id, t('.organizator_id')
+          span data-tooltip='' tabindex="1" title="Osoba do której będą przysyłane e-maile z pytaniami od uczestników" data-allow-html="true"
+            = f.label :organizator_id, 'Kto koordynuje?*'
           - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
           - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil
           = f.text_field :organizator_id, 'data-tokeninput' => { collection: names, options: { tokenLimit: 1, prePopulate: prepopulate}}.to_json
 
         .large-2.columns
-          = f.label :limit, t('.limit')
+          span data-tooltip='' tabindex="1" title="Limit osób którym zostanie przysłany link do płatności, osoby poza limitem, mogą się zapisać ale nie otrzymają linka do płatności. 0 oznacza brak limitu." data-allow-html="true"
+            = f.label :limit, 'Limit osób'
           = f.number_field :limit
 
 .row
   .large-8.columns
     .callout.secondary
       .row
-        .large-3.columns
-          = f.label :application_date, t('.application_date')
-          = f.datetime_field :application_date
-
-        .large-3.columns
-          = f.label :start_date, t('.start_date')
-          = f.datetime_field :start_date
-
-        .large-3.columns
-          .js-one-day-row
-            = f.label :end_date, t('.end_date')
-            = f.date_field :end_date
-
-        .large-3.columns
-          = f.label :packages, t('.packages')
-          = f.check_box :packages
+        .large-4.columns
+          = f.check_box :one_day, class: 'js-one-day'
+          span data-tooltip='' tabindex="1" title="Jeżeli wydarzenie trwa tylko jeden dzień ukrywa datę zakończenia" data-allow-html="true"
+            = f.label :one_day, t('.one_day')
+        .large-4.columns
+          = f.check_box :price, class: 'js-price'
+          span data-tooltip='' tabindex="1" title="Czy wymagane jest opłacenie zapisów? Wymaga podania kwoty, aktywuje wysyłkę płatności jeżeli nie jest zaznaczona opcja płatności gotówką" data-allow-html="true"
+            = f.label :price, t('.price')
+        .large-4.columns
+          = f.check_box :packages, class: 'js-packages'
+          span data-tooltip='' tabindex="1" title="Dodaje opcję kilku pakietów płatności za wydarzenie" data-allow-html="true"
+            = f.label :packages, t('.packages')
 
 .row
   .large-8.columns
     .callout.secondary
-      = f.nested_fields_for :package_types do |ff|
-        .row
-          .large-1.columns
-            br
-            = ff.remove_nested_fields_link
-          .large-9.columns
-            = ff.label :name, 'Nazwa'
-            = ff.text_field :name
-          .large-2.columns
-            = ff.label :name, 'Kwota'
-            = ff.number_field :cost
-      = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
+      .row
+        .large-4.columns
+          span data-tooltip='' tabindex="1" title="Data i godzina kiedy przycisk zapisz się stanie się aktywny" data-allow-html="true"
+            = f.label :application_date, t('.application_date')
+          = f.datetime_field :application_date
+
+        .large-4.columns
+          span data-tooltip='' tabindex="1" title="Kiedy startuje wydarzenie?" data-allow-html="true"
+            = f.label :start_date, t('.start_date')
+          = f.datetime_field :start_date
+
+        .large-4.columns
+          .js-one-day-row
+            span data-tooltip='' tabindex="1" title="Do kiedy trwa wydarzenie" data-allow-html="true"
+              = f.label :end_date, t('.end_date')
+            = f.date_field :end_date
+
+  .js-packages-row
+    .large-8.columns
+      .callout.warning
+        = f.nested_fields_for :package_types do |ff|
+          .row
+            .large-1.columns
+              br
+              = ff.remove_nested_fields_link
+            .large-9.columns
+              = ff.label :name, 'Nazwa'
+              = ff.text_field :name
+            .large-2.columns
+              = ff.label :name, 'Kwota'
+              = ff.number_field :cost
+        = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
   .js-price-row
-      .large-4.columns
-        .callout.warning
-          .row
-            .large-6.columns
-              = f.label :price_kw, t('.price_kw')
-              = f.number_field :price_kw
+    .large-4.columns
+      .callout.warning
+        .row
+          .large-6.columns
+            = f.label :price_kw, 'Kwota zapisów*'
+            = f.number_field :price_kw
 
 .row
   .large-8.columns
@@ -110,14 +134,9 @@
       = f.check_box :cash
       = f.label :cash, t('.cash')
       br
-      = f.check_box :price, class: 'js-price'
-      = f.label :price, t('.price')
-      br
       = f.check_box :last_fee_paid
       = f.label :last_fee_paid, t('.last_fee_paid')
-      br
-      = f.check_box :one_day, class: 'js-one-day'
-      = f.label :one_day, t('.one_day')
+
       br
       = f.check_box :open
       = f.label :open, t('.open')
