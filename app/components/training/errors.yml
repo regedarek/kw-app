@@ -19,6 +19,7 @@ pl:
         filled?: 'Koordynator musi zostać wskazany'
       slug:
         unique?: 'Adres strony już istnieje'
+        max_size?: 'Adres strony musi mieć mniej niż 31 znaków'
         slug?: 'Adres strony jest niepoprawny, użyj znaków a-z oraz -'
         filled?: 'Adres strony wydarzenia nie może być puste'
 en:

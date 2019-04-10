@@ -19,7 +19,7 @@ module Training
 
       define! do
         required(:name).filled(:str?)
-        required(:slug).filled(:slug?, unique?: :slug)
+        required(:slug).filled(:slug?, unique?:(:slug), max_size?: 31)
         required(:place).filled(:str?)
         required(:payment_type).filled
       end
