@@ -1,5 +1,5 @@
 module Messaging
-  class CommentRecord < ApplicationRecord
+  class CommentRecord < ActiveRecord::Base
     self.table_name = 'comments'
 
     belongs_to :commentable, polymorphic: true
