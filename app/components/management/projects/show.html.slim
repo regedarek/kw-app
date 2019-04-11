@@ -1,0 +1,37 @@
+.row
+  .large-12.columns
+    h3 = @project.name
+
+- if @project.coordinator_id
+  .row
+    .large-12.columns
+      h5 Koordynuje: #{::Db::User.find(@project.coordinator_id).display_name}
+
+.row
+  .large-12.columns
+    h5 Kto mógłby pomóc?
+    .callout
+      | Osoba znająca podstawy ...
+
+.row
+  .large-12.columns
+    h5 Przewidywany czas
+    .callout
+      | Projekt mógłby być zrealizowany w ciągu 20-40 h
+
+.row
+  .large-12.columns
+    h5 Benefity dla koordynatora
+    .callout
+      | Zwrot kosztów.
+
+.row
+  .large-12.columns
+    h5 Opis projektu
+    .callout
+      = sanitize @project.description
+
+.row
+  .large-12.columns
+    = link_to 'powrót do pozostałych projektów', projects_path, class: 'button primary'
+    = link_to 'Zgłoś się do pomocy!', projects_path, class: 'button warning'

@@ -8,13 +8,16 @@
 
 .row
   .large-12.columns
-    .callout.primary
-      .row
-        .large-4.columns
-          span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
-            = f.label :name, "Nazwa projektu*"
-          = f.text_field :name
+    span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
+      = f.label :name, "Nazwa projektu*"
+    = f.text_field :name
 
-        .large-8.columns
+    span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
+      = f.label :coordinator_id, "Koordynator projektu*"
+    = f.select :coordinator_id, Db::User.all.map{|u| [u.display_name, u.id]}
+
+    .callout
+      .row
+        .large-12.columns
           = f.label :description, 'Opis projektu*'
-          = f.text_area :description
+          = f.trix_editor :description, style: 'min-height: 150px'

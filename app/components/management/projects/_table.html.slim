@@ -10,8 +10,15 @@ table.stack
     tr
       th.text-center Nazwa projektu
       th.text-center Koordynator
+      th.text-center Status projektu
   tbody
     - @projects.each do |project|
       tr
-        td.text-center = project.name
-        td.text-center = project.coordinator_id
+        td.text-center = link_to project.name, project_path(project)
+        td.text-center
+          - if Db::User.exists?(project.coordinator_id)
+            = Db::User.find_by(id: project.coordinator_id).display_name
+          - else
+            span.label.alert Koordynator poszukiwany
+        td.text-center
+          span.label.warning przygotowany
