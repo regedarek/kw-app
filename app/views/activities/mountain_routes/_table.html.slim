@@ -43,8 +43,7 @@ table.stack
               i.fi-star
         - if user_signed_in?
           td.text-center.large-text-left
-            span data-tooltip='' tabindex="1" title="#{route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence}" data-allow-html="true"
-              = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
+            = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
         td.text-center
           - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each_with_index do |image, index|
             div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
