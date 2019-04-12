@@ -67,8 +67,7 @@
         li.show-for-medium= link_to 'Przejścia', '/przejscia', class: 'button success'
         li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
         - if user_signed_in?
-          - if !current_user.admin? || !current_user.roles.include?('office')
-            li.show-for-medium= link_to 'Twoje składki', membership_fees_path, class: 'button warning'
+          li.show-for-medium= link_to 'Twoje składki', membership_fees_path, class: 'button warning'
         li.show-for-medium
           - if user_signed_in?
             = link_to 'Konto', edit_user_registration_path

@@ -33,7 +33,7 @@
 
         .row
           .medium-12.columns
-            = f.label :users_names, 'Osoby zainteresowane'
+            = f.label :users_names, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
             - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
             - users = @contract.users.map{|u| { id: u.id, name: u.display_name } }
             = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
@@ -50,6 +50,14 @@
               .callout
                 = @contract.users.map(&:display_name).to_sentence
 
+      b Status: 
+      - if @contract.new?
+        span.label.secondary nowe rozliczenie
+      - if @contract.accepted?
+        span.label.success zaakceptowano
+      - if @contract.closed?
+        span.label.primary rozliczono
+      br
       b Zaakceptował: 
       = @contract.acceptor&.display_name
       br
@@ -82,6 +90,8 @@
 
       - if can? :update, @contract
         = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      - if can? :accept, @contract
+      - if @contract.new? && can?(:accept, @contract)
         = link_to 'Zaakceptuj', accept_admin_contract_path(@contract.id), method: :put, class: 'button success'
+      - if @contract.accepted? && can?(:prepayment, @contract)
+        = link_to 'Rozliczono', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button warning'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'

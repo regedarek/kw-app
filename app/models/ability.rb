@@ -59,6 +59,7 @@ class Ability
 
   def office_king
     can :manage, Settlement::ContractRecord
+    can :prepayment, Settlement::ContractRecord
   end
 
   def admin

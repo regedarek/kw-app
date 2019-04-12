@@ -62,6 +62,18 @@ module Settlement
         )
       end
 
+      def prepayment
+        authorize! :prepayment, Settlement::ContractRecord
+
+        contract = Settlement::ContractRecord.find(params[:id])
+        contract.prepayment!
+
+        redirect_back(
+          fallback_location: admin_contracts_path,
+          notice: 'Rozliczono!'
+        )
+      end
+
       private
 
       def create_record

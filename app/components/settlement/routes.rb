@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :contracts do
         member do
           put :accept
+          put :prepayment
         end
       end
     end
