@@ -65,10 +65,11 @@
 
       - if @contract.attachments.any?
         - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-          = link_to attachment.url, download: attachment.file.identifier do
+          = link_to attachment.url, download: File.basename(attachment.file.path) do
             = image_tag('file.jpg', class: 'thumbnail')
             |  
             = attachment.file.identifier
+            = File.basename(attachment.file.path)
         br
         - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
           - unless photo.blank? || photo.thumb.blank?
