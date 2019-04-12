@@ -2,7 +2,7 @@ module Settlement
   class ContractRecord < ActiveRecord::Base
     include Workflow
 
-    mount_uploaders :attachments, AttachmentUploader
+    mount_uploaders :attachments, Settlement::AttachmentUploader
     serialize :attachments, JSON
 
     self.table_name = 'contracts'
