@@ -1,21 +1,20 @@
 .columns
   .row
     .large-12.columns
-      - cache do
-        .callout.warning
-          .row
-            .large-3.columns
-              b Ostatnia legitymacja: 
-              = link_to @latest_profile.kw_id, admin_profile_path(@latest_profile)
-            .large-2.columns
-            .large-2.columns
-            .large-2.columns
-              b Znaleziono: 
-              = @q.result.count
-            .large-3.columns
-              = link_to 'Exportuj bazę', admin_profiles_path(params.permit!.merge(format: "xlsx"))
-              |  |  
-              = link_to 'Dodaj klubowicza', new_admin_profile_path
+      .callout.warning
+        .row
+          .large-3.columns
+            b Ostatnia legitymacja: 
+            = link_to @latest_profile.kw_id, admin_profile_path(@latest_profile)
+          .large-2.columns
+          .large-2.columns
+          .large-2.columns
+            b Znaleziono: 
+            = @q.result.count
+          .large-3.columns
+            = link_to 'Exportuj bazę', admin_profiles_path(params.permit!.merge(format: "xlsx"))
+            |  |  
+            = link_to 'Dodaj klubowicza', new_admin_profile_path
   .row
     .large-12.columns
       .callout
