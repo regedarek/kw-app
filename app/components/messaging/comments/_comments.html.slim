@@ -9,6 +9,6 @@
           = image_tag('default-avatar.png', size: '50x50')
         .comment-section-name
           h5 = link_to 'Darek Finster', 'test'
-          p March 12, 2017 at 1:28pm
+          p = I18n.l(comment.created_at, :format => :short)
       .comment-section-text
         = sanitize comment.body
