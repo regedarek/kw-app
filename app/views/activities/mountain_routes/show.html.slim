@@ -86,13 +86,15 @@
 .row
   .large-12.columns
     hr
-.row
-  .large-6.columns
-    - if user_signed_in?
+
+- if user_signed_in?
+  .row
+    .large-6.columns
       = render 'messaging/comments/comments', commentable: @route
-  .large-6.columns
-    .callout
-      = render 'messaging/comments/form', commentable: @route
+    .large-6.columns
+      .callout
+        = render 'messaging/comments/form', commentable: @route
+
 .row
   .large-12.columns
       = link_to 'powrót do listy przejść', activities_mountain_routes_path, class: 'button warning'
