@@ -20,59 +20,13 @@
       = @route.climbing_date
 
 .row
-  - if @route.difficulty.present?
-    .large-12.columns
-      b wycena: 
-      = @route.difficulty
-
-.row
-  - if @route.length.present?
-    .large-12.columns
-      b długość drogi w metrach: 
-      = @route.length
-
-.row
-  - if user_signed_in?
-    .large-12.columns
-      b skład zespołu: 
-      - if @route.partners.present? && @route.colleagues.any?
-        = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
-      - elsif @route.colleagues.any?
-        = @route.colleagues.map(&:display_name).to_sentence
-      - else
-        = @route.partners
-
-.row
-  - if @route.rating.present?
-    .large-12.columns
-      b subiektywna ocena: 
-      - @route.rating.times do
-        i.fi-star
-
-.row
-  .large-12.columns
-    b
-    div id="route_#{@route.id}"
-      = render  "training/activities/hearts/button", route: @route
-
-.row
-  - if @route.attachments.any?
-    .large-12.columns
-      - @route.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-        = link_to attachment.url, download: File.basename(attachment.file.path) do
-          = image_tag('file.jpg', class: 'thumbnail')
-          |  
-          = File.basename(attachment.file.path)
-
-      br
-      - @route.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-        - unless photo.blank? || photo.thumb.blank?
-          = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
-
-          div id="photo-#{i}" class="reveal" data-reveal="" 
-            = image_tag photo.url
-            button.close-button aria-label=("Close reveal") data-close="" type="button" 
-              span aria-hidden="true"  &times;
+  - if @route.route_type == 'ski'
+    = render 'ski_route', ski_route: @route
+  - else
+    - if @route.peak.present?
+      .large-12.columns
+        b szczyt, przełęcz, ściana: 
+        = @route.peak
 
 .row
   .large-12.columns

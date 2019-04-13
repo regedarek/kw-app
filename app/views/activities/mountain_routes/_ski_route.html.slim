@@ -41,7 +41,7 @@
     = render  "training/activities/hearts/button", route: @route
 
 .large-12.columns
-  hr
+  br
   = link_to 'powrót do przejść narciarskich', activities_mountain_routes_path(route_type: 'ski'), class: 'button warning'
   = link_to 'zobacz tabelę narciarskich dzików', dziki_path, class: 'button alert'
   - if can? :edit, @route
