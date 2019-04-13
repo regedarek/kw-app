@@ -1,5 +1,6 @@
 module Admin
   class ProfilesController < Admin::BaseController
+    append_view_path 'app/components'
     respond_to :html, :xlsx
 
     def index

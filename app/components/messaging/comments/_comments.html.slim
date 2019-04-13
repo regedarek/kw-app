@@ -1,0 +1,14 @@
+.comment-section-container
+  h5 Komentarze
+  - commentable.comments.each do |comment|
+    .callout
+      .comment-section-author
+        - if current_user.avatar.present?
+          = image_tag(current_user.avatar.url, size: '50x50')
+        - else
+          = image_tag('default-avatar.png', size: '50x50')
+        .comment-section-name
+          h5 = link_to 'Darek Finster', 'test'
+          p March 12, 2017 at 1:28pm
+      .comment-section-text
+        = sanitize comment.body

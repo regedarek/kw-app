@@ -12,6 +12,7 @@ module Settlement
 
     has_many :contract_users, class_name: 'Settlement::ContractUsersRecord', foreign_key: :contract_id
     has_many :users, through: :contract_users, foreign_key: :user_id, dependent: :destroy
+    has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
     workflow_column :state
     workflow do

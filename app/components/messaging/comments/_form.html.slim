@@ -1,0 +1,9 @@
+= form_for Messaging::CommentRecord.new, as: :comment, url: comments_path do |f|
+  = f.hidden_field :commentable_type, value: commentable.class
+  = f.hidden_field :commentable_id, value: commentable.id
+  .row
+    .large-12.columns
+      = f.trix_editor :body, style: 'min-height: 150px'
+  .row
+    .large-12.columns
+      = f.submit "Dodaj komentarz", class: 'button expanded large'

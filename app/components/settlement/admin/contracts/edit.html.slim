@@ -95,3 +95,13 @@
       - if @contract.accepted? && can?(:prepayment, @contract)
         = link_to 'Rozliczono', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button warning'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+.row
+  .large-12.columns
+    hr
+.row
+  .large-6.columns
+    - if user_signed_in?
+      = render 'messaging/comments/comments', commentable: @contract
+  .large-6.columns
+    .callout
+      = render 'messaging/comments/form', commentable: @contract

@@ -198,3 +198,14 @@
         = link_to 'edytuj profil', edit_admin_profile_path(@profile.id, original_referrer: session[:original_referrer]), class: 'button alert'
         = link_to 'PDF', profile_path(@profile.id, format: :pdf), class: 'button warning'
         = link_to 'powrót', session[:original_referrer] || admin_profiles_path, class: 'button secondary'
+
+.row
+  .large-12.columns
+    hr
+.row
+  .large-6.columns
+    - if user_signed_in?
+      = render 'messaging/comments/comments', commentable: @profile
+  .large-6.columns
+    .callout
+      = render 'messaging/comments/form', commentable: @profile

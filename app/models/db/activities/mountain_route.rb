@@ -14,6 +14,7 @@ module Db
       has_many :users, through: :hearts
       has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
       has_many :colleagues, through: :route_colleagues
+      has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
       validates :name, :rating, :climbing_date, presence: true
 
