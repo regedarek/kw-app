@@ -9,7 +9,7 @@
           = image_tag('default-avatar.png', size: '50x50')
         .comment-section-name
           - if current_user.profile
-            h5 = link_to current_user.display_name, profile_path(current_user.profile.id)
+            h5 = link_to current_user.display_name, user_path(current_user.kw_id)
           - else
             h5 = current_user.display_name
           p = I18n.l(comment.created_at, :format => :short)
