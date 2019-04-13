@@ -3,7 +3,7 @@
     .large-12.columns
       .card-profile-stats
         .card-profile-stats-intro
-          - if @user.avatar.present?
+          - if @user && @user.avatar.present?
             = image_tag(@user.avatar.url, class: 'card-profile-stats-intro-pic')
           - else
             = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
