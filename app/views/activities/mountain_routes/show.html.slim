@@ -20,15 +20,6 @@
       = @route.climbing_date
 
 .row
-  - if @route.route_type == 'ski'
-    = render 'ski_route', ski_route: @route
-  - else
-    - if @route.peak.present?
-      .large-12.columns
-        b szczyt, przełęcz, ściana: 
-        = @route.peak
-
-.row
   - if @route.difficulty.present?
     .large-12.columns
       b wycena: 
@@ -94,7 +85,3 @@
     .large-6.columns
       .callout
         = render 'messaging/comments/form', commentable: @route
-
-.row
-  .large-12.columns
-      = link_to 'powrót do listy przejść', activities_mountain_routes_path, class: 'button warning'
