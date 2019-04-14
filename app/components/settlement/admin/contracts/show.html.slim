@@ -63,14 +63,14 @@
                   button.close-button aria-label=("Close reveal") data-close="" type="button" 
                     span aria-hidden="true"  &times;
 
-      .row
-        .large-12.columns
-          - if @contract.new? && can?(:accept, @contract)
-            = link_to 'Zaakceptuj', accept_admin_contract_path(@contract.id), method: :put, class: 'button success'
-          - if @contract.accepted? && can?(:prepayment, @contract)
-            = link_to 'Rozlicz', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button alert'
-          = link_to 'edytuj rozliczenie', edit_admin_contract_path(@contract.id), class: 'button warning'
-          = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+    .row
+      .large-12.columns
+        - if @contract.new? && can?(:accept, @contract)
+          = link_to 'Zaakceptuj', accept_admin_contract_path(@contract.id), method: :put, class: 'button success'
+        - if @contract.accepted? && can?(:prepayment, @contract)
+          = link_to 'Rozlicz', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button alert'
+        = link_to 'edytuj rozliczenie', edit_admin_contract_path(@contract.id), class: 'button warning'
+        = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 
   .large-6.columns
     - if user_signed_in?
