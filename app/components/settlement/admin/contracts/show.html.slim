@@ -18,11 +18,13 @@
           span.label.success zaakceptowano
         - if @contract.closed?
           span.label.primary rozliczono
-    br
-    .row
-      .large-12.columns
-        .callout
-          = sanitize @contract.description
+
+    - if @contract.description
+      br
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @contract.description
 
     .row
       .large-12.columns
