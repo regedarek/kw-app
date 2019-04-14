@@ -30,6 +30,12 @@ module Settlement
         end
       end
 
+      def show
+        @contract = Settlement::ContractRecord.find(params[:id])
+
+        authorize! :read, @contract
+      end
+
       def edit
         @contract = Settlement::ContractRecord.find(params[:id])
         authorize! :read, @contract
@@ -40,11 +46,12 @@ module Settlement
         authorize! :update, @contract
 
         either(update_record) do |result|
-          result.success { |contract| redirect_to edit_admin_contract_path(contract.id) }
+          result.success do |contract|
+            redirect_to edit_admin_contract_path(contract.id), notice: 'Zaktualizowano'
+          end
 
           result.failure do |errors|
-            flash[:error] = errors.values.join(", ")
-            render :new
+            render :edit
           end
         end
       end

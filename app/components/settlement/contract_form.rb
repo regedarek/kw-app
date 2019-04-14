@@ -9,9 +9,9 @@
       define! do
         required(:title).filled
         required(:cost).filled
-        required(:users_names).maybe
-        optional(:description).maybe
-        optional(:attachments).maybe
+        required(:users_names)
+        optional(:description)
+        optional(:attachments)
       end
     end
   end

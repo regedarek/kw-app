@@ -1,0 +1,83 @@
+.row
+  .large-12.columns
+    h3 = @contract.title
+
+.row
+  .large-6.columns
+    .row
+      .large-6.columns
+        b Kwota rozliczenia: 
+        = @contract.cost
+        |  zł
+
+      .large-6.columns.text-right
+        b Status: 
+        - if @contract.new?
+          span.label.secondary nowe rozliczenie
+        - if @contract.accepted?
+          span.label.success zaakceptowano
+        - if @contract.closed?
+          span.label.primary rozliczono
+    br
+    .row
+      .large-12.columns
+        .callout
+          = sanitize @contract.description
+
+    .row
+      .large-12.columns
+        b Kto utworzył rozliczenie: 
+        = @contract.creator&.display_name
+
+    .row
+      .large-12.columns
+        b Kiedy utworzono: 
+        = @contract.created_at.strftime("%d-%m-%Y %H:%M")
+
+    - if @contract.users.any?
+      .row
+        .large-12.columns
+          b Osoby zainteresowane rozliczeniem
+          ul
+            - @contract.users.each do |user|
+              li = user.display_name
+
+    - if @contract.attachments.any?
+      .row
+        .large-12.columns
+          b Załączniki: 
+          ul.no-bullet
+            - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+              li
+                = link_to attachment.url, download: File.basename(attachment.file.path) do
+                  = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                  |  
+                  = File.basename(attachment.file.path)
+            - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+              - unless photo.blank? || photo.thumb.blank?
+                li
+                  = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+                div id="photo-#{i}" class="reveal" data-reveal="" 
+                  = image_tag photo.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
+
+      .row
+        .large-12.columns
+          - if @contract.new? && can?(:accept, @contract)
+            = link_to 'Zaakceptuj', accept_admin_contract_path(@contract.id), method: :put, class: 'button success'
+          - if @contract.accepted? && can?(:prepayment, @contract)
+            = link_to 'Rozlicz', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button alert'
+          = link_to 'edytuj rozliczenie', edit_admin_contract_path(@contract.id), class: 'button warning'
+          = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+
+  .large-6.columns
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          = render 'messaging/comments/comments', commentable: @contract
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @contract
+

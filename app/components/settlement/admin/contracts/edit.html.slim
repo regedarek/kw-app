@@ -50,59 +50,27 @@
               .callout
                 = @contract.users.map(&:display_name).to_sentence
 
-      b Status: 
-      - if @contract.new?
-        span.label.secondary nowe rozliczenie
-      - if @contract.accepted?
-        span.label.success zaakceptowano
-      - if @contract.closed?
-        span.label.primary rozliczono
-      br
-      b Zaakceptował: 
-      = @contract.acceptor&.display_name
-      br
-      b Otworzył: 
-      = @contract.creator&.display_name
-      br
-      b Kiedy utworzono: 
-      = @contract.created_at.strftime("%d-%m-%Y %H:%M")
-      br
-
       b= f.label :attachments, "Pliki"
       = f.file_field :attachments, multiple: true
 
       - if @contract.attachments.any?
-        - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-          = link_to attachment.url, download: File.basename(attachment.file.path) do
-            = image_tag('file.jpg', class: 'thumbnail')
-            |  
-            = File.basename(attachment.file.path)
-        br
-        - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-          - unless photo.blank? || photo.thumb.blank?
-            = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+        ul.no-bullet
+          - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            li
+              = link_to attachment.url, download: File.basename(attachment.file.path) do
+                = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                |  
+                = File.basename(attachment.file.path)
+          - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+            - unless photo.blank? || photo.thumb.blank?
+              li
+                = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }, size: '50x50'
 
-            div id="photo-#{i}" class="reveal" data-reveal="" 
-              = image_tag photo.url
-              button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                span aria-hidden="true"  &times;
-      br
+                div id="photo-#{i}" class="reveal" data-reveal="" 
+                  = image_tag photo.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
 
       - if can? :update, @contract
         = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      - if @contract.new? && can?(:accept, @contract)
-        = link_to 'Zaakceptuj', accept_admin_contract_path(@contract.id), method: :put, class: 'button success'
-      - if @contract.accepted? && can?(:prepayment, @contract)
-        = link_to 'Rozliczono', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button warning'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
-.row
-  .large-12.columns
-    hr
-
-- if user_signed_in?
-  .row
-    .large-6.columns
-      = render 'messaging/comments/comments', commentable: @contract
-    .large-6.columns
-      .callout
-        = render 'messaging/comments/form', commentable: @contract
