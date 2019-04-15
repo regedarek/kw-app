@@ -4,7 +4,7 @@
     .callout
       .comment-section-author
         - if comment.user.avatar.present?
-          = image_tag(current_user.avatar.url, size: '50x50')
+          = image_tag(comment.user.avatar.url, size: '50x50')
         - else
           = image_tag('default-avatar.png', size: '50x50')
         .comment-section-name
