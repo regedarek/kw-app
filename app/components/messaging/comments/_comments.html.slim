@@ -3,15 +3,15 @@
   - commentable.comments.each do |comment|
     .callout
       .comment-section-author
-        - if current_user.avatar.present?
+        - if comment.user.avatar.present?
           = image_tag(current_user.avatar.url, size: '50x50')
         - else
           = image_tag('default-avatar.png', size: '50x50')
         .comment-section-name
-          - if current_user.profile
-            h5 = link_to current_user.display_name, user_path(current_user.kw_id)
+          - if comment.user
+            h5 = link_to comment.user.display_name, user_path(comment.user.kw_id)
           - else
-            h5 = current_user.display_name
+            h5 = comment.user.display_name
           p = I18n.l(comment.created_at, :format => :short)
       .comment-section-text
         = sanitize comment.body
