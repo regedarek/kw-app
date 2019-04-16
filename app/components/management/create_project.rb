@@ -7,8 +7,8 @@
       end
 
       def call(raw_inputs:)
-        form_outputs = form.with(record: Management::ProjectRecord.new).call(raw_inputs)
-        return Left(form_outputs.messages) unless form_outputs.success?
+        form_outputs = form.call(raw_inputs.to_unsafe_h)
+        return Left(form_outputs.messages.values) unless form_outputs.success?
 
         course = Management::ProjectRecord.create(form_outputs.to_h)
 

@@ -30,6 +30,9 @@ class Db::User < ActiveRecord::Base
   has_many :contract_users, class_name: 'Settlement::ContractUsersRecord', foreign_key: :user_id
   has_many :contracts, through: :contract_users, foreign_key: :contract_id, dependent: :destroy
 
+  has_many :project_users, class_name: 'Management::ProjectUsersRecord', foreign_key: :user_id
+  has_many :projects, through: :project_users, foreign_key: :project_id, dependent: :destroy
+
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts
 
@@ -38,7 +41,6 @@ class Db::User < ActiveRecord::Base
   has_many :mountain_routes,
     through: :route_colleagues,
     class_name: 'Db::Activities::MountainRoute'
-
 
   ransacker :full_name do |parent|
     Arel::Nodes::NamedFunction.new('CONCAT_WS', [

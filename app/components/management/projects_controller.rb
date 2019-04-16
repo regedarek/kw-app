@@ -4,7 +4,7 @@ module Management
     append_view_path 'app/components'
 
     def index
-      @projects = Management::ProjectRecord.all
+      @projects = Management::ProjectRecord.order(created_at: :desc)
     end
 
     def new
@@ -19,7 +19,7 @@ module Management
 
         result.failure do |errors|
           @project = Management::ProjectRecord.new(project_params)
-          @errors = errors.values
+          @errors = errors.map(&:to_sentence)
           render :new
         end
       end
@@ -33,14 +33,14 @@ module Management
 
     def create_record
       Management::CreateProject.new(
-        Management::ProjectForm.new
+        Management::ProjectForm
       ).call(raw_inputs: project_params)
     end
 
     def project_params
       params
         .require(:project)
-        .permit(:name, :description, :coordinator_id)
+        .permit(:name, :description, users_names: [], attachments: [])
     end
   end
 end

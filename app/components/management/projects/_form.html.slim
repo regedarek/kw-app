@@ -1,21 +1,17 @@
 .row
   .large-12.columns
-    - if @errors
-      .callout.alert
-        ul.circle
-          - @errors.each do |error|
-            li= error.to_sentence
-
-.row
-  .large-12.columns
-    span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
+    span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
       = f.label :name, "Nazwa projektu*"
     = f.text_field :name
 
-    span data-tooltip='' tabindex="1" title="Nazwa wydarzenia widoczna w tabeli wydarzeń" data-allow-html="true" class='has-tip'
-      = f.label :coordinator_id, "Koordynator projektu*"
-    = f.select :coordinator_id, Db::User.all.map{|u| [u.display_name, u.id]}
+.row
+  .large-12.columns
+    = f.label :users_names, 'Koordynatorzy'
+    - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
+    = f.text_field :users_names, 'data-tokeninput': { collection: names }.to_json
 
+.row
+  .large-12.columns
     .callout
       .row
         .large-12.columns

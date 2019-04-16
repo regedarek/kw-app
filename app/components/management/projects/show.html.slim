@@ -31,6 +31,14 @@
     .callout
       = sanitize @project.description
 
+- if @project.users.any?
+  .row
+    .large-12.columns
+      b Osoby koordynujące projekt
+      ul
+        - @project.users.each do |user|
+          li = user.display_name
+
 .row
   .large-12.columns
     = link_to 'powrót do pozostałych projektów', projects_path, class: 'button primary'

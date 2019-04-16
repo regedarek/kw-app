@@ -1,15 +1,14 @@
-module Management
-  class ProjectForm < Dry::Validation::Schema
-    configure do
-      option :record
-      config.messages = :i18n
-      config.messages_file = 'app/components/training/errors.yml'
-      config.type_specs = true
-      config.namespace = :project
-    end
+require 'i18n'
+require 'dry-validation'
 
-    define! do
-      required(:name).filled(:str?)
-    end
+module Management
+  ProjectForm = Dry::Validation.Params do
+    configure { config.messages_file = 'app/components/management/errors.yml' }
+    configure { config.messages = :i18n }
+
+    required(:name).filled(:str?)
+    required(:description).maybe(:str?)
+    optional(:attachments).maybe
+    optional(:users_names).maybe
   end
 end

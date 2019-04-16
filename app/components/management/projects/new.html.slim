@@ -1,3 +1,11 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error
+
 = form_for @project, as: :project, url: projects_path do |f|
   = render 'form', f: f
 

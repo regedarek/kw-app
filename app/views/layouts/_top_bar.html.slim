@@ -7,8 +7,6 @@
   #top-bar.top-bar
     .top-bar-left
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
-        li= link_to 'Dla Mariusza!', mariusz_path, class: 'button warning hollow'
-
         - if request.path == '/narciarskie-dziki'
           li= link_to 'Regulamin programu', dziki_rules_path, class: 'button alert hollow'
         - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/przejscia'
