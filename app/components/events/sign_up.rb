@@ -20,8 +20,8 @@ module Events
     attribute :participant_name_2, Types::String.optional
     attribute :participant_email_1, Types::String.optional
     attribute :participant_email_2, Types::String.optional
-    attribute :participant_birth_year_1, Types::Form::Integer.optional
-    attribute :participant_birth_year_2, Types::Form::Integer.optional
+    attribute :participant_birth_year_1, Types::Integer.optional
+    attribute :participant_birth_year_2, Types::Integer.optional
     attribute :participant_city_1, Types::String.optional
     attribute :participant_city_2, Types::String.optional
     attribute :participant_team_1, Types::String.optional
@@ -33,8 +33,8 @@ module Events
     attribute :competition_package_type_1_id, Types::Integer.optional
     attribute :competition_package_type_2_id, Types::Integer.optional
     attribute :remarks, Types::String.optional
-    attribute :terms_of_service, Types::Form::Bool.default(false)
-    attribute :single, Types::Form::Bool
+    attribute :terms_of_service, Types::Bool.default(false)
+    attribute :single, Types::Bool
 
     def gender_1
       if participant_gender_1 == 1
