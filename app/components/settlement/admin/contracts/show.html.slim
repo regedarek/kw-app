@@ -31,6 +31,12 @@
         b Kto utworzył rozliczenie: 
         = @contract.creator&.display_name
 
+    - if @contract.acceptor
+      .row
+        .large-12.columns
+          b Kto zaakceptowal rozliczenie: 
+          = @contract.acceptor&.display_name
+
     .row
       .large-12.columns
         b Kiedy utworzono: 
