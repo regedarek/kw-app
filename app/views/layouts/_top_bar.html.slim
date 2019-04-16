@@ -11,6 +11,9 @@
           li= link_to 'Regulamin programu', dziki_rules_path, class: 'button alert hollow'
         - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/przejscia'
           li= link_to 'Tabela programu', dziki_path, class: 'button alert hollow'
+        - if request.path == '/przejscia'
+          - if current_user.roles.include?('mountain_routes')
+            li= link_to 'XLSX', activities_mountain_routes_path(format: :xlsx), class: 'button hollow'
         - if user_signed_in?
           - if current_user.roles.include?('office')
             li= link_to 'Baza klubowiczów', admin_profiles_path, class: 'button warning'

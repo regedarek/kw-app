@@ -36,7 +36,7 @@ module Activities
       respond_to do |format|
         format.html
         format.xlsx do
-          disposition = "attachment; filename='przejscia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx'"
+          disposition = "attachment; filename=przejscia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
           response.headers['Content-Disposition'] = disposition
         end
       end
