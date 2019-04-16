@@ -7,7 +7,7 @@ module Settlement
     configure { config.messages = :i18n }
 
     required(:title).filled(:str?)
-    required(:cost).filled(:int?)
+    required(:cost).filled(:float?)
     required(:description).maybe(:str?)
     optional(:attachments).maybe
     required(:users_names).each(:int?)
