@@ -16,15 +16,17 @@ module Activities
       end
 
       @q = if params[:boars]
-             Db::Activities::MountainRoute.includes(:colleagues).where(hidden: false).order(climbing_date: :desc)
+             Db::Activities::MountainRoute.includes(:colleagues).where(hidden: false)
            else
-             Db::Activities::MountainRoute.includes(:colleagues).where(hidden: false, training: false).order(climbing_date: :desc)
+             Db::Activities::MountainRoute.includes(:colleagues).where(hidden: false, training: false)
            end
       @q = @q.climbing if params[:route_type] == 'climbing'
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
       @q = @q.boars if params[:boars] == 'true'
       @q = @q.ransack(params[:q])
-      @routes = @q.result(distinct: true).page(params[:page]).per(10)
+      routes = @q.result(distinct: true)
+      ordered_routes = routes.sort_by {|route| route.climbing_date.to_date}.reverse!
+      @routes = Kaminari.paginate_array(ordered_routes).page(params[:page]).per(10)
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
