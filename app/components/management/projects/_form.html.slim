@@ -15,5 +15,45 @@
     .callout
       .row
         .large-12.columns
-          = f.label :description, 'Opis projektu*'
+          = f.label :description, 'Opis projektu'
           = f.trix_editor :description, style: 'min-height: 150px'
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :needed_knowledge, 'Kto mógłby pomóc?'
+          = f.trix_editor :needed_knowledge, style: 'min-height: 150px'
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :benefits, 'Benefity dla koordynatora'
+          = f.trix_editor :benefits, style: 'min-height: 150px'
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :estimated_time, 'Przewidywany czas na prowadzenie projektu'
+          = f.trix_editor :estimated_time, style: 'min-height: 150px'
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :know_how, 'Know-how'
+          = f.trix_editor :know_how, style: 'min-height: 150px'
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          b= f.label :attachments, "Pliki"
+          = f.file_field :attachments, multiple: true

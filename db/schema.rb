@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_181632) do
+ActiveRecord::Schema.define(version: 2019_04_16_191352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -328,6 +328,11 @@ ActiveRecord::Schema.define(version: 2019_04_16_181632) do
     t.integer "coordinator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "needed_knowledge"
+    t.text "benefits"
+    t.text "estimated_time"
+    t.string "attachments"
+    t.text "know_how"
   end
 
   create_table "reservation_items", id: :serial, force: :cascade do |t|

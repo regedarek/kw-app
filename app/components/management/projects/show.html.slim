@@ -7,29 +7,40 @@
     .large-12.columns
       h5 Koordynuje: #{::Db::User.find(@project.coordinator_id).display_name}
 
-.row
-  .large-12.columns
-    h5 Kto mógłby pomóc?
-    .callout
-      | Osoba znająca podstawy ...
+- if @project.needed_knowledge
+  .row
+    .large-12.columns
+      h5 Kto mógłby pomóc?
+      .callout
+        = sanitize @project.needed_knowledge
 
-.row
-  .large-12.columns
-    h5 Przewidywany czas
-    .callout
-      | Projekt mógłby być zrealizowany w ciągu 20-40 h
+- if @project.estimated_time
+  .row
+    .large-12.columns
+      h5 Przewidywany czas
+      .callout
+        = sanitize @project.estimated_time
 
-.row
-  .large-12.columns
-    h5 Benefity dla koordynatora
-    .callout
-      | Zwrot kosztów.
+- if @project.benefits
+  .row
+    .large-12.columns
+      h5 Benefity dla koordynatora
+      .callout
+        = sanitize @project.benefits
 
-.row
-  .large-12.columns
-    h5 Opis projektu
-    .callout
-      = sanitize @project.description
+- if @project.description
+  .row
+    .large-12.columns
+      h5 Opis projektu
+      .callout
+        = sanitize @project.description
+
+- if @project.know_how
+  .row
+    .large-12.columns
+      h5 Know-how
+      .callout
+        = sanitize @project.know_how
 
 - if @project.users.any?
   .row

@@ -40,7 +40,7 @@ module Management
     def project_params
       params
         .require(:project)
-        .permit(:name, :description, users_names: [], attachments: [])
+        .permit(:name, :description, :know_how, :estimated_time, :benefits, :needed_knowledge, users_names: [], attachments: [])
     end
   end
 end
