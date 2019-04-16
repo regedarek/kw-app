@@ -13,10 +13,10 @@ module Training
       attribute :name, Types::Strict::String
       attribute :climbing_date, Types::Strict::Date
       attribute :hidden, Types::Strict::Bool
-      attribute :rating,  Types::Strict::Int
+      attribute :rating,  Types::Strict::Integer
       attribute :colleagues_names, Types::Coercible::Array
       attribute :partners, Types::Strict::String.optional
-      attribute :length, Types::Strict::Int.optional
+      attribute :length, Types::Strict::Integer.optional
       attribute :description, Types::Strict::String
       attribute :attachments, Types::Coercible::Array
 

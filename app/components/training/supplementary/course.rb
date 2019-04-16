@@ -9,7 +9,7 @@ module Training
     class Course < Dry::Struct
       constructor_type :strict
 
-      attribute :id, Types::Strict::Int.optional
+      attribute :id, Types::Strict::Integer.optional
       attribute :slug, Types::Strict::String
       attribute :category, Types::Strict::String
       attribute :kind, Types::Strict::String
@@ -17,12 +17,12 @@ module Training
       attribute :place, Types::Strict::String.optional
       attribute :start_date, Types::Strict::DateTime.optional
       attribute :end_date, Types::Strict::Date.optional
-      attribute :expired_hours, Types::Strict::Int
+      attribute :expired_hours, Types::Strict::Integer
       attribute :baner, Types::Any
       attribute :baner_type, Types::Any
       attribute :application_date, Types::Strict::DateTime.optional
-      attribute :price_kw, Types::Strict::Int.optional
-      attribute :price_non_kw, Types::Strict::Int.optional
+      attribute :price_kw, Types::Strict::Integer.optional
+      attribute :price_non_kw, Types::Strict::Integer.optional
       attribute :remarks, Types::Strict::String.optional
       attribute :organizator_id, Types::Any.optional
       attribute :price, Types::Strict::Bool
@@ -33,7 +33,7 @@ module Training
       attribute :last_fee_paid, Types::Strict::Bool
       attribute :active, Types::Strict::Bool
       attribute :one_day, Types::Strict::Bool
-      attribute :limit, Types::Strict::Int
+      attribute :limit, Types::Strict::Integer
 
       def sign_ups
         Training::Supplementary::SignUpRecord.where(course_id: id)
