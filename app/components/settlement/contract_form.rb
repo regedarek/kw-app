@@ -9,7 +9,7 @@ module Settlement
     required(:title).filled(:str?)
     required(:cost).filled(:int?)
     required(:description).maybe(:str?)
-    required(:attachments).maybe
+    optional(:attachments).maybe
     required(:users_names).each(:int?)
   end
 end
