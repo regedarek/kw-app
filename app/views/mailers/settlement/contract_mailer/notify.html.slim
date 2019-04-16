@@ -5,12 +5,15 @@ b Kwota:
 = @contract.cost
 | zł
 br
-b Dodatkowe informacje
-br
-= @contract.description.html_safe
-br
+- if @contract.description
+  b Dodatkowe informacje
+  br
+  = @contract.description.html_safe
+  br
 = link_to 'Szczegóły rozliczenia', edit_admin_contract_url(@contract.id)
 br
 br
 | --------------------------
+br
+br
 | Otrzymałeś ten e-mail aby zaakceptować rozliczenie lub po prostu otrzymać informację, że jest ono w tracie procesu rozliczenia.
