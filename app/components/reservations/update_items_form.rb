@@ -1,5 +1,5 @@
 module Reservations
-  class UpdateItemsForm < Dry::Validation::Schema::Form
+  class UpdateItemsForm < Dry::Validation::Schema
     configure do
       config.messages = :i18n
       config.messages_file = 'app/components/training/errors.yml'

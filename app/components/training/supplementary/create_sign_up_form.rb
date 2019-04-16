@@ -1,6 +1,6 @@
 module Training
   module Supplementary
-    class CreateSignUpForm < Dry::Validation::Schema::Form
+    class CreateSignUpForm < Dry::Validation::Schema
       configure do
         config.messages = :i18n
         config.messages_file = 'app/components/training/errors.yml'

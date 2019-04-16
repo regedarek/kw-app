@@ -3,7 +3,7 @@ require 'dry-validation'
 module Events
   module Admin
     module Competitions
-      class CreateForm < Dry::Validation::Schema::Form
+      class CreateForm < Dry::Validation::Schema
         define! do
           required(:name).filled(:str?)
           required(:email_text).filled(:str?)

@@ -86,14 +86,14 @@ module Settlement
       def create_record
         Settlement::CreateContract.new(
           Settlement::Repository.new,
-          Settlement::ContractForm.new
+          Settlement::ContractForm
         ).call(raw_inputs: contract_params, creator_id: current_user.id)
       end
 
       def update_record
         Settlement::UpdateContract.new(
           Settlement::Repository.new,
-          Settlement::ContractForm.new
+          Settlement::ContractForm
         ).call(id: params[:id], raw_inputs: contract_params)
       end
 

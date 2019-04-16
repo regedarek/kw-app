@@ -1,17 +1,15 @@
-  module Settlement
-    class ContractForm < Dry::Validation::Schema::Form
-      configure do
-        config.messages = :i18n
-        config.messages_file = 'app/components/settlement/errors.yml'
-        config.type_specs = true
-      end
+require 'i18n'
+require 'dry-validation'
 
-      define! do
-        required(:title).filled
-        required(:cost).filled
-        required(:users_names)
-        optional(:description)
-        optional(:attachments)
-      end
-    end
+module Settlement
+  ContractForm = Dry::Validation.Params do
+    configure { config.messages_file = 'app/components/settlement/errors.yml' }
+    configure { config.messages = :i18n }
+
+    required(:title).filled(:str?)
+    required(:cost).filled(:int?)
+    required(:description).maybe(:str?)
+    required(:attachments).maybe
+    required(:users_names).each(:int?)
   end
+end

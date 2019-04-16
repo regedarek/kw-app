@@ -1,6 +1,6 @@
 module Training
   module Supplementary
-    class CreateCourseForm < Dry::Validation::Schema::Form
+    class CreateCourseForm < Dry::Validation::Schema
       configure do
         option :record
         config.messages = :i18n

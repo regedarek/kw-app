@@ -1,5 +1,5 @@
 module Management
-  class ProjectForm < Dry::Validation::Schema::Form
+  class ProjectForm < Dry::Validation::Schema
     configure do
       option :record
       config.messages = :i18n
