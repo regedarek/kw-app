@@ -7,7 +7,7 @@ module Management
     configure { config.messages = :i18n }
 
     required(:name).filled(:str?)
-    required(:state).filled(:str?)
+    optional(:state).maybe
     optional(:description).maybe(:str?)
     optional(:needed_knowledge).maybe(:str?)
     optional(:benefits).maybe(:str?)
