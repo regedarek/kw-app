@@ -10,7 +10,7 @@
         form_outputs = form.call(raw_inputs.to_unsafe_h)
         return Left(form_outputs.messages.values) unless form_outputs.success?
 
-        course = Management::ProjectRecord.create(form_outputs.to_h)
+        Management::ProjectRecord.create(form_outputs.to_h)
 
         Right(:success)
       end

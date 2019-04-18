@@ -1,0 +1,42 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error
+
+= form_for @project, as: :project, url: project_path(@project.id) do |f|
+  .row
+    .large-12.columns
+      b= f.label :state, "Status"
+      = f.select :state,
+        Management::ProjectRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }
+  = render 'form', f: f
+
+  - if @project.attachments.any?
+    .row
+      .large-12.columns
+        b Załączniki: 
+        ul.no-bullet
+          - @project.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            li
+              = link_to attachment.url, download: File.basename(attachment.file.path) do
+                = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                |  
+                = File.basename(attachment.file.path)
+          - @project.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+            - unless photo.blank? || photo.thumb.blank?
+              li
+                = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+              div id="photo-#{i}" class="reveal" data-reveal="" 
+                = image_tag photo.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+
+  .row
+    .large-6.columns
+      = f.submit 'Zaktualizuj', class: 'button expanded large success'
+    .large-6.columns
+      = link_to t('.back'), projects_path, class: 'secondary button large expanded'

@@ -49,6 +49,7 @@ class Ability
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
+    can :manage, Management::ProjectRecord
   end
 
   def events

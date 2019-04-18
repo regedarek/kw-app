@@ -1,18 +1,13 @@
-.row
-  .large-6.columns
-    h3 Projekty, pomysły, zadania
-
-  .large-2.columns
-      = link_to 'Dodaj projekt', new_project_path, class: 'button expanded medium'
-
 table.stack
   thead
     tr
       th.text-center Nazwa projektu
       th.text-center Koordynatorzy
       th.text-center Status projektu
+      - if can? :manage, Management::ProjectRecord
+        th
   tbody
-    - @projects.each do |project|
+    - projects.each do |project|
       tr
         td.text-center = link_to project.name, project_path(project)
         td.text-center
@@ -21,4 +16,11 @@ table.stack
           - else
             span.label.alert Koordynatorzy poszukiwani
         td.text-center
-          span.label.warning przygotowany
+          span.label = I18n.t project.state
+        - if can? :manage, project
+          td.text-center
+            - if can? :manage, project
+              = link_to edit_project_path(project) do
+                i.fi-page-edit
+              = link_to project_path(project), method: :delete, data: { confirm: 'Napewno?' } do
+                i.fi-trash

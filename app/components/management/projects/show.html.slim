@@ -1,6 +1,11 @@
 .row
-  .large-12.columns
+  .large-8.columns
     h3 = @project.name
+
+  .large-4.columns.text-right
+    br
+    | Status: 
+    span.label = I18n.t(@project.state)
 
 - if @project.coordinator_id
   .row
@@ -50,7 +55,29 @@
         - @project.users.each do |user|
           li = user.display_name
 
+- if @project.attachments.any?
+  .row
+    .large-12.columns
+      b Załączniki: 
+      ul.no-bullet
+        - @project.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+          li
+            = link_to attachment.url, download: File.basename(attachment.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+              |  
+              = File.basename(attachment.file.path)
+        - @project.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+          - unless photo.blank? || photo.thumb.blank?
+            li
+              = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+            div id="photo-#{i}" class="reveal" data-reveal="" 
+              = image_tag photo.url
+              button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                span aria-hidden="true"  &times;
+
 .row
   .large-12.columns
     = link_to 'powrót do pozostałych projektów', projects_path, class: 'button primary'
+    = link_to 'edytuj', edit_project_path(@project), class: 'button alert'
     = link_to 'Zgłoś się do pomocy!', projects_path, class: 'button warning'

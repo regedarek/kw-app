@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_191352) do
+ActiveRecord::Schema.define(version: 2019_04_18_115538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(version: 2019_04_16_191352) do
     t.text "estimated_time"
     t.string "attachments"
     t.text "know_how"
+    t.string "state", default: "draft"
   end
 
   create_table "reservation_items", id: :serial, force: :cascade do |t|

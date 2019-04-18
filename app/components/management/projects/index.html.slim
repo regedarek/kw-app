@@ -1,3 +1,16 @@
 .row
+  .large-6.columns
+    h3 Projekty, pomysły, inicjatywy
+
+  .large-2.columns
+      = link_to 'Dodaj projekt', new_project_path, class: 'button expanded medium'
+
+.row
   .large-12.columns
-    = render 'table', courses: @projects
+    h5 Koordynatorzy poszukiwani
+    = render 'table', projects: @projects.where(state: 'unassigned')
+
+.row
+  .large-12.columns
+    h5 W trakcie
+    = render 'table', projects: @projects.where(state: 'in_progress')

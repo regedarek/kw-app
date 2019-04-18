@@ -7,6 +7,10 @@ pl:
   'false': Nie
   archived: zarchiwizowane
   reserved: zarazerwowane
+  draft: w przygotowaniu
+  unassigned: nie przypisany
+  in_progress: w trakcie
+  suspended: zawieszony
   holding: w posiadaniu
   ski: Narciarstwo Wysokogórskie
   regular_climbing: Wspinaczka
