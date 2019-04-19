@@ -9,7 +9,7 @@ table.stack
       th width='25%' skład zespołu
       th.text-center width='7%' bicków
   tbody
-    - routes.find_each do |route|
+    - routes.each do |route|
       tr
         td.text-center = image_tag "#{route.category}.png", size: '40x40'
         td.text-center.large-text-left = route.name
