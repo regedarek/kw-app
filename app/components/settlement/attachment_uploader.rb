@@ -2,7 +2,7 @@ module Settlement
   class AttachmentUploader < CarrierWave::Uploader::Base
     include CarrierWave::MiniMagick
 
-    if Rails.env.production? || Rails.env.staging?
+    if Rails.env.staging?
       storage :fog
     else
       storage :file
