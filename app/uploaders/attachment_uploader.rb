@@ -7,7 +7,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     storage :file
   end
 
-  version :thumb, :if => :image? do
+  version :thumb do
     process resize_to_fill: [180, 180]
   end
 
