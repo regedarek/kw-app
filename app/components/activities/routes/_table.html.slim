@@ -18,11 +18,5 @@ table.stack
         td.text-center.large-text-left = route.rating
         td.text-center.large-text-left = route.partners
         td.text-center
-          - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each_with_index do |image, index|
-            div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
-              button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                span aria-hidden="true"  &times;
-            = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image-#{index}" }
         td.text-center
           div id="route_#{route.id}"
-            = render  "training/activities/hearts/button", route: route
