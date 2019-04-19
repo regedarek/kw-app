@@ -9,4 +9,4 @@
 .row
   .large-12.columns
     .text-center
-      = paginate @mountain_routes
+      = paginate @mountain_routes, total_pages: (@mountain_routes.count / 20).ceil

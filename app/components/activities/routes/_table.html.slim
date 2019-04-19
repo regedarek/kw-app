@@ -24,3 +24,4 @@ table.stack
             = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image-#{index}" }
         td.text-center
           div id="route_#{route.id}"
+            = render  "training/activities/hearts/button", route: route
