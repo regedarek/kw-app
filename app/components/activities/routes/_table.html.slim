@@ -18,13 +18,13 @@ table.stack
         td.text-center.large-text-left = route.rating
         td.text-center.large-text-left = route.partners
         td.text-center
-          - if route.attachments
-            - att = route.attachments.first
-            - if att.content_type.start_with?('image')
-              div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
+          - if route.attachments.any?
+            - image = route.attachments.first
+            - if MimeMagic.by_path(image.file.path).image?
+              div id="route-#{route.id}-image" class='reveal' data-close-on-click="true" data-reveal=""
                 button.close-button aria-label=("Close reveal") data-close="" type="button" 
                   span aria-hidden="true"  &times;
-              = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image-#{index}" }
+              = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image" }
         td.text-center
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route
