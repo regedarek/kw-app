@@ -1,6 +1,6 @@
 require "fog/openstack"
 
-if Rails.env.staging? || Rails.env.production?
+if Rails.env.staging?
   CarrierWave.configure do |config|
     config.fog_provider = 'fog/openstack'
     config.fog_credentials = {
