@@ -4,7 +4,7 @@ module Activities
     append_view_path 'app/components'
 
     def index
-      @mountain_routes = MountainRouteRecord.order(:climbing_date).limit(10)
+      @mountain_routes = MountainRouteRecord.order(climbing_date: :desc).limit(10)
     end
   end
 end
