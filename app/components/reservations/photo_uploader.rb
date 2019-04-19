@@ -2,7 +2,7 @@ module Reservations
   class PhotoUploader < CarrierWave::Uploader::Base
     include CarrierWave::MiniMagick
 
-    if Rails.env.staging?
+    if Rails.env.production? || Rails.env.staging?
       storage :fog
     else
       storage :file
