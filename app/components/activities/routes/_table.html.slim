@@ -1,0 +1,27 @@
+table.stack
+  thead
+    tr
+      th width='5%'
+      th width='8%' kiedy?
+      th width='20%' nazwa przejścia
+      th width='15%' wycena
+      th width='10%' ocena
+      th width='25%' skład zespołu
+      th.text-center width='7%' bicków
+  tbody
+    - routes.each do |route|
+      tr
+        td.text-center = image_tag "#{route.category}.png", size: '40x40'
+        td.text-center.large-text-left = route.climbing_date
+        td.text-center.large-text-left = route.difficulty
+        td.text-center.large-text-left = route.rating
+        td.text-center.large-text-left = route.partners
+        td.text-center
+          - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each_with_index do |image, index|
+            div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
+              button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                span aria-hidden="true"  &times;
+            = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image-#{index}" }
+        td.text-center
+          div id="route_#{route.id}"
+            = render  "training/activities/hearts/button", route: route

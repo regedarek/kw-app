@@ -10,10 +10,10 @@ module Db
       scope :boars, -> { ski.merge(where(route_type: :ski, training: [false, true])) }
 
       belongs_to :user
-      has_many :hearts, dependent: :destroy
-      has_many :users, through: :hearts
+      has_many :hearts
+      has_many :users, through: :hearts, dependent: :destroy
       has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
-      has_many :colleagues, through: :route_colleagues
+      has_many :colleagues, through: :route_colleagues, dependent: :destroy
       has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
       validates :name, :rating, :climbing_date, presence: true
