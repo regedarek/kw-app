@@ -22,7 +22,7 @@ table.stack
             div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
               button.close-button aria-label=("Close reveal") data-close="" type="button" 
                 span aria-hidden="true"  &times;
-            = image_tag image.thumb.url, class: 'dashboard-table-image image-modal'
+            = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image-#{index}" }
         td.text-center
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route
