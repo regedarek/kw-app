@@ -3,11 +3,9 @@ $(document).foundation();
 $('.js-photo-reveal').on('open.zf.reveal', function() {
   var img_url = $(this).data('img-src');
   var index = $(this).data('index');
-  setTimeout(function() {
-    $.ajax('/photos').
-      done(function(content) {
-        $('#reveal' + index).html(content + "<img src='" +img_url + "'>");
-       $('#reveal' + index).trigger('resizeme.zf.reveal');
-      });
-  }, 500);
+  $.ajax('/photos').
+    done(function(content) {
+      $('#reveal' + index).html(content + "<img src='" +img_url + "'>");
+      $('#reveal' + index).trigger('resizeme.zf.reveal');
+    });
 })
