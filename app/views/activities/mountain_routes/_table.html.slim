@@ -45,7 +45,7 @@ table.stack
           td.text-center.large-text-left
             = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
         td.text-center
-          - route.attachments.take(2).select{|p| p.content_type.start_with?('image') }.each_with_index do |image, index|
+          - route.attachments.take(2).each_with_index do |image, index|
             div id="route-#{route.id}-image-#{index}" class='reveal' data-close-on-click="true" data-reveal=""
               button.close-button aria-label=("Close reveal") data-close="" type="button" 
                 span aria-hidden="true"  &times;
