@@ -20,7 +20,10 @@ table.stack
         td.text-center
           - if route.attachments.any?
             - image = route.attachments.first
-            = image_tag image.thumb.url
+            div id="route-#{route.id}-image" class='reveal' data-close-on-click="true" data-reveal=""
+              button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                span aria-hidden="true"  &times;
+            = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'reveal-id': "route-#{route.id}-image" }
         td.text-center
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route
