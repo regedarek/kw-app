@@ -7,6 +7,8 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     storage :file
   end
 
+  process :auto_orient
+
   version :thumb do
     process resize_to_fill: [180, 180]
   end
@@ -16,6 +18,12 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   protected
+
+  def auto_orient
+    manipulate! do |image|
+      image.tap(&:auto_orient)
+    end
+  end
 
   def image?(new_file)
     new_file.content_type.instance_of?(String) && new_file.content_type.start_with?('image')
