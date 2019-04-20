@@ -16,7 +16,7 @@
               = image_tag "sww.png",
                 size: '55x55',
                 class: (params[:route_type] == 'climbing' ? '' : 'opacity')
-            = link_to params.merge({route_type: :ski, boars: true}).to_unsafe_h do
+            = link_to params.merge({boars: true}).to_unsafe_h do
               = image_tag "dzik.jpg",
                 size: '55x55',
                 class: (params[:boars] == 'true' ? '' : 'opacity')
@@ -34,7 +34,7 @@
               = image_tag "sww.png",
                 size: '55x55',
                 class: (params[:route_type] == 'climbing' ? '' : 'opacity')
-            = link_to params.merge({route_type: :ski, boars: true}).to_unsafe_h do
+            = link_to params.merge({boars: true}).to_unsafe_h do
               = image_tag "dzik.jpg",
                 size: '55x55',
                 class: (params[:boars] == 'true' ? '' : 'opacity')
@@ -52,6 +52,12 @@
   .row
     .large-12.columns
       - if params[:boars]
+        - if params[:boars] && params[:route_type] == 'climbing'
+          .row
+            .large-6.columns
+              = link_to 'Tabela górskich dzików', gorskie_dziki_path, class: 'button warning large expanded'
+            .large-6.columns
+              = link_to 'Regulamin górskich dzików', gorskie_dziki_regulamin_path, class: 'button alert large expanded'
         = render 'boars_table', routes: @routes
       - else
         = render 'table', routes: @routes
@@ -59,6 +65,6 @@
       .text-center
         = paginate @routes
 
-      - if params[:boars]
+      - if params[:boars] && params[:route_type] == 'ski'
         = render 'training/activities/ski_routes/leaderboard'
         = render 'training/activities/ski_routes/table', routes: @season_leaders

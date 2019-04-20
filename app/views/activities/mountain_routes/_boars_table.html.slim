@@ -6,26 +6,26 @@ table.stack
         th width='10%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
         - if user_signed_in?
-          th width='25%' = sort_link(@q, :partners, 'skład zespołu')
+          th width='23%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
         th width='10%' = sort_link(@q, :created_at, 'dodano?')
         th width='10%' = sort_link(@q, :length, 'przewyższenie')
         th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
         - if user_signed_in?
-          th width='3%'
+          th width='5%'
     - else
       tr
         th width='5%'
         th width='10%' kiedy?
         th width='20%' nazwa przejścia
         - if user_signed_in?
-          th width='25%' skład zespołu
+          th width='23%' skład zespołu
         th width='12%'
         th width='10%' dodano?
         th width='10%' przewyższenie
         th.text-center width='7%' bicki
         - if user_signed_in?
-          th width='3%'
+          th width='5%'
 
   tbody
     - routes.each do |route|
