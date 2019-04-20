@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/charity/routes.rb")
   load Rails.root.join("app/components/photo_competition/routes.rb")
   load Rails.root.join("app/components/settlement/routes.rb")
+  resources :photos, only: :index
 
   namespace :activities, path: '/' do
     resources :mountain_routes, path: 'przejscia' do

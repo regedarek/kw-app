@@ -1,0 +1,4 @@
+- photos.take(take).each_with_index do |photo, index|
+  = image_tag photo.thumb.url, class: 'dashboard-table-image', data: { open: "reveal#{index}", 'img-src': photo.url, 'reveal-id': "photo-#{index}-image" }
+  div id="reveal#{index}" class='js-photo-reveal reveal' data-reveal="" data-img-src="#{photo.url}" data-index="#{index}"
+    h3 Ładuję...
