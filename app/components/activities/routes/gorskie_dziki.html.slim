@@ -35,7 +35,7 @@
                     td.text-center = user.sum
 
         .large-4.columns
-          h5 = "sezon #{Training::Activities::Repository.new.start_date.year}/#{Training::Activities::Repository.new.end_date.year}"
+          h5 = "sezon #{Activities::Repository.new.start_date.year}"
           table.stack
             thead
               tr
@@ -91,7 +91,7 @@
 
 .row
   .large-12.columns
-    h5 = "Tabela sezonu #{Training::Activities::Repository.new.start_date.year}/#{Training::Activities::Repository.new.end_date.year}"
+    h5 = "Tabela sezonu #{Activities::Repository.new.start_date.year}}"
     table.stack
       thead
         tr

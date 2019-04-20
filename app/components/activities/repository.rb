@@ -70,7 +70,7 @@ module Activities
     end
 
     def start_date
-      start_date = DateTime.new(2018, 05, 1)
+      start_date = DateTime.new(2019, 05, 1)
     end
 
     def end_date
