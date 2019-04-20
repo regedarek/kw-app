@@ -49,8 +49,8 @@ module Training
       end
 
       def fetch_spring
-        range_climbing_date = (start_date.next_year.beginning_of_year + 2.months).beginning_of_month..(start_date.next_year.beginning_of_year + 3.months).beginning_of_month
-        range_created_at = (start_date.next_year.beginning_of_year + 2.months).beginning_of_month..((start_date.next_year.beginning_of_year + 3.months).beginning_of_month + 2.days)
+        range_climbing_date = (start_date.next_year.beginning_of_year + 3.months).beginning_of_month..(start_date.next_year.beginning_of_year + 4.months).beginning_of_month
+        range_created_at = (start_date.next_year.beginning_of_year + 3.months).beginning_of_month..((start_date.next_year.beginning_of_year + 4.months).beginning_of_month + 2.days)
         ::Db::User
           .joins(:mountain_routes)
           .where.not(mountain_routes: { id: nil, length: nil })
