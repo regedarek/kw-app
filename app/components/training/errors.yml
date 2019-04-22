@@ -10,7 +10,11 @@ pl:
     filled?: "musi być wypełnione"
     rules:
       name:
-        filled?: 'Nazwa wydarzenia nie może być puste'
+        filled?: 'Nazwa przejścia musi być podana'
+      climbing_date:
+        filled?: 'Data przejścia musi być wypełniona'
+      rating:
+        filled?: 'Ocena przejścia musi zostać wybrana'
       place:
         filled?: 'Miejsce wydarzenia nie może być puste'
       payment_type:

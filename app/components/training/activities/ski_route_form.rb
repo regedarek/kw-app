@@ -4,7 +4,7 @@ module Training
       configure do
         config.messages = :i18n
         config.messages_file = 'app/components/training/errors.yml'
-        config.type_specs = true
+        config.namespace = :ski_route
       end
 
       define! do

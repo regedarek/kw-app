@@ -10,7 +10,7 @@ module Training
 
       def call(raw_inputs:, user_id:)
         form_outputs = form.call(raw_inputs)
-        return Left(form_outputs.messages(full: true)) unless form_outputs.success?
+        return Left(form_outputs.messages(locale: :pl)) unless form_outputs.success?
 
         repository.create(form_outputs: form_outputs, user_id: user_id)
         Right(:success)

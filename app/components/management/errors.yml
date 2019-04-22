@@ -2,9 +2,10 @@ pl:
   errors:
     package_required: 'musi zostać wybrany!'
     filled?: "musi być wypełnione"
-    rules:
-      name:
-        filled?: 'Nazwa projektu musi być wypełniona'
+    project:
+      rules:
+        name:
+          filled?: 'Nazwa projektu musi być wypełniona'
 
 en:
   errors:
