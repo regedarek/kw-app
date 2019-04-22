@@ -204,8 +204,9 @@
     hr
 
 - if user_signed_in?
-  h5 Komentarze, dodatkowe informacje
   .row
+    .large-12.columns
+      h5 Komentarze, dodatkowe informacje
     .large-6.columns
         = render 'messaging/comments/comments', commentable: @profile
     .large-6.columns
