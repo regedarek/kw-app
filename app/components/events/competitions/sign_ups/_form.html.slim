@@ -4,7 +4,7 @@
 - else
   h3 = @competition.name
 
-- if @competition.alert
+- if @competition.alert.present?
   .row
     .large-12.columns
       .callout.alert
