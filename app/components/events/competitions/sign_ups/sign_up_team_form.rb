@@ -16,7 +16,7 @@ module Events
         optional(:participant_kw_id_1).maybe(:int?)
         required(:participant_gender_1).filled(:int?)
         required(:participant_birth_year_1).filled(:int?, gt?: 1920, lt?: 2001)
-        required(:tshirt_size_1).filled
+        required(:tshirt_size_1).filled(:str?)
         optional(:participant_team_1).maybe(:str?)
         optional(:participant_city_1).maybe(:str?)
         validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
@@ -32,7 +32,7 @@ module Events
         optional(:participant_kw_id_2).maybe(:int?)
         required(:participant_gender_2).filled(:int?)
         required(:participant_birth_year_2).filled(:int?, gt?: 1920, lt?: 2001)
-        required(:tshirt_size_2).filled
+        required(:tshirt_size_2).filled(:str?)
         optional(:participant_team_2).maybe(:str?)
         optional(:participant_city_2).maybe(:str?)
         validate(active_kw_id_2: [:participant_kw_id_2, :competition_package_type_2_id]) do |kw_id, package_id|

@@ -89,7 +89,7 @@ module Events
           .permit(
             :name, :edition_sym, :rules, :baner, :single, :team_name, :event_date,
             :closed, :limit, :email_text, :matrimonial_office, :tshirt_url, :alert,
-            :organizer_email, package_types_attributes: [:id, :name, :cost, :_destroy]
+            :organizer_email, package_types_attributes: [:id, :membership, :name, :cost, :_destroy]
           )
       end
     end
