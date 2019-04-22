@@ -1,83 +1,95 @@
 .row
-  .large-8.columns
-    h3 = @project.name
+  .large-6.columns
+    .row
+      .large-8.columns
+        h3 = @project.name
 
-  .large-4.columns.text-right
-    br
-    | Status: 
-    span.label = I18n.t(@project.state)
+      .large-4.columns.text-right
+        br
+        | Status: 
+        span.label = I18n.t(@project.state)
 
-- if @project.coordinator_id
-  .row
-    .large-12.columns
-      h5 Koordynuje: #{::Db::User.find(@project.coordinator_id).display_name}
+    - if @project.coordinator_id
+      .row
+        .large-12.columns
+          h5 Koordynuje: #{::Db::User.find(@project.coordinator_id).display_name}
 
-- if @project.needed_knowledge
-  .row
-    .large-12.columns
-      h5 Kto mógłby pomóc?
-      .callout
-        = sanitize @project.needed_knowledge
+    - if @project.needed_knowledge
+      .row
+        .large-12.columns
+          h5 Kto mógłby pomóc?
+          .callout
+            = sanitize @project.needed_knowledge
 
-- if @project.estimated_time
-  .row
-    .large-12.columns
-      h5 Przewidywany czas
-      .callout
-        = sanitize @project.estimated_time
+    - if @project.estimated_time
+      .row
+        .large-12.columns
+          h5 Przewidywany czas
+          .callout
+            = sanitize @project.estimated_time
 
-- if @project.benefits
-  .row
-    .large-12.columns
-      h5 Benefity dla koordynatora
-      .callout
-        = sanitize @project.benefits
+    - if @project.benefits
+      .row
+        .large-12.columns
+          h5 Benefity dla koordynatora
+          .callout
+            = sanitize @project.benefits
 
-- if @project.description
-  .row
-    .large-12.columns
-      h5 Opis projektu
-      .callout
-        = sanitize @project.description
+    - if @project.description
+      .row
+        .large-12.columns
+          h5 Opis projektu
+          .callout
+            = sanitize @project.description
 
-- if @project.know_how
-  .row
-    .large-12.columns
-      h5 Know-how
-      .callout
-        = sanitize @project.know_how
+    - if @project.know_how
+      .row
+        .large-12.columns
+          h5 Know-how
+          .callout
+            = sanitize @project.know_how
 
-- if @project.users.any?
-  .row
-    .large-12.columns
-      b Osoby koordynujące projekt
-      ul
-        - @project.users.each do |user|
-          li = user.display_name
+    - if @project.users.any?
+      .row
+        .large-12.columns
+          b Osoby koordynujące projekt
+          ul
+            - @project.users.each do |user|
+              li = user.display_name
 
-- if @project.attachments.any?
-  .row
-    .large-12.columns
-      b Załączniki: 
-      ul.no-bullet
-        - @project.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-          li
-            = link_to attachment.url, download: File.basename(attachment.file.path) do
-              = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
-              |  
-              = File.basename(attachment.file.path)
-        - @project.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-          - unless photo.blank? || photo.thumb.blank?
-            li
-              = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+    - if @project.attachments.any?
+      .row
+        .large-12.columns
+          b Załączniki: 
+          ul.no-bullet
+            - @project.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+              li
+                = link_to attachment.url, download: File.basename(attachment.file.path) do
+                  = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                  |  
+                  = File.basename(attachment.file.path)
+            - @project.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+              - unless photo.blank? || photo.thumb.blank?
+                li
+                  = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
 
-            div id="photo-#{i}" class="reveal" data-reveal="" 
-              = image_tag photo.url
-              button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                span aria-hidden="true"  &times;
+                div id="photo-#{i}" class="reveal" data-reveal="" 
+                  = image_tag photo.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
 
-.row
-  .large-12.columns
-    = link_to 'powrót do pozostałych projektów', projects_path, class: 'button primary'
-    = link_to 'edytuj', edit_project_path(@project), class: 'button alert'
-    = link_to 'Zgłoś się do pomocy!', projects_path, class: 'button warning'
+    .row
+      .large-12.columns
+        = link_to 'powrót do pozostałych projektów', projects_path, class: 'button primary'
+        = link_to 'edytuj', edit_project_path(@project), class: 'button alert'
+  .large-6.columns
+    - if user_signed_in?
+      h5 Zgłoś się do projektu
+      .row
+        .large-12.columns
+          = render 'messaging/comments/comments', commentable: @project
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @project
+
+

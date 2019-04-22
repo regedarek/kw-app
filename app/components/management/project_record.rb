@@ -8,6 +8,7 @@ module Management
 
     has_many :project_users, class_name: 'Management::ProjectUsersRecord', foreign_key: :project_id
     has_many :users, through: :project_users, foreign_key: :user_id, dependent: :destroy
+    has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
     def coordinator
       ::Db::User.find(coordinator_id)
