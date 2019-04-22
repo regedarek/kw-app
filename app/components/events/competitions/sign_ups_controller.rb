@@ -83,7 +83,7 @@ module Events
         Events::Competitions::SignUps::Update.new(
           Events::Competitions::Repository.new,
           Events::Competitions::SignUps::CreateForm.new
-        ).call(sign_up_record_id: params[:id], raw_inputs: sign_up_params)
+        ).call(sign_up_record_id: params[:id], raw_inputs: params[:sign_up])
       end
 
       def slug_params
