@@ -23,8 +23,7 @@ module Events
           .to_h.tap { |hs| hs.delete(:terms_of_service) }.merge(competition_record_id: competition_id)
         record = Events::Db::SignUpRecord.create!(attributes)
         record.create_payment(dotpay_id: SecureRandom.hex(13))
-
-        Events::SignUp.from_record(record)
+        record
       end
 
       def update_sign_up(sign_up_record_id:, form_outputs:)
@@ -32,8 +31,7 @@ module Events
           .to_h.tap { |hs| hs.delete(:terms_of_service) }
         record = Events::Db::SignUpRecord.find(sign_up_record_id)
         record.update(attributes)
-
-        Events::SignUp.from_record(record)
+        record
       end
     end
   end

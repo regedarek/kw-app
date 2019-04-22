@@ -1,5 +1,8 @@
 en:
   errors:
+    rules:
+      team_name:
+        filled?: Team name has to be filled
     or: "or"
     array?: "must be an array"
     empty?: "must be empty"
@@ -116,7 +119,14 @@ pl:
       participant_email_1:
         filled?: E-mail 1 nie może być pusty
         format?: E-mail 1 jest nieprawidłowy
+      participant_kw_id_1:
+        filled?: Numer klubowy 1 musi zostać wypełniony
+        int?: Numer klubowy 1 musi być liczbą
+      participant_kw_id_2:
+        filled?: Numer klubowy 2 musi zostać wypełniony
+        int?: Numer klubowy 2 musi być liczbą
       participant_birth_year_1:
+        int?: Rok urodzenia 1 musi być liczbą w formacie RRRR
         filled?: Musisz podać rok urodzenia 1
         gt?: Rok urodzenia 1 nie może być wcześniej niż %{num} w formacie RRRR
         lt?: Rok urodzenia 1 nie może być później niż %{num} w formacie RRRR
@@ -127,7 +137,10 @@ pl:
       participant_email_2:
         filled?: E-mail 2 nie może być pusty
         format?: E-mail 2 jest nieprawidłowy
+      team_name:
+        filled?: Musisz podać nazwę zespołu
       participant_birth_year_2:
+        int?: Rok urodzenia 2 musi być liczbą w formacie RRRR
         filled?: Musisz podać rok urodzenia 2
         gt?: Rok urodzenia 2 nie może być wcześniej niż %{num}
         lt?: Rok urodzenia 2 nie może być później niż %{num}

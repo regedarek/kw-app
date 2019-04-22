@@ -74,7 +74,7 @@ module Events
          required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1).filled(:int?, gt?: 1920)
          required(:competition_package_type_1_id).filled
-         optional(:participant_kw_id_1).maybe(:int?, gt?: 1, lt?: 9000)
+         optional(:participant_kw_id_1).maybe
          required(:terms_of_service).value(:true?)
 
          validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|

@@ -7,8 +7,6 @@ end
 module Training
   module Activities
     class SkiRoute < Dry::Struct
-      constructor_type :strict
-
       attribute :route_type, Types::Strict::String.default('ski')
       attribute :name, Types::Strict::String
       attribute :climbing_date, Types::Strict::Date

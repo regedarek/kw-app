@@ -6,8 +6,6 @@ end
 
 module Events
   class Competition < Dry::Struct
-    constructor_type :strict
-
     attribute :id, Types::Strict::Integer
     attribute :name, Types::Strict::String
     attribute :team_name, Types::Strict::Bool

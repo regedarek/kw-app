@@ -14,7 +14,7 @@ module Events
 
       def new
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-        @sign_up = Events::SignUp.new
+        @sign_up = Events::Db::SignUpRecord.new
         redirect_to competition_sign_ups_path(params[:competition_id]),
           flash: { alert: t('.closed_or_limit_reached') } if @competition.closed_or_limit_reached?
       end
@@ -24,13 +24,13 @@ module Events
 
         either(create_record) do |result|
           result.success do
-            @sign_up = Events::SignUp.new(params_for_build)
+            @sign_up = Events::Db::SignUpRecord.new(sign_up_params)
             redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: t('.success') }
           end
 
           result.failure do |errors|
             @errors = errors
-            @sign_up = Events::SignUp.new(params_for_build)
+            @sign_up = Events::Db::SignUpRecord.new(sign_up_params)
             render(action: :new)
           end
         end
@@ -38,13 +38,13 @@ module Events
 
       def edit
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-        @sign_up = Events::SignUp.from_record(Events::Db::SignUpRecord.find(params[:id]))
+        @sign_up = Events::Db::SignUpRecord.find(params[:id])
         authorize! :update, Events::Db::SignUpRecord
       end
 
       def update
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-        @sign_up = Events::SignUp.from_record(Events::Db::SignUpRecord.find(params[:id]))
+        @sign_up = Events::Db::SignUpRecord.find(params[:id])
 
         authorize! :update, Events::Db::SignUpRecord
 
@@ -76,7 +76,7 @@ module Events
         Events::Competitions::SignUps::Create.new(
           Events::Competitions::Repository.new,
           Events::Competitions::SignUps::CreateForm.new
-        ).call(competition_id: params[:competition_id], raw_inputs: sign_up_params)
+        ).call(competition_id: params[:competition_id], raw_inputs: params[:sign_up])
       end
 
       def update_record
@@ -88,36 +88,6 @@ module Events
 
       def slug_params
         params.permit(:name)
-      end
-
-      def params_for_build
-        {
-          id: params[:id].to_i,
-          competition_id: params[:competition_id].to_i,
-          team_name: sign_up_params[:team_name],
-          participant_name_1: sign_up_params[:participant_name_1],
-          participant_name_2: sign_up_params[:participant_name_2],
-          participant_kw_id_1: sign_up_params[:participant_kw_id_1],
-          participant_kw_id_2: sign_up_params[:participant_kw_id_2],
-          participant_email_1: sign_up_params[:participant_email_1],
-          participant_email_2: sign_up_params[:participant_email_2],
-          participant_birth_year_1: params[:sign_up][:participant_birth_year_1],
-          participant_birth_year_2: params[:sign_up][:participant_birth_year_2],
-          participant_city_1: sign_up_params[:participant_city_1],
-          participant_city_2: sign_up_params[:participant_city_2],
-          participant_team_1: sign_up_params[:participant_team_1],
-          participant_team_2: sign_up_params[:participant_team_2],
-          tshirt_size_1: sign_up_params[:tshirt_size_1],
-          tshirt_size_2: sign_up_params[:tshirt_size_2],
-          participant_gender_1: sign_up_params[:participant_gender_1],
-          participant_gender_2: sign_up_params[:participant_gender_2],
-          competition_package_type_1_id: sign_up_params[:competition_package_type_1_id].to_i,
-          competition_package_type_2_id: sign_up_params[:competition_package_type_2_id].to_i,
-          remarks: sign_up_params[:remarks],
-          teammate_id: sign_up_params[:teammate_id],
-          terms_of_service: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:terms_of_service]),
-          single: ActiveRecord::Type::Boolean.new.deserialize(sign_up_params[:single])
-        }
       end
 
       def sign_up_params
@@ -147,7 +117,6 @@ module Events
             :tshirt_size_1,
             :tshirt_size_2,
             :remarks,
-            :terms_of_service,
             :single
           )
       end

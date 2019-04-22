@@ -7,8 +7,6 @@ end
 module Training
   module Supplementary
     class Course < Dry::Struct
-      constructor_type :strict
-
       attribute :id, Types::Strict::Integer.optional
       attribute :slug, Types::Strict::String
       attribute :category, Types::Strict::String

@@ -8,9 +8,11 @@ ENV app /usr/src/kw-app/
 RUN mkdir $app
 WORKDIR $app
 
-RUN bundle config --global github.https true
-
+ENV BUNDLER_VERSION 2.0.1
 ENV BUNDLE_PATH /kw-app-gems
+
+RUN gem install bundler
+RUN bundle config --global github.https true
 
 ADD . $app
 

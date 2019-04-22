@@ -17,6 +17,14 @@
 
 = form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: competition_sign_ups_path do |f|
   - if @competition.team_name
+    .row
+      .large-12.columns
+        - if @errors && @errors.select { |key, value| key.to_s.include?('team_name') }.any?
+          .callout.alert
+            ul
+              - @errors.select { |key, value| key.to_s.include?('team_name') }.each do |error|
+                li= error.last.to_sentence
+
     .callout.warning
       .row
         .large-12.columns
@@ -113,10 +121,11 @@
       .row
         .large-12.columns
           - if @errors && @errors.values.any?
-            .callout.alert
-              ul
-                - @errors.select { |key, value| key.to_s.include?('_2') }.each do |error|
-                  li= error.last.to_sentence
+            - if @errors.select { |key, value| key.to_s.include?('_2') }.any?
+              .callout.alert
+                ul
+                  - @errors.select { |key, value| key.to_s.include?('_2') }.each do |error|
+                    li= error.last.to_sentence
       .callout.secondary
         .row
           .large-4.columns
@@ -172,23 +181,23 @@
         = f.hidden_field :remarks, id: 'remarks_body'
         trix-editor input='remarks_body'
 
-
-  .row
-    .large-12.columns
-      - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.any?
-        .callout.alert
-          ul
-            - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.each do |error|
-              li= error.last.to_sentence
-
   .callout.warning
     .row
       .large-12.columns
         = f.check_box :terms_of_service
         = f.label :terms_of_service, t('.terms_of_service')
 
-    .row
-      .large-12.columns
+  .row
+    .large-12.columns
+      - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') && !key.to_s.include?('team_name') }.any?
+        .callout.alert
+          ul
+            - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') && !key.to_s.include?('team_name') }.each do |error|
+              li= error.last.to_sentence
+
+  .row
+    .large-12.columns
+      .callout
         small = sanitize @competition.rules
 
   = f.submit t('.submit'), class: 'button expanded large'

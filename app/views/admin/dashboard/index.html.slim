@@ -13,7 +13,7 @@
     = link_to admin_reservations_path do
       h3 5 ostatnich rezerwacji
     table.stack
-      - Db::Reservation.includes(:items, :user).last(5).each do |reservation|
+      - Db::Reservation.includes(:items, :user).not_archived.last(5).each do |reservation|
         tr
           td
             = "#{reservation.user.try(:first_name)} #{reservation.user.try(:last_name)}"

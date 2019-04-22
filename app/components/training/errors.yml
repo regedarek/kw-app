@@ -28,6 +28,9 @@ pl:
         filled?: 'Adres strony wydarzenia nie może być puste'
 en:
   errors:
+    rules:
+      team_name:
+        filled?: Team name has to be filled
     unique?: 'already exists'
     slug?: 'Adres wydarzenia jest niepoprawny'
     or: "or"

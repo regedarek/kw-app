@@ -9,6 +9,33 @@ module Events
         class_name: 'Db::Payment'
       belongs_to :competition_record,
         class_name: 'Events::Db::CompetitionRecord'
+      validates_acceptance_of :terms_of_service
+
+      def gender_1
+        if participant_gender_1 == 1
+          'Mężczyzna'
+        else
+          'Kobieta'
+        end
+      end
+
+      def gender_2
+        if participant_gender_2 == 1
+          'Mężczyzna'
+        else
+          'Kobieta'
+        end
+      end
+
+      def package_type_1_membership?
+        return false unless Events::Db::CompetitionPackageTypeRecord.exists?(competition_package_type_1_id)
+        Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_1_id).membership
+      end
+
+      def package_type_2_membership?
+        return false unless Events::Db::CompetitionPackageTypeRecord.exists?(competition_package_type_2_id)
+        Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_2_id).membership
+      end
 
       def package_type_1
         Events::Db::CompetitionPackageTypeRecord.find_by(id: competition_package_type_1_id)

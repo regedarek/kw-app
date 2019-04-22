@@ -8,30 +8,30 @@ end
 
 module Events
   class SignUp < Dry::Struct
-    constructor_type(:schema)
+    transform_keys(&:to_sym)
 
-    attribute :id, Types::Integer.optional
+    attribute :id, Types::Strict::Integer.optional
     attribute :team_name, Types::String.optional
     attribute :teammate_id, Types::Integer.optional
-    attribute :competition_id, Types::Integer
-    attribute :participant_kw_id_1, Types::String.optional
-    attribute :participant_kw_id_2, Types::String.optional
+    attribute :competition_id, Types::Coercible::Integer
+    attribute :participant_kw_id_1, Types::Coercible::Integer
+    attribute :participant_kw_id_2, Types::Coercible::Integer
     attribute :participant_name_1, Types::String
-    attribute :participant_name_2, Types::String.optional
-    attribute :participant_email_1, Types::String.optional
-    attribute :participant_email_2, Types::String.optional
-    attribute :participant_birth_year_1, Types::Integer.optional
-    attribute :participant_birth_year_2, Types::Integer.optional
-    attribute :participant_city_1, Types::String.optional
-    attribute :participant_city_2, Types::String.optional
-    attribute :participant_team_1, Types::String.optional
-    attribute :participant_team_2, Types::String.optional
+    attribute :participant_name_2, Types::String
+    attribute :participant_email_1, Types::String
+    attribute :participant_email_2, Types::String
+    attribute :participant_birth_year_1, Types::Coercible::Integer
+    attribute :participant_birth_year_2, Types::Coercible::Integer
+    attribute :participant_city_1, Types::String
+    attribute :participant_city_2, Types::String
+    attribute :participant_team_1, Types::String
+    attribute :participant_team_2, Types::String
     attribute :tshirt_size_1, Types::String.optional
     attribute :tshirt_size_2, Types::String.optional
-    attribute :participant_gender_1, Types::Integer.optional
-    attribute :participant_gender_2, Types::Integer.optional
-    attribute :competition_package_type_1_id, Types::Integer.optional
-    attribute :competition_package_type_2_id, Types::Integer.optional
+    attribute :participant_gender_1, Types::Coercible::Integer
+    attribute :participant_gender_2, Types::Coercible::Integer
+    attribute :competition_package_type_1_id, Types::Coercible::Integer
+    attribute :competition_package_type_2_id, Types::Coercible::Integer
     attribute :remarks, Types::String.optional
     attribute :terms_of_service, Types::Bool.default(false)
     attribute :single, Types::Bool
