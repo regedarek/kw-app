@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :contracts do
         member do
+          get :download_attachment
           put :accept
           put :prepayment
         end

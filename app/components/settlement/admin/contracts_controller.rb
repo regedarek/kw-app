@@ -36,6 +36,14 @@ module Settlement
         authorize! :read, @contract
       end
 
+      def download_attachment
+        send_file(
+          params[:url],
+          filename: params[:filename],
+          disposition: 'attachment'
+        )
+      end
+
       def edit
         @contract = Settlement::ContractRecord.find(params[:id])
         authorize! :read, @contract
