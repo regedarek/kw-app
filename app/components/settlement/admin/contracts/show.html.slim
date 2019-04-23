@@ -60,15 +60,14 @@
               li
                 = link_to attachment.url, download: File.basename(attachment.file.path) do
                   = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
-                |  
-                = link_to download_attachment_admin_contract_path(id: @contract.id, url: attachment.url, filename: File.basename(attachment.file.path)) do
+                  |  
                   = File.basename(attachment.file.path)
             - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
               - unless photo.blank? || photo.thumb.blank?
                 li
                   = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
                   |  
-                  = link_to download_attachment_admin_contract_path(id: @contract.id, url: photo.url, filename: File.basename(photo.file.path)) do
+                  = link_to photo.url, download: File.basename(photo.file.path) do
                     = File.basename(photo.file.path)
 
                 div id="photo-#{i}" class="reveal" data-reveal="" 
