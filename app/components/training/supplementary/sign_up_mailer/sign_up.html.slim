@@ -50,6 +50,10 @@ br
 - else
   = link_to 'Zrezygnuj z udziału w wydarzeniu', polish_event_cancel_url(@sign_up.code)
   br
+- if @sign_up.course.email_remarks.present?
+  br
+  b Dodatkowe uwagi od organizatora
+  = sanitize @sign_up.course.email_remarks
 br
 | Więcej informacji znajdziesz na 
 = link_to 'stronie wydarzenia!', polish_event_url(@sign_up.course.slug)

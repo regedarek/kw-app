@@ -122,6 +122,9 @@
     .callout
       = f.label :remarks, t('.remarks')
       = f.trix_editor :remarks, style: 'min-height: 280px'
+    .callout
+      = f.label :email_remarks, 'Uwagi dodane do e-maila z zapisem'
+      = f.trix_editor :email_remarks, style: 'min-height: 280px'
   .large-4.columns
     .callout
       = image_tag "#{@course.baner_type}.jpg"
@@ -135,7 +138,6 @@
         = image_tag @course.baner.url
     fieldset.fieldset.large-12.cell
       legend Opcje
-
       = f.check_box :cash
       = f.label :cash, t('.cash')
       br
