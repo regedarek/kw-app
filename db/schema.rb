@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_090402) do
+ActiveRecord::Schema.define(version: 2019_04_23_094109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_090402) do
     t.datetime "event_date"
     t.text "alert"
     t.boolean "accept_first", default: false, null: false
+    t.datetime "close_payment"
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|
@@ -144,6 +145,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_090402) do
     t.string "tshirt_size_1"
     t.string "tshirt_size_2"
     t.datetime "sent_at"
+    t.datetime "expired_at"
   end
 
   create_table "hearts", id: :serial, force: :cascade do |t|

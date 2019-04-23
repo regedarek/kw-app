@@ -124,6 +124,7 @@ module Events
             :competition_package_type_1_id,
             :competition_package_type_2_id,
             :teammate_id,
+            :expired_at,
             :tshirt_size_1,
             :tshirt_size_2,
             :remarks,

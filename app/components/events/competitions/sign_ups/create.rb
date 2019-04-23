@@ -16,6 +16,9 @@ module Events
           sign_up = competitions_repository.create_sign_up(
             competition_id: competition_id, form_outputs: form_outputs
           )
+          if sign_up.competition_record.close_payment.present?
+            sign_up.update(expired_at: sign_up.competition_record.close_payment)
+          end
           unless sign_up.competition_record.accept_first?
             if Rails.env.development?
               Events::Competitions::SignUpMailer

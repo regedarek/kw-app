@@ -33,6 +33,14 @@ module Events
         record.update(attributes)
         record
       end
+
+      def expired_sign_ups
+        Events::Db::SignUpRecord
+          .joins(:payment)
+          .where.not(sent_at: nil, expired_at: nil)
+          .where('expired_at < ?', Time.zone.now)
+          .where(payments: { state: 'unpaid' })
+      end
     end
   end
 end

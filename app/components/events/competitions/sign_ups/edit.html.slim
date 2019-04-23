@@ -3,6 +3,13 @@
     h3 = @competition.name
 
     = form_for :sign_up, url: competition_sign_up_path(competition_id: @competition, id: @sign_up.id), method: :put do |f|
+      - if @competition.close_payment
+        .callout.warning
+          .row
+            .large-12.columns
+              = f.label :expired_at
+              = f.datetime_field :expired_at
+
       - if @competition.team_name
         .callout.warning
           .row
