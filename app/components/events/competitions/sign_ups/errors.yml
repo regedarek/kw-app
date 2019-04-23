@@ -1,5 +1,7 @@
 en:
   errors:
+    tshirt_size_1_presence: Tshirt size 1 has to be filled
+    tshirt_size_2_presence: Tshirt size 2 has to be filled
     rules:
       team_name:
         filled?: Team name has to be filled
@@ -58,8 +60,8 @@ en:
 
 en:
   errors:
-    active_kw_id_1: Musisz podać numer legitymacji klubu 1 z opłaconą składką
-    active_kw_id_2: Musisz podać numer legitymacji klubu 2 z opłaconą składką
+    active_kw_id_1: Have to fill KW Kraków membership id 1
+    active_kw_id_2: Have to fill KW Kraków membership id 1
     remarks:
       filled?: Please let us know in Remarks section about accomodation you need
     rules:
@@ -99,6 +101,8 @@ en:
         true?: Accept regulations
 pl:
   errors:
+    tshirt_size_1_presence: Wybierz rozmiar koszulki 1
+    tshirt_size_2_presence: Wybierz rozmiar koszulki 2
     active_kw_id_1: Musisz podać numer legitymacji klubu 1 z opłaconą składką
     active_kw_id_2: Musisz podać numer legitymacji klubu 2 z opłaconą składką
     remarks:
