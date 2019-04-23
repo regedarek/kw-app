@@ -58,7 +58,7 @@
           ul.no-bullet
             - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
               li
-                = link_to attachment.url, download: File.basename(attachment.file.path) do
+                = link_to attachment.url, download: File.basename(attachment.file.path), target: :_blank do
                   = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
                   |  
                   = File.basename(attachment.file.path)
@@ -67,7 +67,7 @@
                 li
                   = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
                   |  
-                  = link_to photo.url, download: File.basename(photo.file.path) do
+                  = link_to photo.url, download: File.basename(photo.file.path), target: :_blank do
                     = File.basename(photo.file.path)
 
                 div id="photo-#{i}" class="reveal" data-reveal="" 
