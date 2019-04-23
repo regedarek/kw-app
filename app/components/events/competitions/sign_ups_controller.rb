@@ -70,6 +70,16 @@ module Events
         redirect_back(fallback_location: root_path, notice: 'Usunięto zapis!')
       end
 
+      def send_email
+        sign_up = Events::Db::SignUpRecord.find(params[:id])
+
+        Events::Competitions::SignUpMailer.sign_up(sign_up.id).deliver_later
+        sign_up.update(sent_at: Time.zone.now)
+
+
+        redirect_back(fallback_location: root_path, notice: 'Wysłano e-mail!')
+      end
+
       private
 
       def create_record

@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   scope module: 'events' do
     resources :competitions, only: [] do
-      resources :sign_ups, controller: 'competitions/sign_ups'
+      resources :sign_ups, controller: 'competitions/sign_ups' do
+        member do
+          put :send_email
+        end
+      end
     end
 
     namespace :admin do

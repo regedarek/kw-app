@@ -16,12 +16,15 @@ module Events
           sign_up = competitions_repository.create_sign_up(
             competition_id: competition_id, form_outputs: form_outputs
           )
-          if Rails.env.development?
-            Events::Competitions::SignUpMailer
-              .sign_up(sign_up.id).deliver_now
-          else
-            Events::Competitions::SignUpMailer
-              .sign_up(sign_up.id).deliver_later
+          unless sign_up.competition_record.accept_first?
+            if Rails.env.development?
+              Events::Competitions::SignUpMailer
+                .sign_up(sign_up.id).deliver_now
+            else
+              Events::Competitions::SignUpMailer
+                .sign_up(sign_up.id).deliver_later
+            end
+            sign_up.update(sent_at: Time.zone.now)
           end
 
           Right(:success)

@@ -47,6 +47,10 @@
         = f.label 'Biuro matrymonialne?'
         = f.check_box :matrimonial_office
 
+      .large-2.columns
+        = f.label 'Zaakceptuj najpierw?'
+        = f.check_box :accept_first
+
       .large-4.columns
         = f.label 'Treść e-maila z linkiem do zapisów'
         = f.text_area :email_text

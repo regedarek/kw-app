@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_083521) do
+ActiveRecord::Schema.define(version: 2019_04_23_090402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_083521) do
     t.string "organizer_email", default: "kw@kw.krakow.pl", null: false
     t.datetime "event_date"
     t.text "alert"
+    t.boolean "accept_first", default: false, null: false
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|
@@ -142,6 +143,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_083521) do
     t.integer "teammate_id"
     t.string "tshirt_size_1"
     t.string "tshirt_size_2"
+    t.datetime "sent_at"
   end
 
   create_table "hearts", id: :serial, force: :cascade do |t|
