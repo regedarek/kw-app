@@ -66,6 +66,9 @@
               - unless photo.blank? || photo.thumb.blank?
                 li
                   = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+                  |  
+                  = link_to photo.url, download: File.basename(photo.file.path) do
+                    = File.basename(photo.file.path)
 
                 div id="photo-#{i}" class="reveal" data-reveal="" 
                   = image_tag photo.url
