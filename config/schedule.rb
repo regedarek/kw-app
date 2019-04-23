@@ -4,6 +4,7 @@ set :output, "cron_log.log"
 
 every 1.hour do
   rake :destroy_expired_sign_ups
+  rake :destroy_expired_events_sign_ups
 end
 
 every 24.hours do
