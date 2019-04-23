@@ -15,6 +15,8 @@
           - if current_user.roles.include?('office')
             li= link_to 'Baza klubowiczów', admin_profiles_path, class: 'button warning'
             li= link_to 'Baza składek', admin_membership_fees_path, class: 'button alert'
+          - if current_user.roles.include?('office_king')
+            li= link_to 'Rozliczenia', admin_contracts_path, class: 'button alert'
           - if current_user.roles.include?('reservations')
             li= link_to t('.administration.reservations'), admin_reservations_path, class: 'button warning'
             li= link_to t('.administration.items'), admin_items_path, class: 'button primary'
