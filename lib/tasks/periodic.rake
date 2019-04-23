@@ -20,7 +20,7 @@ end
 task :destroy_expired_events_sign_ups => :environment do
   expired_sign_ups = Events::Competitions::Repository.new.expired_sign_ups
   expired_sign_ups.each do |sign_up|
-    Events::Competitions::DestroySignUp.new(
+    Events::Competitions::SignUps::Destroy.new(
       Events::Competitions::Repository.new
     ).call(id: sign_up.id)
   end
