@@ -19,7 +19,15 @@ module Events
           if sign_up.competition_record.close_payment.present?
             sign_up.update(expired_at: sign_up.competition_record.close_payment)
           end
-          unless sign_up.competition_record.accept_first?
+          if sign_up.competition_record.accept_first?
+            if Rails.env.development?
+              Events::Competitions::SignUpMailer
+                .sign_up_accept_first(sign_up.id).deliver_now
+            else
+              Events::Competitions::SignUpMailer
+                .sign_up_accept_first(sign_up.id).deliver_later
+            end
+          else
             if Rails.env.development?
               Events::Competitions::SignUpMailer
                 .sign_up(sign_up.id).deliver_now
