@@ -28,6 +28,16 @@
         b szczyt, przełęcz, ściana: 
         = @route.peak
 
+    - if @route.rating.present?
+      .large-12.columns
+        b subiektywna ocena: 
+        - @route.rating.times do
+          i.fi-star
+
+    .large-12.columns
+      div id="route_#{@route.id}"
+        = render  "training/activities/hearts/button", route: @route
+
 - if @route.attachments.any?
   .row
     .large-12.columns
