@@ -146,6 +146,15 @@ module Admin
       end
     end
 
+    def destroy
+      authorize! :manage, Db::Profile
+
+      profile = Db::Profile.find(params[:id])
+      profile.destroy
+
+      redirect_to admin_profiles_path, notice: 'Usunięto'
+    end
+
     private
 
     def accept_params

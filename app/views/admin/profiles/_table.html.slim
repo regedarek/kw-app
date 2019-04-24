@@ -6,7 +6,7 @@ table.stack
       th width='10%' Telefon
       th width='5%' Płatności
       th width='20%' Status
-      th width='15%'
+      th width='10%'
   tbody
     - profiles.each_with_index do |profile, i|
       tr
@@ -30,12 +30,17 @@ table.stack
               - if profile.payment.prepaid?
                 span.label.success wpisowe
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
-        td.text-center
-          - if profile.accepted?
-            = link_to 'Zobacz', admin_profile_path(profile.id)
-          - else
-            = link_to 'Akceptuj', admin_profile_path(profile.id)
-          |  | 
-          = link_to 'Edytuj', edit_admin_profile_path(profile.id)
-          |  | 
-          = link_to 'PDF', profile_path(profile.id, format: :pdf)
+        td.text-right
+          .icon-bar
+            - if profile.accepted?
+              = link_to admin_profile_path(profile.id), style: 'padding: 5px' do
+                i.fa.fi-magnifying-glass
+            - else
+              = link_to admin_profile_path(profile.id), style: 'padding: 5px' do
+                i.fi.fi-check style='color: green'
+            = link_to edit_admin_profile_path(profile.id), style: 'padding: 5px' do
+              i.fi.fi-page-edit
+            = link_to profile_path(profile.id, format: :pdf), style: 'padding: 5px' do
+              i.fi.fi-page-pdf
+            = link_to admin_profile_path(profile.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Jestes pewien?' } do
+              i.fi.fi-trash
