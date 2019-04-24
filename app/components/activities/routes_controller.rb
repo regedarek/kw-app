@@ -15,7 +15,7 @@ module Activities
     def gorskie_dziki_regulamin; end
 
     def index
-      @mountain_routes = MountainRouteRecord.order(route_time: :desc).page(params[:page]).per(20)
+      @mountain_routes = MountainRouteRecord.order(climbing_date: :desc).page(params[:page]).per(20)
     end
 
     private

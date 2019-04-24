@@ -4,7 +4,6 @@ module Training
       def create(form_outputs:, user_id:)
         record = ::Db::Activities::MountainRoute
           .new(form_outputs.to_h)
-        record.route_time = form_outputs[:climbing_date]
         record.user_id = user_id
         record.save
 
