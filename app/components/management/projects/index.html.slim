@@ -2,8 +2,16 @@
   .large-6.columns
     h3 Projekty, pomysły, inicjatywy
 
-  .large-2.columns
-      = link_to 'Dodaj projekt', new_project_path, class: 'button expanded medium'
+  - if can? :manage, Management::ProjectRecord
+    .large-2.columns
+        = link_to 'Dodaj projekt', new_project_path, class: 'button expanded medium'
+
+- if can? :manage, Management::ProjectRecord
+  - if @projects.where(state: 'draft').any?
+    .row
+      .large-12.columns
+        h5 W przygotowaniu
+        = render 'table', projects: @projects.where(state: 'draft')
 
 .row
   .large-12.columns

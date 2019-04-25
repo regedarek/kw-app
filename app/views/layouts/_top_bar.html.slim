@@ -65,6 +65,7 @@
         - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/przejscia'
           li.show-for-medium= link_to 'Tabela dzików', dziki_path, class: 'button warning hollow'
         li.show-for-medium = link_to 'Twoje aktywności', page_path('home'), class: 'button hollow'
+        li = link_to 'Projekty', projects_path, class: 'button primary'
         - if user_signed_in?
           - if !current_user.admin? || !current_user.roles.include?('office')
             li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button primary'
