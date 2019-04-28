@@ -1,71 +1,82 @@
 .row
   .large-12.columns
     h3 = @route.name
-
 .row
-  - if @route.description.present?
-    .large-12.columns
-      .callout.small
-        = @route.description&.html_safe
+  .large-6.columns
 
-.row
-  .large-12.columns
-    b rodzaj przejścia: 
-    = I18n.t(@route.route_type)
 
-.row
-  - if @route.climbing_date.present?
-    .large-12.columns
-      b data przejścia: 
-      = @route.climbing_date
-
-.row
-  - if @route.route_type == 'ski'
-    = render 'ski_route', ski_route: @route
-  - else
-    - if @route.peak.present?
+    .row
       .large-12.columns
-        b szczyt, przełęcz, ściana: 
-        = @route.peak
+        b rodzaj przejścia: 
+        = I18n.t(@route.route_type)
 
-    - if @route.rating.present?
+    .row
+      - if @route.climbing_date.present?
+        .large-12.columns
+          b data przejścia: 
+          = @route.climbing_date
+
+    .row
+      - if @route.route_type == 'ski'
+        = render 'ski_route', ski_route: @route
+      - else
+        - if @route.peak.present?
+          .large-12.columns
+            b szczyt, przełęcz, ściana: 
+            = @route.peak
+
+        - if @route.rating.present?
+          .large-12.columns
+            b subiektywna ocena: 
+            - @route.rating.times do
+              i.fi-star
+
+    .row
       .large-12.columns
-        b subiektywna ocena: 
-        - @route.rating.times do
-          i.fi-star
+        div id="route_#{@route.id}"
+          = render  "training/activities/hearts/button", route: @route
+        br
 
-    .large-12.columns
-      div id="route_#{@route.id}"
-        = render  "training/activities/hearts/button", route: @route
+    - if @route.description.present?
+      .row
+        .large-12.columns
+          .callout.small
+            = @route.description&.html_safe
 
-- if @route.attachments.any?
-  .row
-    .large-12.columns
-      - @route.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-        = link_to attachment.url, download: File.basename(attachment.file.path) do
-          = image_tag('file.jpg', class: 'thumbnail')
-          |  
-          = File.basename(attachment.file.path)
-      br
-      - @route.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-        - unless photo.blank? || photo.thumb.blank?
-          = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+  .large-6.columns
+    - if @route.attachments.any?
+      .row
+        .large-12.columns
+          - @route.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            = link_to attachment.url, download: File.basename(attachment.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail')
+              |  
+              = File.basename(attachment.file.path)
+            br
+          - @route.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+            - unless photo.blank? || photo.thumb.blank?
+              = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
 
-          div id="photo-#{i}" class="full reveal" data-reveal="" 
-            = image_tag photo.url
-            button.close-button aria-label=("Close reveal") data-close="" type="button" 
-              span aria-hidden="true"  &times;
+              div id="photo-#{i}" class="full reveal" data-reveal="" 
+                = image_tag photo.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          h5 Komentarze
+          = render 'messaging/comments/comments', commentable: @route
+      .row
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @route
 
 .row
   .large-12.columns
     hr
 
-- if user_signed_in?
-  .row
-    .large-12.columns
-      h5 Komentarze
-    .large-6.columns
-      = render 'messaging/comments/comments', commentable: @route
-    .large-6.columns
-      .callout
-        = render 'messaging/comments/form', commentable: @route
+  .large-12.columns
+    = link_to 'powrót do przejść narciarskich', activities_mountain_routes_path(route_type: 'ski'), class: 'button warning'
+    = link_to 'zobacz tabelę narciarskich dzików', dziki_path, class: 'button alert'
+    - if can? :edit, @route
+      = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
