@@ -45,8 +45,9 @@
 
     .row
       .large-12.columns
-        = link_to 'powrót do przejść narciarskich', activities_mountain_routes_path(route_type: 'ski'), class: 'button warning'
-        = link_to 'zobacz tabelę narciarskich dzików', dziki_path, class: 'button alert'
+        = link_to 'powrót do przejść', activities_mountain_routes_path, class: 'button warning'
+        - if @route.ski?
+          = link_to 'zobacz tabelę narciarskich dzików', dziki_path, class: 'button alert'
         - if can? :edit, @route
           = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
 
