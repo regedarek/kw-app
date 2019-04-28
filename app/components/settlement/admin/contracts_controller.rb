@@ -71,6 +71,19 @@ module Settlement
         contract.accept!
         contract.update(acceptor_id: current_user.id)
 
+        office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
+        contract_user_ids = contract.users.map(&:id)
+        recepient_ids = (office_king_ids + contract_user_ids).uniq.reject{|id| id == current_user.id }
+        recepient_ids.each do |id|
+          NotificationCenter::NotificationRecord.create(
+            recipient_id: id,
+            actor_id: contract.acceptor_id,
+            action: 'accepted_contract',
+            notifiable_id: contract.id,
+            notifiable_type: 'Settlement::ContractRecord'
+          )
+        end
+
         redirect_back(
           fallback_location: admin_contracts_path,
           notice: 'Zaakceptowano'
@@ -82,6 +95,18 @@ module Settlement
 
         contract = Settlement::ContractRecord.find(params[:id])
         contract.prepayment!
+
+        contract_user_ids = contract.users.map(&:id)
+        recepient_ids = contract_user_ids.uniq.reject{|id| id == current_user.id }
+        recepient_ids.each do |id|
+          NotificationCenter::NotificationRecord.create(
+            recipient_id: id,
+            actor_id: current_user.id,
+            action: 'prepayment_contract',
+            notifiable_id: contract.id,
+            notifiable_type: 'Settlement::ContractRecord'
+          )
+        end
 
         redirect_back(
           fallback_location: admin_contracts_path,
