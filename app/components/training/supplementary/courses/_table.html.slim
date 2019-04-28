@@ -51,8 +51,6 @@ table.stack
             - else
               | -
         td.text-center.show-for-small-only
-          = simple_format course.remarks
-          br
           - if user_signed_in?
             - if current_user.admin? || current_user.id == course.organizator_id
               = link_to t('.show'), polish_event_path(course.id)
