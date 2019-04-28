@@ -1,4 +1,5 @@
 li style='min-width: 300px;'
   = link_to activities_mountain_route_path(notification.notifiable_id), class: "#{'unread' if !notification.read_at?}" do
     b= notification.actor.display_name
-    = " dodał cię do przejścia #{notification.notifiable.name}"
+    = " dodał cię do przejścia "
+    b= notification.notifiable.name

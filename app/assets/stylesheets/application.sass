@@ -8,6 +8,13 @@
 @import 'button-hover'
 @import 'trix'
 
+.dropdown.menu > li.is-dropdown-submenu-parent.remove-arrow
+  > a
+    padding-right: 1rem
+  > a::after
+  &.opens-left > a::after
+    border-top-style: none
+
 .unread
   border-left: 3px solid red
 
