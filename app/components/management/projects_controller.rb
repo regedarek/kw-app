@@ -33,10 +33,14 @@ module Management
 
     def edit
       @project = Management::ProjectRecord.friendly.find(params[:id])
+      authorize! :manage, @project
       @users = @project.users.map { |u| { name: u.display_name, id: u.id} }
     end
 
     def update
+      @project = Management::ProjectRecord.new(project_params)
+      authorize! :manage, @project
+
       either(update_record) do |result|
         result.success do |project:|
           redirect_to project_path(project), flash: { notice: 'Zaktualizowano projekt' }

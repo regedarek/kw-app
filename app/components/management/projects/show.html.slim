@@ -81,7 +81,8 @@
     .row
       .large-12.columns
         = link_to 'powrót do pozostałych projektów', projects_path, class: 'button primary'
-        = link_to 'edytuj', edit_project_path(@project), class: 'button alert'
+        - if can? :manage, @project
+          = link_to 'edytuj', edit_project_path(@project), class: 'button alert'
   .large-6.columns
     - if user_signed_in?
       h5 Zgłoś się do projektu
