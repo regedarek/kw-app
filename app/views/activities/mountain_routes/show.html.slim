@@ -43,6 +43,13 @@
           .callout.small
             = @route.description&.html_safe
 
+    .row
+      .large-12.columns
+        = link_to 'powrót do przejść narciarskich', activities_mountain_routes_path(route_type: 'ski'), class: 'button warning'
+        = link_to 'zobacz tabelę narciarskich dzików', dziki_path, class: 'button alert'
+        - if can? :edit, @route
+          = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
+
   .large-6.columns
     - if @route.attachments.any?
       .row
@@ -70,13 +77,3 @@
         .large-12.columns
           .callout
             = render 'messaging/comments/form', commentable: @route
-
-.row
-  .large-12.columns
-    hr
-
-  .large-12.columns
-    = link_to 'powrót do przejść narciarskich', activities_mountain_routes_path(route_type: 'ski'), class: 'button warning'
-    = link_to 'zobacz tabelę narciarskich dzików', dziki_path, class: 'button alert'
-    - if can? :edit, @route
-      = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
