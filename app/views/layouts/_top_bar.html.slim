@@ -93,8 +93,14 @@
 
         - if user_signed_in?
           li data-behaviour='js-notifications'
+
             = link_to '#', data: { behaviour: 'js-notifications-mark-as-read' } do
-              i.fi.fi-flag
-              |  
-              span data-behaviour='js-notifications-unread-count'
+              .show-for-small-only
+                | Nowe powiadomienia (
+                b data-behaviour='js-notifications-unread-count'
+                | )
+              .show-for-medium
+                i.fi.fi-flag
+                |  
+                span data-behaviour='js-notifications-unread-count'
             ul.menu.vertical data-behaviour='js-notifications-items'
