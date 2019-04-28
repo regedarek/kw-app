@@ -9,11 +9,11 @@ module Admin
     end
 
     def edit
-      @user = Db::User.find(params[:id])
+      @user = Db::User.friendly.find(params[:id])
     end
 
     def update
-      @user = Db::User.find(params[:id])
+      @user = Db::User.friendly.find(params[:id])
 
       roles = user_params.slice(:roles)['roles'].split(' ')
       if @user.update(user_params)
@@ -29,7 +29,7 @@ module Admin
       if Db::User.exists?(curator: true)
         redirect_to admin_users_path, alert: 'Może być tylko jeden władca!'
       else
-        user = Db::User.find(params[:id])
+        user = Db::User.friendly.find(params[:id])
         if user.update(curator: true)
           redirect_to admin_users_path, notice: 'Mianowałeś opiekuna'
         else
@@ -39,17 +39,17 @@ module Admin
     end
 
     def cancel_curator
-      Db::User.find(params[:id]).update(curator: false)
+      Db::User.friendly.find(params[:id]).update(curator: false)
       redirect_to admin_users_path, notice: 'No i już nie mamy opiekuna :('
     end
 
     def make_admin
-      Db::User.find(params[:id]).update(admin: true)
+      Db::User.friendly.find(params[:id]).update(admin: true)
       redirect_to admin_users_path, notice: 'Awansowałes'
     end
 
     def cancel_admin
-      Db::User.find(params[:id]).update(admin: false)
+      Db::User.friendly.find(params[:id]).update(admin: false)
       redirect_to admin_users_path, notice: 'Zdegradowałes'
     end
 
