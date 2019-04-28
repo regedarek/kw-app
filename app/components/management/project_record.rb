@@ -1,6 +1,8 @@
 module Management
   class ProjectRecord < ActiveRecord::Base
     include Workflow
+    extend FriendlyId
+    friendly_id :name, use: :slugged
     self.table_name = 'projects'
 
     mount_uploaders :attachments, Management::AttachmentUploader

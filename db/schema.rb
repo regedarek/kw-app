@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_28_175552) do
+ActiveRecord::Schema.define(version: 2019_04_28_183425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,6 +360,8 @@ ActiveRecord::Schema.define(version: 2019_04_28_175552) do
     t.string "attachments"
     t.text "know_how"
     t.string "state", default: "draft"
+    t.string "slug"
+    t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
   create_table "reservation_items", id: :serial, force: :cascade do |t|
@@ -507,8 +509,10 @@ ActiveRecord::Schema.define(version: 2019_04_28_175552) do
     t.boolean "hide", default: false
     t.boolean "boars", default: true, null: false
     t.boolean "ski_hater", default: false, null: false
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   add_foreign_key "product_fields", "product_types"

@@ -1,5 +1,5 @@
 li style='min-width: 300px;'
-  = link_to project_path(notification.notifiable_id), class: "#{'unread' if !notification.read_at?}" do
+  = link_to project_path(notification.notifiable), class: "#{'unread' if !notification.read_at?}" do
     b= notification.actor.display_name
     = " dodał komentarz do projektu "
     b=notification.notifiable.name
