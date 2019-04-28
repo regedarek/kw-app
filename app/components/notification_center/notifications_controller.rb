@@ -1,9 +1,10 @@
 module NotificationCenter
   class NotificationsController < ApplicationController
+    append_view_path 'app/components'
     before_action :authenticate_user!
 
     def index
-      notifications = NotificationCenter::NotificationRecord.where(recipient: current_user).unread
+      notifications = NotificationCenter::NotificationRecord.where(recipient: current_user).recent
 
       render json: notifications.map { |record| NotificationCenter::Notification.from_record(record) }
     end
