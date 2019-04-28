@@ -40,4 +40,6 @@
                 - if contract.accepted?
                   = contract.acceptor&.display_name
                 - else
-                  = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+                  - if user_signed_in?
+                    - unless contract.creator_id == current_user.id
+                      = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
