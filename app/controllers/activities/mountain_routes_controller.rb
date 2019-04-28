@@ -60,18 +60,18 @@ module Activities
     end
 
     def show
-      @route = Db::Activities::MountainRoute.find(params[:id])
+      @route = Db::Activities::MountainRoute.friendly.find(params[:id])
       authorize! :read, @route
     end
 
     def edit
-      @route = Db::Activities::MountainRoute.find(params[:id])
+      @route = Db::Activities::MountainRoute.friendly.find(params[:id])
       return redirect_to activities_mountain_routes_path, alert: t('.not_owner') unless user_signed_in?
       return redirect_to activities_mountain_routes_path, alert: t('.not_owner') unless current_user.admin? || current_user.id == @route.user_id || @route.colleagues.include?(current_user)
     end
 
     def update
-      @route = Db::Activities::MountainRoute.find(params[:id])
+      @route = Db::Activities::MountainRoute.friendly.find(params[:id])
 
       if @route.update(route_params)
         redirect_to activities_mountain_route_path(@route), notice: t('.updated_successfully')
@@ -81,7 +81,7 @@ module Activities
     end
 
     def hide
-      route = Db::Activities::MountainRoute.find(params[:id])
+      route = Db::Activities::MountainRoute.friendly.find(params[:id])
 
       authorize! :hide, route
       route.update(hidden: true)
@@ -104,7 +104,7 @@ module Activities
     end
 
     def destroy
-      route = Db::Activities::MountainRoute.find(params[:id])
+      route = Db::Activities::MountainRoute.friendly.find(params[:id])
       if user_signed_in? && (current_user.admin? || current_user.id == route.user_id)
         route.destroy
 

@@ -1,7 +1,9 @@
 module Db
   module Activities
     class MountainRoute < ActiveRecord::Base
+      extend FriendlyId
       enum route_type: [:ski, :regular_climbing, :winter_climbing]
+      friendly_id :name, use: :slugged
       mount_uploaders :attachments, AttachmentUploader
       serialize :attachments, JSON
       def self.model_name

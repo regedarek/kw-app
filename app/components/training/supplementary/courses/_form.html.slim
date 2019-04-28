@@ -21,9 +21,10 @@
           = f.text_field :place
 
         .large-3.columns
-          span data-tooltip='' tabindex="1" title="Adres strony wydarzenia, może zawierać tylko znaki a-z oraz -" data-allow-html="true"
-            = f.label :slug, 'Adres strony*'
-          = f.text_field :slug
+          - unless action_name == 'new'
+            span data-tooltip='' tabindex="1" title="Adres strony wydarzenia, może zawierać tylko znaki a-z oraz -" data-allow-html="true"
+              = f.label :slug, 'Adres strony*'
+            = f.text_field :slug
 
         .large-2.columns
           span data-tooltip='' tabindex="1" title="Pozwala filtrować po aktywnościach narciarskich, wspinaczkowych, jaskiniowych" data-allow-html="true"

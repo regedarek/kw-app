@@ -19,7 +19,7 @@ module Training
       end
 
       def show
-        record = Training::Supplementary::CourseRecord.find(params[:id]) rescue Training::Supplementary::CourseRecord.find_by!(slug: params[:id])
+        record = Training::Supplementary::CourseRecord.friendly.find(params[:id]) rescue Training::Supplementary::CourseRecord.find_by!(slug: params[:id])
         @course = Training::Supplementary::Course.from_record(record)
         @limiter = Training::Supplementary::Limiter.new(@course)
         @current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id) if user_signed_in?
@@ -34,7 +34,7 @@ module Training
       end
 
       def edit
-        @course = Training::Supplementary::CourseRecord.find(params[:id])
+        @course = Training::Supplementary::CourseRecord.friendly.find(params[:id])
       end
 
       def create
@@ -52,7 +52,7 @@ module Training
       end
 
       def update
-        @course = Training::Supplementary::CourseRecord.find(params[:id])
+        @course = Training::Supplementary::CourseRecord.friendly.find(params[:id])
 
         if @course.update(course_params.merge(organizator_id: course_params[:organizator_id]&.first))
           redirect_to edit_supplementary_course_path(@course.id), notice: 'Course updated'
@@ -62,7 +62,7 @@ module Training
       end
 
       def destroy
-        @course = Training::Supplementary::CourseRecord.find(params[:id])
+        @course = Training::Supplementary::CourseRecord.friendly.find(params[:id])
         if @course.destroy
           redirect_to supplementary_courses_path, notice: 'Course destroyed'
         else

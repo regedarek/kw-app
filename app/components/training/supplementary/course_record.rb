@@ -1,6 +1,8 @@
 module Training
   module Supplementary
     class CourseRecord < ActiveRecord::Base
+      extend FriendlyId
+      friendly_id :name, use: :slugged
       mount_uploader :baner, Training::Supplementary::BanerUploader
       enum category: [:kw, :snw, :sww, :stj]
       enum kind: [:other, :slides, :meeting, :competitions, :tour, :training]

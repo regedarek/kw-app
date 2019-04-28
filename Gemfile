@@ -16,7 +16,7 @@ gem 'bullet', group: 'development'
 gem 'nested_form_fields'
 gem 'honeybadger', '~> 3.1'
 gem 'trix-rails', require: 'trix'
-
+gem 'friendly_id', '~> 5.2.4'
 gem 'foundation-icons-sass-rails'
 gem 'foundation-rails', '~> 6.4.3.0'
 gem 'airbrake'
