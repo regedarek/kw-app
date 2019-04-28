@@ -103,3 +103,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.logger = Logger.new('/dev/null')
 end
+Rails.application.routes.default_url_options[:host] = 'https://panel.kw.krakow.pl'

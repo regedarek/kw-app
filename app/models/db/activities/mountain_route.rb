@@ -4,7 +4,9 @@ module Db
       enum route_type: [:ski, :regular_climbing, :winter_climbing]
       mount_uploaders :attachments, AttachmentUploader
       serialize :attachments, JSON
-
+      def self.model_name
+        ActiveModel::Name.new(self, nil, "Activities::MountainRoute")
+      end
       scope :climbing, -> { where(route_type: [:regular_climbing, :winter_climbing], training: false) }
       scope :ski, -> { where(route_type: :ski, training: false) }
       scope :boars, -> { where(training: [false, true]) }

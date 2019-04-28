@@ -40,6 +40,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = { address: 'mailcatcher', port: 1025 }
   config.action_mailer.default_url_options = { host: 'http://localhost:3002' }
 
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -63,12 +64,12 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-config.after_initialize do
-  Bullet.enable = true
-  Bullet.alert = true
-  Bullet.bullet_logger = true
-  Bullet.console = true
-  Bullet.rails_logger = true
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+  end
 end
-end
-
+Rails.application.routes.default_url_options[:host] = 'http://localhost:3002'

@@ -23,6 +23,7 @@ class Db::User < ActiveRecord::Base
   has_many :photo_requests, class_name: 'PhotoCompetition::RequestRecord'
 
   has_many :comments, class_name: 'Messaging::CommentRecord'
+  has_many :notifications, class_name: 'NotificationCenter::NotificationRecord', foreign_key: :recipient_id
 
   has_many :accepted_contracts, class_name: 'Settlement::ContractRecord'
   has_many :created_contracts, class_name: 'Settlement::ContractRecord'

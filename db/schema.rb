@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_123350) do
+ActiveRecord::Schema.define(version: 2019_04_28_093702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,17 @@ ActiveRecord::Schema.define(version: 2019_04_24_123350) do
     t.boolean "training", default: false, null: false
     t.index ["climbing_date"], name: "index_mountain_routes_on_climbing_date", order: :desc
     t.index ["user_id"], name: "index_mountain_routes_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "actor_id"
+    t.datetime "read_at"
+    t.string "action"
+    t.integer "notifiable_id", null: false
+    t.string "notifiable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "participants", id: :serial, force: :cascade do |t|
