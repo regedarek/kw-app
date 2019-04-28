@@ -39,6 +39,16 @@ module Messaging
             notifiable_type: 'Settlement::ContractRecord'
           )
         end
+      when 'Management::ProjectRecord'
+        comment.commentable.users.map(&:id).reject{|id| id == comment.user_id }.each do |id|
+          NotificationCenter::NotificationRecord.create(
+            recipient_id: id,
+            actor_id: comment.user_id,
+            action: 'commented_project',
+            notifiable_id: comment.commentable_id,
+            notifiable_type: 'Management::ProjectRecord'
+          )
+        end
       end
     end
 
