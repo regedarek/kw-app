@@ -1,4 +1,6 @@
 class Db::User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
   mount_uploader :avatar, ::Membership::AvatarUploader
 
   ROLES = %w(reservations routes admin events courses competitions office tech donations photo_competition management)
@@ -47,6 +49,13 @@ class Db::User < ActiveRecord::Base
     Arel::Nodes::NamedFunction.new('CONCAT_WS', [
       Arel::Nodes.build_quoted(' '), parent.table[:first_name], parent.table[:last_name]
     ])
+  end
+
+  def slug_candidates
+    [
+      [:first_name, :last_name],
+      [:first_name, :last_name, :kw_id],
+    ]
   end
 
   def display_name

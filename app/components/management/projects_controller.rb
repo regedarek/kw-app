@@ -28,11 +28,11 @@ module Management
     end
 
     def show
-      @project = Management::ProjectRecord.find(params[:id])
+      @project = Management::ProjectRecord.friendly.find(params[:id])
     end
 
     def edit
-      @project = Management::ProjectRecord.find(params[:id])
+      @project = Management::ProjectRecord.friendly.find(params[:id])
       @users = @project.users.map { |u| { name: u.display_name, id: u.id} }
     end
 
@@ -52,7 +52,7 @@ module Management
     end
 
     def destroy
-      project = Management::ProjectRecord.find(params[:id])
+      project = Management::ProjectRecord.friendly.find(params[:id])
       project.destroy
 
       redirect_to projects_path, notice: 'Usunięto'
