@@ -3,7 +3,7 @@ module Db
     class MountainRoute < ActiveRecord::Base
       extend FriendlyId
       enum route_type: [:ski, :regular_climbing, :winter_climbing]
-      friendly_id :name, use: :slugged
+      friendly_id :slug_candidates, use: :slugged
       mount_uploaders :attachments, AttachmentUploader
       serialize :attachments, JSON
       def self.model_name
@@ -21,6 +21,13 @@ module Db
       has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
       validates :name, :rating, :climbing_date, presence: true
+
+      def slug_candidates
+        [
+          [:climbing_date, :name],
+          [:route_type, :climbing_date, :name]
+        ]
+      end
 
       def category
         case route_type.to_sym
