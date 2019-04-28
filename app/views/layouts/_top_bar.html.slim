@@ -23,6 +23,7 @@
           li.show-for-small-only= link_to 'Zarezerwuj', new_reservation_path
           li.show-for-small-only= link_to 'Przejścia', '/przejscia'
           li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path
+          li.show-for-small-only = link_to 'Projekty', projects_path
           li.show-for-small-only= link_to 'Twoje dane', edit_user_registration_path
           li.show-for-small-only = link_to 'Twoje aktywności', page_path('home')
           li.show-for-small-only = link_to 'Twoje składki', membership_fees_path
@@ -54,6 +55,7 @@
                   = link_to 'Problemy', 'https://app.honeybadger.io/projects/54689/faults?q=-is%3Aresolved+-is%3Aignored'
         - else
           li.show-for-small-only= link_to 'Przejścia', '/przejscia'
+          li.show-for-small-only = link_to 'Projekty', projects_path
           li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path
           li.show-for-small-only= link_to t('.administration.login'), new_user_session_path
           li.show-for-small-only= link_to t('.administration.signup'), zarejestruj_path
@@ -71,7 +73,7 @@
             li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button secondary'
         - if user_signed_in?
           li.show-for-medium= link_to 'Przejścia', '/przejscia', class: 'button success'
-        li = link_to 'Projekty', projects_path, class: 'button primary'
+        li.show-for-medium = link_to 'Projekty', projects_path, class: 'button primary'
 
         li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
         - if user_signed_in?
@@ -102,5 +104,5 @@
                 i.fi.fi-flag
                 |  
                 span data-behaviour='js-notifications-unread-count'
-                  | 0
+                  = NotificationCenter::NotificationRecord.where(recipient: current_user).unread.count
             ul.menu.vertical data-behaviour='js-notifications-items'
