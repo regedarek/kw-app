@@ -86,3 +86,11 @@
       - Db::Profile.where(accepted: false).order('created_at DESC NULLS LAST').select{|p| p.acomplished_courses.include?('list') }.each do |profile|
         tr
           td = link_to profile.display_name, admin_profile_path(profile.id)
+.row
+  .large-4.columns
+    h3 niedoręczone e-maile
+    table.stack
+      - EmailCenter::EmailRecord.where(state: 'sent').order('created_at DESC NULLS LAST').each do |email|
+        tr
+          td = email.mailable.try(:name) || email.mailable.try(:display_name)
+          td = email.mailable_type
