@@ -11,13 +11,13 @@ module Training
 
       # destroys a heart with matching post_id and user_id
       def unheart!(route)
-        heart = @user.hearts.find_by(mountain_route_id: route.id)
+        heart = @user.hearts.includes(:user).find_by(mountain_route_id: route.id)
         heart.destroy!
       end
 
       # returns true of false if a post is hearted by user
       def heart?(route)
-        @user.hearts.find_by(mountain_route_id: route.id)
+        @user.hearts.includes(:user).find_by(mountain_route_id: route.id)
       end
     end
   end
