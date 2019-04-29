@@ -68,7 +68,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://panel.kw.krakow.pl' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key: 'key-8885440118c81cfc60f9dcfbf933ec3d',
+    api_key: Rails.application.secrets.mailgun_api_key,
     domain: 'kw.krakow.pl',
   }
   # Ignore bad email addresses and do not raise email delivery errors.
