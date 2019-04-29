@@ -22,7 +22,7 @@ module Training
         record = Training::Supplementary::CourseRecord.friendly.find(params[:id]) rescue Training::Supplementary::CourseRecord.find_by!(slug: params[:id])
         @course = Training::Supplementary::Course.from_record(record)
         @limiter = Training::Supplementary::Limiter.new(@course)
-        @current_user_sign_up = Training::Supplementary::SignUpRecord.find_by(course_id: @course.id, user_id: current_user.id) if user_signed_in?
+        @current_user_sign_up = Training::Supplementary::SignUpRecord.includes(:user).find_by(course_id: @course.id, user_id: current_user.id) if user_signed_in?
 
         respond_with do |format|
           format.html
