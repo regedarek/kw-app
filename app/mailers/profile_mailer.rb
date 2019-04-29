@@ -8,7 +8,12 @@ class ProfileMailer < ApplicationMailer
         to: @profile.email,
         from: 'zgloszenia@kw.krakow.pl',
         subject: "Zaakceptowano zgłoszenie do KW Kraków od #{@profile.first_name} #{@profile.last_name}"
-      )
+      ).tap do |message|
+        message.mailgun_options = {
+          "mailable_id" => @profile.id,
+          "mailable_type" => @profile.class.name
+        }
+      end
     end
   end
 
@@ -20,7 +25,12 @@ class ProfileMailer < ApplicationMailer
         to: @profile.email,
         from: 'zgloszenia@kw.krakow.pl',
         subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od #{@profile.first_name} #{@profile.last_name}"
-      )
+      ).tap do |message|
+        message.mailgun_options = {
+          "mailable_id" => @profile.id,
+          "mailable_type" => @profile.class.name
+        }
+      end
     end
   end
 
@@ -142,7 +152,12 @@ class ProfileMailer < ApplicationMailer
         cc: 'zgloszenia@kw.krakow.pl',
         from: 'zgloszenia@kw.krakow.pl',
         subject: "Potwierdzenie zgłoszenia do KW Kraków od #{@profile.first_name} #{@profile.last_name}"
-      )
+      ).tap do |message|
+        message.mailgun_options = {
+          "mailable_id" => @profile.id,
+          "mailable_type" => @profile.class.name
+        }
+      end
     end
   end
 end

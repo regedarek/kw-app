@@ -36,9 +36,11 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: 'mailcatcher', port: 1025 }
-  config.action_mailer.default_url_options = { host: 'http://localhost:3002' }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: 'key-8885440118c81cfc60f9dcfbf933ec3d',
+    domain: 'sandboxcda67a5d28394ec3b9ed5e3164523822.mailgun.org',
+  }
 
 
   # Print deprecation notices to the Rails logger.

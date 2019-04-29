@@ -7,6 +7,7 @@ module Training
       belongs_to :package_type, class_name: 'Training::Supplementary::PackageTypeRecord', foreign_key: :supplementary_course_package_type_id
       belongs_to :user, class_name: 'Db::User', foreign_key: :user_id
       belongs_to :course, class_name: 'Training::Supplementary::CourseRecord', foreign_key: :course_id
+      has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord'
 
       def cost
         if course.packages

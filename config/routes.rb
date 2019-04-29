@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   load Rails.root.join("app/components/events/routes.rb")
   load Rails.root.join("app/components/notification_center/routes.rb")
+  load Rails.root.join("app/components/email_center/routes.rb")
   load Rails.root.join("app/components/activities/routes.rb")
   load Rails.root.join("app/components/messaging/routes.rb")
   load Rails.root.join("app/components/management/routes.rb")

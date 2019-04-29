@@ -9,6 +9,7 @@ module Db
     has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id
+    has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord'
 
     validates :email, uniqueness: true, allow_blank: true, allow_nil: true
     validates :kw_id, uniqueness: true, allow_blank: true, allow_nil: true

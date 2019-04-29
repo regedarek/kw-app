@@ -47,7 +47,10 @@ table.stack
             .icon-bar.five-up
               = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
                 - if sign_up.sent_at
-                  i.fi-mail style='color: red'
+                  - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
+                    i.fi-mail style='color: green'
+                  - else
+                    i.fi-mail style='color: red'
                 - else
                   i.fi-mail
               = link_to edit_supplementary_sign_up_path(sign_up.id), class: 'item', style: 'margin: 5px' do

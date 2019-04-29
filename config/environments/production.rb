@@ -66,14 +66,10 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "kw_app_#{Rails.env}"
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: 'https://panel.kw.krakow.pl' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    authentication: :plain,
-    address: 'smtp.mailgun.org',
-    port: 587,
-    domain: Rails.application.secrets.mailgun_domain,
-    user_name: Rails.application.secrets.mailgun_login,
-    password: Rails.application.secrets.mailgun_password
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: 'key-8885440118c81cfc60f9dcfbf933ec3d',
+    domain: 'kw.krakow.pl',
   }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

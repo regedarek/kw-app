@@ -37,7 +37,10 @@ table.stack
                 i.fa.fi-magnifying-glass
             - else
               = link_to admin_profile_path(profile.id), style: 'padding: 5px' do
-                i.fi.fi-check style='color: green'
+                - if profile.emails.any? && profile.emails.all?(&:delivered?)
+                  i.fi.fi-check style='color: green'
+                - else
+                  i.fi.fi-check style='color: red'
             = link_to edit_admin_profile_path(profile.id), style: 'padding: 5px' do
               i.fi.fi-page-edit
             = link_to profile_path(profile.id, format: :pdf), style: 'padding: 5px' do

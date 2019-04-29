@@ -38,7 +38,10 @@ table.stack
             .icon-bar.five-up
               = link_to send_email_competition_sign_up_path(competition_id: @competition, id: sign_up), method: :put, class: 'item', style: 'margin: 5px' do
                 - if sign_up.sent_at
-                  i.fi-mail style='color: red'
+                  - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
+                    i.fi-mail style='color: green'
+                  - else
+                    i.fi-mail style='color: red'
                 - else
                   i.fi-mail
               = link_to edit_competition_sign_up_path(competition_id: @competition, id: sign_up), class: 'item', style: 'margin: 5px' do

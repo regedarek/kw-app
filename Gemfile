@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'rails-jquery-tokeninput'
 gem 'listen', '~> 3.0'
 gem 'bullet', group: 'development'
-
+gem 'mailgun-ruby', '~>1.1.6'
 gem 'nested_form_fields'
 gem 'honeybadger', '~> 3.1'
 gem 'trix-rails', require: 'trix'
