@@ -51,6 +51,7 @@ class Ability
     can :read, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :manage, Management::ProjectRecord
+    can :manage, Management::Voting::CaseRecord
   end
 
   def events

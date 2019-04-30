@@ -1,0 +1,21 @@
+.row
+  .large-6.columns
+    .row
+      .large-8.columns
+        h3 = @case.name
+
+      .large-4.columns.text-right
+        br
+        | Status: 
+        span.label = I18n.t(@case.state)
+
+    .row
+      .large-12.columns
+        b Utworzył: 
+        = Db::User.find(@case.creator_id).display_name
+
+    .row
+      .large-12.columns
+        h5 Opis
+        .callout
+          = sanitize @case.destrciption

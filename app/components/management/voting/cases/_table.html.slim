@@ -1,0 +1,14 @@
+table.stack
+  thead
+    tr
+      th.text-center Temat głosowania
+      th.text-center Status głosowania
+      th.text-center Data utworzenia
+  tbody
+    - @cases.each do |c|
+      tr
+        td.text-center = link_to c.name, case_path(c)
+        td.text-center
+          = I18n.t c.state
+        td.text-center
+          span.label = c.created_at.to_date

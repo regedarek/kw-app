@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_171548) do
+ActiveRecord::Schema.define(version: 2019_04_30_143708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,17 @@ ActiveRecord::Schema.define(version: 2019_04_29_171548) do
     t.integer "owner", default: 0
     t.integer "cost", default: 0
     t.integer "rentable_id"
+  end
+
+  create_table "management_cases", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "state", default: "draft", null: false
+    t.text "destrciption"
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_management_cases_on_slug", unique: true
   end
 
   create_table "membership_fees", id: :serial, force: :cascade do |t|
