@@ -29,7 +29,7 @@
           li.show-for-small-only = link_to 'Twoje składki', membership_fees_path
           li.show-for-small-only= link_to t('.administration.logout'), destroy_user_session_path
 
-          - if current_user.admin? || current_user.roles.include?('office')
+          - if current_user.admin? || current_user.roles.include?('office') || current_user.roles.include?('management')
             li
               = link_to t('.administration.main'), admin_path
               ul.menu.vertical
@@ -37,6 +37,8 @@
                 - unless current_user.roles.include?('office')
                   li= link_to 'Baza klubowiczów', admin_profiles_path
                   li= link_to 'Baza składek', admin_membership_fees_path
+                - if can? :read, Management::Voting::CaseRecord
+                  li= link_to 'Głosowania', cases_path
                 - if can? :read, Settlement::ContractRecord
                   li= link_to 'Rozliczenia', admin_contracts_path
                 - unless current_user.roles.include?('reservations')
