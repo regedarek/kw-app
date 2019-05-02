@@ -36,6 +36,9 @@ class Db::User < ActiveRecord::Base
   has_many :project_users, class_name: 'Management::ProjectUsersRecord', foreign_key: :user_id
   has_many :projects, through: :project_users, foreign_key: :project_id, dependent: :destroy
 
+  has_many :votes, class_name: 'Management::Voting::VoteRecord', foreign_key: :user_id
+  has_many :cases, through: :votes, foreign_key: :case_id, dependent: :destroy
+
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts
 

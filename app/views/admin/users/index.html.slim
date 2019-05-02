@@ -23,8 +23,8 @@
               = f.label :phone_cont, 'Telefon'
               = f.search_field :phone_cont
             .large-3.columns
-              = f.label :admin_true, 'Administrator'
-              = f.select :admin_true, [nil, ['Tak', true], ['Nie', 'false']]
+              = f.label :roles, 'Uprawnienia'
+              = f.search_field :roles_contains_array
             .large-3.columns
               = f.label :curator_true, 'Opiekun'
               = f.select :curator_true, [nil, ['Tak', true], ['Nie', 'false']]

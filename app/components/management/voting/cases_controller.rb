@@ -28,6 +28,7 @@ module Management
 
       def show
         @case = Management::Voting::CaseRecord.friendly.find(params[:id])
+        @repository = Management::Voting::Repository.new
       end
 
       private
