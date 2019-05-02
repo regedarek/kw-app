@@ -20,6 +20,33 @@
         .callout
           = sanitize @case.destrciption
 
+    - if @case.attachments.any?
+      .row
+        .large-12.columns
+          - @case.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            = link_to attachment.url, download: File.basename(attachment.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail')
+              |  
+              = File.basename(attachment.file.path)
+            br
+          - @case.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+            - unless photo.blank? || photo.thumb.blank?
+              = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+              div id="photo-#{i}" class="full reveal" data-reveal="" 
+                = image_tag photo.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          h5 Komentarze
+          = render 'messaging/comments/comments', commentable: @case
+      .row
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @case
+
   .large-6.columns
     .row
       .large-12.columns
@@ -28,6 +55,18 @@
           b= @repository.voting_results(@case.id)
           h5 = "Przegłosowano?"
           b= I18n.t @repository.approved?(@case.id)
+    - if user_signed_in?
+      - unless @repository.voted?(@case.id, current_user.id)
+        .row
+          .large-12.columns
+            h5 Zagłosuj!
+            = link_to approve_case_path(@case.id)
+              i.fi.fi-like style='color: green; font-size: 40px'
+            |  
+            = link_to unapprove_case_path(@case.id)
+              i.fi.fi-dislike style='color: red; font-size: 40px'
+    .row
+      .large-12.columns
         h5 Głosujący
         ul.no-bullet
           - @repository.already_voted_on(@case.id).each do |vote|

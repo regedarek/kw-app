@@ -12,3 +12,8 @@
         .large-12.columns
           = f.label :destrciption, 'Opis głosowania'
           = f.trix_editor :destrciption, style: 'min-height: 150px'
+
+.row
+  .large-12.columns
+    = f.label :attachments, 'Załączniki'
+    = f.file_field :attachments, multiple: true

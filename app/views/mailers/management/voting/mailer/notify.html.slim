@@ -1,0 +1,27 @@
+b Głosowanie: 
+= @case.name
+br
+- if @case.destrciption
+  b Dodatkowe informacje
+  br
+  = sanitize @case.destrciption
+  br
+= link_to 'Szczegóły głosowania', case_url(@case.id)
+br
+br
+b Zagłosuj: 
+= link_to 'Jestem za!', approve_case_url(@case.id, user_id: @user.id)
+|  | 
+= link_to 'Jestem przeciw!', unapprove_case_url(@case.id, user_id: @user.id)
+br
+br
+- @case.attachments.any?
+  - @case.attachments.each do |attachment|
+    = link_to attachment.url, download: File.basename(attachment.file.path) do
+      = image_tag(image_url('file.jpg'), class: 'thumbnail')
+  br
+  br
+| --------------------------
+br
+br
+| Otrzymałeś ten e-mail aby zagłosować, zrób to!

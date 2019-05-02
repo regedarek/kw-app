@@ -13,7 +13,7 @@ module Management
     end
 
     def store_dir
-      "projects/attachments/#{model.id}"
+      "management/attachments/#{model.id}"
     end
 
     protected

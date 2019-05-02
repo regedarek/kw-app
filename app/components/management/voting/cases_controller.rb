@@ -31,6 +31,36 @@ module Management
         @repository = Management::Voting::Repository.new
       end
 
+      def approve
+        case_record = Management::Voting::CaseRecord.find(params[:id])
+        user = if user_signed_in?
+                 current_user
+               else
+                 Db::User.find(params[:user_id])
+               end
+        case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
+          vote.approved = true
+          vote.save
+        end if user
+
+        redirect_to case_path(params[:id])
+      end
+
+      def unapprove
+        case_record = Management::Voting::CaseRecord.find(params[:id])
+        user = if user_signed_in?
+                 current_user
+               else
+                 Db::User.find(params[:user_id])
+               end
+        case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
+          vote.approved = false
+          vote.save
+        end if user
+
+        redirect_to case_path(params[:id])
+      end
+
       private
 
       def create_record
@@ -42,7 +72,7 @@ module Management
       def case_params
         params
           .require(:case)
-          .permit(:name, :description, :creator_id)
+          .permit(:name, :destrciption, :creator_id, attachments: [])
       end
     end
   end

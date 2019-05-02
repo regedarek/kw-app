@@ -11,6 +11,7 @@ module Management
       required(:creator_id).filled(:int?)
       optional(:state).maybe
       optional(:destrciption).maybe(:str?)
+      optional(:attachments).maybe
     end
   end
 end

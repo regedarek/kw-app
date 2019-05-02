@@ -31,6 +31,10 @@ module Management
         return false if already_voted_on(case_id).count <= management_users.count / 2
         approved.count > unapproved.count
       end
+
+      def voted?(case_id, user_id)
+        already_voted_on(case_id).map(&:user_id).include?(user_id)
+      end
     end
   end
 end

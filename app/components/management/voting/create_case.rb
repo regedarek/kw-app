@@ -13,6 +13,10 @@ module Management
 
         case_record = Management::Voting::CaseRecord.create(form_outputs.to_h)
 
+        Management::Voting::Repository.new.management_users.each do |user|
+          Management::Voting::Mailer.notify(case_record.id, user.id).deliver_later
+        end
+
         Right(:success)
       end
 

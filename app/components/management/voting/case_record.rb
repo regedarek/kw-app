@@ -4,6 +4,9 @@ module Management
       include Workflow
       extend FriendlyId
 
+      mount_uploaders :attachments, Management::AttachmentUploader
+      serialize :attachments, JSON
+
       friendly_id :name, use: :slugged
       self.table_name = 'management_cases'
 
