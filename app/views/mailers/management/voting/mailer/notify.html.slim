@@ -18,7 +18,7 @@ br
 - @case.attachments.any?
   - @case.attachments.each do |attachment|
     = link_to attachment.url, download: File.basename(attachment.file.path) do
-      = image_tag(image_url('file.jpg'), class: 'thumbnail')
+      = image_tag('https://panel.kw.krakow.pl/assets/file-3895eaa67c6d39d47e980b6149f422d25a3815e86512f60c54240e6241d439e6.jpg', class: 'thumbnail')
   br
   br
 | --------------------------
