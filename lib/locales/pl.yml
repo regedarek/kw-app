@@ -1,4 +1,5 @@
 pl:
+  voting: czeka na głosy
   unauthorized:
     manage:
       all: "Nie masz dostępu do tej części panelu: zaloguj się lub opłać składkę, następnie skontaktuj się z administratorem!"
