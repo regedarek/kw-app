@@ -9,10 +9,12 @@ module Management
       end
 
       def new
+        authorize! :create, Management::Voting::CaseRecord
         @case_record = Management::Voting::CaseRecord.new
       end
 
       def create
+        authorize! :create, Management::Voting::CaseRecord
         either(create_record) do |result|
           result.success do
             redirect_to cases_path, flash: { notice: 'Utworzono głosowanie' }
@@ -59,6 +61,15 @@ module Management
         end if user
 
         redirect_to case_path(params[:id])
+      end
+
+      def destroy
+        case_record = Management::Voting::CaseRecord.find(params[:id])
+        authorize! :destroy, Management::Voting::CaseRecord
+
+        case_record.destroy
+
+        redirect_to cases_path
       end
 
       private
