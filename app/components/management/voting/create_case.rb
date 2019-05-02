@@ -15,6 +15,13 @@ module Management
         case_record.update state: 'voting'
 
         Management::Voting::Repository.new.management_users.each do |user|
+          NotificationCenter::NotificationRecord.create(
+            recipient_id: user.id,
+            actor_id: case_record.creator_id,
+            action: 'created_voting',
+            notifiable_id: case_record.id,
+            notifiable_type: 'Management::Voting::CaseRecord'
+          )
           Management::Voting::Mailer.notify(case_record.id, user.id).deliver_later
         end
 

@@ -1,0 +1,5 @@
+li style='min-width: 300px;'
+  = link_to case_path(notification.notifiable), class: "#{'unread' if !notification.read_at?}", data: { behaviour: 'js-notifications-mark-as-read' } do
+    b= notification.actor.display_name
+    = " dodał/a nowe głosowanie "
+    b=notification.notifiable.name
