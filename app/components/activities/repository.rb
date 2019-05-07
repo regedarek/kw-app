@@ -6,7 +6,7 @@ module Activities
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range_climbing_date, created_at: range_created_at })
+        .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range_climbing_date, created_at: range_created_at })
         .select('users.id, SUM(mountain_routes.length)')
         .group('users.id')
         .distinct
@@ -18,7 +18,7 @@ module Activities
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
         .select('users.id, SUM(mountain_routes.length)')
         .group('users.id')
         .distinct
@@ -30,7 +30,7 @@ module Activities
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
         .select('users.id, SUM(mountain_routes.length)')
         .group('users.id')
         .distinct
@@ -42,7 +42,7 @@ module Activities
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
         .select('users.id, SUM(mountain_routes.hearts_count)')
         .group('users.id')
         .distinct
@@ -54,7 +54,7 @@ module Activities
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
         .where("mountain_routes.description LIKE ?", "%#exploratortatr%").uniq
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#exploratortatr%'").count }.reverse!
     end
@@ -64,7 +64,7 @@ module Activities
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
         .where("mountain_routes.description LIKE ?", "%#dziadekgienek%").uniq
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#dziadekgienek%'").count }.reverse!
     end
