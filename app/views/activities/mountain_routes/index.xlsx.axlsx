@@ -12,36 +12,36 @@ wb.styles do |style|
   wb.add_worksheet(name: "przejścia narciarskie") do |sheet|
     default_attributes = attributes.map do |attr|
       Db::Activities::MountainRoute.human_attribute_name(attr)
-    end.push('Kto dodał?')
+    end.push('Kto dodał?').push('Koledzy z klubu')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     Db::Activities::MountainRoute.where(route_type: 'ski').order('climbing_date DESC NULLS LAST').each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
-      end.push(route.user.try(:display_name))
+      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence)
       sheet.add_row(default_values)
     end
   end
   wb.add_worksheet(name: "przejścia wspinaczkowe zimowe") do |sheet|
     default_attributes = attributes.map do |attr|
       Db::Activities::MountainRoute.human_attribute_name(attr)
-    end.push('Kto dodał?')
+    end.push('Kto dodał?').push('Koledzy z klubu')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     Db::Activities::MountainRoute.where(route_type: 'winter_climbing').order('climbing_date DESC NULLS LAST').each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
-      end.push(route.user.try(:display_name))
+      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence)
       sheet.add_row(default_values)
     end
   end
   wb.add_worksheet(name: "przejścia wspinaczkowe letnie") do |sheet|
     default_attributes = attributes.map do |attr|
       Db::Activities::MountainRoute.human_attribute_name(attr)
-    end.push('Kto dodał?')
+    end.push('Kto dodał?').push('Koledzy z klubu')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     Db::Activities::MountainRoute.where(route_type: 'regular_climbing').order('climbing_date DESC NULLS LAST').each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
-      end.push(route.user.try(:display_name))
+      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence)
       sheet.add_row(default_values)
     end
   end
