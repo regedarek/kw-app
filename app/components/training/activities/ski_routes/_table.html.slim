@@ -11,6 +11,6 @@ table.stack
     - routes.each do |user|
       tr
         td.text-center = i + 1
-        td.text-center.large-text-left = Db::User.find(user.id).display_name
+        td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(user.kw_id)
         td.text-center.large-text-left = user.sum
       - i += 1
