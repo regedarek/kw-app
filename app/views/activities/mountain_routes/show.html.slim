@@ -17,9 +17,28 @@
           = @route.climbing_date
 
     .row
+      - if @route.difficulty.present?
+        .large-12.columns
+          b trudność: 
+          = @route.difficulty
       - if @route.route_type == 'ski'
         = render 'ski_route', ski_route: @route
       - else
+        - if @route.length.present?
+          .large-12.columns
+            b długość drogi: 
+            = @route.length
+
+        - if can? :see_user_name, current_user
+          .large-12.columns
+            b skład zespołu: 
+            - if @route.partners.present? && @route.colleagues.any?
+              = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+            - elsif @route.colleagues.any?
+              = @route.colleagues.map(&:display_name).to_sentence
+            - else
+              = @route.partners
+
         - if @route.peak.present?
           .large-12.columns
             b szczyt, przełęcz, ściana: 
