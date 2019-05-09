@@ -17,7 +17,7 @@ module Events
         def singles
           @competition
             .sign_ups_records
-            .includes(:payment)
+            .includes([:payment, :emails])
             .where(
               single: true,
               teammate_id: nil,
@@ -28,7 +28,7 @@ module Events
         def teams_from_singles
           @competition
             .sign_ups_records
-            .includes(:payment)
+            .includes([:payment, :emails])
             .where(
               single: true,
               payments: { state: 'prepaid' }
@@ -38,14 +38,14 @@ module Events
         def teams
           @competition
             .sign_ups_records
-            .includes(:payment)
+            .includes([:payment, :emails])
             .where(single: false, payments: { state: 'prepaid' })
         end
 
         def waiting
           @competition
             .sign_ups_records
-            .includes(:payment)
+            .includes([:payment, :emails])
             .where(payments: { state: 'unpaid' })
         end
 
