@@ -6,9 +6,8 @@ table.stack
         th width='8%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
         th width='2%' wycena
-        th width='2%' = sort_link(@q, :rating, 'ocena')
         - if user_signed_in?
-          th width='25%' = sort_link(@q, :partners, 'skład zespołu')
+          th width='27%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
         th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
         - if user_signed_in?
@@ -19,9 +18,8 @@ table.stack
         th width='10%' kiedy?
         th width='20%' nazwa przejścia
         th width='2%' wycena
-        th width='2%' ocena
         - if user_signed_in?
-          th width='25%' skład zespołu
+          th width='27%' skład zespołu
         th width='12%'
         th.text-center width='7%' bicki
         - if user_signed_in?
@@ -37,13 +35,13 @@ table.stack
           span.dashboard-table-timestamp= truncate(route.peak, length: 25)
         td.text-center
           = route.difficulty
-        td.text-center
-          - if route.rating.present?
-            - route.rating.times do
-              i.fi-star
         - if user_signed_in?
           td.text-center.large-text-left
-            = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
+            - names = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).join(', ')
+            - truncated = truncate(names, length: 45, separator: ',')
+            - length = truncated.length - 2
+            h6.dashboard-table-text= truncated
+            span.dashboard-table-timestamp-small= names.from(length).to(-1)
         td.text-center
           = render 'photos/photos', photos: route.attachments, take: 2
         td.text-center

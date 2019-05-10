@@ -5,6 +5,12 @@
   margin-top: 0;
 }
 
+.dashboard-table-timestamp-small {
+  color: darken($light-gray, 30%);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
 .dashboard-table-timestamp {
   color: darken($light-gray, 30%);
   font-size: 0.9rem;
