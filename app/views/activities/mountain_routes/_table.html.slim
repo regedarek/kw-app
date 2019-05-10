@@ -41,7 +41,8 @@ table.stack
             - truncated = truncate(names, length: 45, separator: ',')
             - length = truncated.length - 2
             h6.dashboard-table-text= truncated
-            span.dashboard-table-timestamp-small= names.from(length).to(-1)
+            - if length < 0
+              span.dashboard-table-timestamp-small= names.from(length).to(-1)
         td.text-center
           = render 'photos/photos', photos: route.attachments, take: 2
         td.text-center
