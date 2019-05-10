@@ -37,10 +37,10 @@ table.stack
           = route.difficulty
         - if user_signed_in?
           td.text-center.large-text-left
-            - truncation = 45
+            - truncation = 46
             - names = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).join(', ')
-            - truncated = truncate(names, length: truncation, separator: ',')
-            - length = truncated.length - 2
+            - truncated = truncate(names, length: truncation, separator: ',', omission: ',')
+            - length = truncated.length
             h6.dashboard-table-text= truncated
             - if names.length > truncation
               span.dashboard-table-timestamp-small= names.from(length).to(-1)
