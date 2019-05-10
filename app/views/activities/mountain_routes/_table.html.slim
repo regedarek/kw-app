@@ -37,11 +37,12 @@ table.stack
           = route.difficulty
         - if user_signed_in?
           td.text-center.large-text-left
+            - truncation = 45
             - names = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).join(', ')
-            - truncated = truncate(names, length: 45, separator: ',')
+            - truncated = truncate(names, length: truncation, separator: ',')
             - length = truncated.length - 2
             h6.dashboard-table-text= truncated
-            - if length < 0
+            - if names.length > truncation
               span.dashboard-table-timestamp-small= names.from(length).to(-1)
         td.text-center
           = render 'photos/photos', photos: route.attachments, take: 2
