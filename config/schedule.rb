@@ -9,6 +9,7 @@ end
 
 every 24.hours do
   rake :send_reminders
+  rake :send_voting_reminders
   rake :destroy_unpaid_reservations
   rake :set_regular_members
   rake :destroy_outdated_profiles

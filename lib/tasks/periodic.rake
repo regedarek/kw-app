@@ -4,6 +4,10 @@ task :send_reminders => :environment do
   Admin::ReservationReminder.send_reminders
 end
 
+task :send_voting_reminders => :environment do
+  Management::Voting::Reminder.send_reminders
+end
+
 task :send_yearly_fee_reminder => :environment do
   Membership::FeesReminderService.new.call
 end
