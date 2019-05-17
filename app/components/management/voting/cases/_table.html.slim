@@ -5,7 +5,8 @@ table.stack
       th.text-center Temat głosowania
       th.text-center Status głosowania
       th.text-center Data utworzenia
-      th
+      - if can? :destroy, Management::Voting::CaseRecord
+        th
   tbody
     - @cases.each do |c|
       tr
@@ -15,6 +16,7 @@ table.stack
           = I18n.t c.state
         td.text-center
           span.label = c.created_at.to_date
-        td
-          = link_to case_path(c.id), method: :delete, data: { confirm: 'Jesteś pewien?' } do
-            i.fi-trash
+        - if can? :destroy, Management::Voting::CaseRecord
+          td
+            = link_to case_path(c.id), method: :delete, data: { confirm: 'Jesteś pewien?' } do
+              i.fi-trash

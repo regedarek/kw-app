@@ -5,7 +5,7 @@ module Management
       append_view_path 'app/components'
 
       def index
-        @cases = Management::Voting::CaseRecord.order(created_at: :desc)
+        @cases = Management::Voting::CaseRecord.accessible_by(current_ability).order(created_at: :desc)
       end
 
       def new
@@ -30,7 +30,28 @@ module Management
 
       def show
         @case = Management::Voting::CaseRecord.friendly.find(params[:id])
+        authorize! :read, @case
         @repository = Management::Voting::Repository.new
+      end
+
+      def approve_for_all
+        repository = Management::Voting::Repository.new
+        case_record = Management::Voting::CaseRecord.find(params[:id])
+
+        repository.management_users.each do |user|
+          case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
+            vote.approved = true
+            vote.save
+          end
+        end
+
+        if case_record.voting? && repository.approved?(case_record.id)
+          case_record.close!
+          nr = Management::Voting::CaseRecord.where(state: 'closed', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+          case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
+        end
+
+        redirect_to case_path(params[:id])
       end
 
       def approve

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :cases, path: 'glosowania' do
         member do
           get :approve
+          put :approve_for_all
           get :unapprove
         end
       end

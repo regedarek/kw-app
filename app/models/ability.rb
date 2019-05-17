@@ -24,15 +24,18 @@ class Ability
 
   def default
     can :create, Db::Profile
+    cannot :read, Management::Voting::CaseRecord
   end
 
   def not_active
     can :manage, Db::Activities::MountainRoute
     can [:read, :update], Settlement::ContractRecord, creator_id: user.id
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
+    cannot :read, Management::Voting::CaseRecord
   end
 
   def active
+    can :read, Management::Voting::CaseRecord, state: 'closed'
     can :manage, Db::Activities::MountainRoute
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::Activities::MountainRoute
