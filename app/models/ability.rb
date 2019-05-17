@@ -10,6 +10,7 @@ class Ability
     not_active if @user.persisted?
     active if @user.active?
     admin if role?('admin')
+    management if role?('secondary_management')
     management if role?('management')
     office_king if role?('office_king')
     routes if role?('routes')
