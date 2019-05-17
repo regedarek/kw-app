@@ -9,7 +9,7 @@
         | Status: 
         span.label = I18n.t(@case.state)
 
-    - if @case.closed?
+    - if @case.finished?
       .row
         .large-12.columns
           b Numer: 
@@ -91,7 +91,7 @@
               i.fi.fi-megaphone style='color: orange; padding-right: 7px;'
               = user.display_name
       - if can? :approve_for_all, Management::Voting::CaseRecord
-        - unless @case.closed?
+        - unless @case.finished?
           .large-6.columns
             h5 Zagłosuj przez aklamację
             .text-center

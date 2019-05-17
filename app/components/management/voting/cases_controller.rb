@@ -46,8 +46,8 @@ module Management
         end
 
         if case_record.voting? && repository.approved?(case_record.id)
-          case_record.close!
-          nr = Management::Voting::CaseRecord.where(state: 'closed', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+          case_record.finish!
+          nr = Management::Voting::CaseRecord.where(state: 'finished', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
           case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
         end
 
@@ -68,8 +68,8 @@ module Management
         end if user
 
         if case_record.voting? && repository.approved?(case_record.id)
-          case_record.close!
-          nr = Management::Voting::CaseRecord.where(state: 'closed', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+          case_record.finish!
+          nr = Management::Voting::CaseRecord.where(state: 'finished', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
           case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
         end
 

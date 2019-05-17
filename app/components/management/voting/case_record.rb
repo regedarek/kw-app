@@ -17,9 +17,9 @@ module Management
       workflow_column :state
       workflow do
         state :voting do
-          event :close, :transitions_to => :closed
+          event :finish, :transitions_to => :finished
         end
-        state :closed
+        state :finished
       end
     end
   end

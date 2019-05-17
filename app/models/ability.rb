@@ -36,7 +36,7 @@ class Ability
   end
 
   def active
-    can :read, Management::Voting::CaseRecord, state: 'closed'
+    can :read, Management::Voting::CaseRecord, state: 'finished'
     can :manage, Db::Activities::MountainRoute
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::Activities::MountainRoute
