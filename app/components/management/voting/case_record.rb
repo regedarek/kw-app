@@ -16,7 +16,6 @@ module Management
 
       workflow_column :state
       workflow do
-        state :draft
         state :voting do
           event :close, :transitions_to => :closed
         end
