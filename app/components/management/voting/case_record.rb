@@ -17,9 +17,10 @@ module Management
       workflow_column :state
       workflow do
         state :draft
-        state :voting
-        state :suspended
-        state :archived
+        state :voting do
+          event :close, :transitions_to => :closed
+        end
+        state :closed
       end
     end
   end

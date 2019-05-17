@@ -1,6 +1,7 @@
 table.stack
   thead
     tr
+      th.text-center Numer głosowania
       th.text-center Temat głosowania
       th.text-center Status głosowania
       th.text-center Data utworzenia
@@ -8,6 +9,7 @@ table.stack
   tbody
     - @cases.each do |c|
       tr
+        td.text-center = c.number
         td.text-center = link_to c.name, case_path(c)
         td.text-center
           = I18n.t c.state

@@ -34,6 +34,7 @@ module Management
       end
 
       def approve
+        repository = Management::Voting::Repository.new
         case_record = Management::Voting::CaseRecord.find(params[:id])
         user = if user_signed_in?
                  current_user
@@ -44,6 +45,12 @@ module Management
           vote.approved = true
           vote.save
         end if user
+
+        if case_record.voting? && repository.approved?(case_record.id)
+          case_record.close!
+          nr = Management::Voting::CaseRecord.where(state: 'closed', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+          case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
+        end
 
         redirect_to case_path(params[:id])
       end
