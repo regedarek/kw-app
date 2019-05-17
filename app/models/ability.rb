@@ -51,6 +51,7 @@ class Ability
 
   def secondary_management
     can :read, Management::Voting::CaseRecord
+    can :manage, Management::ProjectRecord
   end
 
   def management
