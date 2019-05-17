@@ -87,6 +87,8 @@
             = link_to 'Zaloguj lub zarejestruj', edit_user_registration_path
           ul.menu.vertical
             - if user_signed_in?
+              - if can? :read, Management::Voting::CaseRecord
+                li= link_to 'Głosowania', cases_path, class: 'button secondary'
               - if can? :read, Settlement::ContractRecord
                 li= link_to 'Rozliczenia', admin_contracts_path, class: 'button alert'
               li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button'
