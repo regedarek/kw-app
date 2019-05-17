@@ -66,13 +66,20 @@
       - if can? :approve, Management::Voting::CaseRecord
         - unless @repository.voted?(@case.id, current_user.id)
           .row
-            .large-12.columns
+            .large-6.columns
               h5 Zagłosuj!
               = link_to approve_case_path(@case.id)
                 i.fi.fi-like style='color: green; font-size: 40px'
               |  
               = link_to unapprove_case_path(@case.id)
                 i.fi.fi-dislike style='color: red; font-size: 40px'
+            - if can? :approve_for_all, Management::Voting::CaseRecord
+              - unless @case.finished?
+                .large-6.columns
+                  .text-center
+                    h5 Zagłosuj przez aklamację
+                    = link_to approve_for_all_case_path(@case.id), method: :put, data: { confirm: 'Jesteś pewien?' }
+                      i.fi.fi-like style='color: green; font-size: 40px'
     .row
       .large-6.columns
         h5 Głosujący
@@ -90,13 +97,12 @@
             li
               i.fi.fi-megaphone style='color: orange; padding-right: 7px;'
               = user.display_name
-      - if can? :approve_for_all, Management::Voting::CaseRecord
-        - unless @case.finished?
-          .large-6.columns
-            h5 Zagłosuj przez aklamację
-            .text-center
-              = link_to approve_for_all_case_path(@case.id), method: :put, data: { confirm: 'Jesteś pewien?' }
-                i.fi.fi-like style='color: green; font-size: 40px'
+      - if can? :hide, Management::Voting::CaseRecord
+        .large-6.columns
+          .text-center
+            h5 Ukryj głosowanie
+            = link_to hide_case_path(@case.id), method: :put, data: { confirm: 'Jesteś pewien?' }
+              i.fi.fi-lock style='color: orange; font-size: 40px'
 
     .row
       .large-12.columns

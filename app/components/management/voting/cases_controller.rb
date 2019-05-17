@@ -91,6 +91,13 @@ module Management
         redirect_to case_path(params[:id])
       end
 
+      def hide
+        case_record = Management::Voting::CaseRecord.find(params[:id])
+        case_record.update hidden: true
+
+        redirect_to case_path(params[:id])
+      end
+
       def destroy
         case_record = Management::Voting::CaseRecord.find(params[:id])
         authorize! :destroy, Management::Voting::CaseRecord

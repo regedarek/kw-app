@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         member do
           get :approve
           put :approve_for_all
+          put :hide
           get :unapprove
         end
       end
