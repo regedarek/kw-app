@@ -49,6 +49,10 @@ class Ability
     can :manage, Events::Db::SignUpRecord
   end
 
+  def secondary_management
+    can :read, Management::Voting::CaseRecord
+  end
+
   def management
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
