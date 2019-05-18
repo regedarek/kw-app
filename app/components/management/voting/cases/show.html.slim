@@ -100,9 +100,13 @@
       - if can? :hide, Management::Voting::CaseRecord
         .large-6.columns
           .text-center
-            h5 Ukryj głosowanie
-            = link_to hide_case_path(@case.id), method: :put, data: { confirm: 'Jesteś pewien?' }
-              i.fi.fi-lock style='color: orange; font-size: 40px'
+            - if @case.hidden
+              h5 Ukryte głosowanie
+              i.fi.fi-lock style='color: gray; font-size: 40px'
+            - else
+              h5 Ukryj głosowanie
+              = link_to hide_case_path(@case.id), method: :put, data: { confirm: 'Jesteś pewien?' }
+                i.fi.fi-lock style='color: orange; font-size: 40px'
 
     .row
       .large-12.columns
