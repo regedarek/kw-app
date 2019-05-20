@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_221345) do
+ActiveRecord::Schema.define(version: 2019_05_20_230400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_221345) do
     t.string "attachments"
     t.integer "document_type"
     t.date "document_date"
+    t.integer "group_type"
   end
 
   create_table "donations", id: :serial, force: :cascade do |t|

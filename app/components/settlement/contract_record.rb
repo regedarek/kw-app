@@ -3,6 +3,7 @@ module Settlement
     include Workflow
 
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
+    enum group_type: [:snw, :gtw, :sww, :stj]
     mount_uploaders :attachments, Settlement::AttachmentUploader
     serialize :attachments, JSON
 

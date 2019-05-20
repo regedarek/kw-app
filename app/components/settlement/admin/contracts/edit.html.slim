@@ -13,7 +13,7 @@
           = f.text_field :title
 
         .medium-3.columns
-          b= f.label :document_date, "Data dokumentu"
+          b= f.label :document_date, "Data dokumentu *"
           = f.date_field :document_date
 
         .medium-3.columns
@@ -34,6 +34,9 @@
             b= f.label :state, "Status"
             = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
 
+          .medium-3.columns
+            b= f.label :group_type, 'Sekcja'
+            = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
 
       .row
         .medium-12.columns

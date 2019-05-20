@@ -139,7 +139,7 @@ module Settlement
         params
           .require(:contract)
           .permit(
-            :document_type, :document_date, :title, :description, :cost, :state, attachments: [], users_names: []
+            :group_type, :document_type, :document_date, :title, :description, :cost, :state, attachments: [], users_names: []
           )
       end
     end

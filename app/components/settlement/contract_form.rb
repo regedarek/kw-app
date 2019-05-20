@@ -12,6 +12,7 @@ module Settlement
     required(:document_date).filled(:str?)
     required(:description).maybe(:str?)
     optional(:attachments).maybe
+    optional(:group_type).maybe
     required(:users_names).each(:int?)
   end
 end
