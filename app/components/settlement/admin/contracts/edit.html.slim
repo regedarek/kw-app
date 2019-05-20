@@ -8,14 +8,18 @@
               li= msg
 
       .row
-        .medium-6.columns
+        .medium-3.columns
           b= f.label :title, "Nazwa rozliczenia"
           = f.text_field :title
 
-        - if can? :manage, @contract
-          .medium-3.columns
-            b= f.label :state, "Status"
-            = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
+        .medium-3.columns
+          b= f.label :document_date, "Data dokumentu"
+          = f.date_field :document_date
+
+        .medium-3.columns
+          b= f.label :document_type, 'Rodzaj dokumentu *'
+          = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.document_type
+
 
         .medium-3.columns
           b= f.label :cost, "Kwota rozliczenia"
@@ -23,6 +27,13 @@
             = f.number_field :cost, step: 0.01, class: 'input-group-field'
             span.input-group-label
                 | zł
+
+      .row
+        - if can? :manage, @contract
+          .medium-3.columns
+            b= f.label :state, "Status"
+            = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
+
 
       .row
         .medium-12.columns

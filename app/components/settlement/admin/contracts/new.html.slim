@@ -8,9 +8,18 @@
               li= msg
 
       .row
-        .medium-9.columns
+        .medium-3.columns
           b= f.label :title, "Nazwa rozliczenia"
           = f.text_field :title
+
+        .medium-3.columns
+          b= f.label :document_date, "Data dokumentu"
+          = f.date_field :document_date
+
+        .medium-3.columns
+          b= f.label :document_type, 'Rodzaj dokumentu *'
+          = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, include_blank: true
+
 
         .medium-3.columns
           b= f.label :cost, "Kwota rozliczenia"

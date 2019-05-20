@@ -1,4 +1,11 @@
 pl:
+  fv: Faktura
+  work: Umowa o dzieło
+  service: Umowa o zlecenie
+  volunteering: Umowa wolontariatu
+  bill: Rachunek
+  charities: Darowizna
+  taxes: Podatki
   voting: czeka na głosy
   unauthorized:
     manage:

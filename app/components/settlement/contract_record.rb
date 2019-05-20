@@ -2,6 +2,7 @@ module Settlement
   class ContractRecord < ActiveRecord::Base
     include Workflow
 
+    enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
     mount_uploaders :attachments, Settlement::AttachmentUploader
     serialize :attachments, JSON
 
