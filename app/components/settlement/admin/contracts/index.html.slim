@@ -37,7 +37,7 @@
             td = contract.cost
             td
               - if can? :accept, Settlement::ContractRecord
-                - if contract.accepted?
+                - if contract.accepted? || contract.closed?
                   = contract.acceptor&.display_name
                 - else
                   - if user_signed_in?
