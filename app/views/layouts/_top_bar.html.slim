@@ -8,6 +8,7 @@
     .top-bar-left
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
 
+        li= link_to 'Dla Mariusza', mariusz_path, class: 'button warning'
         - if request.path == '/przejscia'
           - if current_user.roles.include?('mountain_routes')
             li= link_to 'XLSX', activities_mountain_routes_path(format: :xlsx), class: 'button hollow'
