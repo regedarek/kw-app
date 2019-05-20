@@ -8,11 +8,11 @@ module Charity
 
     def create
       either(create_record) do |result|
-        result.success { redirect_to admin_contracts_path }
+        result.success { |payment:| redirect_to charge_payment_path(payment.id) }
 
         result.failure do |errors|
           flash[:error] = errors.values.join(", ")
-          render :new
+          redirect_to mariusz_path
         end
       end
     end
