@@ -17,6 +17,9 @@ module Management
         Management::Voting::CaseRecord.where(state: 'voting').each do |case_record|
           if case_record.created_at <= 7.days.ago
             case_record.finish!
+
+            nr = Management::Voting::CaseRecord.where(state: 'finished', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+            case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
           end
         end
 
