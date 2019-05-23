@@ -73,6 +73,9 @@
               |  
               = link_to unapprove_case_path(@case.id)
                 i.fi.fi-dislike style='color: red; font-size: 40px'
+              |  
+              = link_to abstain_case_path(@case.id)
+                i.fi.fi-prohibited style='color: lightblue; font-size: 40px'
             - if can? :approve_for_all, Management::Voting::CaseRecord
               - unless @case.finished?
                 .large-6.columns
@@ -88,7 +91,9 @@
             li
               - if vote.approved?
                 i.fi.fi-like style='color: green; padding-right: 7px;'
-              - else
+              - if vote.abstained?
+                i.fi.fi-prohibited style='color: lightblue; padding-right: 7px;'
+              - if vote.unapproved?
                 i.fi.fi-dislike style='color: red; padding-right: 7px;'
               = vote.user.display_name
         h5 Jeszcze nie zagłosowali

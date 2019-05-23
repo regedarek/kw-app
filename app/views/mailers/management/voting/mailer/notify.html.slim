@@ -13,6 +13,8 @@ b Zagłosuj:
 = link_to 'Jestem za!', approve_case_url(@case.id, user_id: @user.id)
 |  | 
 = link_to 'Jestem przeciw!', unapprove_case_url(@case.id, user_id: @user.id)
+|  | 
+= link_to 'Wstrzymuję się!', abstain_case_url(@case.id, user_id: @user.id)
 br
 br
 - @case.attachments.any?

@@ -8,6 +8,7 @@ every 1.hour do
 end
 
 every 24.hours do
+  rake :close_outdated_voting
   rake :send_reminders
   rake :send_voting_reminders
   rake :destroy_unpaid_reservations

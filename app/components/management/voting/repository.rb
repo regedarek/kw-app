@@ -18,15 +18,15 @@ module Management
       end
 
       def voting_results(case_id)
-        approved = already_voted_on(case_id).where(approved: true)
-        unapproved = already_voted_on(case_id).where(approved: false)
+        approved = already_voted_on(case_id).where(decision: 'approved')
+        unapproved = already_voted_on(case_id).where(decision: 'unapproved')
 
         "#{approved.count} /\ #{unapproved.count} /\ #{already_voted_on(case_id).count}"
       end
 
       def approved?(case_id)
-        approved = already_voted_on(case_id).where(approved: true)
-        unapproved = already_voted_on(case_id).where(approved: false)
+        approved = already_voted_on(case_id).where(decision: 'approved')
+        unapproved = already_voted_on(case_id).where(decision: 'unapproved')
 
         return false if already_voted_on(case_id).count <= management_users.count / 2
         approved.count > unapproved.count

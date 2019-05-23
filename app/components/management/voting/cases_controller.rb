@@ -40,7 +40,7 @@ module Management
 
         repository.management_users.each do |user|
           case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
-            vote.approved = true
+            vote.decision = 'approved'
             vote.save
           end
         end
@@ -63,7 +63,7 @@ module Management
                  Db::User.find(params[:user_id])
                end
         case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
-          vote.approved = true
+          vote.decision = 'approved'
           vote.save
         end if user
 
@@ -84,9 +84,31 @@ module Management
                  Db::User.find(params[:user_id])
                end
         case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
-          vote.approved = false
+          vote.decision = 'unapproved'
           vote.save
         end if user
+
+        redirect_to case_path(params[:id])
+      end
+
+      def abstain
+        repository = Management::Voting::Repository.new
+        case_record = Management::Voting::CaseRecord.find(params[:id])
+        user = if user_signed_in?
+                 current_user
+               else
+                 Db::User.find(params[:user_id])
+               end
+        case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
+          vote.decision = 'abstained'
+          vote.save
+        end if user
+
+        if case_record.voting? && repository.approved?(case_record.id)
+          case_record.finish!
+          nr = Management::Voting::CaseRecord.where(state: 'finished', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+          case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
+        end
 
         redirect_to case_path(params[:id])
       end

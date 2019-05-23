@@ -8,6 +8,10 @@ task :send_voting_reminders => :environment do
   Management::Voting::Reminder.send_reminders
 end
 
+task :close_outdated_voting => :environment do
+  Management::Voting::Reminder.close_outdated
+end
+
 task :send_yearly_fee_reminder => :environment do
   Membership::FeesReminderService.new.call
 end
