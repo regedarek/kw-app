@@ -13,6 +13,8 @@ module Settlement
     required(:description).maybe(:str?)
     optional(:attachments).maybe
     optional(:group_type).maybe
+    optional(:financial_type).maybe
+    optional(:period_date).maybe
     required(:users_names).each(:int?)
   end
 end

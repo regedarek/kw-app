@@ -1,4 +1,10 @@
 pl:
+  financial_type:
+    opp_paid: OPP odpłatna
+    opp_unpaid: OPP nieodpłatna
+    administration: Administracja
+    charity: Darowizny
+    economic_activity: Działalność gospodarcza
   sww: Sekcja Wspinaczki Wysokogórskiej
   snw: Sekcja Narciarstwa Wysokogórskiego
   stj: Sekcja Taternictwa Jaskiniowego

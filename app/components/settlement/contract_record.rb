@@ -3,7 +3,9 @@ module Settlement
     include Workflow
 
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
+    enum financial_type: [:opp_paid, :opp_unpaid, :administration, :charity, :economic_activity]
     enum group_type: [:snw, :gtw, :sww, :stj]
+
     mount_uploaders :attachments, Settlement::AttachmentUploader
     serialize :attachments, JSON
 
@@ -23,7 +25,10 @@ module Settlement
       end
       state :rejected
       state :accepted do
-        event :prepayment, :transitions_to => :closed
+        event :prepayment, :transitions_to => :preclosed
+      end
+      state :preclosed do
+        event :finish, :transitions_to => :closed
       end
       state :closed
     end

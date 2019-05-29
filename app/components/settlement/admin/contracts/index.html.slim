@@ -1,9 +1,11 @@
 .row
-  .large-9.columns
+  .large-8.columns
     h3 Rozliczenia, faktury, przelewy, umowy wolontariackie
-  - if can? :create, Settlement::ContractRecord
-    .large-3.columns
-      .text-right
+  .large-4.columns
+    .text-right
+      - if can? :read, Settlement::ContractRecord
+        = link_to 'A', admin_contracts_path(archive: true), class: 'button warning'
+      - if can? :create, Settlement::ContractRecord
         = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
 
 .row
