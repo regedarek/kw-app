@@ -29,7 +29,7 @@
 
           .large-4.columns
             = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-            = f.select :state_cont_any, [['new', 'Nowe'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Zakończone', 'closed']], { }, { multiple: true }
+            = f.select :state_cont_any, [['Nowe', 'new'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Zakończone', 'closed']], { }, { multiple: true }
 
           .large-2.columns
             = f.label :cost_gteq, 'Kwota od'
