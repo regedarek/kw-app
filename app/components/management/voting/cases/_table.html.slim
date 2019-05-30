@@ -1,22 +1,28 @@
 table.stack
   thead
     tr
-      th.text-center Numer głosowania
-      th.text-center Temat głosowania
-      th.text-center Status głosowania
-      th.text-center Data utworzenia
+      th.text-center width='6%' Numer uchwały
+      th.text-center  width='40%' Temat
+      - if can? :manage, Management::Voting::CaseRecord
+        th.text-center  width='8%' Status
+      th.text-center width='5%' Przyjęta?
+      th.text-center width='8%' Data uchwalenia
       - if can? :destroy, Management::Voting::CaseRecord
-        th
+        th.text-rigth width='3%'
   tbody
     - @cases.each do |c|
       tr
-        td.text-center = c.number
-        td.text-center = link_to c.name, case_path(c)
+        td.text-left = c.number
+        td.text-left = link_to c.name, case_path(c)
+        - if can? :manage, Management::Voting::CaseRecord
+          td.text-center
+            span.label = I18n.t c.state
         td.text-center
-          = I18n.t c.state
+          span.label = I18n.t Management::Voting::Repository.new.approved?(c.id)
         td.text-center
-          span.label = c.created_at.to_date
+          - if c.finished?
+            span = c.updated_at.to_date
         - if can? :destroy, Management::Voting::CaseRecord
-          td
+          td.text-rigth
             = link_to case_path(c.id), method: :delete, data: { confirm: 'Jesteś pewien?' } do
               i.fi-trash
