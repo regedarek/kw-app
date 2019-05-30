@@ -1,51 +1,51 @@
+---
 pl:
+  archived: zarchiwizowane
+  bill: Rachunek
+  charities: Darowizna
+  close_alert: Zamknij alert
+  draft: w przygotowaniu
+  'false': Nie
+  false_value: Nie
   financial_type:
-    opp_paid: OPP odpłatna
-    opp_unpaid: OPP nieodpłatna
     administration: Administracja
     charity: Darowizny
     economic_activity: Działalność gospodarcza
-  sww: Sekcja Wspinaczki Wysokogórskiej
-  snw: Sekcja Narciarstwa Wysokogórskiego
-  stj: Sekcja Taternictwa Jaskiniowego
-  gtw: Grupa Turystyki Wysokogórskiej
+    opp_paid: OPP odpłatna
+    opp_unpaid: OPP nieodpłatna
   fv: Faktura
-  work: Umowa o dzieło
-  service: Umowa o zlecenie
-  volunteering: Umowa wolontariatu
-  bill: Rachunek
-  charities: Darowizna
-  taxes: Podatki
-  voting: czeka na głosy
-  unauthorized:
-    manage:
-      all: "Nie masz dostępu do tej części panelu: zaloguj się lub opłać składkę, następnie skontaktuj się z administratorem!"
-  true_value: Tak
-  false_value: Nie
-  'false': Nie
-  archived: zarchiwizowane
-  reserved: zarazerwowane
-  draft: w przygotowaniu
-  unassigned: nie przypisany
-  in_progress: w trakcie
-  suspended: zawieszony
+  gtw: Grupa Turystyki Wysokogórskiej
   holding: w posiadaniu
-  ski: Narciarstwo Wysokogórskie
-  regular_climbing: Wspinaczka
-  winter_climbing: Wspinaczka
-  title: Klub Wysokogórski Kraków
-  close_alert: Zamknij alert
+  in_progress: w trakcie
   pay: Zapłać
   prepaid: Opłacono
-  unpaid: Czeka na zapłatę
-  resign: Zrezygnuj
-  reserve: Zarezerwuj
+  regular_climbing: Wspinaczka
   reservations:
     table:
-      title: Twoje rezerwacje
-      id: "Rezerwacja nr: #%{id}"
-      item: Przedmiot
-      period: "Od %{start_date} do %{end_date}"
-      cost: "Razem: %{cost} zł"
+      cost: 'Razem: %{cost} zł'
+      id: 'Rezerwacja nr: #%{id}'
       item:
         cost: "%{cost} zł"
+      period: Od %{start_date} do %{end_date}
+      title: Twoje rezerwacje
+  reserve: Zarezerwuj
+  reserved: zarazerwowane
+  resign: Zrezygnuj
+  service: Umowa o zlecenie
+  ski: Narciarstwo Wysokogórskie
+  snw: Sekcja Narciarstwa Wysokogórskiego
+  stj: Sekcja Taternictwa Jaskiniowego
+  suspended: zawieszony
+  sww: Sekcja Wspinaczki Wysokogórskiej
+  taxes: Podatki
+  title: Klub Wysokogórski Kraków
+  true_value: Tak
+  unassigned: nie przypisany
+  unauthorized:
+    manage:
+      all: 'Nie masz dostępu do tej części panelu: zaloguj się lub opłać składkę, następnie skontaktuj się z administratorem!'
+  unpaid: Czeka na zapłatę
+  volunteering: Umowa wolontariatu
+  voting: czeka na głosy
+  winter_climbing: Wspinaczka
+  work: Umowa o dzieło

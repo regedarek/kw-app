@@ -1,22 +1,22 @@
+---
 sk:
-  true_value: Áno
-  false_value: Nie
-  ski: 'Narciarstwo'
-  regular_climbing: 'Wspinaczka letnia'
-  winter_climbing: 'Wspinaczka zimowa'
-  title: Klub Wysokogórski Kraków
   close_alert: Zamknij alert
+  false_value: Nie
   pay: Platiť
   prepaid: Opłacono
-  unpaid: Czeka na zapłatę
-  resign: Zrezygnuj
-  reserve: Zarezerwuj
+  regular_climbing: Wspinaczka letnia
   reservations:
     table:
-      title: Twoje rezerwacje
-      id: "Rezerwacja nr: #%{id}"
-      item: Przedmiot
-      period: "Od %{start_date} do %{end_date}"
-      cost: "Razem: %{cost} zł"
+      cost: 'Razem: %{cost} zł'
+      id: 'Rezerwacja nr: #%{id}'
       item:
         cost: "%{cost} zł"
+      period: Od %{start_date} do %{end_date}
+      title: Twoje rezerwacje
+  reserve: Zarezerwuj
+  resign: Zrezygnuj
+  ski: Narciarstwo
+  title: Klub Wysokogórski Kraków
+  true_value: Áno
+  unpaid: Czeka na zapłatę
+  winter_climbing: Wspinaczka zimowa
