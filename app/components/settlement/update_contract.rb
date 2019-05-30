@@ -13,7 +13,10 @@ module Settlement
 
       contract = Settlement::ContractRecord.find(id)
       contract.update(form_outputs.to_h)
-      contract.update period_date: Date.civil(raw_inputs['period_date(1i)'].to_i, raw_inputs['period_date(2i)'].to_i, raw_inputs['period_date(3i)'].to_i)
+      contract.update(
+        period_date: Date.civil(raw_inputs['period_date(1i)'].to_i, raw_inputs['period_date(2i)'].to_i, raw_inputs['period_date(3i)'].to_i),
+        contractor_id: form_outputs[:contractor_name].first.to_i
+      )
 
       office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
       contract_user_ids = contract.users.map(&:id)

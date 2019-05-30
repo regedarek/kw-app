@@ -20,13 +20,22 @@
           b= f.label :document_type, 'Rodzaj dokumentu *'
           = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.document_type
 
-
         .medium-3.columns
           b= f.label :cost, "Kwota rozliczenia"
           .input-group
             = f.number_field :cost, step: 0.01, class: 'input-group-field'
             span.input-group-label
                 | zł
+
+      .row
+        .medium-3.columns
+          = f.label :contractor_name, 'Kontrahent'
+          - names = Settlement::ContractorRecord.select(:id, :name).map { |u| { id: u.id, name: u.name } }
+          - if @contract.contractor
+             - pre = [{id: @contract.contractor_id, name: @contract.contractor.name}]
+          - else
+             - pre = []
+          = f.text_field :contractor_name, 'data-tokeninput': { collection: names, options: { prePopulate: pre, tokenLimit: 1} }.to_json
 
       .row
         - if can? :manage, @contract

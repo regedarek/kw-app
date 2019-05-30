@@ -16,5 +16,6 @@ module Settlement
     optional(:financial_type).maybe
     optional(:period_date).maybe
     required(:users_names).each(:int?)
+    optional(:contractor_name).maybe
   end
 end

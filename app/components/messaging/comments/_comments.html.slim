@@ -1,5 +1,5 @@
 .comment-section-container
-  - commentable.comments.each do |comment|
+  - commentable.comments.includes(:user).each do |comment|
     .callout
       .comment-section-author
         - if comment.user.avatar.present?

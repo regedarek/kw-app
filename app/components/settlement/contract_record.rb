@@ -13,6 +13,7 @@ module Settlement
 
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
     belongs_to :creator, class_name: 'Db::User', foreign_key: :creator_id
+    belongs_to :contractor, class_name: 'Settlement::ContractorRecord', foreign_key: :contractor_id
 
     has_many :contract_users, class_name: 'Settlement::ContractUsersRecord', foreign_key: :contract_id
     has_many :users, through: :contract_users, foreign_key: :user_id, dependent: :destroy
@@ -37,6 +38,11 @@ module Settlement
       self.user_ids = ids
     end
 
+    def contractor_name=(id)
+      self.contractor_id = id
+    end
+
     attr_reader :users_names
+    attr_reader :contractor_name
   end
 end

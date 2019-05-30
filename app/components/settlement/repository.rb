@@ -6,7 +6,7 @@ module Settlement
     end
 
     def create_contractor(form_outputs:)
-      Settlement::ContractorRecord .create!(form_outputs.to_h)
+      Settlement::ContractorRecord.create!(form_outputs.to_h)
     end
   end
 end
