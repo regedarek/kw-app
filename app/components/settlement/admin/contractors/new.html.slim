@@ -1,0 +1,26 @@
+.row
+  .large-12.columns
+    = form_for @contractor, as: :contractor, url: admin_contractors_path do |f|
+      - if @contractor.errors.any?
+        .callout.alert
+          ul
+            - @contractor.errors.full_messages.each do |msg|
+              li= msg
+
+      .row
+        .medium-3.columns
+          b= f.label :name, "Nazwa kontrahenta*"
+          = f.text_field :name
+
+      .row
+        .medium-3.columns
+          b= f.label :nip, "NIP"
+          = f.text_field :nip
+
+      .row
+        .medium-3.columns
+          b= f.label :description, "Opis"
+          = f.text_area :description
+
+      = f.submit 'Utwórz kontrahenta', class: 'button'
+      = link_to 'wróć', admin_contracts_path, class: 'button secondary'
