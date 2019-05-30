@@ -65,7 +65,7 @@ module Management
         case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
           vote.decision = 'approved'
           vote.save
-        end if user
+        end if user && !case_record.finished?
 
         if case_record.voting? && repository.approved?(case_record.id)
           case_record.finish!
@@ -86,7 +86,7 @@ module Management
         case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
           vote.decision = 'unapproved'
           vote.save
-        end if user
+        end if user && !case_record.finished?
 
         if case_record.voting? && repository.approved?(case_record.id)
           case_record.finish!
@@ -108,7 +108,7 @@ module Management
         case_record.votes.where(user_id: user.id).first_or_initialize.tap do |vote|
           vote.decision = 'abstained'
           vote.save
-        end if user
+        end if user && !case_record.finished?
 
         if case_record.voting? && repository.approved?(case_record.id)
           case_record.finish!
