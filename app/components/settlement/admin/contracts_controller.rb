@@ -7,12 +7,8 @@ module Settlement
       def index
         authorize! :read, Settlement::ContractRecord
 
-        @contracts = if params[:archive]
-          Settlement::ContractRecord.includes([:acceptor, :creator]).where(state: :closed).accessible_by(current_ability).order(created_at: :desc)
-                     else
-          Settlement::ContractRecord.includes([:acceptor, :creator]).where.not(state: :closed).accessible_by(current_ability).order(created_at: :desc)
-                     end
-
+        @q = Settlement::ContractRecord.accessible_by(current_ability).ransack(params[:q])
+        @contracts = @q.result(distinct: true).includes([:acceptor, :creator])
       end
 
       def new
