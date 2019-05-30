@@ -26,6 +26,10 @@
             = f.search_field :creator_first_name_or_creator_last_name_cont
 
           .large-3.columns
+            = f.label :contractor_name_cont, 'Kontraktor?'
+            = f.search_field :contractor_name_cont
+
+          .large-3.columns
             = f.label :acceptor_first_name_or_acceptor_last_name_cont, 'Kto zaakceptował?'
             = f.search_field :acceptor_first_name_or_acceptor_last_name_cont
 
