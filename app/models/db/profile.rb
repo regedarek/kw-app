@@ -1,7 +1,7 @@
 module Db
   class Profile < ActiveRecord::Base
     RECOMMENDED_BY = %w(google facebook friends festival poster course)
-    POSITION = %w(candidate regular honorable_kw honorable_pza management senior instructor canceled stj)
+    POSITION = %w(candidate regular honorable_kw honorable_pza management senior instructor canceled stj released)
     SECTIONS = %w(snw sww stj gtw kts)
     ACOMPLISHED_COURSES = %w(basic_kw basic basic_without_second second second_winter cave cave_kw ski list blank instructors other_club)
 

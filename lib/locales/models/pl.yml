@@ -33,6 +33,7 @@ pl:
         profile_position_regular: Członek zwyczajny
         profile_position_honorable_kw: Członek honorowy KW
         profile_position_canceled: Rezygnacja z członkowstwa
+        profile_position_released: Zwolniony z opłacenia składki
         profile_position_instructor: Instruktor
         profile_position_stj: Członek STJ
         profile_position_honorable_pza: Członek honorowy PZA
@@ -125,6 +126,7 @@ pl:
         profile_position_instructor: Instruktor
         profile_position_honorable_pza: Członek honorowy PZA
         profile_position_canceled: Rezygnacja z członkowstwa
+        profile_position_released: Zwolniony z opłacenia składki
         profile_position_management: Członek zarządu, szef sekcji, prezes/wiceprezes
         profile_position_senior: Członek senior
         profile_position_stj: Członek STJ
