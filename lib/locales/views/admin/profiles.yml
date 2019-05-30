@@ -4,3 +4,5 @@ pl:
       index:
         title: Profile kandydatów oraz członków
         export_to_xlsx_link: Exportuj do arkusza
+      edit:
+        kw_id: KW idd

@@ -8,7 +8,6 @@ gem 'pg'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
-gem 'i18n-tasks', '~> 0.9.29'
 gem 'jquery-rails'
 gem 'rails-jquery-tokeninput'
 gem 'listen', '~> 3.0'
@@ -60,6 +59,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'i18n-tasks', '~> 0.9.29'
   gem 'rspec-rails'
   gem 'timecop'
   gem 'byebug'
