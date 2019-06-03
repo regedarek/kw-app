@@ -53,12 +53,19 @@
     table.stack
       thead
         tr
-          th width='5%' ID
-          th width='35%' Nazwa
-          th width='20%' Kto dodał?
-          th width='15%' Status
-          th width='10%' Kwota(zł)
-          th width='35%' Kto zaakceptował?
+          th width='5%'
+            = sort_link(@q, :id, 'ID', default_order: :desc)
+          th width='30%'
+            = sort_link(@q, :name, 'Nazwa', default_order: :desc)
+          th width='20%'
+            = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
+          th width='15%'
+            = sort_link(@q, :state, 'Status', default_order: :desc)
+          th width='10%'
+            = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
+          th width='20%'
+            = sort_link(@q, :creator_id, 'Kto zaakceptował?', default_order: :desc)
+          th width='10%' Akcje
       tbody
         - @contracts.each_with_index do |contract, i|
           tr
@@ -85,3 +92,6 @@
                   - if user_signed_in?
                     - unless contract.creator_id == current_user.id
                       = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+            td
+              = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
+                i.fi.fi-page-edit

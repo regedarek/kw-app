@@ -8,6 +8,7 @@ module Settlement
         authorize! :read, Settlement::ContractRecord
 
         @q = Settlement::ContractRecord.accessible_by(current_ability).ransack(params[:q])
+        @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
         @contracts = @q.result(distinct: true).includes([:acceptor, :creator])
       end
 

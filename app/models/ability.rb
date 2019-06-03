@@ -11,6 +11,7 @@ class Ability
     active if @user.active?
     admin if role?('admin')
     secondary_management if role?('secondary_management')
+    financial_management if role?('financial_management')
     management if role?('management')
     office_king if role?('office_king')
     routes if role?('routes')
@@ -52,16 +53,18 @@ class Ability
 
   def secondary_management
     can :create, Training::Supplementary::CourseRecord
-    can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
     can :read, Management::Voting::CaseRecord
     can :manage, Management::ProjectRecord
   end
 
+  def financial_management
+    can :accept, Settlement::ContractRecord
+  end
+
   def management
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
-    can :accept, Settlement::ContractRecord
     can :manage, Management::ProjectRecord
     can :manage, Management::Voting::CaseRecord
     can :hide, Management::Voting::CaseRecord
