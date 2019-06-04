@@ -52,6 +52,7 @@ class Ability
   end
 
   def secondary_management
+    can :search, Settlement::ContractRecord
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
     can :read, Management::Voting::CaseRecord
@@ -63,6 +64,7 @@ class Ability
   end
 
   def management
+    can :search, Settlement::ContractRecord
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
     can :manage, Management::ProjectRecord
@@ -77,6 +79,7 @@ class Ability
   end
 
   def office_king
+    can :search, Settlement::ContractRecord
     can :manage, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord

@@ -8,45 +8,46 @@
       - if can? :create, Settlement::ContractRecord
         = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
 
-.row
-  .large-12.columns
-    .callout
-      = search_form_for @q, url: admin_contracts_path, class: 'js-send-on-enter' do |f|
-        .row
-          .large-2.columns
-            = f.label :id_eq, 'Numer rozliczenia'
-            = f.search_field :id_eq
+- if can? :search, Settlement::ContractorRecord
+  .row
+    .large-12.columns
+      .callout
+        = search_form_for @q, url: admin_contracts_path, class: 'js-send-on-enter' do |f|
+          .row
+            .large-2.columns
+              = f.label :id_eq, 'Numer rozliczenia'
+              = f.search_field :id_eq
 
-          .large-3.columns
-            = f.label :title_or_description_cont, 'Nazwa lub opis'
-            = f.search_field :title_or_description_cont
+            .large-3.columns
+              = f.label :title_or_description_cont, 'Nazwa lub opis'
+              = f.search_field :title_or_description_cont
 
-          .large-3.columns
-            = f.label :creator_first_name_or_creator_last_name_cont, 'Kto dodał?'
-            = f.search_field :creator_first_name_or_creator_last_name_cont
+            .large-3.columns
+              = f.label :creator_first_name_or_creator_last_name_cont, 'Kto dodał?'
+              = f.search_field :creator_first_name_or_creator_last_name_cont
 
-          .large-3.columns
-            = f.label :contractor_name_cont, 'Kontraktor?'
-            = f.search_field :contractor_name_cont
+            .large-3.columns
+              = f.label :contractor_name_cont, 'Kontraktor?'
+              = f.search_field :contractor_name_cont
 
-          .large-3.columns
-            = f.label :acceptor_first_name_or_acceptor_last_name_cont, 'Kto zaakceptował?'
-            = f.search_field :acceptor_first_name_or_acceptor_last_name_cont
+            .large-3.columns
+              = f.label :acceptor_first_name_or_acceptor_last_name_cont, 'Kto zaakceptował?'
+              = f.search_field :acceptor_first_name_or_acceptor_last_name_cont
 
-          .large-4.columns
-            = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-            = f.select :state_cont_any, [['Nowe', 'new'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Zakończone', 'closed']], { }, { multiple: true }
+            .large-4.columns
+              = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
+              = f.select :state_cont_any, [['Nowe', 'new'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Zakończone', 'closed']], { }, { multiple: true }
 
-          .large-2.columns
-            = f.label :cost_gteq, 'Kwota od'
-            = f.number_field :cost_gteq
-          .large-2.columns
-            = f.label :created_at_lteq, 'Kwota do'
-            = f.number_field :cost_lteq
+            .large-2.columns
+              = f.label :cost_gteq, 'Kwota od'
+              = f.number_field :cost_gteq
+            .large-2.columns
+              = f.label :created_at_lteq, 'Kwota do'
+              = f.number_field :cost_lteq
 
-          .large-2.columns
-            br
-            = f.submit 'Szukaj', class: 'button expanded'
+            .large-2.columns
+              br
+              = f.submit 'Szukaj', class: 'button expanded'
 
 .row
   .large-12.columns
@@ -85,13 +86,14 @@
                   = t contract.state
             td = contract.cost
             td
-              - if can? :accept, Settlement::ContractRecord
-                - if contract.accepted? || contract.closed?
-                  = contract.acceptor&.display_name
-                - else
-                  - if user_signed_in?
-                    - unless contract.creator_id == current_user.id
-                      = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+              - if contract.accepted? || contract.closed?
+                = contract.acceptor&.display_name
+              - else
+                - if user_signed_in?
+                    - if can? :accept, Settlement::ContractRecord
+                      - unless contract.creator_id == current_user.id
+                        = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
             td
-              = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
-                i.fi.fi-page-edit
+              - if can? :update, contract
+                = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
+                  i.fi.fi-page-edit
