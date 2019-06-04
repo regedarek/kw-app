@@ -21,7 +21,7 @@ module Training
         if course
           course.start_date
         else
-          Date.today
+          Time.current
         end
       end
 
