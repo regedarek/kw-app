@@ -18,11 +18,10 @@ module Training
       end
 
       def start_date
-        if course
-          course.start_date
-        else
-          Time.current
-        end
+        return Time.current unless course && course.start_date
+        return Time.current unless course.start_date
+
+        course.start_date
       end
 
       def payment_type
