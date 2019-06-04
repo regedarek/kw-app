@@ -1,13 +1,11 @@
 .row
   .large-6.columns
     .row
-      .large-8.columns
-        h3 = @case.name
+      .large-12.columns
+        h4 = @case.name
 
-      .large-4.columns.text-right
-        br
-        | Status: 
-        span.label = I18n.t(@case.state)
+    | Status: 
+    span.label = I18n.t(@case.state)
 
     - if @case.finished?
       .row
@@ -20,10 +18,11 @@
         b Utworzył: 
         = Db::User.find(@case.creator_id).display_name
 
-    .row
-      .large-12.columns
-        .callout
-          = sanitize @case.destrciption
+    - if @case.destrciption
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @case.destrciption
 
     - if @case.attachments.any?
       .row
@@ -44,6 +43,7 @@
                   span aria-hidden="true"  &times;
     - if user_signed_in?
       - if can? :approve, Management::Voting::CaseRecord
+        hr
         .row
           .large-12.columns
             h5 Komentarze
