@@ -35,7 +35,6 @@ module Management
       end
 
       def approve_for_all
-        repository = Management::Voting::Repository.new
         case_record = Management::Voting::CaseRecord.find(params[:id])
 
         repository.management_users.each do |user|
@@ -55,7 +54,6 @@ module Management
       end
 
       def approve
-        repository = Management::Voting::Repository.new
         case_record = Management::Voting::CaseRecord.find(params[:id])
         user = if user_signed_in?
                  current_user
@@ -98,7 +96,6 @@ module Management
       end
 
       def abstain
-        repository = Management::Voting::Repository.new
         case_record = Management::Voting::CaseRecord.find(params[:id])
         user = if user_signed_in?
                  current_user
@@ -136,6 +133,10 @@ module Management
       end
 
       private
+
+      def repository
+        @repository ||= Management::Voting::Repository.new
+      end
 
       def create_record
         Management::Voting::CreateCase.new(
