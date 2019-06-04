@@ -80,6 +80,7 @@ class Ability
 
   def office_king
     can :search, Settlement::ContractRecord
+    can :recon_up, Settlement::ContractRecord
     can :manage, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord

@@ -1,3 +1,4 @@
+require 'results'
 module Admin
   class MembershipFees
     def initialize(creator_id:, allowed_params:)

@@ -17,5 +17,7 @@ module Settlement
     optional(:period_date).maybe
     required(:users_names).each(:int?)
     optional(:contractor_name).maybe
+    optional(:'period_date(1i)').filled
+    optional(:'period_date(2i)').filled
   end
 end

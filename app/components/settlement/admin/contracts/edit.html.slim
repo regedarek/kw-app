@@ -27,18 +27,19 @@
             span.input-group-label
                 | zł
 
-      .row
-        .medium-3.columns
-          = f.label :contractor_name, 'Kontrahent'
-          - names = Settlement::ContractorRecord.select(:id, :name).map { |u| { id: u.id, name: u.name } }
-          - if @contract.contractor
-             - pre = [{id: @contract.contractor_id, name: @contract.contractor.name}]
-          - else
-             - pre = []
-          = f.text_field :contractor_name, 'data-tokeninput': { collection: names, options: { prePopulate: pre, tokenLimit: 1} }.to_json
+      - if can? :recon_up, @contract
+        .row
+          .medium-3.columns
+            = f.label :contractor_name, 'Kontrahent'
+            - names = Settlement::ContractorRecord.select(:id, :name).map { |u| { id: u.id, name: u.name } }
+            - if @contract.contractor
+              - pre = [{id: @contract.contractor_id, name: @contract.contractor.name}]
+            - else
+              - pre = []
+            = f.text_field :contractor_name, 'data-tokeninput': { collection: names, options: { prePopulate: pre, tokenLimit: 1} }.to_json
 
-      .row
-        - if can? :manage, @contract
+      - if can? :manage, @contract
+        .row
           .medium-3.columns
             b= f.label :state, "Status"
             = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
