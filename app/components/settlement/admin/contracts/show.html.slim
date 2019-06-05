@@ -1,5 +1,3 @@
-
-
 .row
   .large-6.columns
     .row
@@ -15,12 +13,45 @@
         b Status: 
         span.label= I18n.t @contract.state
 
-    - if @contract.description
-      br
+    .row
+      .large-12.columns
+        b Data dokumentu: 
+        = @contract.document_date
+
+    .row
+      .large-12.columns
+        b Rodzaj dokumentu: 
+        = I18n.t @contract.document_type
+
+    - if @contract.substantive_type
       .row
         .large-12.columns
-          .callout
-            = sanitize @contract.description
+          b Grupa wydarzeń: 
+          = I18n.t @contract.substantive_type, scope: :substantive_type
+
+    - if @contract.financial_type
+      .row
+        .large-12.columns
+          b Rodzaj działalności: 
+          = I18n.t @contract.financial_type, scope: :financial_type
+
+    - if @contract.group_type
+      .row
+        .large-12.columns
+          b Sekcja: 
+          = I18n.t @contract.group_type
+
+    - if @contract.period_date
+      .row
+        .large-12.columns
+          b Okres rozliczeniowy: 
+          = @contract.period_date.strftime("%B %Y")
+
+    - if @contract.contractor
+      .row
+        .large-12.columns
+          b Kontrahent: 
+          = @contract.contractor.name
 
     .row
       .large-12.columns
@@ -37,6 +68,14 @@
       .large-12.columns
         b Kiedy utworzono: 
         = @contract.created_at.strftime("%d-%m-%Y %H:%M")
+
+    - if @contract.description
+      br
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @contract.description
+
 
     - if @contract.users.any?
       .row

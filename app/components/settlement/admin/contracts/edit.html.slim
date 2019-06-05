@@ -44,7 +44,6 @@
               - pre = []
             = f.text_field :contractor_name, 'data-tokeninput': { collection: names, options: { prePopulate: pre, tokenLimit: 1} }.to_json
 
-      - if can? :manage, @contract
         .row
           .medium-3.columns
             b= f.label :state, "Status"
@@ -62,7 +61,6 @@
           .medium-3.columns
             b= f.label :period_date, 'Okres rozliczeniowy'
             = f.date_select :period_date,  { :discard_day => true, include_blank: true}
-
 
       .row
         .medium-12.columns
