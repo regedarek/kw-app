@@ -64,6 +64,7 @@ class Ability
   end
 
   def management
+    cannot :accept, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
@@ -80,6 +81,7 @@ class Ability
 
   def office_king
     can :search, Settlement::ContractRecord
+    cannot :accept, Settlement::ContractRecord
     can :recon_up, Settlement::ContractRecord
     can :manage, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord

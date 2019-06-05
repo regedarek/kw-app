@@ -1,6 +1,5 @@
 .row
-  .large-8.columns
-    h3 Rozliczenia, faktury, przelewy, umowy wolontariackie
+  .large-8.columns h3 Rozliczenia, faktury, przelewy, umowy wolontariackie
   .large-4.columns
     .text-right
       - if can? :create, Settlement::ContractorRecord
@@ -8,7 +7,7 @@
       - if can? :create, Settlement::ContractRecord
         = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
 
-- if can? :search, Settlement::ContractorRecord
+- if can? :search, Settlement::ContractRecord
   .row
     .large-12.columns
       .callout
@@ -90,7 +89,7 @@
                 = contract.acceptor&.display_name
               - else
                 - if user_signed_in?
-                    - if can? :accept, Settlement::ContractRecord
+                    - if can? :accept, contract
                       - unless contract.creator_id == current_user.id
                         = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
             td
