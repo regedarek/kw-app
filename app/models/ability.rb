@@ -41,6 +41,7 @@ class Ability
     can :manage, Db::Activities::MountainRoute
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::Activities::MountainRoute
+    can :create, Settlement::ContractRecord
   end
 
   def routes

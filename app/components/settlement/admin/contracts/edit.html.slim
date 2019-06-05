@@ -12,13 +12,17 @@
           b= f.label :title, "Nazwa rozliczenia"
           = f.text_field :title
 
-        .medium-3.columns
+        .medium-2.columns
           b= f.label :document_date, "Data dokumentu *"
           = f.date_field :document_date
 
-        .medium-3.columns
+        .medium-2.columns
           b= f.label :document_type, 'Rodzaj dokumentu *'
           = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.document_type
+
+        .medium-2.columns
+          b= f.label :payout_type, 'Rodzaj płatności *'
+          = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
         .medium-3.columns
           b= f.label :cost, "Kwota rozliczenia"

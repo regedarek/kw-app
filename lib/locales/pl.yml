@@ -7,6 +7,9 @@ pl:
   draft: w przygotowaniu
   'false': Nie
   false_value: Nie
+  payout_type:
+    to_contractor: Płatność na konto kontrahenta
+    return: Zwrot na konto rozliczanego
   substantive_type:
     office: Biuro KW
     substantive_taxes: Księgowowść/Podatki

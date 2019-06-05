@@ -23,6 +23,11 @@
         b Rodzaj dokumentu: 
         = I18n.t @contract.document_type
 
+    .row
+      .large-12.columns
+        b Płatność: 
+        = I18n.t @contract.payout_type, scope: :payout_type
+
     - if @contract.substantive_type
       .row
         .large-12.columns
