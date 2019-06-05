@@ -57,6 +57,11 @@
             b= f.label :period_date, 'Okres rozliczeniowy'
             = f.date_select :period_date,  { :discard_day => true, include_blank: true}
 
+          .medium-3.columns
+            b= f.label :event_id, 'Wydarzenie'
+            = f.select :event_id,
+              Training::Supplementary::CourseRecord.all.collect {|u| [u.name, u.id]}, :prompt => 'Wybierz'
+
       .row
         .medium-12.columns
           = f.label :description, "Uwagi do rozliczenia"
