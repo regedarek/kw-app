@@ -9,7 +9,7 @@ pl:
   false_value: Nie
   substantive_type:
     office: Biuro KW
-    taxes: Księgowowść/Podatki
+    substantive_taxes: Księgowowść/Podatki
     marketing: Reklama/Marketing
     mas: MAS
     mjs: MJS
