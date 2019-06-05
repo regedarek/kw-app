@@ -64,6 +64,7 @@ module Settlement
 
           result.failure do |errors|
             render :edit
+            flash[:error] = errors.values.join(", ")
           end
         end
       end
