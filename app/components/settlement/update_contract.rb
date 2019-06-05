@@ -9,7 +9,7 @@ module Settlement
 
     def call(id:, raw_inputs:)
       form_outputs = form.call(raw_inputs.to_unsafe_h)
-      return Left(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
+      return Left(form_outputs.messages(full: true, locale: I18n.locale)) unless form_outputs.success?
 
       contract = Settlement::ContractRecord.find(id)
       period_date_month = form_outputs.to_h.delete(:"period_date(2i)").try :to_i
