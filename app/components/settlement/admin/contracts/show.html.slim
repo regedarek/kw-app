@@ -13,12 +13,7 @@
 
       .large-6.columns.text-right
         b Status: 
-        - if @contract.new?
-          span.label.secondary nowe rozliczenie
-        - if @contract.accepted?
-          span.label.success zaakceptowano
-        - if @contract.closed?
-          span.label.primary rozliczono
+        span.label= I18n.t @contract.state
 
     - if @contract.description
       br
