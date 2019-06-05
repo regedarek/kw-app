@@ -30,7 +30,12 @@
       - if can? :recon_up, @contract
         .row
           .medium-3.columns
+            b= f.label :substantive_type, 'Grupa wydarzeń *'
+            = f.select :substantive_type, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type
+
+          .medium-3.columns
             = f.label :contractor_name, 'Kontrahent'
+              = link_to 'Dodaj nowego kontrahenta', new_admin_contractor_path
             - names = Settlement::ContractorRecord.select(:id, :name).map { |u| { id: u.id, name: u.name } }
             - if @contract.contractor
               - pre = [{id: @contract.contractor_id, name: @contract.contractor.name}]

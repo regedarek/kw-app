@@ -147,7 +147,7 @@ module Settlement
         params
           .require(:contract)
           .permit(
-            :group_type, :event_id, :period_date, :financial_type, :document_type, :document_date, :title, :description, :cost, :state, contractor_name: [], attachments: [], events_names: [], users_names: []
+            :group_type, :event_id, :period_date, :substantive_type, :financial_type, :document_type, :document_date, :title, :description, :cost, :state, contractor_name: [], attachments: [], events_names: [], users_names: []
           )
       end
     end

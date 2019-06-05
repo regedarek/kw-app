@@ -7,6 +7,18 @@ pl:
   draft: w przygotowaniu
   'false': Nie
   false_value: Nie
+  substantive_type:
+    mas: MAS
+    mjs: MJS
+    kfg: KFG
+    integration: Integracja
+    climbing_course: Kurs wspinaczkowy
+    avalanche_course: Kurs lawinowy
+    first_aid_course: Kurs pierwszej pomocy
+    stj_course: Kurs jaskiniowy
+    supplementary_training: Doszkalanie
+    egg: Jajeczko
+    christmas_eve: Wigilia
   financial_type:
     administration: Administracja
     charity: Darowizny
