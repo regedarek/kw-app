@@ -14,6 +14,8 @@ module Training
         class_name: 'Training::Supplementary::PackageTypeRecord',
         dependent: :destroy,
         foreign_key: :supplementary_course_record_id
+      has_many :contract_events, class_name: 'Settlement::ContractEventsRecord', foreign_key: :event_id
+      has_many :contracts, through: :contract_events, foreign_key: :contract_id, dependent: :destroy
 
       accepts_nested_attributes_for :package_types,
         reject_if: proc { |attributes| attributes[:name].blank? },

@@ -46,6 +46,14 @@
             - @contract.users.each do |user|
               li = user.display_name
 
+    - if @contract.events.any?
+      .row
+        .large-12.columns
+          b Powiązane wydarzenia
+          ul
+            - @contract.events.each do |event|
+              li = link_to event.name, wydarzenia_path(event.id)
+
     - if @contract.attachments.any?
       .row
         .large-12.columns

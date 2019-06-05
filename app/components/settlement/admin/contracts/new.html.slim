@@ -42,9 +42,9 @@
           = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
 
         .medium-6.columns
-          b= f.label :event_id, 'Wydarzenie'
-          = f.select :event_id,
-            Training::Supplementary::CourseRecord.all.collect {|u| [u.name, u.id]}, :prompt => 'Wybierz'
+          = f.label :events_names, 'Powiązane wydarzenia'
+          - names = Training::Supplementary::CourseRecord.select(:id, :name).map{|u| { id: u.id, name: u.name } }
+          = f.text_field :events_names, 'data-tokeninput': { collection: names }.to_json
 
       b= f.label :attachments, "Pliki"
       = f.file_field :attachments, multiple: true
