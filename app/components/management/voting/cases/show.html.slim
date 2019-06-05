@@ -27,6 +27,7 @@
     - if @case.attachments.any?
       .row
         .large-12.columns
+          h5 Załączniki
           - @case.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
             = link_to attachment.url, download: File.basename(attachment.file.path) do
               = image_tag('file.jpg', class: 'thumbnail')
