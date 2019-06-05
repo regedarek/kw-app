@@ -27,6 +27,8 @@
             span.input-group-label
                 | zł
 
+
+
       - if can? :recon_up, @contract
         .row
           .medium-3.columns
@@ -57,10 +59,6 @@
             b= f.label :period_date, 'Okres rozliczeniowy'
             = f.date_select :period_date,  { :discard_day => true, include_blank: true}
 
-          .medium-3.columns
-            b= f.label :event_id, 'Wydarzenie'
-            = f.select :event_id,
-              Training::Supplementary::CourseRecord.all.collect {|u| [u.name, u.id]}, :prompt => 'Wybierz'
 
       .row
         .medium-12.columns
@@ -69,11 +67,16 @@
           trix-editor input='description_body' style='min-height: 200px'
 
       .row
-        .medium-12.columns
+        .medium-6.columns
           = f.label :users_names, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
           - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
           - users = @contract.users.map{|u| { id: u.id, name: u.display_name } }
           = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
+
+        .medium-6.columns
+          b= f.label :event_id, 'Wydarzenie'
+          = f.select :event_id,
+            Training::Supplementary::CourseRecord.all.collect {|u| [u.name, u.id]}, :prompt => 'Wybierz'
 
 
       b= f.label :attachments, "Pliki"
