@@ -1,11 +1,11 @@
 table.stack
   thead
     tr
-      th.text-center width='6%' Numer uchwały
+      th.text-center width='6%' Numer głosowania
       th.text-center  width='40%' Temat
       - if can? :manage, Management::Voting::CaseRecord
         th.text-center  width='8%' Status
-      th.text-center width='5%' Przyjęta?
+      th.text-center width='5%' Przegłosowano?
       th.text-center width='8%' Data uchwalenia
       - if can? :destroy, Management::Voting::CaseRecord
         th.text-rigth width='3%'
@@ -18,7 +18,10 @@ table.stack
           td.text-center
             span.label = I18n.t c.state
         td.text-center
-          span.label = I18n.t Management::Voting::Repository.new.approved?(c.id)
+          - I18n.t Management::Voting::Repository.new.approved?(c.id)
+            span.label.success = I18n.t Management::Voting::Repository.new.approved?(c.id)
+          - else
+            span.label.warning = I18n.t Management::Voting::Repository.new.approved?(c.id)
         td.text-center
           - if c.finished?
             span = c.updated_at.to_date
