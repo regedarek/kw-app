@@ -36,7 +36,15 @@
 
             .large-4.columns
               = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-              = f.select :state_cont_any, [['Nowe', 'new'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Zakończone', 'closed']], { }, { multiple: true }
+              = f.select :state_cont_any, [['Nowe', 'new'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Rozliczone', 'closed']], { }, { multiple: true }
+
+            .large-4.columns
+              = f.label :substantive_type_eq, 'Grupa wydarzeń'
+              = f.select :substantive_type_eq, Settlement::ContractRecord.substantive_types.to_a.map { |w| [I18n.t(w[0], scope: :substantive_type), w[1]] }, include_blank: true
+
+            .large-4.columns
+              = f.label :period_date_eq, 'Okres rozliczenia(np. 01-05-2019)'
+              = f.search_field :period_date_eq
 
             .large-2.columns
               = f.label :cost_gteq, 'Kwota od'
