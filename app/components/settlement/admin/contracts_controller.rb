@@ -57,6 +57,14 @@ module Settlement
         @contract = Settlement::ContractRecord.find(params[:id])
         authorize! :update, @contract
 
+        if user_signed_in?
+          unless current_user.roles.include?('office_king')
+            if (@contract.preclosed? || @contract.closed?)
+              return redirect_to admin_contract_path(@contract.id), alert: 'Po wstępnym rozliczeniu, nie możesz już edytować!'
+            end
+          end
+        end
+
         either(update_record) do |result|
           result.success do |contract|
             redirect_to edit_admin_contract_path(contract.id), notice: 'Zaktualizowano'
