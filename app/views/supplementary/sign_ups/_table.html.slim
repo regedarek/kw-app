@@ -7,14 +7,20 @@
     tbody
       - sign_ups.each do |sign_up|
         - if sign_up.course
-          - if sign_up.course.start_date >= Time.zone.now
-            tr
-              td
-                = link_to sign_up.course.name, polish_event_slug_path(sign_up.course.slug)
-              td
-                - if sign_up.course.start_date && sign_up.course.end_date
-                  = [sign_up.course.start_date&.strftime("%d"), sign_up.course.end_date&.strftime("%d/%m/%Y")].join('-')
-                - else
-                  = sign_up.course.start_date&.strftime("%d/%m/%Y ")
-                  - unless sign_up.course.start_date&.hour == 00
-                    b = sign_up.course.start_date&.strftime("%H:%M")
+          - if sign_up.course.start_date
+            - if sign_up.course.start_date >= Time.zone.now
+              tr
+                td
+                  = link_to sign_up.course.name, polish_event_slug_path(sign_up.course.slug)
+                td
+                  - if sign_up.course.start_date && sign_up.course.end_date
+                    = [sign_up.course.start_date&.strftime("%d"), sign_up.course.end_date&.strftime("%d/%m/%Y")].join('-')
+                  - else
+                    = sign_up.course.start_date&.strftime("%d/%m/%Y ")
+                    - unless sign_up.course.start_date&.hour == 00
+                      b = sign_up.course.start_date&.strftime("%H:%M")
+            - else
+              tr
+                td
+                  = link_to sign_up.course.name, polish_event_slug_path(sign_up.course.slug)
+                td = "-"
