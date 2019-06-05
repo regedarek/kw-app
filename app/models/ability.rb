@@ -59,10 +59,6 @@ class Ability
     can :manage, Management::ProjectRecord
   end
 
-  def financial_management
-    can :accept, Settlement::ContractRecord
-  end
-
   def management
     cannot :accept, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
@@ -87,6 +83,10 @@ class Ability
     cannot :accept, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord
+  end
+
+  def financial_management
+    can :accept, Settlement::ContractRecord
   end
 
   def admin

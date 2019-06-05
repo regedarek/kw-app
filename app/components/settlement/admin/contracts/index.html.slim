@@ -89,9 +89,9 @@
                 = contract.acceptor&.display_name
               - else
                 - if user_signed_in?
-                    - if can? :accept, contract
-                      - unless contract.creator_id == current_user.id
-                        = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+                  - if can? :accept, contract
+                    - unless contract.creator_id == current_user.id
+                      = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
             td
               - if can? :update, contract
                 = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
