@@ -18,7 +18,7 @@ table.stack
           td.text-center
             span.label = I18n.t c.state
         td.text-center
-          - I18n.t Management::Voting::Repository.new.approved?(c.id)
+          - if I18n.t Management::Voting::Repository.new.approved?(c.id)
             span.label.success = I18n.t Management::Voting::Repository.new.approved?(c.id)
           - else
             span.label.warning = I18n.t Management::Voting::Repository.new.approved?(c.id)
