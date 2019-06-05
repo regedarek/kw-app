@@ -36,7 +36,7 @@
 
           .medium-3.columns
             = f.label :contractor_name, 'Kontrahent'
-              = link_to 'Dodaj nowego kontrahenta', new_admin_contractor_path
+              = link_to 'Dodaj nowego kontrahenta', new_admin_contractor_path, target: :_blank
             - names = Settlement::ContractorRecord.select(:id, :name).map { |u| { id: u.id, name: u.name } }
             - if @contract.contractor
               - pre = [{id: @contract.contractor_id, name: @contract.contractor.name}]
