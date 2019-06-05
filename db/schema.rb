@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_211016) do
+ActiveRecord::Schema.define(version: 2019_06_05_212210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_211016) do
     t.integer "event_id"
     t.integer "substantive_type"
     t.integer "payout_type"
+    t.datetime "preclosed_date"
   end
 
   create_table "donations", id: :serial, force: :cascade do |t|

@@ -108,6 +108,7 @@ module Settlement
 
         contract = Settlement::ContractRecord.find(params[:id])
         contract.prepayment!
+        contract.update(preclosed_date: Time.current)
 
         contract_user_ids = contract.users.map(&:id)
         recepient_ids = contract_user_ids.uniq.reject{|id| id == current_user.id }
