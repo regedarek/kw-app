@@ -30,8 +30,9 @@
       - if can? :recon_up, @contract
         .row
           .medium-3.columns
-            b= f.label :substantive_type, 'Grupa wydarzeń *'
-            = f.select :substantive_type, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type
+            b= f.label :substantive_type, 'Grupa wydarzeń'
+            = f.select :substantive_type,
+            Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
 
           .medium-3.columns
             = f.label :contractor_name, 'Kontrahent'
