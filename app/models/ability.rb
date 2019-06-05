@@ -61,7 +61,6 @@ class Ability
   end
 
   def management
-    cannot :accept, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
