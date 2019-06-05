@@ -13,11 +13,12 @@ module Settlement
     required(:description).maybe(:str?)
     optional(:attachments).maybe
     optional(:group_type).maybe
+    optional(:state).maybe
     optional(:financial_type).maybe
     optional(:period_date).maybe
     required(:users_names).each(:int?)
     optional(:contractor_name).maybe
-    optional(:'period_date(1i)').filled
-    optional(:'period_date(2i)').filled
+    optional(:'period_date(1i)').maybe
+    optional(:'period_date(2i)').maybe
   end
 end

@@ -42,7 +42,8 @@
         .row
           .medium-3.columns
             b= f.label :state, "Status"
-            = f.select :state, Settlement::ContractRecord.workflow_spec.states.keys
+            = f.select :state,
+            Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
 
           .medium-3.columns
             b= f.label :group_type, 'Sekcja'

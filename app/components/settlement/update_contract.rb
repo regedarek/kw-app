@@ -12,10 +12,12 @@ module Settlement
       return Left(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
 
       contract = Settlement::ContractRecord.find(id)
+      period_date_month = form_outputs.to_h.delete(:"period_date(2i)").try :to_i
+      period_date_year = form_outputs.to_h.delete(:"period_date(1i)").try :to_i
       contract.update(form_outputs.to_h)
       contract.update(
-        period_date: Date.civil(raw_inputs['period_date(1i)'].to_i, raw_inputs['period_date(2i)'].to_i, raw_inputs['period_date(3i)'].to_i)
-      ) if form_outputs.to_h.key?(:'period_date(1i)')
+        period_date: Date.civil(period_date_year, period_date_month, 1)
+      ) if period_date_month && period_date_year
       contract.update(contractor_id: form_outputs[:contractor_name].first.to_i) if form_outputs.to_h.key?(:contractor_name)
 
       office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
