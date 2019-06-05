@@ -83,7 +83,7 @@ class Ability
     can :search, Settlement::ContractRecord
     can :recon_up, Settlement::ContractRecord
     can :create, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord
+    can :manage, Settlement::ContractRecord
     cannot :accept, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord
