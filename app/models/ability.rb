@@ -11,9 +11,9 @@ class Ability
     active if @user.active?
     admin if role?('admin')
     secondary_management if role?('secondary_management')
-    financial_management if role?('financial_management')
     management if role?('management')
     office_king if role?('office_king')
+    financial_management if role?('financial_management')
     routes if role?('routes')
     office if role?('office')
     competitions if role?('competitions')
