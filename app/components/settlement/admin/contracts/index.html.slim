@@ -26,13 +26,14 @@
               = f.label :creator_first_name_or_creator_last_name_cont, 'Kto dodał?'
               = f.search_field :creator_first_name_or_creator_last_name_cont
 
-            .large-3.columns
+            .large-2.columns
               = f.label :contractor_name_cont, 'Kontraktor?'
               = f.search_field :contractor_name_cont
 
-            .large-3.columns
+            .large-2.columns
               = f.label :acceptor_id_eq, 'Kto zaakceptował?'
               = f.select :acceptor_id_eq, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, include_blank: true
+          .row
 
             .large-4.columns
               = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
@@ -43,8 +44,8 @@
               = f.select :substantive_type_eq, Settlement::ContractRecord.substantive_types.to_a.map { |w| [I18n.t(w[0], scope: :substantive_type), w[1]] }, include_blank: true
 
             .large-4.columns
-              = f.label :period_date_eq, 'Okres rozliczenia(np. 01-05-2019)'
-              = f.search_field :period_date_eq
+              = f.label :period_date_eq, 'Okres rozliczenia'
+              = f.date_select :period_date_eq,  { :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
 
             .large-2.columns
               = f.label :cost_gteq, 'Kwota od'

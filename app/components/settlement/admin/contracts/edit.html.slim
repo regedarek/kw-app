@@ -68,7 +68,7 @@
 
           .medium-3.columns
             b= f.label :period_date, 'Okres rozliczeniowy'
-            = f.date_select :period_date,  { :discard_day => true, include_blank: true}
+            = f.date_select :period_date,  { :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
 
       .row
         .medium-12.columns
