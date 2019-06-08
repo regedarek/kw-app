@@ -27,8 +27,8 @@
               = f.search_field :creator_first_name_or_creator_last_name_cont
 
             .large-2.columns
-              = f.label :contractor_name_cont, 'Kontraktor?'
-              = f.search_field :contractor_name_cont
+              = f.label :contractor_id_eq, 'Kontrahent'
+              = f.select :contractor_id_eq, Settlement::ContractorRecord.all.map{ |u| [u.name, u.id] }, include_blank: true
 
             .large-2.columns
               = f.label :acceptor_id_eq, 'Kto zaakceptował?'
