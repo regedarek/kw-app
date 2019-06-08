@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       member do
+        post :become
         get :make_admin
         get :cancel_admin
         get :make_curator

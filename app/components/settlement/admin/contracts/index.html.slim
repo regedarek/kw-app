@@ -31,12 +31,12 @@
               = f.search_field :contractor_name_cont
 
             .large-3.columns
-              = f.label :acceptor_first_name_or_acceptor_last_name_cont, 'Kto zaakceptował?'
-              = f.search_field :acceptor_first_name_or_acceptor_last_name_cont
+              = f.label :acceptor_id_eq, 'Kto zaakceptował?'
+              = f.select :acceptor_id_eq, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, include_blank: true
 
             .large-4.columns
               = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-              = f.select :state_cont_any, [['Nowe', 'new'], ['Odrzucone', 'rejected'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Rozliczone', 'closed']], { }, { multiple: true }
+              = f.select :state_cont_any, [['Nowe', 'new'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Rozliczone', 'closed'], ['Odrzucone', 'rejected']], { }, { multiple: true }
 
             .large-4.columns
               = f.label :substantive_type_eq, 'Grupa wydarzeń'

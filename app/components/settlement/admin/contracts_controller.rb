@@ -8,7 +8,7 @@ module Settlement
         authorize! :read, Settlement::ContractRecord
 
         @q = Settlement::ContractRecord.accessible_by(current_ability)
-        @q = @q.where.not(state: 'closed') unless params[:q]
+        @q = @q.where.not(state: ['preclosed', 'closed']) unless params[:q]
         @q = @q.ransack(params[:q])
         @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
         @contracts = @q.result(distinct: true).includes([:acceptor, :creator])
@@ -148,7 +148,7 @@ module Settlement
         params
           .require(:contract)
           .permit(
-            :group_type, :payout_type, :event_id, :period_date, :substantive_type, :financial_type, :document_type, :document_date, :title, :description, :cost, :state, contractor_name: [], attachments: [], events_names: [], users_names: []
+            :group_type, :payout_type, :acceptor_id, :event_id, :period_date, :substantive_type, :financial_type, :document_type, :document_date, :title, :description, :cost, :state, contractor_name: [], attachments: [], events_names: [], users_names: []
           )
       end
     end

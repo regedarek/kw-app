@@ -53,6 +53,13 @@ module Admin
       redirect_to admin_users_path, notice: 'Zdegradowałes'
     end
 
+    def become
+      return unless current_user.admin?
+      bypass_sign_in(Db::User.find(params[:id]))
+
+      redirect_back(fallback_location: root_path)
+    end
+
     private
 
     def authorize_admin

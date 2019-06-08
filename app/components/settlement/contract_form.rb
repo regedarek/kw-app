@@ -14,6 +14,7 @@ module Settlement
     required(:description).maybe(:str?)
     optional(:attachments).maybe
     optional(:group_type).maybe
+    optional(:acceptor_id).maybe
     optional(:substantive_type).maybe
     optional(:state).maybe
     optional(:financial_type).maybe

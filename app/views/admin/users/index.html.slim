@@ -49,7 +49,7 @@
             th width='5%' Numer klubowy
             th width='15%' Imię i nazwisko
             th width='20%' E-mail
-            th width='15%' Telefon
+            th width='15%' Zostań
             th width='25%' Role
             th width='10%' Ostatnie składki
         tbody
@@ -62,7 +62,7 @@
                   = user.kw_id
               td= link_to user.display_name, edit_admin_user_path(user)
               td= mail_to user.email, user.email
-              td= user.phone
+              td= link_to 'Zaloguj jako', become_admin_user_path(user.id), method: :post
               td.text-center= user.roles.to_sentence
               td.text-center
                 - if user.membership_fees.any?
