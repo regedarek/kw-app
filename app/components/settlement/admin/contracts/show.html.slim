@@ -51,7 +51,7 @@
       .row
         .large-12.columns
           b Okres rozliczeniowy: 
-          = @contract.period_date.strftime("%B %Y")
+          = I18n.localize(@contract.period_date, format: "%B %Y")
 
     - if @contract.contractor
       .row
