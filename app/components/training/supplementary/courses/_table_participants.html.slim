@@ -49,9 +49,7 @@ table.stack
             .icon-bar.five-up
               - if sign_up.payment
                 - if sign_up.payment.paid?
-                  - if sign_up.payment.refunded_at
-                    i.fi-dollar-bill
-                  - else
+                  - unless sign_up.payment.refunded_at
                     = link_to refund_payment_path(sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
                       i.fi-dollar-bill
               = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
