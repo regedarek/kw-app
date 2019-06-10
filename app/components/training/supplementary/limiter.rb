@@ -34,7 +34,7 @@ module Training
       end
 
       def sum
-        prepaid_via_dotpay&.count + prepaid_via_cash&.count
+        prepaid_via_dotpay.merge(prepaid_via_cash)&.uniq&.count
       end
 
       def in_limit?(sign_up)
