@@ -11,11 +11,11 @@ class PaymentsController < ApplicationController
 
     result = Payments::Dotpay::GetOperationRequest.new(code: payment.dotpay_id).execute
     result.success do |response|
-      res = Payments::Dotpay::RefundPaymentRequest.new(code: JSON.parse(s)["results"][0]["number"]).execute
+      res = Payments::Dotpay::RefundPaymentRequest.new(code: JSON.parse(response)["results"][0]["number"]).execute
       res.success do
         return redirect_back(fallback_location: root_path, notice: 'Zwrócono')
       end
-      result.dotpay_request_error do
+      res.dotpay_request_error do
         return redirect_back(fallback_location: root_path, alert: 'Błąd podczas zwrotu!')
       end
     end
