@@ -4,9 +4,9 @@ table.stack
       th.text-left width='5%' Lp.
       th.text-left Kto?
       - if @course.price
-        th.text-center width='20%' Płatność
+        th.text-center width='15%' Płatność
       - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
-        th width='15%'
+        th width='20%'
   tbody
     - sign_ups.each_with_index do |sign_up, i|
       tr
@@ -31,6 +31,8 @@ table.stack
               = sign_up.name
         - if @course.price
           td.text-center
+            span class='label success'
+              | opłacono
             - if sign_up&.payment&.paid?
               span class='label success'
                 | opłacono
@@ -46,8 +48,12 @@ table.stack
           td.text-right
             .icon-bar.five-up
               - if sign_up.payment
-                = link_to refund_payment_path(sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
-                  i.fi-page-edit
+                - if sign_up.payment.paid?
+                  - if sign_up.payment.refunded_at
+                    i.fi-dollar-bill
+                  - else
+                    = link_to refund_payment_path(sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
+                      i.fi-dollar-bill
               = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
                 - if sign_up.sent_at
                   - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)

@@ -13,6 +13,7 @@ class PaymentsController < ApplicationController
     result.success do |response|
       res = Payments::Dotpay::RefundPaymentRequest.new(code: JSON.parse(response)["results"][0]["number"]).execute
       res.success do
+        payment.update(refunded_at: Time.current)
         return redirect_back(fallback_location: root_path, notice: 'Zwrócono')
       end
       res.dotpay_request_error do

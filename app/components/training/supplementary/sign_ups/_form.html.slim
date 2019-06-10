@@ -47,6 +47,17 @@
               span class='label alert'
                 | poza limitem
 
+        - if @sign_up.payment
+          .large-2.columns
+            br
+            .text-center
+              - if @sign_up.payment.cash?
+                span class='label success'
+                  | Gotówka
+              - else
+                span class='label alert'
+                  | Gotówka
+
         .large-4.columns
           = f.label :expired_at
           = f.datetime_field :expired_at
@@ -54,6 +65,16 @@
 .row
   .large-12.columns
     ul
+      - if @sign_up.payment
+        - if @sign_up.payment.paid?
+          - if @sign_up.payment.refunded_at
+            li
+              i.fi-dollar-bill
+              = @sign_up.payment.refunded_at.strftime("%d/%m/%Y %H:%M")
+          - else
+            li
+              = link_to refund_payment_path(@sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
+                i.fi-dollar-bill
       - if @sign_up.admin_id
         li = "Dodano ręcznie przez #{Db::User.find(@sign_up.admin_id)&.display_name}"
       - if @sign_up.sent_at
