@@ -9,9 +9,9 @@ class PaymentsController < ApplicationController
   def refund
     payment = Db::Payment.find(params[:id])
 
-    result = Payments::GetOperationRequest.new(code: payment.dotpay_id).execute
+    result = Payments::Dotpay::GetOperationRequest.new(code: payment.dotpay_id).execute
     result.success do |response|
-      res = Payments::RefundPaymentRequest.new(code: JSON.parse(s)["results"][0]["number"]).execute
+      res = Payments::Dotpay::RefundPaymentRequest.new(code: JSON.parse(s)["results"][0]["number"]).execute
       res.success do
         return redirect_back(fallback_location: root_path, notice: 'Zwrócono')
       end
