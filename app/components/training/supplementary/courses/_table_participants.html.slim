@@ -2,7 +2,7 @@ table.stack
   thead
     tr
       th.text-left width='5%' Lp.
-      th.text-left width='50%' Kto?
+      th.text-left Kto?
       - if @course.price
         th.text-center width='15%' Płatność
       - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
@@ -31,8 +31,6 @@ table.stack
               = sign_up.name
         - if @course.price
           td.text-center
-            span class='label success'
-              | opłacono
             - if sign_up&.payment&.paid?
               span class='label success'
                 | opłacono
