@@ -26,7 +26,7 @@ module Payments
         response = http.request(request)
         case response
         when Net::HTTPSuccess, Net::HTTPRedirection
-          Success.new
+          Success.new(response.body)
         else
           Failure.new(:dotpay_request_error, message: 'Błąd podczas dokonywania zwrotu płatności skontaktuj sie z administratorem.')
         end
