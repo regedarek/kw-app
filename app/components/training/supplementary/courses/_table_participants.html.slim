@@ -45,6 +45,9 @@ table.stack
         - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
           td.text-right
             .icon-bar.five-up
+              - if sign_up.payment
+                = link_to refund_supplementary_sign_up_path(sign_up.id), method: :post, class: 'item', style: 'margin: 5px' do
+                  i.fi-page-edit
               = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
                 - if sign_up.sent_at
                   - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)

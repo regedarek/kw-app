@@ -62,6 +62,7 @@ Rails.application.routes.draw do
 
   resources :payments, only: [:index] do
     member do
+      post :refund
       put :mark_as_paid
       get :charge
     end

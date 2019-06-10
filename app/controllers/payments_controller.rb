@@ -6,6 +6,24 @@ class PaymentsController < ApplicationController
 
   end
 
+  def refund
+    payment = Db::Payment.find(params[:id])
+
+    result = Payments::GetOperationRequest.new(code: payment.dotpay_id).execute
+    result.success do |response|
+      res = Payments::RefundPaymentRequest.new(code: JSON.parse(s)["results"][0]["number"]).execute
+      res.success do
+        return redirect_back(fallback_location: root_path, notice: 'Zwrócono')
+      end
+      result.dotpay_request_error do
+        return redirect_back(fallback_location: root_path, alert: 'Błąd podczas zwrotu!')
+      end
+    end
+    result.dotpay_request_error do
+      return redirect_back(fallback_location: root_path, alert: 'Błąd podczas zwrotu!')
+    end
+  end
+
   def mark_as_paid
     payment = Db::Payment.find(params[:id])
     if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
