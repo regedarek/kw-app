@@ -69,12 +69,12 @@
         - if @sign_up.payment.paid?
           - if @sign_up.payment.refunded_at
             li
-              i.fi-dollar-bill
+              | Zwrócono: 
               = @sign_up.payment.refunded_at.strftime("%d/%m/%Y %H:%M")
           - else
             li
               = link_to refund_payment_path(@sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
-                i.fi-dollar-bill
+                | Zwróć pełną kwotę
       - if @sign_up.admin_id
         li = "Dodano ręcznie przez #{Db::User.find(@sign_up.admin_id)&.display_name}"
       - if @sign_up.sent_at

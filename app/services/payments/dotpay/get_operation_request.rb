@@ -11,7 +11,7 @@ module Payments
       def execute
         return Failure.new(:payment_code_needed, message: 'Musisz podać numer transakcji!') unless @code
 
-        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "operations/?type=payment&status=completed&control=#{@code}&format=json")
+        uri = URI.parse(Rails.application.secrets.dotpay_base_url + "operations/?status=completed&control=#{@code}&format=json")
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
