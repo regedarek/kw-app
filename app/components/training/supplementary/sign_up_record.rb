@@ -8,6 +8,7 @@ module Training
       belongs_to :user, class_name: 'Db::User', foreign_key: :user_id
       belongs_to :course, class_name: 'Training::Supplementary::CourseRecord', foreign_key: :course_id
       has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
+      has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
       def cost
         if course.packages
