@@ -6,6 +6,7 @@ module Training
           .includes(:course)
           .where(user_id: user.id)
           .sort_by(&:start_date)
+          .take(5)
       end
 
       def find_sign_up(id)
