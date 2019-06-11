@@ -16,6 +16,7 @@ class Ability
     financial_management if role?('financial_management')
     office if role?('office')
     competitions if role?('competitions')
+    reservations if role?('reservations')
     events if role?('events')
   end
 
@@ -96,5 +97,15 @@ class Ability
     can :manage, Db::User
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
+  end
+
+  def reservations
+    can :manage, Db::Reservation
+    can :give_warning, Db::Reservation
+    can :give_back_warning, Db::Reservation
+    can :remind, Db::Reservation
+    can :charge, Db::Reservation
+    can :give, Db::Reservation
+    can :archive, Db::Reservation
   end
 end

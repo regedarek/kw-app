@@ -8,6 +8,8 @@ module Admin
         @q.result.where.not(state: 'archived').includes(:user, :items).page(params[:page])
       end
 
+      authorize! :manage, Db::Reservation
+
       respond_to do |format|
         format.html
         format.xlsx do
@@ -18,6 +20,8 @@ module Admin
     end
 
     def create
+      authorize! :create, Db::Reservation
+
       result = Admin::Reservations.new(reservation_params).create
       result.success { redirect_to admin_reservations_path, notice: 'Dodano' }
       result.invalid { |form:| redirect_to admin_reservations_path, alert: "Nie dodano: #{form.errors.messages}" }
@@ -26,10 +30,12 @@ module Admin
 
     def edit
       @reservation = Db::Reservation.find(params[:id])
+      authorize! :manage, Db::Reservation
       @reservation_form = Admin::ReservationsForm.new(@reservation.slice(:kw_id, :end_date, :start_date, :remarks))
     end
 
     def update
+      authorize! :manage, Db::Reservation
       result = Admin::Reservations.new(reservation_params).update(params[:id])
       result.success { redirect_to edit_admin_reservation_path(params[:id]), notice: 'Zaktualizowano' }
       result.invalid { |form:| redirect_to edit_admin_reservation_path(params[:id]), alert: "Nie zaktualizowano bo: #{form.errors.messages}" }
@@ -37,6 +43,7 @@ module Admin
     end
 
     def archive
+      authorize! :archive, Db::Reservation
       reservation = Db::Reservation.find(params[:id])
       reservation.archive!
 
@@ -44,6 +51,8 @@ module Admin
     end
 
     def give
+      authorize! :give, Db::Reservation
+
       reservation = Db::Reservation.find(params[:id])
       reservation.give!
 
@@ -51,6 +60,8 @@ module Admin
     end
 
     def charge
+      authorize! :charge, Db::Reservation
+
       reservation = Db::Reservation.find(params[:id])
       reservation.payment.update(cash: true) if reservation.payment
 
@@ -58,12 +69,16 @@ module Admin
     end
 
     def remind
+      authorize! :remind, Db::Reservation
+
       reservation = Db::Reservation.find(params[:id])
       ReservationMailer.remind(reservation).deliver_later
       redirect_to admin_reservations_path, notice: 'Przypomniano i wysłano email'
     end
 
     def give_warning
+      authorize! :give_warning, Db::Reservation
+
       reservation = Db::Reservation.find(params[:id])
       reservation.user.increment(:warnings)
       reservation.user.save
@@ -71,6 +86,8 @@ module Admin
     end
 
     def give_back_warning
+      authorize! :give_back_warning, Db::Reservation
+
       reservation = Db::Reservation.find(params[:id])
       reservation.user.decrement(:warnings)
       reservation.user.save
@@ -78,6 +95,8 @@ module Admin
     end
 
     def destroy
+      authorize! :destroy, Db::Reservation
+
       result = Admin::Reservations.destroy(params[:id])
       result.success { redirect_to admin_reservations_path, notice: 'Usunieto' }
       result.failure { redirect_to admin_reservations_path, alert: 'Nie usunieto' }
