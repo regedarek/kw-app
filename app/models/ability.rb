@@ -38,6 +38,7 @@ class Ability
 
   def active
     can :read, Management::Voting::CaseRecord, state: 'finished', hidden: false
+    can :read, Db::Activities::MountainRoute
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::Activities::MountainRoute
