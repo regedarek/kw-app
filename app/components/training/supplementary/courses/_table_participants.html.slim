@@ -6,7 +6,7 @@ table.stack
       - if @course.price
         th.text-center width='15%' Płatność
       - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
-        th width='20%' Akcje
+        th.text-center width='20%' Akcje
   tbody
     - sign_ups.each_with_index do |sign_up, i|
       tr

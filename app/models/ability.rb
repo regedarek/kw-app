@@ -99,6 +99,7 @@ class Ability
 
   def office
     can :manage, Db::User
+    can :manage, Db::Membership::Fee
     can :manage, Db::Profile
   end
 end
