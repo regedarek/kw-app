@@ -57,5 +57,7 @@ table.stack
                 ul.menu.vertical
                   - if can? :hide, route
                     li= link_to 'Ukryj', hide_activities_mountain_route_path(route.id), method: :put
-                  li= link_to 'Edytuj', edit_activities_mountain_route_path(route.id)
-                  li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete, data: { confirm: 'Jesteś pewien?'} 
+                  - if can? :update, route
+                    li= link_to 'Edytuj', edit_activities_mountain_route_path(route.id)
+                  - if can? :destroy, route
+                    li= link_to 'Usuń', activities_mountain_route_path(route), method: :delete, data: { confirm: 'Jesteś pewien?'} 

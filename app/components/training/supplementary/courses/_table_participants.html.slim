@@ -2,11 +2,11 @@ table.stack
   thead
     tr
       th.text-left width='5%' Lp.
-      th.text-left Kto?
+      th.text-left width='50%' Kto?
       - if @course.price
         th.text-center width='15%' Płatność
       - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
-        th width='20%'
+        th width='20%' Akcje
   tbody
     - sign_ups.each_with_index do |sign_up, i|
       tr

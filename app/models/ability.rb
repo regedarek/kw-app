@@ -30,7 +30,7 @@ class Ability
   end
 
   def not_active
-    can :manage, Db::Activities::MountainRoute
+    can :manage, Db::Activities::MountainRoute, user_id: user.id
     can [:read, :update], Settlement::ContractRecord, creator_id: user.id
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     cannot :read, Management::Voting::CaseRecord
@@ -38,7 +38,7 @@ class Ability
 
   def active
     can :read, Management::Voting::CaseRecord, state: 'finished', hidden: false
-    can :manage, Db::Activities::MountainRoute
+    can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::Activities::MountainRoute
     can :create, Settlement::ContractRecord
