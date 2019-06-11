@@ -10,7 +10,7 @@ module Admin
       @q.sorts = 'created_at desc' if @q.sorts.empty?
       @membership_fees = @q.result.includes(:user, :payment).page(params[:page])
 
-      authorize! :read, @membership_fees
+      authorize! :manage, Db::Membership::Fee
 
       respond_to do |format|
         format.html

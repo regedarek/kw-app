@@ -14,7 +14,6 @@ class Ability
     management if role?('management')
     office_king if role?('office_king')
     financial_management if role?('financial_management')
-    routes if role?('routes')
     office if role?('office')
     competitions if role?('competitions')
     events if role?('events')
@@ -43,10 +42,6 @@ class Ability
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::Activities::MountainRoute
     can :create, Settlement::ContractRecord
-  end
-
-  def routes
-    can %i(manage hide), Db::Activities::MountainRoute
   end
 
   def competitions
