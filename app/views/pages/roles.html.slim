@@ -97,6 +97,7 @@
             - Db::User.where(":name = ANY(roles)", name: "secondary_management").each do |user|
               li = user.display_name
 
+        li
           b financial_management 
           | - dostęp do modułu rozliczeń: tylko akceptacja rozliczeń
           ul

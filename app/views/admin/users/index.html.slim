@@ -23,7 +23,10 @@
               = f.label :phone_cont, 'Telefon'
               = f.search_field :phone_cont
             .large-3.columns
-              = f.label :roles, 'Uprawnienia'
+              = f.label :roles do
+                | Uprawnienia (
+                = link_to 'Lista uprawnień', page_path(id: 'roles')
+                | )
               = f.search_field :roles_contains_array
             .large-3.columns
               = f.label :curator_true, 'Opiekun'
