@@ -130,6 +130,7 @@ Rails.application.routes.draw do
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
   get "pages/*id" => 'pages#show', as: :page, format: false
+  get 'admin/dostepy' => 'pages#show', id: 'roles'
 
   root to: 'pages#show', id: 'home'
 end
