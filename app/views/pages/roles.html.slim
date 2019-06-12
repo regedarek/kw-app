@@ -11,95 +11,95 @@
           | - zarządzanie modułem rezerwacji - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "reservations").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b routes 
           | - zarządzanie modułem przejść - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "routes").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b admin 
           | - rola nadrzędna - pełen dostęp [w przyszłości zostanie usunięta]
           ul
             - Db::User.where(":name = ANY(roles)", name: "admin").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b events 
           | - zarządzenie modułem wydarzeń - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "events").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b courses 
           | - zarządzenie modułem wydarzeń - pełen dostęp [w przyszłości zostanie usunięta]
           ul
             - Db::User.where(":name = ANY(roles)", name: "courses").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b competitons 
           | - zarządzenie modułem zawodów - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "competitons").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b office 
           | - zarządzenie modułami baza klubowiczów oraz baza składek - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "office").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b office_king 
           | - zarządzenie modułami baza klubowiczów oraz baza składek oraz rozliczenia - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "office_king").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b tech 
           | - dostęp do bazy błędów serwera - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "tech").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b donations 
           | - dostęp do modułu darowizn - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "donations").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b photo_competiton 
           | - dostęp do modułu zbierania zdjęć na konkursy fotograficzne - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "photo_competiton").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b management 
           | - dostęp do modułów: wyszukiwanie rozliczeń, tworzenie wydarzeń, zarządzanie projektami, zarządzanie głosowaniami, ukrywanie głosowań - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "management").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b secondary_management 
           | - dostęp do modułów: wyszukiwanie rozliczeń, tworzenie wydarzeń, zarządzanie projektami, tylko przeglądanie głosowań - pełen dostęp
           ul
             - Db::User.where(":name = ANY(roles)", name: "secondary_management").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
 
         li
           b financial_management 
           | - dostęp do modułu rozliczeń: tylko akceptacja rozliczeń
           ul
             - Db::User.where(":name = ANY(roles)", name: "financial_management").each do |user|
-              li = user.display_name
+              li = link_to user.display_name, edit_admin_user_path(user.id)
