@@ -103,7 +103,10 @@
 
         - if user_signed_in?
           li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do
-            = image_tag(current_user.avatar.url, class: 'topbar-avatar-image')
+            - if current_user.avatar.present?
+              = image_tag(current_user.avatar.url, class: 'topbar-avatar-image')
+            - else
+              = image_tag('default-avatar.png', class: 'topbar-avatar-image')
             ul.menu.vertical
               li= link_to 'Twój profil', user_path(current_user.kw_id), class: 'button secondary'
               li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button secondary'
