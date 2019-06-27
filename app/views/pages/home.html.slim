@@ -28,13 +28,25 @@
             td.text-center = user.sum
 
   .row
-    .large-8.columns
+    .large-4.columns
       = link_to supplementary_courses_path do
         h3 Nadchodzące wydarzenia
       table.stack
-        - Training::Supplementary::CourseRecord.order(created_at: :desc).limit(5).each do |course|
+        - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
           tr
-            td width='14%'
+            td width='30%'
+              - if course.start_date
+                = course.start_date.to_date
+            td
+              = link_to course.name, supplementary_course_path(course.id)
+
+    .large-4.columns
+      = link_to supplementary_courses_path do
+        h3 Twoje wydarzenia
+      table.stack
+        - Training::Supplementary::Repository.new.future_sign_ups_of_user(current_user).each do |course|
+          tr
+            td width='30%'
               - if course.start_date
                 = course.start_date.to_date
             td
