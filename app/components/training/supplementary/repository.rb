@@ -1,6 +1,14 @@
 module Training
   module Supplementary
     class Repository
+      def future_courses_of_user(user)
+        Training::Supplementary::CourseRecord
+          .joins(:sign_ups)
+          .where(supplementary_sign_ups: { user_id: user.id }, start_date: Date.current.beginning_of_day..DateTime::Infinity.new)
+          .order(start_date: :asc)
+          .take(5)
+      end
+
       def future_sign_ups_of_user(user)
         Training::Supplementary::SignUpRecord
           .includes(:course)

@@ -40,17 +40,18 @@
             td
               = link_to course.name, supplementary_course_path(course.id)
 
-    .large-4.columns
-      = link_to supplementary_courses_path do
-        h3 Twoje wydarzenia
-      table.stack
-        - Training::Supplementary::Repository.new.future_sign_ups_of_user(current_user).each do |course|
-          tr
-            td width='30%'
-              - if course.start_date
-                = course.start_date.to_date
-            td
-              = link_to course.name, supplementary_course_path(course.id)
+    - if Training::Supplementary::Repository.new.future_courses_of_user(current_user).any?
+      .large-4.columns
+        = link_to supplementary_courses_path do
+          h3 Twoje wydarzenia
+        table.stack
+          - Training::Supplementary::Repository.new.future_courses_of_user(current_user).each do |course|
+            tr
+              td width='30%'
+                - if course.start_date
+                  = course.start_date.to_date
+              td
+                = link_to course.name, supplementary_course_path(course.id)
 
     .large-4.columns
       = link_to projects_path do
