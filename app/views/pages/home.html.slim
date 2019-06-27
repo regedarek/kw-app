@@ -21,7 +21,7 @@ br
       h3
         = "Górskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
     table.stack
-      - Activities::Repository.new.fetch_current_month.each do |user|
+      - Activities::Repository.new.fetch_current_month.limit(5).each do |user|
         tr
           td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
           td.text-center = user.sum
