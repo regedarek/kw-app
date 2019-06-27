@@ -7,7 +7,9 @@
   #top-bar.top-bar
     .top-bar-left
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
-
+        li
+          = link_to root_path, style: 'padding: 0 1rem;' do
+            = image_tag('logo_kw_krakow.jpg', style: 'max-height: 35px;')
         li= link_to 'Dla Mariusza', mariusz_path, class: 'button warning'
         - if request.path == '/przejscia'
           - if current_user.roles.include?('mountain_routes')
