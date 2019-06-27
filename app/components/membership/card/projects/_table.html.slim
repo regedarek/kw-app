@@ -1,0 +1,17 @@
+table.stack
+  thead
+    tr
+      th.text-left Nazwa projektu
+      th.text-center Koordynatorzy
+      th.text-center Status projektu
+  tbody
+    - projects.each do |project|
+      tr
+        td.text-left = link_to project.name, project_path(project)
+        td.text-center
+          - if project.users
+            = project.users.map(&:display_name).to_sentence
+          - else
+            span.label.alert Koordynatorzy poszukiwani
+        td.text-center
+          span.label = I18n.t project.state

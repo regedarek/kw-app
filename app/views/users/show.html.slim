@@ -2,25 +2,31 @@
   .row
     .large-12.columns
       .card-profile-stats
-        .card-profile-stats-intro
-          - if @user && @user.avatar.present?
-            = image_tag(@user.avatar.url, class: 'card-profile-stats-intro-pic')
-          - else
-            = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
-          .card-profile-stats-intro-content
-            h3 = @user.display_name
-            p
-              - if @user.profile
-                = "W klubie od #{@user.profile&.application_date&.to_date}"
-              - else
-                = "Dołączył #{@user.created_at&.to_date}"
-        hr/
+        .large-6.columns
+          .card-profile-stats-intro
+            - if @user && @user.avatar.present?
+              = image_tag(@user.avatar.url, class: 'card-profile-stats-intro-pic')
+            - else
+              = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
+            .card-profile-stats-intro-content
+              h3 = @user.display_name
+              p
+                - if @user.profile
+                  = "W klubie od #{@user.profile&.application_date&.to_date}"
+                - else
+                  = "Dołączył #{@user.created_at&.to_date}"
+        .large-6.columns
+          - if @user.description
+            br
+            = sanitize @user.description
+
+        hr style='padding-top: 20px'
         .card-profile-stats-container
           .card-profile-stats-statistic
             span.stat = Db::Activities::RouteColleagues.where(colleague_id: @user.id).count
             p aktywności
           .card-profile-stats-statistic style='color: #6a89cc'
-            - routes = Db::Activities::RouteColleagues.where(colleague_id: @user.id).collect(&:mountain_route)
+            - routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(colleague_id: @user.id).collect(&:mountain_route)
             span.stat
               - if routes.any?
                 - ski_routes = routes.compact.select { |r| r.category == :snw }
@@ -47,15 +53,34 @@
               = routes.compact.inject(0) { |sum, r| sum + r.hearts_count }
             p wyrazów uznania
 
-  - if false
-    .row
-      .large-12.columns
-        .row
-          .large-12.columns
-            - routes = Db::Activities::RouteColleagues.where(colleague_id: @user.id).map(&:mountain_route).compact
-            - my_routes = Kaminari.paginate_array((@user.mountain_routes + routes).uniq).page(params[:page]).per(10)
-            = render 'activities/mountain_routes/table', routes: my_routes
+  .row
+    .large-12.columns
+        - if @my_routes.any?
+          h5 Ostatnie przejścia górskie
+          .row
+            .large-12.columns
+              = render 'activities/mountain_routes/table', routes: @my_routes
 
-        .row
-          .large-12.columns
-            = paginate my_routes
+          .row
+            .large-12.columns
+              = paginate @my_routes
+
+        - if @my_courses.any?
+          h5 Ostatnie wydarzenia
+          .row
+            .large-12.columns
+              = render 'membership/card/courses/table', courses: @my_courses
+
+          .row
+            .large-12.columns
+              = paginate @my_courses
+
+        - if @my_projects.any?
+          h5 Ostatnie projekty
+          .row
+            .large-12.columns
+              = render 'membership/card/projects/table', projects: @my_projects
+
+          .row
+            .large-12.columns
+              = paginate @my_projects

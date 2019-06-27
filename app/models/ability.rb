@@ -54,6 +54,7 @@ class Ability
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
     can :read, Management::Voting::CaseRecord
+    can :create, Management::Voting::CaseRecord
     can :manage, Management::ProjectRecord
   end
 

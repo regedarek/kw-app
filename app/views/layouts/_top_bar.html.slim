@@ -70,8 +70,6 @@
         - if request.path == '/narciarskie-dziki/regulamin' || request.path == '/przejscia'
           li.show-for-medium= link_to 'Tabela dzików', gorskie_dziki_path, class: 'button warning hollow'
         - if user_signed_in?
-          li.show-for-medium = link_to 'Twoje aktywności', page_path('home'), class: 'button secondary hollow'
-        - if user_signed_in?
           - if !current_user.admin? || !current_user.roles.include?('office')
             li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button secondary'
         - if user_signed_in?
@@ -82,19 +80,10 @@
         - if user_signed_in?
           li.show-for-medium= link_to 'Twoje składki', membership_fees_path, class: 'button warning'
         li.show-for-medium
-          - if user_signed_in?
-            = link_to 'Konto', edit_user_registration_path
-          - else
+          - unless user_signed_in?
             = link_to 'Zaloguj lub zarejestruj', edit_user_registration_path
           ul.menu.vertical
-            - if user_signed_in?
-              - if can? :read, Management::Voting::CaseRecord
-                li= link_to 'Głosowania', cases_path, class: 'button secondary'
-              - if can? :read, Settlement::ContractRecord
-                li= link_to 'Rozliczenia', admin_contracts_path, class: 'button alert'
-              li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button'
-              li= link_to t('.administration.logout'), destroy_user_session_path, class: 'button warning'
-            - else
+            - unless user_signed_in?
               li= link_to t('.administration.login'), new_user_session_path
               li= link_to t('.administration.signup'), zarejestruj_path
 
@@ -111,3 +100,11 @@
                 span data-behaviour='js-notifications-unread-count'
                   = NotificationCenter::NotificationRecord.where(recipient: current_user).unread.count
             ul.menu.vertical data-behaviour='js-notifications-items'
+
+        - if user_signed_in?
+          li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do
+            = image_tag(current_user.avatar.url, class: 'topbar-avatar-image')
+            ul.menu.vertical
+              li= link_to 'Twój profil', user_path(current_user.kw_id), class: 'button secondary'
+              li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button secondary'
+              li= link_to t('.administration.logout'), destroy_user_session_path, class: 'button secondary'

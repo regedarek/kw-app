@@ -8,58 +8,60 @@
             li= msg
 
     .row
-      - if current_user.avatar.present?
-        .large-3.columns
+      .large-3.columns
+        - if current_user.avatar.present?
           = image_tag(current_user.avatar.url, class: 'card-profile-stats-intro-pic')
+          br
+          br
+          .callout
+            .small Przytnij wcześniej zdjęcie do kwadratu
+          = f.file_field :avatar
 
       .large-9.columns
-        br
-        = f.file_field :avatar
+        h4 Biogram
+        | notka o sobie, link do bloga...
+        = f.trix_editor :description, style: 'min-height: 150px'
 
     .row
-      .large-12.columns
-        = f.label :kw_id, 'Numer klubowy'
-        = f.text_field :kw_id
+      .large-6.columns
+        h4 Dane osobowe
+        .large-12.columns
+          = f.label :kw_id, 'Numer klubowy'
+          = f.text_field :kw_id
 
-    .row
-      .large-12.columns
-        = f.label :first_name, 'Imię'
-        = f.text_field :first_name
+        .large-6.columns
+          = f.label :first_name, 'Imię'
+          = f.text_field :first_name
 
-    .row
-      .large-12.columns
-        = f.label :phone, 'Telefon'
-        = f.text_field :phone
+        .large-6.columns
+          = f.label :last_name, 'Nazwisko'
+          = f.text_field :last_name
 
-    .row
-      .large-12.columns
-        = f.label :last_name, 'Nazwisko'
-        = f.text_field :last_name
+        .large-12.columns
+          = f.label :phone, 'Telefon'
+          = f.text_field :phone
 
-    .row
-      .large-12.columns
-        = f.label :email
-        = f.email_field :email, autofocus: true
+        .large-12.columns
+          = f.label :email
+          = f.email_field :email, autofocus: true
 
-    .row
-      .large-12.columns
-        = f.label :hide
-        = f.check_box :hide
+      .large-6.columns
+        h4 Opcje
+        .large-12.columns
+          = f.label :hide
+          = f.check_box :hide
 
-    .row
-      .large-12.columns
-        = f.label :climbing_boars
-        = f.check_box :climbing_boars
+        .large-12.columns
+          = f.label :climbing_boars
+          = f.check_box :climbing_boars
 
-    .row
-      .large-12.columns
-        = f.label :boars
-        = f.check_box :boars
+        .large-12.columns
+          = f.label :boars
+          = f.check_box :boars
 
-    .row
-      .large-12.columns
-        = f.label :ski_hater
-        = f.check_box :ski_hater
+        .large-12.columns
+          = f.label :ski_hater
+          = f.check_box :ski_hater
 
     .row
       .large-12.columns

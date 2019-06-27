@@ -1,0 +1,22 @@
+table.stack
+  thead
+    tr
+      th.text-center width='5%'
+      th.text-left width='50%' Wydarzenia
+      th.text-center width='20%' Miejsce
+      th.text-center width='25%' Data
+
+  tbody
+    - courses.each do |course|
+      tr
+        td.text-center = image_tag "#{course.category}.png", size: '40x40'
+        td.text-left
+          = link_to course.name, polish_event_path(course.slug)
+        td.text-center = course.place
+        td.text-center
+          - if course.start_date && course.end_date
+            = [course.start_date&.strftime("%d"), course.end_date&.strftime("%d/%m/%Y")].join('-')
+          - else
+            = course.start_date&.strftime("%d/%m/%Y ")
+            - unless course.start_date&.hour == 00
+              b = course.start_date&.strftime("%H:%M")

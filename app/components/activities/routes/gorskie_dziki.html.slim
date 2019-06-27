@@ -17,7 +17,7 @@
               tbody
                 - @prev_month_leaders.first(5).each do |user|
                   tr
-                    td = Db::User.find(user.id).display_name
+                    td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                     td.text-center = user.sum
 
         .large-4.columns
@@ -31,7 +31,7 @@
               tbody
                 - @current_month_leaders.first(5).each do |user|
                   tr
-                    td = Db::User.find(user.id).display_name
+                    td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                     td.text-center = user.sum
 
         .large-4.columns
@@ -44,7 +44,7 @@
             tbody
               - @season_leaders.first(5).each do |user|
                 tr
-                  td = Db::User.find(user.id).display_name
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                   td.text-center = user.sum
 
     h4 Pozostałe klasyfikacje
@@ -60,7 +60,7 @@
             tbody
               - @best_of_season.first(5).each do |user|
                 tr
-                  td = Db::User.find(user.id).display_name
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                   td.text-center = user.sum
 
         .large-4.columns
@@ -73,7 +73,7 @@
             tbody
               - @dziadekgienek.first(5).each do |user|
                 tr
-                  td = user.display_name
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                   td.text-center = user.mountain_routes.where("description LIKE '%#dziadekgienek%'").count
 
         .large-4.columns
@@ -86,7 +86,7 @@
             tbody
               - @tatra_uniqe.first(5).each do |user|
                 tr
-                  td = user.display_name
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                   td.text-center = user.mountain_routes.where("description LIKE '%#exploratortatr%'").count
 
 .row
@@ -104,6 +104,6 @@
         - @season_leaders.each do |user|
           tr
             td.text-center = i + 1
-            td.text-center.large-text-left = Db::User.find(user.id).display_name
+            td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
             td.text-center.large-text-left = user.sum
           - i += 1

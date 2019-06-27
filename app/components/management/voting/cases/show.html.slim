@@ -24,6 +24,12 @@
           .callout
             = sanitize @case.destrciption
 
+    - if @case.doc_url
+      b Dokument
+      br
+      = link_to @case.doc_url, target: :_blank do
+        = image_tag('file.jpg', class: 'thumbnail')
+
     - if @case.attachments.any?
       .row
         .large-12.columns

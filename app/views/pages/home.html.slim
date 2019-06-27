@@ -1,80 +1,64 @@
-.column
-  - if user_signed_in?
-    .row
-      .large-12.columns
-        .card-profile-stats
-          .card-profile-stats-intro
-            - if current_user.avatar.present?
-              = image_tag(current_user.avatar.url, class: 'card-profile-stats-intro-pic')
-            - else
-              = image_tag('default-avatar.png', class: 'card-profile-stats-intro-pic')
-            .card-profile-stats-intro-content
-              h3 = current_user.display_name
-              p
-                - if current_user.profile
-                  = "W klubie od #{current_user.profile&.application_date&.to_date}"
-                - else
-                  = "Dołączył #{current_user.created_at&.to_date}"
-          hr/
-          .card-profile-stats-container
-            .card-profile-stats-statistic
-              span.stat = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).count
-              p aktywności
-            .card-profile-stats-statistic style='color: #6a89cc'
-              - routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(colleague_id: current_user.id).collect(&:mountain_route)
-              span.stat
-                - if routes.any?
-                  - ski_routes = routes.compact.select { |r| r.category == :snw }
-                  - if ski_routes.any?
-                    = ski_routes.inject(0) { |sum, r| sum + r.length.to_i }
-                  - else
-                    | 0
-                - else
-                  | 0
-              p metrów przewyższenia na nartach
-            .card-profile-stats-statistic style='color: #82ccdd'
-              span.stat
-                - if routes.any?
-                  - climbing_routes = routes.compact.select { |r| r.category == :sww }
-                  - if climbing_routes.any?
-                    = climbing_routes.inject(0) { |sum, r| sum + r.length.to_i }
-                  - else
-                    | 0
-                - else
-                  | 0
-              p metrów przewyższenia wspinając się
-            .card-profile-stats-statistic
-              span.stat
-                = routes.compact.inject(0) { |sum, r| sum + r.hearts_count }
-              p wyrazów uznania
+.row
+  .large-12.columns style='text-align: center'
+    = image_tag asset_path('kw-bg-home.jpg')
+br
+.row
+  .large-8.columns
+    = link_to activities_mountain_routes_path do
+      h3 Ostatnio dodane przejścia
+    table.stack
+      - Db::Activities::MountainRoute.includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
+        tr
+          td width='14%'
+            = link_to route.climbing_date, activities_mountain_route_path(route.id)
+          td
+            = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
+          td
+            = route.name
 
-    .row
-      .large-12.columns
-        ul.accordion data-accordion="" data-multi-expand="true"
-          - my_sign_ups = Training::Supplementary::Repository.new.future_sign_ups_of_user(current_user)
-          - if my_sign_ups.any?
-            li.accordion-item.is-active data-accordion-item="" 
-              a.accordion-title href="#" Twoje nadchodzące wydarzenia
-              .accordion-content data-tab-content="" 
-                = render 'supplementary/sign_ups/table', sign_ups: my_sign_ups
+  .large-4.columns
+    = link_to gorskie_dziki_path do
+      h3
+        = "Górskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
+    table.stack
+      - Activities::Repository.new.fetch_current_month.each do |user|
+        tr
+          td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+          td.text-center = user.sum
 
-          - if current_user.mountain_routes.any?
-            li.accordion-item.is-active data-accordion-item="" 
-              a.accordion-title href="#" Twoje przejścia
-              .accordion-content data-tab-content="" 
-                .row
-                  .large-12.columns
-                    - routes = Db::Activities::RouteColleagues.where(colleague_id: current_user.id).map(&:mountain_route).compact
-                    - my_routes = Kaminari.paginate_array((current_user.mountain_routes + routes).uniq.sort_by(&:climbing_date).reverse!).page(params[:page]).per(10)
-                    = render 'activities/mountain_routes/table', routes: my_routes
+.row
+  .large-8.columns
+    = link_to supplementary_courses_path do
+      h3 Nadchodzące wydarzenia
+    table.stack
+      - Training::Supplementary::CourseRecord.order(created_at: :desc).limit(5).each do |course|
+        tr
+          td width='14%'
+            - if course.start_date
+              = course.start_date.to_date
+          td
+            = link_to course.name, supplementary_course_path(course.id)
 
-                .row
-                  .large-12.columns
-                    = paginate my_routes
+  .large-4.columns
+    = link_to projects_path do
+      h3 Projekty do wzięcia
+    table.stack
+      - Management::ProjectRecord.order(created_at: :desc).limit(5).each do |project|
+        tr
+          td
+            = link_to project.name, project_path(project.id)
 
-          - if current_user.reservations.not_archived.any?
-            li.accordion-item.is-active data-accordion-item="" 
-              a.accordion-title href="#" Twoje rezerwacje
-              .accordion-content data-tab-content="" 
-                = render 'reservations/table', reservations: current_user.reservations.not_archived.limit(3)
+.row
+  .large-6.columns
+    h3 Biuletyny, sprawozdania, uchwały
+    table.stack
+
+  .large-6.columns
+    = link_to cases_path do
+      h3 Głosowania zarządu
+    table.stack
+      - Management::Voting::CaseRecord.accessible_by(current_ability).order(created_at: :desc).limit(5).each do |case_record|
+        tr
+          td
+            = link_to case_record.name, case_path(case_record.id)
 

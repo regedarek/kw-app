@@ -7,7 +7,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range_climbing_date, created_at: range_created_at })
-        .select('users.id, SUM(mountain_routes.length)')
+        .select('users.kw_id, users.id, SUM(mountain_routes.length)')
         .group('users.id')
         .distinct
         .order('SUM(mountain_routes.length) DESC')
@@ -19,7 +19,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
-        .select('users.id, SUM(mountain_routes.length)')
+        .select('users.kw_id, users.id, SUM(mountain_routes.length)')
         .group('users.id')
         .distinct
         .order('SUM(mountain_routes.length) DESC')
@@ -31,7 +31,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
-        .select('users.id, SUM(mountain_routes.length)')
+        .select('users.kw_id, users.id, SUM(mountain_routes.length)')
         .group('users.id')
         .distinct
         .order('SUM(mountain_routes.length) DESC')
@@ -43,7 +43,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
-        .select('users.id, SUM(mountain_routes.hearts_count)')
+        .select('users.kw_id, users.id, SUM(mountain_routes.hearts_count)')
         .group('users.id')
         .distinct
         .order('SUM(mountain_routes.hearts_count) DESC')
