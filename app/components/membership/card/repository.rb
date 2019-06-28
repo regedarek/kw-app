@@ -13,6 +13,7 @@ module Membership
           .where(user_id: user.id)
           .order(created_at: :desc)
           .collect(&:course)
+          .compact
       end
 
       def fetch_projects(user)
