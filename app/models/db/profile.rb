@@ -10,6 +10,7 @@ module Db
     end
 
     has_one :payment, as: :payable, dependent: :destroy
+    has_one :list, class_name: 'UserManagement::ProfileListRecord'
     has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :user, foreign_key: :kw_id, primary_key: :kw_id

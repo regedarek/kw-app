@@ -83,14 +83,14 @@
   .large-4.columns
     h3 wykazy do akceptacji
     table.stack
-      - Db::Profile.where(accepted: false).order('created_at DESC NULLS LAST').select{|p| p.acomplished_courses.include?('list') }.each do |profile|
+      - UserManagement::ProfileListRecord.where(accepted: false).order('created_at DESC NULLS LAST').each do |list|
         tr
-          td = link_to profile.display_name, admin_profile_path(profile.id)
+          td = link_to list.profile.display_name, admin_profile_path(list.profile.id)
 .row
   .large-4.columns
     h3 niedoręczone e-maile
     table.stack
-      - EmailCenter::EmailRecord.where(state: 'sent').order('created_at DESC NULLS LAST').each do |email|
+      - EmailCenter::EmailRecord.includes(:mailable).where(state: 'sent').order('created_at DESC NULLS LAST').each do |email|
         tr
           td = email.mailable.try(:name) || email.mailable.try(:display_name)
           td = email.mailable_type

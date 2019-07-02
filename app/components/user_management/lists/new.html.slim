@@ -1,0 +1,18 @@
+.row
+  .large-12.columns
+    h4 Wykaz przejść, osiągnięć sportowych
+
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error
+
+= form_for @list, as: :list, url: profile_lists_path(profile_id: @profile.id) do |f|
+  = render 'form', f: f
+
+  .row
+    .large-12.columns
+      = f.submit 'Wyślij wykaz', class: 'button expanded large success'

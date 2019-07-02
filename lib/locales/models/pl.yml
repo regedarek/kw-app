@@ -1,4 +1,10 @@
 pl:
+  user_management:
+    list:
+      enums:
+        section_types:
+          sww: Wspinaczkowy
+          snw: Narciarski
   activemodel:
     mas_sign_up_form: Formularz zapisów
     attributes:
@@ -59,7 +65,7 @@ pl:
         profile_acomplished_courses_cave: Kurs taternictwa jaskiniowego.
         profile_acomplished_courses_cave_kw: Kurs taternictwa jaskiniowego, ukończony w KW Kraków.
         profile_acomplished_courses_ski: Kurs narciarstwa wysokogórskiego.
-        profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.
+        profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść górskich lub sportowych.
         profile_acomplished_courses_instructors: Jestem instruktorem PZA.
         profile_acomplished_courses_other_club: Przenoszę sie z innego klubu oraz mam ukończony podstawowy kurs wspinaczki w skałkach (prowadzony przez instruktora PZA).
         terms_of_service: Zapoznałem się i akceptuję powyższe punkty.
@@ -104,6 +110,9 @@ pl:
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
     attributes:
+      user_management/profile_list_record:
+        description: Opis
+        section_type: Rodzaj wykazu
       db/membership_fee:
         year: Rok
       profile:
@@ -161,7 +170,7 @@ pl:
         profile_acomplished_courses_cave: Kurs taternictwa jaskiniowego.
         profile_acomplished_courses_cave_kw: Kurs taternictwa jaskiniowego, ukończony w KW Kraków.
         profile_acomplished_courses_ski: Kurs narciarstwa wysokogórskiego.
-        profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść.
+        profile_acomplished_courses_list: Nie mam ukończonego kursu skałkowego, ubiegam się o członkostwo w KW Kraków na podstawie wykazu przejść górskich lub sportowych.
         profile_acomplished_courses_instructors: Jestem instruktorem PZA.
         profile_acomplished_courses_other_club: Przenoszę sie z innego klubu oraz mam ukończony podstawowy kurs wspinaczki w skałkach (program PZA).
       db/activities/mountain_route:

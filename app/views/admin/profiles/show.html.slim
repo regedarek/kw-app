@@ -120,6 +120,45 @@
           b Profesja: 
           = @profile.profession
 
+  - if @profile.list
+    .row
+      .large-6.columns 
+        b = "Wykaz do akceptacji - #{I18n.t("user_management.list.enums.section_types.#{@profile.list.section_type}").humanize}"
+        .callout
+          = sanitize @profile.list.description
+
+      .large-3.columns 
+        - if @profile.list.attachments.any?
+          .row
+            .large-12.columns
+              b Załączniki do wykazu: 
+              ul.no-bullet
+                - @profile.list.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+                  li
+                    = link_to attachment.url, download: File.basename(attachment.file.path) do
+                      = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                      |  
+                      = File.basename(attachment.file.path)
+
+                - @profile.list.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+                  - unless photo.blank? || photo.thumb.blank?
+                    li
+                      = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+                    div id="photo-#{i}" class="reveal" data-reveal="" 
+                      = image_tag photo.url
+                      button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                        span aria-hidden="true"  &times;
+
+      .large-3.columns 
+        br
+        .align-right
+          - if @profile.list.accepted?
+            .callout.success
+              = "Zaakceptował #{Db::User.find(@profile.list.acceptor_id).display_name}"
+          - else
+            = link_to 'Zaakceptuj wykaz', accept_profile_list_path(profile_id: @profile.id, id: @profile.list.id), method: :post, class: 'button success'
+
   .row
     .large-12.columns 
       .callout class="#{@activement.active? ? 'success' : 'alert'}"
