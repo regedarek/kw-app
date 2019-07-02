@@ -110,6 +110,10 @@ pl:
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
     attributes:
+      activities/mountain_route:
+        name: nazwa drogi
+        rating: ocena drogi
+        climbing_date: data przejścia
       user_management/profile_list_record:
         description: Opis
         section_type: Rodzaj wykazu

@@ -19,7 +19,7 @@
           = f.date_field :climbing_date, value: @route.climbing_date
 
         .large-2.columns
-          = f.label :length, 'długość drogi w metrach*'
+          = f.label :length, 'długość drogi w metrach'
           = f.number_field :length
 
         .large-3.columns
@@ -61,7 +61,7 @@
     .callout
       .row
         .large-3.columns
-          = f.label :colleagues_names, 'koledzy z klubu*'
+          = f.label :colleagues_names, 'partnerzy z klubu*'
           - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
           - if action_name == 'new'
             - users = [{ id: current_user.id, name: current_user.display_name }]
@@ -69,7 +69,7 @@
             - users = @route.colleagues.map{|u| { id: u.id, name: u.display_name } }
           = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: users.uniq } }.to_json
 
-          = f.label :partners
+          = f.label :partners, 'partnerzy spoza klubu'
           = f.text_field :partners
 
         .large-9.columns
