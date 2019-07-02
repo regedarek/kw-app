@@ -1,0 +1,13 @@
+.row
+  .large-12.columns
+    h3 = @item.title
+.row
+  .large-6.columns
+    .row
+      .large-12.columns
+        b Tytuł: 
+        = @item.title
+
+.row
+  .large-12.columns
+    = link_to 'powrót do zbiorów', library_items_path, class: 'button warning'

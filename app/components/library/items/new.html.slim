@@ -1,0 +1,22 @@
+= form_for @item, as: :item, url: library_items_path, method: :post do |f|
+  .row
+    .large-12.columns
+      - if @item.errors.any?
+        .callout.alert
+          ul
+            - @item.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :title
+      = f.text_field :title
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .large-12.columns
+      = f.submit class: 'button'

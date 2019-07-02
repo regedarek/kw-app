@@ -1,0 +1,20 @@
+.column
+  .row
+    .large-12.columns
+      .large-6.columns
+        h4 Egzlemplarze
+      .large-6.columns
+        =link_to 'Dodaj', new_library_item_path, class: 'button'
+
+    table.stack
+      thead
+        tr
+          th width='25%' Nazwa
+          th width='20%' Opis
+      tbody
+        - @items.each do |item|
+          tr
+            td
+              = link_to item.title, library_item_path(item.id)
+            td
+              = item.description

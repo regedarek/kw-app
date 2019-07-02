@@ -4,4 +4,8 @@ Rails.application.routes.draw do
       resources :areas
     end
   end
+
+  namespace :library do
+    resources :items
+  end
 end
