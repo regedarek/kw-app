@@ -33,9 +33,10 @@
           .large-12.columns
             b skład zespołu: 
             - if @route.partners.present? && @route.colleagues.any?
-              = [@route.partners, @route.colleagues.map(&:display_name).to_sentence].join(' oraz ')
+              - c = render(partial: 'activities/mountain_routes/link', collection: @route.colleagues, spacer_template: 'shared/comma')
+              = sanitize [c, @route.partners].join(' oraz ')
             - elsif @route.colleagues.any?
-              = @route.colleagues.map(&:display_name).to_sentence
+              = render partial: 'activities/mountain_routes/link', collection: @route.colleagues, spacer_template: 'shared/comma'
             - else
               = @route.partners
 
