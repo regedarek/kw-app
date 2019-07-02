@@ -1,1 +1,22 @@
-= @area
+= form_for @area, as: :area, url: admin_areas_path, method: :post do |f|
+  .row
+    .large-12.columns
+      - if @area.errors.any?
+        .callout.alert
+          ul
+            - @area.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .large-12.columns
+      = f.submit class: 'button'
