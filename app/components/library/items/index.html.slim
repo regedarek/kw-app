@@ -9,12 +9,25 @@
     table.stack
       thead
         tr
-          th width='25%' Nazwa
-          th width='20%' Opis
+          th width='8%' Typ
+          th width='7%' Numer
+          th width='23%' Tytuł
+          th width='20%' Autorzy
+          th width='8%' Czytelnia?
+          th width='8%' Rok Wydania
       tbody
         - @items.each do |item|
           tr
             td
+              = I18n.t item.doc_type
+            td
+              = item.item_id
+            td
               = link_to item.title, library_item_path(item.id)
             td
-              = item.description
+              = item.autors
+            td
+              = I18n.t item.reading_room
+            td
+              - if item.publishment_at
+                = item.publishment_at.strftime("%Y")

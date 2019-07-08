@@ -28,7 +28,7 @@ module Library
     private
 
     def item_params
-      params.require(:item).permit(:title, :description)
+      params.require(:item).permit(:title, :description, :doc_type, :publishment_at, :autors, :item_id, :reading_room)
     end
   end
 end

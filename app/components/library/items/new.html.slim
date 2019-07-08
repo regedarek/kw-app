@@ -9,13 +9,39 @@
 
   .row
     .large-12.columns
-      = f.label :title
+      = f.label :title, "Tytuł"
       = f.text_field :title
 
   .row
     .large-12.columns
-      = f.label :description
-      = f.text_area :description
+      = f.label :doc_type, 'Rodzaj'
+      = f.select :doc_type, Library::ItemRecord.doc_types.map { |key, value| [I18n.t(key), key] }
+
+  .row
+    .large-12.columns
+      = f.label :item_id, 'Number'
+      = f.number_field :item_id
+
+  .row
+    .large-12.columns
+      = f.label :autors
+      = f.text_field :autors
+
+  .row
+    .large-12.columns
+      = f.label :reading_room, 'Rok wydania'
+      = f.check_box :reading_room
+
+  .row
+    .large-12.columns
+      = f.label :publishment_at, 'Rok wydania'
+      = f.date_field :publishment_at
+
+  .row
+    .large-12.columns
+      = f.label :description, 'Opis'
+      = f.trix_editor :description, style: 'min-height: 150px'
+      br
 
   .row
     .large-12.columns

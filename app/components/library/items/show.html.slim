@@ -1,12 +1,37 @@
 .row
   .large-12.columns
     h3 = @item.title
+
+.row
+  .large-12.columns
+    = @item.item_id
+
+.row
+  .large-12.columns
+    = I18n.t @item.doc_type
+
+.row
+  .large-12.columns
+    b Czytelnia: 
+    = I18n.t @item.reading_room
+
+.row
+  .large-12.columns
+    b Autorzy: 
+    = @item.autors
+
+.row
+  .large-12.columns
+    b Rok wydania: 
+    - if @item.publishment_at
+      = @item.publishment_at.strftime("%Y")
+
 .row
   .large-6.columns
     .row
       .large-12.columns
-        b Tytuł: 
-        = @item.title
+        .callout
+          = @item.description
 
 .row
   .large-12.columns
