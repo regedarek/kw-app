@@ -4,7 +4,7 @@ module Library
     append_view_path 'app/components'
 
     def index
-      @items = ::Library::ItemRecord.all
+      @items = ::Library::ItemRecord.includes(:authors).page(params[:page]).per(20)
     end
 
     def show

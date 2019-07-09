@@ -19,14 +19,17 @@ module Importing
       def store_library_item(parsed_objects)
         Library::ItemRecord.transaction do
           parsed_objects.each do |parsed_data|
-            library_item = Library::ItemRecord.new.update(
+            library_item = Library::ItemRecord.create(
               doc_type: parsed_data.doc_type,
               title: parsed_data.title,
               description: parsed_data.description,
               item_id: parsed_data.item_id,
-              reading_room: parsed_data.reading_room,
-              autors: parsed_data.autors
+              reading_room: parsed_data.reading_room
             )
+            parsed_data.autors.split(",").map(&:strip).each do |author_name|
+              author = Library::AuthorRecord.where(name: author_name).first_or_create
+              Library::ItemAuthorsRecord.where(author_id: author.id, item_id: library_item.id).first_or_create
+            end if parsed_data.autors
           end
         end
 

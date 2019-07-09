@@ -18,7 +18,8 @@
 .row
   .large-12.columns
     b Autorzy: 
-    = @item.authors.map(&:name).to_sentence
+    - if @item.authors.any?
+      = render partial: 'library/authors/link', collection: @item.authors, spacer_template: 'shared/comma'
 
 .row
   .large-12.columns

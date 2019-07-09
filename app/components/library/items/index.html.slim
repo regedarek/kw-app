@@ -25,9 +25,13 @@
             td
               = link_to item.title, library_item_path(item.id)
             td
-              = item.autors
+              - if item.authors.any?
+                = render partial: 'library/authors/link', collection: item.authors, spacer_template: 'shared/comma'
             td
               = I18n.t item.reading_room
             td
               - if item.publishment_at
                 = item.publishment_at.strftime("%Y")
+
+    .text-center
+      = paginate @items

@@ -1,0 +1,9 @@
+.row
+  .large-12.columns
+    h3 = @author.name
+
+.row
+  .large-12.columns
+    ul
+      - @author.items.each do |item|
+        li = link_to item.title, library_item_path(item.id)

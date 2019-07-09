@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   namespace :library do
     resources :items
+    resources :authors, only: :show
   end
 end

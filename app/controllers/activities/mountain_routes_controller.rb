@@ -24,7 +24,7 @@ module Activities
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
       @q = @q.boars if params[:boars] == 'true'
       @q = @q.ransack(params[:q])
-      @routes = @q.result(distinct: true).page(params[:page]).per(10)
+      @routes = @q.result(distinct: true).page(params[:page]).per(20)
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month
