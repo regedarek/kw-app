@@ -3,5 +3,8 @@ module Library
     self.table_name = 'library_items'
 
     enum doc_type: [:book, :magazine]
+
+    has_many :item_authors, class_name: '::Library::ItemAuthorsRecord', foreign_key: :item_id
+    has_many :authors, class_name: '::Library::AuthorRecord', through: :item_authors, foreign_key: :author_id, dependent: :destroy
   end
 end
