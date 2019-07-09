@@ -10,11 +10,11 @@
       table.stack
         - Db::Activities::MountainRoute.includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
           tr
-            td width='14%'
+            td width='110px'
               = link_to route.climbing_date, activities_mountain_route_path(route.id)
             td
               = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
-            td
+            td.text-right
               = route.name
 
     .large-4.columns
@@ -23,9 +23,15 @@
           = "Górskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
       table.stack
         - Activities::Repository.new.fetch_current_month.limit(5).each do |user|
+          - dbuser = Db::User.find(user.id)
           tr
-            td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-            td.text-center = user.sum
+            td width='45px' = link_to user_path(kw_id: user.kw_id) do
+              - if dbuser.avatar.present?
+                = image_tag(dbuser.avatar.url, class: 'topbar-avatar-image')
+              - else
+                = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+            td = link_to dbuser.display_name, user_path(kw_id: user.kw_id)
+            td.text-right width='70px' = user.sum
 
   .row
     .large-4.columns
@@ -34,7 +40,7 @@
       table.stack
         - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
           tr
-            td width='30%'
+            td width='110px'
               - if course.start_date
                 = course.start_date.to_date
             td
