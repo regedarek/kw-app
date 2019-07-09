@@ -24,12 +24,14 @@
 
   .row
     .large-12.columns
-      = f.label :autors
-      = f.text_field :autors
+      = f.label :authors_names, 'autorzy'
+      - names = Library::AuthorRecord.select(:id, :name).map{|u| { id: u.id, name: u.name } }
+      - authors = @item.authors.map{|u| { id: u.id, name: u.name } }
+      = f.text_field :authors_names, 'data-tokeninput' => { collection: names, options: { prePopulate: authors.uniq } }.to_json
 
   .row
     .large-12.columns
-      = f.label :reading_room, 'Rok wydania'
+      = f.label :reading_room, 'Czytelnia?'
       = f.check_box :reading_room
 
   .row
