@@ -16,6 +16,23 @@ module Importing
         return Success.new
       end
 
+      def store_library_item(parsed_objects)
+        Library::ItemRecord.transaction do
+          parsed_objects.each do |parsed_data|
+            library_item = Library::ItemRecord.new.update(
+              doc_type: parsed_data.doc_type,
+              title: parsed_data.title,
+              description: parsed_data.description,
+              item_id: parsed_data.item_id,
+              reading_room: parsed_data.reading_room,
+              autors: parsed_data.autors
+            )
+          end
+        end
+
+        return Success.new
+      end
+
       def store_mountain_route(parsed_objects)
         Db::Activities::MountainRoute.transaction do
           parsed_objects.each do |parsed_data|

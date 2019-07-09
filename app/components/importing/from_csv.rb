@@ -3,6 +3,8 @@ module Importing
     class << self
       def import(file:, type:)
         result = case type.to_sym
+                 when :library_item
+                   Importing::CsvLibraryItemParser.parse(file: file)
                  when :mountain_route
                    Importing::CsvMountainRouteParser.parse(file: file)
                  when :user
@@ -19,6 +21,8 @@ module Importing
         result.invalid { |message:| return Failure.new(:invalid, message: message) }
         result.success do |parsed_data:|
           case type.to_sym
+          when :library_item
+            return Importing::Store.store_library_item(parsed_data)
           when :mountain_route
             return Importing::Store.store_mountain_route(parsed_data)
           when :user
