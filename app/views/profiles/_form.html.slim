@@ -27,18 +27,15 @@
     .large-12.columns
       .callout.primary
         .row
-          .large-3.columns
+          .large-4.columns
             = f.label :phone
             = f.text_field :phone
 
-          .large-3.columns
-            = f.label :pesel
-            = f.text_field :pesel
-          .large-3.columns
+          .large-4.columns
             = f.label :birth_place
             = f.text_field :birth_place
 
-          .large-3.columns
+          .large-4.columns
             = f.label :birth_date
             = f.date_field :birth_date, value: form.birth_date.to_date
 
