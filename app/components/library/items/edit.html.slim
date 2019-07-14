@@ -1,7 +1,7 @@
-= form_for @item, as: :item, url: library_items_path, method: :post do |f|
+= form_for @item, as: :item, url: library_item_path(@item.id), method: :put do |f|
   = render 'form', item: @item, f: f
 
   .row
     .large-12.columns
-      = f.submit 'Dodaj egzemplarz', class: 'button'
+      = f.submit 'Edytuj egzemplarz', class: 'button'
       = link_to 'wróć do biblioteki', library_items_path, class: 'button'

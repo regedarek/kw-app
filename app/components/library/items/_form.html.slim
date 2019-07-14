@@ -1,0 +1,47 @@
+.row
+  .large-12.columns
+    - if item.errors.any?
+      .callout.alert
+        ul
+          - @item.errors.full_messages.each do |msg|
+            li= msg
+
+.row
+  .large-12.columns
+    = f.label :title, "Tytuł"
+    = f.text_field :title
+
+.row
+  .large-6.columns
+    = f.label :attachments, 'Załączniki'
+    = f.file_field :attachments, multiple: true
+
+  .large-6.columns
+    = f.label :doc_type, 'Rodzaj'
+    = f.select :doc_type, Library::ItemRecord.doc_types.map { |key, value| [I18n.t(key), key] }
+
+.row
+  .large-6.columns
+    = f.label :item_id, 'Numer biblioteczny'
+    = f.number_field :item_id
+
+  .large-6.columns
+    = f.label :authors_names, 'Autorzy'
+    - names = Library::AuthorRecord.select(:id, :name).map{|u| { id: u.id, name: u.name } }
+    - authors = item.authors.map{|u| { id: u.id, name: u.name } }
+    = f.text_field :authors_names, 'data-tokeninput' => { collection: names, options: { prePopulate: authors.uniq } }.to_json
+
+.row
+  .large-6.columns
+    = f.label :reading_room, 'Czytelnia?'
+    = f.check_box :reading_room
+
+  .large-6.columns
+    = f.label :publishment_at, 'Rok wydania'
+    = f.string :publishment_at, {discard_day: true, discard_month: true, start_year: 1900, end_year: Date.today.year}
+
+.row
+  .large-12.columns
+    = f.label :description, 'Opis'
+    = f.trix_editor :description, style: 'min-height: 150px'
+    br

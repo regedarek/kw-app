@@ -25,6 +25,20 @@ module Library
       end
     end
 
+    def edit
+      @item = Library::ItemRecord.friendly.find(params[:id])
+    end
+
+    def update
+      @item = Library::ItemRecord.find(params[:id])
+
+      if @item.update(item_params)
+        redirect_to edit_library_item_path(@item), notice: 'Egzemplarz dodany!'
+      else
+        render :edit
+      end
+    end
+
     private
 
     def item_params
