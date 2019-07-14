@@ -8,7 +8,7 @@ module Library
     end
 
     def show
-      @item = Library::ItemRecord.find(params[:id])
+      @item = Library::ItemRecord.friendly.find(params[:id])
     end
 
     def new

@@ -18,6 +18,7 @@ class Ability
     competitions if role?('competitions')
     reservations if role?('reservations')
     events if role?('events')
+    library if role?('library')
   end
 
   def role?(name)
@@ -27,6 +28,10 @@ class Ability
   def default
     can :create, Db::Profile
     cannot :read, Management::Voting::CaseRecord
+  end
+
+  def library
+    can :manage, Library::ItemRecord
   end
 
   def not_active

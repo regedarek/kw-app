@@ -1,37 +1,46 @@
 .column
   .row
-    .large-12.columns
-      .large-6.columns
-        h4 Egzlemplarze
-      .large-6.columns
+    .large-6.columns
+      .text-left
+        h4 Biblioteka
+    .large-6.columns
+      .text-right
         =link_to 'Dodaj', new_library_item_path, class: 'button'
 
-    table.stack
-      thead
-        tr
-          th width='8%' Typ
-          th width='7%' Numer
-          th width='23%' Tytuł
-          th width='20%' Autorzy
-          th width='8%' Czytelnia?
-          th width='8%' Rok Wydania
-      tbody
-        - @items.each do |item|
+  .row
+    .large-12.columns
+      table.stack
+        thead
           tr
-            td
-              = I18n.t item.doc_type
-            td
-              = item.item_id
-            td
-              = link_to item.title, library_item_path(item.id)
-            td
-              - if item.authors.any?
-                = render partial: 'library/authors/link', collection: item.authors, spacer_template: 'shared/comma'
-            td
-              = I18n.t item.reading_room
-            td
-              - if item.publishment_at
-                = item.publishment_at.strftime("%Y")
+            th width='110px' Typ
+            th width='90px' Numer
+            th Tytuł
+            th Autorzy
+            th width='30px' Czytelnia?
+            th width='30px' Rok Wydania
+            - if can? :update, Library::ItemRecord
+              th width='20px' Akcje
+        tbody
+          - @items.each do |item|
+            tr
+              td
+                = I18n.t item.doc_type
+              td.text-center
+                = item.item_id
+              td
+                = link_to item.title, library_item_path(item.slug)
+              td
+                - if item.authors.any?
+                  = render partial: 'library/authors/link', collection: item.authors, spacer_template: 'shared/comma'
+              td.text-center
+                = I18n.t item.reading_room
+              td
+                - if item.publishment_at
+                  = item.publishment_at.strftime("%Y")
+              - if can? :update, Library::ItemRecord
+                td.text-right
+                  = link_to edit_library_item_path(item.id), style: 'padding: 5px' do
+                    i.fi.fi-page-edit
 
-    .text-center
-      = paginate @items
+      .text-center
+        = paginate @items

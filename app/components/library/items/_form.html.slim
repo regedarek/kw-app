@@ -38,7 +38,7 @@
 
   .large-6.columns
     = f.label :publishment_at, 'Rok wydania'
-    = f.string :publishment_at, {discard_day: true, discard_month: true, start_year: 1900, end_year: Date.today.year}
+    = f.date_field :publishment_at, {discard_day: true, discard_month: true, start_year: 1900, end_year: Date.today.year}
 
 .row
   .large-12.columns
