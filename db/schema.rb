@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_14_111909) do
+ActiveRecord::Schema.define(version: 2019_07_14_142639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(version: 2019_07_14_111909) do
   create_table "library_items", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "attachements"
+    t.string "attachments"
     t.integer "area_id"
     t.integer "doc_type"
     t.datetime "created_at", null: false
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(version: 2019_07_14_111909) do
     t.string "autors"
     t.date "publishment_at"
     t.string "number"
+    t.string "slug", null: false
   end
 
   create_table "management_cases", force: :cascade do |t|

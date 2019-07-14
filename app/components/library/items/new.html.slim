@@ -13,31 +13,33 @@
       = f.text_field :title
 
   .row
-    .large-12.columns
+    .large-6.columns
+      = f.label :attachments, 'Załączniki'
+      = f.file_field :attachments, multiple: true
+
+    .large-6.columns
       = f.label :doc_type, 'Rodzaj'
       = f.select :doc_type, Library::ItemRecord.doc_types.map { |key, value| [I18n.t(key), key] }
 
   .row
-    .large-12.columns
-      = f.label :item_id, 'Number'
+    .large-6.columns
+      = f.label :item_id, 'Numer biblioteczny'
       = f.number_field :item_id
 
-  .row
-    .large-12.columns
-      = f.label :authors_names, 'autorzy'
+    .large-6.columns
+      = f.label :authors_names, 'Autorzy'
       - names = Library::AuthorRecord.select(:id, :name).map{|u| { id: u.id, name: u.name } }
       - authors = @item.authors.map{|u| { id: u.id, name: u.name } }
       = f.text_field :authors_names, 'data-tokeninput' => { collection: names, options: { prePopulate: authors.uniq } }.to_json
 
   .row
-    .large-12.columns
+    .large-6.columns
       = f.label :reading_room, 'Czytelnia?'
       = f.check_box :reading_room
 
-  .row
-    .large-12.columns
+    .large-6.columns
       = f.label :publishment_at, 'Rok wydania'
-      = f.date_field :publishment_at
+      = f.date_select :publishment_at, {discard_day: true, discard_month: true, start_year: 1900, end_year: Date.today.year}
 
   .row
     .large-12.columns
@@ -47,4 +49,5 @@
 
   .row
     .large-12.columns
-      = f.submit class: 'button'
+      = f.submit 'Dodaj egzemplarz', class: 'button'
+      = link_to 'wróć do biblioteki', library_items_path, class: 'button'
