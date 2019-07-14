@@ -1,5 +1,7 @@
-# config valid only for current version of Capistrano
 lock "3.8.0"
+
+set :stages, %w(production staging)
+set :default_stage, "production"
 
 set :application, "kw-app"
 set :repo_url, "git@github.com:regedarek/kw-app.git"
