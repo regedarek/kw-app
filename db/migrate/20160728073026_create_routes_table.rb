@@ -1,4 +1,4 @@
-class CreateRoutesTable < ActiveRecord::Migration
+class CreateRoutesTable < ActiveRecord::Migration[5.0]
   def change
     create_table :routes do |t|
       t.integer :user_id

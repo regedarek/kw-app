@@ -1,4 +1,4 @@
-class CreateReservationCheckouts < ActiveRecord::Migration
+class CreateReservationCheckouts < ActiveRecord::Migration[5.0]
   def change
     create_table :reservation_checkouts do |t|
       t.integer :item_id

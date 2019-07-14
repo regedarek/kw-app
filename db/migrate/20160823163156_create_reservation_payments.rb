@@ -1,4 +1,4 @@
-class CreateReservationPayments < ActiveRecord::Migration
+class CreateReservationPayments < ActiveRecord::Migration[5.0]
   def change
     create_table :reservation_payments do |t|
       t.integer :reservation_id
