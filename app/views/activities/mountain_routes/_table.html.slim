@@ -10,8 +10,6 @@ table.stack
           th width='27%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
         th.text-right width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
-        - if user_signed_in?
-          th width='3%'
     - else
       tr
         th width='5%'
