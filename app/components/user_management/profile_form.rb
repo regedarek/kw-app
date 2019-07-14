@@ -8,7 +8,6 @@ module UserManagement
     attribute :birth_date, :string
     attribute :birth_place, :string
     attribute :city, :string
-    attribute :pesel, :string
     attribute :postal_code, :string
     attribute :main_address, :string
     attribute :optional_address, :string
@@ -20,7 +19,7 @@ module UserManagement
     attribute :terms_of_service, :boolean, default: false
     attribute :plastic, :boolean, default: false
 
-    validates :first_name, :last_name, :email, :pesel, :birth_date, :birth_place,
+    validates :first_name, :last_name, :email, :birth_date, :birth_place,
               :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
     validate :birth_date_is_to_young
