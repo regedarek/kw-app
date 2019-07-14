@@ -22,9 +22,10 @@ module Importing
             library_item = Library::ItemRecord.create(
               doc_type: parsed_data.doc_type,
               title: parsed_data.title,
-              description: parsed_data.description,
+              autors: parsed_data.editors,
               item_id: parsed_data.item_id,
-              reading_room: parsed_data.reading_room
+              reading_room: parsed_data.reading_room,
+              publishment_at: (parsed_data.year && parsed_data.year > 1 ? Date.new(parsed_data.year, 1, 1) : nil)
             )
             parsed_data.autors.split(",").map(&:strip).each do |author_name|
               author = Library::AuthorRecord.where(name: author_name).first_or_create

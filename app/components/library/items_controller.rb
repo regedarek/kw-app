@@ -4,7 +4,9 @@ module Library
     append_view_path 'app/components'
 
     def index
-      @items = ::Library::ItemRecord.includes(:authors).page(params[:page]).per(20)
+      @q = ::Library::ItemRecord.ransack(params[:q])
+      @q.sorts = 'created_at desc' if @q.sorts.empty?
+      @items = @q.result.includes(:authors).page(params[:page]).per(20)
     end
 
     def show
@@ -42,7 +44,7 @@ module Library
     private
 
     def item_params
-      params.require(:item).permit(:title, :description, :doc_type, :publishment_at, :autors, :item_id, :reading_room, authors_names: [], attachments: [])
+      params.require(:item).permit(:title, :description, :doc_type, :autors, :publishment_at, :autors, :item_id, :reading_room, authors_names: [], attachments: [])
     end
   end
 end

@@ -19,6 +19,11 @@
 
     .row
       .large-12.columns
+        b Wydanie: 
+        = @item.autors
+
+    .row
+      .large-12.columns
         b Autorzy: 
         - if @item.authors.any?
           = render partial: 'library/authors/link', collection: @item.authors, spacer_template: 'shared/comma'

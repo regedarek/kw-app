@@ -9,6 +9,27 @@
 
   .row
     .large-12.columns
+      .callout
+        = search_form_for @q, url: library_items_path, class: 'js-send-on-enter' do |f|
+          .row
+            .large-2.columns
+              = f.label :item_id_eq, 'Numer egzemplarza'
+              = f.search_field :item_id_eq
+            .large-4.columns
+              = f.label :title_or_description_or_autors_cont, 'Wyszukaj po tytule'
+              = f.search_field :title_or_description_cont
+            .large-3.columns
+              = f.label :authors_name_cont, 'Autor'
+              = f.search_field :authors_name_cont
+            .large-1.columns
+              = f.label :reading_room_true, 'Czytelnia?'
+              = f.check_box :reading_room_true
+            .large-2.columns
+              br
+              = f.submit 'Szukaj', class: 'button expanded'
+
+  .row
+    .large-12.columns
       table.stack
         thead
           tr

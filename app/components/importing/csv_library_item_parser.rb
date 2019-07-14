@@ -4,7 +4,7 @@ module Importing
   class CsvLibraryItemParser
     class << self
       REQUIRED_LIBRARY_ITEM_HEADERS = %w(
-        doc_type title description item_id reading_room autors publishment_at
+        doc_type title editors year item_id reading_room autors
       )
 
       def parse(file:)
@@ -21,12 +21,13 @@ module Importing
           end
 
           parsed_object = Importing::LibraryItem.new(
-            doc_type: row['doc_type'].to_i,
+            doc_type: (row['doc_type'] == 'przewodnik' ? 2 : 0),
             title: row['title'],
-            description: row['description'],
             item_id: row['item_id'].to_i,
-            reading_room: ActiveModel::Type::Boolean.new.cast(row['reading_room']),
-            autors: row['autors']
+            reading_room: (row['reading_room'] == 'czytelnia' ? true : false),
+            autors: row['autors'],
+            editors: row['editors'],
+            year: row['year'].to_i == 0 ? nil : row['year'].to_i
           )
 
           if parsed_object.invalid?

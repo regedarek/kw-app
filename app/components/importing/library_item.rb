@@ -7,9 +7,10 @@ module Importing
 
     attribute :doc_type, :integer
     attribute :title, :string
-    attribute :description, :string
     attribute :item_id, :integer
     attribute :reading_room, :boolean
     attribute :autors, :string
+    attribute :editors, :string
+    attribute :year, :integer
   end
 end
