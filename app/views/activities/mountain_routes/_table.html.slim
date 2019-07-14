@@ -3,13 +3,13 @@ table.stack
     - if @q.present?
       tr
         th width='5%'
-        th width='8%' = sort_link(@q, :climbing_date, 'kiedy?')
+        th width='10%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
         th width='2%' wycena
         - if user_signed_in?
           th width='27%' = sort_link(@q, :partners, 'skład zespołu')
         th width='12%'
-        th.text-center width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
+        th.text-right width='7%' = sort_link(@q, :hearts_count, 'bicków', default_order: :desc)
         - if user_signed_in?
           th width='3%'
     - else
@@ -46,7 +46,7 @@ table.stack
               span.dashboard-table-timestamp-small= names.from(length).to(-1)
         td.text-center
           = render 'photos/photos', photos: route.attachments, take: 2
-        td.text-center
+        td.text-right
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route
         - if user_signed_in?
