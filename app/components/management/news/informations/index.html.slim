@@ -1,0 +1,21 @@
+.row
+  .large-12.columns
+    table.responsive
+      thead
+        tr
+          th width='90px' Typ
+          th Nazwa
+          th Kiedy dodano?
+          th
+      tbody
+        - @informations.each do |information|
+          tr
+            td
+              - if information.news_type.to_i == 0
+                | Biuletyn
+              - else
+                | Uchwała
+            td
+              = link_to information.name, information.url, target: :_blank
+            td
+              = information.created_at.to_date

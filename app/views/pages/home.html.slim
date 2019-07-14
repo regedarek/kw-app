@@ -70,8 +70,20 @@
 
   .row
     .large-6.columns
-      h3 Biuletyny, sprawozdania, uchwały
+      = link_to informations_path do
+        h3 Biuletyny, sprawozdania, uchwały
       table.stack
+        - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
+          tr
+            td width='90px'
+              - if information.news_type.to_i == 0
+                | Biuletyn
+              - else
+                | Uchwała
+            td
+              = link_to information.name, information.url, target: :_blank
+            td.text-right
+              = information.created_at.to_date
 
     .large-6.columns
       = link_to cases_path do

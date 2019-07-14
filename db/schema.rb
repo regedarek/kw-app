@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_160525) do
+ActiveRecord::Schema.define(version: 2019_07_14_111909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,15 @@ ActiveRecord::Schema.define(version: 2019_07_09_160525) do
     t.boolean "hidden", default: false, null: false
     t.string "doc_url"
     t.index ["slug"], name: "index_management_cases_on_slug", unique: true
+  end
+
+  create_table "management_informations", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "url"
+    t.integer "news_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "management_votes", force: :cascade do |t|
