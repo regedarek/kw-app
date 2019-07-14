@@ -28,7 +28,7 @@
               td.text-center
                 = item.item_id
               td
-                = link_to item.title, library_item_path(item.slug)
+                = link_to item.title, ksiazka_path(item.slug)
               td
                 - if item.authors.any?
                   = render partial: 'library/authors/link', collection: item.authors, spacer_template: 'shared/comma'
