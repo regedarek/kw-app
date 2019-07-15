@@ -11,7 +11,6 @@ module UserManagement
           phone: form.phone,
           birth_date: form.birth_date,
           birth_place: form.birth_place,
-          pesel: form.pesel,
           city: form.city,
           postal_code: form.postal_code,
           main_address: form.main_address,
