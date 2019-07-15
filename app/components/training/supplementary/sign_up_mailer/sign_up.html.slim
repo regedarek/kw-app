@@ -31,7 +31,7 @@ br
     |  zł
   br
   - if @sign_up.course.cash
-    | Osobnym e-mailem dostaniesz informacje od koordynatora w jaki sposób dokonać opłaty za wydarzenie.
+    | Poniżej znajdą się informacje w jaki sposób powinieneś opłacić zapis na wydarzenie.
   - else
     = link_to 'Aby zapisać się na wydarzenie opłać je tutaj!', charge_payment_url(@sign_up.payment.id)
     br

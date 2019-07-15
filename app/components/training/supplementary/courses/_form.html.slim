@@ -39,7 +39,7 @@
         .large-2.columns
           span data-tooltip='' tabindex="1" title="Ilość godzin po której, jeżeli zapis nie zostanie opłacony zostanie usunięty i automatycznie zwolni miejsce dla kolejnej osoby" data-allow-html="true"
             = f.label :expired_hours, 'Godziny na płatność*'
-            = f.number_field :expired_hours, value: 24
+            = f.number_field :expired_hours
 
         .large-2.columns
           = f.label :kind, t('.category')
