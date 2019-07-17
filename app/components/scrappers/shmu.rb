@@ -14,7 +14,7 @@ module Scrappers
       12
     end
 
-    def lomnicki_stit_uri(day: Date.today.to_s(:number), hour: 12)
+    def lomnicki_stit_uri(day: Time.zone.now.to_date.to_s(:number), hour: 12)
       URI.parse("http://www.shmu.sk/data/datanwp/v2/meteogram/al-meteogram_31499-#{day}-#{hour}00-nwp-.png")
     end
   end
