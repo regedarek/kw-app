@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_14_142639) do
+ActiveRecord::Schema.define(version: 2019_07_17_212355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -505,6 +505,14 @@ ActiveRecord::Schema.define(version: 2019_07_14_142639) do
     t.integer "colleague_id"
     t.integer "mountain_route_id"
     t.index ["colleague_id", "mountain_route_id"], name: "index_route_colleagues_on_colleague_id_and_mountain_route_id", unique: true
+  end
+
+  create_table "shmu_diagrams", force: :cascade do |t|
+    t.datetime "diagram_time"
+    t.string "place"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "snw_profiles", id: :serial, force: :cascade do |t|

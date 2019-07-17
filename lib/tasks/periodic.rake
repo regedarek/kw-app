@@ -1,5 +1,9 @@
 desc "This task is called by the Heroku scheduler add-on"
 
+task :run_scrappers => :environment do
+  Scrappers::Shmu.new.call
+end
+
 task :send_reminders => :environment do
   Admin::ReservationReminder.send_reminders
 end
