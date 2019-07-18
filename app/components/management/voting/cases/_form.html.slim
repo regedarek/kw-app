@@ -14,9 +14,12 @@
           = f.trix_editor :destrciption, style: 'min-height: 150px'
 
 .row
-  .large-6.columns
+  .large-4.columns
     = f.label :attachments, 'Załączniki'
     = f.file_field :attachments, multiple: true
-  .large-6.columns
+  .large-4.columns
     = f.label :doc_url, "Link do dokumentu online"
     = f.text_field :doc_url
+  .large-4.columns
+    = f.label :hide_votes, "Ukryj głosujących?"
+    = f.check_box :hide_votes

@@ -25,6 +25,9 @@ module Management
       end
 
       def approved?(case_id)
+        case_record = Management::Voting::CaseRecord.find(case_id)
+        return true if case_record.hide_votes?
+
         approved = already_voted_on(case_id).where(decision: 'approved')
         unapproved = already_voted_on(case_id).where(decision: 'unapproved')
 

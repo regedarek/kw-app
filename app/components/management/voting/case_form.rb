@@ -12,6 +12,7 @@ module Management
       optional(:state).maybe
       optional(:destrciption).maybe(:str?)
       optional(:doc_url).maybe(:str?)
+      optional(:hide_votes).maybe(:bool?)
       optional(:attachments).maybe
     end
   end
