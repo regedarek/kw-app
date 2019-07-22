@@ -1,0 +1,28 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error
+
+= form_for @case_record, as: :case, url: case_path(@case_record.id) do |f|
+  .row
+    .large-6.columns
+      b= f.label :number, 'Numer uchwały, głosowania'
+      = f.text_field :number
+
+    .large-6.columns
+      b= f.label :state, 'Status'
+      = f.select :state, Management::Voting::CaseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @case_record.state
+  = render 'form', f: f
+  .row
+    .large-4.columns
+      = f.label :hidden, "Ukryj uchwałę, głosowanie"
+      = f.check_box :hidden
+
+  .row
+    .large-6.columns
+      = f.submit 'Zaktualizuj', class: 'button expanded large success'
+    .large-6.columns
+      = link_to t('.back'), cases_path, class: 'secondary button large expanded'

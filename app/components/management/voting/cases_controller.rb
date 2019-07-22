@@ -29,7 +29,25 @@ module Management
       end
 
       def edit
+        @case_record = Management::Voting::CaseRecord.find(params[:id])
+        authorize! :update, @case_record
 
+      end
+
+      def update
+        @case_record = Management::Voting::CaseRecord.find(params[:id])
+        authorize! :update, @case_record
+
+        either(update_record) do |result|
+          result.success do |case_id|
+            redirect_to case_path(case_id), flash: { notice: 'Zaktualizowano głosowanie' }
+          end
+
+          result.failure do |errors|
+            @errors = errors.map(&:to_sentence)
+            render :edit
+          end
+        end
       end
 
       def show
@@ -130,10 +148,16 @@ module Management
         ).call(raw_inputs: case_params)
       end
 
+      def update_record
+        Management::Voting::UpdateCase.new(
+          Management::Voting::CaseForm
+        ).call(id: params[:id], raw_inputs: case_params)
+      end
+
       def case_params
         params
           .require(:case)
-          .permit(:name, :destrciption, :creator_id, :doc_url, :hide_votes, attachments: [])
+          .permit(:name, :hidden, :number, :state, :destrciption, :creator_id, :doc_url, :hide_votes, attachments: [])
       end
     end
   end

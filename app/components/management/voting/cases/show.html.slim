@@ -128,3 +128,5 @@
     .row
       .large-12.columns
           = link_to 'powrót do pozostałych głosowań', cases_path, class: 'button secondary expanded'
+          - if can? :update, @case
+            = link_to 'edytuj', edit_case_path(@case.id), class: 'button alert'
