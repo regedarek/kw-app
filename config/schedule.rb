@@ -20,7 +20,7 @@ every '0 0 1 3 *' do
   rake :send_yearly_fee_reminder
 end
 
-every '* 20 * * *' do
+every '0 20 * * *' do
   rake :run_scrappers
 end
 
