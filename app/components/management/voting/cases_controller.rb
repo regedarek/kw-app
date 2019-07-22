@@ -28,6 +28,10 @@ module Management
         end
       end
 
+      def edit
+
+      end
+
       def show
         @case = Management::Voting::CaseRecord.friendly.find(params[:id])
         authorize! :read, @case
