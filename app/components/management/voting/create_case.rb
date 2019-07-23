@@ -28,7 +28,7 @@ module Management
             notifiable_type: 'Management::Voting::CaseRecord'
           )
           Management::Voting::Mailer.notify(case_record.id, user.id).deliver_later
-        end
+        end unless case_record.hide_votes?
 
         Right(:success)
       end
