@@ -1,21 +1,17 @@
-
 .row
   .large-12.columns
-    h3 Biuletyny, sprawozdania, uchwały
+    h3 Biuletyny, sprawozdania, ogłoszenia
     table.responsive
       thead
         tr
           th width='110px' Typ
           th Nazwa
-          th.text-right Kiedy dodano?
+          th.text-right width='110px' Kiedy dodano?
       tbody
         - @informations.each do |information|
           tr
             td
-              - if information.news_type.to_i == 0
-                | Biuletyn
-              - else
-                | Uchwała
+              = I18n.t(information.news_type)
             td
               = link_to information.name, information.url, target: :_blank
             td.text-right
