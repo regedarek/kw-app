@@ -76,15 +76,10 @@
         - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
           tr
             td width='90px'
-              - if information.news_type.to_i == 0
-                | Biuletyn
-              - elsif information.news_type.to_i == 1
-                | Uchwała
-              - elsif information.news_type.to_i == 2
-                | Ogłoszenie
+              = I18n.t(information.news_type)
             td
               = link_to information.name, information.url, target: :_blank
-            td.text-right
+            td.text-right  width='90px'
               = information.created_at.to_date
 
     .large-6.columns
