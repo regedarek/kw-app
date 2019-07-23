@@ -5,10 +5,9 @@
     table.responsive
       thead
         tr
-          th width='90px' Typ
+          th width='110px' Typ
           th Nazwa
-          th Kiedy dodano?
-          th
+          th.text-right Kiedy dodano?
       tbody
         - @informations.each do |information|
           tr
@@ -19,5 +18,5 @@
                 | Uchwała
             td
               = link_to information.name, information.url, target: :_blank
-            td
+            td.text-right
               = information.created_at.to_date

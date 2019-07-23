@@ -75,11 +75,11 @@
       table.stack
         - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
           tr
-            td width='90px'
+            td width='110px'
               = I18n.t(information.news_type)
             td
               = link_to information.name, information.url, target: :_blank
-            td.text-right  width='90px'
+            td.text-right width='110px'
               = information.created_at.to_date
 
     .large-6.columns
