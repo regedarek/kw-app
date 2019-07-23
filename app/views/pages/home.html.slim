@@ -71,15 +71,17 @@
   .row
     .large-6.columns
       = link_to informations_path do
-        h3 Biuletyny, sprawozdania
+        h3 Biuletyny, sprawozdania, ogłoszenia
       table.stack
         - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
           tr
             td width='90px'
               - if information.news_type.to_i == 0
                 | Biuletyn
-              - else
+              - elif == 1
                 | Uchwała
+              - elif == 2
+                | Ogłoszenie
             td
               = link_to information.name, information.url, target: :_blank
             td.text-right

@@ -3,7 +3,7 @@ module Management
     class InformationRecord < ActiveRecord::Base
       self.table_name = 'management_informations'
 
-      enum news_type: [:magazine, :resolution]
+      enum news_type: [:magazine, :resolution, :annoucement]
     end
   end
 end
