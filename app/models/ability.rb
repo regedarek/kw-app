@@ -9,16 +9,16 @@ class Ability
     default
     not_active if @user.persisted?
     active if @user.active?
-    admin if role?('admin')
-    secondary_management if role?('secondary_management')
-    management if role?('management')
     office_king if role?('office_king')
-    financial_management if role?('financial_management')
     office if role?('office')
     competitions if role?('competitions')
     reservations if role?('reservations')
     events if role?('events')
     library if role?('library')
+    secondary_management if role?('secondary_management')
+    financial_management if role?('financial_management')
+    management if role?('management')
+    admin if role?('admin')
   end
 
   def role?(name)
