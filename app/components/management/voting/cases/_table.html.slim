@@ -8,7 +8,7 @@ table.hover
       th.text-center width='5%' Przegłosowano?
       - if can? :destroy, Management::Voting::CaseRecord
         th.text-right width='3%'
-      - if can? :update, Management::Voting::CaseRecord
+      - if can? :manage, Management::Voting::CaseRecord
         th.text-right width='3%'
   tbody
     - @cases.each do |c|
@@ -27,7 +27,7 @@ table.hover
           td.text-right
             = link_to case_path(c.id), method: :delete, data: { confirm: 'Jesteś pewien?' } do
               i.fi-trash
-        - if can? :update, Management::Voting::CaseRecord
-          td.text-rigth
+        - if can? :manage, Management::Voting::CaseRecord
+          td.text-right
             = link_to edit_case_path(c.id) do
               i.fi-page-edit
