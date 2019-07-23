@@ -78,9 +78,9 @@
             td width='90px'
               - if information.news_type.to_i == 0
                 | Biuletyn
-              - elsif == 1
+              - elsif information.news_type.to_i == 1
                 | Uchwała
-              - elsif == 2
+              - elsif information.news_type.to_i == 2
                 | Ogłoszenie
             td
               = link_to information.name, information.url, target: :_blank
