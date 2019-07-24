@@ -27,7 +27,6 @@ gem 'ransack'
 gem 'workflow'
 gem 'virtus'
 gem 'kaminari'
-gem 'wombat'
 gem 'whenever', require: false
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', '2.1.0.pre', git: 'https://github.com/randym/axlsx.git'

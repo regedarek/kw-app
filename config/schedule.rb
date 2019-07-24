@@ -21,7 +21,11 @@ every '0 0 1 3 *' do
 end
 
 every '0 20 * * *' do
-  rake :run_scrappers
+  rake :store_shmu
+end
+
+every '0 7 * * *' do
+  rake :store_weather
 end
 
 every '0 0 1 9 *' do
