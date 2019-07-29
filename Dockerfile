@@ -8,7 +8,7 @@ ENV app /usr/src/kw-app/
 RUN mkdir $app
 WORKDIR $app
 
-ENV BUNDLER_VERSION 2.0.1
+ENV BUNDLER_VERSION 2.0.2
 ENV BUNDLE_PATH /kw-app-gems
 
 RUN gem install bundler
