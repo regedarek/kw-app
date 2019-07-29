@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $.getJSON('http://localhost:3002/api/pogodynka', function (data) {
+  $.getJSON('/api/pogodynka', function (data) {
       // Create the chart
       Highcharts.stockChart('pogodynka-chart', {
           rangeSelector: {
