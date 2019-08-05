@@ -70,7 +70,6 @@ class ProfileMailer < ApplicationMailer
         pdf.move_down 5
         pdf.text "Adres email: #{@profile.email}", align: :left, size: 9
         pdf.move_down 5
-        pdf.text "Pesel: #{@profile.pesel}", align: :left, size: 9
       end
     end
     pdf.grid([3,0], [3,2]).bounding_box do
