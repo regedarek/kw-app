@@ -26,7 +26,7 @@ prawn_document do |pdf|
     pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
       pdf.text "Data i miejsce urodzenia: #{@profile.birth_date}, #{@profile.birth_place}", align: :left, size: 9
       pdf.move_down 5
-      pdf.text "Adres zamieszkania: #{@profile.main_address}", align: :left, size: 9
+      pdf.text "Adres zamieszkania: #{@profile.optional_address}", align: :left, size: 9
       pdf.move_down 5
       pdf.text "Numer telefonu: #{@profile.phone}", align: :left, size: 9
       pdf.move_down 5
