@@ -8,9 +8,16 @@
               li= msg
 
   .row
-    .large-12.columns
+    .large-6.columns
       = f.label :name
       = f.text_field :name
+
+    .large-6.columns
+      = f.label :parent_id, 'Nadrzędny tag'
+      = f.select :parent_id,
+        Library::TagRecord.all.map { |u| [u.name, u.id] },
+        { include_blank: true },
+        { class: 'js-select-multiple' }
 
   .row
     .large-12.columns

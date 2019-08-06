@@ -5,6 +5,7 @@ module Library
       append_view_path 'app/components'
 
       def index
+        @parent_tags = Library::TagRecord.where(id: Library::TagRecord.where.not(parent_id: nil).map(&:parent_id))
         @tags = ::Library::TagRecord.all
       end
 
@@ -25,7 +26,7 @@ module Library
       private
 
       def tag_params
-        params.require(:tag).permit(:name, :description)
+        params.require(:tag).permit(:name, :description, :parent_id)
       end
     end
   end
