@@ -11,6 +11,7 @@ module Management
       required(:creator_id).filled(:int?)
       optional(:state).maybe
       optional(:hidden).maybe(:bool?)
+      optional(:acceptance_date).maybe(:date?)
       optional(:destrciption).maybe(:str?)
       optional(:number).maybe(:str?)
       optional(:doc_url).maybe(:str?)

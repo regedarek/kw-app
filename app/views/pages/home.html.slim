@@ -88,6 +88,8 @@
       table.stack
         - Management::Voting::CaseRecord.accessible_by(current_ability).order(created_at: :desc).limit(5).each do |case_record|
           tr
+            td width='110px'
+              = case_record.acceptance_date
             td
               = link_to case_record.name, case_path(case_record.id)
 

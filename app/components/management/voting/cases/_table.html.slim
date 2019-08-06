@@ -2,7 +2,8 @@ table.hover
   thead
     tr
       th.text-center width='6%' Numer porządkowy
-      th.text-center  width='70%' Temat
+      th.text-center  width='60%' Temat
+      th.text-center width='10%' Data uchwalenia
       - if can? :manage, Management::Voting::CaseRecord
         th.text-center  width='10%' Status
       th.text-center width='5%' Przegłosowano?
@@ -15,6 +16,7 @@ table.hover
       tr
         td.text-left = c.number
         td.text-left = link_to c.name, case_path(c)
+        td.text-left = c.acceptance_date
         - if can? :manage, Management::Voting::CaseRecord
           td.text-center
             span.label = I18n.t c.state

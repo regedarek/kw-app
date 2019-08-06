@@ -157,7 +157,7 @@ module Management
       def case_params
         params
           .require(:case)
-          .permit(:name, :hidden, :number, :state, :destrciption, :creator_id, :doc_url, :hide_votes, attachments: [])
+          .permit(:name, :hidden, :number, :state, :destrciption, :creator_id, :doc_url, :hide_votes, :acceptance_date, attachments: [])
       end
     end
   end

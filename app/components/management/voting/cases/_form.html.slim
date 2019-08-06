@@ -1,9 +1,12 @@
 .row
-  .large-12.columns
+  .large-8.columns
     span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
       = f.label :name, "Nazwa głosowania*"
     = f.text_field :name
     = f.hidden_field :creator_id, value: current_user.id
+  .large-4.columns
+    = f.label :acceptance_date, 'Data uchwalenia'
+    = f.date_field :acceptance_date
 
 .row
   .large-12.columns
