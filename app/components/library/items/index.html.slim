@@ -6,7 +6,8 @@
     .large-6.columns
       .text-right
         - if can? :create, Library::ItemRecord
-          =link_to 'Dodaj', new_library_item_path, class: 'button'
+          =link_to 'Dodaj egzemplarz', new_library_item_path, class: 'button'
+          =link_to 'Dodaj tagi', admin_tags_path, class: 'button'
 
   .row
     .large-12.columns
