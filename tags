@@ -1860,6 +1860,7 @@ setPositiveNumber	public/assets/application-adb37b88852cd8099abe934018ff31effd97
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
 show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"	f	class:Events.Admin.CompetitionsController
+show	app/components/library/admin/tags_controller.rb	/^      def show$/;"	f	class:Library.Admin.TagsController
 show	app/components/library/authors_controller.rb	/^    def show$/;"	f	class:Library.AuthorsController
 show	app/components/library/items_controller.rb	/^    def show$/;"	f	class:Library.ItemsController
 show	app/components/management/projects_controller.rb	/^    def show$/;"	f	class:Management.ProjectsController

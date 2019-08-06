@@ -1,0 +1,16 @@
+.column
+  .row
+    .large-6.columns
+      h4 = @tag.name
+
+  .row
+    .large-12.columns
+      table.stack
+        thead
+          tr
+            th width='25%' Nazwa
+        tbody
+          - @tag.items.each do |tag|
+            tr
+              td
+                = link_to tag.title, library_item_path(tag.id)

@@ -13,6 +13,10 @@ module Library
         @tag = Library::TagRecord.new
       end
 
+      def show
+        @tag = Library::TagRecord.find(params[:id])
+      end
+
       def create
         @tag = Library::TagRecord.new(tag_params)
 
