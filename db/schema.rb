@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_085118) do
+ActiveRecord::Schema.define(version: 2019_08_06_101419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,13 +214,6 @@ ActiveRecord::Schema.define(version: 2019_08_06_085118) do
     t.integer "rentable_id"
   end
 
-  create_table "library_areas", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "library_authors", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -234,6 +227,13 @@ ActiveRecord::Schema.define(version: 2019_08_06_085118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id", "author_id"], name: "index_library_item_authors_on_item_id_and_author_id", unique: true
+  end
+
+  create_table "library_item_tags", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "library_items", force: :cascade do |t|
@@ -250,6 +250,15 @@ ActiveRecord::Schema.define(version: 2019_08_06_085118) do
     t.date "publishment_at"
     t.string "number"
     t.string "slug", null: false
+  end
+
+  create_table "library_tags", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.integer "type"
   end
 
   create_table "management_cases", force: :cascade do |t|

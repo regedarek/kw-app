@@ -1,3 +1,4 @@
+
 .row
   .large-12.columns
     - if item.errors.any?
@@ -48,3 +49,11 @@
     = f.label :description, 'Opis'
     = f.trix_editor :description, style: 'min-height: 150px'
     br
+.row
+  .large-12.columns
+    = f.label :tag_ids do
+      = link_to 'Pełna lista tagów', admin_tags_path, target: :_blank
+    = f.select :tag_ids,
+      Library::TagRecord.all.map { |u| [u.name, u.id] },
+      { },
+      { class: 'js-select-multiple', multiple: true }

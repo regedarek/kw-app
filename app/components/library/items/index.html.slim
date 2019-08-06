@@ -5,7 +5,8 @@
         h4 Biblioteka
     .large-6.columns
       .text-right
-        =link_to 'Dodaj', new_library_item_path, class: 'button'
+        - if can? :create, Library::ItemRecord
+          =link_to 'Dodaj', new_library_item_path, class: 'button'
 
   .row
     .large-12.columns

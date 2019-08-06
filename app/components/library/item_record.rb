@@ -13,6 +13,9 @@ module Library
     has_many :item_authors, class_name: '::Library::ItemAuthorsRecord', foreign_key: :item_id
     has_many :authors, class_name: '::Library::AuthorRecord', through: :item_authors, foreign_key: :author_id, dependent: :destroy
 
+    has_many :item_tags, class_name: '::Library::ItemTagsRecord', foreign_key: :item_id
+    has_many :tags, class_name: '::Library::TagRecord', through: :item_tags, foreign_key: :tag_id, dependent: :destroy
+
     def authors_names=(ids)
       self.author_ids = ids
     end

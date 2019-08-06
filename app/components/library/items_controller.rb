@@ -44,7 +44,7 @@ module Library
     private
 
     def item_params
-      params.require(:item).permit(:title, :description, :doc_type, :autors, :publishment_at, :autors, :item_id, :reading_room, authors_names: [], attachments: [])
+      params.require(:item).permit(:title, :description, :doc_type, :autors, :publishment_at, :autors, :item_id, :reading_room, authors_names: [], attachments: [], tag_ids: [])
     end
   end
 end

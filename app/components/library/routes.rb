@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope module: 'library' do
     namespace :admin do
-      resources :areas
+      resources :tags
     end
   end
 

@@ -41,6 +41,7 @@ gem 'koala'
 gem 'prawn-rails'
 gem 'chronic'
 gem 'cancancan', '~> 2.0'
+gem 'select2-foundation'
 
 # Dry-rb
 gem 'dry-container'
