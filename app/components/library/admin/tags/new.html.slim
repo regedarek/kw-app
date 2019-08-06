@@ -1,0 +1,22 @@
+= form_for @tag, as: :tag, url: admin_tags_path, method: :post do |f|
+  .row
+    .large-12.columns
+      - if @tag.errors.any?
+        .callout.alert
+          ul
+            - @tag.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .large-12.columns
+      = f.submit class: 'button'

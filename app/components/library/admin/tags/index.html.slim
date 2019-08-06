@@ -1,0 +1,20 @@
+.column
+  .row
+    .large-12.columns
+      .large-6.columns
+        h4 Tagi
+      .large-6.columns
+        =link_to 'Dodaj', new_admin_tag_path, class: 'button'
+
+    table.stack
+      thead
+        tr
+          th width='25%' Nazwa
+          th width='20%' Opis
+      tbody
+        - @tags.each do |tag|
+          tr
+            td
+              = tag.name
+            td
+              = tag.description

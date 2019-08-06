@@ -22,6 +22,5 @@ public/*
 .env
 cron_log.log
 latest.dump
-tags
 
 .DS_Store
