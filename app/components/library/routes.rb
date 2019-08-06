@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   get 'biblioteka', to: 'library/items#index', as: :biblioteka
+  get 'tagi', to: 'library/admin/tags#index', as: :tagi
   get 'biblioteka/:id', to: 'library/items#show', as: :ksiazka
   get 'biblioteka/autorzy/:id', to: 'library/authors#show', as: :autor
 end
