@@ -7,6 +7,7 @@ html lang="en"
     title == content_for?(:title) ? yield(:title) : "Administracja - KW Kraków"
     = stylesheet_link_tag "application"
     = csrf_meta_tag
+    = render 'layouts/google_analytics' if Rails.env.production?
 
   body
     = render 'layouts/top_bar'
@@ -14,3 +15,8 @@ html lang="en"
 
     == yield
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag src="https://code.highcharts.com/stock/highstock.js" 
+    = javascript_include_tag src="https://code.highcharts.com/stock/modules/exporting.js" 
+    = javascript_include_tag src="https://code.highcharts.com/stock/modules/export-data.js" 
+    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css"
+    = javascript_include_tag src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" 

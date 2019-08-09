@@ -1,3 +1,4 @@
+<% if Rails.env.production? %>
 document.addEventListener('turbolinks:load', function(event) {
   if (typeof gtag === 'function') {
     gtag('config', '<%= Rails.application.secrets.google_analytics %>', {
@@ -5,3 +6,4 @@ document.addEventListener('turbolinks:load', function(event) {
     })
   }
 })
+<% end %>

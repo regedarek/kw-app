@@ -8,7 +8,7 @@ html lang="en"
 
     = stylesheet_link_tag "application"
     = csrf_meta_tag
-    = render 'layouts/google_analytics' unless Rails.env.development?
+    = render 'layouts/google_analytics' if Rails.env.production?
 
   body
     = render 'layouts/top_bar'
