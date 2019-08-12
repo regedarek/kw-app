@@ -83,6 +83,7 @@ ul
   li = link_to 'Memoriał Jana Strzeleckiego', 'https://www.facebook.com/MemorialJanaStrzeleckiego/'
   li = link_to 'Memoriał Andrzeja Skwirczyńskiego', 'https://www.facebook.com/snw.kw.krakow/'
   li = link_to 'Sekcja Narciarstwa Wysokogórskiego', 'https://www.facebook.com/SekcjaNarciarstwaWysokogorskiego'
+  li = link_to 'Grupa Turystyki Wysokogórskiej', 'https://www.facebook.com/GrupaTurystykiWysokogórskiejKWKrakow'
   li = link_to 'Trytool', 'https://www.facebook.com/trytool/'
   li = link_to 'Mroźne Ostrza', 'https://www.facebook.com/Mro%C5%BAne-Ostrza-Indywidualne-Zawody-Drytoolowe-135959467189054/'
   li = link_to 'Sekcja Taternictwa Jaskiniowego', 'https://www.facebook.com/STJ.KW.Krakow/?ref=br_rs'
@@ -154,6 +155,20 @@ br
 ul
   - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
     li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
+br
+br
+b Aktualne projekty w których potrzebujemy Twojej pomocy:
+br
+ul
+  - Management::ProjectRecord.includes(:users).where(state: 'unassigned').order(created_at: :desc).each do |project|
+    li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
+br
+br
+b Aktualne projekty w które prowadzą inni członkowie klubu:
+br
+ul
+  - Management::ProjectRecord.includes(:users).where(state: 'in_progress').order(created_at: :desc).each do |project|
+    li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
 br
 br
 b Spotkania
