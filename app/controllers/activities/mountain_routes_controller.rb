@@ -56,7 +56,7 @@ module Activities
     def new
       authorize! :create, ::Db::Activities::MountainRoute
 
-      @route = Db::Activities::MountainRoute.new
+      @route = Db::Activities::MountainRoute.new(colleague_ids: [current_user.id])
     end
 
     def show
@@ -74,7 +74,7 @@ module Activities
       @route = Db::Activities::MountainRoute.friendly.find(params[:id])
 
       if @route.update(route_params)
-        redirect_to activities_mountain_route_path(@route), notice: t('.updated_successfully')
+        redirect_to edit_activities_mountain_route_path(@route), notice: t('.updated_successfully')
       else
         render :edit
       end
@@ -117,7 +117,7 @@ module Activities
     private
 
     def route_params
-      params.require(:route).permit(:peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :route_type, :rating, :hidden, colleagues_names: [], attachments: [])
+      params.require(:route).permit(:peak, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :route_type, :rating, :hidden, colleague_ids: [], attachments: [])
     end
   end
 end
