@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_101419) do
+ActiveRecord::Schema.define(version: 2019_08_14_111833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,13 +298,45 @@ ActiveRecord::Schema.define(version: 2019_08_06_101419) do
 
   create_table "membership_fees", id: :serial, force: :cascade do |t|
     t.string "year"
-    t.integer "cost", default: 100, null: false
+    t.integer "cost", null: false
     t.integer "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "creator_id"
     t.boolean "plastic", default: false, null: false
     t.index ["kw_id"], name: "index_membership_fees_on_kw_id"
+  end
+
+  create_table "meteoblue_records", force: :cascade do |t|
+    t.date "time", null: false
+    t.integer "pictocode"
+    t.float "temperature_max"
+    t.float "temperature_min"
+    t.float "temperature_mean"
+    t.float "felttemperature_max"
+    t.float "felttemperature_min"
+    t.integer "winddirection"
+    t.integer "precipitation_probability"
+    t.string "rainspot"
+    t.integer "predictability_class"
+    t.integer "predictability"
+    t.float "precipitation"
+    t.float "snowfraction"
+    t.integer "sealevelpressure_max"
+    t.integer "sealevelpressure_min"
+    t.integer "sealevelpressure_mean"
+    t.float "windspeed_max"
+    t.float "windspeed_mean"
+    t.float "windspeed_min"
+    t.integer "relativehumidity_max"
+    t.integer "relativehumidity_min"
+    t.integer "relativehumidity_mean"
+    t.float "convective_precipitation"
+    t.float "precipitation_hours"
+    t.float "humiditygreater90_hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["time"], name: "index_meteoblue_records_on_time", unique: true
   end
 
   create_table "mountain_routes", id: :serial, force: :cascade do |t|
@@ -364,8 +396,8 @@ ActiveRecord::Schema.define(version: 2019_08_06_101419) do
   create_table "payments", id: :serial, force: :cascade do |t|
     t.boolean "cash", default: false
     t.string "dotpay_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "state", default: "unpaid"
     t.string "payable_type"
     t.integer "payable_id"
@@ -496,8 +528,8 @@ ActiveRecord::Schema.define(version: 2019_08_06_101419) do
   create_table "reservation_items", id: :serial, force: :cascade do |t|
     t.integer "item_id"
     t.integer "reservation_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reservations", id: :serial, force: :cascade do |t|
@@ -611,7 +643,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_101419) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "a15088e83eb354d4", null: false
+    t.string "code", default: "924dd11384eeb715", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"

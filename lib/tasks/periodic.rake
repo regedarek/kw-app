@@ -6,6 +6,7 @@ end
 
 task :store_weather => :environment do
   Scrappers::WeatherStorage.new.call
+  Scrappers::Meteoblue.new.call
 end
 
 task :send_reminders => :environment do
