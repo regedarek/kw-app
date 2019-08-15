@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_092140) do
+ActiveRecord::Schema.define(version: 2019_08_15_095711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -336,6 +336,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_092140) do
     t.float "humiditygreater90_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "meteogram"
+    t.string "location"
     t.index ["time"], name: "index_meteoblue_records_on_time", unique: true
   end
 
