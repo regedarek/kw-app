@@ -10,7 +10,6 @@ module Admin
       if form.valid?
         fee = Db::Membership::Fee.new(form.params)
         fee.creator_id = @creator_id
-        fee.cost = 110 if fee.plastic
         fee.save
         payment = fee.create_payment(dotpay_id: SecureRandom.hex(13))
         payment.update(cash: true, state: 'prepaid') if payment.present?

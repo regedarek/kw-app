@@ -13,8 +13,16 @@ module Admin
 
     def params
       ActiveSupport::HashWithIndifferentAccess.new(
-        kw_id: kw_id, year: year, plastic: plastic
+        kw_id: kw_id, year: year, plastic: plastic, cost: cost
       )
+    end
+
+    def cost
+      if plastic
+        110
+      else
+        100
+      end
     end
 
     def check_uniqueness_of_year
