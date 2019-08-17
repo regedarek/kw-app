@@ -1,3 +1,5 @@
-| SHMU
-- if @shmu_record.any?
-  = image_tag @shmu_record.last&.image&.path
+.row
+  .columns.large-12
+    .text-center
+      - @shmu_records.each do |shmu|
+        = image_tag shmu.image.url

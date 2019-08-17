@@ -1,1 +1,17 @@
-| POGODYNKA
+table.stack
+  thead
+    tr
+      th width='200px' Miejsce
+      th Temperatura
+      th Dobowy przyrost śniegu
+      th Całkowita ilość śniegu
+      th Rodzaj śniegu
+      th Godzina pomiaru
+  tbody
+    tr
+      td = @pogodynka_record.place
+      td = @pogodynka_record.temp
+      td = @pogodynka_record.daily_snow
+      td = @pogodynka_record.all_snow
+      td = @pogodynka_record.snow_type
+      td = @pogodynka_record.created_at.to_date

@@ -15,30 +15,24 @@
       - if @topr_record
         li.tabs-title.is-active
           a aria-selected="true" href="#topr" TOPR
-      - if @shmu_record
+      - if @shmu_records.any?
         li.tabs-title
           a href="#shmu" SHMU.sk
-      li.tabs-title
-        a href="#meteoblue" METEOBLUE
+      - if @meteoblue_record
+        li.tabs-title
+          a href="#meteoblue" METEOBLUE
       li.tabs-title
         a href="#pogodynka" POGODYNKA
-      li.tabs-title
-        a href="#facebook" FACEBOOK
-      li.tabs-title
-        a href="#przejscia" PRZEJŚCIA KW
 
     .tabs-content data-tabs-content="example-tabs" 
       - if @topr_record
         #topr.tabs-panel.is-active
           = render 'scrappers/scrappers/topr'
-      - if @shmu_record
+      - if @shmu_records
         #shmu.tabs-panel
           = render 'scrappers/scrappers/shmu'
-      #meteoblue.tabs-panel
-        = render 'scrappers/scrappers/meteoblue'
+      - if @meteoblue_record
+        #meteoblue.tabs-panel
+          = render 'scrappers/scrappers/meteoblue'
       #pogodynka.tabs-panel
         = render 'scrappers/scrappers/pogodynka'
-      #facebook.tabs-panel
-        = render 'scrappers/scrappers/facebook'
-      #przejscia.tabs-panel
-        = render 'scrappers/scrappers/przejscia'

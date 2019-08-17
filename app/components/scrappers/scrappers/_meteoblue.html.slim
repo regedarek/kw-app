@@ -1,1 +1,5 @@
-| METEOBLUE
+- if @meteoblue_record
+  .row
+    .columns.large-12
+      .text-center
+        = image_tag @meteoblue_record.meteogram.url
