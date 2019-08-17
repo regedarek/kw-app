@@ -2,4 +2,5 @@
   .row
     .columns.large-12
       .text-center
-        = image_tag @meteoblue_record.meteogram.url
+        - if @meteoblue_record.meteogram
+          = image_tag @meteoblue_record.meteogram.url
