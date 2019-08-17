@@ -1,5 +1,5 @@
-.row style='margin-bottom: 10px;'
-  .large-12.columns
+.row
+  .large-8.columns style='height: 35px; line-height: 35px;'
     .text-center
       = link_to scrappers_path(date: @current_date.to_date - 1) do
         span
@@ -8,6 +8,9 @@
       = link_to scrappers_path(date: @current_date.to_date + 1) do
         span
         | ▶︎
+  .large-4.columns
+    = form_for scrappers_path(date: @current_date.to_date) do |f|
+      = f.select :place, [['Kasprowy Wierch', 'kasprowy']]
 
 .row
   .large-12.columns
