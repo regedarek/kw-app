@@ -6,7 +6,7 @@
   .row
     .large-8.columns
       = link_to activities_mountain_routes_path do
-        h3 Ostatnio dodane przejścia
+        h4 Ostatnio dodane przejścia
       table.stack
         - Db::Activities::MountainRoute.includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
           tr
@@ -19,7 +19,7 @@
 
     .large-4.columns
       = link_to gorskie_dziki_path do
-        h3
+        h4
           = "Górskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
       table.stack
         - Activities::Repository.new.fetch_current_month.limit(5).each do |user|
@@ -36,7 +36,7 @@
   .row
     .large-4.columns
       = link_to supplementary_courses_path do
-        h3 Nadchodzące wydarzenia
+        h4 Nadchodzące wydarzenia
       table.stack
         - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
           tr
@@ -49,7 +49,7 @@
     - if Training::Supplementary::Repository.new.future_courses_of_user(current_user).any?
       .large-4.columns
         = link_to supplementary_courses_path do
-          h3 Twoje wydarzenia
+          h4 Twoje wydarzenia
         table.stack
           - Training::Supplementary::Repository.new.future_courses_of_user(current_user).each do |course|
             tr
@@ -61,7 +61,7 @@
 
     .large-4.columns
       = link_to projects_path do
-        h3 Projekty do wzięcia
+        h4 Projekty do wzięcia
       table.stack
         - Management::ProjectRecord.where(state: :unassigned).order(created_at: :desc).limit(5).each do |project|
           tr
@@ -71,7 +71,7 @@
   .row
     .large-6.columns
       = link_to informations_path do
-        h3 Biuletyny, sprawozdania, ogłoszenia
+        h4 Biuletyny, sprawozdania, ogłoszenia
       table.stack
         - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
           tr
@@ -84,7 +84,7 @@
 
     .large-6.columns
       = link_to cases_path do
-        h3 Głosowania zarządu, przyjęte uchwały
+        h4 Głosowania zarządu, przyjęte uchwały
       table.stack
         - Management::Voting::CaseRecord.accessible_by(current_ability).order(created_at: :desc).limit(5).each do |case_record|
           tr
