@@ -1,2 +1,3 @@
 | SHMU
-= image_tag @shmu_record&.last
+- if @shmu_record.any?
+  = image_tag @shmu_record.last&.image&.path
