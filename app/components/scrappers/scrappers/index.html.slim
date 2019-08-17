@@ -13,10 +13,10 @@
   .large-12.columns
     ul#example-tabs.tabs data-responsive-accordion-tabs=("tabs medium-accordion large-tabs") 
       - if @topr_record
-        li.tabs-title.is-active
+        li.tabs-title
           a aria-selected="true" href="#topr" TOPR
       - if @shmu_records.any?
-        li.tabs-title
+        li.tabs-title.is-active
           a href="#shmu" SHMU.sk
       - if @meteoblue_record
         li.tabs-title
