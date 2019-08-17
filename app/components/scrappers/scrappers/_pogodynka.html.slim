@@ -8,10 +8,12 @@ table.stack
       th Rodzaj śniegu
       th Godzina pomiaru
   tbody
-    tr
-      td = @pogodynka_record.place
-      td = @pogodynka_record.temp
-      td = @pogodynka_record.daily_snow
-      td = @pogodynka_record.all_snow
-      td = @pogodynka_record.snow_type
-      td = @pogodynka_record.created_at.to_date
+    - if @pogodynka_records.any?
+      - @pogodynka_records.each do |record|
+        tr
+          td = record.place
+          td = record.temp
+          td = record.daily_snow
+          td = record.all_snow
+          td = record.snow_type
+          td = record.created_at.to_date

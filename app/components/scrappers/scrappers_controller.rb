@@ -8,7 +8,7 @@ module Scrappers
       @shmu_records = Scrappers::ShmuRecord.where(diagram_time: @current_date.all_day)
       @topr_record = Scrappers::ToprRecord.find_by(time: @current_date)
       @meteoblue_record = Scrappers::MeteoblueRecord.find_by(time: @current_date.to_s)
-      @pogodynka_record = Scrappers::WeatherRecord.where(created_at: @current_date.all_day)&.first
+      @pogodynka_records = Scrappers::WeatherRecord.where(created_at: @current_date.all_day)
       @routes_records = Db::Activities::MountainRoute.where(climbing_date: @current_date)
     end
   end

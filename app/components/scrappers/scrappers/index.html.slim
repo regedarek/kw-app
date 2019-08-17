@@ -21,8 +21,9 @@
       - if @meteoblue_record
         li.tabs-title
           a href="#meteoblue" METEOBLUE
-      li.tabs-title
-        a href="#pogodynka" POGODYNKA
+      - if @pogodynka_records.any?
+        li.tabs-title
+          a href="#pogodynka" POGODYNKA
 
     .tabs-content data-tabs-content="example-tabs" 
       - if @topr_record
@@ -32,7 +33,8 @@
         #shmu.tabs-panel
           = render 'scrappers/scrappers/shmu'
       - if @meteoblue_record
-        #meteoblue.tabs-panel
+        jmeteoblue.tabs-panel
           = render 'scrappers/scrappers/meteoblue'
-      #pogodynka.tabs-panel
-        = render 'scrappers/scrappers/pogodynka'
+      - if @pogodynka_records.any?
+        #pogodynka.tabs-panel
+          = render 'scrappers/scrappers/pogodynka'
