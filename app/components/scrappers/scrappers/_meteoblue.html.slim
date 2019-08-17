@@ -3,4 +3,4 @@
     .columns.large-12
       .text-center
         - if @meteoblue_record.meteogram && @meteoblue_record.meteogram.url
-          = image_tag @meteoblue_record.meteogram.url
+          = image_tag @meteoblue_record.meteogram.path
