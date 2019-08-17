@@ -5,7 +5,7 @@
   br
   .row
     .large-8.columns
-      = link_to activities_mountain_routes_path(boars: true) do
+      = link_to activities_mountain_routes_path do
         h4 Ostatnio dodane przejścia
       table.stack
         - Db::Activities::MountainRoute.includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
