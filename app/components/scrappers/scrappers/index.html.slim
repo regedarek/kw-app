@@ -1,22 +1,23 @@
-.row
-  .large-8.columns style='height: 35px; line-height: 35px;'
-    .text-center
-      = link_to scrappers_path(date: @current_date.to_date - 1) do
-        span
-        | ◀︎
-      span.scrappers-date = @current_date.to_s
-      = link_to scrappers_path(date: @current_date.to_date + 1) do
-        span
-        | ▶︎
-  .large-4.columns
-    = form_for scrappers_path(date: @current_date.to_date) do |f|
-      = f.select :place, [['Kasprowy Wierch', 'kasprowy']]
+= form_tag scrappers_path(date: @current_date.to_date), method: :get do
+  .row
+    .large-5.columns
+    .large-4.columns
+      .input-group
+        .input-group-button
+          = link_to '◀︎', scrappers_path(date: @current_date.to_date - 1, place: params[:place]), class: 'button'
+        = date_field_tag :date, @current_date, { onchange: 'this.form.submit();', class: 'input-group-field'}
+        .input-group-button
+          = link_to '▶︎', scrappers_path(date: @current_date.to_date + 1, place: params[:place]), class: 'button'
+    .large-3.columns
+      = select_tag :place,
+      options_for_select([['Kasprowy Wierch', 'kasprowy'], ['Łomnicki Szczyt', 'lomnica']], selected: params[:place]),
+      { onchange: 'this.form.submit();'}
 
 .row
   .large-12.columns
     ul#example-tabs.tabs data-responsive-accordion-tabs=("tabs medium-accordion large-tabs") 
       - if @topr_record
-        li.tabs-title.is-active
+        li.tabs-title
           a aria-selected="true" href="#topr" TOPR
       - if @shmu_records.any?
         li.tabs-title

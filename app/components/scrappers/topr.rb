@@ -8,7 +8,7 @@ module Scrappers
         time: Date.today,
         statement: statement,
         avalanche_degree: 0
-      ) if [12, 01, 02, 03, 04, 05].include?(Date.today.month)
+      )
     end
   end
 end

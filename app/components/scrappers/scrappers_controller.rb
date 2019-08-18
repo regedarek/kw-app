@@ -6,7 +6,7 @@ module Scrappers
       @current_date = params[:date] ? params[:date].to_date : Date.today
 
       @shmu_records = Scrappers::ShmuRecord.where(diagram_time: @current_date.all_day)
-      @topr_record = Scrappers::ToprRecord.find_by(time: @current_date)
+      @topr_record = Scrappers::ToprRecord.find_by(time: @current_date.to_s)
       @meteoblue_record = Scrappers::MeteoblueRecord.find_by(time: @current_date.to_s)
       @pogodynka_records = Scrappers::WeatherRecord.where(created_at: @current_date.all_day)
       @routes_records = Db::Activities::MountainRoute.where(climbing_date: @current_date)
