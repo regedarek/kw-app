@@ -28,6 +28,10 @@ every '0 7 * * *' do
   rake :store_weather
 end
 
+every '0 23 * * *' do
+  rake :store_meteoblue
+end
+
 every '0 0 1 9 *' do
   rake :recalculate_cost
 end
