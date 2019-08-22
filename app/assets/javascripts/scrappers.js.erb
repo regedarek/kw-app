@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  var element =  document.getElementById('js-container');
+  if (typeof(element) != 'undefined' && element != null)
+  {
     // Enable plugins like highlighter and cursor by default.
     // Otherwise, must specify show: true option for those plugins.
     $.jqplot.config.enablePlugins = true;
@@ -39,5 +42,5 @@ $(document).ready(function(){
             looseZoom: true
         }
     });
-
+  }
 });

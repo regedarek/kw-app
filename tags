@@ -110,9 +110,11 @@ AddKwIdToMembershipFees	db/migrate/20160830182103_add_kw_id_to_membership_fees.r
 AddLengthToMountainRoutes	db/migrate/20170220215848_add_length_to_mountain_routes.rb	/^class AddLengthToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddLimitToCompetitions	db/migrate/20180113213250_add_limit_to_competitions.rb	/^class AddLimitToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddLimitToSupplementaryCourses	db/migrate/20180503111523_add_limit_to_supplementary_courses.rb	/^class AddLimitToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
+AddLocationToMeteoblueRecords	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^class AddLocationToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddMandatoryFieldsToEditionCategories	db/migrate/20181009110950_add_mandatory_fields_to_edition_categories.rb	/^class AddMandatoryFieldsToEditionCategories < ActiveRecord::Migration[5.0]$/;"	c
 AddMatrimonialOfficeToCompetitions	db/migrate/20180422174624_add_matrimonial_office_to_competitions.rb	/^class AddMatrimonialOfficeToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddMembershipToPackages	db/migrate/20180111171334_add_membership_to_packages.rb	/^class AddMembershipToPackages < ActiveRecord::Migration[5.0]$/;"	c
+AddMeteogramToMeteoblueRecords	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^class AddMeteogramToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddMoreindexesToMountainRoutes	db/migrate/20190130233129_add_moreindexes_to_mountain_routes.rb	/^class AddMoreindexesToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddNameToSupplementaryCourses	db/migrate/20180504200215_add_name_to_supplementary_courses.rb	/^class AddNameToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddNullFalseToRouteTime	db/migrate/20190419224448_add_null_false_to_route_time.rb	/^class AddNullFalseToRouteTime < ActiveRecord::Migration[5.2]$/;"	c
@@ -215,6 +217,7 @@ Admin	app/controllers/admin/reservations_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/users_controller.rb	/^module Admin$/;"	m
 Animation	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function Animation( elem, properties, options ) {$/;"	f
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
+Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/controllers/api/base_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/payments_controller.rb	/^module Api$/;"	m
@@ -343,6 +346,7 @@ CreateManagementCases	db/migrate/20190430143708_create_management_cases.rb	/^cla
 CreateManagementInformations	db/migrate/20190714111909_create_management_informations.rb	/^class CreateManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementVotes	db/migrate/20190502101949_create_management_votes.rb	/^class CreateManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 CreateMasSignUps	db/migrate/20170317104900_create_mas_sign_ups.rb	/^class CreateMasSignUps < ActiveRecord::Migration[5.0]$/;"	c
+CreateMeteoblueRecords	db/migrate/20190814111833_create_meteoblue_records.rb	/^class CreateMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
 CreateNotifications	db/migrate/20190428093702_create_notifications.rb	/^class CreateNotifications < ActiveRecord::Migration[5.2]$/;"	c
 CreatePackage	app/components/training/supplementary/create_package.rb	/^    class CreatePackage$/;"	c	class:Training.Supplementary
 CreatePackageForm	app/components/training/supplementary/create_package_form.rb	/^    class CreatePackageForm < Dry::Validation::Schema$/;"	c	class:Training.Supplementary
@@ -377,6 +381,7 @@ CreateSupplementaryCoursePackageTypes	db/migrate/20180912190425_create_supplemen
 CreateSupplementaryCourses	db/migrate/20180428115003_create_supplementary_courses.rb	/^class CreateSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 CreateSupplementarySignUps	db/migrate/20180503124007_create_supplementary_sign_ups.rb	/^class CreateSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 CreateTableOrders	db/migrate/20160830160726_create_table_orders.rb	/^class CreateTableOrders < ActiveRecord::Migration[5.0]$/;"	c
+CreateToprRecords	db/migrate/20190815092140_create_topr_records.rb	/^class CreateToprRecords < ActiveRecord::Migration[5.2]$/;"	c
 CreateUsers	db/migrate/20150523153119_create_users.rb	/^class CreateUsers < ActiveRecord::Migration[5.0]$/;"	c
 CreateValleyTable	db/migrate/20160804151037_create_valley_table.rb	/^class CreateValleyTable < ActiveRecord::Migration[5.0]$/;"	c
 CreateWeatherRecords	db/migrate/20190724185610_create_weather_records.rb	/^class CreateWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
@@ -567,6 +572,10 @@ MembershipFeesController	app/controllers/admin/membership_fees_controller.rb	/^ 
 MembershipFeesForm	app/components/admin/membership_fees_form.rb	/^  class MembershipFeesForm$/;"	c	class:Admin
 Messaging	app/components/messaging/comment_record.rb	/^module Messaging$/;"	m
 Messaging	app/components/messaging/comments_controller.rb	/^module Messaging$/;"	m
+Meteoblue	app/components/scrappers/meteoblue.rb	/^  class Meteoblue$/;"	c	class:Scrappers
+MeteoblueController	app/components/scrappers/api/meteoblue_controller.rb	/^    class MeteoblueController < ::Api::BaseController$/;"	c	class:Scrappers.Api
+MeteoblueRecord	app/components/scrappers/meteoblue_record.rb	/^  class MeteoblueRecord < ActiveRecord::Base$/;"	c	class:Scrappers
+MeteoblueUploader	app/components/scrappers/meteoblue_uploader.rb	/^  class MeteoblueUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 MountainRoute	app/components/importing/mountain_route.rb	/^  class MountainRoute$/;"	c	class:Importing
 MountainRoute	app/models/db/activities/mountain_route.rb	/^    class MountainRoute < ActiveRecord::Base$/;"	c	class:Db.Activities
 MountainRouteRecord	app/components/activities/mountain_route_record.rb	/^  class MountainRouteRecord < ActiveRecord::Base$/;"	c	class:Activities
@@ -688,12 +697,18 @@ ReservationsForm	app/components/admin/reservations_form.rb	/^  class Reservation
 Result	lib/result.rb	/^class Result$/;"	c
 RouteColleagues	app/models/db/activities/route_colleagues.rb	/^    class RouteColleagues < ActiveRecord::Base$/;"	c	class:Db.Activities
 RoutesController	app/components/activities/routes_controller.rb	/^  class RoutesController < ApplicationController$/;"	c	class:Activities
+Scrappers	app/components/scrappers/api/meteoblue_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/api/pogodynka_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/image_uploader.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/meteoblue.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/meteoblue_record.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/meteoblue_uploader.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/pogodynka.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/scrappers_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/shmu.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/shmu_record.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/topr.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/topr_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/weather.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/weather_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/weather_storage.rb	/^module Scrappers$/;"	m
@@ -769,6 +784,8 @@ TagRecord	app/components/library/tag_record.rb	/^  class TagRecord < ActiveRecor
 TagsController	app/components/library/admin/tags_controller.rb	/^    class TagsController < ApplicationController$/;"	c	class:Library.Admin
 TimestampCreateDonations	db/migrate/20180813110522_timestamp_create_donations.rb	/^class TimestampCreateDonations < ActiveRecord::Migration[5.0]$/;"	c
 TimestampCreateHearts	db/migrate/20180808131403_timestamp_create_hearts.rb	/^class TimestampCreateHearts < ActiveRecord::Migration[5.0]$/;"	c
+Topr	app/components/scrappers/topr.rb	/^  class Topr$/;"	c	class:Scrappers
+ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < ActiveRecord::Base$/;"	c	class:Scrappers
 Training	app/components/training/activities/create_ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts_controller.rb	/^module Training$/;"	m
@@ -947,8 +964,10 @@ call	app/components/management/voting/create_case.rb	/^      def call(raw_inputs
 call	app/components/management/voting/update_case.rb	/^      def call(id:, raw_inputs:)$/;"	f	class:Management.Voting.UpdateCase
 call	app/components/membership/fees_reminder_service.rb	/^    def call$/;"	f	class:Membership.FeesReminderService
 call	app/components/reservations/update_items.rb	/^    def call(raw_inputs:)$/;"	f	class:Reservations.UpdateItems
+call	app/components/scrappers/meteoblue.rb	/^    def call$/;"	f	class:Scrappers.Meteoblue
 call	app/components/scrappers/pogodynka.rb	/^    def call$/;"	f	class:Scrappers.Pogodynka
 call	app/components/scrappers/shmu.rb	/^    def call$/;"	f	class:Scrappers.Shmu
+call	app/components/scrappers/topr.rb	/^    def call$/;"	f	class:Scrappers.Topr
 call	app/components/scrappers/weather_storage.rb	/^    def call$/;"	f	class:Scrappers.WeatherStorage
 call	app/components/settlement/create_contract.rb	/^    def call(raw_inputs:, creator_id:)$/;"	f	class:Settlement.CreateContract
 call	app/components/settlement/create_contractor.rb	/^    def call(raw_inputs:)$/;"	f	class:Settlement.CreateContractor
@@ -1233,6 +1252,10 @@ change	db/migrate/20190724185610_create_weather_records.rb	/^  def change$/;"	f	
 change	db/migrate/20190806085118_add_acceptance_date_to_voting_cases.rb	/^  def change$/;"	f	class:AddAcceptanceDateToVotingCases
 change	db/migrate/20190806094853_change_library_tags.rb	/^  def change$/;"	f	class:ChangeLibraryTags
 change	db/migrate/20190806101419_create_library_item_tags.rb	/^  def change$/;"	f	class:CreateLibraryItemTags
+change	db/migrate/20190814111833_create_meteoblue_records.rb	/^  def change$/;"	f	class:CreateMeteoblueRecords
+change	db/migrate/20190815092140_create_topr_records.rb	/^  def change$/;"	f	class:CreateToprRecords
+change	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^  def change$/;"	f	class:AddMeteogramToMeteoblueRecords
+change	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^  def change$/;"	f	class:AddLocationToMeteoblueRecords
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1271,6 +1294,7 @@ contract_params	app/components/settlement/admin/contracts_controller.rb	/^      
 contractor_name=	app/components/settlement/contract_record.rb	/^    def contractor_name=(id)$/;"	f	class:Settlement.ContractRecord
 contractor_params	app/components/settlement/admin/contractors_controller.rb	/^      def contractor_params$/;"	f	class:Settlement.Admin.ContractorsController
 coordinator	app/components/management/project_record.rb	/^    def coordinator$/;"	f	class:Management.ProjectRecord
+cost	app/components/admin/membership_fees_form.rb	/^    def cost$/;"	f	class:Admin.MembershipFeesForm
 cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Events.Db.SignUpRecord
 cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;"	f	class:Training.Supplementary.SignUpRecord
 cost	app/models/db/reservation.rb	/^  def cost$/;"	f	class:Db
@@ -1461,6 +1485,7 @@ fetch_spring	app/components/training/activities/repository.rb	/^      def fetch_
 fetch_winter	app/components/training/activities/repository.rb	/^      def fetch_winter$/;"	f	class:Training.Activities.Repository
 filename	app/components/photo_competition/file_uploader.rb	/^    def filename$/;"	f	class:PhotoCompetition.FileUploader
 filename	app/components/scrappers/image_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ImageUploader
+filename	app/components/scrappers/meteoblue_uploader.rb	/^    def filename$/;"	f	class:Scrappers.MeteoblueUploader
 filterHidden	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function filterHidden( elem ) {$/;"	f
 financial_management	app/models/ability.rb	/^  def financial_management$/;"	f	class:Ability
 find_outdated_not_prepaided_profiles	app/components/membership/fees_repository.rb	/^    def find_outdated_not_prepaided_profiles$/;"	f	class:Membership.FeesRepository
@@ -1549,6 +1574,7 @@ index	app/components/management/projects_controller.rb	/^    def index$/;"	f	cla
 index	app/components/management/voting/cases_controller.rb	/^      def index$/;"	f	class:Management.Voting.CasesController
 index	app/components/notification_center/notifications_controller.rb	/^    def index$/;"	f	class:NotificationCenter.NotificationsController
 index	app/components/photo_competition/admin/editions_controller.rb	/^      def index$/;"	f	class:PhotoCompetition.Admin.EditionsController
+index	app/components/scrappers/api/meteoblue_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.MeteoblueController
 index	app/components/scrappers/api/pogodynka_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.PogodynkaController
 index	app/components/scrappers/scrappers_controller.rb	/^    def index$/;"	f	class:Scrappers.ScrappersController
 index	app/components/settlement/admin/contracts_controller.rb	/^      def index$/;"	f	class:Settlement.Admin.ContractsController
@@ -1677,6 +1703,7 @@ jQuery.ready.promise	public/assets/application-adb37b88852cd8099abe934018ff31eff
 jQuery.speed	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^jQuery.speed = function( speed, easing, fn ) {$/;"	f
 jQuery.valHooks.button.get	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		get: function( elem, name ) {$/;"	m
 jQuery.valHooks.button.set	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		set: nodeHook.set$/;"	p
+kasprowy_uri	app/components/scrappers/meteoblue.rb	/^    def kasprowy_uri$/;"	f	class:Scrappers.Meteoblue
 kinds	app/components/training/supplementary/course_record.rb	/^      def kinds$/;"	f	class:Training.Supplementary.CourseRecord
 kw_id_accepted	app/models/db/profile.rb	/^    def kw_id_accepted$/;"	f	class:Db.Profile
 letterSpacing	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		letterSpacing: "0",$/;"	p
@@ -1701,6 +1728,7 @@ manually_sign_up_params	app/components/training/supplementary/sign_ups_controlle
 mark_as_paid	app/controllers/payments_controller.rb	/^  def mark_as_paid$/;"	f	class:PaymentsController.refund
 mark_as_read	app/components/notification_center/notifications_controller.rb	/^    def mark_as_read$/;"	f	class:NotificationCenter.NotificationsController
 mass_create	spec/factories.rb	/^      def self.mass_create!(range: (1..20), years: [2013, 2014, 2015], cash: true, state: 'prepaid')$/;"	F	class:Factories.Membership.Fee
+meteogram_uri	app/components/scrappers/meteoblue.rb	/^    def meteogram_uri$/;"	f	class:Scrappers.Meteoblue
 method_missing	lib/result.rb	/^  def method_missing(_method_name, *_args, &_block)$/;"	f
 missing_votes_on	app/components/management/voting/repository.rb	/^      def missing_votes_on(case_id)$/;"	f	class:Management.Voting.Repository
 model_name	app/components/user_management/profile_form.rb	/^    def self.model_name$/;"	F	class:UserManagement.ProfileForm
@@ -1913,6 +1941,7 @@ store_dir	app/components/photo_competition/file_uploader.rb	/^      def store_di
 store_dir	app/components/photo_competition/file_uploader.rb	/^    def store_dir$/;"	f	class:PhotoCompetition.FileUploader
 store_dir	app/components/reservations/photo_uploader.rb	/^    def store_dir$/;"	f	class:Reservations.PhotoUploader
 store_dir	app/components/scrappers/image_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ImageUploader
+store_dir	app/components/scrappers/meteoblue_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.MeteoblueUploader
 store_dir	app/components/settlement/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Settlement.AttachmentUploader
 store_dir	app/components/training/supplementary/baner_uploader.rb	/^      def store_dir$/;"	f	class:Training.Supplementary.BanerUploader
 store_dir	app/components/user_management/attachment.rb	/^    def store_dir$/;"	f	class:UserManagement.AttachmentUploader
