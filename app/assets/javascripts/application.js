@@ -9,6 +9,7 @@
 //= require jqplot
 //= require jqplot/plugins/dateAxisRenderer
 //= require jqplot/plugins/cursor
+//= require jqplot/plugins/pointLabels
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

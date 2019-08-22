@@ -7,6 +7,10 @@ $(document).ready(function(){
 
     var plot1 = $.jqplot('js-container', [line1], {
         title:'Temperatura - 5 dni',
+        seriesDefaults: {
+          showMarker: false,
+          pointLabels: { show: true }
+        },
         axes:{
             xaxis:{
                 renderer:$.jqplot.DateAxisRenderer,
