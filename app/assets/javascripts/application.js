@@ -6,6 +6,9 @@
 //= require nested_form_fields
 //= require kw_app
 //= require trix
+//= require jqplot
+//= require jqplot/plugins/dateAxisRenderer
+//= require jqplot/plugins/cursor
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

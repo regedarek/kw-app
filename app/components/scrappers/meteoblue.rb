@@ -8,7 +8,7 @@ module Scrappers
       parsed_output = output.dig('data_day').map { |k,v| [k, v.first] }.to_h
       parsed_output.tap { |hs| hs.delete('uvindex') }
 
-      meteoblue = MeteoblueRecord.create(parsed_output.merge(location: 'Kasprowy Wierch'))
+      meteoblue = Scrappers::MeteoblueRecord.create(parsed_output.merge(location: 'Kasprowy Wierch'))
       meteoblue.update(meteogram: open(meteogram_uri))
     end
 

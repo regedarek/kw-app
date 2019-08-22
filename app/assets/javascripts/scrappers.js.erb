@@ -1,0 +1,39 @@
+$(document).ready(function(){
+    // Enable plugins like highlighter and cursor by default.
+    // Otherwise, must specify show: true option for those plugins.
+    $.jqplot.config.enablePlugins = true;
+
+    var line1=<%= Scrappers::MeteoblueRecord.where(location: 'Kasprowy Wierch').select(:location, :time, :temperature_max).collect {|w| [w.time.to_date, w.temperature_max]}.to_json %>;
+
+    var plot1 = $.jqplot('js-container', [line1], {
+        title:'Temperatura - 5 dni',
+        axes:{
+            xaxis:{
+                renderer:$.jqplot.DateAxisRenderer,
+                rendererOptions:{
+                    tickRenderer:$.jqplot.CanvasAxisTickRenderer
+                },
+                tickOptions:{
+                    fontSize:'10pt',
+                    fontFamily:'Tahoma',
+                    angle:-40
+                }
+            },
+            yaxis:{
+                rendererOptions:{
+                    tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+                    tickOptions:{
+                        fontSize:'10pt',
+                        fontFamily:'Tahoma',
+                        angle:30
+                    }
+            }
+        },
+        series:[{ lineWidth:4, markerOptions:{ style:'square' } }],
+        cursor:{
+            zoom:true,
+            looseZoom: true
+        }
+    });
+
+});

@@ -51,6 +51,8 @@ gem 'dry-validation'
 gem 'dry-types'
 gem 'dry-struct', require: false
 
+gem 'jqplot-rails'
+
 group :development, :staging do
   gem 'faker'
 end

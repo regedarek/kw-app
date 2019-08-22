@@ -236,6 +236,8 @@ GEM
     ice_nine (0.11.2)
     insensitive_hash (0.3.3)
     ipaddress (0.8.3)
+    jqplot-rails (0.3)
+      railties
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -511,6 +513,7 @@ DEPENDENCIES
   high_voltage
   honeybadger (~> 3.1)
   i18n-tasks (~> 0.9.29)
+  jqplot-rails
   jquery-rails
   kaminari
   koala

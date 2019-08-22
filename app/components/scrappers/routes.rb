@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :scrappers, only: :index
     namespace :api do
       resources :pogodynka, only: [:index]
+      resources :meteoblue, only: [:index]
     end
   end
 end
