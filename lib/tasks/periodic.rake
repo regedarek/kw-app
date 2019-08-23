@@ -6,10 +6,10 @@ end
 
 task :store_meteoblue => :environment do
   Scrappers::Meteoblue.new.call
+  Scrappers::WeatherStorage.new.call
 end
 
 task :store_weather => :environment do
-  Scrappers::WeatherStorage.new.call
   Scrappers::Topr.new.call
 end
 

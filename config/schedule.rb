@@ -24,11 +24,11 @@ every '0 20 * * *' do
   rake :store_shmu
 end
 
-every '0 7 * * *' do
+every '0 12 * * *' do
   rake :store_weather
 end
 
-every '0 23 * * *' do
+every '0 12 * * *' do
   rake :store_meteoblue
 end
 
