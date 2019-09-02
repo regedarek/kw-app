@@ -22,12 +22,7 @@ module UserManagement
     validates :first_name, :last_name, :email, :birth_date, :birth_place,
               :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
-    validate :birth_date_is_to_young
     validate :email_uniq
-
-    def birth_date_is_to_young
-      errors.add(:base, "Musisz mieć przynajmniej 16 lat by dołączyć do klubu") if birth_date.present? && birth_date >= 16.years.ago
-    end
 
     def email_uniq
       errors.add(:email, "zostało już zajęte") if Db::Profile.exists?(email: email)
