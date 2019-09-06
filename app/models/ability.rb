@@ -43,6 +43,7 @@ class Ability
   end
 
   def active
+    can :manage, Business::CourseRecord
     can :read, Management::Voting::CaseRecord, state: 'finished', hidden: false
     can :read, Db::Activities::MountainRoute
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
