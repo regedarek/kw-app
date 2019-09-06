@@ -25,7 +25,7 @@
         - Activities::Repository.new.fetch_current_month.limit(5).each do |user|
           - dbuser = Db::User.find(user.id)
           tr
-            td width='45px' = link_to user_path(kw_id: user.kw_id) do
+            td width='46px' = link_to user_path(kw_id: user.kw_id) do
               - if dbuser.avatar.present?
                 = image_tag(dbuser.avatar.url, class: 'topbar-avatar-image')
               - else

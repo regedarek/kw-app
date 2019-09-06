@@ -216,6 +216,7 @@ Admin	app/controllers/admin/profiles_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/reservations_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/users_controller.rb	/^module Admin$/;"	m
 Animation	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function Animation( elem, properties, options ) {$/;"	f
+Api	app/components/business/api/courses_controller.rb	/^  module Api$/;"	m	class:Business
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
 Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
@@ -244,6 +245,9 @@ BanerUploader	app/components/events/competitions/baner_uploader.rb	/^    class B
 BanerUploader	app/components/training/supplementary/baner_uploader.rb	/^    class BanerUploader < CarrierWave::Uploader::Base$/;"	c	class:Training.Supplementary
 BaseController	app/controllers/admin/base_controller.rb	/^  class BaseController < ApplicationController$/;"	c	class:Admin
 BaseController	app/controllers/api/base_controller.rb	/^  class BaseController < ApplicationController$/;"	c	class:Api
+Business	app/components/business/api/courses_controller.rb	/^module Business$/;"	m
+Business	app/components/business/course_record.rb	/^module Business$/;"	m
+Business	app/components/business/courses_controller.rb	/^module Business$/;"	m
 CancelItem	app/components/reservations/cancel_item.rb	/^  class CancelItem$/;"	c	class:Reservations
 Card	app/components/membership/card/repository.rb	/^  module Card$/;"	m	class:Membership
 CaseRecord	app/components/management/voting/case_record.rb	/^    class CaseRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
@@ -307,13 +311,17 @@ ContractsController	app/components/settlement/admin/contracts_controller.rb	/^  
 ControllerHelper	spec/support/controller_helper.rb	/^module ControllerHelper$/;"	m
 Cost	app/components/user_management/cost.rb	/^  class Cost$/;"	c	class:UserManagement
 Course	app/components/training/supplementary/course.rb	/^    class Course < Dry::Struct$/;"	c	class:Training.Supplementary
+CourseRecord	app/components/business/course_record.rb	/^  class CourseRecord < ActiveRecord::Base$/;"	c	class:Business
 CourseRecord	app/components/training/db/course_record.rb	/^    class CourseRecord < ActiveRecord::Base$/;"	c	class:Training.Db
 CourseRecord	app/components/training/supplementary/course_record.rb	/^    class CourseRecord < ActiveRecord::Base$/;"	c	class:Training.Supplementary
+CoursesController	app/components/business/api/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Business.Api
+CoursesController	app/components/business/courses_controller.rb	/^  class CoursesController < ApplicationController$/;"	c	class:Business
 CoursesController	app/components/training/supplementary/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Training.Supplementary
 Create	app/components/events/admin/competitions/create.rb	/^      class Create$/;"	c	class:Events.Admin.Competitions
 Create	app/components/events/competitions/sign_ups/create.rb	/^      class Create$/;"	c	class:Events.Competitions.SignUps
 CreateAuctionProduct	db/migrate/20170107103156_create_auction_product.rb	/^class CreateAuctionProduct < ActiveRecord::Migration[5.0]$/;"	c
 CreateAuctions	db/migrate/20170107102938_create_auctions.rb	/^class CreateAuctions < ActiveRecord::Migration[5.0]$/;"	c
+CreateBusinessCourses	db/migrate/20190905151155_create_business_courses.rb	/^class CreateBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 CreateCase	app/components/management/voting/create_case.rb	/^    class CreateCase$/;"	c	class:Management.Voting
 CreateComments	db/migrate/20190410212028_create_comments.rb	/^class CreateComments < ActiveRecord::Migration[5.2]$/;"	c
 CreateCompetitionPackageTypes	db/migrate/20180108175828_create_competition_package_types.rb	/^class CreateCompetitionPackageTypes < ActiveRecord::Migration[5.0]$/;"	c
@@ -944,7 +952,6 @@ availability	app/controllers/reservations_controller.rb	/^  def availability$/;"
 baner_types	app/components/training/supplementary/course_record.rb	/^      def baner_types$/;"	f	class:Training.Supplementary.CourseRecord
 become	app/controllers/admin/users_controller.rb	/^    def become$/;"	f	class:Admin.UsersController
 best_of_season	app/components/activities/repository.rb	/^    def best_of_season$/;"	f	class:Activities.Repository
-birth_date_is_to_young	app/components/user_management/profile_form.rb	/^    def birth_date_is_to_young$/;"	f	class:UserManagement.ProfileForm
 boolHook.set	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	set: function( elem, value, name ) {$/;"	m
 buildFragment	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildFragment( elems, context, scripts, selection, ignored ) {$/;"	f
 buildParams	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildParams( prefix, obj, traditional, add ) {$/;"	f
@@ -1256,6 +1263,7 @@ change	db/migrate/20190814111833_create_meteoblue_records.rb	/^  def change$/;"	
 change	db/migrate/20190815092140_create_topr_records.rb	/^  def change$/;"	f	class:CreateToprRecords
 change	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^  def change$/;"	f	class:AddMeteogramToMeteoblueRecords
 change	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^  def change$/;"	f	class:AddLocationToMeteoblueRecords
+change	db/migrate/20190905151155_create_business_courses.rb	/^  def change$/;"	f	class:CreateBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1298,10 +1306,12 @@ cost	app/components/admin/membership_fees_form.rb	/^    def cost$/;"	f	class:Adm
 cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Events.Db.SignUpRecord
 cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;"	f	class:Training.Supplementary.SignUpRecord
 cost	app/models/db/reservation.rb	/^  def cost$/;"	f	class:Db
+course_params	app/components/business/courses_controller.rb	/^    def course_params$/;"	f	class:Business.CoursesController
 course_params	app/components/training/supplementary/courses_controller.rb	/^      def course_params$/;"	f	class:Training.Supplementary.CoursesController
 create	app/components/admin/items.rb	/^    def create$/;"	f	class:Admin.Items
 create	app/components/admin/membership_fees.rb	/^    def create$/;"	f	class:Admin.MembershipFees
 create	app/components/admin/reservations.rb	/^    def create$/;"	f	class:Admin.Reservations
+create	app/components/business/courses_controller.rb	/^    def create$/;"	f	class:Business.CoursesController
 create	app/components/charity/donations_controller.rb	/^    def create$/;"	f	class:Charity.DonationsController
 create	app/components/events/admin/competitions_controller.rb	/^      def create$/;"	f	class:Events.Admin.CompetitionsController
 create	app/components/events/competitions/repository.rb	/^      def create(form_outputs:)$/;"	f	class:Events.Competitions.Repository
@@ -1564,6 +1574,8 @@ import	app/controllers/admin/importing_controller.rb	/^    def import$/;"	f	clas
 import_params	app/controllers/admin/importing_controller.rb	/^    def import_params$/;"	f	class:Admin.ImportingController
 in_limit?	app/components/training/supplementary/limiter.rb	/^      def in_limit?(sign_up)$/;"	f	class:Training.Supplementary.Limiter
 index	app/components/activities/routes_controller.rb	/^    def index$/;"	f	class:Activities.RoutesController
+index	app/components/business/api/courses_controller.rb	/^      def index$/;"	f	class:Business.Api.CoursesController
+index	app/components/business/courses_controller.rb	/^    def index$/;"	f	class:Business.CoursesController
 index	app/components/charity/admin/donations_controller.rb	/^      def index$/;"	f	class:Charity.Admin.DonationsController
 index	app/components/events/admin/competitions_controller.rb	/^      def index$/;"	f	class:Events.Admin.CompetitionsController
 index	app/components/events/competitions/sign_ups_controller.rb	/^      def index$/;"	f	class:Events.Competitions.SignUpsController
