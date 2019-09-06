@@ -13,9 +13,9 @@
           = image_tag(current_user.avatar.url, class: 'card-profile-stats-intro-pic')
           br
           br
-          .callout
-            .small Przytnij wcześniej zdjęcie do kwadratu
-          = f.file_field :avatar
+        .callout
+          .small Przytnij wcześniej zdjęcie do kwadratu
+        = f.file_field :avatar
 
       .large-9.columns
         h4 Biogram
