@@ -41,11 +41,7 @@
         - if @course.price_kw
           | zł
         br
-      - if @course&.package_types.present?
-        b Pakiety: 
-        ul
-          - @course.package_types.each do |p|
-            li = "#{p.name} - #{p.cost} zł"
+
       - if @course.expired_hours > 0
         b Czas na płatność: 
         = @course.expired_hours
@@ -100,6 +96,11 @@
 
 
     .large-4.columns
+      - if @course&.package_types.present?
+        b Pakiety: 
+        ul
+          - @course.package_types.each do |p|
+            li = "#{p.name} - #{p.cost} zł"
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @current_user_sign_up.present?
       - else
@@ -209,9 +210,9 @@
                   = all_prepaid.map(&:email).join(', ')
 
             - if current_user.admin? || current_user.roles.include?('events')
+              - all_refunded = @limiter.all_refunded
               - if all_refunded.any?
                 h5 Zlecone zwroty
-                - all_refunded = @limiter.all_refunded
                 = render 'table_participants', sign_ups: all_refunded, email: false
 
                 .callout
