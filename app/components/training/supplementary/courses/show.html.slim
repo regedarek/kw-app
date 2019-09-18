@@ -208,6 +208,15 @@
                 .callout
                   = all_prepaid.map(&:email).join(', ')
 
+            h5 Zlecone zwroty
+            - all_refunded = @limiter.all_refunded
+            = render 'table_participants', sign_ups: all_refunded, email: false
+
+            - if current_user.admin? || current_user.roles.include?('events')
+              - if all_refunded.any?
+                .callout
+                  = all_refunded.map(&:email).join(', ')
+
         .large-6.columns
           h5 Lista rezerwowa
           - all_unpaid = @limiter.all_unpaid
@@ -217,6 +226,7 @@
             - if all_unpaid.any?
               .callout
                 = all_unpaid.map(&:email).join(', ')
+
       - else
         - unless @course.open
           .large-6.columns

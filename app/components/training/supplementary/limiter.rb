@@ -18,11 +18,15 @@ module Training
       end
 
       def all_prepaid
-        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid }).or(@course.sign_ups.includes(:payment).where(payments: { cash: true })).order(:created_at)
+        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid }).or(@course.sign_ups.includes(:payment).where(payments: { cash: true })).where.not(payments: { refunded_at: nil }).order(:created_at)
       end
 
       def all_unpaid
         @course.sign_ups.includes([:emails, :payment, :user]).where(payments: { state: :unpaid, cash: false }).order(:created_at)
+      end
+
+      def all_refunded
+        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid }).where.not(payments: { refunded_at: nil }).order(:created_at)
       end
 
       def prepaid_via_dotpay
