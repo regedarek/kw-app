@@ -46,6 +46,9 @@ table.stack
           td.text-right
             .icon-bar.five-up
               - if sign_up.payment
+                - unless sign_up.payment.paid?
+                  = link_to mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+                    i.fi-flag
                 - if sign_up.payment.paid?
                   - unless sign_up.payment.refunded_at
                     = link_to refund_payment_path(sign_up.payment.id), data: { confirm: 'Czy napewno chcesz zwrócić płatność?' }, method: :post, class: 'item', style: 'margin: 5px' do

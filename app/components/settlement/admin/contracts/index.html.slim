@@ -107,5 +107,5 @@
                 = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
                   i.fi.fi-page-edit
               - if can? :destroy, contract
-                = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete do
+                = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
                   i.fi.fi-trash
