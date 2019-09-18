@@ -96,11 +96,7 @@
 
 
     .large-4.columns
-      - if @course&.package_types.present?
-        b Pakiety: 
-        ul
-          - @course.package_types.each do |p|
-            li = "#{p.name} - #{p.cost} zł"
+
       = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
       - if @current_user_sign_up.present?
       - else
@@ -188,15 +184,18 @@
                       .callout.warning
                         | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
       = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large hollow'
-
   .row
     - if user_signed_in?
       .large-6.columns
+        - if @course&.package_types.present?
+          b Pakiety: 
+          ul
+            - @course.package_types.each do |p|
+              li = "#{p.name} - #{p.cost} zł"
         - if @course.remarks.present?
           h5 = t('.remarks')
           .callout
             = sanitize @course&.remarks
-
       - if @course.price
         .large-6.columns
           - if !@limiter.open?
