@@ -63,19 +63,19 @@
     table.stack
       thead
         tr
-          th width='5%'
+          th width='50px'
             = sort_link(@q, :id, 'ID', default_order: :desc)
-          th width='30%'
+          th width='450px'
             = sort_link(@q, :name, 'Nazwa', default_order: :desc)
-          th width='20%'
+          th width='200px'
             = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
-          th width='15%'
+          th width='150px'
             = sort_link(@q, :state, 'Status', default_order: :desc)
-          th width='10%'
+          th width='90px'
             = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
-          th width='20%'
+          th width='180px'
             = sort_link(@q, :creator_id, 'Kto zaakceptował?', default_order: :desc)
-          th width='10%' Akcje
+          th width='100px' Akcje
       tbody
         - @contracts.each_with_index do |contract, i|
           tr
@@ -106,3 +106,6 @@
               - if can? :update, contract
                 = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
                   i.fi.fi-page-edit
+              - if can? :destroy, contract
+                = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete do
+                  i.fi.fi-trash

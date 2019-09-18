@@ -40,6 +40,18 @@ module Settlement
         authorize! :read, @contract
       end
 
+      def destroy
+        authorize! :destroy, Settlement::ContractRecord
+
+        contract = Settlement::ContractRecord.find(params[:id])
+        contract.destroy
+
+        redirect_back(
+          fallback_location: admin_contracts_path,
+          notice: 'Usunięto!'
+        )
+      end
+
       def download_attachment
         send_file(
           params[:url],

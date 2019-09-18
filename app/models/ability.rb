@@ -9,7 +9,6 @@ class Ability
     default
     not_active if @user.persisted?
     active if @user.active?
-    office_king if role?('office_king')
     office if role?('office')
     competitions if role?('competitions')
     reservations if role?('reservations')
@@ -19,6 +18,7 @@ class Ability
     financial_management if role?('financial_management')
     management if role?('management')
     admin if role?('admin')
+    office_king if role?('office_king')
   end
 
   def role?(name)
@@ -63,6 +63,7 @@ class Ability
     can :read, Management::Voting::CaseRecord
     can :create, Management::Voting::CaseRecord
     can :manage, Management::ProjectRecord
+    cannot :destroy, Settlement::ContractRecord
   end
 
   def management
@@ -72,6 +73,7 @@ class Ability
     can :manage, Management::ProjectRecord
     can :manage, Management::Voting::CaseRecord
     can :hide, Management::Voting::CaseRecord
+    cannot :destroy, Settlement::ContractRecord
   end
 
   def events
@@ -80,18 +82,9 @@ class Ability
     can :read, Settlement::ContractRecord, creator_id: user.id
   end
 
-  def office_king
-    can :search, Settlement::ContractRecord
-    can :recon_up, Settlement::ContractRecord
-    can :create, Settlement::ContractRecord
-    can :manage, Settlement::ContractRecord
-    cannot :accept, Settlement::ContractRecord
-    can :manage, Settlement::ContractorRecord
-    can :prepayment, Settlement::ContractRecord
-  end
-
   def financial_management
     can :accept, Settlement::ContractRecord
+    cannot :destroy, Settlement::ContractRecord
   end
 
   def admin
@@ -99,12 +92,25 @@ class Ability
     can :manage, Db::User
     can :manage, Db::Profile
     can :manage, Events::Db::SignUpRecord
+    cannot :destroy, Settlement::ContractRecord
   end
 
   def office
     can :manage, Db::User
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
+    cannot :destroy, Settlement::ContractRecord
+  end
+
+  def office_king
+    can :destroy, Settlement::ContractRecord
+    can :search, Settlement::ContractRecord
+    can :recon_up, Settlement::ContractRecord
+    can :create, Settlement::ContractRecord
+    can :manage, Settlement::ContractRecord
+    cannot :accept, Settlement::ContractRecord
+    can :manage, Settlement::ContractorRecord
+    can :prepayment, Settlement::ContractRecord
   end
 
   def reservations
