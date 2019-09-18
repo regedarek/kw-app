@@ -209,11 +209,11 @@
                   = all_prepaid.map(&:email).join(', ')
 
             - if current_user.admin? || current_user.roles.include?('events')
-              h5 Zlecone zwroty
-              - all_refunded = @limiter.all_refunded
-              = render 'table_participants', sign_ups: all_refunded, email: false
-
               - if all_refunded.any?
+                h5 Zlecone zwroty
+                - all_refunded = @limiter.all_refunded
+                = render 'table_participants', sign_ups: all_refunded, email: false
+
                 .callout
                   = all_refunded.map(&:email).join(', ')
 
