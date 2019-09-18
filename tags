@@ -1405,6 +1405,7 @@ destroy	app/components/admin/reservations.rb	/^    def self.destroy(reservation_
 destroy	app/components/events/competitions/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Events.Competitions
 destroy	app/components/management/projects_controller.rb	/^    def destroy$/;"	f	class:Management.ProjectsController
 destroy	app/components/management/voting/cases_controller.rb	/^      def destroy$/;"	f
+destroy	app/components/settlement/admin/contracts_controller.rb	/^      def destroy$/;"	f	class:Settlement.Admin.ContractsController
 destroy	app/components/training/supplementary/courses_controller.rb	/^      def destroy$/;"	f	class:Training.Supplementary.CoursesController
 destroy	app/components/training/supplementary/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Training.Supplementary.SignUpsController.manually
 destroy	app/controllers/activities/mountain_routes_controller.rb	/^    def destroy$/;"	f	class:Activities
