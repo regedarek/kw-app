@@ -26,7 +26,7 @@ module Training
       end
 
       def prepaid_via_dotpay
-        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid })
+        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid, cash: false })
       end
 
       def prepaid_via_cash
