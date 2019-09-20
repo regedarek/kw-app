@@ -228,6 +228,7 @@ ApplicationController	app/controllers/application_controller.rb	/^class Applicat
 ApplicationCost	app/components/user_management/application_cost.rb	/^  class ApplicationCost$/;"	c	class:UserManagement
 ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
 ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
+ApplicationRecord	app/components/management/snw/application_record.rb	/^    class ApplicationRecord$/;"	c	class:Management.Snw
 AreaRecord	app/components/library/area_record.rb	/^  class AreaRecord < ActiveRecord::Base$/;"	c	class:Library
 Arel	config/initializers/ransack.rb	/^module Arel$/;"	m
 AttachmentUploader	app/components/library/attachment_uploader.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Library
@@ -548,6 +549,8 @@ Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
 Management	app/components/management/project_users_record.rb	/^module Management$/;"	m
 Management	app/components/management/projects_controller.rb	/^module Management$/;"	m
+Management	app/components/management/snw/application_record.rb	/^module Management$/;"	m
+Management	app/components/management/snw/snw_applications_controller.rb	/^module Management$/;"	m
 Management	app/components/management/update_project.rb	/^module Management$/;"	m
 Management	app/components/management/voting/case_form.rb	/^module Management$/;"	m
 Management	app/components/management/voting/case_record.rb	/^module Management$/;"	m
@@ -756,6 +759,9 @@ SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/
 SkiRoute	app/components/training/activities/ski_route.rb	/^    class SkiRoute < Dry::Struct$/;"	c	class:Training.Activities
 SkiRouteForm	app/components/training/activities/ski_route_form.rb	/^    class SkiRouteForm < Dry::Validation::Schema$/;"	c	class:Training.Activities
 SkiRoutesController	app/components/training/activities/ski_routes_controller.rb	/^    class SkiRoutesController < ApplicationController$/;"	c	class:Training.Activities
+Snw	app/components/management/snw/application_record.rb	/^  module Snw$/;"	m	class:Management
+Snw	app/components/management/snw/snw_applications_controller.rb	/^  module Snw$/;"	m	class:Management
+SnwApplicationsController	app/components/management/snw/snw_applications_controller.rb	/^    class SnwApplicationsController < ApplicationController$/;"	c	class:Management.Snw
 SnwProfile	app/components/training/questionare/snw_profile.rb	/^    class SnwProfile < Dry::Struct$/;"	c	class:Training.Questionare
 SnwProfileForm	app/components/training/questionare/snw_profile_form.rb	/^    class SnwProfileForm < Dry::Validation::Schema$/;"	c	class:Training.Questionare
 SnwProfileRecord	app/components/training/questionare/snw_profile_record.rb	/^    class SnwProfileRecord < ActiveRecord::Base$/;"	c	class:Training.Questionare
@@ -1308,6 +1314,7 @@ cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Eve
 cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;"	f	class:Training.Supplementary.SignUpRecord
 cost	app/models/db/reservation.rb	/^  def cost$/;"	f	class:Db
 course_params	app/components/business/courses_controller.rb	/^    def course_params$/;"	f	class:Business.CoursesController
+course_params	app/components/management/snw/snw_applications_controller.rb	/^      def course_params$/;"	f	class:Management.Snw.SnwApplicationsController
 course_params	app/components/training/supplementary/courses_controller.rb	/^      def course_params$/;"	f	class:Training.Supplementary.CoursesController
 create	app/components/admin/items.rb	/^    def create$/;"	f	class:Admin.Items
 create	app/components/admin/membership_fees.rb	/^    def create$/;"	f	class:Admin.MembershipFees
@@ -1320,6 +1327,7 @@ create	app/components/events/competitions/sign_ups_controller.rb	/^      def cre
 create	app/components/library/admin/tags_controller.rb	/^      def create$/;"	f	class:Library.Admin.TagsController
 create	app/components/library/items_controller.rb	/^    def create$/;"	f	class:Library.ItemsController
 create	app/components/management/projects_controller.rb	/^    def create$/;"	f	class:Management.ProjectsController
+create	app/components/management/snw/snw_applications_controller.rb	/^      def create$/;"	f	class:Management.Snw.SnwApplicationsController
 create	app/components/management/voting/cases_controller.rb	/^      def create$/;"	f	class:Management.Voting.CasesController
 create	app/components/messaging/comments_controller.rb	/^    def create$/;"	f	class:Messaging.CommentsController
 create	app/components/photo_competition/requests_controller.rb	/^    def create$/;"	f	class:PhotoCompetition.RequestsController
@@ -1585,6 +1593,7 @@ index	app/components/library/admin/tags_controller.rb	/^      def index$/;"	f	cl
 index	app/components/library/items_controller.rb	/^    def index$/;"	f	class:Library.ItemsController
 index	app/components/management/news/informations_controller.rb	/^      def index$/;"	f	class:Management.News.InformationsController
 index	app/components/management/projects_controller.rb	/^    def index$/;"	f	class:Management.ProjectsController
+index	app/components/management/snw/snw_applications_controller.rb	/^      def index$/;"	f	class:Management.Snw.SnwApplicationsController
 index	app/components/management/voting/cases_controller.rb	/^      def index$/;"	f	class:Management.Voting.CasesController
 index	app/components/notification_center/notifications_controller.rb	/^    def index$/;"	f	class:NotificationCenter.NotificationsController
 index	app/components/photo_competition/admin/editions_controller.rb	/^      def index$/;"	f	class:PhotoCompetition.Admin.EditionsController
