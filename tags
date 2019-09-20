@@ -228,7 +228,6 @@ ApplicationController	app/controllers/application_controller.rb	/^class Applicat
 ApplicationCost	app/components/user_management/application_cost.rb	/^  class ApplicationCost$/;"	c	class:UserManagement
 ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
 ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
-ApplicationRecord	app/components/management/snw/application_record.rb	/^    class ApplicationRecord$/;"	c	class:Management.Snw
 AreaRecord	app/components/library/area_record.rb	/^  class AreaRecord < ActiveRecord::Base$/;"	c	class:Library
 Arel	config/initializers/ransack.rb	/^module Arel$/;"	m
 AttachmentUploader	app/components/library/attachment_uploader.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Library
@@ -549,7 +548,6 @@ Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
 Management	app/components/management/project_users_record.rb	/^module Management$/;"	m
 Management	app/components/management/projects_controller.rb	/^module Management$/;"	m
-Management	app/components/management/snw/application_record.rb	/^module Management$/;"	m
 Management	app/components/management/snw/snw_applications_controller.rb	/^module Management$/;"	m
 Management	app/components/management/update_project.rb	/^module Management$/;"	m
 Management	app/components/management/voting/case_form.rb	/^module Management$/;"	m
@@ -759,7 +757,6 @@ SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/
 SkiRoute	app/components/training/activities/ski_route.rb	/^    class SkiRoute < Dry::Struct$/;"	c	class:Training.Activities
 SkiRouteForm	app/components/training/activities/ski_route_form.rb	/^    class SkiRouteForm < Dry::Validation::Schema$/;"	c	class:Training.Activities
 SkiRoutesController	app/components/training/activities/ski_routes_controller.rb	/^    class SkiRoutesController < ApplicationController$/;"	c	class:Training.Activities
-Snw	app/components/management/snw/application_record.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/snw_applications_controller.rb	/^  module Snw$/;"	m	class:Management
 SnwApplicationsController	app/components/management/snw/snw_applications_controller.rb	/^    class SnwApplicationsController < ApplicationController$/;"	c	class:Management.Snw
 SnwProfile	app/components/training/questionare/snw_profile.rb	/^    class SnwProfile < Dry::Struct$/;"	c	class:Training.Questionare
