@@ -14,6 +14,7 @@ module Membership
 
     def active?
       return false unless user
+      return true if (user.profile.position.include?('senior') || user.profile.position.include?('honorable_kw'))
       return false unless user.membership_fees.any?
       return false unless user.membership_fees.where(year: prev_year..next_year).any?
 
