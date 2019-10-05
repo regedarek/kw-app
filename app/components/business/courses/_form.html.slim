@@ -13,15 +13,19 @@
     = f.date_field :ends_at
 
 .row
-  .large-4.columns
+  .large-3.columns
     b= f.label :activity_type, 'Typ'
     = f.select :activity_type, Business::CourseRecord.activity_type_attributes_for_select, include_blank: true
 
-  .large-4.columns
+  .large-3.columns
     b = f.label :state, 'Status'
     = f.select :state, Business::CourseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @course.state
 
   .large-4.columns
+    b = f.label :instructor_id, 'Instruktor'
+    = f.select :instructor_id, Business::InstructorRecord.where(active: true).map{|i| [i.profile_name, i.id] }, selected: @course.instructor_id, include_blank: true
+
+  .large-2.columns
     b= f.label :seats, 'Ilość miejsc'
     = f.number_field :seats
     = f.hidden_field :creator_id, value: current_user.id

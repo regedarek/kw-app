@@ -249,6 +249,7 @@ BaseController	app/controllers/api/base_controller.rb	/^  class BaseController <
 Business	app/components/business/api/courses_controller.rb	/^module Business$/;"	m
 Business	app/components/business/course_record.rb	/^module Business$/;"	m
 Business	app/components/business/courses_controller.rb	/^module Business$/;"	m
+Business	app/components/business/instructor_record.rb	/^module Business$/;"	m
 CancelItem	app/components/reservations/cancel_item.rb	/^  class CancelItem$/;"	c	class:Reservations
 Card	app/components/membership/card/repository.rb	/^  module Card$/;"	m	class:Membership
 CaseRecord	app/components/management/voting/case_record.rb	/^    class CaseRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
@@ -324,6 +325,7 @@ Create	app/components/events/competitions/sign_ups/create.rb	/^      class Creat
 CreateAuctionProduct	db/migrate/20170107103156_create_auction_product.rb	/^class CreateAuctionProduct < ActiveRecord::Migration[5.0]$/;"	c
 CreateAuctions	db/migrate/20170107102938_create_auctions.rb	/^class CreateAuctions < ActiveRecord::Migration[5.0]$/;"	c
 CreateBusinessCourses	db/migrate/20190905151155_create_business_courses.rb	/^class CreateBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
+CreateBusinessInstructors	db/migrate/20191005223825_create_business_instructors.rb	/^class CreateBusinessInstructors < ActiveRecord::Migration[5.2]$/;"	c
 CreateCase	app/components/management/voting/create_case.rb	/^    class CreateCase$/;"	c	class:Management.Voting
 CreateComments	db/migrate/20190410212028_create_comments.rb	/^class CreateComments < ActiveRecord::Migration[5.2]$/;"	c
 CreateCompetitionPackageTypes	db/migrate/20180108175828_create_competition_package_types.rb	/^class CreateCompetitionPackageTypes < ActiveRecord::Migration[5.0]$/;"	c
@@ -515,6 +517,7 @@ ImportingController	app/controllers/admin/importing_controller.rb	/^  class Impo
 InformationRecord	app/components/management/news/information_record.rb	/^    class InformationRecord < ActiveRecord::Base$/;"	c	class:Management.News
 InformationsController	app/components/management/news/informations_controller.rb	/^    class InformationsController < ApplicationController$/;"	c	class:Management.News
 InputCleaner	lib/input_cleaner.rb	/^module InputCleaner$/;"	m
+InstructorRecord	app/components/business/instructor_record.rb	/^  class InstructorRecord < ActiveRecord::Base$/;"	c	class:Business
 Item	spec/factories.rb	/^  class Item$/;"	c	class:Factories
 ItemAuthorsRecord	app/components/library/item_authors_record.rb	/^  class ItemAuthorsRecord < ActiveRecord::Base$/;"	c	class:Library
 ItemRecord	app/components/library/item_record.rb	/^  class ItemRecord < ActiveRecord::Base$/;"	c	class:Library
@@ -944,6 +947,7 @@ approved?	app/components/management/voting/repository.rb	/^      def approved?(c
 archive	app/controllers/admin/reservations_controller.rb	/^    def archive$/;"	f	class:Admin
 archived	app/components/training/supplementary/courses_controller.rb	/^      def archived$/;"	f	class:Training.Supplementary.CoursesController
 area_needed?	app/components/photo_competition/request_record.rb	/^    def area_needed?$/;"	f	class:PhotoCompetition.RequestRecord
+as_json	app/components/business/instructor_record.rb	/^    def as_json$/;"	f	class:Business.InstructorRecord
 augmentWidthOrHeight	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {$/;"	f
 authorize_admin	app/components/events/admin/competitions_controller.rb	/^      def authorize_admin$/;"	f	class:Events.Admin.CompetitionsController
 authorize_admin	app/components/membership/admin/membership_fees_controller.rb	/^      def authorize_admin$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1273,6 +1277,7 @@ change	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^  def ch
 change	db/migrate/20190905151155_create_business_courses.rb	/^  def change$/;"	f	class:CreateBusinessCourses
 change	db/migrate/20191005100746_change_business_courses.rb	/^  def change$/;"	f	class:ChangeBusinessCourses
 change	db/migrate/20191005203058_add_instructor_to_business_units.rb	/^  def change$/;"	f	class:AddInstructorToBusinessUnits
+change	db/migrate/20191005223825_create_business_instructors.rb	/^  def change$/;"	f	class:CreateBusinessInstructors
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1857,6 +1862,7 @@ prevMonth	vendor/assets/javascripts/foundation-datepicker.js	/^            var p
 prev_year	app/components/membership/activement.rb	/^    def prev_year$/;"	f	class:Membership.Activement
 prev_year_fee	app/components/membership/activement.rb	/^    def prev_year_fee$/;"	f	class:Membership.Activement
 process	app/services/payments/dotpay/status.rb	/^      def process$/;"	f	class:Payments.Dotpay.Status
+profile_name	app/components/business/instructor_record.rb	/^    def profile_name$/;"	f	class:Business.InstructorRecord
 profile_params	app/controllers/admin/profiles_controller.rb	/^    def profile_params$/;"	f	class:Admin.ProfilesController
 profile_params	app/controllers/profiles_controller.rb	/^  def profile_params$/;"	f	class:ProfilesController
 project_params	app/components/management/projects_controller.rb	/^    def project_params$/;"	f	class:Management.ProjectsController

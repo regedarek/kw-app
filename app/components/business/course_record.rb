@@ -3,6 +3,8 @@ module Business
     include Workflow
     extend FriendlyId
 
+    belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
+
     friendly_id :name, use: :slugged
     self.table_name = 'business_courses'
     enum activity_type: [
