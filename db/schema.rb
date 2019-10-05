@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_100746) do
+ActiveRecord::Schema.define(version: 2019_10_05_203058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_100746) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.string "state", default: "draft", null: false
+    t.string "instructor"
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 
@@ -313,7 +314,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_100746) do
 
   create_table "membership_fees", id: :serial, force: :cascade do |t|
     t.string "year"
-    t.integer "cost", default: 100, null: false
+    t.integer "cost", null: false
     t.integer "kw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -413,8 +414,8 @@ ActiveRecord::Schema.define(version: 2019_10_05_100746) do
   create_table "payments", id: :serial, force: :cascade do |t|
     t.boolean "cash", default: false
     t.string "dotpay_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "state", default: "unpaid"
     t.string "payable_type"
     t.integer "payable_id"
@@ -545,8 +546,8 @@ ActiveRecord::Schema.define(version: 2019_10_05_100746) do
   create_table "reservation_items", id: :serial, force: :cascade do |t|
     t.integer "item_id"
     t.integer "reservation_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reservations", id: :serial, force: :cascade do |t|
@@ -660,7 +661,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_100746) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "a15088e83eb354d4", null: false
+    t.string "code", default: "272b41cd412dfce7", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"

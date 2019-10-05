@@ -1,4 +1,24 @@
 pl:
+  activerecord:
+    attributes:
+      business/course_record:
+        activity_types:
+          winter_abc: Zimowe ABC
+          winter_tourist_1: Zimowy kurs turystyki I stopnia
+          winter_tourist_2: Zimowy Kurs turystyki II stopnia
+          skitour_1: Kurs skiturowy I stopnia
+          skitour_2: Kurs skiturowy II stopnia
+          skitour_3: Kurs narciarstwa wysokogórskiego
+          cave: Kurs jaskiniowy
+          climbing_1: 'Kurs wspinaczki skalnej etap I: na drogach ubezpieczonych'
+          climbing_2: 'Kurs wspinaczki skalnej etap II: na własnej asekuracji'
+          full_climbing: Pełny kurs wspinaczki skalnej
+          club_climbing: Klubowy kurs wspinaczki skalnej
+          summer_tatra: Kurs taternicki letni
+          winter_tatra_1: Kurs taternicki zimowy I stopnia
+          winter_tatra_2: Kurs taternicki zimowy II stopnia
+          ice_1: Kurs wspinaczki lodowej I stopnia
+          ice_2: Kurs wspinaczki lodowej II stopnia
   book: Książka
   ready: gotowy
   magazine: Czasopismo
