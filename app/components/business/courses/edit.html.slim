@@ -1,0 +1,16 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error
+
+= form_for @course, as: :course, url: course_path(@course.id) do |f|
+  = render 'form', f: f
+
+  .row
+    .large-6.columns
+      = f.submit 'Zaktualizuj', class: 'button expanded large success'
+    .large-6.columns
+      = link_to 'wróć do kursów', courses_path, class: 'secondary button large expanded'

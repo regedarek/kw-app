@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_151155) do
+ActiveRecord::Schema.define(version: 2019_10_05_100746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 2019_09_05_151155) do
     t.integer "activity_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug", null: false
+    t.string "state", default: "draft", null: false
+    t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 
   create_table "comments", force: :cascade do |t|

@@ -1,0 +1,22 @@
+table.stack
+  thead
+    tr
+      th width='25%' Gdzie?
+      th width='25%' Miejsc
+      th width='25%' Od
+      th width='20%' Do
+      th width='5%'
+  tbody
+    - @courses.each do |course|
+      tr
+        td
+          = course.name
+        td
+          = course.seats
+        td
+          = course.starts_at
+        td
+          = course.ends_at
+        td.text-right
+          = link_to edit_course_path(course.id) do
+            i.fi-page-edit

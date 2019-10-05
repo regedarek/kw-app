@@ -7,6 +7,11 @@ module Business
       @course = Business::CourseRecord.new
     end
 
+    def new
+      @course = Business::CourseRecord.new
+      authorize! :create, @course
+    end
+
     def create
       @course = Business::CourseRecord.new(course_params)
 
@@ -21,10 +26,26 @@ module Business
       end
     end
 
+    def edit
+      @course = Business::CourseRecord.find(params[:id])
+    end
+
+    def update
+      @course = Business::CourseRecord.find(params[:id])
+
+      authorize! :manage, @course
+
+      if @course.update(course_params)
+        redirect_to edit_course_path(@course.id), notice: 'Zaktualizowano kurs'
+      else
+        render :edit
+      end
+    end
+
     private
 
     def course_params
-      params.require(:course).permit(:name, :seats, :starts_at, :ends_at, :description, :activity_type)
+      params.require(:course).permit(:name, :seats, :starts_at, :ends_at, :description, :activity_type, :state)
     end
   end
 end

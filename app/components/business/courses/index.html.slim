@@ -1,48 +1,5 @@
 .row
   .columns
-    = form_for @course, url: courses_path, as: :course do |f|
-      .row
-        .large-12.columns
-          - if @course.errors.any?
-            .callout.alert
-              ul
-                - form.errors.full_messages.each do |msg|
-                  li= msg
+    = link_to 'Dodaj kurs', new_course_path, class: 'button primary'
 
-      .callout.primary
-        .row
-          .large-3.columns
-            = f.label :name, 'Nazwa*'
-            = f.text_field :name
-          .large-3.columns
-            = f.label :seats, 'Miejsc'
-            = f.number_field :seats
-          .large-3.columns
-            = f.label :starts_at, 'Start'
-            = f.datetime_field :starts_at
-          .large-3.columns
-            = f.label :ends_at, 'Koniec'
-            = f.date_field :ends_at
-
-      .row
-        .large-4.columns
-          = f.submit
-
-    table.stack
-      thead
-        tr
-          th width='25%' Gdzie?
-          th width='25%' Miejsc
-          th width='25%' Od
-          th width='25%' Do
-      tbody
-        - @courses.each do |course|
-          tr
-            td
-              = course.name
-            td
-              = course.seats
-            td
-              = course.starts_at
-            td
-              = course.ends_at
+    = render 'table'
