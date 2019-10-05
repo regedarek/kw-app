@@ -254,6 +254,7 @@ CaseRecord	app/components/management/voting/case_record.rb	/^    class CaseRecor
 CasesController	app/components/management/voting/cases_controller.rb	/^    class CasesController < ApplicationController$/;"	c	class:Management.Voting
 CategoryRecord	app/components/photo_competition/category_record.rb	/^  class CategoryRecord < ActiveRecord::Base$/;"	c	class:PhotoCompetition
 ChangeAcomplishedCourses	db/migrate/20170421202934_change_acomplished_courses.rb	/^class ChangeAcomplishedCourses < ActiveRecord::Migration[5.0]$/;"	c
+ChangeBusinessCourses	db/migrate/20191005100746_change_business_courses.rb	/^class ChangeBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 ChangeColumnInPayments	db/migrate/20160830114814_change_column_in_payments.rb	/^class ChangeColumnInPayments < ActiveRecord::Migration[5.0]$/;"	c
 ChangeColumnName	db/migrate/20160621162142_change_column_name.rb	/^class ChangeColumnName < ActiveRecord::Migration[5.0]$/;"	c
 ChangeColumns	db/migrate/20170504204136_change_columns.rb	/^class ChangeColumns < ActiveRecord::Migration[5.0]$/;"	c
@@ -1268,6 +1269,7 @@ change	db/migrate/20190815092140_create_topr_records.rb	/^  def change$/;"	f	cla
 change	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^  def change$/;"	f	class:AddMeteogramToMeteoblueRecords
 change	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^  def change$/;"	f	class:AddLocationToMeteoblueRecords
 change	db/migrate/20190905151155_create_business_courses.rb	/^  def change$/;"	f	class:CreateBusinessCourses
+change	db/migrate/20191005100746_change_business_courses.rb	/^  def change$/;"	f	class:ChangeBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1434,6 +1436,7 @@ down	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.down$/;"	F	cl
 down	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def down$/;"	f	class:AddTimestampsToMountainRoutes
 download_attachment	app/components/settlement/admin/contracts_controller.rb	/^      def download_attachment$/;"	f	class:Settlement.Admin.ContractsController
 dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek$/;"	f	class:Activities.Repository
+edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Business.CoursesController
 edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"	f	class:Events.Admin.CompetitionsController
 edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events.Competitions
 edit	app/components/library/items_controller.rb	/^    def edit$/;"	f	class:Library.ItemsController
@@ -1757,6 +1760,7 @@ model_name	app/models/db/activities/mountain_route.rb	/^      def self.model_nam
 model_name	app/models/db/profile.rb	/^    def self.model_name$/;"	F	class:Db.Profile
 name_with_cost	app/components/training/supplementary/package_type_record.rb	/^      def name_with_cost$/;"	f	class:Training.Supplementary.PackageTypeRecord
 nearest_thursday	app/components/guards/date.rb	/^    def nearest_thursday$/;"	f	class:Guards.Date
+new	app/components/business/courses_controller.rb	/^    def new$/;"	f	class:Business.CoursesController
 new	app/components/charity/donations_controller.rb	/^    def new$/;"	f	class:Charity.DonationsController
 new	app/components/events/competitions/sign_ups_controller.rb	/^      def new$/;"	f	class:Events.Competitions
 new	app/components/library/admin/tags_controller.rb	/^      def new$/;"	f	class:Library.Admin.TagsController
@@ -2011,6 +2015,7 @@ up	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.up$/;"	F	class:
 up	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def up$/;"	f	class:AddTimestampsToMountainRoutes
 update	app/components/admin/items.rb	/^    def update(item_id)$/;"	f	class:Admin.Items
 update	app/components/admin/reservations.rb	/^    def update(reservation_id)$/;"	f	class:Admin.Reservations
+update	app/components/business/courses_controller.rb	/^    def update$/;"	f	class:Business.CoursesController
 update	app/components/events/admin/competitions_controller.rb	/^      def update$/;"	f	class:Events.Admin.CompetitionsController
 update	app/components/events/competitions/repository.rb	/^      def update(id:, form_outputs:)$/;"	f	class:Events.Competitions.Repository
 update	app/components/events/competitions/sign_ups_controller.rb	/^      def update$/;"	f	class:Events.Competitions
