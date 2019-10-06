@@ -103,6 +103,7 @@ AddHideVotesToManagementCases	db/migrate/20190718121404_add_hide_votes_to_manage
 AddIndexToMountainRoutes	db/migrate/20190207233646_add_index_to_mountain_routes.rb	/^class AddIndexToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddIndexToSupplementarySignUps	db/migrate/20180503131609_add_index_to_supplementary_sign_ups.rb	/^class AddIndexToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddIndexesToMountainRoutes	db/migrate/20190130231400_add_indexes_to_mountain_routes.rb	/^class AddIndexesToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
+AddInstructorIdToBusinessCourses	db/migrate/20191005225024_add_instructor_id_to_business_courses.rb	/^class AddInstructorIdToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddInstructorToBusinessUnits	db/migrate/20191005203058_add_instructor_to_business_units.rb	/^class AddInstructorToBusinessUnits < ActiveRecord::Migration[5.2]$/;"	c
 AddKindToSupplementaryCourses	db/migrate/20181003194107_add_kind_to_supplementary_courses.rb	/^class AddKindToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddKwId1AndKwId2ToMasSignUps	db/migrate/20170419220913_add_kw_id_1_and_kw_id_2_to_mas_sign_ups.rb	/^class AddKwId1AndKwId2ToMasSignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -173,6 +174,7 @@ AddSlugToSupplementaryCourses	db/migrate/20181003133537_add_slug_to_supplementar
 AddSlugToUsers	db/migrate/20190428183425_add_slug_to_users.rb	/^class AddSlugToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddStartDateAndEndDateToReservations	db/migrate/20150525130553_add_start_date_and_end_date_to_reservations.rb	/^class AddStartDateAndEndDateToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddStateToProjects	db/migrate/20190418115538_add_state_to_projects.rb	/^class AddStateToProjects < ActiveRecord::Migration[5.2]$/;"	c
+AddStateToSupplementaryCourses	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^class AddStateToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddSubstantiveTypeToContracts	db/migrate/20190605195927_add_substantive_type_to_contracts.rb	/^class AddSubstantiveTypeToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddSupplementaryCoursePackageTypeIdToSupplementarySignUps	db/migrate/20180912195601_add_supplementary_course_package_type_id_to_supplementary_sign_ups.rb	/^class AddSupplementaryCoursePackageTypeIdToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddTeamNameToCompetitions	db/migrate/20180112124404_add_team_name_to_competitions.rb	/^class AddTeamNameToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
@@ -1278,6 +1280,8 @@ change	db/migrate/20190905151155_create_business_courses.rb	/^  def change$/;"	f
 change	db/migrate/20191005100746_change_business_courses.rb	/^  def change$/;"	f	class:ChangeBusinessCourses
 change	db/migrate/20191005203058_add_instructor_to_business_units.rb	/^  def change$/;"	f	class:AddInstructorToBusinessUnits
 change	db/migrate/20191005223825_create_business_instructors.rb	/^  def change$/;"	f	class:CreateBusinessInstructors
+change	db/migrate/20191005225024_add_instructor_id_to_business_courses.rb	/^  def change$/;"	f	class:AddInstructorIdToBusinessCourses
+change	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddStateToSupplementaryCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1964,6 +1968,7 @@ start_date	app/components/training/activities/repository.rb	/^      def start_da
 start_date	app/components/training/supplementary/sign_up_record.rb	/^      def start_date$/;"	f	class:Training.Supplementary.SignUpRecord
 start_date_is_in_the_past	app/components/reservations/form.rb	/^    def start_date_is_in_the_past$/;"	f	class:Reservations.Form
 start_date_is_not_thursday	app/components/reservations/form.rb	/^    def start_date_is_not_thursday$/;"	f	class:Reservations.Form
+states	app/components/training/supplementary/course_record.rb	/^      def states$/;"	f	class:Training.Supplementary.CourseRecord
 status	app/controllers/api/payments_controller.rb	/^    def status$/;"	f	class:Api.PaymentsController
 status	app/services/payments/dotpay/notification.rb	/^      def status$/;"	f	class:Payments.Dotpay.Notification
 store_dir	app/components/events/competitions/baner_uploader.rb	/^      def store_dir$/;"	f	class:Events.Competitions.BanerUploader

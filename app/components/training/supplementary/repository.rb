@@ -34,7 +34,7 @@ module Training
         end
         Training::Supplementary::CourseRecord
           .where(start_date: Date.current.beginning_of_day..DateTime::Infinity.new)
-          .where(category: categories, kind: kinds)
+          .where(category: categories, kind: kinds, state: :published)
           .order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
@@ -52,7 +52,7 @@ module Training
           Training::Supplementary::CourseRecord.kinds.keys
         end
         Training::Supplementary::CourseRecord
-          .where(start_date: 1.year.ago..Date.current.beginning_of_day)
+          .where(state: [:draft, :cancelled, :archived])
           .where(category: categories, kind: kinds)
           .order(start_date: :desc, application_date: :desc).collect do |record|
             Training::Supplementary::Course.from_record(record)

@@ -42,8 +42,8 @@
             = f.number_field :expired_hours
 
         .large-2.columns
-          = f.label :kind, t('.category')
-          = f.select :kind, @course.kinds
+          = f.label :state, t('.category')
+          = f.select :state, @course.states
 
         .large-3.columns
           span data-tooltip='' tabindex="1" title="Osoba do której będą przysyłane e-maile z pytaniami od uczestników" data-allow-html="true"

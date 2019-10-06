@@ -26,6 +26,11 @@ pl:
           not_last_fee: Musisz opłacić składkę członkowską!
       course:
         enums:
+          states:
+            draft: wersja robocza
+            published: opublikowana
+            archived: zarchiwizowane
+            cancelled: odwołane
           baner_types:
             baner_mountain_climbing: Wspinaczka
             baner_ice_axes: Czekany
