@@ -43,7 +43,9 @@ class Ability
   end
 
   def active
-    can :manage, Business::CourseRecord
+    can :create, Db::Profile
+    can :create, Management::Snw::SnwApplyRecord
+    can :read, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
     can :read, Management::Voting::CaseRecord, state: 'finished', hidden: false
     can :read, Db::Activities::MountainRoute
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
@@ -64,6 +66,7 @@ class Ability
     can :create, Management::Voting::CaseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
+    can :manage, Management::Snw::SnwApplyRecord
   end
 
   def management
