@@ -9,7 +9,8 @@ module Management
 
       has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
-      validates :cv, presence: true
+      validates :cv, presence: { message: 'Musisz wypełnić narciarskie CV!' }
+      validates :kw_id, uniqueness: { message: 'Możesz wysłać tylko jedno zgłoszenie!' }
 
       workflow_column :state
       workflow do

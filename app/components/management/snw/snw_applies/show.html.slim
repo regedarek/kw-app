@@ -26,6 +26,13 @@
           .callout
             = sanitize @snw_apply.skills
 
+    - if @snw_apply.avalanche_date
+      .row
+        .large-12.columns
+          h5 Data ostatnich ćwiczeń: 
+          .callout
+            = @snw_apply.avalanche_date
+
     - if @snw_apply.courses
       .row
         .large-12.columns
