@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_235658) do
+ActiveRecord::Schema.define(version: 2019_10_07_131433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -583,6 +583,20 @@ ActiveRecord::Schema.define(version: 2019_10_05_235658) do
     t.datetime "diagram_time"
     t.string "place"
     t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "snw_applies", force: :cascade do |t|
+    t.integer "kw_id", null: false
+    t.string "cv", null: false
+    t.string "skills"
+    t.string "courses"
+    t.boolean "avalanche", default: false, null: false
+    t.date "avalanche_date"
+    t.boolean "first_aid", default: false, null: false
+    t.string "attachments"
+    t.string "state", default: "new", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

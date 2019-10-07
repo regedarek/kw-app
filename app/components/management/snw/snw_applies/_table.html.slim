@@ -1,0 +1,18 @@
+table.stack
+  thead
+    tr
+      th width='25%' Nazwa
+      th width='25%' Status
+      th.text-right width='25%' Akcje
+  tbody
+    - @snw_applies.each do |apply|
+      tr
+        td
+          - profile =  Db::Profile.find_by(kw_id: apply.kw_id)
+          = link_to admin_profile_path(profile.id) do
+            = profile.display_name
+        td
+          label.label = I18n.t(apply.state)
+        td.text-right
+          = link_to snw_apply_path(apply.id), style: 'padding: 5px' do
+            i.fa.fi-magnifying-glass

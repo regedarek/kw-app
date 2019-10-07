@@ -1,0 +1,67 @@
+.row
+  .large-12.columns style='text-align: center'
+    h4 Zgłoszenie do Sekcji Narciarstwa Wysokogórskiego
+
+  .large-12.columns
+    = form_for @snw_apply, url: snw_applies_path, as: :snw_apply do |f|
+      .row
+        .large-12.columns
+          - if @snw_apply.errors.any?
+            .callout.alert
+              ul
+                - @snw_apply.errors.full_messages.each do |msg|
+                  li= msg
+
+      .row
+        .large-12.columns
+          .callout
+            b Wymagania na podstawie 
+            = link_to 'regulaminu sekcji', 'https://docs.google.com/document/d/11HdwtjeKuswHGKHj1hQSipsec4oOCmVXM6DxZnw8ZHU/edit'
+            ul
+              li zaświadczenie o ukończeniu kursu lawinowego I. st. lub analogicznego
+              li zaświadczenie o ukończeniu kursu pierwszej pomocy 
+              li w ciągu ostatnich 3 lat uczestnictwo w doszkalaniu sekcji z przeprowadzenia akcji poszukiwania w lawinisku lub przedstawi wniosek o przeprowadzeniu takich ćwiczeń, który zostanie zaakceptowany przez zarząd sekcji
+              li umiejętności narciarskie pozwalające na swobodny zjazd z Kasprowego Wierchu
+
+      .row
+        .large-12.columns
+          .callout.secondary
+            b I. Opisz krótko swoje narciarskie doświedczenie na stoku jak i w terenie
+          .callout
+            = f.trix_editor :cv, style: 'min-height: 150px'
+
+      .row
+        .large-12.columns
+          .callout.primary
+            b II. Załącz skany zaświadczeń z ukończonych kursów lub jeżeli ich nie posiadasz, opisz gdzie u kogo i  jaki kurs ukończyłeś/aś.
+            br
+            b Podaj przybliżoną date ostatnich ćwiczeń z poszukiwania w lawinisku.
+
+      .row
+        .large-6.columns
+          .callout
+            b= f.label :attachments, "Załączniki"
+            = f.file_field :attachments, multiple: true
+            br
+        .large-6.columns
+          .callout
+            b= f.label :avalanche_date, "Kiedy ostatnio ćwiczyłeś akcję poszukiwania w lawinisku?"
+            = f.date_field :avalanche_date
+
+      .row
+        .large-12.columns
+          .callout
+            = f.label :courses, 'Uwagi dotyczące kursów'
+            = f.trix_editor :courses, style: 'min-height: 150px'
+
+      .row
+        .large-12.columns
+          .callout.warning
+            b III. Daj nam znać jak chciałbyś się zaangażować w działalność w sekcji
+          .callout
+            = f.label :skills, 'Twoje mocne strony'
+            = f.trix_editor :skills, style: 'min-height: 150px'
+
+      .row
+        .large-12.columns
+          = f.submit 'Wyślij zgłoszenie do akceptacji', class: 'button primary large expanded'

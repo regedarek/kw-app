@@ -1,0 +1,65 @@
+.row
+  .large-6.columns
+    .row
+      .large-8.columns
+        h3 = link_to @snw_apply.profile.display_name, admin_profile_path(@snw_apply.profile.id)
+
+      .large-4.columns.text-right
+        | Status: 
+        - if @snw_apply.state == 'new'
+          span.label.warning = 'oczekujące na akceptację'
+        - else
+          span.label = 'zaakceptowano'
+
+
+    - if @snw_apply.cv
+      .row
+        .large-12.columns
+          h5 Narciarskie CV
+          .callout
+            = sanitize @snw_apply.cv
+
+    - if @snw_apply.cv
+      .row
+        .large-12.columns
+          h5 Umiejętności
+          .callout
+            = sanitize @snw_apply.skills
+
+    - if @snw_apply.courses
+      .row
+        .large-12.columns
+          h5 Informacje o kursach
+          .callout
+            = sanitize @snw_apply.courses
+
+    - if @snw_apply.attachments.any?
+      .row
+        .large-12.columns
+          b Załączniki: 
+          ul.no-bullet
+            - @snw_apply.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+              li
+                = link_to attachment.url, download: File.basename(attachment.file.path) do
+                  = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                  |  
+                  = File.basename(attachment.file.path)
+            - @snw_apply.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+              - unless photo.blank? || photo.thumb.blank?
+                li
+                  = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+                div id="photo-#{i}" class="reveal" data-reveal="" 
+                  = image_tag photo.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
+
+  .large-6.columns
+    - if user_signed_in?
+      h5 Komentarze
+      .row
+        .large-12.columns
+          = render 'messaging/comments/comments', commentable: @snw_apply
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @snw_apply
