@@ -10,7 +10,7 @@ table.stack
       tr
         td
           - profile =  Db::Profile.find_by(kw_id: apply.kw_id)
-          = link_to admin_profile_path(profile.kw_id) do
+          = link_to admin_profile_path(profile.id) do
             = profile.display_name
         td
           label.label = I18n.t(apply.state)
