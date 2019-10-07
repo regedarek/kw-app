@@ -40,6 +40,8 @@
                 - unless current_user.roles.include?('office')
                   li= link_to 'Baza klubowiczów', admin_profiles_path
                   li= link_to 'Baza składek', admin_membership_fees_path
+                - if can? :manage, Management::Snw::SnwApplyRecord
+                  li= link_to 'Zgłoszenia do SNW', snw_applies_path
                 - if can? :read, Management::Voting::CaseRecord
                   li= link_to 'Głosowania', cases_path
                 - if can? :read, Settlement::ContractRecord
