@@ -16,6 +16,7 @@ module Management
         @snw_apply.kw_id = current_user.kw_id
 
         if @snw_apply.save
+          Management::Snw::Mailer.apply(@snw_apply.id).deliver_later
           redirect_to snw_applies_path, notice: 'Utworzono zgłoszenie'
         else
           render :new

@@ -547,6 +547,7 @@ LibraryItem	app/components/importing/library_item.rb	/^  class LibraryItem$/;"	c
 Limiter	app/components/events/competitions/sign_ups/limiter.rb	/^      class Limiter$/;"	c	class:Events.Competitions.SignUps
 Limiter	app/components/training/supplementary/limiter.rb	/^    class Limiter$/;"	c	class:Training.Supplementary
 ListsController	app/components/user_management/lists_controller.rb	/^  class ListsController < ApplicationController$/;"	c	class:UserManagement
+Mailer	app/components/management/snw/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Snw
 Mailer	app/components/management/voting/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Voting
 Management	app/components/management/attachment_uploader.rb	/^module Management$/;"	m
 Management	app/components/management/create_project.rb	/^  module Management$/;"	m
@@ -556,6 +557,7 @@ Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
 Management	app/components/management/project_users_record.rb	/^module Management$/;"	m
 Management	app/components/management/projects_controller.rb	/^module Management$/;"	m
+Management	app/components/management/snw/mailer.rb	/^module Management$/;"	m
 Management	app/components/management/snw/snw_applies_controller.rb	/^module Management$/;"	m
 Management	app/components/management/snw/snw_apply_record.rb	/^module Management$/;"	m
 Management	app/components/management/update_project.rb	/^module Management$/;"	m
@@ -766,6 +768,7 @@ SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/
 SkiRoute	app/components/training/activities/ski_route.rb	/^    class SkiRoute < Dry::Struct$/;"	c	class:Training.Activities
 SkiRouteForm	app/components/training/activities/ski_route_form.rb	/^    class SkiRouteForm < Dry::Validation::Schema$/;"	c	class:Training.Activities
 SkiRoutesController	app/components/training/activities/ski_routes_controller.rb	/^    class SkiRoutesController < ApplicationController$/;"	c	class:Training.Activities
+Snw	app/components/management/snw/mailer.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/snw_applies_controller.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/snw_apply_record.rb	/^  module Snw$/;"	m	class:Management
 SnwAppliesController	app/components/management/snw/snw_applies_controller.rb	/^    class SnwAppliesController < ApplicationController$/;"	c	class:Management.Snw
@@ -946,6 +949,7 @@ all_refunded	app/components/training/supplementary/limiter.rb	/^      def all_re
 all_unpaid	app/components/training/supplementary/limiter.rb	/^      def all_unpaid$/;"	f	class:Training.Supplementary.Limiter
 allowed_params	app/components/messaging/comments_controller.rb	/^    def allowed_params$/;"	f	class:Messaging.CommentsController
 already_voted_on	app/components/management/voting/repository.rb	/^      def already_voted_on(case_id)$/;"	f	class:Management.Voting.Repository
+apply	app/components/management/snw/mailer.rb	/^      def apply(apply_id)$/;"	f	class:Management.Snw.Mailer
 apply	app/mailers/profile_mailer.rb	/^  def apply(profile)$/;"	f	class:ProfileMailer
 apply_params	app/components/management/snw/snw_applies_controller.rb	/^      def apply_params$/;"	f	class:Management.Snw.SnwAppliesController
 approve	app/components/management/voting/cases_controller.rb	/^      def approve$/;"	f	class:Management.Voting.CasesController
