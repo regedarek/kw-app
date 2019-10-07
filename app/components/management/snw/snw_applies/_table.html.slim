@@ -10,12 +10,12 @@ table.stack
       tr
         td
           - profile =  Db::Profile.find_by(kw_id: apply.kw_id)
-          = link_to admin_profile_path(profile.id) do
+          = link_to admin_profile_path(profile.kw_id) do
             = profile.display_name
         td
           label.label = I18n.t(apply.state)
         td
           = apply.avalanche_date
         td.text-right
-          = link_to snw_apply_path(apply.id), style: 'padding: 5px' do
+          = link_to snw_apply_path(apply.kw_id), style: 'padding: 5px' do
             i.fa.fi-magnifying-glass

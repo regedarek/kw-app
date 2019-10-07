@@ -8,7 +8,7 @@ module Management
         mail(
           to: [@profile.email, 'zgloszenia.snw@kw.krakow.pl'],
           from: 'zgloszenia.snw@kw.krakow.pl',
-          subject: "Zgłoszenie do SNW: #{@profile.display_name} - ##{@apply.id}",
+          subject: "Zgłoszenie do SNW: #{@profile.display_name} - ##{@apply.kw_id}",
           reply_to: 'zgloszenia.snw@kw.krakow.pl'
         )
       end

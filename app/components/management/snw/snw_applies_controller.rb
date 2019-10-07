@@ -21,14 +21,14 @@ module Management
 
         if @snw_apply.save
           Management::Snw::Mailer.apply(@snw_apply.id).deliver_later
-          redirect_to snw_applies_path, notice: 'Utworzono zgłoszenie'
+          redirect_to root_path, notice: 'Utworzono zgłoszenie, sprawdź e-mail!'
         else
           render :new
         end
       end
 
       def show
-        @snw_apply = Management::Snw::SnwApplyRecord.find(params[:id])
+        @snw_apply = Management::Snw::SnwApplyRecord.find_by(kw_id: params[:id])
         authorize! :read, @snw_apply
       end
 
