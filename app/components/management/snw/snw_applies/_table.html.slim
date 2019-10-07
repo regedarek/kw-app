@@ -3,6 +3,7 @@ table.stack
     tr
       th width='25%' Nazwa
       th width='25%' Status
+      th width='25%' Ostatnie ćwiczenie
       th.text-right width='25%' Akcje
   tbody
     - @snw_applies.each do |apply|
@@ -13,6 +14,8 @@ table.stack
             = profile.display_name
         td
           label.label = I18n.t(apply.state)
+        td
+          = apply.avalanche_date
         td.text-right
           = link_to snw_apply_path(apply.id), style: 'padding: 5px' do
             i.fa.fi-magnifying-glass
