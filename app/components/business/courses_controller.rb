@@ -9,13 +9,11 @@ module Business
 
     def new
       @course = Business::CourseRecord.new
-      authorize! :create, @course
     end
 
     def create
       @course = Business::CourseRecord.new(course_params)
 
-      authorize! :create, @course
       @course.activity_type = 1
       @course.creator_id = current_user.id
 
@@ -32,8 +30,6 @@ module Business
 
     def update
       @course = Business::CourseRecord.find(params[:id])
-
-      authorize! :manage, @course
 
       if @course.update(course_params)
         redirect_to edit_course_path(@course.id), notice: 'Zaktualizowano kurs'
