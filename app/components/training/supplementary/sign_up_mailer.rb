@@ -8,8 +8,8 @@ module Training
         organizer = ::Db::User.find(@sign_up.course.organizator_id)
 
         mail(
-          to: @sign_up.email,
-          from: organizer&.email,
+          to: ['wydarzenia@kw.krakow.pl', @sign_up.email, organizer.email],
+          from: organizer.email,
           subject: "Zapisałeś się na wydarzenie KW Kraków: #{@sign_up.course.name}!"
         ).tap do |message|
           message.mailgun_options = {
