@@ -22,7 +22,7 @@ class ProfileMailer < ApplicationMailer
 
     I18n.with_locale(I18n.locale) do
       mail(
-        to: @profile.email,
+        to: [@profile.email, 'zgloszenia.wykaz@kw.krakow.pl'],
         from: 'zgloszenia@kw.krakow.pl',
         subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od #{@profile.first_name} #{@profile.last_name}"
       ).tap do |message|
