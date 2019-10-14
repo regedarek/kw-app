@@ -147,6 +147,7 @@ AddPlasticToMembershipFees	db/migrate/20181205232003_add_plastic_to_membership_f
 AddPlasticToProfiles	db/migrate/20181209171014_add_plastic_to_profiles.rb	/^class AddPlasticToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddPositionToProfiles	db/migrate/20170510163250_add_position_to_profiles.rb	/^class AddPositionToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddPreclosedDateToContracts	db/migrate/20190605212210_add_preclosed_date_to_contracts.rb	/^class AddPreclosedDateToContracts < ActiveRecord::Migration[5.2]$/;"	c
+AddPriceToBusinessCourses	db/migrate/20191014094026_add_price_to_business_courses.rb	/^class AddPriceToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddPriceToSupplementaryCourses	db/migrate/20180502143718_add_price_to_supplementary_courses.rb	/^class AddPriceToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddProfessionToProfiles	db/migrate/20170509123335_add_profession_to_profiles.rb	/^class AddProfessionToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddReactivationToMembershipFees	db/migrate/20170220140949_add_reactivation_to_membership_fees.rb	/^class AddReactivationToMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
@@ -1292,6 +1293,7 @@ change	db/migrate/20191005223825_create_business_instructors.rb	/^  def change$/
 change	db/migrate/20191005225024_add_instructor_id_to_business_courses.rb	/^  def change$/;"	f	class:AddInstructorIdToBusinessCourses
 change	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddStateToSupplementaryCourses
 change	db/migrate/20191007131433_create_snw_applies.rb	/^  def change$/;"	f	class:CreateSnwApplies
+change	db/migrate/20191014094026_add_price_to_business_courses.rb	/^  def change$/;"	f	class:AddPriceToBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
