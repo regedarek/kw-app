@@ -3,7 +3,9 @@ module Business
     append_view_path 'app/components'
 
     def index
-      @courses = Business::CourseRecord.all
+      @q = Business::CourseRecord.ransack(params[:q])
+      @courses = @q.result(distinct: true)
+
       @course = Business::CourseRecord.new
     end
 
