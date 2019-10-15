@@ -10,9 +10,9 @@
           - @snw_apply.errors.messages.each do |error|
             li= error&.last&.to_sentence
 
-= form_for @snw_apply, url: snw_applies_path, as: :snw_apply do |f|
+= form_for @snw_apply, url: snw_apply_path(@snw_apply.kw_id), as: :snw_apply do |f|
   = render 'form', f: f
 
   .row
     .large-12.columns
-      = f.submit 'Wyślij zgłoszenie do akceptacji', class: 'button primary large expanded'
+      = f.submit 'Edytuj zgłoszenie', class: 'button primary large expanded'

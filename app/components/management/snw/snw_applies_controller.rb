@@ -32,6 +32,20 @@ module Management
         authorize! :read, @snw_apply
       end
 
+      def edit
+        @snw_apply = Management::Snw::SnwApplyRecord.find_by(kw_id: params[:id])
+      end
+
+      def update
+        @snw_apply = Management::Snw::SnwApplyRecord.find_by(kw_id: params[:id])
+
+        if @snw_apply.update(apply_params)
+          redirect_to snw_apply_page_path(@snw_apply.kw_id), notice: 'Zaktualizowano zgłoszenie!'
+        else
+          render :edit
+        end
+      end
+
       private
 
       def apply_params

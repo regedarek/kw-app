@@ -61,6 +61,10 @@
                   button.close-button aria-label=("Close reveal") data-close="" type="button" 
                     span aria-hidden="true"  &times;
 
+    .row
+      .large-12.columns
+        = link_to 'Edytuj swoje zgłoszenie', edit_snw_apply_path(@snw_apply.kw_id), class: 'button alert'
+
   .large-6.columns
     - if user_signed_in?
       h5 Komentarze
