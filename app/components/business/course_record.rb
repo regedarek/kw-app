@@ -7,6 +7,9 @@ module Business
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
 
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
+    validates :max_seats, presence: true
+    validates :sign_up_url, presence: true
+    validates :activity_type, presence: true
     validate :max_seats_size
 
     friendly_id :name, use: :slugged
