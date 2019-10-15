@@ -13,35 +13,39 @@
 
           .large-2.columns
             = f.label :price_gteq, 'Cena od'
-            = f.number_field :price_gteq, value: (params[:q].fetch(:price_gteq) if params[:q])
+            = f.number_field :price_gteq, value: (params[:q].fetch(:price_gteq, {}) if params[:q])
 
           .large-2.columns
             = f.label :price_lteq, 'Cena do'
-            = f.number_field :price_lteq, value: (params[:q].fetch(:price_lteq) if params[:q])
+            = f.number_field :price_lteq, value: (params[:q].fetch(:price_lteq, {}) if params[:q])
 
           .large-2.columns
             = f.label :seats_gteq, 'Minimum wolnych miejsc'
-            = f.number_field :seats_gteq, value: (params[:q].fetch(:seats_gteq) if params[:q])
+            = f.number_field :seats_gteq, value: (params[:q].fetch(:seats_gteq, {}) if params[:q])
 
           .large-2.columns
             = f.label :seats_lteq, 'Maximum wolnych miejsc'
-            = f.number_field :seats_lteq, value: (params[:q].fetch(:seats_lteq) if params[:q])
+            = f.number_field :seats_lteq, value: (params[:q].fetch(:seats_lteq, {}) if params[:q])
 
           .large-2.columns
             = f.label :starts_at_gteq, 'Początek od'
-            = f.date_field :starts_at_gteq, value: (params[:q].fetch(:starts_at_gteq) if params[:q])
+            = f.date_field :starts_at_gteq, value: (params[:q].fetch(:starts_at_gteq, {}) if params[:q])
 
           .large-2.columns
             = f.label :ends_at_lteq, 'Koniec do'
-            = f.date_field :ends_at_lteq, value: (params[:q].fetch(:ends_at_lteq) if params[:q])
+            = f.date_field :ends_at_lteq, value: (params[:q].fetch(:ends_at_lteq, {}) if params[:q])
 
           .large-4.columns
-            = f.label :activity_type_in, 'Rodzaj kursu'
+            = f.label :activity_type_in, 'Rodzaj kursu (Użyj CTRL)'
             = f.select :activity_type_in, Business::CourseRecord.activity_types.to_a.map {|a| [I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{a.first}"), a.last] }, {},  {multiple: true} 
 
           .large-4.columns
-            = f.label :instructor_id_in, 'Rodzaj kursu'
+            = f.label :instructor_id_in, 'Instruktor (Użyj CTRL)'
             = f.select :instructor_id_in, Business::InstructorRecord.all.to_a.map {|a| [a.profile_name, a.id] }, {},  {multiple: true} 
+
+          .large-2.columns
+            = f.label :sign_up_url_present, 'Link do zapisów'
+            = f.select :sign_up_url_present, [['Tak', 1], ['Brak', 0]], include_blank: true
 
           .large-2.columns
             br

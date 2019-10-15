@@ -1,23 +1,33 @@
 table.stack
   thead
     tr
-      th width='30%' Nazwa
-      th width='5%' Miejsc
-      th width='10%' Od
-      th width='10%' Do
-      th width='5%' Cena
-      th width='10%' Instruktor
+      th width='30%'
+        = sort_link @q, :name, 'Nazwa kursu'
+      th.text-center width='10%'
+        = sort_link @q, :seats, 'Miejsc'
+      th width='10%'
+        = sort_link @q, :starts_at, 'Od'
+      th width='10%'
+        = sort_link @q, :ends_at, 'Do'
+      th width='5%'
+        = sort_link @q, :price, 'Cena'
+      th width='10%'
+        = sort_link @q, :instructor_id, 'Instruktor'
       th width='5%'
   tbody
     - @courses.each do |course|
       tr
         td
-          = course.name
-        td
+          = link_to course.name, course_path(course.id)
+        td.text-center
+          = link_to seats_minus_course_path(course.id), method: :put, style: 'margin-right: 5px; color: red' do
+            i.fi-minus
           - if course.max_seats
-            = "#{course.seats}/#{course.max_seats}"
+            b= "#{course.seats}/#{course.max_seats}"
           - else
-            = course.seats
+            b= course.seats
+          = link_to seats_plus_course_path(course.id), method: :put, style: 'margin-left: 5px; color: blue' do
+            i.fi-plus
         td
           = course.starts_at&.to_date
         td

@@ -934,7 +934,6 @@ active	app/models/ability.rb	/^  def active$/;"	f	class:Ability
 active?	app/components/membership/activement.rb	/^    def active?$/;"	f	class:Membership.Activement
 active?	app/models/db/user.rb	/^  def active?$/;"	f	class:Db
 activity_type_attributes_for_select	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select$/;"	F	class:Business.CourseRecord
-activity_type_attributes_for_select2	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select2$/;"	F	class:Business.CourseRecord
 actualDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function actualDisplay( name, doc ) {$/;"	f
 add	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^			add: function() {$/;"	m
 addGetHookIf	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function addGetHookIf( conditionFn, hookFn ) {$/;"	f
@@ -1778,6 +1777,7 @@ manually_sign_up_params	app/components/training/supplementary/sign_ups_controlle
 mark_as_paid	app/controllers/payments_controller.rb	/^  def mark_as_paid$/;"	f	class:PaymentsController.refund
 mark_as_read	app/components/notification_center/notifications_controller.rb	/^    def mark_as_read$/;"	f	class:NotificationCenter.NotificationsController
 mass_create	spec/factories.rb	/^      def self.mass_create!(range: (1..20), years: [2013, 2014, 2015], cash: true, state: 'prepaid')$/;"	F	class:Factories.Membership.Fee
+max_seats_size	app/components/business/course_record.rb	/^    def max_seats_size$/;"	f	class:Business.CourseRecord
 meteogram_uri	app/components/scrappers/meteoblue.rb	/^    def meteogram_uri$/;"	f	class:Scrappers.Meteoblue
 method_missing	lib/result.rb	/^  def method_missing(_method_name, *_args, &_block)$/;"	f
 missing_votes_on	app/components/management/voting/repository.rb	/^      def missing_votes_on(case_id)$/;"	f	class:Management.Voting.Repository
@@ -1928,6 +1928,8 @@ rreturn	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d79
 rules	app/components/training/activities/ski_routes_controller.rb	/^      def rules$/;"	f	class:Training.Activities.SkiRoutesController
 rvalidtokens	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rvalidtokens = \/(,)|(\\[|{)|(}|])|"(?:[^"\\\\\\r\\n]|\\\\["\\\\\\\/bfnrt]|\\\\u[\\da-fA-F]{4})*"\\s*:?|true|false|null|-?(?!0\\d)\\d+(?:\\.\\d+|)(?:[eE][+-]?\\d+|)\/g;$/;"	v
 safeActiveElement	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function safeActiveElement() {$/;"	f
+seats_minus	app/components/business/courses_controller.rb	/^    def seats_minus$/;"	f	class:Business.CoursesController
+seats_plus	app/components/business/courses_controller.rb	/^    def seats_plus$/;"	f	class:Business.CoursesController
 secondary_management	app/models/ability.rb	/^  def secondary_management$/;"	f	class:Ability
 section_types	app/components/user_management/profile_list_record.rb	/^    def section_types$/;"	f	class:UserManagement.ProfileListRecord
 secure_token	app/components/photo_competition/file_uploader.rb	/^    def secure_token$/;"	f	class:PhotoCompetition.FileUploader
@@ -1941,6 +1943,7 @@ setGlobalEval	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25
 setPositiveNumber	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function setPositiveNumber( elem, value, subtract ) {$/;"	f
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
+show	app/components/business/courses_controller.rb	/^    def show$/;"	f	class:Business.CoursesController
 show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"	f	class:Events.Admin.CompetitionsController
 show	app/components/library/admin/tags_controller.rb	/^      def show$/;"	f	class:Library.Admin.TagsController
 show	app/components/library/authors_controller.rb	/^    def show$/;"	f	class:Library.AuthorsController

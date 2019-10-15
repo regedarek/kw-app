@@ -3,7 +3,11 @@ module Business
     include Workflow
     extend FriendlyId
 
+    has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
+
+    validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
+    validate :max_seats_size
 
     friendly_id :name, use: :slugged
     self.table_name = 'business_courses'
@@ -22,11 +26,14 @@ module Business
       state :ready
     end
 
-    def self.activity_type_attributes_for_select2
-      activity_types.map do |activity_type, _|
-        [I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"), activity_type]
+    def max_seats_size
+      if max_seats.present?
+        if self.seats > self.max_seats
+          errors.add(:seats, 'Przekroczono limit miejsc')
+        end
       end
     end
+
     def self.activity_type_attributes_for_select
       activity_types.map do |activity_type, _|
         [I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"), activity_type]

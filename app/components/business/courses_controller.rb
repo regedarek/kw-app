@@ -4,6 +4,7 @@ module Business
 
     def index
       @q = Business::CourseRecord.includes(:instructor).ransack(params[:q])
+      @q.sorts = 'starts_at asc' if @q.sorts.empty?
       @courses = @q.result(distinct: true)
 
       @course = Business::CourseRecord.new
@@ -26,8 +27,34 @@ module Business
       end
     end
 
+    def show
+      @course = Business::CourseRecord.find(params[:id])
+    end
+
     def edit
       @course = Business::CourseRecord.find(params[:id])
+    end
+
+    def seats_minus
+      @course = Business::CourseRecord.find(params[:id])
+      @course.seats -= 1
+
+      if @course.save
+        redirect_to courses_path, notice: 'Zwolniono miejsce!'
+      else
+        redirect_to courses_path, alert: @course.errors.messages
+      end
+    end
+
+    def seats_plus
+      @course = Business::CourseRecord.find(params[:id])
+      @course.seats += 1
+
+      if @course.save
+        redirect_to courses_path, notice: 'Zwolniono miejsce!'
+      else
+        redirect_to courses_path, alert: @course.errors.full_messages
+      end
     end
 
     def update
