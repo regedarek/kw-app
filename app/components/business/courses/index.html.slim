@@ -13,7 +13,7 @@
 
           .large-4.columns
             = f.label :activity_type_eq, 'Rodzaj kursu'
-            = f.select :activity_type_eq, Business::CourseRecord.activity_type_attributes_for_select, { include_blank: true }
+            = f.select :activity_type_eq, Business::CourseRecord.activity_type_attributes_for_select2, { include_blank: true }
 .row
   .large-12.columns
     = render 'table'

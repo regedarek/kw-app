@@ -22,6 +22,11 @@ module Business
       state :ready
     end
 
+    def self.activity_type_attributes_for_select2
+      activity_types.map do |activity_type, _|
+        [I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"), activity_type]
+      end
+    end
     def self.activity_type_attributes_for_select
       activity_types.map do |activity_type, _|
         [I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"), activity_type]

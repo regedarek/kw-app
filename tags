@@ -933,6 +933,7 @@ active	app/models/ability.rb	/^  def active$/;"	f	class:Ability
 active?	app/components/membership/activement.rb	/^    def active?$/;"	f	class:Membership.Activement
 active?	app/models/db/user.rb	/^  def active?$/;"	f	class:Db
 activity_type_attributes_for_select	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select$/;"	F	class:Business.CourseRecord
+activity_type_attributes_for_select2	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select2$/;"	F	class:Business.CourseRecord
 actualDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function actualDisplay( name, doc ) {$/;"	f
 add	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^			add: function() {$/;"	m
 addGetHookIf	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function addGetHookIf( conditionFn, hookFn ) {$/;"	f
