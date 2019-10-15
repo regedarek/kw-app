@@ -18,15 +18,15 @@ table.stack
     - @courses.each do |course|
       tr
         td
-          = link_to course.name, course_path(course.id)
+          = link_to course.name, course_path(id: course.id, q: params.to_unsafe_h[:q])
         td.text-center
-          = link_to seats_minus_course_path(course.id), method: :put, style: 'margin-right: 5px; color: red' do
+          = link_to seats_minus_course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :put, style: 'margin-right: 5px; color: red' do
             i.fi-minus
           - if course.max_seats
             b= "#{course.seats}/#{course.max_seats}"
           - else
             b= course.seats
-          = link_to seats_plus_course_path(course.id), method: :put, style: 'margin-left: 5px; color: blue' do
+          = link_to seats_plus_course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :put, style: 'margin-left: 5px; color: blue' do
             i.fi-plus
         td
           = course.starts_at&.to_date

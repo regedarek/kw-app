@@ -10,5 +10,8 @@ Rails.application.routes.draw do
     namespace :api do
       resources :courses, only: :index
     end
+
+    get 'kursy/narciarskie' => 'courses#index', q: { activity_type_in: [3, 4, 5]}
+    get 'kursy/turystyki' => 'courses#index', q: { activity_type_in: [0, 1, 2]}
   end
 end

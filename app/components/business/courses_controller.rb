@@ -21,7 +21,7 @@ module Business
       @course.creator_id = current_user.id
 
       if @course.save
-        redirect_to courses_path, notice: 'Dodano kurs'
+        redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else
         render :index
       end
@@ -40,9 +40,9 @@ module Business
       @course.seats -= 1
 
       if @course.save
-        redirect_to courses_path, notice: 'Zwolniono miejsce!'
+        redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Zwolniono miejsce!'
       else
-        redirect_to courses_path, alert: @course.errors.messages
+        redirect_to courses_path(q: params.to_unsafe_h[:q]), alert: @course.errors.messages
       end
     end
 
@@ -51,9 +51,9 @@ module Business
       @course.seats += 1
 
       if @course.save
-        redirect_to courses_path, notice: 'Zwolniono miejsce!'
+        redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Zwolniono miejsce!'
       else
-        redirect_to courses_path, alert: @course.errors.full_messages
+        redirect_to courses_path(q: params.to_unsafe_h[:q]), alert: @course.errors.full_messages
       end
     end
 
