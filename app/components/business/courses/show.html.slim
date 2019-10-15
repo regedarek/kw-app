@@ -24,7 +24,7 @@
       .row
         .large-12.columns
           .callout
-            = sanitize @course.price
+            = @course.price
 
     .row
       .large-12.columns
@@ -42,17 +42,18 @@
             b Utworzył: 
             = Db::User.find(@course.creator_id).display_name
 
-    - if @course.seats
-      .row
+    .row
+      - if @course.seats
         .large-6.columns
           .callout
-            b Ilość miejsc:
+            b Ilość miejsc: 
             = @course.seats
-    - if @course.max_seats
-      .large-6.columns
-        .callout.warning
-          b Maksymalna ilość miejsc:
-          = @course.max_seats
+
+      - if @course.max_seats
+        .large-6.columns
+          .callout.warning
+            b Maksymalna ilość miejsc: 
+            = @course.max_seats
 
     - if @course.sign_up_url
       .row
@@ -61,7 +62,9 @@
             = link_to @course.sign_up_url, @course.sign_up_url
 
     .row
-      .large-12.columns
+      .large-6.columns
+        = link_to 'Edytuj kurs', edit_course_path(@course.id), class: 'alert button large expanded'
+      .large-6.columns
         = link_to 'wróć do kursów', courses_path, class: 'secondary button large expanded'
 
   .large-6.columns

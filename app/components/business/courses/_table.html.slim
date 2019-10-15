@@ -35,7 +35,8 @@ table.stack
         td
           = course.price
         td
-          = course.instructor&.profile_name
+          - if course.instructor
+            = link_to course.instructor&.profile_name, courses_path(q: { instructor_id_in: course.instructor_id })
         td.text-right
           - if course.sign_up_url
             = link_to course.sign_up_url, style: 'margin-right: 10px; color: green' do
