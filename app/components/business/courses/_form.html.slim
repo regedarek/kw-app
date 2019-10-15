@@ -13,9 +13,8 @@
     = f.date_field :ends_at
 
   .large-3.columns
-    span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
-      = f.label :instructor, "Instruktor"
-    = f.select :instructor_id, Business::InstructorRecord.where(active: true).map{|i| [i.profile_name, i.id] }, selected: @course.instructor_id
+    = f.label :instructor, "Instruktor"
+    = f.select :instructor_id, Business::InstructorRecord.where(active: true).map{|i| [i.profile_name, i.id] }, selected: @course.instructor_id, include_blank: true
 
 .row
   .large-3.columns
