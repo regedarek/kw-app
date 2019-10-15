@@ -67,6 +67,13 @@ module Business
       end
     end
 
+    def destroy
+      @course = Business::CourseRecord.find(params[:id])
+      @course.destroy
+
+      redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Usunięto kurs'
+    end
+
     private
 
     def course_params

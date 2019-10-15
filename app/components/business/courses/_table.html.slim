@@ -13,7 +13,7 @@ table.stack
         = sort_link @q, :price, 'Cena'
       th width='10%'
         = sort_link @q, :instructor_id, 'Instruktor'
-      th width='5%'
+      th width='10%'
   tbody
     - @courses.each do |course|
       tr
@@ -36,10 +36,12 @@ table.stack
           = course.price
         td
           - if course.instructor
-            = link_to course.instructor&.profile_name, courses_path(q: { instructor_id_in: course.instructor_id })
+            = course.instructor&.profile_name
         td.text-right
           - if course.sign_up_url
             = link_to course.sign_up_url, style: 'margin-right: 10px; color: green' do
               i.fi-share
-          = link_to edit_course_path(course.id), style: 'margin-right: 5px; color: red' do
+          = link_to edit_course_path(course.id), style: 'margin-right: 5px; color: orange' do
             i.fi-page-edit
+          = link_to course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :delete, data: { confirm: 'Napewno?' }, style: 'margin-right: 5px; color: red' do
+            i.fi-trash

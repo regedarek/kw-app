@@ -1436,6 +1436,7 @@ description_needed?	app/components/photo_competition/request_record.rb	/^    def
 destroy	app/components/admin/items.rb	/^    def self.destroy(item_id)$/;"	F	class:Admin.Items
 destroy	app/components/admin/membership_fees.rb	/^    def self.destroy(payment_id)$/;"	F	class:Admin.MembershipFees
 destroy	app/components/admin/reservations.rb	/^    def self.destroy(reservation_id)$/;"	F	class:Admin.Reservations
+destroy	app/components/business/courses_controller.rb	/^    def destroy$/;"	f	class:Business.CoursesController
 destroy	app/components/events/competitions/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Events.Competitions
 destroy	app/components/management/projects_controller.rb	/^    def destroy$/;"	f	class:Management.ProjectsController
 destroy	app/components/management/voting/cases_controller.rb	/^      def destroy$/;"	f
