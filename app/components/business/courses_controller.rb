@@ -6,16 +6,20 @@ module Business
       @q = Business::CourseRecord.includes(:instructor).ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
       @courses = @q.result(distinct: true)
+      authorize! :read, Business::CourseRecord
 
       @course = Business::CourseRecord.new
     end
 
     def new
       @course = Business::CourseRecord.new
+
+      authorize! :create, Business::CourseRecord
     end
 
     def create
       @course = Business::CourseRecord.new(course_params)
+      authorize! :create, Business::CourseRecord
 
       @course.activity_type = 1
       @course.creator_id = current_user.id
@@ -29,15 +33,18 @@ module Business
 
     def show
       @course = Business::CourseRecord.find(params[:id])
+      authorize! :read, Business::CourseRecord
     end
 
     def edit
       @course = Business::CourseRecord.find(params[:id])
+      authorize! :manage, Business::CourseRecord
     end
 
     def seats_minus
       @course = Business::CourseRecord.find(params[:id])
       @course.seats -= 1
+      authorize! :manage, Business::CourseRecord
 
       if @course.save
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Zwolniono miejsce!'
@@ -50,6 +57,7 @@ module Business
       @course = Business::CourseRecord.find(params[:id])
       @course.seats += 1
 
+      authorize! :manage, Business::CourseRecord
       if @course.save
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Zwolniono miejsce!'
       else
@@ -59,6 +67,7 @@ module Business
 
     def update
       @course = Business::CourseRecord.find(params[:id])
+      authorize! :manage, Business::CourseRecord
 
       if @course.update(course_params)
         redirect_to edit_course_path(@course.id), notice: 'Zaktualizowano kurs'
@@ -70,6 +79,7 @@ module Business
     def destroy
       @course = Business::CourseRecord.find(params[:id])
       @course.destroy
+      authorize! :manage, Business::CourseRecord
 
       redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Usunięto kurs'
     end

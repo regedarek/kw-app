@@ -15,6 +15,7 @@ class Ability
     events if role?('events')
     library if role?('library')
     secondary_management if role?('secondary_management')
+    business_courses if role?('business_courses')
     financial_management if role?('financial_management')
     management if role?('management')
     admin if role?('admin')
@@ -103,6 +104,10 @@ class Ability
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
     cannot :destroy, Settlement::ContractRecord
+  end
+
+  def business_courses
+    can :manage, Business::CourseRecord
   end
 
   def office_king
