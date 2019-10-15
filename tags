@@ -960,6 +960,7 @@ approved?	app/components/management/voting/repository.rb	/^      def approved?(c
 archive	app/controllers/admin/reservations_controller.rb	/^    def archive$/;"	f	class:Admin
 archived	app/components/training/supplementary/courses_controller.rb	/^      def archived$/;"	f	class:Training.Supplementary.CoursesController
 area_needed?	app/components/photo_competition/request_record.rb	/^    def area_needed?$/;"	f	class:PhotoCompetition.RequestRecord
+as_json	app/components/business/course_record.rb	/^    def as_json(options={})$/;"	f	class:Business.CourseRecord
 as_json	app/components/business/instructor_record.rb	/^    def as_json$/;"	f	class:Business.InstructorRecord
 augmentWidthOrHeight	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {$/;"	f
 authorize_admin	app/components/events/admin/competitions_controller.rb	/^      def authorize_admin$/;"	f	class:Events.Admin.CompetitionsController

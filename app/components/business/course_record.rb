@@ -39,5 +39,9 @@ module Business
         [I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"), activity_type]
       end
     end
+
+    def as_json(options={})
+      super.merge(free_seats: max_seats ? max_seats - seats : 0)
+    end
   end
 end
