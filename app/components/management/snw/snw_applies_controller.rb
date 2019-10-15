@@ -10,14 +10,14 @@ module Management
 
       def new
         @snw_apply = Management::Snw::SnwApplyRecord.new
-        authorize! :create, @snw_apply
+        authorize! :create, Management::Snw::SnwApplyRecord
       end
 
       def create
+        authorize! :create, Management::Snw::SnwApplyRecord
+
         @snw_apply = Management::Snw::SnwApplyRecord.new(apply_params)
         @snw_apply.kw_id = current_user.kw_id
-
-        authorize! :create, @snw_apply
 
         if @snw_apply.save
           Management::Snw::Mailer.apply(@snw_apply.id).deliver_later
