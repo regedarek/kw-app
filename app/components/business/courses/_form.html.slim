@@ -1,16 +1,21 @@
 .row
-  .large-4.columns
+  .large-3.columns
     span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
       = f.label :name, "Nazwa Kursu*"
     = f.text_field :name
 
-  .large-4.columns
+  .large-3.columns
     = f.label :starts_at, 'Początek'
     = f.date_field :starts_at
 
-  .large-4.columns
+  .large-3.columns
     = f.label :ends_at, 'Koniec'
     = f.date_field :ends_at
+
+  .large-3.columns
+    span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
+      = f.label :instructor, "Instruktor"
+    = f.select :instructor_id, Business::InstructorRecord.where(active: true).map{|i| [i.profile_name, i.id] }, selected: @course.instructor_id
 
 .row
   .large-3.columns
@@ -21,14 +26,25 @@
     b = f.label :state, 'Status'
     = f.select :state, Business::CourseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @course.state
 
-  .large-3.columns
+  .large-2.columns
     b = f.label :price, 'Cena'
     = f.number_field :price
 
-  .large-3.columns
+  .large-2.columns
     b= f.label :seats, 'Ilość miejsc'
     = f.number_field :seats
+
+  .large-2.columns
+    b = f.label :max_seats, 'Max. ilość miejsc'
+    = f.number_field :max_seats
+
     = f.hidden_field :creator_id, value: current_user.id
+
+.row
+  .large-12.columns
+    span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
+      = f.label :sign_up_url, "Link do zapisów"
+    = f.text_field :sign_up_url
 
 .row
   .large-12.columns

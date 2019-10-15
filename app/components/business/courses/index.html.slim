@@ -12,8 +12,8 @@
             = f.search_field :name_or_description_cont
 
           .large-4.columns
-            = f.label :activity_type_eq, 'Rodzaj kursu'
-            = f.select :activity_type_eq, Business::CourseRecord.activity_type_attributes_for_select2, { include_blank: true }
+            = f.label :activity_type_in, 'Rodzaj kursu'
+            = f.select :activity_type_in, Business::CourseRecord.activity_types.to_a.map {|a| [I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{a.first}"), a.last] }, {},  {multiple: true} 
 .row
   .large-12.columns
     = render 'table'

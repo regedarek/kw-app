@@ -115,6 +115,7 @@ AddLimitToSupplementaryCourses	db/migrate/20180503111523_add_limit_to_supplement
 AddLocationToMeteoblueRecords	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^class AddLocationToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddMandatoryFieldsToEditionCategories	db/migrate/20181009110950_add_mandatory_fields_to_edition_categories.rb	/^class AddMandatoryFieldsToEditionCategories < ActiveRecord::Migration[5.0]$/;"	c
 AddMatrimonialOfficeToCompetitions	db/migrate/20180422174624_add_matrimonial_office_to_competitions.rb	/^class AddMatrimonialOfficeToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
+AddMaxSeatsToBusinessCourses	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^class AddMaxSeatsToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddMembershipToPackages	db/migrate/20180111171334_add_membership_to_packages.rb	/^class AddMembershipToPackages < ActiveRecord::Migration[5.0]$/;"	c
 AddMeteogramToMeteoblueRecords	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^class AddMeteogramToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddMoreindexesToMountainRoutes	db/migrate/20190130233129_add_moreindexes_to_mountain_routes.rb	/^class AddMoreindexesToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
@@ -1295,6 +1296,7 @@ change	db/migrate/20191005225024_add_instructor_id_to_business_courses.rb	/^  de
 change	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddStateToSupplementaryCourses
 change	db/migrate/20191007131433_create_snw_applies.rb	/^  def change$/;"	f	class:CreateSnwApplies
 change	db/migrate/20191014094026_add_price_to_business_courses.rb	/^  def change$/;"	f	class:AddPriceToBusinessCourses
+change	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^  def change$/;"	f	class:AddMaxSeatsToBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

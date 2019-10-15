@@ -2,7 +2,7 @@ table.stack
   thead
     tr
       th width='30%' Nazwa
-      th width='10%' Miejsc
+      th width='5%' Miejsc
       th width='10%' Od
       th width='10%' Do
       th width='5%' Cena
@@ -14,7 +14,10 @@ table.stack
         td
           = course.name
         td
-          = course.seats
+          - if course.max_seats
+            = "#{course.seats}/#{course.max_seats}"
+          - else
+            = course.seats
         td
           = course.starts_at&.to_date
         td
@@ -24,5 +27,8 @@ table.stack
         td
           = course.instructor&.profile_name
         td.text-right
-          = link_to edit_course_path(course.id) do
+          - if course.sign_up_url
+            = link_to course.sign_up_url, style: 'margin-right: 10px; color: green' do
+              i.fi-share
+          = link_to edit_course_path(course.id), style: 'margin-right: 5px; color: red' do
             i.fi-page-edit

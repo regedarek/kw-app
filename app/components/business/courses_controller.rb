@@ -3,7 +3,7 @@ module Business
     append_view_path 'app/components'
 
     def index
-      @q = Business::CourseRecord.ransack(params[:q])
+      @q = Business::CourseRecord.includes(:instructor).ransack(params[:q])
       @courses = @q.result(distinct: true)
 
       @course = Business::CourseRecord.new
@@ -43,7 +43,7 @@ module Business
     private
 
     def course_params
-      params.require(:course).permit(:name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :creator_id)
+      params.require(:course).permit(:name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id)
     end
   end
 end
