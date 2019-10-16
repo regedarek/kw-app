@@ -11,7 +11,7 @@ module Scrappers
     transform_keys(&:to_sym)
 
     attribute :place, Types::Strict::String
-    attribute :temp, Types::Coercible::Float
+    attribute :temp, Types::Coercible::Float.optional
     attribute :all_snow, Types::Coercible::Float.optional
     attribute :daily_snow, Types::Coercible::Float.optional
     attribute :snow_type, Types::Coercible::Float.optional
@@ -19,7 +19,7 @@ module Scrappers
     def to_attributes
       {
         place: place,
-        temp: temp,
+        temp: (temp == 'b.d.' ? nil : temp),
         all_snow: (all_snow == 'b.d.' ? nil : all_snow),
         daily_snow: (daily_snow == 'b.d.' ? nil : daily_snow),
         snow_type: (snow_type == 'b.d.' ? nil : snow_type),
