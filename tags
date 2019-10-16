@@ -59,6 +59,7 @@ AddClosedToCompetitions	db/migrate/20180113121440_add_closed_to_competitions.rb	
 AddClosedToPhotoCompetitions	db/migrate/20181029175346_add_closed_to_photo_competitions.rb	/^class AddClosedToPhotoCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddCodeToSupplementarySignUps	db/migrate/20180507142148_add_code_to_supplementary_sign_ups.rb	/^class AddCodeToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddContractorIdToContracts	db/migrate/20190530212416_add_contractor_id_to_contracts.rb	/^class AddContractorIdToContracts < ActiveRecord::Migration[5.2]$/;"	c
+AddCoordinatorIdToBusinessCourses	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^class AddCoordinatorIdToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddCostToItems	db/migrate/20160824190651_add_cost_to_items.rb	/^class AddCostToItems < ActiveRecord::Migration[5.0]$/;"	c
 AddCostToOrders	db/migrate/20161219172839_add_cost_to_orders.rb	/^class AddCostToOrders < ActiveRecord::Migration[5.0]$/;"	c
 AddCostToProfiles	db/migrate/20170625102834_add_cost_to_profiles.rb	/^class AddCostToProfiles < ActiveRecord::Migration[5.0]$/;"	c
@@ -1298,6 +1299,7 @@ change	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^  def c
 change	db/migrate/20191007131433_create_snw_applies.rb	/^  def change$/;"	f	class:CreateSnwApplies
 change	db/migrate/20191014094026_add_price_to_business_courses.rb	/^  def change$/;"	f	class:AddPriceToBusinessCourses
 change	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^  def change$/;"	f	class:AddMaxSeatsToBusinessCourses
+change	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^  def change$/;"	f	class:AddCoordinatorIdToBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

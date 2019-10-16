@@ -1,10 +1,10 @@
 .row
   .large-12.columns
-    - if @errors
+    - if @course.errors.any?
       .callout.alert
         ul.circle
-          - @errors.each do |error|
-            li= error
+          - @course.errors.full_messages.each do |message|
+            li= message
 
 = form_for @course, as: :course, url: courses_path do |f|
   = render 'form', f: f

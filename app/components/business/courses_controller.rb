@@ -37,11 +37,6 @@ module Business
       authorize! :read, Business::CourseRecord
     end
 
-    def edit
-      @course = Business::CourseRecord.find(params[:id])
-      authorize! :manage, Business::CourseRecord
-    end
-
     def seats_minus
       @course = Business::CourseRecord.find(params[:id])
       @course.seats -= 1
@@ -64,6 +59,11 @@ module Business
       else
         redirect_to courses_path(q: params.to_unsafe_h[:q]), alert: @course.errors.full_messages
       end
+    end
+
+    def edit
+      @course = Business::CourseRecord.find(params[:id])
+      authorize! :manage, Business::CourseRecord
     end
 
     def update
