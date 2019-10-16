@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_104410) do
+ActiveRecord::Schema.define(version: 2019_10_16_153656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -458,6 +458,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_104410) do
     t.integer "category_record_id", null: false
     t.string "area"
     t.string "title"
+    t.string "original_filename"
   end
 
   create_table "photos", id: :serial, force: :cascade do |t|

@@ -22,6 +22,7 @@ module PhotoCompetition
       @edition = PhotoCompetition::EditionRecord.find_by(code: params[:edition_id])
 
       @request = @edition.photo_requests.new(request_params)
+      @request.original_filename = request_params[:file]&.original_filename
       @request.user_id = current_user.id
 
       if @request.save

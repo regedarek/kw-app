@@ -17,6 +17,9 @@
       b Nazwa pliku: 
       = File.basename(@request.file.path)
     .large-12.columns
+      b Oryginalna nazwa pliku: 
+      = @request.original_filename
+    .large-12.columns
       b Kto?: 
       = @request.user.display_name
     .large-12.columns
