@@ -3,7 +3,7 @@ module Business
     append_view_path 'app/components'
 
     def index
-      @q = Business::CourseRecord.includes(:instructor).ransack(params[:q])
+      @q = Business::CourseRecord.includes(:coordinator).ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
       @courses = @q.result(distinct: true)
       authorize! :read, Business::CourseRecord
@@ -13,6 +13,7 @@ module Business
 
     def new
       @course = Business::CourseRecord.new
+      @course.coordinator_id = current_user.id
 
       authorize! :create, Business::CourseRecord
     end
@@ -87,7 +88,7 @@ module Business
     private
 
     def course_params
-      params.require(:course).permit(:name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id)
+      params.require(:course).permit(:coordinator_id, :name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id)
     end
   end
 end

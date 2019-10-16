@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_15_211034) do
+ActiveRecord::Schema.define(version: 2019_10_16_104410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_211034) do
     t.integer "price"
     t.integer "max_seats"
     t.string "sign_up_url"
+    t.integer "coordinator_id"
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 

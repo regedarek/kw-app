@@ -1,52 +1,24 @@
 .row
   .large-6.columns
     .row
-      .large-8.columns
-        h4 = @course.name
-
-      .large-4.columns.text-right
-        | Status: 
-        span.label = @course.state
+      .large-6.columns
+        h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
 
     .row
       .large-6.columns
         .callout
-          b Typ: 
-          = I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
-
-    - if @course.description
-      .row
-        .large-12.columns
-          .callout
-            = sanitize @course.description
-
-    - if @course.price
-      .row
-        .large-12.columns
-          .callout
-            = @course.price
-
-    .row
-      .large-12.columns
-        .callout
           b Od: 
           = @course.starts_at&.to_date
-          br
+      .large-6.columns
+        .callout
           b Do: 
           = @course.ends_at&.to_date
-
-    - if @course.creator_id
-      .row
-        .large-12.columns
-          .callout
-            b Utworzył: 
-            = Db::User.find(@course.creator_id).display_name
 
     .row
       - if @course.seats
         .large-6.columns
           .callout
-            b Ilość miejsc: 
+            b Zapisanych osób: 
             = @course.seats
 
       - if @course.max_seats
@@ -54,6 +26,39 @@
           .callout.warning
             b Maksymalna ilość miejsc: 
             = @course.max_seats
+
+    .row
+      - if @course.price
+        .large-6.columns
+          .callout
+            b Cena: 
+            = @course.price
+
+      - if @course.instructor_id
+        .large-6.columns
+          .callout
+            b Instruktor: 
+            = ::Business::InstructorRecord.find(@course.instructor_id)&.profile_name
+
+    .row
+      - if @course.creator_id
+        .large-6.columns
+          .callout
+            b Utworzył: 
+            = Db::User.find(@course.creator_id).display_name
+
+      - if @course.coordinator_id
+        .large-6.columns
+          .callout
+            b Koordynuje: 
+            = Db::User.find(@course.coordinator_id)&.display_name
+
+    - if @course.description
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @course.description
+
 
     - if @course.sign_up_url
       .row

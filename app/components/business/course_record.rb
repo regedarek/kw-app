@@ -5,6 +5,7 @@ module Business
 
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
+    belongs_to :coordinator, class_name: '::Db::User', foreign_key: :coordinator_id
 
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
     validates :max_seats, presence: true

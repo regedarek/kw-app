@@ -19,6 +19,7 @@ class Db::User < ActiveRecord::Base
   scope :not_hidden, -> { Db::User.where(hide: false) }
   scope :active, -> { Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { state: 'prepaid'} ).or(Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { cash: true} )) }
 
+  has_many :courses, dependent: :destroy, class_name: '::Business::CourseRecord', foreign_key: :coordinator_id
   has_one  :profile, foreign_key: :kw_id, primary_key: :kw_id
   has_many :reservations
   has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'

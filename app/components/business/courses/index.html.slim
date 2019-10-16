@@ -3,9 +3,9 @@
     .callout
       = search_form_for @q, url: courses_path, class: 'js-send-on-enter' do |f|
         .row
-          .large-4.columns
-            = f.label :name_or_description_cont, 'Nazwa lub opis'
-            = f.search_field :name_or_description_cont
+          .large-6.columns
+            = f.label :description_cont, 'Opis'
+            = f.search_field :description_cont
 
           .large-3.columns
             = f.label :starts_at_gteq, 'Początek od'
@@ -15,19 +15,14 @@
             = f.label :ends_at_lteq, 'Koniec do'
             = f.date_field :ends_at_lteq, value: (params[:q].fetch(:ends_at_lteq, {}) if params[:q])
 
-          .large-2.columns
-            = f.label :sign_up_url_present, 'Link do zapisów'
-            = f.select :sign_up_url_present, [['Tak', 1], ['Brak', 0]], include_blank: true
-
         .row
           .large-6.columns
             = f.label :activity_type_in, 'Rodzaj kursu (Użyj CTRL)'
             = f.select :activity_type_in, Business::CourseRecord.activity_types.to_a.map {|a| [I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{a.first}"), a.last] }, {},  {multiple: true} 
 
           .large-6.columns
-            = f.label :instructor_id_in, 'Instruktor (Użyj CTRL)'
-            = f.select :instructor_id_in, Business::InstructorRecord.all.to_a.map {|a| [a.profile_name, a.id] }, {},  {multiple: true} 
-
+            = f.label :coordinator_id_in, 'Koordynator (Użyj CTRL)'
+            = f.select :coordinator_id_in, Db::User.where(":name = ANY(roles)", name: "business_courses").map{|i| [i.display_name, i.id] }, {},  {multiple: true} 
 
 
         .row

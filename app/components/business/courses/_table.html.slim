@@ -12,13 +12,14 @@ table.stack
       th width='5%'
         = sort_link @q, :price, 'Cena'
       th width='10%'
-        = sort_link @q, :instructor_id, 'Instruktor'
+        = sort_link @q, :coordinator_id, 'Koordynator'
       th width='10%'
   tbody
     - @courses.each do |course|
       tr
         td
-          = link_to course.name, course_path(id: course.id, q: params.to_unsafe_h[:q])
+          = link_to course_path(id: course.id, q: params.to_unsafe_h[:q]) do
+            = I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{course.activity_type}")
         td.text-center
           = link_to seats_minus_course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :put, style: 'margin-right: 5px; color: red' do
             i.fi-minus
@@ -35,8 +36,8 @@ table.stack
         td
           = course.price
         td
-          - if course.instructor
-            = course.instructor&.profile_name
+          - if course.coordinator_id
+            = course.coordinator&.display_name
         td.text-right
           - if course.sign_up_url
             = link_to course.sign_up_url, style: 'margin-right: 10px; color: green' do
