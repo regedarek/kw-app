@@ -9,6 +9,8 @@ module Scrappers
         statement: statement,
         avalanche_degree: 0
       )
+
+      Net::HTTP.get(URI('https://hc-ping.com/861c60b0-4642-407a-80c3-e629f0ff2c85'))
     end
   end
 end

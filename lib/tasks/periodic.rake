@@ -4,12 +4,9 @@ task :store_shmu => :environment do
   Scrappers::Shmu.new.call
 end
 
-task :store_meteoblue => :environment do
+task :store_weather => :environment do
   Scrappers::Meteoblue.new.call
   Scrappers::WeatherStorage.new.call
-end
-
-task :store_weather => :environment do
   Scrappers::Topr.new.call
 end
 
