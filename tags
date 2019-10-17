@@ -1772,6 +1772,7 @@ list_params	app/components/user_management/lists_controller.rb	/^    def list_pa
 load_fixture	spec/factories.rb	/^def load_fixture(fixture)$/;"	f
 location	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var location = window.location;$/;"	v
 logger	spec/rails_mock.rb	/^    def self.logger$/;"	F	class:Rails
+logo	app/components/business/course_record.rb	/^    def logo$/;"	f	class:Business.CourseRecord
 lomnicki_stit_uri	app/components/scrappers/shmu.rb	/^    def lomnicki_stit_uri(day: Time.zone.now.to_date.to_s(:number), hour: 12)$/;"	f	class:Scrappers.Shmu
 make_admin	app/controllers/admin/users_controller.rb	/^    def make_admin$/;"	f	class:Admin.UsersController
 make_curator	app/controllers/admin/users_controller.rb	/^    def make_curator$/;"	f	class:Admin.UsersController
