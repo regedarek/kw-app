@@ -47,7 +47,7 @@ module Business
     end
 
     def logo
-      case activity_type
+      case activity_type.to_sym
       when :winter_abc, :winter_tourist_1, :winter_tourist_2
         'https://panel.kw.krakow.pl/assets/kw-7b39344ecee6060042f85c3875d827e54a32ff867bf12eb62de751249dd20d0c.png'
       when :skitour_1, :skitour_2, :skitour_3
