@@ -46,6 +46,45 @@ module Business
       end
     end
 
+    def activity_url
+      case activity_type.to_sym
+      when :winter_abc
+        'https://szkolaalpinizmu.kw.krakow.pl/turystyka/zimowe-abc/'
+      when :winter_tourist_1
+        'https://szkolaalpinizmu.kw.krakow.pl/turystyka/turystyka-zimowa-ist/'
+      when :winter_tourist_2
+        'https://szkolaalpinizmu.kw.krakow.pl/turystyka/turystyka-zimowa-iist/'
+      when :skitour_1
+        'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-skiturowy-i-stopnia/'
+      when :skitour_2
+        'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-skiturowy-ii-stopnia/'
+      when :skitour_3
+        'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-narciarstwa-wysokogorskiego/'
+      when :climbing_1
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/drogi-ubezpieczone/'
+      when :climbing_2
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/kurs-na-wlasnej/'
+      when :full_climbing
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/pelny-kurs-wspinaczki/'
+      when :club_climbing
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/klubowy-kurs-wspinaczki/'
+      when :summer_tatra
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/taternictwo/'
+      when :winter_tatra_1
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/taternictwo/'
+      when :winter_tatra_2
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/taternictwo/'
+      when :ice_1
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-lodowa/'
+      when :ice_2
+        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-lodowa/'
+      when :cave
+        'https://szkolaalpinizmu.kw.krakow.pl/jaskinie/'
+      else
+        'https://szkolaalpinizmu.kw.krakow.pl/o-nas/klub-i-szkola/'
+      end
+    end
+
     def logo
       case activity_type.to_sym
       when :winter_abc, :winter_tourist_1, :winter_tourist_2
@@ -65,6 +104,7 @@ module Business
 
     def as_json(options={})
       super.merge(
+        activity_url: activity_url,
         logo: logo,
         display_name: I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"),
         free_seats: max_seats ? max_seats - seats : 0
