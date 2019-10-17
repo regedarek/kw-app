@@ -126,6 +126,7 @@ AddNumberToManagementCases	db/migrate/20190517223532_add_number_to_management_ca
 AddOpenToSupplementaryCourses	db/migrate/20180503143932_add_open_to_supplementary_courses.rb	/^class AddOpenToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddOrderIdToServices	db/migrate/20160830165219_add_order_id_to_services.rb	/^class AddOrderIdToServices < ActiveRecord::Migration[5.0]$/;"	c
 AddOrganizerEmailToCompetitions	db/migrate/20180430091639_add_organizer_email_to_competitions.rb	/^class AddOrganizerEmailToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
+AddOriginalFilenameToPhotoRequests	db/migrate/20191016153656_add_original_filename_to_photo_requests.rb	/^class AddOriginalFilenameToPhotoRequests < ActiveRecord::Migration[5.2]$/;"	c
 AddOwnerToItems	db/migrate/20160808180632_add_owner_to_items.rb	/^class AddOwnerToItems < ActiveRecord::Migration[5.0]$/;"	c
 AddPackagesToSupplementaryCourses	db/migrate/20180912190936_add_packages_to_supplementary_courses.rb	/^class AddPackagesToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddPaidToReservations	db/migrate/20160804220627_add_paid_to_reservations.rb	/^class AddPaidToReservations < ActiveRecord::Migration[5.0]$/;"	c
@@ -1300,6 +1301,7 @@ change	db/migrate/20191007131433_create_snw_applies.rb	/^  def change$/;"	f	clas
 change	db/migrate/20191014094026_add_price_to_business_courses.rb	/^  def change$/;"	f	class:AddPriceToBusinessCourses
 change	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^  def change$/;"	f	class:AddMaxSeatsToBusinessCourses
 change	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^  def change$/;"	f	class:AddCoordinatorIdToBusinessCourses
+change	db/migrate/20191016153656_add_original_filename_to_photo_requests.rb	/^  def change$/;"	f	class:AddOriginalFilenameToPhotoRequests
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
