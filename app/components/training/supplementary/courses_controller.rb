@@ -16,6 +16,7 @@ module Training
 
       def new
         @course = Training::Supplementary::CourseRecord.new
+        @course.organizator_id = current_user.id
       end
 
       def show
@@ -54,7 +55,7 @@ module Training
       def update
         @course = Training::Supplementary::CourseRecord.friendly.find(params[:id])
 
-        if @course.update(course_params.merge(organizator_id: course_params[:organizator_id]&.first))
+        if @course.update(course_params)
           redirect_to edit_supplementary_course_path(@course.id), notice: 'Course updated'
         else
           render :edit
@@ -85,7 +86,7 @@ module Training
           .permit(
             :name, :payment_type, :slug, :place, :start_date, :kind, :end_date, :application_date, :price_kw, :baner, :email_remarks,
             :price_non_kw, :remarks, :category, :price, :one_day, :active, :cash, :expired_hours, :reserve_list, :baner_type, :state,
-            :open, :packages, :limit, :last_fee_paid, organizator_id: [], package_types_attributes: [:id, :name, :cost, :_destroy]
+            :open, :packages, :limit, :last_fee_paid, :organizator_id, package_types_attributes: [:id, :name, :cost, :_destroy]
           )
       end
     end

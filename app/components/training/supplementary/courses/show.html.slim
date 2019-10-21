@@ -191,7 +191,7 @@
           b Pakiety: 
           ul
             - @course.package_types.each do |p|
-              li = "#{p.name} - #{p.cost} zł"
+              li = "#{p.name} - #{p.cost} zł (#{Training::Supplementary::SignUpRecord.where(supplementary_course_package_type_id: p.id)&.count})"
         - if @course.remarks.present?
           h5 = t('.remarks')
           .callout

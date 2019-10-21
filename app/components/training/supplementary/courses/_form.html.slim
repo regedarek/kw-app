@@ -48,9 +48,11 @@
         .large-3.columns
           span data-tooltip='' tabindex="1" title="Osoba do której będą przysyłane e-maile z pytaniami od uczestników" data-allow-html="true"
             = f.label :organizator_id, 'Kto koordynuje?*'
-          - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
-          - prepopulate = @course.organizator_id ? [{name: Db::User.find(@course.organizator_id).display_name, id: @course.organizator_id}] : nil
-          = f.text_field :organizator_id, 'data-tokeninput' => { collection: names, options: { tokenLimit: 1, prePopulate: prepopulate}}.to_json
+
+          = f.select :organizator_id,
+            Db::User.all.map { |u| [u.display_name, u.id] },
+            { },
+            { class: 'js-select-multiple' }
 
         .large-2.columns
           span data-tooltip='' tabindex="1" title="Limit osób którym zostanie przysłany link do płatności, osoby poza limitem, mogą się zapisać ale nie otrzymają linka do płatności. 0 oznacza brak limitu." data-allow-html="true"

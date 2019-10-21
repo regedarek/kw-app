@@ -45,6 +45,9 @@ table.stack
         - if user_signed_in? && current_user.admin? || user_signed_in? && current_user.roles.include?('events')
           td.text-right
             .icon-bar.five-up
+              - if @course.packages
+                span data-tooltip='' tabindex="1" title="#{sign_up&.package_type&.name_with_cost}" data-allow-html="true"
+                  = tag.i class: 'fi-eye item', style: 'margin: 5px'
               - if sign_up.payment
                 - unless sign_up.payment.paid?
                   = link_to mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }

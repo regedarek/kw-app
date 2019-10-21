@@ -14,6 +14,10 @@ module Training
 
         sign_up = Training::Supplementary::SignUpRecord.find(id)
         sign_up.update(form_outputs.to_h)
+        sign_up.update(
+          name: sign_up.user.display_name,
+          email: sign_up.user.email
+        ) if sign_up.user
 
         Right(:success)
       end
