@@ -58,7 +58,7 @@ table.stack
                     span data-tooltip='' tabindex="1" title="Klikając zwrócisz kwotę uczestnikowi minus 1.5% prowizji" data-allow-html="true"
                       = link_to refund_payment_path(sign_up.payment.id), data: { confirm: 'Czy napewno chcesz zwrócić płatność?' }, method: :post, class: 'item', style: 'margin: 5px' do
                         i.fi-refresh style='color: orange'
-              span data-tooltip='' tabindex="1" title="Klikając wyślesz ponownie link do płatności" data-allow-html="true"
+              span data-tooltip='' tabindex="1" title="Klikając wyślesz link do płatności [czerwony: wysłano nie dostarczono, niebieski: nie wysłano, zielony: wysłano i dostarczono]" data-allow-html="true"
                 = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
                   - if sign_up.sent_at
                     - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
