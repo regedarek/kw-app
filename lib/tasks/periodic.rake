@@ -2,12 +2,14 @@ desc "This task is called by the Heroku scheduler add-on"
 
 task :store_shmu => :environment do
   Scrappers::Shmu.new.call
+  Net::HTTP.get(URI('https://hc-ping.com/8a5d9b79-ed79-4270-a6d7-a40d8b90ce64'))
 end
 
 task :store_weather => :environment do
   Scrappers::Meteoblue.new.call
   Scrappers::WeatherStorage.new.call
   Scrappers::Topr.new.call
+  Net::HTTP.get(URI('https://hc-ping.com/861c60b0-4642-407a-80c3-e629f0ff2c85'))
 end
 
 task :send_reminders => :environment do

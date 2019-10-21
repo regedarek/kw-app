@@ -52,7 +52,7 @@ table.stack
                 - unless sign_up.payment.paid?
                   span data-tooltip='' tabindex="1" title="Klikając oznaczysz zapis jako opłacony" data-allow-html="true"
                     = link_to mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-                      i.fi-dollar-bill style='color: green'
+                      i.fi-dollar-bill
                 - if sign_up.payment.paid?
                   - unless sign_up.payment.refunded_at
                     span data-tooltip='' tabindex="1" title="Klikając zwrócisz kwotę uczestnikowi minus 1.5% prowizji" data-allow-html="true"
