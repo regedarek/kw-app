@@ -50,21 +50,26 @@ table.stack
                   = tag.i class: 'fi-eye item', style: 'margin: 5px'
               - if sign_up.payment
                 - unless sign_up.payment.paid?
-                  = link_to mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-                    i.fi-dollar-bill style='color: green'
+                  span data-tooltip='' tabindex="1" title="Klikając oznaczysz zapis jako opłacony" data-allow-html="true"
+                    = link_to mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+                      i.fi-dollar-bill style='color: green'
                 - if sign_up.payment.paid?
                   - unless sign_up.payment.refunded_at
-                    = link_to refund_payment_path(sign_up.payment.id), data: { confirm: 'Czy napewno chcesz zwrócić płatność?' }, method: :post, class: 'item', style: 'margin: 5px' do
-                      i.fi-refresh style='color: orange'
-              = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
-                - if sign_up.sent_at
-                  - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
-                    i.fi-mail style='color: green'
+                    span data-tooltip='' tabindex="1" title="Klikając zwrócisz kwotę uczestnikowi minus 1.5% prowizji" data-allow-html="true"
+                      = link_to refund_payment_path(sign_up.payment.id), data: { confirm: 'Czy napewno chcesz zwrócić płatność?' }, method: :post, class: 'item', style: 'margin: 5px' do
+                        i.fi-refresh style='color: orange'
+              span data-tooltip='' tabindex="1" title="Klikając wyślesz ponownie link do płatności" data-allow-html="true"
+                = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
+                  - if sign_up.sent_at
+                    - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
+                      i.fi-mail style='color: green'
+                    - else
+                      i.fi-mail style='color: red'
                   - else
-                    i.fi-mail style='color: red'
-                - else
-                  i.fi-mail
-              = link_to edit_supplementary_sign_up_path(sign_up.id), class: 'item', style: 'margin: 5px' do
-                i.fi-page-edit
-              = link_to supplementary_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'item', style: 'margin: 5px' do
-                i.fi-trash
+                    i.fi-mail
+              span data-tooltip='' tabindex="1" title="Zobacz szczegóły zapisu i je edytuj" data-allow-html="true"
+                = link_to edit_supplementary_sign_up_path(sign_up.id), class: 'item', style: 'margin: 5px' do
+                  i.fi-page-edit
+              span data-tooltip='' tabindex="1" title="Usuń zapis bez zwrotu płatności" data-allow-html="true"
+                = link_to supplementary_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'item', style: 'margin: 5px' do
+                  i.fi-trash
