@@ -51,11 +51,11 @@ table.stack
               - if sign_up.payment
                 - unless sign_up.payment.paid?
                   = link_to mark_as_paid_payment_path(sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-                    i.fi-flag
+                    i.fi-dollar-bill style='color: green'
                 - if sign_up.payment.paid?
                   - unless sign_up.payment.refunded_at
                     = link_to refund_payment_path(sign_up.payment.id), data: { confirm: 'Czy napewno chcesz zwrócić płatność?' }, method: :post, class: 'item', style: 'margin: 5px' do
-                      i.fi-dollar-bill
+                      i.fi-refresh style='color: yellow'
               = link_to send_email_supplementary_sign_up_path(sign_up.id), method: :put, class: 'item', style: 'margin: 5px' do
                 - if sign_up.sent_at
                   - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
