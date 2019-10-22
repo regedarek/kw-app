@@ -130,7 +130,9 @@
                 = z.hidden_field :email, value: current_user.email
                 = z.hidden_field :name, value: current_user.display_name
                 - if @course.question
-                  = z.text_field :question, placeholder: 'Odpowiedz na pytanie'
+                  .callout.warning
+                    | Odpowiedz na pytanie zadane w opisie wydarzenia
+                  = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
                 - if @course.price
                   - if @course.packages
                     = z.select :supplementary_course_package_type_id,
