@@ -68,6 +68,7 @@
         .large-4.columns
           = f.label :question, 'Odpowiedź'
           = f.text_field :question
+          = f.hidden_field :course_id, value: @sign_up.course_id
 
 .row
   .large-12.columns
