@@ -39,7 +39,7 @@ module Training
           )
         end
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
-        if Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
+        if !course.send_manually && Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
           sign_up.update(sent_at: Time.zone.now)
         end

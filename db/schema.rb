@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_173958) do
+ActiveRecord::Schema.define(version: 2019_10_22_183522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -682,6 +682,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_173958) do
     t.text "email_remarks"
     t.integer "state", default: 0, null: false
     t.boolean "question", default: false, null: false
+    t.boolean "send_manually", default: false, null: false
     t.index ["slug"], name: "index_supplementary_courses_on_slug", unique: true
   end
 

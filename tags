@@ -166,6 +166,7 @@ AddReserveListToSupplementaryCourses	db/migrate/20190204163511_add_reserve_list_
 AddRolesToUsers	db/migrate/20180413141137_add_roles_to_users.rb	/^class AddRolesToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddRouteTimeToMountainRoutes	db/migrate/20190419213628_add_route_time_to_mountain_routes.rb	/^class AddRouteTimeToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddRouteTypeToRoutes	db/migrate/20161008205255_add_route_type_to_routes.rb	/^class AddRouteTypeToRoutes < ActiveRecord::Migration[5.0]$/;"	c
+AddSendManuallyToSupplementaryCourses	db/migrate/20191022183522_add_send_manually_to_supplementary_courses.rb	/^class AddSendManuallyToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddSentAtToEventsSignUps	db/migrate/20190423090310_add_sent_at_to_events_sign_ups.rb	/^class AddSentAtToEventsSignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddSentAtToProfiles	db/migrate/20190204212729_add_sent_at_to_profiles.rb	/^class AddSentAtToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddSentAtToSupplementarySignUps	db/migrate/20190204170211_add_sent_at_to_supplementary_sign_ups.rb	/^class AddSentAtToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -1307,6 +1308,7 @@ change	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^  d
 change	db/migrate/20191016153656_add_original_filename_to_photo_requests.rb	/^  def change$/;"	f	class:AddOriginalFilenameToPhotoRequests
 change	db/migrate/20191022173322_add_question_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddQuestionToSupplementarySignUps
 change	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddQuestionToSupplementaryCourses
+change	db/migrate/20191022183522_add_send_manually_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddSendManuallyToSupplementaryCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

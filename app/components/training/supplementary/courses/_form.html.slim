@@ -63,22 +63,19 @@
   .large-8.columns
     .callout.secondary
       .row
-        .large-3.columns
+        .large-4.columns
           = f.check_box :one_day, class: 'js-one-day'
           span data-tooltip='' tabindex="1" title="Jeżeli wydarzenie trwa tylko jeden dzień ukrywa datę zakończenia" data-allow-html="true"
             = f.label :one_day, t('.one_day')
-        .large-3.columns
+        .large-4.columns
           = f.check_box :price, class: 'js-price'
           span data-tooltip='' tabindex="1" title="Czy wymagane jest opłacenie zapisów? Wymaga podania kwoty, aktywuje wysyłkę płatności jeżeli nie jest zaznaczona opcja płatności gotówką" data-allow-html="true"
             = f.label :price, t('.price')
-        .large-3.columns
+        .large-4.columns
           = f.check_box :packages, class: 'js-packages'
           span data-tooltip='' tabindex="1" title="Dodaje opcję kilku pakietów płatności za wydarzenie" data-allow-html="true"
             = f.label :packages, t('.packages')
-        .large-3.columns
-          = f.check_box :question
-          span data-tooltip='' tabindex="1" title="Zadaj wymagane pytanie?"
-            = f.label :question, 'Pytanie?'
+
 
 .row
   .large-8.columns
@@ -157,3 +154,11 @@
       br
       = f.check_box :reserve_list
       = f.label :reserve_list, 'Lista rezerwowa'
+      br
+      = f.check_box :send_manually
+      span data-tooltip='' tabindex="1" title="Link do płatności nie zostanie wysłany"
+        = f.label :send_manually, 'Wyślij link ręcznie'
+      br
+      = f.check_box :question
+      span data-tooltip='' tabindex="1" title="Zadaj wymagane pytanie?"
+        = f.label :question, 'Pytanie?'
