@@ -31,14 +31,16 @@ module Training
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],
             user_id: nil,
-            name: form_outputs[:name]
+            name: form_outputs[:name],
+            question: nil
           )
         else
           sign_up = repository.sign_up!(
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],
             user_id: user.id,
-            name: user.display_name
+            name: user.display_name,
+            question: nil
           )
         end
 

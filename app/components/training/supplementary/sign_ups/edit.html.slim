@@ -2,11 +2,13 @@
   = render 'form', f: f
 
   .row
-    .large-4.columns
+    .large-3.columns
       = f.submit 'Zaktualizuj', class: 'button expanded large success'
-    .large-4.columns
+    .large-3.columns
       = link_to 'zobacz wydarzenie', polish_event_path(@sign_up.course.slug), class: 'button expanded large success'
-    .large-4.columns
+    .large-3.columns
+      = link_to 'edytuj wydarzenie', edit_supplementary_course_path(@sign_up.course.slug), class: 'button expanded large'
+    .large-3.columns
       = link_to t('.back'), :back, class: 'secondary button large expanded'
 
 .row
