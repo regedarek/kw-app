@@ -96,7 +96,7 @@ module Training
         )
       end
 
-      def sign_up!(name:, email:, user_id:, course_id:)
+      def sign_up!(name:, email:, user_id:, course_id:, question:)
         course = Training::Supplementary::CourseRecord.find(course_id)
         expired_at = unless course.expired_hours.zero?
           Time.zone.now + course.expired_hours.hours
@@ -108,7 +108,8 @@ module Training
           course_id: course_id,
           email: email,
           code: SecureRandom.hex(13),
-          expired_at: expired_at
+          expired_at: expired_at,
+          question: question
         )
         sign_up.create_payment(dotpay_id: SecureRandom.hex(13))
         sign_up

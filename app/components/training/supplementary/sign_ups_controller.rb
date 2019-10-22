@@ -121,7 +121,7 @@ module Training
       end
 
       def sign_up_params
-        params.require(:sign_up).permit(:name, :email, :user_id, :course_id, :supplementary_course_package_type_id, :expired_at)
+        params.require(:sign_up).permit(:name, :email, :user_id, :course_id, :supplementary_course_package_type_id, :expired_at, :question)
       end
     end
   end

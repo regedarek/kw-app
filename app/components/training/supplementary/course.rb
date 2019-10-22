@@ -31,6 +31,7 @@ module Training
       attribute :last_fee_paid, Types::Strict::Bool
       attribute :active, Types::Strict::Bool
       attribute :one_day, Types::Strict::Bool
+      attribute :question, Types::Strict::Bool
       attribute :limit, Types::Strict::Integer
 
       def sign_ups
@@ -71,6 +72,7 @@ module Training
             active: record.active,
             expired_hours: record.expired_hours,
             limit: record.limit,
+            question: record.question,
             open: record.open,
             packages: record.packages,
             reserve_list: record.reserve_list,

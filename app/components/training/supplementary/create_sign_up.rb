@@ -26,14 +26,16 @@ module Training
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],
             name: form_outputs[:name],
-            user_id: form_outputs[:user_id]
+            user_id: form_outputs[:user_id],
+            question: form_outputs[:question]
           )
         else
           sign_up = repository.sign_up!(
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],
             name: form_outputs[:name],
-            user_id: nil
+            user_id: nil,
+            question: form_outputs[:question]
           )
         end
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages

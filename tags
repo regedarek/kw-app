@@ -153,6 +153,8 @@ AddPreclosedDateToContracts	db/migrate/20190605212210_add_preclosed_date_to_cont
 AddPriceToBusinessCourses	db/migrate/20191014094026_add_price_to_business_courses.rb	/^class AddPriceToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddPriceToSupplementaryCourses	db/migrate/20180502143718_add_price_to_supplementary_courses.rb	/^class AddPriceToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddProfessionToProfiles	db/migrate/20170509123335_add_profession_to_profiles.rb	/^class AddProfessionToProfiles < ActiveRecord::Migration[5.0]$/;"	c
+AddQuestionToSupplementaryCourses	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^class AddQuestionToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
+AddQuestionToSupplementarySignUps	db/migrate/20191022173322_add_question_to_supplementary_sign_ups.rb	/^class AddQuestionToSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddReactivationToMembershipFees	db/migrate/20170220140949_add_reactivation_to_membership_fees.rb	/^class AddReactivationToMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
 AddRefreshTokenToUsers	db/migrate/20170505092955_add_refresh_token_to_users.rb	/^class AddRefreshTokenToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddRefundedAtToPayments	db/migrate/20190610212043_add_refunded_at_to_payments.rb	/^class AddRefundedAtToPayments < ActiveRecord::Migration[5.2]$/;"	c
@@ -1303,6 +1305,8 @@ change	db/migrate/20191014094026_add_price_to_business_courses.rb	/^  def change
 change	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^  def change$/;"	f	class:AddMaxSeatsToBusinessCourses
 change	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^  def change$/;"	f	class:AddCoordinatorIdToBusinessCourses
 change	db/migrate/20191016153656_add_original_filename_to_photo_requests.rb	/^  def change$/;"	f	class:AddOriginalFilenameToPhotoRequests
+change	db/migrate/20191022173322_add_question_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddQuestionToSupplementarySignUps
+change	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddQuestionToSupplementaryCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1978,7 +1982,7 @@ siblings	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7
 sign_in	spec/support/controller_helper.rb	/^  def sign_in(user = double('user'))$/;"	f	class:ControllerHelper
 sign_up	app/components/events/competitions/sign_up_mailer.rb	/^      def sign_up(sign_up_id)$/;"	f	class:Events.Competitions.SignUpMailer
 sign_up	app/components/training/supplementary/sign_up_mailer.rb	/^      def sign_up(sign_up_id)$/;"	f	class:Training.Supplementary.SignUpMailer
-sign_up!	app/components/training/supplementary/repository.rb	/^      def sign_up!(name:, email:, user_id:, course_id:)$/;"	f
+sign_up!	app/components/training/supplementary/repository.rb	/^      def sign_up!(name:, email:, user_id:, course_id:, question:)$/;"	f
 sign_up_accept_first	app/components/events/competitions/sign_up_mailer.rb	/^      def sign_up_accept_first(sign_up_id)$/;"	f	class:Events.Competitions.SignUpMailer
 sign_up_params	app/components/events/competitions/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Events.Competitions
 sign_up_params	app/components/training/supplementary/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Training.Supplementary.SignUpsController.manually

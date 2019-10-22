@@ -129,6 +129,8 @@
                 = z.hidden_field :user_id, value: current_user.id
                 = z.hidden_field :email, value: current_user.email
                 = z.hidden_field :name, value: current_user.display_name
+                - if @course.question
+                  = z.text_field :question, placeholder: 'Odpowiedz na pytanie'
                 - if @course.price
                   - if @course.packages
                     = z.select :supplementary_course_package_type_id,

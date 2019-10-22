@@ -10,6 +10,7 @@ pl:
         name: Imię i nazwisko
         email: E-mail
         package_required: Pakiet
+        question_required: Odpowiedź
         user_id: Użytkownik
         expired_at: Wygasa
         supplementary_course_package_type_id: Pakiet

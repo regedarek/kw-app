@@ -46,8 +46,16 @@ table.stack
           td.text-right
             .icon-bar.five-up
               - if @course.packages
-                span data-tooltip='' tabindex="1" title="#{sign_up&.package_type&.name_with_cost}" data-allow-html="true"
-                  = tag.i class: 'fi-eye item', style: 'margin: 5px'
+                - if @course.question
+                  span data-tooltip='' tabindex="1" title="#{sign_up&.package_type&.name_with_cost}<hr> Odpowiedź: #{sign_up&.question}" data-allow-html="true"
+                    = tag.i class: 'fi-eye item', style: 'margin: 5px'
+                - else
+                  span data-tooltip='' tabindex="1" title="#{sign_up&.package_type&.name_with_cost}" data-allow-html="true"
+                    = tag.i class: 'fi-eye item', style: 'margin: 5px'
+              - else
+                - if @course.question
+                  span data-tooltip='' tabindex="1" title="Odpowiedź: #{sign_up&.question}" data-allow-html="true"
+                    = tag.i class: 'fi-eye item', style: 'margin: 5px'
               - if sign_up.payment
                 - unless sign_up.payment.paid?
                   span data-tooltip='' tabindex="1" title="Klikając oznaczysz zapis jako opłacony" data-allow-html="true"

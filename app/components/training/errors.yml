@@ -7,6 +7,7 @@ pl:
 
   errors:
     package_required: 'musi zostać wybrany!'
+    question_required: 'musi zostać wypełniona!'
     filled?: "musi być wypełnione"
     rules:
       name:
