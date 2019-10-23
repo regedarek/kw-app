@@ -229,6 +229,7 @@ Admin	app/controllers/admin/users_controller.rb	/^module Admin$/;"	m
 Animation	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function Animation( elem, properties, options ) {$/;"	f
 Api	app/components/business/api/courses_controller.rb	/^  module Api$/;"	m	class:Business
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
+Api	app/components/management/snw/api/snw_applies_controller.rb	/^    module Api$/;"	m	class:Management.Snw
 Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/controllers/api/base_controller.rb	/^module Api$/;"	m
@@ -565,6 +566,7 @@ Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
 Management	app/components/management/project_users_record.rb	/^module Management$/;"	m
 Management	app/components/management/projects_controller.rb	/^module Management$/;"	m
+Management	app/components/management/snw/api/snw_applies_controller.rb	/^module Management$/;"	m
 Management	app/components/management/snw/mailer.rb	/^module Management$/;"	m
 Management	app/components/management/snw/snw_applies_controller.rb	/^module Management$/;"	m
 Management	app/components/management/snw/snw_apply_record.rb	/^module Management$/;"	m
@@ -777,9 +779,11 @@ SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/
 SkiRoute	app/components/training/activities/ski_route.rb	/^    class SkiRoute < Dry::Struct$/;"	c	class:Training.Activities
 SkiRouteForm	app/components/training/activities/ski_route_form.rb	/^    class SkiRouteForm < Dry::Validation::Schema$/;"	c	class:Training.Activities
 SkiRoutesController	app/components/training/activities/ski_routes_controller.rb	/^    class SkiRoutesController < ApplicationController$/;"	c	class:Training.Activities
+Snw	app/components/management/snw/api/snw_applies_controller.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/mailer.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/snw_applies_controller.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/snw_apply_record.rb	/^  module Snw$/;"	m	class:Management
+SnwAppliesController	app/components/management/snw/api/snw_applies_controller.rb	/^      class SnwAppliesController < ApplicationController$/;"	c	class:Management.Snw.Api
 SnwAppliesController	app/components/management/snw/snw_applies_controller.rb	/^    class SnwAppliesController < ApplicationController$/;"	c	class:Management.Snw
 SnwApplyRecord	app/components/management/snw/snw_apply_record.rb	/^    class SnwApplyRecord < ActiveRecord::Base$/;"	c	class:Management.Snw
 SnwProfile	app/components/training/questionare/snw_profile.rb	/^    class SnwProfile < Dry::Struct$/;"	c	class:Training.Questionare
@@ -1638,6 +1642,7 @@ index	app/components/library/admin/tags_controller.rb	/^      def index$/;"	f	cl
 index	app/components/library/items_controller.rb	/^    def index$/;"	f	class:Library.ItemsController
 index	app/components/management/news/informations_controller.rb	/^      def index$/;"	f	class:Management.News.InformationsController
 index	app/components/management/projects_controller.rb	/^    def index$/;"	f	class:Management.ProjectsController
+index	app/components/management/snw/api/snw_applies_controller.rb	/^        def index$/;"	f	class:Management.Snw.Api.SnwAppliesController
 index	app/components/management/snw/snw_applies_controller.rb	/^      def index$/;"	f	class:Management.Snw.SnwAppliesController
 index	app/components/management/voting/cases_controller.rb	/^      def index$/;"	f	class:Management.Voting.CasesController
 index	app/components/notification_center/notifications_controller.rb	/^    def index$/;"	f	class:NotificationCenter.NotificationsController
