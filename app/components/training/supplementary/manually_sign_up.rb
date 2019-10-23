@@ -45,9 +45,9 @@ module Training
         end
 
         if course.packages
-          sign_up.update(sent_at: Time.zone.now, admin_id: admin_id, supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id])
+          sign_up.update(sent_user_id: admin_id, sent_at: Time.zone.now, admin_id: admin_id, supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id])
         else
-          sign_up.update(sent_at: Time.zone.now, admin_id: admin_id)
+          sign_up.update(sent_user_id: admin_id, sent_at: Time.zone.now, admin_id: admin_id)
         end
         Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
         Right(:success)
