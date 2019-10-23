@@ -13,8 +13,8 @@ module Training
         required(:name).filled(:str?)
         required(:place).filled(:str?)
         optional(:email_remarks).maybe(:str?)
-        optional(:question).maybe(:bool?)
-        optional(:send_manually).maybe(:bool?)
+        optional(:question).maybe(:str?)
+        optional(:send_manually).maybe(:str?)
         required(:payment_type).filled
       end
     end

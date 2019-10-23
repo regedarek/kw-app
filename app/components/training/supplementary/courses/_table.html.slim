@@ -22,7 +22,7 @@ table.stack
       tr
         td.text-center = image_tag "#{course.category}.png", size: '40x40'
         td.text-center
-          = link_to course.name, polish_event_path(course.slug)
+          = link_to course.name, polish_event_slug_path(course.slug)
         td.text-center = course.place
         td.text-center
           - if course.start_date && course.end_date
@@ -53,7 +53,7 @@ table.stack
         td.text-center.show-for-small-only
           - if user_signed_in?
             - if current_user.admin? || current_user.id == course.organizator_id
-              = link_to t('.show'), polish_event_path(course.id)
+              = link_to t('.show'), polish_event_slug_path(course.slug)
               br
               = link_to t('.edit'), edit_supplementary_course_path(course.id)
               br
@@ -65,6 +65,6 @@ table.stack
               i.fi-list-thumbnails data-toggle="example-dropdown-#{course.id}" data-auto-focus="true"
               div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical
-                  li= link_to t('.show'), polish_event_path(course.id)
+                  li= link_to t('.show'), polish_event_slug_path(course.slug)
                   li= link_to t('.edit'), edit_supplementary_course_path(course.id)
                   li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete

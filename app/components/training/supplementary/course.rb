@@ -32,6 +32,7 @@ module Training
       attribute :active, Types::Strict::Bool
       attribute :one_day, Types::Strict::Bool
       attribute :question, Types::Strict::Bool
+      attribute :send_manually, Types::Strict::Bool
       attribute :limit, Types::Strict::Integer
 
       def sign_ups
@@ -73,6 +74,7 @@ module Training
             expired_hours: record.expired_hours,
             limit: record.limit,
             question: record.question,
+            send_manually: record.send_manually,
             open: record.open,
             packages: record.packages,
             reserve_list: record.reserve_list,

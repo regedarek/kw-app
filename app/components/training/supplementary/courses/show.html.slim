@@ -133,6 +133,8 @@
                   .callout.warning
                     | Odpowiedz na pytanie zadane w opisie wydarzenia
                   = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
+                - else
+                  = z.hidden_field :question, value: nil
                 - if @course.price
                   - if @course.packages
                     = z.select :supplementary_course_package_type_id,

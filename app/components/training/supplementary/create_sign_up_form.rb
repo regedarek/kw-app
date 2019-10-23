@@ -10,7 +10,6 @@ module Training
       define! do
         required(:name).filled(:str?)
         required(:email).filled(:str?)
-        optional(:question).maybe(:str?)
         required(:course_id).filled(:str?)
         validate(question_required: [:question, :course_id]) do |question, course_id|
           course = Training::Supplementary::CourseRecord.find(course_id)
@@ -29,6 +28,7 @@ module Training
         end
         optional(:supplementary_course_package_type_id).maybe(:str?)
         optional(:user_id)
+        optional(:question).maybe(:str?)
       end
     end
   end
