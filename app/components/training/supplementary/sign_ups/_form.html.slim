@@ -10,88 +10,89 @@
   .large-12.columns
     .callout.primary
       .row
-        .large-4.columns
+        .large-3.columns
           = f.label :name
           = f.text_field :name
 
-        .large-4.columns
+        .large-3.columns
           = f.label :email
           = f.text_field :email
 
-        .large-4.columns
+        .large-3.columns
+          = f.label :expired_at
+          = f.datetime_field :expired_at
+
+        .large-3.columns
           = f.label :user_id
           = f.select :user_id,
             Db::User.all.map { |u| [u.display_name, u.id] },
             {include_blank: true },
             { class: 'js-select-multiple', include_blank: true }
-      .row
-        - if @sign_up.course.packages?
-          .large-4.columns
-            = f.label :supplementary_course_package_type_id
-            = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
 
-        .large-2.columns
-          br
-          .text-center
-            - if @sign_up&.payment&.paid?
-              span class='label success'
-                | opłacono
-            - else
-              span class='label alert'
-                | nieopłacono
-
-        .large-2.columns
-          br
-          .text-center
-            - if @limiter.in_limit?(@sign_up)
-              span class='label success'
-                | w limicie
-            - else
-              span class='label alert'
-                | poza limitem
-
-        - if @sign_up.payment
-          .large-2.columns
-            br
-            .text-center
-              - if @sign_up.payment.cash?
-                span class='label success'
-                  | Gotówka
-              - else
-                span class='label alert'
-                  | Gotówka
-
-        .large-4.columns
-          = f.label :expired_at
-          = f.datetime_field :expired_at
-
-        .large-4.columns
-          = f.label :question, 'Odpowiedź'
-          = f.text_field :question
-          = f.hidden_field :course_id, value: @sign_up.course_id
+      - if @sign_up.admin_id
+        .row
+          .large-12.columns
+            | Ręcznie zapisał/a: 
+            = Db::User.find(@sign_up.admin_id)&.display_name
 
 .row
-  .large-12.columns
-    ul
-      - if @sign_up.payment
-        - if @sign_up.payment.paid?
-          - if @sign_up.payment.refunded_at
-            li
-              | Zwrócono: 
-              = @sign_up.payment.refunded_at.strftime("%d/%m/%Y %H:%M")
+  - if @sign_up.course.packages?
+    .large-6.columns
+      .callout.primary
+        = f.label :supplementary_course_package_type_id
+        = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
+
+  - if @sign_up.course.question
+    .large-6.columns
+      .callout.primary
+        = f.label :question, 'Odpowiedź'
+        = f.text_field :question
+        = f.hidden_field :course_id, value: @sign_up.course_id
+
+- if @sign_up.payment
+  .row
+    - if @sign_up.sent_at
+      .large-8.columns
+        .callout.warning
+          = "#{Db::User.find(@sign_up.sent_user_id).display_name} wysłał e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
+      .large-4.columns
+        .callout.warning
+          = link_to 'Wyślij ponownie', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
+    - else
+      .large-12.columns
+        .callout.warning
+          = link_to 'Wyślij e-mail z linkiem do płatności', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
+
+  - if @sign_up.payment
+    .row
+      .large-3.columns
+        .callout.alert
+          b Status: 
+          = "#{I18n.t(@sign_up.payment.state)}"
+
+      .large-3.columns
+        .callout.alert
+          = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+
+      .large-3.columns
+        .callout.alert
+          - if @sign_up.payment.cash?
+            b Gotówka 
+            = "przez #{Db::User.find(@sign_up.payment.cash_user_id).display_name}"
           - else
-            li
-              = link_to refund_payment_path(@sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
-                | Zwróć pełną kwotę
-      - if @sign_up.admin_id
-        li = "Dodano ręcznie przez #{Db::User.find(@sign_up.admin_id)&.display_name}"
-      - if @sign_up.sent_at
-        li = "Wysłano e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
-      - else
-        li Nie wysłano jeszcze e-maila z linkiem do płatności
-      li
-        = link_to 'Wyślij e-mail', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
-      li
-        = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-      li
-        = link_to 'Usuń', supplementary_sign_up_path(@sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }
+            - if @sign_up.payment && @sign_up.payment.payment_url
+              = link_to 'Dotpay', @sign_up.payment.payment_url
+            - else
+              | Nie utworzono linku
+
+      - if @sign_up.payment.paid? && @sign_up.payment.payment_url
+        .large-3.columns
+          .callout.alert
+            - if @sign_up.payment.refunded_at
+              li
+                | Zwrócono: 
+                = @sign_up.payment.refunded_at.strftime("%d/%m/%Y %H:%M")
+            - else
+              li
+                = link_to refund_payment_path(@sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
+                  | Zwróć pełną kwotę

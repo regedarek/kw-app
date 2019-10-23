@@ -2,18 +2,20 @@
   = render 'form', f: f
 
   .row
+    .large-12.columns
+      hr
+  .row
     .large-3.columns
       = f.submit 'Zaktualizuj', class: 'button expanded large success'
+    .large-2.columns
+      = link_to 'Zobacz', polish_event_path(@sign_up.course.slug), class: 'button expanded large primary'
+    .large-2.columns
+      = link_to 'Edytuj', edit_supplementary_course_path(@sign_up.course.slug), class: 'button expanded warning large'
+    .large-2.columns
+        = link_to 'Usuń', supplementary_sign_up_path(@sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'button expanded alert large'
     .large-3.columns
-      = link_to 'zobacz wydarzenie', polish_event_path(@sign_up.course.slug), class: 'button expanded large success'
-    .large-3.columns
-      = link_to 'edytuj wydarzenie', edit_supplementary_course_path(@sign_up.course.slug), class: 'button expanded large'
-    .large-3.columns
-      = link_to t('.back'), :back, class: 'secondary button large expanded'
+      = link_to 'Wróć', :back, class: 'secondary button large expanded'
 
-.row
-  .large-12.columns
-    hr
 
 - if user_signed_in?
   .row
