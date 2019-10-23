@@ -55,7 +55,11 @@
       .large-8.columns
         .callout.warning
           - if @sign_up.sent_user_id
-            = "#{Db::User.find(@sign_up.sent_user_id).display_name} wysłał e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
+            b= Db::User.find(@sign_up.sent_user_id).display_name
+            = " wysłał/a e-mail z linkiem do płatności "
+          - else
+            = "Wysłano e-mail z linkiem do płatności "
+            b= @sign_up.sent_at.strftime("%d/%m/%Y %H:%M")
       .large-4.columns
         .callout.warning
           = link_to 'Wyślij ponownie', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
