@@ -14,7 +14,7 @@
     .large-2.columns
         = link_to 'Usuń', supplementary_sign_up_path(@sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'button expanded alert large'
     .large-3.columns
-      = link_to 'Wróć', :back, class: 'secondary button large expanded'
+      = link_to 'Wróć', supplementary_sign_ups_path, class: 'secondary button large expanded'
 
 
 - if user_signed_in?
