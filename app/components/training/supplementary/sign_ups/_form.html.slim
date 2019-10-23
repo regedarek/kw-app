@@ -72,9 +72,14 @@
   - if @sign_up.payment
     .row
       .large-3.columns
-        .callout.alert
-          b Status: 
-          = "#{I18n.t(@sign_up.payment.state)}"
+        - if @sign_up.payment.paid?
+          .callout.success
+            b Status: 
+            = "#{I18n.t(@sign_up.payment.state)}"
+        - else
+          .callout.alert
+            b Status: 
+            = "#{I18n.t(@sign_up.payment.state)}"
 
       - unless @sign_up.payment.paid?
         .large-3.columns
