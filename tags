@@ -684,6 +684,7 @@ RemoveIndexFromMountainRoutes	db/migrate/20190419215905_remove_index_from_mounta
 RemoveIndexesFromMountainRoutes	db/migrate/20190419201102_remove_indexes_from_mountain_routes.rb	/^class RemoveIndexesFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 RemovePaidFromReservations	db/migrate/20160823174538_remove_paid_from_reservations.rb	/^class RemovePaidFromReservations < ActiveRecord::Migration[5.0]$/;"	c
 RemovePaymentIdFromMembershipFees	db/migrate/20170417110107_remove_payment_id_from_membership_fees.rb	/^class RemovePaymentIdFromMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
+RemovePaymentIdFromSupplementarySignUps	db/migrate/20191023183025_remove_payment_id_from_supplementary_sign_ups.rb	/^class RemovePaymentIdFromSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
 RemovePeakIdFromMountainRoutes	db/migrate/20170419230437_remove_peak_id_from_mountain_routes.rb	/^class RemovePeakIdFromMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 RemoveRouteTimeFromMountainRoutes	db/migrate/20190424123350_remove_route_time_from_mountain_routes.rb	/^class RemoveRouteTimeFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 RemoveTermsOfServiceFromEventsSignUps	db/migrate/20180112122318_remove_terms_of_service_from_events_sign_ups.rb	/^class RemoveTermsOfServiceFromEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -1309,6 +1310,7 @@ change	db/migrate/20191016153656_add_original_filename_to_photo_requests.rb	/^  
 change	db/migrate/20191022173322_add_question_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddQuestionToSupplementarySignUps
 change	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddQuestionToSupplementaryCourses
 change	db/migrate/20191022183522_add_send_manually_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddSendManuallyToSupplementaryCourses
+change	db/migrate/20191023183025_remove_payment_id_from_supplementary_sign_ups.rb	/^  def change$/;"	f	class:RemovePaymentIdFromSupplementarySignUps
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

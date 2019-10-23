@@ -174,18 +174,33 @@
                   - if @course.open || @course.limit == 0
                   - else
                     - if @limiter.in_limit?(@current_user_sign_up)
-                      = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button expanded large'
-                      - if @course.expired_hours.zero?
-                        .callout.success
-                          | Zmieściłeś się w limicie prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
+                      - if @course.send_manually
+                        - if @current_user_sign_up.sent_at
+                          = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button expanded large'
+                          - if @course.expired_hours.zero?
+                            .callout.success
+                              | Zmieściłeś się w limicie prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
+                          - else
+                            .callout.success
+                              | Zmieściłeś się w limicie.
+                              br
+                              | Opłać zapis do: 
+                              = @current_user_sign_up.expired_at&.strftime("%d/%m/%Y %R")
+                              br
+                              b Po tym czasie twój zapis zostanie usunięty.
                       - else
-                        .callout.success
-                          | Zmieściłeś się w limicie.
-                          br
-                          | Opłać zapis do: 
-                          = @current_user_sign_up.expired_at&.strftime("%d/%m/%Y %R")
-                          br
-                          b Po tym czasie twój zapis zostanie usunięty.
+                        = link_to 'Opłać', charge_payment_url(@current_user_sign_up.payment.id), class: 'button expanded large'
+                        - if @course.expired_hours.zero?
+                          .callout.success
+                            | Zmieściłeś się w limicie prosimy opłać jak najszybciej swój zapis aby nie blokować miejsca
+                        - else
+                          .callout.success
+                            | Zmieściłeś się w limicie.
+                            br
+                            | Opłać zapis do: 
+                            = @current_user_sign_up.expired_at&.strftime("%d/%m/%Y %R")
+                            br
+                            b Po tym czasie twój zapis zostanie usunięty.
                     - else
                       .callout.warning
                         | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
