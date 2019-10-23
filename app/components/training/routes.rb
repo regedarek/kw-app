@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :sign_ups do
         member do
           put :send_email
+          put :cancel_cash_payment
         end
         collection do
           get :cancel

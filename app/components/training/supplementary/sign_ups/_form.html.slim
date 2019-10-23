@@ -70,15 +70,18 @@
           b Status: 
           = "#{I18n.t(@sign_up.payment.state)}"
 
-      .large-3.columns
-        .callout.alert
-          = link_to 'Oznacz jako opłacone', mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+      - unless @sign_up.payment.paid?
+        .large-3.columns
+          .callout.alert
+            = link_to 'Oznacz jako opłacone gotówką', mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
 
       .large-3.columns
         .callout.alert
           - if @sign_up.payment.cash?
             b Gotówka 
             = "przez #{Db::User.find(@sign_up.payment.cash_user_id).display_name}"
+            br
+            = link_to 'Anuluj', cancel_cash_payment_supplementary_sign_up_path(@sign_up.id), method: :put
           - else
             - if @sign_up.payment && @sign_up.payment.payment_url
               = link_to 'Dotpay', @sign_up.payment.payment_url

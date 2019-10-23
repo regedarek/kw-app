@@ -61,6 +61,17 @@ module Training
         end
       end
 
+      def cancel_cash_payment
+        if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
+          sign_up = Training::Supplementary::SignUpRecord.find(params[:id])
+          sign_up.payment.update(cash: false, cash_user_id: current_user.id, state: 'unpaid')
+
+          redirect_back(fallback_location: polish_event_path(sign_up.course.id))
+        else
+          redirect_to polish_event_path(sign_up.course.id), alert: 'Nie masz uprawnień!'
+        end
+      end
+
       def send_email
         if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
           sign_up = Training::Supplementary::SignUpRecord.find(params[:id])

@@ -170,6 +170,7 @@ AddSendManuallyToSupplementaryCourses	db/migrate/20191022183522_add_send_manuall
 AddSentAtToEventsSignUps	db/migrate/20190423090310_add_sent_at_to_events_sign_ups.rb	/^class AddSentAtToEventsSignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddSentAtToProfiles	db/migrate/20190204212729_add_sent_at_to_profiles.rb	/^class AddSentAtToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddSentAtToSupplementarySignUps	db/migrate/20190204170211_add_sent_at_to_supplementary_sign_ups.rb	/^class AddSentAtToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
+AddSentUserIdToSupplementarySignUps	db/migrate/20191023195250_add_sent_user_id_to_supplementary_sign_ups.rb	/^class AddSentUserIdToSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddSessionsTable	db/migrate/20170219000508_add_sessions_table.rb	/^class AddSessionsTable < ActiveRecord::Migration[5.0]$/;"	c
 AddSingleToCompetitions	db/migrate/20180109213000_add_single_to_competitions.rb	/^class AddSingleToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddSingleToEventSignUps	db/migrate/20180109200332_add_single_to_event_sign_ups.rb	/^class AddSingleToEventSignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -1021,6 +1022,7 @@ call	app/components/training/supplementary/manually_sign_up.rb	/^      def call(
 call	app/components/training/supplementary/update_sign_up.rb	/^      def call(id:, raw_inputs:)$/;"	f	class:Training.Supplementary.UpdateSignUp
 cancel	app/components/training/supplementary/sign_ups_controller.rb	/^      def cancel$/;"	f	class:Training.Supplementary.SignUpsController.manually
 cancel_admin	app/controllers/admin/users_controller.rb	/^    def cancel_admin$/;"	f	class:Admin.UsersController
+cancel_cash_payment	app/components/training/supplementary/sign_ups_controller.rb	/^      def cancel_cash_payment$/;"	f	class:Training.Supplementary.SignUpsController.manually
 cancel_curator	app/controllers/admin/users_controller.rb	/^    def cancel_curator$/;"	f	class:Admin.UsersController
 case_params	app/components/management/voting/cases_controller.rb	/^      def case_params$/;"	f
 categories	app/components/training/supplementary/course_record.rb	/^      def categories$/;"	f	class:Training.Supplementary.CourseRecord
@@ -1311,6 +1313,7 @@ change	db/migrate/20191022173322_add_question_to_supplementary_sign_ups.rb	/^  d
 change	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddQuestionToSupplementaryCourses
 change	db/migrate/20191022183522_add_send_manually_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddSendManuallyToSupplementaryCourses
 change	db/migrate/20191023183025_remove_payment_id_from_supplementary_sign_ups.rb	/^  def change$/;"	f	class:RemovePaymentIdFromSupplementarySignUps
+change	db/migrate/20191023195250_add_sent_user_id_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddSentUserIdToSupplementarySignUps
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
