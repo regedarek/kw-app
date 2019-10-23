@@ -54,10 +54,12 @@
     - if @sign_up.sent_at
       .large-8.columns
         .callout.warning
-          = "#{Db::User.find(@sign_up.sent_user_id).display_name} wysłał e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
+          - if @sign_up.sent_user_id
+            = "#{Db::User.find(@sign_up.sent_user_id).display_name} wysłał e-mail z linkiem do płatności #{@sign_up.sent_at.strftime("%d/%m/%Y %H:%M")}"
       .large-4.columns
         .callout.warning
           = link_to 'Wyślij ponownie', send_email_supplementary_sign_up_path(@sign_up.id), method: :put
+
     - else
       .large-12.columns
         .callout.warning
@@ -79,7 +81,8 @@
         .callout.alert
           - if @sign_up.payment.cash?
             b Gotówka 
-            = "przez #{Db::User.find(@sign_up.payment.cash_user_id).display_name}"
+            - if @sign_up.payment.cash_user_id
+              = "przez #{Db::User.find(@sign_up.payment.cash_user_id).display_name}"
             br
             = link_to 'Anuluj', cancel_cash_payment_supplementary_sign_up_path(@sign_up.id), method: :put
           - else
@@ -92,10 +95,8 @@
         .large-3.columns
           .callout.alert
             - if @sign_up.payment.refunded_at
-              li
-                | Zwrócono: 
-                = @sign_up.payment.refunded_at.strftime("%d/%m/%Y %H:%M")
+              | Zwrócono: 
+              = @sign_up.payment.refunded_at.strftime("%d/%m/%Y %H:%M")
             - else
-              li
-                = link_to refund_payment_path(@sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
-                  | Zwróć pełną kwotę
+              = link_to refund_payment_path(@sign_up.payment.id), method: :post, class: 'item', style: 'margin: 5px' do
+                | Zwróć pełną kwotę

@@ -4,6 +4,7 @@
   .row
     .large-12.columns
       hr
+
   .row
     .large-3.columns
       = f.submit 'Zaktualizuj', class: 'button expanded large success'
@@ -12,7 +13,7 @@
     .large-3.columns
       = link_to 'Edytuj', edit_supplementary_course_path(@sign_up.course.slug), class: 'button expanded warning large'
     .large-3.columns
-        = link_to 'Usuń', supplementary_sign_up_path(@sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'button expanded alert large'
+      = link_to 'Usuń', supplementary_sign_up_path(@sign_up.id), method: :delete, data: { confirm: 'Czy napewno chcesz usunąć?' }, class: 'button expanded alert large'
 
 
 - if user_signed_in?
