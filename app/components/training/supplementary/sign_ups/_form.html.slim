@@ -91,7 +91,7 @@
             - else
               | Nie utworzono linku
 
-      - if @sign_up.payment.paid? && @sign_up.payment.payment_url
+      - if @sign_up.payment.paid? && @sign_up.payment.payment_url && !@sign_up.payment.cash
         .large-3.columns
           .callout.alert
             - if @sign_up.payment.refunded_at
