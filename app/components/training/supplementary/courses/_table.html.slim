@@ -56,8 +56,6 @@ table.stack
               = link_to t('.show'), polish_event_slug_path(course.slug)
               br
               = link_to t('.edit'), edit_supplementary_course_path(course.id)
-              br
-              = link_to t('.sign_up_destroy'), supplementary_sign_up_path(course.id), method: :delete
 
         - if user_signed_in?
           - if current_user.admin? || current_user.id == course.organizator_id || current_user.roles.include?('events')
