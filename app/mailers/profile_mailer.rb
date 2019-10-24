@@ -49,41 +49,41 @@ class ProfileMailer < ApplicationMailer
     end
     pdf.grid([1,0], [1,2]).bounding_box do
       pdf.stroke_horizontal_rule
-      pdf.move_down 10
+      pdf.move_down 5
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf" do
         pdf.text 'Deklaracja członkowska', align: :center
       end
-      pdf.move_down 15
+      pdf.move_down 12
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
         pdf.text 'Proszę o przyjęcie mnie w poczet członków zwyczajnych Klubu Wysokogórskiego Kraków.', align: :left, size: 8
-        pdf.move_down 15
+        pdf.move_down 5
         pdf.text "Imię i Nazwisko: #{@profile.first_name} #{@profile.last_name}", align: :left, size: 9
       end
     end
     pdf.grid([2,0], [2,2]).bounding_box do
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
         pdf.text "Data i miejsce urodzenia: #{@profile.birth_date}, #{@profile.birth_place}", align: :left, size: 9
-        pdf.move_down 5
-        pdf.text "Adres zamieszkania: #{@profile.main_address}", align: :left, size: 9
-        pdf.move_down 5
+        pdf.move_down 3
+        pdf.text "Adres zamieszkania: #{@profile.optional_address}, #{@profile.postal_code}, #{@profile.city}", align: :left, size: 9
+        pdf.move_down 3
         pdf.text "Numer telefonu: #{@profile.phone}", align: :left, size: 9
-        pdf.move_down 5
+        pdf.move_down 3
         pdf.text "Adres email: #{@profile.email}", align: :left, size: 9
-        pdf.move_down 5
+        pdf.move_down 3
       end
     end
     pdf.grid([3,0], [3,2]).bounding_box do
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
         pdf.text "Rodzaj ukończonych kursów:", align: :left, size: 9
         @profile.acomplished_courses.present? && @profile.acomplished_courses.each do |course|
-          pdf.move_down 3
+          pdf.move_down 2
           pdf.text "• " + I18n.t("activemodel.attributes.user_management_profile_form.profile_acomplished_courses_#{course}"), size: 8, indent_paragraphs: 10
         end
       end
     end
     pdf.grid([4,0], [4,2]).bounding_box do
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-        pdf.text I18n.t('activemodel.attributes.user_management_profile_form.terms_of_service_info'), size: 5, indent_paragraphs: 10
+        pdf.text I18n.t('activemodel.attributes.user_management_profile_form.terms_of_service_info'), size: 4, indent_paragraphs: 10
       end
     end
     pdf.grid([5,0], [5,2]).bounding_box do
@@ -94,8 +94,6 @@ class ProfileMailer < ApplicationMailer
         pdf.text "1." + 'Fotografie 3,5 cm x 4,5 cm - 2 szt.', indent_paragraphs: 10, size: 9
         pdf.move_down 3
         pdf.text "2." + 'Świadectwo ukończenia kursu.', indent_paragraphs: 10, size: 9
-        pdf.move_down 3
-        pdf.text "3." + 'Informacje dodatkowe.', indent_paragraphs: 10, size: 9
       end
     end
 
@@ -111,17 +109,16 @@ class ProfileMailer < ApplicationMailer
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf" do
         pdf.stroke_horizontal_rule
         pdf.move_down 15
-        pdf.text 'Decyzja zarządu', align: :center
+        pdf.text 'Decyzja zarządu', align: :center, size: 9
       end
       pdf.move_down 15
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-        pdf.text 'Dnia .......................................................... przyjęta/y w poczet członków zwyczajnych Klubu Wysokogórskiego Kraków.'
-
+        pdf.text 'Dnia .......................................................... przyjęta/y w poczet członków zwyczajnych Klubu Wysokogórskiego Kraków.', align: :left, size: 9
       end
     end
     pdf.grid([7,0], [7,2]).bounding_box do
       pdf.font "#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf" do
-        pdf.text 'Numer legitymacji klubowej ......................'
+        pdf.text 'Numer legitymacji klubowej ......................', align: :left, size: 9
       end
     end
     pdf.grid(8,0).bounding_box do
