@@ -11,6 +11,8 @@ module Training
         required(:name).filled(:str?)
         required(:climbing_date).filled
         required(:rating).filled
+        optional(:colleague_ids).maybe
+        optional(:contract_ids).maybe
       end
     end
   end

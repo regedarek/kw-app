@@ -14,8 +14,8 @@ module Training
 
         route = repository.create(form_outputs: form_outputs, user_id: user_id)
 
-        form_outputs[:colleagues_names].delete(user_id.to_s)
-        form_outputs[:colleagues_names].each do |id|
+        form_outputs[:colleague_ids].delete(user_id.to_s)
+        form_outputs[:colleague_ids].each do |id|
           NotificationCenter::NotificationRecord.create(
             recipient_id: id,
             actor_id: user_id,

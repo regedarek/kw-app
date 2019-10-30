@@ -14,10 +14,12 @@ Activement	app/components/membership/activement.rb	/^  class Activement$/;"	c	cl
 Activities	app/components/activities/mountain_route_record.rb	/^module Activities$/;"	m
 Activities	app/components/activities/repository.rb	/^module Activities$/;"	m
 Activities	app/components/activities/routes_controller.rb	/^module Activities$/;"	m
+Activities	app/components/training/activities/contract_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/create_ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/repository.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/route_contracts_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_route_form.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_routes_controller.rb	/^  module Activities$/;"	m	class:Training
@@ -318,6 +320,7 @@ CompetitionsController	app/components/events/admin/competitions_controller.rb	/^
 ContractEventsRecord	app/components/settlement/contract_events_record.rb	/^  class ContractEventsRecord < ActiveRecord::Base$/;"	c	class:Settlement
 ContractMailer	app/components/settlement/contract_mailer.rb	/^  class ContractMailer < ApplicationMailer$/;"	c	class:Settlement
 ContractRecord	app/components/settlement/contract_record.rb	/^  class ContractRecord < ActiveRecord::Base$/;"	c	class:Settlement
+ContractRecord	app/components/training/activities/contract_record.rb	/^    class ContractRecord < ActiveRecord::Base$/;"	c	class:Training.Activities
 ContractUsersRecord	app/components/settlement/contract_users_record.rb	/^  class ContractUsersRecord < ActiveRecord::Base$/;"	c	class:Settlement
 ContractorRecord	app/components/settlement/contractor_record.rb	/^  class ContractorRecord < ActiveRecord::Base$/;"	c	class:Settlement
 ContractorsController	app/components/settlement/admin/contractors_controller.rb	/^    class ContractorsController < ::Admin::BaseController$/;"	c	class:Settlement.Admin
@@ -333,6 +336,8 @@ CoursesController	app/components/business/courses_controller.rb	/^  class Course
 CoursesController	app/components/training/supplementary/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Training.Supplementary
 Create	app/components/events/admin/competitions/create.rb	/^      class Create$/;"	c	class:Events.Admin.Competitions
 Create	app/components/events/competitions/sign_ups/create.rb	/^      class Create$/;"	c	class:Events.Competitions.SignUps
+CreateActivitiesContracts	db/migrate/20191030103736_create_activities_contracts.rb	/^class CreateActivitiesContracts < ActiveRecord::Migration[5.2]$/;"	c
+CreateActivitiesRouteContracts	db/migrate/20191030104053_create_activities_route_contracts.rb	/^class CreateActivitiesRouteContracts < ActiveRecord::Migration[5.2]$/;"	c
 CreateAuctionProduct	db/migrate/20170107103156_create_auction_product.rb	/^class CreateAuctionProduct < ActiveRecord::Migration[5.0]$/;"	c
 CreateAuctions	db/migrate/20170107102938_create_auctions.rb	/^class CreateAuctions < ActiveRecord::Migration[5.0]$/;"	c
 CreateBusinessCourses	db/migrate/20190905151155_create_business_courses.rb	/^class CreateBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -727,6 +732,7 @@ ReservationsController	app/controllers/reservations_controller.rb	/^class Reserv
 ReservationsForm	app/components/admin/reservations_form.rb	/^  class ReservationsForm$/;"	c	class:Admin
 Result	lib/result.rb	/^class Result$/;"	c
 RouteColleagues	app/models/db/activities/route_colleagues.rb	/^    class RouteColleagues < ActiveRecord::Base$/;"	c	class:Db.Activities
+RouteContractsRecord	app/components/training/activities/route_contracts_record.rb	/^    class RouteContractsRecord < ActiveRecord::Base$/;"	c	class:Training.Activities
 RoutesController	app/components/activities/routes_controller.rb	/^  class RoutesController < ApplicationController$/;"	c	class:Activities
 Scrappers	app/components/scrappers/api/meteoblue_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/api/pogodynka_controller.rb	/^module Scrappers$/;"	m
@@ -824,10 +830,12 @@ TimestampCreateDonations	db/migrate/20180813110522_timestamp_create_donations.rb
 TimestampCreateHearts	db/migrate/20180808131403_timestamp_create_hearts.rb	/^class TimestampCreateHearts < ActiveRecord::Migration[5.0]$/;"	c
 Topr	app/components/scrappers/topr.rb	/^  class Topr$/;"	c	class:Scrappers
 ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < ActiveRecord::Base$/;"	c	class:Scrappers
+Training	app/components/training/activities/contract_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/create_ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/repository.rb	/^module Training$/;"	m
+Training	app/components/training/activities/route_contracts_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_route_form.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_routes_controller.rb	/^module Training$/;"	m
@@ -1318,6 +1326,8 @@ change	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^  de
 change	db/migrate/20191022183522_add_send_manually_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddSendManuallyToSupplementaryCourses
 change	db/migrate/20191023183025_remove_payment_id_from_supplementary_sign_ups.rb	/^  def change$/;"	f	class:RemovePaymentIdFromSupplementarySignUps
 change	db/migrate/20191023195250_add_sent_user_id_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddSentUserIdToSupplementarySignUps
+change	db/migrate/20191030103736_create_activities_contracts.rb	/^  def change$/;"	f	class:CreateActivitiesContracts
+change	db/migrate/20191030104053_create_activities_route_contracts.rb	/^  def change$/;"	f	class:CreateActivitiesRouteContracts
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

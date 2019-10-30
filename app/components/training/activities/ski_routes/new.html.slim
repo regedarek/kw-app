@@ -38,6 +38,13 @@
         = f.label :training do
           span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne na twojej stronie głównej oraz w tabeli dzików, zostanie ukryte na stronie przejść.") Tura treningowa dla dzików
 
+    .large-6.columns
+      = f.label :contract_ids, 'kontrakty'
+      = f.select :contract_ids,
+        Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
+        { },
+        { class: 'js-select-multiple', multiple: true }
+
 
     .large-4.columns
       .callout.alert
@@ -62,14 +69,12 @@
     .large-12.columns
       .callout
         .row
-          .large-3.columns
-            = f.label :colleagues_names
-            - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
-            - if action_name == 'new'
-              - users = [{ id: current_user.id, name: current_user.display_name }]
-            - else
-              - users = @route.colleagues.map{|u| { id: u.id, name: u.display_name } }
-            = f.text_field :colleagues_names, 'data-tokeninput' => { collection: names, options: { prePopulate: users.uniq } }.to_json
+          .large-6.columns
+            = f.label :colleague_ids, 'koledzy'
+            = f.select :colleague_ids,
+              Db::User.all.map { |u| [u.display_name, u.id] },
+              { },
+              { class: 'js-select-multiple', multiple: true }
 
             = f.label :partners
             = f.text_field :partners
