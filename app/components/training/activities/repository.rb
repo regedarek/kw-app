@@ -10,6 +10,13 @@ module Training
         Training::Activities::SkiRoute.from_record(record)
       end
 
+      def update(id:, form_outputs:, user_id:)
+        record = ::Db::Activities::MountainRoute.find(id)
+        record.update(form_outputs.to_h)
+
+        Training::Activities::SkiRoute.from_record(record)
+      end
+
       def choose_winer_from_last_month
         range = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
         routes = ::Db::Activities::MountainRoute

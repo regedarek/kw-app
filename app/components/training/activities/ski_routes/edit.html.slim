@@ -1,0 +1,8 @@
+= form_for @ski_route, as: :ski_route, url: activities_ski_route_path(@ski_route.id), html: { class: 'js-ski-routes-form' } do |f|
+  = render 'form', f: f
+
+  .row
+    .large-4.columns
+      = f.submit 'Zaktualizuj', class: 'button expanded large success'
+    .large-4.columns
+      = link_to t('.back'), :back, class: 'secondary button large expanded'

@@ -23,6 +23,7 @@ Activities	app/components/training/activities/route_contracts_record.rb	/^  modu
 Activities	app/components/training/activities/ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_route_form.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_routes_controller.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/update_ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/controllers/activities/mountain_routes_controller.rb	/^module Activities$/;"	m
 Activities	app/models/db/activities/mountain_route.rb	/^  module Activities$/;"	m	class:Db
 Activities	app/models/db/activities/route_colleagues.rb	/^  module Activities$/;"	m	class:Db
@@ -839,6 +840,7 @@ Training	app/components/training/activities/route_contracts_record.rb	/^module T
 Training	app/components/training/activities/ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_route_form.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_routes_controller.rb	/^module Training$/;"	m
+Training	app/components/training/activities/update_ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/db/course_record.rb	/^module Training$/;"	m
 Training	app/components/training/db/participant_record.rb	/^module Training$/;"	m
 Training	app/components/training/questionare/snw_profile.rb	/^module Training$/;"	m
@@ -897,6 +899,7 @@ UpdateItemsForm	app/components/reservations/update_items_form.rb	/^  class Updat
 UpdateMasSignUps	db/migrate/20170420110654_update_mas_sign_ups.rb	/^class UpdateMasSignUps < ActiveRecord::Migration[5.0]$/;"	c
 UpdateProject	app/components/management/update_project.rb	/^  class UpdateProject$/;"	c	class:Management
 UpdateSignUp	app/components/training/supplementary/update_sign_up.rb	/^    class UpdateSignUp$/;"	c	class:Training.Supplementary
+UpdateSkiRoute	app/components/training/activities/update_ski_route.rb	/^    class UpdateSkiRoute$/;"	c	class:Training.Activities
 User	app/components/importing/user.rb	/^  class User$/;"	c	class:Importing
 User	spec/factories.rb	/^  class User$/;"	c	class:Factories
 UserApplication	app/components/user_management/user_application.rb	/^  class UserApplication$/;"	c	class:UserManagement
@@ -1026,6 +1029,7 @@ call	app/components/settlement/create_contract.rb	/^    def call(raw_inputs:, cr
 call	app/components/settlement/create_contractor.rb	/^    def call(raw_inputs:)$/;"	f	class:Settlement.CreateContractor
 call	app/components/settlement/update_contract.rb	/^    def call(id:, raw_inputs:)$/;"	f	class:Settlement.UpdateContract
 call	app/components/training/activities/create_ski_route.rb	/^      def call(raw_inputs:, user_id:)$/;"	f	class:Training.Activities.CreateSkiRoute
+call	app/components/training/activities/update_ski_route.rb	/^      def call(id:, raw_inputs:, user_id:)$/;"	f	class:Training.Activities.UpdateSkiRoute
 call	app/components/training/supplementary/create_course.rb	/^      def call(raw_inputs:)$/;"	f	class:Training.Supplementary.CreateCourse
 call	app/components/training/supplementary/create_package.rb	/^      def call(raw_inputs:)$/;"	f	class:Training.Supplementary.CreatePackage
 call	app/components/training/supplementary/create_sign_up.rb	/^      def call(raw_inputs:)$/;"	f	class:Training.Supplementary.CreateSignUp
@@ -1502,6 +1506,7 @@ edit	app/components/management/projects_controller.rb	/^    def edit$/;"	f	class
 edit	app/components/management/snw/snw_applies_controller.rb	/^      def edit$/;"	f	class:Management.Snw.SnwAppliesController
 edit	app/components/management/voting/cases_controller.rb	/^      def edit$/;"	f	class:Management.Voting.CasesController
 edit	app/components/settlement/admin/contracts_controller.rb	/^      def edit$/;"	f	class:Settlement.Admin.ContractsController
+edit	app/components/training/activities/ski_routes_controller.rb	/^      def edit$/;"	f	class:Training.Activities.SkiRoutesController
 edit	app/components/training/supplementary/courses_controller.rb	/^      def edit$/;"	f	class:Training.Supplementary.CoursesController
 edit	app/components/training/supplementary/sign_ups_controller.rb	/^      def edit$/;"	f	class:Training.Supplementary.SignUpsController
 edit	app/controllers/activities/mountain_routes_controller.rb	/^    def edit$/;"	f	class:Activities
@@ -1706,6 +1711,7 @@ initialize	app/components/settlement/create_contractor.rb	/^    def initialize(r
 initialize	app/components/settlement/update_contract.rb	/^    def initialize(repository, form)$/;"	f	class:Settlement.UpdateContract
 initialize	app/components/training/activities/create_ski_route.rb	/^      def initialize(repository, form)$/;"	f	class:Training.Activities.CreateSkiRoute
 initialize	app/components/training/activities/hearts.rb	/^      def initialize(user)$/;"	f	class:Training.Activities.Hearts
+initialize	app/components/training/activities/update_ski_route.rb	/^      def initialize(repository, form)$/;"	f	class:Training.Activities.UpdateSkiRoute
 initialize	app/components/training/questionare/snw_profile_service.rb	/^      def initialize(repository, form)$/;"	f	class:Training.Questionare.SnwProfileService
 initialize	app/components/training/supplementary/create_course.rb	/^      def initialize(repository, form)$/;"	f	class:Training.Supplementary.CreateCourse
 initialize	app/components/training/supplementary/create_package.rb	/^      def initialize(repository, form)$/;"	f	class:Training.Supplementary.CreatePackage
@@ -2095,6 +2101,8 @@ update	app/components/management/snw/snw_applies_controller.rb	/^      def updat
 update	app/components/management/voting/cases_controller.rb	/^      def update$/;"	f	class:Management.Voting.CasesController
 update	app/components/reservations/items_controller.rb	/^    def update$/;"	f	class:Reservations.ItemsController
 update	app/components/settlement/admin/contracts_controller.rb	/^      def update$/;"	f	class:Settlement.Admin.ContractsController
+update	app/components/training/activities/repository.rb	/^      def update(id:, form_outputs:, user_id:)$/;"	f	class:Training.Activities.Repository
+update	app/components/training/activities/ski_routes_controller.rb	/^      def update$/;"	f	class:Training.Activities.SkiRoutesController
 update	app/components/training/supplementary/courses_controller.rb	/^      def update$/;"	f	class:Training.Supplementary.CoursesController
 update	app/components/training/supplementary/sign_ups_controller.rb	/^      def update$/;"	f	class:Training.Supplementary.SignUpsController
 update	app/controllers/activities/mountain_routes_controller.rb	/^    def update$/;"	f	class:Activities
@@ -2111,6 +2119,7 @@ update_record	app/components/events/competitions/sign_ups_controller.rb	/^      
 update_record	app/components/management/projects_controller.rb	/^    def update_record$/;"	f	class:Management.ProjectsController
 update_record	app/components/management/voting/cases_controller.rb	/^      def update_record$/;"	f
 update_record	app/components/settlement/admin/contracts_controller.rb	/^      def update_record$/;"	f	class:Settlement.Admin.ContractsController
+update_record	app/components/training/activities/ski_routes_controller.rb	/^      def update_record$/;"	f	class:Training.Activities.SkiRoutesController
 update_record	app/components/training/supplementary/sign_ups_controller.rb	/^      def update_record$/;"	f	class:Training.Supplementary.SignUpsController.manually
 update_resource	app/controllers/registrations_controller.rb	/^  def update_resource(resource, params)$/;"	f	class:RegistrationsController
 update_sign_up	app/components/events/competitions/repository.rb	/^      def update_sign_up(sign_up_record_id:, form_outputs:)$/;"	f	class:Events.Competitions.Repository

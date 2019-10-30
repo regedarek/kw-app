@@ -40,7 +40,34 @@ module Training
         end
       end
 
+      def edit
+        @ski_route = ::Db::Activities::MountainRoute.find(params[:id])
+      end
+
+      def update
+        @ski_route = ::Db::Activities::MountainRoute.find(params[:id])
+        authorize! :manage, @ski_route
+
+        either(update_record) do |result|
+          result.success do
+            redirect_to activities_mountain_route_path(@ski_route.slug), flash: { notice: 'Zaktualizowano przejście' }
+          end
+
+          result.failure do |errors|
+            @errors = errors
+            render :edit
+          end
+        end
+      end
+
       private
+
+      def update_record
+        Training::Activities::UpdateSkiRoute.new(
+          Training::Activities::Repository.new,
+          Training::Activities::SkiRouteForm.new
+        ).call(id: params[:id], raw_inputs: ski_route_params, user_id: current_user&.id)
+      end
 
       def create_record
         Training::Activities::CreateSkiRoute.new(

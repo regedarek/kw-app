@@ -71,7 +71,10 @@
         - else
           = link_to 'zobacz tabelę górskich dzików', gorskie_dziki_path, class: 'button alert'
         - if can? :edit, @route
-          = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
+          - if @route.ski?
+            = link_to 'edytuj', edit_activities_ski_route_path(@route.id), class: 'button'
+          - else
+            = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
 
   .large-6.columns
     - if @route.attachments.any?
