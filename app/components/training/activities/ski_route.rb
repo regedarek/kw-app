@@ -16,7 +16,9 @@ module Training
       attribute :colleagues_names, Types::Coercible::Array
       attribute :partners, Types::Strict::String.optional
       attribute :length, Types::Strict::Integer.optional
-      attribute :description, Types::Strict::String
+      attribute :area, Types::Strict::String.optional
+      attribute :difficulty, Types::Strict::String.optional
+      attribute :description, Types::Strict::String.optional
       attribute :attachments, Types::Coercible::Array
 
       class << self
@@ -31,6 +33,8 @@ module Training
             colleagues_names: record.colleagues_names,
             partners: record.partners,
             length: record.length,
+            area: record.area,
+            difficulty: record.difficulty,
             description: record.description,
             attachments: record.attachments
           )

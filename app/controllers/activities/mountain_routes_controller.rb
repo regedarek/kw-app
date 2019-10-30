@@ -60,7 +60,7 @@ module Activities
     end
 
     def show
-      @route = Db::Activities::MountainRoute.friendly.find(params[:id])
+      @route = Db::Activities::MountainRoute.includes(:colleagues).friendly.find(params[:id])
       authorize! :read, @route
     end
 

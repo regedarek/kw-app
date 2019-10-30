@@ -50,7 +50,7 @@ module Training
 
         either(update_record) do |result|
           result.success do
-            redirect_to activities_mountain_route_path(@ski_route.slug), flash: { notice: 'Zaktualizowano przejście' }
+            redirect_to edit_activities_ski_route_path(@ski_route.id), flash: { notice: 'Zaktualizowano przejście' }
           end
 
           result.failure do |errors|
@@ -81,8 +81,8 @@ module Training
           .require(:ski_route)
           .permit(
             :name, :climbing_date, :training, :hidden, :rating, :partners,
-            :length, :description, colleague_ids: [], contract_ids: [],
-            attachments: []
+            :length, :description, :area, :difficulty, colleague_ids: [],
+            contract_ids: [], attachments: []
           )
       end
     end

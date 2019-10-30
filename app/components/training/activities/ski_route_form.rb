@@ -13,6 +13,12 @@ module Training
         required(:rating).filled
         optional(:colleague_ids).maybe
         optional(:contract_ids).maybe
+        optional(:partners).maybe
+        optional(:difficulty).maybe
+        optional(:area).maybe
+        optional(:length).maybe
+        optional(:description).maybe
+        optional(:contract_ids).maybe
       end
     end
   end

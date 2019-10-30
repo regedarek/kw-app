@@ -1,3 +1,7 @@
+.row
+  .large-12.columns
+    = image_tag 'ski.jpg'
+
 = form_for @ski_route, as: :ski_route, url: activities_ski_route_path(@ski_route.id), html: { class: 'js-ski-routes-form' } do |f|
   = render 'form', f: f
 

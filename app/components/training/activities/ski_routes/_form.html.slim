@@ -2,70 +2,81 @@
   .large-12.columns
     .callout.primary
       .row
-        .large-6.columns
+        .large-4.columns
           = f.label :name, 'nazwa tury*'
           = f.text_field :name
 
-        .large-3.columns
+        .large-2.columns
           = f.label :climbing_date, 'data tury*'
           = f.date_field :climbing_date
 
         .large-3.columns
-          = f.label :length, 'przewyższenie tury w metrach'
+          = f.label :area, 'rejon tury(dolina, góry)'
+          = f.text_field :area
+
+        .large-2.columns
+          = f.label :length, 'przewyższenie tury'
           = f.number_field :length
 
-.row
-  .large-3.columns
-    .callout.secondary
-      = f.check_box :hidden
-      = f.label :hidden do
-        span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne tylko w na twojej stronie głównej.") Widoczne tylko dla mnie
-      br
-      = f.check_box :training
-      = f.label :training do
-        span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne na twojej stronie głównej oraz w tabeli dzików, zostanie ukryte na stronie przejść.") Tura treningowa dla dzików
-
-  .large-6.columns
-    = f.label :contract_ids, 'kontrakty'
-    = f.select :contract_ids,
-      Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
-      { },
-      { class: 'js-select-multiple', multiple: true }
-
-
-  .large-4.columns
-    .callout.alert
-      = f.label :attachments, 'Zdjęcia'
-      = f.file_field :attachments, multiple: true
-      br
-
-  .large-5.columns
-    .callout.success
-      legend.legend subiektywna ocena tury*
-
-      = f.radio_button :rating, 1
-      = f.label :rating_one
-
-      = f.radio_button :rating, 2
-      = f.label :rating_two
-
-      = f.radio_button :rating, 3
-      = f.label :rating_three, 'klasyk'
+        .large-1.columns
+          = f.label :difficulty, 'trudność'
+          = f.text_field :difficulty
 
 .row
   .large-12.columns
     .callout
       .row
         .large-6.columns
-          = f.label :colleague_ids, 'koledzy'
+          = f.label :colleague_ids, 'partnerzy z klubu'
           = f.select :colleague_ids,
             Db::User.all.map { |u| [u.display_name, u.id] },
             { },
             { class: 'js-select-multiple', multiple: true }
 
-          = f.label :partners
+        .large-6.columns
+          = f.label :partners, 'partnerzy spoza klubu'
           = f.text_field :partners
 
-        .large-9.columns
-          = f.label :description, 'uwagi dotyczące tury, warunków śniegowych'
-          = f.trix_editor :description, style: 'min-height: 150px'
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-6.columns
+          = f.label :contract_ids, 'kontrakty'
+          = f.select :contract_ids,
+            Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
+            { },
+            { class: 'js-select-multiple', multiple: true }
+
+.row
+  .large-3.columns
+    .callout.alert
+      = f.label :attachments, 'Zdjęcia'
+      = f.file_field :attachments, multiple: true
+      br
+
+  .large-3.columns
+    .callout.secondary
+      = f.check_box :hidden
+      = f.label :hidden do
+        span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne tylko w na twojej stronie głównej.") Widoczne tylko dla mnie
+
+  .large-6.columns
+    .callout.success
+      legend.legend subiektywna ocena urody drogi*
+
+      = f.radio_button :rating, 1
+      = f.label :rating_one, 'fuj, nie polecam'
+
+      = f.radio_button :rating, 2
+      = f.label :rating_two, 'warta przejścia'
+
+      = f.radio_button :rating, 3
+      = f.label :rating_three, 'absolutny klasyk'
+
+
+.row
+  .large-12.columns
+    .callout
+      = f.label :description, 'opis przejścia, uwagi dotyczące warunków'
+      = f.trix_editor :description, style: 'min-height: 150px'
