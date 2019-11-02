@@ -45,6 +45,7 @@ AddAreaToMountainRoutes	db/migrate/20170218114045_add_area_to_mountain_routes.rb
 AddAreaToPhotoRequests	db/migrate/20181008200214_add_area_to_photo_requests.rb	/^class AddAreaToPhotoRequests < ActiveRecord::Migration[5.0]$/;"	c
 AddAttachmentToContracts	db/migrate/20190225154133_add_attachment_to_contracts.rb	/^class AddAttachmentToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddAttachmentsToManagementCases	db/migrate/20190502125314_add_attachments_to_management_cases.rb	/^class AddAttachmentsToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
+AddAuthorUrlToUsers	db/migrate/20191102143605_add_author_url_to_users.rb	/^class AddAuthorUrlToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddAvatarToUsers	db/migrate/20180807194525_add_avatar_to_users.rb	/^class AddAvatarToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddBanerToCourses	db/migrate/20180727143023_add_baner_to_courses.rb	/^class AddBanerToCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddBanerTypeToSupplementaryCourses	db/migrate/20190410145708_add_baner_type_to_supplementary_courses.rb	/^class AddBanerTypeToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -232,7 +233,6 @@ Admin	app/controllers/admin/users_controller.rb	/^module Admin$/;"	m
 Animation	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function Animation( elem, properties, options ) {$/;"	f
 Api	app/components/blog/api/authors_controller.rb	/^  module Api$/;"	m	class:Blog
 Api	app/components/blog/api/dashboard_controller.rb	/^  module Api$/;"	m	class:Blog
-Api	app/components/blog/api/users_controller.rb	/^  module Api$/;"	m	class:Blog
 Api	app/components/business/api/courses_controller.rb	/^  module Api$/;"	m	class:Business
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
 Api	app/components/management/snw/api/snw_applies_controller.rb	/^    module Api$/;"	m	class:Management.Snw
@@ -257,7 +257,6 @@ Author	app/components/blog/author.rb	/^  class Author < Dry::Struct$/;"	c	class:
 AuthorRecord	app/components/library/author_record.rb	/^  class AuthorRecord < ActiveRecord::Base$/;"	c	class:Library
 Authors	app/components/blog/authors.rb	/^  class Authors$/;"	c	class:Blog
 AuthorsController	app/components/blog/api/authors_controller.rb	/^    class AuthorsController < ApplicationController$/;"	c	class:Blog.Api
-AuthorsController	app/components/blog/api/users_controller.rb	/^    class AuthorsController < ApplicationController$/;"	c	class:Blog.Api
 AuthorsController	app/components/library/authors_controller.rb	/^  class AuthorsController < ApplicationController$/;"	c	class:Library
 Availability	app/components/availability/form.rb	/^module Availability$/;"	m
 Availability	app/components/availability/items.rb	/^module Availability$/;"	m
@@ -269,7 +268,6 @@ BaseController	app/controllers/admin/base_controller.rb	/^  class BaseController
 BaseController	app/controllers/api/base_controller.rb	/^  class BaseController < ApplicationController$/;"	c	class:Api
 Blog	app/components/blog/api/authors_controller.rb	/^module Blog$/;"	m
 Blog	app/components/blog/api/dashboard_controller.rb	/^module Blog$/;"	m
-Blog	app/components/blog/api/users_controller.rb	/^module Blog$/;"	m
 Blog	app/components/blog/author.rb	/^module Blog$/;"	m
 Blog	app/components/blog/authors.rb	/^module Blog$/;"	m
 Blog	app/components/blog/dashboard.rb	/^module Blog$/;"	m
@@ -714,6 +712,7 @@ RemoveRouteTimeFromMountainRoutes	db/migrate/20190424123350_remove_route_time_fr
 RemoveTermsOfServiceFromEventsSignUps	db/migrate/20180112122318_remove_terms_of_service_from_events_sign_ups.rb	/^class RemoveTermsOfServiceFromEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
 RemoveUserIdFromMembershipFees	db/migrate/20160831180312_remove_user_id_from_membership_fees.rb	/^class RemoveUserIdFromMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
 RenameAcomplishedCourseInProfiles	db/migrate/20170218172922_rename_acomplished_course_in_profiles.rb	/^class RenameAcomplishedCourseInProfiles < ActiveRecord::Migration[5.0]$/;"	c
+RenameAuthorUrlToAuthorId	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^class RenameAuthorUrlToAuthorId < ActiveRecord::Migration[5.2]$/;"	c
 RenameBanerUrlToBanerInCompetitions	db/migrate/20180727140559_rename_baner_url_to_baner_in_competitions.rb	/^class RenameBanerUrlToBanerInCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 RenameColumnInProfiles	db/migrate/20170218154417_rename_column_in_profiles.rb	/^class RenameColumnInProfiles < ActiveRecord::Migration[5.0]$/;"	c
 RenamePayments	db/migrate/20160824200044_rename_payments.rb	/^class RenamePayments < ActiveRecord::Migration[5.0]$/;"	c
@@ -1348,6 +1347,8 @@ change	db/migrate/20191023183025_remove_payment_id_from_supplementary_sign_ups.r
 change	db/migrate/20191023195250_add_sent_user_id_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddSentUserIdToSupplementarySignUps
 change	db/migrate/20191030103736_create_activities_contracts.rb	/^  def change$/;"	f	class:CreateActivitiesContracts
 change	db/migrate/20191030104053_create_activities_route_contracts.rb	/^  def change$/;"	f	class:CreateActivitiesRouteContracts
+change	db/migrate/20191102143605_add_author_url_to_users.rb	/^  def change$/;"	f	class:AddAuthorUrlToUsers
+change	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^  def change$/;"	f	class:RenameAuthorUrlToAuthorId
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1669,7 +1670,6 @@ in_limit?	app/components/training/supplementary/limiter.rb	/^      def in_limit?
 index	app/components/activities/routes_controller.rb	/^    def index$/;"	f	class:Activities.RoutesController
 index	app/components/blog/api/authors_controller.rb	/^      def index$/;"	f	class:Blog.Api.AuthorsController
 index	app/components/blog/api/dashboard_controller.rb	/^      def index$/;"	f	class:Blog.Api.DashboardController
-index	app/components/blog/api/users_controller.rb	/^      def index$/;"	f	class:Blog.Api.AuthorsController
 index	app/components/business/api/courses_controller.rb	/^      def index$/;"	f	class:Business.Api.CoursesController
 index	app/components/business/courses_controller.rb	/^    def index$/;"	f	class:Business.CoursesController
 index	app/components/charity/admin/donations_controller.rb	/^      def index$/;"	f	class:Charity.Admin.DonationsController

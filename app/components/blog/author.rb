@@ -9,7 +9,7 @@ module Blog
     attribute :id, Types::Strict::Integer
     attribute :display_name, Types::Strict::String
     attribute :website, Types::Strict::String.optional
-    attribute :url, Types::Strict::String.optional
+    attribute :blog_id, Types::Strict::Integer.optional
     attribute :facebook, Types::Strict::String.optional
     attribute :instagram, Types::Strict::String.optional
     attribute :last_ski_route, Types::Strict::String.optional
@@ -20,7 +20,7 @@ module Blog
         new(
           id: record.id,
           display_name: record.display_name,
-          url: record.author_url,
+          blog_id: record.author_number,
           website: '',
           facebook: '',
           instagram: '',
