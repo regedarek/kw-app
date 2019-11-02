@@ -230,6 +230,9 @@ Admin	app/controllers/admin/profiles_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/reservations_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/users_controller.rb	/^module Admin$/;"	m
 Animation	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function Animation( elem, properties, options ) {$/;"	f
+Api	app/components/blog/api/authors_controller.rb	/^  module Api$/;"	m	class:Blog
+Api	app/components/blog/api/dashboard_controller.rb	/^  module Api$/;"	m	class:Blog
+Api	app/components/blog/api/users_controller.rb	/^  module Api$/;"	m	class:Blog
 Api	app/components/business/api/courses_controller.rb	/^  module Api$/;"	m	class:Business
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
 Api	app/components/management/snw/api/snw_applies_controller.rb	/^    module Api$/;"	m	class:Management.Snw
@@ -250,7 +253,11 @@ AttachmentUploader	app/components/management/attachment_uploader.rb	/^  class At
 AttachmentUploader	app/components/settlement/attachment_uploader.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Settlement
 AttachmentUploader	app/components/user_management/attachment.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:UserManagement
 AttachmentUploader	app/uploaders/attachment_uploader.rb	/^class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c
+Author	app/components/blog/author.rb	/^  class Author < Dry::Struct$/;"	c	class:Blog
 AuthorRecord	app/components/library/author_record.rb	/^  class AuthorRecord < ActiveRecord::Base$/;"	c	class:Library
+Authors	app/components/blog/authors.rb	/^  class Authors$/;"	c	class:Blog
+AuthorsController	app/components/blog/api/authors_controller.rb	/^    class AuthorsController < ApplicationController$/;"	c	class:Blog.Api
+AuthorsController	app/components/blog/api/users_controller.rb	/^    class AuthorsController < ApplicationController$/;"	c	class:Blog.Api
 AuthorsController	app/components/library/authors_controller.rb	/^  class AuthorsController < ApplicationController$/;"	c	class:Library
 Availability	app/components/availability/form.rb	/^module Availability$/;"	m
 Availability	app/components/availability/items.rb	/^module Availability$/;"	m
@@ -260,6 +267,12 @@ BanerUploader	app/components/events/competitions/baner_uploader.rb	/^    class B
 BanerUploader	app/components/training/supplementary/baner_uploader.rb	/^    class BanerUploader < CarrierWave::Uploader::Base$/;"	c	class:Training.Supplementary
 BaseController	app/controllers/admin/base_controller.rb	/^  class BaseController < ApplicationController$/;"	c	class:Admin
 BaseController	app/controllers/api/base_controller.rb	/^  class BaseController < ApplicationController$/;"	c	class:Api
+Blog	app/components/blog/api/authors_controller.rb	/^module Blog$/;"	m
+Blog	app/components/blog/api/dashboard_controller.rb	/^module Blog$/;"	m
+Blog	app/components/blog/api/users_controller.rb	/^module Blog$/;"	m
+Blog	app/components/blog/author.rb	/^module Blog$/;"	m
+Blog	app/components/blog/authors.rb	/^module Blog$/;"	m
+Blog	app/components/blog/dashboard.rb	/^module Blog$/;"	m
 Business	app/components/business/api/courses_controller.rb	/^module Business$/;"	m
 Business	app/components/business/course_record.rb	/^module Business$/;"	m
 Business	app/components/business/courses_controller.rb	/^module Business$/;"	m
@@ -425,6 +438,8 @@ CsvUploader	app/uploaders/csv_uploader.rb	/^class CsvUploader < CarrierWave::Upl
 CsvUserParser	app/components/importing/csv_user_parser.rb	/^  class CsvUserParser$/;"	c	class:Importing
 DPGlobal.modes	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^        modes: [{$/;"	p
 DPGlobal.modes	vendor/assets/javascripts/foundation-datepicker.js	/^        modes: [{$/;"	p
+Dashboard	app/components/blog/dashboard.rb	/^  class Dashboard$/;"	c	class:Blog
+DashboardController	app/components/blog/api/dashboard_controller.rb	/^    class DashboardController < ApplicationController$/;"	c	class:Blog.Api
 DashboardController	app/controllers/admin/dashboard_controller.rb	/^	class DashboardController < Admin::BaseController$/;"	c	class:Admin
 Date	app/components/guards/date.rb	/^  class Date$/;"	c	class:Guards
 Datepicker	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^    var Datepicker = function(element, options) {$/;"	c
@@ -878,6 +893,7 @@ Tween.init	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193
 Tween.init	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^Tween.prototype.init.prototype = Tween.prototype;$/;"	m
 Tween.propHooks._default	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	_default: {$/;"	p
 Tween.run	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	run: function( percent ) {$/;"	m
+Types	app/components/blog/author.rb	/^module Types$/;"	m
 Types	app/components/events/competition.rb	/^module Types$/;"	m
 Types	app/components/events/competitions/sign_ups/create_form.rb	/^module Types$/;"	m
 Types	app/components/events/sign_up.rb	/^module Types$/;"	m
@@ -1551,6 +1567,8 @@ failure_with_lines	app/components/importing/csv_profile_update_parser.rb	/^     
 failure_with_lines	app/components/importing/csv_user_parser.rb	/^      def failure_with_lines(invalid_lines)$/;"	f	class:Importing.CsvUserParser
 fake	spec/rails_mock.rb	/^    def self.fake?$/;"	F	class:Rails
 fee_params	app/controllers/membership/fees_controller.rb	/^    def fee_params$/;"	f	class:Membership.FeesController
+fetch	app/components/blog/authors.rb	/^    def fetch$/;"	f	class:Blog.Authors
+fetch	app/components/blog/dashboard.rb	/^    def fetch$/;"	f	class:Blog.Dashboard
 fetch_active_courses	app/components/training/supplementary/repository.rb	/^      def fetch_active_courses(category: nil, kind: nil)$/;"	f	class:Training.Supplementary.Repository
 fetch_archived_courses	app/components/training/supplementary/repository.rb	/^      def fetch_archived_courses(category: nil, kind: nil)$/;"	f	class:Training
 fetch_autum	app/components/training/activities/repository.rb	/^      def fetch_autum$/;"	f	class:Training.Activities.Repository
@@ -1590,6 +1608,7 @@ form	app/components/admin/membership_fees.rb	/^    def form$/;"	f	class:Admin.Me
 form	app/components/admin/reservations.rb	/^    def form$/;"	f	class:Admin.Reservations
 from	app/components/reservations/cancel_item.rb	/^    def self.from(reservation_id:)$/;"	F	class:Reservations.CancelItem
 from_omniauth	app/models/db/user.rb	/^  def self.from_omniauth(access_token)$/;"	F	class:Db
+from_record	app/components/blog/author.rb	/^      def from_record(record)$/;"	f	class:Blog.Author
 from_record	app/components/events/competition.rb	/^      def from_record(record)$/;"	f	class:Events.Competition
 from_record	app/components/events/sign_up.rb	/^      def from_record(record)$/;"	f	class:Events.SignUp
 from_record	app/components/notification_center/notification.rb	/^      def from_record(record)$/;"	f	class:NotificationCenter.Notification
@@ -1648,6 +1667,9 @@ import	app/controllers/admin/importing_controller.rb	/^    def import$/;"	f	clas
 import_params	app/controllers/admin/importing_controller.rb	/^    def import_params$/;"	f	class:Admin.ImportingController
 in_limit?	app/components/training/supplementary/limiter.rb	/^      def in_limit?(sign_up)$/;"	f	class:Training.Supplementary.Limiter
 index	app/components/activities/routes_controller.rb	/^    def index$/;"	f	class:Activities.RoutesController
+index	app/components/blog/api/authors_controller.rb	/^      def index$/;"	f	class:Blog.Api.AuthorsController
+index	app/components/blog/api/dashboard_controller.rb	/^      def index$/;"	f	class:Blog.Api.DashboardController
+index	app/components/blog/api/users_controller.rb	/^      def index$/;"	f	class:Blog.Api.AuthorsController
 index	app/components/business/api/courses_controller.rb	/^      def index$/;"	f	class:Business.Api.CoursesController
 index	app/components/business/courses_controller.rb	/^    def index$/;"	f	class:Business.CoursesController
 index	app/components/charity/admin/donations_controller.rb	/^      def index$/;"	f	class:Charity.Admin.DonationsController
@@ -1795,6 +1817,7 @@ jQuery.valHooks.button.set	public/assets/application-adb37b88852cd8099abe934018f
 kasprowy_uri	app/components/scrappers/meteoblue.rb	/^    def kasprowy_uri$/;"	f	class:Scrappers.Meteoblue
 kinds	app/components/training/supplementary/course_record.rb	/^      def kinds$/;"	f	class:Training.Supplementary.CourseRecord
 kw_id_accepted	app/models/db/profile.rb	/^    def kw_id_accepted$/;"	f	class:Db.Profile
+last_ski_route	app/components/blog/author.rb	/^      def last_ski_route(user)$/;"	f	class:Blog.Author
 letterSpacing	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		letterSpacing: "0",$/;"	p
 library	app/models/ability.rb	/^  def library$/;"	f	class:Ability
 limit	app/components/events/competitions/sign_ups/limiter.rb	/^        def limit$/;"	f	class:Events.Competitions.SignUps.Limiter
@@ -2057,6 +2080,7 @@ strip_wrong_encoding_chars	lib/parsing_strings.rb	/^  def strip_wrong_encoding_c
 stub_payment_request	spec/payments/payments_controller_spec.rb	/^def stub_payment_request(code, body)$/;"	f
 sum	app/components/training/supplementary/limiter.rb	/^      def sum$/;"	f	class:Training.Supplementary.Limiter
 sum	app/components/user_management/cost.rb	/^    def sum$/;"	f	class:UserManagement.Cost
+sum_of_ski_meters	app/components/blog/author.rb	/^      def sum_of_ski_meters(user)$/;"	f	class:Blog.Author
 support.shrinkWrapBlocks	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	support.shrinkWrapBlocks = function() {$/;"	f
 swap	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var swap = function( elem, options, callback, args ) {$/;"	f
 system!	bin/setup	/^def system!(*args)$/;"	f

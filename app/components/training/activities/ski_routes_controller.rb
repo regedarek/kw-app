@@ -20,7 +20,7 @@ module Training
       def new
         authorize! :create, ::Db::Activities::MountainRoute
 
-        @ski_route = ::Db::Activities::MountainRoute.new
+        @ski_route = ::Db::Activities::MountainRoute.new(colleague_ids: [current_user.id], rating: 2)
       end
 
       def create

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/library/routes.rb")
   load Rails.root.join("app/components/business/routes.rb")
   load Rails.root.join("app/components/management/snw/routes.rb")
+  load Rails.root.join("app/components/blog/routes.rb")
 
   resources :photos, only: :index
 

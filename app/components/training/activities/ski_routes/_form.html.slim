@@ -27,7 +27,7 @@
     .callout
       .row
         .large-6.columns
-          = f.label :colleague_ids, 'partnerzy z klubu'
+          = f.label :colleague_ids, 'partnerzy z klubu*'
           = f.select :colleague_ids,
             Db::User.all.map { |u| [u.display_name, u.id] },
             { },

@@ -7,12 +7,15 @@
             - @user.errors.full_messages.each do |msg|
               li= msg
   .row
-    .large-6.columns
+    .large-4.columns
       = f.label :kw_id
       = f.text_field :kw_id
-    .large-6.columns
+    .large-4.columns
       = f.label :email
       = f.text_field :email
+    .large-4.columns
+      = f.label :author_url
+      = f.text_field :author_url
   .row
     .large-6.columns
       = f.label :first_name

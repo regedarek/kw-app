@@ -10,15 +10,14 @@ module Training
       define! do
         required(:name).filled(:str?)
         required(:climbing_date).filled
-        required(:rating).filled
-        optional(:colleague_ids).maybe
-        optional(:contract_ids).maybe
-        optional(:partners).maybe
-        optional(:difficulty).maybe
-        optional(:area).maybe
-        optional(:length).maybe
-        optional(:description).maybe
-        optional(:contract_ids).maybe
+        required(:colleague_ids).filled
+        optional(:rating).filled
+        optional(:partners)
+        optional(:difficulty)
+        optional(:area)
+        optional(:length)
+        optional(:description)
+        optional(:contract_ids)
       end
     end
   end

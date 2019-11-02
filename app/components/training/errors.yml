@@ -14,6 +14,8 @@ pl:
         filled?: 'Nazwa przejścia musi być podana'
       climbing_date:
         filled?: 'Data przejścia musi być wypełniona'
+      climbing_date:
+        filled?: 'Data przejścia musi być wypełniona'
       rating:
         filled?: 'Ocena przejścia musi zostać wybrana'
       place:
