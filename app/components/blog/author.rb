@@ -25,13 +25,21 @@ module Blog
           website: record.website_url,
           facebook: record.facebook_url,
           instagram: record.instagram_url,
-          avatar: record.avatar.url,
+          avatar: avatar(record),
           last_ski_route: last_ski_route(record),
           sum_of_ski_meters: sum_of_ski_meters(record)
         )
       end
 
       private
+
+      def avatar(record)
+        if record.avatar.present?
+          record.avatar.url
+        else
+          ActionController::Base.helpers.image_tag('default-avatar.png')
+        end
+      end
 
       def last_ski_route(user)
         ski_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 0}, colleague_id: user.id).map(&:mountain_route).compact

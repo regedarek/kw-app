@@ -202,6 +202,7 @@ AddTrainingToMountainRoutes	db/migrate/20190130190334_add_training_to_mountain_r
 AddTshirtSize1ToEventsSignUps	db/migrate/20180423110814_add_tshirt_size_1_to_events_sign_ups.rb	/^class AddTshirtSize1ToEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddTshirtSizesToStrzeleckiSignUps	db/migrate/20170301085832_add_tshirt_sizes_to_strzelecki_sign_ups.rb	/^class AddTshirtSizesToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddTshirtUrlToCompetitions	db/migrate/20180423110921_add_tshirt_url_to_competitions.rb	/^class AddTshirtUrlToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
+AddUlrsToUsers	db/migrate/20191103181309_add_ulrs_to_users.rb	/^class AddUlrsToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddUserIdToYearlyFees	db/migrate/20160830133030_add_user_id_to_yearly_fees.rb	/^class AddUserIdToYearlyFees < ActiveRecord::Migration[5.0]$/;"	c
 AddWarningsToItems	db/migrate/20160808191833_add_warnings_to_items.rb	/^class AddWarningsToItems < ActiveRecord::Migration[5.0]$/;"	c
 Admin	app/components/admin/items.rb	/^module Admin$/;"	m
@@ -1012,6 +1013,7 @@ authorize_admin	app/controllers/admin/users_controller.rb	/^    def authorize_ad
 authors_names=	app/components/library/item_record.rb	/^    def authors_names=(ids)$/;"	f	class:Library.ItemRecord
 auto_orient	app/uploaders/attachment_uploader.rb	/^  def auto_orient$/;"	f	class:AttachmentUploader
 availability	app/controllers/reservations_controller.rb	/^  def availability$/;"	f	class:ReservationsController
+avatar	app/components/blog/author.rb	/^      def avatar(record)$/;"	f	class:Blog.Author
 baner_types	app/components/training/supplementary/course_record.rb	/^      def baner_types$/;"	f	class:Training.Supplementary.CourseRecord
 become	app/controllers/admin/users_controller.rb	/^    def become$/;"	f	class:Admin.UsersController
 best_of_season	app/components/activities/repository.rb	/^    def best_of_season$/;"	f	class:Activities.Repository
@@ -1349,6 +1351,7 @@ change	db/migrate/20191030103736_create_activities_contracts.rb	/^  def change$/
 change	db/migrate/20191030104053_create_activities_route_contracts.rb	/^  def change$/;"	f	class:CreateActivitiesRouteContracts
 change	db/migrate/20191102143605_add_author_url_to_users.rb	/^  def change$/;"	f	class:AddAuthorUrlToUsers
 change	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^  def change$/;"	f	class:RenameAuthorUrlToAuthorId
+change	db/migrate/20191103181309_add_ulrs_to_users.rb	/^  def change$/;"	f	class:AddUlrsToUsers
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
