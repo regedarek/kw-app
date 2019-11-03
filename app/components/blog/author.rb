@@ -12,6 +12,7 @@ module Blog
     attribute :blog_id, Types::Strict::Integer.optional
     attribute :facebook, Types::Strict::String.optional
     attribute :instagram, Types::Strict::String.optional
+    attribute :avatar, Types::Strict::String.optional
     attribute :last_ski_route, Types::Strict::String.optional
     attribute :sum_of_ski_meters, Types::Strict::Integer.optional
 
@@ -21,9 +22,10 @@ module Blog
           id: record.id,
           display_name: record.display_name,
           blog_id: record.author_number,
-          website: '',
-          facebook: '',
-          instagram: '',
+          website: record.website_url,
+          facebook: record.facebook_url,
+          instagram: record.instagram_url,
+          avatar: record.avatar.url,
           last_ski_route: last_ski_route(record),
           sum_of_ski_meters: sum_of_ski_meters(record)
         )

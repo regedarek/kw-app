@@ -64,6 +64,20 @@
           = f.check_box :ski_hater
 
     .row
+      .large-6.columns
+        h4 Dodatkowe informacje
+        .large-12.columns
+          = f.label :facebook_url, 'Link do facebooka'
+          = f.text_field :facebook_url
+        .large-12.columns
+          = f.label :instagram_url, 'Link do instagrama'
+          = f.text_field :instagram_url
+        .large-12.columns
+          = f.label :website_url, 'Link do bloga/galerii'
+          = f.text_field :website_url
+
+
+    .row
       .large-12.columns
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
                       Wyślij ponownie potwierdzajacy email:
