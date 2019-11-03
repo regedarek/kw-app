@@ -11,6 +11,7 @@ module Blog
     attribute :website, Types::Strict::String.optional
     attribute :blog_id, Types::Strict::Integer.optional
     attribute :facebook, Types::Strict::String.optional
+    attribute :bio, Types::Strict::String.optional
     attribute :instagram, Types::Strict::String.optional
     attribute :avatar, Types::Strict::String.optional
     attribute :last_ski_route, Types::Strict::String.optional
@@ -25,6 +26,7 @@ module Blog
           website: record.website_url,
           facebook: record.facebook_url,
           instagram: record.instagram_url,
+          bio: ActionView::Base.full_sanitizer.sanitize(record.description),
           avatar: avatar(record),
           last_ski_route: last_ski_route(record),
           sum_of_ski_meters: sum_of_ski_meters(record)
