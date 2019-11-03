@@ -1581,6 +1581,7 @@ fetch_current_month	app/components/activities/repository.rb	/^    def fetch_curr
 fetch_current_month	app/components/training/activities/repository.rb	/^      def fetch_current_month$/;"	f	class:Training.Activities.Repository
 fetch_inactive_courses	app/components/training/supplementary/repository.rb	/^      def fetch_inactive_courses(category:, kind: nil)$/;"	f
 fetch_mountain_routes	app/components/membership/card/repository.rb	/^      def fetch_mountain_routes(user)$/;"	f	class:Membership.Card.Repository
+fetch_one	app/components/blog/authors.rb	/^    def fetch_one(number: nil)$/;"	f	class:Blog.Authors
 fetch_prev_month	app/components/activities/repository.rb	/^    def fetch_prev_month$/;"	f	class:Activities.Repository
 fetch_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_prev_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_prev_month$/;"	f	class:Training.Activities.Repository
@@ -2010,6 +2011,7 @@ setGlobalEval	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25
 setPositiveNumber	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function setPositiveNumber( elem, value, subtract ) {$/;"	f
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
+show	app/components/blog/api/authors_controller.rb	/^      def show$/;"	f	class:Blog.Api.AuthorsController
 show	app/components/business/courses_controller.rb	/^    def show$/;"	f	class:Business.CoursesController
 show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"	f	class:Events.Admin.CompetitionsController
 show	app/components/library/admin/tags_controller.rb	/^      def show$/;"	f	class:Library.Admin.TagsController
