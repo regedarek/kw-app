@@ -5,6 +5,7 @@
         = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_full_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
       .large-2.columns
         = f.search_field :climbing_date_year_equals, style: 'height: 55px', placeholder: 'Od roku(2018)'
+
       .large-3.columns
         .hide-for-large
           .text-center
@@ -42,12 +43,17 @@
               = link_to category: nil do
                 = ' usuń filtr'
 
+      - if user_signed_in?
+        .text-center
+          .large-1.columns
+            = link_to 'Eksport', activities_mountain_routes_path(format: :xlsx), class: 'button alert', style: 'height: 55px; line-height: 30px;'
       .large-3.columns
         - if user_signed_in?
           .button-hover-reveal-wrapper
             label Dodaj przejście
             = link_to 'Wspinaczka', wspinaczka_path, class: 'button-hover-reveal'
             = link_to 'Narciarstwo', narciarstwo_path, class: 'button-hover-reveal'
+
 
   .row
     .large-12.columns

@@ -6,15 +6,6 @@ module Activities
     def index
       authorize! :read, ::Db::Activities::MountainRoute
 
-      if user_signed_in?
-        if current_user.ski_hater?
-          if params && params.key?(:route_type)
-          else
-            return redirect_to('/przejscia?route_type=climbing') unless params.key?(:q)
-          end
-        end
-      end
-
       @q = if params[:boars]
              Db::Activities::MountainRoute.includes([:colleagues]).where(hidden: false).order(climbing_date: :desc)
            else
@@ -33,9 +24,12 @@ module Activities
 
       respond_to do |format|
         format.html
-        format.xlsx do
-          disposition = "attachment; filename=przejscia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
-          response.headers['Content-Disposition'] = disposition
+        if user_signed_in?
+          format.xlsx do
+            @current_user = current_user
+            disposition = "attachment; filename=przejscia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
+            response.headers['Content-Disposition'] = disposition
+          end
         end
       end
     end
