@@ -10,7 +10,7 @@ module Activities
         if current_user.ski_hater?
           if params && params.key?(:route_type)
           else
-            return redirect_to('/przejscia?route_type=climbing')
+            return redirect_to('/przejscia?route_type=climbing') unless params.key?(:q)
           end
         end
       end
@@ -56,7 +56,7 @@ module Activities
     def new
       authorize! :create, ::Db::Activities::MountainRoute
 
-      @route = Db::Activities::MountainRoute.new(colleague_ids: [current_user.id])
+      @route = Db::Activities::MountainRoute.new(colleague_ids: [current_user.id], rating: 2)
     end
 
     def show
