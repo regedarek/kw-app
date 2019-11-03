@@ -37,7 +37,7 @@ module Blog
         if record.avatar.present?
           record.avatar.url
         else
-          ActionController::Base.helpers.image_tag('default-avatar.png')
+          ActionController::Base.helpers.image_url('default-avatar.png')
         end
       end
 
