@@ -972,6 +972,7 @@ account_id	app/services/payments/dotpay/payment_request.rb	/^      def account_i
 active	app/models/ability.rb	/^  def active$/;"	f	class:Ability
 active?	app/components/membership/activement.rb	/^    def active?$/;"	f	class:Membership.Activement
 active?	app/models/db/user.rb	/^  def active?$/;"	f	class:Db
+active_members	app/components/blog/authors.rb	/^    def active_members$/;"	f	class:Blog.Authors.fetch
 activity_type_attributes_for_select	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select$/;"	F	class:Business.CourseRecord
 activity_url	app/components/business/course_record.rb	/^    def activity_url$/;"	f	class:Business.CourseRecord
 actualDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function actualDisplay( name, doc ) {$/;"	f
@@ -1011,6 +1012,7 @@ authorize_admin	app/controllers/admin/importing_controller.rb	/^    def authoriz
 authorize_admin	app/controllers/admin/items_controller.rb	/^    def authorize_admin$/;"	f	class:Admin.ItemsController
 authorize_admin	app/controllers/admin/reservations_controller.rb	/^    def authorize_admin$/;"	f	class:Admin
 authorize_admin	app/controllers/admin/users_controller.rb	/^    def authorize_admin$/;"	f	class:Admin.UsersController
+authors	app/components/blog/authors.rb	/^    def authors$/;"	f	class:Blog.Authors.fetch
 authors_names=	app/components/library/item_record.rb	/^    def authors_names=(ids)$/;"	f	class:Library.ItemRecord
 auto_orient	app/uploaders/attachment_uploader.rb	/^  def auto_orient$/;"	f	class:AttachmentUploader
 availability	app/controllers/reservations_controller.rb	/^  def availability$/;"	f	class:ReservationsController
@@ -1978,6 +1980,7 @@ request_params	app/components/photo_competition/requests_controller.rb	/^    def
 reservation_params	app/controllers/admin/reservations_controller.rb	/^    def reservation_params$/;"	f	class:Admin
 reservations	app/models/ability.rb	/^  def reservations$/;"	f	class:Ability
 reserve	app/mailers/reservation_mailer.rb	/^  def reserve(reservation)$/;"	f	class:ReservationMailer
+rest_members	app/components/blog/authors.rb	/^    def rest_members$/;"	f	class:Blog.Authors.fetch
 restoreScript	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function restoreScript( elem ) {$/;"	f
 return	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	return new Tween.prototype.init( elem, options, prop, end, easing );$/;"	c
 return.hasOwnProperty	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
