@@ -26,7 +26,7 @@ module Blog
     private
 
     def authors
-      Db::User.includes(:mountain_routes).where.not(author_number: nil).order('profiles.application_date')
+      Db::User.includes(:profile, :mountain_routes).where.not(author_number: nil).order('profiles.application_date')
     end
 
     def active_members
