@@ -44,7 +44,7 @@ module Blog
       end
 
       def last_ski_route(user)
-        ski_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 0}, colleague_id: user.id).map(&:mountain_route).compact
+        ski_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 0}, colleague_id: user.id).order('mountain_routes.climbing_date').map(&:mountain_route).compact
         if ski_routes.any?
           ski_routes.last.name
         else
