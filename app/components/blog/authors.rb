@@ -5,7 +5,7 @@ module Blog
         authors: authors.map do |user|
           ::Blog::Author.from_record(user)
         end,
-        active_members: active_members.map do |user|,
+        active_members: active_members.map do |user|
           ::Blog::Author.from_record(user)
         end,
         rest_members: rest_members.count
