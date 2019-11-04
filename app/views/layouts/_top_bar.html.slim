@@ -44,6 +44,8 @@
                   li= link_to 'Kursy SA', courses_path
                 - if can? :manage, Management::Snw::SnwApplyRecord
                   li= link_to 'Zgłoszenia do SNW', snw_applies_path
+                - if can? :manage, Training::Activities::ContractRecord
+                  li= link_to 'Kontrakty', activities_contracts_path
                 - if can? :read, Management::Voting::CaseRecord
                   li= link_to 'Głosowania', cases_path
                 - if can? :read, Settlement::ContractRecord

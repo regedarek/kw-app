@@ -1,0 +1,13 @@
+table.stack
+  thead
+    tr
+      th width='5%' ID
+      th width='50%' Nazwa
+      th width='45%' Punktacja
+
+  tbody
+    - contracts.each do |contract|
+      tr
+        td.text-center = contract.id
+        td.text-center.large-text-left = contract.name
+        td.text-center.large-text-left = contract.score

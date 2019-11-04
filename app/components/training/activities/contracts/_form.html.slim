@@ -1,0 +1,14 @@
+.row
+  .large-12.columns
+    .callout.primary
+      .row
+        .large-8.columns
+          = f.label :name, 'nazwa kontraktu*'
+          = f.text_field :name
+        .large-4.columns
+          = f.label :score, 'punktacja*'
+          = f.number_field :score
+.row
+  .large-12.columns
+    .callout
+      = f.trix_editor :description, style: 'min-height: 150px'

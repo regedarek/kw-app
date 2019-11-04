@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope module: 'training' do
     namespace :activities do
       resources :ski_routes
+      resources :contracts
 
       match 'heart', to: 'hearts#heart', via: :post
       match 'unheart', to: 'hearts#unheart', via: :delete

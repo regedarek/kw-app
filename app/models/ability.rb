@@ -10,6 +10,7 @@ class Ability
     not_active if @user.persisted?
     active if @user.active?
     office if role?('office')
+    training_contracts if role?('training_contracts')
     competitions if role?('competitions')
     reservations if role?('reservations')
     events if role?('events')
@@ -57,6 +58,10 @@ class Ability
 
   def competitions
     can :manage, Events::Db::SignUpRecord
+  end
+
+  def training_contracts
+    can :manage, Training::Activities::ContractRecord
   end
 
   def secondary_management

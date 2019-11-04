@@ -15,6 +15,7 @@ Activities	app/components/activities/mountain_route_record.rb	/^module Activitie
 Activities	app/components/activities/repository.rb	/^module Activities$/;"	m
 Activities	app/components/activities/routes_controller.rb	/^module Activities$/;"	m
 Activities	app/components/training/activities/contract_record.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/contracts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/create_ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts_controller.rb	/^  module Activities$/;"	m	class:Training
@@ -339,6 +340,7 @@ ContractUsersRecord	app/components/settlement/contract_users_record.rb	/^  class
 ContractorRecord	app/components/settlement/contractor_record.rb	/^  class ContractorRecord < ActiveRecord::Base$/;"	c	class:Settlement
 ContractorsController	app/components/settlement/admin/contractors_controller.rb	/^    class ContractorsController < ::Admin::BaseController$/;"	c	class:Settlement.Admin
 ContractsController	app/components/settlement/admin/contracts_controller.rb	/^    class ContractsController < ::Admin::BaseController$/;"	c	class:Settlement.Admin
+ContractsController	app/components/training/activities/contracts_controller.rb	/^    class ContractsController < ApplicationController$/;"	c	class:Training.Activities
 ControllerHelper	spec/support/controller_helper.rb	/^module ControllerHelper$/;"	m
 Cost	app/components/user_management/cost.rb	/^  class Cost$/;"	c	class:UserManagement
 Course	app/components/training/supplementary/course.rb	/^    class Course < Dry::Struct$/;"	c	class:Training.Supplementary
@@ -848,6 +850,7 @@ TimestampCreateHearts	db/migrate/20180808131403_timestamp_create_hearts.rb	/^cla
 Topr	app/components/scrappers/topr.rb	/^  class Topr$/;"	c	class:Scrappers
 ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < ActiveRecord::Base$/;"	c	class:Scrappers
 Training	app/components/training/activities/contract_record.rb	/^module Training$/;"	m
+Training	app/components/training/activities/contracts_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/create_ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts_controller.rb	/^module Training$/;"	m
@@ -1391,6 +1394,7 @@ configure_permitted_parameters	app/controllers/application_controller.rb	/^  def
 configure_permitted_parameters	app/controllers/registrations_controller.rb	/^  def configure_permitted_parameters$/;"	f	class:RegistrationsController
 contains	config/initializers/ransack.rb	/^    def contains(other)$/;"	f	class:Arel.Predications
 contract_params	app/components/settlement/admin/contracts_controller.rb	/^      def contract_params$/;"	f	class:Settlement.Admin.ContractsController
+contract_params	app/components/training/activities/contracts_controller.rb	/^      def contract_params$/;"	f	class:Training.Activities.ContractsController
 contractor_name=	app/components/settlement/contract_record.rb	/^    def contractor_name=(id)$/;"	f	class:Settlement.ContractRecord
 contractor_params	app/components/settlement/admin/contractors_controller.rb	/^      def contractor_params$/;"	f	class:Settlement.Admin.ContractorsController
 coordinator	app/components/management/project_record.rb	/^    def coordinator$/;"	f	class:Management.ProjectRecord
@@ -1418,6 +1422,7 @@ create	app/components/photo_competition/requests_controller.rb	/^    def create$
 create	app/components/reservations/create_reservation.rb	/^      def create(user:, form:)$/;"	f	class:Reservations.CreateReservation
 create	app/components/settlement/admin/contractors_controller.rb	/^      def create$/;"	f	class:Settlement.Admin.ContractorsController
 create	app/components/settlement/admin/contracts_controller.rb	/^      def create$/;"	f	class:Settlement.Admin.ContractsController
+create	app/components/training/activities/contracts_controller.rb	/^      def create$/;"	f	class:Training.Activities.ContractsController
 create	app/components/training/activities/repository.rb	/^      def create(form_outputs:, user_id:)$/;"	f	class:Training.Activities.Repository
 create	app/components/training/activities/ski_routes_controller.rb	/^      def create$/;"	f	class:Training.Activities.SkiRoutesController
 create	app/components/training/questionare/snw_profile_repository.rb	/^      def create(form_outputs)$/;"	f	class:Training.Questionare.SnwProfileRepository
@@ -1696,6 +1701,7 @@ index	app/components/scrappers/api/meteoblue_controller.rb	/^      def index$/;"
 index	app/components/scrappers/api/pogodynka_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.PogodynkaController
 index	app/components/scrappers/scrappers_controller.rb	/^    def index$/;"	f	class:Scrappers.ScrappersController
 index	app/components/settlement/admin/contracts_controller.rb	/^      def index$/;"	f	class:Settlement.Admin.ContractsController
+index	app/components/training/activities/contracts_controller.rb	/^      def index$/;"	f	class:Training.Activities.ContractsController
 index	app/components/training/activities/ski_routes_controller.rb	/^      def index$/;"	f	class:Training.Activities.SkiRoutesController
 index	app/components/training/supplementary/courses_controller.rb	/^      def index$/;"	f	class:Training.Supplementary.CoursesController
 index	app/controllers/activities/mountain_routes_controller.rb	/^    def index$/;"	f	class:Activities.MountainRoutesController
@@ -1870,6 +1876,7 @@ new	app/components/management/voting/cases_controller.rb	/^      def new$/;"	f	c
 new	app/components/photo_competition/requests_controller.rb	/^    def new$/;"	f	class:PhotoCompetition.RequestsController
 new	app/components/settlement/admin/contractors_controller.rb	/^      def new$/;"	f	class:Settlement.Admin.ContractorsController
 new	app/components/settlement/admin/contracts_controller.rb	/^      def new$/;"	f	class:Settlement.Admin.ContractsController
+new	app/components/training/activities/contracts_controller.rb	/^      def new$/;"	f	class:Training.Activities.ContractsController
 new	app/components/training/activities/ski_routes_controller.rb	/^      def new$/;"	f	class:Training.Activities.SkiRoutesController
 new	app/components/training/supplementary/courses_controller.rb	/^      def new$/;"	f	class:Training.Supplementary.CoursesController
 new	app/components/training/supplementary/packages_controller.rb	/^      def new$/;"	f	class:Training.Supplementary.PackagesController
@@ -2115,6 +2122,7 @@ to_s	app/components/items/owner_presenter.rb	/^    def to_s$/;"	f	class:Items.Ow
 to_s	app/components/reservations/state_presenter.rb	/^    def to_s$/;"	f	class:Reservations.StatePresenter
 toggle_closed	app/components/events/admin/competitions_controller.rb	/^      def toggle_closed$/;"	f	class:Events.Admin.CompetitionsController
 toggle_rentable	app/controllers/admin/items_controller.rb	/^    def toggle_rentable$/;"	f	class:Admin.ItemsController
+training_contracts	app/models/ability.rb	/^  def training_contracts$/;"	f	class:Ability
 unapprove	app/components/management/voting/cases_controller.rb	/^      def unapprove$/;"	f	class:Management.Voting
 unheart	app/components/training/activities/hearts_controller.rb	/^      def unheart$/;"	f	class:Training.Activities.HeartsController
 unheart!	app/components/training/activities/hearts.rb	/^      def unheart!(route)$/;"	f	class:Training.Activities.Hearts
