@@ -184,6 +184,7 @@ AddSlugToMountainRoutes	db/migrate/20190428175444_add_slug_to_mountain_routes.rb
 AddSlugToProjects	db/migrate/20190428183401_add_slug_to_projects.rb	/^class AddSlugToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToSupplementaryCourses	db/migrate/20181003133537_add_slug_to_supplementary_courses.rb	/^class AddSlugToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddSlugToUsers	db/migrate/20190428183425_add_slug_to_users.rb	/^class AddSlugToUsers < ActiveRecord::Migration[5.2]$/;"	c
+AddSnwBlogToUsers	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^class AddSnwBlogToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddStartDateAndEndDateToReservations	db/migrate/20150525130553_add_start_date_and_end_date_to_reservations.rb	/^class AddStartDateAndEndDateToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddStateToProjects	db/migrate/20190418115538_add_state_to_projects.rb	/^class AddStateToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddStateToSupplementaryCourses	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^class AddStateToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -1352,6 +1353,7 @@ change	db/migrate/20191030104053_create_activities_route_contracts.rb	/^  def ch
 change	db/migrate/20191102143605_add_author_url_to_users.rb	/^  def change$/;"	f	class:AddAuthorUrlToUsers
 change	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^  def change$/;"	f	class:RenameAuthorUrlToAuthorId
 change	db/migrate/20191103181309_add_ulrs_to_users.rb	/^  def change$/;"	f	class:AddUlrsToUsers
+change	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^  def change$/;"	f	class:AddSnwBlogToUsers
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1581,7 +1583,7 @@ fetch_current_month	app/components/activities/repository.rb	/^    def fetch_curr
 fetch_current_month	app/components/training/activities/repository.rb	/^      def fetch_current_month$/;"	f	class:Training.Activities.Repository
 fetch_inactive_courses	app/components/training/supplementary/repository.rb	/^      def fetch_inactive_courses(category:, kind: nil)$/;"	f
 fetch_mountain_routes	app/components/membership/card/repository.rb	/^      def fetch_mountain_routes(user)$/;"	f	class:Membership.Card.Repository
-fetch_one	app/components/blog/authors.rb	/^    def fetch_one(number: nil)$/;"	f	class:Blog.Authors
+fetch_one	app/components/blog/authors.rb	/^    def fetch_one(number: nil)$/;"	f	class:Blog.Authors.fetch
 fetch_prev_month	app/components/activities/repository.rb	/^    def fetch_prev_month$/;"	f	class:Activities.Repository
 fetch_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_prev_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_prev_month$/;"	f	class:Training.Activities.Repository
