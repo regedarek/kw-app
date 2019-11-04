@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 attributes = %i(
-  description name difficulty partners rating climbing_date peak time area length mountains
+  name difficulty partners rating climbing_date peak time area length mountains
 )
 wb.styles do |style|
   highlight_cell_options = {
@@ -12,26 +12,26 @@ wb.styles do |style|
   wb.add_worksheet(name: "przejścia narciarskie") do |sheet|
     default_attributes = attributes.map do |attr|
       Db::Activities::MountainRoute.human_attribute_name(attr)
-    end.push('Kto dodał?').push('Koledzy z klubu')
+    end.push('Kto dodał?').push('Koledzy z klubu').push('Opis')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     ski_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 0}, colleague_id: @current_user.id).order('created_at DESC').map(&:mountain_route).compact
     ski_routes.each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
-      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence)
+      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence).push(ActionView::Base.full_sanitizer.sanitize(route.description))
       sheet.add_row(default_values)
     end
   end
   wb.add_worksheet(name: "przejścia wspinaczkowe") do |sheet|
     default_attributes = attributes.map do |attr|
       Db::Activities::MountainRoute.human_attribute_name(attr)
-    end.push('Kto dodał?').push('Koledzy z klubu')
+    end.push('Kto dodał?').push('Koledzy z klubu').push('Opis')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     climbing_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 1}, colleague_id: @current_user.id).order('created_at DESC').map(&:mountain_route).compact
     climbing_routes.each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
-      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence)
+      end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence).push(ActionView::Base.full_sanitizer.sanitize(route.description))
       sheet.add_row(default_values)
     end
   end
