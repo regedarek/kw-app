@@ -32,7 +32,7 @@
           li.show-for-small-only = link_to 'Twoje składki', membership_fees_path
           li.show-for-small-only= link_to t('.administration.logout'), destroy_user_session_path
 
-          - if current_user.admin? || current_user.roles.include?('office') || current_user.roles.include?('management') || !current_user.roles.empty?
+          - if current_user.admin? || current_user.roles.include?('office') || current_user.roles.include?('management')
             li
               = link_to t('.administration.main'), admin_path
               ul.menu.vertical
