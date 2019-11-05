@@ -28,7 +28,7 @@ module Business
       if @course.save
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else
-        render :index
+        render :new
       end
     end
 
