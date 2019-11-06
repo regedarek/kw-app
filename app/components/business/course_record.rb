@@ -3,6 +3,7 @@ module Business
     include Workflow
     include ActionView::Helpers::AssetTagHelper
     extend FriendlyId
+    self.table_name = 'business_courses'
 
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
@@ -14,8 +15,8 @@ module Business
     validates :activity_type, presence: true
     validate :max_seats_size
 
-    friendly_id :name, use: :slugged
-    self.table_name = 'business_courses'
+    friendly_id :slug_candidates, use: :slugged
+
     enum activity_type: [
       :winter_abc, :winter_tourist_1, :winter_tourist_2,
       :skitour_1, :skitour_2, :skitour_3,
@@ -23,6 +24,12 @@ module Business
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
       :cave
     ]
+
+    def slug_candidates
+      [
+        [:starts_at, :name]
+      ]
+    end
 
     workflow_column :state
     workflow do

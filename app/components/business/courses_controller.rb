@@ -24,6 +24,7 @@ module Business
 
       @course.activity_type = 1
       @course.creator_id = current_user.id
+      @course.name = I18n.t("activerecord.attributes.business/course_record.activity_types.#{@course.activity_type}")
 
       if @course.save
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
