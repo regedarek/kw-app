@@ -114,6 +114,12 @@
                       = z.select :supplementary_course_package_type_id,
                       @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
                       include_blank: 'Wybierz pakiet'
+                    - if @course.question
+                      .callout.warning
+                        | Odpowiedz na pytanie zadane w opisie wydarzenia
+                      = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
+                    - else
+                      = z.hidden_field :question, value: nil
                   = z.submit 'Zapisz na listę rezerwową', class: 'button large secondary expanded'
                   .callout.secondary
                     | Limit miejsc został wyczerpany ale możesz zapisać się na 
