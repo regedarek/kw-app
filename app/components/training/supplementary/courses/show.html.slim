@@ -91,7 +91,7 @@
               .row
                 .large-12.columns
                   = a.check_box :link_payment
-                  = a.label :link_payment, 'Wyślij link do płatności'
+                  = a.label :link_payment, 'Zapisz ręcznie'
               = a.hidden_field :course_id, value: @course.id
               - if @course.packages
                 = a.select :supplementary_course_package_type_id,
