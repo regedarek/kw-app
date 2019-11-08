@@ -9,6 +9,7 @@ module Training
 
       define! do
         required(:email).filled(:str?)
+        required(:link_payment).filled
       end
     end
   end

@@ -88,6 +88,10 @@
                   = a.text_field :name, placeholder: 'Imię i nazwisko'
                 .large-6.columns
                   = a.email_field :email, placeholder: 'E-mail'
+              .row
+                .large-12.columns
+                  = a.check_box :link_payment
+                  = a.label :link_payment, 'Wyślij link do płatności'
               = a.hidden_field :course_id, value: @course.id
               - if @course.packages
                 = a.select :supplementary_course_package_type_id,

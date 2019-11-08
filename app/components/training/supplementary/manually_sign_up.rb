@@ -49,7 +49,7 @@ module Training
         else
           sign_up.update(sent_user_id: admin_id, sent_at: Time.zone.now, admin_id: admin_id)
         end
-        Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
+        Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later if ActiveModel::Type::Boolean.new.cast(form_outputs[:link_payment])
         Right(:success)
       end
 
