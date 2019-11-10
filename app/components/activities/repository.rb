@@ -44,8 +44,7 @@ module Activities
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.hearts_count) AS total_mountain_routes_hearts_count')
-        .group('users.id')
-        .distinct
+        .group(:id)
         .order('total_mountain_routes_hearts_count DESC')
       # su = users.collect do |user|
       #   { user_id: user.id, mountain_hearts: user.mountain_routes.where(route_type: 'regular_climbing', climbing_date: range, created_at: range).sum(:hearts_count)  }
