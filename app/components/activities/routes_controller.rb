@@ -8,7 +8,7 @@ module Activities
       @current_month_leaders = repository.fetch_current_month
       @season_leaders = repository.fetch_season
       @best_of_season = repository.best_of_season
-      @dziadekgienek = repository.dziadek_gienek
+      @best_route_of_season = repository.best_route_of_season
       @tatra_uniqe = repository.tatra_uniqe
     end
 
