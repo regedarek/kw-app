@@ -7,10 +7,9 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range_climbing_date, created_at: range_created_at })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length)')
-        .group('users.id')
-        .distinct
-        .order('SUM(mountain_routes.length) DESC')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .group(:id)
+        .order('total_mountain_routes_length DESC')
     end
 
     def fetch_current_month
@@ -19,10 +18,9 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length)')
-        .group('users.id')
-        .distinct
-        .order('SUM(mountain_routes.length) DESC')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .group(:id)
+        .order('total_mountain_routes_length DESC')
     end
 
     def fetch_season
@@ -31,10 +29,9 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(climbing_boars: true, mountain_routes: { route_type: 'regular_climbing', climbing_date: range, created_at: range })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length)')
-        .group('users.id')
-        .distinct
-        .order('SUM(mountain_routes.length) DESC')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .group(:id)
+        .order('total_mountain_routes_length DESC')
     end
 
     def best_of_season
@@ -46,9 +43,6 @@ module Activities
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.hearts_count) AS total_mountain_routes_hearts_count')
         .group(:id)
         .order('total_mountain_routes_hearts_count DESC')
-      # su = users.collect do |user|
-      #   { user_id: user.id, mountain_hearts: user.mountain_routes.where(route_type: 'regular_climbing', climbing_date: range, created_at: range).sum(:hearts_count)  }
-      # end
     end
 
     def tatra_uniqe
