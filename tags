@@ -1023,6 +1023,7 @@ avatar	app/components/blog/author.rb	/^      def avatar(record)$/;"	f	class:Blog
 baner_types	app/components/training/supplementary/course_record.rb	/^      def baner_types$/;"	f	class:Training.Supplementary.CourseRecord
 become	app/controllers/admin/users_controller.rb	/^    def become$/;"	f	class:Admin.UsersController
 best_of_season	app/components/activities/repository.rb	/^    def best_of_season$/;"	f	class:Activities.Repository
+best_route_of_season	app/components/activities/repository.rb	/^    def best_route_of_season$/;"	f	class:Activities.Repository
 boolHook.set	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	set: function( elem, value, name ) {$/;"	m
 buildFragment	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildFragment( elems, context, scripts, selection, ignored ) {$/;"	f
 buildParams	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildParams( prefix, obj, traditional, add ) {$/;"	f
