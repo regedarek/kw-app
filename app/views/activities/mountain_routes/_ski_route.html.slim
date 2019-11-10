@@ -18,3 +18,10 @@
     b subiektywna ocena: 
     - @route.rating.times do
       i.fi-star
+
+- if @route.gps_tracks.any?
+  .large-12.columns
+    b tracki:
+    ul
+      - @route.gps_tracks.each do |track|
+        li= link_to track, track.url

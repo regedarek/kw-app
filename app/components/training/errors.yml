@@ -8,6 +8,7 @@ pl:
   errors:
     package_required: 'musi zostać wybrany!'
     question_required: 'musi zostać wypełniona!'
+    gps_tracks_extension: 'Track musi posiadać rozszerzenie .gpx!'
     filled?: "musi być wypełnione"
     rules:
       name:

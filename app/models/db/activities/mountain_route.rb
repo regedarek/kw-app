@@ -5,7 +5,9 @@ module Db
       enum route_type: [:ski, :regular_climbing, :winter_climbing]
       friendly_id :slug_candidates, use: :slugged
       mount_uploaders :attachments, AttachmentUploader
+      mount_uploaders :gps_tracks, Training::Activities::GpsTrackUploader
       serialize :attachments, JSON
+      serialize :gps_tracks, JSON
       def self.model_name
         ActiveModel::Name.new(self, nil, "Activities::MountainRoute")
       end

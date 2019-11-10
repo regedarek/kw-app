@@ -27,9 +27,9 @@ module Events
             true
           end
         end
-        validate(tshirt_size_1_presence: :tshirt_size_1) do |tshirt_size_1|
+        validate(tshirt_size_1_presence: :tshirt_size_2) do |tshirt_size_2|
           if Events::Db::CompetitionRecord.find(competition_id).tshirt_url.present?
-            tshirt_size_1.present?
+            tshirt_size_2.present?
           else
             true
           end

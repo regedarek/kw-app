@@ -20,6 +20,7 @@ module Training
       attribute :difficulty, Types::Strict::String.optional
       attribute :description, Types::Strict::String.optional
       attribute :attachments, Types::Coercible::Array
+      attribute :gps_tracks, Types::Coercible::Array
 
       class << self
         def from_record(record)
@@ -36,7 +37,8 @@ module Training
             area: record.area,
             difficulty: record.difficulty,
             description: record.description,
-            attachments: record.attachments
+            attachments: record.attachments,
+            gps_tracks: record.gps_tracks
           )
         end
       end

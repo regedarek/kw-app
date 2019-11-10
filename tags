@@ -17,6 +17,7 @@ Activities	app/components/activities/routes_controller.rb	/^module Activities$/;
 Activities	app/components/training/activities/contract_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/contracts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/create_ski_route.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/gps_track_uploader.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/repository.rb	/^  module Activities$/;"	m	class:Training
@@ -100,6 +101,7 @@ AddFileToPhotoRequests	db/migrate/20180903210305_add_file_to_photo_requests.rb	/
 AddFinancialTypeToContracts	db/migrate/20190529221052_add_financial_type_to_contracts.rb	/^class AddFinancialTypeToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddFirstNameLastNamePhoneEmailToProfiles	db/migrate/20170419233047_add_first_name_last_name_phone_email_to_profiles.rb	/^class AddFirstNameLastNamePhoneEmailToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddGender1ToStrzeleckiSignUps	db/migrate/20170216123354_add_gender_1_to_strzelecki_sign_ups.rb	/^class AddGender1ToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
+AddGpsTracksToMountainRoutes	db/migrate/20191110231247_add_gps_tracks_to_mountain_routes.rb	/^class AddGpsTracksToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddGroupTypeToSettlementContracts	db/migrate/20190520230400_add_group_type_to_settlement_contracts.rb	/^class AddGroupTypeToSettlementContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddHeartsCountToHearts	db/migrate/20180815110926_add_hearts_count_to_hearts.rb	/^class AddHeartsCountToHearts < ActiveRecord::Migration[5.0]$/;"	c
 AddHiddenToManagementCases	db/migrate/20190517235048_add_hidden_to_management_cases.rb	/^class AddHiddenToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
@@ -529,6 +531,7 @@ Form	app/components/reservations/form.rb	/^  class Form < FormObject$/;"	c	class
 FormObject	lib/form_object.rb	/^class FormObject$/;"	c
 FromCsv	app/components/importing/from_csv.rb	/^  class FromCsv$/;"	c	class:Importing
 GetOperationRequest	app/services/payments/dotpay/get_operation_request.rb	/^    class GetOperationRequest$/;"	c	class:Payments.Dotpay
+GpsTrackUploader	app/components/training/activities/gps_track_uploader.rb	/^    class GpsTrackUploader < CarrierWave::Uploader::Base$/;"	c	class:Training.Activities
 Guards	app/components/guards/date.rb	/^module Guards$/;"	m
 Heart	app/models/db/heart.rb	/^  class Heart < ActiveRecord::Base$/;"	c	class:Db
 Hearts	app/components/training/activities/hearts.rb	/^    class Hearts$/;"	c	class:Training.Activities
@@ -802,7 +805,6 @@ SignUps	app/components/events/competitions/sign_ups/update.rb	/^    module SignU
 SignUpsController	app/components/events/competitions/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Events.Competitions
 SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Training.Supplementary
 SkiRoute	app/components/training/activities/ski_route.rb	/^    class SkiRoute < Dry::Struct$/;"	c	class:Training.Activities
-SkiRouteForm	app/components/training/activities/ski_route_form.rb	/^    class SkiRouteForm < Dry::Validation::Schema$/;"	c	class:Training.Activities
 SkiRoutesController	app/components/training/activities/ski_routes_controller.rb	/^    class SkiRoutesController < ApplicationController$/;"	c	class:Training.Activities
 Snw	app/components/management/snw/api/snw_applies_controller.rb	/^  module Snw$/;"	m	class:Management
 Snw	app/components/management/snw/mailer.rb	/^  module Snw$/;"	m	class:Management
@@ -852,6 +854,7 @@ ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < Active
 Training	app/components/training/activities/contract_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/contracts_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/create_ski_route.rb	/^module Training$/;"	m
+Training	app/components/training/activities/gps_track_uploader.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/repository.rb	/^module Training$/;"	m
@@ -1360,6 +1363,7 @@ change	db/migrate/20191102143605_add_author_url_to_users.rb	/^  def change$/;"	f
 change	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^  def change$/;"	f	class:RenameAuthorUrlToAuthorId
 change	db/migrate/20191103181309_add_ulrs_to_users.rb	/^  def change$/;"	f	class:AddUlrsToUsers
 change	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^  def change$/;"	f	class:AddSnwBlogToUsers
+change	db/migrate/20191110231247_add_gps_tracks_to_mountain_routes.rb	/^  def change$/;"	f	class:AddGpsTracksToMountainRoutes
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2085,6 +2089,7 @@ store_dir	app/components/reservations/photo_uploader.rb	/^    def store_dir$/;"	
 store_dir	app/components/scrappers/image_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ImageUploader
 store_dir	app/components/scrappers/meteoblue_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.MeteoblueUploader
 store_dir	app/components/settlement/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Settlement.AttachmentUploader
+store_dir	app/components/training/activities/gps_track_uploader.rb	/^      def store_dir$/;"	f	class:Training.Activities.GpsTrackUploader
 store_dir	app/components/training/supplementary/baner_uploader.rb	/^      def store_dir$/;"	f	class:Training.Supplementary.BanerUploader
 store_dir	app/components/user_management/attachment.rb	/^    def store_dir$/;"	f	class:UserManagement.AttachmentUploader
 store_dir	app/uploaders/attachment_uploader.rb	/^  def store_dir$/;"	f	class:AttachmentUploader
