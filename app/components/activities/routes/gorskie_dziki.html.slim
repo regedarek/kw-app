@@ -151,5 +151,5 @@
             td.large-text-left
               - if user.mountain_routes.any?
                 = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
-            td.text-center.large-text-right = user.sum
+            td.text-center.large-text-right = user.total_mountain_routes_length
           - i += 1
