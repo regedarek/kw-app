@@ -65,7 +65,7 @@ module Training
       def update_record
         Training::Activities::UpdateSkiRoute.new(
           Training::Activities::Repository.new,
-          Training::Activities::SkiRouteForm.new
+          Training::Activities::SkiRouteForm
         ).call(id: params[:id], raw_inputs: ski_route_params, user_id: current_user&.id)
       end
 
