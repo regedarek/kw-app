@@ -2061,6 +2061,7 @@ send_reminders	app/components/admin/reservation_reminder.rb	/^    def self.send_
 send_reminders	app/components/management/voting/reminder.rb	/^      def self.send_reminders$/;"	F	class:Management.Voting.Reminder
 setGlobalEval	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function setGlobalEval( elems, refElements ) {$/;"	f
 setPositiveNumber	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function setPositiveNumber( elem, value, subtract ) {$/;"	f
+set_content_type	app/components/scrappers/topr_degree_uploader.rb	/^    def set_content_type(*args)$/;"	f	class:Scrappers.ToprDegreeUploader
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
 show	app/components/blog/api/authors_controller.rb	/^      def show$/;"	f	class:Blog.Api.AuthorsController

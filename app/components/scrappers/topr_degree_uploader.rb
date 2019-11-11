@@ -1,6 +1,11 @@
 module Scrappers
   class ToprDegreeUploader < CarrierWave::Uploader::Base
     include CarrierWave::MiniMagick
+    process :set_content_type
+
+    def set_content_type(*args)
+      self.file.instance_variable_set(:@content_type, 'image/jpeg')
+    end
 
     if Rails.env.production? || Rails.env.staging?
       storage :fog
@@ -9,7 +14,7 @@ module Scrappers
     end
 
     version :normal do
-      process :efficient_conversion => [200, 68]
+      process :efficient_conversion => [400, 136]
     end
 
     def filename
@@ -24,7 +29,7 @@ module Scrappers
 
     def efficient_conversion(width, height)
       manipulate! do |img|
-        img.format("jpg").combine_options do |c|
+        img.format("png") do |c|
           c.fuzz        "3%"
           c.trim
           c.resize      "#{width}x#{height}>"
