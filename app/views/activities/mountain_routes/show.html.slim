@@ -94,6 +94,7 @@
                 = image_tag photo.url
                 button.close-button aria-label=("Close reveal") data-close="" type="button" 
                   span aria-hidden="true"  &times;
+    - if @route.gps_tracks.any?
       .row
         .large-12.columns
           = render 'map-gpx.html.slim'
