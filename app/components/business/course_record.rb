@@ -76,11 +76,11 @@ module Business
       when :club_climbing
         'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/klubowy-kurs-wspinaczki/'
       when :summer_tatra
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/taternictwo/'
+        'https://szkolaalpinizmu.pl/wspinanie/taternictwo/kurs-taternicki-letni/'
       when :winter_tatra_1
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/taternictwo/'
+        'https://szkolaalpinizmu.pl/wspinanie/taternictwo/zimowy-i-stopnia/'
       when :winter_tatra_2
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/taternictwo/'
+        'https://szkolaalpinizmu.pl/wspinanie/taternictwo/zimowy-ii-stopnia/'
       when :ice_1
         'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-lodowa/'
       when :ice_2
