@@ -166,6 +166,7 @@
                   = x.hidden_field :course_id, value: @course.id
                   = x.text_field :name, placeholder: 'Imię i nazwisko'
                   = x.email_field :email, placeholder: 'E-mail'
+                  = x.hidden_field :question, value: nil
                   - if @course.price
                     - if @course.packages
                       = x.select :supplementary_course_package_type_id,
