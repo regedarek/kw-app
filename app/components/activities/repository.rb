@@ -23,7 +23,7 @@ module Activities
         .order('total_mountain_routes_length DESC')
     end
 
-    def fetch_season(route_type = 'regular_climbing')
+    def fetch_season(route_type = 'regular_climbing', start_date=DateTime.new(2019, 05, 1), end_date=DateTime.new(2019, 12, 15))
       range = start_date..end_date
       ::Db::User
         .joins(:mountain_routes)
