@@ -526,6 +526,7 @@ FeesController	app/controllers/membership/fees_controller.rb	/^  class FeesContr
 FeesMailer	app/components/membership/fees_mailer.rb	/^  class FeesMailer < ApplicationMailer$/;"	c	class:Membership
 FeesReminderService	app/components/membership/fees_reminder_service.rb	/^  class FeesReminderService$/;"	c	class:Membership
 FeesRepository	app/components/membership/fees_repository.rb	/^  class FeesRepository$/;"	c	class:Membership
+FileIO	app/components/scrappers/topr.rb	/^  class FileIO < StringIO$/;"	c	class:Scrappers
 FileUploader	app/components/photo_competition/file_uploader.rb	/^  class FileUploader < CarrierWave::Uploader::Base$/;"	c	class:PhotoCompetition
 FixTimestampsForMountainRoutes	db/migrate/20170418163613_fix_timestamps_for_mountain_routes.rb	/^class FixTimestampsForMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 Form	app/components/availability/form.rb	/^  class Form$/;"	c	class:Availability
@@ -569,6 +570,7 @@ ItemsController	app/components/library/items_controller.rb	/^  class ItemsContro
 ItemsController	app/components/reservations/items_controller.rb	/^  class ItemsController < Admin::BaseController$/;"	c	class:Reservations
 ItemsController	app/controllers/admin/items_controller.rb	/^  class ItemsController < Admin::BaseController$/;"	c	class:Admin
 ItemsForm	app/components/admin/items_form.rb	/^  class ItemsForm$/;"	c	class:Admin
+Jpg	app/components/scrappers/pdf_image_extractor.rb	/^  class Jpg$/;"	c	class:Scrappers
 KwApp	config/application.rb	/^module KwApp$/;"	m
 Library	app/components/library/admin/tags_controller.rb	/^module Library$/;"	m
 Library	app/components/library/area_record.rb	/^module Library$/;"	m
@@ -670,6 +672,7 @@ Payments	app/services/payments/dotpay/refund_payment_request.rb	/^module Payment
 Payments	app/services/payments/dotpay/status.rb	/^module Payments$/;"	m
 PaymentsController	app/controllers/api/payments_controller.rb	/^  class PaymentsController < Api::BaseController$/;"	c	class:Api
 PaymentsController	app/controllers/payments_controller.rb	/^class PaymentsController < ApplicationController$/;"	c
+PdfImageExtractor	app/components/scrappers/pdf_image_extractor.rb	/^  class PdfImageExtractor$/;"	c	class:Scrappers
 PeriodicDateValidator	lib/validators/periodic_date_validator.rb	/^class PeriodicDateValidator < ActiveModel::EachValidator$/;"	c
 PhotoCompetition	app/components/photo_competition/admin/editions_controller.rb	/^module PhotoCompetition$/;"	m
 PhotoCompetition	app/components/photo_competition/category_record.rb	/^module PhotoCompetition$/;"	m
@@ -702,6 +705,7 @@ Questionare	app/components/training/questionare/snw_profile_record.rb	/^  module
 Questionare	app/components/training/questionare/snw_profile_repository.rb	/^  module Questionare$/;"	m	class:Training
 Questionare	app/components/training/questionare/snw_profile_service.rb	/^  module Questionare$/;"	m	class:Training
 Rails	spec/rails_mock.rb	/^  module Rails$/;"	m
+Raw	app/components/scrappers/pdf_image_extractor.rb	/^  class Raw$/;"	c	class:Scrappers
 Reactivate	app/components/user_management/reactivate.rb	/^  class Reactivate$/;"	c	class:UserManagement
 ReactivationForm	app/components/user_management/reactivation_form.rb	/^  class ReactivationForm < FormObject$/;"	c	class:UserManagement
 RecalculateCost	app/components/user_management/recalculate_cost.rb	/^  class RecalculateCost$/;"	c	class:UserManagement
@@ -764,11 +768,13 @@ Scrappers	app/components/scrappers/image_uploader.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/meteoblue.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/meteoblue_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/meteoblue_uploader.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/pdf_image_extractor.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/pogodynka.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/scrappers_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/shmu.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/shmu_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/topr.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/topr_degree_uploader.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/topr_pdf_uploader.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/topr_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/weather.rb	/^module Scrappers$/;"	m
@@ -850,9 +856,11 @@ Supplementary	app/components/training/supplementary/update_course_form.rb	/^  mo
 Supplementary	app/components/training/supplementary/update_sign_up.rb	/^  module Supplementary$/;"	m	class:Training
 TagRecord	app/components/library/tag_record.rb	/^  class TagRecord < ActiveRecord::Base$/;"	c	class:Library
 TagsController	app/components/library/admin/tags_controller.rb	/^    class TagsController < ApplicationController$/;"	c	class:Library.Admin
+Tiff	app/components/scrappers/pdf_image_extractor.rb	/^  class Tiff$/;"	c	class:Scrappers
 TimestampCreateDonations	db/migrate/20180813110522_timestamp_create_donations.rb	/^class TimestampCreateDonations < ActiveRecord::Migration[5.0]$/;"	c
 TimestampCreateHearts	db/migrate/20180808131403_timestamp_create_hearts.rb	/^class TimestampCreateHearts < ActiveRecord::Migration[5.0]$/;"	c
 Topr	app/components/scrappers/topr.rb	/^  class Topr$/;"	c	class:Scrappers
+ToprDegreeUploader	app/components/scrappers/topr_degree_uploader.rb	/^  class ToprDegreeUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 ToprPdfUploader	app/components/scrappers/topr_pdf_uploader.rb	/^  class ToprPdfUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < ActiveRecord::Base$/;"	c	class:Scrappers
 Training	app/components/training/activities/contract_record.rb	/^module Training$/;"	m
@@ -1397,6 +1405,7 @@ collect_crampons	app/components/availability/items.rb	/^    def collect_crampons
 collect_rest	app/components/availability/items.rb	/^    def collect_rest$/;"	f	class:Availability.Items
 competition_params	app/components/events/admin/competitions_controller.rb	/^      def competition_params$/;"	f	class:Events.Admin.CompetitionsController
 competitions	app/models/ability.rb	/^  def competitions$/;"	f	class:Ability
+complete_refs	app/components/scrappers/pdf_image_extractor.rb	/^    def complete_refs$/;"	f	class:Scrappers.PdfImageExtractor
 completed	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function completed() {$/;"	f
 completed?	app/services/payments/dotpay/notification.rb	/^      def completed?$/;"	f	class:Payments.Dotpay.Notification
 computeStyleTests	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	function computeStyleTests() {$/;"	f
@@ -1580,6 +1589,7 @@ expired_sign_ups	app/components/training/supplementary/repository.rb	/^      def
 extension_whitelist	app/components/photo_competition/file_uploader.rb	/^    def extension_whitelist$/;"	f	class:PhotoCompetition.FileUploader
 extension_whitelist	app/uploaders/csv_uploader.rb	/^  def extension_whitelist$/;"	f	class:CsvUploader
 extract_emails_to_array	app/components/membership/admin/membership_fees_controller.rb	/^      def extract_emails_to_array(txt)$/;"	f	class:Membership.Admin.MembershipFeesController
+extractor	app/components/scrappers/topr.rb	/^    def extractor$/;"	f	class:Scrappers.Topr
 failure	lib/failure.rb	/^  def failure$/;"	f	class:Failure
 failure?	lib/failure.rb	/^  def failure?$/;"	f	class:Failure
 failure_with_lines	app/components/importing/csv_library_item_parser.rb	/^      def failure_with_lines(invalid_lines)$/;"	f	class:Importing.CsvLibraryItemParser
@@ -1612,6 +1622,7 @@ fetch_winter	app/components/training/activities/repository.rb	/^      def fetch_
 filename	app/components/photo_competition/file_uploader.rb	/^    def filename$/;"	f	class:PhotoCompetition.FileUploader
 filename	app/components/scrappers/image_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ImageUploader
 filename	app/components/scrappers/meteoblue_uploader.rb	/^    def filename$/;"	f	class:Scrappers.MeteoblueUploader
+filename	app/components/scrappers/topr_degree_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ToprDegreeUploader
 filename	app/components/scrappers/topr_pdf_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ToprPdfUploader
 filterHidden	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function filterHidden( elem ) {$/;"	f
 financial_management	app/models/ability.rb	/^  def financial_management$/;"	f	class:Ability
@@ -1755,6 +1766,10 @@ initialize	app/components/reservations/cancel_item.rb	/^    def initialize(reser
 initialize	app/components/reservations/state_presenter.rb	/^    def initialize(state)$/;"	f	class:Reservations.StatePresenter
 initialize	app/components/reservations/unpaid.rb	/^    def initialize(after: 48.hours)$/;"	f	class:Reservations.Unpaid
 initialize	app/components/reservations/update_items.rb	/^    def initialize(form)$/;"	f	class:Reservations.UpdateItems
+initialize	app/components/scrappers/pdf_image_extractor.rb	/^    def initialize(stream)$/;"	f	class:Scrappers.Jpg
+initialize	app/components/scrappers/pdf_image_extractor.rb	/^    def initialize(stream)$/;"	f	class:Scrappers.Raw
+initialize	app/components/scrappers/pdf_image_extractor.rb	/^    def initialize(stream)$/;"	f	class:Scrappers.Tiff
+initialize	app/components/scrappers/topr.rb	/^    def initialize(stream, filename)$/;"	f	class:Scrappers.FileIO
 initialize	app/components/settlement/create_contract.rb	/^    def initialize(repository, form)$/;"	f	class:Settlement.CreateContract
 initialize	app/components/settlement/create_contractor.rb	/^    def initialize(repository, form)$/;"	f	class:Settlement.CreateContractor
 initialize	app/components/settlement/update_contract.rb	/^    def initialize(repository, form)$/;"	f	class:Settlement.UpdateContract
@@ -1934,6 +1949,7 @@ package_type_2_membership?	app/components/events/db/sign_up_record.rb	/^      de
 package_type_2_membership?	app/components/events/sign_up.rb	/^    def package_type_2_membership?$/;"	f	class:Events.SignUp
 package_types	app/components/events/db/sign_up_record.rb	/^      def package_types$/;"	f	class:Events.Db.SignUpRecord
 package_types	app/components/training/supplementary/course.rb	/^      def package_types$/;"	f	class:Training.Supplementary.Course
+page	app/components/scrappers/pdf_image_extractor.rb	/^    def page(page)$/;"	f	class:Scrappers.PdfImageExtractor
 paid?	app/models/db/payment.rb	/^    def paid?$/;"	f	class:Db.Payment
 paid_this_year	app/components/membership/fees_repository.rb	/^    def paid_this_year$/;"	f	class:Membership.FeesRepository
 params	app/components/admin/items_form.rb	/^    def params$/;"	f	class:Admin.ItemsForm
@@ -1977,6 +1993,7 @@ prevMonth	vendor/assets/javascripts/foundation-datepicker.js	/^            var p
 prev_year	app/components/membership/activement.rb	/^    def prev_year$/;"	f	class:Membership.Activement
 prev_year_fee	app/components/membership/activement.rb	/^    def prev_year_fee$/;"	f	class:Membership.Activement
 process	app/services/payments/dotpay/status.rb	/^      def process$/;"	f	class:Payments.Dotpay.Status
+process_page	app/components/scrappers/pdf_image_extractor.rb	/^    def process_page(page, count)$/;"	f	class:Scrappers.PdfImageExtractor
 profile	app/components/management/snw/snw_apply_record.rb	/^      def profile$/;"	f	class:Management.Snw.SnwApplyRecord
 profile_name	app/components/business/instructor_record.rb	/^    def profile_name$/;"	f	class:Business.InstructorRecord
 profile_params	app/controllers/admin/profiles_controller.rb	/^    def profile_params$/;"	f	class:Admin.ProfilesController
@@ -2023,6 +2040,13 @@ rreturn	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d79
 rules	app/components/training/activities/ski_routes_controller.rb	/^      def rules$/;"	f	class:Training.Activities.SkiRoutesController
 rvalidtokens	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rvalidtokens = \/(,)|(\\[|{)|(}|])|"(?:[^"\\\\\\r\\n]|\\\\["\\\\\\\/bfnrt]|\\\\u[\\da-fA-F]{4})*"\\s*:?|true|false|null|-?(?!0\\d)\\d+(?:\\.\\d+|)(?:[eE][+-]?\\d+|)\/g;$/;"	v
 safeActiveElement	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function safeActiveElement() {$/;"	f
+save	app/components/scrappers/pdf_image_extractor.rb	/^    def save(filename)$/;"	f	class:Scrappers.Jpg
+save	app/components/scrappers/pdf_image_extractor.rb	/^    def save(filename)$/;"	f	class:Scrappers.Raw
+save	app/components/scrappers/pdf_image_extractor.rb	/^    def save(filename)$/;"	f	class:Scrappers.Tiff
+save_cmyk	app/components/scrappers/pdf_image_extractor.rb	/^    def save_cmyk(filename)$/;"	f	class:Scrappers.Raw
+save_gray	app/components/scrappers/pdf_image_extractor.rb	/^    def save_gray(filename)$/;"	f	class:Scrappers.Raw
+save_group_four	app/components/scrappers/pdf_image_extractor.rb	/^    def save_group_four(filename)$/;"	f	class:Scrappers.Tiff
+save_rgb	app/components/scrappers/pdf_image_extractor.rb	/^    def save_rgb(filename)$/;"	f	class:Scrappers.Raw
 seats_minus	app/components/business/courses_controller.rb	/^    def seats_minus$/;"	f	class:Business.CoursesController
 seats_plus	app/components/business/courses_controller.rb	/^    def seats_plus$/;"	f	class:Business.CoursesController
 secondary_management	app/models/ability.rb	/^  def secondary_management$/;"	f	class:Ability
@@ -2099,6 +2123,7 @@ store_dir	app/components/photo_competition/file_uploader.rb	/^    def store_dir$
 store_dir	app/components/reservations/photo_uploader.rb	/^    def store_dir$/;"	f	class:Reservations.PhotoUploader
 store_dir	app/components/scrappers/image_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ImageUploader
 store_dir	app/components/scrappers/meteoblue_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.MeteoblueUploader
+store_dir	app/components/scrappers/topr_degree_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ToprDegreeUploader
 store_dir	app/components/scrappers/topr_pdf_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ToprPdfUploader
 store_dir	app/components/settlement/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Settlement.AttachmentUploader
 store_dir	app/components/training/activities/gps_track_uploader.rb	/^      def store_dir$/;"	f	class:Training.Activities.GpsTrackUploader

@@ -1,4 +1,13 @@
 module Scrappers
+  class FileIO < StringIO
+    def initialize(stream, filename)
+      super(stream)
+      @original_filename = filename
+    end
+
+    attr_reader :original_filename
+  end
+
   class Topr
     def call
       page = Nokogiri::HTML(open('http://lawiny.topr.pl'))
@@ -12,22 +21,29 @@ module Scrappers
 
       paragraph = ""
       paragraphs = []
-      reader.pages.each do |page|
-        lines = page.text.scan(/^.+/)
-        lines.each do |line|
-          if line.length > 55
-            paragraph += " #{line}"
-          else
-            paragraph += " #{line}"
-            paragraphs << paragraph
-            paragraph = ""
-          end
+      page = reader.pages.first
+      lines = page.text.scan(/^.+/)
+      lines.each do |line|
+        if line.length > 55
+          paragraph += " #{line}"
+        else
+          paragraph += " #{line}"
+          paragraphs << paragraph
+          paragraph = ""
         end
       end
+      extractor.page(page)
 
       record.update(
-        avalanche_degree: paragraphs[4].gsub!(/.*?(?=PROGNOZA)/im, "").split[1]
+        avalanche_degree: paragraphs[4].gsub!(/.*?(?=PROGNOZA)/im, "").split[1],
+        topr_degree: Pathname.new('tmp/1-1-I4.tif').open
       )
+    end
+
+    private
+
+    def extractor
+      Scrappers::PdfImageExtractor.new
     end
   end
 end
