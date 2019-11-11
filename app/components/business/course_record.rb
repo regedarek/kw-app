@@ -19,7 +19,7 @@ module Business
 
     enum activity_type: [
       :winter_abc, :winter_tourist_1, :winter_tourist_2,
-      :skitour_1, :skitour_2, :skitour_3,
+      :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche,
       :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing,
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
       :cave
@@ -67,6 +67,8 @@ module Business
         'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-skiturowy-ii-stopnia/'
       when :skitour_3
         'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-narciarstwa-wysokogorskiego/'
+      when :skitour_avalanche
+        'https://szkolaalpinizmu.pl/narty/kurs-skiturowo-lawinowy'
       when :climbing_1
         'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/drogi-ubezpieczone/'
       when :climbing_2
@@ -96,7 +98,7 @@ module Business
       case activity_type.to_sym
       when :winter_abc, :winter_tourist_1, :winter_tourist_2
         'https://panel.kw.krakow.pl/assets/kw-7b39344ecee6060042f85c3875d827e54a32ff867bf12eb62de751249dd20d0c.png'
-      when :skitour_1, :skitour_2, :skitour_3
+      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche
         'https://panel.kw.krakow.pl/assets/snw-be2731e417162f8a0868bf081d1971362c768773f10840bdf6d74d9154b4fd4b.png'
       when :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing
         'https://panel.kw.krakow.pl/assets/sww-4cc5e8fb1b78b03696ab49766a499fb36ecfe698641ec3e3a22d3f1f821184ed.png'
