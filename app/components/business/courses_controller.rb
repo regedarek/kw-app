@@ -22,7 +22,6 @@ module Business
       @course = Business::CourseRecord.new(course_params)
       authorize! :create, Business::CourseRecord
 
-      @course.activity_type = 1
       @course.creator_id = current_user.id
       @course.name = I18n.t("activerecord.attributes.business/course_record.activity_types.#{@course.activity_type}")
 
