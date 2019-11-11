@@ -17,6 +17,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.3)
     TimezoneParser (0.3.3)
       insensitive_hash
       tzinfo
@@ -63,6 +64,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    afm (0.2.2)
     airbrake (6.0.0)
       airbrake-ruby (~> 2.0)
     airbrake-ruby (2.0.0)
@@ -214,6 +216,7 @@ GEM
       json (>= 1.8.3)
       signet (~> 0.7)
     hashdiff (0.3.2)
+    hashery (2.1.2)
     hashie (3.6.0)
     high_voltage (3.0.0)
     highline (2.0.2)
@@ -317,6 +320,12 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     pdf-core (0.7.0)
+    pdf-reader (2.3.0)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pg (0.20.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
@@ -394,6 +403,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    ruby-rc4 (0.1.5)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
@@ -522,6 +532,7 @@ DEPENDENCIES
   mini_magick
   nested_form_fields
   omniauth-google-oauth2 (~> 0.6.0)
+  pdf-reader
   pg
   prawn-rails
   rails (>= 5.2.0, < 6.0)

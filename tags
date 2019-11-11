@@ -203,6 +203,7 @@ AddTimestampsToMountainRoutes	db/migrate/20170418161209_add_timestamps_to_mounta
 AddTimestampsToPayments	db/migrate/20160619102019_add_timestamps_to_payments.rb	/^class AddTimestampsToPayments < ActiveRecord::Migration[5.0]$/;"	c
 AddTimestampsToProfiles	db/migrate/20170218183057_add_timestamps_to_profiles.rb	/^class AddTimestampsToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddToLibraryItems	db/migrate/20190708182903_add_to_library_items.rb	/^class AddToLibraryItems < ActiveRecord::Migration[5.2]$/;"	c
+AddToprPdfToToprRecords	db/migrate/20191111023010_add_topr_pdf_to_topr_records.rb	/^class AddToprPdfToToprRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddTrainingToMountainRoutes	db/migrate/20190130190334_add_training_to_mountain_routes.rb	/^class AddTrainingToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddTshirtSize1ToEventsSignUps	db/migrate/20180423110814_add_tshirt_size_1_to_events_sign_ups.rb	/^class AddTshirtSize1ToEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddTshirtSizesToStrzeleckiSignUps	db/migrate/20170301085832_add_tshirt_sizes_to_strzelecki_sign_ups.rb	/^class AddTshirtSizesToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -1367,6 +1368,7 @@ change	db/migrate/20191103181309_add_ulrs_to_users.rb	/^  def change$/;"	f	class
 change	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^  def change$/;"	f	class:AddSnwBlogToUsers
 change	db/migrate/20191110231247_add_gps_tracks_to_mountain_routes.rb	/^  def change$/;"	f	class:AddGpsTracksToMountainRoutes
 change	db/migrate/20191111000949_add_snw_groups_to_users.rb	/^  def change$/;"	f	class:AddSnwGroupsToUsers
+change	db/migrate/20191111023010_add_topr_pdf_to_topr_records.rb	/^  def change$/;"	f	class:AddToprPdfToToprRecords
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
