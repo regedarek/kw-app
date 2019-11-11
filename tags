@@ -1590,7 +1590,7 @@ expired_sign_ups	app/components/training/supplementary/repository.rb	/^      def
 extension_whitelist	app/components/photo_competition/file_uploader.rb	/^    def extension_whitelist$/;"	f	class:PhotoCompetition.FileUploader
 extension_whitelist	app/uploaders/csv_uploader.rb	/^  def extension_whitelist$/;"	f	class:CsvUploader
 extract_emails_to_array	app/components/membership/admin/membership_fees_controller.rb	/^      def extract_emails_to_array(txt)$/;"	f	class:Membership.Admin.MembershipFeesController
-extractor	app/components/scrappers/topr.rb	/^    def extractor$/;"	f	class:Scrappers
+extractor	app/components/scrappers/topr.rb	/^    def extractor$/;"	f
 failure	lib/failure.rb	/^  def failure$/;"	f	class:Failure
 failure?	lib/failure.rb	/^  def failure?$/;"	f	class:Failure
 failure_with_lines	app/components/importing/csv_library_item_parser.rb	/^      def failure_with_lines(invalid_lines)$/;"	f	class:Importing.CsvLibraryItemParser

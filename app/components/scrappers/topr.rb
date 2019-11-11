@@ -8,7 +8,15 @@ module Scrappers
         time: Time.now,
         remote_topr_pdf_url: 'http://lawiny.topr.pl/viewpdf'
       )
-      reader = PDF::Reader.new(record.topr_pdf.path)
+      reader = if Rails.env.production?
+        File.open('/home/deploy/kw-app/shared/tmp/topr_pdf.pdf', "wb") do |file|
+          file.write record.topr_pdf.file.read
+        end
+
+        PDF::Reader.new('/home/deploy/kw-app/shared/tmp/topr_pdf.pdf')
+      else
+        PDF::Reader.new(record.topr_pdf.path)
+      end
 
       paragraph = ""
       paragraphs = []
