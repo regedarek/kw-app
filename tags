@@ -188,6 +188,7 @@ AddSlugToProjects	db/migrate/20190428183401_add_slug_to_projects.rb	/^class AddS
 AddSlugToSupplementaryCourses	db/migrate/20181003133537_add_slug_to_supplementary_courses.rb	/^class AddSlugToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddSlugToUsers	db/migrate/20190428183425_add_slug_to_users.rb	/^class AddSlugToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddSnwBlogToUsers	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^class AddSnwBlogToUsers < ActiveRecord::Migration[5.2]$/;"	c
+AddSnwGroupsToUsers	db/migrate/20191111000949_add_snw_groups_to_users.rb	/^class AddSnwGroupsToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddStartDateAndEndDateToReservations	db/migrate/20150525130553_add_start_date_and_end_date_to_reservations.rb	/^class AddStartDateAndEndDateToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddStateToProjects	db/migrate/20190418115538_add_state_to_projects.rb	/^class AddStateToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddStateToSupplementaryCourses	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^class AddStateToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -978,7 +979,6 @@ account_id	app/services/payments/dotpay/payment_request.rb	/^      def account_i
 active	app/models/ability.rb	/^  def active$/;"	f	class:Ability
 active?	app/components/membership/activement.rb	/^    def active?$/;"	f	class:Membership.Activement
 active?	app/models/db/user.rb	/^  def active?$/;"	f	class:Db
-active_members	app/components/blog/authors.rb	/^    def active_members$/;"	f	class:Blog.Authors.fetch
 activity_type_attributes_for_select	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select$/;"	F	class:Business.CourseRecord
 activity_url	app/components/business/course_record.rb	/^    def activity_url$/;"	f	class:Business.CourseRecord
 actualDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function actualDisplay( name, doc ) {$/;"	f
@@ -1364,6 +1364,7 @@ change	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^  def chang
 change	db/migrate/20191103181309_add_ulrs_to_users.rb	/^  def change$/;"	f	class:AddUlrsToUsers
 change	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^  def change$/;"	f	class:AddSnwBlogToUsers
 change	db/migrate/20191110231247_add_gps_tracks_to_mountain_routes.rb	/^  def change$/;"	f	class:AddGpsTracksToMountainRoutes
+change	db/migrate/20191111000949_add_snw_groups_to_users.rb	/^  def change$/;"	f	class:AddSnwGroupsToUsers
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1638,6 +1639,7 @@ fullOffsetTop	vendor/assets/javascripts/foundation-datepicker.js	/^            v
 future_courses_of_user	app/components/training/supplementary/repository.rb	/^      def future_courses_of_user(user)$/;"	f	class:Training.Supplementary.Repository
 future_sign_ups_of_user	app/components/training/supplementary/repository.rb	/^      def future_sign_ups_of_user(user)$/;"	f	class:Training.Supplementary.Repository
 fxNow	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	fxNow, timerId,$/;"	v
+gear	app/components/blog/authors.rb	/^    def gear$/;"	f	class:Blog.Authors.fetch
 genFx	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function genFx( type, includeWidth ) {$/;"	f
 genFx.which.height	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		attrs = { height: type },$/;"	p
 gender_1	app/components/events/db/sign_up_record.rb	/^      def gender_1$/;"	f	class:Events.Db.SignUpRecord
@@ -1660,6 +1662,7 @@ give_warning	app/controllers/admin/reservations_controller.rb	/^    def give_war
 google_oauth2	app/controllers/users/omniauth_callbacks_controller.rb	/^  def google_oauth2$/;"	f	class:Users
 gorskie_dziki	app/components/activities/routes_controller.rb	/^    def gorskie_dziki$/;"	f	class:Activities.RoutesController
 gorskie_dziki_regulamin	app/components/activities/routes_controller.rb	/^    def gorskie_dziki_regulamin; end$/;"	f	class:Activities.RoutesController
+group_users	app/components/blog/authors.rb	/^    def group_users(group)$/;"	f	class:Blog.Authors.fetch
 handled?	lib/result.rb	/^  def handled?$/;"	f
 handled?	lib/success.rb	/^  def handled?$/;"	f	class:Success
 heart	app/components/training/activities/hearts_controller.rb	/^      def heart$/;"	f	class:Training.Activities.HeartsController
@@ -1776,6 +1779,7 @@ initialize	lib/success.rb	/^  def initialize(*args)$/;"	f	class:Success
 inspect	lib/result.rb	/^  def inspect$/;"	f
 inspectPrefiltersOrTransports	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {$/;"	f
 inspectPrefiltersOrTransports.inspect	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	function inspect( dataType ) {$/;"	f
+instructors	app/components/blog/authors.rb	/^    def instructors$/;"	f	class:Blog.Authors.fetch
 internalData	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function internalData( elem, name, data, pvt \/* Internal Use Only *\/ ) {$/;"	f
 internalRemoveData	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function internalRemoveData( elem, name, pvt ) {$/;"	f
 isArrayLike	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function isArrayLike( obj ) {$/;"	f
@@ -1851,6 +1855,7 @@ logo	app/components/business/course_record.rb	/^    def logo$/;"	f	class:Busines
 lomnicki_stit_uri	app/components/scrappers/shmu.rb	/^    def lomnicki_stit_uri(day: Time.zone.now.to_date.to_s(:number), hour: 12)$/;"	f	class:Scrappers.Shmu
 make_admin	app/controllers/admin/users_controller.rb	/^    def make_admin$/;"	f	class:Admin.UsersController
 make_curator	app/controllers/admin/users_controller.rb	/^    def make_curator$/;"	f	class:Admin.UsersController
+management	app/components/blog/authors.rb	/^    def management$/;"	f	class:Blog.Authors.fetch
 management	app/models/ability.rb	/^  def management$/;"	f	class:Ability
 management_users	app/components/management/voting/repository.rb	/^      def management_users$/;"	f	class:Management.Voting.Repository
 manipulationTarget	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function manipulationTarget( elem, content ) {$/;"	f
@@ -1864,6 +1869,7 @@ max_seats_size	app/components/business/course_record.rb	/^    def max_seats_size
 meteogram_uri	app/components/scrappers/meteoblue.rb	/^    def meteogram_uri$/;"	f	class:Scrappers.Meteoblue
 method_missing	lib/result.rb	/^  def method_missing(_method_name, *_args, &_block)$/;"	f
 missing_votes_on	app/components/management/voting/repository.rb	/^      def missing_votes_on(case_id)$/;"	f	class:Management.Voting.Repository
+mjs	app/components/blog/authors.rb	/^    def mjs$/;"	f	class:Blog.Authors.fetch
 model_name	app/components/user_management/profile_form.rb	/^    def self.model_name$/;"	F	class:UserManagement.ProfileForm
 model_name	app/components/user_management/reactivation_form.rb	/^    def self.model_name$/;"	F	class:UserManagement.ReactivationForm
 model_name	app/models/db/activities/mountain_route.rb	/^      def self.model_name$/;"	F	class:Db.Activities.MountainRoute
@@ -1992,7 +1998,6 @@ request_params	app/components/photo_competition/requests_controller.rb	/^    def
 reservation_params	app/controllers/admin/reservations_controller.rb	/^    def reservation_params$/;"	f	class:Admin
 reservations	app/models/ability.rb	/^  def reservations$/;"	f	class:Ability
 reserve	app/mailers/reservation_mailer.rb	/^  def reserve(reservation)$/;"	f	class:ReservationMailer
-rest_members	app/components/blog/authors.rb	/^    def rest_members$/;"	f	class:Blog.Authors.fetch
 restoreScript	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function restoreScript( elem ) {$/;"	f
 return	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	return new Tween.prototype.init( elem, options, prop, end, easing );$/;"	c
 return.hasOwnProperty	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
@@ -2070,6 +2075,7 @@ slug_candidates	app/components/training/supplementary/course_record.rb	/^      d
 slug_candidates	app/models/db/activities/mountain_route.rb	/^      def slug_candidates$/;"	f	class:Db.Activities.MountainRoute
 slug_candidates	app/models/db/user.rb	/^  def slug_candidates$/;"	f	class:Db
 slug_params	app/components/events/competitions/sign_ups_controller.rb	/^      def slug_params$/;"	f	class:Events.Competitions
+sport	app/components/blog/authors.rb	/^    def sport$/;"	f	class:Blog.Authors.fetch
 start_date	app/components/activities/repository.rb	/^    def start_date$/;"	f	class:Activities.Repository
 start_date	app/components/reservations/form.rb	/^    def start_date$/;"	f	class:Reservations.Form
 start_date	app/components/training/activities/repository.rb	/^      def start_date$/;"	f	class:Training.Activities.Repository
@@ -2105,6 +2111,7 @@ stub_payment_request	spec/payments/payments_controller_spec.rb	/^def stub_paymen
 sum	app/components/training/supplementary/limiter.rb	/^      def sum$/;"	f	class:Training.Supplementary.Limiter
 sum	app/components/user_management/cost.rb	/^    def sum$/;"	f	class:UserManagement.Cost
 sum_of_ski_meters	app/components/blog/author.rb	/^      def sum_of_ski_meters(user)$/;"	f	class:Blog.Author
+support	app/components/blog/authors.rb	/^    def support$/;"	f	class:Blog.Authors.fetch
 support.shrinkWrapBlocks	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	support.shrinkWrapBlocks = function() {$/;"	f
 swap	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var swap = function( elem, options, callback, args ) {$/;"	f
 system!	bin/setup	/^def system!(*args)$/;"	f

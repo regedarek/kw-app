@@ -22,8 +22,9 @@ module Admin
       authorize! :update, @user
 
       roles = user_params.slice(:roles)['roles'].split(' ')
+      snw_groups = user_params.slice(:snw_groups)['snw_groups'].split(' ')
       if @user.update(user_params)
-        @user.update roles: roles
+        @user.update roles: roles, snw_groups: snw_groups
         flash[:notice] = 'Zaktualizowano!'
         redirect_to edit_admin_user_path(@user), notice: 'Zaktualizowano'
       else
@@ -74,7 +75,7 @@ module Admin
 
     def user_params
       params.require(:user).permit(
-        :kw_id, :email,:first_name, :last_name, :phone, :roles, :admin, :author_number, :snw_blog
+        :kw_id, :email,:first_name, :last_name, :phone, :roles, :snw_groups, :admin, :author_number, :snw_blog
       )
     end
   end

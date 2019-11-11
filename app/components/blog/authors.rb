@@ -5,10 +5,24 @@ module Blog
         authors: authors.map do |user|
           ::Blog::Author.from_record(user)
         end,
-        active_members: active_members.map do |user|
+        mjs: mjs.map do |user|
           ::Blog::Author.from_record(user)
         end,
-        rest_members: rest_members
+        instructors: instructors.map do |user|
+          ::Blog::Author.from_record(user)
+        end,
+        management: management.map do |user|
+          ::Blog::Author.from_record(user)
+        end,
+        sport: sport.map do |user|
+          ::Blog::Author.from_record(user)
+        end,
+        gear: gear.map do |user|
+          ::Blog::Author.from_record(user)
+        end,
+        support: support.map do |user|
+          ::Blog::Author.from_record(user)
+        end
       }
     end
 
@@ -26,15 +40,35 @@ module Blog
     private
 
     def authors
-      Db::User.includes(:profile, :mountain_routes).where.not(author_number: nil).order('profiles.application_date')
+      Db::User.includes(:profile, :mountain_routes).where(":name = ANY(snw_groups)", name: "authors").where.not(author_number: nil).order('profiles.application_date')
     end
 
-    def active_members
-      Db::User.includes(:profile, :mountain_routes).where(author_number: nil, snw_blog: true).order('profiles.application_date')
+    def mjs
+      group_users('mjs')
     end
 
-    def rest_members
-      Db::User.includes(:profile, :mountain_routes).where(author_number: nil, snw_blog: false).active.where('sections @> array[?]', 'snw').order('profiles.application_date')
+    def instructors
+      group_users('instructors')
+    end
+
+    def management
+      group_users('management')
+    end
+
+    def sport
+      group_users('sport')
+    end
+
+    def gear
+      group_users('gear')
+    end
+
+    def support
+      group_users('support')
+    end
+
+    def group_users(group)
+      Db::User.includes(:profile, :mountain_routes).where(":name = ANY(snw_groups)", name: group).where.not(snw_blog: false).order('profiles.application_date')
     end
   end
 end

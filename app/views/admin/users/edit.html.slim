@@ -27,10 +27,13 @@
       = f.label :last_name
       = f.text_field :last_name
   .row
-    .large-6.columns
+    .large-4.columns
       = f.label :phone
       = f.text_field :phone
-    .large-6.columns
+    .large-4.columns
+      = f.label :snw_groups, "SNW Grupy: #{Db::User::SNW_GROUPS}"
+      = f.text_field :snw_groups
+    .large-4.columns
       = f.label :roles, "Role: #{Db::User::ROLES}"
       = f.text_field :roles
   .row
