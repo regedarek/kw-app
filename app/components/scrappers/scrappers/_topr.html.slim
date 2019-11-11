@@ -3,6 +3,7 @@
     .callout.alert
       h5.text-center = @topr_record.avalanche_degree
 
-  .large-11.columns
-      = image_tag @topr_record.topr_degree.url(:normal)
+  - if @topr_record.topr_degree
+    .large-11.columns
+        = image_tag @topr_record.topr_degree.url(:normal)
 
