@@ -6,7 +6,7 @@ module Blog
         top_5_boars: top_5_boars,
         total_meters: routes.sum(:length),
         last_route: { name: routes.last.name, date: routes.last.climbing_date },
-        max_meters_person: { name: best_person.display_name, meters: top_5_boars.first }
+        max_meters_person: { name: Db::User.find_by(kw_id: best_person.kw_id).display_name, meters: best_person.total_mountain_routes_length }
       }.to_json
     end
 
@@ -27,8 +27,7 @@ module Blog
     end
 
     def best_person
-      kw_id = Activities::Repository.new.fetch_season(:ski).first.kw_id
-      Db::User.find_by(kw_id: kw_id)
+      Activities::Repository.new.fetch_season(:ski, DateTime.new(2018, 11, 1), DateTime.new(2019, 05, 01)).first
     end
   end
 end
