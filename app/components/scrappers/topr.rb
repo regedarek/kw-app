@@ -34,9 +34,15 @@ module Scrappers
       end
       extractor.page(page)
 
+      pathname = if Rails.env.production?
+                   Pathname.new('/home/deploy/kw-app/shared/tmp/1-1-I4.tif')
+                 else
+                   Pathname.new('tmp/1-1-I4.tif')
+                 end
+
       record.update(
         avalanche_degree: paragraphs[4].gsub!(/.*?(?=PROGNOZA)/im, "").split[1],
-        topr_degree: Pathname.new('tmp/1-1-I4.tif').open
+        topr_degree: pathname.open
       )
     end
 

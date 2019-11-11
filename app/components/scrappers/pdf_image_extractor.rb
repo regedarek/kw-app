@@ -25,11 +25,11 @@ module Scrappers
 
             case stream.hash[:Filter]
             when :CCITTFaxDecode then
-              Scrappers::Tiff.new(stream).save("tmp/#{page.number}-#{count}-#{name}.tif")
+              Scrappers::Tiff.new(stream).save("/home/deploy/kw-app/shared/tmp/#{page.number}-#{count}-#{name}.tif")
             when :DCTDecode      then
-              Scrappers::Jpg.new(stream).save("tmp/#{page.number}-#{count}-#{name}.jpg")
+              Scrappers::Jpg.new(stream).save("/home/deploy/kw-app/shared/tmp/#{page.number}-#{count}-#{name}.jpg")
             else
-              Scrappers::Raw.new(stream).save("tmp/#{page.number}-#{count}-#{name}.tif")
+              Scrappers::Raw.new(stream).save("/home/deploy/kw-app/shared/tmp/#{page.number}-#{count}-#{name}.tif")
             end
           when :Form then
             count = process_page(PDF::Reader::FormXObject.new(page, stream), count)
