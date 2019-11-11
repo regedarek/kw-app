@@ -5,7 +5,7 @@ module Blog
         latest_degree: Scrappers::ToprRecord.last.topr_degree.url(:normal),
         top_5_boars: top_5_boars,
         total_meters: routes.sum(:length),
-        last_route: { name: routes.last.name, date: routes.last.climbing_date },
+        last_route: { name: routes.first.name, date: routes.first.climbing_date },
         max_meters_person: { name: best_person.display_name, meters: top_5_boars.first }
       }.to_json
     end
