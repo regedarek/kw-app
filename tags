@@ -1036,8 +1036,9 @@ availability	app/controllers/reservations_controller.rb	/^  def availability$/;"
 avatar	app/components/blog/author.rb	/^      def avatar(record)$/;"	f	class:Blog.Author
 baner_types	app/components/training/supplementary/course_record.rb	/^      def baner_types$/;"	f	class:Training.Supplementary.CourseRecord
 become	app/controllers/admin/users_controller.rb	/^    def become$/;"	f	class:Admin.UsersController
-best_of_season	app/components/activities/repository.rb	/^    def best_of_season$/;"	f	class:Activities.Repository
-best_route_of_season	app/components/activities/repository.rb	/^    def best_route_of_season$/;"	f	class:Activities.Repository
+best_of_season	app/components/activities/repository.rb	/^    def best_of_season(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
+best_person	app/components/blog/dashboard.rb	/^    def best_person$/;"	f	class:Blog.Dashboard
+best_route_of_season	app/components/activities/repository.rb	/^    def best_route_of_season(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 boolHook.set	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	set: function( elem, value, name ) {$/;"	m
 buildFragment	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildFragment( elems, context, scripts, selection, ignored ) {$/;"	f
 buildParams	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildParams( prefix, obj, traditional, add ) {$/;"	f
@@ -1546,7 +1547,7 @@ donation_params	app/components/charity/donations_controller.rb	/^    def donatio
 down	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.down$/;"	F	class:AddDeviseToUsers
 down	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def down$/;"	f	class:AddTimestampsToMountainRoutes
 download_attachment	app/components/settlement/admin/contracts_controller.rb	/^      def download_attachment$/;"	f	class:Settlement.Admin.ContractsController
-dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek$/;"	f	class:Activities.Repository
+dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Business.CoursesController
 edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"	f	class:Events.Admin.CompetitionsController
 edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events.Competitions
@@ -1608,16 +1609,16 @@ fetch_active_courses	app/components/training/supplementary/repository.rb	/^     
 fetch_archived_courses	app/components/training/supplementary/repository.rb	/^      def fetch_archived_courses(category: nil, kind: nil)$/;"	f	class:Training
 fetch_autum	app/components/training/activities/repository.rb	/^      def fetch_autum$/;"	f	class:Training.Activities.Repository
 fetch_courses	app/components/membership/card/repository.rb	/^      def fetch_courses(user)$/;"	f	class:Membership.Card.Repository
-fetch_current_month	app/components/activities/repository.rb	/^    def fetch_current_month$/;"	f	class:Activities.Repository
+fetch_current_month	app/components/activities/repository.rb	/^    def fetch_current_month(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 fetch_current_month	app/components/training/activities/repository.rb	/^      def fetch_current_month$/;"	f	class:Training.Activities.Repository
 fetch_inactive_courses	app/components/training/supplementary/repository.rb	/^      def fetch_inactive_courses(category:, kind: nil)$/;"	f
 fetch_mountain_routes	app/components/membership/card/repository.rb	/^      def fetch_mountain_routes(user)$/;"	f	class:Membership.Card.Repository
 fetch_one	app/components/blog/authors.rb	/^    def fetch_one(number: nil)$/;"	f	class:Blog.Authors.fetch
-fetch_prev_month	app/components/activities/repository.rb	/^    def fetch_prev_month$/;"	f	class:Activities.Repository
+fetch_prev_month	app/components/activities/repository.rb	/^    def fetch_prev_month(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 fetch_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_prev_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_projects	app/components/membership/card/repository.rb	/^      def fetch_projects(user)$/;"	f	class:Membership.Card.Repository
-fetch_season	app/components/activities/repository.rb	/^    def fetch_season$/;"	f	class:Activities.Repository
+fetch_season	app/components/activities/repository.rb	/^    def fetch_season(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 fetch_season	app/components/training/activities/repository.rb	/^      def fetch_season$/;"	f	class:Training.Activities.Repository
 fetch_spring	app/components/training/activities/repository.rb	/^      def fetch_spring$/;"	f	class:Training.Activities.Repository
 fetch_winter	app/components/training/activities/repository.rb	/^      def fetch_winter$/;"	f	class:Training.Activities.Repository
@@ -2037,6 +2038,7 @@ rodo_name	app/models/db/user.rb	/^  def rodo_name$/;"	f	class:Db
 role?	app/models/ability.rb	/^  def role?(name)$/;"	f	class:Ability
 root	spec/rails_mock.rb	/^    def self.root$/;"	F	class:Rails
 route_params	app/controllers/activities/mountain_routes_controller.rb	/^    def route_params$/;"	f	class:Activities
+routes	app/components/blog/dashboard.rb	/^    def routes$/;"	f	class:Blog.Dashboard
 rreturn	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rreturn = \/\\r\/g,$/;"	v
 rules	app/components/training/activities/ski_routes_controller.rb	/^      def rules$/;"	f	class:Training.Activities.SkiRoutesController
 rvalidtokens	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rvalidtokens = \/(,)|(\\[|{)|(}|])|"(?:[^"\\\\\\r\\n]|\\\\["\\\\\\\/bfnrt]|\\\\u[\\da-fA-F]{4})*"\\s*:?|true|false|null|-?(?!0\\d)\\d+(?:\\.\\d+|)(?:[eE][+-]?\\d+|)\/g;$/;"	v
@@ -2152,7 +2154,7 @@ system!	bin/update	/^def system!(*args)$/;"	f
 tag_params	app/components/library/admin/tags_controller.rb	/^      def tag_params$/;"	f	class:Library.Admin.TagsController
 target	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var target = $(e.target).closest('span, td, th');$/;"	v
 target	vendor/assets/javascripts/foundation-datepicker.js	/^            var target = $(e.target).closest('span, td, th');$/;"	v
-tatra_uniqe	app/components/activities/repository.rb	/^    def tatra_uniqe$/;"	f	class:Activities.Repository
+tatra_uniqe	app/components/activities/repository.rb	/^    def tatra_uniqe(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 teams	app/components/events/competitions/sign_ups/limiter.rb	/^        def teams$/;"	f	class:Events.Competitions.SignUps.Limiter
 teams_from_singles	app/components/events/competitions/sign_ups/limiter.rb	/^        def teams_from_singles$/;"	f	class:Events.Competitions.SignUps.Limiter
 test	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^                test = function() {$/;"	f
@@ -2169,6 +2171,7 @@ to_s	app/components/items/owner_presenter.rb	/^    def to_s$/;"	f	class:Items.Ow
 to_s	app/components/reservations/state_presenter.rb	/^    def to_s$/;"	f	class:Reservations.StatePresenter
 toggle_closed	app/components/events/admin/competitions_controller.rb	/^      def toggle_closed$/;"	f	class:Events.Admin.CompetitionsController
 toggle_rentable	app/controllers/admin/items_controller.rb	/^    def toggle_rentable$/;"	f	class:Admin.ItemsController
+top_5_boars	app/components/blog/dashboard.rb	/^    def top_5_boars$/;"	f	class:Blog.Dashboard
 training_contracts	app/models/ability.rb	/^  def training_contracts$/;"	f	class:Ability
 unapprove	app/components/management/voting/cases_controller.rb	/^      def unapprove$/;"	f	class:Management.Voting
 unheart	app/components/training/activities/hearts_controller.rb	/^      def unheart$/;"	f	class:Training.Activities.HeartsController
