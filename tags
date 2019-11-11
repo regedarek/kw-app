@@ -1563,6 +1563,7 @@ edit	app/controllers/admin/items_controller.rb	/^    def edit$/;"	f	class:Admin.
 edit	app/controllers/admin/profiles_controller.rb	/^    def edit$/;"	f	class:Admin.ProfilesController
 edit	app/controllers/admin/reservations_controller.rb	/^    def edit$/;"	f	class:Admin
 edit	app/controllers/admin/users_controller.rb	/^    def edit$/;"	f	class:Admin.UsersController
+efficient_conversion	app/components/scrappers/topr_degree_uploader.rb	/^    def efficient_conversion(width, height)$/;"	f	class:Scrappers.ToprDegreeUploader
 either	app/components/either_matcher.rb	/^  def either(*args, &block)$/;"	f	class:EitherMatcher
 element	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var element;$/;"	v
 element	vendor/assets/javascripts/foundation-datepicker.js	/^            var element;$/;"	v
