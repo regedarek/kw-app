@@ -47,7 +47,7 @@
       .callout.primary
         = f.label :question, 'Odpowiedź'
         = f.text_field :question
-        = f.hidden_field :course_id, value: @sign_up.course_id
+  = f.hidden_field :course_id, value: @sign_up.course_id
 
 - if @sign_up.payment
   .row
