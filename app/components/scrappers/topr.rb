@@ -40,7 +40,7 @@ module Scrappers
                  end
 
       record.update(
-        avalanche_degree: paragraphs[4].gsub!(/.*?(?=PROGNOZA)/im, "").split[1],
+        avalanche_degree: paragraphs.join('').gsub!(/.*?(?=PROGNOZA)/im, "").split[1],
         topr_degree: pathname.open
       )
     end
