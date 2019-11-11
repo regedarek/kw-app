@@ -29,7 +29,11 @@ module Scrappers
             when :DCTDecode      then
               Scrappers::Jpg.new(stream).save("/home/deploy/kw-app/shared/tmp/#{page.number}-#{count}-#{name}.jpg")
             else
-              Scrappers::Raw.new(stream).save("/home/deploy/kw-app/shared/tmp/#{page.number}-#{count}-#{name}.tif")
+              if Rails.env.production?
+                Scrappers::Raw.new(stream).save("/home/deploy/kw-app/shared/tmp/#{page.number}-#{count}-#{name}.tif")
+              else
+                Scrappers::Raw.new(stream).save("tmp/#{page.number}-#{count}-#{name}.tif")
+              end
             end
           when :Form then
             count = process_page(PDF::Reader::FormXObject.new(page, stream), count)

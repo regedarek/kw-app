@@ -1,17 +1,8 @@
 module Scrappers
-  class FileIO < StringIO
-    def initialize(stream, filename)
-      super(stream)
-      @original_filename = filename
-    end
-
-    attr_reader :original_filename
-  end
-
   class Topr
     def call
-      page = Nokogiri::HTML(open('http://lawiny.topr.pl'))
-      statement = page.xpath('/html/body/div[1]/div[2]/div[1]/section[2]/div[1]/div[1]/div/div[2]').text.squish
+      #page = Nokogiri::HTML(open('http://lawiny.topr.pl'))
+      #statement = page.xpath('/html/body/div[1]/div[2]/div[1]/section[2]/div[1]/div[1]/div/div[2]').text.squish
 
       record = Scrappers::ToprRecord.create(
         time: Time.now,
