@@ -20,6 +20,9 @@ module Blog
         gear: gear.map do |user|
           ::Blog::Author.from_record(user)
         end,
+        foto: foto.map do |user|
+          ::Blog::Author.from_record(user)
+        end,
         support: support.map do |user|
           ::Blog::Author.from_record(user)
         end
@@ -65,6 +68,10 @@ module Blog
 
     def support
       group_users('support')
+    end
+
+    def foto
+      group_users('foto')
     end
 
     def group_users(group)

@@ -1645,6 +1645,7 @@ for_profile	app/components/membership/fees_repository.rb	/^    def for_profile(k
 form	app/components/admin/items.rb	/^    def form$/;"	f	class:Admin.Items
 form	app/components/admin/membership_fees.rb	/^    def form$/;"	f	class:Admin.MembershipFees
 form	app/components/admin/reservations.rb	/^    def form$/;"	f	class:Admin.Reservations
+foto	app/components/blog/authors.rb	/^    def foto$/;"	f	class:Blog.Authors.fetch
 from	app/components/reservations/cancel_item.rb	/^    def self.from(reservation_id:)$/;"	F	class:Reservations.CancelItem
 from_omniauth	app/models/db/user.rb	/^  def self.from_omniauth(access_token)$/;"	F	class:Db
 from_record	app/components/blog/author.rb	/^      def from_record(record)$/;"	f	class:Blog.Author
