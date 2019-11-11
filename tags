@@ -768,6 +768,7 @@ Scrappers	app/components/scrappers/scrappers_controller.rb	/^module Scrappers$/;
 Scrappers	app/components/scrappers/shmu.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/shmu_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/topr.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/topr_pdf_uploader.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/topr_record.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/weather.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/weather_record.rb	/^module Scrappers$/;"	m
@@ -851,6 +852,7 @@ TagsController	app/components/library/admin/tags_controller.rb	/^    class TagsC
 TimestampCreateDonations	db/migrate/20180813110522_timestamp_create_donations.rb	/^class TimestampCreateDonations < ActiveRecord::Migration[5.0]$/;"	c
 TimestampCreateHearts	db/migrate/20180808131403_timestamp_create_hearts.rb	/^class TimestampCreateHearts < ActiveRecord::Migration[5.0]$/;"	c
 Topr	app/components/scrappers/topr.rb	/^  class Topr$/;"	c	class:Scrappers
+ToprPdfUploader	app/components/scrappers/topr_pdf_uploader.rb	/^  class ToprPdfUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < ActiveRecord::Base$/;"	c	class:Scrappers
 Training	app/components/training/activities/contract_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/contracts_controller.rb	/^module Training$/;"	m
@@ -1608,6 +1610,7 @@ fetch_winter	app/components/training/activities/repository.rb	/^      def fetch_
 filename	app/components/photo_competition/file_uploader.rb	/^    def filename$/;"	f	class:PhotoCompetition.FileUploader
 filename	app/components/scrappers/image_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ImageUploader
 filename	app/components/scrappers/meteoblue_uploader.rb	/^    def filename$/;"	f	class:Scrappers.MeteoblueUploader
+filename	app/components/scrappers/topr_pdf_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ToprPdfUploader
 filterHidden	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function filterHidden( elem ) {$/;"	f
 financial_management	app/models/ability.rb	/^  def financial_management$/;"	f	class:Ability
 find_outdated_not_prepaided_profiles	app/components/membership/fees_repository.rb	/^    def find_outdated_not_prepaided_profiles$/;"	f	class:Membership.FeesRepository
@@ -2094,6 +2097,7 @@ store_dir	app/components/photo_competition/file_uploader.rb	/^    def store_dir$
 store_dir	app/components/reservations/photo_uploader.rb	/^    def store_dir$/;"	f	class:Reservations.PhotoUploader
 store_dir	app/components/scrappers/image_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ImageUploader
 store_dir	app/components/scrappers/meteoblue_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.MeteoblueUploader
+store_dir	app/components/scrappers/topr_pdf_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ToprPdfUploader
 store_dir	app/components/settlement/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Settlement.AttachmentUploader
 store_dir	app/components/training/activities/gps_track_uploader.rb	/^      def store_dir$/;"	f	class:Training.Activities.GpsTrackUploader
 store_dir	app/components/training/supplementary/baner_uploader.rb	/^      def store_dir$/;"	f	class:Training.Supplementary.BanerUploader
