@@ -17,6 +17,10 @@ module Scrappers
       process :efficient_conversion => [400, 136]
     end
 
+    version :dashboard do
+      process :efficient_conversion => [180, 62]
+    end
+
     def filename
       "#{model.created_at.hour}_00.jpg" if original_filename.present?
     end

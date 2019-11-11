@@ -2,7 +2,7 @@ module Blog
   class Dashboard
     def fetch
       {
-        latest_degree: Scrappers::ToprRecord.last.topr_degree.url(:normal),
+        latest_degree: Scrappers::ToprRecord.last.topr_degree.url(:dashboard),
         top_5_boars: top_5_boars,
         total_meters: routes.sum(:length),
         last_route: { name: routes.last.name, date: routes.last.climbing_date },
