@@ -20,27 +20,29 @@
       = f.label :snw_blog
       = f.check_box :snw_blog
   .row
-    .large-6.columns
+    .large-4.columns
       = f.label :first_name
       = f.text_field :first_name
-    .large-6.columns
+    .large-4.columns
       = f.label :last_name
       = f.text_field :last_name
-  .row
     .large-4.columns
       = f.label :phone
       = f.text_field :phone
-    .large-4.columns
+  .row
+    .large-6.columns
       = f.label :snw_groups, "SNW Grupy: #{Db::User::SNW_GROUPS}"
       = f.text_field :snw_groups
-    .large-4.columns
+    .large-6.columns
       = f.label :roles, "Role: #{Db::User::ROLES}"
       = f.text_field :roles
   .row
-    .large-4.columns
+    .large-3.columns
       = f.submit 'Zaktualizuj użytkownika', class: 'button large expanded'
+    .large-3.columns
+      = link_to 'Zaloguj jako', become_admin_user_path(@user.id), method: :post, class: 'warning button large expanded'
     - if @user.profile
-      .large-4.columns
+      .large-3.columns
         = link_to 'powiązany profil', admin_profile_path(@user.profile), class: 'button large expanded'
-    .large-4.columns
+    .large-3.columns
       = link_to 'wszyscy użytkownicy', admin_users_path, class: 'button large expanded secondary'
