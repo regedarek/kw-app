@@ -2,7 +2,7 @@ module Activities
   class MountainRoutesController < ApplicationController
     append_view_path 'app/components'
     before_action :authenticate_user!, only: [:create, :update, :destroy]
-    allow_cors :index, :other_methods
+    allow_cors :show
 
 
     def index
