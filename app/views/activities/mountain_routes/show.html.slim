@@ -97,7 +97,7 @@
     - if @route.gps_tracks.any?
       .row
         .large-12.columns
-          = render 'map-gpx.html.slim'
+          = render 'map-gpx', track_urls: @route.gps_tracks.map(&:url)
 
     - if user_signed_in?
       .row

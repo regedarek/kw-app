@@ -8,7 +8,7 @@ div id="map" style="height: 600px"
             attribution: 'Map data &copy; <a href="http://www.osm.org">OpenStreetMap</a>'
         }).addTo(map);
 
-        var tracks = #{raw @route.gps_tracks.map{|track| track.url}};
+        var tracks = #{raw track_urls};
 
         for(var i = 0; i < tracks.length; i++) {
             var gpx = tracks[i];

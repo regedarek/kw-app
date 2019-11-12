@@ -24,4 +24,4 @@
     b tracki:
     ul
       - @route.gps_tracks.each do |track|
-        li= link_to track, track.url
+        li= link_to File.basename(track.path), track.url
