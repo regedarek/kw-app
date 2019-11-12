@@ -4,7 +4,6 @@ module Activities
     before_action :authenticate_user!, only: [:create, :update, :destroy]
     allow_cors :show
 
-
     def index
       authorize! :read, ::Db::Activities::MountainRoute
 
