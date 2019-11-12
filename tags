@@ -1007,7 +1007,6 @@ all	app/components/user_management/recalculate_cost.rb	/^    def all$/;"	f	class
 all_prepaid	app/components/training/supplementary/limiter.rb	/^      def all_prepaid$/;"	f	class:Training.Supplementary.Limiter
 all_refunded	app/components/training/supplementary/limiter.rb	/^      def all_refunded$/;"	f	class:Training.Supplementary.Limiter
 all_unpaid	app/components/training/supplementary/limiter.rb	/^      def all_unpaid$/;"	f	class:Training.Supplementary.Limiter
-allow_cors	app/controllers/application_controller.rb	/^  def self.allow_cors(*methods)$/;"	F	class:ApplicationController
 allowed_params	app/components/messaging/comments_controller.rb	/^    def allowed_params$/;"	f	class:Messaging.CommentsController
 already_voted_on	app/components/management/voting/repository.rb	/^      def already_voted_on(case_id)$/;"	f	class:Management.Voting.Repository
 apply	app/components/management/snw/mailer.rb	/^      def apply(apply_id)$/;"	f	class:Management.Snw.Mailer
@@ -1420,7 +1419,6 @@ contract_params	app/components/training/activities/contracts_controller.rb	/^   
 contractor_name=	app/components/settlement/contract_record.rb	/^    def contractor_name=(id)$/;"	f	class:Settlement.ContractRecord
 contractor_params	app/components/settlement/admin/contractors_controller.rb	/^      def contractor_params$/;"	f	class:Settlement.Admin.ContractorsController
 coordinator	app/components/management/project_record.rb	/^    def coordinator$/;"	f	class:Management.ProjectRecord
-cors_before_filter	app/controllers/application_controller.rb	/^  def cors_before_filter$/;"	f	class:ApplicationController
 cost	app/components/admin/membership_fees_form.rb	/^    def cost$/;"	f	class:Admin.MembershipFeesForm
 cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Events.Db.SignUpRecord
 cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;"	f	class:Training.Supplementary.SignUpRecord
@@ -1734,7 +1732,7 @@ index	app/components/settlement/admin/contracts_controller.rb	/^      def index$
 index	app/components/training/activities/contracts_controller.rb	/^      def index$/;"	f	class:Training.Activities.ContractsController
 index	app/components/training/activities/ski_routes_controller.rb	/^      def index$/;"	f	class:Training.Activities.SkiRoutesController
 index	app/components/training/supplementary/courses_controller.rb	/^      def index$/;"	f	class:Training.Supplementary.CoursesController
-index	app/controllers/activities/mountain_routes_controller.rb	/^    def index$/;"	f	class:Activities.MountainRoutesController
+index	app/controllers/activities/mountain_routes_controller.rb	/^   def index$/;"	f	class:Activities.MountainRoutesController
 index	app/controllers/admin/dashboard_controller.rb	/^		def index$/;"	f	class:Admin.DashboardController
 index	app/controllers/admin/importing_controller.rb	/^    def index$/;"	f	class:Admin.ImportingController
 index	app/controllers/admin/items_controller.rb	/^    def index$/;"	f	class:Admin.ItemsController

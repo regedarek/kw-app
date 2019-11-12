@@ -2,9 +2,8 @@ module Activities
   class MountainRoutesController < ApplicationController
     append_view_path 'app/components'
     before_action :authenticate_user!, only: [:create, :update, :destroy]
-    allow_cors :show
 
-    def index
+   def index
       authorize! :read, ::Db::Activities::MountainRoute
 
       @q = if params[:boars]
@@ -57,11 +56,6 @@ module Activities
     def show
       @route = Db::Activities::MountainRoute.includes(:colleagues).friendly.find(params[:id])
       authorize! :read, @route
-
-      headers['Access-Control-Allow-Origin'] = '*'
-        headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, PATCH, OPTIONS'
-        headers['Access-Control-Request-Method'] = '*'
-        headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     end
 
     def edit
