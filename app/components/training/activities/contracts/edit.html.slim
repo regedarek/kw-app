@@ -1,0 +1,17 @@
+= form_for @contract, as: :contract, url: activities_contract_path(@contract.id), method: :put do |f|
+  .row
+    .large-12.columns
+      - if @errors
+        .callout.alert
+          ul
+            - @errors.each do |error|
+              li= error.last.to_sentence
+
+  = render 'form', f: f
+
+  .row
+    .large-6.columns
+      = f.submit 'Edytuj kontrakt', class: 'button expanded large success'
+
+    .large-6.columns
+      = link_to 'wróć do poprzedniej strony', activities_contracts_path, class: 'button expanded large warning'

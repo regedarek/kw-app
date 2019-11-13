@@ -4,6 +4,7 @@ table.stack
       th width='5%' ID
       th width='50%' Nazwa
       th width='45%' Punktacja
+      th Akcje
 
   tbody
     - contracts.each do |contract|
@@ -11,3 +12,4 @@ table.stack
         td.text-center = contract.id
         td.text-center.large-text-left = contract.name
         td.text-center.large-text-left = contract.score
+        td.text-center.large-text-left = link_to 'Edytuj', edit_activities_contract_path(contract.id)

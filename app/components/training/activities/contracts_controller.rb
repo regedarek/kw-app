@@ -27,6 +27,23 @@ module Training
         end
       end
 
+      def edit
+        authorize! :manage, Training::Activities::ContractRecord
+
+        @contract = ::Training::Activities::ContractRecord.find(params[:id])
+      end
+
+      def update
+        authorize! :manage, Training::Activities::ContractRecord
+        @contract = ::Training::Activities::ContractRecord.find(params[:id])
+
+        if @contract.update(contract_params)
+          redirect_to edit_activities_contract_path(@contract.id), notice: 'Zaktualizowano kontrakt'
+        else
+          render :edit
+        end
+      end
+
       private
 
       def contract_params

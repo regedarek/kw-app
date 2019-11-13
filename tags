@@ -1560,6 +1560,7 @@ edit	app/components/management/projects_controller.rb	/^    def edit$/;"	f	class
 edit	app/components/management/snw/snw_applies_controller.rb	/^      def edit$/;"	f	class:Management.Snw.SnwAppliesController
 edit	app/components/management/voting/cases_controller.rb	/^      def edit$/;"	f	class:Management.Voting.CasesController
 edit	app/components/settlement/admin/contracts_controller.rb	/^      def edit$/;"	f	class:Settlement.Admin.ContractsController
+edit	app/components/training/activities/contracts_controller.rb	/^      def edit$/;"	f	class:Training.Activities.ContractsController
 edit	app/components/training/activities/ski_routes_controller.rb	/^      def edit$/;"	f	class:Training.Activities.SkiRoutesController
 edit	app/components/training/supplementary/courses_controller.rb	/^      def edit$/;"	f	class:Training.Supplementary.CoursesController
 edit	app/components/training/supplementary/sign_ups_controller.rb	/^      def edit$/;"	f	class:Training.Supplementary.SignUpsController
@@ -2207,6 +2208,7 @@ update	app/components/management/snw/snw_applies_controller.rb	/^      def updat
 update	app/components/management/voting/cases_controller.rb	/^      def update$/;"	f	class:Management.Voting.CasesController
 update	app/components/reservations/items_controller.rb	/^    def update$/;"	f	class:Reservations.ItemsController
 update	app/components/settlement/admin/contracts_controller.rb	/^      def update$/;"	f	class:Settlement.Admin.ContractsController
+update	app/components/training/activities/contracts_controller.rb	/^      def update$/;"	f	class:Training.Activities.ContractsController
 update	app/components/training/activities/repository.rb	/^      def update(id:, form_outputs:, user_id:)$/;"	f	class:Training.Activities.Repository
 update	app/components/training/activities/ski_routes_controller.rb	/^      def update$/;"	f	class:Training.Activities.SkiRoutesController
 update	app/components/training/supplementary/courses_controller.rb	/^      def update$/;"	f	class:Training.Supplementary.CoursesController
