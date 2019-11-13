@@ -1,6 +1,7 @@
-.row
-  .large-6.columns
-    = link_to 'Nowy kontrakt', new_activities_contract_path, class: 'button warning large'
+- if can? :create, Training::Activities::ContractRecord
+  .row
+    .large-6.columns
+      = link_to 'Nowy kontrakt', new_activities_contract_path, class: 'button warning large'
 .row
   .large-12.columns
     = render 'table', contracts: @contracts

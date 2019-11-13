@@ -1,15 +1,19 @@
 table.stack
   thead
     tr
-      th width='5%' ID
-      th width='50%' Nazwa
-      th width='45%' Punktacja
-      th Akcje
+      th.text-center.large-text-left width='5%' ID
+      th.text-center.large-text-left width='25%' Nazwa
+      th.text-center.large-text-left width='55%' Opis
+      th.text-center.large-text-left width='10%' Punkty
+      - if can? :manage, Training::Activities::ContractRecord
+        th.text-center.large-text-left width='5%' Akcje
 
   tbody
     - contracts.each do |contract|
       tr
-        td.text-center = contract.id
+        td.text-center.large-text-left = contract.id
         td.text-center.large-text-left = contract.name
+        td.text-center.large-text-left = sanitize contract.description
         td.text-center.large-text-left = contract.score
-        td.text-center.large-text-left = link_to 'Edytuj', edit_activities_contract_path(contract.id)
+        - if can? :manage, Training::Activities::ContractRecord
+          td.text-center.large-text-left = link_to 'Edytuj', edit_activities_contract_path(contract.id)

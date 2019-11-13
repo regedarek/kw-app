@@ -30,6 +30,7 @@ class Ability
   def default
     can :create, Db::Profile
     cannot :read, Management::Voting::CaseRecord
+    can :read, Training::Activities::ContractRecord
   end
 
   def library

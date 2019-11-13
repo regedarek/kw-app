@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'narciarskie-dziki/kontrakty' => 'training/activities/contracts#index', as: :kontrakty
   get 'przejscia/narciarstwo' => 'training/activities/ski_routes#new', as: :narciarstwo
   get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
   get 'wydarzenia/narciarskie' => 'training/supplementary/courses#index', defaults: { category: 'snw' }, as: :ski_events
