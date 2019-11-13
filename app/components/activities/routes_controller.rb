@@ -14,6 +14,16 @@ module Activities
 
     def gorskie_dziki_regulamin; end
 
+    def narciarskie_dziki
+      @prev_month_leaders = ski_repository.fetch_prev_month
+      @current_month_leaders = ski_repository.fetch_current_month
+      @season_leaders = ski_repository.fetch_season
+      @best_of_season = ski_repository.best_of_season
+      @best_route_of_season = ski_repository.best_route_of_season
+    end
+
+    def narciarskie_dziki_regulamin; end
+
     def index
       @mountain_routes = MountainRouteRecord.order(climbing_date: :desc).page(params[:page]).per(20)
     end
@@ -22,6 +32,10 @@ module Activities
 
     def repository
       @repository ||= Repository.new
+    end
+
+    def ski_repository
+      @ski_repository ||= SkiRepository.new
     end
   end
 end

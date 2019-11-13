@@ -1,0 +1,146 @@
+.row
+  .large-12.columns
+    = link_to 'Regulamin narciarskich dzików', narciarskie_dziki_regulamin_path, class: 'button warning large expanded'
+.row
+  .large-12.columns
+    h4 Narciarskie dziki sezonu
+    .callout.primary
+      .row
+        .large-4.columns
+          - if Date.today.month >= 6
+            h5 = I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}")
+            table.stack
+              thead
+                tr
+                  th
+                  th kto?
+                  th width='15%' metrów
+              tbody
+                - @prev_month_leaders.first(5).each do |user|
+                  tr
+                    td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                      - if user.avatar.present?
+                        = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                      - else
+                        = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                    td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                    td.text-center = user.total_mountain_routes_length
+
+        .large-4.columns
+          - if Date.today.month >= 5
+            h5 = I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}")
+            table.stack
+              thead
+                tr
+                  th
+                  th kto?
+                  th width='15%' metrów
+              tbody
+                - @current_month_leaders.first(5).each do |user|
+                  tr
+                    td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                      - if user.avatar.present?
+                        = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                      - else
+                        = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                    td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                    td.text-center = user.total_mountain_routes_length
+
+        .large-4.columns
+          h5 = "sezon #{Activities::SkiRepository.new.start_date.year}"
+          table.stack
+            thead
+              tr
+                th
+                th kto?
+                th width='15%' metrów
+            tbody
+              - @season_leaders.first(5).each do |user|
+                tr
+                  td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                    - if user.avatar.present?
+                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                    - else
+                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                  td.text-center = user.total_mountain_routes_length
+
+    h4 Pozostałe klasyfikacje
+    .callout.secondary
+      .row
+        .large-4.columns
+          h5 najlepsze przejścia sezonu
+          table.stack
+            thead
+              tr
+                th
+                th kto?
+                th width='15%' bicków
+            tbody
+              - @best_of_season.first(5).each do |user|
+                tr
+                  td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                    - if user.avatar.present?
+                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                    - else
+                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                  td.text-center = user.total_mountain_routes_hearts_count
+
+        .large-4.columns
+          h5 najlepsze przejście sezonu
+          table.stack
+            thead
+              tr
+                th
+                th kto?
+                th width='15%' ile?
+            tbody
+              - @best_route_of_season.first(5).each do |user|
+                tr
+                  td width='45px' = link_to activities_mountain_route_path(user.mountain_routes.select('mountain_routes.id, mountain_routes.slug, Max(hearts_count) as max_heart_count').group(:id).order('max_heart_count DESC').first.slug) do
+                    - if user.avatar.present?
+                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                    - else
+                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                  td = link_to Db::User.find(user.id).display_name, activities_mountain_route_path(user.mountain_routes.select('mountain_routes.id, mountain_routes.slug, Max(hearts_count) as max_heart_count').group(:id).order('max_heart_count DESC').first.slug)
+                  td.text-center = user.max_mountain_routes_hearts_count
+
+        .large-4.columns
+          h5 #exploratortatr
+          table.stack
+            thead
+              tr
+                th
+                th kto?
+                th width='15%' ile?
+            tbody
+
+.row
+  .large-12.columns
+    h5 = "Tabela sezonu #{Activities::SkiRepository.new.start_date.year}"
+    table.stack
+      thead
+        tr
+          th width='30px' Miejsce
+          th width='25px'
+          th width='250px' Kto?
+          th.large-text-left Ostatnie przejście
+          th.large-text-right width='50px' Przewspinane [metry]
+
+      tbody
+        - i = 0
+        - @season_leaders.each do |user|
+          tr
+            td.text-center = i + 1
+            td width='45px' = link_to user_path(kw_id: user.kw_id) do
+              - if user.avatar.present?
+                = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+              - else
+                = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+            td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+            td.large-text-left
+              - if user.mountain_routes.any?
+                = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
+            td.text-center.large-text-right = user.total_mountain_routes_length
+          - i += 1

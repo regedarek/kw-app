@@ -14,6 +14,7 @@ Activement	app/components/membership/activement.rb	/^  class Activement$/;"	c	cl
 Activities	app/components/activities/mountain_route_record.rb	/^module Activities$/;"	m
 Activities	app/components/activities/repository.rb	/^module Activities$/;"	m
 Activities	app/components/activities/routes_controller.rb	/^module Activities$/;"	m
+Activities	app/components/activities/ski_repository.rb	/^module Activities$/;"	m
 Activities	app/components/training/activities/contract_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/contracts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/create_ski_route.rb	/^  module Activities$/;"	m	class:Training
@@ -813,6 +814,7 @@ SignUps	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^    m
 SignUps	app/components/events/competitions/sign_ups/update.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUpsController	app/components/events/competitions/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Events.Competitions
 SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Training.Supplementary
+SkiRepository	app/components/activities/ski_repository.rb	/^  class SkiRepository$/;"	c	class:Activities
 SkiRoute	app/components/training/activities/ski_route.rb	/^    class SkiRoute < Dry::Struct$/;"	c	class:Training.Activities
 SkiRoutesController	app/components/training/activities/ski_routes_controller.rb	/^    class SkiRoutesController < ApplicationController$/;"	c	class:Training.Activities
 Snw	app/components/management/snw/api/snw_applies_controller.rb	/^  module Snw$/;"	m	class:Management
@@ -1037,8 +1039,10 @@ avatar	app/components/blog/author.rb	/^      def avatar(record)$/;"	f	class:Blog
 baner_types	app/components/training/supplementary/course_record.rb	/^      def baner_types$/;"	f	class:Training.Supplementary.CourseRecord
 become	app/controllers/admin/users_controller.rb	/^    def become$/;"	f	class:Admin.UsersController
 best_of_season	app/components/activities/repository.rb	/^    def best_of_season(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
+best_of_season	app/components/activities/ski_repository.rb	/^    def best_of_season$/;"	f	class:Activities.SkiRepository
 best_person	app/components/blog/dashboard.rb	/^    def best_person$/;"	f	class:Blog.Dashboard
 best_route_of_season	app/components/activities/repository.rb	/^    def best_route_of_season(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
+best_route_of_season	app/components/activities/ski_repository.rb	/^    def best_route_of_season$/;"	f	class:Activities.SkiRepository
 boolHook.set	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	set: function( elem, value, name ) {$/;"	m
 buildFragment	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildFragment( elems, context, scripts, selection, ignored ) {$/;"	f
 buildParams	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function buildParams( prefix, obj, traditional, add ) {$/;"	f
@@ -1573,6 +1577,7 @@ else_fail!	lib/result.rb	/^  def else_fail!$/;"	f
 email_uniq	app/components/user_management/profile_form.rb	/^    def email_uniq$/;"	f	class:UserManagement.ProfileForm
 email_uniq	app/components/user_management/reactivation_form.rb	/^    def email_uniq$/;"	f	class:UserManagement.ReactivationForm
 end_date	app/components/activities/repository.rb	/^    def end_date$/;"	f	class:Activities.Repository
+end_date	app/components/activities/ski_repository.rb	/^    def end_date$/;"	f	class:Activities.SkiRepository
 end_date	app/components/reservations/form.rb	/^    def end_date$/;"	f	class:Reservations.Form
 end_date	app/components/training/activities/repository.rb	/^      def end_date$/;"	f	class:Training.Activities.Repository
 end_date_is_before_start_date	app/components/reservations/form.rb	/^    def end_date_is_before_start_date$/;"	f	class:Reservations.Form
@@ -1610,15 +1615,18 @@ fetch_archived_courses	app/components/training/supplementary/repository.rb	/^   
 fetch_autum	app/components/training/activities/repository.rb	/^      def fetch_autum$/;"	f	class:Training.Activities.Repository
 fetch_courses	app/components/membership/card/repository.rb	/^      def fetch_courses(user)$/;"	f	class:Membership.Card.Repository
 fetch_current_month	app/components/activities/repository.rb	/^    def fetch_current_month(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
+fetch_current_month	app/components/activities/ski_repository.rb	/^    def fetch_current_month$/;"	f	class:Activities.SkiRepository
 fetch_current_month	app/components/training/activities/repository.rb	/^      def fetch_current_month$/;"	f	class:Training.Activities.Repository
 fetch_inactive_courses	app/components/training/supplementary/repository.rb	/^      def fetch_inactive_courses(category:, kind: nil)$/;"	f
 fetch_mountain_routes	app/components/membership/card/repository.rb	/^      def fetch_mountain_routes(user)$/;"	f	class:Membership.Card.Repository
 fetch_one	app/components/blog/authors.rb	/^    def fetch_one(number: nil)$/;"	f	class:Blog.Authors.fetch
 fetch_prev_month	app/components/activities/repository.rb	/^    def fetch_prev_month(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
+fetch_prev_month	app/components/activities/ski_repository.rb	/^    def fetch_prev_month$/;"	f	class:Activities.SkiRepository
 fetch_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_prev_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_projects	app/components/membership/card/repository.rb	/^      def fetch_projects(user)$/;"	f	class:Membership.Card.Repository
 fetch_season	app/components/activities/repository.rb	/^    def fetch_season(route_type = 'regular_climbing', start_date=DateTime.new(2019, 05, 1), end_date=DateTime.new(2019, 12, 15))$/;"	f	class:Activities.Repository
+fetch_season	app/components/activities/ski_repository.rb	/^    def fetch_season$/;"	f	class:Activities.SkiRepository
 fetch_season	app/components/training/activities/repository.rb	/^      def fetch_season$/;"	f	class:Training.Activities.Repository
 fetch_spring	app/components/training/activities/repository.rb	/^      def fetch_spring$/;"	f	class:Training.Activities.Repository
 fetch_winter	app/components/training/activities/repository.rb	/^      def fetch_winter$/;"	f	class:Training.Activities.Repository
@@ -1898,6 +1906,8 @@ model_name	app/components/user_management/reactivation_form.rb	/^    def self.mo
 model_name	app/models/db/activities/mountain_route.rb	/^      def self.model_name$/;"	F	class:Db.Activities.MountainRoute
 model_name	app/models/db/profile.rb	/^    def self.model_name$/;"	F	class:Db.Profile
 name_with_cost	app/components/training/supplementary/package_type_record.rb	/^      def name_with_cost$/;"	f	class:Training.Supplementary.PackageTypeRecord
+narciarskie_dziki	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki$/;"	f	class:Activities.RoutesController
+narciarskie_dziki_regulamin	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki_regulamin; end$/;"	f	class:Activities.RoutesController
 nearest_thursday	app/components/guards/date.rb	/^    def nearest_thursday$/;"	f	class:Guards.Date
 new	app/components/business/courses_controller.rb	/^    def new$/;"	f	class:Business.CoursesController
 new	app/components/charity/donations_controller.rb	/^    def new$/;"	f	class:Charity.DonationsController
@@ -2039,6 +2049,7 @@ rodo_name	app/models/db/user.rb	/^  def rodo_name$/;"	f	class:Db
 role?	app/models/ability.rb	/^  def role?(name)$/;"	f	class:Ability
 root	spec/rails_mock.rb	/^    def self.root$/;"	F	class:Rails
 route_params	app/controllers/activities/mountain_routes_controller.rb	/^    def route_params$/;"	f	class:Activities
+route_type	app/components/activities/ski_repository.rb	/^    def route_type$/;"	f	class:Activities.SkiRepository
 routes	app/components/blog/dashboard.rb	/^    def routes$/;"	f	class:Blog.Dashboard
 rreturn	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rreturn = \/\\r\/g,$/;"	v
 rules	app/components/training/activities/ski_routes_controller.rb	/^      def rules$/;"	f	class:Training.Activities.SkiRoutesController
@@ -2102,6 +2113,7 @@ sign_ups	app/components/training/supplementary/course.rb	/^      def sign_ups$/;
 sign_ups_reached?	app/components/training/supplementary/limiter.rb	/^      def sign_ups_reached?$/;"	f	class:Training.Supplementary.Limiter
 sign_ups_started?	app/components/training/supplementary/limiter.rb	/^      def sign_ups_started?$/;"	f	class:Training.Supplementary.Limiter
 singles	app/components/events/competitions/sign_ups/limiter.rb	/^        def singles$/;"	f	class:Events.Competitions.SignUps.Limiter
+ski_repository	app/components/activities/routes_controller.rb	/^    def ski_repository$/;"	f	class:Activities.RoutesController
 ski_route_params	app/components/training/activities/ski_routes_controller.rb	/^      def ski_route_params$/;"	f	class:Training.Activities.SkiRoutesController
 slug?	app/components/training/supplementary/update_course_form.rb	/^        def slug?(value)$/;"	f	class:Training.Supplementary.UpdateCourseForm
 slug_candidates	app/components/business/course_record.rb	/^    def slug_candidates$/;"	f	class:Business.CourseRecord
@@ -2111,6 +2123,7 @@ slug_candidates	app/models/db/user.rb	/^  def slug_candidates$/;"	f	class:Db
 slug_params	app/components/events/competitions/sign_ups_controller.rb	/^      def slug_params$/;"	f	class:Events.Competitions
 sport	app/components/blog/authors.rb	/^    def sport$/;"	f	class:Blog.Authors.fetch
 start_date	app/components/activities/repository.rb	/^    def start_date$/;"	f	class:Activities.Repository
+start_date	app/components/activities/ski_repository.rb	/^    def start_date$/;"	f	class:Activities.SkiRepository
 start_date	app/components/reservations/form.rb	/^    def start_date$/;"	f	class:Reservations.Form
 start_date	app/components/training/activities/repository.rb	/^      def start_date$/;"	f	class:Training.Activities.Repository
 start_date	app/components/training/supplementary/sign_up_record.rb	/^      def start_date$/;"	f	class:Training.Supplementary.SignUpRecord
