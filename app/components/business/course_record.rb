@@ -56,29 +56,29 @@ module Business
     def activity_url
       case activity_type.to_sym
       when :winter_abc
-        'https://szkolaalpinizmu.kw.krakow.pl/turystyka/zimowe-abc/'
+        'https://szkolaalpinizmu.pl/turystyka/zimowe-abc/'
       when :winter_tourist_1
-        'https://szkolaalpinizmu.kw.krakow.pl/turystyka/turystyka-zimowa-ist/'
+        'https://szkolaalpinizmu.pl/turystyka/turystyka-zimowa-ist/'
       when :winter_tourist_2
-        'https://szkolaalpinizmu.kw.krakow.pl/turystyka/turystyka-zimowa-iist/'
+        'https://szkolaalpinizmu.pl/turystyka/turystyka-zimowa-iist/'
       when :skitour_1
-        'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-skiturowy-i-stopnia/'
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/kurs-skiturowy-i-stopnia/'
       when :skitour_2
-        'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-skiturowy-ii-stopnia/'
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/kurs-skiturowy-ii-stopnia/'
       when :skitour_3
-        'https://szkolaalpinizmu.kw.krakow.pl/narty/kursy-skiturowe/kurs-narciarstwa-wysokogorskiego/'
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/kurs-narciarstwa-wysokogorskiego/'
       when :skitour_avalanche
         'https://szkolaalpinizmu.pl/narty/kurs-skiturowo-lawinowy'
       when :skitour_avalanche_2
         'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/kurs-skiturowo-lawinowy-ii-stopnia/'
       when :climbing_1
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/drogi-ubezpieczone/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/drogi-ubezpieczone/'
       when :climbing_2
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/kurs-na-wlasnej/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/kurs-na-wlasnej/'
       when :full_climbing
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/pelny-kurs-wspinaczki/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/pelny-kurs-wspinaczki/'
       when :club_climbing
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-skalna/klubowy-kurs-wspinaczki/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/klubowy-kurs-wspinaczki/'
       when :summer_tatra
         'https://szkolaalpinizmu.pl/wspinanie/taternictwo/kurs-taternicki-letni/'
       when :winter_tatra_1
@@ -86,13 +86,13 @@ module Business
       when :winter_tatra_2
         'https://szkolaalpinizmu.pl/wspinanie/taternictwo/zimowy-ii-stopnia/'
       when :ice_1
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-lodowa/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-lodowa/'
       when :ice_2
-        'https://szkolaalpinizmu.kw.krakow.pl/wspinanie/wspinaczka-lodowa/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-lodowa/'
       when :cave
-        'https://szkolaalpinizmu.kw.krakow.pl/jaskinie/'
+        'https://szkolaalpinizmu.pl/jaskinie/'
       else
-        'https://szkolaalpinizmu.kw.krakow.pl/o-nas/klub-i-szkola/'
+        'https://szkolaalpinizmu.pl/o-nas/klub-i-szkola/'
       end
     end
 
