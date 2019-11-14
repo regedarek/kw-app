@@ -14,7 +14,8 @@ body
       .clear_filter
         = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020"
     .col-md-5.col-xs-12
-      .serie_list.pull-right-sm
+
+      .serie_list.pull-right
         ul
           - Activities::CompetitionRecord.series.keys.each do |serie|
             li.serie
