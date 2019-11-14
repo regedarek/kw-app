@@ -3,9 +3,9 @@ table, th, td {
   border-collapse: collapse;
 }
 table.kalendarz-zawodow tbody td {
-  vertical-align: top;
+  vertical-align: top !important;
   padding: 5px;
-  text-align: left;
+  text-align: left !important;
 }
 .weekend {
   background-color: red;
