@@ -1,10 +1,12 @@
 module Activities
   module Api
     class CompetitionsController < ApplicationController
-      def index
-        competitions_table = Activities::CompetitionsTable.new(params[:country] || :all).call
+      append_view_path 'app/components'
 
-        render json: competitions_table
+      def index
+        competitions_table = Activities::CompetitionsTable.new
+
+        render json: render_to_string(partial: "activities/api/competitions/table", locals: { table: competitions_table }), format: :json
       end
     end
   end

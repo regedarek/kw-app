@@ -1426,7 +1426,7 @@ collect_rest	app/components/availability/items.rb	/^    def collect_rest$/;"	f	c
 competition_params	app/components/activities/competitions_controller.rb	/^    def competition_params$/;"	f	class:Activities.CompetitionsController
 competition_params	app/components/events/admin/competitions_controller.rb	/^      def competition_params$/;"	f	class:Events.Admin.CompetitionsController
 competitions	app/models/ability.rb	/^  def competitions$/;"	f	class:Ability
-competitions_for	app/components/activities/competitions_table.rb	/^    def competitions_for(table_month, table_day)$/;"	f
+competitions_for	app/components/activities/competitions_table.rb	/^    def competitions_for(table_month, table_day, country)$/;"	f
 complete_refs	app/components/scrappers/pdf_image_extractor.rb	/^    def complete_refs$/;"	f	class:Scrappers.PdfImageExtractor
 completed	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function completed() {$/;"	f
 completed?	app/services/payments/dotpay/notification.rb	/^      def completed?$/;"	f	class:Payments.Dotpay.Notification
@@ -1780,7 +1780,6 @@ index	app/controllers/photos_controller.rb	/^  def index$/;"	f	class:PhotosContr
 index	app/controllers/reservations_controller.rb	/^  def index$/;"	f	class:ReservationsController
 index	app/controllers/users_controller.rb	/^  def index$/;"	f	class:UsersController
 init	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^init.prototype = jQuery.fn;$/;"	c
-initialize	app/components/activities/competitions_table.rb	/^    def initialize(country)$/;"	f	class:Activities.CompetitionsTable
 initialize	app/components/admin/items.rb	/^    def initialize(allowed_params)$/;"	f	class:Admin.Items
 initialize	app/components/admin/membership_fees.rb	/^    def initialize(creator_id:, allowed_params:)$/;"	f	class:Admin.MembershipFees
 initialize	app/components/admin/reservations.rb	/^    def initialize(allowed_params)$/;"	f	class:Admin.Reservations
