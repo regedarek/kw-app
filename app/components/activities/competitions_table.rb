@@ -4,8 +4,8 @@ module Activities
     include Rails.application.routes.url_helpers
     ApplicationController.append_view_path Rails.root.join('app', 'components', 'activities')
 
-    def call
-      ApplicationController.render(partial: "api/competitions/table", locals: { competitions: competitions }, cached: true)
+    def call(country: :all)
+      ApplicationController.render(partial: "api/competitions/table", locals: { competitions: competitions(country: country) }, cached: true)
     end
 
     def table_months
@@ -16,8 +16,12 @@ module Activities
       1..31
     end
 
-    def competitions
-      Activities::CompetitionRecord.all
+    def competitions(country: :all)
+      if country == :all
+        Activities::CompetitionRecord.all
+      else
+        Activities::CompetitionRecord.where(country: country)
+      end
     end
 
     def table_from_year

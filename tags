@@ -1062,7 +1062,7 @@ build_form	spec/factories.rb	/^    def self.build_form(attrs = {})$/;"	F	class:F
 build_form	spec/factories.rb	/^    def self.build_form(attrs = {})$/;"	F	class:Factories.Reservation
 business_courses	app/models/ability.rb	/^  def business_courses$/;"	f	class:Ability
 cache	spec/rails_mock.rb	/^    def self.cache$/;"	F	class:Rails
-call	app/components/activities/competitions_table.rb	/^    def call$/;"	f	class:Activities.CompetitionsTable
+call	app/components/activities/competitions_table.rb	/^    def call(country: :all)$/;"	f	class:Activities.CompetitionsTable
 call	app/components/charity/create_donation.rb	/^    def call(raw_inputs:)$/;"	f	class:Charity.CreateDonation
 call	app/components/events/admin/competitions/create.rb	/^        def call(raw_inputs:)$/;"	f	class:Events.Admin.Competitions.Create
 call	app/components/events/admin/competitions/update.rb	/^        def call(id:, raw_inputs:)$/;"	f	class:Events.Admin.Competitions.Update
@@ -1425,7 +1425,7 @@ collect_crampons	app/components/availability/items.rb	/^    def collect_crampons
 collect_rest	app/components/availability/items.rb	/^    def collect_rest$/;"	f	class:Availability.Items
 competition_params	app/components/activities/competitions_controller.rb	/^    def competition_params$/;"	f	class:Activities.CompetitionsController
 competition_params	app/components/events/admin/competitions_controller.rb	/^      def competition_params$/;"	f	class:Events.Admin.CompetitionsController
-competitions	app/components/activities/competitions_table.rb	/^    def competitions$/;"	f	class:Activities.CompetitionsTable
+competitions	app/components/activities/competitions_table.rb	/^    def competitions(country: :all)$/;"	f	class:Activities.CompetitionsTable
 competitions	app/models/ability.rb	/^  def competitions$/;"	f	class:Ability
 competitions_for	app/components/activities/competitions_table.rb	/^    def competitions_for(table_month, table_day)$/;"	f
 complete_refs	app/components/scrappers/pdf_image_extractor.rb	/^    def complete_refs$/;"	f	class:Scrappers.PdfImageExtractor
