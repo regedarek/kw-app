@@ -1,0 +1,8 @@
+Otrzymałeś nowe powiadomienie: <%= @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject) %>
+===============================================
+
+-----------------------------------------------
+<%= @notification.body.html_safe? ? @notification.body : strip_tags(@notification.body) %>
+-----------------------------------------------
+
+Odwiedź <%= link_to root_url,root_url %> aby zobaczyć więcej powiadomień.

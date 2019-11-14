@@ -1,4 +1,10 @@
 pl:
+  mailboxer:
+    message_mailer:
+      subject_new: "Panel KW Kraków - Nowa Wiadomość: %{subject}"
+      subject_reply: "Panel KW Kraków - Nowa Odpowiedź: %{subject}"
+    notification_mailer:
+      subject: "Panel KW Kraków- Nowe powiadomienie: %{subject}"
   activerecord:
     attributes:
       activities/competition_record:

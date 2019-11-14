@@ -274,6 +274,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mailboxer (0.15.1)
+      carrierwave (>= 0.5.8)
+      rails (>= 5.0.0)
     mailgun-ruby (1.1.11)
       rest-client (~> 2.0.2)
     marcel (0.3.3)
@@ -531,6 +534,7 @@ DEPENDENCIES
   kaminari
   koala
   listen (~> 3.0)
+  mailboxer
   mailgun-ruby (~> 1.1.6)
   mini_magick
   nested_form_fields

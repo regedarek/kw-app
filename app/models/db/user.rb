@@ -1,4 +1,5 @@
 class Db::User < ActiveRecord::Base
+  acts_as_messageable
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   mount_uploader :avatar, ::Membership::AvatarUploader
@@ -61,6 +62,14 @@ class Db::User < ActiveRecord::Base
       [:first_name, :last_name],
       [:first_name, :last_name, :kw_id],
     ]
+  end
+
+  def mailboxer_email(object)
+    #Check if an email should be sent for that object
+    #if true
+    return email
+    #if false
+    #return nil
   end
 
   def display_name

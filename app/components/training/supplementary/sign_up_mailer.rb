@@ -9,7 +9,7 @@ module Training
 
         mail(
           to: ['wydarzenia@kw.krakow.pl', @sign_up.email, organizer.email],
-          from: organizer.email,
+          from: 'wydarzenia@kw.krakow.pl',
           subject: "Zapisałeś się na wydarzenie KW Kraków: #{@sign_up.course.name}!"
         ).tap do |message|
           message.mailgun_options = {

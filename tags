@@ -74,6 +74,7 @@ AddClosedToPhotoCompetitions	db/migrate/20181029175346_add_closed_to_photo_compe
 AddCloudUrlToWeatherRecords	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^class AddCloudUrlToWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddCodeToSupplementarySignUps	db/migrate/20180507142148_add_code_to_supplementary_sign_ups.rb	/^class AddCodeToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddContractorIdToContracts	db/migrate/20190530212416_add_contractor_id_to_contracts.rb	/^class AddContractorIdToContracts < ActiveRecord::Migration[5.2]$/;"	c
+AddConversationOptout	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^class AddConversationOptout < ActiveRecord::Migration[4.2]$/;"	c
 AddCoordinatorIdToBusinessCourses	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^class AddCoordinatorIdToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddCostToItems	db/migrate/20160824190651_add_cost_to_items.rb	/^class AddCostToItems < ActiveRecord::Migration[5.0]$/;"	c
 AddCostToOrders	db/migrate/20161219172839_add_cost_to_orders.rb	/^class AddCostToOrders < ActiveRecord::Migration[5.0]$/;"	c
@@ -83,6 +84,7 @@ AddCuratorToUsers	db/migrate/20161004174404_add_curator_to_users.rb	/^class AddC
 AddDateOfDeathToProfiles	db/migrate/20170510164450_add_date_of_death_to_profiles.rb	/^class AddDateOfDeathToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddDecisionToManagementVotes	db/migrate/20190523093808_add_decision_to_management_votes.rb	/^class AddDecisionToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 AddDeletedPayments	db/migrate/20181031194422_add_deleted_payments.rb	/^class AddDeletedPayments < ActiveRecord::Migration[5.0]$/;"	c
+AddDeliveryTrackingInfoToMailboxerReceipts	db/migrate/20191114202839_add_delivery_tracking_info_to_mailboxer_receipts.mailboxer_engine.rb	/^class AddDeliveryTrackingInfoToMailboxerReceipts < ActiveRecord::Migration[4.2]$/;"	c
 AddDescriptionToEvents	db/migrate/20170505113615_add_description_to_events.rb	/^class AddDescriptionToEvents < ActiveRecord::Migration[5.0]$/;"	c
 AddDescriptionToItems	db/migrate/20160621151829_add_description_to_items.rb	/^class AddDescriptionToItems < ActiveRecord::Migration[5.0]$/;"	c
 AddDescriptionToReservations	db/migrate/20160621173601_add_description_to_reservations.rb	/^class AddDescriptionToReservations < ActiveRecord::Migration[5.0]$/;"	c
@@ -137,6 +139,7 @@ AddMatrimonialOfficeToCompetitions	db/migrate/20180422174624_add_matrimonial_off
 AddMaxSeatsToBusinessCourses	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^class AddMaxSeatsToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddMembershipToPackages	db/migrate/20180111171334_add_membership_to_packages.rb	/^class AddMembershipToPackages < ActiveRecord::Migration[5.0]$/;"	c
 AddMeteogramToMeteoblueRecords	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^class AddMeteogramToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
+AddMissingIndices	db/migrate/20191114202838_add_missing_indices.mailboxer_engine.rb	/^class AddMissingIndices < ActiveRecord::Migration[4.2]$/;"	c
 AddMoreindexesToMountainRoutes	db/migrate/20190130233129_add_moreindexes_to_mountain_routes.rb	/^class AddMoreindexesToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddNameToSupplementaryCourses	db/migrate/20180504200215_add_name_to_supplementary_courses.rb	/^class AddNameToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddNullFalseToRouteTime	db/migrate/20190419224448_add_null_false_to_route_time.rb	/^class AddNullFalseToRouteTime < ActiveRecord::Migration[5.2]$/;"	c
@@ -365,6 +368,7 @@ ContractorsController	app/components/settlement/admin/contractors_controller.rb	
 ContractsController	app/components/settlement/admin/contracts_controller.rb	/^    class ContractsController < ::Admin::BaseController$/;"	c	class:Settlement.Admin
 ContractsController	app/components/training/activities/contracts_controller.rb	/^    class ContractsController < ApplicationController$/;"	c	class:Training.Activities
 ControllerHelper	spec/support/controller_helper.rb	/^module ControllerHelper$/;"	m
+ConversationsController	app/components/messaging/conversations_controller.rb	/^  class ConversationsController < ApplicationController$/;"	c	class:Messaging
 Cost	app/components/user_management/cost.rb	/^  class Cost$/;"	c	class:UserManagement
 Course	app/components/training/supplementary/course.rb	/^    class Course < Dry::Struct$/;"	c	class:Training.Supplementary
 CourseRecord	app/components/business/course_record.rb	/^  class CourseRecord < ActiveRecord::Base$/;"	c	class:Business
@@ -410,6 +414,7 @@ CreateLibraryAuthors	db/migrate/20190709160525_create_library_authors.rb	/^class
 CreateLibraryItemAuthors	db/migrate/20190709160441_create_library_item_authors.rb	/^class CreateLibraryItemAuthors < ActiveRecord::Migration[5.2]$/;"	c
 CreateLibraryItemTags	db/migrate/20190806101419_create_library_item_tags.rb	/^class CreateLibraryItemTags < ActiveRecord::Migration[5.2]$/;"	c
 CreateLibraryItems	db/migrate/20190702183653_create_library_items.rb	/^class CreateLibraryItems < ActiveRecord::Migration[5.2]$/;"	c
+CreateMailboxer	db/migrate/20191114202836_create_mailboxer.mailboxer_engine.rb	/^class CreateMailboxer < ActiveRecord::Migration[4.2]$/;"	c
 CreateManagementCases	db/migrate/20190430143708_create_management_cases.rb	/^class CreateManagementCases < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementInformations	db/migrate/20190714111909_create_management_informations.rb	/^class CreateManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementVotes	db/migrate/20190502101949_create_management_votes.rb	/^class CreateManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
@@ -650,8 +655,11 @@ MembershipFees	app/components/admin/membership_fees.rb	/^  class MembershipFees$
 MembershipFeesController	app/components/membership/admin/membership_fees_controller.rb	/^    class MembershipFeesController < ::Admin::BaseController$/;"	c	class:Membership.Admin
 MembershipFeesController	app/controllers/admin/membership_fees_controller.rb	/^  class MembershipFeesController < Admin::BaseController$/;"	c	class:Admin
 MembershipFeesForm	app/components/admin/membership_fees_form.rb	/^  class MembershipFeesForm$/;"	c	class:Admin
+MessagesController	app/components/messaging/messages_controller.rb	/^  class MessagesController < ApplicationController$/;"	c	class:Messaging
 Messaging	app/components/messaging/comment_record.rb	/^module Messaging$/;"	m
 Messaging	app/components/messaging/comments_controller.rb	/^module Messaging$/;"	m
+Messaging	app/components/messaging/conversations_controller.rb	/^module Messaging$/;"	m
+Messaging	app/components/messaging/messages_controller.rb	/^module Messaging$/;"	m
 Meteoblue	app/components/scrappers/meteoblue.rb	/^  class Meteoblue$/;"	c	class:Scrappers
 MeteoblueController	app/components/scrappers/api/meteoblue_controller.rb	/^    class MeteoblueController < ::Api::BaseController$/;"	c	class:Scrappers.Api
 MeteoblueRecord	app/components/scrappers/meteoblue_record.rb	/^  class MeteoblueRecord < ActiveRecord::Base$/;"	c	class:Scrappers
@@ -1414,6 +1422,8 @@ change	db/migrate/20191114164820_create_mountain_routes_points.rb	/^  def change
 change	db/migrate/20191114175119_add_fields_to_weather_records.rb	/^  def change$/;"	f	class:AddFieldsToWeatherRecords
 change	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^  def change$/;"	f	class:AddCloudUrlToWeatherRecords
 change	db/migrate/20191114190411_add_fields2_to_weather_records.rb	/^  def change$/;"	f	class:AddFields2ToWeatherRecords
+change	db/migrate/20191114202838_add_missing_indices.mailboxer_engine.rb	/^  def change$/;"	f	class:AddMissingIndices
+change	db/migrate/20191114202839_add_delivery_tracking_info_to_mailboxer_receipts.mailboxer_engine.rb	/^  def change$/;"	f	class:AddDeliveryTrackingInfoToMailboxerReceipts
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1479,6 +1489,8 @@ create	app/components/management/projects_controller.rb	/^    def create$/;"	f	c
 create	app/components/management/snw/snw_applies_controller.rb	/^      def create$/;"	f	class:Management.Snw.SnwAppliesController
 create	app/components/management/voting/cases_controller.rb	/^      def create$/;"	f	class:Management.Voting.CasesController
 create	app/components/messaging/comments_controller.rb	/^    def create$/;"	f	class:Messaging.CommentsController
+create	app/components/messaging/conversations_controller.rb	/^    def create$/;"	f	class:Messaging.ConversationsController
+create	app/components/messaging/messages_controller.rb	/^    def create$/;"	f	class:Messaging.MessagesController
 create	app/components/photo_competition/requests_controller.rb	/^    def create$/;"	f	class:PhotoCompetition.RequestsController
 create	app/components/reservations/create_reservation.rb	/^      def create(user:, form:)$/;"	f	class:Reservations.CreateReservation
 create	app/components/settlement/admin/contractors_controller.rb	/^      def create$/;"	f	class:Settlement.Admin.ContractorsController
@@ -1588,6 +1600,8 @@ domManip	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7
 donation_params	app/components/charity/donations_controller.rb	/^    def donation_params$/;"	f	class:Charity.DonationsController
 down	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.down$/;"	F	class:AddDeviseToUsers
 down	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def down$/;"	f	class:AddTimestampsToMountainRoutes
+down	db/migrate/20191114202836_create_mailboxer.mailboxer_engine.rb	/^  def self.down$/;"	F	class:CreateMailboxer
+down	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^  def self.down$/;"	F	class:AddConversationOptout
 download_attachment	app/components/settlement/admin/contracts_controller.rb	/^      def download_attachment$/;"	f	class:Settlement.Admin.ContractsController
 dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 edit	app/components/activities/competitions_controller.rb	/^    def edit$/;"	f	class:Activities.CompetitionsController
@@ -1773,6 +1787,7 @@ index	app/components/management/projects_controller.rb	/^    def index$/;"	f	cla
 index	app/components/management/snw/api/snw_applies_controller.rb	/^        def index$/;"	f	class:Management.Snw.Api.SnwAppliesController
 index	app/components/management/snw/snw_applies_controller.rb	/^      def index$/;"	f	class:Management.Snw.SnwAppliesController
 index	app/components/management/voting/cases_controller.rb	/^      def index$/;"	f	class:Management.Voting.CasesController
+index	app/components/messaging/conversations_controller.rb	/^    def index$/;"	f	class:Messaging.ConversationsController
 index	app/components/notification_center/notifications_controller.rb	/^    def index$/;"	f	class:NotificationCenter.NotificationsController
 index	app/components/photo_competition/admin/editions_controller.rb	/^      def index$/;"	f	class:PhotoCompetition.Admin.EditionsController
 index	app/components/scrappers/api/meteoblue_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.MeteoblueController
@@ -1930,6 +1945,7 @@ locations	app/components/scrappers/api/pogodynka_controller.rb	/^      def locat
 logger	spec/rails_mock.rb	/^    def self.logger$/;"	F	class:Rails
 logo	app/components/business/course_record.rb	/^    def logo$/;"	f	class:Business.CourseRecord
 lomnicki_stit_uri	app/components/scrappers/shmu.rb	/^    def lomnicki_stit_uri(day: Time.zone.now.to_date.to_s(:number), hour: 12)$/;"	f	class:Scrappers.Shmu
+mailboxer_email	app/models/db/user.rb	/^  def mailboxer_email(object)$/;"	f	class:Db
 make_admin	app/controllers/admin/users_controller.rb	/^    def make_admin$/;"	f	class:Admin.UsersController
 make_curator	app/controllers/admin/users_controller.rb	/^    def make_curator$/;"	f	class:Admin.UsersController
 management	app/components/blog/authors.rb	/^    def management$/;"	f	class:Blog.Authors.fetch
@@ -1966,6 +1982,7 @@ new	app/components/library/items_controller.rb	/^    def new$/;"	f	class:Library
 new	app/components/management/projects_controller.rb	/^    def new$/;"	f	class:Management.ProjectsController
 new	app/components/management/snw/snw_applies_controller.rb	/^      def new$/;"	f	class:Management.Snw.SnwAppliesController
 new	app/components/management/voting/cases_controller.rb	/^      def new$/;"	f	class:Management.Voting.CasesController
+new	app/components/messaging/conversations_controller.rb	/^    def new$/;"	f	class:Messaging.ConversationsController
 new	app/components/photo_competition/requests_controller.rb	/^    def new$/;"	f	class:PhotoCompetition.RequestsController
 new	app/components/settlement/admin/contractors_controller.rb	/^      def new$/;"	f	class:Settlement.Admin.ContractorsController
 new	app/components/settlement/admin/contracts_controller.rb	/^      def new$/;"	f	class:Settlement.Admin.ContractsController
@@ -2127,6 +2144,7 @@ series_attributes_for_select	app/components/activities/competition_record.rb	/^ 
 setGlobalEval	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function setGlobalEval( elems, refElements ) {$/;"	f
 setPositiveNumber	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function setPositiveNumber( elem, value, subtract ) {$/;"	f
 set_content_type	app/components/scrappers/topr_degree_uploader.rb	/^    def set_content_type(*args)$/;"	f	class:Scrappers.ToprDegreeUploader
+set_conversation	app/components/messaging/messages_controller.rb	/^    def set_conversation$/;"	f	class:Messaging.MessagesController
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
 show	app/components/blog/api/authors_controller.rb	/^      def show$/;"	f	class:Blog.Api.AuthorsController
@@ -2138,6 +2156,7 @@ show	app/components/library/items_controller.rb	/^    def show$/;"	f	class:Libra
 show	app/components/management/projects_controller.rb	/^    def show$/;"	f	class:Management.ProjectsController
 show	app/components/management/snw/snw_applies_controller.rb	/^      def show$/;"	f	class:Management.Snw.SnwAppliesController
 show	app/components/management/voting/cases_controller.rb	/^      def show$/;"	f	class:Management.Voting.CasesController
+show	app/components/messaging/conversations_controller.rb	/^    def show$/;"	f	class:Messaging.ConversationsController
 show	app/components/photo_competition/admin/editions_controller.rb	/^      def show$/;"	f	class:PhotoCompetition.Admin.EditionsController
 show	app/components/photo_competition/requests_controller.rb	/^    def show$/;"	f	class:PhotoCompetition.RequestsController
 show	app/components/settlement/admin/contracts_controller.rb	/^      def show$/;"	f	class:Settlement.Admin.ContractsController
@@ -2251,6 +2270,8 @@ unpaid	app/components/membership/admin/membership_fees_controller.rb	/^      def
 unpaid_params	app/components/membership/admin/membership_fees_controller.rb	/^      def unpaid_params$/;"	f	class:Membership.Admin.MembershipFeesController
 up	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.up$/;"	F	class:AddDeviseToUsers
 up	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def up$/;"	f	class:AddTimestampsToMountainRoutes
+up	db/migrate/20191114202836_create_mailboxer.mailboxer_engine.rb	/^  def self.up$/;"	F	class:CreateMailboxer
+up	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^  def self.up$/;"	F	class:AddConversationOptout
 update	app/components/activities/competitions_controller.rb	/^    def update$/;"	f	class:Activities.CompetitionsController
 update	app/components/admin/items.rb	/^    def update(item_id)$/;"	f	class:Admin.Items
 update	app/components/admin/reservations.rb	/^    def update(reservation_id)$/;"	f	class:Admin.Reservations

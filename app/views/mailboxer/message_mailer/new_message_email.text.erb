@@ -1,0 +1,10 @@
+Masz nową wiadomość w panelu KW Kraków: <%= @subject %>
+===============================================
+
+Otrzymałeś wiadomość:
+
+-----------------------------------------------
+<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+-----------------------------------------------
+
+Odwiedź <%= link_to root_url, root_url %> aby odpowiedzieć i sprawdzić skrzynkę odbiorczą.

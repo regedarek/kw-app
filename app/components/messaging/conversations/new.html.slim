@@ -1,0 +1,19 @@
+.column
+  .row
+    .large-12.columns
+      h3 Nowa konwersacja
+
+  = form_tag conversations_path, method: :post do
+    .row
+      .large-6.columns
+        = text_field_tag :subject, nil, placeholder: "Temat"
+      .large-6.columns
+        = select_tag :user_id, options_for_select(Db::User.all.map { |u| [u.display_name, u.id] }, params[:recipient_id]),
+          { class: 'js-select-multiple', include_blank: true }
+    .row
+      .large-12.columns
+        = hidden_field_tag :body, nil, { id: 'remarks_body' }
+        trix-editor input='remarks_body'
+    .row
+      .large-12.columns
+        = submit_tag "Wyślij wiadomość", class: 'button expanded large'

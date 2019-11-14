@@ -1,0 +1,27 @@
+.column
+  .row
+    .large-12.columns
+      h3 = @conversation.subject
+
+  .row
+    .large-12.columns
+      - @conversation.receipts_for(current_user).includes(:message).each do |receipt|
+        .comment-section-container
+          .callout
+            .comment-section-author
+              - if receipt.message.sender.avatar.present?
+                = image_tag(receipt.message.sender.avatar.url, size: '50x50')
+              - else
+                = image_tag('default-avatar.png', size: '50x50')
+              .comment-section-name
+                h5 = link_to receipt.message.sender.display_name, user_path(receipt.message.sender.kw_id)
+                p = I18n.l(receipt.message.created_at, :format => :short)
+            .comment-section-text
+              = sanitize receipt.message.body
+
+      .comment-section-container
+        = render 'messaging/messages/form'
+
+  .row
+    .large-12.columns
+      = link_to 'wróć do skrzynki odbiorczej', conversations_path, class: 'button'

@@ -1,0 +1,8 @@
+= form_tag conversation_messages_path(@conversation), method: :post do |f|
+  .row
+    .large-12.columns
+      = hidden_field_tag :body, nil, { id: 'remarks_body' }
+      trix-editor input='remarks_body'
+  .row
+    .large-12.columns
+      = submit_tag "Odpowiedz", class: 'button expanded large'

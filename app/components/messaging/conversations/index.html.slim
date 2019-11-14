@@ -1,0 +1,10 @@
+.column
+  .row
+    .large-12.columns
+      h3 Wiadomości
+
+      = link_to 'Nowa wiadomość', new_conversation_path, class: 'button medium'
+
+  .row
+    .large-12.columns
+      = render 'table'

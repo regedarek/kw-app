@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Nowe powiadomienie z panelu KW Kraków: <%= @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject) %></h1>
+    <p>
+      Otrzymałeś powiadomienie:
+    </p>
+    <blockquote>
+      <p>
+        <%= raw @notification.body %>
+      </p>
+    </blockquote>
+    <p>
+      Odwiedź <%= link_to root_url,root_url %> aby zobaczyć więcej powiadomień.
+    </p>
+  </body>
+</html>
