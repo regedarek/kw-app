@@ -25,6 +25,13 @@ span.flag {
 .flag_list ul {
     padding: 0;
     list-style-type: none;
+    margin-left:0;
+}
+.clear_filter {
+  text-align: center;
+}
+.clear_filter a {
+  color: red;
 }
 
 .flag_list li {
