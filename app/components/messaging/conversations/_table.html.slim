@@ -15,4 +15,4 @@ table.stack
         td
           = conversation.receipts_for(current_user)&.first&.message&.sender&.display_name
         td.text-right
-          = conversation.receipts_for(current_user)&.first&.message&.created_at&.to_date
+          = I18n.l(conversation.receipts_for(current_user)&.first&.message&.created_at&.to_date, :format => :short)
