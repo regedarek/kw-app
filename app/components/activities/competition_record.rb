@@ -21,6 +21,33 @@ module Activities
       state :ready
     end
 
+    def flag_link
+      case country.to_sym
+      when :poland
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :slovakia
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :italy
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :france
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :austria
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :czech
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :deutchland
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :switzerland
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :andorra
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      when :china
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      else
+        'https://raw.githubusercontent.com/evgenygarl/flag-icons-rails/master/app/assets/images/flags/1x1/sk.svg'
+      end
+    end
+
     def flag_sym
       case country.to_sym
       when :poland

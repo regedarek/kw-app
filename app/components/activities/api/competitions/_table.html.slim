@@ -23,7 +23,7 @@ body
               td class=(table.is_weekend?(table_month, table_day) ? 'weekend number' : 'number') =table_day
               td
                 - table.competitions_for(table_month, table_day).each do |competition|
-                  = flag_icon(competition.flag_sym, squared: true, class: 'flag')
+                  span class="flag flag-#{competition.flag_sym}"
                   - if competition.website
                     - if competition.bold
                       b= link_to competition.name, competition.website
