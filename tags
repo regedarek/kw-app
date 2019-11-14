@@ -409,6 +409,7 @@ CreateManagementInformations	db/migrate/20190714111909_create_management_informa
 CreateManagementVotes	db/migrate/20190502101949_create_management_votes.rb	/^class CreateManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 CreateMasSignUps	db/migrate/20170317104900_create_mas_sign_ups.rb	/^class CreateMasSignUps < ActiveRecord::Migration[5.0]$/;"	c
 CreateMeteoblueRecords	db/migrate/20190814111833_create_meteoblue_records.rb	/^class CreateMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
+CreateMountainRoutesPoints	db/migrate/20191114164820_create_mountain_routes_points.rb	/^class CreateMountainRoutesPoints < ActiveRecord::Migration[5.2]$/;"	c
 CreateNotifications	db/migrate/20190428093702_create_notifications.rb	/^class CreateNotifications < ActiveRecord::Migration[5.2]$/;"	c
 CreatePackage	app/components/training/supplementary/create_package.rb	/^    class CreatePackage$/;"	c	class:Training.Supplementary
 CreatePackageForm	app/components/training/supplementary/create_package_form.rb	/^    class CreatePackageForm < Dry::Validation::Schema$/;"	c	class:Training.Supplementary
@@ -1399,6 +1400,7 @@ change	db/migrate/20191111032054_add_topr_degree_to_topr_records.rb	/^  def chan
 change	db/migrate/20191113235103_create_activities_competitions.rb	/^  def change$/;"	f	class:CreateActivitiesCompetitions
 change	db/migrate/20191114014216_add_bold_to_activities_competitions.rb	/^  def change$/;"	f	class:AddBoldToActivitiesCompetitions
 change	db/migrate/20191114055418_add_series_to_activities_competitions.rb	/^  def change$/;"	f	class:AddSeriesToActivitiesCompetitions
+change	db/migrate/20191114164820_create_mountain_routes_points.rb	/^  def change$/;"	f	class:CreateMountainRoutesPoints
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
