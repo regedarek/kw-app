@@ -7,4 +7,4 @@ Otrzymałeś wiadomość:
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
-Odwiedź <%= link_to root_url, root_url %> aby odpowiedzieć i sprawdzić skrzynkę odbiorczą.
+Odwiedź <%= link_to root_url, conversations_url %> aby odpowiedzieć i sprawdzić skrzynkę odbiorczą.
