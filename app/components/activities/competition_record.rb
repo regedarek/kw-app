@@ -11,7 +11,7 @@ module Activities
 
     friendly_id :slug_candidates, use: :slugged
 
-    validates :name, :country, :state
+    validates :name, :country, :state, presence: true
 
     workflow_column :state
     workflow do
