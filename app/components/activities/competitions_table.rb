@@ -4,8 +4,12 @@ module Activities
     include Rails.application.routes.url_helpers
     ApplicationController.append_view_path Rails.root.join('app', 'components', 'activities')
 
-    def call(country: :all)
-      ApplicationController.render(partial: "api/competitions/table", locals: { competitions: competitions(country: country) }, cached: true)
+    def initialize(country)
+      @country = country
+    end
+
+    def call
+      ApplicationController.render(partial: "api/competitions/table", cached: true)
     end
 
     def table_months
@@ -14,14 +18,6 @@ module Activities
 
     def table_days
       1..31
-    end
-
-    def competitions(country: :all)
-      if country == :all
-        Activities::CompetitionRecord.all
-      else
-        Activities::CompetitionRecord.where(country: country)
-      end
     end
 
     def table_from_year
@@ -57,7 +53,11 @@ module Activities
         Date.new(table_to_year, table_month, table_day)
       end
 
-      Activities::CompetitionRecord.where('start_date <= ? AND end_date >= ?', date, date)
+      if @country == :all
+        Activities::CompetitionRecord.where('start_date <= ? AND end_date >= ?', date, date)
+      else
+        Activities::CompetitionRecord.where(country: @country).where('start_date <= ? AND end_date >= ?', date, date)
+      end
     end
 
     def is_weekend?(table_month, table_day)
