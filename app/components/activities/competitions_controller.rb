@@ -22,7 +22,7 @@ module Activities
       end
 
       if @competition.save
-        redirect_to competitions_path(q: params.to_unsafe_h[:q]), notice: 'Dodano zawody'
+        redirect_to new_competition_path, notice: 'Dodano zawody'
       else
         render :new
       end
