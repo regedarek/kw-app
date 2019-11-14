@@ -9,3 +9,7 @@ th, td {
 .weekend {
   background-color: red;
 }
+
+.number {
+  width: 10px;
+}

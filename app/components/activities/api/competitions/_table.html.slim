@@ -20,7 +20,7 @@ body
         tr
           - table.table_months.each do |table_month|
             - if table.month_has_day?(table_month, table_day)
-              td class=(table.is_weekend?(table_month, table_day) ? 'weekend' : '') =table_day
+              td class=(table.is_weekend?(table_month, table_day) ? 'weekend number' : 'number') =table_day
               td
                 - table.competitions_for(table_month, table_day).each do |competition|
                   - if competition.website
