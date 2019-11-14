@@ -19,12 +19,14 @@ Activities	app/components/activities/mountain_route_record.rb	/^module Activitie
 Activities	app/components/activities/repository.rb	/^module Activities$/;"	m
 Activities	app/components/activities/routes_controller.rb	/^module Activities$/;"	m
 Activities	app/components/activities/ski_repository.rb	/^module Activities$/;"	m
+Activities	app/components/training/activities/api/mountain_route_points_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/contract_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/contracts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/create_ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/gps_track_uploader.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/hearts_controller.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/mountain_route_point_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/repository.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/route_contracts_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_route.rb	/^  module Activities$/;"	m	class:Training
@@ -254,6 +256,7 @@ Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	cl
 Api	app/components/management/snw/api/snw_applies_controller.rb	/^    module Api$/;"	m	class:Management.Snw
 Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
+Api	app/components/training/activities/api/mountain_route_points_controller.rb	/^    module Api$/;"	m	class:Training.Activities
 Api	app/controllers/api/base_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/payments_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/users_controller.rb	/^module Api$/;"	m
@@ -652,6 +655,8 @@ MeteoblueRecord	app/components/scrappers/meteoblue_record.rb	/^  class Meteoblue
 MeteoblueUploader	app/components/scrappers/meteoblue_uploader.rb	/^  class MeteoblueUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 MountainRoute	app/components/importing/mountain_route.rb	/^  class MountainRoute$/;"	c	class:Importing
 MountainRoute	app/models/db/activities/mountain_route.rb	/^    class MountainRoute < ActiveRecord::Base$/;"	c	class:Db.Activities
+MountainRoutePointRecord	app/components/training/activities/mountain_route_point_record.rb	/^    class MountainRoutePointRecord < ActiveRecord::Base$/;"	c	class:Training.Activities
+MountainRoutePointsController	app/components/training/activities/api/mountain_route_points_controller.rb	/^      class MountainRoutePointsController < ApplicationController$/;"	c	class:Training.Activities.Api
 MountainRouteRecord	app/components/activities/mountain_route_record.rb	/^  class MountainRouteRecord < ActiveRecord::Base$/;"	c	class:Activities
 MountainRoutesController	app/controllers/activities/mountain_routes_controller.rb	/^  class MountainRoutesController < ApplicationController$/;"	c	class:Activities
 News	app/components/management/news/information_record.rb	/^  module News$/;"	m	class:Management
@@ -879,12 +884,14 @@ Topr	app/components/scrappers/topr.rb	/^  class Topr$/;"	c	class:Scrappers
 ToprDegreeUploader	app/components/scrappers/topr_degree_uploader.rb	/^  class ToprDegreeUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 ToprPdfUploader	app/components/scrappers/topr_pdf_uploader.rb	/^  class ToprPdfUploader < CarrierWave::Uploader::Base$/;"	c	class:Scrappers
 ToprRecord	app/components/scrappers/topr_record.rb	/^  class ToprRecord < ActiveRecord::Base$/;"	c	class:Scrappers
+Training	app/components/training/activities/api/mountain_route_points_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/contract_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/contracts_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/create_ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/gps_track_uploader.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts.rb	/^module Training$/;"	m
 Training	app/components/training/activities/hearts_controller.rb	/^module Training$/;"	m
+Training	app/components/training/activities/mountain_route_point_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/repository.rb	/^module Training$/;"	m
 Training	app/components/training/activities/route_contracts_record.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_route.rb	/^module Training$/;"	m
@@ -1470,6 +1477,7 @@ create	app/components/photo_competition/requests_controller.rb	/^    def create$
 create	app/components/reservations/create_reservation.rb	/^      def create(user:, form:)$/;"	f	class:Reservations.CreateReservation
 create	app/components/settlement/admin/contractors_controller.rb	/^      def create$/;"	f	class:Settlement.Admin.ContractorsController
 create	app/components/settlement/admin/contracts_controller.rb	/^      def create$/;"	f	class:Settlement.Admin.ContractsController
+create	app/components/training/activities/api/mountain_route_points_controller.rb	/^        def create$/;"	f	class:Training.Activities.Api.MountainRoutePointsController
 create	app/components/training/activities/contracts_controller.rb	/^      def create$/;"	f	class:Training.Activities.ContractsController
 create	app/components/training/activities/repository.rb	/^      def create(form_outputs:, user_id:)$/;"	f	class:Training.Activities.Repository
 create	app/components/training/activities/ski_routes_controller.rb	/^      def create$/;"	f	class:Training.Activities.SkiRoutesController
@@ -1765,6 +1773,7 @@ index	app/components/scrappers/api/meteoblue_controller.rb	/^      def index$/;"
 index	app/components/scrappers/api/pogodynka_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.PogodynkaController
 index	app/components/scrappers/scrappers_controller.rb	/^    def index$/;"	f	class:Scrappers.ScrappersController
 index	app/components/settlement/admin/contracts_controller.rb	/^      def index$/;"	f	class:Settlement.Admin.ContractsController
+index	app/components/training/activities/api/mountain_route_points_controller.rb	/^        def index$/;"	f	class:Training.Activities.Api.MountainRoutePointsController
 index	app/components/training/activities/contracts_controller.rb	/^      def index$/;"	f	class:Training.Activities.ContractsController
 index	app/components/training/activities/ski_routes_controller.rb	/^      def index$/;"	f	class:Training.Activities.SkiRoutesController
 index	app/components/training/supplementary/courses_controller.rb	/^      def index$/;"	f	class:Training.Supplementary.CoursesController
@@ -2031,6 +2040,7 @@ photos	app/controllers/activities/mountain_routes_controller.rb	/^    def photos
 plastic_cost	app/components/user_management/cost.rb	/^    def plastic_cost$/;"	f	class:UserManagement.Cost
 plastic_for_2019	app/components/membership/fee_form.rb	/^    def plastic_for_2019$/;"	f	class:Membership.FeeForm
 pogodynka	app/components/scrappers/weather_storage.rb	/^    def pogodynka$/;"	f	class:Scrappers.WeatherStorage
+point_params	app/components/training/activities/api/mountain_route_points_controller.rb	/^        def point_params$/;"	f	class:Training.Activities.Api.MountainRoutePointsController
 prepaid_via_cash	app/components/training/supplementary/limiter.rb	/^      def prepaid_via_cash$/;"	f	class:Training.Supplementary.Limiter
 prepaid_via_dotpay	app/components/training/supplementary/limiter.rb	/^      def prepaid_via_dotpay$/;"	f	class:Training.Supplementary.Limiter
 prepayment	app/components/settlement/admin/contracts_controller.rb	/^      def prepayment$/;"	f	class:Settlement.Admin.ContractsController

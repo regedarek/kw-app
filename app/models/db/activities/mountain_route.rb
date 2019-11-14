@@ -23,6 +23,7 @@ module Db
       has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
       has_many :route_contracts, class_name: '::Training::Activities::RouteContractsRecord', foreign_key: :route_id
       has_many :contracts, through: :route_contracts, dependent: :destroy, class_name: '::Training::Activities::ContractRecord'
+      has_many :points, class_name: 'Training::Activities::MountainRoutePointRecord'
 
       validates :name, :rating, :climbing_date, presence: true
 

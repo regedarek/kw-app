@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   scope module: 'training' do
     namespace :activities do
+      namespace :api do
+        resources :mountain_route_points
+      end
       resources :ski_routes
       resources :contracts
 

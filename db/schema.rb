@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_055418) do
+ActiveRecord::Schema.define(version: 2019_11_14_164820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -402,6 +402,15 @@ ActiveRecord::Schema.define(version: 2019_11_14_055418) do
     t.string "meteogram"
     t.string "location"
     t.index ["time"], name: "index_meteoblue_records_on_time", unique: true
+  end
+
+  create_table "mountain_route_points", force: :cascade do |t|
+    t.text "description"
+    t.decimal "lat", precision: 10, scale: 6, null: false
+    t.decimal "lng", precision: 10, scale: 6, null: false
+    t.integer "mountain_route_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mountain_routes", id: :serial, force: :cascade do |t|
