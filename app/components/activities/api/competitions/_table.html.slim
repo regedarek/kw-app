@@ -10,6 +10,8 @@ body
             li
               = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020?country=#{country}" do
                 = flag_icon(table.country_iso(country), squared: true, class: 'flag')
+          li
+            = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020"
   .row
     .col-md-12
       table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 
