@@ -26,6 +26,8 @@ module Activities
         :ad
       when :china
         :cn
+      when :ukraine
+        :ua
       else
         :en
       end
