@@ -1443,6 +1443,7 @@ cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Eve
 cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;"	f	class:Training.Supplementary.SignUpRecord
 cost	app/models/db/reservation.rb	/^  def cost$/;"	f	class:Db
 country_attributes_for_select	app/components/activities/competition_record.rb	/^    def self.country_attributes_for_select$/;"	F	class:Activities.CompetitionRecord
+country_iso	app/components/activities/competitions_table.rb	/^    def country_iso(country)$/;"	f	class:Activities.CompetitionsTable
 course_params	app/components/business/courses_controller.rb	/^    def course_params$/;"	f	class:Business.CoursesController
 course_params	app/components/training/supplementary/courses_controller.rb	/^      def course_params$/;"	f	class:Training.Supplementary.CoursesController
 create	app/components/activities/competitions_controller.rb	/^    def create$/;"	f	class:Activities.CompetitionsController
@@ -1664,7 +1665,6 @@ find_sign_up	app/components/training/supplementary/repository.rb	/^      def fin
 find_unpaid_profiles_this_year_by_emails	app/components/membership/fees_repository.rb	/^    def find_unpaid_profiles_this_year_by_emails(emails)$/;"	f	class:Membership.FeesRepository
 fixCloneNodeIssues	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function fixCloneNodeIssues( src, dest ) {$/;"	f
 fixDefaultChecked	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function fixDefaultChecked( elem ) {$/;"	f
-flag_link	app/components/activities/competition_record.rb	/^    def flag_link$/;"	f	class:Activities.CompetitionRecord
 flag_sym	app/components/activities/competition_record.rb	/^    def flag_sym$/;"	f	class:Activities.CompetitionRecord
 fn	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^				fn = function( elem, key, value ) {$/;"	f
 fontWeight	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		fontWeight: "400"$/;"	p

@@ -4,6 +4,33 @@ module Activities
     include Rails.application.routes.url_helpers
     ApplicationController.append_view_path Rails.root.join('app', 'components', 'activities')
 
+    def country_iso(country)
+      case country.to_sym
+      when :poland
+        :pl
+      when :slovakia
+        :sk
+      when :italy
+        :it
+      when :france
+        :fr
+      when :austria
+        :at
+      when :czech
+        :cz
+      when :deutchland
+        :de
+      when :switzerland
+        :ch
+      when :andorra
+        :ar
+      when :china
+        :cn
+      else
+        :en
+      end
+    end
+
     def table_months
       [12, 01, 02, 03, 04]
     end

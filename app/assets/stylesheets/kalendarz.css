@@ -18,3 +18,25 @@ table.kalendarz-zawodow tbody td.names {
 span.flag {
   margin-right: 5px;
 }
+
+.flag_list {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.flag_list ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.flag_list li {
+  float: left
+}
+
+.flag_list span.flag {
+    width: 25px;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+

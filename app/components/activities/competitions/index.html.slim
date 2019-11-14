@@ -8,4 +8,4 @@
 
 .row
   .large-12.columns
-    = render 'activities/api/competitions/table', competitions: Activities::CompetitionRecord.all
+    = render 'activities/api/competitions/table', table: Activities::CompetitionsTable.new
