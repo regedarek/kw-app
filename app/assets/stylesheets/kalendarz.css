@@ -26,6 +26,7 @@ span.flag {
     padding: 0;
     list-style-type: none;
     margin-left:0;
+    margin-bottom: 0;
 }
 .clear_filter {
   text-align: center;
