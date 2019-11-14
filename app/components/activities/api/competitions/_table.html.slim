@@ -47,9 +47,9 @@ body
                       = flag_icon(competition.flag_sym, squared: true, class: 'flag')
                       - if competition.website
                         - if competition.bold
-                          b= link_to competition.name, competition.website
+                          b= link_to competition.name, competition.website, target: :_blank
                         - else
-                          = link_to competition.name, competition.website
+                          = link_to competition.name, competition.website, target: :_blank
                       - else
                         - if competition.bold
                           b competition.name
