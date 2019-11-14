@@ -1541,6 +1541,7 @@ description	app/models/db/membership/fee.rb	/^      def description$/;"	f	class:
 description	app/models/db/profile.rb	/^    def description$/;"	f	class:Db.Profile
 description	app/models/db/reservation.rb	/^  def description$/;"	f	class:Db
 description_needed?	app/components/photo_competition/request_record.rb	/^    def description_needed?$/;"	f	class:PhotoCompetition.RequestRecord
+destroy	app/components/activities/competitions_controller.rb	/^    def destroy$/;"	f	class:Activities.CompetitionsController
 destroy	app/components/admin/items.rb	/^    def self.destroy(item_id)$/;"	F	class:Admin.Items
 destroy	app/components/admin/membership_fees.rb	/^    def self.destroy(payment_id)$/;"	F	class:Admin.MembershipFees
 destroy	app/components/admin/reservations.rb	/^    def self.destroy(reservation_id)$/;"	F	class:Admin.Reservations

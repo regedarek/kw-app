@@ -28,6 +28,13 @@ module Activities
       end
     end
 
+    def destroy
+      @competition = Activities::CompetitionRecord.find(params[:id])
+      @competition.destroy
+
+      redirect_to competitions_path(q: params.to_unsafe_h[:q]), notice: 'Usunięto kurs'
+    end
+
     private
 
     def competition_params
