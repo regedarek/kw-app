@@ -1062,7 +1062,6 @@ build_form	spec/factories.rb	/^    def self.build_form(attrs = {})$/;"	F	class:F
 build_form	spec/factories.rb	/^    def self.build_form(attrs = {})$/;"	F	class:Factories.Reservation
 business_courses	app/models/ability.rb	/^  def business_courses$/;"	f	class:Ability
 cache	spec/rails_mock.rb	/^    def self.cache$/;"	F	class:Rails
-call	app/components/activities/competitions_table.rb	/^    def call$/;"	f	class:Activities.CompetitionsTable
 call	app/components/charity/create_donation.rb	/^    def call(raw_inputs:)$/;"	f	class:Charity.CreateDonation
 call	app/components/events/admin/competitions/create.rb	/^        def call(raw_inputs:)$/;"	f	class:Events.Admin.Competitions.Create
 call	app/components/events/admin/competitions/update.rb	/^        def call(id:, raw_inputs:)$/;"	f	class:Events.Admin.Competitions.Update

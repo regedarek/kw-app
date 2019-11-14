@@ -4,10 +4,6 @@ module Activities
     include Rails.application.routes.url_helpers
     ApplicationController.append_view_path Rails.root.join('app', 'components', 'activities')
 
-    def call
-      ApplicationController.render(partial: "api/competitions/table", cached: true)
-    end
-
     def table_months
       [12, 01, 02, 03, 04]
     end
@@ -49,7 +45,7 @@ module Activities
         Date.new(table_to_year, table_month, table_day)
       end
 
-      if country
+      if country && country.present?
         Activities::CompetitionRecord.where(country: country).where('start_date <= ? AND end_date >= ?', date, date)
       else
         Activities::CompetitionRecord.where('start_date <= ? AND end_date >= ?', date, date)
