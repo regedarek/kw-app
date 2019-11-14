@@ -13,12 +13,13 @@ body
           li
             = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020"
     .col-md-6
-      .serie_list
+      br
+      .serie_list.pull-right
         ul
           - Activities::CompetitionRecord.series.keys.each do |serie|
             li.serie
               = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020?series=#{serie}" do
-                = serie.upcase
+                b = serie.upcase
   .row
     .col-md-12
       table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 

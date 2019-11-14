@@ -184,6 +184,7 @@ AddSentAtToEventsSignUps	db/migrate/20190423090310_add_sent_at_to_events_sign_up
 AddSentAtToProfiles	db/migrate/20190204212729_add_sent_at_to_profiles.rb	/^class AddSentAtToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddSentAtToSupplementarySignUps	db/migrate/20190204170211_add_sent_at_to_supplementary_sign_ups.rb	/^class AddSentAtToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddSentUserIdToSupplementarySignUps	db/migrate/20191023195250_add_sent_user_id_to_supplementary_sign_ups.rb	/^class AddSentUserIdToSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
+AddSeriesToActivitiesCompetitions	db/migrate/20191114055418_add_series_to_activities_competitions.rb	/^class AddSeriesToActivitiesCompetitions < ActiveRecord::Migration[5.2]$/;"	c
 AddSessionsTable	db/migrate/20170219000508_add_sessions_table.rb	/^class AddSessionsTable < ActiveRecord::Migration[5.0]$/;"	c
 AddSingleToCompetitions	db/migrate/20180109213000_add_single_to_competitions.rb	/^class AddSingleToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddSingleToEventSignUps	db/migrate/20180109200332_add_single_to_event_sign_ups.rb	/^class AddSingleToEventSignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -1396,6 +1397,7 @@ change	db/migrate/20191111023010_add_topr_pdf_to_topr_records.rb	/^  def change$
 change	db/migrate/20191111032054_add_topr_degree_to_topr_records.rb	/^  def change$/;"	f	class:AddToprDegreeToToprRecords
 change	db/migrate/20191113235103_create_activities_competitions.rb	/^  def change$/;"	f	class:CreateActivitiesCompetitions
 change	db/migrate/20191114014216_add_bold_to_activities_competitions.rb	/^  def change$/;"	f	class:AddBoldToActivitiesCompetitions
+change	db/migrate/20191114055418_add_series_to_activities_competitions.rb	/^  def change$/;"	f	class:AddSeriesToActivitiesCompetitions
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
