@@ -115,8 +115,10 @@
             ul.menu.vertical data-behaviour='js-notifications-items'
         - if can? :manage, Mailboxer::Conversation
           li.remove-arrow = link_to conversations_path, style: 'padding: 0rem 1rem;padding-right: 0;' do
-            div style='color: green'
+            .show-for-medium style='color: green'
               i.fi.fi-mail
+            .show-for-small-only
+              | Wiadomości
 
         - if user_signed_in?
           li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do
