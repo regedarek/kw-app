@@ -7,14 +7,20 @@ module Messaging
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
       @conversations = @q.result(distinct: true)
+
+      authorize! :read, Mailboxer::Conversation
     end
 
     def show
       @conversation = current_user.mailbox.conversations.find(params[:id])
+
+      authorize! :read, Mailboxer::Conversation
     end
 
     def new
       @recipients = Db::User.all - [current_user]
+
+      authorize! :create, Mailboxer::Conversation
     end
 
     def create

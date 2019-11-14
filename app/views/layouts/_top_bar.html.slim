@@ -113,6 +113,10 @@
                 span data-behaviour='js-notifications-unread-count'
                   = NotificationCenter::NotificationRecord.where(recipient: current_user).unread.count
             ul.menu.vertical data-behaviour='js-notifications-items'
+        - if can? :manage, Mailboxer::Conversation
+          li.remove-arrow = link_to conversations_path, style: 'padding: 0rem 1rem;padding-right: 0;' do
+            .show-for-medium style='color: green'
+              i.fi.fi-mail
 
         - if user_signed_in?
           li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do

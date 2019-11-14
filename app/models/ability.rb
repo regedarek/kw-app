@@ -55,6 +55,7 @@ class Ability
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::User
     can :create, Settlement::ContractRecord
+    can :manage, Mailboxer::Conversation
   end
 
   def competitions

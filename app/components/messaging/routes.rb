@@ -5,4 +5,6 @@ Rails.application.routes.draw do
       resources :messages
     end
   end
+
+  get 'wiadomosci' => 'messaging/conversations#index'
 end

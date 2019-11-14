@@ -5,7 +5,7 @@ table.stack
         = sort_link @q, :name, 'Nazwa'
       th.text-center width='10%'
         = sort_link @q, :seats, 'Odbiorca'
-      th width='15%'
+      th.text-right width='15%'
         = sort_link @q, :created_at, 'Ostatnia odpowiedź'
   tbody
     - @conversations.each do |conversation|
@@ -14,5 +14,5 @@ table.stack
           = link_to conversation.subject, conversation_path(conversation)
         td
           = conversation.receipts_for(current_user)&.first&.message&.sender&.display_name
-        td
+        td.text-right
           = conversation.receipts_for(current_user)&.first&.message&.created_at&.to_date
