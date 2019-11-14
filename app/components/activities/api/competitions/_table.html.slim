@@ -3,19 +3,19 @@
 
 body
   .row
-    .col-md-5
+    .col-md-5.col-xs-12
       .flag_list
         ul
           - Activities::CompetitionRecord.countries.keys.each do |country|
             li
               = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020?country=#{country}" do
                 = flag_icon(table.country_iso(country), squared: true, class: 'flag')
-    .col-md-2
+    .col-md-2.col-xs-12
       .clear_filter
         = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020"
-    .col-md-5
+    .col-md-5.col-xs-12
       br
-      .serie_list.pull-right
+      .serie_list.pull-right-sm
         ul
           - Activities::CompetitionRecord.series.keys.each do |serie|
             li.serie
