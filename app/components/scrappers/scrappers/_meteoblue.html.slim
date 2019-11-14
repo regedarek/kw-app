@@ -1,4 +1,6 @@
-#js-container style=("height: 180px; width: 350px")
+.row
+  .columns.large-12(style="display: flex; justify-content: center; padding-bottom: 20px;")
+    #js-container style=("height: 180px; width: 100%; max-width: 740px;")
 
 - if @meteoblue_record
   .row
@@ -53,6 +55,10 @@
                 zoom:true,
                 looseZoom: true
             }
+        });
+
+        $(window).on('resize', function(){
+            plot1.replot( { resetAxes: true } );
         });
       }
     });
