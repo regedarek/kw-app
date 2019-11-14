@@ -6,7 +6,7 @@ module Activities
     self.table_name = 'activities_competitions'
 
     enum country: [
-      :poland, :slovakia, :italy, :france, :austria, :czech, :deutchland
+      :poland, :slovakia, :italy, :france, :austria, :czech, :deutchland, :switzerland
     ]
 
     friendly_id :slug_candidates, use: :slugged
