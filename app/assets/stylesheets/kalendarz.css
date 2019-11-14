@@ -2,12 +2,10 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
-tbody th, tbody td {
+table.kalendarz-zawodow tbody td {
   vertical-align: top;
-}
-th, td {
   padding: 5px;
-  text-align: left;    
+  text-align: left;
 }
 .weekend {
   background-color: red;
