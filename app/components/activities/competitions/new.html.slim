@@ -1,0 +1,16 @@
+.row
+  .large-12.columns
+    - if @competition.errors.any?
+      .callout.alert
+        ul.circle
+          - @competition.errors.full_messages.each do |message|
+            li= message
+
+= form_for @competition, as: :competition, url: competitions_path do |f|
+  = render 'form', f: f
+
+  .row
+    .large-6.columns
+      = f.submit 'Utwórz zawody', class: 'button expanded large success'
+    .large-6.columns
+      = link_to 'wróć do zawodów', competitions_path, class: 'secondary button large expanded'

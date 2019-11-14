@@ -1,0 +1,34 @@
+.row
+  .large-12.columns
+    = f.label :name, "Nazwa*"
+    = f.text_field :name
+
+.row
+  .large-3.columns
+    = f.label :start_date, 'Początek'
+    = f.date_field :start_date
+
+  .large-3.columns
+    = f.label :end_date, 'Koniec'
+    = f.date_field :end_date
+
+  .large-3.columns
+    = f.label :country, 'Państwo'
+    = f.select :country, Activities::CompetitionRecord.country_attributes_for_select, include_blank: true
+
+  .large-3.columns
+    b = f.label :state, 'Status'
+    = f.select :state, Activities::CompetitionRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @competition.state
+
+.row
+  .large-12.columns
+    = f.label :website, "Link do zawodów"
+    = f.text_field :website
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :description, 'Opis kursu'
+          = f.trix_editor :description, style: 'min-height: 150px'

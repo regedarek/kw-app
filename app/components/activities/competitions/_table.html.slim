@@ -1,0 +1,23 @@
+table.stack
+  thead
+    tr
+      th width='30%'
+        = sort_link @q, :name, 'Nazwa zawodów'
+      th.text-center width='10%'
+        = sort_link @q, :start_date, 'Od'
+      th width='10%'
+        = sort_link @q, :end_date, 'Do'
+      th width='10%'
+  tbody
+    - @competitions.each do |competition|
+      tr
+        td
+          = competition.name
+        td
+          = competition.start_date
+        td
+          = competition.end_date
+        td.text-right
+          - if competition.website
+            = link_to competition.website, style: 'margin-right: 10px; color: green' do
+              i.fi-share
