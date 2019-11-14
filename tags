@@ -58,6 +58,7 @@ AddBanerToCourses	db/migrate/20180727143023_add_baner_to_courses.rb	/^class AddB
 AddBanerTypeToSupplementaryCourses	db/migrate/20190410145708_add_baner_type_to_supplementary_courses.rb	/^class AddBanerTypeToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddBanerUrlToCompetitions	db/migrate/20180112215613_add_baner_url_to_competitions.rb	/^class AddBanerUrlToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddBoarsToUsers	db/migrate/20190130211823_add_boars_to_users.rb	/^class AddBoarsToUsers < ActiveRecord::Migration[5.0]$/;"	c
+AddBoldToActivitiesCompetitions	db/migrate/20191114014216_add_bold_to_activities_competitions.rb	/^class AddBoldToActivitiesCompetitions < ActiveRecord::Migration[5.2]$/;"	c
 AddCanceledToReservations	db/migrate/20161126154922_add_canceled_to_reservations.rb	/^class AddCanceledToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddCashToSupplementaryCourses	db/migrate/20180613155202_add_cash_to_supplementary_courses.rb	/^class AddCashToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddCashUserIdToPayments	db/migrate/20181031181819_add_cash_user_id_to_payments.rb	/^class AddCashUserIdToPayments < ActiveRecord::Migration[5.0]$/;"	c
@@ -1395,6 +1396,7 @@ change	db/migrate/20191111000949_add_snw_groups_to_users.rb	/^  def change$/;"	f
 change	db/migrate/20191111023010_add_topr_pdf_to_topr_records.rb	/^  def change$/;"	f	class:AddToprPdfToToprRecords
 change	db/migrate/20191111032054_add_topr_degree_to_topr_records.rb	/^  def change$/;"	f	class:AddToprDegreeToToprRecords
 change	db/migrate/20191113235103_create_activities_competitions.rb	/^  def change$/;"	f	class:CreateActivitiesCompetitions
+change	db/migrate/20191114014216_add_bold_to_activities_competitions.rb	/^  def change$/;"	f	class:AddBoldToActivitiesCompetitions
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1423,7 +1425,9 @@ collect_crampons	app/components/availability/items.rb	/^    def collect_crampons
 collect_rest	app/components/availability/items.rb	/^    def collect_rest$/;"	f	class:Availability.Items
 competition_params	app/components/activities/competitions_controller.rb	/^    def competition_params$/;"	f	class:Activities.CompetitionsController
 competition_params	app/components/events/admin/competitions_controller.rb	/^      def competition_params$/;"	f	class:Events.Admin.CompetitionsController
+competitions	app/components/activities/competitions_table.rb	/^    def competitions$/;"	f	class:Activities.CompetitionsTable
 competitions	app/models/ability.rb	/^  def competitions$/;"	f	class:Ability
+competitions_for	app/components/activities/competitions_table.rb	/^    def competitions_for(table_month, table_day)$/;"	f
 complete_refs	app/components/scrappers/pdf_image_extractor.rb	/^    def complete_refs$/;"	f	class:Scrappers.PdfImageExtractor
 completed	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function completed() {$/;"	f
 completed?	app/services/payments/dotpay/notification.rb	/^      def completed?$/;"	f	class:Payments.Dotpay.Notification
@@ -1834,6 +1838,7 @@ internalRemoveData	public/assets/application-adb37b88852cd8099abe934018ff31effd9
 isArrayLike	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function isArrayLike( obj ) {$/;"	f
 isEmptyDataObject	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function isEmptyDataObject( obj ) {$/;"	f
 isHidden	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var isHidden = function( elem, el ) {$/;"	f
+is_weekend?	app/components/activities/competitions_table.rb	/^    def is_weekend?(table_month, table_day)$/;"	f
 item_params	app/components/library/items_controller.rb	/^    def item_params$/;"	f	class:Library.ItemsController
 item_params	app/controllers/admin/items_controller.rb	/^    def item_params$/;"	f	class:Admin.ItemsController
 items	app/components/reservations/form.rb	/^    def items$/;"	f	class:Reservations.Form
@@ -1923,6 +1928,8 @@ model_name	app/components/user_management/profile_form.rb	/^    def self.model_n
 model_name	app/components/user_management/reactivation_form.rb	/^    def self.model_name$/;"	F	class:UserManagement.ReactivationForm
 model_name	app/models/db/activities/mountain_route.rb	/^      def self.model_name$/;"	F	class:Db.Activities.MountainRoute
 model_name	app/models/db/profile.rb	/^    def self.model_name$/;"	F	class:Db.Profile
+month_days	app/components/activities/competitions_table.rb	/^    def month_days(table_month)$/;"	f	class:Activities.CompetitionsTable
+month_has_day?	app/components/activities/competitions_table.rb	/^    def month_has_day?(table_month, table_day)$/;"	f	class:Activities
 name_with_cost	app/components/training/supplementary/package_type_record.rb	/^      def name_with_cost$/;"	f	class:Training.Supplementary.PackageTypeRecord
 narciarskie_dziki	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki$/;"	f	class:Activities.RoutesController
 narciarskie_dziki_regulamin	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki_regulamin; end$/;"	f	class:Activities.RoutesController
@@ -2185,6 +2192,10 @@ support.shrinkWrapBlocks	public/assets/application-adb37b88852cd8099abe934018ff3
 swap	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var swap = function( elem, options, callback, args ) {$/;"	f
 system!	bin/setup	/^def system!(*args)$/;"	f
 system!	bin/update	/^def system!(*args)$/;"	f
+table_days	app/components/activities/competitions_table.rb	/^    def table_days$/;"	f	class:Activities.CompetitionsTable
+table_from_year	app/components/activities/competitions_table.rb	/^    def table_from_year$/;"	f	class:Activities.CompetitionsTable
+table_months	app/components/activities/competitions_table.rb	/^    def table_months$/;"	f	class:Activities.CompetitionsTable
+table_to_year	app/components/activities/competitions_table.rb	/^    def table_to_year$/;"	f	class:Activities.CompetitionsTable
 tag_params	app/components/library/admin/tags_controller.rb	/^      def tag_params$/;"	f	class:Library.Admin.TagsController
 target	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var target = $(e.target).closest('span, td, th');$/;"	v
 target	vendor/assets/javascripts/foundation-datepicker.js	/^            var target = $(e.target).closest('span, td, th');$/;"	v

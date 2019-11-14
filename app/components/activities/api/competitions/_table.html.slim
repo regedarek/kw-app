@@ -1,0 +1,32 @@
+- table = Activities::CompetitionsTable.new
+= stylesheet_link_tag "kalendarz"
+
+body
+  table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 
+    thead
+      tr.months
+        th.month colspan="2" 
+          strong Grudzień
+        th.month colspan="2" 
+          strong Styczeń
+        th.month colspan="2" 
+          strong Luty
+        th.month colspan="2" 
+          strong Marzec
+        th.month colspan="2" 
+          strong Kwiecień
+    tbody
+      - (1..31).each do |table_day|
+        tr
+          - table.table_months.each do |table_month|
+            - if table.month_has_day?(table_month, table_day)
+              td class=(table.is_weekend?(table_month, table_day) ? 'weekend' : '') =table_day
+              td
+                - table.competitions_for(table_month, table_day).each do |competition|
+                  - if competition.website
+                    = link_to competition.name, competition.website
+                  - else
+                    competition.name
+                  br
+            - else
+              td colspan="2"
