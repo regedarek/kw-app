@@ -1,7 +1,7 @@
 module Activities
   class CompetitionsTable
     def call
-      "<table>test</table>"
+      "<table><b>test</b></table>"
     end
   end
 end
