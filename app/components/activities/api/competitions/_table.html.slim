@@ -1,5 +1,6 @@
 - table = Activities::CompetitionsTable.new
 = stylesheet_link_tag "kalendarz"
+= stylesheet_link_tag "flag-icon"
 
 body
   table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 
@@ -23,7 +24,7 @@ body
               td class=(table.is_weekend?(table_month, table_day) ? 'weekend number' : 'number') =table_day
               td
                 - table.competitions_for(table_month, table_day).each do |competition|
-                  span class="flag flag-#{competition.flag_sym}"
+                  = flag_icon(competition.flag_sym, squared: true, class: 'flag')
                   - if competition.website
                     - if competition.bold
                       b= link_to competition.name, competition.website
