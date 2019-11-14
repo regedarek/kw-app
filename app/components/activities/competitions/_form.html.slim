@@ -1,7 +1,12 @@
 .row
-  .large-12.columns
+  .large-10.columns
     = f.label :name, "Nazwa*"
     = f.text_field :name
+
+  .large-2.columns
+    br
+    = f.check_box :bold
+    = f.label :bold, "Podkreśl"
 
 .row
   .large-3.columns

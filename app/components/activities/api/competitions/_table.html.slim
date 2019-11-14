@@ -24,9 +24,15 @@ body
               td
                 - table.competitions_for(table_month, table_day).each do |competition|
                   - if competition.website
-                    = link_to competition.name, competition.website
+                    - if competition.bold
+                      b= link_to competition.name, competition.website
+                    - else
+                      = link_to competition.name, competition.website
                   - else
-                    competition.name
+                    - if competition.bold
+                      b competition.name
+                    - else
+                      competition.name
                   br
             - else
               td colspan="2"

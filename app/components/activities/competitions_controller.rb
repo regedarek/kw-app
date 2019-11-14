@@ -17,6 +17,9 @@ module Activities
     def create
       @competition = Activities::CompetitionRecord.new(competition_params)
       @competition.creator_id = current_user.id
+      if @competition.start_date && !@competition.end_date
+        @competition.end_date = @competition.start_date
+      end
 
       if @competition.save
         redirect_to competitions_path(q: params.to_unsafe_h[:q]), notice: 'Dodano zawody'
@@ -28,7 +31,7 @@ module Activities
     private
 
     def competition_params
-      params.require(:competition).permit(:name, :description, :start_date, :end_date, :website,
+      params.require(:competition).permit(:name, :description, :start_date, :end_date, :website, :bold,
                                           :creator_id, :country, :category_type, :slug, :state)
     end
   end

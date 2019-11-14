@@ -5,7 +5,7 @@ module Activities
     ApplicationController.append_view_path Rails.root.join('app', 'components', 'activities')
 
     def call
-      ApplicationController.render(partial: "api/competitions/table", locals: { competitions: competitions })
+      ApplicationController.render(partial: "api/competitions/table", locals: { competitions: competitions }, cached: true)
     end
 
     def table_months
