@@ -18,8 +18,10 @@ table.stack
         td
           = competition.end_date
         td.text-right
+          = link_to edit_competition_path(competition.id), style: 'margin-right: 10px; color: orange' do
+            i.fi-page
           - if competition.website
             = link_to competition.website, style: 'margin-right: 10px; color: green' do
               i.fi-share
-            = link_to competition_path(competition.id), method: :delete, data: { confirm: 'Napewno?' }, style: 'margin-right: 10px; color: red' do
-              i.fi-trash
+          = link_to competition_path(competition.id), method: :delete, data: { confirm: 'Napewno?' }, style: 'margin-right: 10px; color: red' do
+            i.fi-trash

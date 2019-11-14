@@ -1571,6 +1571,7 @@ down	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.down$/;"	F	cl
 down	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def down$/;"	f	class:AddTimestampsToMountainRoutes
 download_attachment	app/components/settlement/admin/contracts_controller.rb	/^      def download_attachment$/;"	f	class:Settlement.Admin.ContractsController
 dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
+edit	app/components/activities/competitions_controller.rb	/^    def edit$/;"	f	class:Activities.CompetitionsController
 edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Business.CoursesController
 edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"	f	class:Events.Admin.CompetitionsController
 edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events.Competitions
@@ -2227,6 +2228,7 @@ unpaid	app/components/membership/admin/membership_fees_controller.rb	/^      def
 unpaid_params	app/components/membership/admin/membership_fees_controller.rb	/^      def unpaid_params$/;"	f	class:Membership.Admin.MembershipFeesController
 up	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.up$/;"	F	class:AddDeviseToUsers
 up	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def up$/;"	f	class:AddTimestampsToMountainRoutes
+update	app/components/activities/competitions_controller.rb	/^    def update$/;"	f	class:Activities.CompetitionsController
 update	app/components/admin/items.rb	/^    def update(item_id)$/;"	f	class:Admin.Items
 update	app/components/admin/reservations.rb	/^    def update(reservation_id)$/;"	f	class:Admin.Reservations
 update	app/components/business/courses_controller.rb	/^    def update$/;"	f	class:Business.CoursesController

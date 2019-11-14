@@ -28,6 +28,20 @@ module Activities
       end
     end
 
+    def edit
+      @competition = Activities::CompetitionRecord.find(params[:id])
+    end
+
+    def update
+      @competition = Activities::CompetitionRecord.find(params[:id])
+
+      if @competition.update(competition_params)
+        redirect_to edit_competition_path(@competition.id), notice: 'Zaktualizowano zawody'
+      else
+        render :edit
+      end
+    end
+
     def destroy
       @competition = Activities::CompetitionRecord.find(params[:id])
       @competition.destroy
