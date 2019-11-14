@@ -23,7 +23,7 @@ module Activities
       when :switzerland
         :ch
       when :andorra
-        :ar
+        :ad
       when :china
         :cn
       else
