@@ -18,7 +18,7 @@ module Messaging
     end
 
     def new
-      @recipients = Db::User.all - [current_user]
+      @recipients = Db::User.where.not(kw_id: nil).not_hidden.active - [current_user]
 
       authorize! :create, Mailboxer::Conversation
     end
