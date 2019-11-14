@@ -22,7 +22,7 @@ body
           - table.table_months.each do |table_month|
             - if table.month_has_day?(table_month, table_day)
               td class=(table.is_weekend?(table_month, table_day) ? 'weekend number' : 'number') =table_day
-              td
+              td.names
                 - table.competitions_for(table_month, table_day).each do |competition|
                   = flag_icon(competition.flag_sym, squared: true, class: 'flag')
                   - if competition.website

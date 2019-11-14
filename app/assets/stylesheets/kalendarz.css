@@ -2,7 +2,7 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
-table.kalendarz-zawodow tbody td {
+table.kalendarz-zawodow tbody td.names {
   vertical-align: top !important;
   padding: 5px;
   text-align: left !important;
