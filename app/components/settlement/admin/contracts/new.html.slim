@@ -9,11 +9,11 @@
 
       .row
         .medium-3.columns
-          b= f.label :title, "Nazwa rozliczenia"
+          b= f.label :title, "Nazwa rozliczenia*"
           = f.text_field :title
 
         .medium-2.columns
-          b= f.label :document_date, "Data dokumentu"
+          b= f.label :document_date, "Data dokumentu*"
           = f.date_field :document_date
 
         .medium-2.columns
@@ -25,7 +25,7 @@
           = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
         .medium-3.columns
-          b= f.label :cost, "Kwota rozliczenia"
+          b= f.label :cost, "Kwota rozliczenia*"
           .input-group
             = f.number_field :cost, step: 0.01, class: 'input-group-field'
             span.input-group-label
@@ -39,14 +39,12 @@
             Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
 
           .medium-3.columns
-            = f.label :contractor_name, 'Kontrahent'
+            = f.label :contractor_id, 'Kontrahent'
               = link_to 'Dodaj nowego kontrahenta', new_admin_contractor_path, target: :_blank
-            - names = Settlement::ContractorRecord.select(:id, :name).map { |u| { id: u.id, name: u.name } }
-            - if @contract.contractor
-              - pre = [{id: @contract.contractor_id, name: @contract.contractor.name}]
-            - else
-              - pre = []
-            = f.text_field :contractor_name, 'data-tokeninput': { collection: names, options: { prePopulate: pre, tokenLimit: 1} }.to_json
+            = f.select :contractor_id,
+              Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
+              { include_blank: true},
+              { class: 'js-select-multiple' }
 
         .row
           .medium-3.columns
@@ -57,9 +55,10 @@
             b= f.label :financial_type, 'Rodzaj działalności'
             = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
 
-          .medium-3.columns
-            b= f.label :period_date, 'Okres rozliczeniowy'
-            = f.date_select :period_date,  { :discard_day => true, include_blank: true}
+          - if false
+            .medium-3.columns
+              b= f.label :period_date, 'Okres rozliczeniowy'
+              = f.date_select :period_date,  { :discard_day => true, include_blank: true}
 
       .row
         .medium-12.columns
@@ -69,18 +68,21 @@
 
       .row
         .medium-6.columns
-          = f.label :users_names, 'Osoby zainteresowane, które otrzymają powiadomienie emailem'
-          - names = Db::User.select(:id, :first_name, :last_name).map{|u| { id: u.id, name: u.display_name } }
-          - users = [{ id: current_user.id, name: current_user.display_name }]
-          = f.text_field :users_names, 'data-tokeninput': { collection: names, options: { prePopulate: users.uniq } }.to_json
+          = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
+          = f.select :user_ids,
+            Db::User.all.map { |u| [u.display_name, u.id] },
+            { },
+            { class: 'js-select-multiple', multiple: true }
 
         .medium-6.columns
-          = f.label :events_names, 'Powiązane wydarzenia'
-          - names = Training::Supplementary::CourseRecord.select(:id, :name).map{|u| { id: u.id, name: u.name } }
-          = f.text_field :events_names, 'data-tokeninput': { collection: names }.to_json
+          = f.label :event_ids, 'Powiązane wydarzenia'
+          = f.select :event_ids,
+            Training::Supplementary::CourseRecord.all.map { |u| [u.name, u.id] },
+            { },
+            { class: 'js-select-multiple', multiple: true }
 
       b= f.label :attachments, "Pliki"
       = f.file_field :attachments, multiple: true
 
       = f.submit 'Utwórz rozliczenie', class: 'button'
-      = link_to 'wróć', admin_contracts_path, class: 'button secondary'
+      = link_to 'wróć', session[:original_referrer] || admin_contracts_path, class: 'button secondary'

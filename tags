@@ -809,6 +809,7 @@ Settlement	app/components/settlement/contractor_form.rb	/^module Settlement$/;"	
 Settlement	app/components/settlement/contractor_record.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/create_contract.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/create_contractor.rb	/^module Settlement$/;"	m
+Settlement	app/components/settlement/new_contract_form.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/repository.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/update_contract.rb	/^module Settlement$/;"	m
 Shmu	app/components/scrappers/shmu.rb	/^  class Shmu$/;"	c	class:Scrappers
@@ -1610,7 +1611,6 @@ end_date_is_not_thursday	app/components/reservations/form.rb	/^    def end_date_
 env	spec/rails_mock.rb	/^    def self.env$/;"	F	class:Rails
 errors_for	lib/form_object.rb	/^  def errors_for(attribute, separator = '<\/br>')$/;"	f	class:FormObject
 events	app/models/ability.rb	/^  def events$/;"	f	class:Ability
-events_names=	app/components/settlement/contract_record.rb	/^    def events_names=(ids)$/;"	f	class:Settlement.ContractRecord
 execute	app/services/payments/dotpay/delete_payment_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.DeletePaymentRequest
 execute	app/services/payments/dotpay/get_operation_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.GetOperationRequest
 execute	app/services/payments/dotpay/payment_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.PaymentRequest
@@ -2272,7 +2272,6 @@ user	app/components/admin/membership_fees_form.rb	/^    def user$/;"	f	class:Adm
 user	app/components/admin/reservations_form.rb	/^    def user$/;"	f	class:Admin.ReservationsForm
 user_params	app/controllers/admin/users_controller.rb	/^    def user_params$/;"	f	class:Admin.UsersController
 users_names=	app/components/management/project_record.rb	/^    def users_names=(ids)$/;"	f	class:Management.ProjectRecord
-users_names=	app/components/settlement/contract_record.rb	/^    def users_names=(ids)$/;"	f	class:Settlement.ContractRecord
 validate_each	lib/validators/periodic_date_validator.rb	/^  def validate_each(record, attribute, parameters)$/;"	f	class:PeriodicDateValidator
 vendorPropName	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function vendorPropName( name ) {$/;"	f
 voted?	app/components/management/voting/repository.rb	/^      def voted?(case_id, user_id)$/;"	f	class:Management.Voting.Repository

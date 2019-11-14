@@ -3,6 +3,7 @@
     h3 Rozliczenia, faktury, przelewy, umowy wolontariackie
   .large-4.columns
     .text-right
+      = link_to 'Archiwum', admin_contracts_path(q: {state_cont_any: 'closed'}), class: 'button alert'
       - if can? :create, Settlement::ContractorRecord
         = link_to 'Nowy kontrahent', new_admin_contractor_path, class: 'button alert'
       - if can? :create, Settlement::ContractRecord

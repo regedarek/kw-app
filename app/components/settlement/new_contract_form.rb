@@ -2,7 +2,7 @@ require 'i18n'
 require 'dry-validation'
 
 module Settlement
-  ContractForm = Dry::Validation.Params do
+  NewContractForm = Dry::Validation.Params do
     configure { config.messages_file = 'app/components/settlement/errors.yml' }
     configure { config.messages = :i18n }
 
@@ -23,7 +23,5 @@ module Settlement
     required(:event_ids).each(:str?)
     optional(:contractor_id).maybe
     optional(:event_id).maybe
-    optional(:'period_date(1i)').maybe
-    optional(:'period_date(2i)').maybe
   end
 end

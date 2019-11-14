@@ -131,7 +131,7 @@
           = link_to 'Rozlicz', prepayment_admin_contract_path(@contract.id), method: :put, class: 'button alert'
         - if can? :update, @contract
           = link_to 'edytuj rozliczenie', edit_admin_contract_path(@contract.id), class: 'button warning'
-        = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+        = link_to 'wróć do rozliczeń', session[:original_referrer] || admin_contracts_path, class: 'button secondary'
 
   .large-6.columns
     h5 Komentarze, dodatkowe informacje

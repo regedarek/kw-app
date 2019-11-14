@@ -17,7 +17,8 @@ module Settlement
       def new
         authorize! :create, Settlement::ContractRecord
 
-        @contract = Settlement::ContractRecord.new
+        @contract = Settlement::ContractRecord.new(user_ids: [current_user.id])
+        session[:original_referrer] = request.env["HTTP_REFERER"]
       end
 
       def create
@@ -38,6 +39,7 @@ module Settlement
         @contract = Settlement::ContractRecord.find(params[:id])
 
         authorize! :read, @contract
+        session[:original_referrer] = request.env["HTTP_REFERER"]
       end
 
       def destroy
@@ -63,6 +65,7 @@ module Settlement
       def edit
         @contract = Settlement::ContractRecord.find(params[:id])
         authorize! :read, @contract
+        session[:original_referrer] = request.env["HTTP_REFERER"]
       end
 
       def update
@@ -145,7 +148,7 @@ module Settlement
       def create_record
         Settlement::CreateContract.new(
           Settlement::Repository.new,
-          Settlement::ContractForm
+          Settlement::NewContractForm
         ).call(raw_inputs: contract_params, creator_id: current_user.id)
       end
 
@@ -160,7 +163,7 @@ module Settlement
         params
           .require(:contract)
           .permit(
-            :group_type, :payout_type, :acceptor_id, :event_id, :period_date, :substantive_type, :financial_type, :document_type, :document_date, :title, :description, :cost, :state, contractor_name: [], attachments: [], events_names: [], users_names: []
+            :group_type, :payout_type, :acceptor_id, :event_id, :period_date, :substantive_type, :financial_type, :document_type, :document_date, :title, :description, :cost, :state, :contractor_id, attachments: [], event_ids: [], user_ids: []
           )
       end
     end

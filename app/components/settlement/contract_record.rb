@@ -40,20 +40,10 @@ module Settlement
       state :closed
     end
 
-    def users_names=(ids)
-      self.user_ids = ids
-    end
-
-    def events_names=(ids)
-      self.event_ids = ids
-    end
-
     def contractor_name=(id)
       self.contractor_id = id
     end
 
-    attr_reader :users_names
-    attr_reader :events_names
     attr_reader :contractor_name
   end
 end
