@@ -12,6 +12,16 @@ module Blog
 
     private
 
+    def latest_degree
+      today_infos = Scrappers::ToprRecord.where(time: Date.today).order(time: :desc)
+
+      if today_infos.any?
+        today_infos.first.topr_degree.url(:dashboard)
+      else
+        'brak zagrożenia'
+      end
+    end
+
     def top_5_boars
       Activities::Repository.new.fetch_season(:ski, DateTime.new(2018, 11, 1), DateTime.new(2019, 05, 01)).limit(5).map do |user|
         {

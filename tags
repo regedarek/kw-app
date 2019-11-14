@@ -1899,6 +1899,7 @@ kasprowy_uri	app/components/scrappers/meteoblue.rb	/^    def kasprowy_uri$/;"	f	
 kinds	app/components/training/supplementary/course_record.rb	/^      def kinds$/;"	f	class:Training.Supplementary.CourseRecord
 kw_id_accepted	app/models/db/profile.rb	/^    def kw_id_accepted$/;"	f	class:Db.Profile
 last_ski_route	app/components/blog/author.rb	/^      def last_ski_route(user)$/;"	f	class:Blog.Author
+latest_degree	app/components/blog/dashboard.rb	/^    def latest_degree$/;"	f	class:Blog.Dashboard
 letterSpacing	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		letterSpacing: "0",$/;"	p
 library	app/models/ability.rb	/^  def library$/;"	f	class:Ability
 limit	app/components/events/competitions/sign_ups/limiter.rb	/^        def limit$/;"	f	class:Events.Competitions.SignUps.Limiter
