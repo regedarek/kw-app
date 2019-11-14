@@ -21,6 +21,33 @@ module Activities
       state :ready
     end
 
+    def flag_sym
+      case country.to_sym
+      when :poland
+        :pl
+      when :slovakia
+        :sk
+      when :italy
+        :it
+      when :france
+        :fr
+      when :austria
+        :at
+      when :czech
+        :cz
+      when :deutchland
+        :de
+      when :switzerland
+        :ch
+      when :andorra
+        :ar
+      when :china
+        :cn
+      else
+        :en
+      end
+    end
+
     def self.country_attributes_for_select
       countries.map do |activity_type, _|
         [activity_type, activity_type]

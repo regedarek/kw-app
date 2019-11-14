@@ -2,6 +2,9 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+tbody th, tbody td {
+  vertical-align: top;
+}
 th, td {
   padding: 5px;
   text-align: left;    
@@ -12,4 +15,8 @@ th, td {
 
 .number {
   width: 3%;
+}
+
+span.flag {
+  margin-right: 5px;
 }

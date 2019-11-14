@@ -6,6 +6,7 @@ gem 'bootsnap', require: false
 gem 'rails', '>= 5.2.0', '< 6.0'
 gem 'pg'
 gem 'sass-rails'
+gem 'flag-icons-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'pdf-reader'
