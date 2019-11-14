@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_164820) do
+ActiveRecord::Schema.define(version: 2019_11_14_190411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -804,6 +804,12 @@ ActiveRecord::Schema.define(version: 2019_11_14_164820) do
     t.integer "snow_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "wind_value"
+    t.integer "wind_direction"
+    t.integer "cloud"
+    t.string "cloud_url"
+    t.string "snow_type_text"
+    t.string "snow_surface"
   end
 
   add_foreign_key "product_fields", "product_types"

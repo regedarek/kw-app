@@ -71,6 +71,7 @@ AddClimbingBoarsToUsers	db/migrate/20190507195445_add_climbing_boars_to_users.rb
 AddClosePaymentToCompetitions	db/migrate/20190423093526_add_close_payment_to_competitions.rb	/^class AddClosePaymentToCompetitions < ActiveRecord::Migration[5.2]$/;"	c
 AddClosedToCompetitions	db/migrate/20180113121440_add_closed_to_competitions.rb	/^class AddClosedToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddClosedToPhotoCompetitions	db/migrate/20181029175346_add_closed_to_photo_competitions.rb	/^class AddClosedToPhotoCompetitions < ActiveRecord::Migration[5.0]$/;"	c
+AddCloudUrlToWeatherRecords	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^class AddCloudUrlToWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddCodeToSupplementarySignUps	db/migrate/20180507142148_add_code_to_supplementary_sign_ups.rb	/^class AddCodeToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddContractorIdToContracts	db/migrate/20190530212416_add_contractor_id_to_contracts.rb	/^class AddContractorIdToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddCoordinatorIdToBusinessCourses	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^class AddCoordinatorIdToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -102,9 +103,11 @@ AddExpiredAtToEventsSignUps	db/migrate/20190423094109_add_expired_at_to_events_s
 AddExpiredAtToSupplementarySignUps	db/migrate/20190204113906_add_expired_at_to_supplementary_sign_ups.rb	/^class AddExpiredAtToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddExpiredHoursToSupplementaryCourses	db/migrate/20190204113745_add_expired_hours_to_supplementary_courses.rb	/^class AddExpiredHoursToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddFeesToSupplementaryCourses	db/migrate/20180503155300_add_fees_to_supplementary_courses.rb	/^class AddFeesToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
+AddFields2ToWeatherRecords	db/migrate/20191114190411_add_fields2_to_weather_records.rb	/^class AddFields2ToWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddFieldsToProjects	db/migrate/20190416191352_add_fields_to_projects.rb	/^class AddFieldsToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddFieldsToRoutes	db/migrate/20160728090245_add_fields_to_routes.rb	/^class AddFieldsToRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddFieldsToStrzeleckiSignUps	db/migrate/20170125085522_add_fields_to_strzelecki_sign_ups.rb	/^class AddFieldsToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
+AddFieldsToWeatherRecords	db/migrate/20191114175119_add_fields_to_weather_records.rb	/^class AddFieldsToWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddFileToPhotoRequests	db/migrate/20180903210305_add_file_to_photo_requests.rb	/^class AddFileToPhotoRequests < ActiveRecord::Migration[5.0]$/;"	c
 AddFinancialTypeToContracts	db/migrate/20190529221052_add_financial_type_to_contracts.rb	/^class AddFinancialTypeToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddFirstNameLastNamePhoneEmailToProfiles	db/migrate/20170419233047_add_first_name_last_name_phone_email_to_profiles.rb	/^class AddFirstNameLastNamePhoneEmailToProfiles < ActiveRecord::Migration[5.0]$/;"	c
@@ -1408,6 +1411,9 @@ change	db/migrate/20191113235103_create_activities_competitions.rb	/^  def chang
 change	db/migrate/20191114014216_add_bold_to_activities_competitions.rb	/^  def change$/;"	f	class:AddBoldToActivitiesCompetitions
 change	db/migrate/20191114055418_add_series_to_activities_competitions.rb	/^  def change$/;"	f	class:AddSeriesToActivitiesCompetitions
 change	db/migrate/20191114164820_create_mountain_routes_points.rb	/^  def change$/;"	f	class:CreateMountainRoutesPoints
+change	db/migrate/20191114175119_add_fields_to_weather_records.rb	/^  def change$/;"	f	class:AddFieldsToWeatherRecords
+change	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^  def change$/;"	f	class:AddCloudUrlToWeatherRecords
+change	db/migrate/20191114190411_add_fields2_to_weather_records.rb	/^  def change$/;"	f	class:AddFields2ToWeatherRecords
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1920,6 +1926,7 @@ list	app/mailers/profile_mailer.rb	/^  def list(profile)$/;"	f	class:ProfileMail
 list_params	app/components/user_management/lists_controller.rb	/^    def list_params$/;"	f	class:UserManagement.ListsController.create
 load_fixture	spec/factories.rb	/^def load_fixture(fixture)$/;"	f
 location	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var location = window.location;$/;"	v
+locations	app/components/scrappers/api/pogodynka_controller.rb	/^      def locations$/;"	f	class:Scrappers.Api.PogodynkaController
 logger	spec/rails_mock.rb	/^    def self.logger$/;"	F	class:Rails
 logo	app/components/business/course_record.rb	/^    def logo$/;"	f	class:Business.CourseRecord
 lomnicki_stit_uri	app/components/scrappers/shmu.rb	/^    def lomnicki_stit_uri(day: Time.zone.now.to_date.to_s(:number), hour: 12)$/;"	f	class:Scrappers.Shmu
