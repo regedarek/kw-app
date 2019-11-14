@@ -6,6 +6,7 @@
   .large-12.columns
     = render 'table'
 
-.row
-  .large-12.columns
-    = render 'activities/api/competitions/table', table: Activities::CompetitionsTable.new
+- if Rails.env.development?
+  .row
+    .large-12.columns
+      = render 'activities/api/competitions/table', table: Activities::CompetitionsTable.new
