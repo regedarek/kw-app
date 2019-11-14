@@ -21,6 +21,10 @@
     = f.label :country, 'Państwo'
     = f.select :country, Activities::CompetitionRecord.country_attributes_for_select, include_blank: true
 
+  .large-3.columns
+    = f.label :series, 'Seria'
+    = f.select :series, Activities::CompetitionRecord.series_attributes_for_select, include_blank: true
+
   - if false
     .large-3.columns
       b = f.label :state, 'Status'

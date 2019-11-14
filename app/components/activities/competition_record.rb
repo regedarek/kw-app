@@ -9,6 +9,10 @@ module Activities
       :poland, :slovakia, :italy, :france, :austria, :czech, :deutchland, :switzerland, :andorra, :china, :ukraine
     ]
 
+    enum series: [
+      :pp, :ismf, :lgc
+    ]
+
     friendly_id :slug_candidates, use: :slugged
 
     validates :name, :country, :state, presence: true
@@ -53,6 +57,12 @@ module Activities
     def self.country_attributes_for_select
       countries.map do |activity_type, _|
         [activity_type, activity_type]
+      end
+    end
+
+    def self.series_attributes_for_select
+      series.map do |activity_type, _|
+        [I18n.t("activerecord.attributes.#{model_name.i18n_key}.series.#{activity_type}"), activity_type]
       end
     end
 

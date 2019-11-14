@@ -31,6 +31,16 @@ span.flag {
   float: left
 }
 
+.serie_list ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.serie_list li {
+  float: left;
+  margin-right: 5px;
+}
+
 .flag_list span.flag {
     width: 25px;
     line-height: 25px;

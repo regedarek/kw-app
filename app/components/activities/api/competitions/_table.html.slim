@@ -3,7 +3,7 @@
 
 body
   .row
-    .col-md-12
+    .col-md-6
       .flag_list
         ul
           - Activities::CompetitionRecord.countries.keys.each do |country|
@@ -12,6 +12,13 @@ body
                 = flag_icon(table.country_iso(country), squared: true, class: 'flag')
           li
             = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020"
+    .col-md-6
+      .serie_list
+        ul
+          - Activities::CompetitionRecord.series.keys.each do |serie|
+            li.serie
+              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020?series=#{serie}" do
+                = serie.upcase
   .row
     .col-md-12
       table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 
@@ -34,7 +41,7 @@ body
                 - if table.month_has_day?(table_month, table_day)
                   td class=(table.is_weekend?(table_month, table_day) ? 'weekend number' : 'number') =table_day
                   td.names
-                    - table.competitions_for(table_month, table_day, params[:country]).each do |competition|
+                    - table.competitions_for(table_month, table_day, params[:country], params[:series]).each do |competition|
                       = flag_icon(competition.flag_sym, squared: true, class: 'flag')
                       - if competition.website
                         - if competition.bold

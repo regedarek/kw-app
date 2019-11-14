@@ -52,7 +52,7 @@ module Activities
     private
 
     def competition_params
-      params.require(:competition).permit(:name, :description, :start_date, :end_date, :website, :bold,
+      params.require(:competition).permit(:name, :description, :start_date, :end_date, :website, :bold, :series,
                                           :creator_id, :country, :category_type, :slug, :state)
     end
   end

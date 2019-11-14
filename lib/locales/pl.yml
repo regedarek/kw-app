@@ -1,6 +1,11 @@
 pl:
   activerecord:
     attributes:
+      activities/competition_record:
+        series:
+          pp: Puchar Polski
+          ismf: ISMF World Cup
+          lgc: La Grand Course
       business/course_record:
         activity_types:
           winter_abc: Zimowe ABC

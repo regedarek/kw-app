@@ -65,7 +65,7 @@ module Activities
       table_day <= days
     end
 
-    def competitions_for(table_month, table_day, country)
+    def competitions_for(table_month, table_day, country, series)
       date = if table_month == 12
         Date.new(table_from_year, table_month, table_day)
       else
@@ -74,6 +74,8 @@ module Activities
 
       if country && country.present?
         Activities::CompetitionRecord.where(country: country).where('start_date <= ? AND end_date >= ?', date, date)
+      elsif series && series.present?
+        Activities::CompetitionRecord.where(series: series).where('start_date <= ? AND end_date >= ?', date, date)
       else
         Activities::CompetitionRecord.where('start_date <= ? AND end_date >= ?', date, date)
       end
