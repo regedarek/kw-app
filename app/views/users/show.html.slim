@@ -15,6 +15,8 @@
                   = "W klubie od #{@user.profile&.application_date&.to_date}"
                 - else
                   = "Dołączył #{@user.created_at&.to_date}"
+              - unless @user.hide
+                = link_to 'Wyślij wiadomość', new_conversation_path(recipient_id: @user.id)
         .large-6.columns
           - if @user.description
             br

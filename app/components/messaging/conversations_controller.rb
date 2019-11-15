@@ -5,7 +5,7 @@ module Messaging
 
     def index
       @q = current_user.mailbox.conversations.ransack(params[:q])
-      @q.sorts = 'created_at desc' if @q.sorts.empty?
+      @q.sorts = 'created_at asc' if @q.sorts.empty?
       @conversations = @q.result(distinct: true)
 
       authorize! :read, Mailboxer::Conversation
