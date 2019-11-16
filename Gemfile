@@ -3,7 +3,7 @@ ruby '2.6.3'
 
 # setup
 gem 'bootsnap', require: false
-gem 'rails', '>= 5.2.3', '< 6.0'
+gem 'rails', github: 'rails/rails'
 gem 'pg'
 gem 'sass-rails'
 gem 'flag-icons-rails'
@@ -32,7 +32,7 @@ gem 'virtus'
 gem 'kaminari'
 gem 'whenever', require: false
 gem 'rubyzip', '>= 1.2.1'
-gem 'axlsx', '2.1.0.pre', git: 'https://github.com/randym/axlsx.git'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails'
 gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'carrierwave'
