@@ -37,7 +37,7 @@
         .large-6.columns
           = f.label :colleague_ids, 'partnerzy z klubu'
           = f.select :colleague_ids,
-            @recipients.map { |u| [u.display_name, u.id] },
+            Db::User.map { |u| [u.display_name, u.id] },
             { },
             { class: 'js-select-multiple', multiple: true }
 
