@@ -98,14 +98,6 @@ GIT
       nokogiri (~> 1.8, >= 1.8.2)
       rubyzip (~> 1.2, >= 1.2.1)
 
-GIT
-  remote: https://github.com/regedarek/mailboxer.git
-  revision: 6ce4f1f27362bab92f0a4f32c47578e5e43bfeec
-  specs:
-    mailboxer (0.15.1)
-      carrierwave (>= 0.5.8)
-      rails (>= 6.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -139,9 +131,6 @@ GEM
       msgpack (~> 1.0)
     brakeman (4.7.1)
     builder (3.2.3)
-    bullet (6.0.2)
-      activesupport (>= 3.0.0)
-      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     cancancan (2.3.0)
     capistrano (3.11.2)
@@ -346,6 +335,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mailboxer (0.15.1)
+      carrierwave (>= 0.5.8)
+      rails (>= 5.0.0)
     mailgun-ruby (1.1.11)
       rest-client (~> 2.0.2)
     marcel (0.3.3)
@@ -530,7 +522,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.6)
     unicode-display_width (1.6.0)
-    uniform_notifier (1.13.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -560,7 +551,6 @@ DEPENDENCIES
   axlsx_rails
   bootsnap
   brakeman
-  bullet
   byebug
   cancancan (~> 2.0)
   capistrano
@@ -593,7 +583,7 @@ DEPENDENCIES
   kaminari
   koala
   listen (~> 3.0)
-  mailboxer!
+  mailboxer
   mailgun-ruby (~> 1.1.6)
   mini_magick
   nested_form_fields
