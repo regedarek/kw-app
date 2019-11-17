@@ -193,7 +193,6 @@ AddSentAtToProfiles	db/migrate/20190204212729_add_sent_at_to_profiles.rb	/^class
 AddSentAtToSupplementarySignUps	db/migrate/20190204170211_add_sent_at_to_supplementary_sign_ups.rb	/^class AddSentAtToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddSentUserIdToSupplementarySignUps	db/migrate/20191023195250_add_sent_user_id_to_supplementary_sign_ups.rb	/^class AddSentUserIdToSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddSeriesToActivitiesCompetitions	db/migrate/20191114055418_add_series_to_activities_competitions.rb	/^class AddSeriesToActivitiesCompetitions < ActiveRecord::Migration[5.2]$/;"	c
-AddServiceNameToActiveStorageBlobs	db/migrate/20191117141456_add_service_name_to_active_storage_blobs.active_storage.rb	/^class AddServiceNameToActiveStorageBlobs < ActiveRecord::Migration[6.0]$/;"	c
 AddSessionsTable	db/migrate/20170219000508_add_sessions_table.rb	/^class AddSessionsTable < ActiveRecord::Migration[5.0]$/;"	c
 AddSingleToCompetitions	db/migrate/20180109213000_add_single_to_competitions.rb	/^class AddSingleToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddSingleToEventSignUps	db/migrate/20180109200332_add_single_to_event_sign_ups.rb	/^class AddSingleToEventSignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -380,6 +379,7 @@ CoursesController	app/components/business/courses_controller.rb	/^  class Course
 CoursesController	app/components/training/supplementary/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Training.Supplementary
 Create	app/components/events/admin/competitions/create.rb	/^      class Create$/;"	c	class:Events.Admin.Competitions
 Create	app/components/events/competitions/sign_ups/create.rb	/^      class Create$/;"	c	class:Events.Competitions.SignUps
+CreateActiveStorageTables	db/migrate/20191117142401_create_active_storage_tables.active_storage.rb	/^class CreateActiveStorageTables < ActiveRecord::Migration[5.2]$/;"	c
 CreateActivitiesCompetitions	db/migrate/20191113235103_create_activities_competitions.rb	/^class CreateActivitiesCompetitions < ActiveRecord::Migration[5.2]$/;"	c
 CreateActivitiesContracts	db/migrate/20191030103736_create_activities_contracts.rb	/^class CreateActivitiesContracts < ActiveRecord::Migration[5.2]$/;"	c
 CreateActivitiesRouteContracts	db/migrate/20191030104053_create_activities_route_contracts.rb	/^class CreateActivitiesRouteContracts < ActiveRecord::Migration[5.2]$/;"	c
@@ -1425,6 +1425,7 @@ change	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^  def cha
 change	db/migrate/20191114190411_add_fields2_to_weather_records.rb	/^  def change$/;"	f	class:AddFields2ToWeatherRecords
 change	db/migrate/20191114202838_add_missing_indices.mailboxer_engine.rb	/^  def change$/;"	f	class:AddMissingIndices
 change	db/migrate/20191114202839_add_delivery_tracking_info_to_mailboxer_receipts.mailboxer_engine.rb	/^  def change$/;"	f	class:AddDeliveryTrackingInfoToMailboxerReceipts
+change	db/migrate/20191117142401_create_active_storage_tables.active_storage.rb	/^  def change$/;"	f	class:CreateActiveStorageTables
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2273,7 +2274,6 @@ up	db/migrate/20150523161408_add_devise_to_users.rb	/^  def self.up$/;"	F	class:
 up	db/migrate/20170418161209_add_timestamps_to_mountain_routes.rb	/^  def up$/;"	f	class:AddTimestampsToMountainRoutes
 up	db/migrate/20191114202836_create_mailboxer.mailboxer_engine.rb	/^  def self.up$/;"	F	class:CreateMailboxer
 up	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^  def self.up$/;"	F	class:AddConversationOptout
-up	db/migrate/20191117141456_add_service_name_to_active_storage_blobs.active_storage.rb	/^  def up$/;"	f	class:AddServiceNameToActiveStorageBlobs
 update	app/components/activities/competitions_controller.rb	/^    def update$/;"	f	class:Activities.CompetitionsController
 update	app/components/admin/items.rb	/^    def update(item_id)$/;"	f	class:Admin.Items
 update	app/components/admin/reservations.rb	/^    def update(reservation_id)$/;"	f	class:Admin.Reservations
