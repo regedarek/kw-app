@@ -132,7 +132,7 @@ GEM
     brakeman (4.7.1)
     builder (3.2.3)
     byebug (11.0.1)
-    cancancan (2.3.0)
+    cancancan (3.0.1)
     capistrano (3.11.2)
       airbrussh (>= 1.0.0)
       i18n
@@ -552,7 +552,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   byebug
-  cancancan (~> 2.0)
+  cancancan (~> 3.0)
   capistrano
   capistrano-passenger
   capistrano-rails
