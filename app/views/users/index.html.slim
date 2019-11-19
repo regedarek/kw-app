@@ -27,10 +27,11 @@
             th.text-right width='15%' Akcje
         tbody
           - @users.each do |user|
-            tr
-              td= link_to user.display_name, user_path(kw_id: user.kw_id)
-              td
-                = user&.profile&.sections&.map(&:upcase)&.to_sentence
-              td.text-right
-                = link_to 'Wyślij wiadomość', new_conversation_path(recipient_id: user.id)
+            - if user.active?
+              tr
+                td= link_to user.display_name, user_path(kw_id: user.kw_id)
+                td
+                  = user&.profile&.sections&.map(&:upcase)&.to_sentence
+                td.text-right
+                  = link_to 'Wyślij wiadomość', new_conversation_path(recipient_id: user.id)
       = paginate @users
