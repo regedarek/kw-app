@@ -4,11 +4,10 @@ module Messaging
     append_view_path 'app/components'
 
     def index
+      authorize! :read, Mailboxer::Conversation
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'created_at asc' if @q.sorts.empty?
       @conversations = @q.result(distinct: true)
-
-      authorize! :read, Mailboxer::Conversation
     end
 
     def show
