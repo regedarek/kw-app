@@ -22,7 +22,7 @@ module Business
       :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2,
       :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing,
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
-      :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6
+      :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6,
       :cave
     ]
 
