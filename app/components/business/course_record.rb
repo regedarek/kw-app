@@ -22,6 +22,7 @@ module Business
       :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2,
       :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing,
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
+      :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6
       :cave
     ]
 
@@ -91,6 +92,18 @@ module Business
         'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-lodowa/'
       when :cave
         'https://szkolaalpinizmu.pl/jaskinie/'
+      when :piste_1
+        'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
+      when :piste_2
+        'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
+      when :piste_3
+        'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
+      when :piste_4
+        'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
+      when :piste_5
+        'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
+      when :piste_6
+        'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
       else
         'https://szkolaalpinizmu.pl/o-nas/klub-i-szkola/'
       end
@@ -100,7 +113,7 @@ module Business
       case activity_type.to_sym
       when :winter_abc, :winter_tourist_1, :winter_tourist_2
         'https://panel.kw.krakow.pl/assets/kw-7b39344ecee6060042f85c3875d827e54a32ff867bf12eb62de751249dd20d0c.png'
-      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2
+      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6
         'https://panel.kw.krakow.pl/assets/snw-be2731e417162f8a0868bf081d1971362c768773f10840bdf6d74d9154b4fd4b.png'
       when :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing
         'https://panel.kw.krakow.pl/assets/sww-4cc5e8fb1b78b03696ab49766a499fb36ecfe698641ec3e3a22d3f1f821184ed.png'

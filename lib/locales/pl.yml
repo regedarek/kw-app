@@ -32,6 +32,12 @@ pl:
           winter_tatra_2: Kurs taternicki zimowy II stopnia
           ice_1: Kurs wspinaczki lodowej I stopnia
           ice_2: Kurs wspinaczki lodowej II stopnia
+          piste_1: Doszkalanie na stoku - początkujący (1 dzień)
+          piste_2: Doszkalanie na stoku - zaawansowani (1 dzień)
+          piste_3: Doszkalanie na stoku - początkujący (2 dni)
+          piste_4: Doszkalanie na stoku - zaawansowani (2 dni)
+          piste_5: Szkolenie z jazdy w terenie
+          piste_6: Wyjazd treningowy ze szkoleniem na stoku
   book: Książka
   ready: gotowy
   magazine: Czasopismo
