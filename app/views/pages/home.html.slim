@@ -18,11 +18,11 @@
               = route.name
 
     .large-4.columns
-      = link_to gorskie_dziki_path do
+      = link_to narciarskie_dziki_path do
         h4
-          = "Górskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
+          = "Narciarskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
       table.stack
-        - Activities::Repository.new.fetch_current_month.limit(5).each do |user|
+        - Activities::SkiRepository.new.fetch_current_month.limit(5).each do |user|
           - dbuser = Db::User.find(user.id)
           tr
             td width='46px' = link_to user_path(kw_id: user.kw_id) do

@@ -66,6 +66,9 @@
       = f.check_box :hidden
       = f.label :hidden do
         span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne tylko w na twojej stronie głównej.") Ukryj przejście
+      = f.check_box :training
+      = f.label :training do
+        span data-tooltip="" tabindex="1" title=("Przejście treningowe. Nie będzie brane pod uwagę w klasyfikacji Narciarskie Dziki") Trening
 
   .large-5.columns
     .callout.success

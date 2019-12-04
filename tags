@@ -1508,7 +1508,7 @@ create	app/components/training/supplementary/sign_ups_controller.rb	/^      def 
 create	app/components/user_management/lists_controller.rb	/^    def create$/;"	f	class:UserManagement.ListsController
 create	app/components/user_management/reactivate.rb	/^      def create(form:)$/;"	f	class:UserManagement.Reactivate
 create	app/components/user_management/user_application.rb	/^      def create(form:)$/;"	f	class:UserManagement.UserApplication
-create	app/controllers/activities/mountain_routes_controller.rb	/^    def create$/;"	f	class:Activities
+create	app/controllers/activities/mountain_routes_controller.rb	/^    def create$/;"	f	class:Activities.MountainRoutesController
 create	app/controllers/admin/items_controller.rb	/^    def create$/;"	f	class:Admin.ItemsController
 create	app/controllers/admin/membership_fees_controller.rb	/^    def create$/;"	f	class:Admin.MembershipFeesController
 create	app/controllers/admin/profiles_controller.rb	/^    def create$/;"	f	class:Admin.ProfilesController
@@ -1582,7 +1582,7 @@ destroy	app/components/management/voting/cases_controller.rb	/^      def destroy
 destroy	app/components/settlement/admin/contracts_controller.rb	/^      def destroy$/;"	f	class:Settlement.Admin.ContractsController
 destroy	app/components/training/supplementary/courses_controller.rb	/^      def destroy$/;"	f	class:Training.Supplementary.CoursesController
 destroy	app/components/training/supplementary/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Training.Supplementary.SignUpsController.manually
-destroy	app/controllers/activities/mountain_routes_controller.rb	/^    def destroy$/;"	f	class:Activities
+destroy	app/controllers/activities/mountain_routes_controller.rb	/^    def destroy$/;"	f	class:Activities.MountainRoutesController
 destroy	app/controllers/admin/items_controller.rb	/^    def destroy$/;"	f	class:Admin.ItemsController
 destroy	app/controllers/admin/membership_fees_controller.rb	/^    def destroy$/;"	f	class:Admin.MembershipFeesController
 destroy	app/controllers/admin/profiles_controller.rb	/^    def destroy$/;"	f	class:Admin.ProfilesController
@@ -1617,7 +1617,7 @@ edit	app/components/training/activities/contracts_controller.rb	/^      def edit
 edit	app/components/training/activities/ski_routes_controller.rb	/^      def edit$/;"	f	class:Training.Activities.SkiRoutesController
 edit	app/components/training/supplementary/courses_controller.rb	/^      def edit$/;"	f	class:Training.Supplementary.CoursesController
 edit	app/components/training/supplementary/sign_ups_controller.rb	/^      def edit$/;"	f	class:Training.Supplementary.SignUpsController
-edit	app/controllers/activities/mountain_routes_controller.rb	/^    def edit$/;"	f	class:Activities
+edit	app/controllers/activities/mountain_routes_controller.rb	/^    def edit$/;"	f	class:Activities.MountainRoutesController
 edit	app/controllers/admin/items_controller.rb	/^    def edit$/;"	f	class:Admin.ItemsController
 edit	app/controllers/admin/profiles_controller.rb	/^    def edit$/;"	f	class:Admin.ProfilesController
 edit	app/controllers/admin/reservations_controller.rb	/^    def edit$/;"	f	class:Admin
@@ -1753,7 +1753,7 @@ heart?	app/components/training/activities/hearts.rb	/^      def heart?(route)$/;
 height	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var height = textbox.outerHeight() + parseInt(textbox.css('margin-top'));$/;"	v
 height	vendor/assets/javascripts/foundation-datepicker.js	/^            var height = textbox.outerHeight() + parseInt(textbox.css('margin-top'));$/;"	v
 hide	app/components/management/voting/cases_controller.rb	/^      def hide$/;"	f
-hide	app/controllers/activities/mountain_routes_controller.rb	/^    def hide$/;"	f	class:Activities
+hide	app/controllers/activities/mountain_routes_controller.rb	/^    def hide$/;"	f	class:Activities.MountainRoutesController
 hooks.empty.fire	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^			hooks.empty.fire = function() {$/;"	f
 html	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var html = [];$/;"	v
 html	vendor/assets/javascripts/foundation-datepicker.js	/^            var html = [];$/;"	v
@@ -1991,7 +1991,7 @@ new	app/components/training/activities/ski_routes_controller.rb	/^      def new$
 new	app/components/training/supplementary/courses_controller.rb	/^      def new$/;"	f	class:Training.Supplementary.CoursesController
 new	app/components/training/supplementary/packages_controller.rb	/^      def new$/;"	f	class:Training.Supplementary.PackagesController
 new	app/components/user_management/lists_controller.rb	/^    def new$/;"	f	class:UserManagement.ListsController
-new	app/controllers/activities/mountain_routes_controller.rb	/^    def new$/;"	f	class:Activities
+new	app/controllers/activities/mountain_routes_controller.rb	/^    def new$/;"	f	class:Activities.MountainRoutesController
 new	app/controllers/admin/profiles_controller.rb	/^    def new$/;"	f	class:Admin.ProfilesController
 new	app/controllers/profiles_controller.rb	/^  def new$/;"	f	class:ProfilesController
 next_year	app/components/membership/activement.rb	/^    def next_year$/;"	f	class:Membership.Activement
@@ -2060,7 +2060,7 @@ payment_url	app/services/payments/create_payment.rb	/^    def payment_url$/;"	f	
 payment_year	app/components/membership/activement.rb	/^    def payment_year$/;"	f	class:Membership.Activement
 persons	app/components/events/competitions/sign_ups/limiter.rb	/^        def persons$/;"	f	class:Events.Competitions.SignUps.Limiter
 persons	app/models/db/activities/mountain_route.rb	/^      def persons$/;"	f	class:Db.Activities.MountainRoute
-photos	app/controllers/activities/mountain_routes_controller.rb	/^    def photos$/;"	f	class:Activities
+photos	app/controllers/activities/mountain_routes_controller.rb	/^    def photos$/;"	f	class:Activities.MountainRoutesController
 plastic_cost	app/components/user_management/cost.rb	/^    def plastic_cost$/;"	f	class:UserManagement.Cost
 plastic_for_2019	app/components/membership/fee_form.rb	/^    def plastic_for_2019$/;"	f	class:Membership.FeeForm
 pogodynka	app/components/scrappers/weather_storage.rb	/^    def pogodynka$/;"	f	class:Scrappers.WeatherStorage
@@ -2115,7 +2115,7 @@ rneedsContext	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25
 rodo_name	app/models/db/user.rb	/^  def rodo_name$/;"	f	class:Db
 role?	app/models/ability.rb	/^  def role?(name)$/;"	f	class:Ability
 root	spec/rails_mock.rb	/^    def self.root$/;"	F	class:Rails
-route_params	app/controllers/activities/mountain_routes_controller.rb	/^    def route_params$/;"	f	class:Activities
+route_params	app/controllers/activities/mountain_routes_controller.rb	/^    def route_params$/;"	f	class:Activities.MountainRoutesController
 route_type	app/components/activities/ski_repository.rb	/^    def route_type$/;"	f	class:Activities.SkiRepository
 routes	app/components/blog/dashboard.rb	/^    def routes$/;"	f	class:Blog.Dashboard
 rreturn	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rreturn = \/\\r\/g,$/;"	v
@@ -2162,7 +2162,7 @@ show	app/components/photo_competition/requests_controller.rb	/^    def show$/;"	
 show	app/components/settlement/admin/contracts_controller.rb	/^      def show$/;"	f	class:Settlement.Admin.ContractsController
 show	app/components/training/supplementary/courses_controller.rb	/^      def show$/;"	f	class:Training.Supplementary.CoursesController
 show	app/components/visiting_card/profiles_controller.rb	/^    def show$/;"	f	class:VisitingCard.ProfilesController
-show	app/controllers/activities/mountain_routes_controller.rb	/^    def show$/;"	f	class:Activities
+show	app/controllers/activities/mountain_routes_controller.rb	/^    def show$/;"	f	class:Activities.MountainRoutesController
 show	app/controllers/admin/items_controller.rb	/^    def show$/;"	f	class:Admin.ItemsController
 show	app/controllers/admin/profiles_controller.rb	/^    def show$/;"	f	class:Admin.ProfilesController
 show	app/controllers/events_controller.rb	/^  def show$/;"	f	class:EventsController
@@ -2290,7 +2290,7 @@ update	app/components/training/activities/repository.rb	/^      def update(id:, 
 update	app/components/training/activities/ski_routes_controller.rb	/^      def update$/;"	f	class:Training.Activities.SkiRoutesController
 update	app/components/training/supplementary/courses_controller.rb	/^      def update$/;"	f	class:Training.Supplementary.CoursesController
 update	app/components/training/supplementary/sign_ups_controller.rb	/^      def update$/;"	f	class:Training.Supplementary.SignUpsController
-update	app/controllers/activities/mountain_routes_controller.rb	/^    def update$/;"	f	class:Activities
+update	app/controllers/activities/mountain_routes_controller.rb	/^    def update$/;"	f	class:Activities.MountainRoutesController
 update	app/controllers/admin/items_controller.rb	/^    def update$/;"	f	class:Admin.ItemsController
 update	app/controllers/admin/profiles_controller.rb	/^    def update$/;"	f	class:Admin.ProfilesController
 update	app/controllers/admin/reservations_controller.rb	/^    def update$/;"	f	class:Admin
