@@ -81,7 +81,7 @@
     .top-bar-right
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         - unless request.path == '/narciarskie-dziki' || request.path == '/gorskie-dziki'
-          li= link_to 'Tabela dzików', gorskie_dziki_path, class: 'button alert'
+          li= link_to 'Tabela dzików', narciarskie_dziki_path, class: 'button alert'
         - if user_signed_in?
           - if !current_user.admin? || !current_user.roles.include?('office')
             li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button secondary'

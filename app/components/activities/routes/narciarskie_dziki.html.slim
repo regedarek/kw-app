@@ -107,18 +107,10 @@
                   td.text-center = user.max_mountain_routes_hearts_count
 
         .large-4.columns
-          h5 #exploratortatr
-          table.stack
-            thead
-              tr
-                th
-                th kto?
-                th width='15%' ile?
-            tbody
 
 .row
   .large-12.columns
-    h5 = "Tabela sezonu #{Activities::SkiRepository.new.start_date.year}"
+    h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
     table.stack
       thead
         tr
@@ -126,7 +118,10 @@
           th width='25px'
           th width='250px' Kto?
           th.large-text-left Ostatnie przejście
-          th.large-text-right width='50px' Przewspinane [metry]
+          th.large-text-right width='220px'
+            | Dzikometry
+            br
+            | [metry + kontrakty]
 
       tbody
         - i = 0
