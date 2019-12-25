@@ -1,9 +1,15 @@
 //= require jquery
+//= require debounce
 
 $( document ).ready(function() {
     var API_URL = 'http://panel.kw.krakow.pl/api/pogodynka'
     var DAYS_COVERED = 5
     var scrapperData = {}
+
+    function onResize(callback) {
+        var callbackFn = debounce(callback, 250);
+        $(window).resize(callbackFn);
+    }
 
     function compare(a, b) {
         if (!a && !b) {
@@ -53,7 +59,6 @@ $( document ).ready(function() {
         data.sort(compare)
         var dataToShow = data.slice(-DAYS_COVERED)
         
-        //temp
         renderTemp(dataToShow);
         renderSnow(dataToShow);
     }
@@ -68,15 +73,17 @@ $( document ).ready(function() {
             return [new Date(dataPoint.created_at), dataPoint.temp]
         }));
 
-        var chart = new google.visualization.LineChart(document.getElementById('temp'));
+        var chart = new google.visualization.ScatterChart(document.getElementById('temp'));
         var options = {
             title: 'Temperatura',
-            curveType: 'function',
-            legend: { position: 'bottom' }
+            hAxis: { format: 'd/MM' },
+            legend: {position: 'none'}
           };
   
-   
         chart.draw(gdata, options);
+        onResize(function() {
+            chart.draw(gdata, options);
+        });
     }
 
     function renderSnow(data) {
@@ -91,14 +98,18 @@ $( document ).ready(function() {
             return [new Date(dataPoint.created_at), dataPoint.all_snow, dataPoint.snow_type_text, dataPoint.snow_type_text]
         }));
 
-        var chart = new google.charts.Bar(document.getElementById('snow'));
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('snow'));
         var options = {
             title: 'Śnieg',
-            legend: { position: 'bottom' }
+            vAxis: {title: 'Całkowita grubość pokrywy śniegu cm'},
+            hAxis: { format: 'd/MM' },
+            legend: {position: 'none'}
           };
   
-   
         chart.draw(gdata, options);
+        onResize(function() {
+            chart.draw(gdata, options);
+        });
     }
 
     function init() {
@@ -107,6 +118,6 @@ $( document ).ready(function() {
     }
 
 
-    google.charts.load('current', {'packages':['corechart', 'bar']});
+    google.charts.load('current', {'packages':['corechart', 'bar', ]});
     google.charts.setOnLoadCallback(init);
 });
