@@ -38,7 +38,8 @@ $( document ).ready(function() {
                 alert( "Błąd przy pobieraniu danych " );
             })
             .done(function(response) {
-                scrapperData = response
+                scrapperData = response;
+                hideLoadingSpinner();
             })
     }
 
@@ -110,6 +111,10 @@ $( document ).ready(function() {
         onResize(function() {
             chart.draw(gdata, options);
         });
+    }
+
+    function hideLoadingSpinner() {
+        $('#loading-spinner').hide();
     }
 
     function init() {
