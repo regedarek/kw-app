@@ -125,7 +125,7 @@
 
       tbody
         - i = 0
-        - @season_leaders.sort {|a,b| a.total_mountain_routes_length + a.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) } <=> b.total_mountain_routes_length + b.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }}.each do |user|
+        - @season_leaders.sort {|a,b| a.total_mountain_routes_length + a.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) } <=> b.total_mountain_routes_length + b.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }}.reverse.each do |user|
           tr
             td.text-center = i + 1
             td width='45px' = link_to user_path(kw_id: user.kw_id) do
