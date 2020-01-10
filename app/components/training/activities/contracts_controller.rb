@@ -7,7 +7,7 @@ module Training
       def index
         authorize! :read, Training::Activities::ContractRecord
 
-        @contracts = Training::Activities::ContractRecord.all
+        @contracts = Training::Activities::ContractRecord.order(:id)
       end
 
       def new

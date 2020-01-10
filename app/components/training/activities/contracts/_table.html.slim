@@ -16,4 +16,7 @@ table.stack
         td.text-center.large-text-left = sanitize contract.description
         td.text-center.large-text-left = contract.score
         - if can? :manage, Training::Activities::ContractRecord
-          td.text-center.large-text-left = link_to 'Edytuj', edit_activities_contract_path(contract.id)
+          td.text-center.large-text-left
+            = link_to edit_activities_contract_path(contract.id), style: 'padding: 5px' do
+              i.fi.fi-page-edit
+
