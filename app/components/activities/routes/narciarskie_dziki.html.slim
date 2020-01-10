@@ -7,24 +7,23 @@
     .callout.primary
       .row
         .large-4.columns
-          - if Date.today.month - 1 > 12
-            h5 = I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}")
-            table.stack
-              thead
+          h5 = I18n.t('date.month_names')[12] + (" #{Date.today.year - 1}")
+          table.stack
+            thead
+              tr
+                th
+                th kto?
+                th width='15%' metrów
+            tbody
+              - @prev_month_leaders.first(5).each do |user|
                 tr
-                  th
-                  th kto?
-                  th width='15%' metrów
-              tbody
-                - @prev_month_leaders.first(5).each do |user|
-                  tr
-                    td width='45px' = link_to user_path(kw_id: user.kw_id) do
-                      - if user.avatar.present?
-                        = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-                      - else
-                        = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-                    td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-                    td.text-center = user.total_mountain_routes_length
+                  td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                    - if user.avatar.present?
+                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                    - else
+                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                  td.text-center = user.total_mountain_routes_length
 
         .large-4.columns
           h5 = I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}")
