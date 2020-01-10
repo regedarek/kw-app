@@ -63,48 +63,23 @@
                   td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                   td.text-center = user.total_mountain_routes_length
 
-    h4 Pozostałe klasyfikacje
-    .callout.secondary
-      .row
-        .large-4.columns
-          h5 najlepsze przejścia sezonu
-          table.stack
-            thead
-              tr
-                th
-                th kto?
-                th width='15%' bicków
-            tbody
-              - @best_of_season.first(5).each do |user|
-                tr
-                  td width='45px' = link_to user_path(kw_id: user.kw_id) do
-                    - if user.avatar.present?
-                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-                    - else
-                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-                  td.text-center = user.total_mountain_routes_hearts_count
-
-        .large-4.columns
-          h5 najlepsze przejście sezonu
-          table.stack
-            thead
-              tr
-                th
-                th kto?
-                th width='15%' ile?
-            tbody
-              - @best_route_of_season.first(5).each do |user|
-                tr
-                  td width='45px' = link_to activities_mountain_route_path(user.mountain_routes.select('mountain_routes.id, mountain_routes.slug, Max(hearts_count) as max_heart_count').group(:id).order('max_heart_count DESC').first.slug) do
-                    - if user.avatar.present?
-                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-                    - else
-                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-                  td = link_to Db::User.find(user.id).display_name, activities_mountain_route_path(user.mountain_routes.select('mountain_routes.id, mountain_routes.slug, Max(hearts_count) as max_heart_count').group(:id).order('max_heart_count DESC').first.slug)
-                  td.text-center = user.max_mountain_routes_hearts_count
-
-        .large-4.columns
+.row
+  .large-12.columns
+    h5 Ostatnie zrealizowane kontrakty
+    table.stack
+      thead
+        tr
+          th width='300px' Kontrakt
+          th Przejście
+          th width='200px' Kiedy?
+          th width='70px' Punkty
+      tbody
+        - @last_contracts.each do |route_contract|
+          tr
+            td = route_contract.contract.name
+            td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
+            td = route_contract.created_at.to_date
+            td = route_contract.contract.score
 
 .row
   .large-12.columns

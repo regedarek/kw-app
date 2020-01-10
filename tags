@@ -1935,6 +1935,7 @@ jQuery.valHooks.button.set	public/assets/application-adb37b88852cd8099abe934018f
 kasprowy_uri	app/components/scrappers/meteoblue.rb	/^    def kasprowy_uri$/;"	f	class:Scrappers.Meteoblue
 kinds	app/components/training/supplementary/course_record.rb	/^      def kinds$/;"	f	class:Training.Supplementary.CourseRecord
 kw_id_accepted	app/models/db/profile.rb	/^    def kw_id_accepted$/;"	f	class:Db.Profile
+last_contracts	app/components/activities/ski_repository.rb	/^    def last_contracts$/;"	f	class:Activities.SkiRepository
 last_ski_route	app/components/blog/author.rb	/^      def last_ski_route(user)$/;"	f	class:Blog.Author
 latest_degree	app/components/blog/dashboard.rb	/^    def latest_degree$/;"	f	class:Blog.Dashboard
 letterSpacing	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		letterSpacing: "0",$/;"	p

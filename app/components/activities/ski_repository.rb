@@ -1,5 +1,9 @@
 module Activities
   class SkiRepository
+    def last_contracts
+      Training::Activities::RouteContractsRecord.includes(:contract, :route).order(created_at: :desc).limit(5)
+    end
+
     def fetch_prev_month
       range_climbing_date = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
       range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 3.days)

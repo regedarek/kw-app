@@ -22,6 +22,7 @@ module Activities
       @prev_month_leaders = ski_repository.fetch_prev_month
       @current_month_leaders = ski_repository.fetch_current_month
       @season_leaders = ski_repository.fetch_season
+      @last_contracts = ski_repository.last_contracts
       @best_of_season = ski_repository.best_of_season
       @best_route_of_season = ski_repository.best_route_of_season
     end
