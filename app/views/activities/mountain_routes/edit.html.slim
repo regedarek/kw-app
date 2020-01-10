@@ -6,8 +6,11 @@
   = render 'form', f: f
 
   .row
-    .large-6.columns
+    .large-4.columns
       = f.submit t('.submit'), class: 'button expanded large success'
 
-    .large-6.columns
+    .large-4.columns
+      = link_to 'wróć do przejścia', activities_mountain_route_path(@route.id), class: 'button expanded large secondary'
+
+    .large-4.columns
       = link_to 'wróć do poprzedniej strony', activities_mountain_routes_path, class: 'button expanded large warning'

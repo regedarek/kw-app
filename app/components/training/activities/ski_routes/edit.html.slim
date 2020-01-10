@@ -9,4 +9,6 @@
     .large-4.columns
       = f.submit 'Zaktualizuj', class: 'button expanded large success'
     .large-4.columns
-      = link_to t('.back'), :back, class: 'secondary button large expanded'
+      = link_to 'wróć do przejścia', activities_mountain_route_path(@ski_route.id), class: 'button expanded large secondary'
+    .large-4.columns
+      = link_to 'powrót do przejść', activities_mountain_routes_path, class: 'secondary button large expanded'

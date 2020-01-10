@@ -1,8 +1,3 @@
-- if @route.length.present?
-  .large-12.columns
-    b przewyższenie tury w metrach: 
-    = @route.length
-
 - if can? :see_user_name, current_user
   .large-12.columns
     b skład zespołu: 
@@ -19,9 +14,23 @@
     - @route.rating.times do
       i.fi-star
 
-- if @route.gps_tracks.any?
+- if @route.contracts.present? || @route.length.present?
   .large-12.columns
-    b tracki:
+    - if @route.length.present?
+      b przewyższenie tury w metrach: 
+      = @route.length
+      br
+    - if @route.contracts.present?
+      b bonus za zrealizowane kontrakty: 
+      = @route.contracts.sum(:score)
+      br
+    - if @route.contracts.present? || @route.length.present?
+      b suma: 
+      = @route.contracts.sum(:score) + @route.length.to_i
+
+- if @route.contracts.any?
+  .large-12.columns
+    b kontrakty:
     ul
-      - @route.gps_tracks.each do |track|
-        li= link_to File.basename(track.path), track.url
+      - @route.contracts.each do |contract|
+        li= contract.name
