@@ -116,14 +116,16 @@
           th width='25px'
           th width='250px' Kto?
           th.large-text-left Ostatnie przejście
-          th.large-text-right width='220px'
-            | Dzikometry
-            br
-            | [metry + kontrakty]
+          th.large-text-right width='120px'
+            | Kontrakty
+          th.large-text-right width='120px'
+            | Metry
+          th.large-text-right width='120px'
+            | Suma
 
       tbody
         - i = 0
-        - @season_leaders.each do |user|
+        - @season_leaders.sort {|a,b| a.total_mountain_routes_length + a.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) } <=> b.total_mountain_routes_length + b.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }}.each do |user|
           tr
             td.text-center = i + 1
             td width='45px' = link_to user_path(kw_id: user.kw_id) do
@@ -135,5 +137,7 @@
             td.large-text-left
               - if user.mountain_routes.any?
                 = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
+            td.text-center.large-text-right = user.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }
             td.text-center.large-text-right = user.total_mountain_routes_length
+            td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }
           - i += 1
