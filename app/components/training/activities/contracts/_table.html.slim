@@ -1,7 +1,6 @@
 table.stack
   thead
     tr
-      th.text-center.large-text-left width='5%' ID
       th.text-center.large-text-left width='25%' Nazwa
       th.text-center.large-text-left width='55%' Opis
       th.text-center.large-text-left width='10%' Punkty
@@ -11,7 +10,6 @@ table.stack
   tbody
     - contracts.each do |contract|
       tr
-        td.text-center.large-text-left = contract.id
         td.text-center.large-text-left = contract.name
         td.text-center.large-text-left = sanitize contract.description
         td.text-center.large-text-left = contract.score
