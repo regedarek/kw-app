@@ -560,6 +560,7 @@ FormObject	lib/form_object.rb	/^class FormObject$/;"	c
 FromCsv	app/components/importing/from_csv.rb	/^  class FromCsv$/;"	c	class:Importing
 GetOperationRequest	app/services/payments/dotpay/get_operation_request.rb	/^    class GetOperationRequest$/;"	c	class:Payments.Dotpay
 GpsTrackUploader	app/components/training/activities/gps_track_uploader.rb	/^    class GpsTrackUploader < CarrierWave::Uploader::Base$/;"	c	class:Training.Activities
+GraphsController	app/components/scrappers/graphs_controller.rb	/^  class GraphsController < ApplicationController$/;"	c	class:Scrappers
 Guards	app/components/guards/date.rb	/^module Guards$/;"	m
 Heart	app/models/db/heart.rb	/^  class Heart < ActiveRecord::Base$/;"	c	class:Db
 Hearts	app/components/training/activities/hearts.rb	/^    class Hearts$/;"	c	class:Training.Activities
@@ -794,6 +795,7 @@ RouteContractsRecord	app/components/training/activities/route_contracts_record.r
 RoutesController	app/components/activities/routes_controller.rb	/^  class RoutesController < ApplicationController$/;"	c	class:Activities
 Scrappers	app/components/scrappers/api/meteoblue_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/api/pogodynka_controller.rb	/^module Scrappers$/;"	m
+Scrappers	app/components/scrappers/graphs_controller.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/image_uploader.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/meteoblue.rb	/^module Scrappers$/;"	m
 Scrappers	app/components/scrappers/meteoblue_record.rb	/^module Scrappers$/;"	m
@@ -1556,6 +1558,8 @@ dataAttr	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7
 dataType	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		var dataType,$/;"	v
 dateChanged	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var dateChanged = false,$/;"	v
 dateChanged	vendor/assets/javascripts/foundation-datepicker.js	/^            var dateChanged = false,$/;"	v
+debounce	app/assets/javascripts/debounce.js	/^function debounce(func, wait, immediate) {$/;"	f
+debounce.later	app/assets/javascripts/debounce.js	/^		var later = function() {$/;"	f
 default	app/models/ability.rb	/^  def default$/;"	f	class:Ability
 defaultDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function defaultDisplay( nodeName ) {$/;"	f
 defaultPrefilter	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function defaultPrefilter( elem, props, opts ) {$/;"	f
@@ -1792,6 +1796,7 @@ index	app/components/notification_center/notifications_controller.rb	/^    def i
 index	app/components/photo_competition/admin/editions_controller.rb	/^      def index$/;"	f	class:PhotoCompetition.Admin.EditionsController
 index	app/components/scrappers/api/meteoblue_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.MeteoblueController
 index	app/components/scrappers/api/pogodynka_controller.rb	/^      def index$/;"	f	class:Scrappers.Api.PogodynkaController
+index	app/components/scrappers/graphs_controller.rb	/^    def index$/;"	f	class:Scrappers.GraphsController
 index	app/components/scrappers/scrappers_controller.rb	/^    def index$/;"	f	class:Scrappers.ScrappersController
 index	app/components/settlement/admin/contracts_controller.rb	/^      def index$/;"	f	class:Settlement.Admin.ContractsController
 index	app/components/training/activities/api/mountain_route_points_controller.rb	/^        def index$/;"	f	class:Training.Activities.Api.MountainRoutePointsController

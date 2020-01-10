@@ -1,6 +1,3 @@
-//= require jquery
-//= require debounce
-
 $( document ).ready(function() {
     var API_URL = 'http://panel.kw.krakow.pl/api/pogodynka'
     var DAYS_COVERED = 5
