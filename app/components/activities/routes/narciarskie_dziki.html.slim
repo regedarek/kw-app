@@ -102,7 +102,7 @@
 
       tbody
         - i = 0
-        - @season_leaders.sort {|a,b| a.total_mountain_routes_length + a.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) } <=> b.total_mountain_routes_length + b.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }}.reverse.each do |user|
+        - @season_leaders.sort {|a,b| a.total_mountain_routes_length + a.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score } <=> b.total_mountain_routes_length + b.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score  }}.reverse.each do |user|
           tr
             td.text-center = i + 1
             td width='45px' = link_to user_path(kw_id: user.kw_id) do
@@ -116,5 +116,4 @@
                 = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
             td.text-center.large-text-right = user.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }
             td.text-center.large-text-right = user.total_mountain_routes_length
-            td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }
-          - i += 1
+            td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score  }
