@@ -33,4 +33,7 @@
     b kontrakty:
     ul
       - @route.contracts.each do |contract|
-        li= contract.name
+
+        li
+          span data-tooltip='' tabindex="1" title="#{contract.description}" data-allow-html="true" class='has-tip'
+            = contract.name
