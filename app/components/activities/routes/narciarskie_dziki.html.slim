@@ -114,6 +114,6 @@
             td.large-text-left
               - if user.mountain_routes.any?
                 = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
-            td.text-center.large-text-right = user.mountain_routes.inject(0) { |sum, route| sum + route.contracts.sum(:score) }
+            td.text-center.large-text-right = user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
             td.text-center.large-text-right = user.total_mountain_routes_length
-            td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score  }
+            td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
