@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    var API_URL = 'https://panel.kw.krakow.pl/api/pogodynka'
+  var API_URL = '/api/pogodynka'
     var DAYS_COVERED = 5
     var scrapperData = {}
 
