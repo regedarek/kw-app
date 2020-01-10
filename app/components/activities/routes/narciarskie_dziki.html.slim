@@ -117,3 +117,4 @@
             td.text-center.large-text-right = user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
             td.text-center.large-text-right = user.total_mountain_routes_length
             td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
+            - i += 1
