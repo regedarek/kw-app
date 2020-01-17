@@ -21,8 +21,14 @@ module Events
 
       def create
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
+        form = if @competition.single?
+                 Events::Competitions::SignUps::SignUpSingleForm.new
+               else
+                 Events::Competitions::SignUps::SignUpTeamForm.new
+               end
 
-        either(create_record) do |result|
+
+        either(create_record(form)) do |result|
           result.success do
             @sign_up = Events::Db::SignUpRecord.new(sign_up_params)
             redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: t('.success') }
@@ -82,10 +88,10 @@ module Events
 
       private
 
-      def create_record
+      def create_record(form)
         Events::Competitions::SignUps::Create.new(
           Events::Competitions::Repository.new,
-          Events::Competitions::SignUps::CreateForm.new
+          form
         ).call(competition_id: params[:competition_id], raw_inputs: params[:sign_up])
       end
 

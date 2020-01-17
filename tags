@@ -351,6 +351,7 @@ Competitions	app/components/events/competitions/sign_ups/create.rb	/^  module Co
 Competitions	app/components/events/competitions/sign_ups/create_form.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/destroy.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/limiter.rb	/^  module Competitions$/;"	m	class:Events
+Competitions	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/update.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups_controller.rb	/^  module Competitions$/;"	m	class:Events
@@ -534,6 +535,7 @@ Events	app/components/events/competitions/sign_ups/create.rb	/^module Events$/;"
 Events	app/components/events/competitions/sign_ups/create_form.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/destroy.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/limiter.rb	/^module Events$/;"	m
+Events	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/update.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups_controller.rb	/^module Events$/;"	m
@@ -838,10 +840,12 @@ SignUpMailer	app/components/events/competitions/sign_up_mailer.rb	/^    class Si
 SignUpMailer	app/components/training/supplementary/sign_up_mailer.rb	/^    class SignUpMailer < ApplicationMailer$/;"	c	class:Training.Supplementary
 SignUpRecord	app/components/events/db/sign_up_record.rb	/^    class SignUpRecord < ActiveRecord::Base$/;"	c	class:Events.Db
 SignUpRecord	app/components/training/supplementary/sign_up_record.rb	/^    class SignUpRecord < ActiveRecord::Base$/;"	c	class:Training.Supplementary
+SignUpSingleForm	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^      class SignUpSingleForm < Dry::Validation::Schema$/;"	c	class:Events.Competitions.SignUps
 SignUps	app/components/events/competitions/sign_ups/create.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/create_form.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/destroy.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/limiter.rb	/^    module SignUps$/;"	m	class:Events.Competitions
+SignUps	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/update.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUpsController	app/components/events/competitions/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Events.Competitions
@@ -951,6 +955,7 @@ Tween.run	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d
 Types	app/components/blog/author.rb	/^module Types$/;"	m
 Types	app/components/events/competition.rb	/^module Types$/;"	m
 Types	app/components/events/competitions/sign_ups/create_form.rb	/^module Types$/;"	m
+Types	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^module Types$/;"	m
 Types	app/components/events/sign_up.rb	/^module Types$/;"	m
 Types	app/components/notification_center/notification.rb	/^module Types$/;"	m
 Types	app/components/scrappers/weather.rb	/^module Types$/;"	m
@@ -1540,7 +1545,7 @@ create_notification	app/components/messaging/comments_controller.rb	/^    def cr
 create_package	app/components/training/supplementary/repository.rb	/^      def create_package(form_outputs:)$/;"	f
 create_record	app/components/charity/donations_controller.rb	/^    def create_record$/;"	f	class:Charity.DonationsController
 create_record	app/components/events/admin/competitions_controller.rb	/^      def create_record$/;"	f	class:Events.Admin.CompetitionsController
-create_record	app/components/events/competitions/sign_ups_controller.rb	/^      def create_record$/;"	f	class:Events.Competitions
+create_record	app/components/events/competitions/sign_ups_controller.rb	/^      def create_record(form)$/;"	f	class:Events
 create_record	app/components/management/projects_controller.rb	/^    def create_record$/;"	f	class:Management.ProjectsController
 create_record	app/components/management/voting/cases_controller.rb	/^      def create_record$/;"	f
 create_record	app/components/settlement/admin/contractors_controller.rb	/^      def create_record$/;"	f	class:Settlement.Admin.ContractorsController
@@ -1580,7 +1585,7 @@ destroy	app/components/admin/items.rb	/^    def self.destroy(item_id)$/;"	F	clas
 destroy	app/components/admin/membership_fees.rb	/^    def self.destroy(payment_id)$/;"	F	class:Admin.MembershipFees
 destroy	app/components/admin/reservations.rb	/^    def self.destroy(reservation_id)$/;"	F	class:Admin.Reservations
 destroy	app/components/business/courses_controller.rb	/^    def destroy$/;"	f	class:Business.CoursesController
-destroy	app/components/events/competitions/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Events.Competitions
+destroy	app/components/events/competitions/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Events
 destroy	app/components/management/projects_controller.rb	/^    def destroy$/;"	f	class:Management.ProjectsController
 destroy	app/components/management/voting/cases_controller.rb	/^      def destroy$/;"	f
 destroy	app/components/settlement/admin/contracts_controller.rb	/^      def destroy$/;"	f	class:Settlement.Admin.ContractsController
@@ -1611,7 +1616,7 @@ dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek(
 edit	app/components/activities/competitions_controller.rb	/^    def edit$/;"	f	class:Activities.CompetitionsController
 edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Business.CoursesController
 edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"	f	class:Events.Admin.CompetitionsController
-edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events.Competitions
+edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events
 edit	app/components/library/items_controller.rb	/^    def edit$/;"	f	class:Library.ItemsController
 edit	app/components/management/projects_controller.rb	/^    def edit$/;"	f	class:Management.ProjectsController
 edit	app/components/management/snw/snw_applies_controller.rb	/^      def edit$/;"	f	class:Management.Snw.SnwAppliesController
@@ -2141,7 +2146,7 @@ secondary_management	app/models/ability.rb	/^  def secondary_management$/;"	f	cl
 section_types	app/components/user_management/profile_list_record.rb	/^    def section_types$/;"	f	class:UserManagement.ProfileListRecord
 secure_token	app/components/photo_competition/file_uploader.rb	/^    def secure_token$/;"	f	class:PhotoCompetition.FileUploader
 seed!	lib/seeding/seeder.rb	/^      def seed!$/;"	f	class:Seeding.Seeder
-send_email	app/components/events/competitions/sign_ups_controller.rb	/^      def send_email$/;"	f	class:Events.Competitions
+send_email	app/components/events/competitions/sign_ups_controller.rb	/^      def send_email$/;"	f	class:Events
 send_email	app/components/training/supplementary/sign_ups_controller.rb	/^      def send_email$/;"	f	class:Training.Supplementary.SignUpsController.manually
 send_email	app/controllers/admin/profiles_controller.rb	/^    def send_email$/;"	f	class:Admin.ProfilesController
 send_reminders	app/components/admin/reservation_reminder.rb	/^    def self.send_reminders$/;"	F	class:Admin.ReservationReminder
@@ -2183,7 +2188,7 @@ sign_up	app/components/events/competitions/sign_up_mailer.rb	/^      def sign_up
 sign_up	app/components/training/supplementary/sign_up_mailer.rb	/^      def sign_up(sign_up_id)$/;"	f	class:Training.Supplementary.SignUpMailer
 sign_up!	app/components/training/supplementary/repository.rb	/^      def sign_up!(name:, email:, user_id:, course_id:, question:)$/;"	f
 sign_up_accept_first	app/components/events/competitions/sign_up_mailer.rb	/^      def sign_up_accept_first(sign_up_id)$/;"	f	class:Events.Competitions.SignUpMailer
-sign_up_params	app/components/events/competitions/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Events.Competitions
+sign_up_params	app/components/events/competitions/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Events
 sign_up_params	app/components/training/supplementary/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Training.Supplementary.SignUpsController.manually
 sign_ups	app/components/training/supplementary/course.rb	/^      def sign_ups$/;"	f	class:Training.Supplementary.Course
 sign_ups_reached?	app/components/training/supplementary/limiter.rb	/^      def sign_ups_reached?$/;"	f	class:Training.Supplementary.Limiter
@@ -2197,7 +2202,7 @@ slug_candidates	app/components/business/course_record.rb	/^    def slug_candidat
 slug_candidates	app/components/training/supplementary/course_record.rb	/^      def slug_candidates$/;"	f	class:Training.Supplementary.CourseRecord
 slug_candidates	app/models/db/activities/mountain_route.rb	/^      def slug_candidates$/;"	f	class:Db.Activities.MountainRoute
 slug_candidates	app/models/db/user.rb	/^  def slug_candidates$/;"	f	class:Db
-slug_params	app/components/events/competitions/sign_ups_controller.rb	/^      def slug_params$/;"	f	class:Events.Competitions
+slug_params	app/components/events/competitions/sign_ups_controller.rb	/^      def slug_params$/;"	f	class:Events
 sport	app/components/blog/authors.rb	/^    def sport$/;"	f	class:Blog.Authors.fetch
 start_date	app/components/activities/repository.rb	/^    def start_date$/;"	f	class:Activities.Repository
 start_date	app/components/activities/ski_repository.rb	/^    def start_date$/;"	f	class:Activities.SkiRepository
@@ -2284,7 +2289,7 @@ update	app/components/admin/reservations.rb	/^    def update(reservation_id)$/;"
 update	app/components/business/courses_controller.rb	/^    def update$/;"	f	class:Business.CoursesController
 update	app/components/events/admin/competitions_controller.rb	/^      def update$/;"	f	class:Events.Admin.CompetitionsController
 update	app/components/events/competitions/repository.rb	/^      def update(id:, form_outputs:)$/;"	f	class:Events.Competitions.Repository
-update	app/components/events/competitions/sign_ups_controller.rb	/^      def update$/;"	f	class:Events.Competitions
+update	app/components/events/competitions/sign_ups_controller.rb	/^      def update$/;"	f	class:Events
 update	app/components/library/items_controller.rb	/^    def update$/;"	f	class:Library.ItemsController
 update	app/components/management/projects_controller.rb	/^    def update$/;"	f	class:Management.ProjectsController
 update	app/components/management/snw/snw_applies_controller.rb	/^      def update$/;"	f	class:Management.Snw.SnwAppliesController
@@ -2306,7 +2311,7 @@ update_items	app/components/reservations/items_controller.rb	/^    def update_it
 update_items_params	app/components/reservations/items_controller.rb	/^    def update_items_params$/;"	f	class:Reservations.ItemsController
 update_owner	app/controllers/admin/items_controller.rb	/^    def update_owner$/;"	f	class:Admin.ItemsController
 update_record	app/components/events/admin/competitions_controller.rb	/^      def update_record(id:)$/;"	f	class:Events.Admin.CompetitionsController
-update_record	app/components/events/competitions/sign_ups_controller.rb	/^      def update_record$/;"	f	class:Events.Competitions
+update_record	app/components/events/competitions/sign_ups_controller.rb	/^      def update_record$/;"	f	class:Events
 update_record	app/components/management/projects_controller.rb	/^    def update_record$/;"	f	class:Management.ProjectsController
 update_record	app/components/management/voting/cases_controller.rb	/^      def update_record$/;"	f
 update_record	app/components/settlement/admin/contracts_controller.rb	/^      def update_record$/;"	f	class:Settlement.Admin.ContractsController

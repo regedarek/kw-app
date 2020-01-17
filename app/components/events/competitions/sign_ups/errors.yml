@@ -2,6 +2,7 @@ en:
   errors:
     tshirt_size_1_presence: Tshirt size 1 has to be filled
     tshirt_size_2_presence: Tshirt size 2 has to be filled
+    terms_of_service_true: Musisz zaakceptować regulamin!
     rules:
       team_name:
         filled?: Team name has to be filled
@@ -103,6 +104,7 @@ pl:
   errors:
     tshirt_size_1_presence: Wybierz rozmiar koszulki 1
     tshirt_size_2_presence: Wybierz rozmiar koszulki 2
+    terms_of_service_true: Musisz zaakceptować regulamin!
     active_kw_id_1: Musisz podać numer legitymacji klubu 1 z opłaconą składką
     active_kw_id_2: Musisz podać numer legitymacji klubu 2 z opłaconą składką
     remarks:

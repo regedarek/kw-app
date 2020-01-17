@@ -6,7 +6,7 @@ module Events
 
         def initialize(competitions_repository, create_sign_up_form)
           @competitions_repository = competitions_repository
-          @create_sign_up_form = Events::Competitions::SignUps::SignUpTeamForm
+          @create_sign_up_form = create_sign_up_form
         end
 
         def call(competition_id:, raw_inputs:)
