@@ -27,19 +27,11 @@ module Events
          required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1).filled
          required(:competition_package_type_1_id).filled
-         optional(:participant_kw_id_1).maybe
+         optional(:participant_kw_id_1)
          required(:terms_of_service).filled
 
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)
-         end
-
-         validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
-           if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
-             ::Membership::Activement.new(user: ::Db::User.find_by(kw_id: kw_id)).active?
-           else
-             true
-           end
          end
         end
       end
