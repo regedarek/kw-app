@@ -35,6 +35,7 @@ end
 task :destroy_outdated_profiles => :environment do
   outdated_profiles = Membership::FeesRepository.new.find_outdated_not_prepaided_profiles
   outdated_profiles.map(&:destroy)
+  Net::HTTP.get(URI('https://hc-ping.com/5ddd7a2e-6daa-4a6f-bd99-c97c02d26160'))
 end
 
 task :destroy_expired_events_sign_ups => :environment do
