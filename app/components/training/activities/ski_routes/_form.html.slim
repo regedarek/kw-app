@@ -45,7 +45,7 @@
           = f.label :contract_ids, 'ukończony kontrakt'
           = f.select :contract_ids,
             Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
-            { },
+            { include_blank: true},
             { class: 'js-select-multiple' }
         .large-4.columns
           br
