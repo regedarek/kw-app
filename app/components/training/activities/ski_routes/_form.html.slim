@@ -42,7 +42,7 @@
     .callout
       .row
         .large-8.columns
-          = f.label :contract_ids, 'kontrakty'
+          = f.label :contract_ids, 'ukończony kontrakt'
           = f.select :contract_ids,
             Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
             { },
