@@ -46,7 +46,7 @@
           = f.select :contract_ids,
             Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
             { },
-            { class: 'js-select-multiple', multiple: true }
+            { class: 'js-select-multiple' }
         .large-4.columns
           br
           = link_to 'Lista konktraktów', kontrakty_path, class: 'button expanded', target: :_blank
