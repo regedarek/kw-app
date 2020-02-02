@@ -52,9 +52,8 @@ module Training
           Training::Supplementary::CourseRecord.kinds.keys
         end
         Training::Supplementary::CourseRecord
-          .where(state: [:draft, :cancelled, :archived])
           .where(category: categories, kind: kinds)
-          .order(start_date: :desc, application_date: :desc).collect do |record|
+          .order(created_at: :desc, start_date: :desc, application_date: :desc).collect do |record|
             Training::Supplementary::Course.from_record(record)
           end
       end

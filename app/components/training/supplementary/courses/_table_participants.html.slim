@@ -16,17 +16,17 @@ table.stack
             - if sign_up.user
               - profile_id = Db::Profile.find_by(kw_id: sign_up.user&.kw_id)&.id
               - if profile_id
-                = sign_up.user.display_name
+                = link_to sign_up.user.display_name, user_path(sign_up.user.kw_id)
                 |  (
                 = link_to sign_up.user.kw_id, admin_profile_path(profile_id)
                 | )
               - else
-                = sign_up.user.display_name
+                = link_to sign_up.user.display_name, user_path(sign_up.user.kw_id)
             - else
               = sign_up.name
           - else
             - if sign_up.user
-              = sign_up.user.display_name
+              = link_to sign_up.user.display_name, user_path(sign_up.user.kw_id)
             - else
               = sign_up.name
         - if @course.price

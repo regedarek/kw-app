@@ -48,7 +48,10 @@
         |  h
         br
       b = t('.organizer')
-      = @course&.organizer
+      - if @course&.organizator_id
+        = Db::User.find(@course.organizator_id).display_name
+      - else
+        = @course&.organizer
       br
       - if @course.last_fee_paid
         b Uczestnicy: 
