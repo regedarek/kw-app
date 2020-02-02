@@ -57,32 +57,37 @@
 
   .row
     .large-12.columns
-        - if @my_routes.any?
-          h5 Ostatnie przejścia górskie
-          .row
-            .large-12.columns
-              = render 'activities/mountain_routes/table', routes: @my_routes
+      - if @my_routes.any?
+        h5 Ostatnie przejścia górskie
+        .row
+          .large-12.columns
+            = render 'activities/mountain_routes/table', routes: @my_routes
 
-          .row
-            .large-12.columns
-              = paginate @my_routes
+        .row
+          .large-12.columns
+            = paginate @my_routes
 
-        - if @my_courses.any?
-          h5 Ostatnie wydarzenia
-          .row
-            .large-12.columns
-              = render 'membership/card/courses/table', courses: @my_courses
+      - if @my_courses.any?
+        h5 Ostatnie wydarzenia
+        .row
+          .large-12.columns
+            = render 'membership/card/courses/table', courses: @my_courses
 
-          .row
-            .large-12.columns
-              = paginate @my_courses
+        .row
+          .large-12.columns
+            = paginate @my_courses
 
-        - if @my_projects.any?
-          h5 Ostatnie projekty
-          .row
-            .large-12.columns
-              = render 'membership/card/projects/table', projects: @my_projects
+      - if @my_projects.any?
+        h5 Ostatnie projekty
+        .row
+          .large-12.columns
+            = render 'membership/card/projects/table', projects: @my_projects
 
-          .row
-            .large-12.columns
-              = paginate @my_projects
+        .row
+          .large-12.columns
+            = paginate @my_projects
+
+      h5 Dzikie Kontrakty 2019/2020
+      .row
+        .large-12.columns
+          = render 'membership/card/contracts/table'

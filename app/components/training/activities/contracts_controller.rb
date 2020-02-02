@@ -16,6 +16,12 @@ module Training
         @contract = ::Training::Activities::ContractRecord.new
       end
 
+      def show
+        authorize! :read, Training::Activities::ContractRecord
+
+        @contract = ::Training::Activities::ContractRecord.find(params[:id])
+      end
+
       def create
         authorize! :create, Training::Activities::ContractRecord
         @contract = ::Training::Activities::ContractRecord.new(contract_params)

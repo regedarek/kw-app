@@ -2171,6 +2171,7 @@ show	app/components/messaging/conversations_controller.rb	/^    def show$/;"	f	c
 show	app/components/photo_competition/admin/editions_controller.rb	/^      def show$/;"	f	class:PhotoCompetition.Admin.EditionsController
 show	app/components/photo_competition/requests_controller.rb	/^    def show$/;"	f	class:PhotoCompetition.RequestsController
 show	app/components/settlement/admin/contracts_controller.rb	/^      def show$/;"	f	class:Settlement.Admin.ContractsController
+show	app/components/training/activities/contracts_controller.rb	/^      def show$/;"	f	class:Training.Activities.ContractsController
 show	app/components/training/supplementary/courses_controller.rb	/^      def show$/;"	f	class:Training.Supplementary.CoursesController
 show	app/components/visiting_card/profiles_controller.rb	/^    def show$/;"	f	class:VisitingCard.ProfilesController
 show	app/controllers/activities/mountain_routes_controller.rb	/^    def show$/;"	f	class:Activities.MountainRoutesController

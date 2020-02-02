@@ -1,0 +1,14 @@
+.row
+  .large-12.columns
+    h4 = @contract.name
+
+    table.stack
+      thead
+        tr
+          th.text-center.large-text-left width='150px' Kto?
+
+      tbody
+        - Training::Activities::RouteContractsRecord.includes(route: [:route_colleagues]).where(contract_id: 3).map(&:route).map(&:route_colleagues).flatten.map(&:colleague).uniq.each do |user|
+          tr
+            td.text-center.large-text-left = user.display_name
+

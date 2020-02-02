@@ -1,0 +1,11 @@
+table.stack
+  thead
+    tr
+      th.text-left Nazwa kontraktu
+      th.text-right Zaliczony
+  tbody
+    - Training::Activities::ContractRecord.all.each do |contract|
+      tr
+        td.text-left = contract.name
+        td.text-right
+          = I18n.t Training::Activities::RouteContractsRecord.includes(route: [:route_colleagues]).where(contract_id: contract.id, route: { route_colleagues: {colleague_id: current_user.id} } ).any?
