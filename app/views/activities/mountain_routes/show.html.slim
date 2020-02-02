@@ -75,6 +75,8 @@
             = link_to 'edytuj', edit_activities_ski_route_path(@route.id), class: 'button'
           - else
             = link_to 'edytuj', edit_activities_mountain_route_path(@route), class: 'button'
+        - if can? :destroy, @route
+            = link_to 'usuń', activities_mountain_route_path(@route), method: :delete, class: 'button', data: { confirm: 'Chcesz usunąć przejście?' }
 
   .large-6.columns
     - if @route.attachments.any?
