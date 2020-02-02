@@ -80,9 +80,9 @@ module Training
         params
           .require(:ski_route)
           .permit(
-            :name, :climbing_date, :training, :hidden, :rating, :partners,
+            :name, :climbing_date, :training, :hidden, :rating, :partners, :contract_ids,
             :length, :description, :area, :difficulty, colleague_ids: [],
-            contract_ids: [], attachments: [], gps_tracks: []
+            attachments: [], gps_tracks: []
           )
       end
     end
