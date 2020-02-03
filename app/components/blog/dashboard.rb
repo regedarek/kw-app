@@ -37,7 +37,7 @@ module Blog
     end
 
     def best_person
-      Activities::Repository.new.fetch_season(:ski, DateTime.new(2018, 11, 1), DateTime.new(2019, 05, 01)).first
+      Activities::Repository.new.fetch_season(:ski, DateTime.new(2019, 11, 1), DateTime.new(2020, 05, 01)).first
     end
   end
 end
