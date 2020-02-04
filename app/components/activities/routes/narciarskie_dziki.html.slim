@@ -78,7 +78,7 @@
       tbody
         - @last_contracts.each do |route_contract|
           tr
-            td = route_contract.contract.name
+            td = link_to route_contract.contract.name, activities_contract_path(route_contract.contract_id)
             td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
             td = route_contract.route.climbing_date.to_date
             td = route_contract.contract.score
