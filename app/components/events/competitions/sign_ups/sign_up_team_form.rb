@@ -9,7 +9,7 @@ module Events
         configure { config.messages = :i18n }
         configure { option :competition_id }
 
-        required(:team_name).filled
+        optional(:team_name).maybe(:str?)
         required(:single).value(:false?)
         required(:participant_name_1).filled(:str?)
         required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
