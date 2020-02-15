@@ -24,7 +24,7 @@ module Events
         form = if @competition.single?
                  Events::Competitions::SignUps::SignUpSingleForm.new
                else
-                 Events::Competitions::SignUps::SignUpTeamForm.new
+                 Events::Competitions::SignUps::SignUpTeamForm
                end
 
 
