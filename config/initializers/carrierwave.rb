@@ -9,7 +9,7 @@ if Rails.env.staging? || Rails.env.production?
       openstack_api_key: Rails.application.secrets.openstack_api_key,
       openstack_username: Rails.application.secrets.openstack_username,
       openstack_auth_url: "https://auth.cloud.ovh.net:35357/v2.0/tokens",
-      openstack_region: 'WAW1'
+      openstack_region: 'WAW'
     }
     config.asset_host = Rails.application.secrets.openstack_asset_host
     config.fog_directory = "kw-app-cloud-#{Rails.env}"

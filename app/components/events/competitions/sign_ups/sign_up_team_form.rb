@@ -10,7 +10,7 @@ module Events
         configure { option :competition_id }
 
         optional(:team_name).maybe(:str?)
-        required(:single).value(:false?)
+        optional(:single).maybe
         required(:participant_name_1).filled(:str?)
         required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
         optional(:competition_package_type_1_id).filled(:int?)
