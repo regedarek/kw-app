@@ -24,9 +24,12 @@ module Events
         form = if @competition.single?
                  Events::Competitions::SignUps::SignUpSingleForm.new
                else
-                 Events::Competitions::SignUps::SignUpTeamForm
+                 if params[:sign_up][:single] == '1'
+                   Events::Competitions::SignUps::SignUpTeamSingleForm
+                 else
+                   Events::Competitions::SignUps::SignUpTeamForm
+                 end
                end
-
 
         either(create_record(form)) do |result|
           result.success do

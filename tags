@@ -353,6 +353,7 @@ Competitions	app/components/events/competitions/sign_ups/destroy.rb	/^  module C
 Competitions	app/components/events/competitions/sign_ups/limiter.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^  module Competitions$/;"	m	class:Events
+Competitions	app/components/events/competitions/sign_ups/sign_up_team_single_form.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups/update.rb	/^  module Competitions$/;"	m	class:Events
 Competitions	app/components/events/competitions/sign_ups_controller.rb	/^  module Competitions$/;"	m	class:Events
 CompetitionsController	app/components/activities/api/competitions_controller.rb	/^    class CompetitionsController < ApplicationController$/;"	c	class:Activities.Api
@@ -537,6 +538,7 @@ Events	app/components/events/competitions/sign_ups/destroy.rb	/^module Events$/;
 Events	app/components/events/competitions/sign_ups/limiter.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^module Events$/;"	m
+Events	app/components/events/competitions/sign_ups/sign_up_team_single_form.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups/update.rb	/^module Events$/;"	m
 Events	app/components/events/competitions/sign_ups_controller.rb	/^module Events$/;"	m
 Events	app/components/events/db/competition_package_type_record.rb	/^module Events$/;"	m
@@ -847,6 +849,7 @@ SignUps	app/components/events/competitions/sign_ups/destroy.rb	/^    module Sign
 SignUps	app/components/events/competitions/sign_ups/limiter.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/sign_up_single_form.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/sign_up_team_form.rb	/^    module SignUps$/;"	m	class:Events.Competitions
+SignUps	app/components/events/competitions/sign_ups/sign_up_team_single_form.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUps	app/components/events/competitions/sign_ups/update.rb	/^    module SignUps$/;"	m	class:Events.Competitions
 SignUpsController	app/components/events/competitions/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Events.Competitions
 SignUpsController	app/components/training/supplementary/sign_ups_controller.rb	/^    class SignUpsController < ApplicationController$/;"	c	class:Training.Supplementary
