@@ -23,7 +23,7 @@ module Business
       :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing,
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
       :piste_1, :piste_2, :piste_3, :piste_7, :piste_4, :piste_5, :piste_6,
-      :cave
+      :cave, :tatra_traverse, :georgia
     ]
 
     def slug_candidates
@@ -108,6 +108,10 @@ module Business
         'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
       when :piste_6
         'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
+      when :georgia
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe'
+      when :tatra_traverse
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe'
       else
         'https://szkolaalpinizmu.pl/o-nas/klub-i-szkola/'
       end
@@ -117,7 +121,7 @@ module Business
       case activity_type.to_sym
       when :winter_abc, :winter_tourist_1, :winter_tourist_2
         'https://panel.kw.krakow.pl/assets/kw-7b39344ecee6060042f85c3875d827e54a32ff867bf12eb62de751249dd20d0c.png'
-      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6, :skitour_glacier, :piste_7
+      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6, :skitour_glacier, :piste_7, :tatra_traverse, :georgia
         'https://panel.kw.krakow.pl/assets/snw-be2731e417162f8a0868bf081d1971362c768773f10840bdf6d74d9154b4fd4b.png'
       when :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing
         'https://panel.kw.krakow.pl/assets/sa_climb-11f304cae2bde0c5393274b95f49abe1fab099ea6211a82b27edb389dd03c8fb.jpg'
