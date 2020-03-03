@@ -120,9 +120,9 @@ module Business
       when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6, :skitour_glacier, :piste_7
         'https://panel.kw.krakow.pl/assets/snw-be2731e417162f8a0868bf081d1971362c768773f10840bdf6d74d9154b4fd4b.png'
       when :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing
-        'https://panel.kw.krakow.pl/assets/sww-4cc5e8fb1b78b03696ab49766a499fb36ecfe698641ec3e3a22d3f1f821184ed.png'
+        'https://panel.kw.krakow.pl/assets/sa_climb-11f304cae2bde0c5393274b95f49abe1fab099ea6211a82b27edb389dd03c8fb.jpg'
       when :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2
-        'https://panel.kw.krakow.pl/assets/sww-4cc5e8fb1b78b03696ab49766a499fb36ecfe698641ec3e3a22d3f1f821184ed.png'
+        'https://panel.kw.krakow.pl/assets/sa_climb-11f304cae2bde0c5393274b95f49abe1fab099ea6211a82b27edb389dd03c8fb.jpg'
       when :cave
         'https://panel.kw.krakow.pl/assets/stj-da6e5b49b22498ae143dfaaf7327744543424caef65ce41e1d0c38c5bef1059d.png'
       else
