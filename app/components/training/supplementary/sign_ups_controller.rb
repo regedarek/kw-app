@@ -78,9 +78,9 @@ module Training
           expired_at = unless sign_up.course.expired_hours.zero?
             Time.zone.now + sign_up.course.expired_hours.hours
           end
+          sign_up.update(expired_at: expired_at)
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
-          sign_up.update(sent_user_id: current_user.id, sent_at: Time.zone.now, expired_at: expired_at)
-
+          sign_up.update(sent_user_id: current_user.id, sent_at: Time.zone.now)
 
           redirect_to polish_event_path(sign_up.course.id), notice: 'Wysłano e-mail z linkiem do płatności!'
         else
