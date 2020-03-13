@@ -84,8 +84,9 @@
     h3 wykazy do akceptacji
     table.stack
       - UserManagement::ProfileListRecord.where(accepted: false).order('created_at DESC NULLS LAST').each do |list|
-        tr
-          td = link_to list.profile&.display_name, admin_profile_path(list.profile.id)
+        - if list.profile
+          tr
+            td = link_to list.profile.display_name, admin_profile_path(list.profile.id)
 .row
   .large-4.columns
     h3 niedoręczone e-maile
