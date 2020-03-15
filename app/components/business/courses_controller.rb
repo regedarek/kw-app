@@ -5,7 +5,7 @@ module Business
     def index
       @q = Business::CourseRecord.includes(:coordinator).ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
-      @courses = @q.result(distinct: true)
+      @courses = @q.result(distinct: true).page(params[:page])
       authorize! :read, Business::CourseRecord
 
       @course = Business::CourseRecord.new
