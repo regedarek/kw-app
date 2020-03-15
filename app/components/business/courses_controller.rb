@@ -3,9 +3,15 @@ module Business
     append_view_path 'app/components'
 
     def index
-      @q = Business::CourseRecord.includes(:coordinator).ransack(params[:q])
+      courses = if params[:archive]
+        Business::CourseRecord.includes(:coordinator).all
+      else
+        Business::CourseRecord.includes(:coordinator).where('starts_at >= ?', Time.zone.now)
+      end
+      @q = courses.ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
       @courses = @q.result(distinct: true).page(params[:page])
+
       authorize! :read, Business::CourseRecord
 
       @course = Business::CourseRecord.new

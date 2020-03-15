@@ -1482,13 +1482,13 @@ cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;
 cost	app/models/db/reservation.rb	/^  def cost$/;"	f	class:Db
 country_attributes_for_select	app/components/activities/competition_record.rb	/^    def self.country_attributes_for_select$/;"	F	class:Activities.CompetitionRecord
 country_iso	app/components/activities/competitions_table.rb	/^    def country_iso(country)$/;"	f	class:Activities.CompetitionsTable
-course_params	app/components/business/courses_controller.rb	/^    def course_params$/;"	f	class:Business.CoursesController
+course_params	app/components/business/courses_controller.rb	/^    def course_params$/;"	f	class:Business
 course_params	app/components/training/supplementary/courses_controller.rb	/^      def course_params$/;"	f	class:Training.Supplementary.CoursesController
 create	app/components/activities/competitions_controller.rb	/^    def create$/;"	f	class:Activities.CompetitionsController
 create	app/components/admin/items.rb	/^    def create$/;"	f	class:Admin.Items
 create	app/components/admin/membership_fees.rb	/^    def create$/;"	f	class:Admin.MembershipFees
 create	app/components/admin/reservations.rb	/^    def create$/;"	f	class:Admin.Reservations
-create	app/components/business/courses_controller.rb	/^    def create$/;"	f	class:Business.CoursesController
+create	app/components/business/courses_controller.rb	/^    def create$/;"	f	class:Business
 create	app/components/charity/donations_controller.rb	/^    def create$/;"	f	class:Charity.DonationsController
 create	app/components/events/admin/competitions_controller.rb	/^      def create$/;"	f	class:Events.Admin.CompetitionsController
 create	app/components/events/competitions/repository.rb	/^      def create(form_outputs:)$/;"	f	class:Events.Competitions.Repository
@@ -1587,7 +1587,7 @@ destroy	app/components/activities/competitions_controller.rb	/^    def destroy$/
 destroy	app/components/admin/items.rb	/^    def self.destroy(item_id)$/;"	F	class:Admin.Items
 destroy	app/components/admin/membership_fees.rb	/^    def self.destroy(payment_id)$/;"	F	class:Admin.MembershipFees
 destroy	app/components/admin/reservations.rb	/^    def self.destroy(reservation_id)$/;"	F	class:Admin.Reservations
-destroy	app/components/business/courses_controller.rb	/^    def destroy$/;"	f	class:Business.CoursesController
+destroy	app/components/business/courses_controller.rb	/^    def destroy$/;"	f	class:Business
 destroy	app/components/events/competitions/sign_ups_controller.rb	/^      def destroy$/;"	f	class:Events
 destroy	app/components/management/projects_controller.rb	/^    def destroy$/;"	f	class:Management.ProjectsController
 destroy	app/components/management/voting/cases_controller.rb	/^      def destroy$/;"	f
@@ -1617,7 +1617,7 @@ down	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^  d
 download_attachment	app/components/settlement/admin/contracts_controller.rb	/^      def download_attachment$/;"	f	class:Settlement.Admin.ContractsController
 dziadek_gienek	app/components/activities/repository.rb	/^    def dziadek_gienek(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 edit	app/components/activities/competitions_controller.rb	/^    def edit$/;"	f	class:Activities.CompetitionsController
-edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Business.CoursesController
+edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Business
 edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"	f	class:Events.Admin.CompetitionsController
 edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events
 edit	app/components/library/items_controller.rb	/^    def edit$/;"	f	class:Library.ItemsController
@@ -1988,7 +1988,7 @@ narciarskie_dziki	app/components/activities/routes_controller.rb	/^    def narci
 narciarskie_dziki_regulamin	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki_regulamin; end$/;"	f	class:Activities.RoutesController
 nearest_thursday	app/components/guards/date.rb	/^    def nearest_thursday$/;"	f	class:Guards.Date
 new	app/components/activities/competitions_controller.rb	/^    def new$/;"	f	class:Activities.CompetitionsController
-new	app/components/business/courses_controller.rb	/^    def new$/;"	f	class:Business.CoursesController
+new	app/components/business/courses_controller.rb	/^    def new$/;"	f	class:Business
 new	app/components/charity/donations_controller.rb	/^    def new$/;"	f	class:Charity.DonationsController
 new	app/components/events/competitions/sign_ups_controller.rb	/^      def new$/;"	f	class:Events.Competitions
 new	app/components/library/admin/tags_controller.rb	/^      def new$/;"	f	class:Library.Admin.TagsController
@@ -2143,8 +2143,8 @@ save_cmyk	app/components/scrappers/pdf_image_extractor.rb	/^    def save_cmyk(fi
 save_gray	app/components/scrappers/pdf_image_extractor.rb	/^    def save_gray(filename)$/;"	f	class:Scrappers.Raw
 save_group_four	app/components/scrappers/pdf_image_extractor.rb	/^    def save_group_four(filename)$/;"	f	class:Scrappers.Tiff
 save_rgb	app/components/scrappers/pdf_image_extractor.rb	/^    def save_rgb(filename)$/;"	f	class:Scrappers.Raw
-seats_minus	app/components/business/courses_controller.rb	/^    def seats_minus$/;"	f	class:Business.CoursesController
-seats_plus	app/components/business/courses_controller.rb	/^    def seats_plus$/;"	f	class:Business.CoursesController
+seats_minus	app/components/business/courses_controller.rb	/^    def seats_minus$/;"	f	class:Business
+seats_plus	app/components/business/courses_controller.rb	/^    def seats_plus$/;"	f	class:Business
 secondary_management	app/models/ability.rb	/^  def secondary_management$/;"	f	class:Ability
 section_types	app/components/user_management/profile_list_record.rb	/^    def section_types$/;"	f	class:UserManagement.ProfileListRecord
 secure_token	app/components/photo_competition/file_uploader.rb	/^    def secure_token$/;"	f	class:PhotoCompetition.FileUploader
@@ -2162,7 +2162,7 @@ set_conversation	app/components/messaging/messages_controller.rb	/^    def set_c
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
 show	app/components/blog/api/authors_controller.rb	/^      def show$/;"	f	class:Blog.Api.AuthorsController
-show	app/components/business/courses_controller.rb	/^    def show$/;"	f	class:Business.CoursesController
+show	app/components/business/courses_controller.rb	/^    def show$/;"	f	class:Business
 show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"	f	class:Events.Admin.CompetitionsController
 show	app/components/library/admin/tags_controller.rb	/^      def show$/;"	f	class:Library.Admin.TagsController
 show	app/components/library/authors_controller.rb	/^    def show$/;"	f	class:Library.AuthorsController
@@ -2290,7 +2290,7 @@ up	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^  def
 update	app/components/activities/competitions_controller.rb	/^    def update$/;"	f	class:Activities.CompetitionsController
 update	app/components/admin/items.rb	/^    def update(item_id)$/;"	f	class:Admin.Items
 update	app/components/admin/reservations.rb	/^    def update(reservation_id)$/;"	f	class:Admin.Reservations
-update	app/components/business/courses_controller.rb	/^    def update$/;"	f	class:Business.CoursesController
+update	app/components/business/courses_controller.rb	/^    def update$/;"	f	class:Business
 update	app/components/events/admin/competitions_controller.rb	/^      def update$/;"	f	class:Events.Admin.CompetitionsController
 update	app/components/events/competitions/repository.rb	/^      def update(id:, form_outputs:)$/;"	f	class:Events.Competitions.Repository
 update	app/components/events/competitions/sign_ups_controller.rb	/^      def update$/;"	f	class:Events
