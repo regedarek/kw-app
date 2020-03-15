@@ -40,7 +40,7 @@ module Activities
 
     def fetch_winter
       range_climbing_date = start_date..DateTime.new(2020, 2, 29)
-      range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 3.days)
+      range_created_at = start_date..(DateTime.new(2020, 2, 29) + 3.days)
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
@@ -52,7 +52,7 @@ module Activities
 
     def fetch_spring
       range_climbing_date = DateTime.new(2020, 3, 1)..end_date
-      range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 3.days)
+      range_created_at = DateTime.new(2020, 3, 1)..(end_date + 3.days)
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
