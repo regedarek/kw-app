@@ -39,10 +39,17 @@
     = f.hidden_field :creator_id, value: current_user.id
 
 .row
-  .large-12.columns
+  .large-6.columns
     span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
       = f.label :sign_up_url, "Link do zapisów*"
     = f.text_field :sign_up_url
+
+  .large-6.columns
+    = f.label :event_id, 'Powiązane wydarzenie'
+    = f.select :event_id,
+      Training::Supplementary::CourseRecord.all.map { |u| ["#{u.name} - #{u.start_date&.to_date}", u.id] },
+      { },
+      { class: 'js-select-multiple' }
 
 .row
   .large-12.columns

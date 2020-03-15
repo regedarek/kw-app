@@ -10,6 +10,14 @@ module Training
       has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
       has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
+      def user_name
+        if user
+          user.display_name
+        else
+          name
+        end
+      end
+
       def cost
         if course.packages
           package_type.cost

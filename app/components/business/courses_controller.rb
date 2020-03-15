@@ -94,7 +94,7 @@ module Business
     private
 
     def course_params
-      params.require(:course).permit(:coordinator_id, :name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id)
+      params.require(:course).permit(:coordinator_id, :name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id, :event_id)
     end
   end
 end

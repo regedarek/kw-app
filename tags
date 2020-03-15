@@ -100,6 +100,7 @@ AddEmailToSupplementaryCourses	db/migrate/20180505201004_add_email_to_supplement
 AddEmailToSupplementarySignUps	db/migrate/20180505202009_add_email_to_supplementary_sign_ups.rb	/^class AddEmailToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddEmailToSupplementarySignUps2	db/migrate/20180505202329_add_email_to_supplementary_sign_ups2.rb	/^class AddEmailToSupplementarySignUps2 < ActiveRecord::Migration[5.0]$/;"	c
 AddEventDateToCompetitions	db/migrate/20190227201508_add_event_date_to_competitions.rb	/^class AddEventDateToCompetitions < ActiveRecord::Migration[5.2]$/;"	c
+AddEventIdToBusinessCourses	db/migrate/20200315091515_add_event_id_to_business_courses.rb	/^class AddEventIdToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddEventIdToContracts	db/migrate/20190605133828_add_event_id_to_contracts.rb	/^class AddEventIdToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddExpiredAtToEventsSignUps	db/migrate/20190423094109_add_expired_at_to_events_sign_ups.rb	/^class AddExpiredAtToEventsSignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddExpiredAtToSupplementarySignUps	db/migrate/20190204113906_add_expired_at_to_supplementary_sign_ups.rb	/^class AddExpiredAtToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
@@ -1434,6 +1435,7 @@ change	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^  def cha
 change	db/migrate/20191114190411_add_fields2_to_weather_records.rb	/^  def change$/;"	f	class:AddFields2ToWeatherRecords
 change	db/migrate/20191114202838_add_missing_indices.mailboxer_engine.rb	/^  def change$/;"	f	class:AddMissingIndices
 change	db/migrate/20191114202839_add_delivery_tracking_info_to_mailboxer_receipts.mailboxer_engine.rb	/^  def change$/;"	f	class:AddDeliveryTrackingInfoToMailboxerReceipts
+change	db/migrate/20200315091515_add_event_id_to_business_courses.rb	/^  def change$/;"	f	class:AddEventIdToBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2326,6 +2328,7 @@ update_sign_up	app/components/events/competitions/repository.rb	/^      def upda
 urlAnchor	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^      var urlAnchor = document.createElement('a');$/;"	v
 user	app/components/admin/membership_fees_form.rb	/^    def user$/;"	f	class:Admin.MembershipFeesForm
 user	app/components/admin/reservations_form.rb	/^    def user$/;"	f	class:Admin.ReservationsForm
+user_name	app/components/training/supplementary/sign_up_record.rb	/^      def user_name$/;"	f	class:Training.Supplementary.SignUpRecord
 user_params	app/controllers/admin/users_controller.rb	/^    def user_params$/;"	f	class:Admin.UsersController
 users_names=	app/components/management/project_record.rb	/^    def users_names=(ids)$/;"	f	class:Management.ProjectRecord
 validate_each	lib/validators/periodic_date_validator.rb	/^  def validate_each(record, attribute, parameters)$/;"	f	class:PeriodicDateValidator
