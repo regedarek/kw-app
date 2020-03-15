@@ -1696,7 +1696,9 @@ fetch_projects	app/components/membership/card/repository.rb	/^      def fetch_pr
 fetch_season	app/components/activities/repository.rb	/^    def fetch_season(route_type = 'regular_climbing', start_date=DateTime.new(2019, 05, 1), end_date=DateTime.new(2019, 12, 15))$/;"	f	class:Activities.Repository
 fetch_season	app/components/activities/ski_repository.rb	/^    def fetch_season$/;"	f	class:Activities.SkiRepository
 fetch_season	app/components/training/activities/repository.rb	/^      def fetch_season$/;"	f	class:Training.Activities.Repository
+fetch_spring	app/components/activities/ski_repository.rb	/^    def fetch_spring$/;"	f	class:Activities.SkiRepository
 fetch_spring	app/components/training/activities/repository.rb	/^      def fetch_spring$/;"	f	class:Training.Activities.Repository
+fetch_winter	app/components/activities/ski_repository.rb	/^    def fetch_winter$/;"	f	class:Activities.SkiRepository
 fetch_winter	app/components/training/activities/repository.rb	/^      def fetch_winter$/;"	f	class:Training.Activities.Repository
 filename	app/components/photo_competition/file_uploader.rb	/^    def filename$/;"	f	class:PhotoCompetition.FileUploader
 filename	app/components/scrappers/image_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ImageUploader

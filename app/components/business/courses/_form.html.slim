@@ -48,7 +48,7 @@
     = f.label :event_id, 'Powiązane wydarzenie'
     = f.select :event_id,
       Training::Supplementary::CourseRecord.where(category: :sa).all.map { |u| ["#{u.name} - #{u.start_date&.to_date}", u.id] },
-      { },
+      { include_blank: 'Wybierz wydarzenie' },
       { class: 'js-select-multiple' }
 
 .row
