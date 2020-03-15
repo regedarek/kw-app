@@ -27,6 +27,14 @@ module Business
       :cave, :tatra_traverse, :georgia
     ]
 
+    def sign_ups_count
+      if event_id
+        Training::Supplementary::Limiter.new(event).sum
+      else
+        seats
+      end
+    end
+
     def slug_candidates
       [
         [:starts_at, :name]
@@ -140,7 +148,7 @@ module Business
         activity_url: activity_url,
         logo: logo,
         display_name: I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"),
-        free_seats: max_seats ? max_seats - seats : 0
+        free_seats: max_seats ? max_seats - sign_ups_count : 0
       )
     end
   end

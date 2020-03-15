@@ -2197,6 +2197,7 @@ sign_up_accept_first	app/components/events/competitions/sign_up_mailer.rb	/^    
 sign_up_params	app/components/events/competitions/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Events
 sign_up_params	app/components/training/supplementary/sign_ups_controller.rb	/^      def sign_up_params$/;"	f	class:Training.Supplementary.SignUpsController.manually
 sign_ups	app/components/training/supplementary/course.rb	/^      def sign_ups$/;"	f	class:Training.Supplementary.Course
+sign_ups_count	app/components/business/course_record.rb	/^    def sign_ups_count$/;"	f	class:Business.CourseRecord
 sign_ups_reached?	app/components/training/supplementary/limiter.rb	/^      def sign_ups_reached?$/;"	f	class:Training.Supplementary.Limiter
 sign_ups_started?	app/components/training/supplementary/limiter.rb	/^      def sign_ups_started?$/;"	f	class:Training.Supplementary.Limiter
 singles	app/components/events/competitions/sign_ups/limiter.rb	/^        def singles$/;"	f	class:Events.Competitions.SignUps.Limiter

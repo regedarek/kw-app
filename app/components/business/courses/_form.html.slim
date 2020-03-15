@@ -47,7 +47,7 @@
   .large-6.columns
     = f.label :event_id, 'Powiązane wydarzenie'
     = f.select :event_id,
-      Training::Supplementary::CourseRecord.all.map { |u| ["#{u.name} - #{u.start_date&.to_date}", u.id] },
+      Training::Supplementary::CourseRecord.where(category: :sa).all.map { |u| ["#{u.name} - #{u.start_date&.to_date}", u.id] },
       { },
       { class: 'js-select-multiple' }
 
