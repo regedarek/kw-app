@@ -1654,6 +1654,7 @@ end_date_is_not_one_week_later	app/components/reservations/form.rb	/^    def end
 end_date_is_not_thursday	app/components/reservations/form.rb	/^    def end_date_is_not_thursday$/;"	f	class:Reservations.Form
 env	spec/rails_mock.rb	/^    def self.env$/;"	F	class:Rails
 errors_for	lib/form_object.rb	/^  def errors_for(attribute, separator = '<\/br>')$/;"	f	class:FormObject
+event_url	app/components/business/course_record.rb	/^    def event_url$/;"	f	class:Business.CourseRecord
 events	app/models/ability.rb	/^  def events$/;"	f	class:Ability
 execute	app/services/payments/dotpay/delete_payment_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.DeletePaymentRequest
 execute	app/services/payments/dotpay/get_operation_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.GetOperationRequest

@@ -35,6 +35,14 @@ module Business
       end
     end
 
+    def event_url
+      if event_id
+        "https://panel.kw.krakow.pl/wydarzenia/#{event.slug}"
+      else
+        sign_up_url
+      end
+    end
+
     def slug_candidates
       [
         [:starts_at, :name]
@@ -148,7 +156,8 @@ module Business
         activity_url: activity_url,
         logo: logo,
         display_name: I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"),
-        free_seats: max_seats ? max_seats - sign_ups_count : 0
+        free_seats: max_seats ? max_seats - sign_ups_count : 0,
+        sign_up_url: event_url
       )
     end
   end
