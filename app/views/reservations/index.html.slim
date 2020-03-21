@@ -19,12 +19,15 @@
             table
               thead
                 tr
+                  th width='200px' Numer katalogowy
                   th=t('.item')
                   th width='5%' Koszt
                   th width='10%' 
               tbody
                 - @abc_1.each do |item|
                   tr
+                    td
+                      = item.rentable_id
                     td
                       = item.display_name
                     td.text-center
@@ -40,12 +43,15 @@
             table
               thead
                 tr
+                  th width='200px' Numer katalogowy
                   th=t('.item')
                   th width='5%' Koszt
                   th width='10%' 
               tbody
                 - @abc_2.each do |item|
                   tr
+                    td
+                      = item.rentable_id
                     td
                       = item.display_name
                     td.text-center
@@ -61,12 +67,15 @@
             table
               thead
                 tr
+                  th width='200px' Numer katalogowy
                   th=t('.item')
                   th width='5%' Koszt
                   th width='10%' 
               tbody
                 - @abc_3.each do |item|
                   tr
+                    td
+                      = item.rentable_id
                     td
                       = item.display_name
                     td.text-center
@@ -81,12 +90,15 @@
             table
               thead
                 tr
+                  th width='200px' Numer katalogowy
                   th=t('.item')
                   th width='5%' Koszt
                   th width='10%' 
               tbody
                 - @axes.each do |item|
                   tr
+                    td
+                      = item.rentable_id
                     td
                       = item.display_name
                     td.text-center
@@ -101,12 +113,15 @@
             table
               thead
                 tr
+                  th width='200px' Numer katalogowy
                   th=t('.item')
                   th width='5%' Koszt
                   th width='10%' 
               tbody
                 - @crampons.each do |item|
                   tr
+                    td
+                      = item.rentable_id
                     td
                       = item.display_name
                     td.text-center
@@ -121,12 +136,15 @@
             table
               thead
                 tr
+                  th width='200px' Numer katalogowy
                   th=t('.item')
                   th width='5%' Koszt
                   th width='10%' 
               tbody
                 - @rest.each do |item|
                   tr
+                    td
+                      = item.rentable_id
                     td
                       = "#{item.display_name} (#{item.rentable_id})"
                     td.text-center
