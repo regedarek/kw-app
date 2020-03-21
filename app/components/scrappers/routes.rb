@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope module: 'scrappers' do
-    resources :scrappers, only: :index
+    resources :scrappers, path: 'warunki', only: :index
     resources :graphs, only: :index
     namespace :api do
       resources :pogodynka, only: [:index]
