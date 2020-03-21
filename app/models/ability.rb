@@ -50,6 +50,7 @@ class Ability
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
     can :read, Management::Voting::CaseRecord, state: 'finished', hidden: false
     can :read, Db::Activities::MountainRoute
+    can :read, Scrappers::ShmuRecord
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     cannot :destroy, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     can :destroy, Db::Activities::MountainRoute, user_id: user.id

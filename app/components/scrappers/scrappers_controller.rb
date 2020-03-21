@@ -3,6 +3,7 @@ module Scrappers
     append_view_path 'app/components'
 
     def index
+      authorize! :read, Scrappers::ShmuRecord
       @current_date = params[:date] ? params[:date].to_date : Date.today
 
       @shmu_records = Scrappers::ShmuRecord.where(diagram_time: @current_date.all_day)
