@@ -20,11 +20,12 @@ module Business
 
     enum activity_type: [
       :winter_abc, :winter_tourist_1, :winter_tourist_2,
-      :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :skitour_glacier,
+      :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2,
+      :skitour_glacier, :georgia, :norway, :skialp,
       :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing,
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
       :piste_1, :piste_2, :piste_3, :piste_7, :piste_4, :piste_5, :piste_6,
-      :cave, :tatra_traverse, :georgia
+      :cave, :tatra_traverse
     ]
 
     def sign_ups_count
@@ -126,9 +127,13 @@ module Business
       when :piste_6
         'https://szkolaalpinizmu.pl/narty/szkolenia-stokowe/'
       when :georgia
-        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe'
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/gruzja-gorna-swanetia/'
+      when :norway
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/oboz-skiturowy-w-norwegii/'
       when :tatra_traverse
-        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe'
+        'https://szkolaalpinizmu.pl/narty/kursy-skiturowe/tatrzanskie-przelecze-trawers/'
+      when :skialp
+        'https://szkolaalpinizmu.pl/narty'
       else
         'https://szkolaalpinizmu.pl/o-nas/klub-i-szkola/'
       end
@@ -138,7 +143,7 @@ module Business
       case activity_type.to_sym
       when :winter_abc, :winter_tourist_1, :winter_tourist_2
         'kw.png'
-      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6, :skitour_glacier, :piste_7, :tatra_traverse, :georgia
+      when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6, :skitour_glacier, :piste_7, :tatra_traverse, :georgia, :norway, :skialp
         'snw.png'
       when :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing
         'sww.png'
