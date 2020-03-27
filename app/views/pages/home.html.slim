@@ -8,7 +8,7 @@
       = link_to activities_mountain_routes_path do
         h4 Ostatnio dodane przejścia
       table.stack
-        - Db::Activities::MountainRoute.includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
+        - Db::Activities::MountainRoute.where(hidden: false).includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
           tr
             td width='110px'
               = link_to route.climbing_date, activities_mountain_route_path(route.id)
