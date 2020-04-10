@@ -86,6 +86,7 @@ class Ability
     can :manage, Management::ProjectRecord
     can :manage, Management::Voting::CaseRecord
     can :hide, Management::Voting::CaseRecord
+    can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
   end
 
@@ -98,6 +99,7 @@ class Ability
   def financial_management
     can :accept, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
+    can :manage, PaperTrail::Version
   end
 
   def admin
@@ -105,6 +107,7 @@ class Ability
     can :manage, Db::User
     can :manage, Db::Profile
     can :manage, Events::Db::SignUpRecord
+    can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
   end
 
@@ -113,10 +116,12 @@ class Ability
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
     cannot :destroy, Settlement::ContractRecord
+    can :manage, PaperTrail::Version
   end
 
   def business_courses
     can :manage, Business::CourseRecord
+    can :manage, PaperTrail::Version
   end
 
   def office_king
@@ -124,6 +129,7 @@ class Ability
     can :search, Settlement::ContractRecord
     can :recon_up, Settlement::ContractRecord
     can :create, Settlement::ContractRecord
+    can :manage, PaperTrail::Version
     can :manage, Settlement::ContractRecord
     cannot :accept, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord

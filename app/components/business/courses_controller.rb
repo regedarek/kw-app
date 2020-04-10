@@ -39,7 +39,7 @@ module Business
     end
 
     def show
-      @course = Business::CourseRecord.find(params[:id])
+      @course = Business::CourseRecord.friendly.find(params[:id])
       authorize! :read, Business::CourseRecord
     end
 

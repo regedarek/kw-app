@@ -1,0 +1,22 @@
+table.stack
+  thead
+    tr
+      th width='20%' Co?
+      th width='20%' Kto?
+      th width='20%' Akcja?
+      th width='20%' Kiedy?
+      th width='40%' Metadata
+  tbody
+    - @versions.each do |version|
+      tr
+        td
+          - if version.item
+            = link_to version.item&.name, polymorphic_url(version.item)
+          - else
+            = version.item_type
+        td = Db::User.find(version.whodunnit)&.display_name
+        td = version.event
+        td = version.created_at
+        td
+          span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.object_changes}</ul>" data-allow-html="true"
+            = link_to 'Zmiany', '#'

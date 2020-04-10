@@ -48,6 +48,8 @@
                   li= link_to 'Baza składek', admin_membership_fees_path
                 li= link_to 'Kalendarz zawodów', competitions_path
                 - if can? :manage, Business::CourseRecord
+                  li= link_to 'Historia zmian', admin_versions_path
+                - if can? :manage, Business::CourseRecord
                   li= link_to 'Kursy SA', courses_path
                 - if can? :manage, Management::Snw::SnwApplyRecord
                   li= link_to 'Zgłoszenia do SNW', snw_applies_path

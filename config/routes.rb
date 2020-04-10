@@ -81,6 +81,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
+
+    resources :versions, only: :index do
+      member do
+        post :revert
+      end
+    end
+
     resources :profiles do
       collection do
         get :general_meeting

@@ -255,6 +255,7 @@ Admin	app/controllers/admin/membership_fees_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/profiles_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/reservations_controller.rb	/^module Admin$/;"	m
 Admin	app/controllers/admin/users_controller.rb	/^module Admin$/;"	m
+Admin	app/controllers/admin/versions_controller.rb	/^module Admin$/;"	m
 Animation	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function Animation( elem, properties, options ) {$/;"	f
 Api	app/components/activities/api/competitions_controller.rb	/^  module Api$/;"	m	class:Activities
 Api	app/components/blog/api/authors_controller.rb	/^  module Api$/;"	m	class:Blog
@@ -1002,6 +1003,7 @@ UsersController	app/controllers/admin/users_controller.rb	/^  class UsersControl
 UsersController	app/controllers/api/users_controller.rb	/^  class UsersController < Api::BaseController$/;"	c	class:Api
 UsersController	app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c
 UsersForm	app/components/admin/users_form.rb	/^  class UsersForm$/;"	c	class:Admin
+VersionsController	app/controllers/admin/versions_controller.rb	/^  class VersionsController < Admin::BaseController$/;"	c	class:Admin
 VisitingCard	app/components/visiting_card/profiles_controller.rb	/^module VisitingCard$/;"	m
 VoteRecord	app/components/management/voting/vote_record.rb	/^    class VoteRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
 Voting	app/components/management/voting/case_form.rb	/^  module Voting$/;"	m	class:Management
@@ -1828,6 +1830,7 @@ index	app/controllers/admin/membership_fees_controller.rb	/^    def index$/;"	f	
 index	app/controllers/admin/profiles_controller.rb	/^    def index$/;"	f	class:Admin.ProfilesController
 index	app/controllers/admin/reservations_controller.rb	/^    def index$/;"	f	class:Admin.ReservationsController
 index	app/controllers/admin/users_controller.rb	/^    def index$/;"	f	class:Admin.UsersController
+index	app/controllers/admin/versions_controller.rb	/^    def index$/;"	f	class:Admin.VersionsController
 index	app/controllers/api/users_controller.rb	/^    def index$/;"	f	class:Api.UsersController
 index	app/controllers/events_controller.rb	/^  def index$/;"	f	class:EventsController
 index	app/controllers/membership/fees_controller.rb	/^    def index$/;"	f	class:Membership.FeesController
@@ -2129,6 +2132,7 @@ return.hasOwnProperty	public/assets/application-adb37b88852cd8099abe934018ff31ef
 return.init	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	return new Tween.prototype.init( elem, options, prop, end, easing );$/;"	m
 returnFalse	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function returnFalse() {$/;"	f
 returnTrue	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function returnTrue() {$/;"	f
+revert	app/controllers/admin/versions_controller.rb	/^    def revert$/;"	f	class:Admin.VersionsController
 rfocusable	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rfocusable = \/^(?:input|select|textarea|button|object)$\/i,$/;"	v
 rformElems	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rformElems = \/^(?:input|select|textarea)$\/i,$/;"	v
 rhtml	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var rhtml = \/<|&#?\\w+;\/,$/;"	v

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope module: 'business' do
+    get 'courses/:id' => 'courses#show', as: 'business_course_record'
     resources :courses do
       member do
         put :seats_minus
