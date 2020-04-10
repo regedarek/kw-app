@@ -145,6 +145,7 @@ AddMoreindexesToMountainRoutes	db/migrate/20190130233129_add_moreindexes_to_moun
 AddNameToSupplementaryCourses	db/migrate/20180504200215_add_name_to_supplementary_courses.rb	/^class AddNameToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddNullFalseToRouteTime	db/migrate/20190419224448_add_null_false_to_route_time.rb	/^class AddNullFalseToRouteTime < ActiveRecord::Migration[5.2]$/;"	c
 AddNumberToManagementCases	db/migrate/20190517223532_add_number_to_management_cases.rb	/^class AddNumberToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
+AddObjectChangesToVersions	db/migrate/20200410095515_add_object_changes_to_versions.rb	/^class AddObjectChangesToVersions < ActiveRecord::Migration[5.2]$/;"	c
 AddOpenToSupplementaryCourses	db/migrate/20180503143932_add_open_to_supplementary_courses.rb	/^class AddOpenToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddOrderIdToServices	db/migrate/20160830165219_add_order_id_to_services.rb	/^class AddOrderIdToServices < ActiveRecord::Migration[5.0]$/;"	c
 AddOrganizerEmailToCompetitions	db/migrate/20180430091639_add_organizer_email_to_competitions.rb	/^class AddOrganizerEmailToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
@@ -462,6 +463,7 @@ CreateTableOrders	db/migrate/20160830160726_create_table_orders.rb	/^class Creat
 CreateToprRecords	db/migrate/20190815092140_create_topr_records.rb	/^class CreateToprRecords < ActiveRecord::Migration[5.2]$/;"	c
 CreateUsers	db/migrate/20150523153119_create_users.rb	/^class CreateUsers < ActiveRecord::Migration[5.0]$/;"	c
 CreateValleyTable	db/migrate/20160804151037_create_valley_table.rb	/^class CreateValleyTable < ActiveRecord::Migration[5.0]$/;"	c
+CreateVersions	db/migrate/20200410095514_create_versions.rb	/^class CreateVersions < ActiveRecord::Migration[5.2]$/;"	c
 CreateWeatherRecords	db/migrate/20190724185610_create_weather_records.rb	/^class CreateWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 CreateYearlyFeesTable	db/migrate/20160830120918_create_yearly_fees_table.rb	/^class CreateYearlyFeesTable < ActiveRecord::Migration[5.0]$/;"	c
 CsvLibraryItemParser	app/components/importing/csv_library_item_parser.rb	/^  class CsvLibraryItemParser$/;"	c	class:Importing
@@ -1436,6 +1438,8 @@ change	db/migrate/20191114190411_add_fields2_to_weather_records.rb	/^  def chang
 change	db/migrate/20191114202838_add_missing_indices.mailboxer_engine.rb	/^  def change$/;"	f	class:AddMissingIndices
 change	db/migrate/20191114202839_add_delivery_tracking_info_to_mailboxer_receipts.mailboxer_engine.rb	/^  def change$/;"	f	class:AddDeliveryTrackingInfoToMailboxerReceipts
 change	db/migrate/20200315091515_add_event_id_to_business_courses.rb	/^  def change$/;"	f	class:AddEventIdToBusinessCourses
+change	db/migrate/20200410095514_create_versions.rb	/^  def change$/;"	f	class:CreateVersions
+change	db/migrate/20200410095515_add_object_changes_to_versions.rb	/^  def change$/;"	f	class:AddObjectChangesToVersions
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

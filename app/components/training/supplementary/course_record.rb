@@ -2,6 +2,7 @@ module Training
   module Supplementary
     class CourseRecord < ActiveRecord::Base
       extend FriendlyId
+      has_paper_trail
       friendly_id :slug_candidates, use: :slugged
       mount_uploader :baner, Training::Supplementary::BanerUploader
       enum category: [:kw, :snw, :sww, :stj, :sa]
