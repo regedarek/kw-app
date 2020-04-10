@@ -4,6 +4,7 @@ module Business
     include ActionView::Helpers::AssetTagHelper
     extend FriendlyId
     self.table_name = 'business_courses'
+    has_paper_trail
 
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
