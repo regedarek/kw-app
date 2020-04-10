@@ -29,7 +29,6 @@ module Business
       authorize! :create, Business::CourseRecord
 
       @course.creator_id = current_user.id
-      @course.name = I18n.t("activerecord.attributes.business/course_record.activity_types.#{@course.activity_type}")
 
       if @course.save
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
@@ -94,7 +93,7 @@ module Business
     private
 
     def course_params
-      params.require(:course).permit(:coordinator_id, :name, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id, :event_id)
+      params.require(:course).permit(:coordinator_id, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id, :event_id)
     end
   end
 end

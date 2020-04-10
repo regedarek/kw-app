@@ -756,6 +756,7 @@ RemoveAndRenameForPayments	db/migrate/20160830170052_remove_and_rename_for_payme
 RemoveAuthorFromRoutes	db/migrate/20160803210921_remove_author_from_routes.rb	/^class RemoveAuthorFromRoutes < ActiveRecord::Migration[5.0]$/;"	c
 RemoveIndexFromMountainRoutes	db/migrate/20190419215905_remove_index_from_mountain_routes.rb	/^class RemoveIndexFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 RemoveIndexesFromMountainRoutes	db/migrate/20190419201102_remove_indexes_from_mountain_routes.rb	/^class RemoveIndexesFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
+RemoveNameFromBusinessCourses	db/migrate/20200410120523_remove_name_from_business_courses.rb	/^class RemoveNameFromBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 RemovePaidFromReservations	db/migrate/20160823174538_remove_paid_from_reservations.rb	/^class RemovePaidFromReservations < ActiveRecord::Migration[5.0]$/;"	c
 RemovePaymentIdFromMembershipFees	db/migrate/20170417110107_remove_payment_id_from_membership_fees.rb	/^class RemovePaymentIdFromMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
 RemovePaymentIdFromSupplementarySignUps	db/migrate/20191023183025_remove_payment_id_from_supplementary_sign_ups.rb	/^class RemovePaymentIdFromSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
@@ -1442,6 +1443,7 @@ change	db/migrate/20191114202839_add_delivery_tracking_info_to_mailboxer_receipt
 change	db/migrate/20200315091515_add_event_id_to_business_courses.rb	/^  def change$/;"	f	class:AddEventIdToBusinessCourses
 change	db/migrate/20200410095514_create_versions.rb	/^  def change$/;"	f	class:CreateVersions
 change	db/migrate/20200410095515_add_object_changes_to_versions.rb	/^  def change$/;"	f	class:AddObjectChangesToVersions
+change	db/migrate/20200410120523_remove_name_from_business_courses.rb	/^  def change$/;"	f	class:RemoveNameFromBusinessCourses
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1995,6 +1997,7 @@ model_name	app/models/db/activities/mountain_route.rb	/^      def self.model_nam
 model_name	app/models/db/profile.rb	/^    def self.model_name$/;"	F	class:Db.Profile
 month_days	app/components/activities/competitions_table.rb	/^    def month_days(table_month)$/;"	f	class:Activities.CompetitionsTable
 month_has_day?	app/components/activities/competitions_table.rb	/^    def month_has_day?(table_month, table_day)$/;"	f	class:Activities
+name	app/components/business/course_record.rb	/^    def name$/;"	f	class:Business.CourseRecord
 name_with_cost	app/components/training/supplementary/package_type_record.rb	/^      def name_with_cost$/;"	f	class:Training.Supplementary.PackageTypeRecord
 narciarskie_dziki	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki$/;"	f	class:Activities.RoutesController
 narciarskie_dziki_regulamin	app/components/activities/routes_controller.rb	/^    def narciarskie_dziki_regulamin; end$/;"	f	class:Activities.RoutesController

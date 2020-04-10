@@ -29,6 +29,10 @@ module Business
       :cave, :tatra_traverse
     ]
 
+    def name
+      I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{activity_type}")
+    end
+
     def sign_ups_count
       if event_id
         Training::Supplementary::Limiter.new(event).sum
