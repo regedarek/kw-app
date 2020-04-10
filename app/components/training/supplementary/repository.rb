@@ -1,6 +1,13 @@
 module Training
   module Supplementary
     class Repository
+      def prepaid_not_emailed_sign_ups
+        Training::Supplementary::SignUpRecord
+          .includes([:course, :payment])
+          .where.not(supplementary_courses: { paid_email: nil })
+          .where(paid_email_sent_at: nil, payments: { state: 'prepaid' })
+      end
+
       def future_courses_of_user(user)
         Training::Supplementary::CourseRecord
           .joins(:sign_ups)

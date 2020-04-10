@@ -152,6 +152,8 @@ AddOrganizerEmailToCompetitions	db/migrate/20180430091639_add_organizer_email_to
 AddOriginalFilenameToPhotoRequests	db/migrate/20191016153656_add_original_filename_to_photo_requests.rb	/^class AddOriginalFilenameToPhotoRequests < ActiveRecord::Migration[5.2]$/;"	c
 AddOwnerToItems	db/migrate/20160808180632_add_owner_to_items.rb	/^class AddOwnerToItems < ActiveRecord::Migration[5.0]$/;"	c
 AddPackagesToSupplementaryCourses	db/migrate/20180912190936_add_packages_to_supplementary_courses.rb	/^class AddPackagesToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
+AddPaidEmailSentAtToSupplementarySignUps	db/migrate/20200410131305_add_paid_email_sent_at_to_supplementary_sign_ups.rb	/^class AddPaidEmailSentAtToSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
+AddPaidEmailToSupplementaryCourses	db/migrate/20200410130334_add_paid_email_to_supplementary_courses.rb	/^class AddPaidEmailToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddPaidToReservations	db/migrate/20160804220627_add_paid_to_reservations.rb	/^class AddPaidToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddParticipantPhoneToEventsSignUps	db/migrate/20180112173252_add_participant_phone_to_events_sign_ups.rb	/^class AddParticipantPhoneToEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddPayableIdToPayments	db/migrate/20170417094726_add_payable_id_to_payments.rb	/^class AddPayableIdToPayments < ActiveRecord::Migration[5.0]$/;"	c
@@ -1444,6 +1446,8 @@ change	db/migrate/20200315091515_add_event_id_to_business_courses.rb	/^  def cha
 change	db/migrate/20200410095514_create_versions.rb	/^  def change$/;"	f	class:CreateVersions
 change	db/migrate/20200410095515_add_object_changes_to_versions.rb	/^  def change$/;"	f	class:AddObjectChangesToVersions
 change	db/migrate/20200410120523_remove_name_from_business_courses.rb	/^  def change$/;"	f	class:RemoveNameFromBusinessCourses
+change	db/migrate/20200410130334_add_paid_email_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddPaidEmailToSupplementaryCourses
+change	db/migrate/20200410131305_add_paid_email_sent_at_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddPaidEmailSentAtToSupplementarySignUps
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2094,6 +2098,8 @@ plastic_cost	app/components/user_management/cost.rb	/^    def plastic_cost$/;"	f
 plastic_for_2019	app/components/membership/fee_form.rb	/^    def plastic_for_2019$/;"	f	class:Membership.FeeForm
 pogodynka	app/components/scrappers/weather_storage.rb	/^    def pogodynka$/;"	f	class:Scrappers.WeatherStorage
 point_params	app/components/training/activities/api/mountain_route_points_controller.rb	/^        def point_params$/;"	f	class:Training.Activities.Api.MountainRoutePointsController
+prepaid_email	app/components/training/supplementary/sign_up_mailer.rb	/^      def prepaid_email(sign_up_id)$/;"	f	class:Training.Supplementary.SignUpMailer
+prepaid_not_emailed_sign_ups	app/components/training/supplementary/repository.rb	/^      def prepaid_not_emailed_sign_ups$/;"	f	class:Training.Supplementary.Repository
 prepaid_via_cash	app/components/training/supplementary/limiter.rb	/^      def prepaid_via_cash$/;"	f	class:Training.Supplementary.Limiter
 prepaid_via_dotpay	app/components/training/supplementary/limiter.rb	/^      def prepaid_via_dotpay$/;"	f	class:Training.Supplementary.Limiter
 prepayment	app/components/settlement/admin/contracts_controller.rb	/^      def prepayment$/;"	f	class:Settlement.Admin.ContractsController

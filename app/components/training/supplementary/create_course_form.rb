@@ -13,6 +13,7 @@ module Training
         required(:name).filled(:str?)
         required(:place).filled(:str?)
         optional(:email_remarks).maybe(:str?)
+        optional(:paid_email).maybe(:str?)
         optional(:question).maybe(:str?)
         optional(:send_manually).maybe(:str?)
         required(:payment_type).filled

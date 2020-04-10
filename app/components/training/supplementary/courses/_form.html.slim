@@ -129,6 +129,9 @@
     .callout
       = f.label :email_remarks, 'Uwagi dodane do e-maila z zapisem'
       = f.trix_editor :email_remarks, style: 'min-height: 280px'
+    .callout
+      = f.label :paid_email, 'E-mail po opłaceniu'
+      = f.trix_editor :paid_email, style: 'min-height: 280px'
   .large-4.columns
     .callout
       = image_tag "#{@course.baner_type}.jpg"

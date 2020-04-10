@@ -1,0 +1,40 @@
+| Hej!
+br
+| Opłaciłeś zapis na nasze wydarzenie!
+br
+br
+b Nazwa wydarzenia: 
+= @sign_up.course.name
+br
+b Miejsce wydarzenia: 
+= @sign_up.course.place
+br
+b Data wydarzenia: 
+= @sign_up.course&.start_date&.strftime("%d/%m/%Y %H:%M")
+br
+b Koordynator wydarzenia: 
+= @sign_up.course&.organizer&.display_name
+br
+- if @sign_up.course.price
+  - if @sign_up.course.packages
+    b Opłata: 
+    = "#{@sign_up.package_type.name} - #{@sign_up.package_type.cost} zł"
+  - else
+    b Opłata: 
+    = @sign_up.course.price_kw
+    |  zł
+br
+| Jeżeli chcesz się wypisać z wydarzenia, poproś o to koordynatora.
+br
+- if @sign_up.course.paid_email.present?
+  br
+  b Dodatkowe uwagi od organizatora
+  br
+  = sanitize @sign_up.course.paid_email
+br
+br
+| Więcej informacji znajdziesz na 
+= link_to 'stronie wydarzenia!', polish_event_url(@sign_up.course.slug)
+br
+br
+| Do zobaczenia!

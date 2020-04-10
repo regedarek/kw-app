@@ -22,6 +22,7 @@ module Training
         required(:slug).filled(:slug?, unique?:(:slug), max_size?: 31)
         required(:place).filled(:str?)
         optional(:email_remarks).maybe(:str?)
+        optional(:paid_email).maybe(:str?)
         optional(:question).maybe(:bool?)
         optional(:send_manually).maybe(:bool?)
         required(:payment_type).filled

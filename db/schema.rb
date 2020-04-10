@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_120523) do
+ActiveRecord::Schema.define(version: 2020_04_10_131305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -801,6 +801,7 @@ ActiveRecord::Schema.define(version: 2020_04_10_120523) do
     t.integer "state", default: 0, null: false
     t.boolean "question", default: false, null: false
     t.boolean "send_manually", default: false, null: false
+    t.text "paid_email"
     t.index ["slug"], name: "index_supplementary_courses_on_slug", unique: true
   end
 
@@ -818,6 +819,7 @@ ActiveRecord::Schema.define(version: 2020_04_10_120523) do
     t.integer "admin_id"
     t.string "question"
     t.integer "sent_user_id"
+    t.datetime "paid_email_sent_at"
     t.index ["course_id", "user_id"], name: "index_supplementary_sign_ups_on_course_id_and_user_id", unique: true
   end
 
