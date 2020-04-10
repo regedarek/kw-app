@@ -1,11 +1,11 @@
 table.stack
   thead
     tr
-      th width='20%' Co?
+      th width='40%' Co?
       th width='20%' Kto?
-      th width='20%' Akcja?
+      th width='10%' Akcja?
       th width='20%' Kiedy?
-      th width='40%' Metadata
+      th width='10%' Metadata
   tbody
     - @versions.each do |version|
       tr
@@ -16,7 +16,7 @@ table.stack
             = version.item_type
         td = Db::User.find(version.whodunnit)&.display_name
         td = version.event
-        td = version.created_at
+        td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
         td
           span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.object_changes}</ul>" data-allow-html="true"
             = link_to 'Zmiany', '#'
