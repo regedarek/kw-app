@@ -1,5 +1,11 @@
 desc "This task is called by the Heroku scheduler add-on"
 
+task :send_prepaid_emails => :environment do
+  Training::Supplementary::SendPrepaidEmail.new.send_prepaid_emails
+
+  Net::HTTP.get(URI('https://hc-ping.com/ddf62dec-b262-49cc-9c1a-d43598be3b28'))
+end
+
 task :store_shmu => :environment do
   Scrappers::Shmu.new.call
   Net::HTTP.get(URI('https://hc-ping.com/8a5d9b79-ed79-4270-a6d7-a40d8b90ce64'))

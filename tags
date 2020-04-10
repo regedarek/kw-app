@@ -826,6 +826,7 @@ Scrappers	app/components/scrappers/weather_storage.rb	/^module Scrappers$/;"	m
 ScrappersController	app/components/scrappers/scrappers_controller.rb	/^  class ScrappersController < ApplicationController$/;"	c	class:Scrappers
 Seeder	lib/seeding/seeder.rb	/^  class Seeder$/;"	c	class:Seeding
 Seeding	lib/seeding/seeder.rb	/^module Seeding$/;"	m
+SendPrepaidEmail	app/components/training/supplementary/send_prepaid_email.rb	/^    class SendPrepaidEmail$/;"	c	class:Training.Supplementary
 SetDefaultStateForReservations	db/migrate/20160830115600_set_default_state_for_reservations.rb	/^class SetDefaultStateForReservations < ActiveRecord::Migration[5.0]$/;"	c
 Settlement	app/components/settlement/admin/contractors_controller.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/admin/contracts_controller.rb	/^module Settlement$/;"	m
@@ -897,6 +898,7 @@ Supplementary	app/components/training/supplementary/manually_sign_up_form.rb	/^ 
 Supplementary	app/components/training/supplementary/package_type_record.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/packages_controller.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/repository.rb	/^  module Supplementary$/;"	m	class:Training
+Supplementary	app/components/training/supplementary/send_prepaid_email.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/sign_up_mailer.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/sign_up_record.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/sign_ups_controller.rb	/^  module Supplementary$/;"	m	class:Training
@@ -949,6 +951,7 @@ Training	app/components/training/supplementary/manually_sign_up_form.rb	/^module
 Training	app/components/training/supplementary/package_type_record.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/packages_controller.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/repository.rb	/^module Training$/;"	m
+Training	app/components/training/supplementary/send_prepaid_email.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/sign_up_mailer.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/sign_up_record.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/sign_ups_controller.rb	/^module Training$/;"	m
@@ -2099,6 +2102,7 @@ plastic_for_2019	app/components/membership/fee_form.rb	/^    def plastic_for_201
 pogodynka	app/components/scrappers/weather_storage.rb	/^    def pogodynka$/;"	f	class:Scrappers.WeatherStorage
 point_params	app/components/training/activities/api/mountain_route_points_controller.rb	/^        def point_params$/;"	f	class:Training.Activities.Api.MountainRoutePointsController
 prepaid_email	app/components/training/supplementary/sign_up_mailer.rb	/^      def prepaid_email(sign_up_id)$/;"	f	class:Training.Supplementary.SignUpMailer
+prepaid_emails	app/components/training/supplementary/send_prepaid_email.rb	/^      def prepaid_emails$/;"	f	class:Training.Supplementary.SendPrepaidEmail
 prepaid_not_emailed_sign_ups	app/components/training/supplementary/repository.rb	/^      def prepaid_not_emailed_sign_ups$/;"	f	class:Training.Supplementary.Repository
 prepaid_via_cash	app/components/training/supplementary/limiter.rb	/^      def prepaid_via_cash$/;"	f	class:Training.Supplementary.Limiter
 prepaid_via_dotpay	app/components/training/supplementary/limiter.rb	/^      def prepaid_via_dotpay$/;"	f	class:Training.Supplementary.Limiter
@@ -2174,6 +2178,7 @@ seed!	lib/seeding/seeder.rb	/^      def seed!$/;"	f	class:Seeding.Seeder
 send_email	app/components/events/competitions/sign_ups_controller.rb	/^      def send_email$/;"	f	class:Events
 send_email	app/components/training/supplementary/sign_ups_controller.rb	/^      def send_email$/;"	f	class:Training.Supplementary.SignUpsController.manually
 send_email	app/controllers/admin/profiles_controller.rb	/^    def send_email$/;"	f	class:Admin.ProfilesController
+send_prepaid_emails	app/components/training/supplementary/send_prepaid_email.rb	/^      def send_prepaid_emails$/;"	f	class:Training.Supplementary.SendPrepaidEmail
 send_reminders	app/components/admin/reservation_reminder.rb	/^    def self.send_reminders$/;"	F	class:Admin.ReservationReminder
 send_reminders	app/components/management/voting/reminder.rb	/^      def self.send_reminders$/;"	F	class:Management.Voting.Reminder
 series_attributes_for_select	app/components/activities/competition_record.rb	/^    def self.series_attributes_for_select$/;"	F	class:Activities.CompetitionRecord
