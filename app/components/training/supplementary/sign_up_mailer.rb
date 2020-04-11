@@ -11,7 +11,12 @@ module Training
           to: ['wydarzenia@kw.krakow.pl', @sign_up.email, organizer.email],
           from: 'wydarzenia@kw.krakow.pl',
           subject: "Opłaciłes zapis na wydarzenie KW Kraków: #{@sign_up.course.name}!"
-        )
+        ).tap do |message|
+          message.mailgun_options = {
+            "mailable_id" => "#{@sign_up.id}-prepaid_email",
+            "mailable_type" => @sign_up.class.name
+          }
+        end
       end
 
       def sign_up(sign_up_id)
