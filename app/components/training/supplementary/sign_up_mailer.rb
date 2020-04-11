@@ -13,7 +13,7 @@ module Training
           subject: "Opłaciłes zapis na wydarzenie KW Kraków: #{@sign_up.course.name}!"
         ).tap do |message|
           message.mailgun_options = {
-            "mailable_id" => "#{@sign_up.id}-prepaid_email",
+            "mailable_id" => @sign_up.id,
             "mailable_type" => @sign_up.class.name
           }
         end
