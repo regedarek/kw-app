@@ -4,7 +4,7 @@ module Training
       def send_prepaid_emails
         prepaid_emails.each do |sign_up|
           Training::Supplementary::SignUpMailer.prepaid_email(sign_up.id).deliver_later
-          sign_up.update(paid_email_sent_at: Time.now)
+          sign_up.update(paid_email_sent_at: Time.zone.now)
         end
       end
 
