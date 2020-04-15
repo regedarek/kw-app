@@ -3,10 +3,11 @@ module Business
     append_view_path 'app/components'
 
     def index
-      courses = if params[:archive]
-        Business::CourseRecord.includes(:coordinator).all
-      else
+      params[:q] ||= {}
+      courses = unless params[:q][:starts_at_gteq]
         Business::CourseRecord.includes(:coordinator).where('starts_at >= ?', Time.zone.now)
+      else
+        Business::CourseRecord.includes(:coordinator)
       end
       @q = courses.ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
