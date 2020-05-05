@@ -19,6 +19,7 @@ class Ability
     business_courses if role?('business_courses')
     financial_management if role?('financial_management')
     management if role?('management')
+    voting if role?('voting')
     admin if role?('admin')
     office_king if role?('office_king')
   end
@@ -84,10 +85,15 @@ class Ability
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
     can :manage, Management::ProjectRecord
-    can :manage, Management::Voting::CaseRecord
-    can :hide, Management::Voting::CaseRecord
     can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
+    can :approve, Management::Voting::CaseRecord
+  end
+
+  def voting
+    can :approve_for_all, Management::Voting::CaseRecord
+    can :manage, Management::Voting::CaseRecord
+    can :hide, Management::Voting::CaseRecord
   end
 
   def events
@@ -100,6 +106,7 @@ class Ability
     can :accept, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
+    can :approve, Management::Voting::CaseRecord
   end
 
   def admin

@@ -2360,6 +2360,7 @@ users_names=	app/components/management/project_record.rb	/^    def users_names=(
 validate_each	lib/validators/periodic_date_validator.rb	/^  def validate_each(record, attribute, parameters)$/;"	f	class:PeriodicDateValidator
 vendorPropName	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function vendorPropName( name ) {$/;"	f
 voted?	app/components/management/voting/repository.rb	/^      def voted?(case_id, user_id)$/;"	f	class:Management.Voting.Repository
+voting	app/models/ability.rb	/^  def voting$/;"	f	class:Ability
 voting_results	app/components/management/voting/repository.rb	/^      def voting_results(case_id)$/;"	f	class:Management.Voting.Repository
 waiting	app/components/events/competitions/sign_ups/limiter.rb	/^        def waiting$/;"	f	class:Events.Competitions.SignUps.Limiter
 week	app/components/availability/items.rb	/^    def week$/;"	f	class:Availability.Items
