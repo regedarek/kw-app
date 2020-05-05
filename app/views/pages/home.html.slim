@@ -18,23 +18,16 @@
               = route.name
 
     .large-4.columns
-      = link_to narciarskie_dziki_path do
-        h4
-          = "Narciarskie Dziki #{I18n.t('date.month_names')[Date.today.month]}"
+      = link_to projects_path do
+        h4 Projekty do wzięcia
       table.stack
-        - Activities::SkiRepository.new.fetch_current_month.limit(5).each do |user|
-          - dbuser = Db::User.find(user.id)
+        - Management::ProjectRecord.where(state: :unassigned).order(created_at: :desc).limit(5).each do |project|
           tr
-            td width='46px' = link_to user_path(kw_id: user.kw_id) do
-              - if dbuser.avatar.present?
-                = image_tag(dbuser.avatar.url, class: 'topbar-avatar-image')
-              - else
-                = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-            td = link_to dbuser.display_name, user_path(kw_id: user.kw_id)
-            td.text-right width='70px' = user.total_mountain_routes_length
+            td
+              = link_to project.name, project_path(project.id)
 
   .row
-    .large-4.columns
+    .large-6.columns
       = link_to supplementary_courses_path do
         h4 Nadchodzące wydarzenia
       table.stack
@@ -47,7 +40,7 @@
               = link_to course.name, supplementary_course_path(course.id)
 
     - if Training::Supplementary::Repository.new.future_courses_of_user(current_user).any?
-      .large-4.columns
+      .large-6.columns
         = link_to supplementary_courses_path do
           h4 Twoje wydarzenia
         table.stack
@@ -58,15 +51,6 @@
                   = course.start_date.to_date
               td
                 = link_to course.name, supplementary_course_path(course.id)
-
-    .large-4.columns
-      = link_to projects_path do
-        h4 Projekty do wzięcia
-      table.stack
-        - Management::ProjectRecord.where(state: :unassigned).order(created_at: :desc).limit(5).each do |project|
-          tr
-            td
-              = link_to project.name, project_path(project.id)
 
   .row
     .large-6.columns
