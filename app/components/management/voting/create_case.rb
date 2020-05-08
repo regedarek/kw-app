@@ -15,8 +15,6 @@ module Management
         case_record.update state: 'voting'
         if case_record.hide_votes?
           case_record.finish!
-          nr = Management::Voting::CaseRecord.where(state: 'finished', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
-          case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
         end
 
         Management::Voting::Repository.new.management_users.each do |user|

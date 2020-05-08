@@ -68,8 +68,6 @@ module Management
 
         if case_record.voting? && repository.approved?(case_record.id)
           case_record.finish!
-          nr = Management::Voting::CaseRecord.where(state: 'finished', updated_at: Time.current.beginning_of_month..Time.current.end_of_month).count
-          case_record.update number: "#{nr}/#{Time.current.month}/#{Time.current.year}"
         end
 
         redirect_to case_path(params[:id])
