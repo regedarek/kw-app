@@ -87,6 +87,7 @@ class Ability
     can :manage, Management::ProjectRecord
     can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
+    can :read, Management::Voting::CaseRecord
     can :approve, Management::Voting::CaseRecord
   end
 
@@ -106,6 +107,7 @@ class Ability
     can :accept, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
+    can :read, Management::Voting::CaseRecord
     can :approve, Management::Voting::CaseRecord
   end
 
