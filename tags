@@ -301,6 +301,8 @@ Blog	app/components/blog/api/dashboard_controller.rb	/^module Blog$/;"	m
 Blog	app/components/blog/author.rb	/^module Blog$/;"	m
 Blog	app/components/blog/authors.rb	/^module Blog$/;"	m
 Blog	app/components/blog/dashboard.rb	/^module Blog$/;"	m
+Bluebook	app/components/training/bluebook/exercise_record.rb	/^  module Bluebook$/;"	m	class:Training
+Bluebook	app/components/training/bluebook/exercises_controller.rb	/^  module Bluebook$/;"	m	class:Training
 Business	app/components/business/api/courses_controller.rb	/^module Business$/;"	m
 Business	app/components/business/course_record.rb	/^module Business$/;"	m
 Business	app/components/business/courses_controller.rb	/^module Business$/;"	m
@@ -464,6 +466,7 @@ CreateSupplementaryCourses	db/migrate/20180428115003_create_supplementary_course
 CreateSupplementarySignUps	db/migrate/20180503124007_create_supplementary_sign_ups.rb	/^class CreateSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 CreateTableOrders	db/migrate/20160830160726_create_table_orders.rb	/^class CreateTableOrders < ActiveRecord::Migration[5.0]$/;"	c
 CreateToprRecords	db/migrate/20190815092140_create_topr_records.rb	/^class CreateToprRecords < ActiveRecord::Migration[5.2]$/;"	c
+CreateTrainingExcercies	db/migrate/20200622113423_create_training_excercies.rb	/^class CreateTrainingExcercies < ActiveRecord::Migration[5.2]$/;"	c
 CreateUsers	db/migrate/20150523153119_create_users.rb	/^class CreateUsers < ActiveRecord::Migration[5.0]$/;"	c
 CreateValleyTable	db/migrate/20160804151037_create_valley_table.rb	/^class CreateValleyTable < ActiveRecord::Migration[5.0]$/;"	c
 CreateVersions	db/migrate/20200410095514_create_versions.rb	/^class CreateVersions < ActiveRecord::Migration[5.2]$/;"	c
@@ -552,6 +555,8 @@ Events	app/components/events/db/competition_record.rb	/^module Events$/;"	m
 Events	app/components/events/db/sign_up_record.rb	/^module Events$/;"	m
 Events	app/components/events/sign_up.rb	/^module Events$/;"	m
 EventsController	app/controllers/events_controller.rb	/^class EventsController < ApplicationController$/;"	c
+ExerciseRecord	app/components/training/bluebook/exercise_record.rb	/^    class ExerciseRecord < ActiveRecord::Base$/;"	c	class:Training.Bluebook
+ExercisesController	app/components/training/bluebook/exercises_controller.rb	/^    class ExercisesController < ApplicationController$/;"	c	class:Training.Bluebook
 Factories	spec/factories.rb	/^module Factories$/;"	m
 Failure	lib/failure.rb	/^class Failure < Result$/;"	c
 Fee	app/models/db/membership/fee.rb	/^    class Fee < ActiveRecord::Base$/;"	c	class:Db.Membership
@@ -927,6 +932,8 @@ Training	app/components/training/activities/ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_route_form.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_routes_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/update_ski_route.rb	/^module Training$/;"	m
+Training	app/components/training/bluebook/exercise_record.rb	/^module Training$/;"	m
+Training	app/components/training/bluebook/exercises_controller.rb	/^module Training$/;"	m
 Training	app/components/training/db/course_record.rb	/^module Training$/;"	m
 Training	app/components/training/db/participant_record.rb	/^module Training$/;"	m
 Training	app/components/training/questionare/snw_profile.rb	/^module Training$/;"	m
@@ -1451,6 +1458,7 @@ change	db/migrate/20200410095515_add_object_changes_to_versions.rb	/^  def chang
 change	db/migrate/20200410120523_remove_name_from_business_courses.rb	/^  def change$/;"	f	class:RemoveNameFromBusinessCourses
 change	db/migrate/20200410130334_add_paid_email_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddPaidEmailToSupplementaryCourses
 change	db/migrate/20200410131305_add_paid_email_sent_at_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddPaidEmailSentAtToSupplementarySignUps
+change	db/migrate/20200622113423_create_training_excercies.rb	/^  def change$/;"	f	class:CreateTrainingExcercies
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1526,6 +1534,7 @@ create	app/components/training/activities/api/mountain_route_points_controller.r
 create	app/components/training/activities/contracts_controller.rb	/^      def create$/;"	f	class:Training.Activities.ContractsController
 create	app/components/training/activities/repository.rb	/^      def create(form_outputs:, user_id:)$/;"	f	class:Training.Activities.Repository
 create	app/components/training/activities/ski_routes_controller.rb	/^      def create$/;"	f	class:Training.Activities.SkiRoutesController
+create	app/components/training/bluebook/exercises_controller.rb	/^      def create$/;"	f	class:Training.Bluebook.ExercisesController
 create	app/components/training/questionare/snw_profile_repository.rb	/^      def create(form_outputs)$/;"	f	class:Training.Questionare.SnwProfileRepository
 create	app/components/training/questionare/snw_profile_service.rb	/^      def create(raw_inputs)$/;"	f	class:Training.Questionare.SnwProfileService
 create	app/components/training/supplementary/courses_controller.rb	/^      def create$/;"	f	class:Training.Supplementary.CoursesController
@@ -1675,6 +1684,7 @@ execute	app/services/payments/dotpay/delete_payment_request.rb	/^      def execu
 execute	app/services/payments/dotpay/get_operation_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.GetOperationRequest
 execute	app/services/payments/dotpay/payment_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.PaymentRequest
 execute	app/services/payments/dotpay/refund_payment_request.rb	/^      def execute$/;"	f	class:Payments.Dotpay.RefundPaymentRequest
+exercise_params	app/components/training/bluebook/exercises_controller.rb	/^      def exercise_params$/;"	f	class:Training.Bluebook.ExercisesController
 expired_sign_ups	app/components/events/competitions/repository.rb	/^      def expired_sign_ups$/;"	f	class:Events.Competitions.Repository
 expired_sign_ups	app/components/training/supplementary/repository.rb	/^      def expired_sign_ups$/;"	f
 extension_whitelist	app/components/photo_competition/file_uploader.rb	/^    def extension_whitelist$/;"	f	class:PhotoCompetition.FileUploader
@@ -2024,6 +2034,7 @@ new	app/components/settlement/admin/contractors_controller.rb	/^      def new$/;
 new	app/components/settlement/admin/contracts_controller.rb	/^      def new$/;"	f	class:Settlement.Admin.ContractsController
 new	app/components/training/activities/contracts_controller.rb	/^      def new$/;"	f	class:Training.Activities.ContractsController
 new	app/components/training/activities/ski_routes_controller.rb	/^      def new$/;"	f	class:Training.Activities.SkiRoutesController
+new	app/components/training/bluebook/exercises_controller.rb	/^      def new$/;"	f	class:Training.Bluebook.ExercisesController
 new	app/components/training/supplementary/courses_controller.rb	/^      def new$/;"	f	class:Training.Supplementary.CoursesController
 new	app/components/training/supplementary/packages_controller.rb	/^      def new$/;"	f	class:Training.Supplementary.PackagesController
 new	app/components/user_management/lists_controller.rb	/^    def new$/;"	f	class:UserManagement.ListsController
@@ -2202,6 +2213,7 @@ show	app/components/photo_competition/admin/editions_controller.rb	/^      def s
 show	app/components/photo_competition/requests_controller.rb	/^    def show$/;"	f	class:PhotoCompetition.RequestsController
 show	app/components/settlement/admin/contracts_controller.rb	/^      def show$/;"	f	class:Settlement.Admin.ContractsController
 show	app/components/training/activities/contracts_controller.rb	/^      def show$/;"	f	class:Training.Activities.ContractsController
+show	app/components/training/bluebook/exercises_controller.rb	/^      def show$/;"	f	class:Training.Bluebook.ExercisesController
 show	app/components/training/supplementary/courses_controller.rb	/^      def show$/;"	f	class:Training.Supplementary.CoursesController
 show	app/components/visiting_card/profiles_controller.rb	/^    def show$/;"	f	class:VisitingCard.ProfilesController
 show	app/controllers/activities/mountain_routes_controller.rb	/^    def show$/;"	f	class:Activities.MountainRoutesController

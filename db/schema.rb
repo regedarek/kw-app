@@ -833,6 +833,14 @@ ActiveRecord::Schema.define(version: 2020_04_10_131305) do
     t.string "topr_degree"
   end
 
+  create_table "training_exercises", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "group_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"

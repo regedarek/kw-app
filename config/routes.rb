@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   load Rails.root.join("app/components/events/routes.rb")
+  load Rails.root.join("app/components/training/bluebook/routes.rb")
   load Rails.root.join("app/components/scrappers/routes.rb")
   load Rails.root.join("app/components/notification_center/routes.rb")
   load Rails.root.join("app/components/email_center/routes.rb")
@@ -146,6 +147,7 @@ Rails.application.routes.draw do
   get "pages/*id" => 'pages#show', as: :page, format: false
   get 'admin/dostepy' => 'pages#show', id: 'roles'
   get 'warunki' => 'scrappers/scrappers#index'
+  get 'trening/skimo' => 'pages#show', id: 'skimo'
 
   root to: 'pages#show', id: 'home'
 end

@@ -1,0 +1,27 @@
+= form_for @exercise, as: :exercise, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if @exercise.errors.any?
+        .callout.alert
+          ul
+            - @exercise.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-6.columns
+      = f.label :name, 'Nazwa'
+      = f.text_field :name
+
+    .large-6.columns
+      = f.label :group_type, 'Typ grupy'
+      = f.select :group_type, :collection => Training::Bluebook::ExerciseRecord.group_types.keys.to_a
+
+  .row
+    .large-12.columns
+      = f.label :description, 'Opis'
+      = f.trix_editor :description, style: 'min-height: 150px'
+      br
+
+  .row
+    .large-12.columns
+      = f.submit 'Dodaj ćwiczenie', class: 'button'

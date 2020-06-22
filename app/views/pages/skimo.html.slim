@@ -1,0 +1,10 @@
+.row
+  .large-12.columns
+    h3.subheader Zarządzenie treningiem SkiMo
+
+    .callout.primary
+      | Tutaj znajdziecie informacje dotyczące treningu.
+
+.row
+  .large-12.columns
+    = render 'training/bluebook/exercises/table', exercises: Training::Bluebook::ExerciseRecord.all

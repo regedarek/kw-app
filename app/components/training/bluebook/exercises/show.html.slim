@@ -1,0 +1,12 @@
+.row
+  .large-12.columns
+    h3 = @exercise.name
+
+.row
+  .large-12.columns
+    .callout
+      = @exercise.description
+
+.row
+  .large-12.columns
+    = link_to 'powrót do strefy treningu', '/trening/skimo', class: 'button alert'

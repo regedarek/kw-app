@@ -1,0 +1,15 @@
+table.responsive
+  thead
+    tr
+      th Nazwa
+      th Opis
+      th Typ
+  tbody
+    - exercises.each do |exercise|
+      tr
+        td
+          = link_to exercise.name, exercise_path(exercise.id)
+        td
+          = truncate(exercise.description, length: 10)
+        td
+          = I18n.t :"exercises.group_types.#{exercise.group_type}"

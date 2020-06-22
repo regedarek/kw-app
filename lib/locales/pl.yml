@@ -1,4 +1,8 @@
 pl:
+  exercises:
+    group_types:
+      base: Baza
+      strength: Siła
   mailboxer:
     message_mailer:
       subject_new: "Panel KW Kraków - Nowa Wiadomość: %{subject}"
