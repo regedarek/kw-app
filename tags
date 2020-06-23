@@ -1083,6 +1083,7 @@ area_needed?	app/components/photo_competition/request_record.rb	/^    def area_n
 as_json	app/components/business/course_record.rb	/^    def as_json(options={})$/;"	f	class:Business.CourseRecord
 as_json	app/components/business/instructor_record.rb	/^    def as_json$/;"	f	class:Business.InstructorRecord
 augmentWidthOrHeight	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {$/;"	f
+authorize	app/controllers/pages_controller.rb	/^  def authorize$/;"	f	class:PagesController
 authorize_admin	app/components/events/admin/competitions_controller.rb	/^      def authorize_admin$/;"	f	class:Events.Admin.CompetitionsController
 authorize_admin	app/components/membership/admin/membership_fees_controller.rb	/^      def authorize_admin$/;"	f	class:Membership.Admin.MembershipFeesController
 authorize_admin	app/components/reservations/items_controller.rb	/^    def authorize_admin$/;"	f	class:Reservations.ItemsController

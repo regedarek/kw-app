@@ -1,10 +1,18 @@
 .row
   .large-12.columns
-    h3.subheader Zarządzenie treningiem SkiMo
+    h3.subheader Baza wiedzy SkiMo - Kompleksowy System Kształcenia Skialpinisty
 
     .callout.primary
-      | Tutaj znajdziecie informacje dotyczące treningu.
+      | Znajdziecie tutaj zestaw narzędzi, wiedzy, która pozwoli Wam zostać mocnym w wielu aspektach narciarzem.
+      br
+      | Baza będzie konsekwentnie rozwijana i uzupełniania o nowe treści powstałe w raz z trwaniem programu.
 
 .row
-  .large-12.columns
-    = render 'training/bluebook/exercises/table', exercises: Training::Bluebook::ExerciseRecord.all
+  .large-3.columns
+    = link_to 'Wydolność', page_path(id: 'wydolnosc'), class: 'button expanded large primary'
+  .large-3.columns
+    = link_to 'Motoryka', '#', class: 'button expanded large warning disabled'
+  .large-3.columns
+    = link_to 'Bezpieczeństwo w górach', '#', class: 'button expanded large alert disabled'
+  .large-3.columns
+    = link_to 'Technika Narciarska', '#', class: 'button expanded large success disabled'
