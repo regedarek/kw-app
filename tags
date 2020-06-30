@@ -1719,7 +1719,7 @@ fetch_prev_month	app/components/activities/ski_repository.rb	/^    def fetch_pre
 fetch_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_prev_prev_month	app/components/training/activities/repository.rb	/^      def fetch_prev_prev_month$/;"	f	class:Training.Activities.Repository
 fetch_projects	app/components/membership/card/repository.rb	/^      def fetch_projects(user)$/;"	f	class:Membership.Card.Repository
-fetch_season	app/components/activities/repository.rb	/^    def fetch_season(route_type = 'regular_climbing', start_date=DateTime.new(2020, 07, 1), end_date=DateTime.new(2020, 11, 30))$/;"	f	class:Activities.Repository
+fetch_season	app/components/activities/repository.rb	/^    def fetch_season(route_type = 'regular_climbing', start_date=DateTime.new(2020, 06, 1), end_date=DateTime.new(2020, 11, 30))$/;"	f	class:Activities.Repository
 fetch_season	app/components/activities/ski_repository.rb	/^    def fetch_season$/;"	f	class:Activities.SkiRepository
 fetch_season	app/components/training/activities/repository.rb	/^      def fetch_season$/;"	f	class:Training.Activities.Repository
 fetch_spring	app/components/activities/ski_repository.rb	/^    def fetch_spring$/;"	f	class:Activities.SkiRepository
