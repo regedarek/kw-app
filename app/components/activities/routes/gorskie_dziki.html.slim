@@ -118,6 +118,9 @@
                 th kto?
                 th width='15%' ile?
             tbody
+              - start_date = DateTime.new(2020, 06, 1)
+              - end_date = DateTime.new(2020, 11, 30)
+              - range = start_date..end_date
               - @tatra_uniqe.first(5).each do |user|
                 tr
                   td width='45px' = link_to user_path(kw_id: user.kw_id) do
@@ -126,7 +129,7 @@
                     - else
                       = image_tag('default-avatar.png', class: 'topbar-avatar-image')
                   td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-                  td.text-center = user.mountain_routes.where("description LIKE '%#exploratortatr%'").count
+                  td.text-center = user.mountain_routes.where(climbing_date: range, created_at: range).where("description LIKE '%#exploratortatr%'").count
 
 .row
   .large-12.columns
