@@ -36,11 +36,10 @@ module Activities
 
     def best_route_of_season(route_type = 'regular_climbing')
       range = start_date..end_date
-      us = ::Db::User
-        .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
-        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
-        .select('users.kw_id, users.id, users.avatar, MAX(mountain_routes.hearts_count) AS max_mountain_routes_hearts_count')
+      us = ::Db::Activities::MountainRoute
+        .where.not(id: nil, length: nil)
+        .where(route_type: route_type, climbing_date: range, created_at: range)
+        .select('id, name, slug, MAX(hearts_count) AS max_mountain_routes_hearts_count')
         .group(:id)
         .order('max_mountain_routes_hearts_count DESC')
     end
