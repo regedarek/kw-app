@@ -103,7 +103,7 @@
                 tr
                   td
                     - route = user.mountain_routes.where(climbing_date: range, created_at: range).select('mountain_routes.id, mountain_routes.slug, Max(hearts_count) as max_heart_count').group(:id).order('max_heart_count DESC').first
-                    - route.users.each do |u|
+                    - route.colleagues.each do |u|
                       = link_to user_path(kw_id: u.kw_id) do
                         - if u.avatar.present?
                           = image_tag(u.avatar.url, class: 'topbar-avatar-image')
