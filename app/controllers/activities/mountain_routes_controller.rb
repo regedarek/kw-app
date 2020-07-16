@@ -36,7 +36,6 @@ module Activities
 
       routes = ::Db::Activities::MountainRoute
         .where(
-          route_type: 'ski',
           climbing_date: range,
           created_at: range
       ).uniq
