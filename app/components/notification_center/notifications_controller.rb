@@ -6,7 +6,7 @@ module NotificationCenter
     def index
       notifications = NotificationCenter::NotificationRecord.includes([:actor, :notifiable]).where(recipient: current_user).recent
 
-      render json: notifications.map { |record| NotificationCenter::Notification.from_record(record) }
+      render json: notifications.map { |record| NotificationCenter::Notification.from_record(record) if record.notifiable }.compact
     end
 
     def mark_as_read
