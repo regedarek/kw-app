@@ -143,6 +143,7 @@
           th width='25px'
           th width='250px' Kto?
           th.large-text-left Ostatnie przejście
+          th.large-text-right width='50px' Szacunek [bicki]
           th.large-text-right width='50px' Przewspinane [metry]
 
       tbody
@@ -159,5 +160,7 @@
             td.large-text-left
               - if user.mountain_routes.any?
                 = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
+            td.large-text-right
+              = Activities::Repository.new.respect_for(user)
             td.text-center.large-text-right = user.total_mountain_routes_length
           - i += 1

@@ -2157,6 +2157,7 @@ request_params	app/components/photo_competition/requests_controller.rb	/^    def
 reservation_params	app/controllers/admin/reservations_controller.rb	/^    def reservation_params$/;"	f	class:Admin
 reservations	app/models/ability.rb	/^  def reservations$/;"	f	class:Ability
 reserve	app/mailers/reservation_mailer.rb	/^  def reserve(reservation)$/;"	f	class:ReservationMailer
+respect_for	app/components/activities/repository.rb	/^    def respect_for(user)$/;"	f	class:Activities.Repository
 restoreScript	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function restoreScript( elem ) {$/;"	f
 return	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	return new Tween.prototype.init( elem, options, prop, end, easing );$/;"	c
 return.hasOwnProperty	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m
