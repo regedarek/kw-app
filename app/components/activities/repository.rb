@@ -55,6 +55,11 @@ module Activities
         .order('total_mountain_routes_hearts_count DESC')
     end
 
+    def respect_for(user)
+      range = start_date..end_date
+      user.mountain_routes.where.not(id: nil, length: nil).where(route_type: 'regular_climbing', climbing_date: range, created_at: range).sum(:hearts_count)
+    end
+
     def tatra_uniqe(route_type = 'regular_climbing')
       range = start_date..end_date
       ::Db::User
@@ -75,10 +80,7 @@ module Activities
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#dziadekgienek%'").count }.reverse!
     end
 
-    def respect_for(user)
-      range = start_date..end_date
-      user.mountain_routes.where(route_type: 'regular_climbing', climbing_date: range).sum(:hearts_count)
-    end
+
 
     def start_date
       start_date = DateTime.new(2020, 06, 1)
