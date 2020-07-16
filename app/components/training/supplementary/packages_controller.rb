@@ -30,7 +30,7 @@ module Training
       end
 
       def package_params
-        params.require(:package).permit(:name, :cost, :course_id)
+        params.require(:package).permit(:name, :cost, :course_id, :membership)
       end
     end
   end

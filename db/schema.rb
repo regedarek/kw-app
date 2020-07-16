@@ -765,6 +765,7 @@ ActiveRecord::Schema.define(version: 2020_04_10_131305) do
     t.boolean "increase_limit", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "membership", default: false, null: false
   end
 
   create_table "supplementary_courses", id: :serial, force: :cascade do |t|

@@ -139,6 +139,7 @@ AddMandatoryFieldsToEditionCategories	db/migrate/20181009110950_add_mandatory_fi
 AddMatrimonialOfficeToCompetitions	db/migrate/20180422174624_add_matrimonial_office_to_competitions.rb	/^class AddMatrimonialOfficeToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddMaxSeatsToBusinessCourses	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^class AddMaxSeatsToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddMembershipToPackages	db/migrate/20180111171334_add_membership_to_packages.rb	/^class AddMembershipToPackages < ActiveRecord::Migration[5.0]$/;"	c
+AddMembershipToSupplementaryCoursePackageTypes	db/migrate/20200716115752_add_membership_to_supplementary_course_package_types.rb	/^class AddMembershipToSupplementaryCoursePackageTypes < ActiveRecord::Migration[5.2]$/;"	c
 AddMeteogramToMeteoblueRecords	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^class AddMeteogramToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddMissingIndices	db/migrate/20191114202838_add_missing_indices.mailboxer_engine.rb	/^class AddMissingIndices < ActiveRecord::Migration[4.2]$/;"	c
 AddMoreindexesToMountainRoutes	db/migrate/20190130233129_add_moreindexes_to_mountain_routes.rb	/^class AddMoreindexesToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
@@ -1460,6 +1461,7 @@ change	db/migrate/20200410120523_remove_name_from_business_courses.rb	/^  def ch
 change	db/migrate/20200410130334_add_paid_email_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddPaidEmailToSupplementaryCourses
 change	db/migrate/20200410131305_add_paid_email_sent_at_to_supplementary_sign_ups.rb	/^  def change$/;"	f	class:AddPaidEmailSentAtToSupplementarySignUps
 change	db/migrate/20200622113423_create_training_excercies.rb	/^  def change$/;"	f	class:CreateTrainingExcercies
+change	db/migrate/20200716115752_add_membership_to_supplementary_course_package_types.rb	/^  def change$/;"	f	class:AddMembershipToSupplementaryCoursePackageTypes
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2126,6 +2128,7 @@ prev_year_fee	app/components/membership/activement.rb	/^    def prev_year_fee$/;
 process	app/services/payments/dotpay/status.rb	/^      def process$/;"	f	class:Payments.Dotpay.Status
 process_page	app/components/scrappers/pdf_image_extractor.rb	/^    def process_page(page, count)$/;"	f	class:Scrappers.PdfImageExtractor
 profile	app/components/management/snw/snw_apply_record.rb	/^      def profile$/;"	f	class:Management.Snw.SnwApplyRecord
+profile_has_been_released?	app/components/membership/activement.rb	/^    def profile_has_been_released?(user)$/;"	f	class:Membership.Activement
 profile_name	app/components/business/instructor_record.rb	/^    def profile_name$/;"	f	class:Business.InstructorRecord
 profile_params	app/controllers/admin/profiles_controller.rb	/^    def profile_params$/;"	f	class:Admin.ProfilesController
 profile_params	app/controllers/profiles_controller.rb	/^  def profile_params$/;"	f	class:ProfilesController

@@ -22,6 +22,14 @@ module Training
             return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).active?
           end
 
+          if course.packages
+            package = Training::Supplementary::PackageTypeRecord.find(form_outputs[:supplementary_course_package_type_id])
+
+            if package.membership
+              return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).active?
+            end
+          end
+
           sign_up = repository.sign_up!(
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],
@@ -30,6 +38,14 @@ module Training
             question: form_outputs[:question]
           )
         else
+          if course.packages
+            package = Training::Supplementary::PackageTypeRecord.find(form_outputs[:supplementary_course_package_type_id])
+
+            if package.membership
+              return Left(fee: I18n.t('.not_last_fee'))
+            end
+          end
+
           sign_up = repository.sign_up!(
             course_id: form_outputs[:course_id],
             email: form_outputs[:email],

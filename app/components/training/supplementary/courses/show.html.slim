@@ -98,7 +98,7 @@
               = a.hidden_field :course_id, value: @course.id
               - if @course.packages
                 = a.select :supplementary_course_package_type_id,
-                @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]}
+                @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]}
               = a.submit 'Zapisz ręcznie', class: 'button primary expanded'
 
 
@@ -119,7 +119,7 @@
                   - if @course.price
                     - if @course.packages
                       = z.select :supplementary_course_package_type_id,
-                      @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
+                      @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
                       include_blank: 'Wybierz pakiet'
                   - if @course.question
                     .callout.warning
@@ -151,7 +151,7 @@
                 - if @course.price
                   - if @course.packages
                     = z.select :supplementary_course_package_type_id,
-                    @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
+                    @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
                     include_blank: 'Wybierz pakiet'
                 = z.submit 'Zapisz się', class: 'button large success expanded'
         - else
@@ -173,7 +173,7 @@
                   - if @course.price
                     - if @course.packages
                       = x.select :supplementary_course_package_type_id,
-                      @course.package_types.collect {|u| ["#{u.name} - #{u.cost} zł", u.id]},
+                      @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
                       include_blank: 'Wybierz pakiet'
                   = x.submit 'Zapisz się', class: 'button large success expanded'
       - if @limiter.sign_ups_started?
@@ -230,7 +230,7 @@
           b Pakiety: 
           ul
             - @course.package_types.each do |p|
-              li = "#{p.name} - #{p.cost} zł (#{@limiter.all_prepaid.where(supplementary_course_package_type_id: p.id)&.count})"
+              li = "#{p.name_with_cost} (#{@limiter.all_prepaid.where(supplementary_course_package_type_id: p.id)&.count})"
         - if @course.remarks.present?
           h5 = t('.remarks')
           .callout

@@ -14,6 +14,7 @@ module Membership
 
     def active?
       return false unless user
+      return true if profile_has_been_released?(user)
       return false unless user.membership_fees.any?
       return false unless user.membership_fees.where(year: prev_year..next_year).any?
 
@@ -39,6 +40,10 @@ module Membership
     end
 
     private
+
+    def profile_has_been_released?(user)
+      user.profile && user.profile.position.any?{|p| ['honorable_kw', 'senior', 'released'].include?(p)}
+    end
 
     def prev_year_fee
       user.membership_fees.find_by(year: prev_year)

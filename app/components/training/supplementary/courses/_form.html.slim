@@ -105,12 +105,16 @@
             .large-1.columns
               br
               = ff.remove_nested_fields_link
-            .large-9.columns
+            .large-6.columns
               = ff.label :name, 'Nazwa'
               = ff.text_field :name
             .large-2.columns
               = ff.label :name, 'Kwota'
               = ff.number_field :cost
+            .large-3.columns
+              br
+              = ff.check_box :membership
+              = ff.label :membership, 'Sprawdź składkę'
         = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
   .js-price-row
