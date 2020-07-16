@@ -72,7 +72,7 @@ module Admin
     def show
       @profile = Db::Profile.find(params[:id])
       @fees_repository = ::Membership::FeesRepository.new
-      @activement = ::Membership::Activement.new(user: @profile)
+      @activement = ::Membership::Activement.new(user: @profile.user)
 
       authorize! :read, Db::Profile
 
