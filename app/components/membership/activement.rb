@@ -42,7 +42,11 @@ module Membership
     private
 
     def profile_has_been_released?(user)
-      user.profile && user.profile.position.any?{|p| ['honorable_kw', 'senior', 'released'].include?(p)}
+      if user.profile
+        user.profile.position.any?{ |p| ['honorable_kw', 'senior', 'released'].include?(p) }
+      else
+        false
+      end
     end
 
     def prev_year_fee
