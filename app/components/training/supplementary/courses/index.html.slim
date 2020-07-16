@@ -32,6 +32,11 @@
         = link_to 'Rozlicz', new_admin_contract_path, class: 'button large expanded'
 
 .row
+  - if current_user.roles.include?('events') && @draft_courses.any?
+    .large-12.columns
+      h4 Robocze wydarzenia
+      = render 'table', courses: @draft_courses
+      h4 Opublikowane wydarzenia
   .large-12.columns
     = render 'table', courses: @active_courses
     ul.accordion data-accordion="" data-multi-expand="true"

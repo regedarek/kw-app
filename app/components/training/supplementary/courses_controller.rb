@@ -7,6 +7,7 @@ module Training
 
       def index
         @active_courses = Training::Supplementary::Repository.new.fetch_active_courses(category: params[:category], kind: params[:kind])
+        @draft_courses = Training::Supplementary::Repository.new.fetch_draft_courses(category: params[:category], kind: params[:kind])
         @inactive_courses = Training::Supplementary::Repository.new.fetch_inactive_courses(category: params[:category], kind: params[:kind])
       end
 

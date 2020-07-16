@@ -1709,12 +1709,13 @@ fee_params	app/controllers/membership/fees_controller.rb	/^    def fee_params$/;
 fetch	app/components/blog/authors.rb	/^    def fetch$/;"	f	class:Blog.Authors
 fetch	app/components/blog/dashboard.rb	/^    def fetch$/;"	f	class:Blog.Dashboard
 fetch_active_courses	app/components/training/supplementary/repository.rb	/^      def fetch_active_courses(category: nil, kind: nil)$/;"	f	class:Training.Supplementary.Repository
-fetch_archived_courses	app/components/training/supplementary/repository.rb	/^      def fetch_archived_courses(category: nil, kind: nil)$/;"	f	class:Training
+fetch_archived_courses	app/components/training/supplementary/repository.rb	/^      def fetch_archived_courses(category: nil, kind: nil)$/;"	f
 fetch_autum	app/components/training/activities/repository.rb	/^      def fetch_autum$/;"	f	class:Training.Activities.Repository
 fetch_courses	app/components/membership/card/repository.rb	/^      def fetch_courses(user)$/;"	f	class:Membership.Card.Repository
 fetch_current_month	app/components/activities/repository.rb	/^    def fetch_current_month(route_type = 'regular_climbing')$/;"	f	class:Activities.Repository
 fetch_current_month	app/components/activities/ski_repository.rb	/^    def fetch_current_month$/;"	f	class:Activities.SkiRepository
 fetch_current_month	app/components/training/activities/repository.rb	/^      def fetch_current_month$/;"	f	class:Training.Activities.Repository
+fetch_draft_courses	app/components/training/supplementary/repository.rb	/^      def fetch_draft_courses(category: nil, kind: nil)$/;"	f	class:Training
 fetch_inactive_courses	app/components/training/supplementary/repository.rb	/^      def fetch_inactive_courses(category:, kind: nil)$/;"	f
 fetch_mountain_routes	app/components/membership/card/repository.rb	/^      def fetch_mountain_routes(user)$/;"	f	class:Membership.Card.Repository
 fetch_one	app/components/blog/authors.rb	/^    def fetch_one(number: nil)$/;"	f	class:Blog.Authors.fetch
