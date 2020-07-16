@@ -94,7 +94,7 @@
       - EmailCenter::EmailRecord.includes(:mailable).where(state: 'sent').order('created_at DESC NULLS LAST').each do |email|
         tr
           td
-            - if mailable_type == 'Db::Profile'
+            - if email.mailable_type == 'Db::Profile'
               = link_to email.mailable.try(:display_name), admin_profile_path(email.mailable.kw_id)
-            - elsif mailable_type == 'Training::Supplementary::SignUpRecord'
+            - elsif email.mailable_type == 'Training::Supplementary::SignUpRecord'
               = link_to email.mailable.try(:name), edit_supplementary_sign_up_path(email.mailable_id)
