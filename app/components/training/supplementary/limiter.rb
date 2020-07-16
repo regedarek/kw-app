@@ -9,6 +9,14 @@ module Training
         @course.application_date.nil? || Time.current.in_time_zone >= @course.application_date.in_time_zone
       end
 
+      def sign_ups_closed?
+        if @course.end_application_date
+          return true if @course.end_application_date < Time.current.in_time_zone
+        else
+          return false
+        end
+      end
+
       def limit
         @course.limit
       end

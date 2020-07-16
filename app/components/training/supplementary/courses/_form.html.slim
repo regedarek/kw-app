@@ -59,8 +59,37 @@
             = f.label :limit, 'Limit osób'
           = f.number_field :limit
 
+
+
+
 .row
-  .large-8.columns
+  .large-12.columns
+    .callout.secondary
+      .row
+        .large-3.columns
+          span data-tooltip='' tabindex="1" title="Data i godzina kiedy przycisk zapisz się stanie się aktywny" data-allow-html="true"
+            = f.label :application_date, t('.application_date')
+          = f.datetime_field :application_date
+
+        .large-3.columns
+          span data-tooltip='' tabindex="1" title="Data i godzina po której przycisk zapisz się stanie się nieaktywny" data-allow-html="true"
+            = f.label :end_application_date, 'Koniec zapisów'
+          = f.datetime_field :end_application_date
+
+        .large-3.columns
+          span data-tooltip='' tabindex="1" title="Kiedy startuje wydarzenie?" data-allow-html="true"
+            = f.label :start_date, t('.start_date')
+          = f.datetime_field :start_date
+
+        .large-3.columns
+          .js-one-day-row
+            span data-tooltip='' tabindex="1" title="Do kiedy trwa wydarzenie" data-allow-html="true"
+              = f.label :end_date, t('.end_date')
+            = f.date_field :end_date
+
+
+.row
+  .large-12.columns
     .callout.secondary
       .row
         .large-4.columns
@@ -75,28 +104,6 @@
           = f.check_box :packages, class: 'js-packages'
           span data-tooltip='' tabindex="1" title="Dodaje opcję kilku pakietów płatności za wydarzenie" data-allow-html="true"
             = f.label :packages, t('.packages')
-
-
-.row
-  .large-8.columns
-    .callout.secondary
-      .row
-        .large-4.columns
-          span data-tooltip='' tabindex="1" title="Data i godzina kiedy przycisk zapisz się stanie się aktywny" data-allow-html="true"
-            = f.label :application_date, t('.application_date')
-          = f.datetime_field :application_date
-
-        .large-4.columns
-          span data-tooltip='' tabindex="1" title="Kiedy startuje wydarzenie?" data-allow-html="true"
-            = f.label :start_date, t('.start_date')
-          = f.datetime_field :start_date
-
-        .large-4.columns
-          .js-one-day-row
-            span data-tooltip='' tabindex="1" title="Do kiedy trwa wydarzenie" data-allow-html="true"
-              = f.label :end_date, t('.end_date')
-            = f.date_field :end_date
-
   .js-packages-row
     .large-8.columns
       .callout.warning

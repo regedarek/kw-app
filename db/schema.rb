@@ -803,6 +803,7 @@ ActiveRecord::Schema.define(version: 2020_04_10_131305) do
     t.boolean "question", default: false, null: false
     t.boolean "send_manually", default: false, null: false
     t.text "paid_email"
+    t.datetime "end_application_date"
     t.index ["slug"], name: "index_supplementary_courses_on_slug", unique: true
   end
 

@@ -34,6 +34,10 @@
         br
       b = t('.application_date')
       = @course&.application_date&.strftime("%d/%m/%Y %H:%M")
+      - if @course&.end_application_date.present?
+        br
+        b Koniec zapisów: 
+        = @course&.end_application_date&.strftime("%d/%m/%Y %H:%M")
       br
       - if @course&.price_kw.present?
         b = t('.application_price_kw')
@@ -109,73 +113,81 @@
       - else
         - if user_signed_in?
           - if @limiter.sign_ups_started? && !@limiter.open?
-            - if @limiter.sign_ups_reached?
-              - if @course.reserve_list
+            - if @limiter.sign_ups_closed?
+              .callout.warning
+                | Jest już po terminie, kiedy możliwe było zapisanie się.
+            - else
+              - if @limiter.sign_ups_reached?
+                - if @course.reserve_list
+                  = form_for :sign_up, url: supplementary_sign_ups_path do |z|
+                    = z.hidden_field :course_id, value: @course.id
+                    = z.hidden_field :user_id, value: current_user.id
+                    = z.hidden_field :email, value: current_user.email
+                    = z.hidden_field :name, value: current_user.display_name
+                    - if @course.price
+                      - if @course.packages
+                        = z.select :supplementary_course_package_type_id,
+                        @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
+                        include_blank: 'Wybierz pakiet'
+                    - if @course.question
+                      .callout.warning
+                        | Odpowiedz na pytanie zadane w opisie wydarzenia
+                      = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
+                    - else
+                      = z.hidden_field :question, value: nil
+                    = z.submit 'Zapisz na listę rezerwową', class: 'button large secondary expanded'
+                    .callout.secondary
+                      | Limit miejsc został wyczerpany ale możesz zapisać się na 
+                      | listę rezerwową i poczekać na zwiększenie limitu.
+                      br
+                      b Jeżeli zwolni się miejsce zostaniesz powiadomiony e-mailem.
+                - else
+                  .callout.warning
+                    | Limit miejsc został wyczerpany.
+              - else
                 = form_for :sign_up, url: supplementary_sign_ups_path do |z|
                   = z.hidden_field :course_id, value: @course.id
                   = z.hidden_field :user_id, value: current_user.id
                   = z.hidden_field :email, value: current_user.email
                   = z.hidden_field :name, value: current_user.display_name
-                  - if @course.price
-                    - if @course.packages
-                      = z.select :supplementary_course_package_type_id,
-                      @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
-                      include_blank: 'Wybierz pakiet'
                   - if @course.question
                     .callout.warning
                       | Odpowiedz na pytanie zadane w opisie wydarzenia
                     = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
                   - else
                     = z.hidden_field :question, value: nil
-                  = z.submit 'Zapisz na listę rezerwową', class: 'button large secondary expanded'
-                  .callout.secondary
-                    | Limit miejsc został wyczerpany ale możesz zapisać się na 
-                    | listę rezerwową i poczekać na zwiększenie limitu.
-                    br
-                    b Jeżeli zwolni się miejsce zostaniesz powiadomiony e-mailem.
-              - else
-                .callout.warning
-                  | Limit miejsc został wyczerpany.
-            - else
-              = form_for :sign_up, url: supplementary_sign_ups_path do |z|
-                = z.hidden_field :course_id, value: @course.id
-                = z.hidden_field :user_id, value: current_user.id
-                = z.hidden_field :email, value: current_user.email
-                = z.hidden_field :name, value: current_user.display_name
-                - if @course.question
-                  .callout.warning
-                    | Odpowiedz na pytanie zadane w opisie wydarzenia
-                  = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
-                - else
-                  = z.hidden_field :question, value: nil
-                - if @course.price
-                  - if @course.packages
-                    = z.select :supplementary_course_package_type_id,
-                    @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
-                    include_blank: 'Wybierz pakiet'
-                = z.submit 'Zapisz się', class: 'button large success expanded'
+                  - if @course.price
+                    - if @course.packages
+                      = z.select :supplementary_course_package_type_id,
+                      @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
+                      include_blank: 'Wybierz pakiet'
+                  = z.submit 'Zapisz się', class: 'button large success expanded'
         - else
           - if @course.last_fee_paid
             = button_to 'Zaloguj się aby zapisać!', '/zaloguj', class: 'button large alert expanded disabled', method: :get
           -else
             - if @limiter.sign_ups_started? && !@limiter.open?
-              - if @limiter.sign_ups_reached?
+              - if @limiter.sign_ups_closed?
                 .callout.warning
-                  | Limit miejsc został wyczerpany.
+                  | Jest już po terminie, kiedy możliwe było zapisanie się?
               - else
-                .callout.secondary
-                  | Twój e-mail wykasujemy z bazy zaraz po zakończeniu wydarzenia.
-                = form_for :sign_up, url: supplementary_sign_ups_path do |x|
-                  = x.hidden_field :course_id, value: @course.id
-                  = x.text_field :name, placeholder: 'Imię i nazwisko'
-                  = x.email_field :email, placeholder: 'E-mail'
-                  = x.hidden_field :question, value: nil
-                  - if @course.price
-                    - if @course.packages
-                      = x.select :supplementary_course_package_type_id,
-                      @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
-                      include_blank: 'Wybierz pakiet'
-                  = x.submit 'Zapisz się', class: 'button large success expanded'
+                - if @limiter.sign_ups_reached?
+                  .callout.warning
+                    | Limit miejsc został wyczerpany.
+                - else
+                  .callout.secondary
+                    | Twój e-mail wykasujemy z bazy zaraz po zakończeniu wydarzenia.
+                  = form_for :sign_up, url: supplementary_sign_ups_path do |x|
+                    = x.hidden_field :course_id, value: @course.id
+                    = x.text_field :name, placeholder: 'Imię i nazwisko'
+                    = x.email_field :email, placeholder: 'E-mail'
+                    = x.hidden_field :question, value: nil
+                    - if @course.price
+                      - if @course.packages
+                        = x.select :supplementary_course_package_type_id,
+                        @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
+                        include_blank: 'Wybierz pakiet'
+                    = x.submit 'Zapisz się', class: 'button large success expanded'
       - if @limiter.sign_ups_started?
         - if user_signed_in?
           - if @current_user_sign_up.present?
