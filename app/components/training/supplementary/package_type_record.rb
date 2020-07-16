@@ -9,7 +9,7 @@ module Training
         if membership
           "[Członek KW] #{name} - #{cost} zł"
         else
-          "#{name} - #{cost} zł"
+          "[Poza KW] #{name} - #{cost} zł"
         end
       end
     end
