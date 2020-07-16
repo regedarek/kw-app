@@ -80,8 +80,6 @@ module Activities
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#dziadekgienek%'").count }.reverse!
     end
 
-
-
     def start_date
       start_date = DateTime.new(2020, 06, 1)
     end
