@@ -7,7 +7,7 @@ module Membership
       def unpaid
         @profile_unpaid_this_year = Db::Profile.where(accepted: true)
           .where.not('position @> array[?]', 'honorable_kw').where.not('position @> array[?]', 'canceled').where.not('position @> array[?]', 'senior').select do |profile|
-            !::Membership::Activement.new(user: profile).active?
+            !::Membership::Activement.new(user: profile.user).active?
           end
       end
 
@@ -18,7 +18,7 @@ module Membership
         @emails = extract_emails_to_array(unpaid_params.fetch(:emails, ''))
         @emails_without_profile = @emails.select { |e| !Db::Profile.exists?(email: e) }
         @unpaid_profiles = Membership::FeesRepository.new.find_unpaid_profiles_this_year_by_emails(@emails).select do |profile|
-          !::Membership::Activement.new(user: profile).active?
+          !::Membership::Activement.new(user: profile.user).active?
         end
         @unpaid_emails = @unpaid_profiles.map(&:email).join(' ')
         render :unpaid
