@@ -18,7 +18,7 @@ module Admin
     end
 
     def cost
-      if plastic
+      if ActiveModel::Type::Boolean.new.cast(plastic)
         110
       else
         100
