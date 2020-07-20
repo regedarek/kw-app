@@ -17,7 +17,7 @@
           tr
             td = I18n.t(group_type)
             td = @contracts.group_by(&:group_type)[group_type].count
-            td = @contracts.@contracts.group_by(&:group_type)[group_type].any? ? @contracts.group_by(&:group_type)[group_type].sum(:cost) : 0
+            td = @contracts.group_by(&:group_type)[group_type].any? ? @contracts.group_by(&:group_type)[group_type].sum(:cost) : 0
 
 .row
   .large-12.columns
