@@ -1,0 +1,54 @@
+.row
+  .large-12.columns
+    b Analiza wydatków
+
+.row
+  .large-12.columns
+    h4 Sekcja
+
+    table.stack
+      thead
+        tr
+          th Grupa
+          th Ilość
+          th Kwota
+      tbody
+        - @contracts.group_by(&:group_type).keys.each do |substantive_type|
+          tr
+            td = I18n.t(substantive_type)
+            td = @contracts.group_by(&:group_type)[substantive_type].count
+            td = @contracts.group_by(&:group_type)[substantive_type].sum(:cost)
+
+.row
+  .large-12.columns
+    h4 Grupa wydarzeń
+
+    table.stack
+      thead
+        tr
+          th Grupa
+          th Ilość
+          th Kwota
+      tbody
+        - @contracts.group_by(&:substantive_type).keys.each do |substantive_type|
+          tr
+            td = I18n.t(substantive_type, scope: :substantive_type)
+            td = @contracts.group_by(&:substantive_type)[substantive_type].count
+            td = @contracts.group_by(&:substantive_type)[substantive_type].sum(:cost)
+
+.row
+  .large-12.columns
+    h4 Rodzaj działalności
+
+    table.stack
+      thead
+        tr
+          th Grupa
+          th Ilość
+          th Kwota
+      tbody
+        - @contracts.group_by(&:financial_type).keys.each do |substantive_type|
+          tr
+            td = I18n.t(substantive_type, scope: :financial_type)
+            td = @contracts.group_by(&:financial_type)[substantive_type].count
+            td = @contracts.group_by(&:financial_type)[substantive_type].sum(:cost)

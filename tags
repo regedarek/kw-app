@@ -1073,6 +1073,7 @@ all_refunded	app/components/training/supplementary/limiter.rb	/^      def all_re
 all_unpaid	app/components/training/supplementary/limiter.rb	/^      def all_unpaid$/;"	f	class:Training.Supplementary.Limiter
 allowed_params	app/components/messaging/comments_controller.rb	/^    def allowed_params$/;"	f	class:Messaging.CommentsController
 already_voted_on	app/components/management/voting/repository.rb	/^      def already_voted_on(case_id)$/;"	f	class:Management.Voting.Repository
+analiza	app/components/settlement/admin/contracts_controller.rb	/^      def analiza$/;"	f	class:Settlement.Admin.ContractsController
 apply	app/components/management/snw/mailer.rb	/^      def apply(apply_id)$/;"	f	class:Management.Snw.Mailer
 apply	app/mailers/profile_mailer.rb	/^  def apply(profile)$/;"	f	class:ProfileMailer
 apply_params	app/components/management/snw/snw_applies_controller.rb	/^      def apply_params$/;"	f	class:Management.Snw.SnwAppliesController
