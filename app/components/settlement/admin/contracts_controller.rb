@@ -15,7 +15,7 @@ module Settlement
       end
 
       def analiza
-        authorize! :read, Settlement::ContractRecord
+        authorize! :analiza, Settlement::ContractRecord
         start_date = Date.new(params[:year].to_i, 1, 1)
         end_date = Date.new(params[:year].to_i, 12, 31)
 

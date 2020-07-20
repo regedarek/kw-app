@@ -45,6 +45,7 @@ class Ability
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     cannot :read, Management::Voting::CaseRecord
     cannot :see_dziki, Db::Activities::MountainRoute
+    cannot :analiza, Settlement::ContractRecord
   end
 
   def active
@@ -62,6 +63,7 @@ class Ability
     can :see_user_name, Db::User
     can :create, Settlement::ContractRecord
     can :manage, Mailboxer::Conversation
+    cannot :analiza, Settlement::ContractRecord
   end
 
   def competitions
@@ -81,6 +83,7 @@ class Ability
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Management::Snw::SnwApplyRecord
+    can :analiza, Settlement::ContractRecord
   end
 
   def management
@@ -92,6 +95,7 @@ class Ability
     cannot :destroy, Settlement::ContractRecord
     can :read, Management::Voting::CaseRecord
     can :approve, Management::Voting::CaseRecord
+    can :analiza, Settlement::ContractRecord
   end
 
   def voting
@@ -112,6 +116,7 @@ class Ability
     can :manage, PaperTrail::Version
     can :read, Management::Voting::CaseRecord
     can :approve, Management::Voting::CaseRecord
+    can :analiza, Settlement::ContractRecord
   end
 
   def admin
@@ -121,6 +126,7 @@ class Ability
     can :manage, Events::Db::SignUpRecord
     can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
+    can :analiza, Settlement::ContractRecord
   end
 
   def office
@@ -129,6 +135,7 @@ class Ability
     can :manage, Db::Profile
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
+    can :analiza, Settlement::ContractRecord
   end
 
   def business_courses
@@ -146,6 +153,7 @@ class Ability
     cannot :accept, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord
+    can :analiza, Settlement::ContractRecord
   end
 
   def reservations
