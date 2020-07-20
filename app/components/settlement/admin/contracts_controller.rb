@@ -19,7 +19,7 @@ module Settlement
         start_date = Date.new(params[:year].to_i, 1, 1)
         end_date = Date.new(params[:year].to_i, 12, 31)
 
-        @contracts = Settlement::ContractRecord.where(document_date: start_date..end_date).group_by(&:group_type)
+        @contracts = Settlement::ContractRecord.where(document_date: start_date..end_date)
       end
 
       def new

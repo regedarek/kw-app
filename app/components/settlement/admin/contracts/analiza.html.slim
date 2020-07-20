@@ -13,11 +13,11 @@
           th Ilość
           th Kwota
       tbody
-        - @contracts.group_by(&:group_type).keys.each do |substantive_type|
+        - @contracts.group_by(&:group_type).keys.each do |group_type|
           tr
-            td = I18n.t(substantive_type)
-            td = @contracts.group_by(&:group_type)[substantive_type].count
-            td = @contracts.group_by(&:group_type)[substantive_type].sum(:cost)
+            td = I18n.t(group_type)
+            td = @contracts.group_by(&:group_type)[group_type].count
+            td = @contracts.group_by(&:group_type)[group_type].sum(:cost)
 
 .row
   .large-12.columns
