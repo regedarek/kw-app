@@ -44,9 +44,11 @@ class Ability
     can [:read, :update], Settlement::ContractRecord, creator_id: user.id
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     cannot :read, Management::Voting::CaseRecord
+    cannot :see_dziki, Db::Activities::MountainRoute
   end
 
   def active
+    can :see_dziki, Db::Activities::MountainRoute
     can :create, Db::Profile
     can :create, Management::Snw::SnwApplyRecord
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id

@@ -4,7 +4,7 @@ module Activities
     append_view_path 'app/components'
 
     def gorskie_dziki
-      authorize! :read, ::Db::Activities::MountainRoute
+      authorize! :see_dziki, ::Db::Activities::MountainRoute
 
       @prev_month_leaders = repository.fetch_prev_month
       @current_month_leaders = repository.fetch_current_month
@@ -17,7 +17,7 @@ module Activities
     def gorskie_dziki_regulamin; end
 
     def narciarskie_dziki
-      authorize! :read, ::Db::Activities::MountainRoute
+      authorize! :see_dziki, ::Db::Activities::MountainRoute
 
       @prev_month_leaders = ski_repository.fetch_prev_month
       @current_month_leaders = ski_repository.fetch_current_month
