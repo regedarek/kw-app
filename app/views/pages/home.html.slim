@@ -1,4 +1,4 @@
-- if user_signed_in?
+- if user_signed_in? && current_user.active?
   .row
     .large-12.columns style='text-align: center'
       = image_tag asset_path('kw-bg-home.jpg')
