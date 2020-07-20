@@ -34,7 +34,7 @@
           tr
             td = substantive_type == nil ? 'Nie przypisano' : I18n.t(substantive_type, scope: :substantive_type)
             td = @contracts.group_by(&:substantive_type)[substantive_type].count
-            td = @contracts.group_by(&:substantive_type)[substantive_type].any? ? @contracts.group_by(&:substantive_type)[substantive_type].sum(&:cost) : 0
+            td = @contracts.group_by(&:substantive_type)[substantive_type].any? ? number_to_currency(@contracts.group_by(&:substantive_type)[substantive_type].sum(&:cost), unit: 'złotych', precision: 2) : 0
 
 .row
   .large-12.columns
@@ -51,4 +51,4 @@
           tr
             td = financial_type  == nil ? 'Nie przypisano' : I18n.t(financial_type, scope: :financial_type)
             td = @contracts.group_by(&:financial_type)[financial_type].count
-            td = @contracts.group_by(&:financial_type)[financial_type].any? ? @contracts.group_by(&:financial_type)[financial_type].sum(&:cost) : 0
+            td = @contracts.group_by(&:financial_type)[financial_type].any? ? number_to_currency(@contracts.group_by(&:financial_type)[financial_type].sum(&:cost), unit: 'złotych', precision: 2) : 0
