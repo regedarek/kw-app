@@ -6,7 +6,7 @@ module Activities
    def index
       authorize! :read, ::Db::Activities::MountainRoute
 
-      @q = Db::Activities::MountainRoute.includes([:colleagues]).where(hidden: false, training: false).order(climbing_date: :desc)
+      @q = Db::Activities::MountainRoute.includes([:colleagues]).accessible_by(current_ability).where(hidden: false, training: false).order(climbing_date: :desc)
       @q = @q.climbing if params[:route_type] == 'climbing'
       @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
       @q = @q.boars if params[:boars] == 'true'
