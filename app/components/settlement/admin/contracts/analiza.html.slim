@@ -17,7 +17,7 @@
           tr
             td = I18n.t(group_type)
             td = @contracts.group_by(&:group_type)[group_type].count
-            td = @contracts.group_by(&:group_type)[group_type].any? ? @contracts.group_by(&:group_type)[group_type].sum(:cost) : 0
+            td = @contracts.group_by(&:group_type)[group_type].any? ? @contracts.group_by(&:group_type)[group_type].sum(&:cost) : 0
 
 .row
   .large-12.columns
@@ -34,7 +34,7 @@
           tr
             td = I18n.t(substantive_type, scope: :substantive_type)
             td = @contracts.group_by(&:substantive_type)[substantive_type].count
-            td = @contracts.group_by(&:substantive_type)[substantive_type].any? ? @contracts.group_by(&:substantive_type)[substantive_type].sum(:cost) : 0
+            td = @contracts.group_by(&:substantive_type)[substantive_type].any? ? @contracts.group_by(&:substantive_type)[substantive_type].sum(&:cost) : 0
 
 .row
   .large-12.columns
@@ -51,4 +51,4 @@
           tr
             td = I18n.t(substantive_type, scope: :financial_type)
             td = @contracts.group_by(&:financial_type)[substantive_type].count
-            td = @contracts.group_by(&:financial_type)[substantive_type].any? ? @contracts.group_by(&:financial_type)[substantive_type].sum(:cost) : 0
+            td = @contracts.group_by(&:financial_type)[substantive_type].any? ? @contracts.group_by(&:financial_type)[substantive_type].sum(&:cost) : 0
