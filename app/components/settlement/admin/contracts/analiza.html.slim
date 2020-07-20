@@ -15,7 +15,7 @@
       tbody
         - @contracts.group_by(&:group_type).keys.each do |group_type|
           tr
-            td = I18n.t(group_type)
+            td = group_type == nil ? 'Nie przypisano' : I18n.t(group_type)
             td = @contracts.group_by(&:group_type)[group_type].count
             td = @contracts.group_by(&:group_type)[group_type].any? ? @contracts.group_by(&:group_type)[group_type].sum(&:cost) : 0
 
@@ -32,7 +32,7 @@
       tbody
         - @contracts.group_by(&:substantive_type).keys.each do |substantive_type|
           tr
-            td = I18n.t(substantive_type, scope: :substantive_type)
+            td = substantive_type == nil ? 'Nie przypisano' : I18n.t(substantive_type, scope: :substantive_type)
             td = @contracts.group_by(&:substantive_type)[substantive_type].count
             td = @contracts.group_by(&:substantive_type)[substantive_type].any? ? @contracts.group_by(&:substantive_type)[substantive_type].sum(&:cost) : 0
 
@@ -47,8 +47,8 @@
           th Ilość
           th Kwota
       tbody
-        - @contracts.group_by(&:financial_type).keys.each do |substantive_type|
+        - @contracts.group_by(&:financial_type).keys.each do |financial_type|
           tr
-            td = I18n.t(substantive_type, scope: :financial_type)
-            td = @contracts.group_by(&:financial_type)[substantive_type].count
-            td = @contracts.group_by(&:financial_type)[substantive_type].any? ? @contracts.group_by(&:financial_type)[substantive_type].sum(&:cost) : 0
+            td = financial_type  == nil ? 'Nie przypisano' : I18n.t(financial_type, scope: :financial_type)
+            td = @contracts.group_by(&:financial_type)[financial_type].count
+            td = @contracts.group_by(&:financial_type)[financial_type].any? ? @contracts.group_by(&:financial_type)[financial_type].sum(&:cost) : 0
