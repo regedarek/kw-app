@@ -89,7 +89,7 @@
   .row
     .large-12.columns
       blockquote.text-justify
-        small= t('activemodel.attributes.user_management_profile_form.terms_of_service_info_html')
+        small= sanitize Management::SettingsRecord.find_by(path: '/zgloszenie')&.content
         .row
           .large-12.columns
             = f.check_box :terms_of_service

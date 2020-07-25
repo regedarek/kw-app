@@ -1,0 +1,24 @@
+.row
+  .large-12.columns
+    .callout
+      = f.label :name, 'Nazwa'
+      = f.text_field :name
+
+- if @setting.rules?
+  .row
+    .large-12.columns
+      .callout
+        = f.label :back_url, 'powrót do strony'
+        = f.text_field :back_url
+
+.row
+  .large-12.columns
+    .callout
+      = f.label :path, 'ścieżka do regulaminu'
+      = f.text_field :path
+
+.row
+  .large-12.columns
+    .callout
+      = f.label :content, 'Treść'
+      = f.trix_editor :content, style: 'min-height: 150px'

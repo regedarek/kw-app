@@ -1,0 +1,16 @@
+.row
+  .large-12.columns
+    - if @setting.errors.any?
+      .callout.alert
+        ul
+          - @setting.errors.messages.each do |error|
+            li= error&.last&.to_sentence
+
+= form_for @setting, url: setting_path(@setting.id), as: :setting do |f|
+  = render 'form', f: f
+
+  .row
+    .large-6.columns
+      = f.submit 'Edytuj', class: 'button primary large expanded'
+    .large-6.columns
+      = link_to 'Ustawienia', settings_path, class: 'button secondary large expanded'

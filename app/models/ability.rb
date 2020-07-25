@@ -84,6 +84,7 @@ class Ability
     cannot :destroy, Settlement::ContractRecord
     can :manage, Management::Snw::SnwApplyRecord
     can :analiza, Settlement::ContractRecord
+    can :manage, Management::SettingsRecord
   end
 
   def management
@@ -96,6 +97,7 @@ class Ability
     can :read, Management::Voting::CaseRecord
     can :approve, Management::Voting::CaseRecord
     can :analiza, Settlement::ContractRecord
+    can :manage, Management::SettingsRecord
   end
 
   def voting
@@ -117,6 +119,7 @@ class Ability
     can :read, Management::Voting::CaseRecord
     can :approve, Management::Voting::CaseRecord
     can :analiza, Settlement::ContractRecord
+    can :manage, Management::SettingsRecord
   end
 
   def admin
@@ -127,6 +130,7 @@ class Ability
     can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
     can :analiza, Settlement::ContractRecord
+    can :manage, Management::SettingsRecord
   end
 
   def office
@@ -136,6 +140,7 @@ class Ability
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
     can :analiza, Settlement::ContractRecord
+    can :manage, Management::SettingsRecord
   end
 
   def business_courses
@@ -154,6 +159,7 @@ class Ability
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord
     can :analiza, Settlement::ContractRecord
+    can :manage, Management::SettingsRecord
   end
 
   def reservations

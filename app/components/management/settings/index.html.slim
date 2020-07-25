@@ -1,0 +1,12 @@
+.row
+  .large-12.columns
+    h3 Ustawienia
+    table.responsive
+      thead
+        tr
+          th Nazwa
+      tbody
+        - @settings.each do |setting|
+          tr
+            td
+              = link_to setting.name, edit_setting_path(setting.id)

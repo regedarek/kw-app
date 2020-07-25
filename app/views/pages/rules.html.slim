@@ -1,102 +1,15 @@
-.column.row
-  .row.columns
-    h3.subheader Wypożyczalnia sprzętu Klubu Wysokogórskiego Kraków
-    - user = Db::User.find_by(curator: true)
-    - if user_signed_in? && user.present?
-      .callout.alert
-        b Opiekun wypożyczalni w tym tygodniu: 
-        = "#{user.first_name} #{user.last_name}"
-        br
-        - if user.phone.length > 3
-          | Kontakt telefoniczny w przypadku pytań i problemów
-          b= ": #{user.phone}"
-          br
-        | Kontakt e-mailowy w przypadku pytań i problemów
-        b= ": wypozyczalnia@kw.krakow.pl"
+- setting = Management::SettingsRecord.find_by(path: request.path)
 
+.row
+  .large-12.columns
+    h3.subheader = setting.name
+
+.row
+  .large-12.columns
     .callout
-      | Wypożyczenia dokonuje się na podstawie wcześniejszej rezerwacji.
-      br
-      | Osoby prowadzące wypożyczalnię będą wiedziały kto chce wypożyczyć i czy w danym tygodniu muszą się zjawić w klubie.
-      br
-      | Osoby chcące wypożyczyć mogą zrobić sobie rezerwację na wcześniej zaplanowaną turę/wspinanie/zawody itp. z dowolnym wyprzedzeniem.
+      = sanitize setting.content
 
-  .row.columns
-    .callout.primary
-      b Krok po kroku
-      br
-      ul
-        li Należy zapoznać się z zasadami wypożyczania sprzętu (poniżej).
-        li Po rezerwacji należy w ciągu 48 godzin opłacić ją w systemie przelewem/kartą kredytową. Po tym czasie rezerwacja zostaje anulowana.
-        li W przypadku rezygnacji z wypożyczenia należy zlikwidować wcześniejszą rezerwację przedmiotu w systemie.
-        li Sprzęt należy odebrać osobiście w siedzibie KW.
-        li
-          | Kontaktuj się z opiekunem lub kimś w sekretariacie klubu. (zaloguj się aby zobaczyć dane kontaktowe)
-
-  .row.columns
-    .callout.secondary
-      b Instrukcje
-      br
-      = link_to 'BCA Tracker 2', 'http://www.backcountryaccess.com/wp-content/uploads/2015/08/BCA-product-manual-Tracker-2-avalanche-transceiver-english.pdf'
-      br
-      = link_to 'BCA Tracker DTS', 'http://www.backcountryaccess.com/wp-content/uploads/2015/08/BCA-product-manual-Tracker-DTS-avalanche-transceiver-english.pdf'
-
-  .row.columns
-    .callout.secondary
-      b Cennik
-      br
-        | Detektor: 10 PLN
-        br
-        | Sonda: 5 PLN
-        br
-        | Łopata: 5 PLN
-        br
-        | Czekan techniczny (1 szt): 15 PLN
-        br
-        | Czekan turystyczny (1 szt): 10 PLN
-        br
-        | Raki: 15 PLN
-        br
-        | GPS Garmin 64s: 15 PLN
-
-.row.columns
-  h4.subheader Regulamin
-  ol
-    li
-      | Sprzęt wypożyczany jest wyłącznie członkom Klubu Wysokogórskiego Kraków (dalej Klub) z opłaconymi składkami członkowskimi na dany rok. Osoba, której sprzęt wypożyczono (dalej: wypożyczający) nie może wypożyczać go kolejnym osobom.
-    li
-      | Sprzęt wypożyczany jest na tydzień (od czwartku do czwartku).
-    li
-      | Odbioru i zwrotu sprzętu dokonuje się w każdy czwartek w siedzibie Klubu; odbioru należy dokonać osobiście.
-      ul
-        li zwrot w godzinach 18.00-19.00
-        li wypożyczenie w godzinach 19.00-20.00
-        li W wyjątkowych sytuacjach możliwe jest przedłużenie wypożyczenia na kolejny tydzień. Maksymalny nieprzerwany okres wypożyczenia sprzętu przez tę samą osobę to dwa tygodnie.
-        li W przypadku nie oddania przedmiotu w terminie, zostanie naliczona opłata za każdy tydzień zwłoki.
-    li
-      | Wypożyczenie i zwrot sprzętu są potwierdzane w systemie, a wypożyczający podaje kontaktowy numer telefonu przy rejestracji.
-
-    li
-      | Po opłaceniu nie ma możliwości zwrotu pieniędzy w przypadku rezygnacji. Wszelkie tego typu sprawy będą traktowane indywidualnie i rozpatrywane na bieżąco wg możliwości.
-    li
-      | Wypożyczający ma obowiązek sprawdzić, czy sprzęt jest w pełni sprawny.
-    li
-      | Wypożyczający oświadcza, że posiada przeszkolenie w zakresie używania wypożyczanego sprzętu.
-    li
-      | Wypożyczający użytkuje wypożyczony sprzęt na własną odpowiedzialność. Klub nie ponosi odpowiedzialności za jakiekolwiek szkody wynikłe z używania wypożyczonego sprzętu.
-    li
-      | Wypożyczający bierze na siebie pełną odpowiedzialność za wypożyczany sprzęt, a w szczególności jest zobowiązany do odkupienia sprzętu zniszczonego/uszkodzonego/zgubionego.
-    li
-      | Wypożyczający jest bezwzględnie zobowiązany do zgłoszenia wszelkich stwierdzonych usterek sprzętu.
-    li
-      | Pierwszeństwo w dostępie do sprzętu mają szkolenia i zawody organizowane przez Klub.
-    li
-      | Wypożyczając sprzęt zbieramy fundusze na zakup kolejnych rzeczy dla Klubu.
-    li
-      | Detektory lawinowe wypożyczane są <b>BEZ BATERII</b>, wypożyczający musi zaopatrzyć się w odpowiednie baterie we własnym zakresie (baterie alkaliczne AAA, nie stosować akumulatorów ani baterii litowych). Detektor wypożyczany jest wraz z odpowiednimi szelkami do mocowania na ciele, a sonda wraz z pokrowcem.
-    li
-      | W przypadku wypożyczania ilości sprzętu więszkej niż dla jednego użytkownika należy poinformować o tym opiekuna rezerwacji i podać odpowiednią ilość numerów klubowych z opłaconymi składkami za rok bieżący.
-    li
-      | Aby uzyskać dostęp do rezerwacji sprzętu należy się uprzednio zarejestrować w aplikacji Klubu Wysokogórskiego Kraków.
-    li
-      | W sprawach nie uregulowanych w niniejszym regulaminie stosuje się przepisy kodeksu cywilnego.
+- if setting.back_url
+  .row
+    .large-12.columns
+      = link_to 'powrót', setting.back_url, class: 'button secondary large expanded'

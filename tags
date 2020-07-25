@@ -158,6 +158,7 @@ AddPaidEmailSentAtToSupplementarySignUps	db/migrate/20200410131305_add_paid_emai
 AddPaidEmailToSupplementaryCourses	db/migrate/20200410130334_add_paid_email_to_supplementary_courses.rb	/^class AddPaidEmailToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddPaidToReservations	db/migrate/20160804220627_add_paid_to_reservations.rb	/^class AddPaidToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddParticipantPhoneToEventsSignUps	db/migrate/20180112173252_add_participant_phone_to_events_sign_ups.rb	/^class AddParticipantPhoneToEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
+AddPathToSettings	db/migrate/20200725115247_add_path_to_settings.rb	/^class AddPathToSettings < ActiveRecord::Migration[5.2]$/;"	c
 AddPayableIdToPayments	db/migrate/20170417094726_add_payable_id_to_payments.rb	/^class AddPayableIdToPayments < ActiveRecord::Migration[5.0]$/;"	c
 AddPayableIdToReservations	db/migrate/20160830161345_add_payable_id_to_reservations.rb	/^class AddPayableIdToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddPayableTypeToPayments	db/migrate/20170417094600_add_payable_type_to_payments.rb	/^class AddPayableTypeToPayments < ActiveRecord::Migration[5.0]$/;"	c
@@ -457,6 +458,7 @@ CreateReservations	db/migrate/20150523164715_create_reservations.rb	/^class Crea
 CreateRouteColleagues	db/migrate/20170815145349_create_route_colleagues.rb	/^class CreateRouteColleagues < ActiveRecord::Migration[5.0]$/;"	c
 CreateRoutesTable	db/migrate/20160728073026_create_routes_table.rb	/^class CreateRoutesTable < ActiveRecord::Migration[5.0]$/;"	c
 CreateServices	db/migrate/20160830162156_create_services.rb	/^class CreateServices < ActiveRecord::Migration[5.0]$/;"	c
+CreateSettings	db/migrate/20200725111235_create_settings.rb	/^class CreateSettings < ActiveRecord::Migration[5.2]$/;"	c
 CreateShmuDiagrams	db/migrate/20190717212355_create_shmu_diagrams.rb	/^class CreateShmuDiagrams < ActiveRecord::Migration[5.2]$/;"	c
 CreateSignUp	app/components/training/supplementary/create_sign_up.rb	/^    class CreateSignUp$/;"	c	class:Training.Supplementary
 CreateSignUpForm	app/components/training/supplementary/create_sign_up_form.rb	/^    class CreateSignUpForm < Dry::Validation::Schema$/;"	c	class:Training.Supplementary
@@ -639,6 +641,8 @@ Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
 Management	app/components/management/project_users_record.rb	/^module Management$/;"	m
 Management	app/components/management/projects_controller.rb	/^module Management$/;"	m
+Management	app/components/management/settings_controller.rb	/^module Management$/;"	m
+Management	app/components/management/settings_record.rb	/^module Management$/;"	m
 Management	app/components/management/snw/api/snw_applies_controller.rb	/^module Management$/;"	m
 Management	app/components/management/snw/mailer.rb	/^module Management$/;"	m
 Management	app/components/management/snw/snw_applies_controller.rb	/^module Management$/;"	m
@@ -835,6 +839,8 @@ Seeder	lib/seeding/seeder.rb	/^  class Seeder$/;"	c	class:Seeding
 Seeding	lib/seeding/seeder.rb	/^module Seeding$/;"	m
 SendPrepaidEmail	app/components/training/supplementary/send_prepaid_email.rb	/^    class SendPrepaidEmail$/;"	c	class:Training.Supplementary
 SetDefaultStateForReservations	db/migrate/20160830115600_set_default_state_for_reservations.rb	/^class SetDefaultStateForReservations < ActiveRecord::Migration[5.0]$/;"	c
+SettingsController	app/components/management/settings_controller.rb	/^  class SettingsController < ApplicationController$/;"	c	class:Management
+SettingsRecord	app/components/management/settings_record.rb	/^  class SettingsRecord < ActiveRecord::Base$/;"	c	class:Management
 Settlement	app/components/settlement/admin/contractors_controller.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/admin/contracts_controller.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/attachment_uploader.rb	/^module Settlement$/;"	m
@@ -1465,6 +1471,8 @@ change	db/migrate/20200410131305_add_paid_email_sent_at_to_supplementary_sign_up
 change	db/migrate/20200622113423_create_training_excercies.rb	/^  def change$/;"	f	class:CreateTrainingExcercies
 change	db/migrate/20200716115752_add_membership_to_supplementary_course_package_types.rb	/^  def change$/;"	f	class:AddMembershipToSupplementaryCoursePackageTypes
 change	db/migrate/20200716125118_add_end_application_date_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddEndApplicationDateToSupplementaryCourses
+change	db/migrate/20200725111235_create_settings.rb	/^  def change$/;"	f	class:CreateSettings
+change	db/migrate/20200725115247_add_path_to_settings.rb	/^  def change$/;"	f	class:AddPathToSettings
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1654,6 +1662,7 @@ edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"
 edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events
 edit	app/components/library/items_controller.rb	/^    def edit$/;"	f	class:Library.ItemsController
 edit	app/components/management/projects_controller.rb	/^    def edit$/;"	f	class:Management.ProjectsController
+edit	app/components/management/settings_controller.rb	/^    def edit$/;"	f	class:Management.SettingsController
 edit	app/components/management/snw/snw_applies_controller.rb	/^      def edit$/;"	f	class:Management.Snw.SnwAppliesController
 edit	app/components/management/voting/cases_controller.rb	/^      def edit$/;"	f	class:Management.Voting.CasesController
 edit	app/components/settlement/admin/contracts_controller.rb	/^      def edit$/;"	f	class:Settlement.Admin.ContractsController
@@ -1833,6 +1842,7 @@ index	app/components/library/admin/tags_controller.rb	/^      def index$/;"	f	cl
 index	app/components/library/items_controller.rb	/^    def index$/;"	f	class:Library.ItemsController
 index	app/components/management/news/informations_controller.rb	/^      def index$/;"	f	class:Management.News.InformationsController
 index	app/components/management/projects_controller.rb	/^    def index$/;"	f	class:Management.ProjectsController
+index	app/components/management/settings_controller.rb	/^    def index$/;"	f	class:Management.SettingsController
 index	app/components/management/snw/api/snw_applies_controller.rb	/^        def index$/;"	f	class:Management.Snw.Api.SnwAppliesController
 index	app/components/management/snw/snw_applies_controller.rb	/^      def index$/;"	f	class:Management.Snw.SnwAppliesController
 index	app/components/management/voting/cases_controller.rb	/^      def index$/;"	f	class:Management.Voting.CasesController
@@ -2208,6 +2218,7 @@ set_content_type	app/components/scrappers/topr_degree_uploader.rb	/^    def set_
 set_conversation	app/components/messaging/messages_controller.rb	/^    def set_conversation$/;"	f	class:Messaging.MessagesController
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
+setting_params	app/components/management/settings_controller.rb	/^    def setting_params$/;"	f	class:Management.SettingsController
 show	app/components/blog/api/authors_controller.rb	/^      def show$/;"	f	class:Blog.Api.AuthorsController
 show	app/components/business/courses_controller.rb	/^    def show$/;"	f	class:Business
 show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"	f	class:Events.Admin.CompetitionsController
@@ -2346,6 +2357,7 @@ update	app/components/events/competitions/repository.rb	/^      def update(id:, 
 update	app/components/events/competitions/sign_ups_controller.rb	/^      def update$/;"	f	class:Events
 update	app/components/library/items_controller.rb	/^    def update$/;"	f	class:Library.ItemsController
 update	app/components/management/projects_controller.rb	/^    def update$/;"	f	class:Management.ProjectsController
+update	app/components/management/settings_controller.rb	/^    def update$/;"	f	class:Management.SettingsController
 update	app/components/management/snw/snw_applies_controller.rb	/^      def update$/;"	f	class:Management.Snw.SnwAppliesController
 update	app/components/management/voting/cases_controller.rb	/^      def update$/;"	f	class:Management.Voting.CasesController
 update	app/components/reservations/items_controller.rb	/^    def update$/;"	f	class:Reservations.ItemsController

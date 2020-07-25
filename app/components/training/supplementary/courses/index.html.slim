@@ -17,7 +17,7 @@
         = link_to category: nil do
           = ' usuń filtr'
   .large-3.columns
-    = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large success'
+    = link_to 'Regulamin', '/wydarzenia/regulamin', class: 'button expanded large success'
   - if user_signed_in? && (current_user.admin? || current_user.roles.include?('events'))
     .large-1.columns
       = link_to '+', new_supplementary_course_path, class: 'button expanded large'

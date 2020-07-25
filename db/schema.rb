@@ -702,6 +702,16 @@ ActiveRecord::Schema.define(version: 2020_04_10_131305) do
     t.index ["colleague_id", "mountain_route_id"], name: "index_route_colleagues_on_colleague_id_and_mountain_route_id", unique: true
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "content"
+    t.string "back_url"
+    t.integer "content_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "path"
+  end
+
   create_table "shmu_diagrams", force: :cascade do |t|
     t.datetime "diagram_time"
     t.string "place"

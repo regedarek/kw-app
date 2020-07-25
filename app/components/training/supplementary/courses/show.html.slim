@@ -108,7 +108,7 @@
 
     .large-4.columns
 
-      = link_to 'Regulamin', page_path('events_rules'), class: 'button expanded large warning'
+      = link_to 'Regulamin', '/wydarzenia/regulamin', class: 'button expanded large warning'
       - if @current_user_sign_up.present?
       - else
         - if user_signed_in?
