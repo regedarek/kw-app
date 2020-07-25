@@ -15,14 +15,6 @@
           - if current_user.roles.include?('mountain_routes')
             li= link_to 'XLSX', activities_mountain_routes_path(format: :xlsx), class: 'button hollow'
         - if user_signed_in?
-          - if current_user.roles.include?('office')
-            li= link_to 'Baza klubowiczów', admin_profiles_path, class: 'button warning'
-            li= link_to 'Baza składek', admin_membership_fees_path, class: 'button alert'
-          - if current_user.roles.include?('office_king')
-            li= link_to 'Rozliczenia', admin_contracts_path, class: 'button alert'
-          - if current_user.roles.include?('reservations')
-            li= link_to t('.administration.reservations'), admin_reservations_path, class: 'button warning'
-            li= link_to t('.administration.items'), admin_items_path, class: 'button primary'
           li.show-for-small-only= link_to 'Zarezerwuj', new_reservation_path
           li.show-for-small-only= link_to 'Przejścia', '/przejscia'
           li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path
@@ -43,10 +35,14 @@
               = link_to t('.administration.main'), admin_path
               ul.menu.vertical
                 li= link_to 'Baza użytkowników', admin_users_path
-                - unless current_user.roles.include?('office')
-                  li= link_to 'Baza klubowiczów', admin_profiles_path
-                  li= link_to 'Baza składek', admin_membership_fees_path
+                li= link_to 'Baza klubowiczów', admin_profiles_path
+                li= link_to 'Baza składek', admin_membership_fees_path
                 li= link_to 'Kalendarz zawodów', competitions_path
+                - if current_user.roles.include?('reservations')
+                  li= link_to t('.administration.reservations'), admin_reservations_path
+                  li= link_to t('.administration.items'), admin_items_path
+                - if can? :manage, Management::SettingsRecord
+                  li= link_to 'Ustawienia', settings_path
                 - if can? :manage, Business::CourseRecord
                   li= link_to 'Historia zmian', admin_versions_path
                 - if can? :manage, Business::CourseRecord
@@ -59,9 +55,6 @@
                   li= link_to 'Głosowania', cases_path
                 - if can? :read, Settlement::ContractRecord
                   li= link_to 'Rozliczenia', admin_contracts_path
-                - unless current_user.roles.include?('reservations')
-                  li= link_to t('.administration.reservations'), admin_reservations_path
-                  li= link_to t('.administration.items'), admin_items_path
                 - if current_user.roles.include?('photo_competition')
                   li= link_to 'Konkursy fotograficzne', admin_editions_path
                 - if current_user.roles.include?('office')
@@ -82,14 +75,13 @@
 
     .top-bar-right
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
-        li= link_to 'Trening SkiMo', '/trening/skimo', class: 'button primary'
+        li= link_to 'KSKS', '/trening/skimo', class: 'button primary'
         - unless request.path == '/narciarskie-dziki' || request.path == '/gorskie-dziki'
           li= link_to 'Tabela dzików', gorskie_dziki_path, class: 'button alert'
         - if user_signed_in?
-          - if !current_user.admin? || !current_user.roles.include?('office')
-            li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button secondary'
-        - if user_signed_in?
+          li.show-for-medium= link_to 'Zarezerwuj', new_reservation_path, class: 'button secondary'
           li.show-for-medium= link_to 'Przejścia', '/przejscia', class: 'button success'
+          li.show-for-medium= link_to 'Projekty', '/projekty', class: 'button warning'
         li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
         - if user_signed_in?
           li.show-for-medium= link_to 'Twoje składki', membership_fees_path, class: 'button warning'
@@ -98,8 +90,8 @@
             = link_to 'Zaloguj lub zarejestruj', edit_user_registration_path
           ul.menu.vertical
             - unless user_signed_in?
+              li= link_to 'Zapisz się do klubu!', '/zgloszenie'
               li= link_to t('.administration.login'), new_user_session_path
-              li= link_to t('.administration.signup'), zarejestruj_path
 
         - if user_signed_in?
           li.remove-arrow data-behaviour='js-notifications'
