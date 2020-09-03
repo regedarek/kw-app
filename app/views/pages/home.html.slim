@@ -77,3 +77,17 @@
             td
               = link_to case_record.name, case_path(case_record.id)
 
+- else
+  .row
+    .large-6.columns.text-left
+      = link_to 'Polityka prywatności', 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html'
+      |  
+      = link_to 'Regulamin', '/wydarzenia/regulamin'
+      |  
+      = link_to 'Dane klubu', 'https://kw.krakow.pl/o-klubie/dane-klubu.html'
+      |  
+      = link_to 'Darowizny', 'https://kw.krakow.pl/o-klubie/1-na-dzialalnosc-kw.html'
+    .large-6.columns.text-right
+      = image_tag 'dotpay.png', width: '80px'
+      = image_tag 'visa.png', width: '80px'
+      = image_tag 'mastercard.png', width: '80px'
