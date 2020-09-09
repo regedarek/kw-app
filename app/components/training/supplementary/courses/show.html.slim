@@ -235,6 +235,7 @@
                       .callout.warning
                         | Nie zmieściłeś się w limicie, jeżeli zwolni się miejsce, zostaniesz o tym poinformowany e-mailowo.
       = link_to 'pozostałe wydarzenia', wydarzenia_path, class: 'button expanded large hollow'
+- unless @course.id == 231
   .row
     - if user_signed_in?
       .large-6.columns
