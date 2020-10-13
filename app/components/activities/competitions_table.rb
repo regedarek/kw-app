@@ -42,11 +42,11 @@ module Activities
     end
 
     def table_from_year
-      2019
+      2020
     end
 
     def table_to_year
-      2020
+      2021
     end
 
     def month_days(table_month)
