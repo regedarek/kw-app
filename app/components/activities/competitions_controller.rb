@@ -3,8 +3,8 @@ module Activities
     append_view_path 'app/components'
 
     def index
-      @q = Activities::CompetitionRecord.where(start_date: [Time.zone.now..Float::INFINITY]).ransack(params[:q])
-      @q.sorts = 'starts_at asc' if @q.sorts.empty?
+      @q = Activities::CompetitionRecord.ransack(params[:q])
+      @q.sorts = 'start_date asc' if @q.sorts.empty?
       @competitions = @q.result(distinct: true)
 
       @competition = Activities::CompetitionRecord.new
