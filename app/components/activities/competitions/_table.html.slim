@@ -18,6 +18,8 @@ table.stack
         td
           = competition.end_date
         td.text-right
+          = link_to new_competition_path(competition: { bold: competition.bold, country: competition.country, series: competition.series, website: competition.website, name: competition.name, start_date: competition.start_date, end_date: competition.end_date }), style: 'margin-right: 10px; color: black' do
+            i.fi-page-copy
           = link_to edit_competition_path(competition.id), style: 'margin-right: 10px; color: orange' do
             i.fi-page
           - if competition.website

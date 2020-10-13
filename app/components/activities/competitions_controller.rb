@@ -11,7 +11,7 @@ module Activities
     end
 
     def new
-      @competition = Activities::CompetitionRecord.new
+      @competition = Activities::CompetitionRecord.new(competition_params)
     end
 
     def create

@@ -4,6 +4,19 @@
 
 .row
   .large-12.columns
+    .callout
+      = search_form_for @q, url: competitions_path, class: 'js-send-on-enter' do |f|
+        .row
+          .large-2.columns
+            = f.label :start_date_gteq, 'Data zawodów od'
+            = f.date_field :start_date_gteq, value: (params[:q].fetch(:start_date_gteq) if params[:q])
+
+          .large-2.columns
+            br
+            = f.submit 'Szukaj', class: 'button expanded'
+
+.row
+  .large-12.columns
     = render 'table'
 
 - if Rails.env.development?

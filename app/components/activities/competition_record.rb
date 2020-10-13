@@ -71,5 +71,9 @@ module Activities
         [:start_date, :name]
       ]
     end
+
+    def to_params
+
+    end
   end
 end

@@ -2331,6 +2331,7 @@ to_attributes	app/components/scrappers/weather.rb	/^    def to_attributes$/;"	f	
 to_options	app/components/availability/weeks_presenter.rb	/^    def self.to_options$/;"	F	class:Availability.WeeksPresenter
 to_options	app/components/items/owner_presenter.rb	/^    def self.to_options$/;"	F	class:Items.OwnerPresenter
 to_options	app/components/reservations/state_presenter.rb	/^    def self.to_options$/;"	F	class:Reservations.StatePresenter
+to_params	app/components/activities/competition_record.rb	/^    def to_params$/;"	f	class:Activities.CompetitionRecord
 to_params	app/services/payments/dotpay/adapt_payment.rb	/^      def to_params$/;"	f	class:Payments.Dotpay.AdaptPayment
 to_s	app/components/items/owner_presenter.rb	/^    def to_s$/;"	f	class:Items.OwnerPresenter
 to_s	app/components/reservations/state_presenter.rb	/^    def to_s$/;"	f	class:Reservations.StatePresenter
