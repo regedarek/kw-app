@@ -16,6 +16,7 @@ module Activities
     friendly_id :slug_candidates, use: :slugged
 
     validates :name, :country, :state, presence: true
+    validates :name, :uniqueness => {:scope => [:start_date], message: ' => Zawody o tej nazwie zostały już dodane w tym terminie.'}
 
     workflow_column :state
     workflow do

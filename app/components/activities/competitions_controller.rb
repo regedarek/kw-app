@@ -11,7 +11,11 @@ module Activities
     end
 
     def new
-      @competition = Activities::CompetitionRecord.new(competition_params)
+      if params[:competition]
+        @competition = Activities::CompetitionRecord.new(competition_params)
+      else
+        @competition = Activities::CompetitionRecord.new
+      end
     end
 
     def create
