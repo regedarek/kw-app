@@ -2,8 +2,11 @@
   .large-8.columns
     h3 Głosowania Walnego Zebrania członków KW Kraków
 
+  - if can? :read, Management::Voting::CaseRecord
+    .large-2.columns
+        = link_to 'Wejdź na spotkanie', 'https://www.youtube.com/watch?v=NrZrKX91vBA', class: 'button success expanded medium', target: :_blank
   - if can? :create, Management::Voting::CaseRecord
-    .large-4.columns
+    .large-2.columns
         = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
 
 .row
