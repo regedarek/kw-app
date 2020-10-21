@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     scope module: 'voting' do
       resources :cases, path: 'glosowania' do
         member do
+          resources :votes
           get :approve
           get :abstain
           put :approve_for_all

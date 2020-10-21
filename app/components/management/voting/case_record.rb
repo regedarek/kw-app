@@ -4,6 +4,8 @@ module Management
       include Workflow
       extend FriendlyId
 
+      enum voting_type: [:document, :member, :members]
+
       mount_uploaders :attachments, Management::AttachmentUploader
       serialize :attachments, JSON
 
@@ -16,6 +18,7 @@ module Management
 
       workflow_column :state
       workflow do
+        state :init
         state :voting do
           event :finish, :transitions_to => :finished
         end

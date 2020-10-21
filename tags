@@ -233,7 +233,10 @@ AddTshirtSizesToStrzeleckiSignUps	db/migrate/20170301085832_add_tshirt_sizes_to_
 AddTshirtUrlToCompetitions	db/migrate/20180423110921_add_tshirt_url_to_competitions.rb	/^class AddTshirtUrlToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddUlrsToUsers	db/migrate/20191103181309_add_ulrs_to_users.rb	/^class AddUlrsToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddUserIdToYearlyFees	db/migrate/20160830133030_add_user_id_to_yearly_fees.rb	/^class AddUserIdToYearlyFees < ActiveRecord::Migration[5.0]$/;"	c
+AddVotingTypeToManagementVotes	db/migrate/20201021100741_add_voting_type_to_management_votes.rb	/^class AddVotingTypeToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 AddWarningsToItems	db/migrate/20160808191833_add_warnings_to_items.rb	/^class AddWarningsToItems < ActiveRecord::Migration[5.0]$/;"	c
+AddWhoIdToManagementVotes	db/migrate/20201020164902_add_who_id_to_management_votes.rb	/^class AddWhoIdToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
+AddWhoIdsToManagementUsers	db/migrate/20201020164758_add_who_ids_to_management_users.rb	/^class AddWhoIdsToManagementUsers < ActiveRecord::Migration[5.2]$/;"	c
 Admin	app/components/admin/items.rb	/^module Admin$/;"	m
 Admin	app/components/admin/items_form.rb	/^module Admin$/;"	m
 Admin	app/components/admin/membership_fees.rb	/^module Admin$/;"	m
@@ -429,6 +432,7 @@ CreateLibraryItems	db/migrate/20190702183653_create_library_items.rb	/^class Cre
 CreateMailboxer	db/migrate/20191114202836_create_mailboxer.mailboxer_engine.rb	/^class CreateMailboxer < ActiveRecord::Migration[4.2]$/;"	c
 CreateManagementCases	db/migrate/20190430143708_create_management_cases.rb	/^class CreateManagementCases < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementInformations	db/migrate/20190714111909_create_management_informations.rb	/^class CreateManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
+CreateManagementVoteUsers	db/migrate/20201021094744_create_management_vote_users.rb	/^class CreateManagementVoteUsers < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementVotes	db/migrate/20190502101949_create_management_votes.rb	/^class CreateManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 CreateMasSignUps	db/migrate/20170317104900_create_mas_sign_ups.rb	/^class CreateMasSignUps < ActiveRecord::Migration[5.0]$/;"	c
 CreateMeteoblueRecords	db/migrate/20190814111833_create_meteoblue_records.rb	/^class CreateMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
@@ -474,6 +478,7 @@ CreateTrainingExcercies	db/migrate/20200622113423_create_training_excercies.rb	/
 CreateUsers	db/migrate/20150523153119_create_users.rb	/^class CreateUsers < ActiveRecord::Migration[5.0]$/;"	c
 CreateValleyTable	db/migrate/20160804151037_create_valley_table.rb	/^class CreateValleyTable < ActiveRecord::Migration[5.0]$/;"	c
 CreateVersions	db/migrate/20200410095514_create_versions.rb	/^class CreateVersions < ActiveRecord::Migration[5.2]$/;"	c
+CreateVote	app/components/management/voting/create_vote.rb	/^    class CreateVote$/;"	c	class:Management.Voting
 CreateWeatherRecords	db/migrate/20190724185610_create_weather_records.rb	/^class CreateWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 CreateYearlyFeesTable	db/migrate/20160830120918_create_yearly_fees_table.rb	/^class CreateYearlyFeesTable < ActiveRecord::Migration[5.0]$/;"	c
 CsvLibraryItemParser	app/components/importing/csv_library_item_parser.rb	/^  class CsvLibraryItemParser$/;"	c	class:Importing
@@ -652,11 +657,15 @@ Management	app/components/management/voting/case_form.rb	/^module Management$/;"
 Management	app/components/management/voting/case_record.rb	/^module Management$/;"	m
 Management	app/components/management/voting/cases_controller.rb	/^module Management$/;"	m
 Management	app/components/management/voting/create_case.rb	/^module Management$/;"	m
+Management	app/components/management/voting/create_vote.rb	/^module Management$/;"	m
 Management	app/components/management/voting/mailer.rb	/^module Management$/;"	m
 Management	app/components/management/voting/reminder.rb	/^module Management$/;"	m
 Management	app/components/management/voting/repository.rb	/^module Management$/;"	m
 Management	app/components/management/voting/update_case.rb	/^module Management$/;"	m
+Management	app/components/management/voting/vote_form.rb	/^module Management$/;"	m
 Management	app/components/management/voting/vote_record.rb	/^module Management$/;"	m
+Management	app/components/management/voting/vote_users_record.rb	/^module Management$/;"	m
+Management	app/components/management/voting/votes_controller.rb	/^module Management$/;"	m
 ManuallySignUp	app/components/training/supplementary/manually_sign_up.rb	/^    class ManuallySignUp$/;"	c	class:Training.Supplementary
 ManuallySignUpForm	app/components/training/supplementary/manually_sign_up_form.rb	/^    class ManuallySignUpForm < Dry::Validation::Schema$/;"	c	class:Training.Supplementary
 Members	app/components/user_management/members.rb	/^  class Members$/;"	c	class:UserManagement
@@ -777,6 +786,7 @@ RemovePeakIdFromMountainRoutes	db/migrate/20170419230437_remove_peak_id_from_mou
 RemoveRouteTimeFromMountainRoutes	db/migrate/20190424123350_remove_route_time_from_mountain_routes.rb	/^class RemoveRouteTimeFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 RemoveTermsOfServiceFromEventsSignUps	db/migrate/20180112122318_remove_terms_of_service_from_events_sign_ups.rb	/^class RemoveTermsOfServiceFromEventsSignUps < ActiveRecord::Migration[5.0]$/;"	c
 RemoveUserIdFromMembershipFees	db/migrate/20160831180312_remove_user_id_from_membership_fees.rb	/^class RemoveUserIdFromMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
+RemoveWhoIdFromManagementVotes	db/migrate/20201021100359_remove_who_id_from_management_votes.rb	/^class RemoveWhoIdFromManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 RenameAcomplishedCourseInProfiles	db/migrate/20170218172922_rename_acomplished_course_in_profiles.rb	/^class RenameAcomplishedCourseInProfiles < ActiveRecord::Migration[5.0]$/;"	c
 RenameAuthorUrlToAuthorId	db/migrate/20191102153924_rename_author_url_to_author_id.rb	/^class RenameAuthorUrlToAuthorId < ActiveRecord::Migration[5.2]$/;"	c
 RenameBanerUrlToBanerInCompetitions	db/migrate/20180727140559_rename_baner_url_to_baner_in_competitions.rb	/^class RenameBanerUrlToBanerInCompetitions < ActiveRecord::Migration[5.0]$/;"	c
@@ -1027,15 +1037,21 @@ UsersForm	app/components/admin/users_form.rb	/^  class UsersForm$/;"	c	class:Adm
 VersionsController	app/controllers/admin/versions_controller.rb	/^  class VersionsController < Admin::BaseController$/;"	c	class:Admin
 VisitingCard	app/components/visiting_card/profiles_controller.rb	/^module VisitingCard$/;"	m
 VoteRecord	app/components/management/voting/vote_record.rb	/^    class VoteRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
+VoteUsersRecord	app/components/management/voting/vote_users_record.rb	/^    class VoteUsersRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
+VotesController	app/components/management/voting/votes_controller.rb	/^    class VotesController < ApplicationController$/;"	c	class:Management.Voting
 Voting	app/components/management/voting/case_form.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/case_record.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/cases_controller.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/create_case.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/create_vote.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/mailer.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/reminder.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/repository.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/update_case.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/vote_form.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/vote_record.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/vote_users_record.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/votes_controller.rb	/^  module Voting$/;"	m	class:Management
 Weather	app/components/scrappers/weather.rb	/^  class Weather < Dry::Struct$/;"	c	class:Scrappers
 WeatherRecord	app/components/scrappers/weather_record.rb	/^  class WeatherRecord < ActiveRecord::Base$/;"	c	class:Scrappers
 WeatherStorage	app/components/scrappers/weather_storage.rb	/^  class WeatherStorage$/;"	c	class:Scrappers
@@ -1130,6 +1146,7 @@ call	app/components/events/competitions/sign_ups/update.rb	/^        def call(co
 call	app/components/management/create_project.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.CreateProject
 call	app/components/management/update_project.rb	/^    def call(id:, raw_inputs:)$/;"	f	class:Management.UpdateProject
 call	app/components/management/voting/create_case.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateCase
+call	app/components/management/voting/create_vote.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateVote
 call	app/components/management/voting/update_case.rb	/^      def call(id:, raw_inputs:)$/;"	f	class:Management.Voting.UpdateCase
 call	app/components/membership/fees_reminder_service.rb	/^    def call$/;"	f	class:Membership.FeesReminderService
 call	app/components/reservations/update_items.rb	/^    def call(raw_inputs:)$/;"	f	class:Reservations.UpdateItems
@@ -1473,6 +1490,11 @@ change	db/migrate/20200716115752_add_membership_to_supplementary_course_package_
 change	db/migrate/20200716125118_add_end_application_date_to_supplementary_courses.rb	/^  def change$/;"	f	class:AddEndApplicationDateToSupplementaryCourses
 change	db/migrate/20200725111235_create_settings.rb	/^  def change$/;"	f	class:CreateSettings
 change	db/migrate/20200725115247_add_path_to_settings.rb	/^  def change$/;"	f	class:AddPathToSettings
+change	db/migrate/20201020164758_add_who_ids_to_management_users.rb	/^  def change$/;"	f	class:AddWhoIdsToManagementUsers
+change	db/migrate/20201020164902_add_who_id_to_management_votes.rb	/^  def change$/;"	f	class:AddWhoIdToManagementVotes
+change	db/migrate/20201021094744_create_management_vote_users.rb	/^  def change$/;"	f	class:CreateManagementVoteUsers
+change	db/migrate/20201021100359_remove_who_id_from_management_votes.rb	/^  def change$/;"	f	class:RemoveWhoIdFromManagementVotes
+change	db/migrate/20201021100741_add_voting_type_to_management_votes.rb	/^  def change$/;"	f	class:AddVotingTypeToManagementVotes
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1537,6 +1559,7 @@ create	app/components/library/items_controller.rb	/^    def create$/;"	f	class:L
 create	app/components/management/projects_controller.rb	/^    def create$/;"	f	class:Management.ProjectsController
 create	app/components/management/snw/snw_applies_controller.rb	/^      def create$/;"	f	class:Management.Snw.SnwAppliesController
 create	app/components/management/voting/cases_controller.rb	/^      def create$/;"	f	class:Management.Voting.CasesController
+create	app/components/management/voting/votes_controller.rb	/^      def create$/;"	f	class:Management.Voting.VotesController
 create	app/components/messaging/comments_controller.rb	/^    def create$/;"	f	class:Messaging.CommentsController
 create	app/components/messaging/conversations_controller.rb	/^    def create$/;"	f	class:Messaging.ConversationsController
 create	app/components/messaging/messages_controller.rb	/^    def create$/;"	f	class:Messaging.MessagesController
@@ -1591,6 +1614,7 @@ create_record	app/components/events/admin/competitions_controller.rb	/^      def
 create_record	app/components/events/competitions/sign_ups_controller.rb	/^      def create_record(form)$/;"	f	class:Events
 create_record	app/components/management/projects_controller.rb	/^    def create_record$/;"	f	class:Management.ProjectsController
 create_record	app/components/management/voting/cases_controller.rb	/^      def create_record$/;"	f
+create_record	app/components/management/voting/votes_controller.rb	/^      def create_record$/;"	f	class:Management.Voting.VotesController
 create_record	app/components/settlement/admin/contractors_controller.rb	/^      def create_record$/;"	f	class:Settlement.Admin.ContractorsController
 create_record	app/components/settlement/admin/contracts_controller.rb	/^      def create_record$/;"	f	class:Settlement.Admin.ContractsController
 create_record	app/components/training/activities/ski_routes_controller.rb	/^      def create_record$/;"	f	class:Training.Activities.SkiRoutesController
@@ -1891,6 +1915,7 @@ initialize	app/components/items/owner_presenter.rb	/^    def initialize(owner)$/
 initialize	app/components/management/create_project.rb	/^      def initialize(form)$/;"	f	class:Management.CreateProject
 initialize	app/components/management/update_project.rb	/^    def initialize(form)$/;"	f	class:Management.UpdateProject
 initialize	app/components/management/voting/create_case.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.CreateCase
+initialize	app/components/management/voting/create_vote.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.CreateVote
 initialize	app/components/management/voting/update_case.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.UpdateCase
 initialize	app/components/membership/activement.rb	/^    def initialize(user: nil)$/;"	f	class:Membership.Activement
 initialize	app/components/reservations/cancel_item.rb	/^    def initialize(reservation_id:)$/;"	f	class:Reservations.CancelItem
@@ -2394,6 +2419,7 @@ user_params	app/controllers/admin/users_controller.rb	/^    def user_params$/;"	
 users_names=	app/components/management/project_record.rb	/^    def users_names=(ids)$/;"	f	class:Management.ProjectRecord
 validate_each	lib/validators/periodic_date_validator.rb	/^  def validate_each(record, attribute, parameters)$/;"	f	class:PeriodicDateValidator
 vendorPropName	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function vendorPropName( name ) {$/;"	f
+vote_params	app/components/management/voting/votes_controller.rb	/^      def vote_params$/;"	f	class:Management.Voting.VotesController
 voted?	app/components/management/voting/repository.rb	/^      def voted?(case_id, user_id)$/;"	f	class:Management.Voting.Repository
 voting	app/models/ability.rb	/^  def voting$/;"	f	class:Ability
 voting_results	app/components/management/voting/repository.rb	/^      def voting_results(case_id)$/;"	f	class:Management.Voting.Repository

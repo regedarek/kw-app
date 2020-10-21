@@ -1,0 +1,77 @@
+.row
+  .large-6.columns
+    .row
+      .large-12.columns
+        h4 = @case.name
+
+    b Status: 
+    span.label = I18n.t(@case.state)
+
+    - if @case.acceptance_date
+      br
+      b Data uchwalenia: 
+      = @case.acceptance_date
+
+    .row
+      .large-12.columns
+        b Utworzył: 
+        = Db::User.find(@case.creator_id).display_name
+
+    - if @case.destrciption
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @case.destrciption
+
+    - if @case.doc_url
+      b Dokument
+      br
+      = link_to @case.doc_url, target: :_blank do
+        = image_tag('file.jpg', class: 'thumbnail')
+
+    - if @case.attachments.any?
+      .row
+        .large-12.columns
+          h5 Załączniki
+          - @case.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            = link_to attachment.url, download: File.basename(attachment.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail')
+            br
+          - @case.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+            - unless photo.blank? || photo.thumb.blank?
+              = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+              div id="photo-#{i}" class="full reveal" data-reveal="" 
+                = image_tag photo.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+
+  .large-6.columns
+    .row
+      .large-12.columns
+        .callout class="#{@repository.approved?(@case.id) ? 'success' : 'alert'}"
+          h5 = "Wyniki (za / przeciw / liczba głosów)"
+          b= @repository.voting_results(@case.id)
+    - if user_signed_in?
+      - if @case.hide_votes?
+      - else
+        - if can? :approve, Management::Voting::CaseRecord
+          - unless @repository.voted?(@case.id, current_user.id)
+            .row
+              .large-6.columns
+                h5 Głosowanie
+                = form_for Management::Voting::VoteRecord.new, as: :vote, url: votes_path(@case.id) do |f|
+                  = f.hidden_field :user_id, value: current_user.id
+                  = f.hidden_field :case_id, value: @case.id
+                  = f.collection_check_boxes(:user_ids, Db::User.all.limit(4), :id, :display_name) do |user|
+                    = user.label
+                    = user.check_box
+                    br
+                  .row
+                    .large-6.columns
+                      = f.submit 'Zagłosuj', class: 'button expanded large success'
+    .row
+      .large-12.columns
+          = link_to 'powrót do pozostałych głosowań', cases_path, class: 'button secondary expanded'
+          - if can? :update, @case
+            = link_to 'edytuj', edit_case_path(@case.id), class: 'button alert'

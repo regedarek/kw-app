@@ -9,10 +9,12 @@ module Management
 
       required(:name).filled(:str?)
       required(:creator_id).filled(:int?)
+      required(:voting_type).filled(:str?)
       optional(:state).maybe
       optional(:hidden).maybe(:bool?)
       optional(:acceptance_date).maybe(:date?)
       optional(:destrciption).maybe(:str?)
+      optional(:who_ids).maybe
       optional(:number).maybe(:str?)
       optional(:doc_url).maybe(:str?)
       optional(:hide_votes).maybe(:bool?)

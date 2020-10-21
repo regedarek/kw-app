@@ -31,7 +31,6 @@ module Management
       def edit
         @case_record = Management::Voting::CaseRecord.find(params[:id])
         authorize! :update, @case_record
-
       end
 
       def update
@@ -155,7 +154,7 @@ module Management
       def case_params
         params
           .require(:case)
-          .permit(:name, :hidden, :number, :state, :destrciption, :creator_id, :doc_url, :hide_votes, :acceptance_date, attachments: [])
+          .permit(:name, :hidden, :number, :state, :destrciption, :voting_type, :creator_id, :doc_url, :hide_votes, :acceptance_date, attachments: [], who_ids: [])
       end
     end
   end
