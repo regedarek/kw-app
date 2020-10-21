@@ -1,7 +1,10 @@
-- decisions = @case.votes.group(:decision).count
+- if @case.hide_votes?
+  | Przegłosowano przez aklamację.
+- else
+  - decisions = @case.votes.group(:decision).count
 
-= "Za: #{decisions['approved'].to_i}"
-br
-= "Przeciw: #{decisions['unapproved'].to_i}"
-br
-= "Wstrzymało się: #{decisions['abstained'].to_i}"
+  = "Za: #{decisions['approved'].to_i}"
+  br
+  = "Przeciw: #{decisions['unapproved'].to_i}"
+  br
+  = "Wstrzymało się: #{decisions['abstained'].to_i}"
