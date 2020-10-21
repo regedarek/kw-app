@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         collection do
           get :walne, as: :walne
           get :obecni, as: :obecni
+          post :accept, as: :accept
         end
         member do
           resources :votes

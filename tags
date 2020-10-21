@@ -40,6 +40,7 @@ AdaptPayment	app/services/payments/dotpay/adapt_payment.rb	/^    class AdaptPaym
 AddAcceptFirstToEventsCompetitions	db/migrate/20190423090402_add_accept_first_to_events_competitions.rb	/^class AddAcceptFirstToEventsCompetitions < ActiveRecord::Migration[5.2]$/;"	c
 AddAcceptanceDateToVotingCases	db/migrate/20190806085118_add_acceptance_date_to_voting_cases.rb	/^class AddAcceptanceDateToVotingCases < ActiveRecord::Migration[5.2]$/;"	c
 AddAcceptedAtToProfiles	db/migrate/20190208171211_add_accepted_at_to_profiles.rb	/^class AddAcceptedAtToProfiles < ActiveRecord::Migration[5.2]$/;"	c
+AddAcceptedTermsToCasePresences	db/migrate/20201021203559_add_accepted_terms_to_case_presences.rb	/^class AddAcceptedTermsToCasePresences < ActiveRecord::Migration[5.2]$/;"	c
 AddAcceptedToProfiles	db/migrate/20170220160402_add_accepted_to_profiles.rb	/^class AddAcceptedToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddAcceptorIdToProfiles	db/migrate/20180208222009_add_acceptor_id_to_profiles.rb	/^class AddAcceptorIdToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddAccessTokenToUsers	db/migrate/20170505150009_add_access_token_to_users.rb	/^class AddAccessTokenToUsers < ActiveRecord::Migration[5.0]$/;"	c
@@ -1073,6 +1074,7 @@ __webpack_require__.o	public/assets/application-adb37b88852cd8099abe934018ff31ef
 _jQuery	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	_jQuery = window.jQuery,$/;"	v
 _load	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var _load = jQuery.fn.load;$/;"	v
 abstain	app/components/management/voting/cases_controller.rb	/^      def abstain$/;"	f	class:Management
+accept	app/components/management/voting/cases_controller.rb	/^      def accept$/;"	f	class:Management.Voting.CasesController
 accept	app/components/settlement/admin/contracts_controller.rb	/^      def accept$/;"	f	class:Settlement.Admin.ContractsController
 accept	app/components/user_management/lists_controller.rb	/^    def accept$/;"	f	class:UserManagement.ListsController.create
 accept	app/controllers/admin/profiles_controller.rb	/^    def accept$/;"	f	class:Admin.ProfilesController
@@ -1513,6 +1515,7 @@ change	db/migrate/20201021125959_add_index_to_management_votes.rb	/^  def change
 change	db/migrate/20201021133743_add_meeting_type_to_management_cases.rb	/^  def change$/;"	f	class:AddMeetingTypeToManagementCases
 change	db/migrate/20201021142747_change_date_format_in_management_cases.rb	/^  def change$/;"	f	class:ChangeDateFormatInManagementCases
 change	db/migrate/20201021161030_create_case_presences.rb	/^  def change$/;"	f	class:CreateCasePresences
+change	db/migrate/20201021203559_add_accepted_terms_to_case_presences.rb	/^  def change$/;"	f	class:AddAcceptedTermsToCasePresences
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

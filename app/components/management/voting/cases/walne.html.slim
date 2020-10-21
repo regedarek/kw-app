@@ -1,19 +1,25 @@
-.row
-  .large-8.columns
-    h3 Głosowania Walnego Zebrania członków KW Kraków
+- if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, accepted_terms: true)
+  .row
+    .large-8.columns
+      h3 Głosowania Walnego Zebrania członków KW Kraków
 
-  - if can? :read, Management::Voting::CaseRecord
-    .large-2.columns
-        = link_to 'Wejdź na spotkanie', 'https://www.youtube.com/watch?v=NrZrKX91vBA', class: 'button success expanded medium', target: :_blank
-  - if can? :create, Management::Voting::CaseRecord
-    .large-2.columns
-        = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
+    - if can? :read, Management::Voting::CaseRecord
+      .large-2.columns
+          = link_to 'Wejdź na spotkanie', 'https://www.youtube.com/watch?v=NrZrKX91vBA', class: 'button success expanded medium', target: :_blank
+    - if can? :create, Management::Voting::CaseRecord
+      .large-2.columns
+          = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
 
-.row
-  .large-12.columns
-    = render 'table', cases: @cases
+  .row
+    .large-12.columns
+      = render 'table', cases: @cases
 
-.row
-  .large-12.columns
-    | Obecni na walnym:  
-    b = Management::Voting::CasePresenceRecord.count
+  .row
+    .large-12.columns
+      | Obecni na walnym:  
+      b = Management::Voting::CasePresenceRecord.count
+- else
+  .row
+    .large-12.columns
+      = render 'management/voting/cases/show/accepted_terms'
+      = link_to 'Zaakceptuj warunki', accept_cases_path, class: 'button expanded large success', method: :post

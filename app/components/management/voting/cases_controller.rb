@@ -13,11 +13,17 @@ module Management
       def walne
         authorize! :read, Management::Voting::CaseRecord
 
+        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').accessible_by(current_ability).order(acceptance_date: :asc)
+      end
+
+      def accept
+        authorize! :read, Management::Voting::CaseRecord
+
         unless Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id)
-          Management::Voting::CasePresenceRecord.create(user_id: current_user.id)
+          Management::Voting::CasePresenceRecord.create(user_id: current_user.id, accepted_terms: true)
         end
 
-        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').accessible_by(current_ability).order(acceptance_date: :asc)
+        redirect_to walne_cases_path, notice: 'Zaakceptowano warunki'
       end
 
       def index

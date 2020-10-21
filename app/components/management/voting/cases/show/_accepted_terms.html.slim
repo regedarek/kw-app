@@ -1,0 +1,6 @@
+- setting = Management::SettingsRecord.find_by(path: '/glosowanie/walne')
+
+.row
+  .large-12.columns
+    .callout.warning
+      = sanitize setting.content
