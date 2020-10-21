@@ -22,10 +22,13 @@
           = render 'table', fees: @fees
         - else
           | Nie masz opłaconych składek
-      .large-4.columns
-        = image_tag 'legitka-2018a.jpg'
-      .large-4.columns
-        = image_tag 'legitka-2018b.jpg'
+      .large-8.columns
+        - setting = Management::SettingsRecord.find_by(path: '/klub/skladki')
+        - if setting
+          .row
+            .large-12.columns
+              .callout.warning
+                = sanitize setting.content
 
   .row
     .large-6.columns.text-left
