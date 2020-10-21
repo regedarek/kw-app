@@ -13,8 +13,8 @@
       = f.text_field :number
 
     .large-2.columns
-      = f.label :meeting_type, t('.category')
-      = f.select :meeting_type, Management::Voting::CaseRecord.meeting_types.keys
+      = f.label :meeting_type, 'Typ głosowania'
+      = f.select :meeting_type, [['Walne', 'circle'],['Zarządowe', 'manage']]
 
     .large-6.columns
       b= f.label :state, 'Status'

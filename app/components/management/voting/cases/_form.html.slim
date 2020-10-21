@@ -17,8 +17,8 @@
     = f.datetime_field :acceptance_date
 
   .large-2.columns
-    = f.label :voting_type, t('.category')
-    = f.select :voting_type, Management::Voting::CaseRecord.voting_types.keys
+    = f.label :voting_type, 'Typ głosowania'
+    = f.select :voting_type, [['Uchwała', 'document'],['Wybór osób', 'members']]
 
 .row
   .large-12.columns
@@ -36,5 +36,5 @@
     = f.label :doc_url, "Link do dokumentu online"
     = f.text_field :doc_url
   .large-4.columns
-    = f.label :hide_votes, "Zaakceptuj i ukryj głosujących?"
+    = f.label :hide_votes, "Przez aklamację?"
     = f.check_box :hide_votes
