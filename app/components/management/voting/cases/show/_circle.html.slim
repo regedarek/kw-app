@@ -69,6 +69,6 @@
               = render "management/voting/cases/forms/#{@case.voting_type}"
     .row
       .large-12.columns
-          = link_to 'powrót do pozostałych głosowań', cases_path, class: 'button secondary expanded'
+          = link_to 'powrót do pozostałych głosowań', '/glosowania/walne', class: 'button secondary expanded'
           - if can? :update, @case
             = link_to 'edytuj', edit_case_path(@case.id), class: 'button alert'

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     scope module: 'voting' do
       resources :cases, path: 'glosowania' do
         collection do
-          get :walne
+          get :walne, as: :walne
         end
         member do
           resources :votes
