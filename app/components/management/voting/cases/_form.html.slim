@@ -1,22 +1,23 @@
 .row
-  .large-4.columns
+  .large-6.columns
     span data-tooltip='' tabindex="1" title="" data-allow-html="true" class='has-tip'
       = f.label :name, "Nazwa głosowania*"
     = f.text_field :name
     = f.hidden_field :creator_id, value: current_user.id
 
-  .large-4.columns
+  .large-6.columns
     = f.label :who_ids, 'z klubu'
     = f.select :who_ids,
       Db::User.all.map { |u| [u.display_name, u.id] },
       { include_blank: false, include_hidden: false },
       { class: 'js-select-multiple', multiple: true }
 
-  .large-2.columns
+.row
+  .large-6.columns
     = f.label :acceptance_date, 'Data uchwalenia'
     = f.datetime_field :acceptance_date
 
-  .large-2.columns
+  .large-6.columns
     = f.label :voting_type, 'Typ głosowania'
     = f.select :voting_type, [['Uchwała', 'document'],['Wybór osób', 'members']]
 
