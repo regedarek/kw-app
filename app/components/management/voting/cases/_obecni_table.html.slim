@@ -1,10 +1,14 @@
 table.hover
   thead
     tr
-      th.text-left  width='45%' Imię i nazwisko
+      th.text-left  width='15%' Numer legitymacji
+      th.text-left  width='35%' Imię i nazwisko
+      th.text-center width='25%' Zaakceptowano warunki
       th.text-center width='25%' Kiedy?
   tbody
     - obecni.each do |presence|
       tr
+        td.text-left = presence.user.kw_id
         td.text-left = presence.user.display_name
-        td.text-center = presence.created_at
+        td.text-center = presence.accepted_terms? ? 'Tak' : 'Nie'
+        td.text-center = presence.created_at&.in_time_zone&.strftime("%m/%d/%Y %H:%M")

@@ -5,7 +5,7 @@
 
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
-          = link_to 'Wejdź na spotkanie', 'https://www.youtube.com/watch?v=NrZrKX91vBA', class: 'button success expanded medium', target: :_blank
+          = link_to 'Transmisja wideo', 'https://www.youtube.com/watch?v=NrZrKX91vBA', class: 'button success expanded large', target: :_blank
     - if can? :create, Management::Voting::CaseRecord
       .large-2.columns
           = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
