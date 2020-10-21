@@ -55,7 +55,10 @@
         - if @case.acceptance_date
           .callout.warning
             b Zamknięcie głosowania
-            p#demo data-expired="#{@case.acceptance_date}"
+            - if @case.finished?
+              Głosowanie zostało zamknięte.
+            - else
+              p#demo data-expired="#{@case.acceptance_date}"
         .callout class="success"
           h5 = "Wyniki"
           = render "management/voting/cases/voting_results/#{@case.voting_type}"
