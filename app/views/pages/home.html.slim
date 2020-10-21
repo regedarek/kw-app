@@ -70,7 +70,7 @@
       = link_to cases_path do
         h4 Głosowania zarządu, przyjęte uchwały
       table.stack
-        - Management::Voting::CaseRecord.accessible_by(current_ability).order(created_at: :desc).limit(5).each do |case_record|
+        - Management::Voting::CaseRecord.where(meeting_type: 'manage').accessible_by(current_ability).order(created_at: :desc).limit(5).each do |case_record|
           tr
             td width='110px'
               = case_record.acceptance_date
