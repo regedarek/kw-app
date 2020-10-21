@@ -5,10 +5,14 @@ module Management
       append_view_path 'app/components'
 
       def walne
-        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').accessible_by(current_ability).order(created_at: :desc)
+        authorize! :read, Management::Voting::CaseRecord
+
+        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').accessible_by(current_ability).order(acceptance_date: :asc)
       end
 
       def index
+        authorize! :read, Management::Voting::CaseRecord
+
         @cases = Management::Voting::CaseRecord.where(meeting_type: 'manage').accessible_by(current_ability).order(created_at: :desc)
       end
 

@@ -39,7 +39,19 @@ module Membership
       return false
     end
 
+    def active_and_regular?
+      active? && profile_is_regular?(user)
+    end
+
     private
+
+    def profile_is_regular?(user)
+      if user.profile
+        user.profile.position.any?{ |p| ['honorable_kw', 'senior', 'regular'].include?(p) }
+      else
+        false
+      end
+    end
 
     def profile_has_been_released?(user)
       if user.profile

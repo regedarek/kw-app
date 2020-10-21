@@ -5,7 +5,7 @@ module Management
       append_view_path 'app/components'
 
       def create
-        #authorize! :create, Management::Voting::VoteRecord
+        authorize! :create, Management::Voting::VoteRecord
 
         either(create_record) do |result|
           result.success do |case_id|

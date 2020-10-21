@@ -1081,8 +1081,9 @@ account_id	app/services/payments/dotpay/payment_request.rb	/^      def account_i
 active	app/models/ability.rb	/^  def active$/;"	f	class:Ability
 active?	app/components/membership/activement.rb	/^    def active?$/;"	f	class:Membership.Activement
 active?	app/models/db/user.rb	/^  def active?$/;"	f	class:Db
-active_one_year	app/models/ability.rb	/^  def active_one_year$/;"	f	class:Ability
-active_one_year?	app/models/db/user.rb	/^  def active_one_year?$/;"	f	class:Db
+active_and_regular	app/models/ability.rb	/^  def active_and_regular$/;"	f	class:Ability
+active_and_regular?	app/components/membership/activement.rb	/^    def active_and_regular?$/;"	f	class:Membership.Activement
+active_and_regular?	app/models/db/user.rb	/^  def active_and_regular?$/;"	f	class:Db
 activity_type_attributes_for_select	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select$/;"	F	class:Business.CourseRecord
 activity_url	app/components/business/course_record.rb	/^    def activity_url$/;"	f	class:Business.CourseRecord
 actualDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function actualDisplay( name, doc ) {$/;"	f
@@ -2181,6 +2182,7 @@ process	app/services/payments/dotpay/status.rb	/^      def process$/;"	f	class:P
 process_page	app/components/scrappers/pdf_image_extractor.rb	/^    def process_page(page, count)$/;"	f	class:Scrappers.PdfImageExtractor
 profile	app/components/management/snw/snw_apply_record.rb	/^      def profile$/;"	f	class:Management.Snw.SnwApplyRecord
 profile_has_been_released?	app/components/membership/activement.rb	/^    def profile_has_been_released?(user)$/;"	f	class:Membership.Activement
+profile_is_regular?	app/components/membership/activement.rb	/^    def profile_is_regular?(user)$/;"	f	class:Membership.Activement
 profile_name	app/components/business/instructor_record.rb	/^    def profile_name$/;"	f	class:Business.InstructorRecord
 profile_params	app/controllers/admin/profiles_controller.rb	/^    def profile_params$/;"	f	class:Admin.ProfilesController
 profile_params	app/controllers/profiles_controller.rb	/^  def profile_params$/;"	f	class:ProfilesController

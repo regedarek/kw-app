@@ -91,8 +91,8 @@ class Db::User < ActiveRecord::Base
     Membership::Activement.new(user: self).active?
   end
 
-  def active_one_year?
-    Membership::Activement.new(user: self).active?
+  def active_and_regular?
+    Membership::Activement.new(user: self).active_and_regular?
   end
 
   def self.from_omniauth(access_token)

@@ -9,6 +9,7 @@ class Ability
     default
     not_active if @user.persisted?
     active if @user.active?
+    active_and_regular if @user.active_and_regular?
     office if role?('office')
     training_contracts if role?('training_contracts')
     competitions if role?('competitions')
@@ -66,7 +67,7 @@ class Ability
     cannot :analiza, Settlement::ContractRecord
   end
 
-  def active_one_year
+  def active_and_regular
     can :create, Management::Voting::VoteRecord
   end
 
