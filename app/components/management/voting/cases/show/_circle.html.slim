@@ -54,9 +54,10 @@
       .large-12.columns
         - if @case.acceptance_date
           .callout.warning
-            b Zamknięcie głosowania
+            b Termin zamknięcia
             - if @case.finished?
-              Głosowanie zostało zamknięte.
+              br
+              | Głosowanie zostało zamknięte.
             - else
               p#demo data-expired="#{@case.acceptance_date}"
         .callout class="success"
