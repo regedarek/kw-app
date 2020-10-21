@@ -1,7 +1,7 @@
 - Db::User.where(id: @case.who_ids).each do |user|
   = user.display_name
   - if @case.hide_votes?
-    | przez aklamację
+    |  przez aklamację.
   - else
     |  [
     b = Management::Voting::VoteRecord.includes(:users).where(case_id: @case.id, users: { id: user.id }).count
