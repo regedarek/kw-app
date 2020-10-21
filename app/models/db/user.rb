@@ -91,6 +91,10 @@ class Db::User < ActiveRecord::Base
     Membership::Activement.new(user: self).active?
   end
 
+  def active_one_year?
+    Membership::Activement.new(user: self).active?
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = Db::User.find_by(email: data['email'])

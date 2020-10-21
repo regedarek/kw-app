@@ -66,6 +66,10 @@ class Ability
     cannot :analiza, Settlement::ContractRecord
   end
 
+  def active_one_year
+    can :create, Management::Voting::VoteRecord
+  end
+
   def competitions
     can :manage, Events::Db::SignUpRecord
   end
@@ -78,8 +82,6 @@ class Ability
     can :search, Settlement::ContractRecord
     can :create, Training::Supplementary::CourseRecord
     can :read, Settlement::ContractRecord
-    can :read, Management::Voting::CaseRecord
-    can :create, Management::Voting::CaseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Management::Snw::SnwApplyRecord
@@ -94,8 +96,6 @@ class Ability
     can :manage, Management::ProjectRecord
     can :manage, PaperTrail::Version
     cannot :destroy, Settlement::ContractRecord
-    can :read, Management::Voting::CaseRecord
-    can :approve, Management::Voting::CaseRecord
     can :analiza, Settlement::ContractRecord
     can :manage, Management::SettingsRecord
   end
@@ -116,8 +116,6 @@ class Ability
     can :accept, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
-    can :read, Management::Voting::CaseRecord
-    can :approve, Management::Voting::CaseRecord
     can :analiza, Settlement::ContractRecord
     can :manage, Management::SettingsRecord
   end

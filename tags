@@ -1080,6 +1080,8 @@ account_id	app/services/payments/dotpay/payment_request.rb	/^      def account_i
 active	app/models/ability.rb	/^  def active$/;"	f	class:Ability
 active?	app/components/membership/activement.rb	/^    def active?$/;"	f	class:Membership.Activement
 active?	app/models/db/user.rb	/^  def active?$/;"	f	class:Db
+active_one_year	app/models/ability.rb	/^  def active_one_year$/;"	f	class:Ability
+active_one_year?	app/models/db/user.rb	/^  def active_one_year?$/;"	f	class:Db
 activity_type_attributes_for_select	app/components/business/course_record.rb	/^    def self.activity_type_attributes_for_select$/;"	F	class:Business.CourseRecord
 activity_url	app/components/business/course_record.rb	/^    def activity_url$/;"	f	class:Business.CourseRecord
 actualDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function actualDisplay( name, doc ) {$/;"	f
