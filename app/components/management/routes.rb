@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     resources :settings, path: 'ustawienia', only: [:index, :edit, :update]
     scope module: 'voting' do
       resources :cases, path: 'glosowania' do
+        collection do
+          get :walne
+        end
         member do
           resources :votes
           get :approve

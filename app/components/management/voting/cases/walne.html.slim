@@ -1,0 +1,11 @@
+.row
+  .large-8.columns
+    h3 Głosowania Walnego Zebrania członków KW Kraków
+
+  - if can? :create, Management::Voting::CaseRecord
+    .large-4.columns
+        = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
+
+.row
+  .large-12.columns
+    = render 'table', cases: @cases

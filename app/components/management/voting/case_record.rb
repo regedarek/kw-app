@@ -4,7 +4,8 @@ module Management
       include Workflow
       extend FriendlyId
 
-      enum voting_type: [:document, :member, :members]
+      enum voting_type: [:document, :members]
+      enum meeting_type: [:manage, :circle]
 
       mount_uploaders :attachments, Management::AttachmentUploader
       serialize :attachments, JSON

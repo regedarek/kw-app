@@ -140,6 +140,7 @@ AddLocationToMeteoblueRecords	db/migrate/20190815095711_add_location_to_meteoblu
 AddMandatoryFieldsToEditionCategories	db/migrate/20181009110950_add_mandatory_fields_to_edition_categories.rb	/^class AddMandatoryFieldsToEditionCategories < ActiveRecord::Migration[5.0]$/;"	c
 AddMatrimonialOfficeToCompetitions	db/migrate/20180422174624_add_matrimonial_office_to_competitions.rb	/^class AddMatrimonialOfficeToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddMaxSeatsToBusinessCourses	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^class AddMaxSeatsToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
+AddMeetingTypeToManagementCases	db/migrate/20201021133743_add_meeting_type_to_management_cases.rb	/^class AddMeetingTypeToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
 AddMembershipToPackages	db/migrate/20180111171334_add_membership_to_packages.rb	/^class AddMembershipToPackages < ActiveRecord::Migration[5.0]$/;"	c
 AddMembershipToSupplementaryCoursePackageTypes	db/migrate/20200716115752_add_membership_to_supplementary_course_package_types.rb	/^class AddMembershipToSupplementaryCoursePackageTypes < ActiveRecord::Migration[5.2]$/;"	c
 AddMeteogramToMeteoblueRecords	db/migrate/20190815093723_add_meteogram_to_meteoblue_records.rb	/^class AddMeteogramToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
@@ -1501,6 +1502,7 @@ change	db/migrate/20201021100741_add_voting_type_to_management_votes.rb	/^  def 
 change	db/migrate/20201021124613_remove_approved_from_management_votes.rb	/^  def change$/;"	f	class:RemoveApprovedFromManagementVotes
 change	db/migrate/20201021124937_set_default_decision_in_management_votes.rb	/^  def change$/;"	f	class:SetDefaultDecisionInManagementVotes
 change	db/migrate/20201021125959_add_index_to_management_votes.rb	/^  def change$/;"	f	class:AddIndexToManagementVotes
+change	db/migrate/20201021133743_add_meeting_type_to_management_cases.rb	/^  def change$/;"	f	class:AddMeetingTypeToManagementCases
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2431,6 +2433,7 @@ voted?	app/components/management/voting/repository.rb	/^      def voted?(case_id
 voting	app/models/ability.rb	/^  def voting$/;"	f	class:Ability
 voting_results	app/components/management/voting/repository.rb	/^      def voting_results(case_id)$/;"	f	class:Management.Voting.Repository
 waiting	app/components/events/competitions/sign_ups/limiter.rb	/^        def waiting$/;"	f	class:Events.Competitions.SignUps.Limiter
+walne	app/components/management/voting/cases_controller.rb	/^      def walne$/;"	f	class:Management.Voting.CasesController
 week	app/components/availability/items.rb	/^    def week$/;"	f	class:Availability.Items
 welcome	app/mailers/registration_mailer.rb	/^  def welcome(user, password)$/;"	f	class:RegistrationMailer
 when	app/models/db/reservation.rb	/^  def when$/;"	f	class:Db

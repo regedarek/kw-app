@@ -4,8 +4,12 @@ module Management
       include EitherMatcher
       append_view_path 'app/components'
 
+      def walne
+        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').accessible_by(current_ability).order(created_at: :desc)
+      end
+
       def index
-        @cases = Management::Voting::CaseRecord.accessible_by(current_ability).order(created_at: :desc)
+        @cases = Management::Voting::CaseRecord.where(meeting_type: 'manage').accessible_by(current_ability).order(created_at: :desc)
       end
 
       def new
