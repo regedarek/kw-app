@@ -12,11 +12,6 @@
       b Data uchwalenia: 
       = @case.acceptance_date
 
-    .row
-      .large-12.columns
-        b Utworzył: 
-        = Db::User.find(@case.creator_id).display_name
-
     - if @case.destrciption
       .row
         .large-12.columns
