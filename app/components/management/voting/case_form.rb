@@ -13,7 +13,7 @@ module Management
       optional(:meeting_type).filled
       optional(:state).maybe
       optional(:hidden).maybe(:bool?)
-      optional(:acceptance_date).maybe(:date?)
+      optional(:acceptance_date).maybe(:time?)
       optional(:destrciption).maybe(:str?)
       optional(:who_ids).maybe
       optional(:number).maybe(:str?)

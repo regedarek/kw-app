@@ -2445,6 +2445,7 @@ width	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940
 width	vendor/assets/javascripts/foundation-datepicker.js	/^            var width = textbox.outerWidth() + parseInt(textbox.css('margin-left'));$/;"	v
 winnow	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function winnow( elements, qualifier, not ) {$/;"	f
 wrapMap.option	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^	option: [ 1, "<select multiple='multiple'>", "<\/select>" ],$/;"	p
+x	app/assets/javascripts/application.js	/^var x = setInterval(function() {$/;"	v
 year_existance	app/components/membership/fee_form.rb	/^    def year_existance$/;"	f	class:Membership.FeeForm
 year_fee	app/components/user_management/application_cost.rb	/^      def year_fee$/;"	f	class:UserManagement.ApplicationCost
 yearly_reminder	app/components/membership/fees_mailer.rb	/^    def yearly_reminder(emails)$/;"	f	class:Membership.FeesMailer

@@ -10,7 +10,7 @@
     - if @case.acceptance_date
       br
       b Data uchwalenia: 
-      = @case.acceptance_date
+      = @case.acceptance_date&.utc&.strftime("%m/%d/%Y o %I:%M%p")
 
     - if @case.destrciption
       .row
@@ -52,6 +52,10 @@
   .large-6.columns
     .row
       .large-12.columns
+        - if @case.acceptance_date
+          .callout.warning
+            b Zamknięcie głosowania
+            p#demo data-expired="#{@case.acceptance_date}"
         .callout class="success"
           h5 = "Wyniki"
           = render "management/voting/cases/voting_results/#{@case.voting_type}"
