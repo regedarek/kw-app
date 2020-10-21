@@ -8,7 +8,7 @@ module Management
       def already_voted_on(case_id)
         case_record = Management::Voting::CaseRecord.find(case_id)
 
-        case_record.votes.includes(:user)
+        case_record.votes
       end
 
       def missing_votes_on(case_id)

@@ -123,6 +123,7 @@ AddHiddenToManagementCases	db/migrate/20190517235048_add_hidden_to_management_ca
 AddHiddenToMountainRoutes	db/migrate/20170815104741_add_hidden_to_mountain_routes.rb	/^class AddHiddenToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddHideToUsers	db/migrate/20180823153859_add_hide_to_users.rb	/^class AddHideToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddHideVotesToManagementCases	db/migrate/20190718121404_add_hide_votes_to_management_cases.rb	/^class AddHideVotesToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
+AddIndexToManagementVotes	db/migrate/20201021125959_add_index_to_management_votes.rb	/^class AddIndexToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 AddIndexToMountainRoutes	db/migrate/20190207233646_add_index_to_mountain_routes.rb	/^class AddIndexToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddIndexToSupplementarySignUps	db/migrate/20180503131609_add_index_to_supplementary_sign_ups.rb	/^class AddIndexToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddIndexesToMountainRoutes	db/migrate/20190130231400_add_indexes_to_mountain_routes.rb	/^class AddIndexesToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
@@ -775,6 +776,7 @@ RegistrationMailer	app/mailers/registration_mailer.rb	/^class RegistrationMailer
 RegistrationsController	app/controllers/registrations_controller.rb	/^class RegistrationsController < Devise::RegistrationsController$/;"	c
 Reminder	app/components/management/voting/reminder.rb	/^    class Reminder$/;"	c	class:Management.Voting
 RemoveAndRenameForPayments	db/migrate/20160830170052_remove_and_rename_for_payments.rb	/^class RemoveAndRenameForPayments < ActiveRecord::Migration[5.0]$/;"	c
+RemoveApprovedFromManagementVotes	db/migrate/20201021124613_remove_approved_from_management_votes.rb	/^class RemoveApprovedFromManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 RemoveAuthorFromRoutes	db/migrate/20160803210921_remove_author_from_routes.rb	/^class RemoveAuthorFromRoutes < ActiveRecord::Migration[5.0]$/;"	c
 RemoveIndexFromMountainRoutes	db/migrate/20190419215905_remove_index_from_mountain_routes.rb	/^class RemoveIndexFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 RemoveIndexesFromMountainRoutes	db/migrate/20190419201102_remove_indexes_from_mountain_routes.rb	/^class RemoveIndexesFromMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
@@ -848,6 +850,7 @@ ScrappersController	app/components/scrappers/scrappers_controller.rb	/^  class S
 Seeder	lib/seeding/seeder.rb	/^  class Seeder$/;"	c	class:Seeding
 Seeding	lib/seeding/seeder.rb	/^module Seeding$/;"	m
 SendPrepaidEmail	app/components/training/supplementary/send_prepaid_email.rb	/^    class SendPrepaidEmail$/;"	c	class:Training.Supplementary
+SetDefaultDecisionInManagementVotes	db/migrate/20201021124937_set_default_decision_in_management_votes.rb	/^class SetDefaultDecisionInManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 SetDefaultStateForReservations	db/migrate/20160830115600_set_default_state_for_reservations.rb	/^class SetDefaultStateForReservations < ActiveRecord::Migration[5.0]$/;"	c
 SettingsController	app/components/management/settings_controller.rb	/^  class SettingsController < ApplicationController$/;"	c	class:Management
 SettingsRecord	app/components/management/settings_record.rb	/^  class SettingsRecord < ActiveRecord::Base$/;"	c	class:Management
@@ -1495,6 +1498,9 @@ change	db/migrate/20201020164902_add_who_id_to_management_votes.rb	/^  def chang
 change	db/migrate/20201021094744_create_management_vote_users.rb	/^  def change$/;"	f	class:CreateManagementVoteUsers
 change	db/migrate/20201021100359_remove_who_id_from_management_votes.rb	/^  def change$/;"	f	class:RemoveWhoIdFromManagementVotes
 change	db/migrate/20201021100741_add_voting_type_to_management_votes.rb	/^  def change$/;"	f	class:AddVotingTypeToManagementVotes
+change	db/migrate/20201021124613_remove_approved_from_management_votes.rb	/^  def change$/;"	f	class:RemoveApprovedFromManagementVotes
+change	db/migrate/20201021124937_set_default_decision_in_management_votes.rb	/^  def change$/;"	f	class:SetDefaultDecisionInManagementVotes
+change	db/migrate/20201021125959_add_index_to_management_votes.rb	/^  def change$/;"	f	class:AddIndexToManagementVotes
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1632,6 +1638,7 @@ dateChanged	public/assets/application-adb37b88852cd8099abe934018ff31effd978a2519
 dateChanged	vendor/assets/javascripts/foundation-datepicker.js	/^            var dateChanged = false,$/;"	v
 debounce	app/assets/javascripts/debounce.js	/^function debounce(func, wait, immediate) {$/;"	f
 debounce.later	app/assets/javascripts/debounce.js	/^		var later = function() {$/;"	f
+decision_to_s	app/components/management/voting/vote_record.rb	/^      def decision_to_s$/;"	f	class:Management.Voting.VoteRecord
 default	app/models/ability.rb	/^  def default$/;"	f	class:Ability
 defaultDisplay	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function defaultDisplay( nodeName ) {$/;"	f
 defaultPrefilter	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function defaultPrefilter( elem, props, opts ) {$/;"	f

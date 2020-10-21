@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_100741) do
+ActiveRecord::Schema.define(version: 2020_10_21_125959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,10 +416,10 @@ ActiveRecord::Schema.define(version: 2020_10_21_100741) do
   create_table "management_votes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "case_id", null: false
-    t.boolean "approved", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "decision"
+    t.string "decision", default: "approved", null: false
+    t.index ["user_id", "case_id"], name: "index_management_votes_on_user_id_and_case_id", unique: true
   end
 
   create_table "membership_fees", id: :serial, force: :cascade do |t|

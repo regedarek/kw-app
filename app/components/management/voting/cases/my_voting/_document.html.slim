@@ -1,1 +1,2 @@
-| document
+- vote = @case.votes.find_by(user_id: current_user.id)
+= vote.decision_to_s

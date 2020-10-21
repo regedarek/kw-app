@@ -11,9 +11,12 @@ module Management
         form_outputs = form.call(raw_inputs.to_unsafe_h)
         return Left(raw_inputs[:case_id]) unless form_outputs.success?
 
-        vote_record = Management::Voting::VoteRecord.create(form_outputs.to_h)
-
-        Right(vote_record.case_id)
+        vote_record = Management::Voting::VoteRecord.new(form_outputs.to_h)
+        if vote_record.save
+          Right(vote_record.case_id)
+        else
+          Left(raw_inputs[:case_id])
+        end
       end
 
       private

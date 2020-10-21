@@ -46,29 +46,27 @@
                 button.close-button aria-label=("Close reveal") data-close="" type="button" 
                   span aria-hidden="true"  &times;
 
-  .large-6.columns
-    .row
-      .large-12.columns
-        .callout class="warning"
-          h5 = "Moje głosowanie"
-          = render "management/voting/cases/my_voting/#{@case.voting_type}"
+  - if @case.votes.exists?(user_id: current_user.id)
+    .large-6.columns
+      .row
+        .large-12.columns
+          .callout class="warning"
+            h5 = "Moje głosowanie"
+            = render "management/voting/cases/my_voting/#{@case.voting_type}"
 
   .large-6.columns
     .row
       .large-12.columns
-        .callout class="#{@repository.approved?(@case.id) ? 'success' : 'alert'}"
+        .callout class="success"
           h5 = "Wyniki"
           = render "management/voting/cases/voting_results/#{@case.voting_type}"
 
-    - if user_signed_in?
-      - if @case.hide_votes?
-      - else
-        - if can? :approve, Management::Voting::CaseRecord
-          - unless @repository.voted?(@case.id, current_user.id)
-            .row
-              .large-6.columns
-                h5 Głosowanie
-                = render "management/voting/cases/forms/#{@case.voting_type}"
+    - if @case.voting?
+        - unless @repository.voted?(@case.id, current_user.id)
+          .row
+            .large-6.columns
+              h5 Głosowanie
+              = render "management/voting/cases/forms/#{@case.voting_type}"
     .row
       .large-12.columns
           = link_to 'powrót do pozostałych głosowań', cases_path, class: 'button secondary expanded'

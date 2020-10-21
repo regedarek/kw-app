@@ -12,8 +12,8 @@ module Management
             redirect_to case_path(case_id), flash: { notice: 'Zagłosowano' }
           end
 
-          result.failure do |errors|
-            redirect_to case_path(case_id), flash: { notice: 'Zagłosowano' }
+          result.failure do |case_id|
+            redirect_to case_path(case_id), flash: { alert: 'Problem' }
           end
         end
       end
@@ -29,7 +29,7 @@ module Management
       def vote_params
         params
           .require(:vote)
-          .permit(:case_id, :user_id, user_ids: [])
+          .permit(:case_id, :user_id, :decision, user_ids: [])
       end
     end
   end

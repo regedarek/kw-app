@@ -120,6 +120,8 @@ pl:
       all: 'Nie masz dostępu do tej części panelu: zaloguj się lub opłać składkę, następnie skontaktuj się z administratorem!'
   unpaid: Czeka na zapłatę
   volunteering: Umowa wolontariatu
+  draft: w przygotowaniu
   voting: czeka na głosy
+  finished: zakończone
   winter_climbing: Wspinaczka
   work: Umowa o dzieło

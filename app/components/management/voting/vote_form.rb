@@ -7,7 +7,8 @@ module Management
       configure { config.messages_file = 'app/components/management/errors.yml' }
       configure { config.messages = :i18n }
 
-      required(:user_ids).maybe
+      optional(:decision).maybe(:str?)
+      optional(:user_ids).maybe
       required(:case_id).filled(:int?)
       required(:user_id).filled(:int?)
     end
