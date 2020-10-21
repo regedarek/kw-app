@@ -12,6 +12,7 @@ module Management
         return Left(form_outputs.messages.values) unless form_outputs.success?
 
         case_record = Management::Voting::CaseRecord.create(form_outputs.to_h)
+        case_record.update meeting_type: 1
         if case_record.hide_votes?
           case_record.finish!
         end
