@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_133743) do
+ActiveRecord::Schema.define(version: 2020_10_21_142747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -391,7 +391,7 @@ ActiveRecord::Schema.define(version: 2020_10_21_133743) do
     t.boolean "hidden", default: false, null: false
     t.string "doc_url"
     t.boolean "hide_votes", default: false, null: false
-    t.date "acceptance_date"
+    t.datetime "acceptance_date"
     t.string "who_ids", array: true
     t.integer "voting_type", default: 0, null: false
     t.integer "meeting_type", default: 0, null: false

@@ -325,6 +325,7 @@ ChangeBusinessCourses	db/migrate/20191005100746_change_business_courses.rb	/^cla
 ChangeColumnInPayments	db/migrate/20160830114814_change_column_in_payments.rb	/^class ChangeColumnInPayments < ActiveRecord::Migration[5.0]$/;"	c
 ChangeColumnName	db/migrate/20160621162142_change_column_name.rb	/^class ChangeColumnName < ActiveRecord::Migration[5.0]$/;"	c
 ChangeColumns	db/migrate/20170504204136_change_columns.rb	/^class ChangeColumns < ActiveRecord::Migration[5.0]$/;"	c
+ChangeDateFormatInManagementCases	db/migrate/20201021142747_change_date_format_in_management_cases.rb	/^class ChangeDateFormatInManagementCases < ActiveRecord::Migration[5.2]$/;"	c
 ChangeDateToTimeInEvents	db/migrate/20170505100900_change_date_to_time_in_events.rb	/^class ChangeDateToTimeInEvents < ActiveRecord::Migration[5.0]$/;"	c
 ChangeDefaultCompetitions	db/migrate/20180113223854_change_default_competitions.rb	/^class ChangeDefaultCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 ChangeDescriptionToRemarks	db/migrate/20170417221032_change_description_to_remarks.rb	/^class ChangeDescriptionToRemarks < ActiveRecord::Migration[5.0]$/;"	c
@@ -1505,6 +1506,7 @@ change	db/migrate/20201021124613_remove_approved_from_management_votes.rb	/^  de
 change	db/migrate/20201021124937_set_default_decision_in_management_votes.rb	/^  def change$/;"	f	class:SetDefaultDecisionInManagementVotes
 change	db/migrate/20201021125959_add_index_to_management_votes.rb	/^  def change$/;"	f	class:AddIndexToManagementVotes
 change	db/migrate/20201021133743_add_meeting_type_to_management_cases.rb	/^  def change$/;"	f	class:AddMeetingTypeToManagementCases
+change	db/migrate/20201021142747_change_date_format_in_management_cases.rb	/^  def change$/;"	f	class:ChangeDateFormatInManagementCases
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
