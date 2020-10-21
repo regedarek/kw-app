@@ -15,7 +15,7 @@ table.hover
     - @cases.each do |c|
       tr
         td.text-left = link_to c.name, case_path(c)
-        td.text-center = c.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %I:%M")
+        td.text-center = c.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %H:%M")
         td.text-center = c.number
         - if can? :manage, Management::Voting::CaseRecord
           td.text-center

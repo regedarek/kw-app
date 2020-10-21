@@ -10,7 +10,7 @@
     - if @case.acceptance_date
       br
       b Data uchwalenia: 
-      = @case.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %I:%M")
+      = @case.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %H:%M")
 
     - if @case.destrciption
       .row
