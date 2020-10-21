@@ -1,0 +1,6 @@
+- Db::User.where(id: @case.who_ids).each do |user|
+  = user.display_name
+  |  [
+  b = Management::Voting::VoteRecord.includes(:users).where(case_id: @case.id, users: { id: user.id }).count
+  | ]
+  br

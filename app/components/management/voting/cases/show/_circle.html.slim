@@ -49,9 +49,17 @@
   .large-6.columns
     .row
       .large-12.columns
+        .callout class="warning"
+          h5 = "Moje głosowanie"
+          = render "management/voting/cases/my_voting/#{@case.voting_type}"
+
+  .large-6.columns
+    .row
+      .large-12.columns
         .callout class="#{@repository.approved?(@case.id) ? 'success' : 'alert'}"
-          h5 = "Wyniki (za / przeciw / liczba głosów)"
-          b= @repository.voting_results(@case.id)
+          h5 = "Wyniki"
+          = render "management/voting/cases/voting_results/#{@case.voting_type}"
+
     - if user_signed_in?
       - if @case.hide_votes?
       - else
@@ -60,16 +68,7 @@
             .row
               .large-6.columns
                 h5 Głosowanie
-                = form_for Management::Voting::VoteRecord.new, as: :vote, url: votes_path(@case.id) do |f|
-                  = f.hidden_field :user_id, value: current_user.id
-                  = f.hidden_field :case_id, value: @case.id
-                  = f.collection_check_boxes(:user_ids, Db::User.all.limit(4), :id, :display_name) do |user|
-                    = user.label
-                    = user.check_box
-                    br
-                  .row
-                    .large-6.columns
-                      = f.submit 'Zagłosuj', class: 'button expanded large success'
+                = render "management/voting/cases/forms/#{@case.voting_type}"
     .row
       .large-12.columns
           = link_to 'powrót do pozostałych głosowań', cases_path, class: 'button secondary expanded'
