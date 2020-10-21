@@ -317,6 +317,7 @@ Business	app/components/business/courses_controller.rb	/^module Business$/;"	m
 Business	app/components/business/instructor_record.rb	/^module Business$/;"	m
 CancelItem	app/components/reservations/cancel_item.rb	/^  class CancelItem$/;"	c	class:Reservations
 Card	app/components/membership/card/repository.rb	/^  module Card$/;"	m	class:Membership
+CasePresenceRecord	app/components/management/voting/case_presence_record.rb	/^    class CasePresenceRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
 CaseRecord	app/components/management/voting/case_record.rb	/^    class CaseRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
 CasesController	app/components/management/voting/cases_controller.rb	/^    class CasesController < ApplicationController$/;"	c	class:Management.Voting
 CategoryRecord	app/components/photo_competition/category_record.rb	/^  class CategoryRecord < ActiveRecord::Base$/;"	c	class:PhotoCompetition
@@ -405,6 +406,7 @@ CreateAuctions	db/migrate/20170107102938_create_auctions.rb	/^class CreateAuctio
 CreateBusinessCourses	db/migrate/20190905151155_create_business_courses.rb	/^class CreateBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
 CreateBusinessInstructors	db/migrate/20191005223825_create_business_instructors.rb	/^class CreateBusinessInstructors < ActiveRecord::Migration[5.2]$/;"	c
 CreateCase	app/components/management/voting/create_case.rb	/^    class CreateCase$/;"	c	class:Management.Voting
+CreateCasePresences	db/migrate/20201021161030_create_case_presences.rb	/^class CreateCasePresences < ActiveRecord::Migration[5.2]$/;"	c
 CreateComments	db/migrate/20190410212028_create_comments.rb	/^class CreateComments < ActiveRecord::Migration[5.2]$/;"	c
 CreateCompetitionPackageTypes	db/migrate/20180108175828_create_competition_package_types.rb	/^class CreateCompetitionPackageTypes < ActiveRecord::Migration[5.0]$/;"	c
 CreateCompetitions	db/migrate/20180106121002_create_competitions.rb	/^class CreateCompetitions < ActiveRecord::Migration[5.0]$/;"	c
@@ -657,6 +659,7 @@ Management	app/components/management/snw/snw_applies_controller.rb	/^module Mana
 Management	app/components/management/snw/snw_apply_record.rb	/^module Management$/;"	m
 Management	app/components/management/update_project.rb	/^module Management$/;"	m
 Management	app/components/management/voting/case_form.rb	/^module Management$/;"	m
+Management	app/components/management/voting/case_presence_record.rb	/^module Management$/;"	m
 Management	app/components/management/voting/case_record.rb	/^module Management$/;"	m
 Management	app/components/management/voting/cases_controller.rb	/^module Management$/;"	m
 Management	app/components/management/voting/create_case.rb	/^module Management$/;"	m
@@ -1045,6 +1048,7 @@ VoteRecord	app/components/management/voting/vote_record.rb	/^    class VoteRecor
 VoteUsersRecord	app/components/management/voting/vote_users_record.rb	/^    class VoteUsersRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
 VotesController	app/components/management/voting/votes_controller.rb	/^    class VotesController < ApplicationController$/;"	c	class:Management.Voting
 Voting	app/components/management/voting/case_form.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/case_presence_record.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/case_record.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/cases_controller.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/create_case.rb	/^  module Voting$/;"	m	class:Management
@@ -1508,6 +1512,7 @@ change	db/migrate/20201021124937_set_default_decision_in_management_votes.rb	/^ 
 change	db/migrate/20201021125959_add_index_to_management_votes.rb	/^  def change$/;"	f	class:AddIndexToManagementVotes
 change	db/migrate/20201021133743_add_meeting_type_to_management_cases.rb	/^  def change$/;"	f	class:AddMeetingTypeToManagementCases
 change	db/migrate/20201021142747_change_date_format_in_management_cases.rb	/^  def change$/;"	f	class:ChangeDateFormatInManagementCases
+change	db/migrate/20201021161030_create_case_presences.rb	/^  def change$/;"	f	class:CreateCasePresences
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -2107,6 +2112,7 @@ not_active	app/models/ability.rb	/^  def not_active$/;"	f	class:Ability
 not_available_items	app/components/availability/items.rb	/^    def not_available_items$/;"	f	class:Availability.Items
 notify	app/components/management/voting/mailer.rb	/^      def notify(case_id, user_id)$/;"	f	class:Management.Voting.Mailer
 notify	app/components/settlement/contract_mailer.rb	/^    def notify(contract)$/;"	f	class:Settlement.ContractMailer
+obecni	app/components/management/voting/cases_controller.rb	/^      def obecni$/;"	f	class:Management.Voting.CasesController
 office	app/models/ability.rb	/^  def office$/;"	f	class:Ability
 office_king	app/models/ability.rb	/^  def office_king$/;"	f	class:Ability
 offset	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var offset = textbox.offset();$/;"	v

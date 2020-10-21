@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :cases, path: 'glosowania' do
         collection do
           get :walne, as: :walne
+          get :obecni, as: :obecni
         end
         member do
           resources :votes

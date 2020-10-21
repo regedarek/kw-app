@@ -4,8 +4,18 @@ module Management
       include EitherMatcher
       append_view_path 'app/components'
 
+      def obecni
+        authorize! :obecni, Management::Voting::CaseRecord
+
+        @obecni = Management::Voting::CasePresenceRecord.all
+      end
+
       def walne
         authorize! :read, Management::Voting::CaseRecord
+
+        unless Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id)
+          Management::Voting::CasePresenceRecord.create(user_id: current_user.id)
+        end
 
         @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').accessible_by(current_ability).order(acceptance_date: :asc)
       end

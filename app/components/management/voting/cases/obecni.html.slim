@@ -1,0 +1,12 @@
+.row
+  .large-8.columns
+    h3 Obecni Walnego Zebrania członków KW Kraków
+
+.row
+  .large-12.columns
+    = render 'obecni_table', obecni: @obecni
+
+.row
+  .large-12.columns
+    | Obecni na walnym:  
+    b = Management::Voting::CasePresenceRecord.count

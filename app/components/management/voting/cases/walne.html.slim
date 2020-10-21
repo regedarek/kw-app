@@ -9,3 +9,8 @@
 .row
   .large-12.columns
     = render 'table', cases: @cases
+
+.row
+  .large-12.columns
+    | Obecni na walnym:  
+    b = Management::Voting::CasePresenceRecord.count

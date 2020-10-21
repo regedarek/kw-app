@@ -1,0 +1,10 @@
+table.hover
+  thead
+    tr
+      th.text-left  width='45%' Imię i nazwisko
+      th.text-center width='25%' Kiedy?
+  tbody
+    - obecni.each do |presence|
+      tr
+        td.text-left = presence.user.display_name
+        td.text-center = presence.created_at
