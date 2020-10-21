@@ -21,7 +21,7 @@ module Management
         authorize! :create, Management::Voting::CaseRecord
         either(create_record) do |result|
           result.success do
-            redirect_to cases_path, flash: { notice: 'Utworzono głosowanie' }
+            redirect_to walne_cases_path, flash: { notice: 'Utworzono głosowanie' }
           end
 
           result.failure do |errors|
@@ -134,7 +134,7 @@ module Management
 
         case_record.destroy
 
-        redirect_to cases_path
+        redirect_to walne_cases_path
       end
 
       private
