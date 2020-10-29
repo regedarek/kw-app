@@ -9,7 +9,7 @@
           = link_to 'Transmisja wideo', 'https://kw-krakow.webex.com/kw-krakow/onstage/g.php?MTID=e1eee68428acc11b15c151f96135c2ef7', class: 'button success expanded large', target: :_blank
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
-          = link_to 'Instrukcja', setting.back_url, class: 'button success expanded large', target: :_blank
+          = link_to 'Instrukcja', setting.back_url, class: 'button warning expanded large', target: :_blank
     - if can? :create, Management::Voting::CaseRecord
       .large-2.columns
           = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'

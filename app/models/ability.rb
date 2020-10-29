@@ -54,7 +54,7 @@ class Ability
     can :create, Db::Profile
     can :create, Management::Snw::SnwApplyRecord
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
-    can :read, Management::Voting::CaseRecord, state: ['voting', 'finished'], hidden: false
+    can :read, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
     can :read, Db::Activities::MountainRoute
     can :read, Scrappers::ShmuRecord
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }

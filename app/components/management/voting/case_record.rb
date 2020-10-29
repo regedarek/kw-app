@@ -20,6 +20,7 @@ module Management
       workflow_column :state
       workflow do
         state :draft
+        state :unactive
         state :voting do
           event :finish, :transitions_to => :finished
         end
