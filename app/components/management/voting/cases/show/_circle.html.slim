@@ -62,9 +62,10 @@
                 | Głosowanie zostało zamknięte.
               - else
                 p#demo data-expired="#{@case.acceptance_date}"
-          .callout class="success"
-            h5 = "Wyniki"
-            = render "management/voting/cases/voting_results/#{@case.voting_type}"
+          - if @case.finished?
+            .callout class="success"
+              h5 = "Wyniki"
+              = render "management/voting/cases/voting_results/#{@case.voting_type}"
 
       - if current_user.active_and_regular?
         - if @case.voting?
