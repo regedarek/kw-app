@@ -20,7 +20,7 @@ every '30 4 * * *' do
 end
 
 every '30 5 * * *' do
-  rake :send_voting_reminders
+  #rake :send_voting_reminders
 end
 
 every '30 6 * * *' do
