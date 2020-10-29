@@ -7,3 +7,8 @@
     b = Management::Voting::VoteRecord.includes(:users).where(case_id: @case.id, users: { id: user.id }).count
     | ]
   br
+hr
+| wszystkie oddane głosy 
+| [
+b = Management::Voting::VoteRecord.includes(:users).where(case_id: @case.id).count
+| ]
