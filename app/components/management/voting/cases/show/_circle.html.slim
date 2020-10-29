@@ -69,10 +69,11 @@
       - if current_user.active_and_regular?
         - if @case.voting?
             - unless @repository.voted?(@case.id, current_user.id)
-              .row
-                .large-12.columns
-                  .callout.warning
-                    | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
+              - if @case.members?
+                .row
+                  .large-12.columns
+                    .callout.warning
+                      | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
               .row
                 .large-6.columns
                   h5 Głosowanie
