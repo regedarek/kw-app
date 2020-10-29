@@ -12,7 +12,7 @@ module Management
         return Left(raw_inputs[:case_id]) unless form_outputs.success?
 
         vote_record = Management::Voting::VoteRecord.new(form_outputs.to_h)
-        if vote_record.save
+        if vote_record.case.voting? && vote_record.save
           Right(vote_record.case_id)
         else
           Left(raw_inputs[:case_id])
