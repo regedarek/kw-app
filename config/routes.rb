@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   get 'wypozyczalnia/regulamin' => 'pages#show', id: 'rules'
   get 'wydarzenia/regulamin' => 'pages#show', id: 'rules'
-  get 'glosowanie/dane-osobowe' => 'pages#show', id: 'rules'
-  get 'glosowanie/instrukcja' => 'pages#show', id: 'rules'
+  get 'glosowania/dane-osobowe' => 'pages#show', id: 'rules'
+  get 'glosowania/instrukcja' => 'pages#show', id: 'rules'
   get 'konkurs_kasprzyka/regulamin' => 'pages#show', id: 'rules'
 
   load Rails.root.join("app/components/events/routes.rb")
