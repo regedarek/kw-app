@@ -1,11 +1,15 @@
+- setting = Management::SettingsRecord.find_by(path: '/glosowanie/walne')
 - if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, accepted_terms: true)
   .row
-    .large-8.columns
+    .large-6.columns
       h3 Głosowania Walnego Zebrania członków KW Kraków
 
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
-          = link_to 'Transmisja wideo', 'https://www.youtube.com/watch?v=NrZrKX91vBA', class: 'button success expanded large', target: :_blank
+          = link_to 'Transmisja wideo', 'https://kw-krakow.webex.com/kw-krakow/onstage/g.php?MTID=e1eee68428acc11b15c151f96135c2ef7', class: 'button success expanded large', target: :_blank
+    - if can? :read, Management::Voting::CaseRecord
+      .large-2.columns
+          = link_to 'Instrukcja', setting.back_url, class: 'button success expanded large', target: :_blank
     - if can? :create, Management::Voting::CaseRecord
       .large-2.columns
           = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
@@ -20,6 +24,11 @@
       b = Management::Voting::CasePresenceRecord.count
 - else
   .row
+    .large-6.columns
+      = link_to 'Informacja dotycząca przetwarzania danych osobowych', setting.path, class: 'button expanded large warning', target: :_blank
+    .large-6.columns
+      = link_to 'Instrukcja dotycząca sposobu komunikacji', setting.back_url, class: 'button expanded large warning', target: :_blank
+  .row
     .large-12.columns
       = render 'management/voting/cases/show/accepted_terms'
-      = link_to 'Zaakceptuj warunki', accept_cases_path, class: 'button expanded large success', method: :post
+      = link_to 'Zapoznałem/am się', accept_cases_path, class: 'button expanded large success', method: :post
