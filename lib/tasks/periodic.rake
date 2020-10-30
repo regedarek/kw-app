@@ -23,11 +23,11 @@ task :send_reminders => :environment do
 end
 
 task :send_voting_reminders => :environment do
-  Management::Voting::Reminder.send_reminders
+  #Management::Voting::Reminder.send_reminders
 end
 
 task :close_outdated_voting => :environment do
-  Management::Voting::Reminder.close_outdated
+  #Management::Voting::Reminder.close_outdated
 end
 
 task :send_yearly_fee_reminder => :environment do
