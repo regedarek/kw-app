@@ -1577,6 +1577,7 @@ create	app/components/events/competitions/repository.rb	/^      def create(form_
 create	app/components/events/competitions/sign_ups_controller.rb	/^      def create$/;"	f	class:Events.Competitions
 create	app/components/library/admin/tags_controller.rb	/^      def create$/;"	f	class:Library.Admin.TagsController
 create	app/components/library/items_controller.rb	/^    def create$/;"	f	class:Library.ItemsController
+create	app/components/management/news/informations_controller.rb	/^      def create$/;"	f	class:Management.News.InformationsController
 create	app/components/management/projects_controller.rb	/^    def create$/;"	f	class:Management.ProjectsController
 create	app/components/management/snw/snw_applies_controller.rb	/^      def create$/;"	f	class:Management.Snw.SnwAppliesController
 create	app/components/management/voting/cases_controller.rb	/^      def create$/;"	f	class:Management.Voting.CasesController
@@ -2089,6 +2090,7 @@ new	app/components/charity/donations_controller.rb	/^    def new$/;"	f	class:Cha
 new	app/components/events/competitions/sign_ups_controller.rb	/^      def new$/;"	f	class:Events.Competitions
 new	app/components/library/admin/tags_controller.rb	/^      def new$/;"	f	class:Library.Admin.TagsController
 new	app/components/library/items_controller.rb	/^    def new$/;"	f	class:Library.ItemsController
+new	app/components/management/news/informations_controller.rb	/^      def new$/;"	f	class:Management.News.InformationsController
 new	app/components/management/projects_controller.rb	/^    def new$/;"	f	class:Management.ProjectsController
 new	app/components/management/snw/snw_applies_controller.rb	/^      def new$/;"	f	class:Management.Snw.SnwAppliesController
 new	app/components/management/voting/cases_controller.rb	/^      def new$/;"	f	class:Management.Voting.CasesController

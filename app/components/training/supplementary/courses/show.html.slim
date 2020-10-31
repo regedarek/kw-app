@@ -110,7 +110,7 @@
 
     .large-4.columns
       - if @course.web?
-        = link_to 'Transmisja online', '/wydarzenia/regulamin', class: 'button expanded large success'
+        = link_to 'Transmisja online', @course.place, class: 'button expanded large success'
       - else
         = link_to 'Regulamin', '/wydarzenia/regulamin', class: 'button expanded large warning'
       - if @current_user_sign_up.present?

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       end
     end
     scope module: 'news' do
-      resources :informations, path: 'informacje', only: :index
+      resources :informations, path: 'informacje'
     end
   end
 end
