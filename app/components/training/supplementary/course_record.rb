@@ -5,7 +5,7 @@ module Training
       has_paper_trail
       friendly_id :slug_candidates, use: :slugged
       mount_uploader :baner, Training::Supplementary::BanerUploader
-      enum category: [:web, :kw, :snw, :sww, :stj, :sa]
+      enum category: [:kw, :snw, :sww, :stj, :sa, :web]
       enum kind: [:other, :slides, :meeting, :competitions, :tour, :training]
       enum state: [:draft, :published, :cancelled, :archived]
       enum payment_type: [:trainings, :club_trips]
