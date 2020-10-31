@@ -44,6 +44,7 @@
   .large-12.columns
     h4 Minione wydarzenia
     = render 'table', courses: @archived_courses
+    = paginate @archived_courses
 
 .row
   .large-6.columns.text-left
