@@ -32,14 +32,15 @@
 
   .row
     .large-6.columns.text-left
-      = link_to 'Polityka prywatności', 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html'
-      |  
-      = link_to 'Regulamin', '/wydarzenia/regulamin'
-      |  
-      = link_to 'Dane klubu', 'https://kw.krakow.pl/o-klubie/dane-klubu.html'
-      |  
-      = link_to 'Darowizny', 'https://kw.krakow.pl/o-klubie/1-na-dzialalnosc-kw.html'
+      = link_to 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html' do
+        span.label.secondary Polityka prywatności
+      = link_to '/wydarzenia/regulamin' do
+        span.label.secondary Regulamin
+      = link_to 'https://kw.krakow.pl/o-klubie/dane-klubu.html' do
+        span.label.secondary Dane klubu
+      = link_to 'https://kw.krakow.pl/o-klubie/1-na-dzialalnosc-kw.html' do
+        span.label.secondary Darowizny
     .large-6.columns.text-right
-      = image_tag 'dotpay.png', width: '80px'
-      = image_tag 'visa.png', width: '80px'
-      = image_tag 'mastercard.png', width: '80px'
+      = image_tag 'dotpay.png', width: '50px'
+      = image_tag 'visa.png', width: '50px'
+      = image_tag 'mastercard.png', width: '50px'
