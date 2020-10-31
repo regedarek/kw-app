@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'glosowania/instrukcja' => 'pages#show', id: 'rules'
   get 'konkurs_kasprzyka/regulamin' => 'pages#show', id: 'rules'
   get 'instrukcje/wydarzenia' => 'pages#show', id: 'rules'
+  get '/wydarzenia/webinary', to: redirect { |path_params, req| "/supplementary/courses?category=web" }
 
   load Rails.root.join("app/components/events/routes.rb")
   load Rails.root.join("app/components/training/bluebook/routes.rb")
@@ -155,6 +156,7 @@ Rails.application.routes.draw do
   get 'admin/dostepy' => 'pages#show', id: 'roles'
   get 'warunki' => 'scrappers/scrappers#index'
   get 'trening/skimo' => 'pages#show', id: 'skimo'
+
 
   root to: 'pages#show', id: 'home'
 end
