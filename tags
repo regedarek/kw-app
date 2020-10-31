@@ -2449,6 +2449,7 @@ voting	app/models/ability.rb	/^  def voting$/;"	f	class:Ability
 voting_results	app/components/management/voting/repository.rb	/^      def voting_results(case_id)$/;"	f	class:Management.Voting.Repository
 waiting	app/components/events/competitions/sign_ups/limiter.rb	/^        def waiting$/;"	f	class:Events.Competitions.SignUps.Limiter
 walne	app/components/management/voting/cases_controller.rb	/^      def walne$/;"	f	class:Management.Voting.CasesController
+web?	app/components/training/supplementary/course.rb	/^      def web?$/;"	f	class:Training.Supplementary.Course
 week	app/components/availability/items.rb	/^    def week$/;"	f	class:Availability.Items
 welcome	app/mailers/registration_mailer.rb	/^  def welcome(user, password)$/;"	f	class:RegistrationMailer
 when	app/models/db/reservation.rb	/^  def when$/;"	f	class:Db

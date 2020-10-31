@@ -52,6 +52,10 @@ module Training
         end
       end
 
+      def web?
+        category == 'web'
+      end
+
       class << self
         def from_record(record)
           new(

@@ -105,9 +105,7 @@ module Training
       end
 
       def create(form_outputs:)
-        o_id = form_outputs[:organizator_id]&.first if form_outputs.to_h.include?(:organizator_id)
-        record = Training::Supplementary::CourseRecord
-          .create!(form_outputs.to_h.merge!(organizator_id: o_id))
+        record = Training::Supplementary::CourseRecord.create!(form_outputs.to_h)
         record.update(packages: true, price: true) if record.package_types.any?
 
         Training::Supplementary::Course.from_record(record)

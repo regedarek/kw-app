@@ -23,7 +23,12 @@ table.stack
         td.text-center = image_tag "#{course.category}.png", size: '40x40'
         td.text-center
           = link_to course.name, polish_event_slug_path(course.slug)
-        td.text-center = course.place
+        td.text-center
+          - if course.web?
+            = link_to course.place do
+              span.label.primary online
+          - else
+            = course.place
         td.text-center
           - if course.start_date && course.end_date
             = [course.start_date&.strftime("%d"), course.end_date&.strftime("%d/%m/%Y")].join('-')

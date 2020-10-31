@@ -19,9 +19,10 @@
           br
   .row
     .large-4.columns
-      b = t('.place')
-      = @course&.place
-      br
+      - unless @course.web?
+        b = t('.place')
+        = @course&.place
+        br
       b = t('.start_date')
       - if @course.start_date.present?
         = @course.start_date&.strftime("%d/%m/%Y %H:%M")
@@ -32,8 +33,9 @@
         b = t('.end_date')
         = @course&.end_date&.strftime("%d/%m/%Y %H:%M")
         br
-      b = t('.application_date')
-      = @course&.application_date&.strftime("%d/%m/%Y %H:%M")
+      - if @course&.application_date.present?
+        b = t('.application_date')
+        = @course&.application_date&.strftime("%d/%m/%Y %H:%M")
       - if @course&.end_application_date.present?
         br
         b Koniec zapisów: 
@@ -107,8 +109,10 @@
 
 
     .large-4.columns
-
-      = link_to 'Regulamin', '/wydarzenia/regulamin', class: 'button expanded large warning'
+      - if @course.web?
+        = link_to 'Transmisja online', '/wydarzenia/regulamin', class: 'button expanded large success'
+      - else
+        = link_to 'Regulamin', '/wydarzenia/regulamin', class: 'button expanded large warning'
       - if @current_user_sign_up.present?
       - else
         - if user_signed_in?

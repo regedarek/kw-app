@@ -1,4 +1,10 @@
 pl:
+  training:
+    supplementary:
+      course:
+        enums:
+          categories:
+            web: Webinar
   user_management:
     list:
       enums:
