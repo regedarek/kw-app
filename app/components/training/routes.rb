@@ -15,7 +15,9 @@ Rails.application.routes.draw do
       resources :snw_profiles, only: [:new, :create]
     end
 
+    get 'wydarzenia/webinary' => 'supplementary/courses#index', defaults: { category: 'web' }
     get 'wydarzenia/:id' => 'supplementary/courses#show', as: 'training_supplementary_course_record'
+
     namespace :supplementary do
       resources :courses do
         resources :packages, only: [:new, :create]
