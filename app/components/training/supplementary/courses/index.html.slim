@@ -38,9 +38,12 @@
     .large-12.columns
       h4 Robocze wydarzenia
       = render 'table', courses: @draft_courses
-      h4 Opublikowane wydarzenia
   .large-12.columns
+    h4 Opublikowane wydarzenia
     = render 'table', courses: @active_courses
+  .large-12.columns
+    h4 Minione wydarzenia
+    = render 'table', courses: @archived_courses
 
 .row
   .large-6.columns.text-left

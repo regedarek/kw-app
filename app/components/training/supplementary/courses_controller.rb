@@ -9,6 +9,7 @@ module Training
         @active_courses = Training::Supplementary::Repository.new.fetch_active_courses(category: params[:category], kind: params[:kind])
         @draft_courses = Training::Supplementary::Repository.new.fetch_draft_courses(category: params[:category], kind: params[:kind])
         @inactive_courses = Training::Supplementary::Repository.new.fetch_inactive_courses(category: params[:category], kind: params[:kind])
+        @archived_courses = Kaminari.paginate_array(Training::Supplementary::Repository.new.fetch_archived_courses(category: params[:category], kind: params[:kind])).page(params[:page]).per(10)
       end
 
       def archived
