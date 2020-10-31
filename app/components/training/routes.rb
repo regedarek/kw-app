@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       resources :snw_profiles, only: [:new, :create]
     end
 
-    get 'wydarzenia/webinary' => 'supplementary/courses#index', defaults: { category: 'web' }
     get 'wydarzenia/:id' => 'supplementary/courses#show', as: 'training_supplementary_course_record'
 
     namespace :supplementary do
@@ -43,6 +42,7 @@ Rails.application.routes.draw do
   get 'przejscia/wspinaczka' => 'activities/mountain_routes#new', as: :wspinaczka
   get 'wydarzenia/narciarskie' => 'training/supplementary/courses#index', defaults: { category: 'snw' }, as: :ski_events
   get 'wydarzenia/wspinaczkowe' => 'training/supplementary/courses#index', defaults: { category: 'sww' }, as: :climbing_events
+  get 'wydarzenia/webinary' => 'training/supplementary/courses#index', defaults: { category: 'web' }, as: :climbing_events
   get 'wydarzenia' => 'training/supplementary/courses#index', as: :wydarzenia
   get 'wydarzenia/*id' => 'training/supplementary/courses#show', as: :polish_event
   get 'wydarzenia/*slug' => 'training/supplementary/courses#show', as: :polish_event_slug
