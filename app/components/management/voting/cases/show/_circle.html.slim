@@ -70,6 +70,15 @@
       - if current_user.active_and_regular?
         - if @case.voting?
             - unless @repository.voted?(@case.id, current_user.id)
+              - if user_signed_in?
+                - if Management::Voting::CommissionRecord.exists?(authorized_id: current_user.id)
+                  .row
+                    .large-12.columns
+                      .callout.warning
+                        | Jesteś pełnomocnikiem:
+                        ul
+                          - Management::Voting::CommissionRecord.where(authorized_id: current_user.id).each do |commission|
+                            li = commission&.owner&.display_name
               - if @case.members?
                 .row
                   .large-12.columns

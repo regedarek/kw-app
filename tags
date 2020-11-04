@@ -2134,6 +2134,7 @@ nodeNames	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d
 nonce	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var nonce = jQuery.now();$/;"	v
 not_active	app/models/ability.rb	/^  def not_active$/;"	f	class:Ability
 not_available_items	app/components/availability/items.rb	/^    def not_available_items$/;"	f	class:Availability.Items
+not_myself	app/components/management/voting/commission_record.rb	/^      def not_myself$/;"	f	class:Management.Voting.CommissionRecord
 notify	app/components/management/voting/mailer.rb	/^      def notify(case_id, user_id)$/;"	f	class:Management.Voting.Mailer
 notify	app/components/settlement/contract_mailer.rb	/^    def notify(contract)$/;"	f	class:Settlement.ContractMailer
 obecni	app/components/management/voting/cases_controller.rb	/^      def obecni$/;"	f	class:Management.Voting.CasesController

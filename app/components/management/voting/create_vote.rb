@@ -11,11 +11,25 @@ module Management
         form_outputs = form.call(raw_inputs.to_unsafe_h)
         return Left(raw_inputs[:case_id]) unless form_outputs.success?
 
-        vote_record = Management::Voting::VoteRecord.new(form_outputs.to_h)
-        if vote_record.case.voting? && vote_record.save
-          Right(vote_record.case_id)
+        case_record = Management::Voting::CaseRecord.find_by(id: raw_inputs[:case_id])
+        return Left(raw_inputs[:case_id]) unless case_record.voting?
+
+        if Management::Voting::CommissionRecord.exists?(authorized_id: form_outputs[:user_id])
+          Management::Voting::VoteRecord.create(form_outputs.to_h)
+
+          commissions = Management::Voting::CommissionRecord.where(authorized_id: form_outputs[:user_id]).each do |commission|
+            Management::Voting::VoteRecord.create(form_outputs.to_h.merge(user_id: commission.owner_id))
+          end
+
+          Right(raw_inputs[:case_id])
         else
-          Left(raw_inputs[:case_id])
+          vote_record = Management::Voting::VoteRecord.new(form_outputs.to_h)
+
+          if vote_record.save
+            Right(vote_record.case_id)
+          else
+            Left(raw_inputs[:case_id])
+          end
         end
       end
 

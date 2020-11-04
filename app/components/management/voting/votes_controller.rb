@@ -13,7 +13,7 @@ module Management
           end
 
           result.failure do |case_id|
-            redirect_to case_path(case_id), flash: { alert: 'Problem' }
+            redirect_to case_path(case_id), flash: { alert: 'Twój głos nie został zapisany, gdyż czas na oddanie głosu już minął.' }
           end
         end
       end
