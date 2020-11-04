@@ -355,6 +355,8 @@ Charity	app/components/charity/donations_controller.rb	/^module Charity$/;"	m
 Charity	app/components/charity/repository.rb	/^module Charity$/;"	m
 CommentRecord	app/components/messaging/comment_record.rb	/^  class CommentRecord < ActiveRecord::Base$/;"	c	class:Messaging
 CommentsController	app/components/messaging/comments_controller.rb	/^  class CommentsController < ApplicationController$/;"	c	class:Messaging
+CommissionRecord	app/components/management/voting/commission_record.rb	/^    class CommissionRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
+CommissionsController	app/components/management/voting/commissions_controller.rb	/^    class CommissionsController < ApplicationController$/;"	c	class:Management.Voting
 Competition	app/components/events/competition.rb	/^  class Competition < Dry::Struct$/;"	c	class:Events
 CompetitionPackageTypeRecord	app/components/events/db/competition_package_type_record.rb	/^    class CompetitionPackageTypeRecord < ActiveRecord::Base$/;"	c	class:Events.Db
 CompetitionRecord	app/components/activities/competition_record.rb	/^  class CompetitionRecord < ActiveRecord::Base$/;"	c	class:Activities
@@ -409,6 +411,7 @@ CreateBusinessInstructors	db/migrate/20191005223825_create_business_instructors.
 CreateCase	app/components/management/voting/create_case.rb	/^    class CreateCase$/;"	c	class:Management.Voting
 CreateCasePresences	db/migrate/20201021161030_create_case_presences.rb	/^class CreateCasePresences < ActiveRecord::Migration[5.2]$/;"	c
 CreateComments	db/migrate/20190410212028_create_comments.rb	/^class CreateComments < ActiveRecord::Migration[5.2]$/;"	c
+CreateCommission	app/components/management/voting/create_commission.rb	/^    class CreateCommission$/;"	c	class:Management.Voting
 CreateCompetitionPackageTypes	db/migrate/20180108175828_create_competition_package_types.rb	/^class CreateCompetitionPackageTypes < ActiveRecord::Migration[5.0]$/;"	c
 CreateCompetitions	db/migrate/20180106121002_create_competitions.rb	/^class CreateCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 CreateCompetitonPhotoSets	db/migrate/20180515165206_create_competiton_photo_sets.rb	/^class CreateCompetitonPhotoSets < ActiveRecord::Migration[5.0]$/;"	c
@@ -437,6 +440,7 @@ CreateLibraryItemTags	db/migrate/20190806101419_create_library_item_tags.rb	/^cl
 CreateLibraryItems	db/migrate/20190702183653_create_library_items.rb	/^class CreateLibraryItems < ActiveRecord::Migration[5.2]$/;"	c
 CreateMailboxer	db/migrate/20191114202836_create_mailboxer.mailboxer_engine.rb	/^class CreateMailboxer < ActiveRecord::Migration[4.2]$/;"	c
 CreateManagementCases	db/migrate/20190430143708_create_management_cases.rb	/^class CreateManagementCases < ActiveRecord::Migration[5.2]$/;"	c
+CreateManagementCommissions	db/migrate/20201104152243_create_management_commissions.rb	/^class CreateManagementCommissions < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementInformations	db/migrate/20190714111909_create_management_informations.rb	/^class CreateManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementVoteUsers	db/migrate/20201021094744_create_management_vote_users.rb	/^class CreateManagementVoteUsers < ActiveRecord::Migration[5.2]$/;"	c
 CreateManagementVotes	db/migrate/20190502101949_create_management_votes.rb	/^class CreateManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
@@ -663,7 +667,11 @@ Management	app/components/management/voting/case_form.rb	/^module Management$/;"
 Management	app/components/management/voting/case_presence_record.rb	/^module Management$/;"	m
 Management	app/components/management/voting/case_record.rb	/^module Management$/;"	m
 Management	app/components/management/voting/cases_controller.rb	/^module Management$/;"	m
+Management	app/components/management/voting/commission_form.rb	/^module Management$/;"	m
+Management	app/components/management/voting/commission_record.rb	/^module Management$/;"	m
+Management	app/components/management/voting/commissions_controller.rb	/^module Management$/;"	m
 Management	app/components/management/voting/create_case.rb	/^module Management$/;"	m
+Management	app/components/management/voting/create_commission.rb	/^module Management$/;"	m
 Management	app/components/management/voting/create_vote.rb	/^module Management$/;"	m
 Management	app/components/management/voting/mailer.rb	/^module Management$/;"	m
 Management	app/components/management/voting/reminder.rb	/^module Management$/;"	m
@@ -1052,7 +1060,11 @@ Voting	app/components/management/voting/case_form.rb	/^  module Voting$/;"	m	cla
 Voting	app/components/management/voting/case_presence_record.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/case_record.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/cases_controller.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/commission_form.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/commission_record.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/commissions_controller.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/create_case.rb	/^  module Voting$/;"	m	class:Management
+Voting	app/components/management/voting/create_commission.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/create_vote.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/mailer.rb	/^  module Voting$/;"	m	class:Management
 Voting	app/components/management/voting/reminder.rb	/^  module Voting$/;"	m	class:Management
@@ -1160,6 +1172,7 @@ call	app/components/events/competitions/sign_ups/update.rb	/^        def call(co
 call	app/components/management/create_project.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.CreateProject
 call	app/components/management/update_project.rb	/^    def call(id:, raw_inputs:)$/;"	f	class:Management.UpdateProject
 call	app/components/management/voting/create_case.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateCase
+call	app/components/management/voting/create_commission.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateCommission
 call	app/components/management/voting/create_vote.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateVote
 call	app/components/management/voting/update_case.rb	/^      def call(id:, raw_inputs:)$/;"	f	class:Management.Voting.UpdateCase
 call	app/components/membership/fees_reminder_service.rb	/^    def call$/;"	f	class:Membership.FeesReminderService
@@ -1516,6 +1529,7 @@ change	db/migrate/20201021133743_add_meeting_type_to_management_cases.rb	/^  def
 change	db/migrate/20201021142747_change_date_format_in_management_cases.rb	/^  def change$/;"	f	class:ChangeDateFormatInManagementCases
 change	db/migrate/20201021161030_create_case_presences.rb	/^  def change$/;"	f	class:CreateCasePresences
 change	db/migrate/20201021203559_add_accepted_terms_to_case_presences.rb	/^  def change$/;"	f	class:AddAcceptedTermsToCasePresences
+change	db/migrate/20201104152243_create_management_commissions.rb	/^  def change$/;"	f	class:CreateManagementCommissions
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1542,6 +1556,7 @@ collect_abc_3	app/components/availability/items.rb	/^    def collect_abc_3$/;"	f
 collect_axes	app/components/availability/items.rb	/^    def collect_axes$/;"	f	class:Availability.Items
 collect_crampons	app/components/availability/items.rb	/^    def collect_crampons$/;"	f	class:Availability.Items
 collect_rest	app/components/availability/items.rb	/^    def collect_rest$/;"	f	class:Availability.Items
+commission_params	app/components/management/voting/commissions_controller.rb	/^      def commission_params$/;"	f	class:Management.Voting.CommissionsController
 competition_params	app/components/activities/competitions_controller.rb	/^    def competition_params$/;"	f	class:Activities.CompetitionsController
 competition_params	app/components/events/admin/competitions_controller.rb	/^      def competition_params$/;"	f	class:Events.Admin.CompetitionsController
 competitions	app/models/ability.rb	/^  def competitions$/;"	f	class:Ability
@@ -1581,6 +1596,7 @@ create	app/components/management/news/informations_controller.rb	/^      def cre
 create	app/components/management/projects_controller.rb	/^    def create$/;"	f	class:Management.ProjectsController
 create	app/components/management/snw/snw_applies_controller.rb	/^      def create$/;"	f	class:Management.Snw.SnwAppliesController
 create	app/components/management/voting/cases_controller.rb	/^      def create$/;"	f	class:Management.Voting.CasesController
+create	app/components/management/voting/commissions_controller.rb	/^      def create$/;"	f	class:Management.Voting.CommissionsController
 create	app/components/management/voting/votes_controller.rb	/^      def create$/;"	f	class:Management.Voting.VotesController
 create	app/components/messaging/comments_controller.rb	/^    def create$/;"	f	class:Messaging.CommentsController
 create	app/components/messaging/conversations_controller.rb	/^    def create$/;"	f	class:Messaging.ConversationsController
@@ -1636,6 +1652,7 @@ create_record	app/components/events/admin/competitions_controller.rb	/^      def
 create_record	app/components/events/competitions/sign_ups_controller.rb	/^      def create_record(form)$/;"	f	class:Events
 create_record	app/components/management/projects_controller.rb	/^    def create_record$/;"	f	class:Management.ProjectsController
 create_record	app/components/management/voting/cases_controller.rb	/^      def create_record$/;"	f
+create_record	app/components/management/voting/commissions_controller.rb	/^      def create_record$/;"	f	class:Management.Voting.CommissionsController
 create_record	app/components/management/voting/votes_controller.rb	/^      def create_record$/;"	f	class:Management.Voting.VotesController
 create_record	app/components/settlement/admin/contractors_controller.rb	/^      def create_record$/;"	f	class:Settlement.Admin.ContractorsController
 create_record	app/components/settlement/admin/contracts_controller.rb	/^      def create_record$/;"	f	class:Settlement.Admin.ContractsController
@@ -1938,6 +1955,7 @@ initialize	app/components/items/owner_presenter.rb	/^    def initialize(owner)$/
 initialize	app/components/management/create_project.rb	/^      def initialize(form)$/;"	f	class:Management.CreateProject
 initialize	app/components/management/update_project.rb	/^    def initialize(form)$/;"	f	class:Management.UpdateProject
 initialize	app/components/management/voting/create_case.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.CreateCase
+initialize	app/components/management/voting/create_commission.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.CreateCommission
 initialize	app/components/management/voting/create_vote.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.CreateVote
 initialize	app/components/management/voting/update_case.rb	/^      def initialize(form)$/;"	f	class:Management.Voting.UpdateCase
 initialize	app/components/membership/activement.rb	/^    def initialize(user: nil)$/;"	f	class:Membership.Activement
@@ -2094,6 +2112,7 @@ new	app/components/management/news/informations_controller.rb	/^      def new$/;
 new	app/components/management/projects_controller.rb	/^    def new$/;"	f	class:Management.ProjectsController
 new	app/components/management/snw/snw_applies_controller.rb	/^      def new$/;"	f	class:Management.Snw.SnwAppliesController
 new	app/components/management/voting/cases_controller.rb	/^      def new$/;"	f	class:Management.Voting.CasesController
+new	app/components/management/voting/commissions_controller.rb	/^      def new$/;"	f	class:Management.Voting.CommissionsController
 new	app/components/messaging/conversations_controller.rb	/^    def new$/;"	f	class:Messaging.ConversationsController
 new	app/components/photo_competition/requests_controller.rb	/^    def new$/;"	f	class:PhotoCompetition.RequestsController
 new	app/components/settlement/admin/contractors_controller.rb	/^      def new$/;"	f	class:Settlement.Admin.ContractorsController

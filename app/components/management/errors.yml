@@ -1,6 +1,7 @@
 pl:
   errors:
     package_required: 'musi zostać wybrany!'
+    acceptance: 'musi byc zaznaczone'
     filled?: "musi być wypełnione"
     project:
       rules:
@@ -9,6 +10,7 @@ pl:
 
 en:
   errors:
+    acceptance: 'musi byc zaznaczone'
     unique?: 'already exists'
     or: "or"
     array?: "must be an array"

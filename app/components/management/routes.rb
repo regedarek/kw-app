@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :projects, path: 'projekty'
     resources :settings, path: 'ustawienia', only: [:index, :edit, :update]
     scope module: 'voting' do
+      get 'glosowania/pelnomocnictwo' => 'commissions#new'
+      resources :commissions, only: [:new, :create]
       resources :cases, path: 'glosowania' do
         collection do
           get :walne, as: :walne

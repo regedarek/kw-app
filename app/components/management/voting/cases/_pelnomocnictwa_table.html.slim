@@ -1,0 +1,14 @@
+table.hover
+  thead
+    tr
+      th.text-left Pełnomocnik
+      th.text-left Właściciel
+      th.text-center Zaakceptowano warunki
+      th.text-center Kiedy?
+  tbody
+    - pelnomocnictwa.each do |pelnomocnictwo|
+      tr
+        td.text-left = "#{pelnomocnictwo.authorized.display_name} [#{pelnomocnictwo.authorized.kw_id}]"
+        td.text-left = "#{pelnomocnictwo.owner.display_name} [#{pelnomocnictwo.owner.kw_id}]"
+        td.text-center = pelnomocnictwo.approval? ? 'Tak' : 'Nie'
+        td.text-center = pelnomocnictwo.created_at&.in_time_zone&.strftime("%m/%d/%Y %H:%M")

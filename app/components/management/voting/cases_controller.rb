@@ -8,6 +8,7 @@ module Management
         authorize! :obecni, Management::Voting::CaseRecord
 
         @obecni = Management::Voting::CasePresenceRecord.all
+        @pelnomocnictwa = Management::Voting::CommissionRecord.all
       end
 
       def walne

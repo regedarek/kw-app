@@ -1,0 +1,32 @@
+- setting = Management::SettingsRecord.find_by(path: 'glosowania/pelnomocnictwo')
+
+.row
+  .large-12.columns
+    .callout.warning
+      = sanitize setting&.content
+
+- if user_signed_in?
+  - if Management::Voting::CommissionRecord.exists?(owner_id: current_user.id)
+    .row
+      .large-12.columns
+        .callout
+          b Upoważniono:
+          |  
+          = Management::Voting::CommissionRecord.find_by(owner_id: current_user.id)&.authorized&.display_name
+  - else
+    .row
+      .large-12.columns
+        - if @errors
+          .callout.alert
+            ul.circle
+              - @errors.each do |error|
+                li= error
+
+    = form_for @commission_record, as: :commission, url: commissions_path do |f|
+      = render 'form', f: f
+
+      .row
+        .large-6.columns
+          = f.submit 'Upoważniam', class: 'button expanded large success'
+        .large-6.columns
+          = link_to 'przejdź do walnego', walne_cases_path, class: 'secondary button large expanded'

@@ -11,6 +11,10 @@ pl:
       subject: "Panel KW Kraków- Nowe powiadomienie: %{subject}"
   activerecord:
     attributes:
+      management/voting/commission_record:
+        approval: Potwierdzenie
+        owner_id: Właściciel pełnomocnictwa
+        authorized_id: Pełnomocnik
       activities/competition_record:
         series:
           pp: Puchar Polski

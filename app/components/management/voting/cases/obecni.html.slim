@@ -3,10 +3,18 @@
     h3 Obecni Walnego Zebrania członków KW Kraków
 
 .row
+  .large-6.columns
+    | Obecni na walnym:  
+    b = Management::Voting::CasePresenceRecord.count
+    |  |  
+    | Pełnomocnictwa:  
+    b = Management::Voting::CommissionRecord.count
+br
+
+.row
   .large-12.columns
     = render 'obecni_table', obecni: @obecni
 
 .row
   .large-12.columns
-    | Obecni na walnym:  
-    b = Management::Voting::CasePresenceRecord.count
+    = render 'pelnomocnictwa_table', pelnomocnictwa: @pelnomocnictwa

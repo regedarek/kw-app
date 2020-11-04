@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_203559) do
+ActiveRecord::Schema.define(version: 2020_11_04_152243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -404,6 +404,15 @@ ActiveRecord::Schema.define(version: 2020_10_21_203559) do
     t.integer "voting_type", default: 0, null: false
     t.integer "meeting_type", default: 0, null: false
     t.index ["slug"], name: "index_management_cases_on_slug", unique: true
+  end
+
+  create_table "management_commissions", force: :cascade do |t|
+    t.integer "owner_id", null: false
+    t.integer "authorized_id", null: false
+    t.boolean "approval", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_management_commissions_on_owner_id", unique: true
   end
 
   create_table "management_informations", force: :cascade do |t|
