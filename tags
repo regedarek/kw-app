@@ -74,6 +74,7 @@ AddClosedToCompetitions	db/migrate/20180113121440_add_closed_to_competitions.rb	
 AddClosedToPhotoCompetitions	db/migrate/20181029175346_add_closed_to_photo_competitions.rb	/^class AddClosedToPhotoCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddCloudUrlToWeatherRecords	db/migrate/20191114184440_add_cloud_url_to_weather_records.rb	/^class AddCloudUrlToWeatherRecords < ActiveRecord::Migration[5.2]$/;"	c
 AddCodeToSupplementarySignUps	db/migrate/20180507142148_add_code_to_supplementary_sign_ups.rb	/^class AddCodeToSupplementarySignUps < ActiveRecord::Migration[5.0]$/;"	c
+AddCommissionToManagementVotes	db/migrate/20201104173358_add_commission_to_management_votes.rb	/^class AddCommissionToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 AddContractorIdToContracts	db/migrate/20190530212416_add_contractor_id_to_contracts.rb	/^class AddContractorIdToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddConversationOptout	db/migrate/20191114202837_add_conversation_optout.mailboxer_engine.rb	/^class AddConversationOptout < ActiveRecord::Migration[4.2]$/;"	c
 AddCoordinatorIdToBusinessCourses	db/migrate/20191016104410_add_coordinator_id_to_business_courses.rb	/^class AddCoordinatorIdToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -1530,6 +1531,7 @@ change	db/migrate/20201021142747_change_date_format_in_management_cases.rb	/^  d
 change	db/migrate/20201021161030_create_case_presences.rb	/^  def change$/;"	f	class:CreateCasePresences
 change	db/migrate/20201021203559_add_accepted_terms_to_case_presences.rb	/^  def change$/;"	f	class:AddAcceptedTermsToCasePresences
 change	db/migrate/20201104152243_create_management_commissions.rb	/^  def change$/;"	f	class:CreateManagementCommissions
+change	db/migrate/20201104173358_add_commission_to_management_votes.rb	/^  def change$/;"	f	class:AddCommissionToManagementVotes
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
