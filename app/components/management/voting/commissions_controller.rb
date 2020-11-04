@@ -13,7 +13,7 @@ module Management
         authorize! :create, Management::Voting::VoteRecord
         either(create_record) do |result|
           result.success do
-            redirect_to new_commission_path, flash: { notice: 'Upoważniono' }
+            redirect_to '/glosowania/pelnomocnictwo', flash: { notice: 'Upoważniono' }
           end
 
           result.failure do |errors|
