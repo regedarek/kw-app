@@ -8,18 +8,18 @@ body
         ul
           - Activities::CompetitionRecord.countries.keys.each do |country|
             li
-              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020?country=#{country}" do
+              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2020-2021?country=#{country}" do
                 = flag_icon(table.country_iso(country), squared: true, class: 'flag')
     .col-md-2.col-xs-12
       .clear_filter
-        = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020"
+        = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2020-202q"
     .col-md-5.col-xs-12
 
       .serie_list.pull-right
         ul
           - Activities::CompetitionRecord.series.keys.each do |serie|
             li.serie
-              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2019-2020?series=#{serie}" do
+              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2020-2021?series=#{serie}" do
                 b = serie.upcase
   .row
     .col-md-12
