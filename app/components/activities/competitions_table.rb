@@ -28,6 +28,12 @@ module Activities
         :cn
       when :ukraine
         :ua
+      when :spain
+        :es
+      when :sweden
+        :se
+      when :usa
+        :us
       else
         :en
       end
