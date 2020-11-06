@@ -1,6 +1,8 @@
 .row
   .large-12.columns
     = form_for @contractor, as: :contractor, url: admin_contractors_path do |f|
+      = f.hidden_field :back_url, value: params[:back_url]
+
       - if @contractor.errors.any?
         .callout.alert
           ul
@@ -8,19 +10,33 @@
               li= msg
 
       .row
-        .medium-3.columns
+        .medium-6.columns
           b= f.label :name, "Nazwa kontrahenta*"
           = f.text_field :name
 
-      .row
-        .medium-3.columns
+        .medium-6.columns
           b= f.label :nip, "NIP"
           = f.text_field :nip
 
       .row
-        .medium-3.columns
-          b= f.label :description, "Opis"
-          = f.text_area :description
+        .medium-4.columns
+          b= f.label :name, "E-mail"
+          = f.text_field :email
+
+        .medium-4.columns
+          b= f.label :name, "Osoba kontaktowa"
+          = f.text_field :contact_name
+
+        .medium-4.columns
+          b= f.label :name, "Strona WWW"
+          = f.text_field :www
+
+      .row
+        .medium-12.columns
+          .callout
+            b= f.label :description, "Opis"
+            = f.trix_editor :description, style: 'min-height: 150px'
 
       = f.submit 'Utwórz kontrahenta', class: 'button'
-      = link_to 'wróć', admin_contracts_path, class: 'button secondary'
+      = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+      = link_to 'wróć do zapytań sponsorskich', sponsorship_requests_path, class: 'button warning'

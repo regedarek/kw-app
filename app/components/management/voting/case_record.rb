@@ -13,7 +13,7 @@ module Management
       friendly_id :name, use: :slugged
       self.table_name = 'management_cases'
 
-      has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
+      has_many :comments, as: :commentable, class_name: 'messaging::commentrecord'
       has_many :votes, class_name: 'Management::Voting::VoteRecord', foreign_key: :case_id
       has_many :users, through: :votes, foreign_key: :user_id
 

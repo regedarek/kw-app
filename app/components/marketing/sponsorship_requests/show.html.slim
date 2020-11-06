@@ -1,0 +1,25 @@
+.row
+  .large-12.columns
+    h3 = @sponsorship_request.contractor.name
+
+  .large-6.columns
+    .row
+      .large-12.columns
+        .callout
+          = sanitize @sponsorship_request.description
+    .row
+      .large-12.columns
+        = link_to 'powrót do wysłanych zgłoszeń', sponsorship_requests_path, class: 'button expanded secondary'
+
+  .large-6.columns
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          h5 Komentarze
+          = render 'messaging/comments/comments', commentable: @sponsorship_request
+      .row
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @sponsorship_request
+
+

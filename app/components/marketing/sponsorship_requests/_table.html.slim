@@ -1,0 +1,15 @@
+table.hover
+  thead
+    tr
+      th.text-left  width='25%' Kto
+      th.text-left width='25%' Firma
+      th.text-left  width='15%' Status
+      th.text-left  width='15%' Wysłano
+  tbody
+    - sponsorship_requests.each do |c|
+      = link_to sponsorship_request_path(c.id) do
+        tr
+          td.text-left = link_to c.user.display_name, sponsorship_request_path(c.id)
+          td.text-left = c.contractor.name
+          td.text-left = c.state
+          td.text-left = c.sent_at.strftime("%Y-%m-%d %H:%M")

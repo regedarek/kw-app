@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/wydarzenia/webinary', to: redirect { |path_params, req| "/supplementary/courses?category=web" }
 
   load Rails.root.join("app/components/events/routes.rb")
+  load Rails.root.join("app/components/marketing/routes.rb")
   load Rails.root.join("app/components/training/bluebook/routes.rb")
   load Rails.root.join("app/components/scrappers/routes.rb")
   load Rails.root.join("app/components/notification_center/routes.rb")

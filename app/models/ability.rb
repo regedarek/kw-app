@@ -50,6 +50,8 @@ class Ability
   end
 
   def active
+    can :manage, Settlement::ContractorRecord
+    can :manage, Marketing::SponsorshipRequestRecord
     can :see_dziki, Db::Activities::MountainRoute
     can :create, Db::Profile
     can :create, Management::Snw::SnwApplyRecord

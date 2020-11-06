@@ -4,6 +4,10 @@ module Settlement
       include EitherMatcher
       append_view_path 'app/components'
 
+      def index
+        @contractor = Settlement::ContractorRecord.where.not(email: nil).all
+      end
+
       def new
         authorize! :create, Settlement::ContractorRecord
 
@@ -14,7 +18,15 @@ module Settlement
         authorize! :create, Settlement::ContractorRecord
 
         either(create_record) do |result|
-          result.success { |contract| redirect_to admin_contracts_path }
+          result.success do |a|
+            if contractor_params[:back_url] == 'sponsorship_requests'
+              redirect_to sponsorship_requests_path, notice: 'Dodano'
+            elsif contractor_params[:back_url] == 'new_sponsorship_request'
+              redirect_to new_sponsorship_request_path, notice: 'Dodano'
+            else
+              redirect_to admin_contracts_path, notice: 'Dodano'
+            end
+          end
 
           result.failure do |errors|
             @contractor = Settlement::ContractorRecord.new(contractor_params)
@@ -22,6 +34,10 @@ module Settlement
             render :new
           end
         end
+      end
+
+      def show
+        @contractor = Settlement::ContractorRecord.find(params[:id])
       end
 
       private
@@ -36,7 +52,7 @@ module Settlement
       def contractor_params
         params
           .require(:contractor)
-          .permit(:name, :description, :nip)
+          .permit(:name, :description, :nip, :back_url, :email, :www, :contact_name)
       end
     end
   end
