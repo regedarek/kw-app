@@ -7,7 +7,7 @@ module Settlement
       def index
         authorize! :read, Settlement::ContractRecord
 
-        @q = Settlement::ContractRecord.accessible_by(current_ability)
+        @q = Settlement::ContractRecord.where(contractor_id: nil).accessible_by(current_ability)
         @q = @q.where.not(state: ['preclosed', 'closed']) unless params[:q]
         @q = @q.ransack(params[:q])
         @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
