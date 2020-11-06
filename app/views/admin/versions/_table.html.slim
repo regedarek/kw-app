@@ -14,7 +14,7 @@ table.stack
             - if version.item.is_a? Settlement::ContractRecord
               = version.item&.title
             - elsif version.item.is_a? Settlement::ContractorRecord
-              = version.item&.title
+              = version.item&.name
             - else
               = link_to version.item&.name, polymorphic_url(version.item)
           - else
