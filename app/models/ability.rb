@@ -69,6 +69,7 @@ class Ability
 
   def active_and_regular
     can :create, Management::Voting::VoteRecord
+    can :create, Management::Voting::CommissionRecord
   end
 
   def competitions

@@ -5,12 +5,13 @@ module Management
       append_view_path 'app/components'
 
       def new
-        authorize! :create, Management::Voting::VoteRecord
+        authorize! :create, Management::Voting::CommissionRecord
         @commission_record = Management::Voting::CommissionRecord.new
       end
 
       def create
-        authorize! :create, Management::Voting::VoteRecord
+        authorize! :create, Management::Voting::CommissionRecord
+
         either(create_record) do |result|
           result.success do
             redirect_to '/glosowania/pelnomocnictwo', flash: { notice: 'Upoważniono' }
