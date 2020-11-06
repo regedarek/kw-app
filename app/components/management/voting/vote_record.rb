@@ -27,7 +27,7 @@ module Management
         when 'unapproved'
           'Przeciw'
         when 'abstained'
-          'Wstrzymało się'
+          'Wstrzymano się'
         else
           'Nie wiadomo'
         end

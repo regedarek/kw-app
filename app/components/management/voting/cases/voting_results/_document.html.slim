@@ -3,8 +3,8 @@
 - else
   - decisions = @case.votes.group(:decision).count
 
-  = "Za: #{decisions['approved'].to_i}"
+  b= "Za: #{decisions['approved'].to_i}"
   br
-  = "Przeciw: #{decisions['unapproved'].to_i}"
+  b= "Przeciw: #{decisions['unapproved'].to_i}"
   br
-  = "Wstrzymało się: #{decisions['abstained'].to_i}"
+  b= "Wstrzymano się: #{decisions['abstained'].to_i}"

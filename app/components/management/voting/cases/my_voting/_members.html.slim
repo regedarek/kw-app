@@ -1,5 +1,5 @@
 - vote = @case.votes.find_by(user_id: user_id)
 - if vote && vote.users.any?
-  = vote.users.map(&:display_name)
+  b = vote.users.map(&:display_name)
 - else
-  | Wstrzymał się
+  b Wstrzymano się
