@@ -11,7 +11,10 @@ table.stack
       tr
         td
           - if version.item
-            = link_to version.item&.name, polymorphic_url(version.item)
+            - if version.item.is_a? Settlement::ContractRecord
+              = link_to version.item&.title, polymorphic_url(version.item)
+            - else
+              = link_to version.item&.name, polymorphic_url(version.item)
           - else
             = version.item_type
         td = Db::User.find(version.whodunnit)&.display_name
