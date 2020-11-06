@@ -1,0 +1,16 @@
+table.hover
+  thead
+    tr
+      th.text-left  width='25%' Kto
+      th.text-left  width='15%' E-mail
+      th.text-left  width='15%' Telefon
+      th.text-left  width='15%' WWW
+      th.text-left  width='15%' Osoba kontaktowa
+  tbody
+    - @contractors.each do |contractor|
+      tr
+        td.text-left = contractor.name
+        td.text-left = contractor.email
+        td.text-left = contractor.phone
+        td.text-left = contractor.www
+        td.text-left = contractor.contact_name

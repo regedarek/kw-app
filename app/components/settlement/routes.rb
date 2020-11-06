@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope module: 'settlement' do
     namespace :admin do
-      resources :contractors, only: [:new, :create]
+      resources :contractors
       resources :contracts do
         member do
           get :download_attachment

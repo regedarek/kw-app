@@ -4,7 +4,7 @@
   .large-6.columns
     = f.label :contractor_id, 'Firma'
     = f.select :contractor_id,
-      Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
+      Settlement::ContractorRecord.where(reason_type: [:both, :sponsor]).all.map { |u| [u.name, u.id] },
       { include_blank: true, include_hidden: false },
       { class: 'js-select-multiple', multiple: false }
   .large-6.columns

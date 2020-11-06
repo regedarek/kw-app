@@ -8,9 +8,11 @@ module Settlement
 
     required(:name).filled
     optional(:nip).maybe
+    optional(:phone).maybe
     optional(:email).maybe
     optional(:www).maybe
     optional(:contact_name).maybe
+    required(:reason_type).filled(:int?)
     optional(:description).maybe
   end
 end

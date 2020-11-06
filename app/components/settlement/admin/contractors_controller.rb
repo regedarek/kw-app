@@ -5,7 +5,7 @@ module Settlement
       append_view_path 'app/components'
 
       def index
-        @contractor = Settlement::ContractorRecord.where.not(email: nil).all
+        @contractors = Settlement::ContractorRecord.all
       end
 
       def new
@@ -52,7 +52,7 @@ module Settlement
       def contractor_params
         params
           .require(:contractor)
-          .permit(:name, :description, :nip, :back_url, :email, :www, :contact_name)
+          .permit(:name, :description, :nip, :back_url, :email, :www, :contact_name, :reason_type, :phone)
       end
     end
   end

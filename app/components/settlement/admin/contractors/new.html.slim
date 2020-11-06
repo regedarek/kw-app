@@ -10,26 +10,34 @@
               li= msg
 
       .row
-        .medium-6.columns
+        .large-3.columns
           b= f.label :name, "Nazwa kontrahenta*"
           = f.text_field :name
 
-        .medium-6.columns
+        .large-3.columns
           b= f.label :nip, "NIP"
           = f.text_field :nip
 
+        .large-3.columns
+          b= f.label :name, "Strona WWW"
+          = f.text_field :www
+
+        .large-3.columns
+          = f.label :reason_type, 'Typ'
+          = f.select :reason_type, [['Oba', 'both'],['Rozliczenia', 'contracts'],['Sponsor', 'sponsors']]
+
       .row
-        .medium-4.columns
+        .large-4.columns
           b= f.label :name, "E-mail"
           = f.text_field :email
 
-        .medium-4.columns
+        .large-4.columns
           b= f.label :name, "Osoba kontaktowa"
           = f.text_field :contact_name
 
-        .medium-4.columns
-          b= f.label :name, "Strona WWW"
-          = f.text_field :www
+        .large-4.columns
+          b= f.label :name, "Telefon"
+          = f.text_field :phone
 
       .row
         .medium-12.columns

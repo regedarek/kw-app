@@ -1,0 +1,10 @@
+.row
+  .large-8.columns
+    h3 Kontrahenci
+
+  .large-4.columns
+      = link_to 'Dodaj kontrahenta', new_admin_contractor_path(back_url: :sponsorship_requests), class: 'button expanded medium'
+
+.row
+  .large-12.columns
+    = render 'table'

@@ -176,6 +176,7 @@ AddPayoutTypeToContracts	db/migrate/20190605211016_add_payout_type_to_contracts.
 AddPeakAndTimeToRoutes	db/migrate/20160803190318_add_peak_and_time_to_routes.rb	/^class AddPeakAndTimeToRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddPeakIdToRoutes	db/migrate/20160804184359_add_peak_id_to_routes.rb	/^class AddPeakIdToRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddPeriodDateToContracts	db/migrate/20190529222947_add_period_date_to_contracts.rb	/^class AddPeriodDateToContracts < ActiveRecord::Migration[5.2]$/;"	c
+AddPhoneToContractors	db/migrate/20201106163311_add_phone_to_contractors.rb	/^class AddPhoneToContractors < ActiveRecord::Migration[5.2]$/;"	c
 AddPhoneToStrzeleckiSignUps	db/migrate/20170201142212_add_phone_to_strzelecki_sign_ups.rb	/^class AddPhoneToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddPhoneToUsers	db/migrate/20160831204756_add_phone_to_users.rb	/^class AddPhoneToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddPhotosToMountainRoutes	db/migrate/20180723204720_add_photos_to_mountain_routes.rb	/^class AddPhotosToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
@@ -190,6 +191,7 @@ AddProfessionToProfiles	db/migrate/20170509123335_add_profession_to_profiles.rb	
 AddQuestionToSupplementaryCourses	db/migrate/20191022173958_add_question_to_supplementary_courses.rb	/^class AddQuestionToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddQuestionToSupplementarySignUps	db/migrate/20191022173322_add_question_to_supplementary_sign_ups.rb	/^class AddQuestionToSupplementarySignUps < ActiveRecord::Migration[5.2]$/;"	c
 AddReactivationToMembershipFees	db/migrate/20170220140949_add_reactivation_to_membership_fees.rb	/^class AddReactivationToMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
+AddReasonTypeToContractors	db/migrate/20201106162414_add_reason_type_to_contractors.rb	/^class AddReasonTypeToContractors < ActiveRecord::Migration[5.2]$/;"	c
 AddRefreshTokenToUsers	db/migrate/20170505092955_add_refresh_token_to_users.rb	/^class AddRefreshTokenToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddRefundedAtToPayments	db/migrate/20190610212043_add_refunded_at_to_payments.rb	/^class AddRefundedAtToPayments < ActiveRecord::Migration[5.2]$/;"	c
 AddRemarksToProfiles	db/migrate/20170510164921_add_remarks_to_profiles.rb	/^class AddRemarksToProfiles < ActiveRecord::Migration[5.0]$/;"	c
@@ -1543,6 +1545,8 @@ change	db/migrate/20201104173358_add_commission_to_management_votes.rb	/^  def c
 change	db/migrate/20201106144908_create_marketing_sponsorship_requests.rb	/^  def change$/;"	f	class:CreateMarketingSponsorshipRequests
 change	db/migrate/20201106160628_add_email_to_contractors.rb	/^  def change$/;"	f	class:AddEmailToContractors
 change	db/migrate/20201106160715_add_contact_name_to_contractors.rb	/^  def change$/;"	f	class:AddContactNameToContractors
+change	db/migrate/20201106162414_add_reason_type_to_contractors.rb	/^  def change$/;"	f	class:AddReasonTypeToContractors
+change	db/migrate/20201106163311_add_phone_to_contractors.rb	/^  def change$/;"	f	class:AddPhoneToContractors
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
