@@ -1,15 +1,24 @@
 module Management
   module Voting
     class CasesController < ApplicationController
-      before_action :authenticate_user!
       include EitherMatcher
+      before_action :authenticate_user!
       append_view_path 'app/components'
+      respond_to :html, :xlsx
 
       def obecni
         authorize! :obecni, Management::Voting::CaseRecord
 
-        @obecni = Management::Voting::CasePresenceRecord.all
-        @pelnomocnictwa = Management::Voting::CommissionRecord.all
+        @obecni = Management::Voting::CasePresenceRecord.includes(:user).all
+        @pelnomocnictwa = Management::Voting::CommissionRecord.includes(:authorized, :owner).all
+
+        respond_with do |format|
+          format.html
+          format.xlsx do
+            disposition = "attachment; filename=walne_kw_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
+            response.headers['Content-Disposition'] = disposition
+          end
+        end
       end
 
       def walne

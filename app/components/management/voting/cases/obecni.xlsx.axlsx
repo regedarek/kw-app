@@ -1,0 +1,64 @@
+wb = xlsx_package.workbook
+case_presence_attributes = %i(
+  user_id
+  accepted_terms
+  created_at
+)
+commission_attributes = %i(
+  owner_id
+  authorized_id
+  approval
+  created_at
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "Obecni na Walnym") do |sheet|
+    human_case_presence_attributes = case_presence_attributes.map do |attr|
+      Management::Voting::CasePresenceRecord.human_attribute_name(attr)
+    end.push('KW ID').push('Status Członka')
+    sheet.add_row(human_case_presence_attributes, style: style.add_style(highlight_cell_options))
+    @obecni.each do |presence|
+      if presence&.user&.profile
+        presence_values = case_presence_attributes.map do |attr|
+          case attr
+          when :user_id
+            presence.user.display_name
+          else
+            presence.read_attribute(attr)
+          end
+        end.push(presence.user.kw_id).push(
+          presence.user.profile.position.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
+        )
+        sheet.add_row(presence_values)
+      end
+    end
+  end
+  wb.add_worksheet(name: "Pełnomocnictwa") do |sheet|
+    human_commission_attributes = commission_attributes.map do |attr|
+      Management::Voting::CommissionRecord.human_attribute_name(attr)
+    end.push('Właściciel KW ID').push('Pełnomocnik KW ID').push('Status właściciela')
+    sheet.add_row(human_commission_attributes, style: style.add_style(highlight_cell_options))
+    @pelnomocnictwa.each do |pelnomocnictwo|
+      if pelnomocnictwo&.owner&.profile
+        commission_values = commission_attributes.map do |attr|
+          case attr
+          when :authorized_id
+            pelnomocnictwo.authorized.display_name
+          when :owner_id
+            pelnomocnictwo.owner.display_name
+          else
+            pelnomocnictwo.read_attribute(attr)
+          end
+        end.push(pelnomocnictwo.owner.kw_id).push(pelnomocnictwo.authorized.kw_id).push(
+          pelnomocnictwo.owner.profile.position.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
+        )
+        sheet.add_row(commission_values)
+      end
+    end
+  end
+end
