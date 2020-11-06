@@ -4,7 +4,7 @@ class Db::User < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
   mount_uploader :avatar, ::Membership::AvatarUploader
 
-  ROLES = %w(training_contracts business_courses library reservations routes admin events courses competitions office tech donations photo_competition management secondary_management financial_management)
+  ROLES = %w(training_contracts business_courses library reservations routes admin events courses competitions office tech donations photo_competition management secondary_management financial_management marketing)
   SNW_GROUPS = %w(mjs instructors management sport authors gear support)
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
