@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'konkurs_kasprzyka/regulamin' => 'pages#show', id: 'rules'
   get 'instrukcje/wydarzenia' => 'pages#show', id: 'rules'
   get '/wydarzenia/webinary', to: redirect { |path_params, req| "/supplementary/courses?category=web" }
+  get '/marketing', to: redirect { |path_params, req| "/sponsorship_requests" }
 
   load Rails.root.join("app/components/events/routes.rb")
   load Rails.root.join("app/components/marketing/routes.rb")
