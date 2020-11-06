@@ -12,4 +12,4 @@ table.hover
           td.text-left = link_to c.user.display_name, sponsorship_request_path(c.id)
           td.text-left = link_to c.contractor.name, admin_contractor_path(c.contractor_id)
           td.text-left = c.state
-          td.text-left = c.sent_at.strftime("%Y-%m-%d %H:%M")
+          td.text-left = c.sent_at&.strftime("%Y-%m-%d %H:%M")
