@@ -27,7 +27,7 @@ module Marketing
     private
 
     def sponsorship_request_params
-      params.require(:sponsorship_request).permit(:user_id, :contractor_id, :description, :state, :sent_at)
+      params.require(:sponsorship_request).permit(:user_id, :contractor_id, :description, :state, :sent_at, :doc_url)
     end
   end
 end

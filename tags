@@ -95,6 +95,7 @@ AddDescriptionToUsers	db/migrate/20190627194521_add_description_to_users.rb	/^cl
 AddDeviseToUsers	db/migrate/20150523161408_add_devise_to_users.rb	/^class AddDeviseToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddDisplayNameToDonations	db/migrate/20180813123301_add_display_name_to_donations.rb	/^class AddDisplayNameToDonations < ActiveRecord::Migration[5.0]$/;"	c
 AddDocUrlToCases	db/migrate/20190627211043_add_doc_url_to_cases.rb	/^class AddDocUrlToCases < ActiveRecord::Migration[5.2]$/;"	c
+AddDocUrlToMarketingSponsorshipRequests	db/migrate/20201106171602_add_doc_url_to_marketing_sponsorship_requests.rb	/^class AddDocUrlToMarketingSponsorshipRequests < ActiveRecord::Migration[5.2]$/;"	c
 AddDocumentTypeAndDocumentDateToContracts	db/migrate/20190520221345_add_document_type_and_document_date_to_contracts.rb	/^class AddDocumentTypeAndDocumentDateToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddEditionSymToCompetitions	db/migrate/20180106162149_add_edition_sym_to_competitions.rb	/^class AddEditionSymToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddEmailRemarksToSupplementaryCourses	db/migrate/20190423083521_add_email_remarks_to_supplementary_courses.rb	/^class AddEmailRemarksToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -1547,6 +1548,7 @@ change	db/migrate/20201106160628_add_email_to_contractors.rb	/^  def change$/;"	
 change	db/migrate/20201106160715_add_contact_name_to_contractors.rb	/^  def change$/;"	f	class:AddContactNameToContractors
 change	db/migrate/20201106162414_add_reason_type_to_contractors.rb	/^  def change$/;"	f	class:AddReasonTypeToContractors
 change	db/migrate/20201106163311_add_phone_to_contractors.rb	/^  def change$/;"	f	class:AddPhoneToContractors
+change	db/migrate/20201106171602_add_doc_url_to_marketing_sponsorship_requests.rb	/^  def change$/;"	f	class:AddDocUrlToMarketingSponsorshipRequests
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

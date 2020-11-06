@@ -7,6 +7,11 @@
       .large-12.columns
         .callout
           = sanitize @sponsorship_request.description
+
+      - if @sponsorship_request.doc_url
+        .large-12.columns
+          = link_to 'wysłana oferta', @sponsorship_request.doc_url, class: 'button expanded'
+
     .row
       .large-12.columns
         = link_to 'powrót do wysłanych zgłoszeń', sponsorship_requests_path, class: 'button expanded secondary'

@@ -12,6 +12,11 @@
     = link_to 'Dodaj kontrahenta', new_admin_contractor_path(back_url: :new_sponsorship_request), target: :_blank, class: 'button expanded medium'
 
 .row
+  .large-12.columns
+    = f.label :doc_url, 'wysłana oferta'
+    = f.text_field :doc_url
+
+.row
   .large-6.columns
     = f.label :acceptance_date, 'Data wysłania'
     = f.datetime_field :sent_at
