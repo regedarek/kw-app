@@ -42,15 +42,6 @@
                   button.close-button aria-label=("Close reveal") data-close="" type="button" 
                     span aria-hidden="true"  &times;
 
-    - if current_user.active_and_regular?
-      - if @case.votes.exists?(user_id: current_user.id)
-        .large-6.columns
-          .row
-            .large-12.columns
-              .callout class="warning"
-                h5 = "Moje głosowanie"
-                = render "management/voting/cases/my_voting/#{@case.voting_type}"
-
     .large-6.columns
       .row
         .large-12.columns
@@ -67,27 +58,29 @@
               h5 = "Wyniki"
               = render "management/voting/cases/voting_results/#{@case.voting_type}"
 
-      - if current_user.active_and_regular?
-        - if @case.voting?
-            - unless @repository.voted?(@case.id, current_user.id)
-              - if user_signed_in?
-                - if Management::Voting::CommissionRecord.exists?(authorized_id: current_user.id)
-                  .row
-                    .large-12.columns
-                      .callout.warning
-                        | Jesteś pełnomocnikiem:
-                        ul
-                          - Management::Voting::CommissionRecord.where(authorized_id: current_user.id).each do |commission|
-                            li = commission&.owner&.display_name
-              - if @case.members?
-                .row
-                  .large-12.columns
-                    .callout.warning
-                      | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
-              .row
-                .large-6.columns
-                  h5 Głosowanie
-                  = render "management/voting/cases/forms/#{@case.voting_type}"
+      .row
+        .large-12.columns
+          - if current_user.active_and_regular?
+            - if @case.voting?
+                - if @repository.authorized?(current_user.id)
+                  = render "management/voting/cases/forms/authorized"
+                - else
+                  - if @repository.voted?(@case.id, current_user.id)
+                    .callout.secondary
+                      h5 = current_user.display_name
+                      | Głos został oddany.
+                      br
+                      = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: current_user.id
+                  - else
+                    - if @case.members?
+                      .row
+                        .large-12.columns
+                          .callout.warning
+                            | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
+                    .row
+                      .large-6.columns
+                        h5 Głosowanie
+                        = render "management/voting/cases/forms/#{@case.voting_type}", user_id: current_user.id, commission: false
       .row
         .large-12.columns
             = link_to 'powrót do pozostałych głosowań', '/glosowania/walne', class: 'button secondary expanded'

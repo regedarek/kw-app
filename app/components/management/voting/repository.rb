@@ -38,6 +38,14 @@ module Management
       def voted?(case_id, user_id)
         already_voted_on(case_id).map(&:user_id).include?(user_id)
       end
+
+      def authorized?(user_id)
+        Management::Voting::CommissionRecord.includes(:owner).exists?(authorized_id: user_id)
+      end
+
+      def commissions(user_id)
+        Management::Voting::CommissionRecord.includes(:owner).where(authorized_id: user_id)
+      end
     end
   end
 end

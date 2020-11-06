@@ -1,3 +1,5 @@
-- vote = Management::Voting::VoteRecord.find_by(case_id: @case.id, user_id: current_user.id, decision: 'approved')
+- vote = @case.votes.find_by(user_id: user_id)
 - if vote && vote.users.any?
   = vote.users.map(&:display_name)
+- else
+  | Wstrzymał się

@@ -1,10 +1,12 @@
 = form_for Management::Voting::VoteRecord.new, as: :vote, url: votes_path(@case.id) do |f|
-  = f.hidden_field :user_id, value: current_user.id
+  = f.hidden_field :user_id, value: user_id
   = f.hidden_field :case_id, value: @case.id
+  = f.hidden_field :commission, value: commission
+  = f.hidden_field :authorized_id, value: current_user.id
   = f.collection_check_boxes(:user_ids, Db::User.where(id: @case.who_ids), :id, :display_name) do |user|
     = user.label
     = user.check_box
     br
   .row
-    .large-6.columns
+    .large-12.columns
       = f.submit 'Zagłosuj', class: 'button expanded large success'

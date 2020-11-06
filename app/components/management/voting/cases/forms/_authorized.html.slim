@@ -1,0 +1,35 @@
+.row
+  .large-12.columns
+    .callout.warning
+      | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
+      br
+      | Zagłosuj po kolei za każde pełnomocnictwo osobno.
+
+.row
+  - if @repository.voted?(@case.id, current_user.id)
+    .large-6.columns
+      .callout.primary
+        h5 = current_user.display_name
+        | Głos został oddany.
+        br
+        = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: current_user.id
+  - else
+    .large-6.columns
+      .callout.primary
+        h5 = current_user.display_name
+        = render "management/voting/cases/forms/#{@case.voting_type}", user_id: current_user.id, commission: false
+
+  - @repository.commissions(current_user.id).each do |commission|
+    - if commission.owner
+      - if @repository.voted?(@case.id, commission.owner_id)
+        .large-6.columns
+          .callout.secondary
+            h5 = commission.owner.display_name
+            | Głos został oddany.
+            br
+            = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: commission.owner_id
+      - else
+        .large-6.columns
+          .callout
+            h5 = commission.owner.display_name
+            = render "management/voting/cases/forms/#{@case.voting_type}", user_id: commission.owner_id, commission: true

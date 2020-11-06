@@ -23,13 +23,13 @@ module Management
       def create_record
         Management::Voting::CreateVote.new(
           Management::Voting::VoteForm
-        ).call(raw_inputs: vote_params)
+        ).call(raw_inputs: vote_params, current_user_id: current_user.id)
       end
 
       def vote_params
         params
           .require(:vote)
-          .permit(:case_id, :user_id, :decision, user_ids: [])
+          .permit(:case_id, :commission, :authorized_id, :user_id, :decision, user_ids: [])
       end
     end
   end

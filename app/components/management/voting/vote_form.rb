@@ -11,6 +11,8 @@ module Management
       optional(:user_ids).maybe
       required(:case_id).filled(:int?)
       required(:user_id).filled(:int?)
+      required(:commission).filled(:bool?)
+      required(:authorized_id).filled(:int?)
     end
   end
 end

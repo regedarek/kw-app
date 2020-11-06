@@ -7,29 +7,25 @@ module Management
         @form = form
       end
 
-      def call(raw_inputs:)
+      def call(raw_inputs:, current_user_id:)
         form_outputs = form.call(raw_inputs.to_unsafe_h)
         return Left(raw_inputs[:case_id]) unless form_outputs.success?
 
         case_record = Management::Voting::CaseRecord.find_by(id: raw_inputs[:case_id])
         return Left(raw_inputs[:case_id]) unless case_record.voting?
 
-        if Management::Voting::CommissionRecord.exists?(authorized_id: form_outputs[:user_id])
-          Management::Voting::VoteRecord.create(form_outputs.to_h)
+        vote_record = Management::Voting::VoteRecord.new(form_outputs.to_h)
 
-          commissions = Management::Voting::CommissionRecord.where(authorized_id: form_outputs[:user_id]).each do |commission|
-            Management::Voting::VoteRecord.create(form_outputs.to_h.merge(user_id: commission.owner_id, commission: true, authorized_id: form_outputs[:user_id]))
+        if form_outputs[:user_id] != current_user_id
+          unless Management::Voting::CommissionRecord.exists?(authorized_id: current_user_id, owner_id: form_outputs[:user_id])
+            return Left(raw_inputs[:case_id])
           end
+        end
 
-          Right(raw_inputs[:case_id])
+        if vote_record.save
+          Right(vote_record.case_id)
         else
-          vote_record = Management::Voting::VoteRecord.new(form_outputs.to_h)
-
-          if vote_record.save
-            Right(vote_record.case_id)
-          else
-            Left(raw_inputs[:case_id])
-          end
+          Left(raw_inputs[:case_id])
         end
       end
 

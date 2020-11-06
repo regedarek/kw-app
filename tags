@@ -1144,6 +1144,7 @@ authorize_admin	app/controllers/admin/importing_controller.rb	/^    def authoriz
 authorize_admin	app/controllers/admin/items_controller.rb	/^    def authorize_admin$/;"	f	class:Admin.ItemsController
 authorize_admin	app/controllers/admin/reservations_controller.rb	/^    def authorize_admin$/;"	f	class:Admin
 authorize_admin	app/controllers/admin/users_controller.rb	/^    def authorize_admin$/;"	f	class:Admin.UsersController
+authorized?	app/components/management/voting/repository.rb	/^      def authorized?(user_id)$/;"	f	class:Management.Voting.Repository
 authors	app/components/blog/authors.rb	/^    def authors$/;"	f	class:Blog.Authors.fetch
 authors_names=	app/components/library/item_record.rb	/^    def authors_names=(ids)$/;"	f	class:Library.ItemRecord
 auto_orient	app/uploaders/attachment_uploader.rb	/^  def auto_orient$/;"	f	class:AttachmentUploader
@@ -1174,7 +1175,7 @@ call	app/components/management/create_project.rb	/^      def call(raw_inputs:)$/
 call	app/components/management/update_project.rb	/^    def call(id:, raw_inputs:)$/;"	f	class:Management.UpdateProject
 call	app/components/management/voting/create_case.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateCase
 call	app/components/management/voting/create_commission.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateCommission
-call	app/components/management/voting/create_vote.rb	/^      def call(raw_inputs:)$/;"	f	class:Management.Voting.CreateVote
+call	app/components/management/voting/create_vote.rb	/^      def call(raw_inputs:, current_user_id:)$/;"	f	class:Management.Voting.CreateVote
 call	app/components/management/voting/update_case.rb	/^      def call(id:, raw_inputs:)$/;"	f	class:Management.Voting.UpdateCase
 call	app/components/membership/fees_reminder_service.rb	/^    def call$/;"	f	class:Membership.FeesReminderService
 call	app/components/reservations/update_items.rb	/^    def call(raw_inputs:)$/;"	f	class:Reservations.UpdateItems
@@ -1559,6 +1560,7 @@ collect_axes	app/components/availability/items.rb	/^    def collect_axes$/;"	f	c
 collect_crampons	app/components/availability/items.rb	/^    def collect_crampons$/;"	f	class:Availability.Items
 collect_rest	app/components/availability/items.rb	/^    def collect_rest$/;"	f	class:Availability.Items
 commission_params	app/components/management/voting/commissions_controller.rb	/^      def commission_params$/;"	f	class:Management.Voting.CommissionsController
+commissions	app/components/management/voting/repository.rb	/^      def commissions(user_id)$/;"	f	class:Management.Voting.Repository
 competition_params	app/components/activities/competitions_controller.rb	/^    def competition_params$/;"	f	class:Activities.CompetitionsController
 competition_params	app/components/events/admin/competitions_controller.rb	/^      def competition_params$/;"	f	class:Events.Admin.CompetitionsController
 competitions	app/models/ability.rb	/^  def competitions$/;"	f	class:Ability
