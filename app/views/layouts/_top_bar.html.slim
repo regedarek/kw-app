@@ -13,13 +13,6 @@
         - if false
           li= link_to 'Walne Zgromadzenie Członków Klubu Online', '/glosowania/walne', class: 'button expanded alert'
         - if user_signed_in?
-          - if current_user.roles.include?('marketing')
-            li
-              = link_to 'Marketing', admin_path
-              ul.menu.vertical
-                li= link_to 'Kontrahenci', admin_contractors_path
-                li= link_to 'Wysłane ofery', sponsorship_requests_path
-
           - if current_user.roles.include?('office')
             li
               = link_to 'Biuro', admin_path
@@ -40,6 +33,13 @@
                 li= link_to 'Głosowania Walne', '/glosowania/walne'
                 li= link_to 'Kursy SA', courses_path
                 li= link_to 'Rozliczenia', admin_contracts_path
+
+          - if current_user.roles.include?('marketing')
+            li
+              = link_to 'Sponsorzy', admin_path
+              ul.menu.vertical
+                li= link_to 'Kontrahenci', admin_contractors_path
+                li= link_to 'Wysłane ofery', sponsorship_requests_path
 
           - if current_user.roles.include?('sa')
             li
@@ -73,17 +73,18 @@
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         - if user_signed_in?
           li
-            = link_to 'Programy', admin_path
+            = link_to 'Programy', root_path
             ul.menu.vertical
               li= link_to 'KSKS', '/trening/skimo'
               li= link_to 'Tabela górskie dziki', gorskie_dziki_path
               li= link_to 'Tabela narciarske dziki', narciarskie_dziki_path
           li
-            = link_to 'Narzędzia', admin_path
+            = link_to 'Narzędzia', root_path
             ul.menu.vertical
               li= link_to 'Zarezerwuj', new_reservation_path
               li= link_to 'Biblioteka', biblioteka_path
               li= link_to 'Baza klubowiczów', '/klubowicze'
+              li= link_to 'Rozliczenia', admin_contracts_path
 
           li= link_to 'Przejścia', '/przejscia', class: 'button success'
           li= link_to 'Projekty', '/projekty', class: 'button warning'
