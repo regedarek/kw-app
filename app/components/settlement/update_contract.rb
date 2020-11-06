@@ -32,7 +32,7 @@ module Settlement
           action: 'updated_contract',
           notifiable_id: contract.id,
           notifiable_type: 'Settlement::ContractRecord'
-        ) if false
+        )
       end
 
       Right(contract)
