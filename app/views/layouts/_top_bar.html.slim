@@ -10,7 +10,7 @@
         li
           = link_to root_path, style: 'padding: 0 1rem;' do
             = image_tag('logo_kw_krakow.jpg', style: 'max-height: 35px;')
-        li= link_to 'Dla Mariusza', mariusz_path, class: 'button warning'
+        li= link_to 'Walne Zgromadzenie Członków Klubu Online', '/glosowania/walne', class: 'button expanded alert'
         - if request.path == '/przejscia'
           - if current_user.roles.include?('mountain_routes')
             li= link_to 'XLSX', activities_mountain_routes_path(format: :xlsx), class: 'button hollow'

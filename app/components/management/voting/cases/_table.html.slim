@@ -5,8 +5,7 @@ table.hover
       th.text-left  width='45%' Temat
       th.text-center width='25%' Data uchwalenia
       th.text-center width='6%' Numer porządkowy
-      - if can? :manage, Management::Voting::CaseRecord
-        th.text-center  width='15%' Status
+      th.text-center  width='15%' Status
       - if can? :destroy, Management::Voting::CaseRecord
         th.text-right width='3%'
       - if can? :manage, Management::Voting::CaseRecord
@@ -17,9 +16,8 @@ table.hover
         td.text-left = link_to c.name, case_path(c)
         td.text-center = c.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %H:%M")
         td.text-center = c.number
-        - if can? :manage, Management::Voting::CaseRecord
-          td.text-center
-            span.label = I18n.t c.state
+        td.text-center
+          span.label = I18n.t c.state
         - if can? :destroy, Management::Voting::CaseRecord
           td.text-right
             = link_to case_path(c.id), method: :delete, data: { confirm: 'Jesteś pewien?' } do

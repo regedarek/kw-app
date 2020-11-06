@@ -1,6 +1,7 @@
 module Management
   module Voting
     class CasesController < ApplicationController
+      before_action :authenticate_user!
       include EitherMatcher
       append_view_path 'app/components'
 
