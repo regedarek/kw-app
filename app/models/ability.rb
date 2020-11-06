@@ -137,6 +137,8 @@ class Ability
   end
 
   def office
+    can :manage, Settlement::ContractRecord
+    can :office, Settlement::ContractRecord
     can :manage, Db::User
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
