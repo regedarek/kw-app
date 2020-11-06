@@ -1,5 +1,6 @@
 module Settlement
   class ContractRecord < ActiveRecord::Base
+    has_paper_trail
     include Workflow
 
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
