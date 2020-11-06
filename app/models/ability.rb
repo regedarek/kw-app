@@ -50,7 +50,7 @@ class Ability
   end
 
   def active
-    can :manage, Settlement::ContractorRecord
+    can :create, Settlement::ContractorRecord
     can :manage, Marketing::SponsorshipRequestRecord
     can :see_dziki, Db::Activities::MountainRoute
     can :create, Db::Profile
@@ -137,14 +137,16 @@ class Ability
   end
 
   def office
+    can :read, Settlement::ContractorRecord
     can :manage, Settlement::ContractRecord
     can :office, Settlement::ContractRecord
+    cannot :destroy, Settlement::ContractRecord
+    can :analiza, Settlement::ContractRecord
     can :manage, Db::User
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
-    cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
-    can :analiza, Settlement::ContractRecord
+
     can :manage, Management::SettingsRecord
   end
 
