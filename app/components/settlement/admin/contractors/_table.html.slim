@@ -4,16 +4,16 @@ table.hover
       th.text-left Kto
       th.text-left  width='15%' E-mail
       th.text-left  width='15%' Telefon
-      th.text-left  width='15%' WWW
+      th.text-left  width='15%' Koszt
       th.text-left  width='15%' Osoba kontaktowa
       th.text-right  width='7%'
   tbody
-    - @contractors.each do |contractor|
+    - contractors.each do |contractor|
       tr
         td.text-left = link_to contractor.name, admin_contractor_path(contractor.id)
         td.text-left = contractor.email
         td.text-left = contractor.phone
-        td.text-left = contractor.www
+        td.text-left = contractor.contracts.sum(:cost)
         td.text-left = contractor.contact_name
         td
           - if can? :update, contractor
