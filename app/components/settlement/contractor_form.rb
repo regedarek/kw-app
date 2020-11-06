@@ -12,7 +12,7 @@ module Settlement
     optional(:email).maybe
     optional(:www).maybe
     optional(:contact_name).maybe
-    required(:reason_type).filled(:int?)
+    required(:reason_type).filled
     optional(:description).maybe
   end
 end

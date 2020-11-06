@@ -5,7 +5,7 @@ module Settlement
       append_view_path 'app/components'
 
       def index
-        @contractors = Settlement::ContractorRecord.all
+        @contractors = Settlement::ContractorRecord.order(created_at: :desc).all
       end
 
       def new
@@ -24,7 +24,7 @@ module Settlement
             elsif contractor_params[:back_url] == 'new_sponsorship_request'
               redirect_to new_sponsorship_request_path, notice: 'Dodano'
             else
-              redirect_to admin_contracts_path, notice: 'Dodano'
+              redirect_to admin_contractors_path, notice: 'Dodano'
             end
           end
 
@@ -38,6 +38,36 @@ module Settlement
 
       def show
         @contractor = Settlement::ContractorRecord.find(params[:id])
+      end
+
+      def edit
+        authorize! :manage, Settlement::ContractorRecord
+
+        @contractor = Settlement::ContractorRecord.find(params[:id])
+      end
+
+      def update
+        authorize! :manage, Settlement::ContractorRecord
+
+        @contractor = Settlement::ContractorRecord.find(params[:id])
+
+        if @contractor.update_attributes(contractor_params)
+          redirect_to admin_contractor_path(@contractor.id), notice: 'Zaktualizowano'
+        else
+          render :edit
+        end
+      end
+
+      def destroy
+        authorize! :destroy, Settlement::ContractorRecord
+
+        contract = Settlement::ContractorRecord.find(params[:id])
+        contract.destroy
+
+        redirect_back(
+          fallback_location: admin_contractors_path,
+          notice: 'Usunięto!'
+        )
       end
 
       private

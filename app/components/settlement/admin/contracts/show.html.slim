@@ -57,7 +57,7 @@
       .row
         .large-12.columns
           b Kontrahent: 
-          = @contract.contractor.name
+          = link_to @contract.contractor.name, admin_contractor_path(@contract.contractor.id)
 
     .row
       .large-12.columns

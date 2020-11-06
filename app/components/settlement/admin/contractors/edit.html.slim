@@ -1,6 +1,6 @@
 .row
   .large-12.columns
-    = form_for @contractor, as: :contractor, url: admin_contractors_path do |f|
+    = form_for @contractor, as: :contractor, url: admin_contractor_path(@contractor.id), method: :put do |f|
       - if @contractor.errors.any?
         .callout.alert
           ul
@@ -9,6 +9,6 @@
 
       = render 'form', f: f
 
-      = f.submit 'Utwórz kontrahenta', class: 'button'
+      = f.submit 'Zaktualizuj kontrahenta', class: 'button'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
       = link_to 'wróć do zapytań sponsorskich', sponsorship_requests_path, class: 'button warning'
