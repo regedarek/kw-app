@@ -1,0 +1,32 @@
+.row
+  .large-12.columns
+    h3 = @contractor.name
+
+  .large-6.columns
+    .row
+      .large-12.columns
+        .callout
+          = sanitize @contractor.description
+    .row
+      .large-12.columns
+        h5 Zapytania sponsorskie
+        = render 'marketing/sponsorship_requests/table', sponsorship_requests: @contractor.sponsorship_requests
+    .row
+      .large-12.columns
+        h5 Rozliczenia
+        = render 'settlement/admin/contracts/table', contracts: @contractor.contracts
+    .row
+      .large-12.columns
+        = link_to 'powrót do rozliczeń', admin_contracts_path, class: 'button expanded secondary'
+        = link_to 'powrót do wysłanych zgłoszeń', sponsorship_requests_path, class: 'button expanded secondary'
+
+  .large-6.columns
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          h5 Komentarze
+          = render 'messaging/comments/comments', commentable: @contractor
+      .row
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @contractor

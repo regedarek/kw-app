@@ -9,7 +9,7 @@ table.hover
   tbody
     - @contractors.each do |contractor|
       tr
-        td.text-left = contractor.name
+        td.text-left = link_to contractor.name, admin_contractor_path(contractor.id)
         td.text-left = contractor.email
         td.text-left = contractor.phone
         td.text-left = contractor.www

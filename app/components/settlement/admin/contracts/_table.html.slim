@@ -1,0 +1,33 @@
+tbody
+  - contracts.each_with_index do |contract, i|
+    tr
+      td = contract.id
+      td
+        - if can? :read, contract
+          = link_to contract.title, admin_contract_path(contract.id)
+        - else
+          = contract.title
+      td = contract.creator&.display_name
+      td
+        - if contract.accepted?
+          span.success.label
+            = t contract.state
+        - else
+          span.secondary.label
+            = t contract.state
+      td = contract.cost
+      td
+        - if contract.accepted? || contract.closed?
+          = contract.acceptor&.display_name
+        - else
+          - if user_signed_in?
+            - if can? :accept, contract
+              - unless contract.creator_id == current_user.id
+                = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+      td
+        - if can? :update, contract
+          = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
+            i.fi.fi-page-edit
+        - if can? :destroy, contract
+          = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
+            i.fi.fi-trash

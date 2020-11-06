@@ -5,6 +5,7 @@
     .text-right
       = link_to 'Archiwum', admin_contracts_path(q: {state_cont_any: 'closed'}), class: 'button alert'
       - if can? :create, Settlement::ContractorRecord
+        = link_to 'Kontrahenci', admin_contractors_path, class: 'button warning'
         = link_to 'Nowy kontrahent', new_admin_contractor_path, class: 'button warning', onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
       - if can? :create, Settlement::ContractRecord
         = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
@@ -77,36 +78,4 @@
           th width='180px'
             = sort_link(@q, :creator_id, 'Kto zaakceptował?', default_order: :desc)
           th width='100px' Akcje
-      tbody
-        - @contracts.each_with_index do |contract, i|
-          tr
-            td = contract.id
-            td
-              - if can? :read, contract
-                = link_to contract.title, admin_contract_path(contract.id)
-              - else
-                = contract.title
-            td = contract.creator&.display_name
-            td
-              - if contract.accepted?
-                span.success.label
-                  = t contract.state
-              - else
-                span.secondary.label
-                  = t contract.state
-            td = contract.cost
-            td
-              - if contract.accepted? || contract.closed?
-                = contract.acceptor&.display_name
-              - else
-                - if user_signed_in?
-                  - if can? :accept, contract
-                    - unless contract.creator_id == current_user.id
-                      = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
-            td
-              - if can? :update, contract
-                = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
-                  i.fi.fi-page-edit
-              - if can? :destroy, contract
-                = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
-                  i.fi.fi-trash
+      = render 'table', contracts: @contracts
