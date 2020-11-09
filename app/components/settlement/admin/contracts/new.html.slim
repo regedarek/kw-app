@@ -46,14 +46,6 @@
             = f.select :substantive_type,
             Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
 
-          .medium-3.columns
-            = f.label :contractor_id, 'Kontrahent*'
-              = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-            = f.select :contractor_id,
-              Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
-              { include_blank: true},
-              { class: 'js-select-multiple' }
-
         .row
           .medium-3.columns
             b= f.label :group_type, 'Sekcja'
