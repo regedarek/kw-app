@@ -1,0 +1,60 @@
+= stylesheet_link_tag "kalendarz"
+= stylesheet_link_tag "flag-icon"
+
+body
+  .row
+    .col-md-5.col-xs-12
+      .flag_list
+        ul
+          - Activities::CompetitionRecord.countries.keys.each do |country|
+            li
+              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2020-2021?country=#{country}" do
+                = flag_icon(table.country_iso(country), squared: true, class: 'flag')
+    .col-md-2.col-xs-12
+      .clear_filter
+        = link_to 'wyczyść filtr', "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2020-202q"
+    .col-md-5.col-xs-12
+
+      .serie_list.pull-right
+        ul
+          - Activities::CompetitionRecord.series.keys.each do |serie|
+            li.serie
+              = link_to "https://snw.kw.krakow.pl/kalendarz-zawodow-skimo-2020-2021?series=#{serie}" do
+                b = serie.upcase
+  .row
+    .col-md-12
+      table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 
+        thead
+          tr.months
+            th.month colspan="2" 
+              strong Grudzień
+            th.month colspan="2" 
+              strong Styczeń
+            th.month colspan="2" 
+              strong Luty
+            th.month colspan="2" 
+              strong Marzec
+            th.month colspan="2" 
+              strong Kwiecień
+        tbody
+          - (1..31).each do |table_day|
+            tr
+              - table.table_months.each do |table_month|
+                - if table.month_has_day?(table_month, table_day)
+                  td class=(table.is_weekend?(table_month, table_day) ? 'weekend number' : 'number') =table_day
+                  td.names
+                    - table.competitions_for(table_month, table_day, params[:country], params[:series]).each do |competition|
+                      = flag_icon(competition.flag_sym, squared: true, class: 'flag')
+                      - if competition.website
+                        - if competition.bold
+                          b= link_to competition.name, competition.website, target: :_blank
+                        - else
+                          = link_to competition.name, competition.website, target: :_blank
+                      - else
+                        - if competition.bold
+                          b competition.name
+                        - else
+                          competition.name
+                      br
+                - else
+                  td colspan="2"

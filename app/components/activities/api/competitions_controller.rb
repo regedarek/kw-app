@@ -8,6 +8,12 @@ module Activities
 
         render json: render_to_string(partial: "activities/api/competitions/table", locals: { table: competitions_table }), format: :json
       end
+
+      def skimo
+        competitions_table = Activities::CompetitionsTable.new
+
+        render json: render_to_string(partial: "activities/api/competitions/skimo_table", locals: { table: competitions_table }), format: :json
+      end
     end
   end
 end

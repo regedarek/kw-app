@@ -2360,6 +2360,7 @@ sign_ups_started?	app/components/training/supplementary/limiter.rb	/^      def s
 singles	app/components/events/competitions/sign_ups/limiter.rb	/^        def singles$/;"	f	class:Events.Competitions.SignUps.Limiter
 ski_repository	app/components/activities/routes_controller.rb	/^    def ski_repository$/;"	f	class:Activities.RoutesController
 ski_route_params	app/components/training/activities/ski_routes_controller.rb	/^      def ski_route_params$/;"	f	class:Training.Activities.SkiRoutesController
+skimo	app/components/activities/api/competitions_controller.rb	/^      def skimo$/;"	f	class:Activities.Api.CompetitionsController
 slug?	app/components/training/supplementary/update_course_form.rb	/^        def slug?(value)$/;"	f	class:Training.Supplementary.UpdateCourseForm
 slug_candidates	app/components/activities/competition_record.rb	/^    def slug_candidates$/;"	f	class:Activities.CompetitionRecord
 slug_candidates	app/components/business/course_record.rb	/^    def slug_candidates$/;"	f	class:Business.CourseRecord

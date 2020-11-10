@@ -3,7 +3,11 @@ Rails.application.routes.draw do
     #resources :mountain_routes, only: :index
     resources :competitions
     namespace :api do
-      resources :competitions
+      resources :competitions do
+        collection do
+          get :skimo
+        end
+      end
     end
   end
 
