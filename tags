@@ -2264,6 +2264,7 @@ profile_name	app/components/business/instructor_record.rb	/^    def profile_name
 profile_params	app/controllers/admin/profiles_controller.rb	/^    def profile_params$/;"	f	class:Admin.ProfilesController
 profile_params	app/controllers/profiles_controller.rb	/^  def profile_params$/;"	f	class:ProfilesController
 project_params	app/components/management/projects_controller.rb	/^    def project_params$/;"	f	class:Management.ProjectsController
+projects	app/models/ability.rb	/^  def projects$/;"	f	class:Ability
 propFilter	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function propFilter( props, specialEasing ) {$/;"	f
 r20	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var r20 = \/%20\/g,$/;"	v
 rails	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^  var rails;$/;"	v

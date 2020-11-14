@@ -16,6 +16,7 @@ class Ability
     reservations if role?('reservations')
     events if role?('events')
     library if role?('library')
+    projects if role?('projects')
     secondary_management if role?('secondary_management')
     business_courses if role?('business_courses')
     marketing if role?('marketing')
@@ -136,6 +137,10 @@ class Ability
     cannot :destroy, Settlement::ContractRecord
     can :analiza, Settlement::ContractRecord
     can :manage, Management::SettingsRecord
+  end
+
+  def projects
+    can :manage, Management::ProjectRecord
   end
 
   def marketing
