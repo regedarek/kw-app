@@ -27,7 +27,7 @@ module Marketing
     private
 
     def discount_params
-      params.require(:discount).permit(:user_id, :contractor_id, :description, :link, :amount, :amount_type, :link, attachments: [])
+      params.require(:discount).permit(:user_id, :contractor_id, :description, :link, :amount, :amount_type, :category_type, :link, attachments: [])
     end
   end
 end

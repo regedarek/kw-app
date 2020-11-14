@@ -24,7 +24,10 @@
     = f.text_field :link
 
 .row
-  .large-12.columns
+  .large-6.columns
+    = f.label :category_type, 'Typ'
+    = f.select :category_type, [['Ścianka wspinaczkowa', 'climbing_hall'],['Sklep', 'shop']]
+  .large-6.columns
     = f.label :amount
     = f.number_field :amount
 
