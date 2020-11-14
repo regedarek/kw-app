@@ -16,7 +16,9 @@ module Marketing
     belongs_to :user, class_name: 'Db::User'
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
-    delegate :name, to: :contractor
+    validates :contractor, presence: true
+
+    delegate :name, to: :contractor, allow_nil: true
 
     def slug_candidates
       [

@@ -16,6 +16,7 @@ module Marketing
       if @discount.save
         redirect_to discounts_path, notice: 'Dodano'
       else
+        @errors = @discount.errors
         render :new
       end
     end
