@@ -26,8 +26,10 @@
           th
         = render 'settlement/admin/contracts/table', contracts: @contractor.contracts
     .row
-      .large-12.columns
-        = link_to 'edytuj', admin_contractor_path(@contractor.id), class: 'button expanded secondary'
+      .large-6.columns
+        = link_to 'edytuj', edit_admin_contractor_path(@contractor.id), class: 'button expanded secondary'
+      .large-6.columns
+        = link_to 'kontrahenci', admin_contractors_path, class: 'button expanded secondary'
     .row
       .large-6.columns
         = link_to 'powrót do rozliczeń', admin_contracts_path, class: 'button expanded secondary'
@@ -35,6 +37,10 @@
         = link_to 'powrót do wysłanych zgłoszeń', sponsorship_requests_path, class: 'button expanded secondary'
 
   .large-6.columns
+    - if @contractor.logo.present?
+      .row
+        .large-6.columns
+          = image_tag @contractor.logo.url
     - if user_signed_in?
       .row
         .large-12.columns

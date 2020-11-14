@@ -16,15 +16,19 @@
     = f.select :reason_type, Settlement::ContractorRecord.reason_types.keys
 
 .row
-  .large-4.columns
+  .large-3.columns
     b= f.label :name, "E-mail"
     = f.text_field :email
 
-  .large-4.columns
+  .large-3.columns
+    b= f.label :logo, "Logo"
+    = f.file_field :logo
+
+  .large-3.columns
     b= f.label :name, "Osoba kontaktowa"
     = f.text_field :contact_name
 
-  .large-4.columns
+  .large-3.columns
     b= f.label :name, "Telefon"
     = f.text_field :phone
 

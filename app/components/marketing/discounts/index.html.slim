@@ -1,0 +1,12 @@
+.row
+  .large-8.columns
+    h3 Rabaty
+
+  - if can? :create, Marketing::DiscountRecord
+    .large-4.columns
+        = link_to 'Dodaj rabat', new_discount_path, class: 'button expanded medium'
+
+- if can? :read, Marketing::DiscountRecord
+  .row
+    .large-12.columns
+      = render 'table', discounts: @discounts

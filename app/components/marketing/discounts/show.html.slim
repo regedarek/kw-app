@@ -1,0 +1,39 @@
+.row
+  .large-12.columns
+    h3 = @discount.contractor.name
+
+  .large-6.columns
+    .row
+      .large-12.columns
+        .callout
+          = sanitize @discount.description
+
+      - if @discount.link
+        .large-12.columns
+          = link_to 'WWW', @discount.link, class: 'button expanded'
+
+    .row
+      .large-12.columns
+        .callout
+          h5 Rabat
+          b= "#{@discount.amount} %"
+
+    .row
+      .large-12.columns
+        = link_to 'powrót do wysłanych zgłoszeń', discounts_path, class: 'button expanded secondary'
+    .row
+      .large-12.columns
+        = link_to 'kontrahent', admin_contractor_path(@discount.contractor_id), class: 'button expanded secondary'
+
+  .large-6.columns
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          h5 Komentarze
+          = render 'messaging/comments/comments', commentable: @discount
+      .row
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @discount
+
+

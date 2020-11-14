@@ -142,6 +142,7 @@ AddLengthToMountainRoutes	db/migrate/20170220215848_add_length_to_mountain_route
 AddLimitToCompetitions	db/migrate/20180113213250_add_limit_to_competitions.rb	/^class AddLimitToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddLimitToSupplementaryCourses	db/migrate/20180503111523_add_limit_to_supplementary_courses.rb	/^class AddLimitToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddLocationToMeteoblueRecords	db/migrate/20190815095711_add_location_to_meteoblue_records.rb	/^class AddLocationToMeteoblueRecords < ActiveRecord::Migration[5.2]$/;"	c
+AddLogoToContractors	db/migrate/20201114105426_add_logo_to_contractors.rb	/^class AddLogoToContractors < ActiveRecord::Migration[5.2]$/;"	c
 AddMandatoryFieldsToEditionCategories	db/migrate/20181009110950_add_mandatory_fields_to_edition_categories.rb	/^class AddMandatoryFieldsToEditionCategories < ActiveRecord::Migration[5.0]$/;"	c
 AddMatrimonialOfficeToCompetitions	db/migrate/20180422174624_add_matrimonial_office_to_competitions.rb	/^class AddMatrimonialOfficeToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
 AddMaxSeatsToBusinessCourses	db/migrate/20191015211034_add_max_seats_to_business_courses.rb	/^class AddMaxSeatsToBusinessCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -214,6 +215,7 @@ AddSingleToCompetitions	db/migrate/20180109213000_add_single_to_competitions.rb	
 AddSingleToEventSignUps	db/migrate/20180109200332_add_single_to_event_sign_ups.rb	/^class AddSingleToEventSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddSkiHaterToUsers	db/migrate/20190211101902_add_ski_hater_to_users.rb	/^class AddSkiHaterToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugIndexToCourses	db/migrate/20181003141613_add_slug_index_to_courses.rb	/^class AddSlugIndexToCourses < ActiveRecord::Migration[5.0]$/;"	c
+AddSlugToMarketingDiscounts	db/migrate/20201114111018_add_slug_to_marketing_discounts.rb	/^class AddSlugToMarketingDiscounts < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToMountainRoutes	db/migrate/20190428175444_add_slug_to_mountain_routes.rb	/^class AddSlugToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToProjects	db/migrate/20190428183401_add_slug_to_projects.rb	/^class AddSlugToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToSupplementaryCourses	db/migrate/20181003133537_add_slug_to_supplementary_courses.rb	/^class AddSlugToSupplementaryCourses < ActiveRecord::Migration[5.0]$/;"	c
@@ -391,6 +393,7 @@ ContractMailer	app/components/settlement/contract_mailer.rb	/^  class ContractMa
 ContractRecord	app/components/settlement/contract_record.rb	/^  class ContractRecord < ActiveRecord::Base$/;"	c	class:Settlement
 ContractRecord	app/components/training/activities/contract_record.rb	/^    class ContractRecord < ActiveRecord::Base$/;"	c	class:Training.Activities
 ContractUsersRecord	app/components/settlement/contract_users_record.rb	/^  class ContractUsersRecord < ActiveRecord::Base$/;"	c	class:Settlement
+ContractorLogoUploader	app/components/settlement/contractor_logo_uploader.rb	/^  class ContractorLogoUploader < CarrierWave::Uploader::Base$/;"	c	class:Settlement
 ContractorRecord	app/components/settlement/contractor_record.rb	/^  class ContractorRecord < ActiveRecord::Base$/;"	c	class:Settlement
 ContractorsController	app/components/settlement/admin/contractors_controller.rb	/^    class ContractorsController < ::Admin::BaseController$/;"	c	class:Settlement.Admin
 ContractsController	app/components/settlement/admin/contracts_controller.rb	/^    class ContractsController < ::Admin::BaseController$/;"	c	class:Settlement.Admin
@@ -430,6 +433,7 @@ CreateContracts	db/migrate/20190225134812_create_contracts.rb	/^class CreateCont
 CreateCourse	app/components/training/supplementary/create_course.rb	/^    class CreateCourse$/;"	c	class:Training.Supplementary
 CreateCourseForm	app/components/training/supplementary/create_course_form.rb	/^    class CreateCourseForm < Dry::Validation::Schema$/;"	c	class:Training.Supplementary
 CreateCourses	db/migrate/20171214150317_create_courses.rb	/^class CreateCourses < ActiveRecord::Migration[5.0]$/;"	c
+CreateDiscounts	db/migrate/20201114095728_create_discounts.rb	/^class CreateDiscounts < ActiveRecord::Migration[5.2]$/;"	c
 CreateDonation	app/components/charity/create_donation.rb	/^  class CreateDonation$/;"	c	class:Charity
 CreateEditionCategories	db/migrate/20180904091725_create_edition_categories.rb	/^class CreateEditionCategories < ActiveRecord::Migration[5.0]$/;"	c
 CreateEmails	db/migrate/20190429171548_create_emails.rb	/^class CreateEmails < ActiveRecord::Migration[5.2]$/;"	c
@@ -537,6 +541,8 @@ DeletePayment	app/services/payments/delete_payment.rb	/^  class DeletePayment$/;
 DeletePaymentRequest	app/services/payments/dotpay/delete_payment_request.rb	/^    class DeletePaymentRequest$/;"	c	class:Payments.Dotpay
 Destroy	app/components/events/competitions/sign_ups/destroy.rb	/^      class Destroy$/;"	c	class:Events.Competitions.SignUps
 DestroySignUp	app/components/training/supplementary/destroy_sign_up.rb	/^    class DestroySignUp$/;"	c	class:Training.Supplementary
+DiscountRecord	app/components/marketing/discount_record.rb	/^  class DiscountRecord < ActiveRecord::Base$/;"	c	class:Marketing
+DiscountsController	app/components/marketing/discounts_controller.rb	/^  class DiscountsController < ApplicationController$/;"	c	class:Marketing
 DonationForm	app/components/charity/donation_form.rb	/^    class DonationForm < Dry::Validation::Schema$/;"	c	class:Charity
 DonationRecord	app/components/charity/donation_record.rb	/^  class DonationRecord < ActiveRecord::Base$/;"	c	class:Charity
 DonationsController	app/components/charity/admin/donations_controller.rb	/^    class DonationsController < ::Admin::BaseController$/;"	c	class:Charity.Admin
@@ -690,6 +696,8 @@ Management	app/components/management/voting/vote_users_record.rb	/^module Manage
 Management	app/components/management/voting/votes_controller.rb	/^module Management$/;"	m
 ManuallySignUp	app/components/training/supplementary/manually_sign_up.rb	/^    class ManuallySignUp$/;"	c	class:Training.Supplementary
 ManuallySignUpForm	app/components/training/supplementary/manually_sign_up_form.rb	/^    class ManuallySignUpForm < Dry::Validation::Schema$/;"	c	class:Training.Supplementary
+Marketing	app/components/marketing/discount_record.rb	/^module Marketing$/;"	m
+Marketing	app/components/marketing/discounts_controller.rb	/^module Marketing$/;"	m
 Marketing	app/components/marketing/sponsorship_request_record.rb	/^module Marketing$/;"	m
 Marketing	app/components/marketing/sponsorship_requests_controller.rb	/^module Marketing$/;"	m
 Members	app/components/user_management/members.rb	/^  class Members$/;"	c	class:UserManagement
@@ -886,6 +894,7 @@ Settlement	app/components/settlement/contract_mailer.rb	/^module Settlement$/;"	
 Settlement	app/components/settlement/contract_record.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/contract_users_record.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/contractor_form.rb	/^module Settlement$/;"	m
+Settlement	app/components/settlement/contractor_logo_uploader.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/contractor_record.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/create_contract.rb	/^module Settlement$/;"	m
 Settlement	app/components/settlement/create_contractor.rb	/^module Settlement$/;"	m
@@ -1549,6 +1558,9 @@ change	db/migrate/20201106160715_add_contact_name_to_contractors.rb	/^  def chan
 change	db/migrate/20201106162414_add_reason_type_to_contractors.rb	/^  def change$/;"	f	class:AddReasonTypeToContractors
 change	db/migrate/20201106163311_add_phone_to_contractors.rb	/^  def change$/;"	f	class:AddPhoneToContractors
 change	db/migrate/20201106171602_add_doc_url_to_marketing_sponsorship_requests.rb	/^  def change$/;"	f	class:AddDocUrlToMarketingSponsorshipRequests
+change	db/migrate/20201114095728_create_discounts.rb	/^  def change$/;"	f	class:CreateDiscounts
+change	db/migrate/20201114105426_add_logo_to_contractors.rb	/^  def change$/;"	f	class:AddLogoToContractors
+change	db/migrate/20201114111018_add_slug_to_marketing_discounts.rb	/^  def change$/;"	f	class:AddSlugToMarketingDiscounts
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1618,6 +1630,7 @@ create	app/components/management/snw/snw_applies_controller.rb	/^      def creat
 create	app/components/management/voting/cases_controller.rb	/^      def create$/;"	f	class:Management.Voting.CasesController
 create	app/components/management/voting/commissions_controller.rb	/^      def create$/;"	f	class:Management.Voting.CommissionsController
 create	app/components/management/voting/votes_controller.rb	/^      def create$/;"	f	class:Management.Voting.VotesController
+create	app/components/marketing/discounts_controller.rb	/^    def create$/;"	f	class:Marketing.DiscountsController
 create	app/components/marketing/sponsorship_requests_controller.rb	/^    def create$/;"	f	class:Marketing.SponsorshipRequestsController
 create	app/components/messaging/comments_controller.rb	/^    def create$/;"	f	class:Messaging.CommentsController
 create	app/components/messaging/conversations_controller.rb	/^    def create$/;"	f	class:Messaging.ConversationsController
@@ -1731,6 +1744,7 @@ detach	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d794
 diagram_hour	app/components/scrappers/shmu.rb	/^    def diagram_hour$/;"	f	class:Scrappers.Shmu
 dir	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var dir = function( elem, dir, until ) {$/;"	f
 disableScript	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function disableScript( elem ) {$/;"	f
+discount_params	app/components/marketing/discounts_controller.rb	/^    def discount_params$/;"	f	class:Marketing.DiscountsController
 display_name	app/models/db/profile.rb	/^    def display_name$/;"	f	class:Db.Profile
 display_name	app/models/db/user.rb	/^  def display_name$/;"	f	class:Db
 documentElement	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^var documentElement = document.documentElement;$/;"	v
@@ -1833,6 +1847,7 @@ filename	app/components/scrappers/image_uploader.rb	/^    def filename$/;"	f	cla
 filename	app/components/scrappers/meteoblue_uploader.rb	/^    def filename$/;"	f	class:Scrappers.MeteoblueUploader
 filename	app/components/scrappers/topr_degree_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ToprDegreeUploader
 filename	app/components/scrappers/topr_pdf_uploader.rb	/^    def filename$/;"	f	class:Scrappers.ToprPdfUploader
+filename	app/components/settlement/contractor_logo_uploader.rb	/^    def filename$/;"	f	class:Settlement.ContractorLogoUploader
 filterHidden	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function filterHidden( elem ) {$/;"	f
 financial_management	app/models/ability.rb	/^  def financial_management$/;"	f	class:Ability
 find_outdated_not_prepaided_profiles	app/components/membership/fees_repository.rb	/^    def find_outdated_not_prepaided_profiles$/;"	f	class:Membership.FeesRepository
@@ -1933,6 +1948,7 @@ index	app/components/management/settings_controller.rb	/^    def index$/;"	f	cla
 index	app/components/management/snw/api/snw_applies_controller.rb	/^        def index$/;"	f	class:Management.Snw.Api.SnwAppliesController
 index	app/components/management/snw/snw_applies_controller.rb	/^      def index$/;"	f	class:Management.Snw.SnwAppliesController
 index	app/components/management/voting/cases_controller.rb	/^      def index$/;"	f	class:Management.Voting.CasesController
+index	app/components/marketing/discounts_controller.rb	/^    def index$/;"	f	class:Marketing.DiscountsController
 index	app/components/marketing/sponsorship_requests_controller.rb	/^    def index$/;"	f	class:Marketing.SponsorshipRequestsController
 index	app/components/messaging/conversations_controller.rb	/^    def index$/;"	f	class:Messaging.ConversationsController
 index	app/components/notification_center/notifications_controller.rb	/^    def index$/;"	f	class:NotificationCenter.NotificationsController
@@ -2110,6 +2126,7 @@ manually_sign_up	app/components/training/supplementary/sign_ups_controller.rb	/^
 manually_sign_up_params	app/components/training/supplementary/sign_ups_controller.rb	/^      def manually_sign_up_params$/;"	f	class:Training.Supplementary.SignUpsController.manually
 mark_as_paid	app/controllers/payments_controller.rb	/^  def mark_as_paid$/;"	f	class:PaymentsController.refund
 mark_as_read	app/components/notification_center/notifications_controller.rb	/^    def mark_as_read$/;"	f	class:NotificationCenter.NotificationsController
+marketing	app/models/ability.rb	/^  def marketing$/;"	f	class:Ability
 mass_create	spec/factories.rb	/^      def self.mass_create!(range: (1..20), years: [2013, 2014, 2015], cash: true, state: 'prepaid')$/;"	F	class:Factories.Membership.Fee
 max_seats_size	app/components/business/course_record.rb	/^    def max_seats_size$/;"	f	class:Business.CourseRecord
 meteogram_uri	app/components/scrappers/meteoblue.rb	/^    def meteogram_uri$/;"	f	class:Scrappers.Meteoblue
@@ -2138,6 +2155,7 @@ new	app/components/management/projects_controller.rb	/^    def new$/;"	f	class:M
 new	app/components/management/snw/snw_applies_controller.rb	/^      def new$/;"	f	class:Management.Snw.SnwAppliesController
 new	app/components/management/voting/cases_controller.rb	/^      def new$/;"	f	class:Management.Voting.CasesController
 new	app/components/management/voting/commissions_controller.rb	/^      def new$/;"	f	class:Management.Voting.CommissionsController
+new	app/components/marketing/discounts_controller.rb	/^    def new$/;"	f	class:Marketing.DiscountsController
 new	app/components/marketing/sponsorship_requests_controller.rb	/^    def new$/;"	f	class:Marketing.SponsorshipRequestsController
 new	app/components/messaging/conversations_controller.rb	/^    def new$/;"	f	class:Messaging.ConversationsController
 new	app/components/photo_competition/requests_controller.rb	/^    def new$/;"	f	class:PhotoCompetition.RequestsController
@@ -2325,6 +2343,7 @@ show	app/components/library/items_controller.rb	/^    def show$/;"	f	class:Libra
 show	app/components/management/projects_controller.rb	/^    def show$/;"	f	class:Management.ProjectsController
 show	app/components/management/snw/snw_applies_controller.rb	/^      def show$/;"	f	class:Management.Snw.SnwAppliesController
 show	app/components/management/voting/cases_controller.rb	/^      def show$/;"	f	class:Management.Voting.CasesController
+show	app/components/marketing/discounts_controller.rb	/^    def show$/;"	f	class:Marketing.DiscountsController
 show	app/components/marketing/sponsorship_requests_controller.rb	/^    def show$/;"	f	class:Marketing.SponsorshipRequestsController
 show	app/components/messaging/conversations_controller.rb	/^    def show$/;"	f	class:Messaging.ConversationsController
 show	app/components/photo_competition/admin/editions_controller.rb	/^      def show$/;"	f	class:PhotoCompetition.Admin.EditionsController
@@ -2364,6 +2383,7 @@ skimo	app/components/activities/api/competitions_controller.rb	/^      def skimo
 slug?	app/components/training/supplementary/update_course_form.rb	/^        def slug?(value)$/;"	f	class:Training.Supplementary.UpdateCourseForm
 slug_candidates	app/components/activities/competition_record.rb	/^    def slug_candidates$/;"	f	class:Activities.CompetitionRecord
 slug_candidates	app/components/business/course_record.rb	/^    def slug_candidates$/;"	f	class:Business.CourseRecord
+slug_candidates	app/components/marketing/discount_record.rb	/^    def slug_candidates$/;"	f	class:Marketing.DiscountRecord
 slug_candidates	app/components/training/supplementary/course_record.rb	/^      def slug_candidates$/;"	f	class:Training.Supplementary.CourseRecord
 slug_candidates	app/models/db/activities/mountain_route.rb	/^      def slug_candidates$/;"	f	class:Db.Activities.MountainRoute
 slug_candidates	app/models/db/user.rb	/^  def slug_candidates$/;"	f	class:Db
@@ -2392,6 +2412,7 @@ store_dir	app/components/scrappers/meteoblue_uploader.rb	/^    def store_dir$/;"
 store_dir	app/components/scrappers/topr_degree_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ToprDegreeUploader
 store_dir	app/components/scrappers/topr_pdf_uploader.rb	/^    def store_dir$/;"	f	class:Scrappers.ToprPdfUploader
 store_dir	app/components/settlement/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Settlement.AttachmentUploader
+store_dir	app/components/settlement/contractor_logo_uploader.rb	/^    def store_dir$/;"	f	class:Settlement.ContractorLogoUploader
 store_dir	app/components/training/activities/gps_track_uploader.rb	/^      def store_dir$/;"	f	class:Training.Activities.GpsTrackUploader
 store_dir	app/components/training/supplementary/baner_uploader.rb	/^      def store_dir$/;"	f	class:Training.Supplementary.BanerUploader
 store_dir	app/components/user_management/attachment.rb	/^    def store_dir$/;"	f	class:UserManagement.AttachmentUploader

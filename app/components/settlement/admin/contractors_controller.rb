@@ -83,7 +83,7 @@ module Settlement
       def contractor_params
         params
           .require(:contractor)
-          .permit(:name, :description, :nip, :back_url, :email, :www, :contact_name, :reason_type, :phone)
+          .permit(:name, :description, :logo, :nip, :back_url, :email, :www, :contact_name, :reason_type, :phone)
       end
     end
   end

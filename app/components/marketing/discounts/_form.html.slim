@@ -1,0 +1,42 @@
+.row
+  .large-6.columns
+    = f.label :user_id, 'Opiekun'
+    = f.select :user_id,
+      Db::User.all.map { |u| [u.display_name, u.id] },
+      { include_blank: true, include_hidden: false },
+      { class: 'js-select-multiple', multiple: false }
+
+.row
+  .large-6.columns
+    = f.label :contractor_id, 'Firma'
+    = f.select :contractor_id,
+      Settlement::ContractorRecord.where(reason_type: [:both, :sponsor]).all.map { |u| [u.name, u.id] },
+      { include_blank: true, include_hidden: false },
+      { class: 'js-select-multiple', multiple: false }
+  - if can? :create, Settlement::ContractorRecord
+    .large-6.columns
+      br
+      = link_to 'Dodaj kontrahenta', new_admin_contractor_path(back_url: :new_sponsorship_request), target: :_blank, class: 'button expanded medium'
+
+.row
+  .large-12.columns
+    = f.label :link, 'WWW'
+    = f.text_field :link
+
+.row
+  .large-12.columns
+    = f.label :amount
+    = f.number_field :amount
+
+.row
+  .large-12.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :description, 'Opis głosowania'
+          = f.trix_editor :description, style: 'min-height: 150px'
+
+.row
+  .large-4.columns
+    = f.label :attachments, 'Załączniki'
+    = f.file_field :attachments, multiple: true

@@ -18,6 +18,7 @@ class Ability
     library if role?('library')
     secondary_management if role?('secondary_management')
     business_courses if role?('business_courses')
+    marketing if role?('marketing')
     financial_management if role?('financial_management')
     management if role?('management')
     voting if role?('voting')
@@ -32,6 +33,7 @@ class Ability
   def default
     can :create, Db::Profile
     cannot :read, Management::Voting::CaseRecord
+    can :read, Marketing::DiscountRecord
     can :read, Training::Activities::ContractRecord
   end
 
@@ -136,8 +138,15 @@ class Ability
     can :manage, Management::SettingsRecord
   end
 
+  def marketing
+    can :manage, Settlement::ContractorRecord
+    can :create, Marketing::DiscountRecord
+    can :manage, Marketing::DiscountRecord
+    can :manage, Marketing::SponsorshipRequestRecord
+  end
+
   def office
-    can :read, Settlement::ContractorRecord
+    can :manage, Settlement::ContractorRecord
     can :manage, Settlement::ContractRecord
     can :office, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord

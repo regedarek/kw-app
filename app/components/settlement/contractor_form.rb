@@ -8,6 +8,7 @@ module Settlement
 
     required(:name).filled
     optional(:nip).maybe
+    optional(:logo).maybe
     optional(:phone).maybe
     optional(:email).maybe
     optional(:www).maybe

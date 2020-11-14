@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_171602) do
+ActiveRecord::Schema.define(version: 2020_11_14_111018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_171602) do
     t.string "contact_name"
     t.integer "reason_type", default: 0, null: false
     t.string "phone"
+    t.string "logo"
   end
 
   create_table "contracts", force: :cascade do |t|
@@ -445,6 +446,20 @@ ActiveRecord::Schema.define(version: 2020_11_06_171602) do
     t.boolean "commission", default: false, null: false
     t.integer "authorized_id"
     t.index ["user_id", "case_id"], name: "index_management_votes_on_user_id_and_case_id", unique: true
+  end
+
+  create_table "marketing_discounts", force: :cascade do |t|
+    t.string "logo"
+    t.integer "contractor_id", null: false
+    t.integer "user_id"
+    t.string "description"
+    t.string "attachments"
+    t.integer "amount"
+    t.integer "amount_type"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
   end
 
   create_table "marketing_sponsorship_requests", force: :cascade do |t|
