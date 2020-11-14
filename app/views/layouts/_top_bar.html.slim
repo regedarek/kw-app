@@ -40,6 +40,7 @@
               ul.menu.vertical
                 li= link_to 'Kontrahenci', admin_contractors_path
                 li= link_to 'Wysłane ofery', sponsorship_requests_path
+                li= link_to 'Zniżki i rabaty', discounts_path
 
           - if current_user.roles.include?('sa')
             li
