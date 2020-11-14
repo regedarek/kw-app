@@ -14,5 +14,7 @@ table.hover
               = link_to discount_path(d.slug) do
                 = image_tag d.contractor.logo.url, size: '100x100'
           td.text-left = link_to d.contractor.name, discount_path(d.slug)
-          td.text-left = link_to d.user.display_name, user_path(d.user.kw_id)
+          td.text-left
+            - if d.user
+              = link_to d.user.display_name, user_path(d.user.kw_id)
           td.text-left = "#{d.amount} %"
