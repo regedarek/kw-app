@@ -29,7 +29,7 @@ module Activities
     def flag_sym
       case country.to_sym
       when :greece
-        :gk
+        :gr
       when :poland
         :pl
       when :slovakia
