@@ -6,7 +6,7 @@ module Activities
     self.table_name = 'activities_competitions'
 
     enum country: [
-      :poland, :slovakia, :italy, :france, :greece, :austria, :czech, :deutchland, :switzerland, :andorra, :china, :ukraine, :spain, :sweden, :usa
+      :poland, :slovakia, :italy, :france, :austria, :czech, :deutchland, :switzerland, :andorra, :china, :ukraine, :spain, :sweden, :usa, :greece
     ]
 
     enum series: [
