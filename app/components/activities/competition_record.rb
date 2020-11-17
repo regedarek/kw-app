@@ -6,7 +6,7 @@ module Activities
     self.table_name = 'activities_competitions'
 
     enum country: [
-      :poland, :slovakia, :italy, :france, :austria, :czech, :deutchland, :switzerland, :andorra, :china, :ukraine, :spain, :sweden, :usa
+      :poland, :slovakia, :italy, :france, :greece, :austria, :czech, :deutchland, :switzerland, :andorra, :china, :ukraine, :spain, :sweden, :usa
     ]
 
     enum series: [
@@ -28,6 +28,8 @@ module Activities
 
     def flag_sym
       case country.to_sym
+      when :greece
+        :gk
       when :poland
         :pl
       when :slovakia

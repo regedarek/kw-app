@@ -26,6 +26,8 @@ module Activities
         :ad
       when :china
         :cn
+      when :greece
+        :gk
       when :ukraine
         :ua
       when :spain
