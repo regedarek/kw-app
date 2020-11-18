@@ -11,6 +11,8 @@ module Management
         commission_record = Management::Voting::CommissionRecord.new(raw_inputs)
 
         if commission_record.save
+          Management::Voting::Mailer.notify_commission(commission_record.id).deliver_later
+
           Right(commission_record)
         else
           Left(commission_record.errors.full_messages)
