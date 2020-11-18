@@ -1,9 +1,13 @@
 = sanitize @setting.content
 br
 b = @commission.owner.display_name 
-| udzielił pełnomocnictwa 
+|   o numerze klubowym 
+b = @commission.authorized.kw_id
+|  udzielił pełnomocnictwa 
 b = @commission.authorized.display_name
 |  o numerze klubowym 
 b = @commission.authorized.kw_id
+br
+hr
 br
 | Klub Wysokogórski Kraków
