@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   append_view_path 'app/components'
   def index
     return redirect_to root_path, alert: 'Musisz być zalogowany i aktywny!' unless user_signed_in? && current_user.active?
-    @q = Db::User.includes(:profile).where.not(kw_id: nil).active.not_hidden.ransack(params[:q])
+    @q = Db::User.includes(:profile, membership_fees: :payment).where.not(kw_id: nil).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { state: 'prepaid'} ).or(Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { cash: true} )).not_hidden.ransack(params[:q])
     @q.sorts = ['kw_id desc', 'created_at desc'] if @q.sorts.empty?
     @users = @q.result.page(params[:page])
   end
