@@ -6,7 +6,7 @@
 
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
-          = link_to 'Transmisja wideo', setting.back_url
+          = link_to 'Transmisja wideo', setting.back_url, class: 'button success expanded large', target: :_blank
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
           = link_to 'Instrukcja', '/glosowania/instrukcja', class: 'button warning expanded large', target: :_blank
