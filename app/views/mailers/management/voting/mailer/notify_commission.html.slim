@@ -1,13 +1,9 @@
-b Potwierdzenie udzielenia pełnomocnictwa
+= sanitize @setting.content
 br
-br
-b = @commission.owner.display_name
+b = @commission.owner.display_name 
 | udzielił pełnomocnictwa 
 b = @commission.authorized.display_name
-br
-br
-= sanitize @setting.content
-
-br
+|  o numerze klubowym 
+b = @commission.authorized.kw_id
 br
 | Klub Wysokogórski Kraków
