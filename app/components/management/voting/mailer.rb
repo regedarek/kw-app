@@ -8,7 +8,7 @@ module Management
         mail(
           to: [@commission.owner.email, @commission.authorized.email, 'pelnomocnictwa@kw.krakow.pl'],
           from: 'pelnomocnictwa@kw.krakow.pl',
-          subject: "Potwierdzenie udzielenia pełnomocnictwa #{@commission.authorized.display_name} na Walne Zebranie KW Kraków",
+          subject: @setting.name,
           reply_to: 'pelnomocnictwa@kw.krakow.pl'
         )
       end
