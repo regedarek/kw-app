@@ -6,7 +6,7 @@
 
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
-          = link_to 'Transmisja wideo', 'https://kw-krakow.webex.com/kw-krakow/onstage/g.php?MTID=e1eee68428acc11b15c151f96135c2ef7', class: 'button success expanded large', target: :_blank
+          = link_to 'Transmisja wideo', setting.back_url
     - if can? :read, Management::Voting::CaseRecord
       .large-2.columns
           = link_to 'Instrukcja', '/glosowania/instrukcja', class: 'button warning expanded large', target: :_blank
