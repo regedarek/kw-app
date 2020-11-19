@@ -36,6 +36,7 @@ class Ability
     cannot :read, Management::Voting::CaseRecord
     can :read, Marketing::DiscountRecord
     can :read, Training::Activities::ContractRecord
+    cannot :read, Settlement::ContractorRecord
   end
 
   def library
