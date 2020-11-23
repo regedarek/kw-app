@@ -1,0 +1,7 @@
+= form_for @author, as: :author, url: library_authors_path, method: :post do |f|
+  = render 'form', author: @author, f: f
+
+  .row
+    .large-12.columns
+      = f.submit 'Dodaj autora', class: 'button'
+      = link_to 'wróć do biblioteki', biblioteka_path, class: 'button'

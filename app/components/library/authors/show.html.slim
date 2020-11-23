@@ -7,3 +7,7 @@
     ul
       - @author.items.each do |item|
         li = link_to item.title, library_item_path(item.id)
+
+.row
+  .large-12.columns
+    = link_to 'powrót do zbiorów', biblioteka_path, class: 'button warning'

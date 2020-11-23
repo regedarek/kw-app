@@ -7,6 +7,7 @@
       .text-right
         - if can? :create, Library::ItemRecord
           =link_to 'Dodaj egzemplarz', new_library_item_path, class: 'button'
+          =link_to 'Dodaj autora', new_library_author_path, class: 'button'
           =link_to 'Dodaj tagi', admin_tags_path, class: 'button'
 
   .row

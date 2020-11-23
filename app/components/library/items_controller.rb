@@ -6,7 +6,7 @@ module Library
     def index
       @q = ::Library::ItemRecord.ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
-      @items = @q.result.includes(:authors).page(params[:page]).per(20)
+      @items = @q.result.page(params[:page]).per(20)
     end
 
     def show

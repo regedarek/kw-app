@@ -1,0 +1,17 @@
+.row
+  .large-12.columns
+    - if @author.errors.any?
+      .callout.alert
+        ul
+          - @author.errors.full_messages.each do |msg|
+            li= msg
+
+.row
+  .large-12.columns
+    = f.label :name, "Nazwa"
+    = f.text_field :name
+
+.row
+  .large-12.columns
+    = f.label :description, "Opis"
+    = f.text_field :description

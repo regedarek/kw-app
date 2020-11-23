@@ -1155,6 +1155,7 @@ area_needed?	app/components/photo_competition/request_record.rb	/^    def area_n
 as_json	app/components/business/course_record.rb	/^    def as_json(options={})$/;"	f	class:Business.CourseRecord
 as_json	app/components/business/instructor_record.rb	/^    def as_json$/;"	f	class:Business.InstructorRecord
 augmentWidthOrHeight	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {$/;"	f
+author_params	app/components/library/authors_controller.rb	/^    def author_params$/;"	f	class:Library.AuthorsController
 authorize	app/controllers/pages_controller.rb	/^  def authorize$/;"	f	class:PagesController
 authorize_admin	app/components/events/admin/competitions_controller.rb	/^      def authorize_admin$/;"	f	class:Events.Admin.CompetitionsController
 authorize_admin	app/components/membership/admin/membership_fees_controller.rb	/^      def authorize_admin$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1625,6 +1626,7 @@ create	app/components/events/admin/competitions_controller.rb	/^      def create
 create	app/components/events/competitions/repository.rb	/^      def create(form_outputs:)$/;"	f	class:Events.Competitions.Repository
 create	app/components/events/competitions/sign_ups_controller.rb	/^      def create$/;"	f	class:Events.Competitions
 create	app/components/library/admin/tags_controller.rb	/^      def create$/;"	f	class:Library.Admin.TagsController
+create	app/components/library/authors_controller.rb	/^    def create$/;"	f	class:Library.AuthorsController
 create	app/components/library/items_controller.rb	/^    def create$/;"	f	class:Library.ItemsController
 create	app/components/management/news/informations_controller.rb	/^      def create$/;"	f	class:Management.News.InformationsController
 create	app/components/management/projects_controller.rb	/^    def create$/;"	f	class:Management.ProjectsController
@@ -2151,6 +2153,7 @@ new	app/components/business/courses_controller.rb	/^    def new$/;"	f	class:Busi
 new	app/components/charity/donations_controller.rb	/^    def new$/;"	f	class:Charity.DonationsController
 new	app/components/events/competitions/sign_ups_controller.rb	/^      def new$/;"	f	class:Events.Competitions
 new	app/components/library/admin/tags_controller.rb	/^      def new$/;"	f	class:Library.Admin.TagsController
+new	app/components/library/authors_controller.rb	/^    def new$/;"	f	class:Library.AuthorsController
 new	app/components/library/items_controller.rb	/^    def new$/;"	f	class:Library.ItemsController
 new	app/components/management/news/informations_controller.rb	/^      def new$/;"	f	class:Management.News.InformationsController
 new	app/components/management/projects_controller.rb	/^    def new$/;"	f	class:Management.ProjectsController
