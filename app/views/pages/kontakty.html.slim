@@ -1,0 +1,10 @@
+- setting = Management::SettingsRecord.find_by(path: 'kontakty')
+
+.row
+  .large-12.columns
+    h3.subheader = setting.name
+
+.row
+  .large-12.columns
+    .callout
+      = sanitize setting.content
