@@ -66,17 +66,6 @@
             td.text-right width='110px'
               = information.created_at.to_date
 
-    .large-6.columns
-      = link_to cases_path do
-        h4 Głosowania zarządu, przyjęte uchwały
-      table.stack
-        - Management::Voting::CaseRecord.where(meeting_type: 'manage').accessible_by(current_ability).order(created_at: :desc).limit(5).each do |case_record|
-          tr
-            td width='110px'
-              = case_record.acceptance_date
-            td
-              = link_to case_record.name, case_path(case_record.id)
-
 - else
   .row
     .large-6.columns.text-left
