@@ -9,6 +9,8 @@ module Db
       ActiveModel::Name.new("Db::Profile", nil, "Profile")
     end
 
+    mount_uploader :photo, ::UserManagement::PhotoUploader
+
     has_one :payment, as: :payable, dependent: :destroy
     has_one :list, class_name: 'UserManagement::ProfileListRecord'
     has_many :membership_fees, foreign_key: :kw_id, primary_key: :kw_id, class_name: 'Db::Membership::Fee'

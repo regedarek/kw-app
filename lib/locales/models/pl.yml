@@ -31,6 +31,7 @@ pl:
         city: Miejscowość
         accepted: Zaakceptowano
         postal_code: Kod pocztowy
+        photo: Zdjęcie do legitymacji
         main_address: Adres zameldowania
         optional_address: Adres kontaktowy
         phone: Telefon

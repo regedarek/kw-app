@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_112345) do
+ActiveRecord::Schema.define(version: 2020_11_25_100729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -690,6 +690,7 @@ ActiveRecord::Schema.define(version: 2020_11_14_112345) do
     t.boolean "plastic", default: false, null: false
     t.datetime "sent_at"
     t.datetime "accepted_at"
+    t.string "photo"
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true
   end
 

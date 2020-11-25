@@ -12,6 +12,7 @@ module UserManagement
     attribute :main_address, :string
     attribute :optional_address, :string
     attribute :phone, :string
+    attribute :photo, :string
     attribute :recommended_by, ArrayOf(:string), default: []
     attribute :acomplished_courses, ArrayOf(:string), default: []
     attribute :main_discussion_group, :boolean
@@ -19,7 +20,7 @@ module UserManagement
     attribute :terms_of_service, :boolean, default: false
     attribute :plastic, :boolean, default: false
 
-    validates :first_name, :last_name, :email, :birth_date, :birth_place,
+    validates :first_name, :last_name, :email, :birth_date, :birth_place, :photo,
               :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
     validate :email_uniq

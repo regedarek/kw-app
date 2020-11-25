@@ -43,17 +43,21 @@
     .large-12.columns
       .callout.primary
         .row
-          .large-4.columns
+          .large-3.columns
             = f.label :optional_address, 'Ulica, numer domu i mieszkania'
             = f.text_field :optional_address
 
-          .large-4.columns
+          .large-3.columns
             = f.label :city
             = f.text_field :city
 
-          .large-4.columns
+          .large-3.columns
             = f.label :postal_code
             = f.text_field :postal_code
+
+          .large-3.columns
+            = f.label :photo
+            = f.file_field :photo
 
   .row
     .large-12.columns

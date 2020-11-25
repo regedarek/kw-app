@@ -1,7 +1,7 @@
 module UserManagement
   class UserApplication
     class << self
-      def create(form:)
+      def create(form:, photo:)
         return Failure.new(:invalid, form: form) if form.invalid?
 
         profile = Db::Profile.create(
@@ -23,6 +23,7 @@ module UserManagement
           cost: UserManagement::ApplicationCost.for(profile: form).sum,
           plastic: form.plastic
         )
+        profile.update(photo: photo) if photo
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
         if profile.acomplished_courses.include?('list')
           ProfileMailer.list(profile).deliver_later

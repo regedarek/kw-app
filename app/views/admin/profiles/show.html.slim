@@ -70,6 +70,8 @@
         - if @profile.optional_address.present?
           b Adres kontaktowy: 
           = @profile.optional_address
+
+
     .large-6.columns
       .callout class="#{['list', 'blank'].any? { |c| @profile.acomplished_courses.include?(c) } ? 'alert' : '' }"
         b Kursy: 
@@ -118,6 +120,13 @@
         - if @profile.profession.present?
           b Profesja: 
           = @profile.profession
+
+  .row
+    - if @profile.photo.present?
+      .large-6.columns
+        .callout
+          = link_to @profile.photo.url do
+            = image_tag @profile.photo.thumb.url
 
   - if @profile.list
     .row

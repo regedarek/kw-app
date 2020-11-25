@@ -182,6 +182,7 @@ AddPeriodDateToContracts	db/migrate/20190529222947_add_period_date_to_contracts.
 AddPhoneToContractors	db/migrate/20201106163311_add_phone_to_contractors.rb	/^class AddPhoneToContractors < ActiveRecord::Migration[5.2]$/;"	c
 AddPhoneToStrzeleckiSignUps	db/migrate/20170201142212_add_phone_to_strzelecki_sign_ups.rb	/^class AddPhoneToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddPhoneToUsers	db/migrate/20160831204756_add_phone_to_users.rb	/^class AddPhoneToUsers < ActiveRecord::Migration[5.0]$/;"	c
+AddPhotoToProfiles	db/migrate/20201125100729_add_photo_to_profiles.rb	/^class AddPhotoToProfiles < ActiveRecord::Migration[5.2]$/;"	c
 AddPhotosToMountainRoutes	db/migrate/20180723204720_add_photos_to_mountain_routes.rb	/^class AddPhotosToMountainRoutes < ActiveRecord::Migration[5.0]$/;"	c
 AddPhotosToReservations	db/migrate/20180727155649_add_photos_to_reservations.rb	/^class AddPhotosToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddPlasticToMembershipFees	db/migrate/20181205232003_add_plastic_to_membership_fees.rb	/^class AddPlasticToMembershipFees < ActiveRecord::Migration[5.0]$/;"	c
@@ -775,6 +776,7 @@ PhotoCompetition	app/components/photo_competition/file_uploader.rb	/^module Phot
 PhotoCompetition	app/components/photo_competition/request_record.rb	/^module PhotoCompetition$/;"	m
 PhotoCompetition	app/components/photo_competition/requests_controller.rb	/^module PhotoCompetition$/;"	m
 PhotoUploader	app/components/reservations/photo_uploader.rb	/^  class PhotoUploader < CarrierWave::Uploader::Base$/;"	c	class:Reservations
+PhotoUploader	app/components/user_management/photo_uploader.rb	/^  class PhotoUploader < CarrierWave::Uploader::Base$/;"	c	class:UserManagement
 PhotosController	app/controllers/photos_controller.rb	/^class PhotosController < ApplicationController$/;"	c
 Pogodynka	app/components/scrappers/pogodynka.rb	/^  class Pogodynka$/;"	c	class:Scrappers
 PogodynkaController	app/components/scrappers/api/pogodynka_controller.rb	/^    class PogodynkaController < ::Api::BaseController$/;"	c	class:Scrappers.Api
@@ -1061,6 +1063,7 @@ UserManagement	app/components/user_management/cost.rb	/^module UserManagement$/;
 UserManagement	app/components/user_management/fee_scope.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/lists_controller.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/members.rb	/^module UserManagement$/;"	m
+UserManagement	app/components/user_management/photo_uploader.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/profile_form.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/profile_list_record.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/reactivate.rb	/^module UserManagement$/;"	m
@@ -1564,6 +1567,7 @@ change	db/migrate/20201114095728_create_discounts.rb	/^  def change$/;"	f	class:
 change	db/migrate/20201114105426_add_logo_to_contractors.rb	/^  def change$/;"	f	class:AddLogoToContractors
 change	db/migrate/20201114111018_add_slug_to_marketing_discounts.rb	/^  def change$/;"	f	class:AddSlugToMarketingDiscounts
 change	db/migrate/20201114112345_add_category_type_to_marketing_discounts.rb	/^  def change$/;"	f	class:AddCategoryTypeToMarketingDiscounts
+change	db/migrate/20201125100729_add_photo_to_profiles.rb	/^  def change$/;"	f	class:AddPhotoToProfiles
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1656,7 +1660,7 @@ create	app/components/training/supplementary/repository.rb	/^      def create(fo
 create	app/components/training/supplementary/sign_ups_controller.rb	/^      def create$/;"	f	class:Training.Supplementary.SignUpsController.manually
 create	app/components/user_management/lists_controller.rb	/^    def create$/;"	f	class:UserManagement.ListsController
 create	app/components/user_management/reactivate.rb	/^      def create(form:)$/;"	f	class:UserManagement.Reactivate
-create	app/components/user_management/user_application.rb	/^      def create(form:)$/;"	f	class:UserManagement.UserApplication
+create	app/components/user_management/user_application.rb	/^      def create(form:, photo:)$/;"	f	class:UserManagement.UserApplication
 create	app/controllers/activities/mountain_routes_controller.rb	/^    def create$/;"	f	class:Activities.MountainRoutesController
 create	app/controllers/admin/items_controller.rb	/^    def create$/;"	f	class:Admin.ItemsController
 create	app/controllers/admin/membership_fees_controller.rb	/^    def create$/;"	f	class:Admin.MembershipFeesController
@@ -2423,6 +2427,8 @@ store_dir	app/components/settlement/contractor_logo_uploader.rb	/^    def store_
 store_dir	app/components/training/activities/gps_track_uploader.rb	/^      def store_dir$/;"	f	class:Training.Activities.GpsTrackUploader
 store_dir	app/components/training/supplementary/baner_uploader.rb	/^      def store_dir$/;"	f	class:Training.Supplementary.BanerUploader
 store_dir	app/components/user_management/attachment.rb	/^    def store_dir$/;"	f	class:UserManagement.AttachmentUploader
+store_dir	app/components/user_management/photo_uploader.rb	/^      def store_dir$/;"	f	class:UserManagement.PhotoUploader
+store_dir	app/components/user_management/photo_uploader.rb	/^    def store_dir$/;"	f	class:UserManagement.PhotoUploader
 store_dir	app/uploaders/attachment_uploader.rb	/^  def store_dir$/;"	f	class:AttachmentUploader
 store_dir	app/uploaders/csv_uploader.rb	/^  def store_dir$/;"	f	class:CsvUploader
 store_library_item	app/components/importing/store.rb	/^      def store_library_item(parsed_objects)$/;"	f	class:Importing.Store
