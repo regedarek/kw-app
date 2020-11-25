@@ -4,8 +4,8 @@ module UserManagement
     append_view_path 'app/components'
 
     def new
-      @profile = Db::Profile.find(params[:profile_id])
-      @list = @profile.build_list
+      @profile = Db::Profile.find_by(id: params[:profile_id])
+      @list = @profile.build_list if @profile
     end
 
     def create
