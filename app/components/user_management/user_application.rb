@@ -28,7 +28,7 @@ module UserManagement
         if profile.acomplished_courses.include?('list')
           ProfileMailer.list(profile).deliver_later
         else
-          ProfileMailer.apply(profile).deliver_later
+          ProfileMailer.apply(profile).deliver_now
           profile.update(sent_at: Time.zone.now)
         end
         return Success.new

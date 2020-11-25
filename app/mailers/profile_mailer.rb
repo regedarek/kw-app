@@ -20,6 +20,7 @@ class ProfileMailer < ApplicationMailer
   def list(profile)
     @profile = profile
 
+
     I18n.with_locale(I18n.locale) do
       mail(
         to: [@profile.email, 'zgloszenia.wykaz@kw.krakow.pl'],
@@ -36,6 +37,8 @@ class ProfileMailer < ApplicationMailer
 
   def apply(profile)
     @profile = profile
+    @setting = Management::SettingsRecord.find_by(path: 'zgloszenie/apply')
+
     pdf = Prawn::Document.new
     pdf.define_grid(columns: 3, rows: 10)
     pdf.grid(0,0).bounding_box do
