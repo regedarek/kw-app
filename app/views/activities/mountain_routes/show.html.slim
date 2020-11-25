@@ -80,7 +80,7 @@
     - if @route.attachments.any?
       .row
         .large-12.columns
-          - @route.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+          - @route.attachments.select{|file| !MimeMagic.by_path(file.path)&.image? }.each do |attachment|
             = link_to attachment.url, download: File.basename(attachment.file.path) do
               = image_tag('file.jpg', class: 'thumbnail')
               |  
