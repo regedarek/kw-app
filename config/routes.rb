@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get 'wypozyczalnia/regulamin' => 'pages#show', id: 'rules'
+  get 'serwis-narciarski/regulamin' => 'pages#show', id: 'rules'
   get 'wydarzenia/regulamin' => 'pages#show', id: 'rules'
   get 'glosowania/dane-osobowe' => 'pages#show', id: 'rules'
   get 'glosowania/instrukcja' => 'pages#show', id: 'rules'
