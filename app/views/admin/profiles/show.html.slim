@@ -231,7 +231,7 @@
             = f.number_field :kw_id, class: 'input-group-field', value: Db::Profile.where.not(kw_id: 3884).maximum(:kw_id) + 1
             span.input-group-label
               | Data wstąpienia
-            = f.date_field :application_date, class: 'input-group-field', value: Date.today
+            = f.date_field :application_date, class: 'input-group-field', style: 'width: 50px; font-size: 10px;', value: Date.today
             .input-group-button
               - if @profile.payment&.paid?
                 = f.submit 'Nadaj i utwórz konto', class: 'button'
