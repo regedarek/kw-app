@@ -82,12 +82,13 @@
           li
             = link_to 'Narzędzia', root_path
             ul.menu.vertical
-              li= link_to 'Zarezerwuj', new_reservation_path
               li= link_to 'Biblioteka', biblioteka_path
+              li= link_to 'Wypożyczalnia', new_reservation_path
+              li= link_to 'Serwis Narciarski', '/serwis-narciarski/regulamin'
               li= link_to 'Baza klubowiczów', '/klubowicze'
               li= link_to 'Kontakty klubowe', '/kontakty'
-              li= link_to 'Zniżki i rabaty', discounts_path
               li= link_to 'Rozliczenia', admin_contracts_path
+              li= link_to 'Zniżki i rabaty', discounts_path
 
           li= link_to 'Przejścia', '/przejscia', class: 'button success'
           li= link_to 'Projekty', '/projekty', class: 'button warning'
