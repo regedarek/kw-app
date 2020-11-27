@@ -1,5 +1,7 @@
 module Admin
   class ReservationsController < Admin::BaseController
+    append_view_path 'app/components'
+
     def index
       @q = Db::Reservation.ransack(params[:q])
       @reservations = if params[:archived]

@@ -4,6 +4,8 @@ require 'items/owner_presenter'
 
 module Admin
   class ItemsController < Admin::BaseController
+    append_view_path 'app/components'
+
     def index
       @q = Db::Item.ransack(params[:q])
       @q.sorts = 'rentable_id asc' if @q.sorts.empty?

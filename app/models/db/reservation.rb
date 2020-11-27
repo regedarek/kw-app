@@ -7,6 +7,7 @@ class Db::Reservation < ActiveRecord::Base
   belongs_to :user
   has_many :reservation_items
   has_many :items, through: :reservation_items
+  has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
   has_one :payment, as: :payable
 
   default_scope { order('start_date') } 

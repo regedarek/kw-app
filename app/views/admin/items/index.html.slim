@@ -11,7 +11,6 @@ column
           = f.text_field :display_name
           = f.label :rentable_id, 'Numer'
           = f.text_field :rentable_id
-          = f.label :description, 'Opis'
           = f.text_area :description
           = f.label :cost, 'Koszt(zl)'
           = f.number_field :cost
@@ -30,12 +29,11 @@ column
         thead
           tr
             th = sort_link(@q, :id, 'ID')
-            th Nazwa
-            th Opis
+            th width='40%' Nazwa
             th Koszt
             th = sort_link(@q, :rentable, 'Wolno?')
             th = sort_link(@q, :owner, 'Własność')
-            th Akcje
+            th width='7%'
         tbody
           - @items.each do |item|
             tr.js-item-row= render 'admin/items/item_row', item: item

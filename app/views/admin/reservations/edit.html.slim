@@ -59,6 +59,8 @@
             = f.label :photos, 'Zdjęcia przedmiotów'
             = f.file_field :photos, multiple: true
 
+
+
         - if @reservation.photos.any?
           .row
             .large-12.columns
@@ -108,3 +110,14 @@
     .large-6.columns
       b Zaktualizuj przedmioty tej rezerwacji(numery przedmiotów po spacjach)
       = render 'update_items_form', reservation: @reservation
+
+  - if user_signed_in?
+    .row
+      .large-12.columns
+        h5 Komentarze, dodatkowe informacje
+      .large-6.columns
+          = render 'messaging/comments/comments', commentable: @reservation
+      .large-6.columns
+        .callout
+          = render 'messaging/comments/form', commentable: @reservation
+
