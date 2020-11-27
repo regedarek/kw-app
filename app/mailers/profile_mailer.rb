@@ -1,5 +1,6 @@
 class ProfileMailer < ApplicationMailer
   def accepted(profile)
+    @setting = Management::SettingsRecord.find_by(path: 'zgloszenie/accepted')
     @profile = profile
     @last_5_events = Training::Supplementary::CourseRecord.all.limit(5)
 

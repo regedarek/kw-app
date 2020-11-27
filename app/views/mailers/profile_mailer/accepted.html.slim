@@ -1,166 +1,202 @@
-| Witamy w Klubie Wysokogórskim Kraków!
-br
-br
-| Otrzymujesz ten e-mail ponieważ właśnie zostałeś przyjęty w grono Klubu Wysokogórskiego Kraków.
-br
-br
-| Wstępujesz do jednego z najstarszych i jednocześnie najbardziej dynamicznego klubu wysokogórskiego w Polsce.
-br
-| Spotkasz u nas zarówno nestorów polskiego wspinania i himalaizmu jak i młodych i dynamicznych ludzi, pełnych inicjatywy i robiących mocne przejścia górskie i skałkowe.
-br
-| Dużo się u nas dzieje i dużo by o tym pisać - niech na tą chwilę wystarczy 
-= link_to 'ten oto film :)', 'https://www.youtube.com/watch?v=ofVtAommBxM'
-br
 h3 = "Twój numer klubowy to #{@profile.kw_id}"
-b Na początek
-br
-| Po pierwsze zapraszamy Cię do zapoznania się z 
-= link_to 'Wademekum członka', 'https://kw.krakow.pl/o-klubie/czlonkowskie/wademekum-nowego-czlonka.html'
-| .
-br
-| Dane naszego klubu znajdziesz na 
-= link_to 'stronie klubowej', 'https://kw.krakow.pl/o-klubie/dane-klubu.html'
-| .
-br
-br
-b Panel klubowy
-br
-| W osobnym e-mailu otrzymałeś instrukcję zresetowania swojego hasła do 
-= link_to 'panelu klubowego', 'https://panel.kw.krakow.pl/zaloguj'
-| .
-br
-| Panel klubowy umożliwia rezerwację sprzętu, dodawanie przejść, płatność składek klubowych, zapisywanie się na wydarzenia.
-br
-| Więcej informacji znajdziesz w tym e-mailu lub na 
-= link_to 'stronie klubowej', 'https://kw.krakow.pl/o-klubie/czlonkowskie/panel-klubowy.html'
-| .
-br
-br
-b Grupy dyskusyjne
-br
-| Grupy dyskusyjne są podstawowym elektronicznym środkiem komunikacji wśród naszych członków. 
-| Jeżeli wyraziłeś chęć dopisania, zostaniesz niebawem(zazwyczaj do tygodnia) do nich dodany.
-br
-ul
-  li
-    b = link_to 'KW', 'https://groups.google.com/forum/#!forum/kw-krakow'
-    |  - główna grupa dyskusyjna
-  li
-    b = link_to 'SWW', 'https://groups.google.com/forum/#!forum/sww-kw-krakow'
-    |  - Sekcja Wspinaczki Wysokogórskiej
-  li
-    b = link_to 'SNW', 'https://groups.google.com/forum/#!forum/snw-kw-krakow'
-    |  - Sekcja Narciarstwa Wysokogórskiego
-  li
-    b = link_to 'STJ', 'https://groups.google.com/forum/#!forum/stj-kw-krakow'
-    |  - Sekcja Taternictwa Jaskiniowego
-  li
-    b = link_to 'GTW', 'https://groups.google.com/forum/#!forum/tw-kw-krakow'
-    |  - Grupa Turystyki Wysokogórskiej
-  li
-    b = link_to 'KTS', 'https://groups.google.com/forum/#!forum/kts-kw-krakow'
-    |  - Koło Taterników Seniorów
-br
-| Na grupach obowiązuje 
-= link_to 'netykieta', 'https://kw.krakow.pl/media-klubowe/grupy-dyskusyjne/netykieta.html'
-|  i mamy dużą prośbę o zapoznanie się z nią zanim zaczniesz odpowiadać/zakładać nowe wątki. 
-br
-br
-b Podstrony sekcji
-br
-| W naszym klubie działają 3 sekcje i jedna grupa - poniżej znajdziecie ich podstrony: 
-ul
-  li = link_to 'Sekcja Wspinaczki Wysokogórskiej', 'https://kw.krakow.pl/sww-kw-krakow/sww-o-sekcji.html'
-  li = link_to 'Sekcja Narciarstwa Wysokogórskiego', 'https://snw.kw.krakow.pl/'
-  li = link_to 'Sekcja Taternictwa Jaskiniowego', 'https://kw.krakow.pl/stj.html'
-  li = link_to 'Grupa Turystyki Wysokogórskiej', 'https://kw.krakow.pl/stw-kw-krakow/o-sekcji.html'
+- if @setting
+  = sanitize @setting.content
+  br
+  b Wydarzenia
+  br
+  | Na część wydarzeń klubowych wymagamy zapisów, opłaconej składki lub wpłacenia wcześniej zaliczki.
+  br
+  | Więcej informacji znajdziesz na 
+  = link_to 'stronie wydarzeń klubowych', 'https://panel.kw.krakow.pl/wydarzenia'
+  | .
+  br
+  br
+  b Nadchodzące wydarzenia
+  br
+  ul
+    - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
+      li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
+  br
+  br
+  b Aktualne projekty w których potrzebujemy Twojej pomocy:
+  br
+  ul
+    - Management::ProjectRecord.includes(:users).where(state: 'unassigned').order(created_at: :desc).each do |project|
+      li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
+  br
+  br
+  b Aktualne projekty w które prowadzą inni członkowie klubu:
+  br
+  ul
+    - Management::ProjectRecord.includes(:users).where(state: 'in_progress').order(created_at: :desc).each do |project|
+      li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
 
-b Media społecznościowe
-br
-| Poniżej znajdziecie linki do fanpage na Facebook naszego klubu jak i organizowanych przez nas imprez:
-ul
-  li = link_to 'Klub Wysokogórski Kraków', 'https://www.facebook.com/KlubWysokogorskiKrakow/'
-  li = link_to 'Memoriał Jana Strzeleckiego', 'https://www.facebook.com/MemorialJanaStrzeleckiego/'
-  li = link_to 'Memoriał Andrzeja Skwirczyńskiego', 'https://www.facebook.com/snw.kw.krakow/'
-  li = link_to 'Sekcja Narciarstwa Wysokogórskiego', 'https://www.facebook.com/SekcjaNarciarstwaWysokogorskiego'
-  li = link_to 'Grupa Turystyki Wysokogórskiej', 'https://www.facebook.com/GrupaTurystykiWysokogorskiej'
-  li = link_to 'Trytool', 'https://www.facebook.com/trytool/'
-  li = link_to 'Mroźne Ostrza', 'https://www.facebook.com/Mro%C5%BAne-Ostrza-Indywidualne-Zawody-Drytoolowe-135959467189054/'
-  li = link_to 'Sekcja Taternictwa Jaskiniowego', 'https://www.facebook.com/STJ.KW.Krakow/?ref=br_rs'
-  li = link_to 'Instagram KW Kraków', 'https://www.instagram.com/kw_krakow/'
-  li = link_to 'Strava KW Kraków', 'https://www.strava.com/clubs/196119/members'
+  br
+  | z taternickim pozdrowieniem i do zobaczenia!
+- else
+  | Witamy w Klubie Wysokogórskim Kraków!
+  br
+  br
+  | Otrzymujesz ten e-mail ponieważ właśnie zostałeś przyjęty w grono Klubu Wysokogórskiego Kraków.
+  br
+  br
+  | Wstępujesz do jednego z najstarszych i jednocześnie najbardziej dynamicznego klubu wysokogórskiego w Polsce.
+  br
+  | Spotkasz u nas zarówno nestorów polskiego wspinania i himalaizmu jak i młodych i dynamicznych ludzi, pełnych inicjatywy i robiących mocne przejścia górskie i skałkowe.
+  br
+  | Dużo się u nas dzieje i dużo by o tym pisać - niech na tą chwilę wystarczy 
+  = link_to 'ten oto film :)', 'https://www.youtube.com/watch?v=ofVtAommBxM'
+  br
+  h3 = "Twój numer klubowy to #{@profile.kw_id}"
+  b Na początek
+  br
+  | Po pierwsze zapraszamy Cię do zapoznania się z 
+  = link_to 'Wademekum członka', 'https://kw.krakow.pl/o-klubie/czlonkowskie/wademekum-nowego-czlonka.html'
+  | .
+  br
+  | Dane naszego klubu znajdziesz na 
+  = link_to 'stronie klubowej', 'https://kw.krakow.pl/o-klubie/dane-klubu.html'
+  | .
+  br
+  br
+  b Panel klubowy
+  br
+  | W osobnym e-mailu otrzymałeś instrukcję zresetowania swojego hasła do 
+  = link_to 'panelu klubowego', 'https://panel.kw.krakow.pl/zaloguj'
+  | .
+  br
+  | Panel klubowy umożliwia rezerwację sprzętu, dodawanie przejść, płatność składek klubowych, zapisywanie się na wydarzenia.
+  br
+  | Więcej informacji znajdziesz w tym e-mailu lub na 
+  = link_to 'stronie klubowej', 'https://kw.krakow.pl/o-klubie/czlonkowskie/panel-klubowy.html'
+  | .
+  br
+  br
+  b Grupy dyskusyjne
+  br
+  | Grupy dyskusyjne są podstawowym elektronicznym środkiem komunikacji wśród naszych członków. 
+  | Jeżeli wyraziłeś chęć dopisania, zostaniesz niebawem(zazwyczaj do tygodnia) do nich dodany.
+  br
+  ul
+    li
+      b = link_to 'KW', 'https://groups.google.com/forum/#!forum/kw-krakow'
+      |  - główna grupa dyskusyjna
+    li
+      b = link_to 'SWW', 'https://groups.google.com/forum/#!forum/sww-kw-krakow'
+      |  - Sekcja Wspinaczki Wysokogórskiej
+    li
+      b = link_to 'SNW', 'https://groups.google.com/forum/#!forum/snw-kw-krakow'
+      |  - Sekcja Narciarstwa Wysokogórskiego
+    li
+      b = link_to 'STJ', 'https://groups.google.com/forum/#!forum/stj-kw-krakow'
+      |  - Sekcja Taternictwa Jaskiniowego
+    li
+      b = link_to 'GTW', 'https://groups.google.com/forum/#!forum/tw-kw-krakow'
+      |  - Grupa Turystyki Wysokogórskiej
+    li
+      b = link_to 'KTS', 'https://groups.google.com/forum/#!forum/kts-kw-krakow'
+      |  - Koło Taterników Seniorów
+  br
+  | Na grupach obowiązuje 
+  = link_to 'netykieta', 'https://kw.krakow.pl/media-klubowe/grupy-dyskusyjne/netykieta.html'
+  |  i mamy dużą prośbę o zapoznanie się z nią zanim zaczniesz odpowiadać/zakładać nowe wątki. 
+  br
+  br
+  b Podstrony sekcji
+  br
+  | W naszym klubie działają 3 sekcje i jedna grupa - poniżej znajdziecie ich podstrony: 
+  ul
+    li = link_to 'Sekcja Wspinaczki Wysokogórskiej', 'https://kw.krakow.pl/sww-kw-krakow/sww-o-sekcji.html'
+    li = link_to 'Sekcja Narciarstwa Wysokogórskiego', 'https://snw.kw.krakow.pl/'
+    li = link_to 'Sekcja Taternictwa Jaskiniowego', 'https://kw.krakow.pl/stj.html'
+    li = link_to 'Grupa Turystyki Wysokogórskiej', 'https://kw.krakow.pl/stw-kw-krakow/o-sekcji.html'
 
-b Grupa na FB
-br
-| Założyliśmy też 
-= link_to 'grupę na Facebooku', 'https://www.facebook.com/groups/206600443275378'
-| .
-br
-| Aby twoje zgłoszenie zostało zaakceptowane, prosimy o podanie numeru klubowego, który znajdziesz na swojej legitymacji lub 
-= link_to 'tej stronie w panelu', 'https://panel.kw.krakow.pl/users/edit'
-| .
-br
-br
-b Wypożyczalnia
-br
-| Za pomocą strony w 
-= link_to 'panelu klubowym', 'https://panel.kw.krakow.pl/zarezerwuj'
-|  możesz wypożyczyć ABC lawinowe, raki, czekany, GPS, friendy do przerys i inne.
-br
-br
-b Przejścia
-br
-| Aby zobaczyć i kolekcjonować swoje górskie przejścia zapraszamy do 
-= link_to 'strony z wykazem przejść klubowych', 'https://panel.kw.krakow.pl/przejscia'
-| .
-br
-br
-b Składki
-br
-| Aby dowiedzieć się więcej o płatności za składki klubowe 
-= link_to 'odwiedź naszą stronę', 'https://kw.krakow.pl/o-klubie/czlonkowskie/skladki.html'
-br
-| Aby sprawdzić swoje opłacone składki 
-= link_to 'odwiedź panel klubowy', 'https://panel.kw.krakow.pl/klub/skladki'
-| .
-br
-br
-b Wydarzenia
-br
-| Na część wydarzeń klubowych wymagamy zapisów, opłaconej składki lub wpłacenia wcześniej zaliczki.
-br
-| Więcej informacji znajdziesz na 
-= link_to 'stronie wydarzeń klubowych', 'https://panel.kw.krakow.pl/wydarzenia'
-| .
-br
-br
-b Nadchodzące wydarzenia
-br
-ul
-  - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
-    li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
-br
-br
-b Aktualne projekty w których potrzebujemy Twojej pomocy:
-br
-ul
-  - Management::ProjectRecord.includes(:users).where(state: 'unassigned').order(created_at: :desc).each do |project|
-    li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
-br
-br
-b Aktualne projekty w które prowadzą inni członkowie klubu:
-br
-ul
-  - Management::ProjectRecord.includes(:users).where(state: 'in_progress').order(created_at: :desc).each do |project|
-    li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
-br
-br
-b Spotkania
-br
-| Zachęcamy jednak głównie do integracji na miejscu w klubie, na slajdowiskach 
-| lub zwykłych 
-= link_to 'czwartkowych spotkaniach', 'https://kw.krakow.pl/o-klubie/spotkania-klubowe.html'
-| .
-br
-br
-| z taternickim pozdrowieniem i do zobaczenia!
+  b Media społecznościowe
+  br
+  | Poniżej znajdziecie linki do fanpage na Facebook naszego klubu jak i organizowanych przez nas imprez:
+  ul
+    li = link_to 'Klub Wysokogórski Kraków', 'https://www.facebook.com/KlubWysokogorskiKrakow/'
+    li = link_to 'Memoriał Jana Strzeleckiego', 'https://www.facebook.com/MemorialJanaStrzeleckiego/'
+    li = link_to 'Memoriał Andrzeja Skwirczyńskiego', 'https://www.facebook.com/snw.kw.krakow/'
+    li = link_to 'Sekcja Narciarstwa Wysokogórskiego', 'https://www.facebook.com/SekcjaNarciarstwaWysokogorskiego'
+    li = link_to 'Grupa Turystyki Wysokogórskiej', 'https://www.facebook.com/GrupaTurystykiWysokogorskiej'
+    li = link_to 'Trytool', 'https://www.facebook.com/trytool/'
+    li = link_to 'Mroźne Ostrza', 'https://www.facebook.com/Mro%C5%BAne-Ostrza-Indywidualne-Zawody-Drytoolowe-135959467189054/'
+    li = link_to 'Sekcja Taternictwa Jaskiniowego', 'https://www.facebook.com/STJ.KW.Krakow/?ref=br_rs'
+    li = link_to 'Instagram KW Kraków', 'https://www.instagram.com/kw_krakow/'
+    li = link_to 'Strava KW Kraków', 'https://www.strava.com/clubs/196119/members'
+
+  b Grupa na FB
+  br
+  | Założyliśmy też 
+  = link_to 'grupę na Facebooku', 'https://www.facebook.com/groups/206600443275378'
+  | .
+  br
+  | Aby twoje zgłoszenie zostało zaakceptowane, prosimy o podanie numeru klubowego, który znajdziesz na swojej legitymacji lub 
+  = link_to 'tej stronie w panelu', 'https://panel.kw.krakow.pl/users/edit'
+  | .
+  br
+  br
+  b Wypożyczalnia
+  br
+  | Za pomocą strony w 
+  = link_to 'panelu klubowym', 'https://panel.kw.krakow.pl/zarezerwuj'
+  |  możesz wypożyczyć ABC lawinowe, raki, czekany, GPS, friendy do przerys i inne.
+  br
+  br
+  b Przejścia
+  br
+  | Aby zobaczyć i kolekcjonować swoje górskie przejścia zapraszamy do 
+  = link_to 'strony z wykazem przejść klubowych', 'https://panel.kw.krakow.pl/przejscia'
+  | .
+  br
+  br
+  b Składki
+  br
+  | Aby dowiedzieć się więcej o płatności za składki klubowe 
+  = link_to 'odwiedź naszą stronę', 'https://kw.krakow.pl/o-klubie/czlonkowskie/skladki.html'
+  br
+  | Aby sprawdzić swoje opłacone składki 
+  = link_to 'odwiedź panel klubowy', 'https://panel.kw.krakow.pl/klub/skladki'
+  | .
+  br
+  br
+  b Wydarzenia
+  br
+  | Na część wydarzeń klubowych wymagamy zapisów, opłaconej składki lub wpłacenia wcześniej zaliczki.
+  br
+  | Więcej informacji znajdziesz na 
+  = link_to 'stronie wydarzeń klubowych', 'https://panel.kw.krakow.pl/wydarzenia'
+  | .
+  br
+  br
+  b Nadchodzące wydarzenia
+  br
+  ul
+    - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
+      li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
+  br
+  br
+  b Aktualne projekty w których potrzebujemy Twojej pomocy:
+  br
+  ul
+    - Management::ProjectRecord.includes(:users).where(state: 'unassigned').order(created_at: :desc).each do |project|
+      li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
+  br
+  br
+  b Aktualne projekty w które prowadzą inni członkowie klubu:
+  br
+  ul
+    - Management::ProjectRecord.includes(:users).where(state: 'in_progress').order(created_at: :desc).each do |project|
+      li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
+  br
+  br
+  b Spotkania
+  br
+  | Zachęcamy jednak głównie do integracji na miejscu w klubie, na slajdowiskach 
+  | lub zwykłych 
+  = link_to 'czwartkowych spotkaniach', 'https://kw.krakow.pl/o-klubie/spotkania-klubowe.html'
+  | .
+  br
+  br
+  | z taternickim pozdrowieniem i do zobaczenia!
