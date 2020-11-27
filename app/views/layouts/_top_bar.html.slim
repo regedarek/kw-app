@@ -20,6 +20,8 @@
                 li= link_to 'Baza użytkowników', admin_users_path
                 li= link_to 'Baza klubowiczów', admin_profiles_path
                 li= link_to 'Baza składek', admin_membership_fees_path
+                - if can? :manage, Db::Reservation
+                  li= link_to 'Wypożyczalnia', admin_reservations_path
                 li= link_to 'Rozliczenia', admin_contracts_path
                 li= link_to 'Kontrahenci', admin_contractors_path
                 li= link_to 'Darowizny', admin_donations_path
