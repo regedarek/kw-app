@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_100729) do
+ActiveRecord::Schema.define(version: 2020_12_01_201134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -551,6 +551,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_100729) do
     t.boolean "training", default: false, null: false
     t.string "slug"
     t.string "gps_tracks"
+    t.integer "boar_length"
     t.index ["climbing_date"], name: "index_mountain_routes_on_climbing_date", order: :desc
     t.index ["slug"], name: "index_mountain_routes_on_slug", unique: true
     t.index ["user_id"], name: "index_mountain_routes_on_user_id"
