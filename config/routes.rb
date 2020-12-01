@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'wydarzenia/regulamin' => 'pages#show', id: 'rules'
   get 'glosowania/dane-osobowe' => 'pages#show', id: 'rules'
   get 'glosowania/instrukcja' => 'pages#show', id: 'rules'
+  get 'narciarskie-dziki/regulamin' => 'pages#show', id: 'rules'
   get 'konkurs_kasprzyka/regulamin' => 'pages#show', id: 'rules'
   get 'instrukcje/wydarzenia' => 'pages#show', id: 'rules'
   get 'kontakty' => 'pages#show', id: 'kontakty'
@@ -160,7 +161,6 @@ Rails.application.routes.draw do
   get 'admin/dostepy' => 'pages#show', id: 'roles'
   get 'warunki' => 'scrappers/scrappers#index'
   get 'trening/skimo' => 'pages#show', id: 'skimo'
-
 
   root to: 'pages#show', id: 'home'
 end
