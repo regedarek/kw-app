@@ -2473,7 +2473,6 @@ to_s	app/components/items/owner_presenter.rb	/^    def to_s$/;"	f	class:Items.Ow
 to_s	app/components/reservations/state_presenter.rb	/^    def to_s$/;"	f	class:Reservations.StatePresenter
 toggle_closed	app/components/events/admin/competitions_controller.rb	/^      def toggle_closed$/;"	f	class:Events.Admin.CompetitionsController
 toggle_rentable	app/controllers/admin/items_controller.rb	/^    def toggle_rentable$/;"	f	class:Admin.ItemsController
-top_5_boars	app/components/blog/dashboard.rb	/^    def top_5_boars$/;"	f	class:Blog.Dashboard
 training_contracts	app/models/ability.rb	/^  def training_contracts$/;"	f	class:Ability
 unapprove	app/components/management/voting/cases_controller.rb	/^      def unapprove$/;"	f	class:Management.Voting
 unheart	app/components/training/activities/hearts_controller.rb	/^      def unheart$/;"	f	class:Training.Activities.HeartsController
