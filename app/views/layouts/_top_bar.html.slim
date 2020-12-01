@@ -13,7 +13,7 @@
         - if false
           li= link_to 'Walne Zgromadzenie Członków Klubu Online', '/glosowania/walne', class: 'button expanded alert'
         - if user_signed_in?
-          - if current_user.roles.include?('office')
+          - if current_user.roles.include?('office') || current_user.roles.include?('settings')
             li
               = link_to 'Biuro', admin_path
               ul.menu.vertical
@@ -27,7 +27,8 @@
                 li= link_to 'Rozliczenia', admin_contracts_path
                 li= link_to 'Kontrahenci', admin_contractors_path
                 li= link_to 'Darowizny', admin_donations_path
-                li= link_to 'Ustawienia', settings_path
+                - if can? :manage, Management::SettingsRecord
+                  li= link_to 'Ustawienia', settings_path
 
           - if current_user.roles.include?('management')
             li
