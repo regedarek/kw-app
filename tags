@@ -2345,6 +2345,7 @@ set_conversation	app/components/messaging/messages_controller.rb	/^    def set_c
 set_locale	app/controllers/application_controller.rb	/^  def set_locale$/;"	f	class:ApplicationController
 set_regular	app/components/user_management/members.rb	/^    def self.set_regular$/;"	F	class:UserManagement.Members
 setting_params	app/components/management/settings_controller.rb	/^    def setting_params$/;"	f	class:Management.SettingsController
+settings	app/models/ability.rb	/^  def settings$/;"	f	class:Ability
 show	app/components/blog/api/authors_controller.rb	/^      def show$/;"	f	class:Blog.Api.AuthorsController
 show	app/components/business/courses_controller.rb	/^    def show$/;"	f	class:Business
 show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"	f	class:Events.Admin.CompetitionsController
