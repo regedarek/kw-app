@@ -1611,6 +1611,7 @@ contract_params	app/components/settlement/admin/contracts_controller.rb	/^      
 contract_params	app/components/training/activities/contracts_controller.rb	/^      def contract_params$/;"	f	class:Training.Activities.ContractsController
 contractor_name=	app/components/settlement/contract_record.rb	/^    def contractor_name=(id)$/;"	f	class:Settlement.ContractRecord
 contractor_params	app/components/settlement/admin/contractors_controller.rb	/^      def contractor_params$/;"	f	class:Settlement.Admin.ContractorsController
+contracts	app/models/ability.rb	/^  def contracts$/;"	f	class:Ability
 coordinator	app/components/management/project_record.rb	/^    def coordinator$/;"	f	class:Management.ProjectRecord
 cost	app/components/admin/membership_fees_form.rb	/^    def cost$/;"	f	class:Admin.MembershipFeesForm
 cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Events.Db.SignUpRecord

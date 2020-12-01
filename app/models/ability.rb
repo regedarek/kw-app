@@ -15,6 +15,7 @@ class Ability
     competitions if role?('competitions')
     reservations if role?('reservations')
     settings if role?('settings')
+    contracts if role?('contracts')
     events if role?('events')
     library if role?('library')
     projects if role?('projects')
@@ -94,6 +95,10 @@ class Ability
     cannot :destroy, Settlement::ContractRecord
     can :manage, Management::Snw::SnwApplyRecord
     can :analiza, Settlement::ContractRecord
+  end
+
+  def contracts
+    can :manage, Training::Activities::ContractRecord
   end
 
   def settings
