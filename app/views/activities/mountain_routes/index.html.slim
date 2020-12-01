@@ -71,7 +71,3 @@
 
       .text-center
         = paginate @routes
-
-      - if params[:boars] && params[:route_type] == 'ski'
-        = render 'training/activities/ski_routes/leaderboard'
-        = render 'training/activities/ski_routes/table', routes: @season_leaders

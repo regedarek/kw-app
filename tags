@@ -2323,6 +2323,7 @@ safeActiveElement	public/assets/application-adb37b88852cd8099abe934018ff31effd97
 save	app/components/scrappers/pdf_image_extractor.rb	/^    def save(filename)$/;"	f	class:Scrappers.Jpg
 save	app/components/scrappers/pdf_image_extractor.rb	/^    def save(filename)$/;"	f	class:Scrappers.Raw
 save	app/components/scrappers/pdf_image_extractor.rb	/^    def save(filename)$/;"	f	class:Scrappers.Tiff
+save_boar_length	app/models/db/activities/mountain_route.rb	/^      def save_boar_length$/;"	f	class:Db.Activities.MountainRoute
 save_cmyk	app/components/scrappers/pdf_image_extractor.rb	/^    def save_cmyk(filename)$/;"	f	class:Scrappers.Raw
 save_gray	app/components/scrappers/pdf_image_extractor.rb	/^    def save_gray(filename)$/;"	f	class:Scrappers.Raw
 save_group_four	app/components/scrappers/pdf_image_extractor.rb	/^    def save_group_four(filename)$/;"	f	class:Scrappers.Tiff

@@ -1,6 +1,8 @@
 module Db
   module Activities
     class MountainRoute < ActiveRecord::Base
+      before_save :save_boar_length, if: :ski?
+
       extend FriendlyId
       enum route_type: [:ski, :regular_climbing, :winter_climbing]
       friendly_id :slug_candidates, use: :slugged
@@ -26,6 +28,14 @@ module Db
       has_many :points, class_name: 'Training::Activities::MountainRoutePointRecord'
 
       validates :name, :rating, :climbing_date, presence: true
+
+      def save_boar_length
+        if training
+          self.boar_length = length / 2
+        else
+          self.boar_length = length
+        end
+      end
 
       def slug_candidates
         [
