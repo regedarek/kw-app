@@ -121,7 +121,7 @@
                 - if user.mountain_routes.last.contracts.any?
                   span.dashboard-table-timestamp-small
                     = user.mountain_routes.last.contracts.map(&:name).join(', ')
-            td.text-center.large-text-right = user.mountain_routes.map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
+            td.text-center.large-text-right = user.mountain_routes.where(climbing_date: Activities::SkiRepository.new.start_date..Activities::SkiRepository.new.end_date).map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
             td.text-center.large-text-right = user.total_mountain_routes_length
             td.text-center.large-text-right = user.total_mountain_routes_length + user.mountain_routes.where(climbing_date: Activities::SkiRepository.new.start_date..Activities::SkiRepository.new.end_date).map(&:contracts).flatten.uniq.inject(0) { |sum, contract| sum + contract.score }
             - i += 1
