@@ -60,6 +60,7 @@ AddAvatarToUsers	db/migrate/20180807194525_add_avatar_to_users.rb	/^class AddAva
 AddBanerToCourses	db/migrate/20180727143023_add_baner_to_courses.rb	/^class AddBanerToCourses < ActiveRecord::Migration[5.0]$/;"	c
 AddBanerTypeToSupplementaryCourses	db/migrate/20190410145708_add_baner_type_to_supplementary_courses.rb	/^class AddBanerTypeToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
 AddBanerUrlToCompetitions	db/migrate/20180112215613_add_baner_url_to_competitions.rb	/^class AddBanerUrlToCompetitions < ActiveRecord::Migration[5.0]$/;"	c
+AddBoarsLengthToMountainRoutes	db/migrate/20201201201134_add_boars_length_to_mountain_routes.rb	/^class AddBoarsLengthToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddBoarsToUsers	db/migrate/20190130211823_add_boars_to_users.rb	/^class AddBoarsToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddBoldToActivitiesCompetitions	db/migrate/20191114014216_add_bold_to_activities_competitions.rb	/^class AddBoldToActivitiesCompetitions < ActiveRecord::Migration[5.2]$/;"	c
 AddCanceledToReservations	db/migrate/20161126154922_add_canceled_to_reservations.rb	/^class AddCanceledToReservations < ActiveRecord::Migration[5.0]$/;"	c
@@ -1568,6 +1569,7 @@ change	db/migrate/20201114105426_add_logo_to_contractors.rb	/^  def change$/;"	f
 change	db/migrate/20201114111018_add_slug_to_marketing_discounts.rb	/^  def change$/;"	f	class:AddSlugToMarketingDiscounts
 change	db/migrate/20201114112345_add_category_type_to_marketing_discounts.rb	/^  def change$/;"	f	class:AddCategoryTypeToMarketingDiscounts
 change	db/migrate/20201125100729_add_photo_to_profiles.rb	/^  def change$/;"	f	class:AddPhotoToProfiles
+change	db/migrate/20201201201134_add_boars_length_to_mountain_routes.rb	/^  def change$/;"	f	class:AddBoarsLengthToMountainRoutes
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
