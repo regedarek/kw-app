@@ -23,7 +23,7 @@ module Blog
     end
 
     def top_5_boars
-      Activities::Repository.new.fetch_season(:ski, DateTime.new(2018, 11, 1), DateTime.new(2019, 05, 01)).limit(5).map do |user|
+      Activities::SkiRepository.new.fetch_season(:ski, DateTime.new(2020, 12, 1), DateTime.new(2020, 04, 30)).limit(5).map do |user|
         {
           display_name: Db::User.find_by(kw_id: user.kw_id).display_name,
           meters: user.total_mountain_routes_length,
@@ -37,7 +37,7 @@ module Blog
     end
 
     def best_person
-      Activities::Repository.new.fetch_season(:ski, DateTime.new(2019, 11, 1), DateTime.new(2020, 05, 01)).first
+      Activities::SkiRepository.new.fetch_season(:ski, DateTime.new(2019, 11, 1), DateTime.new(2020, 05, 01)).first
     end
   end
 end
