@@ -17,16 +17,17 @@
             li
               = link_to 'Biuro', admin_path
               ul.menu.vertical
-                li= link_to 'Baza użytkowników', admin_users_path
-                li= link_to 'Baza klubowiczów', admin_profiles_path
-                li= link_to 'Baza składek', admin_membership_fees_path
+                - if current_user.roles.include?('office')
+                  li= link_to 'Baza użytkowników', admin_users_path
+                  li= link_to 'Baza klubowiczów', admin_profiles_path
+                  li= link_to 'Baza składek', admin_membership_fees_path
+                  li= link_to 'Rozliczenia', admin_contracts_path
+                  li= link_to 'Kontrahenci', admin_contractors_path
+                  li= link_to 'Darowizny', admin_donations_path
                 - if can? :manage, Db::Reservation
                   li= link_to 'Wypożyczalnia', admin_reservations_path
                 - if can? :manage, Db::Reservation
                   li= link_to 'Przedmioty', admin_items_path
-                li= link_to 'Rozliczenia', admin_contracts_path
-                li= link_to 'Kontrahenci', admin_contractors_path
-                li= link_to 'Darowizny', admin_donations_path
                 - if can? :manage, Management::SettingsRecord
                   li= link_to 'Ustawienia', settings_path
 
