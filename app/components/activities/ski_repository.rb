@@ -11,7 +11,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range_climbing_date, created_at: range_created_at })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
@@ -22,7 +22,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
@@ -33,7 +33,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
@@ -45,7 +45,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range_climbing_date, created_at: range_created_at })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
@@ -57,7 +57,7 @@ module Activities
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range_climbing_date, created_at: range_created_at })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
+        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
