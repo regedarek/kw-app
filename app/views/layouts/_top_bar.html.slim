@@ -31,7 +31,7 @@
                 - if can? :manage, Management::SettingsRecord
                   li= link_to 'Ustawienia', settings_path
                 - if can? :manage, Training::Activities::ContractRecord
-                  li= link_to 'Kontrakty', 'narciarskie-dziki/kontrakty'
+                  li= link_to 'Kontrakty', kontrakty_path
 
           - if current_user.roles.include?('management')
             li
