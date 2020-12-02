@@ -6,5 +6,7 @@ class CreateTrainingUserContracts < ActiveRecord::Migration[5.2]
       t.integer :contract_id, null: false
       t.timestamps
     end
+
+    add_index :training_user_contracts, [:user_id, :route_id, :contract_id], unique: true, name: 'user_route_contract_unique'
   end
 end

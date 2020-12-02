@@ -901,6 +901,7 @@ ActiveRecord::Schema.define(version: 2020_12_02_182040) do
     t.integer "contract_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "route_id", "contract_id"], name: "user_route_contract_unique", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
