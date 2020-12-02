@@ -33,6 +33,7 @@ Activities	app/components/training/activities/ski_route.rb	/^  module Activities
 Activities	app/components/training/activities/ski_route_form.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/ski_routes_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/update_ski_route.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/user_contract_record.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/controllers/activities/mountain_routes_controller.rb	/^module Activities$/;"	m
 Activities	app/models/db/activities/mountain_route.rb	/^  module Activities$/;"	m	class:Db
 Activities	app/models/db/activities/route_colleagues.rb	/^  module Activities$/;"	m	class:Db
@@ -499,6 +500,7 @@ CreateSupplementarySignUps	db/migrate/20180503124007_create_supplementary_sign_u
 CreateTableOrders	db/migrate/20160830160726_create_table_orders.rb	/^class CreateTableOrders < ActiveRecord::Migration[5.0]$/;"	c
 CreateToprRecords	db/migrate/20190815092140_create_topr_records.rb	/^class CreateToprRecords < ActiveRecord::Migration[5.2]$/;"	c
 CreateTrainingExcercies	db/migrate/20200622113423_create_training_excercies.rb	/^class CreateTrainingExcercies < ActiveRecord::Migration[5.2]$/;"	c
+CreateTrainingUserContracts	db/migrate/20201202182040_create_training_user_contracts.rb	/^class CreateTrainingUserContracts < ActiveRecord::Migration[5.2]$/;"	c
 CreateUsers	db/migrate/20150523153119_create_users.rb	/^class CreateUsers < ActiveRecord::Migration[5.0]$/;"	c
 CreateValleyTable	db/migrate/20160804151037_create_valley_table.rb	/^class CreateValleyTable < ActiveRecord::Migration[5.0]$/;"	c
 CreateVersions	db/migrate/20200410095514_create_versions.rb	/^class CreateVersions < ActiveRecord::Migration[5.2]$/;"	c
@@ -991,6 +993,7 @@ Training	app/components/training/activities/ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_route_form.rb	/^module Training$/;"	m
 Training	app/components/training/activities/ski_routes_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/update_ski_route.rb	/^module Training$/;"	m
+Training	app/components/training/activities/user_contract_record.rb	/^module Training$/;"	m
 Training	app/components/training/bluebook/exercise_record.rb	/^module Training$/;"	m
 Training	app/components/training/bluebook/exercises_controller.rb	/^module Training$/;"	m
 Training	app/components/training/db/course_record.rb	/^module Training$/;"	m
@@ -1058,6 +1061,7 @@ UpdateSkiRoute	app/components/training/activities/update_ski_route.rb	/^    clas
 User	app/components/importing/user.rb	/^  class User$/;"	c	class:Importing
 User	spec/factories.rb	/^  class User$/;"	c	class:Factories
 UserApplication	app/components/user_management/user_application.rb	/^  class UserApplication$/;"	c	class:UserManagement
+UserContractRecord	app/components/training/activities/user_contract_record.rb	/^    class UserContractRecord < ActiveRecord::Base$/;"	c	class:Training.Activities
 UserManagement	app/components/user_management/application_cost.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/attachment.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/cost.rb	/^module UserManagement$/;"	m
@@ -1570,6 +1574,7 @@ change	db/migrate/20201114111018_add_slug_to_marketing_discounts.rb	/^  def chan
 change	db/migrate/20201114112345_add_category_type_to_marketing_discounts.rb	/^  def change$/;"	f	class:AddCategoryTypeToMarketingDiscounts
 change	db/migrate/20201125100729_add_photo_to_profiles.rb	/^  def change$/;"	f	class:AddPhotoToProfiles
 change	db/migrate/20201201201134_add_boars_length_to_mountain_routes.rb	/^  def change$/;"	f	class:AddBoarsLengthToMountainRoutes
+change	db/migrate/20201202182040_create_training_user_contracts.rb	/^  def change$/;"	f	class:CreateTrainingUserContracts
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController

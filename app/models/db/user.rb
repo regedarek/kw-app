@@ -45,6 +45,9 @@ class Db::User < ActiveRecord::Base
   has_many :hearts, dependent: :destroy
   has_many :fav_mountain_routes, through: :hearts
 
+  has_many :training_user_contracts, class_name: 'Training::Activities::UserContractRecord', foreign_key: :user_id
+  has_many :training_contracts, through: :training_user_contracts, source: :contract
+
   has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues',
     foreign_key: :colleague_id
   has_many :mountain_routes,
