@@ -2,11 +2,7 @@ table.stack
   thead
     tr
       th.text-left Nazwa kontraktu
-      th.text-right Zaliczony
   tbody
-    - Training::Activities::ContractRecord.all.each do |contract|
-      - completed = Training::Activities::RouteContractsRecord.includes(route: [:route_colleagues]).where(contract_id: contract.id, route: { route_colleagues: {colleague_id: @user.id} } ).any?
-      tr style="#{completed ? 'background-color: lightgreen' : ''}"
+    - contracts.each do |contract|
+      tr
         td.text-left.large-text-left = link_to contract.name, activities_contract_path(contract.id)
-        td.text-right
-          = I18n.t completed

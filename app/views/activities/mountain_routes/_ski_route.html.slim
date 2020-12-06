@@ -16,26 +16,18 @@
     - @route.rating.times do
       i.fi-star
 
-- if @route.contracts.present? || @route.length.present?
-  .large-12.columns
-    - if @route.length.present?
-      b przewyższenie tury w metrach: 
-      = @route.length
-      br
-    - if @route.contracts.present?
-      b bonus za zrealizowane kontrakty: 
-      = @route.contracts.sum(:score)
-      br
-    - if @route.contracts.present? || @route.length.present?
-      b suma: 
-      = @route.contracts.sum(:score) + @route.length.to_i
-
-- if @route.contracts.any?
-  .large-12.columns
-    b kontrakty:
-    ul
-      - @route.contracts.each do |contract|
-
-        li
-          span data-tooltip='' tabindex="1" title="#{contract.description}" data-allow-html="true" class='has-tip'
-            = contract.name
+- if user_signed_in?
+  - if @route.colleagues.include? current_user
+    - if ::Training::Activities::UserContractRecord.exists?(user_id: current_user.id, route_id: @route.id)
+      - user_contract = ::Training::Activities::UserContractRecord.find_by(user_id: current_user.id, route_id: @route.id)
+      .large-12.columns
+        b Kontrakt zrealizowany: 
+        = "#{user_contract.contract.name} za #{user_contract.contract.score}"
+    - else
+      = form_for ::Training::Activities::UserContractRecord.new, as: :user_contract, url: activities_user_contracts_path do |f|
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :route_id, value: @route.id
+        .large-6.columns
+          = f.select :contract_id, ::Training::Activities::ContractRecord.all.map { |w, _| [w.name, w.id] }, include_blank: true
+        .large-6.columns
+          = f.submit 'Przypisz kontrakt', class: 'button'

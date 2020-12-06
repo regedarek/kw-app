@@ -34,6 +34,7 @@ Activities	app/components/training/activities/ski_route_form.rb	/^  module Activ
 Activities	app/components/training/activities/ski_routes_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/update_ski_route.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/components/training/activities/user_contract_record.rb	/^  module Activities$/;"	m	class:Training
+Activities	app/components/training/activities/user_contracts_controller.rb	/^  module Activities$/;"	m	class:Training
 Activities	app/controllers/activities/mountain_routes_controller.rb	/^module Activities$/;"	m
 Activities	app/models/db/activities/mountain_route.rb	/^  module Activities$/;"	m	class:Db
 Activities	app/models/db/activities/route_colleagues.rb	/^  module Activities$/;"	m	class:Db
@@ -994,6 +995,7 @@ Training	app/components/training/activities/ski_route_form.rb	/^module Training$
 Training	app/components/training/activities/ski_routes_controller.rb	/^module Training$/;"	m
 Training	app/components/training/activities/update_ski_route.rb	/^module Training$/;"	m
 Training	app/components/training/activities/user_contract_record.rb	/^module Training$/;"	m
+Training	app/components/training/activities/user_contracts_controller.rb	/^module Training$/;"	m
 Training	app/components/training/bluebook/exercise_record.rb	/^module Training$/;"	m
 Training	app/components/training/bluebook/exercises_controller.rb	/^module Training$/;"	m
 Training	app/components/training/db/course_record.rb	/^module Training$/;"	m
@@ -1062,6 +1064,7 @@ User	app/components/importing/user.rb	/^  class User$/;"	c	class:Importing
 User	spec/factories.rb	/^  class User$/;"	c	class:Factories
 UserApplication	app/components/user_management/user_application.rb	/^  class UserApplication$/;"	c	class:UserManagement
 UserContractRecord	app/components/training/activities/user_contract_record.rb	/^    class UserContractRecord < ActiveRecord::Base$/;"	c	class:Training.Activities
+UserContractsController	app/components/training/activities/user_contracts_controller.rb	/^    class UserContractsController < ApplicationController$/;"	c	class:Training.Activities
 UserManagement	app/components/user_management/application_cost.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/attachment.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/cost.rb	/^module UserManagement$/;"	m
@@ -1616,6 +1619,7 @@ configure_permitted_parameters	app/controllers/registrations_controller.rb	/^  d
 contains	config/initializers/ransack.rb	/^    def contains(other)$/;"	f	class:Arel.Predications
 contract_params	app/components/settlement/admin/contracts_controller.rb	/^      def contract_params$/;"	f	class:Settlement.Admin.ContractsController
 contract_params	app/components/training/activities/contracts_controller.rb	/^      def contract_params$/;"	f	class:Training.Activities.ContractsController
+contract_params	app/components/training/activities/user_contracts_controller.rb	/^      def contract_params$/;"	f	class:Training.Activities.UserContractsController
 contractor_name=	app/components/settlement/contract_record.rb	/^    def contractor_name=(id)$/;"	f	class:Settlement.ContractRecord
 contractor_params	app/components/settlement/admin/contractors_controller.rb	/^      def contractor_params$/;"	f	class:Settlement.Admin.ContractorsController
 coordinator	app/components/management/project_record.rb	/^    def coordinator$/;"	f	class:Management.ProjectRecord
@@ -1658,6 +1662,7 @@ create	app/components/training/activities/api/mountain_route_points_controller.r
 create	app/components/training/activities/contracts_controller.rb	/^      def create$/;"	f	class:Training.Activities.ContractsController
 create	app/components/training/activities/repository.rb	/^      def create(form_outputs:, user_id:)$/;"	f	class:Training.Activities.Repository
 create	app/components/training/activities/ski_routes_controller.rb	/^      def create$/;"	f	class:Training.Activities.SkiRoutesController
+create	app/components/training/activities/user_contracts_controller.rb	/^      def create$/;"	f	class:Training.Activities.UserContractsController
 create	app/components/training/bluebook/exercises_controller.rb	/^      def create$/;"	f	class:Training.Bluebook.ExercisesController
 create	app/components/training/questionare/snw_profile_repository.rb	/^      def create(form_outputs)$/;"	f	class:Training.Questionare.SnwProfileRepository
 create	app/components/training/questionare/snw_profile_service.rb	/^      def create(raw_inputs)$/;"	f	class:Training.Questionare.SnwProfileService

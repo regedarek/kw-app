@@ -13,6 +13,7 @@ module Activities
     has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
     has_many :colleagues, through: :route_colleagues
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
+    has_many :user_contracts, class_name: 'Training::Activities::UserContractRecord'
 
     def colleagues_names=(ids)
       self.colleague_ids = ids

@@ -15,6 +15,6 @@
           th.text-center.large-text-left width='150px' Kto?
 
       tbody
-        - Training::Activities::RouteContractsRecord.includes(route: [:route_colleagues]).where(contract_id: @contract.id).map(&:route).map(&:route_colleagues).flatten.map(&:colleague).uniq.each do |user|
+        - @contract.users.each do |user|
           tr
             td.text-center.large-text-left = link_to user.display_name, user_path(user.kw_id)
