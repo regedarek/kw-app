@@ -38,20 +38,6 @@
           = f.text_field :partners
 
 .row
-  .large-12.columns
-    .callout
-      .row
-        .large-8.columns
-          = f.label :contract_ids, 'ukończony kontrakt'
-          = f.select :contract_ids,
-            Training::Activities::ContractRecord.all.map { |u| [u.name, u.id] },
-            { include_blank: true},
-            { class: 'js-select-multiple' }
-        .large-4.columns
-          br
-          = link_to 'Lista konktraktów', kontrakty_path, class: 'button expanded', target: :_blank
-
-.row
   .large-3.columns
     .callout.alert
       = f.label :attachments, 'Zdjęcia'
