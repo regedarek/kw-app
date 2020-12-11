@@ -16,6 +16,17 @@
     - @route.rating.times do
       i.fi-star
 
+.large-12.columns
+  b trening: 
+  = I18n.t @route.training?
+
+.large-12.columns
+  b przewyższenie: 
+  ul
+    li = "rzeczywiste: #{@route.length} m"
+    - if @route.boar_length
+      li = "dzikowe: #{@route.boar_length} m"
+
 - if user_signed_in?
   - if @route.colleagues.include? current_user
     - if ::Training::Activities::UserContractRecord.exists?(user_id: current_user.id, route_id: @route.id)
