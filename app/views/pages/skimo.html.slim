@@ -1,28 +1,29 @@
-.row
-  .large-12.columns
-    h3.subheader Baza wiedzy SkiMo - Kompleksowy System Kształcenia Skialpinisty
+- if user_signed_in?
+  .row
+    .large-12.columns
+      h3.subheader Baza wiedzy SkiMo - Kompleksowy System Kształcenia Skialpinisty
 
-    .callout.primary
-      p Kompendium treningu skimo, czyli Kompleksowy System Kształcenia Skialpinisty (KSKS) to cykl wykładów, szkoleń i treningów kształtujących umiejętności praktyczne niezbędne w uprawianiu narciarstwa wysokogórskiego. W programie zwracamy uwagę na wszystkie aspekty skialpinizmu, poczynając od przygotowania motorycznego, treningu wydolności, poprzez szkolenia narciarskie (zarówno techniki poruszania się w górę, jak i zjazdu), a na kwestiach bezpieczeństwa w górach kończąc.
-      p Chyba nie trzeba nikogo przekonywać, że aby bezpiecznie poruszać się na nartach w górach wysokich, warto być wszechstronnie MOCNYM:
-      ul
-        li mocnym w rozpoznawaniu zagrożeń, szacowaniu ryzyka i decydowaniu jak go minimalizować
-        li mocnym w technice narciarskiej w każdych warunkach śniegowych, zarówno na zjeździe jak i podejściu
-        li mocnym pod względem motoryki i wydolności organizmu
-      br
-      | Baza będzie konsekwentnie rozwijana i uzupełniania o nowe treści powstałe w raz z trwaniem programu.
+      .callout.primary
+        p Kompendium treningu skimo, czyli Kompleksowy System Kształcenia Skialpinisty (KSKS) to cykl wykładów, szkoleń i treningów kształtujących umiejętności praktyczne niezbędne w uprawianiu narciarstwa wysokogórskiego. W programie zwracamy uwagę na wszystkie aspekty skialpinizmu, poczynając od przygotowania motorycznego, treningu wydolności, poprzez szkolenia narciarskie (zarówno techniki poruszania się w górę, jak i zjazdu), a na kwestiach bezpieczeństwa w górach kończąc.
+        p Chyba nie trzeba nikogo przekonywać, że aby bezpiecznie poruszać się na nartach w górach wysokich, warto być wszechstronnie MOCNYM:
+        ul
+          li mocnym w rozpoznawaniu zagrożeń, szacowaniu ryzyka i decydowaniu jak go minimalizować
+          li mocnym w technice narciarskiej w każdych warunkach śniegowych, zarówno na zjeździe jak i podejściu
+          li mocnym pod względem motoryki i wydolności organizmu
+        br
+        | Baza będzie konsekwentnie rozwijana i uzupełniania o nowe treści powstałe w raz z trwaniem programu.
 
-.row
-  .large-3.columns
-    = link_to 'Wydolność', page_path(id: 'wydolnosc'), class: 'button expanded large primary'
-  .large-3.columns
-    = link_to 'Motoryka', page_path(id: 'motoryka'), class: 'button expanded large warning'
-  .large-3.columns
-    = link_to 'Bezpieczeństwo w górach', '#', class: 'button expanded large alert disabled'
-  .large-3.columns
-    = link_to 'Technika Narciarska', page_path(id: 'technika'), class: 'button expanded large success'
+  .row
+    .large-3.columns
+      = link_to 'Wydolność', page_path(id: 'wydolnosc'), class: 'button expanded large primary'
+    .large-3.columns
+      = link_to 'Motoryka', page_path(id: 'motoryka'), class: 'button expanded large warning'
+    .large-3.columns
+      = link_to 'Bezpieczeństwo w górach', '#', class: 'button expanded large alert disabled'
+    .large-3.columns
+      = link_to 'Technika Narciarska', page_path(id: 'technika'), class: 'button expanded large success'
 
-.row
-  .large-12.columns
-    .callout.alert
-      | Bardzo prosimy o nie rozpowszechnianie tych materiałów poza uczestnikami KSKS.
+  .row
+    .large-12.columns
+      .callout.alert
+        | Bardzo prosimy o nie rozpowszechnianie tych materiałów poza uczestnikami KSKS.
