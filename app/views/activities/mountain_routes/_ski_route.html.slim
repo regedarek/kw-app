@@ -10,6 +10,11 @@
       - else
         = @route.partners
 
+- if @route.peak.present?
+  .large-12.columns
+    b rejon tury(dolina, góry): 
+    = @route.peak
+
 - if @route.rating.present?
   .large-12.columns
     b subiektywna ocena: 
