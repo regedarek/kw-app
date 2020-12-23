@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     get 'wydarzenia/:id' => 'supplementary/courses#show', as: 'training_supplementary_course_record'
 
     namespace :supplementary do
+      namespace :api do
+        resources :courses, only: :index
+      end
       resources :courses do
         resources :packages, only: [:new, :create]
         collection do

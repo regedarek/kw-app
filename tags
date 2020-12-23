@@ -414,6 +414,7 @@ Course	app/components/training/supplementary/course.rb	/^    class Course < Dry:
 CourseRecord	app/components/business/course_record.rb	/^  class CourseRecord < ActiveRecord::Base$/;"	c	class:Business
 CourseRecord	app/components/training/db/course_record.rb	/^    class CourseRecord < ActiveRecord::Base$/;"	c	class:Training.Db
 CourseRecord	app/components/training/supplementary/course_record.rb	/^    class CourseRecord < ActiveRecord::Base$/;"	c	class:Training.Supplementary
+CourseSerializer	app/components/training/supplementary/serializers/course_serializer.rb	/^      class CourseSerializer < ActiveModel::Serializer$/;"	c	class:Training.Supplementary.Serializers
 CoursesController	app/components/business/api/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Business.Api
 CoursesController	app/components/business/courses_controller.rb	/^  class CoursesController < ApplicationController$/;"	c	class:Business
 CoursesController	app/components/training/supplementary/api/courses_controller.rb	/^      class CoursesController < ApplicationController$/;"	c	class:Training.Supplementary.Api
@@ -896,6 +897,7 @@ Seeder	lib/seeding/seeder.rb	/^  class Seeder$/;"	c	class:Seeding
 Seeding	lib/seeding/seeder.rb	/^module Seeding$/;"	m
 SendPrepaidEmail	app/components/training/supplementary/send_prepaid_email.rb	/^    class SendPrepaidEmail$/;"	c	class:Training.Supplementary
 Serializers	app/components/training/activities/serializers/mountain_route_serializer.rb	/^    module Serializers$/;"	m	class:Training.Activities
+Serializers	app/components/training/supplementary/serializers/course_serializer.rb	/^    module Serializers$/;"	m	class:Training.Supplementary
 SetDefaultDecisionInManagementVotes	db/migrate/20201021124937_set_default_decision_in_management_votes.rb	/^class SetDefaultDecisionInManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 SetDefaultStateForReservations	db/migrate/20160830115600_set_default_state_for_reservations.rb	/^class SetDefaultStateForReservations < ActiveRecord::Migration[5.0]$/;"	c
 SettingsController	app/components/management/settings_controller.rb	/^  class SettingsController < ApplicationController$/;"	c	class:Management
@@ -975,6 +977,7 @@ Supplementary	app/components/training/supplementary/package_type_record.rb	/^  m
 Supplementary	app/components/training/supplementary/packages_controller.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/repository.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/send_prepaid_email.rb	/^  module Supplementary$/;"	m	class:Training
+Supplementary	app/components/training/supplementary/serializers/course_serializer.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/sign_up_mailer.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/sign_up_record.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/sign_ups_controller.rb	/^  module Supplementary$/;"	m	class:Training
@@ -1035,6 +1038,7 @@ Training	app/components/training/supplementary/package_type_record.rb	/^module T
 Training	app/components/training/supplementary/packages_controller.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/repository.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/send_prepaid_email.rb	/^module Training$/;"	m
+Training	app/components/training/supplementary/serializers/course_serializer.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/sign_up_mailer.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/sign_up_record.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/sign_ups_controller.rb	/^module Training$/;"	m
@@ -1996,6 +2000,7 @@ index	app/components/training/activities/api/mountain_route_points_controller.rb
 index	app/components/training/activities/api/mountain_routes_controller.rb	/^        def index$/;"	f	class:Training.Activities.Api.MountainRoutesController
 index	app/components/training/activities/contracts_controller.rb	/^      def index$/;"	f	class:Training.Activities.ContractsController
 index	app/components/training/activities/ski_routes_controller.rb	/^      def index$/;"	f	class:Training.Activities.SkiRoutesController
+index	app/components/training/supplementary/api/courses_controller.rb	/^        def index$/;"	f	class:Training.Supplementary.Api.CoursesController
 index	app/components/training/supplementary/courses_controller.rb	/^      def index$/;"	f	class:Training.Supplementary.CoursesController
 index	app/controllers/activities/mountain_routes_controller.rb	/^   def index$/;"	f	class:Activities.MountainRoutesController
 index	app/controllers/admin/dashboard_controller.rb	/^		def index$/;"	f	class:Admin.DashboardController
