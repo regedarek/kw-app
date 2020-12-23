@@ -14,7 +14,7 @@ module Membership
                  else
                    150
                  end
-          plastic_cost = form.plastic ? 10 : 0
+          plastic_cost = form.plastic ? 15 : 0
           cost = base_cost + plastic_cost
 
           membership_fee = Db::Membership::Fee.create(

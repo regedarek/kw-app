@@ -22,7 +22,7 @@ pl:
         email: E-mail
         first_name: Imię
         cost: Wpisowe
-        plastic: Legitymacja plastikowa(+10zł)
+        plastic: Legitymacja plastikowa(+15zł)
         last_name: Nazwisko
         birth_date: Data urodzenia
         birth_place: Miejsce urodzenia

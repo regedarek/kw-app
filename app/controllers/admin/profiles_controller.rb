@@ -135,7 +135,7 @@ module Admin
             year: Membership::Activement.new.payment_year,
             kw_id: profile.kw_id,
             payment: profile.payment,
-            cost: profile.plastic ? 110 : 100,
+            cost: profile.plastic ? 115 : 100,
             plastic: profile.plastic
           )
         end

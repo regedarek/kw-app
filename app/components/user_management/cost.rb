@@ -17,7 +17,7 @@ module UserManagement
 
     def plastic_cost
       if plastic
-        10
+        15
       else
         0
       end
