@@ -293,6 +293,7 @@ Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	cl
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/training/activities/api/mountain_route_points_controller.rb	/^    module Api$/;"	m	class:Training.Activities
 Api	app/components/training/activities/api/mountain_routes_controller.rb	/^    module Api$/;"	m	class:Training.Activities
+Api	app/components/training/supplementary/api/courses_controller.rb	/^    module Api$/;"	m	class:Training.Supplementary
 Api	app/controllers/api/base_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/payments_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/users_controller.rb	/^module Api$/;"	m
@@ -415,6 +416,7 @@ CourseRecord	app/components/training/db/course_record.rb	/^    class CourseRecor
 CourseRecord	app/components/training/supplementary/course_record.rb	/^    class CourseRecord < ActiveRecord::Base$/;"	c	class:Training.Supplementary
 CoursesController	app/components/business/api/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Business.Api
 CoursesController	app/components/business/courses_controller.rb	/^  class CoursesController < ApplicationController$/;"	c	class:Business
+CoursesController	app/components/training/supplementary/api/courses_controller.rb	/^      class CoursesController < ApplicationController$/;"	c	class:Training.Supplementary.Api
 CoursesController	app/components/training/supplementary/courses_controller.rb	/^    class CoursesController < ApplicationController$/;"	c	class:Training.Supplementary
 Create	app/components/events/admin/competitions/create.rb	/^      class Create$/;"	c	class:Events.Admin.Competitions
 Create	app/components/events/competitions/sign_ups/create.rb	/^      class Create$/;"	c	class:Events.Competitions.SignUps
@@ -954,6 +956,7 @@ Status	app/services/payments/dotpay/status.rb	/^    class Status$/;"	c	class:Pay
 Store	app/components/importing/store.rb	/^  class Store$/;"	c	class:Importing
 StrzeleckiMembers	db/migrate/20170123172753_strzelecki_members.rb	/^class StrzeleckiMembers < ActiveRecord::Migration[5.0]$/;"	c
 Success	lib/success.rb	/^class Success < Result$/;"	c
+Supplementary	app/components/training/supplementary/api/courses_controller.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/baner_uploader.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/course.rb	/^  module Supplementary$/;"	m	class:Training
 Supplementary	app/components/training/supplementary/course_record.rb	/^  module Supplementary$/;"	m	class:Training
@@ -1013,6 +1016,7 @@ Training	app/components/training/questionare/snw_profile_form.rb	/^module Traini
 Training	app/components/training/questionare/snw_profile_record.rb	/^module Training$/;"	m
 Training	app/components/training/questionare/snw_profile_repository.rb	/^module Training$/;"	m
 Training	app/components/training/questionare/snw_profile_service.rb	/^module Training$/;"	m
+Training	app/components/training/supplementary/api/courses_controller.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/baner_uploader.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/course.rb	/^module Training$/;"	m
 Training	app/components/training/supplementary/course_record.rb	/^module Training$/;"	m
