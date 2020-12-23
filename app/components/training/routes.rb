@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :activities do
       namespace :api do
         resources :mountain_route_points
+        resources :mountain_routes, only: :index
       end
       resources :ski_routes
       resources :contracts

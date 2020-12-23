@@ -52,8 +52,14 @@ module Db
         end
       end
 
+      def colleagues_avatars
+        colleagues.map(&:avatar)
+      end
+
       def persons
-        colleagues.map(&:display_name).push(partners).to_sentence
+        cn = colleagues.map(&:display_name)
+        cn = cn.push(partners) if partners.present?
+        cn.to_sentence
       end
 
       def colleagues_names=(ids)

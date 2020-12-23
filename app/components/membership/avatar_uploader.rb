@@ -10,6 +10,10 @@ module Membership
 
     process resize_to_limit: [250, 250]
 
+    def default_url(*args)
+      ActionController::Base.helpers.image_url('default-avatar.png')
+    end
+
     def store_dir
       "membership/avatars/#{model.id}"
     end

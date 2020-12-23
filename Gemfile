@@ -6,6 +6,7 @@ gem 'bootsnap', require: false
 gem 'rails', '>= 5.2.3', '< 6.0'
 gem 'pg'
 gem 'sass-rails'
+gem 'active_model_serializers'
 gem 'flag-icons-rails'
 gem 'uglifier'
 gem 'coffee-rails'
