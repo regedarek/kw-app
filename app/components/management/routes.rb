@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       end
     end
     scope module: 'news' do
+      namespace :api do
+        resources :informations, only: :index
+      end
       resources :informations, path: 'informacje'
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_182040) do
+ActiveRecord::Schema.define(version: 2020_12_25_102613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -428,6 +428,9 @@ ActiveRecord::Schema.define(version: 2020_12_02_182040) do
     t.integer "news_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "group_type", default: 0, null: false
+    t.boolean "starred", default: false, null: false
+    t.boolean "web", default: false, null: false
   end
 
   create_table "management_vote_users", force: :cascade do |t|

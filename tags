@@ -128,6 +128,7 @@ AddFinancialTypeToContracts	db/migrate/20190529221052_add_financial_type_to_cont
 AddFirstNameLastNamePhoneEmailToProfiles	db/migrate/20170419233047_add_first_name_last_name_phone_email_to_profiles.rb	/^class AddFirstNameLastNamePhoneEmailToProfiles < ActiveRecord::Migration[5.0]$/;"	c
 AddGender1ToStrzeleckiSignUps	db/migrate/20170216123354_add_gender_1_to_strzelecki_sign_ups.rb	/^class AddGender1ToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddGpsTracksToMountainRoutes	db/migrate/20191110231247_add_gps_tracks_to_mountain_routes.rb	/^class AddGpsTracksToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
+AddGroupTypeToManagementInformations	db/migrate/20201225101516_add_group_type_to_management_informations.rb	/^class AddGroupTypeToManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 AddGroupTypeToSettlementContracts	db/migrate/20190520230400_add_group_type_to_settlement_contracts.rb	/^class AddGroupTypeToSettlementContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddHeartsCountToHearts	db/migrate/20180815110926_add_hearts_count_to_hearts.rb	/^class AddHeartsCountToHearts < ActiveRecord::Migration[5.0]$/;"	c
 AddHiddenToManagementCases	db/migrate/20190517235048_add_hidden_to_management_cases.rb	/^class AddHiddenToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
@@ -229,6 +230,7 @@ AddSlugToSupplementaryCourses	db/migrate/20181003133537_add_slug_to_supplementar
 AddSlugToUsers	db/migrate/20190428183425_add_slug_to_users.rb	/^class AddSlugToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddSnwBlogToUsers	db/migrate/20191104103236_add_snw_blog_to_users.rb	/^class AddSnwBlogToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddSnwGroupsToUsers	db/migrate/20191111000949_add_snw_groups_to_users.rb	/^class AddSnwGroupsToUsers < ActiveRecord::Migration[5.2]$/;"	c
+AddStarredToManagementInformations	db/migrate/20201225102500_add_starred_to_management_informations.rb	/^class AddStarredToManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 AddStartDateAndEndDateToReservations	db/migrate/20150525130553_add_start_date_and_end_date_to_reservations.rb	/^class AddStartDateAndEndDateToReservations < ActiveRecord::Migration[5.0]$/;"	c
 AddStateToProjects	db/migrate/20190418115538_add_state_to_projects.rb	/^class AddStateToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddStateToSupplementaryCourses	db/migrate/20191005235658_add_state_to_supplementary_courses.rb	/^class AddStateToSupplementaryCourses < ActiveRecord::Migration[5.2]$/;"	c
@@ -253,6 +255,7 @@ AddUlrsToUsers	db/migrate/20191103181309_add_ulrs_to_users.rb	/^class AddUlrsToU
 AddUserIdToYearlyFees	db/migrate/20160830133030_add_user_id_to_yearly_fees.rb	/^class AddUserIdToYearlyFees < ActiveRecord::Migration[5.0]$/;"	c
 AddVotingTypeToManagementVotes	db/migrate/20201021100741_add_voting_type_to_management_votes.rb	/^class AddVotingTypeToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 AddWarningsToItems	db/migrate/20160808191833_add_warnings_to_items.rb	/^class AddWarningsToItems < ActiveRecord::Migration[5.0]$/;"	c
+AddWebToManagementInformations	db/migrate/20201225102613_add_web_to_management_informations.rb	/^class AddWebToManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 AddWhoIdToManagementVotes	db/migrate/20201020164902_add_who_id_to_management_votes.rb	/^class AddWhoIdToManagementVotes < ActiveRecord::Migration[5.2]$/;"	c
 AddWhoIdsToManagementUsers	db/migrate/20201020164758_add_who_ids_to_management_users.rb	/^class AddWhoIdsToManagementUsers < ActiveRecord::Migration[5.2]$/;"	c
 Admin	app/components/admin/items.rb	/^module Admin$/;"	m
@@ -288,6 +291,7 @@ Api	app/components/blog/api/authors_controller.rb	/^  module Api$/;"	m	class:Blo
 Api	app/components/blog/api/dashboard_controller.rb	/^  module Api$/;"	m	class:Blog
 Api	app/components/business/api/courses_controller.rb	/^  module Api$/;"	m	class:Business
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
+Api	app/components/management/news/api/informations_controller.rb	/^    module Api$/;"	m	class:Management.News
 Api	app/components/management/snw/api/snw_applies_controller.rb	/^    module Api$/;"	m	class:Management.Snw
 Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
@@ -641,6 +645,7 @@ Importing	app/components/importing/store.rb	/^module Importing$/;"	m
 Importing	app/components/importing/user.rb	/^module Importing$/;"	m
 ImportingController	app/controllers/admin/importing_controller.rb	/^  class ImportingController < Admin::BaseController$/;"	c	class:Admin
 InformationRecord	app/components/management/news/information_record.rb	/^    class InformationRecord < ActiveRecord::Base$/;"	c	class:Management.News
+InformationsController	app/components/management/news/api/informations_controller.rb	/^      class InformationsController < ApplicationController$/;"	c	class:Management.News.Api
 InformationsController	app/components/management/news/informations_controller.rb	/^    class InformationsController < ApplicationController$/;"	c	class:Management.News
 InputCleaner	lib/input_cleaner.rb	/^module InputCleaner$/;"	m
 InstructorRecord	app/components/business/instructor_record.rb	/^  class InstructorRecord < ActiveRecord::Base$/;"	c	class:Business
@@ -675,6 +680,7 @@ Mailer	app/components/management/snw/mailer.rb	/^    class Mailer < ApplicationM
 Mailer	app/components/management/voting/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Voting
 Management	app/components/management/attachment_uploader.rb	/^module Management$/;"	m
 Management	app/components/management/create_project.rb	/^  module Management$/;"	m
+Management	app/components/management/news/api/informations_controller.rb	/^module Management$/;"	m
 Management	app/components/management/news/information_record.rb	/^module Management$/;"	m
 Management	app/components/management/news/informations_controller.rb	/^module Management$/;"	m
 Management	app/components/management/project_form.rb	/^module Management$/;"	m
@@ -747,6 +753,7 @@ MountainRouteRecord	app/components/activities/mountain_route_record.rb	/^  class
 MountainRouteSerializer	app/components/training/activities/serializers/mountain_route_serializer.rb	/^      class MountainRouteSerializer < ActiveModel::Serializer$/;"	c	class:Training.Activities.Serializers
 MountainRoutesController	app/components/training/activities/api/mountain_routes_controller.rb	/^      class MountainRoutesController < ApplicationController$/;"	c	class:Training.Activities.Api
 MountainRoutesController	app/controllers/activities/mountain_routes_controller.rb	/^  class MountainRoutesController < ApplicationController$/;"	c	class:Activities
+News	app/components/management/news/api/informations_controller.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/information_record.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/informations_controller.rb	/^  module News$/;"	m	class:Management
 Notification	app/components/notification_center/notification.rb	/^  class Notification < Dry::Struct$/;"	c	class:NotificationCenter
@@ -1593,6 +1600,9 @@ change	db/migrate/20201114112345_add_category_type_to_marketing_discounts.rb	/^ 
 change	db/migrate/20201125100729_add_photo_to_profiles.rb	/^  def change$/;"	f	class:AddPhotoToProfiles
 change	db/migrate/20201201201134_add_boars_length_to_mountain_routes.rb	/^  def change$/;"	f	class:AddBoarsLengthToMountainRoutes
 change	db/migrate/20201202182040_create_training_user_contracts.rb	/^  def change$/;"	f	class:CreateTrainingUserContracts
+change	db/migrate/20201225101516_add_group_type_to_management_informations.rb	/^  def change$/;"	f	class:AddGroupTypeToManagementInformations
+change	db/migrate/20201225102500_add_starred_to_management_informations.rb	/^  def change$/;"	f	class:AddStarredToManagementInformations
+change	db/migrate/20201225102613_add_web_to_management_informations.rb	/^  def change$/;"	f	class:AddWebToManagementInformations
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1979,6 +1989,7 @@ index	app/components/events/admin/competitions_controller.rb	/^      def index$/
 index	app/components/events/competitions/sign_ups_controller.rb	/^      def index$/;"	f	class:Events.Competitions.SignUpsController
 index	app/components/library/admin/tags_controller.rb	/^      def index$/;"	f	class:Library.Admin.TagsController
 index	app/components/library/items_controller.rb	/^    def index$/;"	f	class:Library.ItemsController
+index	app/components/management/news/api/informations_controller.rb	/^        def index$/;"	f	class:Management.News.Api.InformationsController
 index	app/components/management/news/informations_controller.rb	/^      def index$/;"	f	class:Management.News.InformationsController
 index	app/components/management/projects_controller.rb	/^    def index$/;"	f	class:Management.ProjectsController
 index	app/components/management/settings_controller.rb	/^    def index$/;"	f	class:Management.SettingsController
