@@ -1,6 +1,13 @@
 .row
-  .large-12.columns
+  .large-8.columns
     h3 Biuletyny, sprawozdania, ogłoszenia
+  - if can? :create, Management::News::InformationRecord
+    .large-4.columns
+      .text-right
+        = link_to 'Dodaj', new_information_path, class: 'button'
+
+.row
+  .large-12.columns
     table.responsive
       thead
         tr
