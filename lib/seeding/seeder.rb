@@ -231,7 +231,8 @@ module Seeding
             estimated_time: Faker::Lorem.paragraph,
             know_how: Faker::Lorem.paragraph,
             users: Db::User.all.sample(2),
-            state: [:draft, :unassigned, :in_progress, :suspended, :archived].sample
+            state: [:draft, :unassigned, :in_progress, :suspended, :archived].sample,
+            group_type: [:kw, :snw, :sww].sample
           )
         end
       end
