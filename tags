@@ -645,6 +645,7 @@ Importing	app/components/importing/store.rb	/^module Importing$/;"	m
 Importing	app/components/importing/user.rb	/^module Importing$/;"	m
 ImportingController	app/controllers/admin/importing_controller.rb	/^  class ImportingController < Admin::BaseController$/;"	c	class:Admin
 InformationRecord	app/components/management/news/information_record.rb	/^    class InformationRecord < ActiveRecord::Base$/;"	c	class:Management.News
+InformationSerializer	app/components/management/news/information_serializer.rb	/^    class InformationSerializer < ActiveModel::Serializer$/;"	c	class:Management.News
 InformationsController	app/components/management/news/api/informations_controller.rb	/^      class InformationsController < ApplicationController$/;"	c	class:Management.News.Api
 InformationsController	app/components/management/news/informations_controller.rb	/^    class InformationsController < ApplicationController$/;"	c	class:Management.News
 InputCleaner	lib/input_cleaner.rb	/^module InputCleaner$/;"	m
@@ -682,6 +683,7 @@ Management	app/components/management/attachment_uploader.rb	/^module Management$
 Management	app/components/management/create_project.rb	/^  module Management$/;"	m
 Management	app/components/management/news/api/informations_controller.rb	/^module Management$/;"	m
 Management	app/components/management/news/information_record.rb	/^module Management$/;"	m
+Management	app/components/management/news/information_serializer.rb	/^module Management$/;"	m
 Management	app/components/management/news/informations_controller.rb	/^module Management$/;"	m
 Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
@@ -755,6 +757,7 @@ MountainRoutesController	app/components/training/activities/api/mountain_routes_
 MountainRoutesController	app/controllers/activities/mountain_routes_controller.rb	/^  class MountainRoutesController < ApplicationController$/;"	c	class:Activities
 News	app/components/management/news/api/informations_controller.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/information_record.rb	/^  module News$/;"	m	class:Management
+News	app/components/management/news/information_serializer.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/informations_controller.rb	/^  module News$/;"	m	class:Management
 Notification	app/components/notification_center/notification.rb	/^  class Notification < Dry::Struct$/;"	c	class:NotificationCenter
 Notification	app/services/payments/dotpay/notification.rb	/^    class Notification$/;"	c	class:Payments.Dotpay

@@ -13,7 +13,7 @@ module Management
 
           @pagy, records = pagy(informations)
 
-          render json: records, each_serializer: Training::Supplementary::Serializers::CourseSerializer
+          render json: records, each_serializer: Management::News::InformationSerializer
         end
       end
     end
