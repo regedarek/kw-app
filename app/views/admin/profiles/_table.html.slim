@@ -1,19 +1,21 @@
 table.stack
   thead
     tr
+      th width='2%'
       th width='20%' Imię i nazwisko
-      th width='10%' Number klubowy
-      th width='10%' Telefon
-      th width='5%' Płatności
-      th width='20%' Status
+      - if profiles.any?{|p| p.kw_id}
+        th width='10%' Number klubowy
+      th width='8%' Płatności
+      th width='25%' Status
       th width='10%'
   tbody
     - profiles.each_with_index do |profile, i|
       tr
+        td=i+1
         td
           b = "#{profile.first_name} #{profile.last_name}"
-        td.text-center = profile.kw_id
-        td.text-center = profile.phone
+        - if profiles.any?{|p| p.kw_id}
+          td.text-center = profile.kw_id
         td.text-center
           - if profile.payment
             - if profile.payment.prepaid?
@@ -44,6 +46,9 @@ table.stack
                   i.fi.fi-check style='color: green'
                 - else
                   i.fi.fi-check style='color: red'
+            span data-tooltip='' tabindex="1" title="#{profile.phone}" data-allow-html="true" class='has-tip'
+              = link_to admin_profile_path(profile.id), style: 'padding: 5px' do
+                i.fi.fi-telephone
             = link_to edit_admin_profile_path(profile.id), style: 'padding: 5px' do
               i.fi.fi-page-edit
             = link_to profile_path(profile.id, format: :pdf), style: 'padding: 5px' do
