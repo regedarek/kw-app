@@ -10,7 +10,7 @@ module NotificationCenter
         mail(
           to: [comment.commentable.colleagues, comment.commentable.comments.map(&:user)].flatten.uniq.map(&:email) - [@comment.user.email],
           from: 'no-reply@kw.krakow.pl',
-          subject: "Nowy komentarz dotyczący twojego przejścia: #{comment.commentable.name}"
+          subject: "Panel KW Kraków - Nowy komentarz dotyczący twojego przejścia: #{comment.commentable.name}"
         )
       end
     end
