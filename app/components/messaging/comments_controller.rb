@@ -24,8 +24,8 @@ module Messaging
             notifiable_id: comment.commentable_id,
             notifiable_type: 'Db::Activities::MountainRoute'
           )
-          NotificationCenter::Mailers::CommentsMailer.notify(comment).deliver_later
         end
+        NotificationCenter::Mailers::CommentsMailer.notify(comment).deliver_later
       when 'Settlement::ContractRecord'
         office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
         contract_user_ids = comment.commentable.users.map(&:id)
