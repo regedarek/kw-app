@@ -68,6 +68,8 @@ module Seeding
           user = Db::User.new(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
           user.password = "test#{profile.id}"
           user.save
+          fee = user.membership_fees.create year: Date.today.year, cost: 100, kw_id: user.kw_id, creator_id: user.id
+          fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         end
         Factories::Profile.create!(
           first_name: 'Dariusz',
