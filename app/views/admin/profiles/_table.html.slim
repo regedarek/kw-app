@@ -17,23 +17,26 @@ table.stack
         - if profiles.any?{|p| p.kw_id}
           td.text-center = profile.kw_id
         td.text-center
-          - if profile.payment
-            - if profile.payment.prepaid?
-              span.label.success=profile.cost
-              span.label.success=Membership::Activement.new.payment_year
-            - else
-              span.label.secondary=profile.cost
-              span.label.secondary=Membership::Activement.new.payment_year
-          - if profile && profile.kw_id
-            - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
-            - if fee
-              - if fee.year.to_i != Date.today.year.to_i
-                span.label.alert = fee.year
+          - if profile.position.any?{ |p| ['honorable_kw', 'senior', 'regular']
+            span.label.success zwolniony
+          - else
+            - if profile.payment
+              - if profile.payment.prepaid?
+                span.label.success=profile.cost
+                span.label.success=Membership::Activement.new.payment_year
               - else
-                - if fee.payment && fee.payment.paid?
-                  span.label.success = fee.year
+                span.label.secondary=profile.cost
+                span.label.secondary=Membership::Activement.new.payment_year
+            - if profile && profile.kw_id
+              - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
+              - if fee
+                - if fee.year.to_i != Membership::Activement.new.payment_year
+                  span.label.alert = fee.year
                 - else
-                  span.label.warning = fee.year
+                  - if fee.payment && fee.payment.paid?
+                    span.label.success = fee.year
+                  - else
+                    span.label.warning = fee.year
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td.text-right
           .icon-bar
