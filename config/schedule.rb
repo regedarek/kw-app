@@ -44,7 +44,7 @@ every '45 20 * * *' do
 end
 
 every '40 12 * * *' do
-  rake :store_weather
+  #rake :store_weather
 end
 
 every '0 0 1 9 *' do
