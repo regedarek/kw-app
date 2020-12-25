@@ -6,6 +6,7 @@ module Messaging
 
       def index
         comments = Messaging::CommentRecord.order(created_at: :desc)
+        comments = comments.where(user_id: params[:user_id]) if params[:user_id]
 
         @pagy, records = pagy(comments)
 
