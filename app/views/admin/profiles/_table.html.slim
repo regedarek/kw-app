@@ -30,8 +30,8 @@ table.stack
             - if profile && profile.kw_id
               - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
               - if fee
-                - if fee.year.to_i != Membership::Activement.new.payment_year || fee.year.to_i != Date.today.year
-                  span.label.alert = fee.year
+                - if fee.year.to_i == Membership::Activement.new.payment_year || fee.year.to_i == Date.today.year
+                  span.label.success = fee.year
                 - else
                   - if fee.payment && fee.payment.paid?
                     span.label.success = fee.year
