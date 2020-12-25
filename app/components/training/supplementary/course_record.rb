@@ -18,6 +18,7 @@ module Training
         foreign_key: :supplementary_course_record_id
       has_many :contract_events, class_name: 'Settlement::ContractEventsRecord', foreign_key: :event_id
       has_many :contracts, through: :contract_events, foreign_key: :contract_id, dependent: :destroy
+      belongs_to :organizer, class_name: 'Db::User', foreign_key: :organizator_id
 
       accepts_nested_attributes_for :package_types,
         reject_if: proc { |attributes| attributes[:name].blank? },
@@ -30,10 +31,6 @@ module Training
           [:name],
           [:name, :id]
         ]
-      end
-
-      def organizer
-        ::Db::User.find(organizator_id)
       end
 
       def states

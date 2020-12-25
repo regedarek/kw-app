@@ -129,6 +129,7 @@ AddFirstNameLastNamePhoneEmailToProfiles	db/migrate/20170419233047_add_first_nam
 AddGender1ToStrzeleckiSignUps	db/migrate/20170216123354_add_gender_1_to_strzelecki_sign_ups.rb	/^class AddGender1ToStrzeleckiSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddGpsTracksToMountainRoutes	db/migrate/20191110231247_add_gps_tracks_to_mountain_routes.rb	/^class AddGpsTracksToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddGroupTypeToManagementInformations	db/migrate/20201225101516_add_group_type_to_management_informations.rb	/^class AddGroupTypeToManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
+AddGroupTypeToProjects	db/migrate/20201225133659_add_group_type_to_projects.rb	/^class AddGroupTypeToProjects < ActiveRecord::Migration[5.2]$/;"	c
 AddGroupTypeToSettlementContracts	db/migrate/20190520230400_add_group_type_to_settlement_contracts.rb	/^class AddGroupTypeToSettlementContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddHeartsCountToHearts	db/migrate/20180815110926_add_hearts_count_to_hearts.rb	/^class AddHeartsCountToHearts < ActiveRecord::Migration[5.0]$/;"	c
 AddHiddenToManagementCases	db/migrate/20190517235048_add_hidden_to_management_cases.rb	/^class AddHiddenToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
@@ -1109,6 +1110,8 @@ UserManagement	app/components/user_management/reactivate.rb	/^module UserManagem
 UserManagement	app/components/user_management/reactivation_form.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/recalculate_cost.rb	/^module UserManagement$/;"	m
 UserManagement	app/components/user_management/user_application.rb	/^module UserManagement$/;"	m
+UserManagement	app/components/user_management/user_serializer.rb	/^module UserManagement$/;"	m
+UserSerializer	app/components/user_management/user_serializer.rb	/^  class UserSerializer < ActiveModel::Serializer$/;"	c	class:UserManagement
 Users	app/controllers/users/omniauth_callbacks_controller.rb	/^class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController$/;"	c
 UsersController	app/controllers/admin/users_controller.rb	/^  class UsersController < Admin::BaseController$/;"	c	class:Admin
 UsersController	app/controllers/api/users_controller.rb	/^  class UsersController < Api::BaseController$/;"	c	class:Api
@@ -1611,6 +1614,7 @@ change	db/migrate/20201202182040_create_training_user_contracts.rb	/^  def chang
 change	db/migrate/20201225101516_add_group_type_to_management_informations.rb	/^  def change$/;"	f	class:AddGroupTypeToManagementInformations
 change	db/migrate/20201225102500_add_starred_to_management_informations.rb	/^  def change$/;"	f	class:AddStarredToManagementInformations
 change	db/migrate/20201225102613_add_web_to_management_informations.rb	/^  def change$/;"	f	class:AddWebToManagementInformations
+change	db/migrate/20201225133659_add_group_type_to_projects.rb	/^  def change$/;"	f	class:AddGroupTypeToProjects
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1628,7 +1632,6 @@ close_outdated	app/components/management/voting/reminder.rb	/^      def self.clo
 closed_or_limit_reached?	app/components/events/db/competition_record.rb	/^      def closed_or_limit_reached?$/;"	f	class:Events.Db.CompetitionRecord
 clsName	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            var clsName;$/;"	v
 clsName	vendor/assets/javascripts/foundation-datepicker.js	/^            var clsName;$/;"	v
-colleagues_avatars	app/models/db/activities/mountain_route.rb	/^      def colleagues_avatars$/;"	f	class:Db.Activities.MountainRoute
 colleagues_names=	app/components/activities/mountain_route_record.rb	/^    def colleagues_names=(ids)$/;"	f	class:Activities.MountainRouteRecord
 colleagues_names=	app/models/db/activities/mountain_route.rb	/^      def colleagues_names=(ids)$/;"	f	class:Db.Activities.MountainRoute
 collect	app/components/availability/items.rb	/^    def collect$/;"	f	class:Availability.Items
@@ -1656,7 +1659,6 @@ contract_params	app/components/training/activities/contracts_controller.rb	/^   
 contract_params	app/components/training/activities/user_contracts_controller.rb	/^      def contract_params$/;"	f	class:Training.Activities.UserContractsController
 contractor_name=	app/components/settlement/contract_record.rb	/^    def contractor_name=(id)$/;"	f	class:Settlement.ContractRecord
 contractor_params	app/components/settlement/admin/contractors_controller.rb	/^      def contractor_params$/;"	f	class:Settlement.Admin.ContractorsController
-coordinator	app/components/management/project_record.rb	/^    def coordinator$/;"	f	class:Management.ProjectRecord
 cost	app/components/admin/membership_fees_form.rb	/^    def cost$/;"	f	class:Admin.MembershipFeesForm
 cost	app/components/events/db/sign_up_record.rb	/^      def cost$/;"	f	class:Events.Db.SignUpRecord
 cost	app/components/training/supplementary/sign_up_record.rb	/^      def cost$/;"	f	class:Training.Supplementary.SignUpRecord
@@ -2257,7 +2259,6 @@ opt.complete	public/assets/application-adb37b88852cd8099abe934018ff31effd978a251
 options.type	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^          type: method || 'GET', data: data, dataType: dataType,$/;"	p
 options.xhrFields.withCredentials	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^            withCredentials: withCredentials$/;"	p
 organizer	app/components/training/supplementary/course.rb	/^      def organizer$/;"	f	class:Training.Supplementary.Course
-organizer	app/components/training/supplementary/course_record.rb	/^      def organizer$/;"	f	class:Training.Supplementary.CourseRecord
 package_params	app/components/training/supplementary/packages_controller.rb	/^      def package_params$/;"	f	class:Training.Supplementary.PackagesController
 package_type_1	app/components/events/db/sign_up_record.rb	/^      def package_type_1$/;"	f	class:Events.Db.SignUpRecord
 package_type_1_membership?	app/components/events/db/sign_up_record.rb	/^      def package_type_1_membership?$/;"	f	class:Events.Db.SignUpRecord
