@@ -168,7 +168,7 @@ module Seeding
             peak: Faker::Mountain.name,
             area: Faker::Mountain.range,
             mountains: Faker::Mountain.range,
-            colleagues: [Db::User.all.sample, Db::User.all.sample],
+            colleagues: Db::User.all.sample(2),
             difficulty: ['+IV', '6', 'M6', 'V'].sample,
             partners: [Faker::Artist.name, Faker::Artist.name].to_sentence,
             rating: [1, 2, 3].sample,
