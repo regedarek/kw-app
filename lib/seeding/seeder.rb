@@ -220,6 +220,20 @@ module Seeding
             end_application_date: start_time - 1.day
           )
         end
+        Management::ProjectRecord.destroy_all
+        50.times do
+          Management::ProjectRecord.create(
+            name: Faker::Lorem.sentence,
+            description: Faker::Lorem.paragraph,
+            coordinator_id: Db::User.all.map(&:id).sample,
+            needed_knowledge: Faker::Lorem.paragraph,
+            benefits: Faker::Lorem.paragraph,
+            estimated_time: Faker::Lorem.paragraph,
+            know_how: Faker::Lorem.paragraph,
+            users: Db::User.all.sample(2),
+            state: [:draft, :unassigned, :in_progress, :suspended, :archived].sample
+          )
+        end
       end
     end
   end

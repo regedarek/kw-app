@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   scope module: 'management' do
+    namespace :api do
+      resources :projects, only: :index
+    end
     resources :projects, path: 'projekty'
     resources :settings, path: 'ustawienia', only: [:index, :edit, :update]
     scope module: 'voting' do

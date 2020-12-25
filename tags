@@ -291,7 +291,9 @@ Api	app/components/blog/api/authors_controller.rb	/^  module Api$/;"	m	class:Blo
 Api	app/components/blog/api/dashboard_controller.rb	/^  module Api$/;"	m	class:Blog
 Api	app/components/business/api/courses_controller.rb	/^  module Api$/;"	m	class:Business
 Api	app/components/email_center/api/emails_controller.rb	/^  module Api$/;"	m	class:EmailCenter
+Api	app/components/management/api/projects_controller.rb	/^  module Api$/;"	m	class:Management
 Api	app/components/management/news/api/informations_controller.rb	/^    module Api$/;"	m	class:Management.News
+Api	app/components/management/projects/api/projects_controller.rb	/^    module Api$/;"	m	class:Management.Projects
 Api	app/components/management/snw/api/snw_applies_controller.rb	/^    module Api$/;"	m	class:Management.Snw
 Api	app/components/scrappers/api/meteoblue_controller.rb	/^  module Api$/;"	m	class:Scrappers
 Api	app/components/scrappers/api/pogodynka_controller.rb	/^  module Api$/;"	m	class:Scrappers
@@ -679,6 +681,7 @@ Limiter	app/components/training/supplementary/limiter.rb	/^    class Limiter$/;"
 ListsController	app/components/user_management/lists_controller.rb	/^  class ListsController < ApplicationController$/;"	c	class:UserManagement
 Mailer	app/components/management/snw/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Snw
 Mailer	app/components/management/voting/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Voting
+Management	app/components/management/api/projects_controller.rb	/^module Management$/;"	m
 Management	app/components/management/attachment_uploader.rb	/^module Management$/;"	m
 Management	app/components/management/create_project.rb	/^  module Management$/;"	m
 Management	app/components/management/news/api/informations_controller.rb	/^module Management$/;"	m
@@ -687,7 +690,10 @@ Management	app/components/management/news/information_serializer.rb	/^module Man
 Management	app/components/management/news/informations_controller.rb	/^module Management$/;"	m
 Management	app/components/management/project_form.rb	/^module Management$/;"	m
 Management	app/components/management/project_record.rb	/^module Management$/;"	m
+Management	app/components/management/project_serializer.rb	/^module Management$/;"	m
 Management	app/components/management/project_users_record.rb	/^module Management$/;"	m
+Management	app/components/management/projects/api/projects_controller.rb	/^module Management$/;"	m
+Management	app/components/management/projects/project_serializer.rb	/^module Management$/;"	m
 Management	app/components/management/projects_controller.rb	/^module Management$/;"	m
 Management	app/components/management/settings_controller.rb	/^module Management$/;"	m
 Management	app/components/management/settings_record.rb	/^module Management$/;"	m
@@ -815,7 +821,13 @@ ProfilesController	app/components/visiting_card/profiles_controller.rb	/^  class
 ProfilesController	app/controllers/admin/profiles_controller.rb	/^  class ProfilesController < Admin::BaseController$/;"	c	class:Admin
 ProfilesController	app/controllers/profiles_controller.rb	/^class ProfilesController < ApplicationController$/;"	c
 ProjectRecord	app/components/management/project_record.rb	/^  class ProjectRecord < ActiveRecord::Base$/;"	c	class:Management
+ProjectSerializer	app/components/management/project_serializer.rb	/^  class ProjectSerializer < ActiveModel::Serializer$/;"	c	class:Management
+ProjectSerializer	app/components/management/projects/project_serializer.rb	/^    class ProjectSerializer < ActiveModel::Serializer$/;"	c	class:Management.Projects
 ProjectUsersRecord	app/components/management/project_users_record.rb	/^  class ProjectUsersRecord < ActiveRecord::Base$/;"	c	class:Management
+Projects	app/components/management/projects/api/projects_controller.rb	/^  module Projects$/;"	m	class:Management
+Projects	app/components/management/projects/project_serializer.rb	/^  module Projects$/;"	m	class:Management
+ProjectsController	app/components/management/api/projects_controller.rb	/^    class ProjectsController < ApplicationController$/;"	c	class:Management.Api
+ProjectsController	app/components/management/projects/api/projects_controller.rb	/^      class ProjectsController < ApplicationController$/;"	c	class:Management.Projects.Api
 ProjectsController	app/components/management/projects_controller.rb	/^  class ProjectsController < ApplicationController$/;"	c	class:Management
 Questionare	app/components/training/questionare/snw_profile.rb	/^  module Questionare$/;"	m	class:Training
 Questionare	app/components/training/questionare/snw_profile_form.rb	/^  module Questionare$/;"	m	class:Training
@@ -1992,8 +2004,10 @@ index	app/components/events/admin/competitions_controller.rb	/^      def index$/
 index	app/components/events/competitions/sign_ups_controller.rb	/^      def index$/;"	f	class:Events.Competitions.SignUpsController
 index	app/components/library/admin/tags_controller.rb	/^      def index$/;"	f	class:Library.Admin.TagsController
 index	app/components/library/items_controller.rb	/^    def index$/;"	f	class:Library.ItemsController
+index	app/components/management/api/projects_controller.rb	/^      def index$/;"	f	class:Management.Api.ProjectsController
 index	app/components/management/news/api/informations_controller.rb	/^        def index$/;"	f	class:Management.News.Api.InformationsController
 index	app/components/management/news/informations_controller.rb	/^      def index$/;"	f	class:Management.News.InformationsController
+index	app/components/management/projects/api/projects_controller.rb	/^        def index$/;"	f	class:Management.Projects.Api.ProjectsController
 index	app/components/management/projects_controller.rb	/^    def index$/;"	f	class:Management.ProjectsController
 index	app/components/management/settings_controller.rb	/^    def index$/;"	f	class:Management.SettingsController
 index	app/components/management/snw/api/snw_applies_controller.rb	/^        def index$/;"	f	class:Management.Snw.Api.SnwAppliesController
