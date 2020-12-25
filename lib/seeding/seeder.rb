@@ -173,7 +173,7 @@ module Seeding
             partners: [Faker::Artist.name, Faker::Artist.name].to_sentence,
             rating: [1, 2, 3].sample,
             climbing_date: Faker::Date.backward(days: 23),
-            route_type: [0, 1, 2].sample,
+            route_type: [0, 1].sample,
             length: Faker::Number.within(range: 100..2500),
             hidden: Faker::Boolean.boolean(true_ratio: 0.2),
             training: Faker::Boolean.boolean(true_ratio: 0.3)
