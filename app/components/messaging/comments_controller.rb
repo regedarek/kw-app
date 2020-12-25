@@ -7,6 +7,11 @@ module Messaging
       create_notification(@comment)
 
       if @comment.save
+        case @comment.commentable_type
+        when 'Db::Activities::MountainRoute'
+          NotificationCenter::Mailers::CommentsMailer.notify(@comment).deliver_later
+        end
+
         redirect_back(fallback_location: root_path, notice: 'Dodano komentarz!')
       end
     end
@@ -25,7 +30,6 @@ module Messaging
             notifiable_type: 'Db::Activities::MountainRoute'
           )
         end
-        NotificationCenter::Mailers::CommentsMailer.notify(comment).deliver_later
       when 'Settlement::ContractRecord'
         office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
         contract_user_ids = comment.commentable.users.map(&:id)
