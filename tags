@@ -378,6 +378,7 @@ Charity	app/components/charity/donations_controller.rb	/^module Charity$/;"	m
 Charity	app/components/charity/repository.rb	/^module Charity$/;"	m
 CommentRecord	app/components/messaging/comment_record.rb	/^  class CommentRecord < ActiveRecord::Base$/;"	c	class:Messaging
 CommentsController	app/components/messaging/comments_controller.rb	/^  class CommentsController < ApplicationController$/;"	c	class:Messaging
+CommentsMailer	app/components/notification_center/mailers/comments_mailer.rb	/^    class CommentsMailer < ApplicationMailer$/;"	c	class:NotificationCenter.Mailers
 CommissionRecord	app/components/management/voting/commission_record.rb	/^    class CommissionRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
 CommissionsController	app/components/management/voting/commissions_controller.rb	/^    class CommissionsController < ApplicationController$/;"	c	class:Management.Voting
 Competition	app/components/events/competition.rb	/^  class Competition < Dry::Struct$/;"	c	class:Events
@@ -681,6 +682,7 @@ Limiter	app/components/training/supplementary/limiter.rb	/^    class Limiter$/;"
 ListsController	app/components/user_management/lists_controller.rb	/^  class ListsController < ApplicationController$/;"	c	class:UserManagement
 Mailer	app/components/management/snw/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Snw
 Mailer	app/components/management/voting/mailer.rb	/^    class Mailer < ApplicationMailer$/;"	c	class:Management.Voting
+Mailers	app/components/notification_center/mailers/comments_mailer.rb	/^  module Mailers$/;"	m	class:NotificationCenter
 Management	app/components/management/api/projects_controller.rb	/^module Management$/;"	m
 Management	app/components/management/attachment_uploader.rb	/^module Management$/;"	m
 Management	app/components/management/create_project.rb	/^  module Management$/;"	m
@@ -765,6 +767,7 @@ News	app/components/management/news/information_serializer.rb	/^  module News$/;
 News	app/components/management/news/informations_controller.rb	/^  module News$/;"	m	class:Management
 Notification	app/components/notification_center/notification.rb	/^  class Notification < Dry::Struct$/;"	c	class:NotificationCenter
 Notification	app/services/payments/dotpay/notification.rb	/^    class Notification$/;"	c	class:Payments.Dotpay
+NotificationCenter	app/components/notification_center/mailers/comments_mailer.rb	/^module NotificationCenter$/;"	m
 NotificationCenter	app/components/notification_center/notification.rb	/^module NotificationCenter$/;"	m
 NotificationCenter	app/components/notification_center/notification_record.rb	/^module NotificationCenter$/;"	m
 NotificationCenter	app/components/notification_center/notifications_controller.rb	/^module NotificationCenter$/;"	m
@@ -2242,6 +2245,7 @@ not_active	app/models/ability.rb	/^  def not_active$/;"	f	class:Ability
 not_available_items	app/components/availability/items.rb	/^    def not_available_items$/;"	f	class:Availability.Items
 not_myself	app/components/management/voting/commission_record.rb	/^      def not_myself$/;"	f	class:Management.Voting.CommissionRecord
 notify	app/components/management/voting/mailer.rb	/^      def notify(case_id, user_id)$/;"	f	class:Management.Voting.Mailer
+notify	app/components/notification_center/mailers/comments_mailer.rb	/^      def notify(comment)$/;"	f	class:NotificationCenter.Mailers.CommentsMailer
 notify	app/components/settlement/contract_mailer.rb	/^    def notify(contract)$/;"	f	class:Settlement.ContractMailer
 notify_commission	app/components/management/voting/mailer.rb	/^      def notify_commission(commission_id)$/;"	f	class:Management.Voting.Mailer
 obecni	app/components/management/voting/cases_controller.rb	/^      def obecni$/;"	f	class:Management.Voting.CasesController
