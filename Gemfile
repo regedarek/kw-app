@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.3'
+ruby '2.6.6'
 
 # setup
 gem 'bootsnap', require: false
@@ -58,6 +58,8 @@ gem 'dry-types'
 gem 'dry-struct', require: false
 
 gem 'jqplot-rails'
+
+gem 'webpacker', '~> 6.x'
 
 group :development, :staging do
   gem 'faker'
