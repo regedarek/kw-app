@@ -17,7 +17,7 @@ table.stack
         - if profiles.any?{|p| p.kw_id}
           td.text-center = profile.kw_id
         td.text-center
-          - if profile.position.position.any?{ |p| ['honorable_kw', 'senior', 'released'].include?(p) }
+          - if profile.position.any?{ |p| ['honorable_kw', 'senior', 'released'].include?(p) }
             span.label.success zwolniony
           - else
             - if profile.payment
