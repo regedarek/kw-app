@@ -94,6 +94,7 @@ module Seeding
           main_address: Faker::Address.street_address,
           optional_address: Faker::Address.secondary_address
         )
+
         Factories::Profile.create!(
           first_name: 'Piotr',
           last_name: 'Podolski',
@@ -147,6 +148,8 @@ module Seeding
         )
         user3.password = "test"
         user3.save
+        fee = user3.membership_fees.create year: Date.today.year, cost: 100, kw_id: user3.kw_id, creator_id: user3.id
+        fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         user4 = Db::User.new(
           first_name: 'Piotr',
           last_name: 'Podolski',
@@ -157,6 +160,8 @@ module Seeding
         )
         user4.password = "test"
         user4.save
+        fee = user4.membership_fees.create year: Date.today.year, cost: 100, kw_id: user4.kw_id, creator_id: user4.id
+        fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         Db::Item.destroy_all
         (1..10).step(1) do |n|
           Factories::Item.create!(id: n, display_name: Faker::Commerce.product_name, owner: ['snw', 'kw'].sample)
