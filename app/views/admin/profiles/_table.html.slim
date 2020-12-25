@@ -30,13 +30,10 @@ table.stack
             - if profile && profile.kw_id
               - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
               - if fee
-                - if fee.year.to_i == Membership::Activement.new.payment_year || fee.year.to_i == Date.today.year
+                - if fee.payment && fee.payment.prepaid?
                   span.label.success = fee.year
                 - else
-                  - if fee.payment && fee.payment.paid?
-                    span.label.success = fee.year
-                  - else
-                    span.label.warning = fee.year
+                  span.label.warning = fee.year
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td.text-right
           .icon-bar
