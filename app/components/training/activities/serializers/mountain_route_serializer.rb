@@ -13,4 +13,3 @@ module Training
     end
   end
 end
-
