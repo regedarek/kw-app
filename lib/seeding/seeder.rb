@@ -94,7 +94,6 @@ module Seeding
           main_address: Faker::Address.street_address,
           optional_address: Faker::Address.secondary_address
         )
-
         Factories::Profile.create!(
           first_name: 'Piotr',
           last_name: 'Podolski',
@@ -144,7 +143,7 @@ module Seeding
           email: 'dariusz.finster@gmail.com',
           kw_id: 2345,
           phone: Faker::PhoneNumber.cell_phone,
-          admin: true,
+          roles: ['admin', 'office']
         )
         user3.password = "test"
         user3.save
@@ -156,7 +155,7 @@ module Seeding
           email: 'piotr.podolski@gmail.com',
           kw_id: 3123,
           phone: Faker::PhoneNumber.cell_phone,
-          admin: true,
+          roles: ['admin', 'office']
         )
         user4.password = "test"
         user4.save
