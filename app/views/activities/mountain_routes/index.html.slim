@@ -13,10 +13,10 @@
               = image_tag "snw.png",
                 size: '55x55',
                 class: (params[:route_type] == 'ski' ? '' : 'opacity')
-            = link_to params.merge({route_type: :climbing}).to_unsafe_h do
+            = link_to params.merge({route_type: :regular_climbing}).to_unsafe_h do
               = image_tag "sww.jpg",
                 size: '55x55',
-                class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+                class: (params[:route_type] == 'regular_climbing' ? '' : 'opacity')
             = link_to params.merge({boars: true}).to_unsafe_h do
               = image_tag "dzik.jpg",
                 size: '55x55',
@@ -31,10 +31,10 @@
               = image_tag "snw.png",
                 size: '55x55',
                 class: (params[:route_type] == 'ski' ? '' : 'opacity')
-            = link_to params.merge({route_type: :climbing}).to_unsafe_h do
+            = link_to params.merge({route_type: :regular_climbing}).to_unsafe_h do
               = image_tag "sww.jpg",
                 size: '55x55',
-                class: (params[:route_type] == 'climbing' ? '' : 'opacity')
+                class: (params[:route_type] == 'regular_climbing' ? '' : 'opacity')
             = link_to params.merge({boars: true}).to_unsafe_h do
               = image_tag "dzik.jpg",
                 size: '55x55',
@@ -59,7 +59,7 @@
   .row
     .large-12.columns
       - if params[:boars]
-        - if params[:boars] && params[:route_type] == 'climbing'
+        - if params[:boars] && params[:route_type] == 'regular_climbing'
           .row
             .large-6.columns
               = link_to 'Tabela górskich dzików', gorskie_dziki_path, class: 'button warning large expanded'

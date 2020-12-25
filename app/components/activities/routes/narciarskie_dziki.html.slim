@@ -82,11 +82,12 @@
               th width='70px' Punkty
           tbody
             - @my_last_contracts.each do |training_contract|
-              tr
-                td = link_to training_contract.contract.name, activities_contract_path(training_contract.contract_id)
-                td = link_to training_contract.route.name, activities_mountain_route_path(training_contract.route.slug)
-                td = training_contract.route.climbing_date.to_date
-                td = training_contract.contract.score
+              - if training_contract.route
+                tr
+                  td = link_to training_contract.contract.name, activities_contract_path(training_contract.contract_id)
+                  td = link_to training_contract.route.name, activities_mountain_route_path(training_contract.route.slug)
+                  td = training_contract.route.climbing_date.to_date
+                  td = training_contract.contract.score
 
 .row
   .large-12.columns
@@ -100,11 +101,12 @@
           th width='70px' Punkty
       tbody
         - @last_contracts.each do |route_contract|
-          tr
-            td = link_to route_contract.contract.name, activities_contract_path(route_contract.contract_id)
-            td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
-            td = route_contract.route.climbing_date.to_date
-            td = route_contract.contract.score
+          - if route_contract.route
+            tr
+              td = link_to route_contract.contract.name, activities_contract_path(route_contract.contract_id)
+              td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
+              td = route_contract.route.climbing_date.to_date
+              td = route_contract.contract.score
 
 .row
   .large-12.columns
