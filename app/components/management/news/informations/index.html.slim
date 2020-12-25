@@ -7,12 +7,18 @@
           th width='110px' Typ
           th Nazwa
           th.text-right width='110px' Kiedy dodano?
+          - if can? :manage, Management::News::InformationRecord
+            th width='50px'
       tbody
         - @informations.each do |information|
           tr
             td
               = I18n.t(information.news_type)
             td
-              = link_to information.name, information.url, target: :_blank
+              = link_to information.name, information_path(information.id)
             td.text-right
               = information.created_at.to_date
+            - if can? :manage, information
+              td
+                = link_to edit_information_path(information.id), style: 'padding: 5px' do
+                  i.fi.fi-page-edit

@@ -1,0 +1,33 @@
+.row
+  .large-12.columns
+    h4 = @information.name
+
+.row
+  .large-4.columns
+    .callout
+      = I18n.t @information.news_type
+
+  .large-4.columns
+    .callout
+      = I18n.t @information.group_type
+
+  .large-4.columns
+    .callout
+      = @information.starred? ? 'Przyklejone' : 'Zwykłe'
+
+.row
+  .large-12.columns
+    .callout
+      = sanitize @information.description
+
+- if @information.url
+  .row
+    .large-12.columns
+      .callout
+        = link_to @information.url, @information.url
+
+.row
+  .large-12.columns
+    - if can? :edit, @information
+      = link_to 'Edytuj', edit_information_path(@information.id), class: 'button'
+    = link_to 'powrót', informations_path, class: 'button'

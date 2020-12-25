@@ -1836,6 +1836,7 @@ edit	app/components/business/courses_controller.rb	/^    def edit$/;"	f	class:Bu
 edit	app/components/events/admin/competitions_controller.rb	/^      def edit$/;"	f	class:Events.Admin.CompetitionsController
 edit	app/components/events/competitions/sign_ups_controller.rb	/^      def edit$/;"	f	class:Events
 edit	app/components/library/items_controller.rb	/^    def edit$/;"	f	class:Library.ItemsController
+edit	app/components/management/news/informations_controller.rb	/^      def edit$/;"	f	class:Management.News.InformationsController
 edit	app/components/management/projects_controller.rb	/^    def edit$/;"	f	class:Management.ProjectsController
 edit	app/components/management/settings_controller.rb	/^    def edit$/;"	f	class:Management.SettingsController
 edit	app/components/management/snw/snw_applies_controller.rb	/^      def edit$/;"	f	class:Management.Snw.SnwAppliesController
@@ -2060,6 +2061,7 @@ index	app/controllers/payments_controller.rb	/^  def index$/;"	f	class:PaymentsC
 index	app/controllers/photos_controller.rb	/^  def index$/;"	f	class:PhotosController
 index	app/controllers/reservations_controller.rb	/^  def index$/;"	f	class:ReservationsController
 index	app/controllers/users_controller.rb	/^  def index$/;"	f	class:UsersController
+information_params	app/components/management/news/informations_controller.rb	/^      def information_params$/;"	f	class:Management.News.InformationsController
 init	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^init.prototype = jQuery.fn;$/;"	c
 initialize	app/components/admin/items.rb	/^    def initialize(allowed_params)$/;"	f	class:Admin.Items
 initialize	app/components/admin/membership_fees.rb	/^    def initialize(creator_id:, allowed_params:)$/;"	f	class:Admin.MembershipFees
@@ -2426,6 +2428,7 @@ show	app/components/events/admin/competitions_controller.rb	/^      def show$/;"
 show	app/components/library/admin/tags_controller.rb	/^      def show$/;"	f	class:Library.Admin.TagsController
 show	app/components/library/authors_controller.rb	/^    def show$/;"	f	class:Library.AuthorsController
 show	app/components/library/items_controller.rb	/^    def show$/;"	f	class:Library.ItemsController
+show	app/components/management/news/informations_controller.rb	/^      def show$/;"	f	class:Management.News.InformationsController
 show	app/components/management/projects_controller.rb	/^    def show$/;"	f	class:Management.ProjectsController
 show	app/components/management/snw/snw_applies_controller.rb	/^      def show$/;"	f	class:Management.Snw.SnwAppliesController
 show	app/components/management/voting/cases_controller.rb	/^      def show$/;"	f	class:Management.Voting.CasesController
@@ -2566,6 +2569,7 @@ update	app/components/events/admin/competitions_controller.rb	/^      def update
 update	app/components/events/competitions/repository.rb	/^      def update(id:, form_outputs:)$/;"	f	class:Events.Competitions.Repository
 update	app/components/events/competitions/sign_ups_controller.rb	/^      def update$/;"	f	class:Events
 update	app/components/library/items_controller.rb	/^    def update$/;"	f	class:Library.ItemsController
+update	app/components/management/news/informations_controller.rb	/^      def update$/;"	f	class:Management.News.InformationsController
 update	app/components/management/projects_controller.rb	/^    def update$/;"	f	class:Management.ProjectsController
 update	app/components/management/settings_controller.rb	/^    def update$/;"	f	class:Management.SettingsController
 update	app/components/management/snw/snw_applies_controller.rb	/^      def update$/;"	f	class:Management.Snw.SnwAppliesController

@@ -1,1 +1,44 @@
-s
+= form_for @information, as: :information, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if @information.errors.any?
+        .callout.alert
+          ul
+            - @auction.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-4.columns
+      b= f.label :group_type, 'Grupa'
+      = f.select :group_type, Management::News::InformationRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @information.group_type, include_blank: true
+
+    .large-4.columns
+      b= f.label :news_type, 'Type'
+      = f.select :news_type, Management::News::InformationRecord.news_types.map { |w, _| [I18n.t(w), w] }, selected: @information.news_type, include_blank: true
+
+    .large-2.columns
+      b= f.label :web
+      = f.check_box :web
+
+    .large-2.columns
+      b= f.label :starred
+      = f.check_box :starred
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.trix_editor :description, style: 'min-height: 150px'
+
+  .row
+    .large-12.columns
+      = f.label :url
+      = f.text_field :url
+
+  .row
+    .large-12.columns
+      = f.submit class: 'button'
