@@ -5,7 +5,7 @@
 
   .row
     .large-12.columns
-      - @conversation.receipts_for(current_user).includes(:message).order(created_at: :desc).each do |receipt|
+      - @conversation.receipts_for(current_user).includes(:message).order(created_at: :asc).each do |receipt|
         .comment-section-container
           .callout
             .comment-section-author
