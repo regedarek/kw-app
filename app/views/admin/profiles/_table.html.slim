@@ -18,8 +18,10 @@ table.stack
           - if profile.payment
             - if profile.payment.prepaid?
               span.label.success=profile.cost
+              span.label.success=Membership::Activement.new.payment_year
             - else
               span.label.secondary=profile.cost
+              span.label.secondary=Membership::Activement.new.payment_year
           - if profile && profile.kw_id
             - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
             - if fee

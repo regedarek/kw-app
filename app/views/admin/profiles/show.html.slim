@@ -188,12 +188,12 @@
         - if !@profile.accepted
           b Wpisowe oraz pierwsza składka: 
           - if @profile.payment.present?
-            - if @profile.payment.paid?
+            - if @profile.payment.prepaid?
               span.label.success= @profile.cost
-              span.label.success opłacone
+              span.label.success= @profile.created_at.year
             - else
-              span.label.alert= @profile.cost
-              span.label.alert nieopłacone
+              span.label.secondary= @profile.cost
+              span.label.secondary= Membership::Activement.new.payment_year
               br
               - if @profile.payment.payment_url
                 = link_to 'Link do płatności', @profile.payment.payment_url
