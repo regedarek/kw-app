@@ -15,6 +15,9 @@ table.stack
         td.text-center = profile.kw_id
         td.text-center = profile.phone
         td.text-center
+          - if profile.payment
+            - if profile.payment.prepaid?
+              span.label.warning=profile.cost
           - if profile && profile.kw_id
             - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
             - if fee
@@ -28,7 +31,7 @@ table.stack
           - else
             - if profile.payment
               - if profile.payment.prepaid?
-                span.label.success wpisowe
+                span.label.warning=profile.cost
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td.text-right
           .icon-bar
