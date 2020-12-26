@@ -502,7 +502,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    webpacker (6.0.0.pre.2)
+    webpacker (5.2.1)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -582,7 +582,7 @@ DEPENDENCIES
   uglifier
   virtus
   webmock
-  webpacker (~> 6.x)
+  webpacker (~> 5.x)
   whenever
   workflow
 

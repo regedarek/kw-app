@@ -59,7 +59,7 @@ gem 'dry-struct', require: false
 
 gem 'jqplot-rails'
 
-gem 'webpacker', '~> 6.x'
+gem 'webpacker', '~> 5.x'
 
 group :development, :staging do
   gem 'faker'
