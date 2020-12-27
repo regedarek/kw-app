@@ -1,4 +1,6 @@
 - if user_signed_in? && current_user.active?
+  = javascript_pack_tag 'react_components'
+  div(id="test")
   .row
     .large-12.columns style='text-align: center'
       = image_tag asset_path('kw-bg-home.jpg')
@@ -30,6 +32,7 @@
     .large-6.columns
       = link_to supplementary_courses_path do
         h4 Nadchodzące wydarzenia
+      div(id="events_component")
       table.stack
         - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
           tr

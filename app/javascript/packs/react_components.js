@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from "./hello_react";
+import EventsCalendarContainer from "./eventsCalendarContainer";
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-      <Hello name="React" />,
-      document.getElementById("test"),
+      <EventsCalendarContainer />,
+      document.getElementById("events_component"),
     )
   })
   
