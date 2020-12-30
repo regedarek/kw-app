@@ -1,6 +1,5 @@
 # Load DSL and set up stages
 require "capistrano/setup"
-require "capistrano/webpacker/precompile"
 
 # Include default deployment tasks
 require "capistrano/deploy"
