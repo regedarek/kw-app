@@ -20,6 +20,8 @@ module Training
       has_many :contracts, through: :contract_events, foreign_key: :contract_id, dependent: :destroy
       belongs_to :organizer, class_name: 'Db::User', foreign_key: :organizator_id
 
+      scope :upcoming, lambda { where("start_date >= ?", Date.today).order("start_date") }
+
       accepts_nested_attributes_for :package_types,
         reject_if: proc { |attributes| attributes[:name].blank? },
         allow_destroy: true

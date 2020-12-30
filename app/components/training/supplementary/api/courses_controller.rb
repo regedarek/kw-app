@@ -6,7 +6,7 @@ module Training
         after_action { pagy_headers_merge(@pagy) if @pagy }
 
         def index
-          courses = Training::Supplementary::CourseRecord.published
+          courses = Training::Supplementary::CourseRecord.published.upcoming
           courses = courses.where(category: params[:category]) if params[:category]
           courses = courses.where(kind: params[:kind]) if params[:kind]
           courses = courses.order(params[:order] => :desc) if params[:order]
