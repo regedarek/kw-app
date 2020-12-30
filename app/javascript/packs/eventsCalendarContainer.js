@@ -11,7 +11,7 @@ class EventsCalendarContainer extends React.Component {
   }
   
   componentDidMount() {
-    fetch('/supplementary/api/courses?order=id')
+    fetch('/supplementary/api/courses?order=start_date')
       .then(response => response.json())
       .then(data => {
         this.setState({
