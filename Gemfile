@@ -67,7 +67,6 @@ end
 
 group :development do
   gem 'brakeman', require: false
-  gem 'capistrano-webpacker-precompile', require: false
 end
 
 group :development, :test do
