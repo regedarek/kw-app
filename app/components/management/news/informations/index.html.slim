@@ -22,7 +22,7 @@
             td
               = I18n.t(information.news_type)
             td
-              = link_to information.name, information_path(information.id)
+              = link_to information.name, information_path(information.slug)
             td.text-right
               = information.created_at.to_date
             - if can? :manage, information

@@ -24,20 +24,20 @@ module Management
       end
 
       def show
-        @information = InformationRecord.find(params[:id])
+        @information = InformationRecord.friendly.find(params[:id])
       end
 
       def edit
-        @information = InformationRecord.find(params[:id])
+        @information = InformationRecord.friendly.find(params[:id])
       end
 
       def update
-        @information = InformationRecord.find(params[:id])
+        @information = InformationRecord.friendly.find(params[:id])
 
         authorize! :manage, @information
 
         if @information.update(information_params)
-          redirect_to "/informacje/#{@information.id}", notice: 'Zaktualizowano informację'
+          redirect_to "/informacje/#{@information.slug}", notice: 'Zaktualizowano informację'
         else
           render :edit
         end
@@ -46,7 +46,7 @@ module Management
       private
 
       def information_params
-        params.require(:information).permit(:name, :description, :news_type, :group_type, :starred, :web, :url)
+        params.require(:information).permit(:name, :description, :news_type, :group_type, :starred, :web, :url, attachments: [])
       end
     end
   end

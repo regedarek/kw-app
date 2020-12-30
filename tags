@@ -61,6 +61,7 @@ AddAreaToMountainRoutes	db/migrate/20170218114045_add_area_to_mountain_routes.rb
 AddAreaToPhotoRequests	db/migrate/20181008200214_add_area_to_photo_requests.rb	/^class AddAreaToPhotoRequests < ActiveRecord::Migration[5.0]$/;"	c
 AddAttachmentToContracts	db/migrate/20190225154133_add_attachment_to_contracts.rb	/^class AddAttachmentToContracts < ActiveRecord::Migration[5.2]$/;"	c
 AddAttachmentsToManagementCases	db/migrate/20190502125314_add_attachments_to_management_cases.rb	/^class AddAttachmentsToManagementCases < ActiveRecord::Migration[5.2]$/;"	c
+AddAttachmentsToManagementInformations	db/migrate/20201230154736_add_attachments_to_management_informations.rb	/^class AddAttachmentsToManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 AddAuthorUrlToUsers	db/migrate/20191102143605_add_author_url_to_users.rb	/^class AddAuthorUrlToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddAvatarToUsers	db/migrate/20180807194525_add_avatar_to_users.rb	/^class AddAvatarToUsers < ActiveRecord::Migration[5.0]$/;"	c
 AddBanerToCourses	db/migrate/20180727143023_add_baner_to_courses.rb	/^class AddBanerToCourses < ActiveRecord::Migration[5.0]$/;"	c
@@ -226,6 +227,7 @@ AddSingleToCompetitions	db/migrate/20180109213000_add_single_to_competitions.rb	
 AddSingleToEventSignUps	db/migrate/20180109200332_add_single_to_event_sign_ups.rb	/^class AddSingleToEventSignUps < ActiveRecord::Migration[5.0]$/;"	c
 AddSkiHaterToUsers	db/migrate/20190211101902_add_ski_hater_to_users.rb	/^class AddSkiHaterToUsers < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugIndexToCourses	db/migrate/20181003141613_add_slug_index_to_courses.rb	/^class AddSlugIndexToCourses < ActiveRecord::Migration[5.0]$/;"	c
+AddSlugToManagementInformations	db/migrate/20201230153044_add_slug_to_management_informations.rb	/^class AddSlugToManagementInformations < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToMarketingDiscounts	db/migrate/20201114111018_add_slug_to_marketing_discounts.rb	/^class AddSlugToMarketingDiscounts < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToMountainRoutes	db/migrate/20190428175444_add_slug_to_mountain_routes.rb	/^class AddSlugToMountainRoutes < ActiveRecord::Migration[5.2]$/;"	c
 AddSlugToProjects	db/migrate/20190428183401_add_slug_to_projects.rb	/^class AddSlugToProjects < ActiveRecord::Migration[5.2]$/;"	c
@@ -316,6 +318,7 @@ AreaRecord	app/components/library/area_record.rb	/^  class AreaRecord < ActiveRe
 Arel	config/initializers/ransack.rb	/^module Arel$/;"	m
 AttachmentUploader	app/components/library/attachment_uploader.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Library
 AttachmentUploader	app/components/management/attachment_uploader.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Management
+AttachmentUploader	app/components/management/news/attachment_uploader.rb	/^    class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Management.News
 AttachmentUploader	app/components/settlement/attachment_uploader.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:Settlement
 AttachmentUploader	app/components/user_management/attachment.rb	/^  class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c	class:UserManagement
 AttachmentUploader	app/uploaders/attachment_uploader.rb	/^class AttachmentUploader < CarrierWave::Uploader::Base$/;"	c
@@ -694,6 +697,7 @@ Management	app/components/management/api/projects_controller.rb	/^module Managem
 Management	app/components/management/attachment_uploader.rb	/^module Management$/;"	m
 Management	app/components/management/create_project.rb	/^  module Management$/;"	m
 Management	app/components/management/news/api/informations_controller.rb	/^module Management$/;"	m
+Management	app/components/management/news/attachment_uploader.rb	/^module Management$/;"	m
 Management	app/components/management/news/information_record.rb	/^module Management$/;"	m
 Management	app/components/management/news/information_serializer.rb	/^module Management$/;"	m
 Management	app/components/management/news/informations_controller.rb	/^module Management$/;"	m
@@ -772,6 +776,7 @@ MountainRouteSerializer	app/components/training/activities/serializers/mountain_
 MountainRoutesController	app/components/training/activities/api/mountain_routes_controller.rb	/^      class MountainRoutesController < ApplicationController$/;"	c	class:Training.Activities.Api
 MountainRoutesController	app/controllers/activities/mountain_routes_controller.rb	/^  class MountainRoutesController < ApplicationController$/;"	c	class:Activities
 News	app/components/management/news/api/informations_controller.rb	/^  module News$/;"	m	class:Management
+News	app/components/management/news/attachment_uploader.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/information_record.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/information_serializer.rb	/^  module News$/;"	m	class:Management
 News	app/components/management/news/informations_controller.rb	/^  module News$/;"	m	class:Management
@@ -1633,6 +1638,8 @@ change	db/migrate/20201225101516_add_group_type_to_management_informations.rb	/^
 change	db/migrate/20201225102500_add_starred_to_management_informations.rb	/^  def change$/;"	f	class:AddStarredToManagementInformations
 change	db/migrate/20201225102613_add_web_to_management_informations.rb	/^  def change$/;"	f	class:AddWebToManagementInformations
 change	db/migrate/20201225133659_add_group_type_to_projects.rb	/^  def change$/;"	f	class:AddGroupTypeToProjects
+change	db/migrate/20201230153044_add_slug_to_management_informations.rb	/^  def change$/;"	f	class:AddSlugToManagementInformations
+change	db/migrate/20201230154736_add_attachments_to_management_informations.rb	/^  def change$/;"	f	class:AddAttachmentsToManagementInformations
 charge	app/controllers/admin/reservations_controller.rb	/^    def charge$/;"	f	class:Admin
 charge	app/controllers/payments_controller.rb	/^  def charge$/;"	f	class:PaymentsController.refund
 check_emails	app/components/membership/admin/membership_fees_controller.rb	/^      def check_emails$/;"	f	class:Membership.Admin.MembershipFeesController
@@ -1999,6 +2006,7 @@ iframe.BODY	public/assets/application-adb37b88852cd8099abe934018ff31effd978a2519
 iframe.HTML	public/assets/application-adb37b88852cd8099abe934018ff31effd978a25193d7940ab79796848ed452d.js	/^		HTML: "block",$/;"	p
 image?	app/components/library/attachment_uploader.rb	/^    def image?(new_file)$/;"	f	class:Library.AttachmentUploader
 image?	app/components/management/attachment_uploader.rb	/^    def image?(new_file)$/;"	f	class:Management.AttachmentUploader
+image?	app/components/management/news/attachment_uploader.rb	/^      def image?(new_file)$/;"	f	class:Management.News.AttachmentUploader
 image?	app/components/settlement/attachment_uploader.rb	/^    def image?(new_file)$/;"	f	class:Settlement.AttachmentUploader
 image?	app/components/user_management/attachment.rb	/^    def image?(new_file)$/;"	f	class:UserManagement.AttachmentUploader
 image?	app/uploaders/attachment_uploader.rb	/^  def image?(new_file)$/;"	f	class:AttachmentUploader
@@ -2472,6 +2480,7 @@ skimo	app/components/activities/api/competitions_controller.rb	/^      def skimo
 slug?	app/components/training/supplementary/update_course_form.rb	/^        def slug?(value)$/;"	f	class:Training.Supplementary.UpdateCourseForm
 slug_candidates	app/components/activities/competition_record.rb	/^    def slug_candidates$/;"	f	class:Activities.CompetitionRecord
 slug_candidates	app/components/business/course_record.rb	/^    def slug_candidates$/;"	f	class:Business.CourseRecord
+slug_candidates	app/components/management/news/information_record.rb	/^      def slug_candidates$/;"	f	class:Management.News.InformationRecord
 slug_candidates	app/components/marketing/discount_record.rb	/^    def slug_candidates$/;"	f	class:Marketing.DiscountRecord
 slug_candidates	app/components/training/supplementary/course_record.rb	/^      def slug_candidates$/;"	f	class:Training.Supplementary.CourseRecord
 slug_candidates	app/models/db/activities/mountain_route.rb	/^      def slug_candidates$/;"	f	class:Db.Activities.MountainRoute
@@ -2492,6 +2501,7 @@ status	app/services/payments/dotpay/notification.rb	/^      def status$/;"	f	cla
 store_dir	app/components/events/competitions/baner_uploader.rb	/^      def store_dir$/;"	f	class:Events.Competitions.BanerUploader
 store_dir	app/components/library/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Library.AttachmentUploader
 store_dir	app/components/management/attachment_uploader.rb	/^    def store_dir$/;"	f	class:Management.AttachmentUploader
+store_dir	app/components/management/news/attachment_uploader.rb	/^      def store_dir$/;"	f	class:Management.News.AttachmentUploader
 store_dir	app/components/membership/avatar_uploader.rb	/^    def store_dir$/;"	f	class:Membership.AvatarUploader
 store_dir	app/components/photo_competition/file_uploader.rb	/^      def store_dir$/;"	f	class:PhotoCompetition.FileUploader
 store_dir	app/components/photo_competition/file_uploader.rb	/^    def store_dir$/;"	f	class:PhotoCompetition.FileUploader
