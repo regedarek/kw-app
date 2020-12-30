@@ -1,70 +1,71 @@
 - if user_signed_in? && current_user.active?
+  = javascript_pack_tag 'react_components'
+  = stylesheet_pack_tag 'react_components'
+  div(id="test")
   .row
     .large-12.columns style='text-align: center'
       = image_tag asset_path('kw-bg-home.jpg')
   br
+
   .row
     .large-8.columns
-      = link_to activities_mountain_routes_path do
-        h4 Ostatnio dodane przejścia
-      table.stack
-        - Db::Activities::MountainRoute.where(hidden: false).includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
-          tr
-            td width='110px'
-              = link_to route.climbing_date, activities_mountain_route_path(route.id)
-            td
-              = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
-            td.text-right
-              = route.name
+      .row
+        .large-12.columns
+          = link_to activities_mountain_routes_path do
+            h4 Ostatnio dodane przejścia
+          table.stack
+            - Db::Activities::MountainRoute.where(hidden: false).includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
+              tr
+                td width='110px'
+                  = link_to route.climbing_date, activities_mountain_route_path(route.id)
+                td
+                  = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
+                td.text-right
+                  = route.name
 
-    .large-4.columns
-      = link_to projects_path do
-        h4 Projekty do wzięcia
-      table.stack
-        - Management::ProjectRecord.where(state: :unassigned).order(created_at: :desc).limit(5).each do |project|
-          tr
-            td
-              = link_to project.name, project_path(project.id)
+      .row
+        .large-12.columns
+          = link_to informations_path do
+            h4 Biuletyny, sprawozdania, ogłoszenia
+          table.stack
+            - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
+              tr
+                td width='110px'
+                  = I18n.t(information.news_type)
+                td
+                  = link_to information.name, information.url, target: :_blank
+                td.text-right width='110px'
+                  = information.created_at.to_date
 
-  .row
-    .large-6.columns
-      = link_to supplementary_courses_path do
-        h4 Nadchodzące wydarzenia
-      table.stack
-        - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
-          tr
-            td width='110px'
-              - if course.start_date
-                = course.start_date.to_date
-            td
-              = link_to course.name, supplementary_course_path(course.id)
-
-    - if Training::Supplementary::Repository.new.future_courses_of_user(current_user).any?
-      .large-6.columns
-        = link_to supplementary_courses_path do
-          h4 Twoje wydarzenia
-        table.stack
-          - Training::Supplementary::Repository.new.future_courses_of_user(current_user).each do |course|
-            tr
-              td width='30%'
-                - if course.start_date
-                  = course.start_date.to_date
-              td
-                = link_to course.name, supplementary_course_path(course.id)
-
-  .row
-    .large-6.columns
-      = link_to informations_path do
-        h4 Biuletyny, sprawozdania, ogłoszenia
-      table.stack
-        - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
-          tr
-            td width='110px'
-              = I18n.t(information.news_type)
-            td
-              = link_to information.name, information.slug, target: :_blank
-            td.text-right width='110px'
-              = information.created_at.to_date
+    .large-4.columns      
+      .row
+        .large-12.columns
+          = link_to supplementary_courses_path do
+            h4 Nadchodzące wydarzenia
+          div(id="events_component")
+          
+      - if Training::Supplementary::Repository.new.future_courses_of_user(current_user).any?
+        .row
+          .large-12.columns
+            = link_to supplementary_courses_path do
+              h4 Twoje wydarzenia
+            table.stack
+              - Training::Supplementary::Repository.new.future_courses_of_user(current_user).each do |course|
+                tr
+                  td width='30%'
+                    - if course.start_date
+                      = course.start_date.to_date
+                  td
+                    = link_to course.name, supplementary_course_path(course.id)
+      .row
+        .large-12.columns
+          = link_to projects_path do
+            h4 Projekty do wzięcia
+          table.stack
+            - Management::ProjectRecord.where(state: :unassigned).order(created_at: :desc).limit(5).each do |project|
+              tr
+                td
+                  = link_to project.name, project_path(project.id)
 
 - else
   .row
