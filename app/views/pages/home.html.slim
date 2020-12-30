@@ -11,6 +11,19 @@
     .large-8.columns
       .row
         .large-12.columns
+          = link_to informations_path do
+            h4 Biuletyny, sprawozdania, ogłoszenia
+          table.stack
+            - Management::News::InformationRecord.order(created_at: :desc).limit(3).each do |information|
+              tr
+                td width='110px'
+                  = I18n.t(information.news_type)
+                td
+                  = link_to information.name, information_path(information.slug)
+                td.text-right width='110px'
+                  = information.created_at.to_date
+      .row
+        .large-12.columns
           = link_to activities_mountain_routes_path do
             h4 Ostatnio dodane przejścia
           table.stack
@@ -23,19 +36,7 @@
                 td.text-right
                   = route.name
 
-      .row
-        .large-12.columns
-          = link_to informations_path do
-            h4 Biuletyny, sprawozdania, ogłoszenia
-          table.stack
-            - Management::News::InformationRecord.order(created_at: :desc).limit(5).each do |information|
-              tr
-                td width='110px'
-                  = I18n.t(information.news_type)
-                td
-                  = link_to information.name, information_path(information.slug)
-                td.text-right width='110px'
-                  = information.created_at.to_date
+
 
     .large-4.columns      
       .row
