@@ -14,8 +14,8 @@ module Management
 
       def slug_candidates
         [
-          [:created_at, :name],
-          [:group_type, :created_at, :name]
+          [:name],
+          [:group_type, :name]
         ]
       end
     end
