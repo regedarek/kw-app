@@ -6,25 +6,11 @@ function CalendarIconComponent({date}) {
     let day = parsedDate.getDate();
 
     return (
-        <div title={date} style={{
-            width: "80px",
-            textAlign: "center"
-        }}>
-            <div style={{
-                color: "white",
-                backgroundColor: "rgb(232, 86, 80)",
-                width: "100%",
-                borderTopLeftRadius: "15px",
-                borderTopRightRadius: "15px"
-            }}>
+        <div title={date} className="calendar-date-icon">
+            <div className="calendar-date-icon-month">
                 {month}
             </div>
-            <div style={{
-                fontSize: "26px",
-                borderBottomLeftRadius: "15px",
-                borderBottomRightRadius: "15px",
-                border: "1px solid #eee"
-            }}>
+            <div className="calendar-date-icon-day">
                 {day}
             </div>
         </div>

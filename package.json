@@ -5,7 +5,9 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-calendar-icon": "^0.9.4",
+    "react-dom": "^17.0.1",
+    "styled-jss": "^2.2.3"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
