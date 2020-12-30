@@ -347,6 +347,7 @@ Business	app/components/business/api/courses_controller.rb	/^module Business$/;"
 Business	app/components/business/course_record.rb	/^module Business$/;"	m
 Business	app/components/business/courses_controller.rb	/^module Business$/;"	m
 Business	app/components/business/instructor_record.rb	/^module Business$/;"	m
+CalendarIconComponent	app/javascript/packs/calendarIconComponent.js	/^function CalendarIconComponent({date}) {$/;"	f
 CancelItem	app/components/reservations/cancel_item.rb	/^  class CancelItem$/;"	c	class:Reservations
 Card	app/components/membership/card/repository.rb	/^  module Card$/;"	m	class:Membership
 CasePresenceRecord	app/components/management/voting/case_presence_record.rb	/^    class CasePresenceRecord < ActiveRecord::Base$/;"	c	class:Management.Voting
@@ -615,6 +616,7 @@ Events	app/components/events/db/competition_package_type_record.rb	/^module Even
 Events	app/components/events/db/competition_record.rb	/^module Events$/;"	m
 Events	app/components/events/db/sign_up_record.rb	/^module Events$/;"	m
 Events	app/components/events/sign_up.rb	/^module Events$/;"	m
+EventsCalendarContainer	app/javascript/packs/eventsCalendar.js	/^function EventsCalendarContainer({ events }) {$/;"	f
 EventsController	app/controllers/events_controller.rb	/^class EventsController < ApplicationController$/;"	c
 ExerciseRecord	app/components/training/bluebook/exercise_record.rb	/^    class ExerciseRecord < ActiveRecord::Base$/;"	c	class:Training.Bluebook
 ExercisesController	app/components/training/bluebook/exercises_controller.rb	/^    class ExercisesController < ApplicationController$/;"	c	class:Training.Bluebook
@@ -2228,6 +2230,8 @@ model_name	app/components/user_management/profile_form.rb	/^    def self.model_n
 model_name	app/components/user_management/reactivation_form.rb	/^    def self.model_name$/;"	F	class:UserManagement.ReactivationForm
 model_name	app/models/db/activities/mountain_route.rb	/^      def self.model_name$/;"	F	class:Db.Activities.MountainRoute
 model_name	app/models/db/profile.rb	/^    def self.model_name$/;"	F	class:Db.Profile
+module.exports	babel.config.js	/^module.exports = function(api) {$/;"	f
+module.exports.plugins	postcss.config.js	/^  plugins: [$/;"	p
 month_days	app/components/activities/competitions_table.rb	/^    def month_days(table_month)$/;"	f	class:Activities.CompetitionsTable
 month_has_day?	app/components/activities/competitions_table.rb	/^    def month_has_day?(table_month, table_day)$/;"	f	class:Activities
 name	app/components/business/course_record.rb	/^    def name$/;"	f	class:Business.CourseRecord
@@ -2495,6 +2499,7 @@ start_date	app/components/training/activities/repository.rb	/^      def start_da
 start_date	app/components/training/supplementary/sign_up_record.rb	/^      def start_date$/;"	f	class:Training.Supplementary.SignUpRecord
 start_date_is_in_the_past	app/components/reservations/form.rb	/^    def start_date_is_in_the_past$/;"	f	class:Reservations.Form
 start_date_is_not_thursday	app/components/reservations/form.rb	/^    def start_date_is_not_thursday$/;"	f	class:Reservations.Form
+state.data	app/javascript/packs/eventsCalendarContainer.js	/^      data: []$/;"	p
 states	app/components/training/supplementary/course_record.rb	/^      def states$/;"	f	class:Training.Supplementary.CourseRecord
 status	app/controllers/api/payments_controller.rb	/^    def status$/;"	f	class:Api.PaymentsController
 status	app/services/payments/dotpay/notification.rb	/^      def status$/;"	f	class:Payments.Dotpay.Notification
