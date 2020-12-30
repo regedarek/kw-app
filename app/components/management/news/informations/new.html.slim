@@ -1,4 +1,8 @@
 .column.row
-  h3.subheader Dodaj aukcję
+  h3.subheader Dodaj informację
 
-  = render 'form', url: auctions_path, method: :post
+  = render 'form', url: informations_path, method: :post
+
+    .row
+      .large-12.columns
+        = f.submit

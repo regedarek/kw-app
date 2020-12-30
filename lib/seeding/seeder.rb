@@ -68,6 +68,8 @@ module Seeding
           user = Db::User.new(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
           user.password = "test#{profile.id}"
           user.save
+          fee = user.membership_fees.create year: Date.today.year, cost: 100, kw_id: user.kw_id, creator_id: user.id
+          fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         end
         Factories::Profile.create!(
           first_name: 'Dariusz',
@@ -141,20 +143,24 @@ module Seeding
           email: 'dariusz.finster@gmail.com',
           kw_id: 2345,
           phone: Faker::PhoneNumber.cell_phone,
-          admin: true,
+          roles: ['admin', 'office']
         )
         user3.password = "test"
         user3.save
+        fee = user3.membership_fees.create year: Date.today.year, cost: 100, kw_id: user3.kw_id, creator_id: user3.id
+        fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         user4 = Db::User.new(
           first_name: 'Piotr',
           last_name: 'Podolski',
           email: 'piotr.podolski@gmail.com',
           kw_id: 3123,
           phone: Faker::PhoneNumber.cell_phone,
-          admin: true,
+          roles: ['admin', 'office']
         )
         user4.password = "test"
         user4.save
+        fee = user4.membership_fees.create year: Date.today.year, cost: 100, kw_id: user4.kw_id, creator_id: user4.id
+        fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         Db::Item.destroy_all
         (1..10).step(1) do |n|
           Factories::Item.create!(id: n, display_name: Faker::Commerce.product_name, owner: ['snw', 'kw'].sample)
@@ -173,7 +179,7 @@ module Seeding
             partners: [Faker::Artist.name, Faker::Artist.name].to_sentence,
             rating: [1, 2, 3].sample,
             climbing_date: Faker::Date.backward(days: 23),
-            route_type: [0, 1, 2].sample,
+            route_type: [0, 1].sample,
             length: Faker::Number.within(range: 100..2500),
             hidden: Faker::Boolean.boolean(true_ratio: 0.2),
             training: Faker::Boolean.boolean(true_ratio: 0.3)
@@ -231,7 +237,8 @@ module Seeding
             estimated_time: Faker::Lorem.paragraph,
             know_how: Faker::Lorem.paragraph,
             users: Db::User.all.sample(2),
-            state: [:draft, :unassigned, :in_progress, :suspended, :archived].sample
+            state: [:draft, :unassigned, :in_progress, :suspended, :archived].sample,
+            group_type: [:kw, :snw, :sww].sample
           )
         end
       end

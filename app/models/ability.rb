@@ -164,6 +164,7 @@ class Ability
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
     can :manage, PaperTrail::Version
+    can :manage, Management::News::InformationRecord
 
     can :manage, Management::SettingsRecord
   end

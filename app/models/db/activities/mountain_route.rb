@@ -4,7 +4,7 @@ module Db
       before_save :save_boar_length, if: :ski?
 
       extend FriendlyId
-      enum route_type: [:ski, :regular_climbing, :winter_climbing]
+      enum route_type: [:ski, :regular_climbing]
       friendly_id :slug_candidates, use: :slugged
       mount_uploaders :attachments, AttachmentUploader
       mount_uploaders :gps_tracks, Training::Activities::GpsTrackUploader
@@ -50,10 +50,6 @@ module Db
         else
           :sww
         end
-      end
-
-      def colleagues_avatars
-        colleagues.map(&:avatar)
       end
 
       def persons

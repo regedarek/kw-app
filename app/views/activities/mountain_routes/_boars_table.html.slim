@@ -45,7 +45,7 @@ table.stack
                 span aria-hidden="true"  &times;
             = image_tag image.thumb.url, class: 'dashboard-table-image image-modal', data: { 'img-src': image.url, 'close-on-click': "true", 'reveal-id': "route-#{route.id}-image-#{index}" }
         td.text-center = route.created_at.to_date
-        td.text-center = route.length&.present? ? "#{route.length}m" : '-'
+        td.text-center = route.length&.present? ? "#{route.boar_length}m" : '-'
         td.text-center
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route

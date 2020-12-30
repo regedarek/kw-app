@@ -6,15 +6,19 @@ module Activities
    def index
       authorize! :read, ::Db::Activities::MountainRoute
 
-      if params[:boars]
-        @q = Db::Activities::MountainRoute.includes([:colleagues]).accessible_by(current_ability).where(hidden: false).order(climbing_date: :desc)
+      @q = Db::Activities::MountainRoute
+        .includes([:colleagues])
+        .accessible_by(current_ability)
+        .where(hidden: false)
+        .order(climbing_date: :desc)
+      @q = @q.where(route_type: params[:route_type]) if params[:route_type]
+      unless params[:boars]
+        @q = @q.where(training: false)
       else
-        @q = Db::Activities::MountainRoute.includes([:colleagues]).accessible_by(current_ability).where(hidden: false, training: false).order(climbing_date: :desc)
+        @q = @q.where(training: [false, true])
       end
-      @q = @q.climbing if params[:route_type] == 'climbing'
-      @q = @q.ski if params[:route_type] == 'ski' && params[:boars] != 'true'
-      @q = @q.boars if params[:boars] == 'true'
       @q = @q.ransack(params[:q])
+
       @routes = @q.result(distinct: true).page(params[:page]).per(20)
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month

@@ -7,8 +7,8 @@ module Training
 
         def index
           courses = Training::Supplementary::CourseRecord.published
-          courses = courses.where(kind: params[:kind]) if params[:kind]
           courses = courses.where(category: params[:category]) if params[:category]
+          courses = courses.where(kind: params[:kind]) if params[:kind]
           courses = courses.order(params[:order] => :desc) if params[:order]
 
           @pagy, records = pagy(courses)

@@ -7,6 +7,11 @@ module Messaging
       create_notification(@comment)
 
       if @comment.save
+        case @comment.commentable_type
+        when 'Db::Activities::MountainRoute'
+          NotificationCenter::Mailers::CommentsMailer.notify(@comment).deliver_later
+        end
+
         redirect_back(fallback_location: root_path, notice: 'Dodano komentarz!')
       end
     end
@@ -17,7 +22,7 @@ module Messaging
       case comment.commentable_type
       when 'Db::Activities::MountainRoute'
         comment.commentable.colleague_ids.reject{|id| id == comment.user_id }.each do |id|
-          NotificationCenter::NotificationRecord.create(
+          notification = NotificationCenter::NotificationRecord.create(
             recipient_id: id,
             actor_id: comment.user_id,
             action: 'commented_route',

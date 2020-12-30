@@ -2,7 +2,7 @@ env :PATH, ENV['PATH']
 env :GEM_PATH, ENV['GEM_PATH']
 set :output, "cron_log.log"
 
-every 5.minutes do
+every 20.minutes do
   rake :send_prepaid_emails
 end
 
@@ -44,7 +44,7 @@ every '45 20 * * *' do
 end
 
 every '40 12 * * *' do
-  rake :store_weather
+  #rake :store_weather
 end
 
 every '0 0 1 9 *' do

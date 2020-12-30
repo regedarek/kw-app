@@ -1,34 +1,39 @@
 table.stack
   thead
     tr
+      th width='3%'
       th width='20%' Imię i nazwisko
-      th width='10%' Number klubowy
-      th width='10%' Telefon
-      th width='5%' Płatności
-      th width='20%' Status
+      - if profiles.any?{|p| p.kw_id}
+        th width='10%' Number klubowy
+      th width='10%' Płatności
+      th width='23%' Status
       th width='10%'
   tbody
     - profiles.each_with_index do |profile, i|
       tr
+        td=i+1
         td
           b = "#{profile.first_name} #{profile.last_name}"
-        td.text-center = profile.kw_id
-        td.text-center = profile.phone
+        - if profiles.any?{|p| p.kw_id}
+          td.text-center = profile.kw_id
         td.text-center
-          - if profile && profile.kw_id
-            - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
-            - if fee
-              - if fee.year.to_i != Date.today.year.to_i
-                span.label.alert = fee.year
-              - else
-                - if fee.payment && fee.payment.paid?
-                  span.label.success = fee.year
-                - else
-                  span.label.warning = fee.year
+          - if profile.position.any?{ |p| ['honorable_kw', 'senior', 'released'].include?(p) }
+            span.label.success zwolniony
           - else
             - if profile.payment
               - if profile.payment.prepaid?
-                span.label.success wpisowe
+                span.label.success=profile.cost
+                span.label.success=Membership::Activement.new.payment_year
+              - else
+                span.label.secondary=profile.cost
+                span.label.secondary=Membership::Activement.new.payment_year
+            - if profile && profile.kw_id
+              - fee = Db::Membership::Fee.where(kw_id: profile.kw_id).order(year: :asc).last
+              - if fee
+                - if fee.payment && fee.payment.prepaid?
+                  span.label.success = fee.year
+                - else
+                  span.label.warning = fee.year
         td = profile.position.to_a.map { |course| I18n.t("activemodel.attributes.user_management_profile_form.profile_position_#{course}") }.to_sentence
         td.text-right
           .icon-bar
@@ -41,6 +46,9 @@ table.stack
                   i.fi.fi-check style='color: green'
                 - else
                   i.fi.fi-check style='color: red'
+            span data-tooltip='' tabindex="1" title="#{profile.phone}" data-allow-html="true" class='has-tip'
+              = link_to admin_profile_path(profile.id), style: 'padding: 5px' do
+                i.fi.fi-telephone
             = link_to edit_admin_profile_path(profile.id), style: 'padding: 5px' do
               i.fi.fi-page-edit
             = link_to profile_path(profile.id, format: :pdf), style: 'padding: 5px' do

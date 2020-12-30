@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       namespace :api do
         resources :mountain_route_points
         resources :mountain_routes, only: :index
+        resources :boars, only: :index
       end
       resources :ski_routes
       resources :contracts

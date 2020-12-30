@@ -10,9 +10,14 @@
         li
           = link_to root_path, style: 'padding: 0 1rem;' do
             = image_tag('logo_kw_krakow.jpg', style: 'max-height: 35px;')
-        - if false
-          li= link_to 'Walne Zgromadzenie Członków Klubu Online', '/glosowania/walne', class: 'button expanded alert'
         - if user_signed_in?
+          li
+            = link_to 'Walne zebranie', admin_path, style: 'color: red'
+            ul.menu.vertical
+              li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/13'
+              li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
+              li= link_to 'Przekazanie pełnomocnictwa', 'https://panel.kw.krakow.pl/glosowania/pelnomocnictwo'
+              li= link_to 'Głosowanie i transmisja', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
           - if current_user.roles.include?('office') || current_user.roles.include?('settings')
             li
               = link_to 'Biuro', admin_path

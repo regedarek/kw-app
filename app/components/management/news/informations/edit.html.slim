@@ -1,0 +1,8 @@
+.column.row
+  h3.subheader Edytuj informację
+
+  = render 'form', url: information_path(@information.id), method: :put
+
+    .row
+      .large-12.columns
+        = f.submit

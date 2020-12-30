@@ -1,0 +1,11 @@
+h3= @comment.commentable.name
+b Autor komentarza: 
+= @comment.user.display_name
+br
+br
+b O treści: 
+br
+= simple_format @comment.body
+= link_to 'Link do przejścia', Rails.application.routes.url_helpers.activities_mountain_route_url(@comment.commentable)
+hr
+| Klub Wysokogórski Kraków
