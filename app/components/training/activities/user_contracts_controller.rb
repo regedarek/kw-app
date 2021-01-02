@@ -5,7 +5,6 @@ module Training
 
       def create
         #authorize! :create, Training::Activities::UserContractRecord
-        byebug
         contract = ::Training::Activities::UserContractRecord.new(contract_params)
         contract.user = current_user
 
