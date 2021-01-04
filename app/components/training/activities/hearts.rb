@@ -17,6 +17,8 @@ module Training
 
       # returns true of false if a post is hearted by user
       def heart?(route)
+        return false unless @user.present?
+
         @user.hearts.includes(:user).find_by(mountain_route_id: route.id)
       end
     end
