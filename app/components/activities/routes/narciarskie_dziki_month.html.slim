@@ -20,11 +20,7 @@
           th width='250px' Kto?
           th.large-text-left Ostatnie przejście
           th.large-text-right width='120px'
-            | Kontrakty
-          th.large-text-right width='120px'
             | Metry
-          th.large-text-right width='120px'
-            | Suma
 
       tbody
         - i = 0
@@ -44,7 +40,5 @@
                 - if user.training_contracts.any?
                   span.dashboard-table-timestamp-small
                     = user.training_contracts.last.name
-            td.text-center.large-text-right = user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
             td.text-center.large-text-right = user.total_mountain_routes_length
-            td.text-center.large-text-right = user.total_mountain_routes_length + user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
             - i += 1
