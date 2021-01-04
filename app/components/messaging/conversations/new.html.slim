@@ -6,7 +6,7 @@
   = form_tag conversations_path, method: :post do
     .row
       .large-6.columns
-        = text_field_tag :subject, nil, placeholder: "Temat"
+        = text_field_tag :subject, nil, placeholder: "Temat", required: true
       .large-6.columns
         = select_tag :user_id, options_for_select(@recipients.map { |u| [u.display_name, u.id] }, params[:recipient_id]),
           { class: 'js-select-multiple', include_blank: true }

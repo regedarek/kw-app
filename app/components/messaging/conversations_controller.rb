@@ -23,11 +23,14 @@ module Messaging
     end
 
     def create
-      recipient = Db::User.find(params[:user_id])
-      if recipient && params[:body].present? && params[:subject]
+      @recipients = Db::User.where.not(kw_id: nil).not_hidden.active - [current_user]
+      recipient = Db::User.find_by(id: params[:user_id])
+
+      if recipient && params[:body].present? && params[:subject].present?
         receipt = current_user.send_message(recipient, params[:body], params[:subject])
         redirect_to conversation_path(receipt.conversation)
       else
+        flash[:alert] = 'Wypełnij temat i wybierz odbiorcę'
         render :new
       end
     end
