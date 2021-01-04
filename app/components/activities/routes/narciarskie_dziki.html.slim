@@ -8,9 +8,9 @@
     h4 Narciarskie dziki sezonu
     .callout.primary
       .row
-        - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month - 2)
+        - if %w(-1 1 2 3 4).map(&:to_i).include?(Date.today.month - 2)
           .large-4.columns
-            h5 = I18n.t('date.month_names')[Date.today.month - 2] + (" #{Date.today.year}")
+            h5 = link_to I18n.t('date.month_names')[Date.today.month - 2] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2020, 12)
             table.stack
               thead
                 tr
@@ -50,7 +50,7 @@
 
         - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month)
           .large-4.columns
-            h5 = I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}")
+            h5 = link_to I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, Date.today.month)
             table.stack
               thead
                 tr

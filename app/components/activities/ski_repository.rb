@@ -1,7 +1,7 @@
 module Activities
   class SkiRepository
     def last_contracts
-      Training::Activities::UserContractRecord.includes(:contract, :route).order(created_at: :desc).limit(5)
+      Training::Activities::UserContractRecord.includes(:route).order(created_at: :desc).limit(5)
     end
 
     def fetch_prev_month
@@ -12,6 +12,23 @@ module Activities
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range_climbing_date, created_at: range_created_at })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
+        .group(:id)
+        .order('total_mountain_routes_length DESC')
+    end
+
+    def fetch_specific_month(year, month)
+      if year && month
+        specific_date = Date.new(year, month, 01)
+      else
+        specific_date = Date.today
+      end
+      range = specific_date.beginning_of_month..specific_date.end_of_month
+      range_created_at = specific_date.beginning_of_month..(specific_date.end_of_month + 3.days)
+      ::Db::User
+        .joins(:mountain_routes)
+        .where.not(mountain_routes: { id: nil, length: nil })
+        .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range_created_at })
+        .select('users.kw_id, users.id, users.first_name, users.last_name, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end

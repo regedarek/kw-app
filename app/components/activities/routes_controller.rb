@@ -16,6 +16,12 @@ module Activities
 
     def gorskie_dziki_regulamin; end
 
+    def narciarskie_dziki_month
+      authorize! :see_dziki, ::Db::Activities::MountainRoute
+
+      @specific_month_leaders = ski_repository.fetch_specific_month(params[:year].to_i, params[:month].to_i)
+    end
+
     def narciarskie_dziki
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 
