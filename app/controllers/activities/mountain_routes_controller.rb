@@ -6,6 +6,11 @@ module Activities
    def index
       authorize! :read, ::Db::Activities::MountainRoute
 
+      # hotfix
+      if params[:route_type] == 'climbing'
+        params[:route_type] = 'regular_climbing'
+      end
+
       @q = Db::Activities::MountainRoute
         .includes([:colleagues])
         .accessible_by(current_ability)
