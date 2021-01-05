@@ -154,6 +154,7 @@ Rails.application.routes.draw do
 
   get 'zarezerwuj' => 'reservations#new', as: :reserve
   get 'zgloszenie' => 'profiles#new'
+  get 'application' => 'profiles#new', locale: :en
 
   get 'pages/home' => 'pages#show', id: 'home'
   get 'pages/rules' => 'pages#show', id: 'rules'
