@@ -44,7 +44,7 @@
       .callout.primary
         .row
           .large-3.columns
-            = f.label :optional_address, 'Ulica, numer domu i mieszkania'
+            = f.label :optional_address
             = f.text_field :optional_address
 
           .large-3.columns
@@ -101,4 +101,4 @@
 
   .row
     .large-12.columns
-      = f.submit 'Wyślij zgłoszenie', class: 'button large expanded'
+      = f.submit I18n.t(:apply_button), class: 'button large expanded'

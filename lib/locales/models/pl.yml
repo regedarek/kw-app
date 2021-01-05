@@ -33,7 +33,7 @@ pl:
         postal_code: Kod pocztowy
         photo: Zdjęcie do legitymacji
         main_address: Adres zameldowania
-        optional_address: Adres kontaktowy
+        optional_address: Ulica, numer domu i mieszkania
         phone: Telefon
         date_of_death: Data śmierci
         main_discussion_group: Proszę mnie dopisać do głównej grupy dyskusyjnej KW Kraków
