@@ -4,7 +4,7 @@ module Management
       append_view_path 'app/components'
 
       def index
-        @informations = InformationRecord.order(created_at: :desc).all
+        @informations = InformationRecord.order(starred: :desc, created_at: :desc).all
       end
 
       def new

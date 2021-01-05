@@ -14,8 +14,11 @@
           = link_to informations_path do
             h4 Biuletyny, sprawozdania, ogłoszenia
           table.stack
-            - Management::News::InformationRecord.order(created_at: :desc).limit(3).each do |information|
-              tr
+            - Management::News::InformationRecord.order(starred: :desc, created_at: :desc).limit(3).each do |information|
+              tr style=("#{information.starred? ? 'background-color: #fffddf' : nil}")
+                td width='25px'
+                  - if information.starred?
+                    i.fi.fi-star style='color: #ffae00'
                 td width='110px'
                   = I18n.t(information.news_type)
                 td

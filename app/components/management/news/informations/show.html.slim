@@ -20,7 +20,7 @@
     .callout
       = sanitize @information.description
 
-- if @information.url
+- if @information.url.present?
   .row
     .large-12.columns
       .callout

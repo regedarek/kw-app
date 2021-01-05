@@ -6,7 +6,7 @@ module Management
         after_action { pagy_headers_merge(@pagy) if @pagy }
 
         def index
-          informations = InformationRecord.order(created_at: :desc).all
+          informations = InformationRecord.order(starred: :desc, created_at: :desc).all
           informations = informations.where(news_type: params[:news_type]) if params[:news_type]
           informations = informations.where(group_type: params[:group_type]) if params[:group_type]
           informations = informations.order(params[:order] => :desc) if params[:order]

@@ -11,6 +11,7 @@
     table.responsive
       thead
         tr
+          th width='25px'
           th width='110px' Typ
           th Nazwa
           th.text-right width='110px' Kiedy dodano?
@@ -18,7 +19,10 @@
             th width='50px'
       tbody
         - @informations.each do |information|
-          tr
+          tr style=("#{information.starred? ? 'background-color: #fffddf' : nil}")
+            td
+              - if information.starred?
+                i.fi.fi-star style='color: #ffae00'
             td
               = I18n.t(information.news_type)
             td
