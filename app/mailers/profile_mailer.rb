@@ -20,13 +20,13 @@ class ProfileMailer < ApplicationMailer
 
   def list(profile)
     @profile = profile
-
+    @setting = Management::SettingsRecord.find_by(path: "zgloszenie/list/#{@profile.locale}")
 
     I18n.with_locale(I18n.locale) do
       mail(
         to: [@profile.email, 'zgloszenia.wykaz@kw.krakow.pl'],
         from: 'zgloszenia@kw.krakow.pl',
-        subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od #{@profile.first_name} #{@profile.last_name}"
+        subject: I18n.t('profile_mailer.list.subject', first_name: @profile.first_name, last_name: @profile.last_name)
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @profile.id,

@@ -1,5 +1,9 @@
 pl:
   profile_mailer:
+    list:
+      subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od %{first_name} %{last_name}"
+      link: "Wykaz przekaż nam uzupełniając ten "
+      link_title: "formularz"
     apply:
       subject: "Potwierdzenie zgłoszenia do KW Kraków od %{first_name} %{last_name}"
       link: Przesyłamy również link do panelu poprzez który należy opłacić składkę i/lub wpisowe

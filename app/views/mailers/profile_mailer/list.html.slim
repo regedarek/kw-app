@@ -1,28 +1,37 @@
-| Serdecznie dziękujemy za chęć wstąpienia do naszego Klubu. 
-br
-br
-| Doświadczeni alpiniści stanowią podstawę działalności naszego Klubu.
-br
-| Jeśli więc masz duże doświadczenie alpinistyczne lub wykaz sportowy 
-| lecz do tej pory nie ukończyłeś żadnego formalnego szkolenia,
-br
-|  to przedstaw nam wykaz swoich przejść zrobionych w Tatrach lub innych górach typu alpejskiego obejmujący 3 ostatnie lata Twojej działalności.
-br
-| Jeżeli posiadasz wykaz sportowy(wspinaczka skalna, skialpinizm) także go uzupełnij.
-br
-br
-| Wykaz przekaż nam uzupełniając ten 
-= link_to 'formularz', new_profile_list_url(profile_id: @profile.id)
-| .
-br
-| Po weryfikacji wykazu poinformujemy Cię, czy wykaz jest wystarczający do 
-| uzyskania członkostwa KW Kraków.
-br
-| Oraz otrzymasz e-mail potwierdzający twoje zgłoszenie wraz z linkiem do płatności za wpisowe.
-br
-br
-| W razie pytań i wątpliwości, pisz na adres: 
-= link_to 'zgloszenia@kw.krakow.pl', 'mailto:zgloszenia@kw.krakow.pl'
-br
-br
-| z taternickim pozdrowieniem
+- if @setting
+  = sanitize @setting.content
+  br
+  = t('profile_mailer.list.link')
+  = link_to t('profile_mailer.list.link_title'), new_profile_list_url(profile_id: @profile.id)
+  br
+  br
+  = t('profile_mailer.apply.bye')
+- else
+  | Serdecznie dziękujemy za chęć wstąpienia do naszego Klubu. 
+  br
+  br
+  | Doświadczeni alpiniści stanowią podstawę działalności naszego Klubu.
+  br
+  | Jeśli więc masz duże doświadczenie alpinistyczne lub wykaz sportowy 
+  | lecz do tej pory nie ukończyłeś żadnego formalnego szkolenia,
+  br
+  |  to przedstaw nam wykaz swoich przejść zrobionych w Tatrach lub innych górach typu alpejskiego obejmujący 3 ostatnie lata Twojej działalności.
+  br
+  | Jeżeli posiadasz wykaz sportowy(wspinaczka skalna, skialpinizm) także go uzupełnij.
+  br
+  br
+  | Wykaz przekaż nam uzupełniając ten 
+  = link_to 'formularz', new_profile_list_url(profile_id: @profile.id)
+  | .
+  br
+  | Po weryfikacji wykazu poinformujemy Cię, czy wykaz jest wystarczający do 
+  | uzyskania członkostwa KW Kraków.
+  br
+  | Oraz otrzymasz e-mail potwierdzający twoje zgłoszenie wraz z linkiem do płatności za wpisowe.
+  br
+  br
+  | W razie pytań i wątpliwości, pisz na adres: 
+  = link_to 'zgloszenia@kw.krakow.pl', 'mailto:zgloszenia@kw.krakow.pl'
+  br
+  br
+  | z taternickim pozdrowieniem
