@@ -20,7 +20,6 @@ public/*
 .ruby-version
 .byebug_history
 .env
-tags
 cron_log.log
 latest.dump
 
@@ -32,3 +31,4 @@ latest.dump
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+tags

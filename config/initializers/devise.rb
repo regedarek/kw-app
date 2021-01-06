@@ -10,7 +10,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'kw@kw.krakow.pl'
+  config.mailer_sender = 'zgloszenia@kw.krakow.pl'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -263,4 +263,25 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+end
+require 'devise/mailer'
+
+module Devise
+  class Mailer
+    module Localized
+      %w(
+        confirmation_instructions
+        reset_password_instructions
+        unlock_instructions
+      ).each do |method|
+        define_method(method) do |resource, *args|
+          I18n.with_locale(resource.try(:locale)) do
+            super(resource, *args)
+          end
+        end
+      end
+    end
+
+    prepend Localized
+  end
 end

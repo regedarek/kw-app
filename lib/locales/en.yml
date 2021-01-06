@@ -12,6 +12,15 @@ en:
     create:
       success: Thank you for your application, now check your email!
   apply_button: Send application
+  devise_mailer:
+    reset:
+      title: "Your login to our app: %{email}!"
+      change_password: "Change your password!"
+      google: "Connect your account with Google!"
+      description: "You can connect your account with Google for quicker login process without password."
+    change:
+      hello: "Hello %{email}!"
+      password: "Your password has been succesfully changed."
   profile_mailer:
     accepted:
       subject: "The application to KW Kraków was accepted from %{first_name} %{last_name}"

@@ -19,10 +19,6 @@ every '30 4 * * *' do
   rake :send_reminders
 end
 
-every '30 5 * * *' do
-  #rake :send_voting_reminders
-end
-
 every '30 6 * * *' do
   rake :destroy_unpaid_reservations
 end
@@ -37,14 +33,6 @@ end
 
 every '0 0 1 3 *' do
   rake :send_yearly_fee_reminder
-end
-
-every '45 20 * * *' do
-  rake :store_shmu
-end
-
-every '40 12 * * *' do
-  #rake :store_weather
 end
 
 every '0 0 1 9 *' do

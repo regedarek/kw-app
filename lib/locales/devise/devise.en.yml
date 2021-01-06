@@ -19,7 +19,7 @@ en:
       confirmation_instructions:
         subject: Confirmation instructions
       reset_password_instructions:
-        subject: Reset password instructions
+        subject: Reset your password in KW Kraków App
       unlock_instructions:
         subject: Unlock instructions
     omniauth_callbacks:

@@ -104,4 +104,14 @@ class Db::User < ActiveRecord::Base
     user.update(refresh_token: access_token.try(:credentials).try(:refresh_token)) if user
     user
   end
+
+  def send_devise_notification(notification, *args)
+    if self.profile
+      my_locale = self.profile.locale
+    else
+      my_locale = I18n.default_locale
+    end
+
+    I18n.with_locale(my_locale) { super(notification, *args) }
+  end
 end

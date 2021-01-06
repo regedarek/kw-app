@@ -6,6 +6,15 @@ pl:
         send: "Wyślij wykaz"
       create:
         success: "Wykaz został wysłany, prosimy o cierpliwość :)"
+  devise_mailer:
+    reset:
+      title: "Twój login do panelu: %{email}!"
+      change_password: "Zmień swoje hasło!"
+      google: "Połącz swoje konto z Google"
+      description: "Kliknij link powyżej aby zmienić swoje hasło lub połącz swoje konto z google wtedy hasło nie będzie Ci potrzebne."
+    change:
+      hello: "Cześć %{email}!"
+      password: "Twoje hasło zostało zmienione."
   profile_mailer:
     accepted:
       title: "Twój numer klubowy to %{kw_id}"
