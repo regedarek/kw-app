@@ -13,6 +13,9 @@ en:
       success: Thank you for your application, now check your email!
   apply_button: Send application
   profile_mailer:
+    accepted:
+      subject: "The application to KW Kraków was accepted from %{first_name} %{last_name}"
+      title: "Your member card ID is %{kw_id}"
     list:
       subject: "Application to the Mountaineering Club Kraków based on the list of activities from %{first_name} %{last_name}"
       link: "Please provide us the list of your climbs, ski tours, races by completing this "

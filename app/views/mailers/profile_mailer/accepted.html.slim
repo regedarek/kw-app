@@ -1,38 +1,39 @@
-h3 = "Twój numer klubowy to #{@profile.kw_id}"
+h3 = t("profile_mailer.accepted.title", kw_id: @profile.kw_id)
 - if @setting
   = sanitize @setting.content
-  br
-  b Wydarzenia
-  br
-  | Na część wydarzeń klubowych wymagamy zapisów, opłaconej składki lub wpłacenia wcześniej zaliczki.
-  br
-  | Więcej informacji znajdziesz na 
-  = link_to 'stronie wydarzeń klubowych', 'https://panel.kw.krakow.pl/wydarzenia'
-  | .
-  br
-  br
-  b Nadchodzące wydarzenia
-  br
-  ul
-    - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
-      li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
-  br
-  br
-  b Aktualne projekty w których potrzebujemy Twojej pomocy:
-  br
-  ul
-    - Management::ProjectRecord.includes(:users).where(state: 'unassigned').order(created_at: :desc).each do |project|
-      li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
-  br
-  br
-  b Aktualne projekty w które prowadzą inni członkowie klubu:
-  br
-  ul
-    - Management::ProjectRecord.includes(:users).where(state: 'in_progress').order(created_at: :desc).each do |project|
-      li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
+  - if @profile.locale == 'pl'
+    br
+    b Wydarzenia
+    br
+    | Na część wydarzeń klubowych wymagamy zapisów, opłaconej składki lub wpłacenia wcześniej zaliczki.
+    br
+    | Więcej informacji znajdziesz na 
+    = link_to 'stronie wydarzeń klubowych', 'https://panel.kw.krakow.pl/wydarzenia'
+    | .
+    br
+    br
+    b Nadchodzące wydarzenia
+    br
+    ul
+      - Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
+        li = link_to course.name, "https://panel.kw.krakow.pl/wydarzenia/#{course.id}"
+    br
+    br
+    b Aktualne projekty w których potrzebujemy Twojej pomocy:
+    br
+    ul
+      - Management::ProjectRecord.includes(:users).where(state: 'unassigned').order(created_at: :desc).each do |project|
+        li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
+    br
+    br
+    b Aktualne projekty w które prowadzą inni członkowie klubu:
+    br
+    ul
+      - Management::ProjectRecord.includes(:users).where(state: 'in_progress').order(created_at: :desc).each do |project|
+        li = link_to project.name, "https://panel.kw.krakow/projekty/#{project.slug}"
 
-  br
-  | z taternickim pozdrowieniem i do zobaczenia!
+    br
+    | z taternickim pozdrowieniem i do zobaczenia!
 - else
   | Witamy w Klubie Wysokogórskim Kraków!
   br

@@ -7,6 +7,9 @@ pl:
       create:
         success: "Wykaz został wysłany, prosimy o cierpliwość :)"
   profile_mailer:
+    accepted:
+      title: "Twój numer klubowy to %{kw_id}"
+      subject: "Zaakceptowano zgłoszenie do KW Kraków od %{first_name} %{last_name}"
     list:
       subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od %{first_name} %{last_name}"
       link: "Wykaz przekaż nam uzupełniając ten "

@@ -1,14 +1,14 @@
 class ProfileMailer < ApplicationMailer
   def accepted(profile)
-    @setting = Management::SettingsRecord.find_by(path: 'zgloszenie/accepted')
     @profile = profile
+    @setting = Management::SettingsRecord.find_by(path: "zgloszenie/accepted/#{@profile.locale}")
     @last_5_events = Training::Supplementary::CourseRecord.all.limit(5)
 
-    I18n.with_locale(I18n.locale) do
+    I18n.with_locale(@profile.locale) do
       mail(
         to: @profile.email,
         from: 'zgloszenia@kw.krakow.pl',
-        subject: "Zaakceptowano zgłoszenie do KW Kraków od #{@profile.first_name} #{@profile.last_name}"
+        subject: I18n.t('profile_mailer.accepted.subject', first_name: @profile.first_name, last_name: @profile.last_name)
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @profile.id,
