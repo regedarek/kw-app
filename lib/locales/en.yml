@@ -1,5 +1,12 @@
 ---
 en:
+  user_management:
+    lists:
+      new:
+        title: "List of climbs, skitours, races"
+        send: "Send us your list"
+      create:
+        success: "List send successfully, please be patient :)"
   profiles_new_info: Please accept me as an ordinary member of the Kraków Mountaineering Club.
   profiles:
     create:

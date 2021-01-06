@@ -9,8 +9,14 @@ en:
     list:
       enums:
         section_types:
-          sww: Wspinaczkowy
-          snw: Narciarski
+          sww: Climbing
+          snw: Skitours
+  activerecord:
+    attributes:
+      user_management/profile_list_record:
+        description: Description
+        section_type: Main type of activities
+        attachments: Attachments
   activemodel:
     mas_sign_up_form: Sign up Form
     attributes:

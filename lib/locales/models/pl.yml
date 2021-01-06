@@ -124,6 +124,7 @@ pl:
       user_management/profile_list_record:
         description: Opis
         section_type: Rodzaj wykazu
+        attachments: Załączniki
       db/membership_fee:
         year: Rok
       profile:

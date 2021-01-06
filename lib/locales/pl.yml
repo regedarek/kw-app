@@ -1,4 +1,11 @@
 pl:
+  user_management:
+    lists:
+      new:
+        title: "Wykaz przejść narciarskich, wspinaczkowych"
+        send: "Wyślij wykaz"
+      create:
+        success: "Wykaz został wysłany, prosimy o cierpliwość :)"
   profile_mailer:
     list:
       subject: "Zgłoszenie do Klubu Wysokogórskiego Kraków na podstawie wykazu przejść od %{first_name} %{last_name}"

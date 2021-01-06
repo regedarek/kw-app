@@ -22,7 +22,7 @@ class ProfileMailer < ApplicationMailer
     @profile = profile
     @setting = Management::SettingsRecord.find_by(path: "zgloszenie/list/#{@profile.locale}")
 
-    I18n.with_locale(I18n.locale) do
+    I18n.with_locale(@profile.locale) do
       mail(
         to: [@profile.email, 'zgloszenia.wykaz@kw.krakow.pl'],
         from: 'zgloszenia@kw.krakow.pl',
@@ -146,7 +146,7 @@ class ProfileMailer < ApplicationMailer
     end
     attachments['zgloszenie_do_kw.pdf'] = pdf.render
 
-    I18n.with_locale(I18n.locale) do
+    I18n.with_locale(@profile.locale) do
       mail(
         to: @profile.email,
         cc: 'zgloszenia@kw.krakow.pl',

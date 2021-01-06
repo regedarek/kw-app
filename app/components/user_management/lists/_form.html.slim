@@ -1,11 +1,11 @@
 .row
   .large-2.columns
-    = f.label :section_type, 'Rodzaj wykazu'
+    = f.label :section_type
     = f.select :section_type, @list.section_types, include_blank: true
 
 .row
   .large-12.columns
-    = f.label :description, "Opis"
+    = f.label :description
     = f.trix_editor :description, style: 'min-height: 150px'
 
 br
@@ -15,5 +15,5 @@ br
     .callout
       .row
         .large-12.columns
-          b= f.label :attachments, "Załączniki"
+          b= f.label :attachments
           = f.file_field :attachments, multiple: true

@@ -5,6 +5,7 @@ module UserManagement
 
     def new
       @profile = Db::Profile.find(params[:profile_id])
+      I18n.locale = @profile.locale
       @list = @profile.build_list
     end
 
@@ -12,8 +13,9 @@ module UserManagement
       @profile = Db::Profile.find(params[:profile_id])
       @list = @profile.build_list(list_params)
 
+      I18n.locale = @profile.locale
       if @list.save
-        redirect_to root_path, notice: 'Wysłano wykaz do akceptacji'
+        redirect_to root_path, notice: I18n.t('user_management.lists.create.success')
       else
         @errors = @list.errors.full_messages
         render :new
