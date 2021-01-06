@@ -8,6 +8,7 @@ module UserManagement
           first_name: form.first_name,
           last_name: form.last_name,
           email: form.email,
+          locale: form.locale,
           phone: form.phone,
           birth_date: form.birth_date,
           birth_place: form.birth_place,

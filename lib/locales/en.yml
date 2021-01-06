@@ -2,3 +2,9 @@
 en:
   profiles_new_info: Please accept me as an ordinary member of the Kraków Mountaineering Club.
   apply_button: Send application
+  profile_mailer:
+    apply:
+      subject: "Confirmation of application to KW Kraków from %{first_name} %{last_name}"
+      link: We also send you a link to the panel through which you must pay the premium and / or entry fee
+      link_title: link to payment
+      bye: see you soon in club!

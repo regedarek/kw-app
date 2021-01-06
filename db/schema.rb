@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_154736) do
+ActiveRecord::Schema.define(version: 2021_01_05_232113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -697,6 +697,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_154736) do
     t.datetime "sent_at"
     t.datetime "accepted_at"
     t.string "photo"
+    t.string "locale", default: "pl", null: false
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true
   end
 

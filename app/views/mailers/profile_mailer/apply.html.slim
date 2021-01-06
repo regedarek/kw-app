@@ -1,12 +1,12 @@
 - if @setting
   = sanitize @setting.content
   br
-  | Przesyłamy również link do panelu poprzez który należy opłacić składkę i/lub wpisowe: 
+  = t('profile_mailer.apply.link')
   - if @profile.payment.present?
-    = link_to 'link do płatności', charge_payment_url(@profile.payment.id)
+    = link_to t('profile_mailer.apply.link_title'), charge_payment_url(@profile.payment.id)
   br
   br
-  | Do zobaczenia w Klubie :)
+  = t('profile_mailer.apply.bye')
 - else
   b Serdecznie dziękujemy za chęć wstąpienia do naszego Klubu. 
   br

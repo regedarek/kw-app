@@ -1,4 +1,10 @@
 pl:
+  profile_mailer:
+    apply:
+      subject: "Potwierdzenie zgłoszenia do KW Kraków od %{first_name} %{last_name}"
+      link: Przesyłamy również link do panelu poprzez który należy opłacić składkę i/lub wpisowe
+      link_title: link do płatności
+      bye: Do zobaczenia w Klubie :)
   profiles_new_info: Proszę o przyjęcie mnie w poczet członków zwyczajnych Klubu Wysokogórskiego Kraków.
   apply_button: Wyślij zgłoszenie
   kw: Klubowe

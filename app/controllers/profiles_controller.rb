@@ -8,9 +8,10 @@ class ProfilesController < ApplicationController
   def create
     @profile_form = UserManagement::ProfileForm.build_cleaned(profile_params)
 
+    I18n.locale = @profile_form.locale;
     result = UserManagement::UserApplication.create(form: @profile_form, photo: profile_params[:photo])
     result.success { redirect_to root_path, notice: t('.success') }
-    result.invalid { |form:| render :new, form: form }
+    result.invalid { |form:|  render :new, form: form }
     result.else_fail!
   end
 
@@ -37,7 +38,7 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(
-      :email, :first_name, :last_name, :phone, :plastic, :photo,
+      :email, :first_name, :last_name, :phone, :plastic, :photo, :locale,
       :birth_date, :birth_place, :city, :postal_code, :main_address,
       :optional_address, :main_discussion_group, :terms_of_service,
       recommended_by: [], acomplished_courses: [], sections: []

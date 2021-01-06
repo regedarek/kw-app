@@ -4,6 +4,7 @@ module UserManagement
   class ProfileForm < FormObject
     attribute :first_name, :string
     attribute :last_name, :string
+    attribute :locale, :string, default: 'pl'
     attribute :email, :string
     attribute :birth_date, :string
     attribute :birth_place, :string

@@ -38,7 +38,7 @@ class ProfileMailer < ApplicationMailer
 
   def apply(profile)
     @profile = profile
-    @setting = Management::SettingsRecord.find_by(path: 'zgloszenie/apply')
+    @setting = Management::SettingsRecord.find_by(path: "zgloszenie/apply/#{@profile.locale}")
 
     pdf = Prawn::Document.new
     pdf.define_grid(columns: 3, rows: 10)
@@ -151,7 +151,7 @@ class ProfileMailer < ApplicationMailer
         to: @profile.email,
         cc: 'zgloszenia@kw.krakow.pl',
         from: 'zgloszenia@kw.krakow.pl',
-        subject: "Potwierdzenie zgłoszenia do KW Kraków od #{@profile.first_name} #{@profile.last_name}"
+        subject: I18n.t('profile_mailer.apply.subject', first_name: @profile.first_name, last_name: @profile.last_name)
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @profile.id,
