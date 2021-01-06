@@ -7,7 +7,7 @@ en:
         send: "Send us your list"
       create:
         success: "List send successfully, please be patient :)"
-  profiles_new_info: Please accept me as an ordinary member of the Kraków Mountaineering Club.
+  profiles_new_info: Please accept my application as an member of the Kraków Mountaineering Club.
   profiles:
     create:
       success: Thank you for your application, now check your email!
