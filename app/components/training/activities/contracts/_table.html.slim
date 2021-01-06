@@ -1,6 +1,7 @@
 table.stack
   thead
     tr
+      th width='35px'
       th.text-center.large-text-left width='200px' Nazwa
       th.text-center.large-text-left Opis
       th.text-center.large-text-left width='10%' Punkty
@@ -8,8 +9,9 @@ table.stack
         th.text-center.large-text-left width='5%' Akcje
 
   tbody
-    - contracts.each do |contract|
+    - contracts.each_with_index do |contract, i|
       tr
+        td.text-center.large-text-left = i + 1
         td.text-center.large-text-left = link_to contract.name, activities_contract_path(contract.id)
         td.text-center.large-text-left = sanitize contract.description
         td.text-center.large-text-left = contract.score

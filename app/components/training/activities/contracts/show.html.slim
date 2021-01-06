@@ -1,6 +1,6 @@
 .row
   .large-12.columns
-    h4 = "#{@contract.name} (#{@contract.score})"
+    h4 = "#{@contract.name} (#{@contract.score} dzikometrów)"
 
 .row
   .large-12.columns
@@ -9,12 +9,16 @@
 
 .row
   .large-12.columns
+    h5 Ukończone w 2021
+
     table.stack
       thead
         tr
-          th.text-center.large-text-left width='150px' Kto?
+          th width='35px'
+          th.text-center.large-text-left Kto?
 
       tbody
-        - @contract.users.each do |user|
+        - @contract.users.each_with_index do |user,i|
           tr
+            td = i + 1
             td.text-center.large-text-left = link_to user.display_name, user_path(user.kw_id)

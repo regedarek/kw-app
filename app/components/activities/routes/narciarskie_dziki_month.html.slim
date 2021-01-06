@@ -34,9 +34,11 @@
                 = image_tag('default-avatar.png', class: 'topbar-avatar-image')
             td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
             td.large-text-left
-              - if user.mountain_routes.any?
+              - specific_date = Date.new(params[:year].to_i, params[:month].to_i, 01)
+              - range = specific_date.beginning_of_month..specific_date.end_of_month
+              - if user.mountain_routes.where(climbing_date: range).any?
                 h6.dashboard-table-text
-                  = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
+                  = link_to user.mountain_routes.where(climbing_date: range).last.name, activities_mountain_route_path(user.mountain_routes.where(climbing_date: range).last.id)
                 - if user.training_contracts.any?
                   span.dashboard-table-timestamp-small
                     = user.training_contracts.last.name
