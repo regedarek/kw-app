@@ -9,10 +9,13 @@
                 - @profile.errors.full_messages.each do |msg|
                   li= msg
       .row
-        .medium-6.columns
+        .medium-4.columns
+          = f.label :locale, 'Język'
+          = f.text_field :locale
+        .medium-4.columns
           = f.label :kw_id
           = f.text_field :kw_id
-        .medium-6.columns
+        .medium-4.columns
           = f.label :email
           = f.text_field :email
       .row
