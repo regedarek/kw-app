@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_232113) do
+ActiveRecord::Schema.define(version: 2021_01_07_225658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -409,6 +409,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_232113) do
     t.string "who_ids", array: true
     t.integer "voting_type", default: 0, null: false
     t.integer "meeting_type", default: 0, null: false
+    t.boolean "public", default: false, null: false
     t.index ["slug"], name: "index_management_cases_on_slug", unique: true
   end
 
