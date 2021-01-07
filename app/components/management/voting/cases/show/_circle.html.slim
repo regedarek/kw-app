@@ -86,7 +86,22 @@
             = link_to 'powrót do pozostałych głosowań', '/glosowania/walne', class: 'button secondary expanded'
             - if can? :update, @case
               = link_to 'edytuj', edit_case_path(@case.id), class: 'button alert'
-
+  - if @case.finished?
+    .row
+      .large-12.columns
+        table.hover
+          thead
+            tr
+              th.text-left  width='45%' Kto?
+              th.text-center width='25%' Jak?
+          tbody
+            - Management::Voting::VoteRecord.where(case_id: @case.id).each do |vote|
+              tr
+                td.text-left = vote.user.display_name
+                - if @case.members?
+                  td.text-center = vote.users.map(&:display_name)
+                - else
+                  td.text-center = vote.decision_to_s
 - else
   .row
     .large-12.columns
