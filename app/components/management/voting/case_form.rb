@@ -10,6 +10,7 @@ module Management
       required(:name).filled(:str?)
       required(:creator_id).filled(:int?)
       required(:voting_type).filled(:str?)
+      optional(:public).maybe(:bool?)
       optional(:meeting_type).filled
       optional(:state).maybe
       optional(:hidden).maybe(:bool?)

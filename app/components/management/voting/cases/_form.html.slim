@@ -30,12 +30,16 @@
           = f.trix_editor :destrciption, style: 'min-height: 150px'
 
 .row
-  .large-4.columns
+  .large-6.columns
     = f.label :attachments, 'Załączniki'
     = f.file_field :attachments, multiple: true
-  .large-4.columns
+  .large-6.columns
     = f.label :doc_url, "Link do dokumentu online"
     = f.text_field :doc_url
-  .large-4.columns
+.row
+  .large-6.columns
     = f.label :hide_votes, "Przez aklamację?"
     = f.check_box :hide_votes
+  .large-6.columns
+    = f.label :public, "Jawne?"
+    = f.check_box :public
