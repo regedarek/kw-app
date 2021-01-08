@@ -12,7 +12,7 @@ services:
       - 'db'
       - 'redis'
     build: .
-    command: bundle exec sidekiq
+    command: bundle exec sidekiq -q default -q mailers
     volumes:
       - .:/usr/src/kw-app
       - .:/usr/src/kw-app/tmp
