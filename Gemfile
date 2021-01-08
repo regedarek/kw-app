@@ -57,6 +57,8 @@ gem 'dry-validation'
 gem 'dry-types'
 gem 'dry-struct', require: false
 
+gem 'sidekiq'
+
 gem 'jqplot-rails'
 
 gem 'webpacker', '~> 5.x'
