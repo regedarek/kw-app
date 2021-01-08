@@ -12,8 +12,7 @@ module Management
         @obecni = Management::Voting::CasePresenceRecord.includes(:user).all
         @pelnomocnictwa = Management::Voting::CommissionRecord.includes(:authorized, :owner).all
 
-        respond_with do |format|
-          format.html
+        respond_with do |format| format.html
           format.xlsx do
             disposition = "attachment; filename=walne_kw_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
             response.headers['Content-Disposition'] = disposition
@@ -165,7 +164,7 @@ module Management
 
         case_record.destroy
 
-        redirect_to walne_cases_path
+        redirect_to walne_cases_path, notice: 'Usunięto głosowanie'
       end
 
       private

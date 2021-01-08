@@ -15,7 +15,7 @@ module Management
 
       has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord', dependent: :destroy
       has_many :votes, class_name: 'Management::Voting::VoteRecord', foreign_key: :case_id, dependent: :destroy
-      has_many :users, through: :votes, foreign_key: :user_id, dependent: :destroy
+      has_many :users, through: :votes, foreign_key: :user_id, dependent: :destroy, source: :user
 
       workflow_column :state
       workflow do
