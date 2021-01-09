@@ -58,6 +58,7 @@ gem 'dry-types'
 gem 'dry-struct', require: false
 
 gem 'sidekiq'
+gem 'sidekiq-failures'
 
 gem 'jqplot-rails'
 

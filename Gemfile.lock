@@ -450,6 +450,8 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-failures (1.0.0)
+      sidekiq (>= 4.0.0)
     signet (0.11.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -582,6 +584,7 @@ DEPENDENCIES
   sass-rails
   select2-foundation
   sidekiq
+  sidekiq-failures
   slim-rails
   spring
   timecop
