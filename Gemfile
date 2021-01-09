@@ -59,6 +59,7 @@ gem 'dry-struct', require: false
 
 gem 'sidekiq'
 gem 'sidekiq-failures'
+gem 'appsignal'
 
 gem 'jqplot-rails'
 
