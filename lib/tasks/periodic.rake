@@ -47,9 +47,7 @@ end
 task :destroy_expired_events_sign_ups => :environment do
   expired_sign_ups = Events::Competitions::Repository.new.expired_sign_ups
   expired_sign_ups.each do |sign_up|
-    Events::Competitions::SignUps::Destroy.new(
-      Events::Competitions::Repository.new
-    ).call(id: sign_up.id)
+    Events::Competitions::Worker::DestroyExpiredSignUpWorker.perform_async(sign_up.id)
   end
   Net::HTTP.get(URI('https://hc-ping.com/2dce93ef-f5e2-468d-8640-8f27f9233842'))
 end
