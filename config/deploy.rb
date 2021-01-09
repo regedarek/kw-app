@@ -1,6 +1,6 @@
 lock "3.8.0"
 
-set :stages, %w(production staging)
+set :stages, %w(production)
 set :default_stage, "production"
 
 set :application, "kw-app"
