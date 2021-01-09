@@ -11,8 +11,8 @@ every 1.hour do
   rake :destroy_expired_events_sign_ups
 end
 
-every '30 3 * * *' do
-  rake :close_outdated_voting
+every 6.hours do
+  rake :store_topr
 end
 
 every '30 4 * * *' do
