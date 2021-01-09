@@ -1,6 +1,6 @@
 lock "3.8.0"
 
-set :stages, %w(production staging)
+set :stages, %w(production)
 set :default_stage, "production"
 
 set :application, "kw-app"
@@ -8,7 +8,7 @@ set :repo_url, "git@github.com:regedarek/kw-app.git"
 set :passenger_restart_with_touch, true
 
 # Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/kw-app"

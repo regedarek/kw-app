@@ -1,3 +1,4 @@
+/*
 $( document ).ready(function() {
   var API_URL = '/api/pogodynka'
     var DAYS_COVERED = 5
@@ -123,3 +124,4 @@ $( document ).ready(function() {
     google.charts.load('current', {'packages':['corechart', 'bar', ]});
     google.charts.setOnLoadCallback(init);
 });
+*/

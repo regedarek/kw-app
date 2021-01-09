@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users,
     class_name: 'Db::User',
@@ -9,6 +10,10 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/zaloguj', to: 'devise/sessions#new'
     get '/zarejestruj', to: 'devise/registrations#new'
+  end
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   get 'wypozyczalnia/regulamin' => 'pages#show', id: 'rules'

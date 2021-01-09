@@ -2,9 +2,8 @@ module Training
   module Supplementary
     class SendPrepaidEmail
       def send_prepaid_emails
-        prepaid_emails.each do |sign_up|
-          Training::Supplementary::SignUpMailer.prepaid_email(sign_up.id).deliver_now
-          sign_up.update(paid_email_sent_at: Time.zone.now)
+        prepaid_emails.map(&:id).each do |sign_up_id|
+          Training::Supplementary::Workers::SendPrepaidEmailsWorker.perform_async(sign_up_id)
         end
       end
 
