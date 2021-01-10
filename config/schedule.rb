@@ -2,6 +2,8 @@ env :PATH, ENV['PATH']
 env :GEM_PATH, ENV['GEM_PATH']
 set :output, "cron_log.log"
 
+job_type :rake,    "cd :path && :environment_variable=:environment nice -19 bundle exec rake :task --silent :output"
+
 every 20.minutes do
   rake :send_prepaid_emails
 end
