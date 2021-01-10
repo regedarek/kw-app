@@ -1,0 +1,4 @@
+destroy_expired_events_sign_ups:
+  cron: "40 * * * *"
+  class: "Events::Competitions::Workers::DestroySignUpsEnqueuer"
+  queue: 'default'
