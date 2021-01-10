@@ -1,5 +1,3 @@
-require 'net/http'
-
 module Membership
   module Workers
     class DestroyOudatedProfilesWorker

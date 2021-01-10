@@ -34,7 +34,7 @@ task :send_yearly_fee_reminder => :environment do
 end
 
 task :destroy_unpaid_reservations => :environment do
-  Reservations::Workers::DestroyExpiredSignUpWorker.perform_async
+  Reservations::Workers::DestroyUnpaidReservationsWorker.perform_async
   Net::HTTP.get(URI('https://hchk.io/8da144aa-7b69-4cb5-bd7e-031c404d5d04'))
 end
 
