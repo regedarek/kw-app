@@ -1,109 +1,103 @@
-- if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, accepted_terms: true)
-  .row
-    .large-6.columns
-      .row
-        .large-12.columns
-          h4 = @case.name
-
-      b Status: 
-      span.label = I18n.t(@case.state)
-      br
-      - if @case.acceptance_date
-        b Data uchwalenia: 
-        = @case.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %H:%M")
-
-      - if @case.destrciption
-        br
-        .row
-          .large-12.columns
-            .callout
-              = sanitize @case.destrciption
-
-      - if @case.doc_url
-        b Dokument
-        br
-        = link_to @case.doc_url, target: :_blank do
-          = image_tag('file.jpg', class: 'thumbnail')
-
-      - if @case.attachments.any?
-        .row
-          .large-12.columns
-            h5 Załączniki
-            - @case.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-              = link_to attachment.url, download: File.basename(attachment.file.path) do
-                = image_tag('file.jpg', class: 'thumbnail')
-              br
-            - @case.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-              - unless photo.blank? || photo.thumb.blank?
-                = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
-
-                div id="photo-#{i}" class="full reveal" data-reveal="" 
-                  = image_tag photo.url
-                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                    span aria-hidden="true"  &times;
-
-    .large-6.columns
-      .row
-        .large-12.columns
-          - if @case.acceptance_date
-            .callout.warning
-              b Czas na głosowanie
-              - if @case.finished?
-                br
-                | Głosowanie zostało zamknięte.
-              - else
-                p#demo data-expired="#{@case.acceptance_date}"
-          - if @case.finished?
-            .callout class="success"
-              h5 = "Wyniki"
-              = render "management/voting/cases/voting_results/#{@case.voting_type}"
-
-      .row
-        .large-12.columns
-          - if current_user.active_and_regular?
-            - if @case.voting?
-                - if @repository.authorized?(current_user.id)
-                  = render "management/voting/cases/forms/authorized"
-                - else
-                  - if @repository.voted?(@case.id, current_user.id)
-                    .callout.secondary
-                      h5 = current_user.display_name
-                      | Głos został oddany.
-                      br
-                      = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: current_user.id
-                  - else
-                    - if @case.members?
-                      .row
-                        .large-12.columns
-                          .callout.warning
-                            | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
-                    .row
-                      .large-6.columns
-                        h5 Głosowanie
-                        = render "management/voting/cases/forms/#{@case.voting_type}", user_id: current_user.id, commission: false
-      .row
-        .large-12.columns
-            = link_to 'powrót do pozostałych głosowań', '/glosowania/walne', class: 'button secondary expanded'
-            - if can? :update, @case
-              = link_to 'edytuj', edit_case_path(@case.id), class: 'button alert'
-  - if @case.finished? && @case.public?
+.row
+  .large-6.columns
     .row
       .large-12.columns
-        table.hover
-          thead
-            tr
-              th.text-left  width='45%' Kto?
-              th.text-center width='25%' Jak?
-          tbody
-            - Management::Voting::VoteRecord.where(case_id: @case.id).each do |vote|
-              tr
-                td.text-left = vote.user.display_name
-                - if @case.members?
-                  td.text-center = vote.users.map(&:display_name)
+        h4 = @case.name
+
+    b Status: 
+    span.label = I18n.t(@case.state)
+    br
+    - if @case.acceptance_date
+      b Data uchwalenia: 
+      = @case.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %H:%M")
+
+    - if @case.destrciption
+      br
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @case.destrciption
+
+    - if @case.doc_url
+      b Dokument
+      br
+      = link_to @case.doc_url, target: :_blank do
+        = image_tag('file.jpg', class: 'thumbnail')
+
+    - if @case.attachments.any?
+      .row
+        .large-12.columns
+          h5 Załączniki
+          - @case.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            = link_to attachment.url, download: File.basename(attachment.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail')
+            br
+          - @case.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+            - unless photo.blank? || photo.thumb.blank?
+              = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+              div id="photo-#{i}" class="full reveal" data-reveal="" 
+                = image_tag photo.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+
+  .large-6.columns
+    .row
+      .large-12.columns
+        - if @case.acceptance_date
+          .callout.warning
+            b Czas na głosowanie
+            - if @case.finished?
+              br
+              | Głosowanie zostało zamknięte.
+            - else
+              p#demo data-expired="#{@case.acceptance_date}"
+        - if @case.finished?
+          .callout class="success"
+            h5 = "Wyniki"
+            = render "management/voting/cases/voting_results/#{@case.voting_type}"
+
+    .row
+      .large-12.columns
+        - if current_user.active_and_regular?
+          - if @case.voting?
+              - if @repository.authorized?(current_user.id)
+                = render "management/voting/cases/forms/authorized"
+              - else
+                - if @repository.voted?(@case.id, current_user.id)
+                  .callout.secondary
+                    h5 = current_user.display_name
+                    | Głos został oddany.
+                    br
+                    = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: current_user.id
                 - else
-                  td.text-center = vote.decision_to_s
-- else
+                  - if @case.members?
+                    .row
+                      .large-12.columns
+                        .callout.warning
+                          | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
+                  .row
+                    .large-6.columns
+                      h5 Głosowanie
+                      = render "management/voting/cases/forms/#{@case.voting_type}", user_id: current_user.id, commission: false
+    .row
+      .large-12.columns
+          = link_to 'powrót do pozostałych głosowań', '/glosowania/walne', class: 'button secondary expanded'
+          - if can? :update, @case
+            = link_to 'edytuj', edit_case_path(@case.id), class: 'button alert'
+- if @case.finished? && @case.public?
   .row
     .large-12.columns
-      = render 'management/voting/cases/show/accepted_terms'
-      = link_to 'Zaakceptuj warunki', accept_cases_path, class: 'button expanded large success', method: :post
+      table.hover
+        thead
+          tr
+            th.text-left  width='45%' Kto?
+            th.text-center width='25%' Jak?
+        tbody
+          - Management::Voting::VoteRecord.where(case_id: @case.id).each do |vote|
+            tr
+              td.text-left = vote.user.display_name
+              - if @case.members?
+                td.text-center = vote.users.map(&:display_name)
+              - else
+                td.text-center = vote.decision_to_s
