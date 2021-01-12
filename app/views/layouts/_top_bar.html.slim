@@ -16,8 +16,7 @@
             ul.menu.vertical
               li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/13'
               li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
-              li= link_to 'Przekazanie pełnomocnictwa', 'https://panel.kw.krakow.pl/glosowania/pelnomocnictwo'
-              li= link_to 'Głosowanie i transmisja', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
+              li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
               - if can? :obecni, Management::Voting::CaseRecord
                 li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
           - if current_user.roles.include?('office') || current_user.roles.include?('settings')

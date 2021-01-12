@@ -5,6 +5,7 @@ module Management
       append_view_path 'app/components'
 
       def new
+        return redirect_to '/glosowania/walne', flash: { alert: 'Walne zakończone' }
         authorize! :create, Management::Voting::CommissionRecord
         @commission_record = Management::Voting::CommissionRecord.new
       end
