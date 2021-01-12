@@ -29,10 +29,6 @@ module Management
       def accept
         authorize! :read, Management::Voting::CaseRecord
 
-        unless Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id)
-          Management::Voting::CasePresenceRecord.create(user_id: current_user.id, accepted_terms: true)
-        end
-
         redirect_to walne_cases_path, notice: 'Zaakceptowano warunki'
       end
 
