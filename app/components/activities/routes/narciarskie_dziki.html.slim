@@ -17,7 +17,7 @@
                 th kto?
                 th width='15%' metrów
             tbody
-              - @prev_month_leaders.first(5).each do |user|
+              - @prev_prev_month_leaders.first(5).each do |user|
                 tr
                   td width='45px' = link_to user_path(kw_id: user.kw_id) do
                     - if user.avatar.present?
@@ -37,7 +37,7 @@
                   th kto?
                   th width='15%' metrów
               tbody
-                - @current_month_leaders.first(5).each do |user|
+                - @prev_month_leaders.first(5).each do |user|
                   tr
                     td width='45px' = link_to user_path(kw_id: user.kw_id) do
                       - if user.avatar.present?
@@ -141,7 +141,7 @@
                   = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
                 - if user.mountain_routes.last.training_contracts.any?
                   span.dashboard-table-timestamp-small
-                    = user.mountain_routes.last.training_contracts.map(&:contract).map(&:name).to_sentence
+                    = user.mountain_routes.last.training_contracts.map(&:contract).uniq.map(&:name).to_sentence
             td.text-center.large-text-right = user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
             td.text-center.large-text-right = user.total_mountain_routes_length
             td.text-center.large-text-right = user.total_mountain_routes_length + user.training_contracts.inject(0) { |sum, contract| sum + contract.score }

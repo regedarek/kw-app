@@ -26,6 +26,7 @@ module Activities
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 
       @prev_month_leaders = ski_repository.fetch_prev_month
+      @prev_prev_month_leaders = ski_repository.fetch_specific_month(2020, 12)
       @current_month_leaders = ski_repository.fetch_current_month
       @season_leaders = ski_repository.fetch_season
       @last_contracts = ski_repository.last_contracts.includes(:contract)
