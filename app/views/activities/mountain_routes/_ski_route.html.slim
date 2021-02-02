@@ -33,16 +33,17 @@
       li = "dzikowe: #{@route.boar_length} m"
 
 - if user_signed_in?
-  - user_contracts = ::Training::Activities::UserContractRecord.includes(:contract).where(route_id: @route.id)
-  .large-12.columns
-    b kontrakty: 
-    ul
-      - user_contracts.each do |user_contract|
-        li
-          = link_to "#{user_contract.contract.name} za #{user_contract.contract.score}", activities_contract_path(user_contract.contract.id)
-          - if @route.colleagues.include?(current_user)
-            = link_to activities_user_contract_path(user_contract.id), method: :delete, style: 'padding: 5px; color: red;' do
-              i.fi.fi-trash
+  - user_contracts = ::Training::Activities::UserContractRecord.includes(:contract).where(route_id: @route.id, user_id: current_user.id)
+  - if user_contracts.any?
+    .large-12.columns
+      b twoje kontrakty: 
+      ul
+        - user_contracts.each do |user_contract|
+          li
+            = link_to "#{user_contract.contract.name} za #{user_contract.contract.score}", activities_contract_path(user_contract.contract.id)
+            - if @route.colleagues.include?(current_user)
+              = link_to activities_user_contract_path(user_contract.id), method: :delete, style: 'padding: 5px; color: red;' do
+                i.fi.fi-trash
 
   - if @route.colleagues.include? current_user
     = form_for ::Training::Activities::UserContractRecord.new, as: :user_contract, url: activities_user_contracts_path do |f|
