@@ -11,20 +11,18 @@ module Activities
         params[:route_type] = 'regular_climbing'
       end
 
-      @q = Db::Activities::MountainRoute
+      @q = Db::Activities::MountainRoute.ransack(params[:q])
+
+      @routes = @q.result(distinct: true)
+      @routes = @routes.where(route_type: params[:route_type]) if params[:route_type]
+      @routes = @routes
         .includes([:colleagues])
         .accessible_by(current_ability)
         .where(hidden: false)
         .order(climbing_date: :desc)
-      @q = @q.where(route_type: params[:route_type]) if params[:route_type]
-      unless params[:boars]
-        @q = @q.where(training: false)
-      else
-        @q = @q.where(training: [false, true])
-      end
-      @q = @q.ransack(params[:q])
 
-      @routes = @q.result(distinct: true).page(params[:page]).per(20)
+      @routes = @routes.page(params[:page]).per(20)
+
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
         @current_month_leaders = Training::Activities::Repository.new.fetch_current_month

@@ -39,6 +39,7 @@ module Activities
 
     def index
       authorize! :read, ::Db::Activities::MountainRoute
+
       @mountain_routes = MountainRouteRecord.order(climbing_date: :desc).page(params[:page]).per(20)
     end
 
