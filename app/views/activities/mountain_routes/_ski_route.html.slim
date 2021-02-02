@@ -35,15 +35,19 @@
 - if user_signed_in?
   - if @route.colleagues.include? current_user
     - if ::Training::Activities::UserContractRecord.exists?(user_id: current_user.id, route_id: @route.id)
-      - user_contract = ::Training::Activities::UserContractRecord.find_by(user_id: current_user.id, route_id: @route.id)
+      - user_contracts = ::Training::Activities::UserContractRecord.where(user_id: current_user.id, route_id: @route.id)
       .large-12.columns
-        b Kontrakt zrealizowany: 
-        = "#{user_contract.contract.name} za #{user_contract.contract.score}"
-    - else
-      = form_for ::Training::Activities::UserContractRecord.new, as: :user_contract, url: activities_user_contracts_path do |f|
-        = f.hidden_field :user_id, value: current_user.id
-        = f.hidden_field :route_id, value: @route.id
-        .large-6.columns
-          = f.select :contract_id, ::Training::Activities::ContractRecord.all.map { |w, _| [w.name, w.id] }, include_blank: true
-        .large-6.columns
-          = f.submit 'Przypisz kontrakt', class: 'button'
+        b kontrakty: 
+        ul
+          - user_contracts.each do |user_contract|
+            li
+              = link_to "#{user_contract.contract.name} za #{user_contract.contract.score}", activities_contract_path(user_contract.contract.id)
+              = link_to activities_user_contract_path(user_contract.id), method: :delete, style: 'padding: 5px; color: red;' do
+                i.fi.fi-trash
+    = form_for ::Training::Activities::UserContractRecord.new, as: :user_contract, url: activities_user_contracts_path do |f|
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :route_id, value: @route.id
+      .large-6.columns
+        = f.select :contract_id, ::Training::Activities::ContractRecord.all.map { |w, _| [w.name, w.id] }, include_blank: true
+      .large-6.columns
+        = f.submit 'Przypisz kontrakt', class: 'button'

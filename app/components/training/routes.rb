@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       end
       resources :ski_routes
       resources :contracts
-      resources :user_contracts, only: [:create]
+      resources :user_contracts, only: [:create, :destroy]
 
       match 'heart', to: 'hearts#heart', via: :post
       match 'unheart', to: 'hearts#unheart', via: :delete

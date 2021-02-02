@@ -11,8 +11,16 @@ module Training
         if contract.save
           redirect_to activities_mountain_route_path(contract.route.id), notice: 'Przypisano kontrakt'
         else
-          render :new
+          redirect_to activities_mountain_route_path(contract.route.id), alert: 'Wybierz kontrakt!'
         end
+      end
+
+      def destroy
+        user_contract = ::Training::Activities::UserContractRecord.find(params[:id])
+        route_slug = user_contract.route.slug
+
+        user_contract.destroy
+        redirect_to activities_mountain_route_path(route_slug), notice: 'Usunięto kontrakt'
       end
 
       private
