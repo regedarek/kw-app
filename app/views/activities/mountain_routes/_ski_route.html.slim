@@ -34,8 +34,8 @@
 
 - if user_signed_in?
   - if @route.colleagues.include? current_user
-    - if ::Training::Activities::UserContractRecord.exists?(user_id: current_user.id, route_id: @route.id)
-      - user_contracts = ::Training::Activities::UserContractRecord.where(user_id: current_user.id, route_id: @route.id)
+    - if ::Training::Activities::UserContractRecord.includes(:contract).exists?(user_id: current_user.id, route_id: @route.id)
+      - user_contracts = ::Training::Activities::UserContractRecord.includes(:contract).where(user_id: current_user.id, route_id: @route.id)
       .large-12.columns
         b kontrakty: 
         ul

@@ -140,9 +140,9 @@
               - if user.mountain_routes.any?
                 h6.dashboard-table-text
                   = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
-                - if user.training_contracts.any?
+                - if user.mountain_routes.last.training_contracts.any?
                   span.dashboard-table-timestamp-small
-                    = user.training_contracts.last.name
+                    = user.mountain_routes.last.training_contracts.map(&:contract).map(&:name).to_sentence
             td.text-center.large-text-right = user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
             td.text-center.large-text-right = user.total_mountain_routes_length
             td.text-center.large-text-right = user.total_mountain_routes_length + user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
