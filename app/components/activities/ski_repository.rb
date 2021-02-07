@@ -44,15 +44,16 @@ module Activities
         .order('total_mountain_routes_length DESC')
     end
 
-    def fetch_season
-      range = start_date..end_date
+    def fetch_season(year: Date.today.year)
+      start_day = DateTime.new(year - 1, 12, 01)
+      end_day = DateTime.new(year, 4, 30)
+      range = start_day..end_day
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
         .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
-        .order('total_mountain_routes_length DESC')
     end
 
     def fetch_winter
