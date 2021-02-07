@@ -4,6 +4,7 @@ class Db::User < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
   mount_uploader :avatar, ::Membership::AvatarUploader
 
+  enum gender: [:male, :female]
   ROLES = %w(training_contracts business_courses library reservations routes admin events courses competitions office tech donations photo_competition management secondary_management financial_management marketing projects)
   SNW_GROUPS = %w(mjs instructors management sport authors gear support)
   devise :database_authenticatable, :registerable,
@@ -56,8 +57,6 @@ class Db::User < ActiveRecord::Base
 
   has_many :vote_users, class_name: 'Management::Voting::VoteUsersRecord', foreign_key: :user_id
   has_many :member_votes, through: :vote_users, foreign_key: :vote_id, dependent: :destroy, source: :vote
-
-  delegate :gender, to: :profile, allow_nil: true
 
   ransacker :full_name do |parent|
     Arel::Nodes::NamedFunction.new('CONCAT_WS', [

@@ -16,6 +16,23 @@ module Activities
         .order('total_mountain_routes_length DESC')
     end
 
+    def fetch_specific_month_with_gender(gender, year, month)
+      if year && month
+        specific_date = Date.new(year, month, 01)
+      else
+        specific_date = Date.today
+      end
+      range = specific_date.beginning_of_month..specific_date.end_of_month
+      range_created_at = specific_date.beginning_of_month..(specific_date.end_of_month + 3.days)
+      ::Db::User
+        .joins(:mountain_routes)
+        .where.not(mountain_routes: { id: nil, length: nil })
+        .where(gender: gender, boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range_created_at })
+        .select('users.kw_id, users.id, users.first_name, users.last_name, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
+        .group(:id)
+        .order('total_mountain_routes_length DESC')
+    end
+
     def fetch_specific_month(year, month)
       if year && month
         specific_date = Date.new(year, month, 01)

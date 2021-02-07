@@ -75,7 +75,7 @@ module Admin
 
     def user_params
       params.require(:user).permit(
-        :kw_id, :email,:first_name, :last_name, :phone, :roles, :snw_groups, :admin, :author_number, :snw_blog
+        :kw_id, :email,:first_name, :last_name, :phone, :roles, :snw_groups, :admin, :author_number, :snw_blog, :gender
       )
     end
   end
