@@ -35,10 +35,12 @@
                 td width='110px'
                   = link_to route.climbing_date, activities_mountain_route_path(route.id)
                 td
-                  = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
-                td.text-right
                   = route.name
-
+                td.text-center
+                  - if route.area.present?
+                    = route.area
+                td.text-right
+                  = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
 
 
     .large-4.columns      
