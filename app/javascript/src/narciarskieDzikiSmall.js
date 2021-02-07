@@ -15,9 +15,15 @@ function NarciarskieDzikiSmall({ data, keyPrefix }) {
                         return (
                             <tr key={keyPrefix + id}>
                                 <td width='45px'>
-                                    <img src={dzik.avatar} />
+                                    <a href={"/klubowicze/" + dzik.kwId}>
+                                        <img src={dzik.avatar} />
+                                    </a>
                                 </td>
-                                <td className="text-center large-text-left">{dzik.displayName}</td>
+                                <td className="text-center large-text-left">
+                                    <a href={"/klubowicze/" + dzik.kwId}>
+                                        {dzik.displayName}
+                                    </a>
+                                </td>
                                 <td className="text-center">{dzik.totalMountainRoutesLength}</td>
                             </tr>
                         )

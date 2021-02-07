@@ -20,9 +20,15 @@ function NarciarskieDziki({ data, keyPrefix }) {
                             <tr key={keyPrefix + id}>
                                 <td className="text-center">{id+1}</td>
                                 <td width='45px'>
-                                    <img src={dzik.avatar} />
+                                    <a href={"/klubowicze/" + dzik.kwId}>
+                                        <img src={dzik.avatar} />
+                                    </a>
                                 </td>
-                                <td className="text-center large-text-left">{dzik.displayName}</td>
+                                <td className="text-center large-text-left">
+                                    <a href={"/klubowicze/" + dzik.kwId}>
+                                        {dzik.displayName}
+                                    </a>
+                                </td>
                                 <td className="large-text-left">
                                     <a href={"/przejscia/" + dzik.last_activity.id}>
                                         <h6 className="dashboard-table-text">{dzik.last_activity.name}</h6>
