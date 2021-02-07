@@ -1,3 +1,5 @@
+= javascript_pack_tag 'narciarskie_dziki_components'
+
 .row
   .large-6.columns
     = link_to 'Regulamin narciarskich dzików', narciarskie_dziki_regulamin_path, class: 'button warning large expanded'
@@ -110,39 +112,5 @@
 .row
   .large-12.columns
     h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
-    table.stack
-      thead
-        tr
-          th width='30px' Miejsce
-          th width='25px'
-          th width='250px' Kto?
-          th.large-text-left Ostatnie przejście
-          th.large-text-right width='120px'
-            | Kontrakty
-          th.large-text-right width='120px'
-            | Metry
-          th.large-text-right width='120px'
-            | Suma
-
-      tbody
-        - i = 0
-        - @season_leaders.each do |user|
-          tr
-            td.text-center = i + 1
-            td width='45px' = link_to user_path(kw_id: user.kw_id) do
-              - if user.avatar.present?
-                = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-              - else
-                = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-            td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-            td.large-text-left
-              - if user.mountain_routes.any?
-                h6.dashboard-table-text
-                  = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
-                - if user.mountain_routes.last.training_contracts.any?
-                  span.dashboard-table-timestamp-small
-                    = user.mountain_routes.last.training_contracts.map(&:contract).uniq.map(&:name).to_sentence
-            td.text-center.large-text-right = user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
-            td.text-center.large-text-right = user.total_mountain_routes_length
-            td.text-center.large-text-right = user.total_mountain_routes_length + user.training_contracts.inject(0) { |sum, contract| sum + contract.score }
-            - i += 1
+    div(id="narciarskie_dziki_component")
+    
