@@ -50,6 +50,7 @@ module Seeding
             cost: [100, 50, 150].sample,
             added: [true, false].sample,
             accepted: true,
+            gender: gender: [:male, :female].sample,
             main_discussion_group: [true, false].sample,
             application_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
             birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
@@ -65,7 +66,7 @@ module Seeding
         end
         Db::User.destroy_all
         Db::Profile.where(kw_id: (81..100)).each do |profile|
-          user = Db::User.new(kw_id: profile.kw_id, first_name: profile.first_name, last_name: profile.last_name, email: profile.email, phone: profile.phone)
+          user = Db::User.new(kw_id: profile.kw_id, first_name: profile.first_name, gender: [:male, :female].sample, last_name: profile.last_name, email: profile.email, phone: profile.phone)
           user.password = "test#{profile.id}"
           user.save
           fee = user.membership_fees.create year: Date.today.year, cost: 100, kw_id: user.kw_id, creator_id: user.id
