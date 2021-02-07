@@ -2,7 +2,12 @@ module Activities
   module Api
     class RoutesController < ApplicationController
       def season
-        season_leaders = ski_repository.fetch_season(year: params[:id].to_i, gender: params[:gender])
+        gender = if params[:gender]
+          params[:gender]
+        else
+          [nil, :male, :female]
+        end
+        season_leaders = ski_repository.fetch_season(year: params[:id].to_i, gender: gender)
 
         render json: season_leaders, format: :json, each_serializer: Activities::SeasonLeaderSerializer, year: params[:id]
       end
