@@ -5,82 +5,84 @@
     = link_to 'Tabela narciarskich dzików', narciarskie_dziki_path, class: 'button primary large expanded'
   .large-4.columns
     = link_to 'Kontrakty', 'narciarskie-dziki/kontrakty', class: 'button alert large expanded'
+
+
 .row
   .large-12.columns
     h4
       = "Narciarskie dziki miesiąca #{params[:month]}/#{params[:year]}"
+    ul#example-tabs.tabs data-tabs="" 
+      li.tabs-title.is-active
+        a aria-selected="true" href="#male" Dziki
+      li.tabs-title
+        a data-tabs-target="female" href="#female" Dziczki
 
 .row
   .large-12.columns
-    table.stack
-      thead
-        tr
-          th width='30px' Miejsce
-          th width='25px'
-          th width='250px' Kto?
-          th.large-text-left Ostatnie przejście w tym miesiącu
-          th.large-text-right width='120px'
-            | Metry
+    .tabs-content data-tabs-content="example-tabs" 
+      #male.tabs-panel.is-active
+        table
+          thead
+            tr
+              th width='30px' Miejsce
+              th width='25px'
+              th width='250px' Kto?
+              th.large-text-left Ostatnie przejście w tym miesiącu
+              th.large-text-right width='120px'
+                | Metry
 
-      tbody
-        - i = 0
-        - @specific_month_leaders_male.each do |user|
-          tr
-            td.text-center = i + 1
-            td width='45px' = link_to user_path(kw_id: user.kw_id) do
-              - if user.avatar.present?
-                = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-              - else
-                = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-            td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-            td.large-text-left
-              - specific_date = Date.new(params[:year].to_i, params[:month].to_i, 01)
-              - range = specific_date.beginning_of_month..specific_date.end_of_month
-              - if user.mountain_routes.where(climbing_date: range).any?
-                h6.dashboard-table-text
-                  = link_to user.mountain_routes.where(climbing_date: range).last.name, activities_mountain_route_path(user.mountain_routes.where(climbing_date: range).last.id)
-                - if user.training_contracts.any?
-                  span.dashboard-table-timestamp-small
-                    = user.training_contracts.last.name
-            td.text-center.large-text-right = user.total_mountain_routes_length
-            - i += 1
+          tbody
+            - i = 0
+            - @specific_month_leaders_male.each do |user|
+              tr
+                td.text-center = i + 1
+                td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                  - if user.avatar.present?
+                    = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                  - else
+                    = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                td.large-text-left
+                  - specific_date = Date.new(params[:year].to_i, params[:month].to_i, 01)
+                  - range = specific_date.beginning_of_month..specific_date.end_of_month
+                  - if user.mountain_routes.where(climbing_date: range).any?
+                    h6.dashboard-table-text
+                      = link_to user.mountain_routes.where(climbing_date: range).last.name, activities_mountain_route_path(user.mountain_routes.where(climbing_date: range).last.id)
+                    - if user.training_contracts.any?
+                      span.dashboard-table-timestamp-small
+                        = user.training_contracts.last.name
+                td.text-center.large-text-right = user.total_mountain_routes_length
+                - i += 1
+      #female.tabs-panel
+        table
+          thead
+            tr
+              th width='30px' Miejsce
+              th width='25px'
+              th width='250px' Kto?
+              th.large-text-left Ostatnie przejście w tym miesiącu
+              th.large-text-right width='120px'
+                | Metry
 
-.row
-  .large-12.columns
-    h4
-      = "Narciarskie dziczki miesiąca #{params[:month]}/#{params[:year]}"
-
-.row
-  .large-12.columns
-    table.stack
-      thead
-        tr
-          th width='30px' Miejsce
-          th width='25px'
-          th width='250px' Kto?
-          th.large-text-left Ostatnie przejście w tym miesiącu
-          th.large-text-right width='120px'
-            | Metry
-
-      tbody
-        - i = 0
-        - @specific_month_leaders_female.each do |user|
-          tr
-            td.text-center = i + 1
-            td width='45px' = link_to user_path(kw_id: user.kw_id) do
-              - if user.avatar.present?
-                = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-              - else
-                = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-            td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-            td.large-text-left
-              - specific_date = Date.new(params[:year].to_i, params[:month].to_i, 01)
-              - range = specific_date.beginning_of_month..specific_date.end_of_month
-              - if user.mountain_routes.where(climbing_date: range).any?
-                h6.dashboard-table-text
-                  = link_to user.mountain_routes.where(climbing_date: range).last.name, activities_mountain_route_path(user.mountain_routes.where(climbing_date: range).last.id)
-                - if user.training_contracts.any?
-                  span.dashboard-table-timestamp-small
-                    = user.training_contracts.last.name
-            td.text-center.large-text-right = user.total_mountain_routes_length
-            - i += 1
+          tbody
+            - i = 0
+            - @specific_month_leaders_female.each do |user|
+              tr
+                td.text-center = i + 1
+                td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                  - if user.avatar.present?
+                    = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                  - else
+                    = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                td.text-center.large-text-left = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                td.large-text-left
+                  - specific_date = Date.new(params[:year].to_i, params[:month].to_i, 01)
+                  - range = specific_date.beginning_of_month..specific_date.end_of_month
+                  - if user.mountain_routes.where(climbing_date: range).any?
+                    h6.dashboard-table-text
+                      = link_to user.mountain_routes.where(climbing_date: range).last.name, activities_mountain_route_path(user.mountain_routes.where(climbing_date: range).last.id)
+                    - if user.training_contracts.any?
+                      span.dashboard-table-timestamp-small
+                        = user.training_contracts.last.name
+                td.text-center.large-text-right = user.total_mountain_routes_length
+                - i += 1
