@@ -5,33 +5,19 @@
     = link_to 'Regulamin narciarskich dzików', narciarskie_dziki_regulamin_path, class: 'button warning large expanded'
   .large-6.columns
     = link_to 'Kontrakty', 'narciarskie-dziki/kontrakty', class: 'button alert large expanded'
-.row
+.row style="margin-bottom: 1rem;"
   .large-12.columns
     h4 Narciarskie dziki sezonu
-    .callout.primary
-      .row
-        .large-4.columns
-          h5 = link_to I18n.t('date.month_names')[12] + (" #{Date.today.year - 1}"), narciarskie_dziki_month_path(2020, 12)
-          table.stack
-            thead
-              tr
-                th
-                th kto?
-                th width='15%' metrów
-            tbody
-              - @prev_prev_month_leaders.first(5).each do |user|
-                tr
-                  td width='45px' = link_to user_path(kw_id: user.kw_id) do
-                    - if user.avatar.present?
-                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-                    - else
-                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-                  td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-                  td.text-center = user.total_mountain_routes_length
-
-        - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month - 1)
+    ul.tabs data-tabs="" id="panels-tabs"
+      li.tabs-title.is-active
+        a(data-tabs-target="panel1", href="#panel1" aria-selected="true") Miesiące
+      li.tabs-title 
+        a(data-tabs-target="panel2", href="#panel2") Sezony
+    .tabs-content data-tabs-content="panels-tabs" 
+      .tabs-panel.is-active.callout.primary id="panel1" style="border: none; margin-bottom: 0;"
+        .row
           .large-4.columns
-            h5 = link_to I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, 01)
+            h5 = link_to I18n.t('date.month_names')[12] + (" #{Date.today.year - 1}"), narciarskie_dziki_month_path(2020, 12)
             table.stack
               thead
                 tr
@@ -39,7 +25,7 @@
                   th kto?
                   th width='15%' metrów
               tbody
-                - @prev_month_leaders.first(5).each do |user|
+                - @prev_prev_month_leaders.first(5).each do |user|
                   tr
                     td width='45px' = link_to user_path(kw_id: user.kw_id) do
                       - if user.avatar.present?
@@ -49,25 +35,52 @@
                     td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
                     td.text-center = user.total_mountain_routes_length
 
-        - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month)
-          .large-4.columns
-            h5 = link_to I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, Date.today.month)
-            table.stack
-              thead
-                tr
-                  th
-                  th kto?
-                  th width='15%' metrów
-              tbody
-                - @current_month_leaders.first(5).each do |user|
+          - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month - 1)
+            .large-4.columns
+              h5 = link_to I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, 01)
+              table.stack
+                thead
                   tr
-                    td width='45px' = link_to user_path(kw_id: user.kw_id) do
-                      - if user.avatar.present?
-                        = image_tag(user.avatar.url, class: 'topbar-avatar-image')
-                      - else
-                        = image_tag('default-avatar.png', class: 'topbar-avatar-image')
-                    td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
-                    td.text-center = user.total_mountain_routes_length
+                    th
+                    th kto?
+                    th width='15%' metrów
+                tbody
+                  - @prev_month_leaders.first(5).each do |user|
+                    tr
+                      td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                        - if user.avatar.present?
+                          = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                        - else
+                          = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                      td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                      td.text-center = user.total_mountain_routes_length
+
+          - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month)
+            .large-4.columns
+              h5 = link_to I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, Date.today.month)
+              table.stack
+                thead
+                  tr
+                    th
+                    th kto?
+                    th width='15%' metrów
+                tbody
+                  - @current_month_leaders.first(5).each do |user|
+                    tr
+                      td width='45px' = link_to user_path(kw_id: user.kw_id) do
+                        - if user.avatar.present?
+                          = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                        - else
+                          = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                      td = link_to Db::User.find(user.id).display_name, user_path(kw_id: user.kw_id)
+                      td.text-center = user.total_mountain_routes_length
+      .tabs-panel.callout.primary id="panel2" style="border: none; margin-bottom: 0;"
+        .row
+          .large-4.columns
+            div id="narciarskie_dziki_component_winter"
+          .large-4.columns
+          .large-4.columns
+            div id="narciarskie_dziki_component_spring"
 
 - if user_signed_in?
   - if @my_last_contracts.any?
@@ -112,5 +125,5 @@
 .row
   .large-12.columns
     h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
-    div(id="narciarskie_dziki_component")
+    div id="narciarskie_dziki_component"
     
