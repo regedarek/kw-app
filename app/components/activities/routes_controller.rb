@@ -19,6 +19,7 @@ module Activities
     def narciarskie_dziki_month
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 
+      @specific_month_leaders = ski_repository.fetch_specific_month_with_gender([nil, :male, :female], params[:year].to_i, params[:month].to_i)
       @specific_month_leaders_male = ski_repository.fetch_specific_month_with_gender([nil, :male], params[:year].to_i, params[:month].to_i)
       @specific_month_leaders_female = ski_repository.fetch_specific_month_with_gender(:female, params[:year].to_i, params[:month].to_i)
     end
