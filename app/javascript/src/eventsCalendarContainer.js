@@ -1,4 +1,5 @@
 import React from 'react';
+import 'whatwg-fetch';
 
 import EventsCalendar from "./eventsCalendar";
 
@@ -11,7 +12,7 @@ class EventsCalendarContainer extends React.Component {
   }
   
   componentDidMount() {
-    fetch('/supplementary/api/courses?order=start_date')
+    window.fetch('/supplementary/api/courses?order=start_date')
       .then(response => response.json())
       .then(data => {
         this.setState({

@@ -7,7 +7,8 @@
     "react": "^17.0.1",
     "react-calendar-icon": "^0.9.4",
     "react-dom": "^17.0.1",
-    "styled-jss": "^2.2.3"
+    "styled-jss": "^2.2.3",
+    "whatwg-fetch": "^3.5.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"

@@ -1,7 +1,7 @@
 import React from 'react';
 import CalendarIconComponent from "./calendarIconComponent";
 
-function EventsCalendarContainer({ events }) {
+function EventsCalendar({ events }) {
     return (
         <div>
             <div style={{
@@ -26,4 +26,4 @@ function EventsCalendarContainer({ events }) {
         </div>
     )
 }
-export default EventsCalendarContainer;
+export default EventsCalendar;
