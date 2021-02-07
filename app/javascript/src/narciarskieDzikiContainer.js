@@ -55,10 +55,12 @@ class NarciarskieDzikiComponent extends React.Component {
           totalMountainRoutesLength: 0,
           totalLength: 0,
           last_activity: {},
+          kwId: null
       }
       if (dzik && dzik.leader) {
           displayObj.avatar = dzik.leader.avatar && dzik.leader.avatar.url;
           displayObj.displayName = dzik.leader.display_name;
+          displayObj.kwId = dzik.leader.kw_id;
       }
       if (dzik) {
           displayObj.trainingContractsLength = dzik.training_contracts_length;
