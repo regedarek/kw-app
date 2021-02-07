@@ -5,15 +5,23 @@ import NarciarskieDziki from "./narciarskieDziki";
 import NarciarskieDzikiSmall from "./narciarskieDzikiSmall";
 import Spinner from "./spinner";
 
-function compareTotals(a, b) {
-  if (!a) {
-      return 1;
-  }
-  if (!b) {
-      return -1;
-  }
+function compareWith(comparisionType) {
+  return function (a, b) {
+    if (!a) {
+        return 1;
+    }
+    if (!b) {
+        return -1;
+    }
 
-  return b.total_length - a.total_length;
+    return b[comparisionType] - a[comparisionType]
+  }
+}
+
+const sortByMap = {
+  "winter": "total_mountain_routes_length",
+  "spring": "total_mountain_routes_length",
+  "season": "total_length"
 }
 
 class NarciarskieDzikiComponent extends React.Component {
@@ -26,28 +34,20 @@ class NarciarskieDzikiComponent extends React.Component {
   }
   
   componentDidMount() {
-    window.fetch('/api/routes/2021/' + this.props.type)
+    const route = '/api/routes/2021/' + this.props.type + (this.props.gender ? `?gender=${this.props.gender}` : "");
+    window.fetch(route)
       .then(response => response.json())
       .then(data => {
         this.setState({
-          data,
+          data: this.sanitizeData(data),
           isLoading: false
         });
       });
   }
 
-  render() {
-    if (this.state.isLoading) {
-        return (<div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-        }}>
-            <Spinner /> 
-        </div>);
-    }
-    const sortedData = (this.state.data || []).sort(compareTotals);
-    const sanitizedData = sortedData.map((dzik, id) => {
+  sanitizeData(data) {
+    const sortedData = (data || []).sort(compareWith(sortByMap[this.props.type]));
+    return sortedData.map((dzik) => {
       const displayObj = {
           avatar: "",
           displayName: "",
@@ -69,10 +69,23 @@ class NarciarskieDzikiComponent extends React.Component {
 
       return displayObj;
     });
-    if (this.props.isSmall) {
-      return (<NarciarskieDzikiSmall data={sanitizedData} keyPrefix={"" + Math.random()} />);
+  }
+
+  render() {
+    if (this.state.isLoading) {
+        return (<div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        }}>
+            <Spinner /> 
+        </div>);
     }
-    return (<NarciarskieDziki data={sanitizedData} keyPrefix={"" + Math.random()} />);
+    
+    if (this.props.isSmall) {
+      return (<NarciarskieDzikiSmall data={this.state.data} keyPrefix={"" + Math.random()} />);
+    }
+    return (<NarciarskieDziki data={this.state.data} keyPrefix={"" + Math.random()} />);
   }
 }
 
