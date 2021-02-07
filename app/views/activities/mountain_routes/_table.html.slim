@@ -5,7 +5,6 @@ table.stack
         th width='5%'
         th width='10%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
-        th width='10%' rejon
         th width='2%' wycena
         - if user_signed_in?
           th width='17%' = sort_link(@q, :partners, 'skład zespołu')
@@ -16,7 +15,6 @@ table.stack
         th width='5%'
         th width='10%' kiedy?
         th width='20%' nazwa przejścia
-        th width='10%' rejon
         th width='2%' wycena
         - if user_signed_in?
           th width='17%' skład zespołu
@@ -31,9 +29,6 @@ table.stack
         td.text-center.large-text-left
           h6.dashboard-table-text= link_to route.name, activities_mountain_route_path(route)
           span.dashboard-table-timestamp= truncate(route.peak, length: 25)
-        td.text-center.large-text-left
-          - if route.area.present?
-            = route.area
         td.text-center
           = route.difficulty
         - if user_signed_in?
