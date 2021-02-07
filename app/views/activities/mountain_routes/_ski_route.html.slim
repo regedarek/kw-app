@@ -33,6 +33,14 @@
       li = "dzikowe: #{@route.boar_length} m"
 
 - if user_signed_in?
+  - route_contracts = ::Training::Activities::UserContractRecord.includes(:contract).where(route_id: @route.id).where.not(user_id: current_user.id)
+  - if route_contracts.any?
+    .large-12.columns
+      b kontrakty innych: 
+      ul
+        - route_contracts.each do |user_contract|
+          li
+            = link_to "#{user_contract.user.display_name} #{user_contract.contract.name} za #{user_contract.contract.score}", activities_contract_path(user_contract.contract.id)
   - user_contracts = ::Training::Activities::UserContractRecord.includes(:contract).where(route_id: @route.id, user_id: current_user.id)
   - if user_contracts.any?
     .large-12.columns

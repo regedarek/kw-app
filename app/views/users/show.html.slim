@@ -83,11 +83,11 @@
           .large-12.columns
             = render 'membership/card/projects/table', projects: @my_projects
 
-      - if @user.training_contracts.any?
+      - if @user.training_user_contracts.any?
         h5 Ukończone narciarskie kontrakty
         .row
           .large-12.columns
-            = render 'membership/card/contracts/table', contracts: @user.training_contracts
+            = render 'membership/card/contracts/table', contracts: @user.training_user_contracts
 
         .row
           .large-12.columns
