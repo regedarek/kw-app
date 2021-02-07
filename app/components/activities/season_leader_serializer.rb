@@ -1,6 +1,6 @@
 module Activities
   class SeasonLeaderSerializer < ActiveModel::Serializer
-    attributes :id, :gender, :leader, :total_mountain_routes_length, :training_contracts_length, :total_length, :last_activity
+    attributes :id, :leader, :total_mountain_routes_length, :training_contracts_length, :total_length, :last_activity
 
     def leader
       UserManagement::UserSerializer.new(user)
