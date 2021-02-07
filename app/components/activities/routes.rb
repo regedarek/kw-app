@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       resources :routes, only: [] do
         member do
           get :season
+          get :winter
+          get :spring
         end
       end
       resources :competitions do
