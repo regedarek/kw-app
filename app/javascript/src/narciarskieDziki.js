@@ -14,7 +14,7 @@ function compareTotals(a, b) {
 function NarciarskieDziki({ data }) {
     const sortedData = (data || []).sort(compareTotals)
     return (
-        <>
+        <table className="stack">
             <thead>
                 <tr>
                     <th width='30px'>Miejsce</th>
@@ -56,6 +56,11 @@ function NarciarskieDziki({ data }) {
                                 <td className="large-text-left">
                                     <a href={"/przejscia/" + displayObj.last_activity.id}>
                                         {displayObj.last_activity.name}
+                                        {displayObj.last_activity.contracts &&
+                                            <span className="dashboard-table-timestamp-small">
+                                                {displayObj.last_activity.contracts}
+                                            </span>
+                                        }
                                     </a>
                                 </td>
                                 <td className="text-center large-text-right">{displayObj.trainingContractsLength}</td>
@@ -65,7 +70,7 @@ function NarciarskieDziki({ data }) {
                         )
                     })}
             </tbody>
-        </>
+        </table>
     )
 }
 export default NarciarskieDziki;

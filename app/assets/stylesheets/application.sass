@@ -71,3 +71,26 @@ trix-toolbar
 .inline-date-select
   display: inline
   width: 30%
+
+@keyframes growDown
+  0%
+    max-height: 0
+  100%
+    max-height: 3rem
+
+.mountains-spinner-wrapper
+  height: 3rem
+  display: flex
+  align-items: flex-end
+
+.mountains-spinner
+  overflow: hidden
+  font-size: 2.5rem
+  color: #808080
+  animation-name: growDown
+  animation-duration: 3s
+  display: flex
+  align-items: flex-end
+  transition-timing-function: ease
+  transform-origin: bottom center
+  animation-iteration-count: infinite
