@@ -1,18 +1,6 @@
 import React from 'react';
 
-function compareTotals(a, b) {
-    if (!a) {
-        return 1;
-    }
-    if (!b) {
-        return -1;
-    }
-
-    return b.total_length - a.total_length;
- }
-
-function NarciarskieDziki({ data }) {
-    const sortedData = (data || []).sort(compareTotals)
+function NarciarskieDziki({ data, keyPrefix }) {
     return (
         <table className="stack">
             <thead>
@@ -27,45 +15,27 @@ function NarciarskieDziki({ data }) {
                 </tr>
             </thead>
             <tbody>
-                {sortedData.map((dzik, id) => {
-                        const displayObj = {
-                            avatar: "",
-                            displayName: "",
-                            trainingContractsLength: 0,
-                            totalMountainRoutesLength: 0,
-                            totalLength: 0,
-                            last_activity: {},
-                        }
-                        if (dzik && dzik.leader) {
-                            displayObj.avatar = dzik.leader.avatar && dzik.leader.avatar.url;
-                            displayObj.displayName = dzik.leader.display_name;
-                        }
-                        if (dzik) {
-                            displayObj.trainingContractsLength = dzik.training_contracts_length;
-                            displayObj.totalMountainRoutesLength = dzik.total_mountain_routes_length;
-                            displayObj.totalLength = dzik.total_length;
-                            displayObj.last_activity = dzik.last_activity;
-                        }
+                {data.map((dzik, id) => {
                         return (
-                            <tr key={id}>
+                            <tr key={keyPrefix + id}>
                                 <td className="text-center">{id+1}</td>
                                 <td width='45px'>
-                                    <img src={displayObj.avatar} />
+                                    <img src={dzik.avatar} />
                                 </td>
-                                <td className="text-center large-text-left">{displayObj.displayName}</td>
+                                <td className="text-center large-text-left">{dzik.displayName}</td>
                                 <td className="large-text-left">
-                                    <a href={"/przejscia/" + displayObj.last_activity.id}>
-                                        {displayObj.last_activity.name}
-                                        {displayObj.last_activity.contracts &&
+                                    <a href={"/przejscia/" + dzik.last_activity.id}>
+                                        <h6 className="dashboard-table-text">{dzik.last_activity.name}</h6>
+                                        {dzik.last_activity.contracts &&
                                             <span className="dashboard-table-timestamp-small">
-                                                {displayObj.last_activity.contracts}
+                                                {dzik.last_activity.contracts}
                                             </span>
                                         }
                                     </a>
                                 </td>
-                                <td className="text-center large-text-right">{displayObj.trainingContractsLength}</td>
-                                <td className="text-center large-text-right">{displayObj.totalMountainRoutesLength}</td>
-                                <td className="text-center large-text-right">{displayObj.totalLength}</td>
+                                <td className="text-center large-text-right">{dzik.trainingContractsLength}</td>
+                                <td className="text-center large-text-right">{dzik.totalMountainRoutesLength}</td>
+                                <td className="text-center large-text-right">{dzik.totalLength}</td>
                             </tr>
                         )
                     })}
