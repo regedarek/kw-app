@@ -125,6 +125,21 @@
 
 .row
   .large-12.columns
-    h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
-    div id="narciarskie_dziki_component"
+    ul.tabs data-tabs="" id="genders-panels-tabs"
+      li.tabs-title.is-active
+        a(data-tabs-target="genders-panel1", href="#genders-panel1" aria-selected="true") Wszyscy
+      li.tabs-title 
+        a(data-tabs-target="genders-panel2", href="#genders-panel2") Damska
+      li.tabs-title 
+        a(data-tabs-target="genders-panel3", href="#genders-panel3") Męska        
+    .tabs-content data-tabs-content="genders-panels-tabs" 
+      .tabs-panel.is-active id="genders-panel1"
+        h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
+        div id="narciarskie_dziki_component"
+      .tabs-panel id="genders-panel2"
+        h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
+        div id="narciarskie_dziki_component_female"
+      .tabs-panel id="genders-panel3"
+        h5 = "Tabela Open #{Activities::SkiRepository.new.start_date.year}/#{Activities::SkiRepository.new.end_date.year}"
+        div id="narciarskie_dziki_component_male"
     

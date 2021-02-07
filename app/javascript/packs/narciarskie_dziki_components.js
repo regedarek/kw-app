@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById("narciarskie_dziki_component"),
     )
     ReactDOM.render(
+      <NarciarskieDzikiComponent type="season" isSmall={false} gender="female"/>,
+      document.getElementById("narciarskie_dziki_component_female"),
+    )
+    ReactDOM.render(
+      <NarciarskieDzikiComponent type="season" isSmall={false} gender="male"/>,
+      document.getElementById("narciarskie_dziki_component_male"),
+    )
+    ReactDOM.render(
       <NarciarskieDzikiComponent type="winter" isSmall={true} />,
       document.getElementById("narciarskie_dziki_component_winter"),
     )
