@@ -57,6 +57,8 @@ class Db::User < ActiveRecord::Base
   has_many :vote_users, class_name: 'Management::Voting::VoteUsersRecord', foreign_key: :user_id
   has_many :member_votes, through: :vote_users, foreign_key: :vote_id, dependent: :destroy, source: :vote
 
+  delegate :gender, to: :profile, allow_nil: true
+
   ransacker :full_name do |parent|
     Arel::Nodes::NamedFunction.new('CONCAT_WS', [
       Arel::Nodes.build_quoted(' '), parent.table[:first_name], parent.table[:last_name]

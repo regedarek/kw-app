@@ -1,4 +1,6 @@
 pl:
+  male: Męska
+  female: Damska
   user_management:
     lists:
       new:

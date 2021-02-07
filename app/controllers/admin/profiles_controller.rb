@@ -163,7 +163,7 @@ module Admin
 
     def profile_params
       params.require(:profile).permit(
-        :kw_id, :email, :pesel, :first_name, :last_name, :phone, :profession, :application_date,
+        :kw_id, :email, :pesel, :first_name, :last_name, :phone, :profession, :application_date, :gender,
         :birth_date, :birth_place, :city, :postal_code, :main_address, :date_of_death, :cost, :locale,
         :optional_address, :main_discussion_group, :terms_of_service, :added, :remarks, :accepted,
         recommended_by: [], acomplished_courses: [], sections: [], position: []

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_225658) do
+ActiveRecord::Schema.define(version: 2021_02_07_194013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -467,6 +467,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_225658) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "category_type"
+    t.string "amount_body"
   end
 
   create_table "marketing_sponsorship_requests", force: :cascade do |t|
@@ -699,6 +700,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_225658) do
     t.datetime "accepted_at"
     t.string "photo"
     t.string "locale", default: "pl", null: false
+    t.integer "gender"
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true
   end
 

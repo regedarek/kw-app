@@ -25,6 +25,7 @@ en:
         plastic: Legitymacja plastikowa
       user_management_profile_form:
         kw_id: Membership ID
+        gender: Gender
         email: E-mail
         first_name: First name
         cost: Entry Fee

@@ -19,10 +19,13 @@
           = f.label :email
           = f.text_field :email
       .row
-        .medium-6.columns
+        .medium-4.columns
           = f.label :first_name
           = f.text_field :first_name
-        .medium-6.columns
+        .medium-4.columns
+          = f.label :gender
+          = f.select :gender, [nil, :male, :female]
+        .medium-4.columns
           = f.label :last_name
           = f.text_field :last_name
       .row

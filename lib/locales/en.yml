@@ -1,5 +1,7 @@
 ---
 en:
+  male: Male
+  female: Female
   user_management:
     lists:
       new:

@@ -12,11 +12,13 @@
     .large-12.columns
       .callout.primary
         .row
-          .large-4.columns
+          .large-2.columns
+            = f.label :gender
+            = f.select :gender, Db::Profile.genders.map { |w, _| [I18n.t(w), w] }, selected: form.gender, include_blank: true
+          .large-3.columns
             = f.label :first_name
             = f.text_field :first_name
-
-          .large-4.columns
+          .large-3.columns
             = f.label :last_name
             = f.text_field :last_name
 

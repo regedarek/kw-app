@@ -18,6 +18,7 @@ pl:
         year: Rok
         plastic: Legitymacja plastikowa
       user_management_profile_form:
+        gender: Płeć
         kw_id: Numer klubowy
         email: E-mail
         first_name: Imię

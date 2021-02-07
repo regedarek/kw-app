@@ -8,6 +8,7 @@ module UserManagement
     attribute :email, :string
     attribute :birth_date, :string
     attribute :birth_place, :string
+    attribute :gender, :string
     attribute :city, :string
     attribute :postal_code, :string
     attribute :main_address, :string
@@ -21,7 +22,7 @@ module UserManagement
     attribute :terms_of_service, :boolean, default: false
     attribute :plastic, :boolean, default: false
 
-    validates :first_name, :last_name, :email, :birth_date, :birth_place, :photo,
+    validates :first_name, :last_name, :gender, :email, :birth_date, :birth_place, :photo,
               :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
     validate :email_uniq

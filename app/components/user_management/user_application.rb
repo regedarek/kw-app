@@ -10,6 +10,7 @@ module UserManagement
           email: form.email,
           locale: form.locale,
           phone: form.phone,
+          gender: form.gender,
           birth_date: form.birth_date,
           birth_place: form.birth_place,
           city: form.city,
