@@ -3,7 +3,7 @@ table.stack
     - if @q.present?
       tr
         th width='5%'
-        th width='10%' = sort_link(@q, :climbing_date, 'kiedy?')
+        th width='7%' = sort_link(@q, :climbing_date, 'kiedy?')
         th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
         th width='2%' wycena
         - if user_signed_in?
@@ -18,8 +18,8 @@ table.stack
         th width='2%' wycena
         - if user_signed_in?
           th width='17%' skład zespołu
-        th width='12%'
-        th.text-center width='7%' bicki
+        th width='10%'
+        th.text-center width='4%' bicki
 
   tbody
     - routes.each do |route|
