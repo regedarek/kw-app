@@ -26,7 +26,7 @@ module Blog
     end
 
     def best_person
-      Activities::SkiRepository.new.fetch_season.first
+      Activities::SkiRepository.new.fetch_season.order('total_mountain_routes_length DESC').first
     end
   end
 end
