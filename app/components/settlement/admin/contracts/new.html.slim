@@ -1,27 +1,43 @@
 .row
   .large-12.columns
     = form_for @contract, as: :contract, url: admin_contracts_path do |f|
-      - if @contract.errors.any?
-        .callout.alert
-          ul
-            - @contract.errors.full_messages.each do |msg|
-              li= msg
+      - if @errors
+        .row
+          .medium-6.columns
+            .callout.alert
+              ul
+                - @errors.each do |key,value|
+                  li
+                    = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
+
+      .row
+        .medium-6.columns
+          b= f.label :title
+          = f.text_field :title
+
+        .medium-6.columns
+          = f.label :contractor_id
+            = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+          = f.select :contractor_id,
+            Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
+            { include_blank: true},
+            { class: 'js-select-multiple' }
 
       .row
         .medium-3.columns
-          b= f.label :title, "Nazwa rozliczenia*"
-          = f.text_field :title
+          b= f.label :document_number
+          = f.text_field :document_number
 
         .medium-2.columns
-          b= f.label :document_date, "Data dokumentu*"
+          b= f.label :document_date
           = f.date_field :document_date
 
         .medium-2.columns
-          b= f.label :document_type, 'Rodzaj dokumentu *'
+          b= f.label :document_type
           = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, include_blank: true
 
         .medium-2.columns
-          b= f.label :payout_type, 'Rodzaj płatności *'
+          b= f.label :payout_type
           = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
         .medium-3.columns
@@ -31,15 +47,7 @@
             span.input-group-label
                 | zł
 
-        .medium-3.columns
-          = f.label :contractor_id, 'Kontrahent*'
-            = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-          = f.select :contractor_id,
-            Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
-            { include_blank: true},
-            { class: 'js-select-multiple' }
-
-      - if can? :recon_up, @contract
+      - if false
         .row
           .medium-3.columns
             b= f.label :substantive_type, 'Grupa wydarzeń'
@@ -74,15 +82,21 @@
             { },
             { class: 'js-select-multiple', multiple: true }
 
+        - if false
+          .medium-6.columns
+            = f.label :event_ids, 'Powiązane wydarzenia'
+            = f.select :event_ids,
+              Training::Supplementary::CourseRecord.all.map { |u| [u.name, u.id] },
+              { },
+              { class: 'js-select-multiple', multiple: true }
+
         .medium-6.columns
-          = f.label :event_ids, 'Powiązane wydarzenia'
-          = f.select :event_ids,
-            Training::Supplementary::CourseRecord.all.map { |u| [u.name, u.id] },
-            { },
-            { class: 'js-select-multiple', multiple: true }
+          b= f.label :attachments
+          = f.file_field :attachments, multiple: true
 
-      b= f.label :attachments, "Pliki"
-      = f.file_field :attachments, multiple: true
-
-      = f.submit 'Utwórz rozliczenie', class: 'button'
-      = link_to 'wróć', session[:original_referrer] || admin_contracts_path, class: 'button secondary'
+      .row
+        br
+        .medium-9.columns
+          = f.submit 'Utwórz rozliczenie', class: 'button large expanded'
+        .medium-3.columns
+          = link_to 'wróć do rozliczeń', session[:original_referrer] || admin_contracts_path, class: 'button secondary large expanded'

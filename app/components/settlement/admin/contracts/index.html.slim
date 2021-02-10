@@ -17,13 +17,13 @@
       .callout
         = search_form_for @q, url: admin_contracts_path, class: 'js-send-on-enter' do |f|
           .row
-            .large-2.columns
-              = f.label :id_eq, 'Numer rozliczenia'
+            .large-1.columns
+              = f.label :id_eq, 'ID'
               = f.search_field :id_eq
 
-            .large-3.columns
-              = f.label :title_or_description_cont, 'Nazwa lub opis'
-              = f.search_field :title_or_description_cont
+            .large-4.columns
+              = f.label :document_number_or_title_or_description_cont, 'Numer, nazwa lub opis dokumentu'
+              = f.search_field :document_number_or_title_or_description_cont
 
             .large-3.columns
               = f.label :creator_first_name_or_creator_last_name_cont, 'Kto dodał?'

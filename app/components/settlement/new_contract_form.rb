@@ -9,10 +9,11 @@ module Settlement
     required(:title).filled(:str?)
     required(:cost).filled(:float?)
     required(:document_type).filled
+    required(:document_number).filled(:str?)
     required(:payout_type).filled
     required(:document_date).filled(:str?)
     required(:description).maybe(:str?)
-    optional(:attachments).maybe
+    required(:attachments).filled
     optional(:group_type).maybe
     optional(:acceptor_id).maybe
     optional(:substantive_type).maybe
@@ -20,8 +21,6 @@ module Settlement
     optional(:financial_type).maybe
     optional(:period_date).maybe
     required(:user_ids).each(:str?)
-    required(:event_ids).each(:str?)
     required(:contractor_id).filled(:int?)
-    optional(:event_id).maybe
   end
 end

@@ -14,6 +14,8 @@ pl:
   activemodel:
     mas_sign_up_form: Formularz zapisów
     attributes:
+      settlement/new_contract_form:
+        title: Tytuł
       membership/fee_form:
         year: Rok
         plastic: Legitymacja plastikowa
@@ -118,6 +120,15 @@ pl:
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
     attributes:
+      settlement/contract_record:
+        title: Tytuł
+        contractor_id: Kontrahent
+        document_number: Numer dokumentu
+        attachments: Załączniki
+        document_date: Data dokumentu
+        document_type: Rodzaj dokumentu
+        payout_type: Rodzaj płatności
+        cost: Kwota rozliczenia
       activities/mountain_route:
         name: nazwa drogi
         rating: ocena drogi
