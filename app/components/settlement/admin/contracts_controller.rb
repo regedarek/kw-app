@@ -94,6 +94,7 @@ module Settlement
           end
 
           result.failure do |errors|
+            @errors = errors
             render :edit
           end
         end

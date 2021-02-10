@@ -1,11 +1,14 @@
 .row
   .large-12.columns
     = form_for @contract, as: :contract, url: admin_contract_path(@contract), method: :put do |f|
-      - if @contract.errors.any?
-        .callout.alert
-          ul
-            - @contract.errors.full_messages.each do |msg|
-              li= msg
+      - if @errors
+        .row
+          .medium-6.columns
+            .callout.alert
+              ul
+                - @errors.each do |key,value|
+                  li
+                    = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
 
       .row
         .medium-3.columns
@@ -33,6 +36,10 @@
 
       - if can? :recon_up, @contract
         .row
+          .medium-3.columns
+            b= f.label :document_number, "Number dokumentu*"
+            = f.text_field :document_number
+
           .medium-3.columns
             b= f.label :substantive_type, 'Grupa wydarzeń'
             = f.select :substantive_type,
@@ -82,14 +89,7 @@
             { },
             { class: 'js-select-multiple', multiple: true }
 
-        .medium-6.columns
-          = f.label :event_ids, 'Powiązane wydarzenia'
-          = f.select :event_ids,
-            Training::Supplementary::CourseRecord.all.map { |u| [u.name, u.id] },
-            { },
-            { class: 'js-select-multiple', multiple: true }
-
-      b= f.label :attachments, "Pliki"
+      b= f.label :attachments, "Załączniki"
       = f.file_field :attachments, multiple: true
 
       - if @contract.attachments.any?

@@ -3,15 +3,22 @@
     .row
       .large-12.columns
         h3 = @contract.title
+
+    .row
+      .large-6.columns
+        b Numer dokumentu: 
+        = @contract.document_number
+
+      .large-6.columns.text-right
+        b Status: 
+        span.label= I18n.t @contract.state
+
     .row
       .large-6.columns
         b Kwota rozliczenia: 
         = @contract.cost
         |  zł
 
-      .large-6.columns.text-right
-        b Status: 
-        span.label= I18n.t @contract.state
 
     .row
       .large-12.columns
