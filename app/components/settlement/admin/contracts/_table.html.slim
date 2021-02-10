@@ -1,7 +1,7 @@
 tbody
   - contracts.each_with_index do |contract, i|
     tr
-      td = "#{contract.id}/#{contract.document_date.year}"
+      td = "#{contract.id}"
       td = contract.document_date
       td
         - if contract.description
