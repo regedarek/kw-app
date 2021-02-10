@@ -66,10 +66,12 @@
     table.stack
       thead
         tr
-          th width='50px'
+          th width='100px'
             = sort_link(@q, :id, 'ID', default_order: :desc)
-          th width='450px'
-            = sort_link(@q, :name, 'Nazwa', default_order: :desc)
+          th width='120px'
+            = sort_link(@q, :document_date, 'Data', default_order: :desc)
+          th width='300px'
+            = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
           th width='200px'
             = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
           th width='160px'
@@ -78,5 +80,5 @@
             = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
           th width='180px'
             = sort_link(@q, :creator_id, 'Kto zaakceptował?', default_order: :desc)
-          th width='100px' Akcje
+          th width='60px' Akcje
       = render 'table', contracts: @contracts

@@ -1,7 +1,8 @@
 tbody
   - contracts.each_with_index do |contract, i|
     tr
-      td = contract.id
+      td = "#{contract.id}/#{contract.document_date.year}"
+      td = contract.document_date
       td
         - if can? :read, contract
           = link_to "#{contract.title} - #{contract.document_number}", admin_contract_path(contract.id)
