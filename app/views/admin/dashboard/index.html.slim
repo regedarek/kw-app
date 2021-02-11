@@ -98,3 +98,6 @@
               = link_to email.mailable.try(:display_name), admin_profile_path(email.mailable_id)
             - elsif email.mailable_type == 'Training::Supplementary::SignUpRecord'
               = link_to email.mailable.try(:name), edit_supplementary_sign_up_path(email.mailable_id)
+          td.text-right
+            = link_to admin_email_record_path(email.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Jestes pewien?' } do
+              i.fi.fi-trash
