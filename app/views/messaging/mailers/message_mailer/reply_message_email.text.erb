@@ -1,10 +1,7 @@
-Masz nową odpowiedź: <%= @subject %>
-===============================================
-
 Otrzymałeś odpowiedź:
 
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
-Odwiedź <%= link_to root_url, conversations_url %> aby przejść do skrzynki odbiorczej.
+Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.

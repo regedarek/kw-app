@@ -4,9 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Masz nową wiadomość w panelu KW Kraków: <%= @subject %></h1>
     <p>
-      Otrzymałeś wiadomość:
+      Wysłano do Ciebie wiadomość w panelu KW Kraków:
     </p>
     <blockquote>
       <p>
@@ -14,7 +13,7 @@
       </p>
     </blockquote>
     <p>
-      Odwiedź <%= link_to root_url, conversations_url %> aby odpowiedzieć i sprawdzić skrzynkę odbiorczą.
+      Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.
     </p>
   </body>
 </html>

@@ -3,6 +3,7 @@ Mailboxer.setup do |config|
   #Configures if your application uses or not email sending for Notifications and Messages
   config.uses_emails = true
 
+  config.message_mailer = Messaging::Mailers::MessageMailer
   #Configures the default from for emails sent for Messages and Notifications
   config.default_from = "no-reply@kw.krakow.pl"
 

@@ -1,0 +1,7 @@
+Otrzymałeś wiadomość:
+
+-----------------------------------------------
+<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+-----------------------------------------------
+
+Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.

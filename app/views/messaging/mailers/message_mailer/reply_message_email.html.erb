@@ -4,17 +4,14 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Masz nową odpowiedź w temacie: <%= @subject %></h1>
-    <p>
-      W panelu KW Kraków, czeka na ciebie odpowiedź:
-    </p>
+    <h3>Masz nową odpowiedź w temacie: <%= @subject %></h3>
     <blockquote>
       <p>
         <%= raw @message.body %>
       </p>
     </blockquote>
     <p>
-      Odwiedź <%= link_to root_url, conversations_url %> aby przejść do skrzynki odbiorczej.
+      Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.
     </p>
   </body>
 </html>
