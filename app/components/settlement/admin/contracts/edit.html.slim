@@ -33,7 +33,7 @@
               = f.select :contractor_id,
                 Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
                 { include_blank: true},
-                { class: 'js-select-multiple' }
+                { class: 'js-select-multiple', style: 'width: 100%' }
 
           .row
             .medium-3.columns
