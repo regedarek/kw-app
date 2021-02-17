@@ -124,7 +124,7 @@
 
       - if can? :update, @contract
         - if @contract.new?
-          = f.submit "Zaktualizuj i zaakceptuj rozliczenie", class: 'button success'
+          = f.submit "Zaktualizuj rozliczenie", class: 'button success'
         - else
           = f.submit "Zaktualizuj rozliczenie", class: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button primary'
