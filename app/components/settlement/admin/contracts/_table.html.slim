@@ -27,7 +27,7 @@ tbody
             = t contract.state
       td = contract.cost
       td
-        - if contract.accepted? || contract.closed?
+        - if contract.accepted? || contract.preclosed? || contract.closed?
           = contract.acceptor&.display_name
         - else
           - if user_signed_in?
