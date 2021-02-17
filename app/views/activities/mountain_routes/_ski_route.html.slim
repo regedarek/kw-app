@@ -9,6 +9,13 @@
         = render partial: 'activities/mountain_routes/link', collection: @route.colleagues, spacer_template: 'shared/comma'
       - else
         = @route.partners
+  .large-12.columns
+    b kto dodał przejście?: 
+    = @route.user.display_name
+  - if @route.photograph
+    .large-12.columns
+      b kto robił zdjęcia?: 
+      = @route.photograph
 
 - if @route.area.present?
   .large-12.columns

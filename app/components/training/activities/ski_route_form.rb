@@ -15,6 +15,7 @@ module Training
       required(:colleague_ids).filled
       optional(:rating).filled
       optional(:partners)
+      optional(:photograph)
       optional(:difficulty)
       optional(:area)
       optional(:length)
