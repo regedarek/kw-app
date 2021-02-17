@@ -5,6 +5,9 @@ module Settlement
   ContractForm = Dry::Validation.Params do
     configure { config.messages_file = 'app/components/settlement/errors.yml' }
     configure { config.messages = :i18n }
+    configure do
+      option :record
+    end
 
     required(:title).filled(:str?)
     required(:cost).filled(:float?)
@@ -27,7 +30,7 @@ module Settlement
     optional(:'period_date(2i)').maybe
 
     validate(internal_number_uniq: [:internal_number, :'period_date(1i)']) do |internal_number, period_date|
-      !Settlement::ContractRecord.exists?(period_date: "01-01-#{period_date}", internal_number: internal_number)
+      record.class.where.not(id: record.id).where(period_date: "01-01-#{period_date}", internal_number: internal_number).empty?
     end
   end
 end

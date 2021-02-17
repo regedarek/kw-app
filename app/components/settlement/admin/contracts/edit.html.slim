@@ -129,3 +129,15 @@
           = f.submit "Zaktualizuj rozliczenie", class: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button primary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+
+.row
+  .large-12.columns
+    h5 Komentarze, dodatkowe informacje
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          = render 'messaging/comments/comments', commentable: @contract
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @contract
+
