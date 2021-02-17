@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    resources :users, only: [:show]
     resources :payments, only: [] do
       collection do
         post :status
