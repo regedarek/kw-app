@@ -86,6 +86,10 @@ module Settlement
               return redirect_to admin_contract_path(@contract.id), alert: 'Po wstępnym rozliczeniu, nie możesz już edytować!'
             end
           end
+
+          if current_user.roles.include?('contract_preaccept')
+            @contract.preaccept! if @contract.new?
+          end
         end
 
         either(update_record) do |result|

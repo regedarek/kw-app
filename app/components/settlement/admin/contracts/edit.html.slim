@@ -11,83 +11,94 @@
                     = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
 
       .row
-        .medium-3.columns
-          b= f.label :title, "Nazwa rozliczenia*"
-          = f.text_field :title
+        .large-12.columns
+          ul#edit-tabs.tabs data-tabs="" 
+            li.tabs-title class="#{!@contract.new? ? 'is-active' : nil}"
+              a aria-selected="true" href="#new" Dane dokumentu
+            li.tabs-title class="#{@contract.new? ? 'is-active' : nil}"
+              a data-tabs-target="preaccepted" href="#preaccepted" Opis merytoryczny
+            li.tabs-title
+              a data-tabs-target="admin" href="#admin" Administracja
 
-        .medium-2.columns
-          b= f.label :document_date, "Data dokumentu *"
-          = f.date_field :document_date
+      .tabs-content data-tabs-content="edit-tabs" 
+        #new.tabs-panel class="#{!@contract.new? ? 'is-active' : nil}"
+          .row
+            .medium-6.columns
+              b= f.label :title
+              = f.text_field :title
 
-        .medium-2.columns
-          b= f.label :document_type, 'Rodzaj dokumentu *'
-          = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.document_type
+            .medium-6.columns
+              = f.label :contractor_id
+                = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+              = f.select :contractor_id,
+                Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
+                { include_blank: true},
+                { class: 'js-select-multiple' }
 
-        .medium-2.columns
-          b= f.label :payout_type, 'Rodzaj płatności *'
-          = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
+          .row
+            .medium-3.columns
+              b= f.label :document_number
+              = f.text_field :document_number
 
-        .medium-3.columns
-          b= f.label :cost, "Kwota rozliczenia"
-          .input-group
-            = f.number_field :cost, step: 0.01, class: 'input-group-field'
-            span.input-group-label
-                | zł
+            .medium-2.columns
+              b= f.label :document_date
+              = f.date_field :document_date
 
-      - if can? :recon_up, @contract
-        .row
-          .medium-3.columns
-            b= f.label :document_number, "Number dokumentu*"
-            = f.text_field :document_number
+            .medium-2.columns
+              b= f.label :document_type
+              = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, include_blank: true
 
-          .medium-3.columns
-            b= f.label :substantive_type, 'Grupa wydarzeń'
-            = f.select :substantive_type,
-            Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
+            .medium-2.columns
+              b= f.label :payout_type
+              = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
-          .medium-3.columns
-            b= f.label :acceptor_id, 'Zaakceptował'
-            = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
+            .medium-3.columns
+              b= f.label :cost, "Kwota rozliczenia*"
+              .input-group
+                = f.number_field :cost, step: 0.01, class: 'input-group-field'
+                span.input-group-label
+                    | zł
 
-          .medium-3.columns
-            = f.label :contractor_id, 'Kontrahent'
-              = link_to 'Dodaj nowego kontrahenta', new_admin_contractor_path, target: :_blank,  onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-            = f.select :contractor_id,
-              Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
-              { include_blank: true},
-              { class: 'js-select-multiple' }
+        #preaccepted.tabs-panel class="#{@contract.new? ? 'is-active' : nil}"
+          .row
+            .medium-3.columns
+              b= f.label :group_type, 'Sekcja'
+              = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
 
-        .row
-          .medium-3.columns
-            b= f.label :state, "Status"
-            = f.select :state,
-            Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
+            .medium-3.columns
+              b= f.label :substantive_type, 'Grupa wydarzeń'
+              = f.select :substantive_type,
+              Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
 
-          .medium-3.columns
-            b= f.label :group_type, 'Sekcja'
-            = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
 
-          .medium-3.columns
-            b= f.label :financial_type, 'Rodzaj działalności'
-            = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
+            .medium-3.columns
+              b= f.label :financial_type, 'Rodzaj działalności'
+              = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
 
-          .medium-3.columns
-            b= f.label :period_date, 'Okres rozliczeniowy'
-            = f.date_select :period_date,  { :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
+            .medium-3.columns
+              b= f.label :period_date, 'Okres rozliczeniowy'
+              = f.date_select :period_date,  { :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
 
+
+        #admin.tabs-panel
+          .row
+            .medium-4.columns
+              b= f.label :state, "Status"
+              = f.select :state,
+              Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
+
+            .large-6.columns
+              = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
+              = f.select :user_ids,
+                Db::User.all.map { |u| [u.display_name, u.id] },
+                { },
+                { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
       .row
         .medium-12.columns
           = f.label :description, "Uwagi do rozliczenia"
           = f.hidden_field :description, id: 'description_body'
           trix-editor input='description_body' style='min-height: 200px'
 
-      .row
-        .medium-6.columns
-          = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
-          = f.select :user_ids,
-            Db::User.all.map { |u| [u.display_name, u.id] },
-            { },
-            { class: 'js-select-multiple', multiple: true }
 
       b= f.label :attachments, "Załączniki"
       = f.file_field :attachments, multiple: true
@@ -111,6 +122,9 @@
                     span aria-hidden="true"  &times;
 
       - if can? :update, @contract
-        = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      = link_to 'wróć do rozliczenia', admin_contract_path(@contract.id), class: 'button primary'
-      = link_to 'wróć do rozliczeń', session[:original_referrer] || admin_contracts_path, class: 'button secondary'
+        - if @contract.new?
+          = f.submit "Zaktualizuj i zaakceptuj rozliczenie", class: 'button success'
+        - else
+          = f.submit "Zaktualizuj rozliczenie", class: 'button'
+      = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button primary'
+      = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'

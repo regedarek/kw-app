@@ -1,5 +1,6 @@
 pl:
   new: Nowy
+  preaccepted: Wstępnie zaakceptowany
   accepted: Zaakceptowany
   rejected: Odrzucony
   closed: Rozliczony
