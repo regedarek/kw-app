@@ -124,6 +124,7 @@ pl:
         title: Tytuł
         contractor_id: Kontrahent
         document_number: Numer dokumentu
+        internal_number: Number wewnętrzny
         attachments: Załączniki
         document_date: Data dokumentu
         document_type: Rodzaj dokumentu

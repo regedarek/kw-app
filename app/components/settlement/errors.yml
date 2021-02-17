@@ -1,6 +1,9 @@
 pl:
+  errors:
+    internal_number_uniq: 'taki numer już istnieje'
   dry_validation:
     errors:
+      internal_number_uniq: 'taki numer już istnieje'
       key?: "brakuje"
       attr?: "brakuje"
       filled?: "brakuje"

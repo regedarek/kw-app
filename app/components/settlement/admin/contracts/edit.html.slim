@@ -70,24 +70,25 @@
               = f.select :substantive_type,
               Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
 
-
             .medium-3.columns
               b= f.label :financial_type, 'Rodzaj działalności'
               = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
 
-            .medium-3.columns
-              b= f.label :period_date, 'Okres rozliczeniowy'
-              = f.date_select :period_date,  { :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
-
-
         #admin.tabs-panel
           .row
-            .medium-4.columns
+            .medium-2.columns
               b= f.label :state, "Status"
-              = f.select :state,
-              Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
+              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
 
-            .large-6.columns
+            .medium-2.columns
+              b= f.label :internal_number, 'Numer wewnętrzny'
+              = f.number_field :internal_number
+
+            .medium-3.columns
+              b= f.label :period_date, 'Rok rozliczeniowy'
+              = f.date_select :period_date,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
+
+            .large-5.columns
               = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
               = f.select :user_ids,
                 Db::User.all.map { |u| [u.display_name, u.id] },

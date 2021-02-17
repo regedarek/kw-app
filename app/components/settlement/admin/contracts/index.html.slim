@@ -18,8 +18,8 @@
         = search_form_for @q, url: admin_contracts_path, class: 'js-send-on-enter' do |f|
           .row
             .large-1.columns
-              = f.label :id_eq, 'ID'
-              = f.search_field :id_eq
+              = f.label :internal_number_eq, 'ID'
+              = f.search_field :internal_number_eq
 
             .large-4.columns
               = f.label :document_number_or_title_or_description_cont, 'Numer, nazwa lub opis dokumentu'
@@ -48,7 +48,7 @@
 
             .large-4.columns
               = f.label :period_date_eq, 'Okres rozliczenia'
-              = f.date_select :period_date_eq,  { :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
+              = f.date_select :period_date_eq,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
 
             .large-2.columns
               = f.label :cost_gteq, 'Kwota od'
