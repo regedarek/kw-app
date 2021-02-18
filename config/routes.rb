@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/marketing', to: redirect { |path_params, req| "/sponsorship_requests" }
 
   load Rails.root.join("app/components/events/routes.rb")
+  load Rails.root.join("app/components/shop/routes.rb")
   load Rails.root.join("app/components/marketing/routes.rb")
   load Rails.root.join("app/components/training/bluebook/routes.rb")
   load Rails.root.join("app/components/scrappers/routes.rb")
