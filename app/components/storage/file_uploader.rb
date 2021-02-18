@@ -10,7 +10,7 @@ module Storage
 
     process :auto_orient
 
-    version :thumb do
+    version :thumb, :if => :image? do
       process resize_to_fill: [180, 180]
     end
 

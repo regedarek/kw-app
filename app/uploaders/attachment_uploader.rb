@@ -9,11 +9,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   process :auto_orient
 
-  version :small, :if => :image? do
-    process resize_to_fill: [50, 50]
-  end
-
-  version :medium, :if => :image? do
+  version :thumb, :if => :image? do
     process resize_to_fill: [180, 180]
   end
 
