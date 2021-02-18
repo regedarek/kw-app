@@ -88,6 +88,23 @@
 
   .large-6.columns
     - if user_signed_in?
+      h5 Zapisy
+      .row
+        .large-12.columns
+          table.stack
+            tbody
+              - @course.sign_ups.each_with_index do |sign_up, i|
+                tr
+                  td
+                    = sign_up.name
+                  td
+                    = sign_up.email
+                  td
+                    - if sign_up.payment.payment_url
+                      = link_to 'Link do płatności', sign_up.payment_url
+                    - else
+                      = link_to 'Stworz link do płatności', charge_payment_url(sign_up.payment.id)
+
       h5 Komentarze
       .row
         .large-12.columns

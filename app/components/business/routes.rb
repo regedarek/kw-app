@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :courses, only: :index
     end
 
+    get 'kursy/:id' => 'courses#public', as: 'business_course_record_public'
     get 'courses/:id' => 'courses#show', as: 'business_course_record'
     get 'kursy/narciarskie' => 'courses#index', q: { activity_type_in: [3, 4, 5]}
     get 'kursy/turystyki' => 'courses#index', q: { activity_type_in: [0, 1, 2]}

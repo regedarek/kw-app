@@ -50,9 +50,13 @@ module Business
       end
     end
 
+    def start_date
+      starts_at.to_date
+    end
+
     def slug_candidates
       [
-        [:starts_at, :name]
+        [:start_date, :name]
       ]
     end
 
@@ -146,7 +150,7 @@ module Business
     end
 
     def payment_type
-      :comercial
+      :trainings
     end
 
     def logo
