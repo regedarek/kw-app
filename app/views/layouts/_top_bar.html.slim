@@ -31,6 +31,8 @@
                   li= link_to 'Rozliczenia', admin_contracts_path
                   li= link_to 'Kontrahenci', admin_contractors_path
                   li= link_to 'Darowizny', admin_donations_path
+                - if can? :manage, Business::CourseRecord
+                  li= link_to 'Kursy SA', courses_path
                 - if can? :manage, Db::Reservation
                   li= link_to 'Wypożyczalnia', admin_reservations_path
                 - if can? :manage, Db::Reservation
@@ -46,7 +48,7 @@
               ul.menu.vertical
                 li= link_to 'Głosowania', cases_path
                 li= link_to 'Głosowania Walne', '/glosowania/walne'
-                li= link_to 'Kursy SA', courses_path
+
                 li= link_to 'Rozliczenia', admin_contracts_path
 
           - if current_user.roles.include?('marketing')
