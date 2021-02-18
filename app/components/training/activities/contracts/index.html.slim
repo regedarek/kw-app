@@ -4,7 +4,16 @@
       = link_to 'Nowy kontrakt', new_activities_contract_path, class: 'button warning large'
 .row
   .large-12.columns
-    h5 Kontrakty na 2021
+    h4 Kontrakty na 2021
+
+.row
+  .large-12.columns
+    .callout.alert
+      | Oto lista kontraktów wyselekcjonowanych na ten rok przez Kapitułę Dzików.
+      br
+      | Aby dodać kontrakt musisz dodać przejście, następnie wejść na stronę przejścia, którego byłeś uczestnikiem i przypisać wybrany kontrakt.
+      br
+      | Regulamin narciarskich kontraktów znajduje się na dole <a href='https://panel.kw.krakow.pl/narciarskie-dziki/regulamin'>regulaminu Narciarskich Dzików</a>.
 .row
   .large-12.columns
     = render 'table', contracts: @contracts
