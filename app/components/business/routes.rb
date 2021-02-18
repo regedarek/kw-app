@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  namespace :business do
+    resources :sign_ups
+  end
   scope module: 'business' do
-
     resources :courses do
       member do
+        get :public
         put :seats_minus
         put :seats_plus
       end

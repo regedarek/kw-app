@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_170619) do
+ActiveRecord::Schema.define(version: 2021_02_18_195439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,22 @@ ActiveRecord::Schema.define(version: 2021_02_18_170619) do
     t.boolean "active", default: true, null: false
     t.string "description"
     t.string "attachements"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "business_sign_ups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.string "name"
+    t.string "email"
+    t.string "code", default: "512cb69ed5f44d7f", null: false
+    t.datetime "expired_at"
+    t.datetime "sent_at"
+    t.integer "admin_id"
+    t.string "question"
+    t.integer "send_user_id"
+    t.datetime "paid_email_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

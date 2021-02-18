@@ -1,0 +1,78 @@
+.row
+  .large-12.columns
+    h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
+
+  .large-6.columns
+    .row
+      .large-6.columns
+        .callout
+          b Od: 
+          = @course.starts_at&.to_date
+      .large-6.columns
+        .callout
+          b Do: 
+          = @course.ends_at&.to_date
+
+    .row
+      - if @course.seats
+        .large-6.columns
+          .callout
+            b Zapisanych osób: 
+            - if @course.event_id
+              = Training::Supplementary::Limiter.new(@course.event).sum
+            - else
+              = @course.seats
+
+      - if @course.max_seats
+        .large-6.columns
+          .callout.warning
+            b Maksymalna ilość miejsc: 
+            = @course.max_seats
+
+    .row
+      - if @course.price
+        .large-6.columns
+          .callout
+            b Cena: 
+            = @course.price
+
+      - if @course.instructor_id
+        .large-6.columns
+          .callout
+            b Instruktor: 
+            = ::Business::InstructorRecord.find(@course.instructor_id)&.profile_name
+
+    .row
+      - if @course.creator_id
+        .large-6.columns
+          .callout
+            b Utworzył: 
+            = Db::User.find(@course.creator_id).display_name
+
+      - if @course.coordinator_id
+        .large-6.columns
+          .callout
+            b Koordynuje: 
+            = Db::User.find(@course.coordinator_id)&.display_name
+
+    - if @course.description
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @course.description
+
+    - if @course.sign_up_url
+      .row
+        .large-12.columns
+          .callout
+            = link_to @course.sign_up_url, @course.sign_up_url
+
+  .large-6.columns
+    = form_for :sign_up, url: business_sign_ups_path do |f|
+      .row
+        .large-6.columns
+          = f.text_field :name, placeholder: 'Imię i nazwisko'
+        .large-6.columns
+          = f.email_field :email, placeholder: 'E-mail'
+      = f.hidden_field :course_id, value: @course.id
+      = f.submit 'Zapisz się', class: 'button primary expanded'

@@ -6,6 +6,7 @@ module Business
     self.table_name = 'business_courses'
     has_paper_trail
 
+    has_many :sign_ups, class_name: 'Business::SignUpRecord', foreign_key: :course_id
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
     belongs_to :coordinator, class_name: '::Db::User', foreign_key: :coordinator_id
@@ -142,6 +143,10 @@ module Business
       else
         'https://szkolaalpinizmu.pl/o-nas/klub-i-szkola/'
       end
+    end
+
+    def payment_type
+      :comercial
     end
 
     def logo

@@ -43,6 +43,10 @@ module Business
       authorize! :read, Business::CourseRecord
     end
 
+    def public
+      @course = Business::CourseRecord.friendly.find(params[:id])
+    end
+
     def seats_minus
       @course = Business::CourseRecord.find(params[:id])
       @course.seats -= 1

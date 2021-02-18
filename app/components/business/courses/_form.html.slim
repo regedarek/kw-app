@@ -13,12 +13,16 @@
 
   .large-3.columns
     = f.label :instructor, "Instruktor"
-    = f.select :instructor_id, Business::InstructorRecord.where(active: true).map{|i| [i.profile_name, i.id] }, selected: @course.instructor_id, include_blank: true
-
+    = f.select :instructor_id,
+      Business::InstructorRecord.where(active: true).map{|i| [i.profile_name, i.id] },
+      { selected: @course.instructor_id, include_blank: true },
+      { class: 'js-select-multiple' }
 .row
   .large-3.columns
     b= f.label :activity_type, 'Typ'
-    = f.select :activity_type, Business::CourseRecord.activity_type_attributes_for_select, include_blank: true
+    = f.select :activity_type, Business::CourseRecord.activity_type_attributes_for_select,
+    { include_blank: true },
+    { class: 'js-select-multiple' }
 
   .large-3.columns
     b = f.label :state, 'Status'
