@@ -1,5 +1,5 @@
 module Storage
-  class UploadRecord < ApplicationRecord
+  class UploadRecord < ActiveRecord::Base
     self.table_name = 'storage_uploads'
 
     validates :file, presence: true
