@@ -11,14 +11,15 @@
           = link_to root_path, style: 'padding: 0 1rem;' do
             = image_tag('logo_kw_krakow.jpg', style: 'max-height: 35px;')
         - if user_signed_in?
-          li
-            = link_to 'Walne zebranie', 'https://panel.kw.krakow.pl/informacje/zawiadomienie-o-zwolaniu-nadzwyczajnego-walnego-zebrania-czlonkow-klubu', style: 'color: red'
-            ul.menu.vertical
-              li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/13'
-              li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
-              li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
-              - if can? :obecni, Management::Voting::CaseRecord
-                li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
+          - if false
+            li
+              = link_to 'Walne zebranie', 'https://panel.kw.krakow.pl/informacje/zawiadomienie-o-zwolaniu-nadzwyczajnego-walnego-zebrania-czlonkow-klubu', style: 'color: red'
+              ul.menu.vertical
+                li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/13'
+                li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
+                li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
+                - if can? :obecni, Management::Voting::CaseRecord
+                  li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
           - if current_user.roles.include?('office') || current_user.roles.include?('settings')
             li
               = link_to 'Biuro', admin_path
