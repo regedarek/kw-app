@@ -100,10 +100,11 @@
                   td
                     = sign_up.email
                   td
-                    - if sign_up.payment.payment_url
-                      = link_to 'Link do płatności', sign_up.payment_url
-                    - else
-                      = link_to 'Stworz link do płatności', charge_payment_url(sign_up.payment.id)
+                    - if sign_up.payment
+                      - if sign_up.payment.payment_url
+                        = link_to 'Link do płatności', sign_up.payment_url
+                      - else
+                        = link_to 'Stworz link do płatności', charge_payment_url(sign_up.payment.id)
 
       h5 Komentarze
       .row
