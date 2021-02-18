@@ -9,7 +9,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   process :auto_orient
 
-  version :thumb
+  version :thumb do
     process resize_to_fill: [180, 180]
   end
 
