@@ -13,9 +13,9 @@
       = "Narciarskie dziki miesiąca #{params[:month]}/#{params[:year]}"
     ul#example-tabs.tabs data-tabs="" 
       li.tabs-title.is-active
-        a aria-selected="true" href="#all" Wszyscy
+        a  data-tabs-target="all" aria-selected="true" href="#all" Wszyscy
       li.tabs-title
-        a aria-selected="true" href="#male" Męska
+        a data-tabs-target="male" href="#male" Męska
       li.tabs-title
         a data-tabs-target="female" href="#female" Damska
 

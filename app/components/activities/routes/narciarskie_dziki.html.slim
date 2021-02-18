@@ -84,45 +84,58 @@
             div id="narciarskie_dziki_component_spring"
 
 - if user_signed_in?
-  - if @my_last_contracts.any?
-    .row
-      .large-12.columns
-        h5 Moje zrealizowane kontrakty
-        table.stack
-          thead
-            tr
-              th width='300px' Kontrakt
-              th Przejście
-              th width='200px' Kiedy?
-              th width='70px' Punkty
-          tbody
-            - @my_last_contracts.each do |training_contract|
-              - if training_contract.route
-                tr
-                  td = link_to training_contract.contract.name, activities_contract_path(training_contract.contract_id)
-                  td = link_to training_contract.route.name, activities_mountain_route_path(training_contract.route.slug)
-                  td = training_contract.route.climbing_date.to_date
-                  td = training_contract.contract.score
+  .row
+    .large-12.columns
+      ul.tabs data-tabs="" id="contracts-tabs"
+        li.tabs-title
+          a(data-tabs-target="contracts-panel1", href="#contracts-panel1") Twoje kontrakty
+        li.tabs-title.is-active 
+          a(data-tabs-target="contracts-panel2", href="#contracts-panel2" aria-selected="true") Ostatnie kontrakty
 
-.row
-  .large-12.columns
-    h5 Ostatnie zrealizowane kontrakty
-    table.stack
-      thead
-        tr
-          th width='300px' Kontrakt
-          th Przejście
-          th width='200px' Kiedy?
-          th width='70px' Punkty
-      tbody
-        - @last_contracts.each do |route_contract|
-          - if route_contract.route
-            tr
-              td = link_to route_contract.contract.name, activities_contract_path(route_contract.contract_id)
-              td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
-              td = route_contract.route.climbing_date.to_date
-              td = route_contract.contract.score
+      .tabs-content data-tabs-content="contracts-tabs" 
+        .tabs-panel id="contracts-panel1"
+          - if @my_last_contracts.any?
+            .row
+              .large-12.columns
+                h5 Moje zrealizowane kontrakty
+                table.stack
+                  thead
+                    tr
+                      th width='300px' Kontrakt
+                      th Przejście
+                      th width='200px' Kiedy?
+                      th width='150px' Punkty
+                  tbody
+                    - @my_last_contracts.each do |training_contract|
+                      - if training_contract.route
+                        tr
+                          td = link_to training_contract.contract.name, activities_contract_path(training_contract.contract_id)
+                          td = link_to training_contract.route.name, activities_mountain_route_path(training_contract.route.slug)
+                          td = training_contract.route.climbing_date.to_date
+                          td = training_contract.contract.score
+        .tabs-panel.is-active id="contracts-panel2"
+          .row
+            .large-12.columns
+              h5 Ostatnie zrealizowane kontrakty
+              table.stack
+                thead
+                  tr
+                    th width='300px' Kontrakt
+                    th Przejście
+                    th width='200px' Kiedy?
+                    th width='200px' Kto?
+                    th width='150px' Punkty
+                tbody
+                  - @last_contracts.each do |route_contract|
+                    - if route_contract.route
+                      tr
+                        td = link_to route_contract.contract.name, activities_contract_path(route_contract.contract_id)
+                        td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
+                        td = link_to route_contract.user.display_name, user_path(route_contract.user.kw_id)
+                        td = route_contract.route.climbing_date.to_date
+                        td = route_contract.contract.score
 
+br
 .row
   .large-12.columns
     ul.tabs data-tabs="" id="genders-panels-tabs"
@@ -139,4 +152,3 @@
         div id="narciarskie_dziki_component_female"
       .tabs-panel id="genders-panel3"
         div id="narciarskie_dziki_component_male"
-    

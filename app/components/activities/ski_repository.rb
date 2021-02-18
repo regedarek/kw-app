@@ -1,7 +1,7 @@
 module Activities
   class SkiRepository
     def last_contracts
-      Training::Activities::UserContractRecord.includes(:route).order(created_at: :desc).limit(5)
+      Training::Activities::UserContractRecord.includes([:route, :user]).order(created_at: :desc).limit(5)
     end
 
     def fetch_prev_month
