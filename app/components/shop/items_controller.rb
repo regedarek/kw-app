@@ -1,7 +1,3 @@
-require 'admin/items'
-require 'admin/items_form'
-require 'items/owner_presenter'
-
 module Shop
   class ItemsController < ApplicationController
     append_view_path 'app/components'
