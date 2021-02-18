@@ -8,14 +8,16 @@
       | Tutaj znajdziecie informacje na temat aktualnych oraz zakończonych zamówieniach gadżetów klubowych.
 
 .row
-  - @items.each do |item|
-    .large-3.columns
-      .card.card-product
-        .card-product-img-wrapper
-          a.button.expanded href="/sklepik/#{item.id}" Zobacz
-          a href="/sklepik/#{item.id}" 
-            img src="https://picsum.photos/300/300" /
-        .card-section
-          h3.card-product-name = item.name
-          h5.card-product-price = "#{item.price} zł"
-          p.card-product-description = simple_format item.description, length: 20
+  .large-12.colums
+    .row
+      - @items.each do |item|
+        .large-3.columns
+          .card.card-product
+            .card-product-img-wrapper
+              a.button.expanded href="/sklepik/#{item.slug}" Zobacz
+              a href="/sklepik/#{item.slug}" 
+                img src="https://picsum.photos/300/300" /
+            .card-section
+              h3.card-product-name = item.name
+              h5.card-product-price = "#{item.price} zł"
+              p.card-product-description = simple_format item.description, length: 100

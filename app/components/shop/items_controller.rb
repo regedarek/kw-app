@@ -11,7 +11,7 @@ module Shop
     end
 
     def show
-      @item = Shop::ItemRecord.find(params[:id])
+      @item = Shop::ItemRecord.friendly.find(params[:id])
     end
 
     def new
@@ -29,7 +29,7 @@ module Shop
     end
 
     def edit
-      @item = Shop::ItemRecord.find(params[:id])
+      @item = Shop::ItemRecord.friendly.find(params[:id])
     end
 
     def update

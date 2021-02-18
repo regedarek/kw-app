@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   end
 
   get 'sklepik' => 'shop/items#index'
-  get 'sklepik/przedmioty:id' => 'shop/items#show'
+  get 'sklepik/:id' => 'shop/items#show'
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_133712) do
+ActiveRecord::Schema.define(version: 2021_02_18_163143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -781,6 +781,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_133712) do
     t.string "name"
     t.text "description"
     t.float "price"
+    t.string "slug", null: false
   end
 
   create_table "snw_applies", force: :cascade do |t|
