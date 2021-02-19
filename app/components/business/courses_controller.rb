@@ -1,6 +1,7 @@
 module Business
   class CoursesController < ApplicationController
     append_view_path 'app/components'
+    respond_to :html, :xlsx
 
     def index
       params[:q] ||= {}
@@ -41,6 +42,14 @@ module Business
     def show
       @course = Business::CourseRecord.friendly.find(params[:id])
       authorize! :read, Business::CourseRecord
+
+      respond_with do |format|
+        format.html
+        format.xlsx do
+          disposition = "attachment; filename=kurs_#{@course.activity_type}_#{@course.start_date}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
+          response.headers['Content-Disposition'] = disposition
+        end
+      end
     end
 
     def public

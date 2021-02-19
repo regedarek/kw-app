@@ -7,7 +7,8 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: 'wydarzenia@kw.krakow.pl',
+        from: 'zapisy@szkolaalpinizmu.pl',
+        cc: 'zapisy@szkolaalpinizmu.pl',
         subject: "Zapisałeś się na #{@sign_up.course.name}!"
       ).tap do |message|
         message.mailgun_options = {
@@ -22,7 +23,8 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: 'wydarzenia@kw.krakow.pl',
+        from: 'zapisy@szkolaalpinizmu.pl',
+        cc: 'zapisy@szkolaalpinizmu.pl',
         subject: "Zapisałeś się na #{@sign_up.course.name}: wpłać resztę!"
       ).tap do |message|
         message.mailgun_options = {

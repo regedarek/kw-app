@@ -1,0 +1,33 @@
+wb = xlsx_package.workbook
+course_attributes = %i(
+  starts_at ends_at max_seats activity_type
+  slug state price sign_up_url payment_first_cost payment_second_cost
+)
+
+sign_up_attributes = %i(
+  name email code phone state
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "#{@course.starts_at.to_date}") do |sheet|
+    default_attributes = course_attributes.map do |attr|
+      Business::CourseRecord.human_attribute_name(attr)
+    end.push('Instruktor', 'Koordynator')
+    sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
+    default_values = course_attributes.map do |attr|
+      @course.read_attribute(attr)
+    end.push(@course.instructor.name, @course.coordinator.display_name)
+    sheet.add_row(default_values)
+    @course.sign_ups.each do |sign_up|
+      default_values = sign_up_attributes.map do |attr|
+        sign_up.read_attribute(attr)
+      end.push(sign_up.payments&.first&.paid?, sign_up.payments&.first&.payment_url)
+      sheet.add_row(default_values)
+    end
+  end
+end

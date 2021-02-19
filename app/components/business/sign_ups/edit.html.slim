@@ -61,10 +61,11 @@
                 = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.second.id)
             - else
                 = link_to 'Wyślij drugi link', send_second_business_sign_up_path(@sign_up.id), method: :post
-            - unless @sign_up.payments.second.paid?
-              br
-              = link_to mark_as_paid_payment_path(@sign_up.payments.second.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-                | Oznacz jako opłacone
+            - if @sign_up.payments.second
+              - unless @sign_up.payments.second.paid?
+                br
+                = link_to mark_as_paid_payment_path(@sign_up.payments.second.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+                  | Oznacz jako opłacone
 
       #history.tabs-panel
         table.stack
