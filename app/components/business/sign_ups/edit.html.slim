@@ -36,7 +36,7 @@
               span.label.alert nieopłacono
             br
             - if @sign_up.payments.first.payment_url
-              = @sign_up.payments.first
+              = link_to 'Link do płatności', @sign_up.payments.first.payment_url
             - else
               = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.first.id)
             br
@@ -56,7 +56,7 @@
                 span.label.alert nieopłacono
                 br
               - if @sign_up.payments.second.payment_url
-                = @sign_up.payments.second
+                = link_to 'Link do płatności', @sign_up.payments.second.payment_url
               - else
                 = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.second.id)
             - else
