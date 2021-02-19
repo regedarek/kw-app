@@ -81,10 +81,12 @@
               li = link_to sign_up.user_name, edit_supplementary_sign_up_path(sign_up.id), class: 'item'
 
     .row
-      .large-6.columns
-        = link_to 'Edytuj kurs', edit_course_path(@course.id), class: 'alert button large expanded'
-      .large-6.columns
-        = link_to 'wróć do kursów', courses_path, class: 'secondary button large expanded'
+      .large-4.columns
+        = link_to 'Edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
+      .large-4.columns
+        = link_to 'Excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
+      .large-4.columns
+        = link_to 'Kursy', courses_path, class: 'secondary button large expanded'
 
   .large-6.columns
     = render 'sign_ups_table', sign_ups: @course.sign_ups
