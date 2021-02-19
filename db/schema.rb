@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_174219) do
+ActiveRecord::Schema.define(version: 2021_02_19_200112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2021_02_19_174219) do
     t.integer "event_id"
     t.integer "payment_first_cost", default: 0, null: false
     t.integer "payment_second_cost", default: 0, null: false
+    t.text "email_first_content"
+    t.text "email_second_content"
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 

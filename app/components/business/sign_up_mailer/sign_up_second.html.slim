@@ -4,3 +4,5 @@ br
 = link_to 'Kliknij tutaj aby opłacić zapis!', charge_payment_url(@sign_up.payments.second.id)
 br/
 br/
+- if @sign_up.course.email_second_content
+  = sanitize @sign_up.course.email_second_content

@@ -105,7 +105,8 @@ module Business
           :coordinator_id, :price, :seats, :starts_at,:ends_at,
           :description, :activity_type, :state, :instructor_id,
           :max_seats, :sign_up_url, :creator_id, :event_id,
-          :payment_first_cost, :payment_second_cost
+          :payment_first_cost, :payment_second_cost,
+          :email_first_content, :email_second_content
         )
     end
   end

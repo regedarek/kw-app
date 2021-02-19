@@ -55,6 +55,21 @@
     = f.number_field :payment_second_cost
 
 .row
+  .large-6.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :email_first_content
+          = f.trix_editor :email_first_content, style: 'min-height: 150px'
+
+  .large-6.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :email_second_content
+          = f.trix_editor :email_second_content, style: 'min-height: 150px'
+
+.row
   .large-12.columns
     .callout
       .row
