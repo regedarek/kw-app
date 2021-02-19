@@ -46,12 +46,13 @@
       = f.label :sign_up_url, "Link do zapisów*"
     = f.text_field :sign_up_url
 
-  .large-6.columns
-    = f.label :event_id, 'Powiązane wydarzenie'
-    = f.select :event_id,
-      Training::Supplementary::CourseRecord.where(category: :sa).all.map { |u| ["#{u.name} - #{u.start_date&.to_date}", u.id] },
-      { include_blank: 'Wybierz wydarzenie' },
-      { class: 'js-select-multiple' }
+  .large-3.columns
+    b = f.label :payment_first_cost
+    = f.number_field :payment_first_cost
+
+  .large-3.columns
+    b = f.label :payment_second_cost
+    = f.number_field :payment_second_cost
 
 .row
   .large-12.columns

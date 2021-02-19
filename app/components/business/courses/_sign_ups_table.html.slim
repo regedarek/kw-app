@@ -1,0 +1,38 @@
+h5 Zapisy
+.row
+  .large-12.columns
+    table.stack
+      tbody
+        - sign_ups.includes(:payments).each_with_index do |sign_up, i|
+          tr
+            td
+              = sign_up.name
+            td
+              = sign_up.email
+            td width='20%'
+              - if sign_up.payments.first
+                - if sign_up.payments.first.payment_url
+                  - if sign_up.payments.first.paid?
+                    = link_to sign_up.payments.first.payment_url, style: 'margin-right: 10px; color: green' do
+                      i.fi-die-one.large
+                  - else
+                    = link_to sign_up.payments.first.payment_url, style: 'margin-right: 10px; color: yellow' do
+                      i.fi-die-one.large
+                - else
+                  = link_to charge_payment_url(sign_up.payments.first.id), style: 'margin-right: 10px;'
+                    i.fi-die-one.large
+              - if sign_up.payments.second
+                - if sign_up.payments.second.payment_url
+                  - if sign_up.payments.second.paid?
+                    = link_to sign_up.payments.second.payment_url, style: 'margin-right: 10px; color: green' do
+                      i.fi-die-two.large
+                  - else
+                    = link_to sign_up.payments.second.payment_url, style: 'margin-right: 10px; color: yellow' do
+                      i.fi-die-two.large
+                - else
+                  = link_to charge_payment_url(sign_up.payments.second.id), style: 'margin-right: 10px;'
+                    i.fi-die-two.large
+              = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px;'
+                i.fi-info
+              = link_to business_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Jesteś pewien?' }
+                i.fi-trash

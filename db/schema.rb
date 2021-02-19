@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_195439) do
+ActiveRecord::Schema.define(version: 2021_02_19_174219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2021_02_18_195439) do
     t.string "sign_up_url"
     t.integer "coordinator_id"
     t.integer "event_id"
+    t.integer "payment_first_cost", default: 0, null: false
+    t.integer "payment_second_cost", default: 0, null: false
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 
@@ -92,6 +94,11 @@ ActiveRecord::Schema.define(version: 2021_02_18_195439) do
     t.datetime "paid_email_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone", null: false
+    t.date "birthdate"
+    t.string "birthplace"
+    t.string "alternative_email"
+    t.string "state", default: "new", null: false
   end
 
   create_table "case_presences", force: :cascade do |t|
@@ -625,6 +632,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_195439) do
     t.integer "cash_user_id"
     t.boolean "deleted", default: false, null: false
     t.datetime "refunded_at"
+    t.integer "amount"
   end
 
   create_table "photo_competitions", id: :serial, force: :cascade do |t|

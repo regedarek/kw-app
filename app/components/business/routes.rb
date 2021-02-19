@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   namespace :business do
-    resources :sign_ups
+    resources :sign_ups do
+      member do
+        post :send_second
+      end
+    end
   end
   scope module: 'business' do
     resources :courses do

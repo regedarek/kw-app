@@ -1,0 +1,22 @@
+.row
+  .large-12.columns
+    = f.label :course_id
+    = f.select :course_id, Business::CourseRecord.all.map{|i| [i.slug, i.id] },
+    { selected: @sign_up.course_id, include_blank: true },
+    { class: 'js-select-multiple' }
+.row
+  .large-12.columns
+    b = f.label :state, 'Status'
+    = f.select :state, Business::SignUpRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @sign_up.state
+
+  .large-12.columns
+    b = f.label :email
+    = f.text_field :email
+
+  .large-12.columns
+    b = f.label :name
+    = f.text_field :name
+
+  .large-12.columns
+    b = f.label :phone
+    = f.text_field :phone

@@ -45,6 +45,7 @@ module Business
 
     def public
       @course = Business::CourseRecord.friendly.find(params[:id])
+      @sign_up = @course.sign_ups.new
     end
 
     def seats_minus
@@ -98,7 +99,14 @@ module Business
     private
 
     def course_params
-      params.require(:course).permit(:coordinator_id, :price, :seats, :starts_at, :ends_at, :description, :activity_type, :state, :instructor_id, :max_seats, :sign_up_url, :creator_id, :event_id)
+      params
+        .require(:course)
+        .permit(
+          :coordinator_id, :price, :seats, :starts_at,:ends_at,
+          :description, :activity_type, :state, :instructor_id,
+          :max_seats, :sign_up_url, :creator_id, :event_id,
+          :payment_first_cost, :payment_second_cost
+        )
     end
   end
 end

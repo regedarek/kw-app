@@ -1,0 +1,43 @@
+= form_for :sign_up, url: business_sign_ups_path do |f|
+  = f.hidden_field :course_id, value: course.id
+  - target = @sign_up
+  - if target.errors.any?
+    .callout.alert
+      h5 Przyczyny dlaczego zapis nie został wysłany
+      div class="error_explanation"
+        ul
+        - target.errors.full_messages.each do |msg|
+          li= msg
+
+  .row
+    .large-12.columns
+      = f.text_field :name, placeholder: true
+  .row
+    .large-6.columns
+      = f.text_field :phone, placeholder: true
+    .large-6.columns
+      = f.email_field :email, placeholder: true
+
+  .row
+    .large-12.columns
+      = f.check_box :rodo
+      = f.label :rodo
+      .small style='font-size: 8px'
+        = t('activerecord.attributes.business/sign_up_record.rodo_html')
+  .row
+    .large-12.columns
+      = f.check_box :rules
+      = f.label :rules
+      .small style='font-size: 10px'
+        = t('activerecord.attributes.business/sign_up_record.rules_html')
+
+  .row
+    .large-12.columns
+      = f.check_box :data
+      = f.label :data
+      .small style='font-size: 10px'
+        = t('activerecord.attributes.business/sign_up_record.data_html')
+
+  .row
+    .large-12.columns
+      = f.submit 'Zapisz się', class: 'button primary expanded'

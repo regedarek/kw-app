@@ -68,11 +68,6 @@
             = link_to @course.sign_up_url, @course.sign_up_url
 
   .large-6.columns
-    = form_for :sign_up, url: business_sign_ups_path do |f|
-      .row
-        .large-6.columns
-          = f.text_field :name, placeholder: 'Imię i nazwisko'
-        .large-6.columns
-          = f.email_field :email, placeholder: 'E-mail'
-      = f.hidden_field :course_id, value: @course.id
-      = f.submit 'Zapisz się', class: 'button primary expanded'
+    .row
+      .large-12.columns
+        = render 'business/sign_ups/sign_up_form', course: @course

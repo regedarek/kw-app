@@ -1,0 +1,99 @@
+.row
+  .large-6.columns
+    ul#business_sign_ups-tabs.tabs data-tabs="" 
+      li.tabs-title.is-active
+        a aria-selected="true" href="#fields" Dane zapisu
+      li.tabs-title
+        a aria-selected="true" href="#payments" Płatności
+      li.tabs-title
+        a data-tabs-target="history" href="#history" Historia zmian
+
+    .tabs-content data-tabs-content="business_sign_ups-tabs" 
+      #fields.tabs-panel.is-active
+        .row
+          .large-12.columns
+            - if @sign_up.errors.any?
+              .callout.alert
+                ul.circle
+                  - @sign_up.errors.full_messages.each do |message|
+                    li= message
+
+        = form_for @sign_up, as: :sign_up, url: business_sign_up_path(@sign_up.id) do |f|
+          = render 'form', f: f
+          = f.submit 'Zaktualizuj', class: 'button expanded large success'
+
+      #payments.tabs-panel
+        .row
+          .large-6.columns
+            h5 Zadatek
+            = I18n.t @sign_up.payments.first.state
+            br
+            = "#{@sign_up.payments.first.amount} zł"
+            br
+            - if @sign_up.payments.first.paid?
+              span.label.success opłacono
+            - else
+              span.label.alert nieopłacono
+            br
+            - if @sign_up.payments.first.payment_url
+              = @sign_up.payments.first
+            - else
+              = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.first.id)
+            br
+            - unless @sign_up.payments.first.paid?
+              = link_to mark_as_paid_payment_path(@sign_up.payments.first.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+                | Oznacz jako opłacone
+          .large-6.columns
+            h5 Reszta
+            - if @sign_up.payments.second
+              = I18n.t @sign_up.payments.second.state
+              br
+              = "#{@sign_up.payments.second.amount} zł"
+              br
+              - if @sign_up.payments.second.paid?
+                span.label.success opłacono
+              - else
+                span.label.alert nieopłacono
+                br
+              - if @sign_up.payments.second.payment_url
+                = @sign_up.payments.second
+              - else
+                = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.second.id)
+            - else
+                = link_to 'Wyślij drugi link', send_second_business_sign_up_path(@sign_up.id), method: :post
+            - unless @sign_up.payments.second.paid?
+              br
+              = link_to mark_as_paid_payment_path(@sign_up.payments.second.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+                | Oznacz jako opłacone
+
+      #history.tabs-panel
+        table.stack
+          thead
+            tr
+              th width='20%' Kto?
+              th width='10%' Akcja?
+              th width='20%' Kiedy?
+              th width='10%' Metadata
+          tbody
+            - @sign_up.versions.includes(:item).reverse.each do |version|
+              tr
+                td = Db::User.find(version.whodunnit)&.display_name
+                td = version.event
+                td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
+                td
+                  span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
+                    = link_to 'Zmiany', '#'
+    br
+    .row
+      .large-6.columns
+        = link_to 'zobacz kurs', course_path(@sign_up.course.id), class: 'warning button large expanded'
+      .large-6.columns
+        = link_to 'wróć do kursów', courses_path, class: 'secondary button large expanded'
+  .large-6.columns
+    h5 Komentarze
+    .row
+      .large-12.columns
+        = render 'messaging/comments/comments', commentable: @sign_up
+      .large-12.columns
+        .callout
+          = render 'messaging/comments/form', commentable: @sign_up
