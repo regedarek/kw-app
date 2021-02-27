@@ -1,4 +1,7 @@
 pl:
+  business/sign_up_record: Zapis
+  business/course_record: Kurs
+  db/payment: Płatność
   training:
     supplementary:
       course:

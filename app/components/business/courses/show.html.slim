@@ -1,92 +1,140 @@
 .row
   .large-6.columns
-    .row
-      .large-6.columns
-        h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
+    ul#business_courses-tabs.tabs data-tabs="" 
+      li.tabs-title.is-active
+        a aria-selected="true" href="#fields" Dane zapisu
+      li.tabs-title
+        a data-tabs-target="history" href="#history" Historia zmian
 
-    .row
-      .large-6.columns
-        .callout
-          b Od: 
-          = @course.starts_at&.to_date
-      .large-6.columns
-        .callout
-          b Do: 
-          = @course.ends_at&.to_date
+    .tabs-content data-tabs-content="business_courses-tabs" 
+      #fields.tabs-panel.is-active
+        .row
+          .large-6.columns
+            h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
 
-    .row
-      - if @course.seats
-        .large-6.columns
-          .callout
-            b Zapisanych osób: 
-            - if @course.event_id
-              = Training::Supplementary::Limiter.new(@course.event).sum
-            - else
-              = @course.seats
+        .row
+          .large-6.columns
+            .callout
+              b Od: 
+              = @course.starts_at&.to_date
+          .large-6.columns
+            .callout
+              b Do: 
+              = @course.ends_at&.to_date
 
-      - if @course.max_seats
-        .large-6.columns
-          .callout.warning
-            b Maksymalna ilość miejsc: 
-            = @course.max_seats
+        .row
+          - if @course.seats
+            .large-6.columns
+              .callout
+                b Zapisanych osób: 
+                - if @course.event_id
+                  = Training::Supplementary::Limiter.new(@course.event).sum
+                - else
+                  = @course.seats
 
-    .row
-      - if @course.price
-        .large-6.columns
-          .callout
-            b Cena: 
-            = @course.price
+          - if @course.max_seats
+            .large-6.columns
+              .callout.warning
+                b Maksymalna ilość miejsc: 
+                = @course.max_seats
 
-      - if @course.instructor_id
-        .large-6.columns
-          .callout
-            b Instruktor: 
-            = ::Business::InstructorRecord.find(@course.instructor_id)&.profile_name
+        .row
+          - if @course.price
+            .large-6.columns
+              .callout
+                b Cena: 
+                = @course.price
 
-    .row
-      - if @course.creator_id
-        .large-6.columns
-          .callout
-            b Utworzył: 
-            = Db::User.find(@course.creator_id).display_name
+          - if @course.instructor_id
+            .large-6.columns
+              .callout
+                b Instruktor: 
+                = ::Business::InstructorRecord.find(@course.instructor_id)&.profile_name
 
-      - if @course.coordinator_id
-        .large-6.columns
-          .callout
-            b Koordynuje: 
-            = Db::User.find(@course.coordinator_id)&.display_name
 
-    - if @course.description
-      .row
-        .large-12.columns
-          .callout
-            = sanitize @course.description
+        - if @course.payment_first_cost > 0
+          .row
+            .large-6.columns
+              .callout
+                b Zaliczka: 
+                = @course.payment_first_cost
 
-    - if @course.sign_up_url
-      .row
-        .large-12.columns
-          .callout
-            = link_to @course.sign_up_url, @course.sign_up_url
+            .large-6.columns
+              .callout
+                b Reszta:
+                = @course.payment_first_cost
 
-    - if @course.event_id
-      .row
-        .large-12.columns
-          .callout
-            = link_to @course.event.name, polish_event_path(@course.event.slug)
+        .row
+          - if @course.creator_id
+            .large-6.columns
+              .callout
+                b Utworzył: 
+                = Db::User.find(@course.creator_id).display_name
 
-      .row
-        .large-12.columns
-          ul
-            - Training::Supplementary::Limiter.new(@course.event).all_prepaid.each do |sign_up|
-              li = link_to sign_up.user_name, edit_supplementary_sign_up_path(sign_up.id), class: 'item'
+          - if @course.coordinator_id
+            .large-6.columns
+              .callout
+                b Koordynuje: 
+                = Db::User.find(@course.coordinator_id)&.display_name
 
-    .row
-      .large-4.columns
-        = link_to 'Edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
-      .large-4.columns
-        = link_to 'Excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
-      .large-4.columns
-        = link_to 'Kursy', courses_path, class: 'secondary button large expanded'
+        - if @course.description
+          .row
+            .large-12.columns
+              .callout
+                = sanitize @course.description
+
+        - if @course.sign_up_url
+          .row
+            .large-12.columns
+              .callout
+                = link_to @course.sign_up_url, @course.sign_up_url
+
+        - if @course.event_id
+          .row
+            .large-12.columns
+              .callout
+                = link_to @course.event.name, polish_event_path(@course.event.slug)
+
+          .row
+            .large-12.columns
+              ul
+                - Training::Supplementary::Limiter.new(@course.event).all_prepaid.each do |sign_up|
+                  li = link_to sign_up.user_name, edit_supplementary_sign_up_path(sign_up.id), class: 'item'
+
+        .row
+          .large-4.columns
+            = link_to 'Edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
+          .large-4.columns
+            = link_to 'Excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
+          .large-4.columns
+            = link_to 'Kursy', courses_path, class: 'secondary button large expanded'
+
+    .tabs-content data-tabs-content="business_courses-tabs" 
+      #history.tabs-panel
+        table.stack
+          thead
+            tr
+              th width='20%' Kto?
+              th width='20%' Co?
+              th width='10%' Metadata
+          tbody
+            - @course.all_versions.includes(:item).reverse.each do |version|
+              tr
+                td
+                  - user = Db::User.find_by(id: version.whodunnit)
+                  - if user
+                    = user.display_name
+                  - else
+                    - if version.item_type == 'Business::SignUpRecord'
+                      = version.item.name
+                    - if version.item_type == 'Db::Payment'
+                      = version.item.payable.name
+                td
+                  h6.dashboard-table-text= I18n.t version.event
+                  span.dashboard-table-timestamp= I18n.t(version.item.class.name.underscore)
+                td
+                  span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
+                    span.dashboard-table-timestamp= version.created_at.strftime '%Y-%m-%d %H:%M'
 
   .large-6.columns
     = render 'sign_ups_table', sign_ups: @course.sign_ups

@@ -78,7 +78,13 @@
           tbody
             - @sign_up.versions.includes(:item).reverse.each do |version|
               tr
-                td = Db::User.find(version.whodunnit)&.display_name
+                td
+                  - user = Db::User.find_by(id: version.whodunnit)
+                  - if user
+                    = user.display_name
+                  - else
+                    - if version.item_type == 'Business::SignUpRecord'
+                      = version.item.name
                 td = version.event
                 td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
                 td

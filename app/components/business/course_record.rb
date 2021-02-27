@@ -30,6 +30,18 @@ module Business
       :cave, :tatra_traverse
     ]
 
+    def sign_ups_versions
+      PaperTrail::Version.includes(:item).where(item_type: 'Business::SignUpRecord', item_id: sign_ups)
+    end
+
+    def sign_ups_payments_versions
+      PaperTrail::Version.includes(:item).where(item_type: 'Db::Payment', item_id: sign_ups.map(&:payment_ids).flatten)
+    end
+
+    def all_versions
+      PaperTrail::Version.includes(:item).where(item_type: 'Business::SignUpRecord', item_id: sign_ups).or(PaperTrail::Version.includes(:item).where(item_type: 'Business::CourseRecord', item_id: self.id)).or(sign_ups_payments_versions).order(created_at: :asc)
+    end
+
     def name
       I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{activity_type}")
     end

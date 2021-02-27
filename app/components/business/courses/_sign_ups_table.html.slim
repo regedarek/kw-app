@@ -9,7 +9,7 @@ h5 Zapisy
               = sign_up.name
             td
               = sign_up.email
-            td width='20%'
+            td.text-right width='20%'
               - if sign_up.payments.first
                 - if sign_up.payments.first.payment_url
                   - if sign_up.payments.first.paid?
@@ -32,7 +32,7 @@ h5 Zapisy
                 - else
                   = link_to charge_payment_url(sign_up.payments.second.id), style: 'margin-right: 10px;'
                     i.fi-die-two.large
-              = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px;'
+              = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: #ffae00'
                 i.fi-info
-              = link_to business_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Jesteś pewien?' }
+              = link_to business_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Jesteś pewien?' }, style: 'color: gray'
                 i.fi-trash

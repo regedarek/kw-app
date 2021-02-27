@@ -7,11 +7,16 @@
     .callout.primary
       h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
 
+.row
   .large-6.columns
     .row
-      .large-12.columns
-        .callout
-          = sanitize I18n.t('.start_end_date_html', start_date: l(@course.starts_at.to_date, format: "%d %B %Y"), end_date: l(@course.ends_at.to_date, format: "%d %B %Y"))
+      .large-6.columns
+        .callout.success
+          = sanitize I18n.t('.from_date_html', start_date: l(@course.starts_at.to_date, format: "%d %B %Y"))
+
+      .large-6.columns
+        .callout.success
+          = sanitize I18n.t('.to_date_html', end_date: l(@course.ends_at.to_date, format: "%d %B %Y"))
 
     .row
       - if @course.seats
@@ -21,7 +26,7 @@
 
       - if @course.max_seats
         .large-6.columns
-          .callout.warning
+          .callout
             = sanitize I18n.t(".course_max_seats_html", max_seats: @course.max_seats)
 
     .row
