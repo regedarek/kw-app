@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   namespace :business do
+    resources :payments, only: [] do
+      member do
+        post :charge
+      end
+    end
     resources :sign_ups do
       member do
         post :send_second

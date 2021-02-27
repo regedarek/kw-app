@@ -34,7 +34,7 @@
 
           - if @course.max_seats
             .large-6.columns
-              .callout.warning
+              .callout
                 b Maksymalna ilość miejsc: 
                 = @course.max_seats
 
@@ -137,7 +137,7 @@
                     span.dashboard-table-timestamp= version.created_at.strftime '%Y-%m-%d %H:%M'
 
   .large-6.columns
-    = render 'sign_ups_table', sign_ups: @course.sign_ups
+    = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)
 
     h5 Komentarze
     .row

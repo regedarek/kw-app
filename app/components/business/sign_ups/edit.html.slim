@@ -4,8 +4,6 @@
       li.tabs-title.is-active
         a aria-selected="true" href="#fields" Dane zapisu
       li.tabs-title
-        a aria-selected="true" href="#payments" Płatności
-      li.tabs-title
         a data-tabs-target="history" href="#history" Historia zmian
 
     .tabs-content data-tabs-content="business_sign_ups-tabs" 
@@ -23,49 +21,6 @@
           = f.submit 'Zaktualizuj', class: 'button expanded large success'
 
       #payments.tabs-panel
-        .row
-          .large-6.columns
-            h5 Zadatek
-            = I18n.t @sign_up.payments.first.state
-            br
-            = "#{@sign_up.payments.first.amount} zł"
-            br
-            - if @sign_up.payments.first.paid?
-              span.label.success opłacono
-            - else
-              span.label.alert nieopłacono
-            br
-            - if @sign_up.payments.first.payment_url
-              = link_to 'Link do płatności', @sign_up.payments.first.payment_url
-            - else
-              = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.first.id)
-            br
-            - unless @sign_up.payments.first.paid?
-              = link_to mark_as_paid_payment_path(@sign_up.payments.first.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-                | Oznacz jako opłacone
-          .large-6.columns
-            h5 Reszta
-            - if @sign_up.payments.second
-              = I18n.t @sign_up.payments.second.state
-              br
-              = "#{@sign_up.payments.second.amount} zł"
-              br
-              - if @sign_up.payments.second.paid?
-                span.label.success opłacono
-              - else
-                span.label.alert nieopłacono
-                br
-              - if @sign_up.payments.second.payment_url
-                = link_to 'Link do płatności', @sign_up.payments.second.payment_url
-              - else
-                = link_to 'Stwórz link do płatności', charge_payment_url(@sign_up.payments.second.id)
-            - else
-                = link_to 'Wyślij drugi link', send_second_business_sign_up_path(@sign_up.id), method: :post
-            - if @sign_up.payments.second
-              - unless @sign_up.payments.second.paid?
-                br
-                = link_to mark_as_paid_payment_path(@sign_up.payments.second.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
-                  | Oznacz jako opłacone
 
       #history.tabs-panel
         table.stack
@@ -92,12 +47,26 @@
                     = link_to 'Zmiany', '#'
     br
     .row
-      .large-6.columns
-        = link_to 'zobacz kurs', course_path(@sign_up.course.id), class: 'warning button large expanded'
-      .large-6.columns
-        = link_to 'wróć do kursów', courses_path, class: 'secondary button large expanded'
+      .large-4.columns
+        = link_to 'kurs', course_path(@sign_up.course.id), class: 'warning button large expanded'
+      .large-4.columns
+        = link_to 'zapisy', public_course_path(@sign_up.course.id), class: 'primary button large expanded', target: :_blank
+      .large-4.columns
+        = link_to 'kursy', courses_path, class: 'secondary button large expanded'
   .large-6.columns
-    h5 Komentarze
+    .callout
+      .row
+        .large-6.columns
+          h5 Zadatek
+          = render 'payment', payment: @sign_up.first_payment, number: 1
+        .large-6.columns
+          h5 Reszta
+          - if @sign_up.second_payment
+            = render 'payment', payment: @sign_up.second_payment, number: 2
+          - else
+            = "#{@sign_up.course.payment_second_cost} zł"
+            br
+            = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
     .row
       .large-12.columns
         = render 'messaging/comments/comments', commentable: @sign_up

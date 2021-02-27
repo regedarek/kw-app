@@ -1,0 +1,26 @@
+- if payment
+  = "#{payment.amount} zł"
+  br
+  - if payment.paid?
+    span.label.success opłacono
+  - else
+    span.label.alert nieopłacono
+  br
+  - if payment.payment_url
+    = link_to 'Link do płatności', payment.payment_url
+    br
+  - else
+    - unless payment.paid?
+      = link_to 'Stwórz link do płatności', charge_business_payment_path(payment.id), method: :post
+  - if payment.paid?
+    - if payment.cash?
+      | Bezpośrednia wpłata
+  - else
+    br
+    = link_to mark_as_paid_payment_path(payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }
+      | Oznacz jako opłacone
+- else
+  - if number == 1
+    = "#{@sign_up.course.payment_first_cost} zł"
+  - if number == 2
+    = "#{@sign_up.course.payment_second_cost} zł"

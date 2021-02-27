@@ -21,6 +21,16 @@ module Business
       course.payment_type
     end
 
+    def first_payment
+      payments.order(created_at: :asc).first
+    end
+
+    def second_payment
+      return nil unless payments.count > 1
+
+      payments.order(created_at: :asc).last
+    end
+
     def start_date
       return Time.current unless course && course.start_date
       return Time.current unless course.start_date
@@ -37,7 +47,7 @@ module Business
     end
 
     def description
-      "Kurs Szkoły Alpinizmu: #{course.name} - Opłata od #{name}"
+      "Kurs Szkoły Alpinizmu: #{course.name} - #{course.start_date} - Opłata od #{name}"
     end
   end
 end

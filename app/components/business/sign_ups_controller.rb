@@ -9,7 +9,7 @@ module Business
       if @sign_up.save
         @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
-        redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisano'
+        redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
       else
         @course = @sign_up.course
         render 'business/courses/public'
@@ -32,11 +32,13 @@ module Business
 
     def send_second
       @sign_up = Business::SignUpRecord.find(params[:id])
+      return false if @sign_up.payments.count >= 2
+
       @sign_up.accept!
       @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_second_cost)
       ::Business::SignUpMailer.sign_up_second(@sign_up.id).deliver_later
 
-        redirect_to edit_business_sign_up_path(@sign_up.id), notice: 'Wysłano'
+      redirect_to edit_business_sign_up_path(@sign_up.id), notice: 'Zaakceptowano zaliczkę i wysłano drugi link!'
     end
 
     def destroy
