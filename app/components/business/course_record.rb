@@ -179,7 +179,7 @@ module Business
     end
 
     def name_with_date
-      "[#{name}] #{start_date}"
+      "#{name} #{start_date}"
     end
 
     def logo

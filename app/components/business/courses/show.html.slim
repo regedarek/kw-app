@@ -139,6 +139,11 @@
   .large-6.columns
     = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)
 
+    .row
+      .large-12.columns
+        .callout
+          = @course.sign_ups.map(&:email).join(', ')
+
     h5 Komentarze
     .row
       .large-12.columns

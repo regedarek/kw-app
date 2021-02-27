@@ -9,7 +9,7 @@ module Business
         to: @sign_up.email,
         from: 'zapisy@szkolaalpinizmu.pl',
         cc: 'zapisy@szkolaalpinizmu.pl',
-        subject: "Zapisałeś się na #{@sign_up.course.name}!"
+        subject: "[#{@sign_up.course.name_with_date}] - Zapisano na kurs #{@sign_up.name}"
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @sign_up.id,
@@ -25,7 +25,7 @@ module Business
         to: @sign_up.email,
         from: 'zapisy@szkolaalpinizmu.pl',
         cc: 'zapisy@szkolaalpinizmu.pl',
-        subject: "Zgłosiłeś zapotrzebowanie #{@sign_up.course.name}!"
+        subject: "[#{@sign_up.course.name_with_date}] - Zapisano na kurs #{@sign_up.name}"
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @sign_up.id,
@@ -41,7 +41,7 @@ module Business
         to: @sign_up.email,
         from: 'zapisy@szkolaalpinizmu.pl',
         cc: 'zapisy@szkolaalpinizmu.pl',
-        subject: "Zapisałeś się na #{@sign_up.course.name}: wpłać resztę!"
+        subject: "[#{@sign_up.course.name_with_date}] - Zapisano na kurs #{@sign_up.name}"
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @sign_up.id,
