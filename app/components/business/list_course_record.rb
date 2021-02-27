@@ -2,6 +2,8 @@ module Business
   class ListCourseRecord < ActiveRecord::Base
     self.table_name = 'business_list_courses'
 
+    has_paper_trail
+
     belongs_to :course, class_name: '::Business::CourseRecord', foreign_key: :course_id
     belongs_to :list, class_name: '::Business::ListRecord', foreign_key: :list_id
   end

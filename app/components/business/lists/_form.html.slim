@@ -8,7 +8,7 @@
     .callout
       | Terminy alternatywne
       br
-      = f.collection_check_boxes :course_ids, Business::CourseRecord.all, :id, :period do |m|
+      = f.collection_check_boxes :course_ids, @alternative_courses, :id, :period do |m|
         = m.check_box
         = m.label
         br

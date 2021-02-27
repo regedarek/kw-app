@@ -6,6 +6,13 @@ module Business
     def new
       @sign_up = Business::SignUpRecord.find(params[:id])
       @list = Business::ListRecord.new
+      @alternative_courses = Business::CourseRecord
+        .where('starts_at >= ?', Time.zone.now)
+        .where('max_seats > seats')
+        .where(
+          state: 'ready',
+          activity_type: @sign_up.course.activity_type
+        ).order(created_at: :desc)
 
       render layout: 'public'
     end
