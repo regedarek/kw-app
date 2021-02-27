@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     end
     resources :sign_ups do
       member do
-        resources :lists, only: [:new, :create]
+        resources :lists, only: [:new, :create] do
+          collection do
+            post :ask
+          end
+        end
         post :send_second
       end
     end
@@ -25,6 +29,7 @@ Rails.application.routes.draw do
       resources :courses, only: :index
     end
 
+    get 'zapotrzebowanie/:id' => 'lists#new', as: 'business_list'
     get 'kursy/:id' => 'courses#public', as: 'business_course_record_public'
     get 'courses/:id' => 'courses#show', as: 'business_course_record'
     get 'kursy/narciarskie' => 'courses#index', q: { activity_type_in: [3, 4, 5]}
