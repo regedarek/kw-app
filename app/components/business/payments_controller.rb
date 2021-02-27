@@ -3,6 +3,8 @@ module Business
     include EitherMatcher
 
     def charge
+      authorize! :create, Business::CourseRecord
+
       payment = Db::Payment.find(params[:id])
 
       result = Payments::CreatePayment.new(payment: payment).create

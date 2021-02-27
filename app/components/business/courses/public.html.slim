@@ -19,7 +19,11 @@
           = sanitize I18n.t('.to_date_html', end_date: l(@course.ends_at.to_date, format: "%d %B %Y"))
 
     .row
-      - if @course.seats
+      - if @course.sign_ups.count > 0
+        .large-6.columns
+          .callout
+            = sanitize I18n.t(".course_seats_html", seats: @course.sign_ups.count)
+      - else
         .large-6.columns
           .callout
             = sanitize I18n.t(".course_seats_html", seats: @course.seats)
@@ -54,4 +58,15 @@
   .large-6.columns
     .row
       .large-12.columns
-        = render 'business/sign_ups/sign_up_form', course: @course
+        - if @course.sign_ups.count > 0
+          - if @course.sign_ups.count >= @sign_up.course.max_seats
+            .callout.alert
+              | Wszystkie miejsca już zarezerwowane.
+          - else
+            = render 'business/sign_ups/sign_up_form', course: @course
+        - else
+          - if @course.seats >= @course.max_seats
+            .callout.alert
+              | Wszystkie miejsca już zarezerwowane.
+          - else
+            = render 'business/sign_ups/sign_up_form', course: @course

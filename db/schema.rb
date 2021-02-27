@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_200112) do
+ActiveRecord::Schema.define(version: 2021_02_27_195641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_02_19_200112) do
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.text "description"
-    t.integer "seats", default: 1, null: false
+    t.integer "seats", default: 0, null: false
     t.integer "creator_id"
     t.integer "activity_type", null: false
     t.datetime "created_at", null: false

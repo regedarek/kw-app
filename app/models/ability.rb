@@ -171,6 +171,8 @@ class Ability
 
   def business_courses
     can :manage, Business::CourseRecord
+    can :manage, Business::SignUpRecord
+    can :destroy, Business::SignUpRecord
     can :manage, PaperTrail::Version
   end
 

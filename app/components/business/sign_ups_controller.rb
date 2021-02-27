@@ -6,7 +6,12 @@ module Business
     def create
       @sign_up = Business::SignUpRecord.new(sign_up_params)
 
+      if @sign_up.course.sign_ups.count >= @sign_up.course.max_seats
+        return redirect_to public_course_path(@sign_up.course_id), alert: 'Niestety nie ma już wolnych miejsc'
+      end
+
       if @sign_up.save
+        @sign_up.course.update(seats: @sign_up.course.seats + 1)
         @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
@@ -18,10 +23,14 @@ module Business
 
     def edit
       @sign_up = Business::SignUpRecord.find(params[:id])
+
+      authorize! :manage, @sign_up
     end
 
     def update
       @sign_up = Business::SignUpRecord.find(params[:id])
+
+      authorize! :manage, @sign_up
 
       if @sign_up.update(sign_up_params)
         redirect_to edit_business_sign_up_path(@sign_up.id), notice: 'Zaktualizowano zapis'
@@ -32,6 +41,9 @@ module Business
 
     def send_second
       @sign_up = Business::SignUpRecord.find(params[:id])
+
+      authorize! :manage, @sign_up
+
       return false if @sign_up.payments.count >= 2
 
       @sign_up.accept!
@@ -43,6 +55,8 @@ module Business
 
     def destroy
       sign_up = Business::SignUpRecord.find(params[:id])
+
+      authorize! :destroy, sign_up
 
       sign_up.destroy
       redirect_to course_path(sign_up.course.id), notice: 'Usunięto'

@@ -16,8 +16,7 @@ module Business
     validates :max_seats, presence: true
     validates :start_date, presence: true
     validates :payment_first_cost, presence: true
-    validates :payment_last_cost, presence: true
-    validates :sign_up_url, presence: true
+    validates :payment_second_cost, presence: true
     validates :activity_type, presence: true
     validate :max_seats_size
 
@@ -66,7 +65,7 @@ module Business
     end
 
     def start_date
-      starts_at.to_date
+      starts_at&.to_date
     end
 
     def slug_candidates

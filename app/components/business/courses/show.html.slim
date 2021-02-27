@@ -103,11 +103,11 @@
 
         .row
           .large-4.columns
-            = link_to 'Edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
+            = link_to 'edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
           .large-4.columns
-            = link_to 'Excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
+            = link_to 'excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
           .large-4.columns
-            = link_to 'Kursy', courses_path, class: 'secondary button large expanded'
+            = link_to 'kursy', courses_path, class: 'secondary button large expanded'
 
     .tabs-content data-tabs-content="business_courses-tabs" 
       #history.tabs-panel

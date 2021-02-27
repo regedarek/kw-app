@@ -74,6 +74,14 @@ pl:
           ismf: ISMF World Cup
           lgc: La Grand Course
       business/course_record:
+        max_seats: 'Maksymalna ilość miejsc'
+        start_at: 'Od'
+        sign_up_url: Link do zapisów
+        payment_first_cost: Zadatek
+        payment_second_cost: Reszta
+        email_first_content: E-mail o zadatku
+        email_second_content: E-mail o resztę
+        activity_type: Rodzaj kursu
         activity_types:
           winter_abc: Zimowe ABC
           winter_tourist_1: Zimowy kurs turystyki I stopnia

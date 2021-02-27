@@ -28,11 +28,13 @@ module Business
 
     def create
       @course = Business::CourseRecord.new(course_params)
+
       authorize! :create, Business::CourseRecord
 
       @course.creator_id = current_user.id
 
       if @course.save
+        @course.update(sign_up_url: "https://panel.kw.krakow.pl/kursy/#{@course.slug}")
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else
         render :new
@@ -41,6 +43,7 @@ module Business
 
     def show
       @course = Business::CourseRecord.friendly.find(params[:id])
+
       authorize! :read, Business::CourseRecord
 
       respond_with do |format|
@@ -60,6 +63,7 @@ module Business
     def seats_minus
       @course = Business::CourseRecord.find(params[:id])
       @course.seats -= 1
+
       authorize! :manage, Business::CourseRecord
 
       if @course.save
@@ -74,6 +78,7 @@ module Business
       @course.seats += 1
 
       authorize! :manage, Business::CourseRecord
+
       if @course.save
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Zwolniono miejsce!'
       else
@@ -83,11 +88,13 @@ module Business
 
     def edit
       @course = Business::CourseRecord.find(params[:id])
+
       authorize! :manage, Business::CourseRecord
     end
 
     def update
       @course = Business::CourseRecord.find(params[:id])
+
       authorize! :manage, Business::CourseRecord
 
       if @course.update(course_params)
@@ -100,6 +107,7 @@ module Business
     def destroy
       @course = Business::CourseRecord.find(params[:id])
       @course.destroy
+
       authorize! :manage, Business::CourseRecord
 
       redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Usunięto kurs'
