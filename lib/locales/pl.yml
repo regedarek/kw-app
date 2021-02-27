@@ -1,4 +1,13 @@
 pl:
+  course_seats_html: "<b>Zapisanych osób</b>: %{seats}"
+  course_max_seats_html: "<b>Ilość wszystkich miejsc</b>: %{max_seats}"
+  course_price_html: "<b>Cena kursu</b>: %{price} zł"
+  course_price_1_html: "<b>Zaliczka</b>: %{price} zł"
+  start_end_date_html: "<b>Termin kursu</b>: Od %{start_date} do %{end_date}"
+  business:
+    sign_ups:
+      sign_up_form:
+        submit: Zapisz się!
   male: Męska
   female: Damska
   user_management:

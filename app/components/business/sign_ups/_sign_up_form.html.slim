@@ -19,25 +19,28 @@
       = f.email_field :email, placeholder: true
 
   .row
-    .large-12.columns
-      = f.check_box :rodo
-      = f.label :rodo
-      .small style='font-size: 8px'
+    .large-12.columns style=('font-size: 8px')
+      .callout
+        = f.check_box :rodo
+        = f.label :rodo
+        br
         = t('activerecord.attributes.business/sign_up_record.rodo_html')
   .row
-    .large-12.columns
-      = f.check_box :rules
-      = f.label :rules
-      .small style='font-size: 10px'
+    .large-12.columns style=('font-size: 8px')
+      .callout
+        = f.check_box :rules
+        = f.label :rules
+        br
         = t('activerecord.attributes.business/sign_up_record.rules_html')
 
   .row
-    .large-12.columns
-      = f.check_box :data
-      = f.label :data
-      .small style='font-size: 10px'
+    .large-12.columns style=('font-size: 8px')
+      .callout
+        = f.check_box :data
+        = f.label :data
+        br
         = t('activerecord.attributes.business/sign_up_record.data_html')
 
   .row
     .large-12.columns
-      = f.submit 'Zapisz się', class: 'button primary expanded'
+      = f.submit t('.submit'), class: 'button primary expanded large'
