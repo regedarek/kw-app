@@ -3,7 +3,7 @@ h5 Zapisy
   .large-12.columns
     table.stack
       tbody
-        - sign_ups.includes(:payments).each_with_index do |sign_up, i|
+        - sign_ups.each_with_index do |sign_up, i|
           tr
             td
               = sign_up.name

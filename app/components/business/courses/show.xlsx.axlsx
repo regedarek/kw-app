@@ -21,7 +21,7 @@ wb.styles do |style|
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     default_values = course_attributes.map do |attr|
       @course.read_attribute(attr)
-    end.push(@course.instructor.name, @course.coordinator.display_name)
+    end.push(@course.instructor&.name, @course.coordinator.display_name)
     sheet.add_row(default_values)
     @course.sign_ups.each do |sign_up|
       default_values = sign_up_attributes.map do |attr|
