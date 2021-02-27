@@ -1,5 +1,41 @@
 = f.hidden_field :sign_up_id, value: params[:id]
 .row
+  .large-8.columns
+    .callout
+      = f.label :description
+      = f.trix_editor :description, style: 'min-height: 150px'
+  .large-4.columns
+    .callout
+      | Terminy alternatywne
+      br
+      = f.collection_check_boxes :course_ids, Business::CourseRecord.all, :id, :period do |m|
+        = m.check_box
+        = m.label
+        br
+
+br
+.row
   .large-12.columns
-    = f.label :description
-    = f.trix_editor :description, style: 'min-height: 150px'
+    .callout
+      | Dane wymagane do ubezpieczenia oraz wystawienia zaświadczenia
+
+.row
+  .large-4.columns
+    = f.label :birthplace
+    = f.text_field :birthplace
+
+  .large-4.columns
+    = f.label :birthdate
+    = f.date_field :birthdate
+
+  .large-4.columns
+    = f.label :alternative_email
+    = f.text_field :alternative_email, value: @sign_up.email
+
+.row
+  .large-12.columns
+    .callout
+      = f.check_box :rules
+      = f.label :rules
+      br
+      = sanitize t('activerecord.attributes.business/list_record.rules_html')

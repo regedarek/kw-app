@@ -85,6 +85,30 @@
         .large-12.columns
           .callout
             = sanitize @sign_up.list.description
+      .row
+        .large-12.columns
+          .callout
+            - @sign_up.list.courses.each do |course|
+              = course.name_with_date
+
+      - if @sign_up.list.alternative_email
+        .row
+          .large-6.columns
+            .callout
+              = @sign_up.email
+
+          .large-6.columns
+            .callout
+              = @sign_up.list.alternative_email
+
+      .row
+        .large-6.columns
+          .callout
+            = @sign_up.list.birthplace
+
+        .large-6.columns
+          .callout
+            = @sign_up.list.birthdate
 
     .row
       .large-12.columns

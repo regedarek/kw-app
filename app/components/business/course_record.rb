@@ -12,6 +12,9 @@ module Business
     belongs_to :coordinator, class_name: '::Db::User', foreign_key: :coordinator_id
     belongs_to :event, class_name: 'Training::Supplementary::CourseRecord', foreign_key: :event_id, dependent: :destroy
 
+    has_many :list_courses, class_name: 'Business::ListCourseRecord', foreign_key: :course_id
+    has_many :lists, through: :list_courses, dependent: :destroy, foreign_key: :list_id
+
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
     validates :max_seats, presence: true
     validates :start_date, presence: true
@@ -66,6 +69,10 @@ module Business
 
     def start_date
       starts_at&.to_date
+    end
+
+    def end_date
+      ends_at&.to_date
     end
 
     def slug_candidates
@@ -165,6 +172,14 @@ module Business
 
     def payment_type
       :trainings
+    end
+
+    def period
+      "#{start_date.strftime("%d/%m/%Y")} - #{end_date.strftime("%d/%m/%Y")}"
+    end
+
+    def name_with_date
+      "[#{name}] #{start_date}"
     end
 
     def logo

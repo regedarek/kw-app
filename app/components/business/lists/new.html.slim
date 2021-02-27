@@ -5,7 +5,8 @@
 .row
   .large-12.columns
     - if @sign_up&.course&.equipment
-      .callout.alert
+      .callout.primary
+        h5 = "#{@sign_up.course.name} - #{l(@sign_up.course.start_date, format: "%d %B %Y")}"
         = sanitize @sign_up.course.equipment
 
 .row

@@ -79,6 +79,12 @@ pl:
       business/list_record:
         description: Zapotrzebowanie
         sign_up_id: Zapotrzebowanie
+        birthplace: Miejsce urodzenia
+        course_ids: Terminy alternatywne
+        birthdate: Data urodzenia
+        alternative_email: E-mail udostępniony reszcie grupy
+        rules: Zgoda
+        rules_html: Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w kursach/szkoleniach organizowanych przez Klub podejmuje na własne ryzyko i odpowiedzialność. Organizator nie odpowiada za przyczynienie się do wypadku/uszkodzenia zdrowia/ciała/mienia w wyniku używania przez uczestnika kurs/szkolenia własnego sprzętu podczas zajęć.
       business/course_record:
         max_seats: 'Maksymalna ilość miejsc'
         start_at: 'Od'

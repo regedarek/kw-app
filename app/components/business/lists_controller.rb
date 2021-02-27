@@ -29,7 +29,7 @@ module Business
     private
 
     def list_params
-      params.require(:list).permit(:description, :sign_up_id)
+      params.require(:list).permit(:description, :sign_up_id, :birthplace, :birthdate, :rules, :alternative_email, course_ids: [])
     end
   end
 end
