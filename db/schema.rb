@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_27_195641) do
+ActiveRecord::Schema.define(version: 2021_02_27_211044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_02_27_195641) do
     t.integer "payment_second_cost", default: 0, null: false
     t.text "email_first_content"
     t.text "email_second_content"
+    t.text "equipment"
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 
@@ -78,6 +79,13 @@ ActiveRecord::Schema.define(version: 2021_02_27_195641) do
     t.boolean "active", default: true, null: false
     t.string "description"
     t.string "attachements"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "business_lists", force: :cascade do |t|
+    t.text "description"
+    t.integer "sign_up_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

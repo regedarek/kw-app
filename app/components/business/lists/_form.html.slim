@@ -1,0 +1,5 @@
+= f.hidden_field :sign_up_id, value: params[:id]
+.row
+  .large-12.columns
+    = f.label :description
+    = f.trix_editor :description, style: 'min-height: 150px'

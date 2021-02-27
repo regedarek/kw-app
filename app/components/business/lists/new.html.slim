@@ -1,0 +1,24 @@
+.row
+  .large-12.columns style='text-align: center'
+    = image_tag asset_path('kw-bg-home.jpg')
+
+.row
+  .large-12.columns
+    - if @sign_up&.course&.equipment
+      .callout.alert
+        = sanitize @sign_up.course.equipment
+
+.row
+  .large-12.columns
+    - if @list.errors.any?
+      .callout.alert
+        ul.circle
+          - @list.errors.full_messages.each do |message|
+            li= message
+
+= form_for @list, as: :list, url: business_lists_path(id: params[:id]) do |f|
+  = render 'form', f: f
+
+  .row
+    .large-12.columns
+      = f.submit t('.send'), class: 'button expanded large success'

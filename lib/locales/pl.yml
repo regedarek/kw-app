@@ -10,6 +10,9 @@ pl:
   from_date_html: "<b>Od</b>: %{start_date}"
   to_date_html: "<b>Do</b>: %{end_date}"
   business:
+    lists:
+      new:
+        send: Wyślij zapotrzebowanie na sprzęt
     sign_ups:
       sign_up_form:
         submit: Zapisz się!
@@ -73,6 +76,9 @@ pl:
           pp: Puchar Polski
           ismf: ISMF World Cup
           lgc: La Grand Course
+      business/list_record:
+        description: Zapotrzebowanie
+        sign_up_id: Zapotrzebowanie
       business/course_record:
         max_seats: 'Maksymalna ilość miejsc'
         start_at: 'Od'

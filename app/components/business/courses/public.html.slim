@@ -55,6 +55,12 @@
           .callout
             = sanitize @course.description
 
+    - if @course.equipment
+      .row
+        .large-12.columns
+          .callout
+            = sanitize @course.equipment
+
   .large-6.columns
     .row
       .large-12.columns

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     resources :sign_ups do
       member do
+        resources :lists, only: [:new, :create]
         post :send_second
       end
     end

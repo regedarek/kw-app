@@ -69,7 +69,13 @@
           = f.trix_editor :email_second_content, style: 'min-height: 150px'
 
 .row
-  .large-12.columns
+  .large-6.columns
+    .callout
+      .row
+        .large-12.columns
+          = f.label :equipment, 'Zapotrzebowanie na sprzęt'
+          = f.trix_editor :equipment, style: 'min-height: 150px'
+  .large-6.columns
     .callout
       .row
         .large-12.columns

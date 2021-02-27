@@ -3,7 +3,7 @@ h5 Zapisy
   .large-12.columns
     table.stack
       tbody
-        - sign_ups.each_with_index do |sign_up, i|
+        - sign_ups.includes(:list).each_with_index do |sign_up, i|
           tr
             td
               = sign_up.name
@@ -33,6 +33,9 @@ h5 Zapisy
                   = link_to charge_payment_url(sign_up.second_payment.id), style: 'margin-right: 10px;'
                     i.fi-die-two.large
 
+              - if sign_up.list
+                = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: #e75480'
+                  i.fi-list
               = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: #ffae00'
                 i.fi-info
               = link_to business_sign_up_path(sign_up.id), method: :delete, data: { confirm: 'Jesteś pewien?' }, style: 'color: gray'

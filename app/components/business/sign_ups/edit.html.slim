@@ -4,6 +4,8 @@
       li.tabs-title.is-active
         a aria-selected="true" href="#fields" Dane zapisu
       li.tabs-title
+        a data-tabs-target="list" href="#list" Wyposażenie
+      li.tabs-title
         a data-tabs-target="history" href="#history" Historia zmian
 
     .tabs-content data-tabs-content="business_sign_ups-tabs" 
@@ -45,6 +47,11 @@
                 td
                   span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
                     = link_to 'Zmiany', '#'
+
+    .tabs-content data-tabs-content="business_sign_ups-tabs" 
+      #list.tabs-panel
+        = sanitize @sign_up.course.equipment
+
     br
     .row
       .large-4.columns
@@ -54,19 +61,28 @@
       .large-4.columns
         = link_to 'kursy', courses_path, class: 'secondary button large expanded'
   .large-6.columns
-    .callout
+    .row
+      .large-12.columns
+        .callout
+          .row
+            .large-6.columns
+              h5 Zadatek
+              = render 'payment', payment: @sign_up.first_payment, number: 1
+            .large-6.columns
+              h5 Reszta
+              - if @sign_up.second_payment
+                = render 'payment', payment: @sign_up.second_payment, number: 2
+              - else
+                = "#{@sign_up.course.payment_second_cost} zł"
+                br
+                = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
+
+    - if @sign_up.list
       .row
-        .large-6.columns
-          h5 Zadatek
-          = render 'payment', payment: @sign_up.first_payment, number: 1
-        .large-6.columns
-          h5 Reszta
-          - if @sign_up.second_payment
-            = render 'payment', payment: @sign_up.second_payment, number: 2
-          - else
-            = "#{@sign_up.course.payment_second_cost} zł"
-            br
-            = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
+        .large-12.columns
+          .callout
+            = sanitize @sign_up.list.description
+
     .row
       .large-12.columns
         = render 'messaging/comments/comments', commentable: @sign_up
