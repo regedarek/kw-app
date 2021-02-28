@@ -27,13 +27,14 @@ tbody
             = t contract.state
       td = contract.cost
       td
-        - if contract.accepted? || contract.preclosed? || contract.closed?
+        - if contract.accepted?
+          = link_to 'Wstepnie rozlicz', prepayment_admin_contract_path(contract.id), method: :put
+        - elsif contract.closed? || contract.preclosed?
           = contract.acceptor&.display_name
-        - else
-          - if user_signed_in?
-            - if can? :accept, contract
-              - unless contract.creator_id == current_user.id
-                = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
+        - if contract.new?
+          - if can? :accept, contract
+            - unless contract.creator_id == current_user.id
+              = link_to 'Zaakceptuj', accept_admin_contract_path(contract.id), method: :put
       td
         - if can? :update, contract
           = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do

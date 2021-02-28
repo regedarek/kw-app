@@ -149,9 +149,11 @@
       - if can? :update, @contract
         - if @contract.new?
           = f.submit "Zaktualizuj rozliczenie", class: 'button success'
+        - elsif @contract.accepted?
+          = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button primary', method: :put
         - else
           = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button primary'
+      = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 
 .row
