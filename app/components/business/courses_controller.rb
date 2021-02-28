@@ -35,6 +35,16 @@ module Business
 
       if @course.save
         @course.update(sign_up_url: "https://panel.kw.krakow.pl/kursy/#{@course.slug}")
+        project = ::Settlement::ProjectRecord.create(
+          name: @course.name_with_date,
+          user_id: current_user.id
+        )
+        ::Settlement::ProjectItemRecord.create(
+          accountable_type: 'Business::CourseRecord',
+          accountable_id: @course.id,
+          user_id: current_user.id,
+          project_id: project.id
+        )
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else
         render :new
