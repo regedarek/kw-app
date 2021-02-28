@@ -15,7 +15,8 @@ module Business
     has_many :list_courses, class_name: 'Business::ListCourseRecord', foreign_key: :course_id
     has_many :lists, through: :list_courses, dependent: :destroy, foreign_key: :list_id
 
-    has_many :project_items, class_name: 'Settlement::ProjectItemRecord', foreign_key: :accountable_id
+    has_many :project_items, as: :accountable
+    has_many :projects, :through => :project_items
 
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
     validates :start_date, :max_seats, presence: true

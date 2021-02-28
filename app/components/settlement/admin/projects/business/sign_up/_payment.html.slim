@@ -1,0 +1,4 @@
+- if payment.paid?
+  span.label.success = sanitize "#{payment.amount}"
+- else
+  span.secondary = sanitize "#{payment.amount}"

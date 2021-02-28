@@ -9,17 +9,34 @@
         = @project.description
 
 .row
-  .large-6.columns
-    .callout = @project.user.display_name
-
-  .large-6.columns
-    .callout = @project.created_at.strftime("%d/%m/%Y")
-
+  .large-12.columns
+    .callout
+      .row
+        .large-6.columns
+          b Utworzył: 
+          = @project.user.display_name
+        .large-6.columns
+          b Kiedy: 
+          = @project.created_at.strftime("%d/%m/%Y")
 
 .row
-  .large-12.columns
-    - @project.project_items.each do |item|
-      = link_to item.accountable.name_with_date, item.accountable
+  .large-6.columns
+    h5 = "Wpływy (#{Settlement::ProjectEntity.new.incomings_sum(@project)})"
+    - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
+      = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+
+    h5 = "Koszty (#{Settlement::ProjectEntity.new.outcomings_sum(@project)})"
+    - @project.project_items.includes(:accountable).where(accountable_type: 'Settlement::ContractRecord').each do |item|
+      = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+  .large-6.columns
+    h5 Komentarze, dodatkowe informacje
+    - if user_signed_in?
+      .row
+        .large-12.columns
+          = render 'messaging/comments/comments', commentable: @project
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @project
 
 .row
   .large-4.columns

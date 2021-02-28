@@ -1,0 +1,11 @@
+.row
+  .large-12.columns
+    .callout
+      - contract = item.accountable
+      = link_to contract.title
+      br
+      = sanitize "<b>Cena</b>: #{contract.cost} zł"
+      br
+      = sanitize "<b>Utworzył</b>: #{contract.creator.display_name}"
+      br
+      = sanitize "<b>Dotyczy</b>: #{contract.contractor.name}"
