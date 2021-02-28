@@ -9,18 +9,18 @@ h5 Zapisy
               = sign_up.name
             td
               = sign_up.email
-            td.text-right width='20%'
+            td.text-right width='25%'
               - if sign_up.first_payment
-                - if sign_up.first_payment.payment_url
-                  - if sign_up.first_payment.paid?
-                    = link_to sign_up.payments.first.payment_url, style: 'margin-right: 10px; color: green' do
+                - if sign_up.first_payment.paid?
+                  - if sign_up.first_payment.cash?
+                    = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: lightgreen' do
                       i.fi-die-one.large
-                  - else
-                    = link_to sign_up.first_payment.payment_url, style: 'margin-right: 10px; color: gray' do
+                  - if sign_up.first_payment.payment_url
+                    = link_to sign_up.first_payment.payment_url, style: 'margin-right: 10px; color: green' do
                       i.fi-die-one.large
                 - else
                   = link_to charge_payment_url(sign_up.first_payment.id), style: 'margin-right: 10px;'
-                    i.fi-die-one.large
+                    i.fi-die-two.large
               - if sign_up.second_payment
                 - if sign_up.second_payment.paid?
                   - if sign_up.second_payment.cash?

@@ -30,11 +30,11 @@
 
   .large-6.columns
     = f.label :sign_up_url, "Link do zapisów"
-    = f.text_field :sign_up_url
+    = f.text_field :sign_up_url, placeholder: 'Nie wypełniaj jeżeli chcesz płatności przez panel'
 
 .row
   .large-2.columns
-    b = f.label :cash, 'Gotówką?'
+    b = f.label :cash, 'Bezpośrednio na konto?'
     = f.check_box :cash
 
   .large-2.columns

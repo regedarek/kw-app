@@ -113,10 +113,12 @@
 
       #lists.tabs-panel
         .callout.primary
-           = @course.equipment
+           = sanitize @course.equipment
         br
         - @course.sign_ups.includes(:list).collect(&:list).compact.each do |record|
           .callout
+            h6.dashboard-table-text= record.sign_up.name
+            span.dashboard-table-timestamp= record.sign_up.email
             = sanitize record.description
 
       #history.tabs-panel
