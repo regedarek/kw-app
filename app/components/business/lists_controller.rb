@@ -22,6 +22,8 @@ module Business
     def ask
       @sign_up = Business::SignUpRecord.find(params[:id])
       ::Business::SignUpMailer.list(@sign_up.id).deliver_later
+
+      redirect_to new_business_list_path(@sign_up.id)
     end
 
     def create
@@ -40,7 +42,7 @@ module Business
       if @list.save
         redirect_to public_course_path(@list.sign_up.course_id), notice: 'Wysłaliśmy twoje zapotrzebowanie na sprzęt. Po zatwierdzeniu twojego zapisu otrzymasz e-mail od koordynatora.'
       else
-        render :new
+        render :new, layout: 'public'
       end
     end
 

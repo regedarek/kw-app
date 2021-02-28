@@ -11,7 +11,10 @@ module Business
       end
 
       if @sign_up.save
-        @sign_up.course.update(seats: @sign_up.course.seats + 1)
+        PaperTrail.request(whodunnit: @sign_up.name) do
+          @sign_up.course.update(seats: @sign_up.course.seats + 1)
+        end
+
         @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'

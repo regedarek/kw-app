@@ -85,11 +85,16 @@
         .large-12.columns
           .callout
             = sanitize @sign_up.list.description
-      .row
-        .large-12.columns
-          .callout
-            - @sign_up.list.courses.each do |course|
-              = course.name_with_date
+
+      - if @sign_up.list.courses.any?
+        .row
+          .large-12.columns
+            .callout
+              - @sign_up.list.courses.each do |course|
+                = course.name_with_date
+      - else
+        .callout
+          | Brak alternatywnych terminów.
 
       - if @sign_up.list.alternative_email
         .row

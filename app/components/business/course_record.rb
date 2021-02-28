@@ -42,11 +42,27 @@ module Business
     end
 
     def sign_ups_payments_versions
-      PaperTrail::Version.includes(:item).where(item_type: 'Db::Payment', item_id: sign_ups.map(&:payment_ids).flatten)
+      payment_ids = sign_ups.map(&:payment_ids).flatten
+      PaperTrail::Version.includes(:item).where(item_type: 'Db::Payment', item_id: payment_ids)
+    end
+
+    def lists_versions
+      sign_up_ids = sign_ups.includes(:list).map(&:list)
+      PaperTrail::Version.includes(:item).where(item_type: 'Business::ListRecord', item_id: sign_up_ids)
     end
 
     def all_versions
-      PaperTrail::Version.includes(:item).where(item_type: 'Business::SignUpRecord', item_id: sign_ups).or(PaperTrail::Version.includes(:item).where(item_type: 'Business::CourseRecord', item_id: self.id)).or(sign_ups_payments_versions).order(created_at: :asc)
+      PaperTrail::Version
+        .includes(:item)
+        .where(item_type: 'Business::SignUpRecord', item_id: sign_ups)
+        .or(
+          PaperTrail::Version
+            .includes(:item)
+            .where(item_type: 'Business::CourseRecord', item_id: self.id)
+        )
+        .or(sign_ups_payments_versions)
+        .or(lists_versions)
+        .order(created_at: :asc)
     end
 
     def name
