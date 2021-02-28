@@ -12,7 +12,9 @@ module Business
         .where(
           state: 'ready',
           activity_type: @sign_up.course.activity_type
-        ).order(created_at: :desc)
+        )
+        .where.not(id: @sign_up.course_id)
+        .order(created_at: :desc)
 
       render layout: 'public'
     end
@@ -31,7 +33,9 @@ module Business
         .where(
           state: 'ready',
           activity_type: @sign_up.course.activity_type
-        ).order(created_at: :desc)
+        )
+        .where.not(id: @sign_up.course_id)
+        .order(created_at: :desc)
 
       if @list.save
         redirect_to public_course_path(@list.sign_up.course_id), notice: 'Wysłaliśmy twoje zapotrzebowanie na sprzęt. Po zatwierdzeniu twojego zapisu otrzymasz e-mail od koordynatora.'

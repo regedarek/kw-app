@@ -7,11 +7,15 @@
   .large-4.columns
     .callout
       | Terminy alternatywne
-      br
-      = f.collection_check_boxes :course_ids, @alternative_courses, :id, :period do |m|
-        = m.check_box
-        = m.label
+      - if @alternative_courses.any?
         br
+        = f.collection_check_boxes :course_ids, @alternative_courses, :id, :period do |m|
+          = m.check_box
+          = m.label
+          br
+      - else
+        br
+        b Brak alternatywnych terminów.
 
 br
 .row
