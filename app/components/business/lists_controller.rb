@@ -25,6 +25,13 @@ module Business
     def create
       @sign_up = Business::SignUpRecord.find(params[:id])
       @list = Business::ListRecord.new(list_params)
+      @alternative_courses = Business::CourseRecord
+        .where('starts_at >= ?', Time.zone.now)
+        .where('max_seats > seats')
+        .where(
+          state: 'ready',
+          activity_type: @sign_up.course.activity_type
+        ).order(created_at: :desc)
 
       if @list.save
         redirect_to public_course_path(@list.sign_up.course_id), notice: 'Wysłaliśmy twoje zapotrzebowanie na sprzęt. Po zatwierdzeniu twojego zapisu otrzymasz e-mail od koordynatora.'

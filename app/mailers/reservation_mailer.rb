@@ -11,6 +11,8 @@ class ReservationMailer < ApplicationMailer
   end
 
   def remind(reservation)
+    return true unless reservation
+
     @user = reservation.user
     @reservation = reservation
 

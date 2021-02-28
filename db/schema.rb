@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_27_221235) do
+ActiveRecord::Schema.define(version: 2021_02_28_001421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -812,6 +812,21 @@ ActiveRecord::Schema.define(version: 2021_02_27_221235) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "path"
+  end
+
+  create_table "settlement_project_items", force: :cascade do |t|
+    t.string "accountable_type", null: false
+    t.integer "accountable_id", null: false
+    t.integer "user_id", null: false
+    t.index ["accountable_type", "accountable_id"], name: "settlement_project_items_uniq", unique: true
+  end
+
+  create_table "settlement_projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shmu_diagrams", force: :cascade do |t|
