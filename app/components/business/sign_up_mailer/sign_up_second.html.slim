@@ -4,5 +4,8 @@ br
 - if @sign_up.course.email_second_content
   = sanitize @sign_up.course.email_second_content
 br
-= link_to I18n.t('.business.mailer.charge_link2'), charge_payment_url(@sign_up.second_payment.id)
-br
+- if @sign_up.course.cash?
+  = sanitize Management::SettingsRecord.find_by(path: '/kursy/cash')&.content
+- else
+  = link_to I18n.t('.business.mailer.charge_link2'), charge_payment_url(@sign_up.second_payment.id)
+  br

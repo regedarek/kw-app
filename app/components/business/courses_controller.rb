@@ -135,7 +135,7 @@ module Business
           :description, :activity_type, :state, :instructor_id,
           :max_seats, :sign_up_url, :creator_id, :event_id,
           :payment_first_cost, :payment_second_cost, :equipment,
-          :email_first_content, :email_second_content
+          :email_first_content, :email_second_content, :cash
         )
     end
   end

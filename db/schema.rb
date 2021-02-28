@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_28_095159) do
+ActiveRecord::Schema.define(version: 2021_02_28_102121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_02_28_095159) do
     t.text "email_first_content"
     t.text "email_second_content"
     t.text "equipment"
+    t.boolean "cash", default: false, null: false
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 

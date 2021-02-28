@@ -28,9 +28,26 @@
     b = f.label :state, 'Status'
     = f.select :state, Business::CourseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @course.state
 
+  .large-6.columns
+    = f.label :sign_up_url, "Link do zapisów"
+    = f.text_field :sign_up_url
+
+.row
+  .large-2.columns
+    b = f.label :cash, 'Gotówką?'
+    = f.check_box :cash
+
   .large-2.columns
     b = f.label :price, 'Cena'
     = f.number_field :price
+
+  .large-2.columns
+    b = f.label :payment_first_cost
+    = f.number_field :payment_first_cost
+
+  .large-2.columns
+    b = f.label :payment_second_cost
+    = f.number_field :payment_second_cost
 
   .large-2.columns
     b= f.label :seats, 'Ilość miejsc'
@@ -39,19 +56,6 @@
   .large-2.columns
     b = f.label :max_seats, 'Max. ilość miejsc*'
     = f.number_field :max_seats
-
-.row
-  .large-6.columns
-    = f.label :sign_up_url, "Link do zapisów"
-    = f.text_field :sign_up_url
-
-  .large-3.columns
-    b = f.label :payment_first_cost
-    = f.number_field :payment_first_cost
-
-  .large-3.columns
-    b = f.label :payment_second_cost
-    = f.number_field :payment_second_cost
 
 .row
   .large-6.columns
