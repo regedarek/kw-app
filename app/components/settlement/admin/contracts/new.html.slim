@@ -11,15 +11,21 @@
                     = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
 
       .row
-        .medium-6.columns
+        .medium-4.columns
           b= f.label :title
           = f.text_field :title
 
-        .medium-6.columns
+        .medium-4.columns
           = f.label :contractor_id
             = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
           = f.select :contractor_id,
             Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
+            { include_blank: true},
+            { class: 'js-select-multiple' }
+        .medium-4.columns
+          = f.label :project_ids, 'Projekt'
+          = f.select :project_ids,
+            Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
             { include_blank: true},
             { class: 'js-select-multiple' }
 

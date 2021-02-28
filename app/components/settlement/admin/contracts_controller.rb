@@ -181,7 +181,7 @@ module Settlement
             :group_type, :payout_type, :acceptor_id, :event_id, :period_date,
             :substantive_type, :financial_type, :document_type, :document_date,
             :title, :description, :cost, :state, :document_number, :internal_number,
-            :contractor_id, attachments: [], event_ids: [], user_ids: []
+            :contractor_id, attachments: [], event_ids: [], user_ids: [], project_ids: []
           )
       end
     end

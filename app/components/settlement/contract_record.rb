@@ -26,7 +26,7 @@ module Settlement
 
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
-    has_many :project_items, as: :accountable
+    has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord'
     has_many :projects, through: :project_items
 
     workflow_column :state

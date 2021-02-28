@@ -12,7 +12,7 @@
       = sanitize "<b>Koordynator</b>: #{item.accountable.coordinator.display_name}"
       - if item.accountable.instructor
         br
-        = sanitize "<b>Instruktor</b>: #{item.accountable.instructor.display_name}"
+        = sanitize "<b>Instruktor</b>: #{item.accountable.instructor&.name}"
       br
       - item.accountable.sign_ups.each do |sign_up|
         = link_to edit_business_sign_up_path(sign_up.id) do
