@@ -1,0 +1,12 @@
+table.stack
+  thead
+    tr
+      th width='25%' Nazwa
+      th width='20%' Kiedy?
+  tbody
+    - projects.each do |project|
+      tr
+        td
+          = link_to project.name, admin_project_path(project.id)
+        td
+         = project.created_at.strftime("%d/%m/%Y")

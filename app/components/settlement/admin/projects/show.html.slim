@@ -1,0 +1,26 @@
+.row
+  .large-12.columns
+    h4 = @project.name
+
+- if @project.description
+  .row
+    .large-12.columns
+      .callout
+        = @project.description
+
+.row
+  .large-6.columns
+    .callout = @project.user.display_name
+
+  .large-6.columns
+    .callout = @project.created_at.strftime("%d/%m/%Y")
+
+
+.row
+  .large-12.columns
+    - @project.project_items.each do |item|
+      = link_to item.accountable.name_with_date, item.accountable
+
+.row
+  .large-4.columns
+    = link_to 'projekty', admin_projects_path, class: 'secondary button large expanded'
