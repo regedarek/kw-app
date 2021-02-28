@@ -26,7 +26,7 @@ tbody
           span.secondary.label
             = t contract.state
       td = contract.cost
-      td.text-right
+      td.text-center
         - if contract.new?
           - if can? :accept, contract
             - unless contract.creator_id == current_user.id
@@ -36,7 +36,7 @@ tbody
             = link_to 'Rozlicz', prepayment_admin_contract_path(contract.id), method: :put
         - elsif contract.closed? || contract.preclosed?
           = contract.acceptor&.display_name
-        |     
+      td.text-right
         - if can? :update, contract
           = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
             i.fi.fi-page-edit
