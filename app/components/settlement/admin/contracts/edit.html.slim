@@ -150,7 +150,7 @@
         - if @contract.new?
           = f.submit "Zaktualizuj rozliczenie", class: 'button success'
         - elsif @contract.accepted?
-          = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button primary', method: :put
+          = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button alert', method: :put
         - else
           = f.submit "Zaktualizuj rozliczenie", class: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'

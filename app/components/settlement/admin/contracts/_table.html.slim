@@ -21,7 +21,7 @@ tbody
       td
         - if contract.accepted?
           span.success.label
-            = t contract.state
+            = t contract.acceptor&.display_name
         - else
           span.secondary.label
             = t contract.state
