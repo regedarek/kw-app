@@ -78,7 +78,6 @@
             = sort_link(@q, :state, 'Status', default_order: :desc)
           th width='90px'
             = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
-          th width='180px'
-            = sort_link(@q, :creator_id, 'Kto zaakceptował?', default_order: :desc)
-          th width='70px' Akcje
+          th.text-right width='200px'
+            | Akcje
       = render 'table', contracts: @contracts
