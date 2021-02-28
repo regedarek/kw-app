@@ -117,8 +117,12 @@
         br
         - @course.sign_ups.includes(:list).collect(&:list).compact.each do |record|
           .callout
-            h6.dashboard-table-text= record.sign_up.name
+            h6.dashboard-table-text= link_to record.sign_up.name, edit_business_sign_up_path(record.sign_up.id)
             span.dashboard-table-timestamp= record.sign_up.email
+            h6 Alternatywne terminy
+            ul
+              - record.courses.each do |course|
+                li = course.name_with_date
             = sanitize record.description
 
       #history.tabs-panel

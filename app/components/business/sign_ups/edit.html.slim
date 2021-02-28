@@ -91,6 +91,7 @@
       - if @sign_up.list.courses.any?
         .row
           .large-12.columns
+            h6 Alternatywne terminy
             .callout
               - @sign_up.list.courses.each do |course|
                 = course.name_with_date
