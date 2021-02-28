@@ -146,13 +146,15 @@
                   button.close-button aria-label=("Close reveal") data-close="" type="button" 
                     span aria-hidden="true"  &times;
 
+      = f.submit "Zaktualizuj rozliczenie", class: 'button'
       - if can? :update, @contract
         - if @contract.new?
-          = f.submit "Zaktualizuj rozliczenie", class: 'button success'
+          - if can? :accept, @contract
+            - unless @contract.creator_id == current_user.id
+              = link_to 'zaakceptuj', accept_admin_contract_path(@contract.id), class: 'button success', method: :put
         - elsif @contract.accepted?
-          = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button alert', method: :put
-        - else
-          = f.submit "Zaktualizuj rozliczenie", class: 'button'
+          - if can? :prepayment, @contract
+            = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button alert', method: :put
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 

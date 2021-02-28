@@ -126,6 +126,7 @@ class Ability
 
   def financial_management
     can :accept, Settlement::ContractRecord
+    cannot :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
     can :analiza, Settlement::ContractRecord
@@ -184,6 +185,7 @@ class Ability
     can :manage, PaperTrail::Version
     can :manage, Settlement::ContractRecord
     cannot :accept, Settlement::ContractRecord
+    can :prepayment, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord
     can :analiza, Settlement::ContractRecord
