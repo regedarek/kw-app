@@ -18,10 +18,8 @@ module Business
     has_many :project_items, class_name: 'Settlement::ProjectItemRecord', foreign_key: :accountable_id
 
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
-    validates :max_seats, presence: true
-    validates :start_date, presence: true
-    validates :payment_first_cost, presence: true
-    validates :payment_second_cost, presence: true
+    validates :start_date, :max_seats, presence: true
+    validates :price, :payment_first_cost, :payment_second_cost, presence: true
     validates :activity_type, presence: true
     validate :max_seats_size
 

@@ -7,7 +7,10 @@
             li= message
 
 = form_for @course, as: :course, url: course_path(@course.id) do |f|
-  = render 'form', f: f
+  = render 'form',
+    f: f,
+    email_1: @course.email_first_content,
+    email_2: @course.email_second_content
 
   .row
     .large-4.columns

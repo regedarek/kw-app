@@ -10,6 +10,10 @@ pl:
   from_date_html: "<b>Od</b>: %{start_date}"
   to_date_html: "<b>Do</b>: %{end_date}"
   business:
+    mailer:
+      charge_link: Kliknij tutaj aby opłacić zadatek w naszym systemie płatności!
+      charge_link2: Kliknij tutaj aby dopłacić pozostałą kwotę w naszym systemie płatności!
+      send_list_link: Kliknij tutaj aby zgłosić zapotrzebowanie oraz wypełnić dane do ubezpieczenia!
     lists:
       new:
         send: Wyślij zapotrzebowanie na sprzęt
@@ -89,6 +93,7 @@ pl:
         max_seats: 'Maksymalna ilość miejsc'
         start_at: 'Od'
         sign_up_url: Link do zapisów
+        price: Cena
         payment_first_cost: Zadatek
         payment_second_cost: Reszta
         email_first_content: E-mail o zadatku

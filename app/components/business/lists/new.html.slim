@@ -7,6 +7,7 @@
     - if @sign_up&.course&.equipment
       .callout.primary
         h5 = "#{@sign_up.course.name} - #{l(@sign_up.course.start_date, format: "%d %B %Y")}"
+        b Wymagane wyposażenie:
         = sanitize @sign_up.course.equipment
 
 .row

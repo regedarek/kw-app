@@ -4,6 +4,8 @@
       li.tabs-title.is-active
         a aria-selected="true" href="#fields" Dane zapisu
       li.tabs-title
+        a data-tabs-target="lists" href="#lists" Zapotrzebowanie
+      li.tabs-title
         a data-tabs-target="history" href="#history" Historia zmian
 
     .tabs-content data-tabs-content="business_courses-tabs" 
@@ -109,7 +111,14 @@
           .large-4.columns
             = link_to 'kursy', courses_path, class: 'secondary button large expanded'
 
-    .tabs-content data-tabs-content="business_courses-tabs" 
+      #lists.tabs-panel
+        .callout.primary
+           = @course.equipment
+        br
+        - @course.sign_ups.includes(:list).collect(&:list).compact.each do |record|
+          .callout
+            = sanitize record.description
+
       #history.tabs-panel
         table.stack
           thead

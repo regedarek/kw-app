@@ -22,13 +22,13 @@ module Business
     def ask
       @sign_up = Business::SignUpRecord.find(params[:id])
       ::Business::SignUpMailer.list(@sign_up.id).deliver_later
+      @sign_up.update(equipment_at: Time.zone.now)
 
-      redirect_to new_business_list_path(@sign_up.id)
+      redirect_to edit_business_sign_up_path(@sign_up.id), notice: 'Wysłano prośbę o zapotrzebowanie'
     end
 
     def create
       @sign_up = Business::SignUpRecord.find(params[:id])
-      @list = Business::ListRecord.new(list_params)
       @alternative_courses = Business::CourseRecord
         .where('starts_at >= ?', Time.zone.now)
         .where('max_seats > seats')
@@ -38,6 +38,7 @@ module Business
         )
         .where.not(id: @sign_up.course_id)
         .order(created_at: :desc)
+      @list = Business::ListRecord.new(list_params)
 
       if @list.save
         redirect_to public_course_path(@list.sign_up.course_id), notice: 'Wysłaliśmy twoje zapotrzebowanie na sprzęt. Po zatwierdzeniu twojego zapisu otrzymasz e-mail od koordynatora.'

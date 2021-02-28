@@ -59,14 +59,14 @@
       .row
         .large-12.columns
           = f.label :email_first_content
-          = f.trix_editor :email_first_content, style: 'min-height: 150px'
+          = f.trix_editor :email_first_content, style: 'min-height: 150px', value: email_1
 
   .large-6.columns
     .callout
       .row
         .large-12.columns
           = f.label :email_second_content
-          = f.trix_editor :email_second_content, style: 'min-height: 150px'
+          = f.trix_editor :email_second_content, style: 'min-height: 150px', value: email_2
 
 .row
   .large-6.columns

@@ -7,14 +7,17 @@
     span.label.alert nieopłacono
   br
   - if payment.payment_url
-    = link_to 'Link do płatności', payment.payment_url
+    h6.dashboard-table-text = link_to 'Link do płatności', payment.payment_url
+    span.dashboard-table-timestamp= payment.updated_at.strftime("%d/%m/%Y %H:%M")
     br
   - else
     - unless payment.paid?
-      = link_to 'Stwórz link do płatności', charge_business_payment_path(payment.id), method: :post
+      h6.dashboard-table-text = link_to 'Stwórz link do płatności', charge_business_payment_path(payment.id), method: :post
+      span.dashboard-table-timestamp= payment.updated_at.strftime("%d/%m/%Y %H:%M")
   - if payment.paid?
     - if payment.cash?
-      | Bezpośrednia wpłata
+      h6.dashboard-table-text Bezpośrednia wpłata
+      span.dashboard-table-timestamp= payment.updated_at.strftime("%d/%m/%Y %H:%M")
   - else
     br
     = link_to mark_as_paid_payment_path(payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' }

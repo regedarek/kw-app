@@ -70,7 +70,9 @@
               = render 'payment', payment: @sign_up.first_payment, number: 1
               - unless @sign_up.list
                 br
-                = link_to 'Poproś o zapotrzebowanie', ask_business_lists_path(@sign_up.id), method: :post
+                h6.dashboard-table-text= link_to 'Poproś o zapotrzebowanie', ask_business_lists_path(@sign_up.id), method: :post
+                - if @sign_up.equipment_at
+                  span.dashboard-table-timestamp= @sign_up.equipment_at.strftime("%d/%m/%Y %H:%M")
             .large-6.columns
               h5 Reszta
               - if @sign_up.second_payment
