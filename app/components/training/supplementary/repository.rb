@@ -60,7 +60,6 @@ module Training
         end
         Training::Supplementary::CourseRecord
           .where(category: categories, kind: kinds, state: :draft)
-          .where.not(category: :sa)
           .order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
