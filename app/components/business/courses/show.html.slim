@@ -119,6 +119,12 @@
           .callout
             h6.dashboard-table-text= link_to record.sign_up.name, edit_business_sign_up_path(record.sign_up.id)
             span.dashboard-table-timestamp= record.sign_up.email
+            br
+            = "#{record.birthdate}"
+            br
+            = "#{record.birthdate}"
+            br
+            = "#{record.alternative_email}"
             h6 Alternatywne terminy
             ul
               - record.courses.each do |course|

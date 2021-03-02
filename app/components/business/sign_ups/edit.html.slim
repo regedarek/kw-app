@@ -93,8 +93,9 @@
           .large-12.columns
             h6 Alternatywne terminy
             .callout
+              ul
               - @sign_up.list.courses.each do |course|
-                = course.name_with_date
+                li = course.name_with_date
       - else
         .callout
           | Brak alternatywnych terminów.
