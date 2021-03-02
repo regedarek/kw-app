@@ -42,7 +42,6 @@ module Training
         Training::Supplementary::CourseRecord
           .where(start_date: Date.current.beginning_of_day..DateTime::Infinity.new)
           .where(category: categories, kind: kinds, state: :published)
-          .where.not(category: :sa)
           .order(:start_date, :application_date).collect do |record|
           Training::Supplementary::Course.from_record(record)
         end
