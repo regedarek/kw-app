@@ -120,11 +120,11 @@
             h6.dashboard-table-text= link_to record.sign_up.name, edit_business_sign_up_path(record.sign_up.id)
             span.dashboard-table-timestamp= record.sign_up.email
             br
-            = "<b>Miejce urodzenia</b> #{record.birthplace}"
+            = sanitize "<b>Miejce urodzenia</b> #{record.birthplace}"
             br
-            = "<b>Data urodzenia</b> #{record.birthdate}"
+            = sanitize "<b>Data urodzenia</b> #{record.birthdate}"
             br
-            = "<b>E-mail dla grupy</b> #{record.alternative_email}"
+            = sanitize "<b>E-mail dla grupy</b> #{record.alternative_email}"
             h5 Alternatywne terminy
             ul
               - record.courses.each do |course|
