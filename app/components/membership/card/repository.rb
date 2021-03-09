@@ -3,7 +3,7 @@ module Membership
     class Repository
       def fetch_mountain_routes(user)
         routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(colleague_id: user.id).map(&:mountain_route).compact
-        my_routes = user.mountain_routes.where(hidden: false).includes(:colleagues) + routes
+        my_routes = user.mountain_routes.where(hidden: false).includes(:colleagues) + Db::Activities::MountainRoute.where(id: routes.map(&:id), hidden: false)
         my_routes.uniq.sort_by(&:climbing_date).reverse!
       end
 
