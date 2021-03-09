@@ -18,7 +18,8 @@ module Activities
     end
 
     def last_activity
-      Activities::RouteSerializer.new(user.mountain_routes.order(:created_at).last)
+      route = user.mountain_routes.where(hidden: false).order(:created_at).last
+      Activities::RouteSerializer.new(route)
     end
 
     def user
