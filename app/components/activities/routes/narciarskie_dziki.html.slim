@@ -130,7 +130,9 @@
                     - if route_contract.route
                       tr
                         td = link_to route_contract.contract.name, activities_contract_path(route_contract.contract_id)
-                        td = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
+                        td
+                          - if !route_contract.route.hidden?
+                            = link_to route_contract.route.name, activities_mountain_route_path(route_contract.route.slug)
                         td = link_to route_contract.user.display_name, user_path(route_contract.user.kw_id)
                         td = route_contract.route.climbing_date.to_date
                         td = route_contract.contract.score
