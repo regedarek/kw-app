@@ -17,7 +17,7 @@
       .tabs-panel.is-active.callout.primary id="panel1" style="border: none; margin-bottom: 0;"
         .row
           .large-4.columns
-            h5 = link_to I18n.t('date.month_names')[Date.today.month - 2] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, Date.today.month - 2)
+            h5 = link_to I18n.t('date.month_names')[Date.today.month - 2] + (" #{Date.today.year}"), narciarskie_dziki_month_path(Date.today.year, Date.today.month - 2)
             table.stack
               thead
                 tr
@@ -37,7 +37,7 @@
 
           - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month - 1)
             .large-4.columns
-              h5 = link_to I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, 01)
+              h5 = link_to I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}"), narciarskie_dziki_month_path(Date.today.year, Date.today.month - 1)
               table.stack
                 thead
                   tr
@@ -57,7 +57,7 @@
 
           - if %w(1 2 3 4 12).map(&:to_i).include?(Date.today.month)
             .large-4.columns
-              h5 = link_to I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}"), narciarskie_dziki_month_path(2021, Date.today.month)
+              h5 = link_to I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}"), narciarskie_dziki_month_path(Date.today.year, Date.today.month)
               table.stack
                 thead
                   tr
