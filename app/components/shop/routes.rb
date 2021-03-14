@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   scope module: 'shop' do
+    namespace :api do
+      resources :items
+    end
     resources :items
   end
 

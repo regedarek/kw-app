@@ -3,7 +3,6 @@ module Storage
     self.table_name = 'storage_uploads'
 
     validates :file, presence: true
-    validates :user_id, presence: true
     validates :uploadable_id, presence: true
     validates :uploadable_type, presence: true
 
