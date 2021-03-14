@@ -1,6 +1,7 @@
 module Shop
   class ItemRecord < ActiveRecord::Base
     extend FriendlyId
+    include Workflow
     self.table_name = 'shop_items'
     friendly_id :slug_candidates, use: :slugged
 
@@ -11,6 +12,14 @@ module Shop
       [
         [:name]
       ]
+    end
+
+    workflow_column :state
+    workflow do
+      state :draft do
+        event :publish, transitions_to: :published
+      end
+      state :published
     end
   end
 end
