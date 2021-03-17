@@ -1,0 +1,36 @@
+.row
+  .large-12.colums
+    h3 = "#{@item.name}"
+
+.row
+  .large-12.colums
+    .callout
+      = @item.description
+
+.row
+  .large-12.colums
+    - @item.photos.each do |photo|
+      = image_tag photo.thumb.url, class: 'thumbnail'
+
+.row
+  h5 Magazyn
+  .large-6.colums
+    ul
+      - @item.item_kinds.each do |kind|
+        li = "#{kind.name} - #{kind.quantity}"
+
+.row
+  h5 Zamówienia opłacone
+  .large-12.colums
+    ul
+      - @item.orders.includes(:payment, :user).uniq.each do |order|
+        - if order.payment && !order.payment.paid?
+          li
+            = link_to "[#{order.id}] #{order.user.display_name}", order_path(order.id)
+            ul
+              - order.order_items.includes(:item, :item_kind).each do |order_item|
+                li = "#{order_item.item.name} - #{order_item.item_kind.name}"
+
+.row
+  .large-12.colums
+    = link_to 'wróć do przedmiotów', shop_admin_items_path, class: 'button'
