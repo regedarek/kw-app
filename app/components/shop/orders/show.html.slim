@@ -10,19 +10,22 @@
           th width='25%' Przedmiot
           th width='25%' Kwota
           th width='25%' Zdjęcia
+          th width='25%' Model
       tbody
-        - @order.items.each do |item|
+        - @order.order_items.includes(:item, :item_kind).each do |order_item|
           tr
             td
-              = item.name
+              = order_item.item.name
             td
-              = "#{item.price} zł"
+              = "#{order_item.item.price} zł"
             td
               - 2.times.each do |photo|
                 img src="https://picsum.photos/30/30"
+            td
+              = order_item.item_kind.name
       thead
         tr
-          th.text-right colspan=3
+          th.text-right colspan=4
 
             = "Do zapłaty #{@order.cost} zł"
             |   

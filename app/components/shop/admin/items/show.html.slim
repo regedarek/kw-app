@@ -24,7 +24,7 @@
   .large-12.colums
     ul
       - @item.orders.includes(:payment, :user).uniq.each do |order|
-        - if order.payment && !order.payment.paid?
+        - if order.payment && order.payment.paid?
           li
             = link_to "[#{order.id}] #{order.user.display_name}", order_path(order.id)
             ul

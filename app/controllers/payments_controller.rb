@@ -50,6 +50,11 @@ class PaymentsController < ApplicationController
         return redirect_to(supplementary_course_path(payment.payable.course.id), alert: 'Limit zapisów został wykorzystany!')
       end
     end
+    if payment.payable.is_a?(Shop::OrderRecord)
+      if ::Shop::Limiter.new(payment.payable).reached?
+        return redirect_to(order_path(payment.payable.id), alert: 'Któryś z przedmiotów został wyprzedany!')
+      end
+    end
     result = Payments::CreatePayment.new(payment: payment).create
     result.success do |payment_url:|
       payment.update(payment_url: payment_url)
