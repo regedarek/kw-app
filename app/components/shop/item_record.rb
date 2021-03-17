@@ -8,8 +8,12 @@ module Shop
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
 
+    has_many :item_kinds, class_name: '::Shop::ItemKindRecord', foreign_key: :item_id
+
     has_many :order_items, class_name: '::Shop::OrderItemRecord', foreign_key: :item_id
     has_many :orders, through: :order_items, dependent: :destroy, foreign_key: :order_id
+
+    accepts_nested_attributes_for :item_kinds, allow_destroy: true
 
     def slug_candidates
       [
