@@ -1,0 +1,15 @@
+.row
+  .large-12.colums
+    h3 = "Zamówienie #{@order.id}"
+
+.row
+  .large-12.colums
+    table.stack
+      thead
+        tr
+          th width='25%' Przedmiot
+      tbody
+        - @order.items.each do |item|
+          tr
+            td
+              = item.name
