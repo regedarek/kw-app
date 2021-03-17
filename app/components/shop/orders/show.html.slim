@@ -3,7 +3,7 @@
     h3 = "Zamówienie #{@order.id}"
 
 .row
-  .large-12.colums
+  .large-6.columns
     table.stack
       thead
         tr
@@ -33,3 +33,11 @@
             - else
               = link_to 'Opłać', charge_payment_url(@order.payment.id)
     = link_to 'powrót do zamówień', orders_path, class: 'button'
+
+  .large-6.columns
+    .row
+      .large-12.columns
+        = render 'messaging/comments/comments', commentable: @order
+      .large-12.columns
+        .callout
+          = render 'messaging/comments/form', commentable: @order
