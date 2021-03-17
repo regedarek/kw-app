@@ -9,7 +9,7 @@ module Charity
     end
 
     def description
-      "Darowizna na pomoc społeczną rodziny Mariusza Norweckiego"
+      "Darowizna książki Karola Życzkowskiego dla #{display_name}"
     end
   end
 end

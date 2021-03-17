@@ -3,7 +3,8 @@ table.stack
     tr
       th width='25%' Data
       th width='25%' Przedmioty
-      th width='25%' Płatność
+      th width='35%' Płatność
+      th width='10%'
   tbody
     - orders.each do |order|
       tr
@@ -17,3 +18,6 @@ table.stack
             span.success.label Zapłacone
           - else
             span.warning.label Nie opłacone
+        td
+          - if order.payment && !order.payment.paid?
+            = link_to 'Opłać', charge_payment_url(order.payment.id)
