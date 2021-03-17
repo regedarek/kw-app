@@ -36,6 +36,12 @@
                   li= link_to 'Kursy SA', courses_path
                 - if can? :manage, Db::Reservation
                   li= link_to 'Wypożyczalnia', admin_reservations_path
+                - if current_user.roles.include?('shop')
+                  li
+                    = link_to 'Sklepik', admin_path
+                    ul.menu.vertical
+                      li= link_to 'Zamówienia', shop_admin_orders_path
+                      li= link_to 'Przedmioty', shop_admin_items_path
                 - if can? :manage, Db::Reservation
                   li= link_to 'Przedmioty', admin_items_path
                 - if can? :manage, Management::SettingsRecord
@@ -104,6 +110,7 @@
               li= link_to 'Biblioteka', biblioteka_path
               li= link_to 'Wypożyczalnia', new_reservation_path
               li= link_to 'Sklepik Klubowy', '/sklepik'
+
               li= link_to 'Serwis Narciarski', '/serwis-narciarski/regulamin'
               li= link_to 'Baza klubowiczów', '/klubowicze'
               li= link_to 'Kontakty klubowe', '/kontakty'
@@ -151,6 +158,7 @@
               = image_tag('default-avatar.png', class: 'topbar-avatar-image')
             ul.menu.vertical
               li= link_to 'Twoje składki', membership_fees_path, class: 'button alert'
+              li= link_to 'Twoje zamówienia', '/zamowienia', class: 'button secondary'
               li= link_to 'Twój profil', user_path(current_user.kw_id), class: 'button secondary'
               li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button secondary'
               li= link_to t('.administration.logout'), destroy_user_session_path, class: 'button secondary'

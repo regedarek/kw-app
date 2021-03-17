@@ -1,0 +1,33 @@
+.row
+  .large-12.colums
+    h3 = "Zamówienie #{@order.id}"
+
+.row
+  .large-12.colums
+    table.stack
+      thead
+        tr
+          th width='25%' Przedmiot
+          th width='25%' Kwota
+          th width='25%' Zdjęcia
+          th width='25%' Model
+      tbody
+        - @order.order_items.includes(:item, :item_kind).each do |order_item|
+          tr
+            td
+              = order_item.item.name
+            td
+              = "#{order_item.item.price} zł"
+            td
+              - 2.times.each do |photo|
+                img src="https://picsum.photos/30/30"
+            td
+              = order_item.item_kind.name
+      thead
+        tr
+          th.text-right colspan=4
+
+            = "Do zapłaty #{@order.cost} zł"
+            |   
+            = link_to 'Opłać', charge_payment_url(@order.payment.id)
+    = link_to 'powrót do zamówień', orders_path, class: 'button'

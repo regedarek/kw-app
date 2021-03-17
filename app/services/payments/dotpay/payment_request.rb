@@ -51,6 +51,8 @@ module Payments
           Rails.application.secrets.dotpay_donations_id
         when :club_trips
           Rails.application.secrets.dotpay_club_trips_id
+        when :shop
+          Rails.application.secrets.dotpay_shop_id
         else
           Rails.application.secrets.dotpay_fees_id
         end
