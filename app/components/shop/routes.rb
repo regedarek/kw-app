@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     namespace :api do
       resources :items
     end
-    resources :items
-    resources :orders
+    resources :items, path: 'sklepik'
+    resources :orders, path: 'zamowienia'
   end
 
   get 'sklepik' => 'shop/items#index'
