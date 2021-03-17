@@ -23,6 +23,8 @@
       thead
         tr
           th.text-right colspan=3
-            = "Do zapłaty #{@order.amount} zł"
+
+            = "Do zapłaty #{@order.cost} zł"
             |   
             = link_to 'Opłać', charge_payment_url(@order.payment.id)
+    = link_to 'powrót do zamówień', orders_path, class: 'button'
