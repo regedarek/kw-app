@@ -8,8 +8,21 @@
       thead
         tr
           th width='25%' Przedmiot
+          th width='25%' Kwota
+          th width='25%' Zdjęcia
       tbody
         - @order.items.each do |item|
           tr
             td
               = item.name
+            td
+              = "#{item.price} zł"
+            td
+              - 2.times.each do |photo|
+                img src="https://picsum.photos/30/30"
+      thead
+        tr
+          th.text-right colspan=3
+            = "Do zapłaty #{@order.amount} zł"
+            |   
+            = link_to 'Opłać', charge_payment_url(@order.payment.id)

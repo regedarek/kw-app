@@ -3,7 +3,7 @@ module Shop
     append_view_path 'app/components'
 
     def index
-      @orders = current_user.orders
+      @orders = current_user.orders.includes(:order_items, :items, :payment)
     end
 
     def show

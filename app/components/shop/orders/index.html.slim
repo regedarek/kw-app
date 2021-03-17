@@ -4,12 +4,4 @@
 
 .row
   .large-12.colums
-    table.stack
-      thead
-        tr
-          th width='25%' Data
-      tbody
-        - @orders.each do |order|
-          tr
-            td
-              = link_to order.created_at.to_date, order_path(order.id)
+    = render "table", orders: @orders

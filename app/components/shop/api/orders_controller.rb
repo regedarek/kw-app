@@ -5,6 +5,8 @@ module Shop
         order = Shop::OrderRecord.new(order_params)
 
         if order.save
+          order.create_payment(dotpay_id: SecureRandom.hex(13))
+
           render json: order, code: 201, serializer: Shop::OrderSerializer
         else
           render json: order.errors, code: 400

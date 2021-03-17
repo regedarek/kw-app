@@ -8,7 +8,20 @@ module Shop
     has_many :items, through: :order_items, dependent: :destroy, foreign_key: :item_id
 
     belongs_to :user, class_name: '::Db::User', foreign_key: :user_id
+    has_one :payment, as: :payable, dependent: :destroy, class_name: 'Db::Payment'
 
     accepts_nested_attributes_for :items, :order_items, allow_destroy: true
+
+    def cost
+      items.inject(0){|sum,item| sum + item.price }
+    end
+
+    def description
+      "Zakup w sklepiku od #{user.display_name}"
+    end
+
+    def payment_type
+      :shop
+    end
   end
 end
