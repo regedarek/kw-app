@@ -12,4 +12,4 @@
         - @orders.each do |order|
           tr
             td
-              = link_to order.created_at.to_date, order
+              = link_to order.created_at.to_date, order_path(order.id)

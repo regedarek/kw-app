@@ -1,8 +1,6 @@
 module Shop
   module Api
     class ItemsController < ApplicationController
-      append_view_path 'app/components'
-
       def index
         items = Shop::ItemRecord.all
 
