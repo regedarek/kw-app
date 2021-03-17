@@ -4,6 +4,8 @@ module Seeding
   class Seeder
     class << self
       def seed!
+        Shop::OrderRecord.destroy_all
+        Shop::ItemRecord.destroy_all
         Db::Membership::Fee.destroy_all
         Factories::Membership::Fee.mass_create!(range: (1..20), state: 'prepaid', cash: false)
         Factories::Membership::Fee.mass_create!(range: (21..40), state: 'unpaid', cash: true)
@@ -50,7 +52,7 @@ module Seeding
             cost: [100, 50, 150].sample,
             added: [true, false].sample,
             accepted: true,
-            gender: gender: [:male, :female].sample,
+            gender: [:male, :female].sample,
             main_discussion_group: [true, false].sample,
             application_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
             birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
