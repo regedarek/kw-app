@@ -1,6 +1,7 @@
 pl:
   errors:
     internal_number_uniq: 'taki numer już istnieje w tym roku rozliczeniowym'
+    unique_nip: 'nip juz istnieje'
   dry_validation:
     errors:
       internal_number_uniq: 'taki numer już istnieje'
