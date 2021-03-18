@@ -124,12 +124,15 @@ class Ability
     can :read, Settlement::ContractRecord, creator_id: user.id
   end
 
+  def contracts_checker
+    can :accept, Settlement::ContractRecord
+  end
+
   def financial_management
     can :accept, Settlement::ContractRecord
-    cannot :prepayment, Settlement::ContractRecord
+    can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, PaperTrail::Version
-    can :analiza, Settlement::ContractRecord
     can :manage, Management::SettingsRecord
   end
 
@@ -184,7 +187,7 @@ class Ability
     can :create, Settlement::ContractRecord
     can :manage, PaperTrail::Version
     can :manage, Settlement::ContractRecord
-    cannot :accept, Settlement::ContractRecord
+    can :accept, Settlement::ContractRecord
     can :prepayment, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :prepayment, Settlement::ContractRecord

@@ -15,7 +15,6 @@ module Settlement
       end
 
       def analiza
-        authorize! :analiza, Settlement::ContractRecord
         start_date = Date.new(params[:year].to_i, 1, 1)
         end_date = Date.new(params[:year].to_i, 12, 31)
 
@@ -93,9 +92,9 @@ module Settlement
       end
 
       def accept
-        authorize! :accept, Settlement::ContractRecord
-
         contract = Settlement::ContractRecord.find(params[:id])
+
+        authorize! :accept, Settlement::ContractRecord
 
         return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Sekcja, Aktywność i Impreza" unless contract.activity_type && contract.group_type && contract.event_type
 
@@ -123,7 +122,8 @@ module Settlement
 
       def prepayment
         contract = Settlement::ContractRecord.find(params[:id])
-        authorize! :accept, Settlement::ContractRecord
+
+        authorize! :prepayment, Settlement::ContractRecord
 
         return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Sekcja, Aktywność i Impreza" unless contract.activity_type && contract.group_type && contract.event_type
 
