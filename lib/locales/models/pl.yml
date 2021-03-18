@@ -140,6 +140,8 @@ pl:
       settlement/contract_record:
         title: Tytuł
         contractor_id: Kontrahent
+        acceptor_id: Akceptujacy
+        checker_id: Sprawdzajacy
         document_number: Numer dokumentu
         internal_number: Number wewnętrzny
         internal_number_uniq: Number wewnętrzny

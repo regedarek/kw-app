@@ -39,15 +39,14 @@
           .row
             .large-6.columns
               .large-8.columns
-                = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-                = f.select :state_cont_any, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, { }, { multiple: true }
+                = f.label :state_eq_any, 'Status rozliczenia (użyj CTRL)'
+                = f.select :state_eq_any, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, { }, { multiple: true }
 
               .large-4.columns
                 = f.label :substantive_type_eq, 'Grupa wydarzeń'
                 = f.select :substantive_type_eq, Settlement::ContractRecord.substantive_types.to_a.map { |w| [I18n.t(w[0], scope: :substantive_type), w[1]] }, include_blank: true
 
             .large-6.columns
-
               .large-2.columns
                 = f.label :cost_gteq, 'Kwota od'
                 = f.number_field :cost_gteq
@@ -67,7 +66,7 @@
       thead
         tr
           th width='100px'
-            = sort_link(@q, :id, 'ID', default_order: :desc)
+            = sort_link(@q, :internal_number, 'ID', default_order: :desc)
           th width='120px'
             = sort_link(@q, :document_date, 'Data', default_order: :desc)
           th width='300px'

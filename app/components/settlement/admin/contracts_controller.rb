@@ -114,7 +114,7 @@ module Settlement
 
         redirect_back(
           fallback_location: admin_contracts_path,
-          notice: 'Zaakceptowano'
+          notice: 'Zaakceptowano!'
         )
       end
 
@@ -136,6 +136,16 @@ module Settlement
             notifiable_type: 'Settlement::ContractRecord'
           )
         end
+
+        redirect_back(
+          fallback_location: admin_contracts_path,
+          notice: 'Rozliczono!'
+        )
+      end
+
+      def finish
+        contract = Settlement::ContractRecord.find(params[:id])
+        contract.finish!
 
         redirect_back(
           fallback_location: admin_contracts_path,
@@ -165,7 +175,7 @@ module Settlement
           .permit(
             :group_type, :payout_type, :acceptor_id, :event_id, :period_date,
             :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date, :activity_type,
-            :title, :description, :cost, :state, :document_number, :internal_number,
+            :title, :description, :cost, :state, :document_number, :internal_number, :checker_id,
             :contractor_id, attachments: [], event_ids: [], user_ids: [], project_ids: []
           )
       end

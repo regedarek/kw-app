@@ -1,23 +1,26 @@
 module Settlement
   class ContractRecord < ActiveRecord::Base
-    has_paper_trail
     include Workflow
 
-    enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
-    enum financial_type: [:opp_paid, :opp_unpaid]
-    enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
-    enum group_type: [:kw, :snw, :sww, :stj]
-    enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
-    enum event_type: [:not_event, :other_event, :mjs, :mas, :mo, :kfg]
-    enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
-    enum payout_type: [:to_contractor, :return]
-
+    self.table_name = 'contracts'
+    has_paper_trail
     mount_uploaders :attachments, Settlement::AttachmentUploader
     serialize :attachments, JSON
 
-    self.table_name = 'contracts'
+    enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
+    enum payout_type: [:to_contractor, :return]
+    enum group_type: [:kw, :snw, :sww, :stj]
+    enum event_type: [:not_event, :other_event, :mjs, :mas, :mo, :kfg]
+    enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
+    enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
+    enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
+    enum financial_type: [:opp_paid, :opp_unpaid]
+
+    validates :group_type, :event_type, :activity_type, presence: true,
+      if: Proc.new { |contract| ['new', 'accepted', 'preclosed', 'closed'].include?(contract.state) }
 
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
+    belongs_to :checker, class_name: 'Db::User', foreign_key: :checker_id
     belongs_to :creator, class_name: 'Db::User', foreign_key: :creator_id
     belongs_to :contractor, class_name: 'Settlement::ContractorRecord', foreign_key: :contractor_id
 
@@ -31,6 +34,8 @@ module Settlement
 
     has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord'
     has_many :projects, through: :project_items
+
+
 
     workflow_column :state
     workflow do

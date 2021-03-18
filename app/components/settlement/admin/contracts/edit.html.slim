@@ -102,7 +102,11 @@
               = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, selected: @contract.state
 
             .medium-3.columns
-              b= f.label :acceptor_id, 'Zaakceptował'
+              b= f.label :checker_id
+              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
+
+            .medium-3.columns
+              b= f.label :acceptor_id
               = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
 
             .medium-2.columns
@@ -166,14 +170,7 @@
                     span aria-hidden="true"  &times;
 
       = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      - if can? :update, @contract
-        - if @contract.new?
-          - if can? :accept, @contract
-            - unless @contract.creator_id == current_user.id
-              = link_to 'zaakceptuj', accept_admin_contract_path(@contract.id), class: 'button success', method: :put
-        - elsif @contract.accepted?
-          - if can? :prepayment, @contract
-            = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button alert', method: :put
+      = render 'state_link', contract: @contract, class_value: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 

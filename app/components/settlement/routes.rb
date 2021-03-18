@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           get :download_attachment
           put :accept
           put :prepayment
+          put :finish
         end
       end
     end
