@@ -144,6 +144,7 @@ pl:
         internal_number: Number wewnętrzny
         internal_number_uniq: Number wewnętrzny
         attachments: Załączniki
+        group_type: Sekcja
         document_date: Data dokumentu
         document_type: Rodzaj dokumentu
         payout_type: Rodzaj płatności

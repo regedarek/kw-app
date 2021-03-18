@@ -6,7 +6,7 @@ module Settlement
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
     enum financial_type: [:opp_paid, :opp_unpaid, :administration, :charity, :economic_activity]
     enum substantive_type: [:office, :substantive_taxes, :mas, :mjs, :kfg, :marketing, :integration, :climbing_course, :avalanche_course, :first_aid_course, :stj_course, :supplementary_training, :egg, :christmas_eve]
-    enum group_type: [:snw, :gtw, :sww, :stj]
+    enum group_type: [:kw, :snw, :sww, :stj]
     enum payout_type: [:to_contractor, :return]
 
     mount_uploaders :attachments, Settlement::AttachmentUploader

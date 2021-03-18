@@ -14,7 +14,7 @@ module Settlement
     required(:document_date).filled(:str?)
     required(:description).maybe(:str?)
     required(:attachments).filled
-    optional(:group_type).maybe
+    required(:group_type).filled
     optional(:acceptor_id).maybe
     optional(:substantive_type).maybe
     optional(:state).maybe
