@@ -9,6 +9,12 @@ pl:
   start_end_date_html: "<b>Termin kursu</b>: Od %{start_date} do %{end_date}"
   from_date_html: "<b>Od</b>: %{start_date}"
   to_date_html: "<b>Do</b>: %{end_date}"
+  activity_type:
+    courses: Kursy
+    competitions: Zawody
+    events: Wydarzenia
+    maintenance: Utrzymanie
+    supplementary_courses: Doszkalania
   business:
     mailer:
       charge_link: Kliknij tutaj aby opłacić zadatek w naszym systemie płatności!

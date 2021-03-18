@@ -5,6 +5,7 @@ module Settlement
 
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
     enum financial_type: [:opp_paid, :opp_unpaid, :administration, :charity, :economic_activity]
+    enum activity_type: [:courses, :competitions, :events, :maintenance, :supplementary_courses]
     enum substantive_type: [:mas, :mjs, :kfg, :mo, :not, :other]
     enum group_type: [:kw, :sww, :snw, :stj]
     enum payout_type: [:to_contractor, :return]

@@ -73,6 +73,11 @@
               Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
 
             .medium-3.columns
+              b= f.label :activity_type, 'Aktywność'
+              = f.select :activity_type,
+              Settlement::ContractRecord.activity_types.map { |w, _| [I18n.t(w, scope: :activity_type), w] }, selected: @contract.activity_type, include_blank: true
+
+            .medium-3.columns
               = f.label :project_ids, 'Projekt'
               = f.select :project_ids,
                 Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
