@@ -79,14 +79,16 @@
                 { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 
           .row
+            .medium-4.columns
+              b= f.label :substantive_type
+              = f.select :substantive_type, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'), w] }, selected: @contract.substantive_type, include_blank: true
 
-            .medium-6.columns
-              b= f.label :substantive_type, 'Grupa wydarzeń'
-              = f.select :substantive_type,
-              Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
+            .medium-4.columns
+              b= f.label :area_type
+              = f.select :area_type, Settlement::ContractRecord.area_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.area_types'), w] }, selected: @contract.area_type, include_blank: true
 
-            .medium-6.columns
-              b= f.label :financial_type, 'Rodzaj działalności'
+            .medium-4.columns
+              b= f.label :financial_type
               = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
 
         #admin.tabs-panel

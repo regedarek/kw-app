@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_103054) do
+ActiveRecord::Schema.define(version: 2021_03_18_111206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_103054) do
     t.integer "preacceptor_id"
     t.integer "activity_type"
     t.integer "event_type"
+    t.integer "area_type"
     t.index ["internal_number", "period_date"], name: "index_contracts_on_internal_number_and_period_date", unique: true
   end
 

@@ -4,10 +4,11 @@ module Settlement
     include Workflow
 
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
-    enum financial_type: [:opp_paid, :opp_unpaid, :administration, :charity, :economic_activity]
-    enum substantive_type: [:office, :substantive_taxes, :marketing, :integration, :climbing_course, :avalanche_course, :first_aid_course, :stj_course, :supplementary_training, :egg, :christmas_eve]
+    enum financial_type: [:opp_paid, :opp_unpaid]
+    enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
     enum group_type: [:kw, :snw, :sww, :stj]
-    enum event_type: [:not, :other, :mjs, :mas, :mo, :kfg]
+    enum event_type: [:not_event, :other_event, :mjs, :mas, :mo, :kfg]
+    enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
     enum payout_type: [:to_contractor, :return]
 
     mount_uploaders :attachments, Settlement::AttachmentUploader
