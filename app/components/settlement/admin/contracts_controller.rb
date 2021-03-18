@@ -125,7 +125,7 @@ module Settlement
         contract = Settlement::ContractRecord.find(params[:id])
         authorize! :accept, Settlement::ContractRecord
 
-        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj płatności" unless contract.substantive_type && contract.area_type && contract.payout_type
+        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Sekcja, Aktywność i Impreza" unless contract.activity_type && contract.group_type && contract.event_type
 
         contract.prepayment!
         contract.update(acceptor_id: current_user.id, preclosed_date: Time.current)
@@ -150,6 +150,9 @@ module Settlement
 
       def finish
         contract = Settlement::ContractRecord.find(params[:id])
+
+        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj płatności" unless contract.substantive_type && contract.area_type && contract.payout_type
+
         contract.finish!
 
         redirect_back(
