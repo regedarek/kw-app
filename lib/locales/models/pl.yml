@@ -145,6 +145,8 @@ pl:
         document_number: Numer dokumentu
         internal_number: Number wewnętrzny
         internal_number_uniq: Number wewnętrzny
+        substantive_type: Impreza
+        group_type: Seckja
         attachments: Załączniki
         document_date: Data dokumentu
         document_type: Rodzaj dokumentu

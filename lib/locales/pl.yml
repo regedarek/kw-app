@@ -149,20 +149,12 @@ pl:
     to_contractor: Płatność na konto kontrahenta
     return: Zwrot na konto rozliczanego
   substantive_type:
-    office: Biuro KW
-    substantive_taxes: Księgowowść/Podatki
-    marketing: Reklama/Marketing
     mas: MAS
     mjs: MJS
     kfg: KFG
-    integration: Integracja
-    climbing_course: Kurs wspinaczkowy
-    avalanche_course: Kurs lawinowy
-    first_aid_course: Kurs pierwszej pomocy
-    stj_course: Kurs jaskiniowy
-    supplementary_training: Doszkalanie
-    egg: Jajeczko
-    christmas_eve: Wigilia
+    mo: KFG
+    not: Nie
+    other: Inne
   financial_type:
     administration: Administracja
     charity: Darowizny
