@@ -146,6 +146,13 @@ pl:
         attachments: Załączniki
         group_type: Sekcja
         activity_type: Aktywność
+        state: Status
+        states:
+          new: Nowy
+          rejected: Odrzucony
+          accepted: Zaakceptowany
+          preclosed: W banku
+          closed: Rozliczony
         activity_types:
           courses: Kursy
           competitions: Zawody

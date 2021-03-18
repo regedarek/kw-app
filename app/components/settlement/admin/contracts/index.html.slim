@@ -40,7 +40,7 @@
             .large-6.columns
               .large-8.columns
                 = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-                = f.select :state_cont_any, [['Nowe', 'new'], ['Wstępnie zaakceptowane', 'preaccepted'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Rozliczone', 'closed'], ['Odrzucone', 'rejected']], { }, { multiple: true }
+                = f.select :state_cont_any, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, { }, { multiple: true }
 
               .large-4.columns
                 = f.label :substantive_type_eq, 'Grupa wydarzeń'

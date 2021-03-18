@@ -98,8 +98,8 @@
         #admin.tabs-panel
           .row
             .medium-2.columns
-              b= f.label :state, "Status"
-              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
+              b= f.label :state
+              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, selected: @contract.state
 
             .medium-3.columns
               b= f.label :acceptor_id, 'Zaakceptował'
@@ -130,7 +130,7 @@
             tbody
               - @contract.versions.includes(:item).reverse.each do |version|
                 tr
-                  td = Db::User.find(version.whodunnit)&.display_name
+                  td = Db::User.find_by(id: version.whodunnit)&.display_name
                   td = version.event
                   td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
                   td

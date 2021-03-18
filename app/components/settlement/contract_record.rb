@@ -37,7 +37,6 @@ module Settlement
       state :new do
         event :accept, :transitions_to => :accepted
       end
-      state :rejected
       state :accepted do
         event :prepayment, :transitions_to => :preclosed
       end
