@@ -16,9 +16,6 @@ module Settlement
     enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
     enum financial_type: [:opp_paid, :opp_unpaid]
 
-    validates :group_type, :event_type, :activity_type, presence: true,
-      if: Proc.new { |contract| ['new', 'accepted', 'preclosed', 'closed'].include?(contract.state) }
-
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
     belongs_to :checker, class_name: 'Db::User', foreign_key: :checker_id
     belongs_to :creator, class_name: 'Db::User', foreign_key: :creator_id
