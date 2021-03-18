@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   end
 
   get 'sklepik' => 'shop/items#index'
-  get 'sklepik/admin' => 'shop/items#admin'
+  get 'sklepik-admin' => 'shop/items#admin'
   get 'sklepik/:id' => 'shop/items#show'
 end

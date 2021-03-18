@@ -10,11 +10,15 @@ const uploadPath = "/api/uploads"
 class FileUploaderContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-        files: [],
+        files: props.files || [],
         maxFiles: this.props.maxFiles || 5,
         maxFileSize: this.props.maxFileSize || 5 * 1024 * 1024,
-        uploadProgress: null
+        uploadProgress: null,
+        userId: props.userId,
+        uploadableId: props.uploadableId,
+        uploadableType: props.uploadableType,
     };
   }
   
@@ -26,11 +30,13 @@ class FileUploaderContainer extends React.Component {
       return;
     }
 
+    const {userId, uploadableId, uploadableType} = this.state;
+
     const data = new FormData()
     data.append('upload[file]', uploadedFile)
-    data.append('upload[user_id]', "2345")
-    data.append('upload[uploadable_id]', "2021-03-01-tura")
-    data.append('upload[uploadable_type]', "Db::Activities::MountainRoute")
+    data.append('upload[user_id]', userId)
+    data.append('upload[uploadable_id]', uploadableId)
+    data.append('upload[uploadable_type]', uploadableType)
 
     axios.request({
       method: "post", 
@@ -53,9 +59,12 @@ class FileUploaderContainer extends React.Component {
   }
 
   onFileRemove(id) {
-    this.setState({
-      files: this.state.files.filter(el => el.id !== id)
-    })
+    if (window.confirm("Czy na pewno chcesz usunąć zdjęcie? Tej akcji nie da się cofnąć")) {
+      
+      this.setState({
+        files: this.state.files.filter(el => el.id !== id)
+      })
+    }
   }
 
   render() {

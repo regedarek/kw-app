@@ -84,7 +84,7 @@ class ShopListContainer extends React.Component {
                     </div>
                     <div className="row">
                         <div className="columns large-12">
-                            {this.state.isLoading ? <Spinner></Spinner> : <ShopList items={this.state.items}></ShopList>}
+                            {this.state.isLoading ? <Spinner centered="true"></Spinner> : <ShopList items={this.state.items}></ShopList>}
                         </div>
                     </div>
                 </>
