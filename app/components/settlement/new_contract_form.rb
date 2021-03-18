@@ -14,7 +14,8 @@ module Settlement
     required(:document_date).filled(:str?)
     required(:description).maybe(:str?)
     required(:attachments).filled
-    optional(:group_type).maybe
+    required(:group_type).filled
+    required(:event_type).filled
     optional(:acceptor_id).maybe
     optional(:substantive_type).maybe
     optional(:state).maybe
@@ -23,5 +24,12 @@ module Settlement
     required(:user_ids).each(:str?)
     optional(:project_ids).maybe
     required(:contractor_id).filled(:int?)
+    validate(nip_if_fv: [:contractor_id, :document_type]) do |contractor_id, document_type|
+      if ['fv', 'bill'].include?(document_type)
+        Settlement::ContractorRecord.find_by(id: contractor_id).nip?
+      else
+        true
+      end
+    end
   end
 end

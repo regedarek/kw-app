@@ -11,6 +11,13 @@ module Storage
         end
       end
 
+      def destroy
+        upload = Storage::UploadRecord.find(params[:id])
+
+        upload.destroy
+        render json: upload, code: 200
+      end
+
       private
 
       def upload_params

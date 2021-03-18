@@ -8,7 +8,7 @@ module Settlement
         authorize! :read, Settlement::ContractRecord
 
         @q = Settlement::ContractRecord.accessible_by(current_ability)
-        @q = @q.where.not(state: ['preclosed', 'closed']) unless params[:q]
+        @q = @q.where.not(state: ['closed']) unless params[:q]
         @q = @q.ransack(params[:q])
         @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
         @contracts = @q.result(distinct: true).includes([:acceptor, :creator])
@@ -80,21 +80,6 @@ module Settlement
         @contract = Settlement::ContractRecord.find(params[:id])
         authorize! :update, @contract
 
-        if user_signed_in?
-          unless current_user.roles.include?('office_king')
-            if (@contract.preclosed? || @contract.closed?)
-              return redirect_to admin_contract_path(@contract.id), alert: 'Po wstępnym rozliczeniu, nie możesz już edytować!'
-            end
-          end
-
-          if current_user.roles.include?('contract_preaccept')
-            if @contract.new?
-              @contract.preaccept!
-              @contract.update(preacceptor_id: current_user.id)
-            end
-          end
-        end
-
         either(update_record) do |result|
           result.success do |contract|
             redirect_to edit_admin_contract_path(contract.id), notice: 'Zaktualizowano'
@@ -129,7 +114,7 @@ module Settlement
 
         redirect_back(
           fallback_location: admin_contracts_path,
-          notice: 'Zaakceptowano'
+          notice: 'Zaakceptowano!'
         )
       end
 
@@ -158,6 +143,16 @@ module Settlement
         )
       end
 
+      def finish
+        contract = Settlement::ContractRecord.find(params[:id])
+        contract.finish!
+
+        redirect_back(
+          fallback_location: admin_contracts_path,
+          notice: 'Rozliczono!'
+        )
+      end
+
       private
 
       def create_record
@@ -179,8 +174,8 @@ module Settlement
           .require(:contract)
           .permit(
             :group_type, :payout_type, :acceptor_id, :event_id, :period_date,
-            :substantive_type, :financial_type, :document_type, :document_date,
-            :title, :description, :cost, :state, :document_number, :internal_number,
+            :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date, :activity_type,
+            :title, :description, :cost, :state, :document_number, :internal_number, :checker_id,
             :contractor_id, attachments: [], event_ids: [], user_ids: [], project_ids: []
           )
       end

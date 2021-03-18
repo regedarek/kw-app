@@ -28,6 +28,14 @@
             Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
             { include_blank: true},
             { class: 'js-select-multiple' }
+      .row
+        .medium-6.columns
+          b= f.label :group_type, 'Sekcja'
+          = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
+
+        .medium-6.columns
+          b= f.label :event_type
+          = f.select :event_type, Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }, selected: @contract.event_type, include_blank: true
 
       .row
         .medium-3.columns
@@ -53,27 +61,6 @@
             span.input-group-label
                 | zł
 
-      - if false
-        .row
-          .medium-3.columns
-            b= f.label :substantive_type, 'Grupa wydarzeń'
-            = f.select :substantive_type,
-            Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
-
-        .row
-          .medium-3.columns
-            b= f.label :group_type, 'Sekcja'
-            = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
-
-          .medium-3.columns
-            b= f.label :financial_type, 'Rodzaj działalności'
-            = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
-
-          - if false
-            .medium-3.columns
-              b= f.label :period_date, 'Okres rozliczeniowy'
-              = f.date_select :period_date,  { :discard_day => true, include_blank: true}
-
       .row
         .medium-12.columns
           = f.label :description, "Uwagi do rozliczenia"
@@ -87,14 +74,6 @@
             Db::User.all.map { |u| [u.display_name, u.id] },
             { },
             { class: 'js-select-multiple', multiple: true }
-
-        - if false
-          .medium-6.columns
-            = f.label :event_ids, 'Powiązane wydarzenia'
-            = f.select :event_ids,
-              Training::Supplementary::CourseRecord.all.map { |u| [u.name, u.id] },
-              { },
-              { class: 'js-select-multiple', multiple: true }
 
         .medium-6.columns
           b= f.label :attachments

@@ -16,7 +16,7 @@
             li.tabs-title class="#{!@contract.new? ? 'is-active' : nil}"
               a aria-selected="true" href="#new" Dane dokumentu
             li.tabs-title class="#{@contract.new? ? 'is-active' : nil}"
-              a data-tabs-target="preaccepted" href="#preaccepted" Opis merytoryczny
+              a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
             li.tabs-title
               a data-tabs-target="admin" href="#admin" Administracja
             li.tabs-title
@@ -64,13 +64,16 @@
         #preaccepted.tabs-panel class="#{@contract.new? ? 'is-active' : nil}"
           .row
             .medium-3.columns
-              b= f.label :group_type, 'Sekcja'
+              b= f.label :group_type
               = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
 
             .medium-3.columns
-              b= f.label :substantive_type, 'Grupa wydarzeń'
-              = f.select :substantive_type,
-              Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: :substantive_type), w] }, selected: @contract.substantive_type, include_blank: true
+              b= f.label :activity_type
+              = f.select :activity_type, Settlement::ContractRecord.activity_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.activity_types'), w] }, selected: @contract.activity_type, include_blank: true
+
+            .medium-3.columns
+              b= f.label :event_type
+              = f.select :event_type, Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }, selected: @contract.event_type, include_blank: true
 
             .medium-3.columns
               = f.label :project_ids, 'Projekt'
@@ -79,18 +82,31 @@
                 { },
                 { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 
-            .medium-3.columns
-              b= f.label :financial_type, 'Rodzaj działalności'
+          .row
+            .medium-4.columns
+              b= f.label :substantive_type
+              = f.select :substantive_type, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'), w] }, selected: @contract.substantive_type, include_blank: true
+
+            .medium-4.columns
+              b= f.label :area_type
+              = f.select :area_type, Settlement::ContractRecord.area_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.area_types'), w] }, selected: @contract.area_type, include_blank: true
+
+            .medium-4.columns
+              b= f.label :financial_type
               = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
 
         #admin.tabs-panel
           .row
             .medium-2.columns
-              b= f.label :state, "Status"
-              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w), w] }, selected: @contract.state
+              b= f.label :state
+              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, selected: @contract.state
 
             .medium-3.columns
-              b= f.label :acceptor_id, 'Zaakceptował'
+              b= f.label :checker_id
+              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
+
+            .medium-3.columns
+              b= f.label :acceptor_id
               = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
 
             .medium-2.columns
@@ -118,7 +134,7 @@
             tbody
               - @contract.versions.includes(:item).reverse.each do |version|
                 tr
-                  td = Db::User.find(version.whodunnit)&.display_name
+                  td = Db::User.find_by(id: version.whodunnit)&.display_name
                   td = version.event
                   td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
                   td
@@ -154,14 +170,7 @@
                     span aria-hidden="true"  &times;
 
       = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      - if can? :update, @contract
-        - if @contract.new?
-          - if can? :accept, @contract
-            - unless @contract.creator_id == current_user.id
-              = link_to 'zaakceptuj', accept_admin_contract_path(@contract.id), class: 'button success', method: :put
-        - elsif @contract.accepted?
-          - if can? :prepayment, @contract
-            = link_to 'wstepnie rozlicz', prepayment_admin_contract_path(@contract.id), class: 'button alert', method: :put
+      = render 'state_link', contract: @contract, class_value: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 

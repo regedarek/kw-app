@@ -140,10 +140,58 @@ pl:
       settlement/contract_record:
         title: Tytuł
         contractor_id: Kontrahent
+        acceptor_id: Akceptujacy
+        checker_id: Sprawdzajacy
         document_number: Numer dokumentu
         internal_number: Number wewnętrzny
         internal_number_uniq: Number wewnętrzny
         attachments: Załączniki
+        group_type: Sekcja
+        activity_type: Aktywność
+        state: Status
+        states:
+          new: Nowy
+          accepted: Sprawdzony
+          preclosed: Zaaceptowany
+          closed: Rozliczony
+        activity_types:
+          courses: Kursy
+          competitions: Zawody
+          other_activity: Inne imprezy
+          maintenance: Utrzymanie
+          supplementary_trainings: Doszkalania
+        event_type: Impreza
+        event_types:
+          not_event: Nie
+          other_event: Inna
+          mjs: Memoriał Jana Strzeleckiego
+          mas: Memoriał Andrzeja Skwirczyńskiego
+          mo: Mroźne Ostrza/Trytool
+          kfg: Krakowski Festiwal Górski
+        area_type: Obszar
+        area_types:
+          marketing: Marketing
+          it: IT
+          accomodation: Lokal
+          administration: Administracja
+          reservations: Wypożyczalnia
+          training: Szkolenia
+          image: Wizerunek
+          integration: Integracja
+          associations: Zrzeszenia
+          mountain_actions: Działanie górskie
+          general: Ogólne
+        financial_type: Rodzaj płatności
+        substantive_type: Rodzaj wydatku
+        substantive_types:
+          salary: Wynagrodzenie
+          other_substantive: Inna usługa
+          materials: Materiały i wyposażenie
+          equipment: Sprzęt
+          finantial_costs: Koszty finansowe
+          rewards: Nagrody i gadżety
+          printing: Poligrafia i druk
+          insurance: Ubezpieczenie
         document_date: Data dokumentu
         document_type: Rodzaj dokumentu
         payout_type: Rodzaj płatności
