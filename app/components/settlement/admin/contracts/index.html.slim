@@ -21,7 +21,7 @@
               = f.label :internal_number_eq, 'ID'
               = f.search_field :internal_number_eq
 
-            .large-4.columns
+            .large-2.columns
               = f.label :document_number_or_title_or_description_cont, 'Numer, nazwa lub opis dokumentu'
               = f.search_field :document_number_or_title_or_description_cont
 
@@ -32,11 +32,15 @@
             .large-2.columns
               = f.label :contractor_id_eq, 'Kontrahent'
               = f.select :contractor_id_eq, Settlement::ContractorRecord.all.map{ |u| [u.name, u.id] }, include_blank: true
+            .large-2.columns
+              = f.label :contractor_nip_eq, 'NIP'
+              = f.search_field :contractor_nip_eq
 
             .large-2.columns
               = f.label :acceptor_id_eq, 'Kto zaakceptował?'
               = f.select :acceptor_id_eq, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, include_blank: true
           .row
+
 
             .large-4.columns
               = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
