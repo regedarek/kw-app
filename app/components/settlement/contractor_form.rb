@@ -15,5 +15,12 @@ module Settlement
     optional(:contact_name).maybe
     required(:reason_type).filled
     optional(:description).maybe
+    validate(unique_nip: :nip) do |nip|
+      if nip.nil? || nip.empty?
+        true
+      else
+        !Settlement::ContractorRecord.exists?(nip: nip)
+      end
+    end
   end
 end

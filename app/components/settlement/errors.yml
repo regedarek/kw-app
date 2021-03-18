@@ -1,9 +1,10 @@
 pl:
   errors:
-    internal_number_uniq: 'taki numer już istnieje w tym roku rozliczeniowym'
+    internal_number_uniq: taki numer już istnieje w tym roku rozliczeniowym
+    unique_nip: nip juz istnieje
   dry_validation:
     errors:
-      internal_number_uniq: 'taki numer już istnieje'
-      key?: "brakuje"
-      attr?: "brakuje"
-      filled?: "brakuje"
+      internal_number_uniq: taki numer już istnieje
+      key?: brakuje
+      attr?: brakuje
+      filled?: brakuje
