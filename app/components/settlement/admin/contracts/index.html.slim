@@ -30,36 +30,36 @@
               = f.search_field :creator_first_name_or_creator_last_name_cont
 
             .large-2.columns
-              = f.label :contractor_id_eq, 'Kontrahent'
-              = f.select :contractor_id_eq, Settlement::ContractorRecord.all.map{ |u| [u.name, u.id] }, include_blank: true
+              = f.label :contractor_nip_or_contractor_name_cont, 'Kontrahent(nip, nazwa)'
+              = f.search_field :contractor_nip_or_contractor_name_cont
 
             .large-2.columns
               = f.label :acceptor_id_eq, 'Kto zaakceptował?'
               = f.select :acceptor_id_eq, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, include_blank: true
           .row
+            .large-6.columns
+              .large-8.columns
+                = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
+                = f.select :state_cont_any, [['Nowe', 'new'], ['Wstępnie zaakceptowane', 'preaccepted'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Rozliczone', 'closed'], ['Odrzucone', 'rejected']], { }, { multiple: true }
 
-            .large-4.columns
-              = f.label :state_cont_any, 'Status rozliczenia (użyj CTRL)'
-              = f.select :state_cont_any, [['Nowe', 'new'], ['Wstępnie zaakceptowane', 'preaccepted'], ['Zaakceptowane', 'accepted'], ['Wstępnie rozliczone', 'preclosed'], ['Rozliczone', 'closed'], ['Odrzucone', 'rejected']], { }, { multiple: true }
+              .large-4.columns
+                = f.label :substantive_type_eq, 'Grupa wydarzeń'
+                = f.select :substantive_type_eq, Settlement::ContractRecord.substantive_types.to_a.map { |w| [I18n.t(w[0], scope: :substantive_type), w[1]] }, include_blank: true
 
-            .large-4.columns
-              = f.label :substantive_type_eq, 'Grupa wydarzeń'
-              = f.select :substantive_type_eq, Settlement::ContractRecord.substantive_types.to_a.map { |w| [I18n.t(w[0], scope: :substantive_type), w[1]] }, include_blank: true
+            .large-6.columns
 
-            .large-4.columns
-              = f.label :period_date_eq, 'Okres rozliczenia'
-              = f.date_select :period_date_eq,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
-
-            .large-2.columns
-              = f.label :cost_gteq, 'Kwota od'
-              = f.number_field :cost_gteq
-            .large-2.columns
-              = f.label :created_at_lteq, 'Kwota do'
-              = f.number_field :cost_lteq
-
-            .large-2.columns
-              br
-              = f.submit 'Szukaj', class: 'button expanded'
+              .large-2.columns
+                = f.label :cost_gteq, 'Kwota od'
+                = f.number_field :cost_gteq
+              .large-2.columns
+                = f.label :created_at_lteq, 'Kwota do'
+                = f.number_field :cost_lteq
+              .large-4.columns
+                = f.label :period_date_eq, 'Rok'
+                = f.date_select :period_date_eq,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select', style: 'width: 100px' }
+              .large-4.columns
+                br
+                = f.submit 'Szukaj', class: 'button expanded'
 
 .row
   .large-12.columns
