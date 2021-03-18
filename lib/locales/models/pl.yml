@@ -145,6 +145,14 @@ pl:
         internal_number_uniq: Number wewnętrzny
         attachments: Załączniki
         group_type: Sekcja
+        event_type: Impreza
+        event_types:
+          not: Nie
+          other: Inna
+          mjs: Memoriał Jana Strzeleckiego
+          mas: Memoriał Andrzeja Skwirczyńskiego
+          mo: Mroźne Ostrza/Trytool
+          kfg: Krakowski Festiwal Górski
         document_date: Data dokumentu
         document_type: Rodzaj dokumentu
         payout_type: Rodzaj płatności

@@ -15,6 +15,7 @@ module Settlement
     required(:description).maybe(:str?)
     required(:attachments).filled
     required(:group_type).filled
+    required(:event_type).filled
     optional(:acceptor_id).maybe
     optional(:substantive_type).maybe
     optional(:state).maybe
