@@ -96,8 +96,11 @@ module Settlement
         authorize! :accept, Settlement::ContractRecord
 
         contract = Settlement::ContractRecord.find(params[:id])
+
+        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Sekcja, Aktywność i Impreza" unless contract.activity_type && contract.group_type && contract.event_type
+
+        contract.update(checker_id: current_user.id)
         contract.accept!
-        contract.update(acceptor_id: current_user.id)
 
         office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
         contract_user_ids = contract.users.map(&:id)
@@ -114,16 +117,18 @@ module Settlement
 
         redirect_back(
           fallback_location: admin_contracts_path,
-          notice: 'Zaakceptowano!'
+          notice: 'Sprawdzono!'
         )
       end
 
       def prepayment
-        authorize! :prepayment, Settlement::ContractRecord
-
         contract = Settlement::ContractRecord.find(params[:id])
+        authorize! :accept, Settlement::ContractRecord
+
+        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj płatności" unless contract.substantive_type && contract.area_type && contract.payout_type
+
         contract.prepayment!
-        contract.update(preclosed_date: Time.current)
+        contract.update(acceptor_id: current_user.id, preclosed_date: Time.current)
 
         contract_user_ids = contract.users.map(&:id)
         recepient_ids = contract_user_ids.uniq.reject{|id| id == current_user.id }
@@ -139,7 +144,7 @@ module Settlement
 
         redirect_back(
           fallback_location: admin_contracts_path,
-          notice: 'Rozliczono!'
+          notice: 'Zaakceptowano!'
         )
       end
 
@@ -148,7 +153,7 @@ module Settlement
         contract.finish!
 
         redirect_back(
-          fallback_location: admin_contracts_path,
+          fallback_location: admin_contract_path(contract.id),
           notice: 'Rozliczono!'
         )
       end
