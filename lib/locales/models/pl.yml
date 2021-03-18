@@ -125,6 +125,8 @@ pl:
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
     attributes:
+      settlement/contract_record:
+        nip_if_fv: NIP
       business/sign_up_record:
         name: Imię i nazwisko
         email: E-mail
