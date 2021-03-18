@@ -149,9 +149,8 @@ pl:
         state: Status
         states:
           new: Nowy
-          rejected: Odrzucony
-          accepted: Zaakceptowany
-          preclosed: W banku
+          accepted: Sprawdzony
+          preclosed: Zaaceptowany
           closed: Rozliczony
         activity_types:
           courses: Kursy

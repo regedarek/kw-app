@@ -12,7 +12,7 @@ module Charity
       return Left(message: 'Kwota i imie i nazwisko musi być uzupełnione!') unless form_outputs.success?
 
       donation = repository.create_donation(form_outputs: form_outputs)
-      donation.update description: "Darowizna książki Karola Życzkowskiego dla #{donation.display_name}"
+      donation.update description: "Wsprarcie Memoriału Jana Strzeleckiego od #{donation.display_name}"
       payment = donation.payment
       Right(payment: payment)
     end

@@ -19,12 +19,8 @@ tbody
             = contract.title
       td = contract.creator&.display_name
       td
-        - if contract.accepted?
-          span.success.label
-            = t contract.acceptor&.display_name
-        - else
-          span.secondary.label
-            = t contract.state
+        span.label
+          = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
       td = contract.cost
       td.text-center
         - if contract.new?
