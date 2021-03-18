@@ -80,21 +80,6 @@ module Settlement
         @contract = Settlement::ContractRecord.find(params[:id])
         authorize! :update, @contract
 
-        if user_signed_in?
-          unless current_user.roles.include?('office_king')
-            if (@contract.preclosed? || @contract.closed?)
-              return redirect_to admin_contract_path(@contract.id), alert: 'Po wstępnym rozliczeniu, nie możesz już edytować!'
-            end
-          end
-
-          if current_user.roles.include?('contract_preaccept')
-            if @contract.new?
-              @contract.preaccept!
-              @contract.update(preacceptor_id: current_user.id)
-            end
-          end
-        end
-
         either(update_record) do |result|
           result.success do |contract|
             redirect_to edit_admin_contract_path(contract.id), notice: 'Zaktualizowano'
@@ -179,7 +164,7 @@ module Settlement
           .require(:contract)
           .permit(
             :group_type, :payout_type, :acceptor_id, :event_id, :period_date,
-            :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date,
+            :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date, :activity_type,
             :title, :description, :cost, :state, :document_number, :internal_number,
             :contractor_id, attachments: [], event_ids: [], user_ids: [], project_ids: []
           )

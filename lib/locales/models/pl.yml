@@ -145,6 +145,13 @@ pl:
         internal_number_uniq: Number wewnętrzny
         attachments: Załączniki
         group_type: Sekcja
+        activity_type: Aktywność
+        activity_types:
+          courses: Kursy
+          competitions: Zawody
+          other_activity: Inne imprezy
+          maintenance: Utrzymanie
+          supplementary_trainings: Doszkalania
         event_type: Impreza
         event_types:
           not_event: Nie

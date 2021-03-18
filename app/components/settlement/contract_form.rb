@@ -19,6 +19,7 @@ module Settlement
     required(:description).maybe(:str?)
     optional(:attachments).maybe
     optional(:group_type).maybe
+    optional(:activity_type).maybe
     optional(:event_type).maybe
     optional(:area_type).maybe
     optional(:acceptor_id).maybe

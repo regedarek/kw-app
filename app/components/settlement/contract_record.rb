@@ -7,6 +7,7 @@ module Settlement
     enum financial_type: [:opp_paid, :opp_unpaid]
     enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
     enum group_type: [:kw, :snw, :sww, :stj]
+    enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
     enum event_type: [:not_event, :other_event, :mjs, :mas, :mo, :kfg]
     enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
     enum payout_type: [:to_contractor, :return]

@@ -63,15 +63,19 @@
 
         #preaccepted.tabs-panel class="#{@contract.new? ? 'is-active' : nil}"
           .row
-            .medium-4.columns
-              b= f.label :group_type, 'Sekcja'
+            .medium-3.columns
+              b= f.label :group_type
               = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
 
-            .medium-4.columns
+            .medium-3.columns
+              b= f.label :activity_type
+              = f.select :activity_type, Settlement::ContractRecord.activity_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.activity_types'), w] }, selected: @contract.activity_type, include_blank: true
+
+            .medium-3.columns
               b= f.label :event_type
               = f.select :event_type, Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }, selected: @contract.event_type, include_blank: true
 
-            .medium-4.columns
+            .medium-3.columns
               = f.label :project_ids, 'Projekt'
               = f.select :project_ids,
                 Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
