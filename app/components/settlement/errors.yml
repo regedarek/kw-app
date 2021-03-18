@@ -1,7 +1,12 @@
 pl:
+  activerecord:
+    attributes:
+      'settlement/contract_record':
+        nip_if_fv: Dla faktury i rachunku
   errors:
     internal_number_uniq: taki numer już istnieje w tym roku rozliczeniowym
     unique_nip: nip juz istnieje
+    nip_if_fv: kontrahent musi mieć podany nip
   dry_validation:
     errors:
       internal_number_uniq: taki numer już istnieje

@@ -7,9 +7,5 @@ module Charity
     def payment_type
       :donations
     end
-
-    def description
-      "Darowizna książki Karola Życzkowskiego dla #{display_name}"
-    end
   end
 end

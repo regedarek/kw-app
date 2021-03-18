@@ -26,37 +26,6 @@
 
               = f.submit 'Przekaż', class: 'button'
 
-  .show-for-small-only
-    .row
-      .large-12.colummns
-        .thumbnail
-          = image_tag 'https://kw.krakow.pl/images/artykuly/KWKrakow/aktualnosci/2018/mariusz_norwecki.jpg', size: '200x200'
-    .row
-      .large-12.colummns
-        | W związku z tragiczną śmiercią w Tatrach naszego klubowego kolegi Mariusza Norweckiego, ruszamy ze zbiórką pieniędzy na rzecz rodziny Mariusza, żony i dwójki małych dzieci.
-        br
-        br
-        = form_for @donation, as: :donation, url: donations_path do |f|
-          - if @donation.errors.any?
-            .callout.alert
-              ul
-                - form.errors.full_messages.each do |msg|
-                  li= msg
-
-          - if user_signed_in?
-            = f.hidden_field :user_id, value: current_user.id
-          - else
-            .row
-              .large-3.columns
-                b= f.label :display_name
-                = f.text_field :display_name
-          .row
-            .large-3.columns
-              b= f.label :cost
-              = f.number_field :cost
-
-              = f.submit 'Przekaż', class: 'button'
-
 .row
   .large-12.colummns
     .row
