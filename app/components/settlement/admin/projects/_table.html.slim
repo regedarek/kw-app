@@ -8,7 +8,7 @@ table.stack
       th.text-right width='70px' Wpływy
       th.text-right width='70px' Wydatki
   tbody
-    - projects.includes(:project_items).each_with_index do |project,i|
+    - projects.includes(:project_items, :contracts).each_with_index do |project,i|
       tr
         td = i + 1
         td
@@ -16,7 +16,7 @@ table.stack
         td
          = project.created_at.strftime("%d/%m/%Y")
         td
-         = project.user.display_name
+         = project.user&.display_name
         td.text-right
          = Settlement::ProjectEntity.new.incomings_sum(project)
         td.text-right

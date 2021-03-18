@@ -14,6 +14,7 @@ module Settlement
 
       def create
         @project = Settlement::ProjectRecord.new(project_params)
+        @project.user_id = current_user.id
 
         if @project.save
           redirect_to admin_project_path(@project.id), notice: 'Utworzono projekt'

@@ -14,7 +14,7 @@
       .row
         .large-6.columns
           b Utworzył: 
-          = @project.user.display_name
+          = @project.user&.display_name
         .large-6.columns
           b Kiedy: 
           = @project.created_at.strftime("%d/%m/%Y")

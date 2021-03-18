@@ -1,0 +1,22 @@
+= form_for @project, as: :project, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if @project.errors.any?
+        .callout.alert
+          ul
+            - @project.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .large-12.columns
+      = f.submit class: 'button'
