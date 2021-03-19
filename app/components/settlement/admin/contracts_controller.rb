@@ -107,7 +107,7 @@ module Settlement
         recepient_ids.each do |id|
           NotificationCenter::NotificationRecord.create(
             recipient_id: id,
-            actor_id: contract.checker_id,
+            actor_id: current_user.id,
             action: 'accepted_contract',
             notifiable_id: contract.id,
             notifiable_type: 'Settlement::ContractRecord'
@@ -135,7 +135,7 @@ module Settlement
         recepient_ids.each do |id|
           NotificationCenter::NotificationRecord.create(
             recipient_id: id,
-            actor_id: contract.acceptor_id,
+            actor_id: current_user.id,
             action: 'prepayment_contract',
             notifiable_id: contract.id,
             notifiable_type: 'Settlement::ContractRecord'
