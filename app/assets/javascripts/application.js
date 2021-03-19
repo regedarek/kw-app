@@ -17,10 +17,8 @@
 
 $(function(){ $(document).foundation(); });
 
-
 $(document).ready(function() {
-  var selectedTab = window.location.hash;
-  $(selectedTab + "-label").trigger('click');
+  $(window.location.hash + "-label").trigger('click');
 });
 
 $('.js-send-on-enter').keypress(function(e){
