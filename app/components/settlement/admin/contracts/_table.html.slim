@@ -8,15 +8,9 @@ tbody
       td
         - if contract.description
           span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
-            - if can? :read, contract
-              = link_to contract.title, edit_admin_contract_path(contract.id)
-            - else
-              = contract.title
+            = link_to contract.title, admin_contract_path(contract.id)
         - else
-          - if can? :read, contract
-            = link_to contract.title, edit_admin_contract_path(contract.id)
-          - else
-            = contract.title
+          = link_to contract.title, admin_contract_path(contract.id)
       td.text-center
         - if contract.creator
           = link_to contract.creator.display_name, "/klubowicze/#{contract.creator.kw_id}"

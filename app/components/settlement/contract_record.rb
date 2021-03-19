@@ -32,8 +32,6 @@ module Settlement
     has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord'
     has_many :projects, through: :project_items
 
-
-
     workflow_column :state
     workflow do
       state :new do
@@ -46,6 +44,10 @@ module Settlement
         event :finish, :transitions_to => :closed
       end
       state :closed
+    end
+
+    def event_types_select
+      Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }
     end
 
     def contractor_name=(id)

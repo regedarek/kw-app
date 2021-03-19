@@ -3,7 +3,7 @@
     = form_for @contract, as: :contract, url: admin_contracts_path do |f|
       - if @errors
         .row
-          .medium-6.columns
+          .large-12.columns
             .callout.alert
               ul
                 - @errors.each do |key,value|
@@ -11,50 +11,54 @@
                     = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
 
       .row
-        .medium-4.columns
-          b= f.label :title
+        .large-6.columns
+          b= f.label :title, 'Tytuł*'
           = f.text_field :title
 
-        .medium-4.columns
+        .large-6.columns
           = f.label :contractor_id
             = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
           = f.select :contractor_id,
             Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
             { include_blank: true},
             { class: 'js-select-multiple' }
-        .medium-4.columns
+
+      .row
+        .large-4.columns
+          b= f.label :group_type, 'Sekcja*'
+          = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
+
+        .large-4.columns
+          b= f.label :event_type, 'Impreza*'
+          = f.select :event_type,
+            options_for_select(f.object.event_types_select, f.object.event_type || :not_event),
+            include_blank: true
+
+        .large-4.columns
           = f.label :project_ids, 'Projekt'
           = f.select :project_ids,
             Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
             { include_blank: true},
             { class: 'js-select-multiple' }
-      .row
-        .medium-6.columns
-          b= f.label :group_type, 'Sekcja'
-          = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
-
-        .medium-6.columns
-          b= f.label :event_type
-          = f.select :event_type, Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }, selected: @contract.event_type, include_blank: true
 
       .row
-        .medium-3.columns
-          b= f.label :document_number
+        .large-3.columns
+          b= f.label :document_number, 'Numer dokumentu*'
           = f.text_field :document_number
 
-        .medium-2.columns
-          b= f.label :document_date
+        .large-2.columns
+          b= f.label :document_date, 'Data dokumentu*'
           = f.date_field :document_date
 
-        .medium-2.columns
-          b= f.label :document_type
+        .large-2.columns
+          b= f.label :document_type, 'Rodzaj dokumentu*'
           = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, include_blank: true
 
-        .medium-2.columns
-          b= f.label :payout_type
+        .large-2.columns
+          b= f.label :payout_type, 'Rodzaj płatności*'
           = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
-        .medium-3.columns
+        .large-3.columns
           b= f.label :cost, "Kwota rozliczenia*"
           .input-group
             = f.number_field :cost, step: 0.01, class: 'input-group-field'
@@ -62,26 +66,28 @@
                 | zł
 
       .row
-        .medium-12.columns
+        .large-12.columns
           = f.label :description, "Uwagi do rozliczenia"
           = f.hidden_field :description, id: 'description_body'
           trix-editor input='description_body' style='min-height: 200px'
 
-      .row
-        .medium-6.columns
-          = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
-          = f.select :user_ids,
-            Db::User.all.map { |u| [u.display_name, u.id] },
-            { },
-            { class: 'js-select-multiple', multiple: true }
+      br
+      .callout
+        .row
+          .large-6.columns
+            = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
+            = f.select :user_ids,
+              Db::User.all.map { |u| [u.display_name, u.id] },
+              { },
+              { class: 'js-select-multiple', multiple: true }
 
-        .medium-6.columns
-          b= f.label :attachments
-          = f.file_field :attachments, multiple: true
+          .large-6.columns
+            b= f.label :attachments, 'Załączniki*'
+            = f.file_field :attachments, multiple: true
 
       .row
         br
-        .medium-9.columns
+        .large-9.columns
           = f.submit 'Utwórz rozliczenie', class: 'button large expanded'
-        .medium-3.columns
+        .large-3.columns
           = link_to 'wróć do rozliczeń', session[:original_referrer] || admin_contracts_path, class: 'button secondary large expanded'
