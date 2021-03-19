@@ -5,7 +5,7 @@ class Db::User < ActiveRecord::Base
   mount_uploader :avatar, ::Membership::AvatarUploader
 
   enum gender: [:male, :female]
-  ROLES = %w(contracts_checker training_contracts business_courses library reservations routes admin events courses shop competitions office tech donations photo_competition management secondary_management financial_management marketing projects)
+  ROLES = %w(training_contracts business_courses library reservations routes admin events courses shop competitions office tech donations photo_competition management secondary_management financial_management marketing projects)
   SNW_GROUPS = %w(mjs instructors management sport authors gear support)
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

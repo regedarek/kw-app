@@ -18,13 +18,14 @@ class Ability
     events if role?('events')
     library if role?('library')
     projects if role?('projects')
-    secondary_management if role?('secondary_management')
     business_courses if role?('business_courses')
     marketing if role?('marketing')
-    financial_management if role?('financial_management')
     management if role?('management')
     voting if role?('voting')
     admin if role?('admin')
+
+    secondary_management if role?('secondary_management')
+    financial_management if role?('financial_management')
     office_king if role?('office_king')
   end
 
@@ -86,15 +87,7 @@ class Ability
     can :manage, Training::Activities::ContractRecord
   end
 
-  def secondary_management
-    can :search, Settlement::ContractRecord
-    can :create, Training::Supplementary::CourseRecord
-    can :read, Settlement::ContractRecord
-    can :manage, Management::ProjectRecord
-    cannot :destroy, Settlement::ContractRecord
-    can :manage, Management::Snw::SnwApplyRecord
-    can :analiza, Settlement::ContractRecord
-  end
+
 
   def settings
     can :manage, Management::SettingsRecord
@@ -122,18 +115,6 @@ class Ability
     can :create, Training::Supplementary::CourseRecord
     can :create, Settlement::ContractRecord
     can :read, Settlement::ContractRecord, creator_id: user.id
-  end
-
-  def contracts_checker
-    can :accept, Settlement::ContractRecord
-  end
-
-  def financial_management
-    can :accept, Settlement::ContractRecord
-    can :prepayment, Settlement::ContractRecord
-    cannot :destroy, Settlement::ContractRecord
-    can :manage, PaperTrail::Version
-    can :manage, Management::SettingsRecord
   end
 
   def admin
@@ -169,7 +150,6 @@ class Ability
     can :manage, Db::Profile
     can :manage, PaperTrail::Version
     can :manage, Management::News::InformationRecord
-
     can :manage, Management::SettingsRecord
   end
 
@@ -180,19 +160,26 @@ class Ability
     can :manage, PaperTrail::Version
   end
 
-  def office_king
-    can :destroy, Settlement::ContractRecord
+  def secondary_management
     can :search, Settlement::ContractRecord
-    can :recon_up, Settlement::ContractRecord
-    can :create, Settlement::ContractRecord
-    can :manage, PaperTrail::Version
+    can :accept, Settlement::ContractRecord
     can :manage, Settlement::ContractRecord
+    can :create, Training::Supplementary::CourseRecord
+    can :manage, Management::ProjectRecord
+    cannot :destroy, Settlement::ContractRecord
+  end
+
+  def financial_management
     can :accept, Settlement::ContractRecord
     can :prepayment, Settlement::ContractRecord
+    cannot :destroy, Settlement::ContractRecord
+  end
+
+  def office_king
+    can :manage, Settlement::ContractRecord
+    can :search, Settlement::ContractRecord
+    can :finish, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
-    can :prepayment, Settlement::ContractRecord
-    can :analiza, Settlement::ContractRecord
-    can :manage, Management::SettingsRecord
   end
 
   def reservations
