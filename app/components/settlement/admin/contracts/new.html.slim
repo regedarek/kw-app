@@ -26,12 +26,12 @@
       .row
         .large-4.columns
           b= f.label :group_type, 'Sekcja*'
-          = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
+          = f.select :group_type, Settlement::ContractRecord.group_types_select, selected: @contract.group_type, include_blank: true
 
         .large-4.columns
           b= f.label :event_type, 'Impreza*'
           = f.select :event_type,
-            options_for_select(f.object.event_types_select, f.object.event_type || :not_event),
+            options_for_select(Settlement::ContractRecord.event_types_select, f.object.event_type || :not_event),
             include_blank: true
 
         .large-4.columns

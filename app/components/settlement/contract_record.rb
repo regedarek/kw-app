@@ -46,8 +46,16 @@ module Settlement
       state :closed
     end
 
-    def event_types_select
-      Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }
+    class << self
+      Settlement::ContractRecord.defined_enums.keys.each do |method|
+        define_method "#{method}s_select" do
+          Settlement::ContractRecord.send("#{method}s").map { |w, _| [I18n.t(w, scope: "activerecord.attributes.settlement/contract_record.#{method}s"), w] }
+        end
+      end
+    end
+
+    def self.states_select
+      Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }
     end
 
     def contractor_name=(id)
