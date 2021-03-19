@@ -175,7 +175,7 @@ module Settlement
         Settlement::UpdateContract.new(
           Settlement::Repository.new,
           Settlement::ContractForm
-        ).call(id: params[:id], raw_inputs: contract_params)
+        ).call(id: params[:id], raw_inputs: contract_params, updater_id: current_user.id)
       end
 
       def contract_params

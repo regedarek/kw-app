@@ -1,3 +1,21 @@
+table.stack
+  thead
+    tr
+      th width='80px'
+        = sort_link(@q, :internal_number, 'ID', default_order: :desc)
+      th width='110px'
+        = sort_link(@q, :document_date, 'Data', default_order: :desc)
+      th width='300px'
+        = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
+      th.text-center width='160px'
+        = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
+      th.text-center width='160px'
+        = sort_link(@q, :state, 'Status', default_order: :desc)
+      th.text-center width='90px'
+        = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
+      th.text-center width='140px'
+        | Zmień status
+      th.text-right width='70px' Akcje
 tbody
   - contracts.each_with_index do |contract, i|
     tr

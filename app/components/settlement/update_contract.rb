@@ -7,7 +7,7 @@ module Settlement
       @form = form
     end
 
-    def call(id:, raw_inputs:)
+    def call(id:, raw_inputs:, updater_id:)
       contract = Settlement::ContractRecord.find(id)
       form_outputs = form.with(record: contract).call(raw_inputs.to_unsafe_h)
       return Left(form_outputs.messages(full: true, locale: I18n.locale)) unless form_outputs.success?
@@ -23,11 +23,11 @@ module Settlement
       office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
       financial_ids = Db::User.where(":name = ANY(roles)", name: "financial_management").map(&:id)
       contract_user_ids = contract.users.map(&:id)
-      recepient_ids = (financial_ids + office_king_ids + contract_user_ids).uniq.reject{|id| id == contract.creator_id }
+      recepient_ids = (financial_ids + office_king_ids + contract_user_ids).uniq.reject{|id| id == updater_id }
       recepient_ids.each do |id|
         NotificationCenter::NotificationRecord.create(
           recipient_id: id,
-          actor_id: contract.creator_id,
+          actor_id: updater_id,
           action: 'updated_contract',
           notifiable_id: contract.id,
           notifiable_type: 'Settlement::ContractRecord'

@@ -3,7 +3,6 @@
     h3 Rozliczenia, faktury, przelewy, umowy
   .large-6.columns
     .text-right
-      = link_to 'Archiwum', admin_contracts_path(q: {state_cont_any: 'closed'}), class: 'button alert'
       - if can? :read, Settlement::ContractorRecord
         = link_to 'Kontrahenci', admin_contractors_path, class: 'button warning'
       - if can? :create, Settlement::ContractorRecord
@@ -62,22 +61,4 @@
 
 .row
   .large-12.columns
-    table.stack
-      thead
-        tr
-          th width='80px'
-            = sort_link(@q, :internal_number, 'ID', default_order: :desc)
-          th width='110px'
-            = sort_link(@q, :document_date, 'Data', default_order: :desc)
-          th width='300px'
-            = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
-          th.text-center width='160px'
-            = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
-          th.text-center width='160px'
-            = sort_link(@q, :state, 'Status', default_order: :desc)
-          th.text-center width='90px'
-            = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
-          th.text-center width='140px'
-            | Zmień status
-          th.text-right width='70px' Akcje
-      = render 'table', contracts: @contracts
+    = render 'table', contracts: @contracts
