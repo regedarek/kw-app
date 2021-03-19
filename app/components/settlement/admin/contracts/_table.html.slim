@@ -17,7 +17,9 @@ tbody
             = link_to contract.title, edit_admin_contract_path(contract.id)
           - else
             = contract.title
-      td.text-center = contract.creator&.display_name
+      td.text-center
+        - if contract.creator
+          = link_to contract.creator.display_name, "/klubowicze/#{contract.creator.kw_id}"
       td.text-center = render 'state_bagde', contract: contract, class_value: nil
       td.text-center = contract.cost
       td.text-center = render 'state_link', contract: contract, class_value: nil
