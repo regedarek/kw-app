@@ -79,7 +79,7 @@
                 = f.select :project_ids,
                   Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
                   { },
-                  { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
+                  { class: 'js-select-multiple', style: 'width: 100%' }
 
           .callout.alert
             .row
