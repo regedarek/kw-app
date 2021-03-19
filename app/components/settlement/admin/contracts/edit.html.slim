@@ -111,7 +111,7 @@
 
             .large-2.columns
               b= f.label :checker_id
-              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').or(Db::User.where('roles @> ARRAY[?]', 'contracts_checker')).map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
+              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').or(Db::User.where('roles @> ARRAY[?]', 'secondary_management')).map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
 
             .large-2.columns
               b= f.label :acceptor_id

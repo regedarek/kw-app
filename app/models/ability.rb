@@ -99,8 +99,6 @@ class Ability
 
   def events
     can :create, Training::Supplementary::CourseRecord
-    can :create, Settlement::ContractRecord
-    can :read, Settlement::ContractRecord, creator_id: user.id
   end
 
   def admin
@@ -127,10 +125,6 @@ class Ability
 
   def office
     can :manage, Settlement::ContractorRecord
-    can :manage, Settlement::ContractRecord
-    can :office, Settlement::ContractRecord
-    cannot :destroy, Settlement::ContractRecord
-    can :analiza, Settlement::ContractRecord
     can :manage, Db::User
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
@@ -149,7 +143,7 @@ class Ability
   def secondary_management
     can :search, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
-    can :manage, Settlement::ContractRecord
+    can :update, Settlement::ContractRecord
     can :create, Training::Supplementary::CourseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
@@ -162,7 +156,7 @@ class Ability
   end
 
   def office_king
-    can :manage, Settlement::ContractRecord
+    can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord

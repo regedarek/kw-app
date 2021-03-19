@@ -39,7 +39,7 @@
       .row
         .large-12.columns
           b Grupa wydarzeń: 
-          = I18n.t @contract.substantive_type, scope: :substantive_type
+          = I18n.t @contract.substantive_type, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'
 
     - if @contract.financial_type
       .row
