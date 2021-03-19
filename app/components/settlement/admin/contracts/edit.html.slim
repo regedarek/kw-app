@@ -1,35 +1,33 @@
-.row
-  .large-12.columns
-    = form_for @contract, as: :contract, url: admin_contract_path(@contract), method: :put do |f|
-      - if @errors
-        .row
-          .medium-6.columns
-            .callout.alert
-              ul
-                - @errors.each do |key,value|
-                  li
-                    = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
+= form_for @contract, as: :contract, url: admin_contract_path(@contract), method: :put do |f|
+  - if @errors
+    .row
+      .large-12.columns
+        .callout.alert
+          ul
+            - @errors.each do |key,value|
+              li
+                = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
 
-      .row
-        .large-12.columns
-          ul#edit-tabs.tabs data-tabs="" 
-            li.tabs-title class="#{!@contract.new? ? 'is-active' : nil}"
-              a aria-selected="true" href="#new" Dane dokumentu
-            li.tabs-title class="#{@contract.new? ? 'is-active' : nil}"
-              a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
-            li.tabs-title
-              a data-tabs-target="admin" href="#admin" Administracja
-            li.tabs-title
-              a data-tabs-target="history" href="#history" Historia zmian
+  .row
+    .large-12.columns
+      ul#edit-tabs.tabs data-tabs=""
+        li.tabs-title.is-active
+          a aria-selected="true" href="#new" Dane dokumentu
+        li.tabs-title
+          a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
+        li.tabs-title
+          a data-tabs-target="admin" href="#admin" Administracja
+        li.tabs-title
+          a data-tabs-target="history" href="#history" Historia zmian
 
-      .tabs-content data-tabs-content="edit-tabs" 
-        #new.tabs-panel class="#{!@contract.new? ? 'is-active' : nil}"
+      .tabs-content data-tabs-content="edit-tabs"
+        #new.tabs-panel.is-active
           .row
-            .medium-6.columns
+            .large-6.columns
               b= f.label :title
               = f.text_field :title
 
-            .medium-6.columns
+            .large-6.columns
               = f.label :contractor_id
                 = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
               = f.select :contractor_id,
@@ -38,86 +36,89 @@
                 { class: 'js-select-multiple', style: 'width: 100%' }
 
           .row
-            .medium-3.columns
+            .large-3.columns
               b= f.label :document_number
               = f.text_field :document_number
 
-            .medium-2.columns
+            .large-2.columns
               b= f.label :document_date
               = f.date_field :document_date
 
-            .medium-2.columns
+            .large-2.columns
               b= f.label :document_type
               = f.select :document_type, Settlement::ContractRecord.document_types.map { |w, _| [I18n.t(w), w] }, include_blank: true
 
-            .medium-2.columns
+            .large-2.columns
               b= f.label :payout_type
               = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
-            .medium-3.columns
+            .large-3.columns
               b= f.label :cost, "Kwota rozliczenia*"
               .input-group
                 = f.number_field :cost, step: 0.01, class: 'input-group-field'
                 span.input-group-label
                     | zł
 
-        #preaccepted.tabs-panel class="#{@contract.new? ? 'is-active' : nil}"
-          .row
-            .medium-3.columns
-              b= f.label :group_type
-              = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
+        #preaccepted.tabs-panel
+          .callout
+            .row
+              .large-3.columns
+                b= f.label :group_type
+                = f.select :group_type, Settlement::ContractRecord.group_types.map { |w, _| [I18n.t(w), w] }, selected: @contract.group_type, include_blank: true
 
-            .medium-3.columns
-              b= f.label :activity_type
-              = f.select :activity_type, Settlement::ContractRecord.activity_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.activity_types'), w] }, selected: @contract.activity_type, include_blank: true
+              .large-3.columns
+                b= f.label :activity_type
+                = f.select :activity_type, Settlement::ContractRecord.activity_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.activity_types'), w] }, selected: @contract.activity_type, include_blank: true
 
-            .medium-3.columns
-              b= f.label :event_type
-              = f.select :event_type, Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }, selected: @contract.event_type, include_blank: true
+              .large-3.columns
+                b= f.label :event_type
+                = f.select :event_type, Settlement::ContractRecord.event_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.event_types'), w] }, selected: @contract.event_type, include_blank: true
 
-            .medium-3.columns
-              = f.label :project_ids, 'Projekt'
-              = f.select :project_ids,
-                Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
-                { },
-                { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
+              .large-3.columns
+                = f.label :project_ids, 'Projekt'
+                = f.select :project_ids,
+                  Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
+                  { },
+                  { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 
-          .row
-            .medium-4.columns
-              b= f.label :substantive_type
-              = f.select :substantive_type, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'), w] }, selected: @contract.substantive_type, include_blank: true
+          .callout.alert
+            .row
+              .large-4.columns
+                b= f.label :substantive_type
+                = f.select :substantive_type, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'), w] }, selected: @contract.substantive_type, include_blank: true
 
-            .medium-4.columns
-              b= f.label :area_type
-              = f.select :area_type, Settlement::ContractRecord.area_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.area_types'), w] }, selected: @contract.area_type, include_blank: true
+              .large-4.columns
+                b= f.label :area_type
+                = f.select :area_type, Settlement::ContractRecord.area_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.area_types'), w] }, selected: @contract.area_type, include_blank: true
 
-            .medium-4.columns
-              b= f.label :financial_type
-              = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
+              .large-4.columns
+                b= f.label :financial_type
+                = f.select :financial_type, Settlement::ContractRecord.financial_types.map { |w, _| [I18n.t(w, scope: :financial_type), w] }, selected: @contract.financial_type, include_blank: true
 
         #admin.tabs-panel
           .row
-            .medium-2.columns
-              b= f.label :state
-              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, selected: @contract.state
-
-            .medium-3.columns
-              b= f.label :checker_id
-              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').or(Db::User.where('roles @> ARRAY[?]', 'contracts_checker')).map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
-
-            .medium-3.columns
-              b= f.label :acceptor_id
-              = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
-
-            .medium-2.columns
+            .large-2.columns
               b= f.label :internal_number, 'Numer wewnętrzny'
               = f.number_field :internal_number
 
-            .medium-3.columns
+            .large-3.columns
               b= f.label :period_date, 'Rok rozliczeniowy'
               = f.date_select :period_date,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
+
+            .large-3.columns
+              b= f.label :state
+              = f.select :state, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, selected: @contract.state
+
+            .large-2.columns
+              b= f.label :checker_id
+              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').or(Db::User.where('roles @> ARRAY[?]', 'contracts_checker')).map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
+
+            .large-2.columns
+              b= f.label :acceptor_id
+              = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
+
           .row
-            .large-5.columns
+            .large-12.columns
               = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
               = f.select :user_ids,
                 Db::User.all.map { |u| [u.display_name, u.id] },
@@ -142,7 +143,7 @@
                       = link_to 'Zmiany', '#'
 
       .row
-        .medium-12.columns
+        .large-12.columns
           = f.label :description, "Uwagi do rozliczenia"
           = f.hidden_field :description, id: 'description_body'
           trix-editor input='description_body' style='min-height: 200px'

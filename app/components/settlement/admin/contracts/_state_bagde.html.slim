@@ -2,10 +2,14 @@
   span.label.secondary
     = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
 - if contract.accepted?
-  span data-tooltip='' tabindex="1" title="#{contract.checker.display_name}" data-allow-html="true" class='has-tip left'
+  span data-tooltip='' tabindex="1" title="#{contract.checker.display_name}" data-allow-html="true" class='left' style='font-weight: normal;'
     span.label
       = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
 - if contract.preclosed?
-  span data-tooltip='' tabindex="1" title="#{contract.acceptor.display_name}" data-allow-html="true" class='has-tip left'
+  span data-tooltip='' tabindex="1" title="#{contract.acceptor.display_name}" data-allow-html="true" class='left' style='font-weight: normal;'
     span.label.success
       = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
+
+- if contract.closed?
+  span.label.success.alert
+    = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')

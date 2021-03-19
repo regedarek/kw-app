@@ -1,6 +1,6 @@
 - if contract.new?
-  = link_to 'Sprawdź', accept_admin_contract_path(contract.id), method: :put, class: class_value
+  = link_to 'Sprawdź', accept_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
 - if contract.accepted?
-  = link_to 'Zaakceptuj', prepayment_admin_contract_path(contract.id), method: :put, class: class_value
+  = link_to 'Zaakceptuj', prepayment_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
 - if contract.preclosed?
-  = link_to 'Rozlicz', finish_admin_contract_path(contract.id), method: :put, class: class_value
+  = link_to 'Rozlicz', finish_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value

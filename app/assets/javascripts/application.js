@@ -17,6 +17,12 @@
 
 $(function(){ $(document).foundation(); });
 
+
+$(document).ready(function() {
+let selectedTab = window.location.hash;
+$(selectedTab + "-label").trigger('click');
+});
+
 $('.js-send-on-enter').keypress(function(e){
   if(e.which == 13){
        $(this).closest('form').submit();
