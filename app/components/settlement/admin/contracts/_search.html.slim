@@ -1,0 +1,43 @@
+.callout
+  = search_form_for @q, url: admin_contracts_path, class: 'js-send-on-enter' do |f|
+    .row
+      .large-1.columns
+        = f.label :internal_number_eq, 'ID'
+        = f.search_field :internal_number_eq
+
+      .large-4.columns
+        = f.label :document_number_or_title_or_description_cont, 'Numer, nazwa lub opis dokumentu'
+        = f.search_field :document_number_or_title_or_description_cont
+
+      .large-3.columns
+        = f.label :creator_first_name_or_creator_last_name_cont, 'Kto dodał?'
+        = f.search_field :creator_first_name_or_creator_last_name_cont
+
+      .large-2.columns
+        = f.label :contractor_nip_or_contractor_name_cont, 'Kontrahent(nip, nazwa)'
+        = f.search_field :contractor_nip_or_contractor_name_cont
+
+      .large-2.columns
+        = f.label :acceptor_first_name_or_acceptor_last_name_or_checker_last_name_or_checker_first_name_cont, 'Kto zaakceptował?'
+        = f.search_field :acceptor_first_name_or_acceptor_last_name_or_checker_last_name_or_checker_first_name_cont
+    .row
+      .large-8.columns
+        = f.label :state_eq_any, 'Status rozliczenia (użyj CTRL)'
+        = f.select :state_eq_any, Settlement::ContractRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.states'), w] }, { }, { multiple: true }
+
+      .large-4.columns
+        = f.label :substantive_type_eq, 'Grupa wydarzeń'
+        = f.select :substantive_type_eq, Settlement::ContractRecord.substantive_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'), w] }, include_blank: true
+
+      .large-2.columns
+        = f.label :cost_gteq, 'Kwota od'
+        = f.number_field :cost_gteq
+      .large-2.columns
+        = f.label :created_at_lteq, 'Kwota do'
+        = f.number_field :cost_lteq
+      .large-4.columns
+        = f.label :period_date_eq, 'Rok'
+        = f.date_select :period_date_eq,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
+      .large-4.columns
+        br
+      = f.submit 'Szukaj', class: 'button expanded'

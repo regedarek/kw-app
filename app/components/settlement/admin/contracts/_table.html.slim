@@ -16,29 +16,29 @@ table.stack
       th.text-center width='140px'
         | Zmień status
       th.text-right width='70px' Akcje
-tbody
-  - contracts.each_with_index do |contract, i|
-    tr
-      td
-        - if contract.internal_number && contract.period_date
-          = "#{contract.internal_number}/#{contract.period_date.year}"
-      td = contract.document_date
-      td
-        - if contract.description
-          span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
+  tbody
+    - contracts.each_with_index do |contract, i|
+      tr
+        td
+          - if contract.internal_number && contract.period_date
+            = "#{contract.internal_number}/#{contract.period_date.year}"
+        td = contract.document_date
+        td
+          - if contract.description
+            span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
+              = link_to contract.title, admin_contract_path(contract.id)
+          - else
             = link_to contract.title, admin_contract_path(contract.id)
-        - else
-          = link_to contract.title, admin_contract_path(contract.id)
-      td.text-center
-        - if contract.creator
-          = link_to contract.creator.display_name, "/klubowicze/#{contract.creator.kw_id}"
-      td.text-center = render 'state_bagde', contract: contract, class_value: nil
-      td.text-center = contract.cost
-      td.text-center = render 'state_link', contract: contract, class_value: nil
-      td.text-right
-        - if can? :update, contract
-          = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
-            i.fi.fi-page-edit
-        - if can? :destroy, contract
-          = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
-            i.fi.fi-trash
+        td.text-center
+          - if contract.creator
+            = link_to contract.creator.display_name, "/klubowicze/#{contract.creator.kw_id}"
+        td.text-center = render 'state_bagde', contract: contract, class_value: nil
+        td.text-center = contract.cost
+        td.text-center = render 'state_link', contract: contract, class_value: nil
+        td.text-right
+          - if can? :update, contract
+            = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
+              i.fi.fi-page-edit
+          - if can? :destroy, contract
+            = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
+              i.fi.fi-trash
