@@ -152,11 +152,14 @@ class Ability
 
   def financial_management
     can :accept, Settlement::ContractRecord
+    can :read, Settlement::ContractRecord
+    can :update, Settlement::ContractRecord
     can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
   end
 
   def office_king
+    can :read, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
