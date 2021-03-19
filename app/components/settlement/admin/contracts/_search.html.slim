@@ -32,7 +32,9 @@
       .large-4.columns
         = f.label :document_type_eq_any, 'Rodzaj dokumentu (użyj CTRL)'
         = f.select :document_type_eq_any,
-          Settlement::ContractRecord.document_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.document_types_select,
+          { selected:  params[:q][:document_type_eq_any] },
+          { multiple: true }
 
       .large-4.columns
         = f.label :state_eq_any, 'Status rozliczenia (użyj CTRL)'
@@ -42,44 +44,52 @@
       .large-4.columns
         = f.label :substantive_type_eq_any, 'Grupa wydarzeń (użyj CTRL)'
         = f.select :substantive_type_eq_any,
-          Settlement::ContractRecord.substantive_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.substantive_types_select,
+          { selected:  params[:q][:substantive_type_eq_any] },
+          { multiple: true }
 
     .row
       .large-4.columns
         = f.label :payout_type_eq_any, 'Sposób płatności (użyj CTRL)'
         = f.select :payout_type_eq_any,
-          Settlement::ContractRecord.payout_types_select, { }, { multiple: true }
-
+          Settlement::ContractRecord.payout_types_select,
+          { selected:  params[:q][:payout_type_eq_any] },
+          { multiple: true }
       .large-4.columns
         = f.label :group_type_eq_any, 'Sekcja (użyj CTRL)'
         = f.select :group_type_eq_any,
-          Settlement::ContractRecord.group_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.group_types_select,
+          { selected:  params[:q][:group_type_eq_any] },
+          { multiple: true }
 
       .large-4.columns
         = f.label :activity_type_eq_any, 'Aktywność (użyj CTRL)'
         = f.select :activity_type_eq_any,
-          Settlement::ContractRecord.activity_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.activity_types_select,
+          { selected:  params[:q][:activity_type_eq_any] },
+          { multiple: true }
 
     .row
-      .large-3.columns
+      .large-4.columns
         = f.label :area_type_eq_any, 'Obszar (użyj CTRL)'
         = f.select :area_type_eq_any,
-          Settlement::ContractRecord.area_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.area_types_select,
+          { selected:  params[:q][:area_type_eq_any] },
+          { multiple: true }
 
-      .large-3.columns
+      .large-4.columns
         = f.label :financial_type_eq_any, 'Rodzaj płatności (użyj CTRL)'
         = f.select :financial_type_eq_any,
-          Settlement::ContractRecord.financial_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.financial_types_select,
+          { selected:  params[:q][:financial_type_eq_any] },
+          { multiple: true }
 
-      .large-3.columns
-        = f.label :activity_type_eq_any, 'Aktywność (użyj CTRL)'
-        = f.select :activity_type_eq_any,
-          Settlement::ContractRecord.activity_types_select, { }, { multiple: true }
-
-      .large-3.columns
+      .large-4.columns
         = f.label :event_type_eq_any, 'Impreza (użyj CTRL)'
         = f.select :event_type_eq_any,
-          Settlement::ContractRecord.event_types_select, { }, { multiple: true }
+          Settlement::ContractRecord.event_types_select,
+          { selected:  params[:q][:event_type_eq_any] },
+          { multiple: true }
 
   .row
     .large-2.columns
