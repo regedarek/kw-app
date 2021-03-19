@@ -20,7 +20,6 @@ class Ability
     projects if role?('projects')
     business_courses if role?('business_courses')
     marketing if role?('marketing')
-    management if role?('management')
     voting if role?('voting')
     admin if role?('admin')
 
@@ -87,20 +86,7 @@ class Ability
     can :manage, Training::Activities::ContractRecord
   end
 
-
-
   def settings
-    can :manage, Management::SettingsRecord
-  end
-
-  def management
-    can :search, Settlement::ContractRecord
-    can :create, Training::Supplementary::CourseRecord
-    can :read, Settlement::ContractRecord
-    can :manage, Management::ProjectRecord
-    can :manage, PaperTrail::Version
-    cannot :destroy, Settlement::ContractRecord
-    can :analiza, Settlement::ContractRecord
     can :manage, Management::SettingsRecord
   end
 

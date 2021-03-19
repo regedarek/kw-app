@@ -150,6 +150,7 @@ module Settlement
 
       def finish
         contract = Settlement::ContractRecord.find(params[:id])
+        authorize! :finish, Settlement::ContractRecord
 
         return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj płatności" unless contract.substantive_type && contract.area_type && contract.payout_type
 
