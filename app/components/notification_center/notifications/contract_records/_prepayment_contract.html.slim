@@ -1,5 +1,5 @@
 li style='min-width: 300px;'
   = link_to admin_contract_path(notification.notifiable), class: "#{'unread' if !notification.read_at?}" do
-    b= notification.actor.display_name
-    = " zakończył/a rozliczenie "
+    b= notification.actor&.display_name
+    = " zaakceptował rozliczenie "
     b= notification.notifiable.title
