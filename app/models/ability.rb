@@ -151,6 +151,7 @@ class Ability
   end
 
   def financial_management
+    can :search, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
