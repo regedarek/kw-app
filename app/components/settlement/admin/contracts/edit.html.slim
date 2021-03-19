@@ -11,9 +11,9 @@
   .row
     .large-12.columns
       ul#edit-tabs.tabs data-tabs=""
-        li.tabs-title.is-active
-          a aria-selected="true" href="#new" Dane dokumentu
         li.tabs-title
+          a aria-selected="true" href="#new" Dane dokumentu
+        li.tabs-title.is-active
           a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
         li.tabs-title
           a data-tabs-target="admin" href="#admin" Administracja
@@ -21,7 +21,7 @@
           a data-tabs-target="history" href="#history" Historia zmian
 
       .tabs-content data-tabs-content="edit-tabs"
-        #new.tabs-panel.is-active
+        #new.tabs-panel
           .row
             .large-6.columns
               b= f.label :title
@@ -59,7 +59,7 @@
                 span.input-group-label
                     | zł
 
-        #preaccepted.tabs-panel
+        #preaccepted.tabs-panel.is-active
           .callout
             .row
               .large-3.columns

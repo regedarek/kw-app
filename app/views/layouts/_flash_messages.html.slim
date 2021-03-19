@@ -1,22 +1,28 @@
-.row
-  .large-12.colums
-    - if flash[:warn] || flash[:alert]		
-      .callout.alert data-closable=""
+- if flash[:warn] || flash[:alert]		
+  .callout.alert data-closable=""
+    .row
+      .large-12.colums
         | #{flash[:warn]} #{flash[:alert]}		
         button.close-button aria-label=t('close_alert') data-close="" type="button" 
           span aria-hidden="true"  &times;
-    - if flash[:notice] || flash[:success]		
-      .callout.success data-closable=""
+- if flash[:notice] || flash[:success]		
+  .callout.success data-closable=""
+    .row
+      .large-12.colums
         | #{flash[:notice]} #{flash[:success]}
         button.close-button aria-label=t('close_alert') data-close="" type="button" 
           span aria-hidden="true"  &times;
-    - if flash[:info]		
-      .callout.info data-closable=""
+- if flash[:info]		
+  .callout.info data-closable=""
+    .row
+      .large-12.colums
         | #{flash[:info]}		
         button.close-button aria-label=t('close_alert') data-close="" type="button" 
           span aria-hidden="true"  &times;
-    - if flash[:error]		
-      .callout.alert data-closable=""
+- if flash[:error]		
+  .callout.alert data-closable=""
+    .row
+      .large-12.colums
         | #{flash[:error]}
         button.close-button aria-label=t('close_alert') data-close="" type="button" 
           span aria-hidden="true"  &times;
