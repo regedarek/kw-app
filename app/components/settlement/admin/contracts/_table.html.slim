@@ -18,12 +18,9 @@ tbody
           - else
             = contract.title
       td = contract.creator&.display_name
-      td
-        span.label
-          = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
+      td.text-center = render 'state_bagde', contract: contract, class_value: nil
       td = contract.cost
-      td.text-center
-        = render 'state_link', contract: contract, class_value: nil
+      td.text-center = render 'state_link', contract: contract, class_value: nil
       td.text-right
         - if can? :update, contract
           = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do

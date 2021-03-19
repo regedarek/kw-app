@@ -10,8 +10,7 @@
         = @contract.document_number
 
       .large-6.columns.text-right
-        b Status: 
-        span.label= I18n.t @contract.state
+        = render 'state_bagde', contract: @contract, class_value: nil
 
     .row
       .large-6.columns
