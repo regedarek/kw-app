@@ -48,8 +48,13 @@ module Settlement
 
     class << self
       Settlement::ContractRecord.defined_enums.keys.each do |method|
+        define_method "search_#{method}s_select" do
+          Settlement::ContractRecord.send("#{method}s").map { |name, value| [I18n.t(name, scope: "activerecord.attributes.settlement/contract_record.#{method}s"), value] }
+        end
+      end
+      Settlement::ContractRecord.defined_enums.keys.each do |method|
         define_method "#{method}s_select" do
-          Settlement::ContractRecord.send("#{method}s").map { |w, _| [I18n.t(w, scope: "activerecord.attributes.settlement/contract_record.#{method}s"), w] }
+          Settlement::ContractRecord.send("#{method}s").map { |name, value| [I18n.t(name, scope: "activerecord.attributes.settlement/contract_record.#{method}s"), name] }
         end
       end
     end
