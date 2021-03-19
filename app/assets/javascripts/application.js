@@ -19,8 +19,8 @@ $(function(){ $(document).foundation(); });
 
 
 $(document).ready(function() {
-let selectedTab = window.location.hash;
-$(selectedTab + "-label").trigger('click');
+  var selectedTab = window.location.hash;
+  $(selectedTab + "-label").trigger('click');
 });
 
 $('.js-send-on-enter').keypress(function(e){
