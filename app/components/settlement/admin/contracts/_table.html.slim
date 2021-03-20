@@ -19,11 +19,11 @@ table.stack
   tbody
     - contracts.each_with_index do |contract, i|
       tr
-        td.small-only-text-center
+        td.text-center
           - if contract.internal_number && contract.period_date
             = "#{contract.internal_number}/#{contract.period_date.year}"
-        td.small-only-text-center = contract.document_date
-        td.small-only-text-center
+        td.text-center = contract.document_date
+        td.text-center
           - if contract.description
             span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
               = link_to contract.title, admin_contract_path(contract.id)
@@ -35,10 +35,13 @@ table.stack
         td.text-center = render 'state_bagde', contract: contract, class_value: nil
         td.text-center = contract.cost
         td.text-center = render 'state_link', contract: contract, class_value: nil
-        td.small-only-text-center.large-text-right
+        td.text-center.large-text-right
           - if can? :update, contract
             = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
-              i.fi.fi-page-edit
+              i.fi.fi-large.fi-page-edit
           - if can? :destroy, contract
             = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
-              i.fi.fi-trash
+              .show-for-medium
+                i.fi.fi-trash
+              .show-for-small
+                i.fi.fi-large.fi-trash

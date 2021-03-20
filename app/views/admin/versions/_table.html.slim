@@ -9,8 +9,9 @@ table.table-expand
   tbody
     - @versions.each do |version|
       tr.table-expand-row data-open-details=''
-        td = version.item
-        td = Db::User.find(version.whodunnit)&.display_name
+        td
+          = render "admin/versions/name/#{version.item.model_name.param_key}", item: version.item
+        td = Db::User.find_by(id: version.whodunnit)&.display_name
         td = version.event
         td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
         td
