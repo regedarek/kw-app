@@ -7,8 +7,9 @@
 
 .row
   .large-12.columns
-    = render 'table', projects: Settlement::ProjectRecord.opened
+    .callout
+      = render 'search'
 
 .row
   .large-12.columns
-    = render 'table', projects: Settlement::ProjectRecord.closed
+    = render 'table', projects: @projects

@@ -1,4 +1,6 @@
 pl:
+  open: otwarty
+  closed: zamknięty
   create: utwórz
   update: zmiana
   destroy: usuń

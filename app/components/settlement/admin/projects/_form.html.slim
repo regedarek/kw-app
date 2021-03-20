@@ -8,7 +8,13 @@
               li= msg
 
   .row
-    .large-12.columns
+    .large-6.columns
+      b= f.label :area_type
+      = f.select :area_type,
+        Settlement::ProjectRecord.area_types_select, selected: @project.area_type, include_blank: true
+
+
+    .large-6.columns
       = f.label :name
       = f.text_field :name
 

@@ -1,10 +1,12 @@
 table.stack
   thead
     tr
-      th width='25px' ID
-      th width='35%' Nazwa
-      th width='20%' Kiedy?
-      th width='20%' Kto?
+      th width='45px' ID
+      th Nazwa
+      th width='90px' Status
+      th width='150px' Typ
+      th width='150px' Kiedy?
+      th width='150px' Kto?
       th.text-right width='70px' Wpływy
       th.text-right width='100px' Wydatki
       th.text-right width='75px'
@@ -13,6 +15,12 @@ table.stack
       tr
         td = project.id
         td = link_to project.name, admin_project_path(project.id)
+        td
+          - if project.open?
+            span.label.success = I18n.t project.state
+          - else
+            span.label.alert = I18n.t project.state
+        td = I18n.t(project.area_type, scope: "activerecord.attributes.settlement/project_record.area_types")
         td = project.created_at.strftime("%d/%m/%Y")
         td = project.user&.display_name
         td.text-right = Settlement::ProjectEntity.new.incomings_sum(project)
@@ -21,5 +29,7 @@ table.stack
           - if project.open?
             = link_to close_admin_project_path(project.id), style: 'padding: 5px', method: :put do
               i.fi.fi-lock
+          = link_to edit_admin_project_path(project.id), style: 'padding: 5px' do
+            i.fi.fi-page-edit
           = link_to admin_project_path(project.id), method: :delete, data: { confirm: 'Jestes pewien?' } do
             i.fi.fi-trash

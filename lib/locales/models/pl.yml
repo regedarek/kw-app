@@ -125,6 +125,7 @@ pl:
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
       settlement/contract_record: Rozliczenie
+      settlement/project_record: Rozliczenie
       settlement/contractor_record: Kontrahent
     attributes:
       business/sign_up_record:
@@ -139,6 +140,14 @@ pl:
         rules_html: Oświadczam iż zapoznałem się i akceptuję warunki Regulaminu kursów Klubu Wysokogórskiego Kraków oraz zasadami przetwarzania danych osobowych z pkt 7 Regulaminu kursów i szkoleń Klubu Wysokogórskiego Kraków. <a href=https://drive.google.com/file/d/1AollLCCY1j_Kj0G5njDRCiD_kxW-6yzE/view?usp=sharing>Link do regulaminu</a>
         danger_html: "Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w kursach/szkoleniach organizowanych przez Klub podejmuje na własne ryzyko i odpowiedzialność. Organizator nie odpowiada za przyczynienie się do wypadku/uszkodzenia zdrowia/ciała/mienia w wyniku używania przez uczestnika kurs/szkolenia własnego sprzętu podczas zajęć."
         data_html: "Wyrażam zgodę na otrzymywanie informacji drogą elektroniczną zgodnie z ustawą z dnia 18 lipca 2002 roku o świadczeniu usług drogą elektroniczną (Dz.U. z 2017 r., poz. 1219)."
+      settlement/project_record:
+        name: Nazwa
+        description: Opis
+        area_type: Obszar
+        area_types:
+          other_budget: Inny budżet
+          course_budget: Budżet kursu
+          section_budget: Budżet sekcji
       settlement/contract_record:
         title: Tytuł
         name: Nazwa

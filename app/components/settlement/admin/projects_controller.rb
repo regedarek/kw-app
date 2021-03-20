@@ -4,9 +4,13 @@ module Settlement
       include EitherMatcher
       append_view_path 'app/components'
 
+
       def index
-        @opened_projects = Settlement::ProjectRecord.opened
-        @closed_projects = Settlement::ProjectRecord.closed
+        @q = Settlement::ProjectRecord.all
+        @q = @q.where.not(area_type: 'course_budget', state: ['closed']) unless params[:q]
+        @q = @q.ransack(params[:q])
+        @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
+        @projects = @q.result(distinct: true).page(params[:page])
       end
 
       def new
@@ -21,6 +25,20 @@ module Settlement
           redirect_to admin_project_path(@project.id), notice: 'Utworzono projekt'
         else
           render :new
+        end
+      end
+
+      def edit
+        @project = Settlement::ProjectRecord.find(params[:id])
+      end
+
+      def update
+        @project = Settlement::ProjectRecord.find(params[:id])
+
+        if @project.update(project_params)
+          redirect_to admin_project_path(@project.id), notice: 'Zmieniono projekt'
+        else
+          render :edit
         end
       end
 
@@ -46,7 +64,7 @@ module Settlement
       def project_params
         params
           .require(:project)
-          .permit(:name, :description, :user_id)
+          .permit(:name, :description, :user_id, :area_type)
       end
     end
   end

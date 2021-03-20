@@ -2,10 +2,12 @@ module Settlement
   class ProjectRecord < ActiveRecord::Base
     include Workflow
 
+    self.table_name = 'settlement_projects'
+
     scope :opened, -> { where(state: 'open') }
     scope :closed, -> { where(state: 'closed') }
 
-    self.table_name = 'settlement_projects'
+    enum area_type: { other_budget: 0, course_budget: 1, section_budget: 2 }
 
     belongs_to :user, class_name: 'Db::User'
 
@@ -28,6 +30,14 @@ module Settlement
         event :close, :transitions_to => :closed
       end
       state :closed
+    end
+
+    def self.search_area_types_select
+      area_types.map { |name, value| [I18n.t(name, scope: "activerecord.attributes.settlement/project_record.area_types"), value] }
+    end
+
+    def self.area_types_select
+      area_types.map { |name, value| [I18n.t(name, scope: "activerecord.attributes.settlement/project_record.area_types"), name] }
     end
   end
 end

@@ -12,10 +12,13 @@
   .large-12.columns
     .callout
       .row
-        .large-6.columns
+        .large-4.columns
           b Utworzył: 
           = @project.user&.display_name
-        .large-6.columns
+        .large-4.columns
+          b Obszar: 
+          = I18n.t(@project.area_type, scope: "activerecord.attributes.settlement/project_record.area_types")
+        .large-4.columns
           b Kiedy: 
           = @project.created_at.strftime("%d/%m/%Y")
 

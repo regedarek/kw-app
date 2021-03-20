@@ -1,0 +1,20 @@
+= search_form_for @q, url: admin_projects_path, class: 'js-send-on-enter' do |f|
+  .row
+    .large-1.columns
+      = f.label :id_eq, 'ID'
+      = f.search_field :id_eq
+
+    .large-3.columns
+      = f.label :name_or_description_cont, 'Nazwa lub opis'
+      = f.search_field :name_or_description_cont
+
+    .large-4.columns
+      = f.label :area_type_eq_any, 'Obszar (użyj CTRL)'
+      = f.select :area_type_eq_any,
+        Settlement::ProjectRecord.search_area_types_select,
+        { selected:  params.dig(:q, :area_type_eq_any) },
+        { multiple: true }
+
+    .large-4.columns
+      br
+      = f.submit 'Szukaj', class: 'button expanded'
