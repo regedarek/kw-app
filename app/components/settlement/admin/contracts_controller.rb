@@ -15,7 +15,7 @@ module Settlement
       end
 
       def history
-        @versions = PaperTrail::Version.includes(:item).where(item_type: ["Settlement::ContractorRecord", "Settlement::ContractRecord"]).page(params[:page]).per(10)
+        @versions = PaperTrail::Version.includes(:item).where(item_type: ["Settlement::ContractorRecord", "Settlement::ContractRecord"]).order(created_at: :desc).page(params[:page]).per(10)
       end
 
       def analiza

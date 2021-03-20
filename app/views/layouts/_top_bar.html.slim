@@ -50,8 +50,10 @@
                 li
                   = link_to 'Rozliczenia', admin_contracts_path
                   ul.menu.vertical
+                    li= link_to 'Rozliczenia', admin_contracts_path
                     li= link_to 'Projekty finansowe', admin_projects_path
                     li= link_to 'Kontrahenci', admin_contractors_path
+                    li= link_to 'Historia', history_admin_contracts_path
 
           - if current_user.roles.include?('management')
             li
