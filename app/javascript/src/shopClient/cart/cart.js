@@ -3,7 +3,7 @@ import {removeFromCart} from "../state/actions";
 import { connect } from "react-redux";
 import 'whatwg-fetch';
 
-function Cart({items, userId}) {
+function Cart({items, userId, removeFromCart}) {
     console.log(userId)
 
     const goToCheckout = () => {
@@ -23,6 +23,10 @@ function Cart({items, userId}) {
                     }))
                 }
             })          
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/zamowienia/${data.id}`
         })
     }
 
@@ -53,7 +57,7 @@ function Cart({items, userId}) {
                                         {el.quantity}
                                     </div>
                                     <div className="columns large-3 text-center">
-                                        <button className="button danger" onClick={() => removeFromCart(idx)}>Usuń</button>
+                                        <button className="button danger" onClick={() => {removeFromCart(idx)}}>Usuń</button>
                                     </div>
                             </div>
                         )
@@ -73,4 +77,4 @@ const mapStateToProps = state => {
     const { items } = state;
     return { items };
 }
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, { removeFromCart })(Cart);
