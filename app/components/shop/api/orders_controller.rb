@@ -16,7 +16,7 @@ module Shop
       private
 
       def order_params
-        params.require(:order).permit(:user_id, order_items_attributes: [:id, :item_id, :user_id, :item_kind_id])
+        params.require(:order).permit(:user_id, order_items_attributes: [:id, :item_id, :user_id, :item_kind_id, :quantity, :size])
       end
     end
   end
