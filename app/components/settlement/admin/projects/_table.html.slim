@@ -11,7 +11,7 @@ table.stack
       th.text-right width='100px' Wydatki
       th.text-right width='75px'
   tbody
-    - projects.includes(:project_items, :contracts, :business_courses, :user).each_with_index do |project,i|
+    - projects.includes(:project_items, :business_courses, :user).each_with_index do |project,i|
       tr
         td = project.id
         td = link_to project.name, admin_project_path(project.id)
