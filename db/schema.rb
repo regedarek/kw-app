@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_20_171301) do
+ActiveRecord::Schema.define(version: 2021_03_20_181636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -825,6 +825,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_171301) do
     t.integer "accountable_id", null: false
     t.integer "project_id"
     t.integer "user_id"
+    t.float "cost"
     t.index ["accountable_type", "accountable_id"], name: "settlement_project_items_uniq", unique: true
   end
 

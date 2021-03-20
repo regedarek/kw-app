@@ -13,7 +13,10 @@ module Settlement
 
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
-    has_many :project_items, class_name: 'Settlement::ProjectItemRecord', foreign_key: :project_id
+    has_many :project_items,
+      class_name: 'Settlement::ProjectItemRecord',
+      foreign_key: :project_id
+
     has_many :business_courses,
       through: :project_items,
       source: :accountable,

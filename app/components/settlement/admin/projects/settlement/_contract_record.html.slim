@@ -1,11 +1,19 @@
-.row
-  .large-12.columns
-    .callout
+.callout
+  .row
+    .large-8.columns
       - contract = item.accountable
       = link_to contract.title
       br
-      = sanitize "<b>Cena</b>: #{contract.cost} zł"
+      = sanitize "<b>Kwota rozliczenia</b>: #{contract.cost} zł"
+      - if item.cost
+        br
+        = sanitize "<b>Kwota dotycząca projektu</b>: #{item.cost} zł"
       br
       = sanitize "<b>Utworzył</b>: #{contract.creator&.display_name}"
       br
       = sanitize "<b>Dotyczy</b>: #{contract.contractor&.name}"
+
+    .large-4.columns
+      = form_for item, as: :project_item, url: admin_project_item_path(item.id), method: :put do |f|
+        = f.number_field :cost, step: 0.1
+        = f.submit 'Wytnij koszt', class: 'button'

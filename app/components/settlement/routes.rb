@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
     namespace :admin do
       resources :contractors
+      resources :project_items, only: :update
       resources :projects do
         member do
           put :close

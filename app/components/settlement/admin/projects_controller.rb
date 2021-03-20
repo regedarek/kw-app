@@ -4,7 +4,6 @@ module Settlement
       include EitherMatcher
       append_view_path 'app/components'
 
-
       def index
         @q = Settlement::ProjectRecord.all
         @q = @q.where.not(area_type: 'course_budget', state: ['closed']) unless params[:q]
