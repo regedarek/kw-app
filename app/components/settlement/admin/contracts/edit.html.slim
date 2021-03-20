@@ -16,20 +16,24 @@
       ul#edit-tabs.tabs data-tabs=""
         li.tabs-title
           a aria-selected="true" href="#new" Dane dokumentu
-        li.tabs-title.is-active
-          a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
-        li.tabs-title
-          a data-tabs-target="admin" href="#admin" Administracja
+        - if can?(:accept, @contract) || can?(:prepayment, @contract)
+          li.tabs-title.is-active
+            a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
+        - if can?(:finish, @contract)
+          li.tabs-title
+            a data-tabs-target="admin" href="#admin" Administracja
         li.tabs-title
           a data-tabs-target="history" href="#history" Historia zmian
 
       .tabs-content data-tabs-content="edit-tabs"
         #new.tabs-panel
           = render 'settlement/admin/contracts/edit/new', f: f
-        #preaccepted.tabs-panel.is-active
-          = render 'settlement/admin/contracts/edit/preaccepted', f: f
-        #admin.tabs-panel
-          = render 'settlement/admin/contracts/edit/admin', f: f
+        - if can?(:accept, @contract) || can?(:prepayment, @contract)
+          #preaccepted.tabs-panel.is-active
+            = render 'settlement/admin/contracts/edit/preaccepted', f: f
+        - if can?(:finish, @contract)
+          #admin.tabs-panel
+            = render 'settlement/admin/contracts/edit/admin', f: f
         #history.tabs-panel
           = render 'settlement/admin/contracts/edit/history', f: f
 
