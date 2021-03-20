@@ -7,24 +7,7 @@
       .large-12.columns
         .callout
           = sanitize @contractor.description
-    .row
-      .large-12.columns
-        h6 Zapytania sponsorskie
-        = render 'marketing/sponsorship_requests/table', sponsorship_requests: @contractor.sponsorship_requests
-    .row
-      .large-12.columns
-        h6 = "Rozliczenia: #{@contractor.contracts.sum(:cost)} zł"
-    table.stack
-      thead
-        tr
-          th ID
-          th Nazwa
-          th Kto?
-          th Status
-          th Kwota
-          th Akcept
-          th
-        = render 'settlement/admin/contracts/table', contracts: @contractor.contracts
+
     .row
       .large-6.columns
         = link_to 'edytuj', edit_admin_contractor_path(@contractor.id), class: 'button expanded secondary'
