@@ -1,3 +1,6 @@
+= javascript_pack_tag 'shop_client_components'
+= stylesheet_pack_tag 'shop_client_components'
+
 .row
   .large-6.columns
     .card.card-product
@@ -11,8 +14,12 @@
             = simple_format @item.description
     = link_to 'wróć do sklepiku', '/sklepik', class: 'button secondary expanded'
   .large-6.columns
-    h5 Komentarze
-    = render 'messaging/comments/comments', commentable: @item
+    .row
+      div#add-to-cart data={ userId: current_user.id, itemKinds: @item.item_kinds.to_json, itemId: @item.id }
 
-    .callout
-      = render 'messaging/comments/form', commentable: @item
+    .row
+      h5 Komentarze
+      = render 'messaging/comments/comments', commentable: @item
+
+      .callout
+        = render 'messaging/comments/form', commentable: @item
