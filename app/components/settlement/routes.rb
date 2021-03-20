@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   scope module: 'settlement' do
+    namespace :api do
+      resources :contractors
+    end
     namespace :admin do
       resources :contractors
       resources :projects do
