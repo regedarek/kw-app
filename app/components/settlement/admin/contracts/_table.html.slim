@@ -38,10 +38,7 @@ table.stack
         td.text-center.large-text-right
           - if can? :update, contract
             = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
-              i.fi.fi-large.fi-page-edit
+              i.fi.fi-page-edit
           - if can? :destroy, contract
             = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
-              .show-for-medium
-                i.fi.fi-trash
-              .show-for-small
-                i.fi.fi-large.fi-trash
+              i.fi.fi-trash
