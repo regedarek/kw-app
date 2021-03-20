@@ -12,10 +12,7 @@ table.table-expand
       - if version.item
         tr.table-expand-row data-open-details=''
           td
-            - if version.item_type == 'Settlement::ContractRecord'
-              = link_to version.item.try(:title), admin_contract_path(version.item_id)
-            - else
-              = version.item.try(:name) || version.item.try(:title)
+            b = version.item.try(:name) || version.item.try(:title)
           td = Db::User.find_by(id: version.whodunnit)&.display_name
           td = version.item.model_name.human
           td = I18n.t version.event
@@ -24,7 +21,7 @@ table.table-expand
             = link_to 'Zmiany', '#'
             span.expand-icon
         tr.table-expand-row-content
-          td.table-expand-row-nested colspan=6
+          td.table-expand-row-nested colspan=5
             ul
               - version.changeset.each do |change|
                 - if change[1][0].to_s != change[1][1].to_s
@@ -39,3 +36,7 @@ table.table-expand
                       = "#{Db::User.find_by(id: change[1][0])&.display_name} na #{Db::User.find_by(id: change[1][1])&.display_name}"
                     - else
                       = "#{change[1][0]} na #{change[1][1]}"
+          td colspan=2
+            - if version.item_type == 'Settlement::ContractRecord'
+              .text-right
+                = link_to 'Przejdź do', admin_contract_path(version.item_id), class: 'button', target: :_blank
