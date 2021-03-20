@@ -2,7 +2,7 @@ module Settlement
   class ProjectEntity
     def incomings_sum(project)
       project.project_items.includes(:accountable).where(accountable_type: ['Business::CourseRecord', 'Settlement::IncomeRecord']).inject(0) do |sum, item|
-        sum += item.accountable.cost if item.accountable_type == 'Settlement::IncomeRecord'
+        sum += item.accountable.try(:cost).to_f if item.accountable_type == 'Settlement::IncomeRecord'
         sum += item.try(:accountable).try(:price).to_f if item.accountable_type == 'Business::CourseRecord'
         sum
       end
