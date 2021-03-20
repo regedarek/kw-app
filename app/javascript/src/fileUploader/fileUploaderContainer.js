@@ -2,6 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import FileUploader from "./fileUploader";
 import FileList from "./fileList";
+import Spinner from "../spinner";
 
 import axios from "axios";
 
@@ -60,21 +61,31 @@ class FileUploaderContainer extends React.Component {
 
   onFileRemove(id) {
     if (window.confirm("Czy na pewno chcesz usunąć zdjęcie? Tej akcji nie da się cofnąć")) {
-      
       this.setState({
-        files: this.state.files.filter(el => el.id !== id)
+        isLoading: true
+      })
+      window.fetch(`${uploadPath}/${id}`, {
+        method: 'DELETE'
+      })
+      .then(() => {
+        this.setState({
+          files: this.state.files.filter(el => el.id !== id),
+          isLoading: false
+        })
       })
     }
   }
 
   render() {
+    const {isLoading, files, maxFiles, maxFileSize, uploadProgress} = this.state;
     return (
         <>
-          <FileList files={this.state.files} onFileRemove={this.onFileRemove.bind(this)}/>
-          {this.state.files.length < this.state.maxFiles && !this.state.uploadProgress && <FileUploader maxSize={this.state.maxFileSize} onFileChange={this.onFileChange.bind(this)} />}
-          {this.state.uploadProgress && (
-            <div className="progress" role="progressbar" tabIndex="0" aria-valuenow={parseInt(this.state.uploadProgress*100)} aria-valuemin="0" aria-valuemax="100">
-              <div className="progress-meter" style={{width: parseInt(this.state.uploadProgress*100) + "%"}}></div>
+          {isLoading && <Spinner></Spinner>}
+          <FileList files={files} onFileRemove={this.onFileRemove.bind(this)}/>
+          {files.length < maxFiles && !uploadProgress && <FileUploader maxSize={maxFileSize} onFileChange={this.onFileChange.bind(this)} />}
+          {uploadProgress && (
+            <div className="progress" role="progressbar" tabIndex="0" aria-valuenow={parseInt(uploadProgress*100)} aria-valuemin="0" aria-valuemax="100">
+              <div className="progress-meter" style={{width: parseInt(uploadProgress*100) + "%"}}></div>
             </div>
           )}
         </>

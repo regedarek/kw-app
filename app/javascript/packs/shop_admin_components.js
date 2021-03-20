@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ShopApp from "../src/shop";
+import ShopApp from "../src/shopAdmin";
 
 document.addEventListener('DOMContentLoaded', () => {
     const shopEl = document.getElementById("shop");

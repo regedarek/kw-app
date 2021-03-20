@@ -5,8 +5,8 @@ import {
     Route
   } from "react-router-dom";
 
-  import ItemsList from "./itemsList"
-  import ItemEdit from "./itemEdit";
+import ItemsList from "./itemsList"
+import ItemEdit from "./itemEdit";
 import ShopContext from "./shopContext";
 
 function ShopApp({userId}) {
