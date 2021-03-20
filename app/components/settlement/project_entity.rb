@@ -8,15 +8,11 @@ module Settlement
 
     def outcomings_sum(project)
       project.project_items.includes(:accountable).where(accountable_type: 'Settlement::ContractRecord').inject(0) do |sum, item|
-        if item
-          if item.cost
-            sum += item.cost
-          else
-            sum += item.accountable.cost
-          end
+        if item.try(:cost)
+          sum += item.try(:cost)
         else
-          sum += 0
-        end
+          sum += item.try(:accountable).try(:cost)
+        end.to_f
       end
     end
   end
