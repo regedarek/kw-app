@@ -1,7 +1,7 @@
 module Admin
   class VersionsController < Admin::BaseController
     def index
-      @versions = PaperTrail::Version.includes(:item).order(created_at: :desc).page(params[:page]).per(20)
+      @versions = PaperTrail::Version.includes(:item).order(created_at: :desc).page(params[:page]).per(10)
     end
 
     def revert

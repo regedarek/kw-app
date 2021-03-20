@@ -1,4 +1,4 @@
-table.stack
+table.table-expand
   thead
     tr
       th width='40%' Co?
@@ -8,20 +8,17 @@ table.stack
       th width='10%' Metadata
   tbody
     - @versions.each do |version|
-      tr
+      tr.table-expand-row data-open-details=''
         td
-          - if version.item
-            - if version.item.is_a? Settlement::ContractRecord
-              = version.item&.title
-            - elsif version.item.is_a? Settlement::ContractorRecord
-              = version.item&.name
-            - else
-              = link_to version.item&.name, polymorphic_url(version.item)
-          - else
-            = version.item_type
+          = render "admin/versions/name/#{version.item.model_name.param_key}", item: version.item
         td = Db::User.find(version.whodunnit)&.display_name
         td = version.event
         td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
         td
-          span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.object_changes}</ul>" data-allow-html="true"
-            = link_to 'Zmiany', '#'
+          | Zmiany
+          span.expand-icon
+      tr.table-expand-row-content
+        td.table-expand-row-nested colspan=5
+          ul
+            - version.changeset.each do |change|
+              li = change

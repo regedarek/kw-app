@@ -1,3 +1,42 @@
+.table-expand-row {
+  &.is-active {
+    .expand-icon::after {
+      content: '-';
+    }
+  }
+
+  .expand-icon::after {
+    content: '+';
+    float: right;
+  }
+}
+
+// this is where the magic happens
+.table-expand-row-content {
+  display: none;
+}
+
+.table-expand-row-content {
+  &.is-active {
+    display: table-row;
+    animation: fadeIn ease-in 1;
+    animation-fill-mode: both;
+    animation-duration: 0.5s;
+  }
+}
+
+.table-expand-row-nested {
+  background-color: $light-gray;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .dashboard-table-text {
   font-size: 1rem;
   font-weight: 400;
