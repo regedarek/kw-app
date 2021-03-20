@@ -8,11 +8,10 @@ table.table-expand
       th width='20%' Kiedy?
       th width='10%' Metadata
   tbody
-    - @versions.each do |version|
+    - versions.each do |version|
       - if version.item
         tr.table-expand-row data-open-details=''
-          td
-            b = version.item.try(:name) || version.item.try(:title)
+          td = version.item.try(:name) || version.item.try(:title)
           td = Db::User.find_by(id: version.whodunnit)&.display_name
           td = version.item.model_name.human
           td = I18n.t version.event
