@@ -19,11 +19,11 @@ table.stack
   tbody
     - contracts.each_with_index do |contract, i|
       tr
-        td
+        td.small-only-text-center
           - if contract.internal_number && contract.period_date
             = "#{contract.internal_number}/#{contract.period_date.year}"
-        td = contract.document_date
-        td
+        td.small-only-text-center = contract.document_date
+        td.small-only-text-center
           - if contract.description
             span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
               = link_to contract.title, admin_contract_path(contract.id)
@@ -35,7 +35,7 @@ table.stack
         td.text-center = render 'state_bagde', contract: contract, class_value: nil
         td.text-center = contract.cost
         td.text-center = render 'state_link', contract: contract, class_value: nil
-        td.text-right
+        td.small-only-text-center.large-text-right
           - if can? :update, contract
             = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
               i.fi.fi-page-edit
