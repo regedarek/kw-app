@@ -37,6 +37,7 @@ module Business
         @course.update(sign_up_url: "https://panel.kw.krakow.pl/kursy/#{@course.slug}")
         project = ::Settlement::ProjectRecord.create(
           name: @course.name_with_date,
+          area_type: :course_budget,
           user_id: current_user.id
         )
         ::Settlement::ProjectItemRecord.create(

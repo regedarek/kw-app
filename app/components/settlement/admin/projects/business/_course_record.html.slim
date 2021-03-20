@@ -1,7 +1,7 @@
-.row
-  .large-12.columns
-    .callout
-      - if item.accountable
+- if item.accountable
+  .callout
+    .row
+      .large-8.columns
         = link_to item.accountable.name, item.accountable
         br
         = sanitize "<b>Cena</b>: #{item.accountable.price} zł"

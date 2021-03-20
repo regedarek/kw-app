@@ -216,6 +216,10 @@ module Business
       end
     end
 
+    def cost
+      price
+    end
+
     def as_json(options={})
       super.merge(
         activity_url: activity_url,
