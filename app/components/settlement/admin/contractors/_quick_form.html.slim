@@ -1,0 +1,17 @@
+.row
+  .small-6.columns
+    b= f.label :name, "Nazwa kontrahenta*"
+    = f.text_field :name
+
+  .small-6.columns
+    b= f.label :nip, "NIP"
+    = f.text_field :nip
+
+.row
+  .medium-12.columns
+    .callout
+      b= f.label :description, "Opis"
+      = f.trix_editor :description, style: 'min-height: 80px; max-height:100px;'
+
+= f.hidden_field :reason_type, value: :contracts
+

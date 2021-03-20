@@ -9,7 +9,7 @@
         - if can? :read, Settlement::ContractorRecord
           = link_to 'Kontrahenci', admin_contractors_path, class: 'button warning'
         - if can? :create, Settlement::ContractorRecord
-          = link_to 'Nowy kontrahent', new_admin_contractor_path, class: 'button warning', onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+          = link_to 'Nowy kontrahent', new_admin_contractor_path(quick: true), class: 'button warning', onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
         - if can? :create, Settlement::ContractRecord
           = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
 

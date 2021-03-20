@@ -20,12 +20,19 @@ module Settlement
 
         either(create_record) do |result|
           result.success do |a|
-            if contractor_params[:back_url] == 'sponsorship_requests'
-              redirect_to sponsorship_requests_path, notice: 'Dodano'
-            elsif contractor_params[:back_url] == 'new_sponsorship_request'
-              redirect_to new_sponsorship_request_path, notice: 'Dodano'
+            if params[:quick]
+              @contractor = Settlement::ContractorRecord.new(contractor_params)
+              flash[:notice] = "Dodano kontrahenta"
+              params[:quick] = true
+              render :new
             else
-              redirect_to admin_contractors_path, notice: 'Dodano'
+              if contractor_params[:back_url] == 'sponsorship_requests'
+                redirect_to sponsorship_requests_path, notice: 'Dodano'
+              elsif contractor_params[:back_url] == 'new_sponsorship_request'
+                redirect_to new_sponsorship_request_path, notice: 'Dodano'
+              else
+                redirect_to admin_contractors_path, notice: 'Dodano'
+              end
             end
           end
 

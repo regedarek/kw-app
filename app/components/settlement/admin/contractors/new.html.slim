@@ -7,9 +7,17 @@
             - @contractor.errors.full_messages.each do |msg|
               li= msg
 
-      = render 'form', f: f
+      - if params[:quick]
+        = render 'quick_form', f: f
+        = hidden_field_tag :quick, true
+      - else
+        = render 'form', f: f
 
-      = f.submit 'Utwórz kontrahenta', class: 'button'
-      = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
-      = link_to 'wróć do zapytań sponsorskich', sponsorship_requests_path, class: 'button warning'
-      = link_to 'wróć do kontrahentów', admin_contractors_path, class: 'button warning'
+
+      = f.submit 'utwórz', class: 'button'
+      - if params[:quick]
+        = link_to 'zamknij', '_self', :onclick=>'window.close();', class: 'button alert'
+      - unless params[:quick]
+        = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
+        = link_to 'wróć do zapytań sponsorskich', sponsorship_requests_path, class: 'button warning'
+        = link_to 'wróć do kontrahentów', admin_contractors_path, class: 'button warning'
