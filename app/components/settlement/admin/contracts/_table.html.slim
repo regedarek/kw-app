@@ -1,11 +1,11 @@
 table.stack
   thead
     tr
-      th width='80px'
+      th.text-center width='80px'
         = sort_link(@q, :internal_number, 'ID', default_order: :desc)
-      th width='110px'
+      th.text-center width='110px'
         = sort_link(@q, :document_date, 'Data', default_order: :desc)
-      th width='300px'
+      th.text-center width='300px'
         = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
       th.text-center width='160px'
         = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
