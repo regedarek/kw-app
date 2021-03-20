@@ -1,0 +1,37 @@
+table.table-expand
+  thead
+    tr
+      th Co?
+      th width='150px' Kto?
+      th width='120px' Typ
+      th width='10%' Akcja?
+      th width='20%' Kiedy?
+      th width='10%' Metadata
+  tbody
+    - @versions.each do |version|
+      tr.table-expand-row data-open-details=''
+        td
+          = version.item.try(:name) || version.item.try(:title)
+        td = Db::User.find_by(id: version.whodunnit)&.display_name
+        td = version.item.model_name.human
+        td = I18n.t version.event
+        td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
+        td
+          = link_to 'Zmiany', '#'
+          span.expand-icon
+      tr.table-expand-row-content
+        td.table-expand-row-nested colspan=6
+          ul
+            - version.changeset.each do |change|
+              - if change[1][0].to_s != change[1][1].to_s
+                li
+                  b = "#{Settlement::ContractRecord.human_attribute_name(change[0], locale: :pl)}: "
+                  - if ['updated_at','created_at','preclosed_date'].include?(change[0])
+                    = "#{change[1][0]&.strftime('%Y-%m-%d %H:%M')} na #{change[1][1]&.strftime('%Y-%m-%d %H:%M')}"
+                  - elsif ['reason_type'].include?(change[0])
+                  - elsif ['state'].include?(change[0])
+                    = "#{I18n.t(change[1][0], scope: "activerecord.attributes.settlement/contract_record.states")} na #{I18n.t(change[1][1], scope: "activerecord.attributes.settlement/contract_record.states")}"
+                  - elsif ['creator_id','acceptor_id', 'contractor_id', 'user_id','checker_id'].include?(change[0])
+                    = "#{Db::User.find_by(id: change[1][0])&.display_name} na #{Db::User.find_by(id: change[1][1])&.display_name}"
+                  - else
+                    = "#{change[1][0]} na #{change[1][1]}"

@@ -4,11 +4,13 @@
       - if @errors
         .row
           .large-12.columns
-            .callout.alert
+            .callout.alert data-closable=""
               ul
                 - @errors.each do |key,value|
                   li
                     = "#{I18n.t("#{key}", scope: "activerecord.attributes.settlement/contract_record")} #{value.to_sentence}, "
+              button.close-button aria-label=t('close_alert') data-close="" type="button" 
+                span aria-hidden="true"  &times;
 
       .row
         .large-6.columns

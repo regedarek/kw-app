@@ -14,6 +14,10 @@ module Settlement
         @contracts = @q.result(distinct: true).includes([:acceptor, :creator, :checker]).page(params[:page])
       end
 
+      def history
+        @versions = PaperTrail::Version.includes(:item).where(item_type: ["Settlement::ContractorRecord", "Settlement::ContractRecord"]).page(params[:page]).per(10)
+      end
+
       def analiza
         start_date = Date.new(params[:year].to_i, 1, 1)
         end_date = Date.new(params[:year].to_i, 12, 31)

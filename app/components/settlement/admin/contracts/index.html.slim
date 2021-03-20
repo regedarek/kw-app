@@ -1,17 +1,9 @@
 .columns
   .row
-    .large-6.columns
-      h3 Rozliczenia, faktury, przelewy, umowy
-    .large-6.columns
-      .text-right
-        - if can? :read, Settlement::ProjectRecord
-          = link_to 'Projekty finansowe', admin_projects_path, class: 'button alert'
-        - if can? :read, Settlement::ContractorRecord
-          = link_to 'Kontrahenci', admin_contractors_path, class: 'button warning'
-        - if can? :create, Settlement::ContractorRecord
-          = link_to 'Nowy kontrahent', new_admin_contractor_path(quick: true), class: 'button warning', onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-        - if can? :create, Settlement::ContractRecord
-          = link_to 'Nowe rozliczenie', new_admin_contract_path, class: 'button'
+    .large-2.columns
+      h3 Rozliczenia
+    .large-10.columns
+      = render 'settlement/admin/contracts/menu'
 
   - if can? :search, Settlement::ContractRecord
     .row

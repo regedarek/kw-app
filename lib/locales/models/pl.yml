@@ -124,6 +124,8 @@ pl:
       db/membership_fee: Składka
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
+      settlement/contract_record: Rozliczenie
+      settlement/contractor_record: Kontrahent
     attributes:
       business/sign_up_record:
         name: Imię i nazwisko
@@ -139,6 +141,14 @@ pl:
         data_html: "Wyrażam zgodę na otrzymywanie informacji drogą elektroniczną zgodnie z ustawą z dnia 18 lipca 2002 roku o świadczeniu usług drogą elektroniczną (Dz.U. z 2017 r., poz. 1219)."
       settlement/contract_record:
         title: Tytuł
+        name: Nazwa
+        id: ID
+        updated_at: Ostatnia zmiana
+        created_at: Utworzono
+        creator_id: Utworzył
+        preclosed_date: Data akceptacji
+        period_date: Rok
+        description: Opis
         contractor_id: Kontrahent
         acceptor_id: Akceptujacy
         checker_id: Sprawdzajacy

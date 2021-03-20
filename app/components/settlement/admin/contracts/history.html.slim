@@ -1,0 +1,14 @@
+.columns
+  .row
+    .large-2.columns
+      h3 Historia rozliczeń
+    .large-10.columns
+      = render 'settlement/admin/contracts/menu'
+
+  .row
+    .large-12.columns
+      = render 'history_table', versions: @versions
+
+  .row
+    .large-12.columns
+      = paginate @versions

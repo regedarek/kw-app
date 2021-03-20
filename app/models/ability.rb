@@ -141,6 +141,7 @@ class Ability
   end
 
   def secondary_management
+    can :read, PaperTrail::Version
     can :search, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
@@ -152,6 +153,7 @@ class Ability
   end
 
   def financial_management
+    can :read, PaperTrail::Version
     can :search, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
@@ -162,6 +164,7 @@ class Ability
   end
 
   def office_king
+    can :read, PaperTrail::Version
     can :read, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
