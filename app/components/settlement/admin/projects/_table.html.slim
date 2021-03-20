@@ -1,23 +1,25 @@
 table.stack
   thead
     tr
-      th width='25px' Lp
-      th width='45%' Nazwa
+      th width='25px' ID
+      th width='35%' Nazwa
       th width='20%' Kiedy?
       th width='20%' Kto?
       th.text-right width='70px' Wpływy
-      th.text-right width='70px' Wydatki
+      th.text-right width='100px' Wydatki
+      th.text-right width='75px'
   tbody
-    - projects.includes(:project_items, :contracts).each_with_index do |project,i|
+    - projects.includes(:project_items, :contracts, :business_courses, :user).each_with_index do |project,i|
       tr
-        td = i + 1
-        td
-          = link_to project.name, admin_project_path(project.id)
-        td
-         = project.created_at.strftime("%d/%m/%Y")
-        td
-         = project.user&.display_name
+        td = project.id
+        td = link_to project.name, admin_project_path(project.id)
+        td = project.created_at.strftime("%d/%m/%Y")
+        td = project.user&.display_name
+        td.text-right = Settlement::ProjectEntity.new.incomings_sum(project)
+        td.text-right = Settlement::ProjectEntity.new.outcomings_sum(project)
         td.text-right
-         = Settlement::ProjectEntity.new.incomings_sum(project)
-        td.text-right
-         = Settlement::ProjectEntity.new.outcomings_sum(project)
+          - if project.open?
+            = link_to close_admin_project_path(project.id), style: 'padding: 5px', method: :put do
+              i.fi.fi-lock
+          = link_to admin_project_path(project.id), method: :delete, data: { confirm: 'Jestes pewien?' } do
+            i.fi.fi-trash

@@ -4,13 +4,17 @@
       = f.label :internal_number_eq, 'ID'
       = f.search_field :internal_number_eq
 
-    .large-6.columns
+    .large-4.columns
       = f.label :document_number_or_title_or_description_cont, 'Numer, nazwa lub opis dokumentu'
       = f.search_field :document_number_or_title_or_description_cont
 
-    .large-5.columns
+    .large-4.columns
       = f.label :contractor_nip_or_contractor_name_cont, 'Kontrahent(nip, nazwa)'
       = f.search_field :contractor_nip_or_contractor_name_cont
+
+    .large-3.columns
+      = f.label :projects_name_cont, 'Projekt(nazwa)'
+      = f.search_field :projects_name_cont
 
   #panel.hide data-toggler='.hide'
     .row

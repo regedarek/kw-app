@@ -4,6 +4,8 @@
       h3 Rozliczenia, faktury, przelewy, umowy
     .large-6.columns
       .text-right
+        - if can? :read, Settlement::ProjectRecord
+          = link_to 'Projekty finansowe', admin_projects_path, class: 'button alert'
         - if can? :read, Settlement::ContractorRecord
           = link_to 'Kontrahenci', admin_contractors_path, class: 'button warning'
         - if can? :create, Settlement::ContractorRecord

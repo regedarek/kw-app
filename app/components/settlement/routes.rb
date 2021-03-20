@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   scope module: 'settlement' do
     namespace :admin do
       resources :contractors
-      resources :projects
+      resources :projects do
+        member do
+          put :close
+        end
+      end
       resources :contracts do
         member do
           get :download_attachment

@@ -18,7 +18,6 @@
         = @contract.cost
         |  zł
 
-
     .row
       .large-12.columns
         b Data dokumentu: 
@@ -105,6 +104,11 @@
           b Kto zaakceptowal rozliczenie: 
           = @contract.acceptor&.display_name
 
+    - if @contract.projects.any?
+      .row
+        .large-12.columns
+          b Projekt: 
+          = link_to @contract.projects.first.name, admin_project_path(@contract.projects.first.id)
 
     - if @contract.description
       br
@@ -112,7 +116,6 @@
         .large-12.columns
           .callout
             = sanitize @contract.description
-
 
     - if @contract.users.any?
       .row

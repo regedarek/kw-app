@@ -4,6 +4,11 @@
 
   .large-4.columns
       = link_to 'Dodaj projekt', new_admin_project_path, class: 'button expanded medium'
+
 .row
   .large-12.columns
-    = render 'table', projects: @projects
+    = render 'table', projects: Settlement::ProjectRecord.opened
+
+.row
+  .large-12.columns
+    = render 'table', projects: Settlement::ProjectRecord.closed

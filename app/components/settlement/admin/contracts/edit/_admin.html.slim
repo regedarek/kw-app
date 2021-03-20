@@ -1,0 +1,28 @@
+.row
+  .large-2.columns
+    b= f.label :internal_number, 'Numer wewnętrzny'
+    = f.number_field :internal_number
+
+  .large-3.columns
+    b= f.label :period_date, 'Rok rozliczeniowy'
+    = f.date_select :period_date,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
+
+  .large-3.columns
+    b= f.label :state
+    = f.select :state, Settlement::ContractRecord.states_select, selected: @contract.state
+
+  .large-2.columns
+    b= f.label :checker_id
+    = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').or(Db::User.where('roles @> ARRAY[?]', 'secondary_management')).map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
+
+  .large-2.columns
+    b= f.label :acceptor_id
+    = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
+
+.row
+  .large-12.columns
+    = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
+    = f.select :user_ids,
+      Db::User.all.map { |u| [u.display_name, u.id] },
+      { },
+      { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }

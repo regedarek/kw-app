@@ -1,5 +1,10 @@
 module Settlement
   class ProjectRecord < ActiveRecord::Base
+    include Workflow
+
+    scope :opened, -> { where(state: 'open') }
+    scope :closed, -> { where(state: 'closed') }
+
     self.table_name = 'settlement_projects'
 
     belongs_to :user, class_name: 'Db::User'
@@ -16,5 +21,13 @@ module Settlement
       through: :project_items,
       source: :accountable,
       source_type: 'Settlement::ContractRecord'
+
+    workflow_column :state
+    workflow do
+      state :open do
+        event :close, :transitions_to => :closed
+      end
+      state :closed
+    end
   end
 end

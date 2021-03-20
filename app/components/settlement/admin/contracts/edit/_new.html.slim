@@ -1,0 +1,38 @@
+.row
+  .large-6.columns
+    b= f.label :title
+    = f.text_field :title
+
+  .large-6.columns
+    = f.label :contractor_id
+      = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+    = f.select :contractor_id,
+      Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
+      { include_blank: true},
+      { class: 'js-select-multiple', style: 'width: 100%' }
+
+.row
+  .large-3.columns
+    b= f.label :document_number
+    = f.text_field :document_number
+
+  .large-2.columns
+    b= f.label :document_date
+    = f.date_field :document_date
+
+  .large-2.columns
+    b= f.label :document_type
+    = f.select :document_type,
+      Settlement::ContractRecord.document_types_select, include_blank: true
+
+  .large-2.columns
+    b= f.label :payout_type
+    = f.select :payout_type,
+      Settlement::ContractRecord.payout_types_select, include_blank: true
+
+  .large-3.columns
+    b= f.label :cost, "Kwota rozliczenia*"
+    .input-group
+      = f.number_field :cost, step: 0.01, class: 'input-group-field'
+      span.input-group-label
+          | zł

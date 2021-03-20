@@ -1,0 +1,16 @@
+table.stack
+  thead
+    tr
+      th width='20%' Kto?
+      th width='10%' Akcja?
+      th width='20%' Kiedy?
+      th width='10%' Metadata
+  tbody
+    - @contract.versions.includes(:item).reverse.each do |version|
+      tr
+        td = Db::User.find_by(id: version.whodunnit)&.display_name
+        td = version.event
+        td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
+        td
+          span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
+            = link_to 'Zmiany', '#'

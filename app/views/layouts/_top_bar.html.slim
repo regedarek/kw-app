@@ -28,9 +28,7 @@
                   li= link_to 'Baza użytkowników', admin_users_path
                   li= link_to 'Baza klubowiczów', admin_profiles_path
                   li= link_to 'Baza składek', admin_membership_fees_path
-                  li= link_to 'Rozliczenia', admin_contracts_path
-                  li= link_to 'Projekty finansowe', admin_projects_path
-                  li= link_to 'Kontrahenci', admin_contractors_path
+
                   li= link_to 'Darowizny', admin_donations_path
                 - if can? :manage, Business::CourseRecord
                   li= link_to 'Kursy SA', courses_path
@@ -48,6 +46,12 @@
                   li= link_to 'Ustawienia', settings_path
                 - if can? :manage, Training::Activities::ContractRecord
                   li= link_to 'Kontrakty', kontrakty_path
+              - if current_user.roles.include?('office')
+                li
+                  = link_to 'Rozliczenia', admin_contracts_path
+                  ul.menu.vertical
+                    li= link_to 'Projekty finansowe', admin_projects_path
+                    li= link_to 'Kontrahenci', admin_contractors_path
 
           - if current_user.roles.include?('management')
             li

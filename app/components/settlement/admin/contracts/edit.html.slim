@@ -22,161 +22,47 @@
 
       .tabs-content data-tabs-content="edit-tabs"
         #new.tabs-panel
-          .row
-            .large-6.columns
-              b= f.label :title
-              = f.text_field :title
-
-            .large-6.columns
-              = f.label :contractor_id
-                = link_to 'Dodaj nowego kontrahenta*', new_admin_contractor_path, target: :_blank, onclick: "window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
-              = f.select :contractor_id,
-                Settlement::ContractorRecord.all.map { |u| [u.name, u.id] },
-                { include_blank: true},
-                { class: 'js-select-multiple', style: 'width: 100%' }
-
-          .row
-            .large-3.columns
-              b= f.label :document_number
-              = f.text_field :document_number
-
-            .large-2.columns
-              b= f.label :document_date
-              = f.date_field :document_date
-
-            .large-2.columns
-              b= f.label :document_type
-              = f.select :document_type,
-                Settlement::ContractRecord.document_types_select, include_blank: true
-
-            .large-2.columns
-              b= f.label :payout_type
-              = f.select :payout_type,
-                Settlement::ContractRecord.payout_types_select, include_blank: true
-
-            .large-3.columns
-              b= f.label :cost, "Kwota rozliczenia*"
-              .input-group
-                = f.number_field :cost, step: 0.01, class: 'input-group-field'
-                span.input-group-label
-                    | zł
-
+          = render 'settlement/admin/contracts/edit/new', f: f
         #preaccepted.tabs-panel.is-active
+          = render 'settlement/admin/contracts/edit/preaccepted', f: f
+        #admin.tabs-panel
+          = render 'settlement/admin/contracts/edit/admin', f: f
+        #history.tabs-panel
+          = render 'settlement/admin/contracts/edit/history', f: f
+
+      br
+      .row
+        .large-8.columns
           .callout
             .row
-              .large-3.columns
-                b= f.label :group_type
-                = f.select :group_type,
-                  Settlement::ContractRecord.group_types_select, selected: @contract.group_type, include_blank: true
-
-              .large-3.columns
-                b= f.label :activity_type
-                = f.select :activity_type,
-                  Settlement::ContractRecord.activity_types_select, selected: @contract.activity_type, include_blank: true
-
-              .large-3.columns
-                b= f.label :event_type
-                = f.select :event_type,
-                  Settlement::ContractRecord.event_types_select, selected: @contract.event_type, include_blank: true
-
-              .large-3.columns
-                = f.label :project_ids, 'Projekt'
-                = f.select :project_ids,
-                  Settlement::ProjectRecord.all.map { |u| [u.name, u.id] },
-                  { include_blank: true },
-                  { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
-
-          .callout.alert
-            .row
-              .large-4.columns
-                b= f.label :substantive_type
-                = f.select :substantive_type,
-                  Settlement::ContractRecord.substantive_types_select, selected: @contract.substantive_type, include_blank: true
-
-              .large-4.columns
-                b= f.label :area_type
-                = f.select :area_type,
-                  Settlement::ContractRecord.area_types_select, selected: @contract.area_type, include_blank: true
-
-              .large-4.columns
-                b= f.label :financial_type
-                = f.select :financial_type,
-                  Settlement::ContractRecord.financial_types_select, selected: @contract.financial_type, include_blank: true
-
-        #admin.tabs-panel
-          .row
-            .large-2.columns
-              b= f.label :internal_number, 'Numer wewnętrzny'
-              = f.number_field :internal_number
-
-            .large-3.columns
-              b= f.label :period_date, 'Rok rozliczeniowy'
-              = f.date_select :period_date,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
-
-            .large-3.columns
-              b= f.label :state
-              = f.select :state, Settlement::ContractRecord.states_select, selected: @contract.state
-
-            .large-2.columns
-              b= f.label :checker_id
-              = f.select :checker_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').or(Db::User.where('roles @> ARRAY[?]', 'secondary_management')).map{ |u| [u.display_name, u.id] }, selected: @contract.checker_id, include_blank: true
-
-            .large-2.columns
-              b= f.label :acceptor_id
-              = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
-
-          .row
-            .large-12.columns
-              = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
-              = f.select :user_ids,
-                Db::User.all.map { |u| [u.display_name, u.id] },
-                { },
-                { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
-        #history.tabs-panel
-          table.stack
-            thead
-              tr
-                th width='20%' Kto?
-                th width='10%' Akcja?
-                th width='20%' Kiedy?
-                th width='10%' Metadata
-            tbody
-              - @contract.versions.includes(:item).reverse.each do |version|
-                tr
-                  td = Db::User.find_by(id: version.whodunnit)&.display_name
-                  td = version.event
-                  td = version.created_at.strftime '%Y-%m-%d %H:%M:%S'
-                  td
-                    span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
-                      = link_to 'Zmiany', '#'
-
-      .row
-        .large-12.columns
-          = f.label :description, "Uwagi do rozliczenia"
-          = f.hidden_field :description, id: 'description_body'
-          trix-editor input='description_body' style='min-height: 200px'
+              .large-12.columns
+                = f.label :description, "Uwagi do rozliczenia"
+                = f.hidden_field :description, id: 'description_body'
+                trix-editor input='description_body' style='min-height: 200px'
 
 
-      b= f.label :attachments, "Załączniki"
-      = f.file_field :attachments, multiple: true
+        .large-4.columns
+          .callout
+            b= f.label :attachments, "Załączniki"
+            = f.file_field :attachments, multiple: true
 
-      - if @contract.attachments.any?
-        ul.no-bullet
-          - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
-            li
-              = link_to attachment.url, download: File.basename(attachment.file.path) do
-                = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
-                |  
-                = File.basename(attachment.file.path)
-          - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
-            - unless photo.blank? || photo.thumb.blank?
-              li
-                = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }, size: '50x50'
+            - if @contract.attachments.any?
+              ul.no-bullet
+                - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+                  li
+                    = link_to attachment.url, download: File.basename(attachment.file.path) do
+                      = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                      |  
+                      = File.basename(attachment.file.path)
+                - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+                  - unless photo.blank? || photo.thumb.blank?
+                    li
+                      = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }, size: '50x50'
 
-                div id="photo-#{i}" class="reveal" data-reveal="" 
-                  = image_tag photo.url
-                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                    span aria-hidden="true"  &times;
+                      div id="photo-#{i}" class="reveal" data-reveal="" 
+                        = image_tag photo.url
+                        button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                          span aria-hidden="true"  &times;
 
       = f.submit "Zaktualizuj rozliczenie", class: 'button'
       = render 'state_link', contract: @contract, class_value: 'button'

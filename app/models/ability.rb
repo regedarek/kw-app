@@ -148,6 +148,7 @@ class Ability
     can :create, Training::Supplementary::CourseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
+    can :manage, Settlement::ProjectRecord
   end
 
   def financial_management
@@ -157,6 +158,7 @@ class Ability
     can :update, Settlement::ContractRecord
     can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
+    can :manage, Settlement::ProjectRecord
   end
 
   def office_king
@@ -165,6 +167,7 @@ class Ability
     can :search, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
+    can :manage, Settlement::ProjectRecord
   end
 
   def reservations
