@@ -12,7 +12,10 @@ table.table-expand
       - if version.item
         tr.table-expand-row data-open-details=''
           td
-            = version.item.try(:name) || version.item.try(:title)
+            - if version.item_type == 'Settlement::ContractRecord'
+              = link_to version.item.try(:title), admin_contract_path(version.item_id)
+            - else
+              = version.item.try(:name) || version.item.try(:title)
           td = Db::User.find_by(id: version.whodunnit)&.display_name
           td = version.item.model_name.human
           td = I18n.t version.event
