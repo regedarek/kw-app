@@ -7,9 +7,9 @@ module Settlement
       @form = form
     end
 
-    def call(id:, raw_inputs:, updater_id:)
+    def call(id:, raw_inputs:, verify:, updater_id:)
       contract = Settlement::ContractRecord.find(id)
-      form_outputs = form.with(record: contract).call(raw_inputs.to_unsafe_h)
+      form_outputs = form.with(record: contract, verify: verify).call(raw_inputs.to_h)
       return Left(form_outputs.messages) unless form_outputs.success?
 
       period_date_month = form_outputs.to_h.delete(:"period_date(2i)").try :to_i
@@ -19,6 +19,9 @@ module Settlement
         period_date: Date.civil(period_date_year, period_date_month, 1)
       ) if period_date_month && period_date_year
       contract.update(contractor_id: form_outputs[:contractor_name].first.to_i) if form_outputs.to_h.key?(:contractor_name)
+      contract.update(checker_id: updater_id, state: 'accepted') if verify == 'accept'
+      contract.update(acceptor_id: updater_id, state: 'preclosed') if verify == 'prepayment'
+      contract.update(state: 'closed') if verify == 'finish'
 
       office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
       financial_ids = Db::User.where(":name = ANY(roles)", name: "financial_management").map(&:id)

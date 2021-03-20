@@ -68,7 +68,6 @@
                           span aria-hidden="true"  &times;
 
       = f.submit "Zaktualizuj rozliczenie", class: 'button'
-      = render 'state_link', contract: @contract, class_value: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 

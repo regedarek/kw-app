@@ -7,6 +7,7 @@ module Settlement
     configure { config.messages = :i18n }
     configure do
       option :record
+      option :verify
     end
 
     required(:title).filled(:str?)
@@ -55,7 +56,7 @@ module Settlement
     end
 
     validate(accepted_fields: [:activity_type, :group_type, :event_type, :state]) do |activity_type, group_type, event_type, state|
-      if ['new', 'accepted', 'preclosed', 'closed'].include?(state)
+      if ['accepted', 'preclosed', 'closed'].include?(state) || ['accept', 'prepayment'].include?(verify)
         activity_type.present? && group_type.present? && event_type.present?
       else
         true
@@ -63,7 +64,7 @@ module Settlement
     end
 
     validate(closed_fields: [:substantive_type, :financial_type, :area_type, :state]) do |substantive_type, financial_type, area_type, state|
-      if ['closed'].include?(state)
+      if ['closed'].include?(state) || ['finish'].include?(verify)
         substantive_type.present? && financial_type.present? && area_type.present?
       else
         true
