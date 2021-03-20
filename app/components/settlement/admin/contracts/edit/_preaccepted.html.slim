@@ -17,7 +17,10 @@
         | Nie zaakceptowano
 
     .large-6.columns
-      = f.label :project_ids, 'Projekt'
+      - if @contract.projects.any?
+        = link_to @contract.projects.first.name, admin_project_path(@contract.projects.first.id)
+      - else
+        = f.label :project_ids, 'Projekt'
       = f.select :project_ids,
         Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
         { include_blank: true },

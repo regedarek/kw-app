@@ -81,7 +81,7 @@ module Settlement
 
         either(update_record) do |result|
           result.success do |contract|
-            redirect_to edit_admin_contract_path(contract.id), notice: 'Zaktualizowano'
+            redirect_to edit_admin_contract_path(contract.id), notice: 'Zaktualizowano!'
           end
 
           result.failure do |errors|

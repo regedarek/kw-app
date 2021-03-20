@@ -1,21 +1,22 @@
 .row
   .large-12.columns
     .callout
-      = link_to item.accountable.name, item.accountable
-      br
-      = sanitize "<b>Cena</b>: #{item.accountable.price} zł"
-      br
-      = sanitize "<b>Zadatek</b>: #{item.accountable.payment_first_cost} zł"
-      br
-      = sanitize "<b>Reszta</b>: #{item.accountable.payment_second_cost} zł"
-      br
-      = sanitize "<b>Koordynator</b>: #{item.accountable.coordinator.display_name}"
-      - if item.accountable.instructor
+      - if item.accountable
+        = link_to item.accountable.name, item.accountable
         br
-        = sanitize "<b>Instruktor</b>: #{item.accountable.instructor&.name}"
-      br
-      - item.accountable.sign_ups.each do |sign_up|
-        = link_to edit_business_sign_up_path(sign_up.id) do
-          = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.first_payment
-          = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.second_payment
+        = sanitize "<b>Cena</b>: #{item.accountable.price} zł"
         br
+        = sanitize "<b>Zadatek</b>: #{item.accountable.payment_first_cost} zł"
+        br
+        = sanitize "<b>Reszta</b>: #{item.accountable.payment_second_cost} zł"
+        br
+        = sanitize "<b>Koordynator</b>: #{item.accountable.coordinator.display_name}"
+        - if item.accountable.instructor
+          br
+          = sanitize "<b>Instruktor</b>: #{item.accountable.instructor&.name}"
+        br
+        - item.accountable.sign_ups.each do |sign_up|
+          = link_to edit_business_sign_up_path(sign_up.id) do
+            = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.first_payment
+            = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.second_payment
+          br
