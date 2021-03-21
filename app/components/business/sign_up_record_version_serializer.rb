@@ -8,8 +8,8 @@ module Business
     end
 
     def title
-      if object.item.course
-        object.item.course.name
+      if object.item&.course
+        object.item.course&.name
       else
         'Brak'
       end
