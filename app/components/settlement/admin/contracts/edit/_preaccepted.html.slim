@@ -1,4 +1,4 @@
-.callout
+.callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : 'primary'}")
   .row
     .large-3.columns
       b Sprawdził
@@ -27,7 +27,7 @@
         { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 .row
   .large-6.columns
-    .callout class=("#{@contract.preclosed? ? 'success' : 'primary'}")
+    .callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : 'alert'}")
       .row
         .large-12.columns
           b= f.label :group_type
@@ -84,9 +84,3 @@
             br
             = check_box_tag :verify, :finish
             = label_tag :verify, 'Rozlicz'
-
-      .row
-        - if @contract.closed?
-          .large-12.columns
-            br
-            b Zamknięto rozliczenie
