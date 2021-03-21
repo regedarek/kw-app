@@ -31,7 +31,11 @@ module Business
     end
 
     def new
-      @course = Business::CourseRecord.new
+      if params[:dup]
+        @course = Business::CourseRecord.new(course_params)
+      else
+        @course = Business::CourseRecord.new
+      end
       @course.coordinator_id = current_user.id
 
       authorize! :create, Business::CourseRecord
