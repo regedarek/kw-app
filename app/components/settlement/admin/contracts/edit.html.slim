@@ -61,7 +61,7 @@
                       = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
                       |  
                       = File.basename(attachment.file.path)
-                - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+                - @contract.attachments.select{|file| MimeMagic.by_path(file.path)&.image? }.each_with_index do |photo, i|
                   - unless photo.blank? || photo.thumb.blank?
                     li
                       = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }, size: '50x50'
