@@ -55,7 +55,7 @@
 
             - if @contract.attachments.any?
               ul.no-bullet
-                - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+                - @contract.attachments.select{|file| !MimeMagic.by_path(file.path)&.image? }.each do |attachment|
                   li
                     = link_to attachment.url, download: File.basename(attachment.file.path) do
                       = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
