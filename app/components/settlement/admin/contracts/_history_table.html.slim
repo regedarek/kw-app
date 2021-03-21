@@ -29,7 +29,7 @@ table.table-expand
                     - if ['updated_at','created_at','preclosed_date'].include?(change[0])
                       = "#{change[1][0]&.strftime('%Y-%m-%d %H:%M')} na #{change[1][1]&.strftime('%Y-%m-%d %H:%M')}"
                     - elsif ['reason_type', 'document_type', 'payout_type', 'group_type', 'event_type', 'activity_type', 'substantive_type', 'area_type', 'financial_type'].include?(change[0])
-                      = "#{I18n.t(change[1][0], scope: "activerecord.attributes.settlement/contract_record.#{change[0]}s")} na #{I18n.t(change[1][1], scope: "activerecord.attributes.settlement/contract_record.#{change[0]}s")}"
+                      = "#{change[1][0] ? I18n.t(change[1][0], scope: "activerecord.attributes.settlement/contract_record.#{change[0]}s") : ''} na #{I18n.t(change[1][1], scope: "activerecord.attributes.settlement/contract_record.#{change[0]}s")}"
                     - elsif ['description'].include?(change[0])
                       = "#{strip_tags(change[1][0])} na #{strip_tags(change[1][1])}"
                     - elsif ['state'].include?(change[0])
