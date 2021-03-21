@@ -8,11 +8,15 @@ module Business
     end
 
     def title
-      item&.name
+      if object.item.course
+        object.item.course.name
+      else
+        'Brak'
+      end
     end
 
     def changer_name
-      Db::User.find_by(id: object.whodunnit)&.display_name
+      item&.name
     end
 
     def item_human_name

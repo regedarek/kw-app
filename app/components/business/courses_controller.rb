@@ -23,7 +23,7 @@ module Business
       @versions = PaperTrail::Version
         .includes(:item)
         .where(
-          item_type: ["Business::SignUpRecord", "Business::CourseRecord"]
+          item_type: ["Business::SignUpRecord"]
         )
         .order(created_at: :desc)
         .page(params[:page])
