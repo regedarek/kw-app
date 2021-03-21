@@ -10,3 +10,7 @@
 .row
   .large-12.columns
     = render 'table', contractors: @contractors
+
+  .row
+    .large-12.columns
+      = paginate @contractors
