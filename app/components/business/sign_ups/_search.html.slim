@@ -1,8 +1,8 @@
 = search_form_for @q, url: business_sign_ups_path, class: 'js-send-on-enter' do |f|
   .row
     .large-6.columns
-      = f.label :name_or_email_or_phone_or_alternative_email_cont, 'Nazwa, email, telefon'
-      = f.search_field :name_or_email_or_phone_or_alternative_email_cont
+      = f.label :course_slug_or_name_or_email_or_phone_or_alternative_email_cont, 'Nazwa, email, telefon, data rozpoczęcia(dd-mm-yyyy)'
+      = f.search_field :course_slug_or_name_or_email_or_phone_or_alternative_email_cont
 
     .large-2.columns
       br
