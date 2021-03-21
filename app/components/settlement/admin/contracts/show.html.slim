@@ -56,7 +56,7 @@
           b Status: 
           = render 'state_bagde', contract: @contract, class_value: ''
 
-    .callout class=("#{@contract.preclosed? ? 'success' : 'primary'}")
+    .callout class=("#{@contract.preclosed? ? 'success' : 'alert'}")
       .row
         .large-12.columns
           b Sekcja: 
@@ -89,17 +89,20 @@
       .row
         .large-12.columns
           b Rodzaj wydatku: 
-          = I18n.t @contract.substantive_type, scope: 'activerecord.attributes.settlement/contract_record.substantive_types'
+          - if @contract.substantive_type
+            = I18n.t(@contract.substantive_type, scope: 'activerecord.attributes.settlement/contract_record.substantive_types')
 
       .row
         .large-12.columns
           b Obszar: 
-          = I18n.t(@contract.area_type, scope: 'activerecord.attributes.settlement/contract_record.area_types')
+          - if @contract.area_type
+            = I18n.t(@contract.area_type, scope: 'activerecord.attributes.settlement/contract_record.area_types')
 
       .row
         .large-12.columns
           b Rodzaj płatności: 
-          = I18n.t @contract.financial_type, scope: :financial_type
+          - if @contract.financial_type
+            = I18n.t(@contract.financial_type, scope: 'activerecord.attributes.settlement/contract_record.financial_types')
 
     - if @contract.description
       .row
@@ -113,7 +116,7 @@
           b Projekty
           ul
             - @contract.projects.each do |project|
-              = link_to project.name, admin_project_path(project.id)
+              li = link_to project.name, admin_project_path(project.id)
 
       .large-6.columns
         - if @contract.users.any?
