@@ -32,7 +32,11 @@ module Business
     end
 
     def course_link
-      "/courses/#{object.item.course_id}"
+      if object.item
+        "/courses/#{object.item.course_id}"
+      else
+        '/courses/history'
+      end
     end
 
     def sign_up_link
