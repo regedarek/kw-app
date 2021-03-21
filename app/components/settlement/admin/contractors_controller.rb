@@ -5,8 +5,10 @@ module Settlement
       append_view_path 'app/components'
 
       def index
-        @contractors_without_contracts = Settlement::ContractorRecord.includes(:contracts).where(contracts: { id: nil })
-        @contractors_with_contracts = Settlement::ContractorRecord.joins(:contracts).group('contractors.id').order("SUM(contracts.cost) desc")
+        @q = Settlement::ContractorRecord.all
+        @q = @q.ransack(params[:q])
+        @q.sorts = ['created_at desc', 'name desc'] if @q.sorts.empty?
+        @contractors = @q.result(distinct: true).includes([:contracts]).page(params[:page])
       end
 
       def new
