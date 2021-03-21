@@ -25,7 +25,7 @@
         Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
         { include_blank: true },
         { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
-.callout.primary
+.callout class=("#{@contract.preclosed? ? 'success' : 'primary'}")
   .row
     .large-3.columns
       b= f.label :group_type
@@ -54,16 +54,7 @@
         = check_box_tag :verify, :prepayment
         = label_tag :verify, 'Zaakceptuj'
 
-    - if @contract.preclosed? || @contract.closed?
-      br
-      .large-3.columns
-        b Sprawdził: 
-        = @contract.checker&.display_name
-        br
-        b Zaakceptował: 
-        = @contract.acceptor&.display_name
-
-.callout.alert
+.callout class=("#{@contract.closed? ? 'success' : 'primary'}")
   .row
     .large-3.columns
       b= f.label :substantive_type

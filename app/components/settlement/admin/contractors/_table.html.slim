@@ -1,20 +1,20 @@
 table.hover
   thead
     tr
+      th.text-left  width='70px' ID
       th.text-left Kto
       th.text-left  width='15%' E-mail
-      th.text-left  width='15%' Telefon
+      th.text-left  width='15%' NIP
       th.text-left  width='15%' Koszt
-      th.text-left  width='15%' Osoba kontaktowa
       th.text-right  width='7%'
   tbody
     - contractors.each do |contractor|
       tr
+        td.text-left = contractor.id
         td.text-left = link_to contractor.name, admin_contractor_path(contractor.id)
         td.text-left = contractor.email
-        td.text-left = contractor.phone
+        td.text-left = contractor.nip
         td.text-left = contractor.contracts.sum(:cost)
-        td.text-left = contractor.contact_name
         td
           - if can? :update, contractor
             = link_to edit_admin_contractor_path(contractor.id), style: 'padding: 5px' do
