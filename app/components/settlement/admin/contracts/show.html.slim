@@ -71,7 +71,8 @@
       .row
         .large-12.columns
           b Impreza: 
-          = I18n.t(@contract.event_type, scope: 'activerecord.attributes.settlement/contract_record.event_types')
+          - if @contract.event_type
+            = I18n.t(@contract.event_type, scope: 'activerecord.attributes.settlement/contract_record.event_types')
 
       - if @contract.checker
         .row
