@@ -167,6 +167,7 @@ class Ability
   def office_king
     can :read, PaperTrail::Version
     can :read, Settlement::ContractRecord
+    can :destroy, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
