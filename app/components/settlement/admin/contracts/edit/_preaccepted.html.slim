@@ -25,59 +25,68 @@
         Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
         { include_blank: true },
         { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
-.callout class=("#{@contract.preclosed? ? 'success' : 'primary'}")
-  .row
-    .large-3.columns
-      b= f.label :group_type
-      = f.select :group_type,
-        Settlement::ContractRecord.group_types_select, selected: @contract.group_type, include_blank: true
+.row
+  .large-6.columns
+    .callout class=("#{@contract.preclosed? ? 'success' : 'primary'}")
+      .row
+        .large-12.columns
+          b= f.label :group_type
+          = f.select :group_type,
+            Settlement::ContractRecord.group_types_select, selected: @contract.group_type, include_blank: true
 
-    .large-3.columns
-      b= f.label :activity_type
-      = f.select :activity_type,
-        Settlement::ContractRecord.activity_types_select, selected: @contract.activity_type, include_blank: true
+      .row
+        .large-12.columns
+          b= f.label :activity_type
+          = f.select :activity_type,
+            Settlement::ContractRecord.activity_types_select, selected: @contract.activity_type, include_blank: true
 
-    .large-3.columns
-      b= f.label :event_type
-      = f.select :event_type,
-        Settlement::ContractRecord.event_types_select, selected: @contract.event_type, include_blank: true
+      .row
+        .large-12.columns
+          b= f.label :event_type
+          = f.select :event_type,
+            Settlement::ContractRecord.event_types_select, selected: @contract.event_type, include_blank: true
 
-    - if @contract.new? && can?(:accept, @contract)
-      .large-3.columns
-        br
-        = check_box_tag :verify, :accept
-        = label_tag :verify, 'Sprawdź'
+        - if @contract.new? && can?(:accept, @contract)
+          .large-12.columns.text-right
+            br
+            = check_box_tag :verify, :accept
+            = label_tag :verify, 'Sprawdź'
 
-    - if @contract.accepted? && can?(:prepayment, @contract)
-      .large-3.columns
-        br
-        = check_box_tag :verify, :prepayment
-        = label_tag :verify, 'Zaakceptuj'
+        - if @contract.accepted? && can?(:prepayment, @contract)
+          .large-12.columns.text-right
+            br
+            = check_box_tag :verify, :prepayment
+            = label_tag :verify, 'Zaakceptuj'
 
-.callout class=("#{@contract.closed? ? 'success' : 'primary'}")
-  .row
-    .large-3.columns
-      b= f.label :substantive_type
-      = f.select :substantive_type,
-        Settlement::ContractRecord.substantive_types_select, selected: @contract.substantive_type, include_blank: true
+  .large-6.columns
+    .callout class=("#{@contract.closed? ? 'success' : 'alert'}")
+      .row
+        .large-12.columns
+          b= f.label :substantive_type
+          = f.select :substantive_type,
+            Settlement::ContractRecord.substantive_types_select, selected: @contract.substantive_type, include_blank: true
 
-    .large-3.columns
-      b= f.label :area_type
-      = f.select :area_type,
-        Settlement::ContractRecord.area_types_select, selected: @contract.area_type, include_blank: true
+      .row
+        .large-12.columns
+          b= f.label :area_type
+          = f.select :area_type,
+            Settlement::ContractRecord.area_types_select, selected: @contract.area_type, include_blank: true
 
-    .large-3.columns
-      b= f.label :financial_type
-      = f.select :financial_type,
-        Settlement::ContractRecord.financial_types_select, selected: @contract.financial_type, include_blank: true
+      .row
+        .large-12.columns
+          b= f.label :financial_type
+          = f.select :financial_type,
+            Settlement::ContractRecord.financial_types_select, selected: @contract.financial_type, include_blank: true
 
-    - if @contract.preclosed? && can?(:finish, @contract)
-      .large-3.columns
-        br
-        = check_box_tag :verify, :finish
-        = label_tag :verify, 'Rozlicz'
+      .row
+        - if @contract.preclosed? && can?(:finish, @contract)
+          .large-12.columns.text-right
+            br
+            = check_box_tag :verify, :finish
+            = label_tag :verify, 'Rozlicz'
 
-    - if @contract.closed?
-      .large-3.columns
-        br
-        b Zamknięto rozliczenie
+      .row
+        - if @contract.closed?
+          .large-12.columns
+            br
+            b Zamknięto rozliczenie
