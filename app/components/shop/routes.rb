@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   namespace :shop do
     namespace :admin do
-      resources :orders, only: [:index, :show]
+      resources :orders, only: [:index, :show] do
+        member do
+          put :close
+        end
+      end
       resources :items, only: [:index, :show]
     end
   end

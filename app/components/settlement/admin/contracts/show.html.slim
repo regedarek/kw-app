@@ -138,7 +138,7 @@
         .large-12.columns
           b Załączniki: 
           ul.no-bullet
-            - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+            - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).try(:image?) }.each do |attachment|
               li
                 = link_to attachment.url, download: File.basename(attachment.file.path), target: :_blank do
                   = image_tag('file.jpg', class: 'thumbnail', size: '50x50')

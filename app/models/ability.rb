@@ -126,6 +126,7 @@ class Ability
   def office
     can :manage, Settlement::ContractorRecord
     can :manage, Db::User
+    can :manage, Shop::OrderRecord
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
     can :manage, PaperTrail::Version

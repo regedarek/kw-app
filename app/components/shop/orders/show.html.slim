@@ -7,10 +7,11 @@
     table.stack
       thead
         tr
-          th width='25%' Przedmiot
-          th width='25%' Kwota
-          th width='25%' Zdjęcia
-          th width='25%' Model
+          th width='20%' Przedmiot
+          th width='20%' Kwota
+          th width='20%' Zdjęcia
+          th width='20%' Status
+          th width='20%' Model
       tbody
         - @order.order_items.includes(:item, :item_kind).each do |order_item|
           tr
@@ -22,10 +23,12 @@
               - 2.times.each do |photo|
                 img src="https://picsum.photos/30/30"
             td
+              span.label.success = I18n.t(@order.state, scope: 'activerecord.attributes.shop/order_record.states')
+            td
               = order_item.item_kind.name
       thead
         tr
-          th.text-right colspan=4
+          th.text-right colspan=5
             = "Do zapłaty #{@order.cost} zł"
             |   
             - if @order.payment.paid?
@@ -33,6 +36,8 @@
             - else
               = link_to 'Opłać', charge_payment_url(@order.payment.id)
     = link_to 'powrót do zamówień', orders_path, class: 'button'
+    - if can? :close, @order && @order.new?
+      = link_to 'zamknij', close_shop_admin_order_path(@order.id), class: 'button alert', method: :put
 
   .large-6.columns
     .row
