@@ -1,0 +1,16 @@
+.row
+  .large-8.columns
+    h3 Zapisy
+
+.row
+  .large-12.columns
+    .callout
+      = render 'search'
+
+.row
+  .large-12.columns
+    = render 'table', sign_ups: @sign_ups
+
+  .row
+    .large-12.columns
+      = paginate @sign_ups
