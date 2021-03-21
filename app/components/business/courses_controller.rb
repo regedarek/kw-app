@@ -19,6 +19,17 @@ module Business
       @course = Business::CourseRecord.new
     end
 
+    def history
+      @versions = PaperTrail::Version
+        .includes(:item)
+        .where(
+          item_type: ["Business::SignUpRecord", "Business::CourseRecord"]
+        )
+        .order(created_at: :desc)
+        .page(params[:page])
+        .per(10)
+    end
+
     def new
       @course = Business::CourseRecord.new
       @course.coordinator_id = current_user.id
