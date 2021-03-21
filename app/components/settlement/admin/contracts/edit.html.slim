@@ -16,7 +16,7 @@
       ul#edit-tabs.tabs data-tabs=""
         li.tabs-title
           a aria-selected="true" href="#new" Dane dokumentu
-        - if can?(:accept, @contract) || can?(:prepayment, @contract)
+        - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish, @contract)
           li.tabs-title.is-active
             a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
         - if can?(:finish, @contract)
@@ -28,7 +28,7 @@
       .tabs-content data-tabs-content="edit-tabs"
         #new.tabs-panel
           = render 'settlement/admin/contracts/edit/new', f: f
-        - if can?(:accept, @contract) || can?(:prepayment, @contract)
+        - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish)
           #preaccepted.tabs-panel.is-active
             = render 'settlement/admin/contracts/edit/preaccepted', f: f
         - if can?(:finish, @contract)
