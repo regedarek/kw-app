@@ -6,7 +6,6 @@ import {
   } from "react-router-dom";
 
 function ShopList({items}) {
-    console.log(items);
     return  <table className="hover">
                 <thead>
                     <tr>
