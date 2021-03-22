@@ -18,7 +18,7 @@
             tr
               td
                 - if enum_key == nil
-                  | 'Nie przypisano'
+                  | Nie przypisano
                 - else
                   = link_to I18n.t(enum_key, scope: "activerecord.attributes.settlement/contract_record.#{enum_name}s"), admin_contracts_path(q: { "#{enum_name}_eq_any": Settlement::ContractRecord.defined_enums[enum_name][enum_key], "period_date_eq(1i)": params[:year] })
               td = @contracts.group_by(&enum_name.to_sym)[enum_key].count
