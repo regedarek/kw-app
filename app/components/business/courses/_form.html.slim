@@ -24,11 +24,15 @@
     { include_blank: true },
     { class: 'js-select-multiple' }
 
-  .large-3.columns
+  .large-2.columns
     b = f.label :state, 'Status'
     = f.select :state, Business::CourseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @course.state
 
-  .large-6.columns
+  .large-3.columns
+    = f.label :sa_title, "SA Podtytuł"
+    = f.text_field :sa_title
+
+  .large-4.columns
     = f.label :sign_up_url, "Link do zapisów"
     = f.text_field :sign_up_url, placeholder: 'Nie wypełniaj jeżeli chcesz płatności przez panel'
 
