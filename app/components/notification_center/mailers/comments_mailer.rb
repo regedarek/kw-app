@@ -6,12 +6,13 @@ module NotificationCenter
 
       def notify(comment)
         @comment = comment
+        to_emails = [comment.commentable.colleagues, comment.commentable.comments.map(&:user)].flatten.uniq.map(&:email) - [comment.user.email]
 
         mail(
-          to: [comment.commentable.colleagues, comment.commentable.comments.map(&:user)].flatten.uniq.map(&:email) - [@comment.user.email],
+          to: to_emails,
           from: 'no-reply@kw.krakow.pl',
           subject: "Panel KW Kraków - Nowy komentarz dotyczący twojego przejścia: #{comment.commentable.name}"
-        )
+        ) if to_emails.any?
       end
     end
   end
