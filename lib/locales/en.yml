@@ -1,4 +1,11 @@
 en:
+  course_seats_html: "<b>Zapisanych osób</b>: %{seats}"
+  course_max_seats_html: "<b>Ilość wszystkich miejsc</b>: %{max_seats}"
+  course_price_html: "<b>Cena kursu</b>: %{price} zł"
+  course_price_1_html: "<b>Zaliczka</b>: %{price} zł"
+  start_end_date_html: "<b>Termin kursu</b>: Od %{start_date} do %{end_date}"
+  from_date_html: "<b>Od</b>: %{start_date}"
+  to_date_html: "<b>Do</b>: %{end_date}"
   male: Male
   female: Female
   user_management:
@@ -35,3 +42,170 @@ en:
       link: "We also send you a link to the panel through which you must pay the yearly and / or entry fee: "
       link_title: link to payment
       bye: see you soon in the club!
+  business:
+    mailer:
+      charge_link: Kliknij tutaj aby opłacić zadatek w naszym systemie płatności!
+      charge_link2: Kliknij tutaj aby dopłacić pozostałą kwotę w naszym systemie płatności!
+      send_list_link: Kliknij tutaj aby zgłosić zapotrzebowanie oraz wypełnić dane do ubezpieczenia!
+    lists:
+      new:
+        send: Wyślij zapotrzebowanie na sprzęt
+    sign_ups:
+      sign_up_form:
+        submit: Zapisz się!
+  activerecord:
+    attributes:
+      management/voting/case_presence_record:
+        user_id: Członek
+        accepted_terms: Zapoznał się
+        created_at: Przybył
+      management/voting/commission_record:
+        approval: Potwierdzenie
+        owner_id: Właściciel pełnomocnictwa
+        authorized_id: Pełnomocnik
+        created_at: Przesłał
+      activities/competition_record:
+        series:
+          pp: Puchar Polski
+          ismf: ISMF World Cup
+          lgc: La Grand Course
+      business/sign_up_record:
+        name: Imię i nazwisko
+        email: E-mail
+        phone: Telefon
+        rodo: Dane osobowe
+        rules: Regulaminu kursów
+        danger: Świadomość
+        data: Przetwarzanie danych
+        rodo_html: "Na podstawie art. 7 ust. 1 RODO - Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oświadczam, iż wyrażam zgodę na przetwarzanie przez administratora, którym jest Klubu Wysokogórskiego Kraków moich danych osobowych w celu realizacji celów statutowych Klubu. 2. Podanie danych ma charakter dobrowolny, ale jest konieczne do zrealizowania przepisów RODO i Ustawy z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. U. 2018 poz. 1000) oraz otrzymywania informacji dotyczących działalności Klubu.3. Konsekwencją niepodania danych osobowych będzie brak możliwości rozpatrzenia Pani/Pana zgłoszenia na kurs.4. Zgodnie z art. 13 ust. 1−2 rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z 27.04.2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) (Dz. Urz. UE L 119, s. 1) zwanego dalej RODO – informuje się, że:1) Administratorem Pani/Pana danych osobowych jest Klub Wysokogórski Kraków, z siedzibą w Krakowie ul. Pędzichów 11/10A, 31-152 Kraków.2) Adres do korespondencji: ul. Pędzichów 11/10A, 31-152 Kraków.3) Administrator będzie przetwarzać Pani/Pana dane w celu realizacji celów statutowych Klubu Wysokogórskiego Kraków.4) Pani/Pana dane osobowe będą przechowywane rok czasu od daty zgłoszenia. 5) Posiada Pani/Pan prawo dostępu do treści swoich danych oraz prawo ich: sprostowania, usunięcia, ograniczenia przetwarzania, prawo do przenoszenia danych, prawo do cofnięcia zgody w dowolnym momencie bez wpływu na zgodność z prawem przetwarzania, którego dokonano na podstawie zgody przed jej cofnięciem.6) Ma Pani/Pan prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, gdy uzna Pani/Pan, iż przetwarzanie danych osobowych Pani/Pana dotyczących narusza przepisy RODO.7) Pani/Pana dane osobowe mogą zostać ujawnione innym podmiotom na podstawie przepisów prawa.8) Pani/Pana dane nie będą przetwarzane w sposób zautomatyzowany, w tym również profilowane.5. Oświadczam iż zapoznałem się z informacjami zawartymi w pkt. 4.6. Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w kursie organizowanym przez Klub podejmuję na własne ryzyko i odpowiedzialność.7. Wyrażam zgodę na otrzymywanie informacji drogą elektroniczną zgodnie z ustawą z dnia 18 lipca 2002 roku o świadczeniu usług drogą elektroniczną (Dz.U. z 2017 r., poz. 1219)."
+        rules_html: Oświadczam iż zapoznałem się i akceptuję warunki Regulaminu kursów Klubu Wysokogórskiego Kraków oraz zasadami przetwarzania danych osobowych z pkt 7 Regulaminu kursów i szkoleń Klubu Wysokogórskiego Kraków. <a href=https://drive.google.com/file/d/1AollLCCY1j_Kj0G5njDRCiD_kxW-6yzE/view?usp=sharing>Link do regulaminu</a>
+        danger_html: "Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w kursach/szkoleniach organizowanych przez Klub podejmuje na własne ryzyko i odpowiedzialność. Organizator nie odpowiada za przyczynienie się do wypadku/uszkodzenia zdrowia/ciała/mienia w wyniku używania przez uczestnika kurs/szkolenia własnego sprzętu podczas zajęć."
+        data_html: "Wyrażam zgodę na otrzymywanie informacji drogą elektroniczną zgodnie z ustawą z dnia 18 lipca 2002 roku o świadczeniu usług drogą elektroniczną (Dz.U. z 2017 r., poz. 1219)."
+      business/list_record:
+        description: Zapotrzebowanie
+        sign_up_id: Zapotrzebowanie
+        birthplace: Miejsce urodzenia
+        course_ids: Terminy alternatywne
+        birthdate: Data urodzenia
+        alternative_email: E-mail udostępniony reszcie grupy
+        rules: Zgoda
+        rules_html: Mając świadomość, że sporty propagowane przez Klub Wysokogórski Kraków mogą być niebezpieczne dla życia lub zdrowia, oświadczam, że uprawianie tych sportów oraz udział w kursach/szkoleniach organizowanych przez Klub podejmuje na własne ryzyko i odpowiedzialność. Organizator nie odpowiada za przyczynienie się do wypadku/uszkodzenia zdrowia/ciała/mienia w wyniku używania przez uczestnika kurs/szkolenia własnego sprzętu podczas zajęć.
+      business/course_record:
+        max_seats: 'Maksymalna ilość miejsc'
+        start_at: 'Od'
+        sign_up_url: Link do zapisów
+        price: Cena
+        payment_first_cost: Zadatek
+        payment_second_cost: Reszta
+        email_first_content: E-mail o zadatku
+        email_second_content: E-mail o resztę
+        activity_type: Rodzaj kursu
+        activity_types:
+          winter_abc: Zimowe ABC
+          winter_tourist_1: Zimowy kurs turystyki I stopnia
+          winter_tourist_2: Zimowy Kurs turystyki II stopnia
+          skitour_1: Kurs skiturowy I stopnia
+          skitour_2: Kurs skiturowy II stopnia
+          skitour_3: Kurs narciarstwa wysokogórskiego
+          skitour_avalanche: Kurs skiturowo-lawinowy
+          skitour_avalanche_2: Kurs skiturowo-lawinowy II stopnia
+          skitour_glacier: Kurs skiturowo-lodowcowy
+          cave: Kurs jaskiniowy
+          climbing_1: 'Kurs wspinaczki skalnej etap I: na drogach ubezpieczonych'
+          climbing_2: 'Kurs wspinaczki skalnej etap II: na własnej asekuracji'
+          full_climbing: Pełny kurs wspinaczki skalnej
+          club_climbing: Klubowy kurs wspinaczki skalnej
+          georgia: Gruzja - skitury
+          norway: Obóz skiturowy w Norwegii
+          skialp: Kurs skialpinistyczny
+          tatra_traverse: Tatrzańskie przełęcze
+          summer_tatra: Kurs taternicki letni
+          winter_tatra_1: Kurs taternicki zimowy I stopnia
+          winter_tatra_2: Kurs taternicki zimowy II stopnia
+          ice_1: Kurs wspinaczki lodowej I stopnia
+          ice_2: Kurs wspinaczki lodowej II stopnia
+          piste_1: Doszkalanie na stoku - początkujący (1 dzień)
+          piste_2: Doszkalanie na stoku - zaawansowani (1 dzień)
+          piste_3: Doszkalanie na stoku - początkujący (2 dni)
+          piste_4: Doszkalanie na stoku - zaawansowani (2 dni)
+          piste_5: Szkolenie z jazdy w terenie
+          piste_6: Wyjazd treningowy ze szkoleniem na stoku
+          piste_7: Doszkalanie na stoku - średniozaawansowani (1 dzień)
+  book: Książka
+  ready: gotowy
+  magazine: Czasopismo
+  guide: Przewodnik
+  annoucement: Ogłoszenie
+  resolution: Uchwała
+  preclosed: Wstepnie rozliczony
+  closed: Rozliczony
+  archived: zarchiwizowane
+  bill: Rachunek
+  charities: Darowizna
+  close_alert: Zamknij alert
+  draft: w przygotowaniu
+  'false': Nie
+  false_value: Nie
+  payout_type:
+    to_contractor: Płatność na konto kontrahenta
+    return: Zwrot na konto rozliczanego
+  substantive_type:
+    office: Biuro KW
+    substantive_taxes: Księgowowść/Podatki
+    marketing: Reklama/Marketing
+    mas: MAS
+    mjs: MJS
+    kfg: KFG
+    integration: Integracja
+    climbing_course: Kurs wspinaczkowy
+    avalanche_course: Kurs lawinowy
+    first_aid_course: Kurs pierwszej pomocy
+    stj_course: Kurs jaskiniowy
+    supplementary_training: Doszkalanie
+    egg: Jajeczko
+    christmas_eve: Wigilia
+  financial_type:
+    administration: Administracja
+    charity: Darowizny
+    economic_activity: Działalność gospodarcza
+    opp_paid: OPP odpłatna
+    opp_unpaid: OPP nieodpłatna
+  fv: Faktura
+  gtw: Grupa Turystyki Wysokogórskiej
+  holding: w posiadaniu
+  in_progress: w trakcie
+  pay: Zapłać
+  prepaid: Opłacono
+  regular_climbing: Wspinaczka
+  reservations:
+    table:
+      cost: 'Razem: %{cost} zł'
+      id: 'Rezerwacja nr: #%{id}'
+      item:
+        cost: "%{cost} zł"
+      period: Od %{start_date} do %{end_date}
+      title: Twoje rezerwacje
+  reserve: Zarezerwuj
+  reserved: zarazerwowane
+  resign: Zrezygnuj
+  service: Umowa o zlecenie
+  ski: Narciarstwo Wysokogórskie
+  snw: Sekcja Narciarstwa Wysokogórskiego
+  stj: Sekcja Taternictwa Jaskiniowego
+  suspended: zawieszony
+  sww: Sekcja Wspinaczki Wysokogórskiej
+  taxes: Podatki
+  title: Klub Wysokogórski Kraków
+  true_value: Tak
+  unassigned: nie przypisany
+  unauthorized:
+    manage:
+      all: 'Nie masz dostępu do tej części panelu: zaloguj się lub opłać składkę, następnie skontaktuj się z administratorem!'
+  unpaid: Czeka na zapłatę
+  volunteering: Umowa wolontariatu
+  draft: w przygotowaniu
+  voting: czeka na głosy
+  unactive: nieaktywne
+  finished: zakończone
+  winter_climbing: Wspinaczka
+  work: Umowa o dzieło
