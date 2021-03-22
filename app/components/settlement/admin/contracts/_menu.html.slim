@@ -1,5 +1,6 @@
 .text-right
   - if can? :read, PaperTrail::Version
+    = link_to 'Analiza', "/rozliczenia/analiza/#{Date.today.year}", class: 'button secondary'
     = link_to 'Historia', history_admin_contracts_path, class: 'button secondary'
   - if can? :read, Settlement::ProjectRecord
     = link_to 'Projekty finansowe', admin_projects_path, class: 'button alert'
