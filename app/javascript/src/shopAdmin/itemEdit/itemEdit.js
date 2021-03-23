@@ -187,13 +187,7 @@ class ShopItemContainer extends React.Component {
             return <Spinner></Spinner>
         }
         return <>
-            <div className="row">
-                <div className="large-12 columns">
-                    <Link to="/" className="button secondary hollow">
-                        Powrót
-                    </Link>
-                </div>
-            </div>
+
             <div className="row">
                 <div className="large-12 columns">
                     <ul className="tabs" id="shop-edit-tabs">
@@ -302,12 +296,16 @@ class ShopItemContainer extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="row">
-                                <div className="large-12 columns text-right">
-                                    <div className="button info" onClick={this.saveChanges.bind(this)}>
+                                <div className="large-6 columns text-right">
+                                    <div className="button expanded info" onClick={this.saveChanges.bind(this)}>
                                         Zapisz zmiany
                                     </div>
+                                </div>
+                                <div className="large-6 columns">
+                                    <Link to="/" className="button  expanded secondary hollow">
+                                        Powrót
+                                    </Link>
                                 </div>
                             </div>
                         </div>
