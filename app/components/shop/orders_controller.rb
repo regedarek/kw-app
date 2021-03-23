@@ -4,8 +4,6 @@ module Shop
 
     def index
       @orders = current_user.orders.includes(:order_items, :items, :payment)
-
-      authorize! :read, @orders
     end
 
     def show

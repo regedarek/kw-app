@@ -14,6 +14,14 @@ module Shop
 
     accepts_nested_attributes_for :item_kinds, allow_destroy: true
 
+    def primary_photo
+      photos.first
+    end
+
+    def price
+      item_kinds.first.price
+    end
+
     def slug_candidates
       [
         [:name]

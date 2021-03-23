@@ -5,7 +5,8 @@
   .large-6.columns
     .card.card-product
       .card-product-img-wrapper
-        img src="https://picsum.photos/300/300" /
+        - if @item.primary_photo
+          = image_tag @item.primary_photo.file.url
       .card-section
         h3.card-product-name = @item.name
         h5.card-product-price
