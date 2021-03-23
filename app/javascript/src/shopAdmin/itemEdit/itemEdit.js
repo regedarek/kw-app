@@ -162,8 +162,9 @@ class ShopItemContainer extends React.Component {
                 item_kinds: [
                     ...item_kinds,
                     {
-                        "quantity": 0,
-                        "name": ""
+                        quantity: 0,
+                        name: "",
+                        price: 0.0
                     }
                 ]
             }
@@ -209,19 +210,18 @@ class ShopItemContainer extends React.Component {
                         <div className={`tabs-panel ${this.state.activePanel === 'panel-1' ? 'is-active' : ''}`} id="panel-1">
                             <div className="row">
                                 <div className="large-12 columns">
+                                    <h5><small>Pamietaj o kliknięciu 'zapisz' po wprowadzeniu zmian</small></h5>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="large-12 columns">
                                     <div className="callout primary">
                                         <div className="row">
-                                            <div className="large-4 columns">
+                                            <div className="large-12 columns">
                                                 <label htmlFor="item_name">
                                                     Nazwa
                                                 </label>
                                                 <input type="text" id="item_name" value={data.name} onChange={e => this.onInputChange("name", e.target.value)} />
-                                            </div>
-                                            <div className="large-4 columns">
-                                                <label htmlFor="item_price">
-                                                    Cena
-                                                </label>
-                                                <input type="text" id="item_price"  value={data.price} onChange={e => this.onInputChange("price", e.target.value)} />
                                             </div>
                                         </div>
                                     </div>
@@ -254,11 +254,14 @@ class ShopItemContainer extends React.Component {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="large-8 columns">
+                                            <div className="large-7 columns">
                                                 Nazwa
                                             </div>
-                                            <div className="large-3 columns">
+                                            <div className="large-2 columns">
                                                 Dostępna liczba sztuk
+                                            </div>
+                                            <div className="large-2 columns">
+                                                Cena
                                             </div>
                                             <div className="large-1 columns">
                                                 
@@ -267,11 +270,14 @@ class ShopItemContainer extends React.Component {
                                         {data && data.item_kinds && data.item_kinds.map((el, idx) => {
                                             return (
                                                 <div className="row" key={idx}>
-                                                    <div className="large-8 columns">
+                                                    <div className="large-7 columns">
                                                         <input type="text" value={el.name} onChange={e => this.onItemKindsChange("name", idx, e.target.value)}/>
                                                     </div>
-                                                    <div className="large-3 columns">
+                                                    <div className="large-2 columns">
                                                         <input type="number" value={el.quantity} onChange={e => this.onItemKindsChange("quantity", idx, e.target.value)}/>
+                                                    </div>
+                                                    <div className="large-2 columns">
+                                                        <input type="number" step="0.01" value={el.price} onChange={e => this.onItemKindsChange("price", idx, e.target.value)}/>
                                                     </div>
                                                     <div className="large-1 columns">
                                                         <button className="button alert" onClick={() => this.onItemKindsRemove(idx)}>Usuń</button>
