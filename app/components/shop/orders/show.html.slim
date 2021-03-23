@@ -7,21 +7,20 @@
     table.stack
       thead
         tr
-          th width='20%' Przedmiot
-          th width='20%' Kwota
-          th width='20%' Zdjęcia
-          th width='20%' Status
-          th width='20%' Model
+          th Przedmiot
+          th width='50px' Kwota
+          th Ilość
+          th width='70px' Status
+          th width='120px' Model
       tbody
         - @order.order_items.includes(:item, :item_kind).each do |order_item|
           tr
             td
               = order_item.item.name
             td
-              = "#{order_item.item.price} zł"
+              = "#{order_item.item_kind.price} zł"
             td
-              - 2.times.each do |photo|
-                img src="https://picsum.photos/30/30"
+              = order_item.quantity
             td
               span.label.success = I18n.t(@order.state, scope: 'activerecord.attributes.shop/order_record.states')
             td

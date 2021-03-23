@@ -2,8 +2,9 @@ table.stack
   thead
     tr
       th width='25%' Data
-      th width='25%' Przedmioty
+      th width='15%' Przedmioty
       th width='15%' Płatność
+      th width='10%' Koszt
       th width='10%' Status
       th width='10%'
   tbody
@@ -19,6 +20,7 @@ table.stack
             span.success.label Zapłacone
           - else
             span.warning.label Nie opłacone
+        td = "#{order.cost} zł"
         td
           span.label.success = I18n.t(order.state, scope: 'activerecord.attributes.shop/order_record.states')
         td

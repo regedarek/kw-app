@@ -8,5 +8,11 @@ module Shop
     belongs_to :order, class_name: '::Shop::OrderRecord', foreign_key: :order_id
     belongs_to :user, class_name: '::Db::User', foreign_key: :user_id
     belongs_to :item_kind, class_name: '::Shop::ItemKindRecord', foreign_key: :item_kind_id
+
+    def cost
+      return 0 unless quantity > 0
+
+      item_kind.price * quantity
+    end
   end
 end

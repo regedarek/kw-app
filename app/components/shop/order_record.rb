@@ -23,7 +23,7 @@ module Shop
     end
 
     def cost
-      items.inject(0){|sum,item| sum + item.price }
+      order_items.includes(:item_kind).inject(0){|sum,order_item| sum + order_item.cost }
     end
 
     def description
@@ -33,6 +33,5 @@ module Shop
     def payment_type
       :shop
     end
-
   end
 end
