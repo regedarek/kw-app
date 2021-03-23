@@ -39,7 +39,7 @@ task :destroy_unpaid_reservations => :environment do
 end
 
 task :destroy_outdated_profiles => :environment do
-  Membership::Workers::DestroyOudatedProfilesWorker.perform_async
+  ::Membership::Workers::DestroyOudatedProfilesWorker.perform_async
   Net::HTTP.get(URI('https://hc-ping.com/5ddd7a2e-6daa-4a6f-bd99-c97c02d26160'))
 end
 
