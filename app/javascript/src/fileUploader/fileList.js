@@ -2,7 +2,7 @@ import React from 'react';
 
 function FileEntity({data, onFileRemove}) {
     const f = data.file;
-    return  <div className="row" style={{display: "flex", alignItems: "center"}}>
+    return  <div className="row" style={{display: "flex", alignItems: "center", paddingTop: "10px", paddingBottom: "10px"}}>
                 <div className="columns small-1">
                     {f && f.thumb && <img src={f.thumb.url} />}
                 </div>

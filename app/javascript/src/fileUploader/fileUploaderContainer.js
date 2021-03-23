@@ -79,7 +79,12 @@ class FileUploaderContainer extends React.Component {
   render() {
     const {isLoading, files, maxFiles, maxFileSize, uploadProgress} = this.state;
     return (
-        <>
+        <div className="callout">
+          <div className="row">
+            <div className="columns large-12">
+              Zdjęcia
+            </div>
+          </div>
           {isLoading && <Spinner></Spinner>}
           <FileList files={files} onFileRemove={this.onFileRemove.bind(this)}/>
           {files.length < maxFiles && !uploadProgress && <FileUploader maxSize={maxFileSize} onFileChange={this.onFileChange.bind(this)} />}
@@ -88,7 +93,7 @@ class FileUploaderContainer extends React.Component {
               <div className="progress-meter" style={{width: parseInt(uploadProgress*100) + "%"}}></div>
             </div>
           )}
-        </>
+        </div>
     );
   }
 }
