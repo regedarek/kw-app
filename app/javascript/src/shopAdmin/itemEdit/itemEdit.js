@@ -10,6 +10,15 @@ import {
 } from "react-router-dom";
 import ShopContext from "../shopContext";
 
+function decorateWithKey(data) {
+    return (data || []).map(el => {
+        return {
+            ...el,
+            key: Math.random()
+        }
+    })
+}
+
 class ShopItemContainer extends React.Component {
     static contextType = ShopContext;
 
@@ -48,18 +57,15 @@ class ShopItemContainer extends React.Component {
         .then(data => {
             this.setState({
                 data: {
-                    description: "",
-                    price: 0,
-                    name: "",
-                    item_kinds: [],
-                    ...data
+                    ...data,
+                    item_kinds: decorateWithKey(data.item_kinds)
                 },
                 isLoading: false,
                 editorState: EditorState.createWithContent(
                     ContentState.createFromBlockArray(
                         convertFromHTML(data.description)
                     )
-                    ),                
+                    ),
             });
         });
     }
@@ -69,7 +75,7 @@ class ShopItemContainer extends React.Component {
         this.setState({
             isLoading: true
         });
-        
+
         window.fetch(`/api/items/${data.id}`, {
             method: 'PUT',
             headers: {
@@ -79,8 +85,14 @@ class ShopItemContainer extends React.Component {
                 item: {
                     name: data.name,
                     description: data.description,
-                    price: data.price,
-                    item_kinds_attributes: data.item_kinds
+                    state: data.state,
+                    item_kinds_attributes: data.item_kinds.map(el => {
+                        const filteredObj = {
+                            ...el
+                        }
+                        delete filteredObj['key'];
+                        return filteredObj;
+                    })
                 }
             })
         })
@@ -88,18 +100,15 @@ class ShopItemContainer extends React.Component {
         .then(data => {
             this.setState({
                 data: {
-                    description: "",
-                    price: "",
-                    name: "",
-                    item_kinds: [],
-                    ...data
+                    ...data,
+                    item_kinds: decorateWithKey(data.item_kinds)
                 },
                 isLoading: false,
                 editorState: EditorState.createWithContent(
                     ContentState.createFromBlockArray(
                         convertFromHTML(data.description)
                     )
-                    ),                
+                    ),
             });
         });
     }
@@ -112,10 +121,16 @@ class ShopItemContainer extends React.Component {
             }
         })
     }
-    
-    onItemKindsChange(property, idx, value) {
+
+    onItemKindsChange(property, key, value) {
+        if (property !== "name" && parseFloat(value) < 0) {
+            value = 0;
+        }
+
         const {data} = this.state;
         const {item_kinds} = data;
+        const idx = item_kinds.findIndex(el => el.key === key);
+
         const newItemKinds =  [
             ...item_kinds.slice(0, idx),
             {
@@ -123,22 +138,7 @@ class ShopItemContainer extends React.Component {
                 [property]: value
             },
             ...item_kinds.slice(idx+1)
-        ]           
-        this.setState({
-            data: {
-                ...data,
-                item_kinds: newItemKinds
-            }
-        })
-    }
-
-    onItemKindsRemove(idx) {
-        const {data} = this.state;
-        const {item_kinds} = data;
-        const newItemKinds =  [
-            ...item_kinds.slice(0, idx),
-            ...item_kinds.slice(idx+1)
-        ]           
+        ]
         this.setState({
             data: {
                 ...data,
@@ -164,7 +164,8 @@ class ShopItemContainer extends React.Component {
                     {
                         quantity: 0,
                         name: "",
-                        price: 0.0
+                        price: 0.0,
+                        key: Math.random()
                     }
                 ]
             }
@@ -183,13 +184,7 @@ class ShopItemContainer extends React.Component {
             return <Spinner></Spinner>
         }
         return <>
-            <div className="row">
-                <div className="large-12 columns">
-                    <Link to="/" className="button secondary hollow">
-                        Powrót
-                    </Link>
-                </div>
-            </div>
+
             <div className="row">
                 <div className="large-12 columns">
                     <ul className="tabs" id="shop-edit-tabs">
@@ -214,7 +209,7 @@ class ShopItemContainer extends React.Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="large-12 columns">
+                                <div className="large-6 columns">
                                     <div className="callout primary">
                                         <div className="row">
                                             <div className="large-12 columns">
@@ -224,6 +219,15 @@ class ShopItemContainer extends React.Component {
                                                 <input type="text" id="item_name" value={data.name} onChange={e => this.onInputChange("name", e.target.value)} />
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div className="large-6 columns">
+                                    <div className="callout ">
+                                        <h5>Stan <small>Szkic nie jest dostępny do publicznego wglądu</small></h5>
+                                        <select value={data.state} onChange={e => this.onInputChange("state", e.target.value)}>
+                                            <option value="draft">Szkic (nieopublikowane)</option>
+                                            <option value="published">Opublikowane</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -264,23 +268,23 @@ class ShopItemContainer extends React.Component {
                                                 Cena
                                             </div>
                                             <div className="large-1 columns">
-                                                
+
                                             </div>
                                         </div>
-                                        {data && data.item_kinds && data.item_kinds.map((el, idx) => {
+                                        {data && data.item_kinds && data.item_kinds.filter(el => !el._destroy).map((el, idx) => {
                                             return (
-                                                <div className="row" key={idx}>
+                                                <div className="row" key={el.key}>
                                                     <div className="large-7 columns">
-                                                        <input type="text" value={el.name} onChange={e => this.onItemKindsChange("name", idx, e.target.value)}/>
+                                                        <input type="text" value={el.name} onChange={e => this.onItemKindsChange("name", el.key, e.target.value)}/>
                                                     </div>
                                                     <div className="large-2 columns">
-                                                        <input type="number" value={el.quantity} onChange={e => this.onItemKindsChange("quantity", idx, e.target.value)}/>
+                                                        <input type="number" value={el.quantity} onChange={e => this.onItemKindsChange("quantity", el.key, e.target.value)}/>
                                                     </div>
                                                     <div className="large-2 columns">
-                                                        <input type="number" step="0.01" value={el.price} onChange={e => this.onItemKindsChange("price", idx, e.target.value)}/>
+                                                        <input type="number" step="0.01" value={el.price} onChange={e => this.onItemKindsChange("price", el.key, e.target.value)}/>
                                                     </div>
                                                     <div className="large-1 columns">
-                                                        <button className="button alert" onClick={() => this.onItemKindsRemove(idx)}>Usuń</button>
+                                                        <button className="button alert" onClick={() => this.onItemKindsChange("_destroy", el.key, true)}>Usuń</button>
                                                     </div>
                                                 </div>
                                             )
@@ -290,21 +294,15 @@ class ShopItemContainer extends React.Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="large-12 columns">
-                                    <div className="callout ">
-                                        <h5>Stan <small>Szkic nie jest dostępny do publicznego wglądu</small></h5>
-                                        <select value={data.state} onChange={e => this.onInputChange("state", e.target.value)}>
-                                            <option value="draft">Szkic (nieopublikowane)</option>
-                                            <option value="published">Opublikowane</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="large-12 columns text-right">
-                                    <div className="button info" onClick={this.saveChanges.bind(this)}>
+                                <div className="large-6 columns text-right">
+                                    <div className="button expanded info" onClick={this.saveChanges.bind(this)}>
                                         Zapisz zmiany
                                     </div>
+                                </div>
+                                <div className="large-6 columns">
+                                    <Link to="/" className="button  expanded secondary hollow">
+                                        Powrót
+                                    </Link>
                                 </div>
                             </div>
                         </div>
