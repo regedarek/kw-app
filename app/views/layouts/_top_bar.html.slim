@@ -20,6 +20,8 @@
                 li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
                 - if can? :obecni, Management::Voting::CaseRecord
                   li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
+
+
           - if current_user.roles.include?('office') || current_user.roles.include?('settings')
             li
               = link_to 'Biuro', admin_path
@@ -30,8 +32,7 @@
                   li= link_to 'Baza składek', admin_membership_fees_path
 
                   li= link_to 'Darowizny', admin_donations_path
-                - if can? :manage, Business::CourseRecord
-                  li= link_to 'Kursy SA', courses_path
+
                 - if can? :manage, Db::Reservation
                   li= link_to 'Wypożyczalnia', admin_reservations_path
                 - if current_user.roles.include?('shop')
@@ -54,6 +55,14 @@
                     li= link_to 'Projekty finansowe', admin_projects_path
                     li= link_to 'Kontrahenci', admin_contractors_path
                     li= link_to 'Historia', history_admin_contracts_path
+
+          - if can? :manage, Business::CourseRecord
+            li
+              = link_to 'Kursy SA', courses_path
+              ul.menu.vertical
+                li= link_to 'Kursy', courses_path
+                li= link_to 'Zapisy', business_sign_ups_path
+                li= link_to 'Historia', history_courses_path
 
           - if current_user.roles.include?('management')
             li

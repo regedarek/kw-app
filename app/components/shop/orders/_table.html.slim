@@ -3,7 +3,8 @@ table.stack
     tr
       th width='25%' Data
       th width='25%' Przedmioty
-      th width='35%' Płatność
+      th width='15%' Płatność
+      th width='10%' Status
       th width='10%'
   tbody
     - orders.each do |order|
@@ -18,6 +19,8 @@ table.stack
             span.success.label Zapłacone
           - else
             span.warning.label Nie opłacone
+        td
+          span.label.success = I18n.t(order.state, scope: 'activerecord.attributes.shop/order_record.states')
         td
           - if order.payment && !order.payment.paid?
             = link_to 'Opłać', charge_payment_url(order.payment.id)

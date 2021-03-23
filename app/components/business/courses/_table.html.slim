@@ -39,12 +39,11 @@ table.stack
           - if course.coordinator_id
             = course.coordinator&.display_name
         td.text-right
-          = link_to business_course_record_public_path(course.slug), style: 'margin-right: 10px; color: pink' do
+          = link_to new_course_path(course: course.attributes, dup: true), style: 'margin-right: 10px; color: #1779ba' do
+            i.fi-page-multiple
+          = link_to business_course_record_public_path(course.slug), style: 'margin-right: 10px; color: green' do
             i.fi-share
-          - if course.sign_up_url
-            = link_to course.sign_up_url, style: 'margin-right: 10px; color: green' do
-              i.fi-share
-          = link_to edit_course_path(course.id), style: 'margin-right: 5px; color: orange' do
+          = link_to edit_course_path(course.id), style: 'margin-right: 10px; color: red' do
             i.fi-page-edit
-          = link_to course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :delete, data: { confirm: 'Napewno?' }, style: 'margin-right: 5px; color: red' do
+          = link_to course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :delete, data: { confirm: 'Napewno?' }, style: 'color: black' do
             i.fi-trash

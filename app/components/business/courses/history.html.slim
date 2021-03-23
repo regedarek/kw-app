@@ -1,0 +1,12 @@
+.columns
+  .row
+    .large-8.columns
+      h3 Historia kursów
+
+  .row
+    .large-12.columns
+      = render 'history_table', versions: @versions
+
+  .row
+    .large-12.columns
+      = paginate @versions

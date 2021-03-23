@@ -1,0 +1,13 @@
+= search_form_for @q, url: admin_contractors_path, class: 'js-send-on-enter' do |f|
+  .row
+    .large-6.columns
+      = f.label :name_or_description_cont, 'Nazwa lub Opis'
+      = f.search_field :name_or_description_cont
+
+    .large-4.columns
+      br
+      = link_to 'Dodaj kontrahenta', new_admin_contractor_path(back_url: :sponsorship_requests), class: 'button expanded medium'
+
+    .large-2.columns
+      br
+      = f.submit 'Szukaj', class: 'button expanded'

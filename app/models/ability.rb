@@ -126,6 +126,7 @@ class Ability
   def office
     can :manage, Settlement::ContractorRecord
     can :manage, Db::User
+    can :manage, Shop::OrderRecord
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
     can :manage, PaperTrail::Version
@@ -166,6 +167,7 @@ class Ability
   def office_king
     can :read, PaperTrail::Version
     can :read, Settlement::ContractRecord
+    can :destroy, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord

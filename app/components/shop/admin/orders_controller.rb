@@ -10,6 +10,13 @@ module Shop
       def show
         @order = ::Shop::OrderRecord.find(params[:id])
       end
+
+      def close
+        order = ::Shop::OrderRecord.find(params[:id])
+        order.close!
+
+        redirect_to shop_admin_orders_path, notice: 'Zamknięto'
+      end
     end
   end
 end

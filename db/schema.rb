@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_20_190128) do
+ActiveRecord::Schema.define(version: 2021_03_23_110229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_190128) do
     t.text "email_second_content"
     t.text "equipment"
     t.boolean "cash", default: false, null: false
+    t.string "sa_title"
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 
@@ -859,6 +860,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_190128) do
     t.string "name"
     t.integer "quantity", default: 1, null: false
     t.integer "item_id", null: false
+    t.float "price"
   end
 
   create_table "shop_items", force: :cascade do |t|
@@ -886,6 +888,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_190128) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state", default: "new", null: false
   end
 
   create_table "snw_applies", force: :cascade do |t|

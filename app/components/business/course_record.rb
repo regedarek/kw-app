@@ -147,7 +147,7 @@ module Business
       when :full_climbing
         'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/pelny-kurs-wspinaczki/'
       when :club_climbing
-        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/klubowy-kurs-wspinaczki/'
+        'https://szkolaalpinizmu.pl/wspinanie/wspinaczka-skalna/klubowy/'
       when :summer_tatra
         'https://szkolaalpinizmu.pl/wspinanie/taternictwo/kurs-taternicki-letni/'
       when :winter_tatra_1

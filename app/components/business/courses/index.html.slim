@@ -1,53 +1,8 @@
 .row
   .large-12.columns
     .callout
-      = search_form_for @q, url: courses_path, class: 'js-send-on-enter' do |f|
-        .row
-          .large-6.columns
-            = f.label :description_cont, 'Opis'
-            = f.search_field :description_cont
+      = render 'search'
 
-          .large-3.columns
-            = f.label :starts_at_gteq, 'Początek od'
-            = f.date_field :starts_at_gteq, value: (params[:q].fetch(:starts_at_gteq, {}) if params[:q])
-
-          .large-3.columns
-            = f.label :ends_at_lteq, 'Koniec do'
-            = f.date_field :ends_at_lteq, value: (params[:q].fetch(:ends_at_lteq, {}) if params[:q])
-
-        .row
-          .large-6.columns
-            = f.label :activity_type_in, 'Rodzaj kursu (Użyj CTRL)'
-            = f.select :activity_type_in, Business::CourseRecord.activity_types.to_a.map {|a| [I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{a.first}"), a.last] }, {},  {multiple: true} 
-
-          .large-6.columns
-            = f.label :coordinator_id_in, 'Koordynator (Użyj CTRL)'
-            = f.select :coordinator_id_in, Db::User.where(":name = ANY(roles)", name: "business_courses").map{|i| [i.display_name, i.id] }, {},  {multiple: true} 
-
-
-        .row
-          .large-2.columns
-            = f.label :seats_gteq, 'Minimum wolnych miejsc'
-            = f.number_field :seats_gteq, value: (params[:q].fetch(:seats_gteq, {}) if params[:q])
-
-          .large-2.columns
-            = f.label :seats_lteq, 'Maximum wolnych miejsc'
-            = f.number_field :seats_lteq, value: (params[:q].fetch(:seats_lteq, {}) if params[:q])
-          .large-2.columns
-            = f.label :price_gteq, 'Cena od'
-            = f.number_field :price_gteq, value: (params[:q].fetch(:price_gteq, {}) if params[:q])
-
-          .large-2.columns
-            = f.label :price_lteq, 'Cena do'
-            = f.number_field :price_lteq, value: (params[:q].fetch(:price_lteq, {}) if params[:q])
-
-          .large-2.columns
-            br
-            = link_to 'Dodaj kurs', new_course_path, class: 'button success expanded'
-
-          .large-2.columns
-            br
-            = f.submit 'Szukaj', class: 'button expanded'
 .row
   .large-12.columns
     = render 'table'

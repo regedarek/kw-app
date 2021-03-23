@@ -16,7 +16,7 @@
       ul#edit-tabs.tabs data-tabs=""
         li.tabs-title
           a aria-selected="true" href="#new" Dane dokumentu
-        - if can?(:accept, @contract) || can?(:prepayment, @contract)
+        - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish, @contract)
           li.tabs-title.is-active
             a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
         - if can?(:finish, @contract)
@@ -28,7 +28,7 @@
       .tabs-content data-tabs-content="edit-tabs"
         #new.tabs-panel
           = render 'settlement/admin/contracts/edit/new', f: f
-        - if can?(:accept, @contract) || can?(:prepayment, @contract)
+        - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish)
           #preaccepted.tabs-panel.is-active
             = render 'settlement/admin/contracts/edit/preaccepted', f: f
         - if can?(:finish, @contract)
@@ -55,13 +55,13 @@
 
             - if @contract.attachments.any?
               ul.no-bullet
-                - @contract.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+                - @contract.attachments.select{|file| !MimeMagic.by_path(file.path)&.image? }.each do |attachment|
                   li
                     = link_to attachment.url, download: File.basename(attachment.file.path) do
                       = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
                       |  
                       = File.basename(attachment.file.path)
-                - @contract.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+                - @contract.attachments.select{|file| MimeMagic.by_path(file.path)&.image? }.each_with_index do |photo, i|
                   - unless photo.blank? || photo.thumb.blank?
                     li
                       = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }, size: '50x50'
@@ -73,6 +73,7 @@
 
       = f.submit "Zaktualizuj rozliczenie", class: 'button'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
+      = link_to 'pokaż kontrahenta', admin_contractor_path(@contract.contractor_id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
 
 .row

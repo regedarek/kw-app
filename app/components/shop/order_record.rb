@@ -1,5 +1,7 @@
 module Shop
   class OrderRecord < ActiveRecord::Base
+    include Workflow
+    has_paper_trail
     self.table_name = 'shop_orders'
 
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
@@ -12,6 +14,14 @@ module Shop
 
     accepts_nested_attributes_for :items, :order_items, allow_destroy: true
 
+    workflow_column :state
+    workflow do
+      state :new do
+        event :close, :transitions_to => :closed
+      end
+      state :closed
+    end
+
     def cost
       items.inject(0){|sum,item| sum + item.price }
     end
@@ -23,5 +33,6 @@ module Shop
     def payment_type
       :shop
     end
+
   end
 end

@@ -1,0 +1,37 @@
+table.hover
+  thead
+    tr
+      th.text-left width='60px'
+        = sort_link(@q, :id, 'ID', default_order: :desc)
+      th.text-left width='110px'
+        = sort_link(@q, :course_start_date, 'Od', default_order: :desc)
+      th.text-left width='110px'
+        = sort_link(@q, :course_end_date, 'Do', default_order: :desc)
+      th.text-left Kurs
+      th.text-left width='160px' Kto
+      th.text-left width='220px' E-mail
+      th.text-center width='90px' Wpłata 1
+      th.text-center width='90px' Wpłata 2
+  tbody
+    - sign_ups.each do |sign_up|
+      tr
+        td.text-left = sign_up.id
+        td.text-left = sign_up.course&.start_date
+        td.text-left = sign_up.course&.end_date
+        td.text-left
+          - if sign_up.course
+            = link_to sign_up.course.name, course_path(sign_up.course.id)
+        td.text-left = link_to sign_up.name, edit_business_sign_up_path(sign_up.id)
+        td.text-left = sign_up.email
+        td.text-center
+          - if sign_up.first_payment
+            - if sign_up.first_payment.paid?
+              span.label.success = sign_up.first_payment.amount
+            - else
+              span.label.warning = sign_up.first_payment.amount
+        td.text-center
+          - if sign_up.second_payment
+            - if sign_up.second_payment.paid?
+              span.label.success = sign_up.second_payment.amount
+            - else
+              span.label.warning = sign_up.second_payment.amount

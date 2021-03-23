@@ -1,10 +1,12 @@
 table.stack
   thead
     tr
-      th width='25%' Data
-      th width='25%' Kto?
-      th width='25%' Przedmioty
-      th width='25%' Płatność
+      th width='10%' Data
+      th width='20%' Kto?
+      th width='20%' Przedmioty
+      th width='20%' Status
+      th width='20%' Płatność
+      th
   tbody
     - orders.each do |order|
       tr
@@ -16,7 +18,12 @@ table.stack
           - order.items.each do |item|
             img src="https://picsum.photos/30/30"
         td
+          span.label.success = I18n.t(order.state, scope: 'activerecord.attributes.shop/order_record.states')
+        td
           - if order.payment && order.payment.paid?
             span.success.label Zapłacone
           - else
             span.warning.label Nie opłacone
+        td
+          - if order.new?
+            = link_to 'Zamknij', close_shop_admin_order_path(order.id), method: :put, data: { confirm: 'Pewien?' }

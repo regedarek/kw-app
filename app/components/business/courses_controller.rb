@@ -19,8 +19,23 @@ module Business
       @course = Business::CourseRecord.new
     end
 
+    def history
+      @versions = PaperTrail::Version
+        .includes(:item)
+        .where(
+          item_type: ["Business::SignUpRecord"]
+        )
+        .order(created_at: :desc)
+        .page(params[:page])
+        .per(10)
+    end
+
     def new
-      @course = Business::CourseRecord.new
+      if params[:dup]
+        @course = Business::CourseRecord.new(course_params)
+      else
+        @course = Business::CourseRecord.new
+      end
       @course.coordinator_id = current_user.id
 
       authorize! :create, Business::CourseRecord
@@ -134,7 +149,7 @@ module Business
         .permit(
           :coordinator_id, :price, :seats, :starts_at,:ends_at,
           :description, :activity_type, :state, :instructor_id,
-          :max_seats, :sign_up_url, :creator_id, :event_id,
+          :max_seats, :sign_up_url, :creator_id, :event_id, :sa_title,
           :payment_first_cost, :payment_second_cost, :equipment,
           :email_first_content, :email_second_content, :cash
         )

@@ -1,0 +1,33 @@
+table.table-expand
+  thead
+    tr
+      th Co?
+      th width='200px' Kto?
+      th width='120px' Typ
+      th width='10%' Akcja?
+      th width='20%' Kiedy?
+      th width='10%' Metadata
+  tbody
+    - versions.map { |version| "#{version.item_type}VersionSerializer".constantize.new(version) }.each do |version|
+      tr.table-expand-row data-open-details=''
+        td = version.title
+        td = version.changer_name
+        td = version.item_human_name
+        td = I18n.t version.event
+        td = version.created_at_to_s
+        td
+          = link_to 'Zmiany', '#'
+          span.expand-icon
+      tr.table-expand-row-content
+        td.table-expand-row-nested colspan=4
+          ul
+            - version.changeset.each do |change|
+              - if change[1][0].to_s != change[1][1].to_s
+                li
+                  b = "#{Business::CourseRecord.human_attribute_name(change[0], locale: :pl)}: "
+                  = "#{change[1][0]} na #{change[1][1]}"
+        td colspan=3
+          ul
+            - if version.sign_up_link
+              li = link_to 'Zapis', version.sign_up_link
+            li = link_to 'Kurs', version.course_link

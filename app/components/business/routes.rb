@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   end
   scope module: 'business' do
     resources :courses do
+      collection do
+        get :history
+      end
       member do
         get :public
         put :seats_minus

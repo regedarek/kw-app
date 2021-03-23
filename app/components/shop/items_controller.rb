@@ -2,6 +2,10 @@ module Shop
   class ItemsController < ApplicationController
     append_view_path 'app/components'
 
+    def admin
+      render "pages/shop_admin"
+    end 
+    
     def index
       @items = Shop::ItemRecord.all
     end
