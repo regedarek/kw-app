@@ -58,6 +58,7 @@ class Ability
     can :create, Settlement::ContractorRecord
     can :see_dziki, Db::Activities::MountainRoute
     can :create, Db::Profile
+    can :read, Shop::OrderRecord
     can :create, Management::Snw::SnwApplyRecord
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
     can :read, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
