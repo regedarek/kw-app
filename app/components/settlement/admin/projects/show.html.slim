@@ -28,15 +28,16 @@
     - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
       .row
         .large-12.columns
-          = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+          - if item
+            = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
 
     - @project.project_items.includes(:accountable).where(accountable_type: 'Settlement::IncomeRecord').each do |item|
       .row
         .large-12.columns
-          = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+          - if item
+            = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
 
     .callout
-
       = form_for Settlement::IncomeRecord.new, as: :income, url: admin_incomes_path, method: :post do |f|
         = hidden_field_tag :project_id, params[:id]
         .row
@@ -51,7 +52,8 @@
 
     h5 = "Koszty (#{Settlement::ProjectEntity.new.outcomings_sum(@project)})"
     - @project.project_items.includes(accountable: [:creator, :contractor]).where(accountable_type: 'Settlement::ContractRecord').each do |item|
-      = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+      - if item
+        = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
 
     = link_to 'wróć do projektów', admin_projects_path, class: 'secondary button large expanded'
   .large-6.columns
@@ -63,4 +65,3 @@
         .large-12.columns
           .callout
             = render 'messaging/comments/form', commentable: @project
-
