@@ -46,7 +46,6 @@ class ShopItemContainer extends React.Component {
                     item: {
                         name: "Nowy przedmiot",
                         description: "Opis",
-                        price: 9999,
                         item_kinds: []
                     }
                 })

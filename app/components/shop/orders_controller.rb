@@ -7,7 +7,7 @@ module Shop
     end
 
     def show
-      @order = current_user.orders.includes(:item_kind).find(params[:id])
+      @order = current_user.orders.find(params[:id])
     end
   end
 end

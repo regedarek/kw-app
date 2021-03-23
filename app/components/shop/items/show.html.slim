@@ -8,7 +8,9 @@
         img src="https://picsum.photos/300/300" /
       .card-section
         h3.card-product-name = @item.name
-        h5.card-product-price = "#{@item.price} zł"
+        h5.card-product-price
+          - if @item.item_kinds.any?
+            = "#{@item.item_kinds.first.price} zł"
         p.card-product-description
           .callout
             = simple_format @item.description
