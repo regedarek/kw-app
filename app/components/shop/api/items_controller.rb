@@ -43,7 +43,7 @@ module Shop
       private
 
       def item_params
-        params.require(:item).permit(:name, :state, :description, :price, item_kinds_attributes: [:name, :price, :quantity])
+        params.require(:item).permit(:name, :state, :description, :price, item_kinds_attributes: [:id, :name, :price, :quantity, :_destroy])
       end
     end
   end
