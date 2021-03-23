@@ -59,7 +59,7 @@ class ShopItemContainer extends React.Component {
                     ContentState.createFromBlockArray(
                         convertFromHTML(data.description)
                     )
-                    ),                
+                    ),
             });
         });
     }
@@ -69,7 +69,7 @@ class ShopItemContainer extends React.Component {
         this.setState({
             isLoading: true
         });
-        
+
         window.fetch(`/api/items/${data.id}`, {
             method: 'PUT',
             headers: {
@@ -99,7 +99,7 @@ class ShopItemContainer extends React.Component {
                     ContentState.createFromBlockArray(
                         convertFromHTML(data.description)
                     )
-                    ),                
+                    ),
             });
         });
     }
@@ -112,7 +112,7 @@ class ShopItemContainer extends React.Component {
             }
         })
     }
-    
+
     onItemKindsChange(property, idx, value) {
         const {data} = this.state;
         const {item_kinds} = data;
@@ -123,7 +123,7 @@ class ShopItemContainer extends React.Component {
                 [property]: value
             },
             ...item_kinds.slice(idx+1)
-        ]           
+        ]
         this.setState({
             data: {
                 ...data,
@@ -138,7 +138,7 @@ class ShopItemContainer extends React.Component {
         const newItemKinds =  [
             ...item_kinds.slice(0, idx),
             ...item_kinds.slice(idx+1)
-        ]           
+        ]
         this.setState({
             data: {
                 ...data,
@@ -273,7 +273,7 @@ class ShopItemContainer extends React.Component {
                                                 Cena
                                             </div>
                                             <div className="large-1 columns">
-                                                
+
                                             </div>
                                         </div>
                                         {data && data.item_kinds && data.item_kinds.map((el, idx) => {
