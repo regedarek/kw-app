@@ -146,6 +146,7 @@
 
         - if user_signed_in?
           li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
+          li#cart  data={ userId: current_user.id }
           li.remove-arrow data-behaviour='js-notifications'
             = link_to '#', data: { behaviour: 'js-notifications-mark-as-read' } do
               .show-for-small-only
