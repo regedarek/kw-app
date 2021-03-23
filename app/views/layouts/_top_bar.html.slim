@@ -40,7 +40,7 @@
                     = link_to 'Sklepik', admin_path
                     ul.menu.vertical
                       li= link_to 'Zamówienia', shop_admin_orders_path
-                      li= link_to 'Przedmioty', shop_admin_items_path
+                      li= link_to 'Przedmioty', '/sklepik-admin'
                 - if can? :manage, Db::Reservation
                   li= link_to 'Przedmioty', admin_items_path
                 - if can? :manage, Management::SettingsRecord

@@ -214,7 +214,7 @@ class ShopItemContainer extends React.Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="large-12 columns">
+                                <div className="large-6 columns">
                                     <div className="callout primary">
                                         <div className="row">
                                             <div className="large-12 columns">
@@ -224,6 +224,15 @@ class ShopItemContainer extends React.Component {
                                                 <input type="text" id="item_name" value={data.name} onChange={e => this.onInputChange("name", e.target.value)} />
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div className="large-6 columns">
+                                    <div className="callout ">
+                                        <h5>Stan <small>Szkic nie jest dostępny do publicznego wglądu</small></h5>
+                                        <select value={data.state} onChange={e => this.onInputChange("state", e.target.value)}>
+                                            <option value="draft">Szkic (nieopublikowane)</option>
+                                            <option value="published">Opublikowane</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -289,17 +298,7 @@ class ShopItemContainer extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="large-12 columns">
-                                    <div className="callout ">
-                                        <h5>Stan <small>Szkic nie jest dostępny do publicznego wglądu</small></h5>
-                                        <select value={data.state} onChange={e => this.onInputChange("state", e.target.value)}>
-                                            <option value="draft">Szkic (nieopublikowane)</option>
-                                            <option value="published">Opublikowane</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div className="row">
                                 <div className="large-12 columns text-right">
                                     <div className="button info" onClick={this.saveChanges.bind(this)}>
