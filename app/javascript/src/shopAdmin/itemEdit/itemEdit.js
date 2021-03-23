@@ -79,7 +79,7 @@ class ShopItemContainer extends React.Component {
                 item: {
                     name: data.name,
                     description: data.description,
-                    price: data.price,
+                    state: data.state,
                     item_kinds_attributes: data.item_kinds
                 }
             })
@@ -114,6 +114,10 @@ class ShopItemContainer extends React.Component {
     }
 
     onItemKindsChange(property, idx, value) {
+        if (property !== "name" && parseFloat(value) < 0) {
+            value = 0;
+        }
+
         const {data} = this.state;
         const {item_kinds} = data;
         const newItemKinds =  [
