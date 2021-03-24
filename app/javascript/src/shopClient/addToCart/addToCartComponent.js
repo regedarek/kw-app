@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { addToCart } from "../state/actions";
+import { ToastContainer, toast } from 'react-toastify';
 
 function AddToCartComponent({ addToCart, itemId, itemKinds, userId }) {
     const [selectedKind, setKind] = useState(null);
@@ -28,7 +29,9 @@ function AddToCartComponent({ addToCart, itemId, itemKinds, userId }) {
     const addToBasket = () => {
         addToCart(itemId, selectedKind.id, quantity, selectedKind)
 
-        alert('Dodano do koszyka')
+        toast.success("Dodano do koszyka", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
     }
 
     return (
@@ -53,6 +56,7 @@ function AddToCartComponent({ addToCart, itemId, itemKinds, userId }) {
                     Dodaj do koszyka
                 </button>
             </div>
+            <ToastContainer />
         </div>
     )
 }

@@ -49,7 +49,7 @@ function Cart({items, userId, removeFromCart}) {
                     )}
                     {items.length > 0 && 
                         items.map((el, idx) => (
-                            <div className="row" key={el.id} style={{display: "flex", alignItems: "center"}}>
+                            <div className="shopping-cart-item" key={el.id} style={{display: "flex", alignItems: "center"}}>
                                     <div className="columns large-6">
                                         {el.item.name}
                                     </div>
@@ -64,11 +64,7 @@ function Cart({items, userId, removeFromCart}) {
                             </div>
                         )
                     )}
-                    <div className="row">
-                        <div className="columns large-12">
-                            <button className="button success" onClick={() => goToCheckout()}>Przejdź do płatności</button>
-                        </div>
-                    </div>
+                    <button className="button success expanded" onClick={() => goToCheckout()}>Przejdź do płatności</button>
                 </div>
             </div>
         </>

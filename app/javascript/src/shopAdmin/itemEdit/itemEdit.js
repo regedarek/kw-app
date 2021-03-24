@@ -1,7 +1,6 @@
 import React from 'react';
 import Spinner from "../../spinner";
-import { EditorState, ContentState, convertFromHTML } from 'draft-js';
-import { Editor } from "react-draft-wysiwyg";
+import ReactQuill from 'react-quill';
 import FileUploader from "../../fileUploader";
 import { Link } from "react-router-dom";
 
@@ -26,8 +25,7 @@ class ShopItemContainer extends React.Component {
         super(props);
         this.state = {
             isLoading: true,
-            activePanel: "panel-1",
-            editorState: EditorState.createEmpty()
+            activePanel: "panel-1"
         }
     }
 
@@ -45,7 +43,7 @@ class ShopItemContainer extends React.Component {
                 body: JSON.stringify({
                     item: {
                         name: "Nowy przedmiot",
-                        description: "Opis",
+                        description: "<p>Opis</p>",
                         item_kinds: []
                     }
                 })
@@ -59,18 +57,13 @@ class ShopItemContainer extends React.Component {
                     ...data,
                     item_kinds: decorateWithKey(data.item_kinds)
                 },
-                isLoading: false,
-                editorState: EditorState.createWithContent(
-                    ContentState.createFromBlockArray(
-                        convertFromHTML(data.description)
-                    )
-                    ),
+                isLoading: false
             });
         });
     }
 
     saveChanges() {
-        const {data} = this.state;
+        const {data, editorState} = this.state;
         this.setState({
             isLoading: true
         });
@@ -102,12 +95,7 @@ class ShopItemContainer extends React.Component {
                     ...data,
                     item_kinds: decorateWithKey(data.item_kinds)
                 },
-                isLoading: false,
-                editorState: EditorState.createWithContent(
-                    ContentState.createFromBlockArray(
-                        convertFromHTML(data.description)
-                    )
-                    ),
+                isLoading: false
             });
         });
     }
@@ -146,9 +134,9 @@ class ShopItemContainer extends React.Component {
         })
     }
 
-    onEditorStateChange(editorState){
+    onEditorStateChange(editorState) {
         this.setState({
-            editorState,
+            editorState: editorState,
         });
     }
 
@@ -234,17 +222,7 @@ class ShopItemContainer extends React.Component {
                                 <div className="large-12 columns">
                                     <div className="callout">
                                         Opis
-                                        <Editor
-                                            editorState={editorState}
-                                            onEditorStateChange={this.onEditorStateChange.bind(this)}
-                                            toolbar={{
-                                                inline: { inDropdown: true },
-                                                list: { inDropdown: true },
-                                                textAlign: { inDropdown: true },
-                                                link: { inDropdown: true },
-                                                history: { inDropdown: true },
-                                            }}
-                                        />
+                                        <ReactQuill theme="snow" value={data.description} onChange={(e) => this.onInputChange("description", e)} />
                                     </div>
                                 </div>
                             </div>
