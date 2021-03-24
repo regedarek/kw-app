@@ -11,7 +11,7 @@
             .card-product-img-wrapper
               a.button.expanded href="/sklepik/#{item.slug}" Zobacz
               a href="/sklepik/#{item.slug}" 
-                - if item.primary_photo&.file&.medium&.url?
+                - if item.primary_photo
                   = image_tag(item.primary_photo.file.medium.url)
             .card-section
               h4.card-product-name = item.name

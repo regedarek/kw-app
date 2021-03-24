@@ -9,9 +9,9 @@
         br
         = sanitize "<b>Kwota dotycząca projektu</b>: #{item&.cost} zł"
       br
-      = sanitize "<b>Utworzył</b>: #{contract.creator&.display_name}"
+      = sanitize "<b>Utworzył</b>: #{contract&.creator&.display_name}"
       br
-      = sanitize "<b>Dotyczy</b>: #{contract.contractor&.name}"
+      = sanitize "<b>Dotyczy</b>: #{contract&.contractor&.name}"
 
     .large-4.columns
       = form_for item, as: :project_item, url: admin_project_item_path(item.id), method: :put do |f|
