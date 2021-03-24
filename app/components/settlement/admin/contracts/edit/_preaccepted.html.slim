@@ -18,13 +18,10 @@
 
     .large-6.columns
       - if @contract.projects.any?
-        = link_to @contract.projects.first.name, admin_project_path(@contract.projects.first.id)
-      - else
-        = f.label :project_ids, 'Projekt'
-      = f.select :project_ids,
-        Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
-        { include_blank: true },
-        { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
+        b Projekty
+        br
+        ul
+          li = link_to @contract.projects.first.name, admin_project_path(@contract.projects.first.id)
 .row
   .large-6.columns
     .callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : 'alert'}")
@@ -36,15 +33,23 @@
 
       .row
         .large-12.columns
+          b= f.label :event_type
+          = f.select :event_type,
+            Settlement::ContractRecord.event_types_select, selected: @contract.event_type, include_blank: true
+
+      .row
+        .large-12.columns
           b= f.label :activity_type
           = f.select :activity_type,
             Settlement::ContractRecord.activity_types_select, selected: @contract.activity_type, include_blank: true
 
       .row
         .large-12.columns
-          b= f.label :event_type
-          = f.select :event_type,
-            Settlement::ContractRecord.event_types_select, selected: @contract.event_type, include_blank: true
+          = f.label :project_ids, 'Projekt'
+          = f.select :project_ids,
+            Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
+            { include_blank: true },
+            { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 
         - if @contract.new? && can?(:accept, @contract)
           .large-12.columns.text-right

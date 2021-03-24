@@ -12,6 +12,7 @@ table.hover
       th.text-left width='220px' E-mail
       th.text-center width='90px' Wpłata 1
       th.text-center width='90px' Wpłata 2
+      th.text-center width='80px' Ubezp
   tbody
     - sign_ups.each do |sign_up|
       tr
@@ -35,3 +36,10 @@ table.hover
               span.label.success = sign_up.second_payment.amount
             - else
               span.label.warning = sign_up.second_payment.amount
+        td.text-center
+          - if sign_up.list
+            = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: green'
+              i.fi-list
+          - else
+            = link_to ask_business_lists_path(sign_up.id), method: :post, style: 'margin-right: 10px; color: #e75480'
+              i.fi-list
