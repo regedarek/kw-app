@@ -2,12 +2,12 @@
   .row
     .large-8.columns
       - contract = item.accountable
-      = link_to contract.title
+      = link_to contract&.title
       br
-      = sanitize "<b>Kwota rozliczenia</b>: #{contract.cost} zł"
+      = sanitize "<b>Kwota rozliczenia</b>: #{contract&.cost} zł"
       - if item.cost
         br
-        = sanitize "<b>Kwota dotycząca projektu</b>: #{item.cost} zł"
+        = sanitize "<b>Kwota dotycząca projektu</b>: #{item&.cost} zł"
       br
       = sanitize "<b>Utworzył</b>: #{contract.creator&.display_name}"
       br
