@@ -4,6 +4,13 @@
 
 .row
   .large-12.colums
+    .callout.warning
+      | Tutaj zakupisz klubowe gadżety, pamiętaj, że swoje zamówienia znajdziesz 
+      = link_to 'tutaj', orders_path
+      |!
+
+.row
+  .large-12.colums
     .row
       - @items.each do |item|
         .large-3.columns

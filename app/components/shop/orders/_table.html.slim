@@ -14,7 +14,8 @@ table.stack
           = link_to order.created_at.to_date, order_path(order.id)
         td
           - order.items.each do |item|
-            img src="https://picsum.photos/30/30"
+            a.sim-thumb href="/sklepik/#{item.slug}"
+              img alt="" src="#{item.primary_photo.file.thumb.url}" width='30px'
         td
           - if order.payment && order.payment.paid?
             span.success.label Zapłacone
