@@ -4,7 +4,7 @@ import { addToCart } from "../state/actions";
 
 function AddToCartComponent({ addToCart, itemId, itemKinds, userId }) {
     const [selectedKind, setKind] = useState(null);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         if (itemKinds && itemKinds.length === 1) {
@@ -16,8 +16,8 @@ function AddToCartComponent({ addToCart, itemId, itemKinds, userId }) {
         setKind(itemKinds.find(el => `${el.id}` === `${id}`))
     }
     const setValidatedQuantity = (value) => {
-        if (value < 0) {
-            value = 0;
+        if (value < 1) {
+            value = 1;
         }
         if (selectedKind && value > selectedKind.quantity) {
             value = selectedKind.quantity;

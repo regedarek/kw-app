@@ -57,7 +57,9 @@ function Cart({items, userId, removeFromCart}) {
                                         {el.quantity}
                                     </div>
                                     <div className="columns large-3 text-center">
-                                        <button className="button danger" onClick={() => {removeFromCart(idx)}}>Usuń</button>
+                                        <button className="button alert" onClick={() => {removeFromCart(idx)}}>
+                                            <i className="fi fi-x"></i>
+                                        </button>
                                     </div>
                             </div>
                         )
