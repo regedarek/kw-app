@@ -28,7 +28,7 @@
       .tabs-content data-tabs-content="edit-tabs"
         #new.tabs-panel
           = render 'settlement/admin/contracts/edit/new', f: f
-        - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish)
+        - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish, @contract)
           #preaccepted.tabs-panel.is-active
             = render 'settlement/admin/contracts/edit/preaccepted', f: f
         - if can?(:finish, @contract)
