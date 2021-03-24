@@ -23,6 +23,9 @@ $('[data-open-details]').click(function (e) {
   $(this).toggleClass('is-active');
 });
 
+$('.sim-thumb').on('click', function() {
+  $('#main-product-image').attr('src', $(this).data('image'));
+})
 
 $('.js-send-on-enter').keypress(function(e){
   if(e.which == 13){

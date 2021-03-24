@@ -10,8 +10,16 @@ module Storage
 
     process :auto_orient
 
+    version :large, :if => :image? do
+      process resize_to_fill: [250, 250]
+    end
+
+    version :medium, :if => :image? do
+      process resize_to_fill: [150, 150]
+    end
+
     version :thumb, :if => :image? do
-      process resize_to_fill: [180, 180]
+      process resize_to_fill: [50, 50]
     end
 
     def store_dir

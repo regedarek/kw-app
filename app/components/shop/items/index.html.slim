@@ -16,10 +16,7 @@
             .card-product-img-wrapper
               a.button.expanded href="/sklepik/#{item.slug}" Zobacz
               a href="/sklepik/#{item.slug}" 
-                - if item.photos.any?
-                  = image_tag item.primary_photo.file.url
-                - else
-                  img src="https://picsum.photos/300/300"
+                = image_tag(item.primary_photo.file.medium.url)
             .card-section
               h3.card-product-name = item.name
               h5.card-product-price
