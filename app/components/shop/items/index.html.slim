@@ -1,11 +1,6 @@
 .row
   .large-12.colums
-    h3 Sklep klubowy
-
-.row
-  .large-12.colums
-    .callout.warning
-      | Tutaj znajdziecie informacje na temat aktualnych oraz zakończonych zamówieniach gadżetów klubowych.
+    h2 Sklep klubowy
 
 .row
   .large-12.colums
@@ -18,8 +13,7 @@
               a href="/sklepik/#{item.slug}" 
                 = image_tag(item.primary_photo.file.medium.url)
             .card-section
-              h3.card-product-name = item.name
+              h4.card-product-name = item.name
               h5.card-product-price
                 - if item.item_kinds.any?
                   = "#{item.price} zł"
-              p.card-product-description = simple_format item.description, length: 100

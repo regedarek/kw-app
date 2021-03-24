@@ -39,7 +39,7 @@ function AddToCartComponent({ addToCart, itemId, itemKinds, userId }) {
                     value={selectedKind && selectedKind.id || ""}>
                     <option key={"empty"}>Wybierz rodzaj</option>
                     {itemKinds.map(el => (
-                        <option value={el.id} key={el.id}>{el.name}</option>
+                        <option value={el.id} key={el.id}>{el.name} - {el.price} zł</option>
                     ))}
                 </select>
             </div>
