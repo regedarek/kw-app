@@ -4,10 +4,10 @@ module Shop
 
     def admin
       render "pages/shop_admin"
-    end 
-    
+    end
+
     def index
-      @items = Shop::ItemRecord.all
+      @items = Shop::ItemRecord.published
     end
 
     def show

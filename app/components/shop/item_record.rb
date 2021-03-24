@@ -4,6 +4,8 @@ module Shop
     self.table_name = 'shop_items'
     friendly_id :slug_candidates, use: :slugged
 
+    scope :published, -> { order(state: 'published') }
+
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
 
