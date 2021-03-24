@@ -8,12 +8,13 @@
         .callout
           .text-center
             img#main-product-image.pdp-product-image alt="" src="#{@item.primary_photo.file.large.url}" /
-            br/
-            ul.menu.product-thumbs.align-center
-              - @item.photos.each do |photo|
-                li
-                  a.sim-thumb data-image="#{photo.file.large.url}" 
-                    img alt="" src="#{photo.file.thumb.url}" /
+            - if @item.photos.any?
+              br/
+              ul.menu.product-thumbs.align-center
+                - @item.photos.each do |photo|
+                  li
+                    a.sim-thumb data-image="#{photo.file.large.url}" 
+                      img alt="" src="#{photo.file.thumb.url}" /
     .row
       .large-12.columns
         .text-right
