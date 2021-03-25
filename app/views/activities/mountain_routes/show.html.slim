@@ -78,6 +78,28 @@
             = link_to 'usuń', activities_mountain_route_path(@route), method: :delete, class: 'button', data: { confirm: 'Chcesz usunąć przejście?' }
 
   .large-6.columns
+    - if @route.photos.any?
+      .row
+        .large-12.columns
+          - @route.photos.select{|photo| !MimeMagic.by_path(photo.file.path)&.image? }.each do |photo|
+            = link_to photo.file.url, download: File.basename(photo.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail')
+              = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'file-close-button' do
+                span aria-hidden="true"  &times;
+              |  
+              = File.basename(photo.file.path)
+            br
+          - @route.photos.select{|photo| MimeMagic.by_path(photo.file.path)&.image? }.each_with_index do |photo, i|
+            - unless photo.file.blank? || photo.file.medium.blank?
+              = image_tag photo.file.medium.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+              = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'photo-close-button' do
+                span aria-hidden="true"  &times;
+
+              div id="photo-#{i}" class="full reveal" data-reveal="" 
+                = image_tag photo.file.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+
     - if @route.attachments.any?
       .row
         .large-12.columns

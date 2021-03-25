@@ -83,7 +83,7 @@ module Training
             :name, :climbing_date, :training, :hidden, :rating, :partners,
             :contract_ids, :photograph,
             :length, :description, :area, :difficulty, colleague_ids: [],
-            attachments: [], gps_tracks: []
+            attachments: [], gps_tracks: [], photos_attributes: [:file, :filename]
           )
       end
     end

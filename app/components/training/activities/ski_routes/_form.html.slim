@@ -51,13 +51,7 @@
 
 
 .row
-  .large-3.columns
-    .callout.alert
-      = f.label :attachments, 'Zdjęcia'
-      = f.file_field :attachments, multiple: true
-      br
-
-  .large-2.columns
+  .large-4.columns
     .callout.primary
       = f.label :gps_tracks, 'Tracki(GPX)'
       = f.file_field :gps_tracks, multiple: true
@@ -87,7 +81,32 @@
 
 
 .row
-  .large-12.columns
+  .large-8.columns
     .callout
       = f.label :description, 'opis przejścia, uwagi dotyczące warunków'
       = f.trix_editor :description, style: 'min-height: 150px'
+
+  .large-4.columns
+    .callout.alert
+      = f.label :attachments, 'Dodaj więcej zdjęć'
+      = f.fields_for :photos_attributes do |p|
+        = p.file_field :file, multiple: true, name: 'ski_route[photos_attributes][][file]'
+      br
+
+    - if @ski_route.photos.any?
+      - @ski_route.photos.select{|photo| !MimeMagic.by_path(photo.file.path)&.image? }.each do |photo|
+        = link_to photo.file.url, download: File.basename(photo.file.path) do
+          = image_tag('file.jpg', class: 'thumbnail', width: '58px')
+          = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'thumb-close-button' do
+            span aria-hidden="true"  &times;
+        br
+      - @ski_route.photos.select{|photo| MimeMagic.by_path(photo.file.path)&.image? }.each_with_index do |photo, i|
+        - unless photo.file.blank? || photo.file.thumb.blank?
+          = image_tag photo.file.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+          = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'thumb-close-button' do
+            span aria-hidden="true"  &times;
+
+          div id="photo-#{i}" class="full reveal" data-reveal="" 
+            = image_tag photo.file.url
+            button.close-button aria-label=("Close reveal") data-close="" type="button" 
+              span aria-hidden="true"  &times;

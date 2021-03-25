@@ -7,7 +7,7 @@ module Storage
     #validates :uploadable_type, presence: true
 
     belongs_to :uploadable, polymorphic: true
-    belongs_to :user, class_name: 'Db::User'
+    belongs_to :user, class_name: 'Db::User', optional: true
 
     mount_uploader :file, Storage::FileUploader
   end

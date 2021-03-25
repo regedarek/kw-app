@@ -26,6 +26,9 @@ module Db
       has_many :points, class_name: 'Training::Activities::MountainRoutePointRecord'
       has_many :training_contracts, class_name: 'Training::Activities::UserContractRecord', foreign_key: :route_id
 
+      has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
+      accepts_nested_attributes_for :photos
+
       validates :name, :rating, :climbing_date, presence: true
 
       def save_boar_length

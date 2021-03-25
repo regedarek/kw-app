@@ -22,6 +22,7 @@ module Training
       optional(:description)
       optional(:contract_ids)
       optional(:attachments)
+      optional(:photos_attributes).maybe
       optional(:gps_tracks).maybe
       validate(gps_tracks_extension: :gps_tracks) do |tracks|
         if tracks.present?
