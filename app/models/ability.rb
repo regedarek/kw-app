@@ -50,6 +50,7 @@ class Ability
     can [:read, :update], Settlement::ContractRecord, creator_id: user.id
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable: { user_id: user.id }
+    can :manage, Messaging::CommentRecord, user_id: user.id
     cannot :read, Management::Voting::CaseRecord
     cannot :see_dziki, Db::Activities::MountainRoute
     cannot :analiza, Settlement::ContractRecord

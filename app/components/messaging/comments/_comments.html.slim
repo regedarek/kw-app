@@ -11,6 +11,11 @@
             h5 = link_to comment.user.display_name, user_path(comment.user.kw_id)
           - else
             h5 = comment.user.display_name
-          p = I18n.l(comment.created_at, :format => :short)
+          p
+            = I18n.l(comment.created_at, :format => :short)
+            - if can?(:destroy, comment)
+              = link_to comment_path(comment.id), data: { confirm: 'Napewno?' }, style: 'margin-left: 5px; color: red;', method: :delete do
+                i.fi-trash
+
       .comment-section-text
         = sanitize comment.body

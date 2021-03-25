@@ -16,6 +16,27 @@ module Messaging
       end
     end
 
+    def update
+      @comment = Messaging::CommentRecord.find(params[:id])
+
+      authorize! :manage, @comment
+
+      if @comment.update(allowed_params)
+        redirect_back(fallback_location: root_path, notice: 'Dodano komentarz!')
+      else
+        redirect_back(fallback_location: root_path, alert: 'Wystąpił błąd!')
+      end
+    end
+
+    def destroy
+      comment = Messaging::CommentRecord.find(params[:id])
+
+      authorize! :manage, comment
+
+      comment.destroy
+      redirect_back(fallback_location: root_path, notice: 'Zaktualizowano komentarz!')
+    end
+
     private
 
     def create_notification(comment)
