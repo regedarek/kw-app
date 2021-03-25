@@ -44,24 +44,27 @@ function Cart({items, userId, removeFromCart}) {
                             Koszyk jest pusty
                         </div>
                     )}
-                    {items.length > 0 && 
-                        items.map((el, idx) => (
-                            <div className="shopping-cart-item" key={el.id} style={{display: "flex", alignItems: "center"}}>
-                                    <div className="columns large-6">
-                                        {el.item.name}
+                    {items.length > 0 && (
+                        <>
+                            {items.map((el, idx) => (
+                                    <div className="shopping-cart-item" key={el.id} style={{display: "flex", alignItems: "center"}}>
+                                            <div className="columns large-6">
+                                                {el.item.name}
+                                            </div>
+                                            <div className="columns large-3">
+                                                {el.quantity}
+                                            </div>
+                                            <div className="columns large-3 text-center">
+                                                <button className="button alert" onClick={() => {removeFromCart(idx)}}>
+                                                    <i className="fi fi-x"></i>
+                                                </button>
+                                            </div>
                                     </div>
-                                    <div className="columns large-3">
-                                        {el.quantity}
-                                    </div>
-                                    <div className="columns large-3 text-center">
-                                        <button className="button alert" onClick={() => {removeFromCart(idx)}}>
-                                            <i className="fi fi-x"></i>
-                                        </button>
-                                    </div>
-                            </div>
-                        )
+                                ))
+                            }
+                            <button className="button success expanded" onClick={() => goToCheckout()}>Przejdź do płatności</button>
+                        </>
                     )}
-                    <button className="button success expanded" onClick={() => goToCheckout()}>Przejdź do płatności</button>
                 </div>
             </div>
         </>
