@@ -16,7 +16,7 @@ module Activities
       @routes = @q.result(distinct: true)
       @routes = @routes.where(route_type: params[:route_type]) if params[:route_type]
       @routes = @routes
-        .includes([:colleagues])
+        .includes([:colleagues, :photos])
         .accessible_by(current_ability)
         .where(hidden: false)
         .order(climbing_date: :desc)

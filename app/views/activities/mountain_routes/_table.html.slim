@@ -41,7 +41,10 @@ table.stack
             - if names.length > truncation
               span.dashboard-table-timestamp-small= names.from(length).to(-1)
         td.text-center
-          = render 'photos/photos', photos: route.attachments, take: 2
+          - if route.attachments.any?
+            = render 'photos/photos', photos: route.attachments, take: 2
+          - if route.photos.any?
+            = render 'photos/photos', photos: route.photos.map(&:file), take: 2
         td.text-right
           div id="route_#{route.id}"
             = render  "training/activities/hearts/button", route: route
