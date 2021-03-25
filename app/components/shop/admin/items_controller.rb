@@ -10,6 +10,13 @@ module Shop
       def show
         @item = ::Shop::ItemRecord.find(params[:id])
       end
+
+      def destroy
+        @item = ::Shop::ItemRecord.find(params[:id])
+        @item.destroy
+
+        redirect_to '/sklepik-admin'
+      end
     end
   end
 end

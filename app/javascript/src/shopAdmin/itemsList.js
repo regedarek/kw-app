@@ -38,9 +38,7 @@ function ShopList({items}) {
                                 </Link>
                             </td>
                             <td className="text-center">
-                                <div className="button alert">
-                                    Usuń
-                                </div>
+                              <a href={`shop/admin/items/${item.id}`} class="button alert" data-method="delete">Usuń</a>
                             </td>
                         </tr>
                     )}    

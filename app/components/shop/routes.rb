@@ -6,7 +6,7 @@ Rails.application.routes.draw do
           put :close
         end
       end
-      resources :items, only: [:index, :show]
+      resources :items, only: [:index, :show, :destroy]
     end
   end
   scope module: 'shop' do
