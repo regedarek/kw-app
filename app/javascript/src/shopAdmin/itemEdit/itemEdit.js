@@ -3,6 +3,7 @@ import Spinner from "../../spinner";
 import ReactQuill from 'react-quill';
 import FileUploader from "../../fileUploader";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
     withRouter
@@ -97,6 +98,10 @@ class ShopItemContainer extends React.Component {
                 },
                 isLoading: false
             });
+
+            toast.success("Zapisano", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         });
     }
 
@@ -165,13 +170,9 @@ class ShopItemContainer extends React.Component {
         })
     }
 
-    render() {
-        const {isLoading, data, editorState} = this.state;
-        if (isLoading) {
-            return <Spinner></Spinner>
-        }
-        return <>
-
+    renderEditor() {
+        const {data} = this.state;
+        return (
             <div className="row">
                 <div className="large-12 columns">
                     <ul className="tabs" id="shop-edit-tabs">
@@ -293,6 +294,19 @@ class ShopItemContainer extends React.Component {
                     </div>
                 </div>
             </div>
+        )
+    }
+
+    render() {
+        const {isLoading} = this.state;
+        return <>
+            <ToastContainer></ToastContainer>
+            {isLoading && <div className="row">
+                <div className="large-12 columns">
+                    <Spinner></Spinner>
+                </div>
+            </div>}
+            {!isLoading && this.renderEditor()}
         </>
     }
 }

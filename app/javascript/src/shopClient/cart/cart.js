@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import 'whatwg-fetch';
 
 function Cart({items, userId, removeFromCart}) {
-    console.log(userId)
-
     const goToCheckout = () => {
         window.fetch('/api/orders', {
             method: 'POST',
@@ -30,7 +28,6 @@ function Cart({items, userId, removeFromCart}) {
         })
     }
 
-    console.log(items)
     return (
         <>
             <button type="button" style={{"padding": "0 10px", "cursor": "pointer"}} data-toggle="shopping-cart-dropdown">

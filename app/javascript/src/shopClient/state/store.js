@@ -1,5 +1,6 @@
 import { createStore } from 'redux'
 import {ADD_TO_CART, REMOVE_FROM_CART} from "./actions"
+import { loadState, saveState } from './sessionStorage';
 
 const defaultState = {items: []}
 
@@ -23,4 +24,10 @@ function cartReducer(state = defaultState, action) {
     }
 }
 
-export default createStore(cartReducer);
+const persistedState = loadState();
+const store = createStore(cartReducer, persistedState);
+store.subscribe(() => {
+    saveState(store.getState());
+  });
+
+export default store;
