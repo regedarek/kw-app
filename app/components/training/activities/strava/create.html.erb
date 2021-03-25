@@ -1,0 +1,15 @@
+<h1>Response from Strava</h2>
+<dl>
+  <dt>Access Token: </dt>
+  <dd><%= @response.access_token %> </dd>
+  <dt>Refresh Token: </dt>
+  <dd><%= @response.refresh_token %> </dd>
+  <dt>Athlete Name</dt>
+  <dd><%= @response.athlete.name %></dd>
+  <dt>Athlete ID</dt>
+  <dd><%= @response.athlete.id %></dd>
+  <dt>Sex</dt>
+  <dd><%= @response.athlete.sex %></dd>
+  <dt>City</dt>
+  <dd><%= @response.athlete.city %></dd>
+</dl>

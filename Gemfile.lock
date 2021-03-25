@@ -198,6 +198,8 @@ GEM
       i18n (>= 1.6, < 2)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.14.0)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.10.0)
     flag-icons-rails (3.1.0)
       sass (~> 3.2)
@@ -486,6 +488,11 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     ssrf_filter (1.0.7)
+    strava-ruby-client (0.3.2)
+      activesupport
+      faraday (>= 0.9)
+      faraday_middleware
+      hashie
     temple (0.8.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -594,6 +601,7 @@ DEPENDENCIES
   sidekiq-failures
   slim-rails
   spring
+  strava-ruby-client
   timecop
   trix-rails
   uglifier
