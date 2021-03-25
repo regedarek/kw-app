@@ -47,11 +47,11 @@
                 = f.hidden_field :description, id: 'description_body'
                 trix-editor input='description_body' style='min-height: 200px'
 
-
         .large-4.columns
           .callout
             b= f.label :attachments, "Załączniki"
-            = f.file_field :attachments, multiple: true
+            = f.fields_for :photos_attributes do |p|
+              = p.file_field :file, multiple: true, name: 'contract[photos_attributes][][file]'
 
             - if @contract.attachments.any?
               ul.no-bullet

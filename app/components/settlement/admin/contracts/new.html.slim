@@ -76,8 +76,9 @@
               { class: 'js-select-multiple', multiple: true }
 
           .large-6.columns
-            b= f.label :attachments, 'Załączniki*'
-            = f.file_field :attachments, multiple: true
+            = f.label :attachments
+            = f.fields_for :photos_attributes do |p|
+              = p.file_field :file, multiple: true, name: 'contract[photos_attributes][][file]'
 
       .row
         br

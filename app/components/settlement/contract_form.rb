@@ -19,6 +19,7 @@ module Settlement
     required(:document_number).filled(:str?)
     required(:description).maybe(:str?)
     optional(:attachments).maybe
+    optional(:photos_attributes).maybe
     optional(:group_type).maybe
     optional(:activity_type).maybe
     optional(:event_type).maybe

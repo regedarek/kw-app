@@ -41,5 +41,5 @@ table.hover
             = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: green'
               i.fi-list
           - else
-            = link_to ask_business_lists_path(sign_up.id), method: :post, style: 'margin-right: 10px; color: #e75480'
+            = link_to ask_business_lists_path(sign_up.id), method: :post, style: 'margin-right: 10px; color: #e75480', data: { confirm: 'Jesteś pewien?' }
               i.fi-list

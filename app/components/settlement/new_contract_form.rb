@@ -13,7 +13,8 @@ module Settlement
     required(:payout_type).filled
     required(:document_date).filled(:str?)
     required(:description).maybe(:str?)
-    required(:attachments).filled
+    optional(:attachments).maybe
+    required(:photos_attributes).filled
     required(:group_type).filled
     required(:event_type).filled
     optional(:acceptor_id).maybe

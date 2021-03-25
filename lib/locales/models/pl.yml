@@ -170,6 +170,7 @@ pl:
         internal_number: Number wewnętrzny
         internal_number_uniq: Number wewnętrzny
         attachments: Załączniki
+        photos_attributes: Załączniki
         group_type: Sekcja
         activity_type: Aktywność
         state: Status

@@ -32,6 +32,9 @@ module Settlement
     has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord'
     has_many :projects, through: :project_items
 
+    has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
+    accepts_nested_attributes_for :photos
+
     workflow_column :state
     workflow do
       state :new do

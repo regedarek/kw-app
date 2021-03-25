@@ -134,6 +134,30 @@
             - @contract.events.each do |event|
               li = link_to event.name, wydarzenia_path(event.id)
 
+    - if @contract.photos.any?
+      .row
+        .large-12.columns
+          b Załączniki: 
+          ul.no-bullet
+            - @contract.photos.map(&:file).select{|file| !MimeMagic.by_path(file.path)&.image? }.each do |attachment|
+              li
+                = link_to attachment.url, download: File.basename(attachment.file.path), target: :_blank do
+                  = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                  |  
+                  = File.basename(attachment.file.path)
+            - @contract.photos.map(&:file).select{|file| MimeMagic.by_path(file.path)&.image? }.each_with_index do |photo, i|
+              - unless photo.blank? || photo.thumb.blank?
+                li
+                  = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+                  |  
+                  = link_to photo.url, download: File.basename(photo.file.path), target: :_blank do
+                    = File.basename(photo.file.path)
+
+                div id="photo-#{i}" class="reveal" data-reveal="" 
+                  = image_tag photo.url
+                  button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                    span aria-hidden="true"  &times;
+
     - if @contract.attachments.any?
       .row
         .large-12.columns
