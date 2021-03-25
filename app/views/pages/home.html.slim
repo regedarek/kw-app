@@ -75,6 +75,21 @@
 
 - else
   .row
+    .large-12.columns
+      h2 Zaloguj się
+      = form_for(Db::User.new, as: :user, url: session_path(Db::User.new)) do |f|
+        = f.label :email
+        = f.email_field :email, autofocus: true
+
+        = f.label :password, 'Hasło'
+        = f.password_field :password, autocomplete: "off"
+        = f.hidden_field :remember_me, value: true
+
+        = f.submit "Zaloguj się", class: 'button large expanded'
+        p.text-center
+          | lub
+        = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path(protocol: 'https'), class: 'button secondary large expanded'
+  .row
     .large-6.columns.text-left
       = link_to 'Polityka prywatności', 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html'
       |  

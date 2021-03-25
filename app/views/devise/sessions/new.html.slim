@@ -8,6 +8,7 @@
 
         = f.label :password, 'Hasło'
         = f.password_field :password, autocomplete: "off"
+        = f.hidden_field :remember_me, value: true
 
         = f.submit "Zaloguj się", class: 'button large expanded'
         p.text-center
