@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     #resources :mountain_routes, only: :index
     resources :competitions
     namespace :api do
-      resources :routes, only: [] do
+      resources :routes, only: [:index] do
         member do
           get :season
           get :winter

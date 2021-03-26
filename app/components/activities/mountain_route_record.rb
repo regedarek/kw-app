@@ -7,13 +7,19 @@ module Activities
 
     self.table_name = 'mountain_routes'
 
-    belongs_to :user
+    belongs_to :user, class_name: 'Db::User'
+
     has_many :hearts, dependent: :destroy, class_name: 'Db::Heart', foreign_key: 'mountain_route_id'
     has_many :users, through: :hearts
+
     has_many :route_colleagues, class_name: 'Db::Activities::RouteColleagues'
     has_many :colleagues, through: :route_colleagues
+
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
-    has_many :user_contracts, class_name: 'Training::Activities::UserContractRecord'
+    has_many :training_contracts, class_name: 'Training::Activities::UserContractRecord', foreign_key: :route_id
+
+    has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
+    accepts_nested_attributes_for :photos
 
     def colleagues_names=(ids)
       self.colleague_ids = ids

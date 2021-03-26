@@ -1,6 +1,17 @@
 module Activities
   module Api
     class RoutesController < ApplicationController
+      include Pagy::Backend
+      after_action { pagy_headers_merge(@pagy) if @pagy }
+
+      def index
+        routes = ::Activities::MountainRouteRecord.order(climbing_date: :desc)
+
+        @pagy, records = pagy(routes)
+
+        render json: records, format: :json, each_serializer: Activities::RouteSerializer
+      end
+
       def season
         gender = if params[:gender]
           params[:gender]
