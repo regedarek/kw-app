@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_paper_trail_whodunnit
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    respond_to do |format|
+      format.json { head :not_found, content_type: 'text/html' }
+      format.xlsx { redirect_back(fallback_location: main_app.root_path, alert: 'Nie ma takiej strony, sprawdź czy to poprawny adres!') }
+      format.html { redirect_back(fallback_location: main_app.root_path, alert: 'Nie ma takiej strony, sprawdź czy to poprawny adres!') }
+      format.js   { head :not_found, content_type: 'text/html' }
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
