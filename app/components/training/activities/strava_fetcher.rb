@@ -8,7 +8,7 @@ module Training
             name: activity.name,
             strava_url: activity.strava_url,
             id: activity.id
-          } unless user.mountain_routes.exists?(strava_id: activity.id)
+          } if !user.mountain_routes.exists?(strava_id: activity.id) && our_type(activity.type)
         end
         activities
       end
@@ -18,6 +18,14 @@ module Training
       end
 
       private
+
+      def our_type(strava_type)
+        {
+          "BackcountrySki" => :ski,
+          "NordicSki" => :ski,
+          "RockClimbing" => :regular_climbing
+        }.fetch(strava_type, false)
+      end
 
       def client(token)
         Strava::Api::Client.new(access_token: token)
