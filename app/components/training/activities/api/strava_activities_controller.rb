@@ -17,6 +17,7 @@ module Training
 
           activity = strava_fetcher.activity(user: user, strava_id: params[:strava_id])
 
+          return false if our_type(activity.type) && !user.mountain_routes.exists?(strava_id: activity.id)
           route = user.mountain_routes.create(
             strava_id: activity.id,
             map_summary_polyline: activity.map.summary_polyline,
@@ -26,7 +27,8 @@ module Training
             climbing_date: activity.start_date,
             length: activity.total_elevation_gain,
             rating: 2
-          ) if our_type(activity.type) && !user.mountain_routes.exists?(strava_id: activity.id)
+          )
+          route.photos.create(remote_file_url: activity.photos.primary.urls['600']) if activity.photos.count >= 1
 
           if route
             render json: route, status: :created

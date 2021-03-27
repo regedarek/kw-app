@@ -17,6 +17,10 @@ module Training
         client(user.strava_token).activity(strava_id)
       end
 
+      def activity_photos(user:, strava_id:)
+        client(user.strava_token).activity_photos(strava_id) 
+      end
+
       private
 
       def our_type(strava_type)
