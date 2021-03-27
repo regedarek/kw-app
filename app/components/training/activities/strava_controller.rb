@@ -3,6 +3,9 @@ module Training
     class StravaController < ApplicationController
       append_view_path 'app/components'
 
+      def index
+      end
+
       def new
         authorize! :create, Db::Activities::MountainRoute
 

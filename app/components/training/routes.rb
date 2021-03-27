@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope module: 'training' do
     namespace :activities do
-      resources :strava, only: [:create, :new] do
+      resources :strava, only: [:index, :create, :new] do
         collection do
           get :callback
         end
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
       resources :snw_profiles, only: [:new, :create]
     end
 
-    get '/activities/strava' => 'activities/strava#create'
     get 'wydarzenia/:id' => 'supplementary/courses#show', as: 'training_supplementary_course_record'
 
     namespace :supplementary do
