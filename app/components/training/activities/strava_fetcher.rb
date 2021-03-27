@@ -3,9 +3,13 @@ module Training
     class StravaFetcher
       def activities(user:, per_page: 30, page: 1)
         activities = []
-        client(user.strava_token).athlete_activities(per_page: per_page, page: page) do |activity|
+        client(user.strava_token).athlete_activities(per_page: per_page, page: page, after: 1.year.ago.to_i) do |activity|
           activities << {
             name: activity.name,
+            start_date: activity.start_date,
+            distance: activity.distance_in_kilometers,
+            time: activity.moving_time_in_hours_s,
+            length: activity.total_elevation_gain_in_meters,
             strava_url: activity.strava_url,
             id: activity.id
           } if !user.mountain_routes.exists?(strava_id: activity.id) && our_type(activity.type)
