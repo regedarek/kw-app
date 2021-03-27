@@ -9,10 +9,24 @@ module Training
 
       def create
         @response = client.oauth_token(code: params[:code])
+
+        current_user.update(
+          strava_access_token: @response.access_token,
+          strava_refresh_token: @response.refresh_token,
+          strava_expires_at: @response.expires_at
+        )
       end
 
       def callback
+        response = client.oauth_token(code: params[:code])
 
+        current_user.update(
+          strava_access_token: response.access_token,
+          strava_refresh_token: response.refresh_token,
+          strava_expires_at: response.expires_at
+        )
+
+        redirect_to '/przejscia', notice: 'Połączono ze Stravą'
       end
 
       private
@@ -26,7 +40,7 @@ module Training
 
       def strava_url
         client.authorize_url(
-          redirect_uri: "#{Rails.application.secrets.localtunnel}/activities/strava",
+          redirect_uri: "http://4e4fe666299d.ngrok.io/activities/strava/callback",
           approval_prompt: 'force',
           response_type: 'code',
           scope: 'activity:read_all',

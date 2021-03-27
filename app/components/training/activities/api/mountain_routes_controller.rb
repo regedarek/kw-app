@@ -15,6 +15,19 @@ module Training
 
           render json: records, each_serializer: Training::Activities::Serializers::MountainRouteSerializer
         end
+
+        def strava_activities
+          current_user = Db::User.find(params[:user_id])
+          activities = strava_fetcher.activities(user: current_user, per_page: params[:pre_page], page: params[:page])
+
+          render json: activities.as_json
+        end
+
+        private
+
+        def strava_fetcher
+          ::Training::Activities::StravaFetcher.new
+        end
       end
     end
   end

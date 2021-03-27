@@ -101,6 +101,25 @@ class Db::User < ActiveRecord::Base
     Membership::Activement.new(user: self).active_and_regular?
   end
 
+  def strava_token
+    return nil unless strava_access_token && strava_refresh_token
+    return strava_access_token if Time.current < strava_expires_at
+
+    client = ::Strava::OAuth::Client.new(
+      client_id: Rails.application.secrets.strava_client,
+      client_secret: Rails.application.secrets.strava_secret
+    )
+    response = client.oauth_token(
+      refresh_token: self.strava_refresh_token,
+      grant_type: 'refresh_token'
+    )
+    update(
+      strava_access_token: response.access_token,
+      strava_refresh_token: response.refresh_token,
+      strava_expires_at: response.expires_at
+    )
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = Db::User.find_by(email: data['email'])
