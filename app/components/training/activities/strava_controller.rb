@@ -6,7 +6,7 @@ module Training
       def new
         authorize! :create, Db::Activities::MountainRoute
 
-        if current_user.strava_client_id && current_user.strava_client_secret
+        if current_user.strava_client_id.present? && current_user.strava_client_secret.present?
           redirect_to strava_url
         else
           redirect_to '/users/edit', alert: 'Uzupełnij Strava Client ID i Client Secret!'

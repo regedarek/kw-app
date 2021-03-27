@@ -92,13 +92,20 @@
             .callout
               | Dane znajdziesz na poniższej stronie.
               br
-              = link_to 'https://www.strava.com/settings/api', 'https://www.strava.com/settings/api'
+              = link_to 'https://www.strava.com/settings/api', 'https://www.strava.com/settings/api', target: :_blank
           .large-12.columns
             = f.label :strava_client_id, 'Client ID'
             = f.text_field :strava_client_id
           .large-12.columns
             = f.label :strava_client_secret, 'Client Secret'
             = f.text_field :strava_client_secret
+          .large-12.columns
+            - if current_user.strava_client_id.present? && current_user.strava_client_secret.present?
+              - if current_user.strava_expires_at
+                = sanitize "<b>Token</b> wygasa: #{current_user.strava_expires_at.to_datetime.strftime("%d-%m-%Y %H:%M")}"
+              - else
+                = link_to 'Połacz ze Stravą', '/activities/strava/new', class: 'button alert', style: 'height: 55px; line-height: 30px;'
+
         .large-6.columns
           .callout.warning
             | Aby połączyć swoje konto ze Stravą wejdź na stronę (
