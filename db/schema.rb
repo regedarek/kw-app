@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_175751) do
+ActiveRecord::Schema.define(version: 2021_03_27_202113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -616,6 +616,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_175751) do
     t.integer "boar_length", default: 0
     t.string "photograph"
     t.string "strava_id"
+    t.string "map_summary_polyline"
     t.index ["climbing_date"], name: "index_mountain_routes_on_climbing_date", order: :desc
     t.index ["slug"], name: "index_mountain_routes_on_slug", unique: true
     t.index ["user_id"], name: "index_mountain_routes_on_user_id"
