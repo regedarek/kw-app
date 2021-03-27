@@ -40,7 +40,7 @@ module Training
 
       def strava_url
         client.authorize_url(
-          redirect_uri: "http://4e4fe666299d.ngrok.io/activities/strava/callback",
+          redirect_uri: "https://panel.kw.krakow.pl/activities/strava/callback",
           approval_prompt: 'force',
           response_type: 'code',
           scope: 'activity:read_all',
