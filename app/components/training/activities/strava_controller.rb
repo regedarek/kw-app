@@ -4,6 +4,8 @@ module Training
       append_view_path 'app/components'
 
       def new
+        authorize! :create, Db::Activities::MountainRoute
+
         redirect_to strava_url
       end
 

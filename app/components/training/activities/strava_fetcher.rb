@@ -8,9 +8,13 @@ module Training
             name: activity.name,
             strava_url: activity.strava_url,
             id: activity.id
-          }
+          } unless user.mountain_routes.exists?(strava_id: activity.id)
         end
         activities
+      end
+
+      def activity(user:, strava_id:)
+        client(user.strava_token).activity(strava_id)
       end
 
       private
