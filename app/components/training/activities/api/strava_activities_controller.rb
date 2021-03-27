@@ -22,10 +22,12 @@ module Training
             strava_id: activity.id,
             map_summary_polyline: activity.map.summary_polyline,
             name: activity.name,
+            time: activity.moving_time_in_hours_s,
+            distance: activity.distance_in_kilometers,
             route_type: our_type(activity.type),
             description: activity.description,
             climbing_date: activity.start_date,
-            length: activity.total_elevation_gain,
+            length: activity.total_elevation_gain_in_meters,
             rating: 2
           )
           route.photos.create(remote_file_url: activity.photos.primary.urls['600']) if activity.photos.count >= 1
