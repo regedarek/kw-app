@@ -8,11 +8,8 @@ Rails.application.routes.draw do
       end
       namespace :api do
         resources :mountain_route_points
-        resources :mountain_routes, only: :index do
-          collection do
-            get :strava_activities
-          end
-        end
+        resources :strava_activities, only: [:index, :create]
+        resources :mountain_routes, only: :index
         resources :boars, only: :index
       end
       resources :ski_routes
