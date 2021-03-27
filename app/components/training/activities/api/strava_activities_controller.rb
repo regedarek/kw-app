@@ -20,6 +20,7 @@ module Training
           return false if our_type(activity.type) && !user.mountain_routes.exists?(strava_id: activity.id)
           route = user.mountain_routes.create(
             strava_id: activity.id,
+            user_id: user.id,
             map_summary_polyline: activity.map.summary_polyline,
             name: activity.name,
             time: activity.moving_time_in_hours_s,
