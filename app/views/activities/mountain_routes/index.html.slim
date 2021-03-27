@@ -40,8 +40,7 @@
           .large-3.columns
             = link_to 'Dziki', narciarskie_dziki_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
             = link_to 'Eksport', activities_mountain_routes_path(format: :xlsx), class: 'button alert', style: 'height: 55px; line-height: 30px;'
-            - unless current_user.strava_expires_at
-              = link_to 'Strava', '/activities/strava/new', class: 'button alert', style: 'height: 55px; line-height: 30px;'
+            = link_to 'Strava', '/activities/strava/new', class: 'button alert', style: 'height: 55px; line-height: 30px;'
       .large-3.columns
         - if user_signed_in?
           .button-hover-reveal-wrapper
