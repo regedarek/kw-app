@@ -5,7 +5,13 @@ class RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(
-      :account_update, keys: [:snw_blog, :facebook_url, :instagram_url, :website_url, :description, :avatar, :hide, :climbing_boars, :boars, :ski_hater, :first_name, :last_name, :phone, :email, :kw_id, :password, :password_confirmation, :current_password])
+      :account_update, keys: [
+        :snw_blog, :facebook_url, :instagram_url, :website_url, :description,
+        :avatar, :hide, :climbing_boars, :boars, :ski_hater, :first_name,
+        :last_name, :phone, :email, :kw_id, :password, :password_confirmation,
+        :current_password, :strava_client_secret, :strava_client_id
+      ]
+    )
     devise_parameter_sanitizer.permit(
       :sign_up, keys: [:first_name, :last_name, :phone, :email, :kw_id]
     )

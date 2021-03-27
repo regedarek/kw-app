@@ -47,6 +47,8 @@ module Db
       end
 
       def category
+        return :sww if route_type.nil?
+
         case route_type.to_sym
         when :ski
           :snw

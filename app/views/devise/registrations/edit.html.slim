@@ -9,83 +9,104 @@
 
     .row
       .large-3.columns
-        - if current_user.avatar.present?
-          = image_tag(current_user.avatar.url, class: 'card-profile-stats-intro-pic')
-          br
-          br
         .callout
-          .small Przytnij wcześniej zdjęcie do kwadratu
-        = f.file_field :avatar
+          - if current_user.avatar.present?
+            = image_tag(current_user.avatar.url, class: 'card-profile-stats-intro-pic')
+            br
+            br
+          .callout
+            .small Przytnij wcześniej zdjęcie do kwadratu
+          = f.file_field :avatar
 
       .large-9.columns
-        h4 Biogram
-        | notka o sobie, link do bloga...
-        = f.trix_editor :description, style: 'min-height: 150px'
+        .callout
+          h4 Biogram
+          | notka o sobie, link do bloga...
+          = f.trix_editor :description, style: 'min-height: 150px'
 
-    .row
-      .large-6.columns
-        h4 Dane osobowe
-        .large-12.columns
-          = f.label :kw_id, 'Numer klubowy'
-          = f.text_field :kw_id
+    .callout
+      .row
+        .large-6.columns
+          h4 Dane osobowe
+          .large-12.columns
+            = f.label :kw_id, 'Numer klubowy'
+            = f.text_field :kw_id
+
+          .large-6.columns
+            = f.label :first_name, 'Imię'
+            = f.text_field :first_name
+
+          .large-6.columns
+            = f.label :last_name, 'Nazwisko'
+            = f.text_field :last_name
+
+          .large-12.columns
+            = f.label :phone, 'Telefon'
+            = f.text_field :phone
+
+          .large-12.columns
+            = f.label :email
+            = f.email_field :email, autofocus: true
 
         .large-6.columns
-          = f.label :first_name, 'Imię'
-          = f.text_field :first_name
+          h4 Opcje
+          .large-12.columns
+            = f.label :hide
+            = f.check_box :hide
 
+          .large-12.columns
+            = f.label :snw_blog, 'Pokaż mnie na blogu SNW(https://snw.kw.krakow.pl)'
+            = f.check_box :snw_blog
+
+          .large-12.columns
+            = f.label :climbing_boars
+            = f.check_box :climbing_boars
+
+          .large-12.columns
+            = f.label :boars
+            = f.check_box :boars
+
+          .large-12.columns
+            = f.label :ski_hater
+            = f.check_box :ski_hater
+
+    .callout
+      .row
+        .large-12.columns
+          h4 Media społecznościowe
+          .large-4.columns
+            = f.label :facebook_url, 'Link do facebooka'
+            = f.text_field :facebook_url
+          .large-4.columns
+            = f.label :instagram_url, 'Link do instagrama'
+            = f.text_field :instagram_url
+          .large-4.columns
+            = f.label :website_url, 'Link do bloga/galerii'
+            = f.text_field :website_url
+
+    .callout
+      .row
         .large-6.columns
-          = f.label :last_name, 'Nazwisko'
-          = f.text_field :last_name
-
-        .large-12.columns
-          = f.label :phone, 'Telefon'
-          = f.text_field :phone
-
-        .large-12.columns
-          = f.label :email
-          = f.email_field :email, autofocus: true
-
-      .large-6.columns
-        h4 Opcje
-        .large-12.columns
-          = f.label :hide
-          = f.check_box :hide
-
-        .large-12.columns
-          = f.label :snw_blog, 'Pokaż mnie na blogu SNW(https://snw.kw.krakow.pl)'
-          = f.check_box :snw_blog
-
-        .large-12.columns
-          = f.label :climbing_boars
-          = f.check_box :climbing_boars
-
-        .large-12.columns
-          = f.label :boars
-          = f.check_box :boars
-
-        .large-12.columns
-          = f.label :ski_hater
-          = f.check_box :ski_hater
-
-    .row
-      .large-6.columns
-        h4 Dodatkowe informacje
-        .large-12.columns
-          = f.label :facebook_url, 'Link do facebooka'
-          = f.text_field :facebook_url
-        .large-12.columns
-          = f.label :instagram_url, 'Link do instagrama'
-          = f.text_field :instagram_url
-        .large-12.columns
-          = f.label :website_url, 'Link do bloga/galerii'
-          = f.text_field :website_url
-
-
-    .row
-      .large-12.columns
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                      Wyślij ponownie potwierdzajacy email:
-                      = resource.unconfirmed_email
+          h4 Połącz ze Stravą
+          .large-12.columns
+            .callout
+              | Dane znajdziesz na poniższej stronie.
+              br
+              = link_to 'https://www.strava.com/settings/api', 'https://www.strava.com/settings/api'
+          .large-12.columns
+            = f.label :strava_client_id, 'Client ID'
+            = f.text_field :strava_client_id
+          .large-12.columns
+            = f.label :strava_client_secret, 'Client Secret'
+            = f.text_field :strava_client_secret
+        .large-6.columns
+          .callout.warning
+            | Aby połączyć swoje konto ze Stravą wejdź na stronę (
+            = link_to 'https://www.strava.com/settings/api', 'https://www.strava.com/settings/api', target: :_blank
+            | ) oraz skopiuj dwa atrybuty <b>Client ID</b> oraz <b>Client Secret</b>.
+            br
+            | Oraz uzupełnij w formularzu aplikacji <b>Authorization Callback Domain</b> jako <b>panel.kw.krakow.pl</b>
+            = image_tag 'strava.png'
 
     .row
       .large-6.columns

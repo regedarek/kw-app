@@ -6,7 +6,11 @@ module Training
       def new
         authorize! :create, Db::Activities::MountainRoute
 
-        redirect_to strava_url
+        if current_user.strava_client_id && current_user.strava_client_secret
+          redirect_to strava_url
+        else
+          redirect_to '/users/edit', alert: 'Uzupełnij Strava Client ID i Client Secret!'
+        end
       end
 
       def create
@@ -35,8 +39,8 @@ module Training
 
       def client
         ::Strava::OAuth::Client.new(
-          client_id: Rails.application.secrets.strava_client,
-          client_secret: Rails.application.secrets.strava_secret
+          client_id: current_user.strava_client_id,
+          client_secret: current_user.strava_client_secret
         )
       end
 
