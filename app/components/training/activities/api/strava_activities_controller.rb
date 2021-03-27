@@ -4,7 +4,7 @@ module Training
       class StravaActivitiesController < ApplicationController
         def index
           activities = strava_fetcher.activities(
-            user: Db::User.find(params[:user_id]),
+            user: ::Db::User.find(params[:user_id]),
             per_page: params[:per_page] || 30,
             page: params[:page] || 1
           )
@@ -13,7 +13,7 @@ module Training
         end
 
         def create
-          user = Db::User.find(params[:user_id])
+          user = ::Db::User.find(params[:user_id])
 
           activity = strava_fetcher.activity(user: user, strava_id: params[:strava_id])
 
