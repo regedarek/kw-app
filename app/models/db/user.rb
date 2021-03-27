@@ -102,15 +102,15 @@ class Db::User < ActiveRecord::Base
   end
 
   def strava_token
-    return nil unless strava_access_token && strava_refresh_token
+    return nil unless strava_client_id && strava_client_secret && strava_access_token && strava_refresh_token
     return strava_access_token if Time.current < strava_expires_at
 
     client = ::Strava::OAuth::Client.new(
-      client_id: Rails.application.secrets.strava_client,
-      client_secret: Rails.application.secrets.strava_secret
+      client_id: strava_client_id,
+      client_secret: strava_client_secret
     )
     response = client.oauth_token(
-      refresh_token: self.strava_refresh_token,
+      refresh_token: strava_refresh_token,
       grant_type: 'refresh_token'
     )
     update(
