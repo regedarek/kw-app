@@ -9,6 +9,7 @@ class StravaListContainer extends React.Component {
     super(props);
     this.state = {
       isLoading: false,
+      allSelected: false,
       data: []
     };
   }
@@ -20,7 +21,6 @@ class StravaListContainer extends React.Component {
     window.fetch(`/activities/api/strava_activities?user_id=${this.props.userId}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         this.setState({
           data,
           isLoading: false
@@ -47,20 +47,45 @@ class StravaListContainer extends React.Component {
     })
   }
 
+  onSelect(id) {
+    this.setState({
+      data: this.state.data.map(el => ({
+        ...el,
+        ...(el.id === id && {checked: !el.checked} )
+      }))
+    })
+  }
+
+  onSelectAll() {
+    this.setState({
+      allSelected: !this.state.allSelected,
+      data: this.state.data.map(el => ({
+        ...el,
+        checked: !this.state.allSelected
+      }))
+    })
+  }
+
+  onImportSelected() {
+    this.state.data.filter(el => el.checked).forEach(el => {
+      this.onImport(el.id)
+    })
+  }
+
   render() {
-    if (this.state.isLoading) {
-      return <Spinner></Spinner>
-    }
     return <>
         <ToastContainer />
-        {this.state.isLoading && 
+        { this.state.isLoading && 
           <div className="row">
             <div className="columns large-12 text-center">
-              <Spinner></Spinner>
+              <Spinner centered={true}></Spinner>
             </div>
           </div>
         }
-        {!this.state.isLoading && <StravaList items={this.state.data} onImport={this.onImport.bind(this)} /> }
+        {!this.state.isLoading && <StravaList items={this.state.data} onImport={this.onImport.bind(this)}
+          onImportSelected={this.onImportSelected.bind(this)} onSelect={this.onSelect.bind(this)} onSelectAll={this.onSelectAll.bind(this)}
+          allSelected={this.state.allSelected}
+        /> }
       </>
   }
 }
