@@ -7,7 +7,7 @@ module Training
       end
 
       def new
-        authorize! :create, Db::Activities::MountainRoute
+        authorize! :create, ::Db::Activities::MountainRoute
 
         if current_user.strava_client_id.present? && current_user.strava_client_secret.present?
           redirect_to strava_url
