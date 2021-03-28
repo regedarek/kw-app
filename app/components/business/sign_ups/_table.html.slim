@@ -31,15 +31,19 @@ table.hover
             - else
               span.label.warning = sign_up.first_payment.amount
         td.text-center
-          - if sign_up.second_payment
-            - if sign_up.second_payment.paid?
-              span.label.success = sign_up.second_payment.amount
-            - else
-              span.label.warning = sign_up.second_payment.amount
-        td.text-center
-          - if sign_up.list
-            = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: green'
-              i.fi-list
+          - if !sign_up.course&.packages?
+            - if sign_up.second_payment
+              - if sign_up.second_payment.paid?
+                span.label.success = sign_up.second_payment.amount
+              - else
+                span.label.warning = sign_up.second_payment.amount
           - else
-            = link_to ask_business_lists_path(sign_up.id), method: :post, style: 'margin-right: 10px; color: #e75480', data: { confirm: 'Jesteś pewien?' }
-              i.fi-list
+            span.label.secondary Nie dotyczy
+        td.text-center
+          - if !sign_up.course&.packages?
+            - if sign_up.list
+              = link_to edit_business_sign_up_path(sign_up.id), style: 'margin-right: 10px; color: green'
+                i.fi-list
+            - else
+              = link_to ask_business_lists_path(sign_up.id), method: :post, style: 'margin-right: 10px; color: #e75480', data: { confirm: 'Jesteś pewien?' }
+                i.fi-list
