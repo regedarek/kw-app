@@ -13,31 +13,30 @@ module Training
         end
 
         def create
-          user = ::Db::User.find(params[:user_id])
-
-          activity = strava_fetcher.activity(user: user, strava_id: params[:strava_id])
-
-          return false if our_type(activity.type) && !user.mountain_routes.exists?(strava_id: activity.id)
-          route = user.mountain_routes.create(
-            strava_id: activity.id,
-            user_id: user.id,
-            map_summary_polyline: activity.map.summary_polyline,
-            name: activity.name,
-            time: activity.moving_time_in_hours_s,
-            distance: activity.distance_in_kilometers,
-            route_type: our_type(activity.type),
-            description: activity.description,
-            climbing_date: activity.start_date,
-            length: activity.total_elevation_gain_in_meters,
-            rating: 2
-          )
-          route.photos.create(remote_file_url: activity.photos.primary.urls['600']) if activity.photos.count >= 1
-
-          if route
-            render json: route, status: :created
+          if params[:user_id] && params[:strava_id]
+            ::Training::Activities::Workers::SyncStravaActivityWorker
+              .perform_async(params[:user_id], params[:strava_id])
+            render json: {message: 'Zakolejkowano!'}, status: :created
           else
-            render json: activity.as_json, status: 400
+            render json: {}, status: 400
           end
+        end
+
+        def subscribe
+          challenge = Strava::Webhooks::Models::Challenge.new(params.permit(:"hub.challenge", :"hub.mode", :"hub.verify_token"))
+          raise 'Bad Request' unless challenge.verify_token == 'strava_token'
+
+          render json: challenge.response, status: 200
+        end
+
+        def callback
+          event = Strava::Webhooks::Models::Event.new(event_params)
+          user = Db::User.find_by(strava_athlete_id: event_params[:owner_id])
+
+          Training::Activities::Workers::SyncStravaActivityWorker
+            .perform_async(user.id, event_params[:object_id]) if user && event_params[:object_id]
+
+          render json: { ok: true }, status: :ok
         end
 
         def our_type(strava_type)
@@ -50,6 +49,10 @@ module Training
 
         def strava_fetcher
           ::Training::Activities::StravaFetcher.new
+        end
+
+        def event_params
+          params.permit(:aspect_type, :event_time, :object_id, :object_type, :owner_id, :subscription_id)
         end
       end
     end

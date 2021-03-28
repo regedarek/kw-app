@@ -8,7 +8,12 @@ Rails.application.routes.draw do
       end
       namespace :api do
         resources :mountain_route_points
-        resources :strava_activities, only: [:index, :create]
+        resources :strava_activities, only: [:index, :create] do
+          collection do
+            get '/callback' => 'strava_activities#subscribe'
+            post '/callback' => 'strava_activities#callback'
+          end
+        end
         resources :mountain_routes, only: :index
         resources :boars, only: :index
       end

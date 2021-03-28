@@ -32,7 +32,8 @@ module Training
         current_user.update(
           strava_access_token: response.access_token,
           strava_refresh_token: response.refresh_token,
-          strava_expires_at: response.expires_at
+          strava_expires_at: response.expires_at,
+          strava_athlete_id: response.athlete.id
         )
 
         redirect_to '/przejscia', notice: 'Połączono ze Stravą'
