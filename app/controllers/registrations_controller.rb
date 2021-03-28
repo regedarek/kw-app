@@ -27,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
     else
       if strava_client(resource.strava_client_id, resource.strava_client_secret).push_subscriptions.any?
         strava_client(resource.strava_client_id, resource.strava_client_secret)
-          .delete_push_subscription(strava_client(resource.strava_client_id, resource.strava_client_secret).push_subscriptions.first.id)
+          .delete_push_subscription(strava_client(resource.strava_subscription_id) if resource.strava_subscription_id
       end
     end
     resource
