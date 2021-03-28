@@ -54,17 +54,18 @@
                 = ::Business::InstructorRecord.find(@course.instructor_id)&.profile_name
 
 
-        - if @course.payment_first_cost > 0
-          .row
-            .large-6.columns
-              .callout
-                b Zaliczka: 
-                = @course.payment_first_cost
+        - if !@course.packages?
+          - if @course.payment_first_cost > 0
+            .row
+              .large-6.columns
+                .callout
+                  b Zaliczka: 
+                  = @course.payment_first_cost
 
-            .large-6.columns
-              .callout
-                b Reszta:
-                = @course.payment_second_cost
+              .large-6.columns
+                .callout
+                  b Reszta:
+                  = @course.payment_second_cost
 
         .row
           - if @course.creator_id

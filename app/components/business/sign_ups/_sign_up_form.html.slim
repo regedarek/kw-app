@@ -18,6 +18,13 @@
     .large-6.columns
       = f.email_field :email, placeholder: true
 
+  - if @sign_up.course.packages?
+    .row
+      .large-12.columns
+        .callout
+          = f.label :business_course_package_type_id
+          = f.collection_select :business_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
+
   .row
     .large-12.columns style=('font-size: 8px')
       .callout

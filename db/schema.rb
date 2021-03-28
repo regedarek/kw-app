@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_105122) do
+ActiveRecord::Schema.define(version: 2021_03_28_174853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2021_03_28_105122) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "business_course_package_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "business_course_record_id", null: false
+    t.integer "cost", null: false
+    t.boolean "increase_limit", default: false, null: false
+    t.boolean "membership", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "business_courses", force: :cascade do |t|
     t.datetime "starts_at"
     t.datetime "ends_at"
@@ -72,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_105122) do
     t.text "equipment"
     t.boolean "cash", default: false, null: false
     t.string "sa_title"
+    t.boolean "packages", default: false, null: false
     t.index ["slug"], name: "index_business_courses_on_slug", unique: true
   end
 
@@ -123,6 +134,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_105122) do
     t.string "alternative_email"
     t.string "state", default: "new", null: false
     t.datetime "equipment_at"
+    t.integer "business_course_package_type_id"
   end
 
   create_table "case_presences", force: :cascade do |t|

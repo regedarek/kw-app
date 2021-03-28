@@ -35,12 +35,13 @@
 
     .row
       - if @course.price
-        .large-6.columns
-          .callout
-            = sanitize I18n.t(".course_price_html", price: @course.price)
-        .large-6.columns
-          .callout
-            = sanitize I18n.t(".course_price_1_html", price: @course.payment_first_cost)
+        - if !@course.packages?
+          .large-6.columns
+            .callout
+              = sanitize I18n.t(".course_price_html", price: @course.price)
+          .large-6.columns
+            .callout
+              = sanitize I18n.t(".course_price_1_html", price: @course.payment_first_cost)
 
     .row
       - if @course.instructor_id

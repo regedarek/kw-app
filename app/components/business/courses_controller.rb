@@ -151,7 +151,8 @@ module Business
           :description, :activity_type, :state, :instructor_id,
           :max_seats, :sign_up_url, :creator_id, :event_id, :sa_title,
           :payment_first_cost, :payment_second_cost, :equipment,
-          :email_first_content, :email_second_content, :cash,
+          :email_first_content, :email_second_content, :cash, :packages,
+          package_types_attributes: [:id, :name, :cost, :membership, :_destroy],
           project_ids: []
         )
     end

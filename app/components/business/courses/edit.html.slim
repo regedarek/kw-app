@@ -6,7 +6,7 @@
           - @course.errors.full_messages.each do |message|
             li= message
 
-= form_for @course, as: :course, url: course_path(@course.id) do |f|
+= form_for @course, as: :course, url: course_path(@course.id), html: { class: 'js-course-form' } do |f|
   = render 'form',
     f: f,
     email_1: @course.email_first_content,

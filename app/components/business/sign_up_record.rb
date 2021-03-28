@@ -12,6 +12,7 @@ module Business
 
     belongs_to :user, class_name: 'Db::User', foreign_key: :user_id
     belongs_to :course, class_name: 'Business::CourseRecord', foreign_key: :course_id
+    belongs_to :package_type, class_name: 'Business::PackageTypeRecord', foreign_key: :business_course_package_type_id
 
     has_one :list, class_name: 'Business::ListRecord', foreign_key: :sign_up_id
 

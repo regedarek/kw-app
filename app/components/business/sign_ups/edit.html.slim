@@ -61,26 +61,35 @@
       .large-4.columns
         = link_to 'kursy', courses_path, class: 'secondary button large expanded'
   .large-6.columns
-    .row
-      .large-12.columns
-        .callout
-          .row
-            .large-6.columns
-              h5 Zadatek
-              = render 'payment', payment: @sign_up.first_payment, number: 1
-              - unless @sign_up.list
-                br
-                h6.dashboard-table-text= link_to 'Poproś o zapotrzebowanie', ask_business_lists_path(@sign_up.id), method: :post
-                - if @sign_up.equipment_at
-                  span.dashboard-table-timestamp= @sign_up.equipment_at.strftime("%d/%m/%Y %H:%M")
-            .large-6.columns
-              h5 Reszta
-              - if @sign_up.second_payment
-                = render 'payment', payment: @sign_up.second_payment, number: 2
-              - else
-                = "#{@sign_up.course.payment_second_cost} zł"
-                br
-                = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
+    - if @sign_up.course.packages?
+      .row
+        .large-12.columns
+          .callout
+            .row
+              .large-6.columns
+                h5 Opłata
+                = render 'payment', payment: @sign_up.first_payment, number: 1
+    - else
+      .row
+        .large-12.columns
+          .callout
+            .row
+              .large-6.columns
+                h5 Zadatek
+                = render 'payment', payment: @sign_up.first_payment, number: 1
+                - unless @sign_up.list
+                  br
+                  h6.dashboard-table-text= link_to 'Poproś o zapotrzebowanie', ask_business_lists_path(@sign_up.id), method: :post
+                  - if @sign_up.equipment_at
+                    span.dashboard-table-timestamp= @sign_up.equipment_at.strftime("%d/%m/%Y %H:%M")
+              .large-6.columns
+                h5 Reszta
+                - if @sign_up.second_payment
+                  = render 'payment', payment: @sign_up.second_payment, number: 2
+                - else
+                  = "#{@sign_up.course.payment_second_cost} zł"
+                  br
+                  = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
 
     - if @sign_up.list
       .row

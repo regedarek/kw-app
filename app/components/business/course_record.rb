@@ -18,6 +18,11 @@ module Business
     has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord', :dependent => :destroy
     has_many :projects, :through => :project_items, :dependent => :destroy
 
+    has_many :package_types,
+      class_name: 'Business::PackageTypeRecord',
+      dependent: :destroy,
+      foreign_key: :business_course_record_id
+
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
     validates :start_date, :max_seats, presence: true
     validates :price, :payment_first_cost, :payment_second_cost, presence: true
@@ -35,6 +40,10 @@ module Business
       :piste_1, :piste_2, :piste_3, :piste_7, :piste_4, :piste_5, :piste_6,
       :cave, :tatra_traverse
     ]
+
+    accepts_nested_attributes_for :package_types,
+      reject_if: proc { |attributes| attributes[:name].blank? },
+      allow_destroy: true
 
     def sign_ups_versions
       PaperTrail::Version.includes(:item).where(item_type: 'Business::SignUpRecord', item_id: sign_ups)

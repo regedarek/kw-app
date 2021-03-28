@@ -6,7 +6,7 @@
           - @course.errors.full_messages.each do |message|
             li= message
 
-= form_for @course, as: :course, url: courses_path do |f|
+= form_for @course, as: :course, url: courses_path, html: { class: 'js-course-form' } do |f|
   = render 'form',
     f: f,
     email_1: params.dig(:course, :email_first_content) || Management::SettingsRecord.find_by(path: '/kursy/email_1')&.content,

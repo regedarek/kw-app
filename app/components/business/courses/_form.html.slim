@@ -49,6 +49,11 @@
     b = f.label :cash, 'Bezpośrednio na konto?'
     = f.check_box :cash
 
+  .large-1.columns
+    = f.label :packages, t('.packages')
+    = f.check_box :packages, class: 'js-packages'
+    span data-tooltip='' tabindex="1" title="Dodaje opcję kilku pakietów płatności za wydarzenie" data-allow-html="true"
+
   .large-2.columns
     b = f.label :price, 'Cena'
     = f.number_field :price
@@ -57,7 +62,7 @@
     b = f.label :payment_first_cost
     = f.number_field :payment_first_cost
 
-  .large-2.columns
+  .large-1.columns
     b = f.label :payment_second_cost
     = f.number_field :payment_second_cost
 
@@ -68,6 +73,27 @@
   .large-2.columns
     b = f.label :max_seats, 'Max. ilość miejsc*'
     = f.number_field :max_seats
+
+.row
+  .js-packages-row
+    .large-12.columns
+      .callout.warning
+        = f.nested_fields_for :package_types do |ff|
+          .row
+            .large-1.columns
+              br
+              = ff.remove_nested_fields_link
+            .large-6.columns
+              = ff.label :name, 'Nazwa'
+              = ff.text_field :name
+            .large-2.columns
+              = ff.label :name, 'Kwota'
+              = ff.number_field :cost
+            .large-3.columns
+              br
+              = ff.check_box :membership
+              = ff.label :membership, 'Sprawdź składkę'
+        = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
 .row
   .large-6.columns
@@ -97,3 +123,4 @@
         .large-12.columns
           = f.label :description, 'Opis kursu'
           = f.trix_editor :description, style: 'min-height: 150px'
+

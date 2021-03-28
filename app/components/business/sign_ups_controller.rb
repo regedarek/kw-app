@@ -21,7 +21,11 @@ module Business
           @sign_up.course.update(seats: @sign_up.course.seats + 1)
         end
 
-        @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
+        if @sign_up.course.packages?
+          @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.package_type.cost)
+        else
+          @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
+        end
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
       else
@@ -74,7 +78,7 @@ module Business
     private
 
     def sign_up_params
-      params.require(:sign_up).permit(:name, :email, :user_id, :phone, :rodo, :rules, :data, :course_id, :expired_at)
+      params.require(:sign_up).permit(:name, :email, :user_id, :phone, :rodo, :rules, :data, :course_id, :expired_at, :business_course_package_type_id)
     end
   end
 end
