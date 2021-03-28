@@ -22,8 +22,8 @@ module Training
             action: 'assigned_to_route',
             notifiable_id: route.id,
             notifiable_type: 'Db::Activities::MountainRoute'
-          ) if route && user_id
-        end
+          )
+        end if route && user_id
         Right(:success)
       end
 
