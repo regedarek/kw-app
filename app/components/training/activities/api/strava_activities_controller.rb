@@ -15,7 +15,7 @@ module Training
         def create
           if params[:user_id] && params[:strava_id]
             ::Training::Activities::Workers::SyncStravaActivityWorker
-              .perform_async(params[:user_id], params[:strava_id])
+              .perform_async(user_id: params[:user_id], strava_id: params[:strava_id], name: params[:name])
             render json: {message: 'Zakolejkowano!'}, status: :created
           else
             render json: {}, status: 400
@@ -35,7 +35,7 @@ module Training
 
           if event.aspect_type == 'create' && event.object_type == 'activity'
             ::Training::Activities::Workers::SyncStravaActivityWorker
-              .perform_async(user.id, event_params[:object_id]) if user && event_params[:object_id]
+              .perform_async(user_id: user.id, strava_id: event_params[:object_id]) if user && event_params[:object_id]
           end
 
           render json: { ok: true }, status: :ok
