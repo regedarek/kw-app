@@ -33,8 +33,10 @@ module Training
           event = Strava::Webhooks::Models::Event.new(event_params)
           user = Db::User.find_by(strava_athlete_id: event_params[:owner_id])
 
-          Training::Activities::Workers::SyncStravaActivityWorker
-            .perform_async(user.id, event_params[:object_id]) if user && event_params[:object_id]
+          if event.aspect_type == 'create' && event.object_type == 'activity'
+            Training::Activities::Workers::SyncStravaActivityWorker
+              .perform_async(user.id, event_params[:object_id]) if user && event_params[:object_id]
+          end
 
           render json: { ok: true }, status: :ok
         end

@@ -109,6 +109,9 @@
                 = sanitize "<b>Token</b> wygasa: #{current_user.strava_expires_at.to_datetime.strftime("%d-%m-%Y %H:%M")}"
               - else
                 = link_to 'Połacz ze Stravą', '/activities/strava/new', class: 'button alert', style: 'height: 55px; line-height: 30px;'
+              - if current_user.strava_subscription_id
+                br
+                = sanitize "<b>ID subskrypcji</b>: #{current_user.strava_subscription_id}"
 
         .large-6.columns
           .callout.warning

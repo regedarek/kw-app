@@ -20,14 +20,19 @@ class RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     resource.update_without_password(params)
     if resource.strava_token && resource.strava_subscribe?
-      unless strava_client(resource.strava_client_id, resource.strava_client_secret).push_subscriptions.any?
-        strava_client(resource.strava_client_id, resource.strava_client_secret)
+      if strava_client(resource.strava_client_id, resource.strava_client_secret).push_subscriptions.any?
+      else
+        subscription = strava_client(resource.strava_client_id, resource.strava_client_secret)
           .create_push_subscription(callback_url: 'https://panel.kw.krakow.pl/activities/api/strava_activities/callback', verify_token: 'strava_token')
+        resource.update(strava_subscription_id: subscription&.id) unless resource.strava_subscription_id
       end
     else
       if strava_client(resource.strava_client_id, resource.strava_client_secret).push_subscriptions.any?
         strava_client(resource.strava_client_id, resource.strava_client_secret)
-          .delete_push_subscription(strava_client(resource.strava_subscription_id) if resource.strava_subscription_id
+          .delete_push_subscription(resource.strava_subscription_id) if resource.strava_subscription_id
+        resource.update(strava_subscription_id: nil)
+      else
+        resource.update(strava_subscription_id: nil)
       end
     end
     resource
