@@ -3,7 +3,7 @@ module Training
     class StravaFetcher
       def activities(user:, per_page: 30, page: 1)
         activities = []
-        client(user.strava_token).athlete_activities(per_page: per_page, page: page, after: 1.year.ago.to_i).each do |activity|
+        client(user.strava_token).athlete_activities(per_page: per_page, page: page).each do |activity|
           activities << {
             name: activity.name,
             start_date: activity.start_date.to_date,
