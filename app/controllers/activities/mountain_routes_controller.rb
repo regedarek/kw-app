@@ -22,7 +22,7 @@ module Activities
 
       @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true)
       @my_routes = current_user.mountain_routes.includes([:colleagues, :photos])
-      @my_training_routes = current_user.mountain_routes.where(trainig: true).includes([:colleagues, :photos])
+      @my_training_routes = current_user.mountain_routes.where(training: true).includes([:colleagues, :photos])
       @my_strava_routes = @routes.where.not(strava_id: nil).where(user_id: current_user.id, hidden: true)
 
       @routes = @routes.where(hidden: false)
