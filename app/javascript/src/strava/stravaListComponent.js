@@ -19,7 +19,7 @@ function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, a
                                     <th colSpan="2" className="text-left">
                                         <input type="checkbox" onChange={(event) => onSelectAll(event)}
                                             checked={allSelected}
-                                            style={{margin: 0}}
+                                            className="margin-none"
                                         /> Zaznacz wszystko
                                     </th>
                                     <th width="150px" className="text-center">
@@ -38,7 +38,7 @@ function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, a
                                       Kiedy?
                                     </th>
                                     <th width="150px" className="text-center">
-                                        <button className="button success" onClick={() => onImportSelected()}
+                                        <button className="button success margin-none" onClick={() => onImportSelected()}
                                         disabled={selectCount < 1}>
                                             Zaimportuj zaznaczone ({selectCount})
                                         </button>
@@ -52,7 +52,7 @@ function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, a
                                             <input type="checkbox" 
                                                 checked={el.checked}
                                                 onChange={() => onSelect(el.id)}
-                                                style={{margin: 0}}
+                                                className="margin-none"
                                             />
                                         </td>
                                         <td className="text-left">
@@ -76,7 +76,7 @@ function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, a
                                           {el.start_date}
                                         </td>
                                         <td className="text-center">
-                                            <button className="button" onClick={() => { onImport(el.id) }}>Zaimportuj</button>
+                                            <button className="button margin-none" onClick={() => { onImport(el.id) }}>Zaimportuj</button>
                                         </td>
                                     </tr>
                                 )}
