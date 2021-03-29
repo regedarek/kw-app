@@ -44,6 +44,10 @@ class StravaListContainer extends React.Component {
       toast.success(<span>Zaimportowana aktywność, <a href={`/przejscia/${data.id}`}>Link</a></span>, {
         position: toast.POSITION.BOTTOM_RIGHT
       });
+
+      this.setState({
+        data: this.state.data.filter(el => id !== el.id)
+      })
     })
   }
 
@@ -72,6 +76,10 @@ class StravaListContainer extends React.Component {
     })
   }
 
+  getSelectCount() {
+    return (this.state.data || []).filter(el => el.checked).length
+  }
+
   render() {
     return <>
         <ToastContainer />
@@ -85,6 +93,7 @@ class StravaListContainer extends React.Component {
         {!this.state.isLoading && <StravaList items={this.state.data} onImport={this.onImport.bind(this)}
           onImportSelected={this.onImportSelected.bind(this)} onSelect={this.onSelect.bind(this)} onSelectAll={this.onSelectAll.bind(this)}
           allSelected={this.state.allSelected}
+          selectCount={this.getSelectCount()}
         /> }
       </>
   }
