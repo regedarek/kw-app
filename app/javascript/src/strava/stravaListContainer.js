@@ -41,7 +41,7 @@ class StravaListContainer extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-      toast.success(<span>Zaimportowana aktywność, <a href={`/przejscia/${data.id}`}>Link</a></span>, {
+      toast.success(<span>Zaimportowane aktywności, <a href={`/przejscia#my_strava_routes`}>Link</a></span>, {
         position: toast.POSITION.BOTTOM_RIGHT
       });
 

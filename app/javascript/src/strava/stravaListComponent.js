@@ -7,6 +7,8 @@ function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, a
                 <div className="row">
                     <div className="columns large-12">
                         Brak odpowiednich aktywności (BackcountrySki, NordicSki, RockClimbing)                    
+                        <br/>
+                        <a href='/przejscia#my_strava_routes'>Przejdź do zaimportowanych przejść</a>
                     </div>
                 </div>
             )}

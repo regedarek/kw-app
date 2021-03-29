@@ -20,6 +20,6 @@ table.stack
           - if route.photos.any?
             = render 'photos/photos', photos: route.photos.map(&:file), take: 2
         td.text-right
-          = link_to 'Edytuj', edit_activities_mountain_route_path(route)
-          |  | 
-          = link_to 'Opublikuj', unhide_route_path(route), method: :put
+          = link_to 'usuń', activities_mountain_route_path(route), method: :delete, class: 'button', data: { confirm: 'Chcesz usunąć przejście?' }
+          = link_to 'edytuj', edit_activities_mountain_route_path(route), class: 'button alert'
+          = link_to 'publikuj', unhide_route_path(route), method: :put, class: 'button warning'
