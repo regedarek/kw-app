@@ -99,10 +99,9 @@
           .large-12.columns
             = f.label :strava_client_secret, 'Client Secret'
             = f.text_field :strava_client_secret
-          - if current_user.kw_id == 2345
-            .large-12.columns
-              = f.label :strava_subscribe, 'Synchronizuj automatycznie'
-              = f.check_box :strava_subscribe
+          .large-12.columns
+            = f.label :strava_subscribe, 'Synchronizuj automatycznie'
+            = f.check_box :strava_subscribe
           .large-12.columns
             - if current_user.strava_client_id.present? && current_user.strava_client_secret.present?
               - if current_user.strava_token
