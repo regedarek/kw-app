@@ -46,5 +46,8 @@ table.stack
           - if route.photos.any?
             = render 'photos/photos', photos: route.photos.map(&:file), take: 2
         td.text-right
-          div id="route_#{route.id}"
-            = render  "training/activities/hearts/button", route: route
+          - if route.hidden?
+            div id="route_#{route.id}"
+              = render  "training/activities/hearts/button", route: route
+          - else
+            i.fi.fi-lock style='color: gray; font-size: 40px'

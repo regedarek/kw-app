@@ -20,10 +20,10 @@ module Activities
         .accessible_by(current_ability)
         .order(climbing_date: :desc)
 
-      @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true)
-      @my_routes = current_user.mountain_routes.includes([:colleagues, :photos])
-      @my_training_routes = current_user.mountain_routes.where(training: true).includes([:colleagues, :photos])
-      @my_strava_routes = @routes.where.not(strava_id: nil).where(user_id: current_user.id, hidden: true)
+      @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true).page(params[:hidden_page]).per(15)
+      @my_routes = current_user.mountain_routes.includes([:colleagues, :photos]).page(params[:my_page]).per(15)
+      @my_training_routes = current_user.mountain_routes.where(training: true).includes([:colleagues, :photos]).page(params[:training_page]).per(15)
+      @my_strava_routes = @routes.where.not(strava_id: nil).where(user_id: current_user.id, hidden: true).page(params[:strava_page]).per(15)
 
       @routes = @routes.where(hidden: false)
       @routes = @routes.page(params[:page]).per(15)

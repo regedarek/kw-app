@@ -56,9 +56,9 @@
         li.tabs-title
           a data-tabs-target="my_routes" href="#my_routes" Twoje wszystkie przejścia
         li.tabs-title
-          a data-tabs-target="my_training_routes" href="#my_routes" Twoje wszystkie treningi
+          a data-tabs-target="my_training_routes" href="#my_training_routes" Twoje treningi
         li.tabs-title
-          a data-tabs-target="my_hidden_routes" href="#my_routes" Twoje przejścia
+          a data-tabs-target="my_hidden_routes" href="#my_hidden_routes" Twoje ukryte przejścia
         li.tabs-title
           a data-tabs-target="my_strava_routes" href="#my_strava_routes" Twoje zaimportowane przejścia
 
@@ -66,23 +66,43 @@
         #new.tabs-panel.is-active
           = render 'table', routes: @routes
 
+          .row
+            .large-12.columns
+              .text-center
+                = paginate @routes
+
         #my_hidden_routes.tabs-panel
           h5 Twoje ukryte przejścia
           = render 'table', routes: @my_hidden_routes
+
+          .row
+            .large-12.columns
+              .text-center
+                = paginate @my_hidden_routes, param_name: :hidden_page, params: { anchor: 'my_hidden_routes' }
 
         #my_routes.tabs-panel
           h5 Twoje wszystkie przejścia
           = render 'table', routes: @my_routes
 
+          .row
+            .large-12.columns
+              .text-center
+                = paginate @my_routes, param_name: :my_page, params: { anchor: 'my_routes' }
+
         #my_training_routes.tabs-panel
           h5 Twoje wszystkie treningi
-          = render 'table', routes: @my_routes
+          = render 'table', routes: @my_training_routes
+
+          .row
+            .large-12.columns
+              .text-center
+                = paginate @my_training_routes, param_name: :training_page, params: { anchor: 'my_training_routes' }
 
         #my_strava_routes.tabs-panel
           h5 Twoje zaimportowane przejścia
           = render 'hidden_table', routes: @my_strava_routes
 
-  .row
-    .large-12.columns
-      .text-center
-        = paginate @routes
+          .row
+            .large-12.columns
+              .text-center
+                = paginate @my_strava_routes, param_name: :strava_page, params: { anchor: 'my_strava_routes' }
