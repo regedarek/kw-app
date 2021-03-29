@@ -1,6 +1,7 @@
 module Storage
   class FileUploader < CarrierWave::Uploader::Base
     include CarrierWave::MiniMagick
+    process :save_content_type_and_size_in_model
 
     if Rails.env.production? || Rails.env.staging?
       storage :fog
@@ -34,8 +35,13 @@ module Storage
       end
     end
 
+    def save_content_type_and_size_in_model
+      model.content_type = file.content_type if file.content_type
+      model.file_size = file.size
+    end
+
     def image?(new_file)
-      new_file.content_type.instance_of?(String) && new_file.content_type.start_with?('image')
+     model.content_type.start_with?('image')
     end
   end
 end
