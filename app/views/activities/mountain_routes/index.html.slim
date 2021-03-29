@@ -48,19 +48,17 @@
             = link_to 'Wspinaczka', wspinaczka_path, class: 'button-hover-reveal'
             = link_to 'Narciarstwo', narciarstwo_path, class: 'button-hover-reveal'
 
+  - if @my_hidden_routes.any?
+    .row
+      .large-12.columns
+        h5 Twoje ukryte przejścia
+        = render 'hidden_table', routes: @my_hidden_routes
 
   .row
     .large-12.columns
-      - if params[:boars]
-        - if params[:boars] && params[:route_type] == 'regular_climbing'
-          .row
-            .large-6.columns
-              = link_to 'Tabela górskich dzików', gorskie_dziki_path, class: 'button warning large expanded'
-            .large-6.columns
-              = link_to 'Regulamin górskich dzików', gorskie_dziki_regulamin_path, class: 'button alert large expanded'
-        = render 'boars_table', routes: @routes
-      - else
-        = render 'table', routes: @routes
+      = render 'table', routes: @routes
 
+  .row
+    .large-12.columns
       .text-center
         = paginate @routes

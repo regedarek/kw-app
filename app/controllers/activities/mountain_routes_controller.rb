@@ -18,9 +18,11 @@ module Activities
       @routes = @routes
         .includes([:colleagues, :photos])
         .accessible_by(current_ability)
-        .where(hidden: false)
         .order(climbing_date: :desc)
 
+      @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true)
+
+      @routes = @routes.where(hidden: false)
       @routes = @routes.page(params[:page]).per(20)
 
       if params[:boars]

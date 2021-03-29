@@ -6,7 +6,8 @@ module Training
         client(user.strava_token).athlete_activities(per_page: per_page, page: page, after: 1.year.ago.to_i) do |activity|
           activities << {
             name: activity.name,
-            start_date: activity.start_date,
+            start_date: activity.start_date.to_date,
+            route_type: activity.type,
             distance: activity.distance_in_kilometers,
             time: activity.moving_time_in_hours_s,
             length: activity.total_elevation_gain_in_meters,

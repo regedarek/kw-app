@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   scope module: 'activities' do
-    #resources :mountain_routes, only: :index
+    resources :routes, only: [] do
+      member do
+        put :unhide
+      end
+    end
     resources :competitions
     namespace :api do
       resources :routes, only: [:index] do

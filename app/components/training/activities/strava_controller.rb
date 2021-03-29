@@ -9,6 +9,8 @@ module Training
       def new
         authorize! :create, ::Db::Activities::MountainRoute
 
+        return redirect_to '/activities/strava' if current_user.strava_token
+
         if current_user.strava_client_id.present? && current_user.strava_client_secret.present?
           redirect_to strava_url
         else

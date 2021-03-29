@@ -1,0 +1,25 @@
+table.stack
+  thead
+    tr
+      th width='5%'
+      th width='150px' Kiedy?
+      th width='300px' Nazwa
+      th width='12%' Zdjęcia
+      th.text-right
+  tbody
+    - routes.each do |route|
+      tr
+        td.text-center = image_tag "#{route.category}.png", size: '40x40'
+        td.text-center.large-text-left = route.climbing_date
+        td.text-center.large-text-left
+          h6.dashboard-table-text= link_to route.name, activities_mountain_route_path(route)
+          span.dashboard-table-timestamp= truncate(route.peak, length: 25)
+        td.text-center
+          - if route.attachments.any?
+            = render 'photos/photos', photos: route.attachments, take: 2
+          - if route.photos.any?
+            = render 'photos/photos', photos: route.photos.map(&:file), take: 2
+        td.text-right
+          = link_to 'Edytuj', edit_activities_mountain_route_path(route)
+          |  | 
+          = link_to 'Opublikuj', unhide_route_path(route), method: :put

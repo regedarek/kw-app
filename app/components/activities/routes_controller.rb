@@ -24,6 +24,13 @@ module Activities
       @specific_month_leaders_female = ski_repository.fetch_specific_month_with_gender(:female, params[:year].to_i, params[:month].to_i)
     end
 
+    def unhide
+      route = ::Db::Activities::MountainRoute.find(params[:id])
+      route.update(hidden: false)
+
+      redirect_to activities_mountain_routes_path, notice: 'Opublikowano'
+    end
+
     def narciarskie_dziki
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 
