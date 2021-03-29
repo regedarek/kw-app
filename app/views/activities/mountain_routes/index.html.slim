@@ -48,15 +48,33 @@
             = link_to 'Wspinaczka', wspinaczka_path, class: 'button-hover-reveal'
             = link_to 'Narciarstwo', narciarstwo_path, class: 'button-hover-reveal'
 
-  - if @my_hidden_routes.any?
-    .row
-      .large-12.columns
-        h5 Twoje ukryte przejścia
-        = render 'hidden_table', routes: @my_hidden_routes
-
   .row
     .large-12.columns
-      = render 'table', routes: @routes
+      ul#show-tabs.tabs data-tabs=""
+        li.tabs-title.is-active
+          a aria-selected="true" href="#new" Najnowsze przejscia
+        li.tabs-title
+          a data-tabs-target="my_routes" href="#my_routes" Twoje wszystkie przejścia
+        li.tabs-title
+          a data-tabs-target="my_hidden_routes" href="#my_routes" Twoje przejścia
+        li.tabs-title
+          a data-tabs-target="my_strava_routes" href="#my_strava_routes" Twoje zaimportowane przejścia
+
+      .tabs-content data-tabs-content="show-tabs"
+        #new.tabs-panel.is-active
+          = render 'table', routes: @routes
+
+        #my_hidden_routes.tabs-panel
+          h5 Twoje ukryte przejścia
+          = render 'hidden_table', routes: @my_hidden_routes
+
+        #my_routes.tabs-panel
+          h5 Twoje wszystkie przejścia
+          = render 'hidden_table', routes: @my_routes
+
+        #my_strava_routes.tabs-panel
+          h5 Twoje zaimportowane przejścia
+          = render 'hidden_table', routes: @my_strava_routes
 
   .row
     .large-12.columns

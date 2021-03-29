@@ -21,9 +21,11 @@ module Activities
         .order(climbing_date: :desc)
 
       @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true)
+      @my_routes = current_user.mountain_routes.includes([:photos])
+      @my_strava_routes = @routes.where.not(strava_id: nil).where(user_id: current_user.id, hidden: true)
 
       @routes = @routes.where(hidden: false)
-      @routes = @routes.page(params[:page]).per(20)
+      @routes = @routes.page(params[:page]).per(15)
 
       if params[:boars]
         @prev_month_leaders = Training::Activities::Repository.new.fetch_prev_month
