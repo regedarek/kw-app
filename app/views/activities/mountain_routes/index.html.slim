@@ -56,6 +56,8 @@
         li.tabs-title
           a data-tabs-target="my_routes" href="#my_routes" Twoje wszystkie przejścia
         li.tabs-title
+          a data-tabs-target="my_training_routes" href="#my_routes" Twoje wszystkie treningi
+        li.tabs-title
           a data-tabs-target="my_hidden_routes" href="#my_routes" Twoje przejścia
         li.tabs-title
           a data-tabs-target="my_strava_routes" href="#my_strava_routes" Twoje zaimportowane przejścia
@@ -70,6 +72,10 @@
 
         #my_routes.tabs-panel
           h5 Twoje wszystkie przejścia
+          = render 'hidden_table', routes: @my_routes
+
+        #my_training_routes.tabs-panel
+          h5 Twoje wszystkie treningi
           = render 'hidden_table', routes: @my_routes
 
         #my_strava_routes.tabs-panel
