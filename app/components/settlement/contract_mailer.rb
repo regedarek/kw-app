@@ -8,7 +8,7 @@ module Settlement
       mail(
         to: ([@contract.creator.email] + @contract.users.map(&:email) + @acceptors.map(&:email) + @office_kings.map(&:email)).uniq,
         from: 'kw@kw.krakow.pl',
-        subject: "Nowe rozliczenie: #{@contract.title} ##{@contract.id}"
+        subject: "Nowe rozliczenie: #{@contract.title} ##{@contract.number}"
       )
     end
   end

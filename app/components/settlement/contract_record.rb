@@ -49,6 +49,10 @@ module Settlement
       state :closed
     end
 
+    def number
+      "#{internal_number}/#{period_date.year}"
+    end
+
     class << self
       Settlement::ContractRecord.defined_enums.keys.each do |method|
         define_method "search_#{method}s_select" do
