@@ -10,7 +10,10 @@ class StravaListContainer extends React.Component {
     this.state = {
       isLoading: false,
       allSelected: false,
-      data: []
+      data: [],
+      showLoadMore: false,
+      isLoadingMore: false,
+      page: 1
     };
   }
   
@@ -18,12 +21,14 @@ class StravaListContainer extends React.Component {
     this.setState({
       isLoading: true,
     })
-    window.fetch(`/activities/api/strava_activities?user_id=${this.props.userId}`)
+    window.fetch(`/activities/api/strava_activities?user_id=${this.props.userId}&page=${this.state.page}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
           data,
-          isLoading: false
+          showLoadMore: data.length > 0,
+          isLoading: false,
+          page: this.state.page+1
         });
       });
   }
@@ -80,20 +85,43 @@ class StravaListContainer extends React.Component {
     return (this.state.data || []).filter(el => el.checked).length
   }
 
+  loadMore() {
+    this.setState({
+      isLoadingMore: true
+    })
+    window.fetch(`/activities/api/strava_activities?user_id=${this.props.userId}&page=${this.state.page}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          data: [
+            ...this.state.data,
+            ...data
+          ],
+          page: this.state.page+1,
+          isLoadingMore: false,
+          showLoadMore: data.length > 0
+        });
+      });
+  }
+
   render() {
+    const {data, isLoading, isLoadingMore, allSelected, showLoadMore} = this.state;
     return <>
         <ToastContainer />
-        { this.state.isLoading && 
+        { isLoading && 
           <div className="row">
             <div className="columns large-12 text-center">
               <Spinner centered={true}></Spinner>
             </div>
           </div>
         }
-        {!this.state.isLoading && <StravaList items={this.state.data} onImport={this.onImport.bind(this)}
+        {!isLoading && <StravaList items={data} onImport={this.onImport.bind(this)}
           onImportSelected={this.onImportSelected.bind(this)} onSelect={this.onSelect.bind(this)} onSelectAll={this.onSelectAll.bind(this)}
-          allSelected={this.state.allSelected}
+          allSelected={allSelected}
           selectCount={this.getSelectCount()}
+          showLoadMore={showLoadMore}
+          isLoadingMore={isLoadingMore}
+          loadMore={this.loadMore.bind(this)}
         /> }
       </>
   }
