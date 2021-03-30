@@ -5,7 +5,7 @@ module Settlement
       year_date = Date.new(contract.document_date.year, 1, 1)
       contract.period_date = year_date
       contract.internal_number = Settlement::ContractRecord.where(period_date: year_date).maximum(:internal_number).to_i + 1
-      contract.save
+      contract.save!
       contract
     end
 
