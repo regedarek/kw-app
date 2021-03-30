@@ -9,7 +9,11 @@ module Settlement
 
     def call(id:, raw_inputs:, verify:, updater_id:)
       contract = Settlement::ContractRecord.find(id)
-      form_outputs = form.with(record: contract, verify: verify).call(raw_inputs.to_h)
+      if Db::User.find_by(id: updater_id)&.roles&.include?('office_king')
+        form_outputs = "::Settlement::OfficeKingContractForm".constantize.with(record: contract, verify: verify).call(raw_inputs.to_h)
+      else
+        form_outputs = "::Settlement::ContractForm".constantize.with(record: contract, verify: verify).call(raw_inputs.to_h)
+      end
       return Left(form_outputs.messages) unless form_outputs.success?
 
       period_date_month = form_outputs.to_h.delete(:"period_date(2i)").try :to_i
