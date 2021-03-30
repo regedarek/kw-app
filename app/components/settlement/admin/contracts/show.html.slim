@@ -139,17 +139,19 @@
         .large-12.columns
           - @contract.photos.select{|photo| !MimeMagic.by_path(photo.file.path)&.image? }.each do |photo|
             = link_to photo.file.url, download: File.basename(photo.file.path) do
-              = image_tag('file.jpg', class: 'thumbnail')
-              |  
-              = File.basename(photo.file.path)
+              = image_tag('file.jpg', class: 'thumbnail', width: '58px')
+              - if can?(:destroy, photo)
+                = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'thumb-close-button' do
+                  span aria-hidden="true"  &times;
             br
           - @contract.photos.select{|photo| MimeMagic.by_path(photo.file.path)&.image? }.each_with_index do |photo, i|
             - unless photo.file.blank? || photo.file.medium.blank?
               = image_tag photo.file.medium.url, class: 'thumbnail', data: { open: "reveal-#{photo.id}-#{i}", 'img-src': photo.file.url }
               div id="reveal-#{photo.id}-#{i}" class='js-photo-reveal full reveal' data-reveal="" data-img-src="#{photo.file.url}" data-index="-#{photo.id}-#{i}"
                 h3 Ładuję...
-              = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'photo-close-button' do
-                span aria-hidden="true"  &times;
+              - if can?(:manage, photo)
+                = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'photo-close-button' do
+                  span aria-hidden="true"  &times;
 
     - if @contract.attachments.any?
       .row

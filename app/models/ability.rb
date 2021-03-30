@@ -50,6 +50,7 @@ class Ability
     can [:read, :update], Settlement::ContractRecord, creator_id: user.id
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable: { user_id: user.id }
+    can :manage, Storage::UploadRecord, { uploadable_type: 'Settlement::ContractRecord', uploadable: { creator_id: user.id } }
     can :manage, Messaging::CommentRecord, user_id: user.id
     cannot :read, Management::Voting::CaseRecord
     cannot :see_dziki, Db::Activities::MountainRoute
@@ -150,7 +151,6 @@ class Ability
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
-    can :manage, Storage::UploadRecord
     can :create, Training::Supplementary::CourseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
@@ -163,7 +163,6 @@ class Ability
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
-    can :manage, Storage::UploadRecord
     can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Settlement::ProjectRecord
@@ -173,7 +172,6 @@ class Ability
     can :read, PaperTrail::Version
     can :read, Settlement::ContractRecord
     can :destroy, Settlement::ContractRecord
-    can :manage, Storage::UploadRecord
     can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
