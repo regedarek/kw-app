@@ -5,6 +5,8 @@ module Training
 
       def index
         authorize! :create, ::Db::Activities::MountainRoute
+      rescue Strava::Errors::Fault
+        return redirect_to '/przejscia', alert: 'Sprawdź czy poprawnie skonfigurowałeś Stravę!'
       end
 
       def new
