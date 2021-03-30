@@ -8,7 +8,7 @@ module Storage
     mount_uploader :file, Storage::FileUploader
 
     def image?
-     content_type.start_with?('image')
+      content_type.start_with?('image')
     end
   end
 end
