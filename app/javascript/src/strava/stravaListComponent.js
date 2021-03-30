@@ -1,6 +1,7 @@
 import React from 'react';
+import Spinner from '../spinner';
 
-function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, allSelected, selectCount}){
+function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, allSelected, selectCount, showLoadMore, isLoadingMore, loadMore}){
     return (
         <>
             {items && items.length === 0 && (
@@ -84,6 +85,16 @@ function StravaList({items, onImport, onImportSelected, onSelect, onSelectAll, a
                                 )}
                             </tbody>
                         </table>
+                        <div className="text-center" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            {showLoadMore && !isLoadingMore && 
+                                <button className="button" onClick={loadMore}>
+                                    Załaduj więcej
+                                </button>
+                            }
+                            {isLoadingMore && 
+                                <Spinner></Spinner>
+                            }
+                        </div>
                     </div>
                 </div>
             }
