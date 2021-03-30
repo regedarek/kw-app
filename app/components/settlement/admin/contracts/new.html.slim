@@ -78,6 +78,7 @@
           .large-6.columns
             = f.label :attachments
             = f.fields_for :photos_attributes do |p|
+              = p.hidden_field :user_id, value: current_user.id, multiple: true, name: 'contract[photos_attributes][][user_id]'
               = p.file_field :file, multiple: true, name: 'contract[photos_attributes][][file]'
 
       .row

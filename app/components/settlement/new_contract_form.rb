@@ -7,24 +7,18 @@ module Settlement
     configure { config.messages = :i18n }
 
     required(:title).filled(:str?)
-    required(:cost).filled(:float?)
-    required(:document_type).filled
-    required(:document_number).filled(:str?)
-    required(:payout_type).filled
-    required(:document_date).filled(:str?)
-    required(:description).maybe(:str?)
-    optional(:attachments).maybe
-    required(:photos_attributes).filled
+    required(:contractor_id).filled(:int?)
     required(:group_type).filled
     required(:event_type).filled
-    optional(:acceptor_id).maybe
-    optional(:substantive_type).maybe
-    optional(:state).maybe
-    optional(:financial_type).maybe
-    optional(:period_date).maybe
+    required(:document_number).filled(:str?)
+    required(:document_date).filled(:str?)
+    required(:document_type).filled
+    required(:payout_type).filled
+    required(:cost).filled(:float?)
+    required(:description).maybe(:str?)
     required(:user_ids).each(:str?)
-    optional(:project_ids).maybe
-    required(:contractor_id).filled(:int?)
+    required(:photos_attributes).filled
+
     validate(nip_if_fv: [:contractor_id, :document_type]) do |contractor_id, document_type|
       if ['fv', 'bill'].include?(document_type)
         Settlement::ContractorRecord.find_by(id: contractor_id).nip?
