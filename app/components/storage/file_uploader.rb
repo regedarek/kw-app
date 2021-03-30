@@ -41,7 +41,9 @@ module Storage
     end
 
     def image?(new_file)
-     model.content_type.start_with?('image')
+      return true if model&.content_type&.start_with?('image')
+
+      new_file.content_type.instance_of?(String) && new_file.content_type.start_with?('image')
     end
   end
 end
