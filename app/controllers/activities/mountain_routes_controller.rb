@@ -21,8 +21,8 @@ module Activities
         .order(climbing_date: :desc)
 
       @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true).page(params[:hidden_page]).per(15)
-      @my_routes = current_user.mountain_routes.ransack(params[:q]).result(distinct: true).where(route_type: params[:route_type]).includes([:colleagues, :photos]).page(params[:my_page]).per(15)
-      @my_training_routes = current_user.mountain_routes.ransack(params[:q]).result(distinct: true).where(route_type: params[:route_type]).where(training: true).includes([:colleagues, :photos]).page(params[:training_page]).per(15)
+      @my_routes = @routes.where(user_id: current_user.id).page(params[:my_page]).per(15)
+      @my_training_routes = @routes.where(user_id: current_user.id, training: true).page(params[:training_page]).per(15)
       @my_strava_routes = @routes.where.not(strava_id: nil).where(user_id: current_user.id, hidden: true).page(params[:strava_page]).per(15)
 
       @routes = @routes.where(hidden: false)
