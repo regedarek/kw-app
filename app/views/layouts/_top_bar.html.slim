@@ -63,6 +63,7 @@
                 li= link_to 'Kursy', courses_path
                 li= link_to 'Zapisy', business_sign_ups_path
                 li= link_to 'Historia', history_courses_path
+                li= link_to 'Rozliczenia', admin_contracts_path
 
           - if current_user.roles.include?('management')
             li
@@ -80,14 +81,6 @@
                 li= link_to 'Kontrahenci', admin_contractors_path
                 li= link_to 'Wysłane ofery', sponsorship_requests_path
                 li= link_to 'Zniżki i rabaty', discounts_path
-
-          - if current_user.roles.include?('sa')
-            li
-              = link_to 'SA', admin_path
-              ul.menu.vertical
-                - if can? :manage, Business::CourseRecord
-                  li= link_to 'Kursy SA', courses_path
-                  li= link_to 'Rozliczenia', admin_contracts_path
 
           - if current_user.roles.include?('tech')
             li
