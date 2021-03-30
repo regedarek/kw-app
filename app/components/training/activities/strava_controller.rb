@@ -4,6 +4,7 @@ module Training
       append_view_path 'app/components'
 
       def index
+        authorize! :create, ::Db::Activities::MountainRoute
       end
 
       def new
