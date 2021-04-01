@@ -98,6 +98,29 @@ module Seeding
           optional_address: Faker::Address.secondary_address
         )
         Factories::Profile.create!(
+          first_name: 'Mikolaj',
+          last_name: 'Rydzewski',
+          email: 'mikolaj.rydzewski@gmail.com',
+          phone: Faker::PhoneNumber.cell_phone,
+          position: 2.times.map { Db::Profile::POSITION.sample }.uniq,
+          acomplished_courses: 2.times.map { Db::Profile::ACOMPLISHED_COURSES.sample }.uniq,
+          sections: 2.times.map { Db::Profile::SECTIONS.sample }.uniq,
+          recommended_by: 3.times.map { Db::Profile::RECOMMENDED_BY.sample }.uniq,
+          cost: [100, 50, 150].sample,
+          added: [true, false].sample,
+          accepted: true,
+          main_discussion_group: [true, false].sample,
+          application_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
+          birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+          kw_id: 2794,
+          city: Faker::Address.city,
+          birth_place: Faker::Address.city,
+          pesel: Faker::Code.ean,
+          postal_code: Faker::Address.postcode,
+          main_address: Faker::Address.street_address,
+          optional_address: Faker::Address.secondary_address
+        )
+         Factories::Profile.create!(
           first_name: 'Piotr',
           last_name: 'Podolski',
           email: 'piotr.podolski@gmail.com',
@@ -163,6 +186,18 @@ module Seeding
         user4.password = "test"
         user4.save
         fee = user4.membership_fees.create year: Date.today.year, cost: 100, kw_id: user4.kw_id, creator_id: user4.id
+        fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
+        user5 = Db::User.new(
+          first_name: 'Mikolaj',
+          last_name: 'Rydzewski',
+          email: 'mikolaj.rydzewski@gmail.com',
+          kw_id: 2794,
+          phone: Faker::PhoneNumber.cell_phone,
+          roles: ['admin', 'office']
+        )
+        user5.password = "test"
+        user5.save
+        fee = user5.membership_fees.create year: Date.today.year, cost: 100, kw_id: user5.kw_id, creator_id: user5.id
         fee.create_payment cash: true, state: 'prepaid', cash_user_id: Db::User.first.id
         Db::Item.destroy_all
         (1..10).step(1) do |n|
