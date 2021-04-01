@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_185409) do
     t.integer "course_id"
     t.string "name"
     t.string "email"
-    t.string "code", default: "512cb69ed5f44d7f", null: false
+    t.string "code", default: "e9615cc49046a762", null: false
     t.datetime "expired_at"
     t.datetime "sent_at"
     t.integer "admin_id"
@@ -542,7 +542,6 @@ ActiveRecord::Schema.define(version: 2021_03_30_185409) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "category_type"
-    t.string "amount_body"
   end
 
   create_table "marketing_sponsorship_requests", force: :cascade do |t|
@@ -1027,7 +1026,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_185409) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "64019b257f9e3f0a", null: false
+    t.string "code", default: "821109d73608acb1", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"
