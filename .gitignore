@@ -33,3 +33,4 @@ latest.dump
 yarn-debug.log*
 .yarn-integrity
 tags
+.idea
