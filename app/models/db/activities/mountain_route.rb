@@ -1,8 +1,6 @@
 module Db
   module Activities
     class MountainRoute < ActiveRecord::Base
-      include Elasticsearch::Model
-      include Elasticsearch::Model::Callbacks
       extend FriendlyId
 
       before_save :save_boar_length, if: :ski?
