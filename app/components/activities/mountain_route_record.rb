@@ -1,5 +1,6 @@
 module Activities
   class MountainRouteRecord < ActiveRecord::Base
+    before_save :save_boar_length, if: :ski?
     enum route_type: [:ski, :regular_climbing, :winter_climbing]
 
     mount_uploaders :attachments, AttachmentUploader
@@ -31,6 +32,14 @@ module Activities
         :snw
       else
         :sww
+      end
+    end
+
+    def save_boar_length
+      if training
+        self.boar_length = length / 2
+      else
+        self.boar_length = length
       end
     end
 

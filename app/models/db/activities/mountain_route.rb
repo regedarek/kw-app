@@ -1,11 +1,17 @@
 module Db
   module Activities
     class MountainRoute < ActiveRecord::Base
+      include Elasticsearch::Model
+      include Elasticsearch::Model::Callbacks
+      extend FriendlyId
+
       before_save :save_boar_length, if: :ski?
 
-      extend FriendlyId
+      searchkick word_start: %i[name]
+
       enum route_type: [:ski, :regular_climbing]
       friendly_id :slug_candidates, use: :slugged
+
       mount_uploaders :attachments, AttachmentUploader
       mount_uploaders :gps_tracks, Training::Activities::GpsTrackUploader
       serialize :attachments, JSON
