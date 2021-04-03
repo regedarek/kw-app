@@ -203,10 +203,6 @@
                   = submit_tag "Wyślij wiadomość", class: 'button expanded large'
       .row
         .large-12.columns
-          h3 = @conversation.subject
-
-      .row
-        .large-12.columns
           - @conversation.messages.includes(:sender).order(created_at: :asc).each do |message|
             .comment-section-container
               .callout
