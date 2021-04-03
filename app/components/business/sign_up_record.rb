@@ -1,5 +1,6 @@
 module Business
   class SignUpRecord < ActiveRecord::Base
+    acts_as_messageable
     include Workflow
     self.table_name = 'business_sign_ups'
 
@@ -19,6 +20,14 @@ module Business
     has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     has_many :payments, as: :payable, dependent: :destroy, class_name: 'Db::Payment'
+
+    def mailboxer_email(object)
+      #Check if an email should be sent for that object
+      #if true
+      return email
+      #if false
+      #return nil
+    end
 
     def payment_type
       course.payment_type
