@@ -18,7 +18,6 @@ module Messaging
         @receiver = receiver
         set_subject(message)
         mail :to => receiver.send(Mailboxer.email_method, message),
-            :bcc => message.sender.email,
             :from => "Panel KW Kraków <reply+#{message.conversation.code}@panel.kw.krakow.pl>",
             :subject => t('mailboxer.message_mailer.subject_new', :subject => @subject),
             :template_name => 'new_message_email'
@@ -30,7 +29,6 @@ module Messaging
         @receiver = receiver
         set_subject(message)
         mail :to => receiver.send(Mailboxer.email_method, message),
-            :bcc => message.sender.email,
             :from => "Panel KW Kraków <reply+#{message.conversation.code}@panel.kw.krakow.pl>",
             :subject => t('mailboxer.message_mailer.subject_new', :subject => @subject),
             :template_name => 'reply_message_email'
