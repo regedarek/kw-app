@@ -9,3 +9,8 @@ br
 - else
   = link_to I18n.t('.business.mailer.charge_link'), charge_payment_url(@sign_up.first_payment.id)
   br
+br
+| Klikając w poniższy link, możesz kontaktować się z koordynatorem i instruktorem kursu oraz pozostałymi uczestnikami.
+br
+= link_to 'Link do kontatku z pozostałymi uczestnikami', course_url(id: @sign_up.course_id, code: @sign_up.code)
+br

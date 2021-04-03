@@ -33,6 +33,7 @@ class Ability
   end
 
   def default
+    can :read, Business::CourseRecord
     can :create, Db::Profile
     cannot :read, Management::Voting::CaseRecord
     can :read, Marketing::DiscountRecord

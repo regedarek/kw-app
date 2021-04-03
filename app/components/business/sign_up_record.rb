@@ -29,6 +29,10 @@ module Business
       #return nil
     end
 
+    def display_name
+      return name
+    end
+
     def payment_type
       course.payment_type
     end

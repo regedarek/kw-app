@@ -9,8 +9,8 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: "SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>",
-        cc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
+        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.course.conversations.first.code}@szkolaalpinizmu.pl>",
+        bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
         subject: "[#{@sign_up.course.name_with_date}] - Zapisałeś na kurs - #{@sign_up.name}"
       ).tap do |message|
         message.mailgun_options = {

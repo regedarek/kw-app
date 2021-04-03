@@ -15,6 +15,9 @@ module Business
     has_many :list_courses, class_name: 'Business::ListCourseRecord', foreign_key: :course_id
     has_many :lists, through: :list_courses, dependent: :destroy, foreign_key: :list_id
 
+    has_many :course_conversations, class_name: '::Business::CourseConversationRecord', :dependent => :destroy, foreign_key: :course_id
+    has_many :conversations, :through => :course_conversations, :dependent => :destroy, foreign_key: :conversation_id
+
     has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord', :dependent => :destroy
     has_many :projects, :through => :project_items, :dependent => :destroy
 

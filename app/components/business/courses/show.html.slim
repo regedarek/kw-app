@@ -2,11 +2,12 @@
   .large-6.columns
     ul#business_courses-tabs.tabs data-tabs="" 
       li.tabs-title.is-active
-        a aria-selected="true" href="#fields" Dane zapisu
-      li.tabs-title
-        a data-tabs-target="lists" href="#lists" Zapotrzebowanie
-      li.tabs-title
-        a data-tabs-target="history" href="#history" Historia zmian
+        a aria-selected="true" href="#fields" Dane kursu
+      - if can?(:manage, @course)
+        li.tabs-title
+          a data-tabs-target="lists" href="#lists" Zapotrzebowanie
+        li.tabs-title
+          a data-tabs-target="history" href="#history" Historia zmian
 
     .tabs-content data-tabs-content="business_courses-tabs" 
       #fields.tabs-panel.is-active
@@ -86,99 +87,148 @@
               .callout
                 = sanitize @course.description
 
-        - if @course.projects.any?
-          .row
-            .large-12.columns
-              .callout
-                - @course.projects.each do |project|
-                  = link_to project.name, admin_project_path(project.id)
+        - if can?(:manage, @course)
+          - if @course.projects.any?
+            .row
+              .large-12.columns
+                .callout
+                  - @course.projects.each do |project|
+                    = link_to project.name, admin_project_path(project.id)
 
-        - if @course.sign_up_url
-          .row
-            .large-12.columns
-              .callout
-                = link_to @course.sign_up_url, @course.sign_up_url
+          - if @course.sign_up_url
+            .row
+              .large-12.columns
+                .callout
+                  = link_to @course.sign_up_url, @course.sign_up_url
 
-        - if @course.event_id
-          .row
-            .large-12.columns
-              .callout
-                = link_to @course.event.name, polish_event_path(@course.event.slug)
+          - if @course.event_id
+            .row
+              .large-12.columns
+                .callout
+                  = link_to @course.event.name, polish_event_path(@course.event.slug)
 
+            .row
+              .large-12.columns
+                ul
+                  - Training::Supplementary::Limiter.new(@course.event).all_prepaid.each do |sign_up|
+                    li = link_to sign_up.user_name, edit_supplementary_sign_up_path(sign_up.id), class: 'item'
+
+        - if can?(:manage, @course)
           .row
-            .large-12.columns
+            .large-4.columns
+              = link_to 'edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
+            .large-4.columns
+              = link_to 'excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
+            .large-4.columns
+              = link_to 'kursy', courses_path, class: 'secondary button large expanded'
+
+      - if can?(:manage, @course)
+        #lists.tabs-panel
+          .callout.primary
+            = sanitize @course.equipment
+          br
+          - @course.sign_ups.includes(:list).collect(&:list).compact.each do |record|
+            .callout
+              h6.dashboard-table-text= link_to record.sign_up.name, edit_business_sign_up_path(record.sign_up.id)
+              span.dashboard-table-timestamp= record.sign_up.email
+              br
+              = sanitize "<b>Miejce urodzenia</b> #{record.birthplace}"
+              br
+              = sanitize "<b>Data urodzenia</b> #{record.birthdate}"
+              br
+              = sanitize "<b>E-mail dla grupy</b> #{record.alternative_email}"
+              h5 Alternatywne terminy
               ul
-                - Training::Supplementary::Limiter.new(@course.event).all_prepaid.each do |sign_up|
-                  li = link_to sign_up.user_name, edit_supplementary_sign_up_path(sign_up.id), class: 'item'
+                - record.courses.each do |course|
+                  li = course.name_with_date
+              = sanitize record.description
 
-        .row
-          .large-4.columns
-            = link_to 'edytuj', edit_course_path(@course.id), class: 'alert button large expanded'
-          .large-4.columns
-            = link_to 'excel', course_path(@course.id, format: :xlsx), class: 'warning button large expanded'
-          .large-4.columns
-            = link_to 'kursy', courses_path, class: 'secondary button large expanded'
-
-      #lists.tabs-panel
-        .callout.primary
-           = sanitize @course.equipment
-        br
-        - @course.sign_ups.includes(:list).collect(&:list).compact.each do |record|
-          .callout
-            h6.dashboard-table-text= link_to record.sign_up.name, edit_business_sign_up_path(record.sign_up.id)
-            span.dashboard-table-timestamp= record.sign_up.email
-            br
-            = sanitize "<b>Miejce urodzenia</b> #{record.birthplace}"
-            br
-            = sanitize "<b>Data urodzenia</b> #{record.birthdate}"
-            br
-            = sanitize "<b>E-mail dla grupy</b> #{record.alternative_email}"
-            h5 Alternatywne terminy
-            ul
-              - record.courses.each do |course|
-                li = course.name_with_date
-            = sanitize record.description
-
-      #history.tabs-panel
-        table.stack
-          thead
-            tr
-              th width='20%' Kto?
-              th width='20%' Co?
-              th width='10%' Metadata
-          tbody
-            - @course.all_versions.includes(:item).reverse.each do |version|
+        #history.tabs-panel
+          table.stack
+            thead
               tr
-                td
-                  - user = Db::User.find_by(id: version.whodunnit)
-                  - if user
-                    = user.display_name
-                  - else
-                    - if version.item_type == 'Business::SignUpRecord'
-                      = version.item.name
-                    - if version.item_type == 'Db::Payment'
-                      = Business::SignUpRecord.find_by(id: version.item.payable_id)&.name
-                    - if version.item_type == 'Business::ListRecord'
-                      = version.item.sign_up.name
-                td
-                  h6.dashboard-table-text= I18n.t version.event
-                  span.dashboard-table-timestamp= I18n.t(version.item.class.name.underscore)
-                td
-                  span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
-                    span.dashboard-table-timestamp= version.created_at.strftime '%Y-%m-%d %H:%M'
+                th width='20%' Kto?
+                th width='20%' Co?
+                th width='10%' Metadata
+            tbody
+              - @course.all_versions.includes(:item).reverse.each do |version|
+                tr
+                  td
+                    - user = Db::User.find_by(id: version.whodunnit)
+                    - if user
+                      = user.display_name
+                    - else
+                      - if version.item_type == 'Business::SignUpRecord'
+                        = version.item.name
+                      - if version.item_type == 'Db::Payment'
+                        = Business::SignUpRecord.find_by(id: version.item.payable_id)&.name
+                      - if version.item_type == 'Business::ListRecord'
+                        = version.item.sign_up.name
+                  td
+                    h6.dashboard-table-text= I18n.t version.event
+                    span.dashboard-table-timestamp= I18n.t(version.item.class.name.underscore)
+                  td
+                    span data-tooltip='' tabindex="1" title="<ul class='dashboard-table-ul'>#{version.changeset.except('updated_at')}</ul>" data-allow-html="true"
+                      span.dashboard-table-timestamp= version.created_at.strftime '%Y-%m-%d %H:%M'
 
   .large-6.columns
-    = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)
+    - if can?(:manage, @course)
+      = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)
 
-    .row
-      .large-12.columns
-        .callout
-          = @course.sign_ups.map(&:email).join(', ')
+      .row
+        .large-12.columns
+          .callout
+            = @course.sign_ups.map(&:email).join(', ')
 
-    h5 Komentarze
-    .row
-      .large-12.columns
-        = render 'messaging/comments/comments', commentable: @course
-      .large-12.columns
-        .callout
-          = render 'messaging/comments/form', commentable: @course
+    - if (user_signed_in? && current_user.roles.include?('business_courses')) || ::Business::SignUpRecord.exists?(code: params[:code])
+      h5 Porozmawiaj
+      - if false
+        .row
+          .large-12.columns
+            h3 Nowa Wiadomość
+
+            = form_tag business_conversations_path, method: :post do
+              .row
+                .large-6.columns
+                  = text_field_tag :subject, nil, placeholder: "Temat", required: true
+                .large-6.columns
+                  = select_tag :user_id, options_for_select(@course.sign_ups.map { |u| [u.name, u.id] }, params[:recipient_id]),
+                    { class: 'js-select-multiple', include_blank: true }
+              .row
+                .large-12.columns
+                  = hidden_field_tag :body, nil, { id: 'remarks_body' }
+                  trix-editor input='remarks_body'
+              .row
+                .large-12.columns
+                  = submit_tag "Wyślij wiadomość", class: 'button expanded large'
+      .row
+        .large-12.columns
+          h3 = @conversation.subject
+
+      .row
+        .large-12.columns
+          - @conversation.messages.includes(:sender).order(created_at: :asc).each do |message|
+            .comment-section-container
+              .callout
+                .comment-section-author
+                  = image_tag('default-avatar.png', size: '50x50')
+                  .comment-section-name
+                    h5 = message.sender.display_name
+                    p = I18n.l(message.created_at, :format => :short)
+                .comment-section-text
+                  = sanitize message.body
+
+          .comment-section-container
+            = form_tag business_messages_path(conversation_id: @conversation.id, course_id: @course.id), method: :post do |f|
+              = hidden_field_tag :code, params[:code]
+              .row
+                .large-12.columns
+                  = hidden_field_tag :body, nil, { id: 'remarks_body' }
+                  trix-editor input='remarks_body'
+              .row
+                .large-12.columns
+                  = submit_tag "Odpowiedz", class: 'button expanded large'
+
+      .row
+        .large-12.columns
+          = link_to 'wróć do skrzynki odbiorczej', conversations_path, class: 'button'

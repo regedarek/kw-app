@@ -60,7 +60,10 @@ module Business
           accountable_id: @course.id,
           user_id: current_user.id,
           project_id: project.id
-        )
+        ) unless ::Settlement::ProjectItemRecord.exists?(accountable_type: 'Business::CourseRecord', accountable_id: @course.id)
+        receipt = current_user.send_message(nil, @course.description, @course.name_with_date)
+        ::Business::CourseConversationRecord.create(conversation_id: receipt.conversation.id, course_id: @course.id)
+
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else
         render :new
@@ -69,6 +72,7 @@ module Business
 
     def show
       @course = Business::CourseRecord.friendly.find(params[:id])
+      @conversation = @course.conversations.first
 
       authorize! :read, Business::CourseRecord
 
