@@ -1,38 +1,39 @@
-require 'sendgrid-ruby'
-
 module EmailCenter
   class Mailman
-    include SendGrid
-
     def initialize(email)
+      @email = email
       @to = pick_meaningful_recipient(email.to)
       @from = email.from
       @body = email.body
     end
 
     def handle_it
-      byebug
-    end
+      conversation_code = @to[:token]&.split('+')&.last
+      return true unless conversation_code
 
-    def send!
-      from = Email.new(email: "reply+#{123}@panel.kw.krakow.pl")
-      to = Email.new(email: 'dariusz.finster@gmail.com')
-      subject = 'Sending with SendGrid is Fun'
-      content = Content.new(type: 'text/plain', value: '-- REPLY ABOVE THIS LINE -- \n and easy to do anywhere, even with Ruby')
-      mail = Mail.new(from, subject, to, content)
-      mail.add_header(Header.new(key: 'X-Test3', value: 'test3'))
+      conversation = ::Mailboxer::Conversation.find_by(code: conversation_code)
 
-      sg = SendGrid::API.new(api_key: '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')
-      response = sg.client.mail._('send').post(request_body: mail.to_json)
-      puts response.status_code
-      puts response.body
-      puts response.headers
+      sender = nil
+      if conversation && conversation.courses.any?
+        if Db::User.find_by(email: @from[:email])
+          sender = Db::User.find_by(email: @from[:email])
+        else
+          sender = ::Business::SignUpRecord.find_by(email: @from[:email])
+        end
+      else
+        sender = Db::User.find_by(email: @from[:email])
+      end
+
+      if sender && conversation
+        sender.reply_to_conversation(conversation, @body)
+      end
+      true
     end
 
     private
 
     def pick_meaningful_recipient(recipients)
-      recipients.find { |address| address =~ /@mydomain.com$/ }
+      recipients.find { |address| address[:host] =~ /panel.kw.krakow.pl/ }
     end
   end
 end

@@ -6,6 +6,8 @@ module Business
 
     has_paper_trail
 
+    before_create :set_code
+
     validates :rodo, acceptance: true
     validates :rules, acceptance: true
     validates :data, acceptance: true
@@ -64,6 +66,15 @@ module Business
 
     def description
       "Kurs Szkoły Alpinizmu: #{course.name} - #{course.start_date} - Opłata od #{name}"
+    end
+
+    private
+
+    def set_code
+      self.code = loop do
+        random_token = SecureRandom.hex(8)
+        break random_token unless ::Business::SignUpRecord.exists?(code: random_token)
+      end
     end
   end
 end

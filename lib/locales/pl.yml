@@ -62,10 +62,10 @@ pl:
       strength: Siła
   mailboxer:
     message_mailer:
-      subject_new: "[Panel KW Kraków] Wiadomość: %{subject}"
-      subject_reply: "Panel KW Kraków - Nowa Odpowiedź: %{subject}"
+      subject_new: "Wiadomość: %{subject}"
+      subject_reply: "Nowa Odpowiedź: %{subject}"
     notification_mailer:
-      subject: "Panel KW Kraków- Nowe powiadomienie: %{subject}"
+      subject: "Nowe powiadomienie: %{subject}"
   activerecord:
     attributes:
       management/voting/case_presence_record:

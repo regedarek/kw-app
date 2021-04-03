@@ -21,3 +21,19 @@ Mailboxer.setup do |config|
   config.subject_max_length = 255
   config.body_max_length = 32000
 end
+
+Rails.application.config.to_prepare do
+  Mailboxer::Conversation.class_eval do
+    before_create :set_code
+
+    has_many :course_conversations, class_name: '::Business::CourseConversationRecord', :dependent => :destroy, foreign_key: :conversation_id
+    has_many :courses, :through => :course_conversations, :dependent => :destroy, foreign_key: :course_id
+
+    def set_code
+      self.code = loop do
+        random_token = SecureRandom.hex(8)
+        break random_token unless ::Mailboxer::Conversation.exists?(code: random_token)
+      end
+    end
+  end
+end

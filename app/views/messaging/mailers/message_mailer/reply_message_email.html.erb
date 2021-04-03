@@ -1,17 +1,31 @@
+<span>-- ODPOWIEDZ E-MAILOWO POWYŻEJ TEJ LINI --</span>
 <!DOCTYPE html>
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h3>Masz nową odpowiedź w temacie: <%= @subject %></h3>
-    <blockquote>
+    <% if @message.conversation && @message.conversation.courses.any?%>
+      <h3>Masz nową odpowiedź dotyczącą: <%= @subject %></h3>
+      <blockquote>
+        <p>
+          <%= raw @message.body %>
+        </p>
+      </blockquote>
       <p>
-        <%= raw @message.body %>
+        <% sign_up = @message&.conversation&.courses&.first&.sign_ups&.find_by(email: @receiver.email) %>
+        Odwiedź <%= link_to 'stronę kursu', course_url(@message.conversation.courses.first.id, code: sign_up&.code) %> w celu kontaktu z pozostałymi uczestnikami.)
       </p>
-    </blockquote>
-    <p>
-      Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.
-    </p>
+    <% else %>
+      <h3>Masz nową odpowiedź w temacie: <%= @subject %></h3>
+      <blockquote>
+        <p>
+          <%= raw @message.body %>
+        </p>
+      </blockquote>
+      <p>
+        Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.
+      </p>
+    <% end %>
   </body>
 </html>
