@@ -253,7 +253,7 @@
           .callout
             = sanitize @course&.remarks
         - if Training::Supplementary::CourseRecord.find(@course.id).conversations.any?
-          = render 'messaging/conversations/conversation', conversation: Training::Supplementary::CourseRecord.find(@course.id).conversations.first, users: Db::User.all
+          = render 'messaging/conversations/conversation', conversation: Training::Supplementary::CourseRecord.find(@course.id).conversations.first, users: Db::User.active.not_hidden
       - if @course.price
         .large-6.columns
           - if !@limiter.open?
