@@ -2,6 +2,10 @@
   .row
     .large-12.columns
       h3 = @conversation.subject
+  .row
+    .large-12.columns
+      .callout
+        = @conversation.participants.map(&:display_name).to_sentence
 
   .row
     .large-12.columns

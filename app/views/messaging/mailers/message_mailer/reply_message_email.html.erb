@@ -24,7 +24,7 @@
         </p>
       </blockquote>
       <p>
-        Odwiedź swoją <%= link_to 'skrzynkę odbiorczą', conversations_url %> aby odpowiedzieć i sprawdzić inne wiadomości.
+        Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
       </p>
     <% end %>
   </body>

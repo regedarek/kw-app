@@ -8,8 +8,8 @@
       .large-6.columns
         = text_field_tag :subject, nil, placeholder: "Temat", required: true
       .large-6.columns
-        = select_tag :user_id, options_for_select(@recipients.map { |u| [u.display_name, u.id] }, params[:recipient_id]),
-          { class: 'js-select-multiple', include_blank: true }
+        = select_tag :user_ids, options_for_select(@users.map { |u| [u.display_name, u.id] }, @recipients),
+          { class: 'js-select-multiple', include_blank: true, multiple: true }
     .row
       .large-12.columns
         = hidden_field_tag :body, nil, { id: 'remarks_body' }
