@@ -5,24 +5,27 @@ module Messaging
 
     def index
       authorize! :read, Mailboxer::Conversation
+
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
       @conversations = @q.result(distinct: true)
     end
 
     def show
-      @conversation = current_user.mailbox.conversations.find(params[:id])
-
       authorize! :read, Mailboxer::Conversation
+
+      @conversation = current_user.mailbox.conversations.find(params[:id])
     end
 
     def new
-      @recipients = Db::User.where.not(kw_id: nil).not_hidden.active - [current_user]
-
       authorize! :create, Mailboxer::Conversation
+
+      @recipients = Db::User.where.not(kw_id: nil).not_hidden.active - [current_user]
     end
 
     def create
+      authorize! :create, Mailboxer::Conversation
+
       @recipients = Db::User.where.not(kw_id: nil).not_hidden.active - [current_user]
       recipient = Db::User.find_by(id: params[:user_id])
 

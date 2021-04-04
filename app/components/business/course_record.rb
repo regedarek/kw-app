@@ -28,7 +28,7 @@ module Business
 
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
     validates :start_date, :max_seats, presence: true
-    validates :price, :payment_first_cost, :payment_second_cost, presence: true
+    validates :price, :description, :payment_first_cost, :payment_second_cost, presence: true
     validates :activity_type, presence: true
     validate :max_seats_size
 

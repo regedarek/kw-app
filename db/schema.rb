@@ -425,6 +425,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_171924) do
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code", default: "0b0367353bdde73e", null: false
   end
 
   create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|

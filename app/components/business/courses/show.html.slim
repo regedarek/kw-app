@@ -172,13 +172,14 @@
                       span.dashboard-table-timestamp= version.created_at.strftime '%Y-%m-%d %H:%M'
 
   .large-6.columns
-    - if can?(:manage, @course)
-      = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)
+    - if @course.sign_ups.any?
+      - if can?(:manage, @course)
+        = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)
 
-      .row
-        .large-12.columns
-          .callout
-            = @course.sign_ups.map(&:email).join(', ')
+        .row
+          .large-12.columns
+            .callout
+              = @course.sign_ups.map(&:email).join(', ')
 
     - if (user_signed_in? && current_user.roles.include?('business_courses')) || ::Business::SignUpRecord.exists?(code: params[:code])
       h5 Porozmawiaj
