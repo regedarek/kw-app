@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     end
     resources :comments
     resources :conversations do
+      post :add_participant, on: :member
+
       resources :messages
     end
   end

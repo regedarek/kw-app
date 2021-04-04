@@ -14,6 +14,15 @@ GIT
       nokogiri (>= 1.6.6)
       rubyzip (>= 1.2.1)
 
+GIT
+  remote: https://github.com/regedarek/mailboxer.git
+  revision: 27acabebfedb27ab3b34d17104c4660e26671119
+  branch: kw_app
+  specs:
+    mailboxer (0.15.1)
+      carrierwave (>= 0.5.8)
+      rails (>= 5.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -303,9 +312,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    mailboxer (0.15.1)
-      carrierwave (>= 0.5.8)
-      rails (>= 5.0.0)
     mailgun-ruby (1.1.11)
       rest-client (~> 2.0.2)
     marcel (0.3.3)
@@ -606,7 +612,7 @@ DEPENDENCIES
   kaminari
   koala
   listen (~> 3.0)
-  mailboxer
+  mailboxer!
   mailgun-ruby (~> 1.1.6)
   mini_magick
   nested_form_fields

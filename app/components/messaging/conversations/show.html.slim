@@ -3,9 +3,18 @@
     .large-12.columns
       h3 = @conversation.subject
   .row
-    .large-12.columns
+    .large-6.columns
       .callout
         = @conversation.participants.map(&:display_name).to_sentence
+
+    .large-6.columns
+      = form_tag add_participant_conversation_path(@conversation.id), method: :post do
+        .row
+          .large-6.columns
+            = select_tag :user_id, options_for_select(@users.map { |u| [u.display_name, u.id] }),
+              { class: 'js-select-multiple expanded', include_blank: true }
+          .large-6.columns
+            = submit_tag "Dodaj uczestnika", class: 'button expanded'
 
   .row
     .large-12.columns

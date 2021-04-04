@@ -1,0 +1,10 @@
+
+-- ODPOWIEDZ E-MAILOWO POWYŻEJ TEJ LINI --
+
+Otrzymałeś odpowiedź:
+
+-----------------------------------------------
+<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+-----------------------------------------------
+
+Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.

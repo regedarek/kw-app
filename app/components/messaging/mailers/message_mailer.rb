@@ -12,6 +12,16 @@ module Messaging
         end
       end
 
+      def add_participant(message, participant)
+        @message  = message
+        @participant = participant
+        set_subject(message)
+        mail :to => participant.email,
+            :from => "Panel KW Kraków <reply+#{message.conversation.code}@panel.kw.krakow.pl>",
+            :subject => "#{@subject} - dodano Cię do konwersacji",
+            :template_name => 'add_participant_email'
+      end
+
       #Sends an email for indicating a new message for the receiver
       def new_message_email(message,receiver)
         @message  = message
