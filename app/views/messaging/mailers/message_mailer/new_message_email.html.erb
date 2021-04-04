@@ -1,20 +1,28 @@
-<span>-- ODPOWIEDZ E-MAILOWO POWYŻEJ TEJ LINI --</span>
+<small>-- ODPOWIEDZ E-MAILOWO POWYŻEJ TEJ LINI --</small>
 <!DOCTYPE html>
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>
-      Wysłano do Ciebie wiadomość w panelu KW Kraków:
-    </p>
+    <% if @message.sender %>
+      <p>
+        <b><%= @message.sender.display_name %></b>
+      </p>
+    <% end %>
     <blockquote>
       <p>
         <%= raw @message.body %>
       </p>
     </blockquote>
-    <p>
+    -----------------------------------------------
+    <br>
+    <small>
       Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
-    </p>
+    </small>
+    </br>
+    <small>
+      Klub Wysokogórski Kraków
+    </small>
   </body>
 </html>

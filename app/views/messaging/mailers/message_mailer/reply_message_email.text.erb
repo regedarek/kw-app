@@ -1,6 +1,8 @@
 -- ODPOWIEDZ E-MAILOWO POWYŻEJ TEJ LINI --
 
-Otrzymałeś odpowiedź:
+<% if @message.sender %>
+  <%= @message.sender.display_name %> odpowiedział
+<% end %>
 
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>

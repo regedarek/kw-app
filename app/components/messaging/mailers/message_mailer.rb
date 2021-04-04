@@ -18,7 +18,7 @@ module Messaging
         set_subject(message)
         mail :to => participant.email,
             :from => "Panel KW Kraków <reply+#{message.conversation.code}@panel.kw.krakow.pl>",
-            :subject => "#{@subject} - dodano Cię do konwersacji",
+            :subject => @subject,
             :template_name => 'add_participant_email'
       end
 
@@ -29,7 +29,7 @@ module Messaging
         set_subject(message)
         mail :to => receiver.send(Mailboxer.email_method, message),
             :from => "Panel KW Kraków <reply+#{message.conversation.code}@panel.kw.krakow.pl>",
-            :subject => t('mailboxer.message_mailer.subject_new', :subject => @subject),
+            :subject => @subject,
             :template_name => 'new_message_email'
       end
 
@@ -40,7 +40,7 @@ module Messaging
         set_subject(message)
         mail :to => receiver.send(Mailboxer.email_method, message),
             :from => "Panel KW Kraków <reply+#{message.conversation.code}@panel.kw.krakow.pl>",
-            :subject => t('mailboxer.message_mailer.subject_new', :subject => @subject),
+            :subject => @subject,
             :template_name => 'reply_message_email'
       end
     end
