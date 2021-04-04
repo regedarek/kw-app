@@ -261,6 +261,7 @@
 
             - if current_user.admin? || current_user.roles.include?('events')
               - if all_prepaid.any?
+                = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_prepaid.map(&:user_id).join(',')), class: 'button expanded'
                 .callout
                   = all_prepaid.map(&:email).join(', ')
 
@@ -280,6 +281,7 @@
 
           - if current_user.admin? || current_user.roles.include?('events')
             - if all_unpaid.any?
+              = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_unpaid.map(&:user_id).join(',')), class: 'button expanded secondary'
               .callout
                 = all_unpaid.map(&:email).join(', ')
 

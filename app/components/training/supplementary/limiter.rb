@@ -26,7 +26,7 @@ module Training
       end
 
       def all_prepaid
-        @course.sign_ups.includes(:payment).where(payments: { state: :prepaid, refunded_at: nil }).or(@course.sign_ups.includes(:payment).where(payments: { cash: true })).order(:created_at)
+        @course.sign_ups.includes([:emails, :payment, :user]).where(payments: { state: :prepaid, refunded_at: nil }).or(@course.sign_ups.includes([:emails, :payment, :user]).where(payments: { cash: true })).order(:created_at)
       end
 
       def all_unpaid

@@ -13,6 +13,8 @@ module Messaging
         end
 
         redirect_back(fallback_location: root_path, notice: 'Dodano komentarz!')
+      else
+        redirect_back(fallback_location: root_path, alert: 'Komentarz nie może być pusty!')
       end
     end
 
