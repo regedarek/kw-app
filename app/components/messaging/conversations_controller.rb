@@ -47,6 +47,15 @@ module Messaging
 
       if @recipients.any? && params[:body].present? && params[:subject].present?
         receipt = current_user.send_message(@recipients, params[:body], params[:subject])
+
+        if params[:messageable_type] && params[:messageable_id]
+          Messaging::ConversationItemRecord.create(
+            conversation_id: receipt.conversation.id,
+            messageable_type: params[:messageable_type],
+            messageable_id: params[:messageable_id]
+          )
+        end
+
         redirect_to conversation_path(receipt.conversation), notice: 'Wysłano wiadomość'
       else
         flash[:alert] = 'Wypełnij temat i wybierz odbiorców!'

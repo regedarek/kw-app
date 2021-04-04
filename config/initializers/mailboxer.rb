@@ -29,6 +29,20 @@ Rails.application.config.to_prepare do
     has_many :course_conversations, class_name: '::Business::CourseConversationRecord', :dependent => :destroy, foreign_key: :conversation_id
     has_many :courses, :through => :course_conversations, :dependent => :destroy, foreign_key: :course_id
 
+    has_many :conversation_items,
+      class_name: 'Messaging::ConversationItemRecord',
+      foreign_key: :conversation_id
+
+    has_many :business_courses,
+      through: :conversation_items,
+      source: :messageable,
+      source_type: 'Business::CourseRecord'
+
+    has_many :supplementary_courses,
+      through: :conversation_items,
+      source: :messageable,
+      source_type: 'Training::Supplementary::CourseRecord'
+
     def set_code
       self.code = loop do
         random_token = SecureRandom.hex(8)

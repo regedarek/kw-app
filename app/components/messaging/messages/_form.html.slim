@@ -1,4 +1,4 @@
-= form_tag conversation_messages_path(@conversation), method: :post do |f|
+= form_tag conversation_messages_path(conversation), method: :post do |f|
   .row
     .large-12.columns
       = hidden_field_tag :body, nil, { id: 'remarks_body' }

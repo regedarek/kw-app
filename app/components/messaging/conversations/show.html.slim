@@ -1,7 +1,11 @@
 .column
   .row
-    .large-12.columns
+    .large-6.columns
       h3 = @conversation.subject
+    .large-6.columns
+      - if @conversation.conversation_items.any?
+        = link_to @conversation.conversation_items.first.messageable.name, url_for(@conversation.conversation_items.first.messageable)
+
   .row
     .large-6.columns
       .callout
@@ -37,7 +41,7 @@
               = sanitize receipt.message.body
 
       .comment-section-container
-        = render 'messaging/messages/form'
+        = render 'messaging/messages/form', conversation: @conversation
 
   .row
     .large-12.columns

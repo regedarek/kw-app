@@ -17,6 +17,9 @@ module Training
         dependent: :destroy,
         foreign_key: :supplementary_course_record_id
 
+      has_many :conversation_items, as: :messageable, class_name: '::Messaging::ConversationItemRecord', :dependent => :destroy
+      has_many :conversations, :through => :conversation_items, :dependent => :destroy
+
       has_many :contract_events, class_name: 'Settlement::ContractEventsRecord', foreign_key: :event_id
       has_many :contracts, through: :contract_events, foreign_key: :contract_id, dependent: :destroy
       belongs_to :organizer, class_name: 'Db::User', foreign_key: :organizator_id

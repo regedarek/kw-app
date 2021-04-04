@@ -252,6 +252,8 @@
           h5 = t('.remarks')
           .callout
             = sanitize @course&.remarks
+        - if Training::Supplementary::CourseRecord.find(@course.id).conversations.any?
+          = render 'messaging/conversations/conversation', conversation: Training::Supplementary::CourseRecord.find(@course.id).conversations.first, users: Db::User.all
       - if @course.price
         .large-6.columns
           - if !@limiter.open?
@@ -261,7 +263,7 @@
 
             - if current_user.admin? || current_user.roles.include?('events')
               - if all_prepaid.any?
-                = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_prepaid.map(&:user_id).join(',')), class: 'button expanded'
+                = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_prepaid.map(&:user_id).join(','), messageable_type: 'Training::Supplementary::CourseRecord', messageable_id: @course.id), class: 'button expanded'
                 .callout
                   = all_prepaid.map(&:email).join(', ')
 
@@ -281,7 +283,7 @@
 
           - if current_user.admin? || current_user.roles.include?('events')
             - if all_unpaid.any?
-              = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_unpaid.map(&:user_id).join(',')), class: 'button expanded secondary'
+              = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_prepaid.map(&:user_id).join(','), messageable_type: 'Training::Supplementary::CourseRecord', messageable_id: @course.id), class: 'button expanded secondary'
               .callout
                 = all_unpaid.map(&:email).join(', ')
 

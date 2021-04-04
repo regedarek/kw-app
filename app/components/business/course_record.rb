@@ -21,6 +21,9 @@ module Business
     has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord', :dependent => :destroy
     has_many :projects, :through => :project_items, :dependent => :destroy
 
+    has_many :conversation_items, as: :messageable, class_name: '::Messaging::ConversationItemRecord', :dependent => :destroy
+    has_many :conversations, :through => :conversation_items, :dependent => :destroy
+
     has_many :package_types,
       class_name: 'Business::PackageTypeRecord',
       dependent: :destroy,
