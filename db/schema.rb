@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_04_113448) do
+ActiveRecord::Schema.define(version: 2021_04_04_220730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -583,7 +583,6 @@ ActiveRecord::Schema.define(version: 2021_04_04_113448) do
     t.integer "messageable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["messageable_type", "messageable_id"], name: "messaging_conversation_items_uniq", unique: true
   end
 
   create_table "meteoblue_records", force: :cascade do |t|

@@ -49,7 +49,7 @@ module Messaging
         receipt = current_user.send_message(@recipients, params[:body], params[:subject])
 
         if params[:messageable_type] && params[:messageable_id]
-          Messaging::ConversationItemRecord.first_or_create(
+          Messaging::ConversationItemRecord.create(
             conversation_id: receipt.conversation.id,
             messageable_type: params[:messageable_type],
             messageable_id: params[:messageable_id]
