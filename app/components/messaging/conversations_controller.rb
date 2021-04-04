@@ -15,7 +15,29 @@ module Messaging
       authorize! :read, Mailboxer::Conversation
 
       @conversation = current_user.mailbox.conversations.find(params[:id])
-      @users = Db::User.where.not(kw_id: nil).not_hidden.active - @conversation.participants
+      @users = Db::User.where.not(kw_id: nil).not_hidden.active - @conversation.participants - @conversation.opt_outs.map(&:unsubscriber)
+    end
+
+    def opt_in
+      authorize! :create, Mailboxer::Conversation
+
+      conversation = current_user.mailbox.conversations.find(params[:id])
+      participant = Db::User.find_by(id: params[:user_id])
+
+      conversation.opt_in(participant) if conversation && participant
+
+      redirect_back(fallback_location: conversation_path(conversation.id), notice: 'Dopisałeś się!')
+    end
+
+    def opt_out
+      authorize! :create, Mailboxer::Conversation
+
+      conversation = current_user.mailbox.conversations.find(params[:id])
+      participant = Db::User.find_by(id: params[:user_id])
+
+      conversation.opt_out(participant) if conversation && participant
+
+      redirect_back(fallback_location: conversation_path(conversation.id), notice: 'Wypisałeś się!')
     end
 
     def add_participant
@@ -24,12 +46,12 @@ module Messaging
       conversation = current_user.mailbox.conversations.find(params[:id])
       participant = Db::User.find_by(id: params[:user_id])
 
-      if conversation.participants.any?(participant)
-        redirect_to conversation_path(conversation.id), alert: 'Uczestnik już został dodany!'
+      if conversation.is_participant?(participant)
+        redirect_to conversation_path(conversation.id), alert: 'Jesteś już uczestnikiem!'
       else
         messages = conversation.add_participant(participant)
-        redirect_to conversation_path(conversation.id), notice: 'Dodano uczestnika!'
         ::Messaging::Mailers::MessageMailer.add_participant(messages.first, participant).deliver_later if messages.any?
+        redirect_to conversation_path(conversation.id), alert: 'Dodano uczestnika!'
       end
     end
 

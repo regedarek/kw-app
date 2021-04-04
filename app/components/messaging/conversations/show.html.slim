@@ -15,11 +15,16 @@
       .callout
         = form_tag add_participant_conversation_path(@conversation.id), method: :post do
           .row
-            .large-6.columns
+            .large-4.columns
               = select_tag :user_id, options_for_select(@users.map { |u| [u.display_name, u.id] }),
                 { class: 'js-select-multiple expanded', include_blank: true }
-            .large-6.columns
+            .large-4.columns
               = submit_tag "Dodaj uczestnika", class: 'button expanded'
+            .large-4.columns
+              - if @conversation.has_subscriber?(current_user)
+                = link_to "Wypisz się", opt_out_conversation_path(@conversation.id, user_id: current_user.id), method: :put, class: 'alert button expanded'
+              - else
+                = link_to "Dopisz się", opt_in_conversation_path(@conversation.id, user_id: current_user.id), method: :put, class: 'success button expanded'
 
   .row
     .large-12.columns

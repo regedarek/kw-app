@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :comments
     resources :conversations do
       post :add_participant, on: :member
+      put :opt_out, on: :member
+      put :opt_in, on: :member
 
       resources :messages
     end
