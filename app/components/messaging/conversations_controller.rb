@@ -8,7 +8,7 @@ module Messaging
 
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
-      @conversations = @q.result(distinct: true).page(params[:page])
+      @conversations = @q.result(distinct: true).page(params[:page]).per(10)
     end
 
     def show
