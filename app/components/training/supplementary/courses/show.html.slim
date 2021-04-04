@@ -252,8 +252,9 @@
           h5 = t('.remarks')
           .callout
             = sanitize @course&.remarks
-        - if Training::Supplementary::CourseRecord.find(@course.id).conversations.any?
-          = render 'messaging/conversations/conversation', conversation: Training::Supplementary::CourseRecord.find(@course.id).conversations.first, users: Db::User.active.not_hidden
+        - @course_record = Training::Supplementary::CourseRecord.find(@course.id)
+        - if @course_record.conversations.any?
+          = render 'messaging/conversations/conversation', conversation: @course_record.conversations.first, users: Db::User.active.not_hidden
       - if @course.price
         .large-6.columns
           - if !@limiter.open?
@@ -263,7 +264,8 @@
 
             - if current_user.admin? || current_user.roles.include?('events')
               - if all_prepaid.any?
-                = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_prepaid.map(&:user_id).join(','), messageable_type: 'Training::Supplementary::CourseRecord', messageable_id: @course.id), class: 'button expanded'
+                - unless @course_record.conversations.any?
+                  = link_to 'Otwórz konwersację', new_conversation_path(subject: @course.name, recipient_id: all_prepaid.map(&:user_id).join(','), messageable_type: 'Training::Supplementary::CourseRecord', messageable_id: @course.id), class: 'button expanded'
                 .callout
                   = all_prepaid.map(&:email).join(', ')
 
