@@ -6,7 +6,7 @@ table.stack
       th.text-center width='45%'
         = 'Odbiorcy'
       th.text-right width='15%'
-        = sort_link @q, :created_at, 'Ostatnia odpowiedź'
+        = sort_link @q, :updated_at, 'Ostatnia odpowiedź'
   tbody
     - @conversations.each do |conversation|
       tr
@@ -15,4 +15,4 @@ table.stack
         td
           = conversation.participants.map(&:display_name).to_sentence
         td.text-right
-          = I18n.l(conversation.receipts_for(current_user)&.first&.message&.created_at, :format => :short)
+          = I18n.l(conversation.updated_at, :format => :short)

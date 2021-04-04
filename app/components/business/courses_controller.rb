@@ -49,7 +49,7 @@ module Business
       @course.creator_id = current_user.id
 
       if @course.save
-        @course.update(sign_up_url: "https://panel.kw.krakow.pl/kursy/#{@course.slug}")
+        @course.update(sign_up_url: "#{Rails.application.routes.default_url_options[:host]}/kursy/#{@course.slug}")
         project = ::Settlement::ProjectRecord.create(
           name: @course.name_with_date,
           area_type: :course_budget,

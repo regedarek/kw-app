@@ -9,7 +9,7 @@
         = search_form_for @q, url: conversations_path, class: 'js-send-on-enter' do |f|
           .row
             .large-6.columns
-              = f.label :subject_or_messages_body_cont, 'Tytuł, odpowiedzi, uczestnicy'
+              = f.label :subject_or_messages_body_cont, 'Tytuł, odpowiedzi'
               = f.search_field :subject_or_messages_body_cont
             .large-4.columns
               br

@@ -22,7 +22,18 @@ module Business
         end
 
         if @sign_up.course.packages?
-          @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.package_type.cost)
+          if @sign_up.package_type.membership?
+            user = Db::User.find_by(email: @sign_up.email)
+            if user && ::Membership::Activement.new(user: user).active?
+              @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.package_type.cost)
+            else
+              flash[:alert] = 'Nie jesteś członkiem klubu lub nie masz opłaconej składki!'
+              @course = @sign_up.course
+              return render 'business/courses/public'
+            end
+          else
+            @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.package_type.cost)
+          end
         else
           @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         end
