@@ -17,7 +17,11 @@ module Training
       end
 
       def new
-        @course = Training::Supplementary::CourseRecord.new
+        if params[:dup]
+          @course = Training::Supplementary::CourseRecord.new(course_params)
+        else
+          @course = Training::Supplementary::CourseRecord.new
+        end
         @course.organizator_id = current_user.id
       end
 
