@@ -70,7 +70,7 @@ module Messaging
       if @recipients.any? && params[:body].present? && params[:subject].present?
         receipt = current_user.send_message(@recipients, params[:body], params[:subject])
 
-        if params[:messageable_type] && params[:messageable_id]
+        if params[:messageable_type].present? && params[:messageable_id].present?
           Messaging::ConversationItemRecord.create(
             conversation_id: receipt.conversation.id,
             messageable_type: params[:messageable_type],
