@@ -20,8 +20,26 @@
 
   .row
     .large-12.columns
-      = render 'table'
+      ul#mailbox-tabs.tabs data-tabs="" data-deep-link="true" data-deep-link-smudge="true"
+        li.tabs-title.is-active
+          a data-tabs-target="inbox" href="#inbox" Skrzynka odbiorcza
+        li.tabs-title
+          a data-tabs-target="sentbox" href="#sentbox" Wysłane
+        li.tabs-title
+          a data-tabs-target="trash" href="#trash" Kosz
 
-  .row
-    .large-12.columns
-      = paginate @conversations
+      .tabs-content data-tabs-content="mailbox-tabs"
+        #inbox.tabs-panel.is-active
+          = render 'table', conversations: @inbox
+
+          = paginate @inbox, param_name: :inbox_page, params: { anchor: 'inbox' }
+
+        #sentbox.tabs-panel
+          = render 'table', conversations: @sentbox
+
+          = paginate @sentbox, param_name: :sentbox_page, params: { anchor: 'sentbox' }
+
+        #trash.tabs-panel
+          = render 'table', conversations: @trash
+
+          = paginate @trash, param_name: :trash_page, params: { anchor: 'trash' }

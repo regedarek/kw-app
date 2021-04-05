@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  get 'wiadomosci' => 'messaging/conversations#index'
   get 'wypozyczalnia/regulamin' => 'pages#show', id: 'rules'
   get 'serwis-narciarski/regulamin' => 'pages#show', id: 'rules'
   get 'wydarzenia/regulamin' => 'pages#show', id: 'rules'

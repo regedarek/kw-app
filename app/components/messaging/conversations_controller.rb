@@ -8,7 +8,10 @@ module Messaging
 
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'updated_at desc' if @q.sorts.empty?
-      @conversations = @q.result(distinct: true).page(params[:page]).per(10)
+      @conversations = @q.result(distinct: true)
+      @inbox = @conversations.inbox(current_user).page(params[:inbox_page]).per(10)
+      @sentbox = @conversations.sentbox(current_user).page(params[:sentbox_page]).per(10)
+      @trash = @conversations.trash(current_user).page(params[:trash_page]).per(10)
     end
 
     def show
@@ -38,6 +41,15 @@ module Messaging
       conversation.opt_out(participant) if conversation && participant
 
       redirect_back(fallback_location: conversation_path(conversation.id), notice: 'Wypisałeś się!')
+    end
+
+    def destroy
+      authorize! :create, Mailboxer::Conversation
+
+      conversation = current_user.mailbox.conversations.find(params[:id])
+      conversation.move_to_trash(current_user) if conversation
+
+      redirect_back(fallback_location: conversation_path(conversation.id), notice: 'Dodano do kosza!')
     end
 
     def add_participant

@@ -3,12 +3,14 @@ table.stack
     tr
       th width='40%'
         = 'Nazwa'
-      th.text-center width='45%'
+      th.text-center width='35%'
         = 'Odbiorcy'
-      th.text-right width='15%'
+      th.text-right width='25%'
         = sort_link @q, :updated_at, 'Ostatnia odpowiedź'
+      th.text-right width='50px'
+        | Akcje
   tbody
-    - @conversations.each do |conversation|
+    - conversations.each do |conversation|
       tr
         td
           = link_to conversation.subject, conversation_path(conversation)
@@ -16,3 +18,7 @@ table.stack
           = conversation.participants.map(&:display_name).to_sentence
         td.text-right
           = I18n.l(conversation.updated_at, :format => :short)
+        td.text-right
+          - unless conversation.is_trashed?(current_user)
+            = link_to conversation_path(conversation.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Przenieść do kosza?' } do
+              i.fi.fi-trash
