@@ -16,6 +16,8 @@ module Business
         return redirect_to public_course_path(@sign_up.course_id), alert: 'Niestety nie ma już wolnych miejsc'
       end
 
+      @sign_up.expired_at = 48.hours.from_now
+
       if @sign_up.save
         PaperTrail.request(whodunnit: @sign_up.name) do
           @sign_up.course.update(seats: @sign_up.course.seats + 1)
@@ -38,6 +40,7 @@ module Business
           @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         end
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
+        @sign_up.update(sent_at: Time.current)
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
       else
         @course = @sign_up.course
@@ -89,7 +92,10 @@ module Business
     private
 
     def sign_up_params
-      params.require(:sign_up).permit(:name, :email, :user_id, :phone, :rodo, :rules, :data, :course_id, :expired_at, :business_course_package_type_id)
+      params.require(:sign_up).permit(
+        :name, :email, :user_id, :phone, :rodo, :rules, :data, :course_id,
+        :expired_at, :business_course_package_type_id
+      )
     end
   end
 end

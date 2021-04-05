@@ -141,6 +141,7 @@ pl:
         name: Imię i nazwisko
         email: E-mail
         phone: Telefon
+        expired_at: Wygaśnie
         rodo: Dane osobowe
         rules: Regulaminu kursów
         danger: Świadomość

@@ -61,8 +61,7 @@ module Business
           user_id: current_user.id,
           project_id: project.id
         ) unless ::Settlement::ProjectItemRecord.exists?(accountable_type: 'Business::CourseRecord', accountable_id: @course.id)
-        receipt = current_user.send_message(nil, @course.description, @course.name_with_date)
-        ::Business::CourseConversationRecord.create(conversation_id: receipt.conversation.id, course_id: @course.id)
+        @course.conversations.create(subject: @course.name)
 
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else

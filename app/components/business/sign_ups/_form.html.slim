@@ -16,6 +16,10 @@
     = f.select :state, Business::SignUpRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @sign_up.state
 
   .large-12.columns
+    b = f.label :expired_at
+    = f.datetime_field :expired_at
+
+  .large-12.columns
     b = f.label :email
     = f.text_field :email
 

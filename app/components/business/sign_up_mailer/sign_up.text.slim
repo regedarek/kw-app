@@ -6,6 +6,13 @@ br
 - if @sign_up.course.email_first_content
   = sanitize @sign_up.course.email_first_content
 br
+- if @sign_up.expired_at
+  .callout.success
+    b Opłać zadatek do: 
+    = @sign_up.expired_at&.strftime("%d/%m/%Y %R")
+    br
+    b Po tym czasie twój zapis zostanie usunięty.
+br
 - if @sign_up.course.cash?
   = sanitize Management::SettingsRecord.find_by(path: '/kursy/cash')&.content
 - else
