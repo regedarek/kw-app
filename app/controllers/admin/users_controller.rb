@@ -64,7 +64,7 @@ module Admin
       return unless current_user.admin?
       bypass_sign_in(Db::User.find(params[:id]))
 
-      redirect_back(fallback_location: root_path)
+      redirect_to root_path, notice: 'Zalogowano'
     end
 
     private
