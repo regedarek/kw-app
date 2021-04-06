@@ -55,6 +55,7 @@ class Ability
   end
 
   def active
+    can :read, Training::Activities::ContractRecord
     can :create, Settlement::ContractorRecord
     can :see_dziki, Db::Activities::MountainRoute
     can :create, Db::Profile
