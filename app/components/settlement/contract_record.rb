@@ -14,7 +14,7 @@ module Settlement
     enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
     enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
     enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
-    enum financial_type: [:opp_paid, :opp_unpaid]
+    enum financial_type: [:opp_paid, :opp_unpaid, :internal]
 
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
     belongs_to :checker, class_name: 'Db::User', foreign_key: :checker_id
