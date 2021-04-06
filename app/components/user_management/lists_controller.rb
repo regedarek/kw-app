@@ -11,6 +11,7 @@ module UserManagement
 
     def create
       @profile = Db::Profile.find(params[:profile_id])
+      return redirect_to root_path, alert: 'Wykaz przejść już został wysłany!' if @profile.list
       @list = @profile.build_list(list_params)
 
       I18n.locale = @profile.locale
