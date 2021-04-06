@@ -9,6 +9,6 @@ table.stack
       tr
         td.text-left.large-text-left = link_to training_contract.contract.name, activities_contract_path(training_contract.contract.id)
         td.text-left.large-text-left
-          - if !training_contract.route.hidden?
+          - if !training_contract&.route&.hidden?
             = link_to training_contract.route.name, activities_mountain_route_path(training_contract.route.slug)
         td.text-left.large-text-left = training_contract.route.climbing_date.to_date
