@@ -5,7 +5,7 @@ module Db
 
       before_save :save_boar_length, if: :ski?
 
-      searchkick word_start: %i[name] unless Rails.env.production?
+      #searchkick word_start: %i[name] unless Rails.env.production?
 
       enum route_type: [:ski, :regular_climbing]
       friendly_id :slug_candidates, use: :slugged
