@@ -57,38 +57,67 @@
 
   .row
     .large-12.columns
-      - if @my_routes.any?
-        h5 Ostatnie przejścia górskie
-        .row
-          .large-12.columns
-            = render 'activities/mountain_routes/table', routes: @my_routes
+      .callout
 
-        .row
-          .large-12.columns
-            = paginate @my_routes
+  .row
+    .large-12.columns
+      ul#user_card-tabs.tabs data-tabs="" data-deep-link="true" data-deep-link-smudge="true"
+        - if @my_routes.any?
+          li.tabs-title.is-active
+            a data-tabs-target="routes" href="#routes" Przejścia górskie
+        - if @my_courses.any?
+          li.tabs-title
+            a data-tabs-target="courses" href="#courses" Wydarzenia
+        - if @my_projects.any?
+          li.tabs-title
+            a data-tabs-target="projects" href="#projects" Projekty
+        - if @user.training_user_contracts.any?
+          li.tabs-title
+            a data-tabs-target="training_contracts" href="#training_contracts" Kontrakty
 
-      - if @my_courses.any?
-        h5 Ostatnie wydarzenia
-        .row
-          .large-12.columns
-            = render 'membership/card/courses/table', courses: @my_courses
+      .tabs-content data-tabs-content="user_card-tabs"
+        - if @my_routes.any?
+          #routes.tabs-panel.is-active
+            .row
+              .large-12.columns
+                = render 'activities/mountain_routes/table', routes: @my_routes
 
-        .row
-          .large-12.columns
-            = paginate @my_courses
+            .row
+              .large-12.columns
+                = paginate @my_routes, param_name: :route_page, params: { anchor: 'routes' }
 
-      - if @my_projects.any?
-        h5 Ostatnie projekty
-        .row
-          .large-12.columns
-            = render 'membership/card/projects/table', projects: @my_projects
+        - if @my_courses.any?
+          #courses.tabs-panel
+            .row
+              .large-12.columns
+                .row
+                  .large-12.columns
+                    = render 'membership/card/courses/table', courses: @my_courses
 
-      - if @user.training_user_contracts.any?
-        h5 Ukończone narciarskie kontrakty
-        .row
-          .large-12.columns
-            = render 'membership/card/contracts/table', contracts: @user.training_user_contracts
+                .row
+                  .large-12.columns
+                    = paginate @my_courses, param_name: :course_page, params: { anchor: 'courses' }
 
-        .row
-          .large-12.columns
-            = paginate @my_projects
+        - if @my_projects.any?
+          #projects.tabs-panel
+            .row
+              .large-12.columns
+                .row
+                  .large-12.columns
+                    = render 'membership/card/projects/table', projects: @my_projects
+
+                .row
+                  .large-12.columns
+                    = paginate @my_projects, param_name: :project_page, params: { anchor: 'projects' }
+
+        - if @my_training_contracts.any?
+          #training_contracts.tabs-panel
+            .row
+              .large-12.columns
+                .row
+                  .large-12.columns
+                    = render 'membership/card/contracts/table', contracts: @my_training_contracts
+
+                .row
+                  .large-12.columns
+                    = paginate @my_training_contracts, param_name: :training_contract_page, params: { anchor: 'training_contracts' }
