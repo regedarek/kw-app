@@ -20,5 +20,5 @@ table.stack
           = I18n.l(conversation.updated_at, :format => :short)
         td.text-right
           - unless conversation.is_trashed?(current_user)
-            = link_to conversation_path(conversation.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Przenieść do kosza?' } do
+            = link_to conversation_path(conversation.id), style: 'padding: 5px', method: :delete do
               i.fi.fi-trash
