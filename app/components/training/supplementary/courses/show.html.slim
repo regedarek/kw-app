@@ -130,9 +130,14 @@
                     = z.hidden_field :name, value: current_user.display_name
                     - if @course.price
                       - if @course.packages
-                        = z.select :supplementary_course_package_type_id,
-                        @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
-                        include_blank: 'Wybierz pakiet'
+                        - if user_signed_in?
+                          = z.select :supplementary_course_package_type_id,
+                          @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
+                          include_blank: 'Wybierz pakiet'
+                        - else
+                          = z.select :supplementary_course_package_type_id,
+                          @course.package_types.where(membership: false).collect {|pt| [pt.name_with_cost, pt.id]},
+                          include_blank: 'Wybierz pakiet'
                     - if @course.question
                       .callout.warning
                         | Odpowiedz na pytanie zadane w opisie wydarzenia
@@ -162,9 +167,11 @@
                     = z.hidden_field :question, value: nil
                   - if @course.price
                     - if @course.packages
-                      = z.select :supplementary_course_package_type_id,
-                      @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
-                      include_blank: 'Wybierz pakiet'
+                      - if user_signed_in?
+                        = z.select :supplementary_course_package_type_id,
+                        @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
+                        include_blank: 'Wybierz pakiet'
+                      - else
                   = z.submit 'Zapisz się', class: 'button large success expanded'
         - else
           - if @course.last_fee_paid
@@ -188,9 +195,16 @@
                     = x.hidden_field :question, value: nil
                     - if @course.price
                       - if @course.packages
-                        = x.select :supplementary_course_package_type_id,
-                        @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
-                        include_blank: 'Wybierz pakiet'
+                        - if user_signed_in?
+                          = x.select :supplementary_course_package_type_id,
+                          @course.package_types.collect {|pt| [pt.name_with_cost, pt.id]},
+                          include_blank: 'Wybierz pakiet'
+                        - else
+                          .callout.warning
+                            | Pakiety klubowe dostępne są tylko po zalogowaniu.
+                          = x.select :supplementary_course_package_type_id,
+                          @course.package_types.where(membership: false).collect {|pt| [pt.name_with_cost, pt.id]},
+                          include_blank: 'Wybierz pakiet'
                     = x.submit 'Zapisz się', class: 'button large success expanded'
       - if @limiter.sign_ups_started?
         - if user_signed_in?
