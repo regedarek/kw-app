@@ -35,10 +35,6 @@ class Ability
   def default
     can :read, Business::CourseRecord
     can :create, Db::Profile
-    cannot :read, Management::Voting::CaseRecord
-    can :read, Marketing::DiscountRecord
-    can :read, Training::Activities::ContractRecord
-    cannot :read, Settlement::ContractorRecord
   end
 
   def library
@@ -46,7 +42,6 @@ class Ability
   end
 
   def not_active
-    cannot :read, Db::Activities::MountainRoute
     can :manage, Db::Activities::MountainRoute, user_id: user.id
     can [:read, :update], Settlement::ContractRecord, creator_id: user.id
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
@@ -56,6 +51,7 @@ class Ability
     cannot :read, Management::Voting::CaseRecord
     cannot :see_dziki, Db::Activities::MountainRoute
     cannot :analiza, Settlement::ContractRecord
+    cannot :create, Db::Activities::MountainRoute
   end
 
   def active
