@@ -49,6 +49,6 @@ services:
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
 volumes:
-  es-data:
   redis:
+  data-volume:
   gems:
