@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_203930) do
+ActiveRecord::Schema.define(version: 2021_04_07_210215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_203930) do
     t.string "name", null: false
     t.string "sign_ups_uri", null: false
     t.integer "logo_type", default: 0, null: false
+    t.string "type_sym", null: false
   end
 
   create_table "business_courses", force: :cascade do |t|
