@@ -1,7 +1,7 @@
 .row
   .large-12.columns
     = f.label :course_id
-    = f.select :course_id, Business::CourseRecord.all.map{|i| [i.name_with_date, i.id] },
+    = f.select :course_id, Business::CourseRecord.includes(:course_type).all.map{|i| [i.name_with_date, i.id] },
     { selected: @sign_up.course_id, include_blank: true },
     { class: 'js-select-multiple' }
 

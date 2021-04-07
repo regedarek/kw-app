@@ -4,7 +4,7 @@ module Business
     append_view_path 'app/components'
 
     def index
-      @q = Business::SignUpRecord.includes(:course, :list).ransack(params[:q])
+      @q = Business::SignUpRecord.includes(:list, course: [:course_type]).ransack(params[:q])
       @q.sorts = 'updated_at desc' if @q.sorts.empty?
       @sign_ups = @q.result(distinct: true).page(params[:page])
     end
