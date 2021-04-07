@@ -1,0 +1,20 @@
+.row
+  .large-12.columns
+    table.stack
+      thead
+        tr
+          th width='30%' Nazwa
+          th width='30%' Symbol
+          th width='30%' Logo
+          th width='30%' Link
+      tbody
+        - @course_types.each do |course_type|
+          tr
+            td
+              = course_type.name
+            td
+              = course_type.type_sym
+            td
+              = course_type.logo_type
+            td
+              = course_type.sign_ups_uri

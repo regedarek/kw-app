@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :business do
+    resources :course_types, only: [:index]
     resources :conversations, only: [:create]
     resources :messages, only: [:create]
     resources :payments, only: [] do

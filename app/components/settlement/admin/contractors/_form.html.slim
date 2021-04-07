@@ -7,13 +7,17 @@
     b= f.label :nip, "NIP"
     = f.text_field :nip
 
-  .large-3.columns
+  .large-2.columns
     b= f.label :name, "Strona WWW"
     = f.text_field :www
 
-  .large-3.columns
+  .large-2.columns
     = f.label :reason_type, 'Typ'
     = f.select :reason_type, Settlement::ContractorRecord.reason_types.keys
+
+  .large-2.columns
+    = f.label :profession_type, 'Zawód'
+    = f.select :profession_type, Settlement::ContractorRecord.profession_types.keys
 
 .row
   .large-3.columns

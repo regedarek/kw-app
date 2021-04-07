@@ -14,6 +14,7 @@ module Settlement
     optional(:www).maybe
     optional(:contact_name).maybe
     required(:reason_type).filled
+    required(:profession_type).filled
     optional(:description).maybe
     validate(unique_nip: :nip) do |nip|
       if nip.nil? || nip.empty?

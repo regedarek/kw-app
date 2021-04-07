@@ -10,7 +10,7 @@ module Business
 
     has_many :sign_ups, class_name: 'Business::SignUpRecord', foreign_key: :course_id
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
-    belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
+    belongs_to :instructor, class_name: '::Settlement::ContractorRecord', foreign_key: :instructor_id
     belongs_to :coordinator, class_name: '::Db::User', foreign_key: :coordinator_id
     belongs_to :event, class_name: 'Training::Supplementary::CourseRecord', foreign_key: :event_id, dependent: :destroy
 
