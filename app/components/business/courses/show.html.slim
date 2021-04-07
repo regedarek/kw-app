@@ -13,7 +13,7 @@
       #fields.tabs-panel.is-active
         .row
           .large-6.columns
-            h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
+            h3= @course.name
 
         .row
           .large-6.columns

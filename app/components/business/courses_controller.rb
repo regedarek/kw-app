@@ -46,7 +46,6 @@ module Business
       authorize! :create, Business::CourseRecord
 
       @course.creator_id = current_user.id
-      @course.activity_type = :kw
 
       if @course.save
         @course.update(sign_up_url: "#{Rails.application.routes.default_url_options[:host]}/kursy/#{@course.slug}")
@@ -151,7 +150,7 @@ module Business
         .require(:course)
         .permit(
           :coordinator_id, :price, :seats, :starts_at,:ends_at,
-          :description, :activity_type, :state, :instructor_id, :course_type_id,
+          :description, :state, :instructor_id, :course_type_id,
           :max_seats, :sign_up_url, :creator_id, :event_id, :sa_title,
           :payment_first_cost, :payment_second_cost, :equipment,
           :email_first_content, :email_second_content, :cash, :packages,

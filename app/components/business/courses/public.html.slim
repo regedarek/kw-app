@@ -5,7 +5,7 @@
 .row
   .large-12.columns
     .callout.primary
-      h3= I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{@course.activity_type}")
+      h3= @course.name
 
 .row
   .large-6.columns

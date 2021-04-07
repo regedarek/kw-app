@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 course_attributes = %i(
-  starts_at ends_at max_seats activity_type
+  starts_at ends_at max_seats
   slug state price sign_up_url payment_first_cost payment_second_cost
 )
 

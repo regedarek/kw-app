@@ -19,9 +19,6 @@
 
     .row
       .large-6.columns
-        = f.label :activity_type_in, 'Rodzaj kursu (Użyj CTRL)'
-        = f.select :activity_type_in, Business::CourseRecord.activity_types.to_a.map {|a| [I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{a.first}"), a.last] }, {},  {multiple: true} 
-
       .large-6.columns
         = f.label :coordinator_id_in, 'Koordynator (Użyj CTRL)'
         = f.select :coordinator_id_in, Db::User.where(":name = ANY(roles)", name: "business_courses").map{|i| [i.display_name, i.id] }, {},  {multiple: true} 
