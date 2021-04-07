@@ -6,6 +6,8 @@ module Business
     self.table_name = 'business_courses'
     has_paper_trail
 
+    belongs_to :course_type, class_name: '::Business::CourseTypeRecord'
+
     has_many :sign_ups, class_name: 'Business::SignUpRecord', foreign_key: :course_id
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Business::InstructorRecord', foreign_key: :instructor_id
@@ -32,7 +34,7 @@ module Business
     validates :seats, numericality: { greater_than_or_equal_to: 0, message: 'Minimum to 0' }
     validates :start_date, :max_seats, presence: true
     validates :price, :description, :payment_first_cost, :payment_second_cost, presence: true
-    validates :activity_type, presence: true
+    validates :course_type, presence: true
     validate :max_seats_size
 
     friendly_id :slug_candidates, use: :slugged
@@ -44,7 +46,7 @@ module Business
       :climbing_1, :climbing_2, :full_climbing, :summer_tatra, :club_climbing,
       :winter_tatra_1, :winter_tatra_2, :ice_1, :ice_2,
       :piste_1, :piste_2, :piste_3, :piste_7, :piste_4, :piste_5, :piste_6,
-      :cave, :tatra_traverse
+      :cave, :tatra_traverse, :kw
     ]
 
     accepts_nested_attributes_for :package_types,
@@ -80,6 +82,8 @@ module Business
     end
 
     def name
+      return course_type.name if course_type
+
       I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{activity_type}")
     end
 
@@ -136,7 +140,11 @@ module Business
     end
 
     def activity_url
+      return course_type.sign_ups_uri if course_type
+
       case activity_type.to_sym
+      when :kw
+        'https://szkolaalpinizmu.pl'
       when :winter_abc
         'https://szkolaalpinizmu.pl/turystyka/zimowe-abc/'
       when :winter_tourist_1
@@ -215,8 +223,10 @@ module Business
     end
 
     def logo
+      return course_type.logo_uri if course_type
+
       case activity_type.to_sym
-      when :winter_abc, :winter_tourist_1, :winter_tourist_2
+      when :winter_abc, :winter_tourist_1, :winter_tourist_2, :kw
         'kw.png'
       when :skitour_1, :skitour_2, :skitour_3, :skitour_avalanche, :skitour_avalanche_2, :piste_1, :piste_2, :piste_3, :piste_4, :piste_5, :piste_6, :skitour_glacier, :piste_7, :tatra_traverse, :georgia, :norway, :skialp
         'snw.png'
@@ -239,7 +249,7 @@ module Business
       super.merge(
         activity_url: activity_url,
         logo: logo,
-        display_name: I18n.t("activerecord.attributes.#{model_name.i18n_key}.activity_types.#{activity_type}"),
+        display_name: name,
         free_seats: max_seats ? max_seats - sign_ups_count : 0,
         sign_up_url: event_url
       )

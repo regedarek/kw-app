@@ -19,10 +19,8 @@
       { class: 'js-select-multiple' }
 .row
   .large-4.columns
-    b= f.label :activity_type, 'Typ'
-    = f.select :activity_type, Business::CourseRecord.activity_type_attributes_for_select,
-    { include_blank: true },
-    { class: 'js-select-multiple' }
+    b= f.label :course_type_id
+    = f.select :course_type_id, Business::CourseTypeRecord.all.map{|i| [i.name, i.id] }, selected: @course.course_type_id, include_blank: true
 
   .large-4.columns
     b = f.label :state, 'Status'

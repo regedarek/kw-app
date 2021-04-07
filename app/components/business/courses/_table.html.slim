@@ -18,8 +18,7 @@ table.stack
     - @courses.each do |course|
       tr
         td
-          = link_to course_path(id: course.slug, q: params.to_unsafe_h[:q]) do
-            = I18n.t("activerecord.attributes.#{Business::CourseRecord.model_name.i18n_key}.activity_types.#{course.activity_type}")
+          = link_to course.name, course_path(id: course.slug, q: params.to_unsafe_h[:q])
         td.text-center
           = link_to seats_minus_course_path(id: course.id, q: params.to_unsafe_h[:q]), method: :put, style: 'margin-right: 5px; color: red' do
             i.fi-minus

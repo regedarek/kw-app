@@ -11,7 +11,7 @@ module Business
         .where('max_seats > seats')
         .where(
           state: 'ready',
-          activity_type: @sign_up.course.activity_type
+          course_type_id: @sign_up.course.course_type_id
         )
         .where.not(id: @sign_up.course_id)
         .order(created_at: :desc)
@@ -34,7 +34,7 @@ module Business
         .where('max_seats > seats')
         .where(
           state: 'ready',
-          activity_type: @sign_up.course.activity_type
+          course_type_id: @sign_up.course.course_type_id
         )
         .where.not(id: @sign_up.course_id)
         .order(created_at: :desc)

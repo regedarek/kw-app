@@ -26,7 +26,7 @@ module Business
         .where('max_seats > seats')
         .where(
           state: 'ready',
-          activity_type: self.sign_up.course.activity_type
+          course_type_id: self.sign_up.course.course_type_id
         )
         .where.not(id: self.sign_up.course_id)
         .any?

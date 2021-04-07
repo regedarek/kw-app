@@ -6,9 +6,9 @@ module Business
     def index
       params[:q] ||= {}
       courses = unless params[:q][:starts_at_gteq]
-        Business::CourseRecord.includes(:coordinator).where('starts_at >= ?', Time.zone.now)
+        Business::CourseRecord.includes(:coordinator, :course_type).where('starts_at >= ?', Time.zone.now)
       else
-        Business::CourseRecord.includes(:coordinator)
+        Business::CourseRecord.includes(:coordinator, :course_type)
       end
       @q = courses.ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
@@ -46,6 +46,7 @@ module Business
       authorize! :create, Business::CourseRecord
 
       @course.creator_id = current_user.id
+      @course.activity_type = :kw
 
       if @course.save
         @course.update(sign_up_url: "#{Rails.application.routes.default_url_options[:host]}/kursy/#{@course.slug}")
@@ -77,7 +78,7 @@ module Business
       respond_with do |format|
         format.html
         format.xlsx do
-          disposition = "attachment; filename=#{@course.activity_type}_#{@course.start_date}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
+          disposition = "attachment; filename=#{@course.name}_#{@course.start_date}_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
           response.headers['Content-Disposition'] = disposition
         end
       end
@@ -150,7 +151,7 @@ module Business
         .require(:course)
         .permit(
           :coordinator_id, :price, :seats, :starts_at,:ends_at,
-          :description, :activity_type, :state, :instructor_id,
+          :description, :activity_type, :state, :instructor_id, :course_type_id,
           :max_seats, :sign_up_url, :creator_id, :event_id, :sa_title,
           :payment_first_cost, :payment_second_cost, :equipment,
           :email_first_content, :email_second_content, :cash, :packages,

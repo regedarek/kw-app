@@ -179,6 +179,7 @@ pl:
         photos_attributes: Załączniki
         group_type: Sekcja
         activity_type: Aktywność
+        course_type_id: Rodzaj kursu
         state: Status
         states:
           new: Nowy
