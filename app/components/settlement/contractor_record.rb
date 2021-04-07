@@ -10,5 +10,6 @@ module Settlement
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
     enum reason_type: [:both, :contracts, :sponsor]
+    enum profession_type: [:no_profession, :instructor]
   end
 end
