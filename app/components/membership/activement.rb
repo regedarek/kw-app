@@ -12,6 +12,12 @@ module Membership
       return Date.current.year
     end
 
+    def profile_payment_year(profile)
+      return profile.created_at.next_year.year if profile.created_at.between?(Date.new(profile.created_at.year, 11, 15), profile.created_at.end_of_year)
+
+      return profile.created_at.year
+    end
+
     def active?
       return false unless user
       return true if profile_has_been_released?(user)
