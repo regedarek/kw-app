@@ -34,6 +34,15 @@ module Training
           }
         end
       end
+
+      def deleted_sign_up(course, email)
+        @course = course
+        mail(
+          to: ['wydarzenia@kw.krakow.pl', email],
+          from: 'wydarzenia@kw.krakow.pl',
+          subject: "Twój czas na płatność za #{@course.name} wygasł!"
+        )
+      end
     end
   end
 end

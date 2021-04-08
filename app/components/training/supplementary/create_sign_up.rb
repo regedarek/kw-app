@@ -56,6 +56,10 @@ module Training
         end
         sign_up.update(supplementary_course_package_type_id: form_outputs[:supplementary_course_package_type_id]) if course.packages
         if !course.send_manually && Training::Supplementary::Limiter.new(course).in_limit?(sign_up)
+          expired_at = unless course.expired_hours.zero?
+            Time.zone.now + course.expired_hours.hours
+          end
+          sign_up.update(expired_at: expired_at)
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
           sign_up.update(sent_at: Time.zone.now)
         end

@@ -137,6 +137,7 @@ class Ability
   end
 
   def business_courses
+    can :manage, Settlement::ContractorRecord
     can :manage, Business::CourseRecord
     can :manage, Business::SignUpRecord
     can :destroy, Business::SignUpRecord
