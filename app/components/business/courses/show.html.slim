@@ -52,7 +52,7 @@
             .large-6.columns
               .callout
                 b Instruktor: 
-                = @course.instructor.name
+                = @course.instructor&.display_name
 
 
         - if !@course.packages?

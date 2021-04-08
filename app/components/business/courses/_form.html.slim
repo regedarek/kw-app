@@ -14,7 +14,7 @@
   .large-3.columns
     = f.label :instructor, "Instruktor"
     = f.select :instructor_id,
-      Settlement::ContractorRecord.where(profession_type: :instructor).map{|i| [i.name, i.id] },
+      Settlement::ContractorRecord.where(profession_type: :instructor).map{|i| [i.display_name, i.id] },
       { selected: @course.instructor_id, include_blank: true },
       { class: 'js-select-multiple' }
 .row

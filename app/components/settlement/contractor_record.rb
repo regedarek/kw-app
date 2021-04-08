@@ -12,5 +12,9 @@ module Settlement
 
     enum reason_type: [:both, :contracts, :sponsor]
     enum profession_type: [:no_profession, :instructor]
+
+    def display_name
+      contact_name
+    end
   end
 end
