@@ -152,6 +152,7 @@ module Business
     def as_json(options={})
       super.merge(
         activity_url: activity_url,
+        activity_type: activity_type,
         logo: logo,
         display_name: name,
         free_seats: max_seats ? max_seats - sign_ups_count : 0,
