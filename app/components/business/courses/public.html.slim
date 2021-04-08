@@ -48,7 +48,7 @@
         .large-12.columns
           .callout
             b Instruktor: 
-            = ::Business::InstructorRecord.find(@course.instructor_id)&.profile_name
+            = @course.instructor.name
 
     - if @course.description
       .row

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
+    Appsignal.set_error(exception)
     respond_to do |format|
       format.json { head :not_found, content_type: 'text/html' }
       format.xlsx { redirect_back(fallback_location: main_app.root_path, alert: 'Nie ma takiej strony, sprawdź czy to poprawny adres!') }
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
+    Appsignal.set_error(exception)
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
       format.xlsx { redirect_back(fallback_location: main_app.root_path, alert: exception.message) }
