@@ -64,6 +64,7 @@
                 li= link_to 'Zapisy', business_sign_ups_path
                 li= link_to 'Historia', history_courses_path
                 li= link_to 'Rozliczenia', admin_contracts_path
+                li= link_to 'Kontrahenci', admin_contractors_path
 
           - if current_user.roles.include?('management')
             li
