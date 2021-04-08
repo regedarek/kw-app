@@ -60,7 +60,6 @@ module Business
           user_id: current_user.id,
           project_id: project.id
         ) unless ::Settlement::ProjectItemRecord.exists?(accountable_type: 'Business::CourseRecord', accountable_id: @course.id)
-        @course.conversations.create(subject: @course.name)
 
         redirect_to courses_path(q: params.to_unsafe_h[:q]), notice: 'Dodano kurs'
       else

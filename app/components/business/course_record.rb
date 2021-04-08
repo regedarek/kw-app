@@ -105,6 +105,10 @@ module Business
       ]
     end
 
+    def conversation
+      conversations.first
+    end
+
     workflow_column :state
     workflow do
       state :draft do

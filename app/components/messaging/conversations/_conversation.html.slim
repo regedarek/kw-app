@@ -1,4 +1,4 @@
-- if conversation.is_participant?(current_user)
+- if conversation.is_participant?(participant)
   .row
     .large-12.columns
       .callout
@@ -15,14 +15,14 @@
             .large-4.columns
               = submit_tag "Dodaj uczestnika", class: 'button expanded'
             .large-4.columns
-              - if conversation.is_participant?(current_user)
-                - if conversation.has_subscriber?(current_user)
-                  = link_to "Wypisz się", opt_out_conversation_path(conversation.id, user_id: current_user.id), method: :put, class: 'alert button expanded'
+              - if conversation.is_participant?(participant)
+                - if conversation.has_subscriber?(participant)
+                  = link_to "Wypisz się", opt_out_conversation_path(conversation.id, user_id: participant.id), method: :put, class: 'alert button expanded'
                 - else
-                  = link_to "Dopisz się", opt_in_conversation_path(conversation.id, user_id: current_user.id), method: :put, class: 'alert button expanded'
+                  = link_to "Dopisz się", opt_in_conversation_path(conversation.id, user_id: participant.id), method: :put, class: 'alert button expanded'
   .row
     .large-12.columns
-      - conversation.receipts_for(current_user).includes(message: :sender).order(created_at: :asc).each do |receipt|
+      - conversation.receipts_for(participant).includes(message: :sender).order(created_at: :asc).each do |receipt|
         .comment-section-container
           .callout
             .comment-section-author

@@ -268,7 +268,7 @@
             = sanitize @course&.remarks
         - @course_record = Training::Supplementary::CourseRecord.find(@course.id)
         - if @course_record.conversations.any?
-          = render 'messaging/conversations/conversation', conversation: @course_record.conversations.first, users: Db::User.active.not_hidden
+          = render 'messaging/conversations/conversation', conversation: @course_record.conversations.first, users: Db::User.active.not_hidden, participant: current_user
       - if @course.price
         .large-6.columns
           - if !@limiter.open?

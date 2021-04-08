@@ -41,6 +41,7 @@ module Business
         end
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         @sign_up.update(sent_at: Time.current)
+        @sign_up.course.conversation.add_participant(@sign_up) if @sign_up.course.conversation
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
       else
         @course = @sign_up.course
