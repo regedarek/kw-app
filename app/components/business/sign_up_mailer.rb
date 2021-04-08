@@ -9,8 +9,9 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.course.conversations.first.code}@panel.kw.krakow.pl>",
-        subject: "[#{@sign_up.course.name_with_date}] - Zapisałeś na kurs - #{@sign_up.name}"
+        from: "SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>",
+        bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
+        subject: "[#{@sign_up.course.name_with_date}] Zapisałeś/aś się na nasz kurs - opłać zadatek!"
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @sign_up.id,
@@ -25,8 +26,8 @@ module Business
       mail(
         to: @sign_up.email,
         from: "SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>",
-        cc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
-        subject: "[#{@sign_up.course.name_with_date}] - Zapisałeś na kurs - #{@sign_up.name}"
+        bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
+        subject: "[#{@sign_up.course.name_with_date}] Zadatek został opłacony - wypełnij dane do ubezpieczenia!"
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @sign_up.id,
@@ -41,14 +42,24 @@ module Business
       mail(
         to: @sign_up.email,
         from: "SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>",
-        cc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
-        subject: "[#{@sign_up.course.name_with_date}] - Zapisałeś na kurs - #{@sign_up.name}"
+        bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
+        subject: "[#{@sign_up.course.name_with_date}] Witamy na kursie - skontaktuj się z uczestnikami i instruktorem!"
       ).tap do |message|
         message.mailgun_options = {
           "mailable_id" => @sign_up.id,
           "mailable_type" => @sign_up.class.name
         }
       end
+    end
+
+    def deleted_sign_up(course, email)
+      @course = course
+      mail(
+        to: email,
+        from: "SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>",
+        bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
+        subject: "[#{@course.name_with_date}] Twój czas na płatność za zadatek wygasł!"
+      )
     end
   end
 end
