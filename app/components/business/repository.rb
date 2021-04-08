@@ -10,5 +10,11 @@ module Business
       end
       end_unpaid
     end
+
+    def sign_ups_for_equipment
+      ::Business::SignUpRecord
+        .joins(:payments)
+        .where(equipment_at: nil, payments: { state: 'prepaid' })
+    end
   end
 end

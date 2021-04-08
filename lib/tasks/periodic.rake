@@ -60,6 +60,10 @@ task :destroy_expired_sign_ups => :environment do
   expired_business_sign_ups.each do |sign_up|
     ::Business::Workers::DestroyExpiredSignUpWorker.perform_async(sign_up.id)
   end
+  sign_ups_for_equipment = ::Business::Repository.new.sign_ups_for_equipment
+  sign_ups_for_equipment.each do |sign_up|
+    ::Business::Workers::SendListWorker.perform_async(sign_up.id)
+  end
   Net::HTTP.get(URI('https://hc-ping.com/3b87fe26-31d5-442d-985b-baa658254ae8'))
 end
 
