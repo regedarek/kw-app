@@ -181,52 +181,53 @@
             .callout
               = @course.sign_ups.map(&:email).join(', ')
 
-    - if (user_signed_in? && current_user.roles.include?('business_courses')) || ::Business::SignUpRecord.exists?(code: params[:code])
-      h5 Porozmawiaj
-      - if false
-        .row
-          .large-12.columns
-            h3 Nowa Wiadomość
+    - if Rails.env.development?
+      - if (user_signed_in? && current_user.roles.include?('business_courses')) || ::Business::SignUpRecord.exists?(code: params[:code])
+        h5 Porozmawiaj
+        - if false
+          .row
+            .large-12.columns
+              h3 Nowa Wiadomość
 
-            = form_tag business_conversations_path, method: :post do
-              .row
-                .large-6.columns
-                  = text_field_tag :subject, nil, placeholder: "Temat", required: true
-                .large-6.columns
-                  = select_tag :user_id, options_for_select(@course.sign_ups.map { |u| [u.name, u.id] }, params[:recipient_id]),
-                    { class: 'js-select-multiple', include_blank: true }
-              .row
-                .large-12.columns
-                  = hidden_field_tag :body, nil, { id: 'remarks_body' }
-                  trix-editor input='remarks_body'
-              .row
-                .large-12.columns
-                  = submit_tag "Wyślij wiadomość", class: 'button expanded large'
-      - if @conversation
-        .row
-          .large-12.columns
-            - @conversation.messages.includes(:sender).order(created_at: :asc).each do |message|
-              .comment-section-container
-                .callout
-                  .comment-section-author
-                    = image_tag('default-avatar.png', size: '50x50')
-                    .comment-section-name
-                      h5 = message.sender.display_name
-                      p = I18n.l(message.created_at, :format => :short)
-                  .comment-section-text
-                    = sanitize message.body
-
-            .comment-section-container
-              = form_tag business_messages_path(conversation_id: @conversation.id, course_id: @course.id), method: :post do |f|
-                = hidden_field_tag :code, params[:code]
+              = form_tag business_conversations_path, method: :post do
+                .row
+                  .large-6.columns
+                    = text_field_tag :subject, nil, placeholder: "Temat", required: true
+                  .large-6.columns
+                    = select_tag :user_id, options_for_select(@course.sign_ups.map { |u| [u.name, u.id] }, params[:recipient_id]),
+                      { class: 'js-select-multiple', include_blank: true }
                 .row
                   .large-12.columns
                     = hidden_field_tag :body, nil, { id: 'remarks_body' }
                     trix-editor input='remarks_body'
                 .row
                   .large-12.columns
-                    = submit_tag "Odpowiedz", class: 'button expanded large'
+                    = submit_tag "Wyślij wiadomość", class: 'button expanded large'
+        - if @conversation
+          .row
+            .large-12.columns
+              - @conversation.messages.includes(:sender).order(created_at: :asc).each do |message|
+                .comment-section-container
+                  .callout
+                    .comment-section-author
+                      = image_tag('default-avatar.png', size: '50x50')
+                      .comment-section-name
+                        h5 = message.sender.display_name
+                        p = I18n.l(message.created_at, :format => :short)
+                    .comment-section-text
+                      = sanitize message.body
 
-        .row
-          .large-12.columns
-            = link_to 'wróć do skrzynki odbiorczej', conversations_path, class: 'button'
+              .comment-section-container
+                = form_tag business_messages_path(conversation_id: @conversation.id, course_id: @course.id), method: :post do |f|
+                  = hidden_field_tag :code, params[:code]
+                  .row
+                    .large-12.columns
+                      = hidden_field_tag :body, nil, { id: 'remarks_body' }
+                      trix-editor input='remarks_body'
+                  .row
+                    .large-12.columns
+                      = submit_tag "Odpowiedz", class: 'button expanded large'
+
+          .row
+            .large-12.columns
+              = link_to 'wróć do skrzynki odbiorczej', conversations_path, class: 'button'
