@@ -9,5 +9,6 @@ br
 - else
   = link_to I18n.t('.business.mailer.charge_link2'), charge_payment_url(@sign_up.second_payment.id)
   br
-= link_to 'Link do kontatku z pozostałymi uczestnikami', course_url(id: @sign_up.course_id, code: @sign_up.code)
-br
+- if false
+  = link_to 'Link do kontatku z pozostałymi uczestnikami', course_url(id: @sign_up.course_id, code: @sign_up.code)
+  br
