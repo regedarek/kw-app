@@ -1,13 +1,12 @@
 module Messaging
   class MessagesController < ApplicationController
-    before_action :set_participant
     before_action :set_conversation
 
     def create
-      return redirect_to(conversation_path(@conversation), alert: 'Nie jesteś uczestnikiem!') unless @participant
+      authorize! :create, Mailboxer::Conversation
 
       if params[:body].present?
-        receipt = @participant.reply_to_conversation(@conversation, params[:body])
+        receipt = current_user.reply_to_conversation(@conversation, params[:body])
         redirect_to conversation_path(@conversation)
       else
         flash[:alert] = 'Odpowiedź nie może być pusta!'
@@ -18,15 +17,7 @@ module Messaging
     private
 
     def set_conversation
-      @conversation = @participant.mailbox.conversations.find(params[:conversation_id])
-    end
-
-    def set_participant
-      @participant = if user_signed_in?
-                      current_user
-                    else
-                      Business::SignUpRecord.find_by(code: params[:code])
-                    end
+      @conversation = current_user.mailbox.conversations.find(params[:conversation_id])
     end
   end
 end
