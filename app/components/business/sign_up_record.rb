@@ -19,6 +19,9 @@ module Business
 
     has_one :list, class_name: 'Business::ListRecord', foreign_key: :sign_up_id
 
+    has_many :conversation_items, as: :messageable, class_name: '::Messaging::ConversationItemRecord', :dependent => :destroy
+    has_many :conversations, :through => :conversation_items, :dependent => :destroy
+
     has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     has_many :payments, as: :payable, dependent: :destroy, class_name: 'Db::Payment'

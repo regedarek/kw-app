@@ -1,0 +1,47 @@
+- if conversation.is_participant?(participant)
+  .row
+    .large-12.columns
+      .callout
+        = conversation.participants.map(&:display_name).to_sentence
+
+  .row
+    .large-12.columns
+      .callout
+        = form_tag add_participant_conversation_path(conversation.id), method: :post do
+          .row
+            .large-4.columns
+              = select_tag :user_id, options_for_select(users.map { |u| [u.display_name, u.id] }),
+                { class: 'js-select-multiple expanded', include_blank: true }
+            .large-4.columns
+              = submit_tag "Dodaj uczestnika", class: 'button expanded'
+            .large-4.columns
+              - if conversation.is_participant?(participant)
+                - if conversation.has_subscriber?(participant)
+                  = link_to "Wypisz się", opt_out_conversation_path(conversation.id, user_id: participant.id), method: :put, class: 'alert button expanded'
+                - else
+                  = link_to "Dopisz się", opt_in_conversation_path(conversation.id, user_id: participant.id), method: :put, class: 'alert button expanded'
+  .row
+    .large-12.columns
+      - conversation.receipts_for(participant).includes(message: :sender).order(created_at: :asc).each do |receipt|
+        .comment-section-container
+          .callout
+            .comment-section-author
+              - if receipt.message.sender.is_a?(Db::User) && receipt.message&.sender&.avatar&.present?
+                = image_tag(receipt.message.sender.avatar.url, size: '50x50')
+              - else
+                = image_tag('default-avatar.png', size: '50x50')
+              .comment-section-name
+                - if receipt.message.sender.is_a?(Db::User)
+                  h5 = link_to receipt.message.sender.display_name, user_path(receipt.message.sender.kw_id)
+                - else
+                  h5 = receipt.message.sender.display_name
+                p = I18n.l(receipt.message.created_at, :format => :short)
+            .comment-section-text
+              = sanitize receipt.message.body
+
+      .comment-section-container
+        = render 'messaging/messages/form', conversation: conversation
+
+  .row
+    .large-12.columns
+      = link_to 'wróć do skrzynki odbiorczej', conversations_path, class: 'button'

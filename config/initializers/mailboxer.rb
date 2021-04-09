@@ -33,6 +33,11 @@ Rails.application.config.to_prepare do
       class_name: 'Messaging::ConversationItemRecord',
       foreign_key: :conversation_id
 
+    has_many :sign_ups,
+      through: :conversation_items,
+      source: :messageable,
+      source_type: 'Business::SignUpRecord'
+
     has_many :business_courses,
       through: :conversation_items,
       source: :messageable,

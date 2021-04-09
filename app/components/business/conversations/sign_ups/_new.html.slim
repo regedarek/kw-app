@@ -1,0 +1,15 @@
+.row
+  .large-12.columns
+    = form_for :conversation, url: business_conversations_path, method: :post do
+      = hidden_field_tag :messageable_type, 'Business::SignUpRecord'
+      = hidden_field_tag :messageable_id, params[:id]
+
+      = hidden_field_tag :subject, "[#{@sign_up.course.name_with_date}] Pytania od #{@sign_up.name}"
+      = hidden_field_tag :recipient_id, params[:id]
+      .row
+        .large-12.columns
+          = hidden_field_tag :body, nil, { id: 'remarks_body' }
+          trix-editor input='remarks_body'
+      .row
+        .large-12.columns
+          = submit_tag "Wyślij wiadomość", class: 'button expanded large'

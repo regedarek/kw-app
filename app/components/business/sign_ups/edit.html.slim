@@ -128,9 +128,10 @@
           .callout
             = @sign_up.list.birthdate
 
+    - if false
     .row
       .large-12.columns
-        = render 'messaging/comments/comments', commentable: @sign_up
-      .large-12.columns
-        .callout
-          = render 'messaging/comments/form', commentable: @sign_up
+        - if @sign_up.conversations.any?
+          = render 'business/conversations/sign_ups/conversation', conversation: @sign_up.conversations.first, participant: current_user
+        - else
+          = render 'business/conversations/sign_ups/new'
