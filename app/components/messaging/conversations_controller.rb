@@ -9,7 +9,7 @@ module Messaging
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'updated_at desc' if @q.sorts.empty?
       @conversations = @q.result(distinct: true)
-      @inbox = @conversations.inbox(current_user).page(params[:inbox_page]).per(10)
+      @inbox = @conversations.not_trash(current_user).inbox(current_user).page(params[:inbox_page]).per(10)
       @sentbox = @conversations.sentbox(current_user).page(params[:sentbox_page]).per(10)
       @trash = @conversations.trash(current_user).page(params[:trash_page]).per(10)
     end

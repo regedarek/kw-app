@@ -19,6 +19,6 @@ table.stack
         td.text-right
           = I18n.l(conversation.updated_at, :format => :short)
         td.text-right
-          - unless conversation.is_trashed?(current_user)
+          - unless conversation.is_trashed?(current_user) || conversation.is_deleted?(current_user)
             = link_to conversation_path(conversation.id), style: 'padding: 5px', method: :delete do
               i.fi.fi-trash
