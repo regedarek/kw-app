@@ -8,6 +8,14 @@
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
-<% unless @message.conversation.sign_ups.any? %>
-  Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
+<% if @message.conversation.sign_ups.any? %>
+  <small>
+    Kliknij aby przejść bezpośrednio do <%= link_to 'QA z koordynatorem', business_sign_up_url(@sign_up.id, code: @sign_up.code) %>.
+  </small>
+  </br>
+<% else %>
+  <small>
+    Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
+  </small>
+  </br>
 <% end %>
