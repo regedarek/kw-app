@@ -39,10 +39,10 @@ module Business
         else
           @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         end
+        @sign_up.init_conversation(Db::User.where(":name = ANY(roles)", name: "business_courses"), "Nowy kursant.", "[#{@sign_up.course.name_with_date}] QA z #{@sign_up.name}")
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         @sign_up.update(sent_at: Time.current)
-        #@sign_up.course.conversation.add_participant(@sign_up) if @sign_up.course.conversation
-        @sign_up.conversations.create(subject: "#{@sign_up.course.name_with_date}: #{@sign_up.name}")
+
 
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
       else

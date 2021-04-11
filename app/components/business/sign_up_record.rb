@@ -42,6 +42,27 @@ module Business
       course.payment_type
     end
 
+    def init_conversation(recipients, msg_body, subject, sanitize_text=true, attachment=nil, message_timestamp = Time.now)
+      convo = Mailboxer::ConversationBuilder.new({
+        :subject    => subject,
+        :created_at => message_timestamp,
+        :updated_at => message_timestamp
+      }).build
+
+      message = Mailboxer::MessageBuilder.new({
+        :sender       => self,
+        :conversation => convo,
+        :recipients   => recipients,
+        :body         => msg_body,
+        :subject      => subject,
+        :attachment   => attachment,
+        :created_at   => message_timestamp,
+        :updated_at   => message_timestamp
+      }).build
+
+      conversations << convo
+    end
+
     def first_payment
       payments.order(created_at: :asc).first
     end
