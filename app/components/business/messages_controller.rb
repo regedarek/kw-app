@@ -2,17 +2,31 @@ module Business
   class MessagesController < ApplicationController
     def create
       conversation = ::Mailboxer::Conversation.find(params[:conversation_id])
-      course = ::Business::CourseRecord.find(params[:course_id])
+      set_participant
 
-      if current_user
-        sender = current_user
+      if conversation.participants.any?
+        @participant.reply_to_conversation(conversation, params[:body])
       else
-        sender = ::Business::SignUpRecord.find_by!(code: params[:code])
+        @participant.reply(conversation, [], params[:body])
       end
 
-      receipt = sender.reply_to_conversation(conversation, params[:body])
+      sign_up = Business::SignUpRecord.find_by(code: params[:code])
 
-      redirect_to course_path(course.id, code: params[:code])
+      if sign_up
+        redirect_back(fallback_location: course_path(sign_up.course.id, code: params[:code]))
+      else
+        redirect_back(fallback_location: course_path(conversation.sign_ups.first.course_id, code: params[:code]))
+      end
+    end
+
+    private
+
+    def set_participant
+      if user_signed_in?
+        @participant = current_user
+      else
+        @participant = ::Business::SignUpRecord.find_by!(code: params[:code])
+      end
     end
   end
 end

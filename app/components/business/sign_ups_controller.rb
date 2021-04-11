@@ -41,7 +41,9 @@ module Business
         end
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         @sign_up.update(sent_at: Time.current)
-        @sign_up.course.conversation.add_participant(@sign_up) if @sign_up.course.conversation
+        #@sign_up.course.conversation.add_participant(@sign_up) if @sign_up.course.conversation
+        @sign_up.conversations.create(subject: "#{@sign_up.course.name_with_date}: #{@sign_up.name}")
+
         redirect_to public_course_path(@sign_up.course_id), notice: 'Zapisaliśmy Cię na kurs, teraz sprawdź e-mail i opłać zadatek'
       else
         @course = @sign_up.course
@@ -64,6 +66,17 @@ module Business
         redirect_to edit_business_sign_up_path(@sign_up.id), notice: 'Zaktualizowano zapis'
       else
         render :edit
+      end
+    end
+
+    def show
+      @sign_up = Business::SignUpRecord.find(params[:id])
+      @course = @sign_up.course
+      @conversation = @sign_up.conversations&.first
+      if user_signed_in?
+        @participant = current_user
+      else
+        @participant = Business::SignUpRecord.find_by!(code: params[:code])
       end
     end
 

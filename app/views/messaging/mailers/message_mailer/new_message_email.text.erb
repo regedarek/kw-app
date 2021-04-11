@@ -8,4 +8,6 @@
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
-Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
+<% unless @message.conversation.sign_ups.any? %>
+  Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
+<% end %>

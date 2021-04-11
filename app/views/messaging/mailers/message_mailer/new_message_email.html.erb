@@ -17,10 +17,12 @@
     </blockquote>
     -----------------------------------------------
     <br>
-    <small>
-      Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
-    </small>
-    </br>
+    <% unless @message.conversation.sign_ups.any? %>
+      <small>
+        Kliknij aby przejść bezpośrednio do <%= link_to 'wątku', conversation_url(@message.conversation.id) %> aby odpowiedzieć i sprawdzić inne wiadomości.
+      </small>
+      </br>
+    <% end %>
     <small>
       Klub Wysokogórski Kraków
     </small>

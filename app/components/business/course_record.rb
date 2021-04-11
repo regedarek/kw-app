@@ -8,7 +8,7 @@ module Business
 
     belongs_to :course_type, class_name: '::Business::CourseTypeRecord'
 
-    has_many :sign_ups, class_name: 'Business::SignUpRecord', foreign_key: :course_id
+    has_many :sign_ups, class_name: 'Business::SignUpRecord', foreign_key: :course_id, dependent: :destroy
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
     belongs_to :instructor, class_name: '::Settlement::ContractorRecord', foreign_key: :instructor_id
     belongs_to :coordinator, class_name: '::Db::User', foreign_key: :coordinator_id

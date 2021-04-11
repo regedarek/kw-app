@@ -128,10 +128,7 @@
           .callout
             = @sign_up.list.birthdate
 
-    - if false
     .row
       .large-12.columns
         - if @sign_up.conversations.any?
           = render 'business/conversations/sign_ups/conversation', conversation: @sign_up.conversations.first, participant: current_user
-        - else
-          = render 'business/conversations/sign_ups/new'

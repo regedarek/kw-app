@@ -178,8 +178,6 @@
 
         .row
           .large-12.columns
-            - unless @course.conversation
-              = link_to 'Otwórz konwersację', new_business_conversation_path(subject: @course.name, recipient_id: @course.sign_ups.map(&:id).join(','), messageable_type: 'Business::CourseRecord', messageable_id: @course.id), class: 'button expanded'
             .callout
               = @course.sign_ups.map(&:email).join(', ')
 
