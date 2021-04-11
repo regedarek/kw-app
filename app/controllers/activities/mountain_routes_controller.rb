@@ -39,6 +39,11 @@ module Activities
         if user_signed_in?
           format.xlsx do
             @current_user = current_user
+            if current_user.roles.include?('secondary_management')
+              @climbing_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 1}).order('created_at DESC').map(&:mountain_route).compact
+            else
+              @climbing_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 1}, colleague_id: @current_user.id).order('created_at DESC').map(&:mountain_route).compact
+            end
             disposition = "attachment; filename=przejscia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
             response.headers['Content-Disposition'] = disposition
           end

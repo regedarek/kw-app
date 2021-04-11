@@ -27,8 +27,7 @@ wb.styles do |style|
       Db::Activities::MountainRoute.human_attribute_name(attr)
     end.push('Kto dodał?').push('Koledzy z klubu').push('Opis')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
-    climbing_routes = Db::Activities::RouteColleagues.includes(:mountain_route).where(mountain_routes: {route_type: 1}, colleague_id: @current_user.id).order('created_at DESC').map(&:mountain_route).compact
-    climbing_routes.each do |route|
+    @climbing_routes.each do |route|
       default_values = attributes.map do |attr|
         route.read_attribute(attr)
       end.push(route.user.try(:display_name)).push(route.colleagues.map(&:display_name).to_sentence).push(ActionView::Base.full_sanitizer.sanitize(route.description))
