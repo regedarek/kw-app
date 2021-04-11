@@ -11,10 +11,6 @@ module Training
           Training::Supplementary::DestroySignUp.new(
             Training::Supplementary::Repository.new
           ).call(id: sign_up_id) if sign_up
-
-          Training::Supplementary::FillEmptyPlaces.new(
-            Training::Supplementary::Repository.new
-          ).call(course_id: course_id)
         end
       end
     end

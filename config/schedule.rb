@@ -4,6 +4,7 @@ set :output, "cron_log.log"
 
 every 20.minutes do
   rake :send_prepaid_emails
+  rake :fill_empty_places
 end
 
 every 1.hour do
