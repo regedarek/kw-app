@@ -4,7 +4,7 @@
       h3 = @conversation.subject
     .large-6.columns
       - if @conversation.conversation_items.any?
-        - if conversation.sign_ups
+        - if @conversation.sign_ups
           = @conversation.conversation_items.first.messageable.name
         - else
           = link_to @conversation.conversation_items.first.messageable.name, url_for(@conversation.conversation_items.first.messageable)
