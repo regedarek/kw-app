@@ -10,7 +10,7 @@
 
 <% if @message.conversation.sign_ups.any? %>
   <small>
-    Kliknij aby przejść bezpośrednio do <%= link_to 'QA z koordynatorem', business_sign_up_url(@sign_up.id, code: @sign_up.code) %>.
+    Kliknij aby przejść bezpośrednio do <%= link_to 'QA z koordynatorem', business_sign_up_url(@message.conversation.sign_ups.first.id, code: @message.conversation.sign_ups.first.code) %>.
   </small>
   </br>
 <% else %>
