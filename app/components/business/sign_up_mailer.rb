@@ -9,7 +9,7 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.code}@panel.kw.krakow.pl>",
+        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.conversations.first.code}@panel.kw.krakow.pl>",
         bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
         subject: "[#{@sign_up.course.name_with_date}] Zapisałeś/aś się na nasz kurs - opłać zadatek!"
       ).tap do |message|
@@ -25,7 +25,7 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.code}@panel.kw.krakow.pl>",
+        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.conversations.first.code}@panel.kw.krakow.pl>",
         bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
         subject: "[#{@sign_up.course.name_with_date}] Zadatek został opłacony - wypełnij dane do ubezpieczenia!"
       ).tap do |message|
@@ -41,7 +41,7 @@ module Business
 
       mail(
         to: @sign_up.email,
-        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.code}@panel.kw.krakow.pl>",
+        from: "SzkolaAlpinizmu.pl <reply+#{@sign_up.conversations.first.code}@panel.kw.krakow.pl>",
         bcc: 'SzkolaAlpinizmu.pl <zapisy@szkolaalpinizmu.pl>',
         subject: "[#{@sign_up.course.name_with_date}] Witamy na kursie - skontaktuj się z uczestnikami i instruktorem!"
       ).tap do |message|
