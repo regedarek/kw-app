@@ -128,6 +128,7 @@ class Ability
   end
 
   def office
+    can :manage, Management::ResolutionRecord
     can :manage, Settlement::ContractorRecord
     can :manage, Db::User
     can :manage, Shop::OrderRecord

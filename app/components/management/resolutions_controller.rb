@@ -60,7 +60,7 @@ module Management
     private
 
     def resolution_params
-      params.require(:resolution).permit(:name, :number, :description, attachments_attributes: [:file, :filename])
+      params.require(:resolution).permit(:name, :passed_date, :number, :description, attachments_attributes: [:file, :filename])
     end
   end
 end

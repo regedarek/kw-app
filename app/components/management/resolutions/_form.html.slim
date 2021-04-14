@@ -2,9 +2,12 @@
   .large-4.columns
     = f.label :number, "Numer uchwały*"
     = f.text_field :number
-  .large-8.columns
+  .large-4.columns
     = f.label :name, "Nazwa uchwały*"
     = f.text_field :name
+  .large-4.columns
+    = f.label :passed_date, "Data przyjęcia"
+    = f.date_field :passed_date
 
 .row
   .large-12.columns

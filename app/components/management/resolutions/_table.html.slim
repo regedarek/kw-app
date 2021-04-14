@@ -2,6 +2,7 @@ table.stack
   thead
     tr
       th.text-left width='150px' Numer uchwały
+      th.text-left width='150px' Data przyjęcia
       th.text-left Nazwa uchwały
       - if can? :manage, Management::ResolutionRecord
         th.text-right
@@ -9,6 +10,7 @@ table.stack
     - resolutions.each do |resolution|
       tr
         td.text-left = resolution.number
+        td.text-left = resolution.passed_date
         td.text-left = link_to resolution.name, resolution_path(resolution)
         - if can? :manage, resolution
           td.text-right
