@@ -23,6 +23,7 @@ class Ability
     voting if role?('voting')
     admin if role?('admin')
 
+    management if role?('management')
     secondary_management if role?('secondary_management')
     financial_management if role?('financial_management')
     office_king if role?('office_king')
@@ -55,6 +56,7 @@ class Ability
   end
 
   def active
+    can :read, Management::ResolutionRecord
     can :read, Training::Activities::ContractRecord
     can :create, Settlement::ContractorRecord
     can :see_dziki, Db::Activities::MountainRoute
@@ -154,6 +156,10 @@ class Ability
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Settlement::ProjectRecord
+  end
+
+  def management
+    can :manage, Management::ResolutionRecord
   end
 
   def financial_management

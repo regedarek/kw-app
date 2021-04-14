@@ -1,0 +1,19 @@
+table.stack
+  thead
+    tr
+      th.text-left width='150px' Numer uchwały
+      th.text-left Nazwa uchwały
+      - if can? :manage, Management::ResolutionRecord
+        th.text-right
+  tbody
+    - resolutions.each do |resolution|
+      tr
+        td.text-left = resolution.number
+        td.text-left = link_to resolution.name, resolution_path(resolution)
+        - if can? :manage, resolution
+          td.text-right
+            - if can? :manage, resolution
+              = link_to edit_resolution_path(resolution) do
+                i.fi-page-edit
+              = link_to resolution_path(resolution), method: :delete, data: { confirm: 'Napewno?' } do
+                i.fi-trash

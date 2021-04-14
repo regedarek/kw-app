@@ -27,19 +27,19 @@ module Management
     def show
       authorize! :read, Management::ResolutionRecord
 
-      @resolution = Management::ResolutionRecord.find(params[:id])
+      @resolution = Management::ResolutionRecord.friendly.find(params[:id])
     end
 
     def edit
       authorize! :manage, Management::ResolutionRecord
 
-      @resolution = Management::ResolutionRecord.find(params[:id])
+      @resolution = Management::ResolutionRecord.friendly.find(params[:id])
     end
 
     def update
       authorize! :manage, Management::ResolutionRecord
 
-      @resolution = Management::ResolutionRecord.find(params[:id])
+      @resolution = Management::ResolutionRecord.friendly.find(params[:id])
 
       if @resolution.update(resolution_params)
         redirect_to resolution_path(@resolution), notice: 'Zaktualizowano'
@@ -51,7 +51,7 @@ module Management
     def destroy
       authorize! :manage, Management::ResolutionRecord
 
-      @resolution = Management::ResolutionRecord.find(params[:id])
+      @resolution = Management::ResolutionRecord.friendly.find(params[:id])
 
       @resolution.destroy
       redirect_to resolutions_path, notice: 'Usunięto'
@@ -60,7 +60,7 @@ module Management
     private
 
     def resolution_params
-      params.require(:resolution).permit(:name, :description)
+      params.require(:resolution).permit(:name, :number, :description, attachments_attributes: [:file, :filename])
     end
   end
 end

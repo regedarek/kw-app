@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :projects, only: :index
     end
     resources :projects, path: 'projekty'
+    resources :resolutions, path: 'uchwaly'
     resources :settings, path: 'ustawienia', only: [:index, :edit, :update]
     scope module: 'voting' do
       get 'glosowania/pelnomocnictwo' => 'commissions#new'

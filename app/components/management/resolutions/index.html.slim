@@ -1,0 +1,19 @@
+.row
+  .large-6.columns
+    h3 Uchwały zarządu
+
+  - if can? :create, Management::ResolutionRecord
+    .large-2.columns
+        = link_to 'Dodaj uchwałę', new_resolution_path, class: 'button expanded medium'
+
+- if can? :manage, Management::ProjectRecord
+  - if @resolutions.where(state: 'draft').any?
+    .row
+      .large-12.columns
+        h5 W przygotowaniu
+        = render 'table', resolutions: @resolutions.where(state: 'draft')
+
+.row
+  .large-12.columns
+    h5 Uchwalone
+    = render 'table', resolutions: @resolutions.where(state: 'published')

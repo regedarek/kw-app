@@ -1,0 +1,27 @@
+.row
+  .large-12.columns
+    - if @errors
+      .callout.alert
+        ul.circle
+          - @errors.each do |error|
+            li= error
+
+= form_for @resolution, as: :resolution, url: resolution_path(@resolution.id) do |f|
+  .row
+    .large-12.columns
+      b= f.label :state, "Status"
+      = f.select :state,
+        Management::ResolutionRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }
+
+  = render 'form', f: f
+
+  - if @resolution.attachments.any?
+    .row
+      .large-12.columns
+        = render 'attachments/box', attachments: @resolution.attachments
+
+  .row
+    .large-6.columns
+      = f.submit 'Zaktualizuj', class: 'button expanded large success'
+    .large-6.columns
+      = link_to t('.back'), resolutions_path, class: 'secondary button large expanded'

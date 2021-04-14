@@ -1,0 +1,38 @@
+.row
+  .large-6.columns
+    .row
+      .large-8.columns
+        h3 = "[#{@resolution.number}] #{@resolution.name}"
+
+      .large-4.columns.text-right
+        br
+        | Status: 
+        span.label = I18n.t(@resolution.state)
+
+    - if @resolution.description
+      .row
+        .large-12.columns
+          h5 Opis
+          .callout
+            = sanitize @resolution.description
+
+    - if @resolution.attachments.any?
+      .row
+        .large-12.columns
+          = render 'attachments/box', attachments: @resolution.attachments
+
+    .row
+      .large-12.columns
+        = link_to 'powrót do pozostałych uchwał', resolutions_path, class: 'button primary'
+        - if can? :manage, @resolution
+          = link_to 'edytuj', edit_resolution_path(@resolution), class: 'button alert'
+
+  .large-6.columns
+    - if user_signed_in?
+      h5 Komentuj
+      .row
+        .large-12.columns
+          = render 'messaging/comments/comments', commentable: @resolution
+        .large-12.columns
+          .callout
+            = render 'messaging/comments/form', commentable: @resolution

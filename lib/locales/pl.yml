@@ -1,6 +1,7 @@
 pl:
   open: otwarty
   closed: zamknięty
+  published: opublikowano
   create: utwórz
   update: zmiana
   destroy: usuń
