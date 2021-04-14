@@ -9,10 +9,14 @@
         | Status: 
         span.label = I18n.t(@resolution.state)
 
+    - if @resolution.passed_date
+      .row
+        .large-12.columns
+          = @resolution.passed_date
+
     - if @resolution.description
       .row
         .large-12.columns
-          h5 Opis
           .callout
             = sanitize @resolution.description
 
