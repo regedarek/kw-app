@@ -1,0 +1,20 @@
+= search_form_for @q, url: resolutions_path, class: 'js-send-on-enter' do |f|
+  .row
+    .large-2.columns
+      = f.label :number_eq, 'Numer'
+      = f.search_field :number_eq
+
+    .large-4.columns
+      = f.label :name_or_description_cont, 'nazwa lub opis dokumentu'
+      = f.search_field :name_or_description_cont
+
+    .large-2.columns
+      = f.label :passed_date_gteq, 'Od'
+      = f.date_field :passed_date_gteq
+    .large-2.columns
+      = f.label :passed_date_lteq, 'Do'
+      = f.date_field :passed_date_lteq
+
+    .large-2.columns
+      br
+      = f.submit 'Szukaj', class: 'button expanded'

@@ -6,6 +6,11 @@
     .large-2.columns
         = link_to 'Dodaj uchwałę', new_resolution_path, class: 'button expanded medium'
 
+.row
+  .large-12.columns
+    .callout
+      = render 'search'
+
 - if can? :manage, Management::ProjectRecord
   - if @resolutions.where(state: 'draft').any?
     .row

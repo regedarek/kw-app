@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    Appsignal.set_error(exception)
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
       format.xlsx { redirect_back(fallback_location: main_app.root_path, alert: exception.message) }

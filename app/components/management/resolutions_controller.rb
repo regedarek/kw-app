@@ -4,7 +4,10 @@ module Management
     append_view_path 'app/components'
 
     def index
-      @resolutions = Management::ResolutionRecord.all
+      @q = Management::ResolutionRecord.accessible_by(current_ability)
+      @q = @q.ransack(params[:q])
+      @q.sorts = ['state desc', 'passed_date desc'] if @q.sorts.empty?
+      @resolutions = @q.result(distinct: true).page(params[:page])
     end
 
     def new
