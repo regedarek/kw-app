@@ -16,7 +16,7 @@ module Business
         return redirect_to public_course_path(@sign_up.course_id), alert: 'Niestety nie ma już wolnych miejsc'
       end
 
-      @sign_up.expired_at = 48.hours.from_now
+      @sign_up.expired_at = 12.hours.from_now
 
       if @sign_up.save
         PaperTrail.request(whodunnit: @sign_up.name) do
