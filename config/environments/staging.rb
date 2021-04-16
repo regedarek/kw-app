@@ -60,7 +60,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://kw-app-staging.herokuapp.com' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key: 'key-8885440118c81cfc60f9dcfbf933ec3d',
+    api_key: Rails.application.secrets.mailgun_api_key,
     domain: 'sandboxcda67a5d28394ec3b9ed5e3164523822.mailgun.org',
   }
   # Ignore bad email addresses and do not raise email delivery errors.
