@@ -1,1 +1,1 @@
-worker: bundle exec sidekiq -e staging
+worker: bundle exec sidekiq -c 2
