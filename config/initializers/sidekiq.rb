@@ -1,10 +1,10 @@
 if Rails.env.staging?
   Sidekiq.configure_server do |config|
-    config.redis = { url: 'redis://:p8acf4997e1b39826d2ba0bc71ad9ee34692286831a48c9e3c58c6a8390d48487@ec2-54-196-46-100.compute-1.amazonaws.com:12790' }
+    config.redis = { url: ENV["REDIS_URL"] }
   end
 
   Sidekiq.configure_client do |config|
-    config.redis = { url: 'redis://:p8acf4997e1b39826d2ba0bc71ad9ee34692286831a48c9e3c58c6a8390d48487@ec2-54-196-46-100.compute-1.amazonaws.com:12790' }
+    config.redis = { url: ENV["REDIS_URL"] }
   end
 else
   Sidekiq.configure_server do |config|
