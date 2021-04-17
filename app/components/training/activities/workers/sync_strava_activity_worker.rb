@@ -8,7 +8,8 @@ module Training
           user = ::Db::User.find(user_id)
           activity = strava_fetcher.activity(user: user, strava_id: strava_id)
 
-          return false if !our_type(activity.type) && user.mountain_routes.exists?(strava_id: activity.id)
+          return false if !our_type(activity.type) || user.mountain_routes.exists?(strava_id: activity.id)
+
           route = user.mountain_routes.create(
             strava_id: activity.id,
             user_id: user.id,
