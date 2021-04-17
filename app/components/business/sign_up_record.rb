@@ -58,9 +58,10 @@ module Business
         :attachment   => attachment,
         :created_at   => message_timestamp,
         :updated_at   => message_timestamp
-      }).build
+      }).build.save
 
       conversations << convo
+      convo
     end
 
     def first_payment

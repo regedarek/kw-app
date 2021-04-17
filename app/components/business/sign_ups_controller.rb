@@ -39,7 +39,8 @@ module Business
         else
           @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_first_cost)
         end
-        @sign_up.init_conversation([@sign_up, @sign_up.course.coordinator], "Nowy kursant.", "[#{@sign_up.course.name_with_date}] QA z #{@sign_up.name}")
+        conversation = @sign_up.init_conversation([@sign_up, @sign_up.course.coordinator], "Nowy kursant.", "[#{@sign_up.course.name_with_date}] QA z #{@sign_up.name}")
+        conversation.add_participant(@sign_up)
         ::Business::SignUpMailer.sign_up(@sign_up.id).deliver_later
         @sign_up.update(sent_at: Time.current)
 
