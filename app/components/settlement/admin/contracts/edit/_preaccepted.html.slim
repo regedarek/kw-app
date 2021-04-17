@@ -24,7 +24,7 @@
           li = link_to @contract.projects.first.name, admin_project_path(@contract.projects.first.id)
 .row
   .large-6.columns
-    .callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : 'alert'}")
+    .callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : @errors ? 'alert' : 'warning'}")
       .row
         .large-12.columns
           b= f.label :group_type
@@ -56,15 +56,28 @@
             br
             = check_box_tag :verify, :accept
             = label_tag :verify, 'Sprawdź'
+            - if @errors && @errors.key?(:accepted_fields)
+              .callout.warning
+                | Musisz wypełnić pola Sekcja, Aktywność i Impreza
+
+        - if @contract.preclosed? && can?(:prepayment, @contract)
+          .large-12.columns.text-right
+            br
+            - if @errors && @errors.key?(:accepted_fields)
+              .callout.warning
+                | Musisz wypełnić pola Sekcja, Aktywność i Impreza
 
         - if @contract.accepted? && can?(:prepayment, @contract)
           .large-12.columns.text-right
             br
             = check_box_tag :verify, :prepayment
             = label_tag :verify, 'Zaakceptuj'
+            - if @errors && @errors.key?(:accepted_fields)
+              .callout.warning
+                | Musisz wypełnić pola Sekcja, Aktywność i Impreza
 
   .large-6.columns
-    .callout class=("#{@contract.closed? ? 'success' : 'alert'}")
+    .callout class=("#{@contract.closed? ? 'success' : @errors ? 'alert' : 'warning'}")
       .row
         .large-12.columns
           b= f.label :substantive_type
@@ -89,3 +102,7 @@
             br
             = check_box_tag :verify, :finish
             = label_tag :verify, 'Rozlicz'
+
+            - if @errors && @errors.key?(:closed_fields)
+              .callout.warning
+                | Musisz wypełnić pola Rodzaj wydatku, Obszar, Rodzaj płatności
