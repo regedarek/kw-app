@@ -173,7 +173,7 @@
 
   .large-6.columns
     - if @course.lists.any?
-      h5 Alternatywne terminy
+      h5 Ten termin wybrali
       .row
         .large-12.columns
           table.stack
@@ -181,7 +181,10 @@
               - @course.lists.each_with_index do |list, i|
                 tr
                   td
-                    = link_to list.sign_up.course.name_with_date, edit_business_sign_up_path(list.sign_up_id)
+                    - if list.sign_up
+                      = link_to "#{list.sign_up.name} - #{list.sign_up.course.name_with_date}, edit_business_sign_up_path(list.sign_up_id)
+                    - else
+                      | Zapis został usunięty
 
     - if @course.sign_ups.any?
       - if can?(:manage, @course)
