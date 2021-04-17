@@ -172,6 +172,17 @@
                       span.dashboard-table-timestamp= version.created_at.strftime '%Y-%m-%d %H:%M'
 
   .large-6.columns
+    - if @course.lists.any?
+      h5 Alternatywne terminy
+      .row
+        .large-12.columns
+          table.stack
+            tbody
+              - @course.lists.each_with_index do |list, i|
+                tr
+                  td
+                    = link_to list.sign_up.course.name_with_date, edit_business_sign_up_path(list.sign_up_id)
+
     - if @course.sign_ups.any?
       - if can?(:manage, @course)
         = render 'sign_ups_table', sign_ups: @course.sign_ups.order(updated_at: :desc)

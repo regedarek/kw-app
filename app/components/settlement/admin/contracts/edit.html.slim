@@ -53,7 +53,6 @@
             = f.fields_for :photos_attributes do |p|
               = p.file_field :file, multiple: true, name: 'contract[photos_attributes][][file]'
 
-
       .row
         .large-12.columns
             = render 'attachments/box', attachments: @contract.photos
@@ -73,4 +72,3 @@
         .large-12.columns
           .callout
             = render 'messaging/comments/form', commentable: @contract
-
