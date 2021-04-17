@@ -8,7 +8,6 @@ module Training
       end
 
       def call(course_id:)
-        return Left(:no_course) unless Training::Supplementary::CourseRecord.exists?(id: course_id)
         course = Training::Supplementary::CourseRecord.find(course_id)
         return Left(:already_exists) if course.conversation_at
         return Left(:no_participants) unless repository.users_signed_in(course_id).any?
