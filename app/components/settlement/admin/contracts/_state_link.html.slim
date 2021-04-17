@@ -1,6 +1,15 @@
 - if contract.new? && can?(:accept, contract)
-  = link_to 'Sprawdź', accept_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+  - if contract.activity_type.present? && contract.group_type.present? && contract.event_type.present?
+    = link_to 'Sprawdź', accept_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+  - else
+    = link_to 'Uzupełnij', edit_admin_contract_path(contract.id, anchor: 'preaccepted'), class: class_value
 - if contract.accepted? && can?(:prepayment, contract)
-  = link_to 'Zaakceptuj', prepayment_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+  - if contract.activity_type.present? && contract.group_type.present? && contract.event_type.present?
+    = link_to 'Zaakceptuj', prepayment_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+  - else
+    = link_to 'Uzupełnij', edit_admin_contract_path(contract.id, anchor: 'preaccepted'), class: class_value
 - if contract.preclosed? && can?(:finish, contract)
-  = link_to 'Rozlicz', finish_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+  - if contract.substantive_type.present? && contract.financial_type.present? && contract.area_type.present?
+    = link_to 'Rozlicz', finish_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+  - else
+    = link_to 'Uzupełnij', edit_admin_contract_path(contract.id, anchor: 'preaccepted'), class: class_value
