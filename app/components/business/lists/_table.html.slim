@@ -1,0 +1,10 @@
+table.stack
+  thead
+    tr
+      th Zapotrzebowanie
+  tbody
+    - lists.each do |list|
+      - if list.sign_up && !list.sign_up.accepted?
+        tr
+          td
+            = link_to "#{list.sign_up.name} - #{list.sign_up.course.name_with_date}", edit_business_sign_up_path(list.sign_up_id)

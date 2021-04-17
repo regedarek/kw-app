@@ -3,6 +3,13 @@ module Business
     include EitherMatcher
     append_view_path 'app/components'
 
+    def index
+      @q = Business::ListRecord.includes(:sign_up)
+      @q = @q.ransack(params[:q])
+      @q.sorts = 'updated_at desc' if @q.sorts.empty?
+      @lists = @q.result(distinct: true).page(params[:page])
+    end
+
     def new
       @sign_up = Business::SignUpRecord.find(params[:id])
       @list = Business::ListRecord.new

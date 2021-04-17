@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :business do
+
     resources :course_types, only: [:index]
     resources :conversations, only: [:create] do
       resources :messages, only: [:create]
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
         post :send_second
       end
     end
+    resources :lists, only: [:index]
   end
   scope module: 'business' do
     resources :courses do
