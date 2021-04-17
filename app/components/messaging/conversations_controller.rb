@@ -65,7 +65,7 @@ module Messaging
       else
         messages = conversation.add_participant(participant)
         ::Messaging::Mailers::MessageMailer.add_participant(messages.first, participant).deliver_later if messages.any?
-        redirect_to conversation_path(conversation.id), alert: 'Dodano uczestnika!'
+        redirect_to conversation_path(conversation.id), notice: 'Dodano uczestnika!'
       end
     end
 
