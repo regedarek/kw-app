@@ -27,7 +27,7 @@ Rails.application.config.to_prepare do
     before_create :set_code
 
     has_many :course_conversations, class_name: '::Business::CourseConversationRecord', :dependent => :destroy, foreign_key: :conversation_id
-    has_many :courses, :through => :course_conversations, :dependent => :destroy, foreign_key: :course_id
+    has_many :courses, :through => :course_conversations, foreign_key: :course_id
 
     has_many :conversation_items,
       class_name: 'Messaging::ConversationItemRecord',

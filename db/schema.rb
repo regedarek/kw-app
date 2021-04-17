@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_203025) do
+ActiveRecord::Schema.define(version: 2021_04_17_112022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1045,6 +1045,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_203025) do
     t.boolean "send_manually", default: false, null: false
     t.text "paid_email"
     t.datetime "end_application_date"
+    t.datetime "conversation_at"
     t.index ["slug"], name: "index_supplementary_courses_on_slug", unique: true
   end
 

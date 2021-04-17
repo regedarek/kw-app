@@ -32,6 +32,11 @@ module Training
 
       self.table_name = 'supplementary_courses'
 
+      def original_conversation
+        return nil unless conversations.any?
+        conversations.order(:created_at).first
+      end
+
       def slug_candidates
         [
           [:name],

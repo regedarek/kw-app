@@ -67,6 +67,13 @@ task :destroy_expired_sign_ups => :environment do
   Net::HTTP.get(URI('https://hc-ping.com/3b87fe26-31d5-442d-985b-baa658254ae8'))
 end
 
+task :open_conversations => :environment do
+  Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
+    Training::Supplementary::Workers::OpenConversationWorker.perform_async(course.id)
+  end
+  Net::HTTP.get(URI('https://hc-ping.com/66def5a5-3a1f-4e36-a199-0379a9e74141'))
+end
+
 task :fill_empty_places => :environment do
   Training::Supplementary::Repository.new.fetch_active_courses.each do |course|
     Training::Supplementary::FillEmptyPlaces.new(

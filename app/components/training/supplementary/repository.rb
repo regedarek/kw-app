@@ -151,6 +151,17 @@ module Training
           .where(sent_at: nil, expired_at: nil)
           .where(payments: { state: 'unpaid' })
       end
+
+      def users_signed_in(course_id)
+        return [] unless Training::Supplementary::CourseRecord.exists?(course_id)
+
+        Training::Supplementary::SignUpRecord
+          .joins(:payment)
+          .where(course_id: course_id)
+          .where.not(user_id: nil)
+          .where(payments: { state: 'prepaid' })
+          .collect(&:user)
+      end
     end
   end
 end
