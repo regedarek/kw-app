@@ -58,6 +58,8 @@ module Messaging
       conversation = current_user.mailbox.conversations.find(params[:id])
       participant = Db::User.find_by(id: params[:user_id])
 
+      return redirect_to(conversation_path(conversation.id), alert: 'Użytkownik nie istnieje!') unless participant
+
       if conversation.is_participant?(participant)
         redirect_to conversation_path(conversation.id), alert: 'Jesteś już uczestnikiem!'
       else
