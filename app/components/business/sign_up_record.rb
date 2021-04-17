@@ -17,7 +17,7 @@ module Business
     belongs_to :course, class_name: 'Business::CourseRecord', foreign_key: :course_id
     belongs_to :package_type, class_name: 'Business::PackageTypeRecord', foreign_key: :business_course_package_type_id
 
-    has_one :list, class_name: 'Business::ListRecord', foreign_key: :sign_up_id
+    has_one :list, class_name: 'Business::ListRecord', foreign_key: :sign_up_id, dependent: :destroy
 
     has_many :conversation_items, as: :messageable, class_name: '::Messaging::ConversationItemRecord', :dependent => :destroy
     has_many :conversations, :through => :conversation_items, :dependent => :destroy
