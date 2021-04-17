@@ -79,6 +79,7 @@ module Training
         Training::Supplementary::CourseRecord
           .where(start_date: Date.new..Date.current.beginning_of_day)
           .where(category: categories, kind: kinds)
+          .where.not(state: :draft)
           .order(created_at: :desc, start_date: :desc, application_date: :desc).collect do |record|
             Training::Supplementary::Course.from_record(record)
           end
