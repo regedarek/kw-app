@@ -25,8 +25,8 @@
         = f.select :coordinator_id_in, Db::User.where(":name = ANY(roles)", name: "business_courses").map{|i| [i.display_name, i.id] }, {},  {multiple: true} 
   .row
     .large-4.columns
-      = f.label :slug_or_description_cont, 'Nazwa lub Opis'
-      = f.search_field :slug_or_description_cont
+      = f.label :course_type_name_or_description_cont, 'Nazwa lub Opis'
+      = f.search_field :course_type_name_or_description_cont
 
     .large-2.columns
       br

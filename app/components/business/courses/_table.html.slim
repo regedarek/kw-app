@@ -15,7 +15,7 @@ table.stack
         = sort_link @q, :coordinator_id, 'Koordynator'
       th width='10%'
   tbody
-    - @courses.each do |course|
+    - courses.each do |course|
       tr
         td
           = link_to course.name, course_path(id: course.slug, q: params.to_unsafe_h[:q])

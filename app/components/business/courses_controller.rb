@@ -4,17 +4,13 @@ module Business
     respond_to :html, :xlsx
 
     def index
-      params[:q] ||= {}
-      courses = unless params[:q][:starts_at_gteq]
-        Business::CourseRecord.includes(:coordinator, :course_type).where('starts_at >= ?', Time.zone.now)
-      else
-        Business::CourseRecord.includes(:coordinator, :course_type)
-      end
-      @q = courses.ransack(params[:q])
-      @q.sorts = 'starts_at asc' if @q.sorts.empty?
-      @courses = @q.result(distinct: true).page(params[:page])
-
       authorize! :read, Business::CourseRecord
+
+      @q = Business::CourseRecord.includes(:course_type, :coordinator).ransack(params[:q])
+      @q.sorts = 'starts_at asc' if @q.sorts.empty?
+      @courses = @q.result(distinct: true)
+      @future_courses = @courses.where('starts_at >= ?', Time.zone.now).page(params[:future_page]).per(1)
+      @history_courses = @courses.where('starts_at < ?', Time.zone.now).page(params[:history_page]).per(1)
 
       @course = Business::CourseRecord.new
     end

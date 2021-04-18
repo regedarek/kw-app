@@ -5,18 +5,31 @@
 
 .row
   .large-12.columns
-    ul#business_courses-tabs.tabs data-tabs="" 
-      li.tabs-title.is-active
+    ul#business_courses-tabs.tabs data-tabs="" data-deep-link="true" data-deep-link-smudge="true"
+      - if params[:q]
+        li.tabs-title.is-active
+          a aria-selected="true" href="#all" Wyszukiwanie
+      li.tabs-title class=("#{params[:q] ? '' : 'is-active'}")
         a aria-selected="true" href="#future" Aktualne
       li.tabs-title
         a data-tabs-target="history" href="#history" Minione
 
-    .tabs-content data-tabs-content="business_courses-tabs" 
-      #future.tabs-panel.is-active
-        = render 'table'
-      #history.tabs-panel
-        = render 'table'
+    .tabs-content data-tabs-content="business_courses-tabs"
+      - if params[:q]
+        #all.tabs-panel.is-active
+          = render 'table', courses: @courses
 
-.row
-  .large-12.columns
-    = paginate @courses
+          .row
+            .large-12.columns
+              = paginate @future_courses
+      #future.tabs-panel class=("#{params[:q] ? '' : 'is-active'}")
+        = render 'table', courses: @future_courses
+
+        .row
+          .large-12.columns
+            = paginate @future_courses, param_name: :future_page, params: { anchor: 'future' }
+      #history.tabs-panel
+        = render 'table', courses: @history_courses
+        .row
+          .large-12.columns
+            = paginate @history_courses, param_name: :history_page, params: { anchor: 'history' }
