@@ -7,8 +7,9 @@ table.stack
         = 'Odbiorcy'
       th.text-right width='25%'
         = sort_link @q, :updated_at, 'Ostatnia odpowiedź'
-      th.text-right width='50px'
-        | Akcje
+      - unless anchor == 'unread' || anchor == 'trash'
+        th.text-right width='50px'
+          | Akcje
   tbody
     - conversations.each do |conversation|
       tr
@@ -18,6 +19,7 @@ table.stack
           = conversation.participants.map(&:display_name).to_sentence
         td.text-right
           = I18n.l(conversation.updated_at, :format => :short)
-        td.text-right
-          = link_to conversation_path(conversation.id), style: 'padding: 5px', method: :delete do
-            i.fi.fi-trash
+        - unless anchor == 'unread' || anchor == 'trash'
+          td.text-right
+            = link_to conversation_path(conversation.id, anchor: anchor), style: 'padding: 5px', method: :delete do
+              i.fi.fi-trash

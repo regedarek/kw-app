@@ -9,6 +9,7 @@ module Messaging
       @q = current_user.mailbox.conversations.ransack(params[:q])
       @q.sorts = 'updated_at desc' if @q.sorts.empty?
       @conversations = @q.result(distinct: true)
+      @unread = @conversations.unread(current_user).inbox(current_user).page(params[:unread_page]).per(10)
       @inbox = @conversations.not_trash(current_user).inbox(current_user).page(params[:inbox_page]).per(10)
       @sentbox = @conversations.sentbox(current_user).page(params[:sentbox_page]).per(10)
       @trash = @conversations.trash(current_user).page(params[:trash_page]).per(10)
@@ -18,6 +19,7 @@ module Messaging
       authorize! :read, Mailboxer::Conversation
 
       @conversation = current_user.mailbox.conversations.find(params[:id])
+      @conversation.mark_as_read(current_user) if current_user
       @users = Db::User.where.not(kw_id: nil).not_hidden.active - @conversation.participants - @conversation.opt_outs.map(&:unsubscriber)
     end
 

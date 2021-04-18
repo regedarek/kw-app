@@ -22,6 +22,8 @@
     .large-12.columns
       ul#mailbox-tabs.tabs data-tabs="" data-deep-link="true" data-deep-link-smudge="true"
         li.tabs-title.is-active
+          a data-tabs-target="unread" href="#unread" Nieprzeczytane
+        li.tabs-title
           a data-tabs-target="inbox" href="#inbox" Skrzynka odbiorcza
         li.tabs-title
           a data-tabs-target="sentbox" href="#sentbox" Wysłane
@@ -29,17 +31,22 @@
           a data-tabs-target="trash" href="#trash" Kosz
 
       .tabs-content data-tabs-content="mailbox-tabs"
-        #inbox.tabs-panel.is-active
-          = render 'table', conversations: @inbox
+        #unread.tabs-panel.is-active
+          = render 'table', conversations: @unread, anchor: 'unread'
+
+          = paginate @unread, param_name: :unread_page, params: { anchor: 'unread' }
+
+        #inbox.tabs-panel
+          = render 'table', conversations: @inbox, anchor: 'inbox'
 
           = paginate @inbox, param_name: :inbox_page, params: { anchor: 'inbox' }
 
         #sentbox.tabs-panel
-          = render 'table', conversations: @sentbox
+          = render 'table', conversations: @sentbox, anchor: 'sentbox'
 
           = paginate @sentbox, param_name: :sentbox_page, params: { anchor: 'sentbox' }
 
         #trash.tabs-panel
-          = render 'table', conversations: @trash
+          = render 'table', conversations: @trash, anchor: 'trash'
 
           = paginate @trash, param_name: :trash_page, params: { anchor: 'trash' }
