@@ -1,5 +1,5 @@
 li style='min-width: 300px;'
-  = link_to conversation_path(notification.notifiable), class: "#{'unread' if !notification.read_at?}" do
+  = link_to conversation_path(notification.notifiable.conversation.id), class: "#{'unread' if !notification.read_at?}" do
     - if notification.actor
       b= notification.actor.display_name
     - else
