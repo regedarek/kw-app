@@ -9,8 +9,8 @@ module Business
       @q = Business::CourseRecord.includes(:course_type, :coordinator).ransack(params[:q])
       @q.sorts = 'starts_at asc' if @q.sorts.empty?
       @courses = @q.result(distinct: true)
-      @future_courses = @courses.where('starts_at >= ?', Time.zone.now).page(params[:future_page]).per(1)
-      @history_courses = @courses.where('starts_at < ?', Time.zone.now).page(params[:history_page]).per(1)
+      @future_courses = @courses.where('starts_at >= ?', Time.zone.now).page(params[:future_page]).per(15)
+      @history_courses = @courses.where('starts_at < ?', Time.zone.now).page(params[:history_page]).per(15)
 
       @course = Business::CourseRecord.new
     end
