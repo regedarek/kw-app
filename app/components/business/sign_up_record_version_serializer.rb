@@ -11,7 +11,11 @@ module Business
       if object.item&.course
         object.item.course&.name
       else
-        Business::CourseRecord.find_by(id: object.changeset&.dig("course_id")&.first)&.name || 'Usunięty'
+        if object.event == 'create'
+          Business::CourseRecord.find_by(id: object.changeset&.dig("course_id")&.last)&.name || 'Usunięty'
+        else
+          Business::CourseRecord.find_by(id: object.changeset&.dig("course_id")&.first)&.name || 'Usunięty'
+        end
       end
     end
 
