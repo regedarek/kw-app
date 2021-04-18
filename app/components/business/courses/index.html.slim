@@ -5,7 +5,17 @@
 
 .row
   .large-12.columns
-    = render 'table'
+    ul#business_courses-tabs.tabs data-tabs="" 
+      li.tabs-title.is-active
+        a aria-selected="true" href="#future" Aktualne
+      li.tabs-title
+        a data-tabs-target="history" href="#history" Minione
+
+    .tabs-content data-tabs-content="business_courses-tabs" 
+      #future.tabs-panel.is-active
+        = render 'table'
+      #history.tabs-panel
+        = render 'table'
 
 .row
   .large-12.columns
