@@ -11,12 +11,16 @@ module Business
       if object.item&.course
         object.item.course&.name
       else
-        'Brak'
+        Business::CourseRecord.find_by(id: object.changeset&.dig("course_id")&.first)&.name
       end
     end
 
     def changer_name
-      item&.name
+      if item
+        item.name
+      else
+        object.changeset&.dig("name")&.first
+      end
     end
 
     def item_human_name
