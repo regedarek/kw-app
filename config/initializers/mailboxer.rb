@@ -1,5 +1,4 @@
 Mailboxer.setup do |config|
-
   #Configures if your application uses or not email sending for Notifications and Messages
   config.uses_emails = true
 
@@ -23,6 +22,22 @@ Mailboxer.setup do |config|
 end
 
 Rails.application.config.to_prepare do
+  Mailboxer::Message.class_eval do
+    after_save :create_notification
+
+    def create_notification
+      recipients.each do |recipient|
+        NotificationCenter::NotificationRecord.create(
+          recipient_id: recipient.id,
+          actor_id: sender_id,
+          action: 'created_message',
+          notifiable_id: id,
+          notifiable_type: 'Mailboxer::Message'
+        )
+      end
+    end
+  end
+
   Mailboxer::Conversation.class_eval do
     before_create :set_code
 

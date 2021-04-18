@@ -1,0 +1,8 @@
+li style='min-width: 300px;'
+  = link_to conversation_path(notification.notifiable), class: "#{'unread' if !notification.read_at?}" do
+    - if notification.actor
+      b= notification.actor.display_name
+    - else
+      b= Business::SignUpRecord.find_by(id: notification.actor_id)&.display_name
+    = " wysłał wiadomość "
+    b=notification.notifiable.conversation.subject
