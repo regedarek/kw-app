@@ -11,7 +11,7 @@ module Business
       if object.item&.course
         object.item.course&.name
       else
-        Business::CourseRecord.find_by(id: object.changeset&.dig("course_id")&.first)&.name
+        Business::CourseRecord.find_by(id: object.changeset&.dig("course_id")&.first)&.name || 'Usunięty'
       end
     end
 
@@ -19,7 +19,15 @@ module Business
       if item
         item.name
       else
-        object.changeset&.dig("name")&.first
+        if object.object
+          YAML.load(object.object).fetch("name")
+        else
+          if object.event == 'create'
+            object.changeset&.dig("name")&.last
+          else
+            object.changeset&.dig("name")&.first
+          end
+        end
       end
     end
 
