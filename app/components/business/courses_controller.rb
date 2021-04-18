@@ -7,10 +7,9 @@ module Business
       authorize! :read, Business::CourseRecord
 
       @q = Business::CourseRecord.includes(:course_type, :coordinator).ransack(params[:q])
-      @q.sorts = 'starts_at asc' if @q.sorts.empty?
       @courses = @q.result(distinct: true)
-      @future_courses = @courses.where('starts_at >= ?', Time.zone.now).page(params[:future_page]).per(15)
-      @history_courses = @courses.where('starts_at < ?', Time.zone.now).page(params[:history_page]).per(15)
+      @future_courses = @courses.order(starts_at: :asc).where('starts_at >= ?', Time.zone.now).page(params[:future_page]).per(15)
+      @history_courses = @courses.order(starts_at: :desc).where('starts_at < ?', Time.zone.now).page(params[:history_page]).per(15)
 
       @course = Business::CourseRecord.new
     end
