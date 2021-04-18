@@ -1,0 +1,91 @@
+= search_form_for @q, url: admin_contracts_path, class: 'js-send-on-enter' do |f|
+  .row
+    .large-1.columns
+      = f.label :internal_number_eq, 'ID'
+      = f.search_field :internal_number_eq
+
+    .large-4.columns
+      = f.label :document_number_or_title_or_description_cont, 'Numer, nazwa lub opis dokumentu'
+      = f.search_field :document_number_or_title_or_description_cont
+
+    .large-4.columns
+      = f.label :contractor_nip_or_contractor_name_cont, 'Kontrahent(nip, nazwa)'
+      = f.search_field :contractor_nip_or_contractor_name_cont
+
+    .large-3.columns
+      = f.label :projects_name_cont, 'Projekt(nazwa)'
+      = f.search_field :projects_name_cont
+
+  #panel.hide data-toggler='.hide'
+    .row
+      .large-3.columns
+        = f.label :acceptor_first_name_or_acceptor_last_name_or_checker_last_name_or_checker_first_name_cont, 'Sprawdził/Zaakceptował'
+        = f.search_field :acceptor_first_name_or_acceptor_last_name_or_checker_last_name_or_checker_first_name_cont
+      .large-3.columns
+        = f.label :creator_first_name_or_creator_last_name_cont, 'Kto dodał?'
+        = f.search_field :creator_first_name_or_creator_last_name_cont
+
+      .large-3.columns
+        = f.label :cost_gteq, 'Kwota od'
+        = f.number_field :cost_gteq
+      .large-3.columns
+        = f.label :cost_lteq, 'Kwota do'
+        = f.number_field :cost_lteq
+
+    .row
+      .large-4.columns
+        = f.label :document_type_eq_any, 'Rodzaj dokumentu (użyj CTRL)'
+        = f.select :document_type_eq_any,
+          Settlement::ContractRecord.search_document_types_select,
+          { selected:  params.dig(:q, :document_type_eq_any) },
+          { multiple: true }
+
+      .large-4.columns
+        = f.label :state_eq_any, 'Status rozliczenia (użyj CTRL)'
+        = f.select :state_eq_any,
+          Settlement::ContractRecord.states_select, { }, { multiple: true }
+
+      .large-4.columns
+        = f.label :substantive_type_eq_any, 'Grupa wydarzeń (użyj CTRL)'
+        = f.select :substantive_type_eq_any,
+          Settlement::ContractRecord.search_substantive_types_select,
+          { selected:  params.dig(:q, :substantive_type_eq_any) },
+          { multiple: true }
+
+    .row
+      .large-4.columns
+        = f.label :payout_type_eq_any, 'Sposób płatności (użyj CTRL)'
+        = f.select :payout_type_eq_any,
+          Settlement::ContractRecord.search_payout_types_select,
+          { selected:  params.dig(:q, :payout_type_eq_any) },
+          { multiple: true }
+      .large-4.columns
+        = f.label :group_type_eq_any, 'Sekcja (użyj CTRL)'
+        = f.select :group_type_eq_any,
+          Settlement::ContractRecord.search_group_types_select,
+          { selected:  params.dig(:q, :group_type_eq_any) },
+          { multiple: true }
+
+      .large-4.columns
+        = f.label :activity_type_eq_any, 'Aktywność (użyj CTRL)'
+        = f.select :activity_type_eq_any,
+          Settlement::ContractRecord.search_activity_types_select,
+          { selected:  params.dig(:q, :activity_type_eq_any) },
+          { multiple: true }
+
+  .row
+    .large-2.columns
+      = f.label :document_date_gteq, 'Od'
+      = f.date_field :document_date_gteq
+    .large-2.columns
+      = f.label :document_date_lteq, 'Do'
+      = f.date_field :document_date_lteq
+    .large-4.columns
+      = f.label :period_date_eq, 'Rok'
+      = f.date_select :period_date_eq,  { :discard_month => true, :discard_day => true, include_blank: true, selected: params.dig(:q, :'period_date_eq(1i)') ? "#{params.dig(:q, :'period_date_eq(1i)')}-01-01"&.to_date : nil}, { class: 'inline-date-select' }
+    .large-2.columns
+      br
+      a.hollow.warning.button.expanded data-toggle="panel" Pokaż więcej
+    .large-2.columns
+      br
+      = f.submit 'Szukaj', class: 'button expanded'
