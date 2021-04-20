@@ -69,7 +69,7 @@ end
 
 task :open_conversations => :environment do
   Training::Supplementary::Repository.new.fetch_active_courses.each_with_index do |course, index|
-    Training::Supplementary::Workers::OpenConversationWorker.set(wait: index * 10.second).perform_async(course.id)
+    Training::Supplementary::Workers::OpenConversationWorker.set(wait: index * 1.minute).perform_async(course.id)
   end
   Net::HTTP.get(URI('https://hc-ping.com/66def5a5-3a1f-4e36-a199-0379a9e74141'))
 end

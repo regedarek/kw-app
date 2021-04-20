@@ -17,7 +17,11 @@ module Training
           "Tutaj możecie kontaktować się w sprawie dojazdu, po wydarzeniu z instruktorem, koordynatorem. Konwersacja jest widoczna tylko dla uczestników",
           "[#{course.start_date.to_date}] #{course.name}"
         )
-        course.conversations << receipt.conversation
+        Messaging::ConversationItemRecord.create(
+          conversation_id: receipt.conversation.id,
+          messageable_type: 'Training::Supplementary::CourseRecord',
+          messageable_id: course.id
+        )
         course.update(conversation_at: Time.current)
 
         Right(:success)
