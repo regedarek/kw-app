@@ -23,7 +23,7 @@ end
 
 Rails.application.config.to_prepare do
   Mailboxer::Message.class_eval do
-    after_save :create_notification
+    #after_save :create_notification
 
     def create_notification
       recipients.each do |recipient|
