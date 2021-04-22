@@ -6,6 +6,7 @@
   .small-6.columns
     b= f.label :nip, "NIP"
     = f.text_field :nip
+    = f.hidden_field :profession_type, value: 'no_profession'
 
 .row
   .medium-12.columns
