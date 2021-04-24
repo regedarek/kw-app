@@ -13,7 +13,7 @@ module Settlement
     enum event_type: [:not_event, :other_event, :mjs, :mas, :mo, :kfg]
     enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
     enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
-    enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general]
+    enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general, :library]
     enum financial_type: [:opp_paid, :opp_unpaid, :internal]
 
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id

@@ -230,6 +230,7 @@ pl:
           integration: Integracja
           associations: Zrzeszenia
           mountain_actions: Działanie górskie
+          library: Biblioteka
           general: Ogólne
 
         substantive_type: Rodzaj wydatku
