@@ -41,10 +41,9 @@ module Marketing
 
     def destroy
       @discount = Marketing::DiscountRecord.friendly.find(params[:id])
-
       @discount.destroy
 
-      redirect_to discounts_path, notice: 'Usunięto'
+      redirect_to discounts_path, notice: 'Dodano'
     end
 
     private
