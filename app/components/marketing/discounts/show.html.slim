@@ -4,10 +4,7 @@
 
   .large-6.columns
     .row
-      .large-8.columns
-        .callout
-          = sanitize @discount.description
-      .large-4.columns
+      .large-12.columns
         .callout
           h5 Rabat
           - if @discount.amount_text
@@ -15,6 +12,10 @@
           - else
             - if @discount.amount
               b= "#{@discount.amount} %"
+    .row
+      .large-12.columns
+        .callout
+          = sanitize @discount.description
 
     .row
       - if @discount.link
