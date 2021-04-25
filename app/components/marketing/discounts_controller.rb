@@ -25,6 +25,20 @@ module Marketing
       @discount = Marketing::DiscountRecord.friendly.find(params[:id])
     end
 
+    def edit
+      @discount = Marketing::DiscountRecord.friendly.find(params[:id])
+    end
+
+    def update
+      @discount = Marketing::DiscountRecord.friendly.find(params[:id])
+
+      if @discount.update(discount_params)
+        redirect_to discount_path(@discount.id), notice: 'Zaktualizowano'
+      else
+        render :edit
+      end
+    end
+
     private
 
     def discount_params

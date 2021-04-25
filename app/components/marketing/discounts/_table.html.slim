@@ -5,6 +5,7 @@ table.hover
       th.text-left  width='25%' Partner
       th.text-left width='25%' Opiekun
       th.text-left  width='15%' Rabat
+      th.text-right
   tbody
     - discounts.each do |d|
       = link_to discount_path(d.id) do
@@ -17,4 +18,9 @@ table.hover
           td.text-left
             - if d.user
               = link_to d.user.display_name, user_path(d.user.kw_id)
-          td.text-left = "#{d.amount} %"
+          td.text-left
+            - if d.amount
+              = "#{d.amount} %"
+          td.text-right
+            = link_to edit_discount_path(d.id), style: 'padding: 5px' do
+              i.fi.fi-page-edit
