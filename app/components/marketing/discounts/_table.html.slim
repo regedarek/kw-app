@@ -4,7 +4,7 @@ table.hover
       th.text-left
       th.text-left  width='25%' Partner
       th.text-left width='25%' Opiekun
-      th.text-left  width='15%' Rabat
+      th.text-right  width='60px' Rabat
       - if can? :manage, Marketing::DiscountRecord
         th.text-right
   tbody
@@ -19,7 +19,7 @@ table.hover
           td.text-left
             - if d.user
               = link_to d.user.display_name, user_path(d.user.kw_id)
-          td.text-left
+          td.text-right
             - if d.amount_text
               = d.amount_text
             - else
