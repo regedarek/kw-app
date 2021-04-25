@@ -1,26 +1,35 @@
 table.hover
   thead
     tr
-      th.text-left  width='25%'
+      th.text-left  width='80px'
       th.text-left  width='25%' Partner
       th.text-left width='25%' Opiekun
       th.text-left  width='15%' Rabat
-      th.text-right
+      - if can? :manage, Marketing::DiscountRecord
+        th.text-right
   tbody
     - discounts.each do |d|
       = link_to discount_path(d.id) do
         tr
-          td.text-left
+          td.text-left height='80px' width='80px'
             - if d.contractor.logo.present?
-              = link_to discount_path(d.slug) do
-                = image_tag d.contractor.logo.url, size: '100x100'
+              - if d.link
+                = link_to d.link, target: :_blank do
+                  = image_tag d.contractor.logo.url, style: 'height:100%;width:auto;'
+              - else
+                = link_to discount_path(d.slug) do
+                  = image_tag d.contractor.logo.url, style: 'height:100%;width:auto;'
           td.text-left = link_to d.contractor.name, discount_path(d.slug)
           td.text-left
             - if d.user
               = link_to d.user.display_name, user_path(d.user.kw_id)
           td.text-left
-            - if d.amount
-              = "#{d.amount} %"
-          td.text-right
-            = link_to edit_discount_path(d.id), style: 'padding: 5px' do
-              i.fi.fi-page-edit
+            - if d.amount_text
+              = d.amount_text
+            - else
+              - if d.amount
+                = "#{d.amount} %"
+          - if can? :manage, Marketing::DiscountRecord
+            td.text-right
+              = link_to edit_discount_path(d.id), style: 'padding: 5px' do
+                i.fi.fi-page-edit

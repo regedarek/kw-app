@@ -14,9 +14,12 @@
       { include_blank: true, include_hidden: false },
       { class: 'js-select-multiple', multiple: false }
   - if can? :create, Settlement::ContractorRecord
-    .large-6.columns
-      br
-      = link_to 'Dodaj kontrahenta', new_admin_contractor_path(back_url: :new_sponsorship_request), target: :_blank, class: 'button expanded medium'
+    br
+    - if @discount.contractor
+      .large-3.columns
+        = link_to 'Zobacz kontrahenta', admin_contractor_path(@discount.id), class: 'button expanded medium'
+    .large-3.columns
+      = link_to 'Dodaj kontrahenta', new_admin_contractor_path(quick: true), target: :_blank, class: 'button expanded medium'
 
 .row
   .large-12.columns
@@ -27,7 +30,10 @@
   .large-6.columns
     = f.label :category_type, 'Typ'
     = f.select :category_type, [['Ścianka wspinaczkowa', 'climbing_hall'],['Sklep', 'shop']]
-  .large-6.columns
+  .large-3.columns
+    = f.label :amount_text
+    = f.text_field :amount_text
+  .large-3.columns
     = f.label :amount
     = f.number_field :amount
 

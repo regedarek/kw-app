@@ -4,32 +4,33 @@
 
   .large-6.columns
     .row
-      .large-12.columns
+      .large-8.columns
         .callout
           = sanitize @discount.description
+      .large-4.columns
+        .callout
+          h5 Rabat
+          - if @discount.amount_text
+            b= @discount.amount_text
+          - else
+            - if @discount.amount
+              b= "#{@discount.amount} %"
 
+    .row
       - if @discount.link
         .large-12.columns
-          = link_to 'WWW', @discount.link, class: 'button expanded'
+          = link_to 'WWW', @discount.link, class: 'button expanded', target: :_blank
 
     .row
       .large-6.columns
-        .callout
-          h5 Rabat
-          b= "#{@discount.amount} %"
-
-    .row
-      .large-12.columns
-        = link_to 'powrót do wysłanych zgłoszeń', discounts_path, class: 'button expanded secondary'
-    .row
-      .large-12.columns
+        = link_to 'powrót do pozostałych zniżek', discounts_path, class: 'button expanded secondary'
+      .large-6.columns
         = link_to 'kontrahent', admin_contractor_path(@discount.contractor_id), class: 'button expanded secondary'
 
   .large-6.columns
     - if user_signed_in?
       .row
         .large-12.columns
-          h5 Komentarze
           = render 'messaging/comments/comments', commentable: @discount
       .row
         .large-12.columns

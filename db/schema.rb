@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_211835) do
+ActiveRecord::Schema.define(version: 2021_04_25_205819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -563,6 +563,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_211835) do
     t.string "slug"
     t.integer "category_type"
     t.string "amount_body"
+    t.string "amount_text"
   end
 
   create_table "marketing_sponsorship_requests", force: :cascade do |t|
