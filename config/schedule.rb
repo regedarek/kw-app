@@ -6,7 +6,6 @@ every 20.minutes do
   rake :send_prepaid_emails
   rake :destroy_expired_sign_ups
   rake :fill_empty_places
-  rake :open_conversations
 end
 
 every 1.hour do
@@ -19,6 +18,7 @@ end
 
 every '30 4 * * *' do
   rake :send_reminders
+  rake :open_conversations
 end
 
 every '30 6 * * *' do
