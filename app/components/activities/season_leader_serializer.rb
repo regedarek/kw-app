@@ -8,7 +8,7 @@ module Activities
 
     def training_contracts_length
       start_day = DateTime.new(@instance_options[:year].to_i - 1, 12, 01)
-      end_day = DateTime.new(@instance_options[:year].to_i, 4, 30)
+      end_day = DateTime.new(@instance_options[:year].to_i, 5, 3)
 
       user.training_user_contracts.where(created_at: start_day..end_day).inject(0) { |sum, contract| sum + contract.contract.score }
     end
