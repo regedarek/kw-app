@@ -20,6 +20,8 @@ module Training
 
       def cost
         if course.packages
+          return course.price_kw unless package_type
+
           package_type.cost
         else
           course.price_kw
