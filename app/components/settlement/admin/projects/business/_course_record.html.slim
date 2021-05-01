@@ -2,13 +2,13 @@
   .callout
     .row
       .large-8.columns
-        = link_to item.accountable.name, item.accountable
+        = link_to item.accountable.name_with_date, item.accountable
         br
-        = sanitize "<b>Cena</b>: #{item.accountable.price} zł"
+        = sanitize "<b>Cena</b>: #{number_to_currency(item.accountable.price, unit: 'zł')}"
         br
-        = sanitize "<b>Zadatek</b>: #{item.accountable.payment_first_cost} zł"
+        = sanitize "<b>Zadatek</b>: #{number_to_currency(item.accountable.payment_first_cost, unit: 'zł')}"
         br
-        = sanitize "<b>Reszta</b>: #{item.accountable.payment_second_cost} zł"
+        = sanitize "<b>Reszta</b>: #{number_to_currency(item.accountable.payment_second_cost, unit: 'zł')}"
         br
         = sanitize "<b>Koordynator</b>: #{item.accountable.coordinator.display_name}"
         - if item.accountable.instructor
@@ -16,7 +16,11 @@
           = sanitize "<b>Instruktor</b>: #{item.accountable.instructor&.display_name}"
         br
         - item.accountable.sign_ups.each do |sign_up|
-          = link_to edit_business_sign_up_path(sign_up.id) do
-            = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.first_payment
-            = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.second_payment
-          br
+          .callout
+            = link_to edit_business_sign_up_path(sign_up.id) do
+              .row
+                .large-8.columns
+                  = sign_up.name
+                .large-4.columns
+                  = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.first_payment
+                  = render 'settlement/admin/projects/business/sign_up/payment', payment: sign_up.second_payment

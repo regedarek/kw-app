@@ -24,7 +24,7 @@
 
 .row
   .large-6.columns
-    h5 = "Wpływy (#{Settlement::ProjectEntity.new.incomings_sum(@project)})"
+    h5 = "Wpływy (#{number_to_currency(Settlement::ProjectEntity.new.incomings_sum(@project), :unit => "zł")})"
     - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
       .row
         .large-12.columns
@@ -50,10 +50,25 @@
             = f.number_field :cost, step: 0.1
             = f.submit 'Dodaj wpływ', class: 'button'
 
-    h5 = "Koszty (#{Settlement::ProjectEntity.new.outcomings_sum(@project)})"
+    h5 = "Koszty (#{number_to_currency(Settlement::ProjectEntity.new.outcomings_sum(@project), unit: 'zł')})"
     - @project.project_items.includes(accountable: [:creator, :contractor]).where(accountable_type: 'Settlement::ContractRecord').each do |item|
       - if item
         = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+
+    .callout
+      = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
+        = f.hidden_field :project_id, value: params[:id]
+        = f.hidden_field :accountable_type, value: 'Settlement::ContractRecord'
+        .row
+          .large-12.columns
+            = f.select :accountable_id,
+              Settlement::ContractRecord.all.map { |p| ["#{p.id}-#{p.title}", p.id] },
+              { include_blank: true },
+              { class: 'js-select-multiple' }
+        .row
+          .large-12.columns
+            br
+            = f.submit 'Dodaj koszt', class: 'button'
 
     = link_to 'wróć do projektów', admin_projects_path, class: 'secondary button large expanded'
   .large-6.columns

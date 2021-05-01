@@ -1,5 +1,5 @@
 - if payment
   - if payment.paid?
-    span.label.success = sanitize "#{payment.amount}"
+    span.label.success = sanitize "#{number_to_currency(payment.amount, unit: 'zł')}"
   - else
-    span.secondary = sanitize "#{payment.amount}"
+    span.label.warning = sanitize "#{number_to_currency(payment.amount, unit: 'zł')}"
