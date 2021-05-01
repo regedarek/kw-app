@@ -111,7 +111,7 @@ module Activities
 
     def best_of_season
       range = start_date..end_date
-      range_created_at = DateTime.new(year, 3, 1)..(end_day + 4.days)
+      range_created_at = start_date..(end_date + 4.days)
       us = ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
