@@ -65,10 +65,11 @@ module Activities
       start_day = DateTime.new(year - 1, 12, 01)
       end_day = DateTime.new(year, 4, 30)
       range = start_day..end_day
+      prolonged_range = start_day..DateTime.new(year, 5, 3)
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(gender: gender, boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
+        .where(gender: gender, boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: prolonged_range })
         .select('users.kw_id, users.gender, users.id, users.avatar, SUM(mountain_routes.boar_length) AS total_mountain_routes_length')
         .group(:id)
     end
@@ -88,7 +89,7 @@ module Activities
     def fetch_spring(year: Date.today.year, gender: [nil, :male, :female])
       end_day = DateTime.new(year, 4, 30)
       range_climbing_date = DateTime.new(year, 3, 1)..end_day
-      range_created_at = DateTime.new(year, 3, 1)..(end_day + 3.days)
+      range_created_at = DateTime.new(year, 3, 1)..(end_day + 4.days)
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
@@ -110,10 +111,11 @@ module Activities
 
     def best_of_season
       range = start_date..end_date
+      range_created_at = DateTime.new(year, 3, 1)..(end_day + 4.days)
       us = ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })
-        .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
+        .where(boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range_created_at })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.hearts_count) AS total_mountain_routes_hearts_count')
         .group(:id)
         .order('total_mountain_routes_hearts_count DESC')
