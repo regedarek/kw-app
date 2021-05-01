@@ -16,5 +16,10 @@
         { multiple: true }
 
     .large-4.columns
+      = f.label :state_eq_any, 'Status rozliczenia (użyj CTRL)'
+      = f.select :state_eq_any,
+        Settlement::ProjectRecord.states_select, { }, { multiple: true }
+
+    .large-4.columns
       br
       = f.submit 'Szukaj', class: 'button expanded'

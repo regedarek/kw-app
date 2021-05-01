@@ -32,6 +32,16 @@ module Training
 
       self.table_name = 'supplementary_courses'
 
+      def income_sum
+        prepaid_sign_ups.inject(0) { |sum, s| sum + s.cost }
+      end
+
+      def prepaid_sign_ups
+        sign_ups
+          .joins(:payment)
+          .where(payments: { state: 'prepaid' })
+      end
+
       def original_conversation
         return nil unless conversations.any?
         conversations.order(:created_at).first

@@ -6,7 +6,7 @@ module Settlement
 
       def index
         @q = Settlement::ProjectRecord.all
-        @q = @q.where.not(area_type: 'course_budget', state: ['closed']) unless params[:q]
+        @q = @q.opened.where.not(area_type: 'course_budget', state: ['closed']) unless params[:q]
         @q = @q.ransack(params[:q])
         @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
         @projects = @q.result(distinct: true).page(params[:page])

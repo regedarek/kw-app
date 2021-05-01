@@ -13,8 +13,7 @@
     .callout
       .row
         .large-4.columns
-          b Utworzył: 
-          = @project.user&.display_name
+          = sanitize "<b>Utworzył</b>: #{@project.user&.display_name}"
         .large-4.columns
           b Obszar: 
           = I18n.t(@project.area_type, scope: "activerecord.attributes.settlement/project_record.area_types")
@@ -23,83 +22,164 @@
           = @project.created_at.strftime("%d/%m/%Y")
 
 .row
-  .large-6.columns
-    h5 = "Wpływy (#{number_to_currency(Settlement::ProjectEntity.new.incomings_sum(@project), :unit => "zł")})"
-    - @project.project_items.includes(:accountable).where(accountable_type: 'Training::Supplementary::CourseRecord').each do |item|
+  .large-12.columns
+    .callout class=("#{@project.balance >= 0 ? 'success' : 'alert'}")
       .row
-        .large-12.columns
-          - if item
-            = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+        .large-4.columns
+          b Bilans: 
+          = number_to_currency(@project.balance, unit: 'zł')
+        .large-4.columns
+          b Wpływy: 
+          = number_to_currency(@project.income_sum, unit: 'zł')
+        .large-4.columns
+          b Koszty: 
+          = number_to_currency(@project.outcome_sum, unit: 'zł')
 
-    - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
-      .row
-        .large-12.columns
-          - if item
-            = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
-
-    - @project.project_items.includes(:accountable).where(accountable_type: 'Settlement::IncomeRecord').each do |item|
-      .row
-        .large-12.columns
-          - if item
-            = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
-
-    .callout
-      = form_for Settlement::IncomeRecord.new, as: :income, url: admin_incomes_path, method: :post do |f|
-        = hidden_field_tag :project_id, params[:id]
-        .row
-          .large-6.columns
-            = f.text_field :name
-          .large-6.columns
-            = f.text_area :description
-        .row
-          .large-12.columns
-            = f.number_field :cost, step: 0.1
-            = f.submit 'Dodaj wpływ', class: 'button'
-
-    .callout
-      = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
-        = f.hidden_field :project_id, value: params[:id]
-        = f.hidden_field :accountable_type, value: 'Training::Supplementary::CourseRecord'
-        .row
-          .large-12.columns
-            = f.select :accountable_id,
-              Training::Supplementary::CourseRecord.all.map { |p| ["#{p.id}-#{p.name}", p.id] },
-              { include_blank: true },
-              { class: 'js-select-multiple' }
-        .row
-          .large-12.columns
-            br
-            = f.submit 'Dodaj wydarzenie', class: 'button'
-
-  .large-6.columns
-    h5 = "Koszty (#{number_to_currency(Settlement::ProjectEntity.new.outcomings_sum(@project), unit: 'zł')})"
-    - @project.project_items.includes(accountable: [:creator, :contractor]).where(accountable_type: 'Settlement::ContractRecord').each do |item|
-      - if item
-        = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
-
-    .callout
-      = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
-        = f.hidden_field :project_id, value: params[:id]
-        = f.hidden_field :accountable_type, value: 'Settlement::ContractRecord'
-        .row
-          .large-12.columns
-            = f.select :accountable_id,
-              Settlement::ContractRecord.all.map { |p| ["#{p.id}-#{p.title}", p.id] },
-              { include_blank: true },
-              { class: 'js-select-multiple' }
-        .row
-          .large-12.columns
-            br
-            = f.submit 'Dodaj koszt', class: 'button'
-
-    = link_to 'wróć do projektów', admin_projects_path, class: 'secondary button large expanded'
 .row
   .large-12.columns
-    h5 Komentarze, dodatkowe informacje
-    - if user_signed_in?
-      .row
-        .large-12.columns
-          = render 'messaging/comments/comments', commentable: @project
-        .large-12.columns
-          .callout
-            = render 'messaging/comments/form', commentable: @project
+    ul#project-tabs.tabs data-tabs="" data-deep-link="true" data-deep-link-smudge="true"
+      li.tabs-title.is-active
+        a data-tabs-target="overview" href="#overview" Ogólny
+      li.tabs-title
+        a data-tabs-target="incomes" href="#incomes" Wpływy
+      li.tabs-title
+        a data-tabs-target="outcomes" href="#outcomes" Koszty
+      li.tabs-title
+        a data-tabs-target="comments" href="#comments" Komentarze
+
+    .tabs-content data-tabs-content="project-tabs"
+      #overview.tabs-panel.is-active
+        .row
+          .large-6.columns
+            h5 = "Wpływy (#{number_to_currency(@project.income_sum, :unit => "zł")})"
+
+            table
+              tbody
+                - @project.project_items.incomes.each do |item|
+                  tr style='background-color: #e1faea;'
+                    td.text-left
+                      = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
+                    td.text-right width='110px'
+                      = number_to_currency(item.income_cost, unit: 'zł')
+
+          .large-6.columns
+            h5 = "Koszty (#{number_to_currency(@project.outcome_sum, :unit => "zł")})"
+
+            table
+              tbody
+                - @project.project_items.outcomes.each do |item|
+                  tr style='background-color: #f7e4e1;'
+                    td.text-left
+                      = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
+                    td.text-right width='110px'
+                      = number_to_currency(item.outcome_cost, unit: 'zł')
+
+      #incomes.tabs-panel
+        .row
+          .large-6.columns
+            - @project.project_items.includes(:accountable).where(accountable_type: 'Training::Supplementary::CourseRecord').each do |item|
+              .row
+                .large-12.columns
+                  .callout
+                    h5 Wydarzenia
+                    = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+                    .row
+                      .large-12.columns
+                        = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
+                          = f.hidden_field :project_id, value: params[:id]
+                          = f.hidden_field :accountable_type, value: 'Training::Supplementary::CourseRecord'
+                          .row
+                            .large-12.columns
+                              = f.select :accountable_id,
+                                Training::Supplementary::CourseRecord.all.map { |p| ["#{p.id}-#{p.name}", p.id] },
+                                { include_blank: true },
+                                { class: 'js-select-multiple' }
+                          .row
+                            .large-12.columns
+                              = f.submit 'Dodaj wydarzenie', class: 'button expanded'
+
+            - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
+              .row
+                .large-12.columns
+                  .callout
+                    h5 Kursy SA
+                    = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+                    .row
+                      .large-12.columns
+                        = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
+                          = f.hidden_field :project_id, value: params[:id]
+                          = f.hidden_field :accountable_type, value: 'Business::CourseRecord'
+                          .row
+                            .large-12.columns
+                              = f.select :accountable_id,
+                                Business::CourseRecord.includes(:course_type).all.map { |p| ["#{p.id}-#{p.name_with_date}", p.id] },
+                                { include_blank: true },
+                                { class: 'js-select-multiple' }
+                          .row
+                            .large-12.columns
+                              = f.submit 'Dodaj kurs', class: 'button expanded'
+
+          .large-6.columns
+            .row
+              .large-12.columns
+                .callout
+                  h5 Bezpośrednie wpłaty
+                  - @project.project_items.includes(:accountable).where(accountable_type: 'Settlement::IncomeRecord').each do |item|
+                    .row
+                      .large-12.columns
+                        = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+
+                  .callout
+                    = form_for Settlement::IncomeRecord.new, as: :income, url: admin_incomes_path, method: :post do |f|
+                      = hidden_field_tag :project_id, params[:id]
+                      .row
+                        .large-8.columns
+                          = f.label :name, "Tytuł"
+                          = f.text_field :name
+                        .large-4.columns
+                          = f.label :cost, "Kwota"
+                          = f.number_field :cost, step: 0.1
+                      .row
+                        .large-12.columns
+                          = f.label :description, "Opis"
+                          = f.trix_editor :description, style: 'min-height: 150px'
+                      .row
+                        .large-12.columns
+                          = f.submit 'Dodaj wpływ', class: 'button expanded'
+
+      #outcomes.tabs-panel
+        h5 = "Koszty (#{number_to_currency(@project.outcome_sum, unit: 'zł')})"
+        .row
+          .large-6.columns
+            - @project.project_items.includes(accountable: [:creator, :contractor]).where(accountable_type: 'Settlement::ContractRecord').each do |item|
+              = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+
+          .large-6.columns
+            .callout
+              = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
+                = f.hidden_field :project_id, value: params[:id]
+                = f.hidden_field :accountable_type, value: 'Settlement::ContractRecord'
+                .row
+                  .large-12.columns
+                    = f.select :accountable_id,
+                      Settlement::ContractRecord.all.map { |p| ["#{p.id}-#{p.title}", p.id] },
+                      { include_blank: true },
+                      { class: 'js-select-multiple', style: 'width: 100%' }
+                .row
+                  .large-12.columns
+                    br
+                    = f.submit 'Dodaj koszt', class: 'button expanded'
+
+      #comments.tabs-panel
+        .row
+          .large-12.columns
+            h5 Komentarze, dodatkowe informacje
+            - if user_signed_in?
+              .row
+                .large-12.columns
+                  = render 'messaging/comments/comments', commentable: @project
+                .large-12.columns
+                  .callout
+                    = render 'messaging/comments/form', commentable: @project
+
+    = link_to 'wróć do projektów', admin_projects_path, class: 'button expanded'

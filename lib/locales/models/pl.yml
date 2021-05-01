@@ -159,6 +159,9 @@ pl:
           other_budget: Inny budżet
           course_budget: Budżet kursu
           section_budget: Budżet sekcji
+        states:
+          open: Otwarty
+          closed: Zamknięty
       settlement/contract_record:
         title: Tytuł
         name: Nazwa

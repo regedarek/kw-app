@@ -40,12 +40,30 @@ module Settlement
       state :closed
     end
 
+    def income_sum
+      project_items.includes(:accountable).where(accountable_type: Settlement::ProjectItemRecord::INCOME_ITEMS).inject(0) do |sum, item|
+        sum += item.accountable.income_sum
+      end
+    end
+
+    def outcome_sum
+      project_items.where(accountable_type: Settlement::ProjectItemRecord::OUTCOME_ITEMS).inject(0) { |sum, item| sum += item.outcome_cost }
+    end
+
+    def balance
+      income_sum - outcome_sum
+    end
+
     def self.search_area_types_select
       area_types.map { |name, value| [I18n.t(name, scope: "activerecord.attributes.settlement/project_record.area_types"), value] }
     end
 
     def self.area_types_select
       area_types.map { |name, value| [I18n.t(name, scope: "activerecord.attributes.settlement/project_record.area_types"), name] }
+    end
+
+    def self.states_select
+      Settlement::ProjectRecord.workflow_spec.states.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.settlement/project_record.states'), w] }
     end
   end
 end

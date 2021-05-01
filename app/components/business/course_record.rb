@@ -43,6 +43,20 @@ module Business
       reject_if: proc { |attributes| attributes[:name].blank? },
       allow_destroy: true
 
+    def income_sum
+      prepaid_sign_ups.inject(0) do |sum, sign_up|
+        sum = sum + sign_up.first_payment.amount if sign_up.first_payment && sign_up.first_payment.paid?
+        sum = sum + sign_up.second_payment.amount if sign_up.second_payment && sign_up.second_payment.paid?
+        sum
+      end
+    end
+
+    def prepaid_sign_ups
+      sign_ups
+        .includes(:payments)
+        .where(payments: { state: 'prepaid' })
+    end
+
     def sign_ups_versions
       PaperTrail::Version.includes(:item).where(item_type: 'Business::SignUpRecord', item_id: sign_ups)
     end

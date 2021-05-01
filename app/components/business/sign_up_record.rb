@@ -74,6 +74,10 @@ module Business
       payments.order(created_at: :asc).last
     end
 
+    def prepaid_sign_ups
+      payments.where(state: :prepaid)
+    end
+
     def start_date
       return Time.current unless course && course.start_date
       return Time.current unless course.start_date

@@ -3,28 +3,26 @@ table.stack
     tr
       th width='45px' ID
       th Nazwa
-      th width='90px' Status
       th width='150px' Typ
-      th width='150px' Kiedy?
       th width='150px' Kto?
-      th.text-right width='70px' Wpływy
-      th.text-right width='100px' Wydatki
+      th.text-right width='110px' Wpływy
+      th.text-right width='110px' Wydatki
+      th.text-right width='110px' Bilans
       th.text-right width='75px'
   tbody
-    - projects.includes(:project_items, :business_courses, :user).each_with_index do |project,i|
+    - projects.includes(:user).each_with_index do |project,i|
       tr
         td = project.id
         td = link_to project.name, admin_project_path(project.id)
-        td
-          - if project.open?
-            span.label.success = I18n.t project.state
-          - else
-            span.label.alert = I18n.t project.state
         td = I18n.t(project.area_type, scope: "activerecord.attributes.settlement/project_record.area_types")
-        td = project.created_at.strftime("%d/%m/%Y")
         td = project.user&.display_name
-        td.text-right = Settlement::ProjectEntity.new.incomings_sum(project)
-        td.text-right = Settlement::ProjectEntity.new.outcomings_sum(project)
+        td.text-right = number_to_currency(project.income_sum, unit: 'zł')
+        td.text-right = number_to_currency(project.outcome_sum, unit: 'zł')
+        td.text-right
+          - if project.balance >= 0
+            span.label.success = number_to_currency(project.balance, unit: 'zł')
+          - else
+            span.label.warning = number_to_currency(project.balance, unit: 'zł')
         td.text-right
           - if project.open?
             = link_to close_admin_project_path(project.id), style: 'padding: 5px', method: :put do
