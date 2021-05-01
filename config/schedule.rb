@@ -2,14 +2,10 @@ env :PATH, ENV['PATH']
 env :GEM_PATH, ENV['GEM_PATH']
 set :output, "cron_log.log"
 
-every 20.minutes do
+every '*/30 8-23 * * *' do
   rake :send_prepaid_emails
   rake :destroy_expired_sign_ups
   rake :fill_empty_places
-end
-
-every 1.hour do
-  rake :destroy_expired_events_sign_ups
 end
 
 every 6.hours do
