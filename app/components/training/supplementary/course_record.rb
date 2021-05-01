@@ -32,6 +32,10 @@ module Training
 
       self.table_name = 'supplementary_courses'
 
+      def name_with_date
+        "#{name} #{start_date&.to_date}"
+      end
+
       def income_sum
         prepaid_sign_ups.inject(0) { |sum, s| sum + s.cost }
       end
