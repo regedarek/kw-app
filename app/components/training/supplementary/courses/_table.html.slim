@@ -21,7 +21,7 @@ table
     - courses.each do |course|
       tr
         td.text-center = image_tag "#{course.category}.png", size: '40x40'
-        td.text-center style='white-space: normal;'
+        td.text-left style='white-space: normal;'
           = link_to course.name, polish_event_slug_path(course.slug)
         td.text-center
           - if course.web?

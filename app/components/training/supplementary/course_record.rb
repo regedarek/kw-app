@@ -33,7 +33,7 @@ module Training
       self.table_name = 'supplementary_courses'
 
       def name_with_date
-        "#{name} #{start_date&.to_date}"
+        "#{start_date&.to_date} #{name}"
       end
 
       def income_sum

@@ -156,7 +156,7 @@ module Business
     end
 
     def name_with_date
-      "#{name} #{start_date}"
+      "#{start_date} #{name}"
     end
 
     def logo

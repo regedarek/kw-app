@@ -77,26 +77,27 @@
       #incomes.tabs-panel
         .row
           .large-6.columns
-            - @project.project_items.includes(:accountable).where(accountable_type: 'Training::Supplementary::CourseRecord').each do |item|
+            .callout
+              h5 Wydarzenia
+              - @project.project_items.includes(accountable: [:organizer, :sign_ups]).where(accountable_type: 'Training::Supplementary::CourseRecord').each do |item|
+                .row
+                  .large-12.columns
+                    .callout
+                      = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
               .row
                 .large-12.columns
-                  .callout
-                    h5 Wydarzenia
-                    = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+                  = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post, html: {id: "supplementary_form"} do |f|
+                    = f.hidden_field :project_id, value: params[:id], id: "supplementary_project"
+                    = f.hidden_field :accountable_type, value: 'Training::Supplementary::CourseRecord', id: "supplementary_accountable_type"
                     .row
                       .large-12.columns
-                        = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post, html: {id: "supplementary_form"} do |f|
-                          = f.hidden_field :project_id, value: params[:id], id: "supplementary_project"
-                          = f.hidden_field :accountable_type, value: 'Training::Supplementary::CourseRecord', id: "supplementary_accountable_type"
-                          .row
-                            .large-12.columns
-                              = f.select :accountable_id,
-                                Training::Supplementary::CourseRecord.all.map { |p| ["#{p.id}-#{p.name_with_date}", p.id] },
-                                { include_blank: true },
-                                { class: 'js-select-multiple', id: "supplementary_select", style: 'width: 100%' }
-                          .row
-                            .large-12.columns
-                              = f.submit 'Dodaj wydarzenie', class: 'button expanded'
+                        = f.select :accountable_id,
+                          Training::Supplementary::CourseRecord.all.map { |p| ["#{p.id}-#{p.name_with_date}", p.id] },
+                          { include_blank: true },
+                          { class: 'js-select-multiple', id: "supplementary_select", style: 'width: 100%' }
+                    .row
+                      .large-12.columns
+                        = f.submit 'Dodaj wydarzenie', class: 'button expanded'
 
             - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
               .row
@@ -176,9 +177,9 @@
             h5 Komentarze, dodatkowe informacje
             - if user_signed_in?
               .row
-                .large-12.columns
+                .large-6.columns
                   = render 'messaging/comments/comments', commentable: @project
-                .large-12.columns
+                .large-6.columns
                   .callout
                     = render 'messaging/comments/form', commentable: @project
 

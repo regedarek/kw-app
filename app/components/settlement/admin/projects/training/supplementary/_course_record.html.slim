@@ -1,11 +1,11 @@
 .callout
   .row
     .large-12.columns
-      = link_to item.accountable.name, item.accountable
+      = link_to item.accountable.name_with_date, item.accountable
       br
       = sanitize "<b>Cena</b>: #{number_to_currency(item.income_cost, unit: 'zł')}"
       br
       = sanitize "<b>Koordynator</b>: #{item.accountable.organizer.display_name}"
       br
-      - item.accountable.sign_ups.each do |sign_up|
+      - item.accountable.prepaid_sign_ups.each do |sign_up|
         = render 'settlement/admin/projects/training/supplementary/sign_up_record', sign_up: sign_up
