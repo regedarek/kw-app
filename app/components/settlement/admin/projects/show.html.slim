@@ -25,6 +25,12 @@
 .row
   .large-6.columns
     h5 = "Wpływy (#{number_to_currency(Settlement::ProjectEntity.new.incomings_sum(@project), :unit => "zł")})"
+    - @project.project_items.includes(:accountable).where(accountable_type: 'Training::Supplementary::CourseRecord').each do |item|
+      .row
+        .large-12.columns
+          - if item
+            = render "settlement/admin/projects/#{item.accountable_type.underscore}", item: item
+
     - @project.project_items.includes(:accountable).where(accountable_type: 'Business::CourseRecord').each do |item|
       .row
         .large-12.columns
@@ -50,6 +56,22 @@
             = f.number_field :cost, step: 0.1
             = f.submit 'Dodaj wpływ', class: 'button'
 
+    .callout
+      = form_for Settlement::ProjectItemRecord.new, as: :project_item, url: admin_project_items_path, method: :post do |f|
+        = f.hidden_field :project_id, value: params[:id]
+        = f.hidden_field :accountable_type, value: 'Training::Supplementary::CourseRecord'
+        .row
+          .large-12.columns
+            = f.select :accountable_id,
+              Training::Supplementary::CourseRecord.all.map { |p| ["#{p.id}-#{p.name}", p.id] },
+              { include_blank: true },
+              { class: 'js-select-multiple' }
+        .row
+          .large-12.columns
+            br
+            = f.submit 'Dodaj wydarzenie', class: 'button'
+
+  .large-6.columns
     h5 = "Koszty (#{number_to_currency(Settlement::ProjectEntity.new.outcomings_sum(@project), unit: 'zł')})"
     - @project.project_items.includes(accountable: [:creator, :contractor]).where(accountable_type: 'Settlement::ContractRecord').each do |item|
       - if item
@@ -71,7 +93,8 @@
             = f.submit 'Dodaj koszt', class: 'button'
 
     = link_to 'wróć do projektów', admin_projects_path, class: 'secondary button large expanded'
-  .large-6.columns
+.row
+  .large-12.columns
     h5 Komentarze, dodatkowe informacje
     - if user_signed_in?
       .row

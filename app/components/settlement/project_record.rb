@@ -22,6 +22,11 @@ module Settlement
       source: :accountable,
       source_type: 'Business::CourseRecord'
 
+    has_many :supplementary_courses,
+      through: :project_items,
+      source: :accountable,
+      source_type: 'Training::Supplementary::CourseRecord'
+
     has_many :contracts,
       through: :project_items,
       source: :accountable,

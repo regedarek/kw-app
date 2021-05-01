@@ -2,7 +2,7 @@
   .row
     .large-8.columns
       - contract = item.accountable
-      = link_to contract&.title
+      = link_to item.accountable.title, admin_contract_path(item.accountable.id)
       br
       = sanitize "<b>Kwota rozliczenia</b>: #{number_to_currency(contract&.cost, unit: 'zł')}"
       - if item.cost
