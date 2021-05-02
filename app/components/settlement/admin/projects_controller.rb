@@ -6,7 +6,8 @@ module Settlement
 
       def index
         @q = Settlement::ProjectRecord.ransack(params[:q])
-        @projects = @q.result(distinct: true).page(params[:search_page]).per(15)
+        @projects = @q.result(distinct: true)
+        @search_projects  = @projects.page(params[:search_page]).per(15)
         @current_projects = @projects.opened.where.not(area_type: 'course_budget').order(created_at: :asc).page(params[:current_page]).per(15)
         @courses_projects = @projects.opened.where(area_type: 'course_budget').order(created_at: :asc).page(params[:courses_page]).per(15)
       end

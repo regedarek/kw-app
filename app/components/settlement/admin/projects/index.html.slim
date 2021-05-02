@@ -24,22 +24,22 @@
     .tabs-content data-tabs-content="projects-tabs"
       - if params[:q]
         #all.tabs-panel.is-active
-          = render 'table', projects: @projects
+          = render 'table', projects: @search_projects
 
           .row
             .large-12.columns
-              = paginate @projects, param: :search_page
+              = paginate @search_projects, param: :search_page, params: { anchor: 'all' }
 
       #current.tabs-panel class=("#{params[:q] ? '' : 'is-active'}")
         = render 'table', projects: @current_projects
 
         .row
           .large-12.columns
-            = paginate @projects, param_name: :current_page, params: { anchor: 'current' }
+            = paginate @current_projects, param_name: :current_page, params: { anchor: 'current' }
 
       #courses.tabs-panel
         = render 'table', projects: @courses_projects
 
         .row
           .large-12.columns
-            = paginate @projects, param_name: :courses_page, params: { anchor: 'courses' }
+            = paginate @courses_projects, param_name: :courses_page, params: { anchor: 'courses' }
