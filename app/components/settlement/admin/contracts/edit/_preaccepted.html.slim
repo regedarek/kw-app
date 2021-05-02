@@ -58,14 +58,14 @@
             = label_tag :verify, 'Sprawdź'
             - if @errors && @errors.key?(:accepted_fields)
               .callout.warning
-                | Musisz wypełnić pola Sekcja, Aktywność i Impreza
+                | Musisz wypełnić pola Sekcja, Aktywność i Impreza, a jeżeli to szkolenie to projekty
 
         - if @contract.preclosed? && can?(:prepayment, @contract)
           .large-12.columns.text-right
             br
             - if @errors && @errors.key?(:accepted_fields)
               .callout.warning
-                | Musisz wypełnić pola Sekcja, Aktywność i Impreza
+                | Musisz wypełnić pola Sekcja, Aktywność i Impreza, a jeżeli to szkolenie to projekty
 
         - if @contract.accepted? && can?(:prepayment, @contract)
           .large-12.columns.text-right
