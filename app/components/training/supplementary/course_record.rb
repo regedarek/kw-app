@@ -45,7 +45,7 @@ module Training
 
       def prepaid_sign_ups
         sign_ups
-          .joins(:payment)
+          .includes(:course, :payment)
           .where(payments: { state: 'prepaid' })
       end
 

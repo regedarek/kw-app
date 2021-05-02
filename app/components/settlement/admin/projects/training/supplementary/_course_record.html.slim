@@ -9,7 +9,8 @@
       = sanitize "<b>Koordynator</b>: #{item.accountable.organizer.display_name}"
       br
       table
-        tr
+        tbody
           - item.accountable.prepaid_sign_ups.each do |sign_up|
-            td
-              = render 'settlement/admin/projects/training/supplementary/sign_up_record', sign_up: sign_up
+            tr
+              td
+                = render 'settlement/admin/projects/training/supplementary/sign_up_record', sign_up: sign_up

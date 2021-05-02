@@ -1,6 +1,7 @@
 .callout
   .row
     .large-12.columns
+      h5 Kurs SA
       = link_to item.accountable.name_with_date, item.accountable
       br
       = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.price, unit: 'zł')}"
