@@ -49,7 +49,7 @@
           = f.select :project_ids,
             Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
             { include_blank: true },
-            { data: { 'maximum-selection-length': "1" }, class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
+            { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 
         - if @contract.new? && can?(:accept, @contract)
           .large-12.columns.text-right

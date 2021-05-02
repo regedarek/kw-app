@@ -1,6 +1,7 @@
 .callout
   .row
     .large-8.columns
+      h4 Bezpośrednia wpłata
       = sanitize "<b>Nazwa</b>: #{item.accountable.name}"
       br
       = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.cost, unit: 'zł')}"

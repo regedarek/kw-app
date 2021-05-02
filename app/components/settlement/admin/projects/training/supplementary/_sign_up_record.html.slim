@@ -1,14 +1,13 @@
-.callout
-  = link_to edit_supplementary_sign_up_path(sign_up.id) do
-    .row
-      .large-8.columns
-        = sign_up.name
-      .large-4.columns
-        .text-right
-          - if sign_up.payment
-            - if sign_up.payment.paid?
-              span.label.success= number_to_currency(sign_up.cost, unit: 'zł')
-            - else
-              span.label.alert= number_to_currency(sign_up.cost, unit: 'zł')
+= link_to edit_supplementary_sign_up_path(sign_up.id) do
+  .row
+    .large-8.columns
+      = sign_up.name
+    .large-4.columns
+      .text-right
+        - if sign_up.payment
+          - if sign_up.payment.paid?
+            span.label.success= number_to_currency(sign_up.cost, unit: 'zł')
           - else
-            span.label.warning= number_to_currency(sign_up.cost, unit: 'zł')
+            span.label.alert= number_to_currency(sign_up.cost, unit: 'zł')
+        - else
+          span.label.warning= number_to_currency(sign_up.cost, unit: 'zł')

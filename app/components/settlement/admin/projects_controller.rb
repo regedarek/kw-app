@@ -5,11 +5,10 @@ module Settlement
       append_view_path 'app/components'
 
       def index
-        @q = Settlement::ProjectRecord.all
-        @q = @q.opened.where.not(area_type: 'course_budget', state: ['closed']) unless params[:q]
-        @q = @q.ransack(params[:q])
-        @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
-        @projects = @q.result(distinct: true).page(params[:page])
+        @q = Settlement::ProjectRecord.ransack(params[:q])
+        @projects = @q.result(distinct: true).page(params[:search_page]).per(15)
+        @current_projects = @projects.opened.where.not(area_type: 'course_budget').order(created_at: :asc).page(params[:current_page]).per(15)
+        @courses_projects = @projects.opened.where(area_type: 'course_budget').order(created_at: :asc).page(params[:courses_page]).per(15)
       end
 
       def new

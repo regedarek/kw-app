@@ -2,3 +2,9 @@
   h3.subheader Zaktualizuj project
 
   = render 'form', url: admin_project_path(@project.id), method: :put
+
+.row
+  .large-8.columns
+    = link_to 'wróć do projektów', admin_projects_path, class: 'button expanded'
+  .large-4.columns
+    = link_to 'wróć do projektu', admin_project_path(@project), class: 'button expanded warning'

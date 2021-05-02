@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_205819) do
+ActiveRecord::Schema.define(version: 2021_05_02_145255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -889,7 +889,8 @@ ActiveRecord::Schema.define(version: 2021_04_25_205819) do
     t.integer "project_id"
     t.integer "user_id"
     t.float "cost"
-    t.index ["accountable_type", "accountable_id"], name: "settlement_project_items_uniq", unique: true
+    t.index ["accountable_id", "project_id"], name: "index_settlement_project_items_on_accountable_id_and_project_id", unique: true
+    t.index ["user_id"], name: "index_settlement_project_items_on_user_id"
   end
 
   create_table "settlement_projects", force: :cascade do |t|

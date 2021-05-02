@@ -8,7 +8,7 @@ module Settlement
     scope :incomes, -> { includes(:accountable).where(accountable_type: INCOME_ITEMS) }
     scope :outcomes, -> { includes(:accountable).where(accountable_type: OUTCOME_ITEMS) }
 
-    validates :accountable_type, uniqueness: { scope: :accountable_id }
+    validates :project_id, uniqueness: { scope: :accountable_id }
 
     belongs_to :project, class_name: "Settlement::ProjectRecord", foreign_key: :project_id
     belongs_to :accountable, polymorphic: true

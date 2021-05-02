@@ -12,4 +12,32 @@
 
 .row
   .large-12.columns
-    = render 'table', projects: @projects
+    ul#projects-tabs.tabs data-tabs="" data-deep-link="true" data-deep-link-smudge="true"
+      - if params[:q]
+        li.tabs-title.is-active
+          a aria-selected="true" href="#all" Wyszukiwanie
+      li.tabs-title class=("#{params[:q] ? '' : 'is-active'}")
+        a data-tabs-target="current" href="#current" Aktualne
+      li.tabs-title
+        a data-tabs-target="courses" href="#courses" Kursy SA
+
+    .tabs-content data-tabs-content="projects-tabs"
+      - if params[:q]
+        #all.tabs-panel.is-active
+          = render 'table', projects: @projects
+
+          .row
+            .large-12.columns
+              = paginate @projects, param: :search_page
+      #current.tabs-panel class=("#{params[:q] ? '' : 'is-active'}")
+        = render 'table', projects: @current_projects
+
+        .row
+          .large-12.columns
+            = paginate @projects, param: :current_page
+      #courses.tabs-panel
+        = render 'table', projects: @courses_projects
+
+        .row
+          .large-12.columns
+            = paginate @projects, param: :courses_page

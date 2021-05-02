@@ -1,11 +1,15 @@
 .callout
   .row
     .large-12.columns
+      h5 Wydarzenie
       = link_to item.accountable.name_with_date, item.accountable
       br
-      = sanitize "<b>Cena</b>: #{number_to_currency(item.income_cost, unit: 'zł')}"
+      = sanitize "<b>Kwota</b>: #{number_to_currency(item.income_cost, unit: 'zł')}"
       br
       = sanitize "<b>Koordynator</b>: #{item.accountable.organizer.display_name}"
       br
-      - item.accountable.prepaid_sign_ups.each do |sign_up|
-        = render 'settlement/admin/projects/training/supplementary/sign_up_record', sign_up: sign_up
+      table
+        tr
+          - item.accountable.prepaid_sign_ups.each do |sign_up|
+            td
+              = render 'settlement/admin/projects/training/supplementary/sign_up_record', sign_up: sign_up
