@@ -5,3 +5,6 @@
       = sanitize "<b>Nazwa</b>: #{item.accountable.name}"
       br
       = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.cost, unit: 'zł')}"
+      br
+      .callout
+        = sanitize item.accountable.description
