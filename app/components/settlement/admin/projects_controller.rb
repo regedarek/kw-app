@@ -62,7 +62,7 @@ module Settlement
       def project_params
         params
           .require(:project)
-          .permit(:name, :description, :user_id, :area_type)
+          .permit(:name, :description, :user_id, :area_type, :state)
       end
     end
   end

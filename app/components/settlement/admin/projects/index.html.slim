@@ -29,15 +29,17 @@
           .row
             .large-12.columns
               = paginate @projects, param: :search_page
+
       #current.tabs-panel class=("#{params[:q] ? '' : 'is-active'}")
         = render 'table', projects: @current_projects
 
         .row
           .large-12.columns
-            = paginate @projects, param: :current_page
+            = paginate @projects, param_name: :current_page, params: { anchor: 'current' }
+
       #courses.tabs-panel
         = render 'table', projects: @courses_projects
 
         .row
           .large-12.columns
-            = paginate @projects, param: :courses_page
+            = paginate @projects, param_name: :courses_page, params: { anchor: 'courses' }
