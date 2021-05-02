@@ -50,9 +50,21 @@ module Settlement
       end
     end
 
-    validate(accepted_fields: [:activity_type, :group_type, :event_type, :state]) do |activity_type, group_type, event_type, state|
+    validate(accepted_fields: [:activity_type, :group_type, :event_type, :state, :project_ids]) do |activity_type, group_type, event_type, state, project_ids|
       if ['accepted', 'preclosed', 'closed'].include?(state) || ['accept', 'prepayment'].include?(verify)
-        activity_type.present? && group_type.present? && event_type.present?
+        if activity_type.present? && group_type.present? && event_type.present?
+          if ['supplementary_trainings', 'courses'].include?(activity_type)
+            if project_ids.reject(&:empty?).any?
+              true
+            else
+              false
+            end
+          else
+            true
+          end
+        else
+          false
+        end
       else
         true
       end

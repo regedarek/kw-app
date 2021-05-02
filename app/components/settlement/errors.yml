@@ -3,13 +3,13 @@ pl:
     attributes:
       'settlement/contract_record':
         nip_if_fv: Dla faktury i rachunku
-        accepted_fields: "Sekcja, Aktywnośc i Impreza "
+        accepted_fields: "Sekcja, Aktywnośc i Impreza, a jeżeli to szkolenie Projekty "
         closed_fields: "Status Rozliczony wymaga wypełnionych pól "
         accepted_group: w tym statusie musi być wybrany
         preclosed_group: w tym statusie musi być wybrany
   errors:
     internal_number_uniq: taki numer już istnieje w tym roku rozliczeniowym
-    accepted_fields: Sekcja, Aktywnośc i Impreza
+    accepted_fields: Sekcja, Aktywnośc i Impreza, a jeżeli to szkolenie Projekty 
     accepted_group: sprawdzajacy
     preclosed_group: akceptujacy
     closed_fields: Rodzaj wydatku, Obszar i Rodzaj płatności
