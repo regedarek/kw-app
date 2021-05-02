@@ -66,6 +66,7 @@
                 li= link_to 'Zapotrzebowanie', '/business/lists'
                 li= link_to 'Historia', history_courses_path
                 li= link_to 'Rozliczenia', admin_contracts_path
+                li= link_to 'Projekty finansowe', admin_projects_path
                 li= link_to 'Kontrahenci', admin_contractors_path
 
           - if current_user.roles.include?('management')
