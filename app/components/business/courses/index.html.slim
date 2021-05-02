@@ -22,12 +22,14 @@
           .row
             .large-12.columns
               = paginate @courses
+
       #future.tabs-panel class=("#{params[:q] ? '' : 'is-active'}")
         = render 'table', courses: @future_courses
 
         .row
           .large-12.columns
             = paginate @future_courses, param_name: :future_page, params: { anchor: 'future' }
+
       #history.tabs-panel
         = render 'table', courses: @history_courses
         .row

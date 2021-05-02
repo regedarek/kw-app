@@ -19,10 +19,12 @@ table.stack
         td.text-right = number_to_currency(project.income_sum, unit: 'zł')
         td.text-right = number_to_currency(project.outcome_sum, unit: 'zł')
         td.text-right
-          - if project.balance >= 0
+          - if project.balance > 0
             span.label.success = number_to_currency(project.balance, unit: 'zł')
+          - elsif project.balance == 0
+            span.label = number_to_currency(project.balance, unit: 'zł')
           - else
-            span.label.warning = number_to_currency(project.balance, unit: 'zł')
+            span.label.alert = number_to_currency(project.balance, unit: 'zł')
         td.text-right
           - if project.open?
             = link_to close_admin_project_path(project.id), style: 'padding: 5px', method: :put do
