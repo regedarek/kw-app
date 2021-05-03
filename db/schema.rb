@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_03_125121) do
+ActiveRecord::Schema.define(version: 2021_05_03_130655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,17 +214,18 @@ ActiveRecord::Schema.define(version: 2021_05_03_125121) do
 
   create_table "contract_templates", force: :cascade do |t|
     t.string "name"
-    t.integer "group_type"
-    t.integer "payout_type"
-    t.integer "financial_type"
-    t.integer "document_type"
-    t.integer "event_type"
-    t.integer "substantive_type"
-    t.integer "area_type"
-    t.integer "activity_type"
+    t.string "group_type"
+    t.string "payout_type"
+    t.string "financial_type"
+    t.string "document_type"
+    t.string "event_type"
+    t.string "substantive_type"
+    t.string "area_type"
+    t.string "activity_type"
     t.integer "checker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "project_id"
   end
 
   create_table "contract_users", force: :cascade do |t|

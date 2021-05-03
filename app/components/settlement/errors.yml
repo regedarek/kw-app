@@ -3,6 +3,9 @@ pl:
     attributes:
       'settlement/contract_record':
         nip_if_fv: Dla faktury i rachunku
+        group_type_presence: Sekcja
+        document_type_presence: Rodzaj dokumentu
+        payout_type_presence: Rodzaj płatności
         accepted_fields: "pola do sprawdzenia "
         closed_fields: "Status Rozliczony wymaga wypełnionych pól "
         accepted_group: w tym statusie musi być wybrany
@@ -15,6 +18,9 @@ pl:
     closed_fields: Rodzaj wydatku, Obszar i Rodzaj płatności
     unique_nip: nip juz istnieje
     nip_if_fv: kontrahent musi mieć podany nip
+    group_type_presence: nie może być puste
+    payout_type_presence: nie może być puste
+    document_type_presence: nie może być puste
     key?: brakuje
   dry_validation:
     errors:
