@@ -68,17 +68,24 @@
       br
       .callout
         .row
-          .large-6.columns
-            = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail z notyfikacją o dodaniu rozliczenia'
+          .large-5.columns
+            = f.label :user_ids, 'Osoby zainteresowane, które otrzymają e-mail'
             = f.select :user_ids,
               Db::User.all.map { |u| [u.display_name, u.id] },
               { },
               { class: 'js-select-multiple', multiple: true }
 
-          .large-6.columns
+          .large-3.columns
             = f.label :attachments
             = f.fields_for :photos_attributes do |p|
               = p.file_field :file, multiple: true, name: 'contract[photos_attributes][][file]'
+
+          .large-4.columns
+            = f.label :project_ids, 'Projekt'
+            = f.select :project_ids,
+              Settlement::ProjectRecord.opened.map { |p| ["#{p.id}-#{p.name}", p.id] },
+              { include_blank: true },
+              { class: 'js-select-multiple', multiple: true, style: 'width: 100%' }
 
       .row
         br

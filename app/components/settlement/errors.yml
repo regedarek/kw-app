@@ -6,6 +6,7 @@ pl:
         group_type_presence: Sekcja
         document_type_presence: Rodzaj dokumentu
         payout_type_presence: Rodzaj płatności
+        project_presence: Projekty
         accepted_fields: "pola do sprawdzenia "
         closed_fields: "Status Rozliczony wymaga wypełnionych pól "
         accepted_group: w tym statusie musi być wybrany
@@ -20,6 +21,7 @@ pl:
     nip_if_fv: kontrahent musi mieć podany nip
     group_type_presence: nie może być puste
     payout_type_presence: nie może być puste
+    project_presence: musi być wybrany
     document_type_presence: nie może być puste
     key?: brakuje
   dry_validation:
