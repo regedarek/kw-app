@@ -16,6 +16,8 @@ module Settlement
     enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general, :library]
     enum financial_type: [:opp_paid, :opp_unpaid, :internal]
 
+    belongs_to :contract_template, class_name: 'Settlement::ContractTemplateRecord', optional: true
+
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
     belongs_to :checker, class_name: 'Db::User', foreign_key: :checker_id
     belongs_to :creator, class_name: 'Db::User', foreign_key: :creator_id
