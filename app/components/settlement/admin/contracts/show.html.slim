@@ -15,6 +15,12 @@
           b Numer dokumentu: 
           = @contract.document_number
 
+      - if @contract.period_date
+        .row
+          .large-12.columns
+            b Okres rozliczeniowy: 
+            = I18n.localize(@contract.period_date, format: "%Y")
+
       .row
         .large-12.columns
           b Data dokumentu: 
@@ -26,20 +32,14 @@
           = I18n.t @contract.document_type
 
       .row
-        .large-6.columns
-          b Kwota rozliczenia: 
-          = @contract.cost
-          |  zł
-      - if @contract.period_date
-        .row
-          .large-12.columns
-            b Okres rozliczeniowy: 
-            = I18n.localize(@contract.period_date, format: "%B %Y")
+        .large-12.columns
+          b Płatność: 
+          = I18n.t @contract.payout_type, scope: :payout_type
 
       .row
-        .large-12.columns
-          b Kiedy utworzono: 
-          = @contract.created_at.strftime("%d-%m-%Y %H:%M")
+        .large-6.columns
+          b Kwota rozliczenia: 
+          = number_to_currency(@contract.cost, unit: 'zł')
 
       .row
         .large-12.columns
@@ -48,8 +48,8 @@
 
       .row
         .large-12.columns
-          b Płatność: 
-          = I18n.t @contract.payout_type, scope: :payout_type
+          b Kiedy utworzono: 
+          = @contract.created_at.strftime("%d-%m-%Y %H:%M")
 
       .row
         .large-12.columns
