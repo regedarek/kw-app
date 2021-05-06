@@ -9,7 +9,7 @@ module Settlement
         contract.document_type = contract.document_type || contract.contract_template.document_type
         contract.event_type = contract.contract_template.event_type
         contract.substantive_type = contract.contract_template.substantive_type
-        contract.description = contract.contract_template.description
+        contract.description = contract.description || contract.contract_template.description
         contract.area_type = contract.contract_template.area_type
         contract.activity_type = contract.contract_template.activity_type
         contract.project_ids = [contract.contract_template.project_id] if contract.contract_template.project_id
