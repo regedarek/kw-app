@@ -12,9 +12,17 @@
       .row
         .large-12.columns
           table
+            thead
+              tr
+                th.text-center width='30px'
+                  = sort_link(@q, :internal_number, 'ID', default_order: :desc)
+                th.text-center Nazwa
+                th.text-center Data
+                th.text-center Kwota
             tbody
-              - @contractor.contracts.each do |contract|
+              - @contracts.each do |contract|
                 tr
+                  td.text-left = link_to contract.internal_number, admin_contract_path(contract.id)
                   td.text-left = link_to contract.title, admin_contract_path(contract.id)
                   td.text-left width='140px' = contract.document_date.to_date
                   td.text-left width='80px' = contract.cost

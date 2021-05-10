@@ -48,6 +48,10 @@ module Settlement
 
       def show
         @contractor = Settlement::ContractorRecord.find(params[:id])
+        @q = @contractor.contracts
+        @q = @q.ransack(params[:q])
+        @q.sorts = ['internal_number desc'] if @q.sorts.empty?
+        @contracts = @q.result(distinct: true).page(params[:page])
       end
 
       def edit
