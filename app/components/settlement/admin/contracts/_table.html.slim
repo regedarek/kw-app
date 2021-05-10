@@ -5,14 +5,14 @@ table.stack
         = sort_link(@q, :internal_number, 'ID', default_order: :desc)
       th.text-center width='110px'
         = sort_link(@q, :document_date, 'Data', default_order: :desc)
-      th.text-center width='300px'
+      th.text-left width='300px'
         = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
       th.text-center width='160px'
         = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
       th.text-center width='160px'
         = sort_link(@q, :state, 'Status', default_order: :desc)
-      th.text-center width='90px'
-        = sort_link(@q, :cost, 'Kwota(zł)', default_order: :desc)
+      th.text-center width='110px'
+        = sort_link(@q, :cost, 'Kwota', default_order: :desc)
       th.text-center width='140px'
         | Zmień status
       th.text-right width='70px' Akcje
@@ -23,7 +23,7 @@ table.stack
           - if contract.internal_number && contract.period_date
             = "#{contract.internal_number}/#{contract.period_date.year}"
         td.text-center = contract.document_date
-        td.text-center
+        td.text-left
           - if contract.description
             span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
               = link_to contract.title, admin_contract_path(contract.id)
@@ -33,7 +33,7 @@ table.stack
           - if contract.creator
             = link_to contract.creator.display_name, "/klubowicze/#{contract.creator.kw_id}"
         td.text-center = render 'state_bagde', contract: contract, class_value: nil
-        td.text-center = contract.cost
+        td.text-center = number_to_currency(contract.cost, unit: 'zł')
         td.text-center = render 'state_link', contract: contract, class_value: nil
         td.text-center.large-text-right
           - if can? :update, contract
