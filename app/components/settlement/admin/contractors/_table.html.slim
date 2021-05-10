@@ -1,9 +1,9 @@
 table.hover
   thead
     tr
-      th.text-center width='80px'
+      th.text-center width='50px'
         = sort_link(@q, :id, 'ID', default_order: :desc)
-      th.text-center Nazwa
+      th.text-left Nazwa
       th.text-center width='250px' E-mail
       th.text-center width='200px' Ostatnie rozliczenie
       th.text-center width='120px' Koszt
@@ -12,7 +12,7 @@ table.hover
     - contractors.each do |contractor|
       tr
         td.text-center = contractor.id
-        td.text-center = link_to contractor.name, admin_contractor_path(contractor.id)
+        td.text-left = link_to contractor.name, admin_contractor_path(contractor.id)
         td.text-center = contractor.email
         td.text-center
           - if contractor.contracts.any?
