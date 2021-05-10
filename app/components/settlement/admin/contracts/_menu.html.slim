@@ -1,9 +1,10 @@
 .text-right
   - if can? :read, PaperTrail::Version
+    = link_to 'Archiwum', admin_contracts_path(q: { state_eq_any: [:closed], document_date_gteq: '2021-01-01', s: 'internal_number desc' }), class: 'button alert'
     = link_to 'Analiza', "/rozliczenia/analiza/#{Date.today.year}", class: 'button secondary'
     = link_to 'Historia', history_admin_contracts_path, class: 'button secondary'
   - if can? :read, Settlement::ProjectRecord
-    = link_to 'Projekty finansowe', admin_projects_path, class: 'button alert'
+    = link_to 'Projekty finansowe', admin_projects_path, class: 'button warning'
   - if can? :read, Settlement::ContractorRecord
     = link_to 'Kontrahenci', admin_contractors_path, class: 'button warning'
   - if can? :create, Settlement::ContractorRecord
