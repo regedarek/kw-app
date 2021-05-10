@@ -1,10 +1,11 @@
 table.hover
   thead
     tr
-      th.text-center width='70px' ID
+      th.text-center width='80px'
+        = sort_link(@q, :id, 'ID', default_order: :desc)
       th.text-center Nazwa
-      th.text-center width='120px' E-mail
-      th.text-center width='250px' Ostatnie rozliczenie
+      th.text-center width='250px' E-mail
+      th.text-center width='200px' Ostatnie rozliczenie
       th.text-center width='120px' Koszt
       th.text-right  width='70px'
   tbody
