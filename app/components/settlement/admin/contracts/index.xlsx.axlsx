@@ -45,15 +45,15 @@ wb.styles do |style|
         end
     end
     sheet.add_row(human_contract_attributes, style: style.add_style(highlight_cell_options))
-    Settlement::ContractRecord.all.each do |profile|
+    Settlement::ContractRecord.accessible_by(current_ability).each do |profile|
       contract_values = contract_attributes.map do |attr|
         case attr
         when *contract_type_attributes
           I18n.t(profile.read_attribute(attr), scope: "activerecord.attributes.settlement/contract_record.#{attr.to_s}s")
         when :creator_id
-          Db::User.find(profile.read_attribute(attr))&.display_name
+          Db::User.find_by(id: profile.read_attribute(attr))&.display_name
         when :contractor_id
-          Settlement::ContractorRecord.find(profile.read_attribute(attr))&.name
+          Settlement::ContractorRecord.find_by(id: profile.read_attribute(attr))&.name
         else
           profile.read_attribute(attr)
         end
