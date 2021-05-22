@@ -44,7 +44,8 @@ class Ability
 
   def not_active
     can :manage, Db::Activities::MountainRoute, user_id: user.id
-    can [:read, :update], Settlement::ContractRecord, creator_id: user.id, state: [:new, :accepted]
+    can :read, Settlement::ContractRecord, creator_id: user.id
+    can :update, Settlement::ContractRecord, creator_id: user.id, state: [:new, :accepted]
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable_type: ['Db::Activities::MountainRoute'], uploadable: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable_type: 'Settlement::ContractRecord', uploadable: { creator_id: user.id }
