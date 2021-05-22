@@ -45,7 +45,7 @@ wb.styles do |style|
         end
     end
     sheet.add_row(human_contract_attributes, style: style.add_style(highlight_cell_options))
-    @results.each do |profile|
+    Settlement::ContractRecord.all.each do |profile|
       contract_values = contract_attributes.map do |attr|
         case attr
         when *contract_type_attributes
