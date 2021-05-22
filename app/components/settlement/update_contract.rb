@@ -23,11 +23,23 @@ module Settlement
         period_date: Date.civil(period_date_year, period_date_month, 1)
       ) if period_date_month && period_date_year
       contract.update(contractor_id: form_outputs[:contractor_name].first.to_i) if form_outputs.to_h.key?(:contractor_name)
-      contract.update(
-        checker_id: updater_id, state: 'accepted'
-      ) if form_outputs[:activity_type].present? && form_outputs[:group_type].present? && form_outputs[:event_type].present? && !contract.checker_id && contract.new?
-      contract.update(acceptor_id: updater_id, state: 'preclosed') if verify == 'prepayment'
-      contract.update(state: 'closed') if verify == 'finish'
+
+      if form_outputs[:activity_type].present? && form_outputs[:group_type].present? && form_outputs[:event_type].present? && !contract.checker_id && contract.new?
+        contract.update(
+          checker_id: updater_id, state: 'accepted'
+        )
+        ::Settlement::ContractMailer.state_changed(contract).deliver_later
+      end
+
+      if verify == 'prepayment'
+        contract.update(acceptor_id: updater_id, state: 'preclosed')
+        ::Settlement::ContractMailer.state_changed(contract).deliver_later
+      end
+
+      if verify == 'finish'
+        ::Settlement::ContractMailer.state_changed(contract).deliver_later
+        contract.update(state: 'closed', closer_id: updater_id)
+      end
 
       office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
       financial_ids = Db::User.where(":name = ANY(roles)", name: "financial_management").map(&:id)

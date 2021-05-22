@@ -9,7 +9,9 @@ module Events
         if params[:archive]
           @competitions = Events::Db::CompetitionRecord.all
         else
-          @competitions = Events::Db::CompetitionRecord.where.not(event_date: nil).where('event_date >= ?', Time.now)
+          @competitions = Events::Db::CompetitionRecord.where('event_date >= ?', Time.now).or(
+            Events::Db::CompetitionRecord.where(event_date: nil)
+          )
         end
       end
 

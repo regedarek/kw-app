@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_22_133104) do
+ActiveRecord::Schema.define(version: 2021_05_22_142521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 2021_05_22_133104) do
     t.integer "activity_type"
     t.integer "checker_id"
     t.integer "contract_template_id"
+    t.integer "closer_id"
     t.index ["internal_number", "period_date"], name: "index_contracts_on_internal_number_and_period_date", unique: true
   end
 

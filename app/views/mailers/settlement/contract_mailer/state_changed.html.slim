@@ -1,0 +1,23 @@
+b Rozliczenie: 
+= @contract.title
+br
+b Kwota: 
+= @contract.cost
+| zł
+br
+- if @contract.description
+  b Dodatkowe informacje
+  br
+  = @contract.description.html_safe
+  br
+= link_to 'Szczegóły rozliczenia', admin_contract_url(@contract.id)
+br
+br
+| Zmieniło status na 
+b= I18n.t(@contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
+br
+br
+| --------------------------
+br
+br
+| Otrzymałeś ten e-mail aby zaakceptować rozliczenie lub po prostu otrzymać informację, że jest ono w tracie procesu rozliczenia.

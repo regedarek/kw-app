@@ -3,11 +3,11 @@
     b= f.label :internal_number, 'Numer wewnętrzny'
     = f.number_field :internal_number
 
-  .large-3.columns
+  .large-2.columns
     b= f.label :period_date, 'Rok rozliczeniowy'
     = f.date_select :period_date,  { :discard_month => true, :discard_day => true, include_blank: true}, { class: 'inline-date-select' }
 
-  .large-3.columns
+  .large-2.columns
     b= f.label :state
     = f.select :state, Settlement::ContractRecord.states_select, selected: @contract.state
 
@@ -18,6 +18,10 @@
   .large-2.columns
     b= f.label :acceptor_id
     = f.select :acceptor_id, Db::User.where('roles @> ARRAY[?]', 'financial_management').map{ |u| [u.display_name, u.id] }, selected: @contract.acceptor_id, include_blank: true
+
+  .large-2.columns
+    b= f.label :closer_id
+    = f.select :closer_id, Db::User.where('roles @> ARRAY[?]', 'office_king').map{ |u| [u.display_name, u.id] }, selected: @contract.closer_id, include_blank: true
 
 .row
   .large-12.columns

@@ -16,7 +16,15 @@
       - else
         | Nie zaakceptowano
 
-    .large-6.columns
+    .large-3.columns
+      b Akceptacja finansowa
+      br
+      - if @contract.closer
+        = @contract.closer.display_name
+      - else
+        | Nie zaakceptowano
+
+    .large-3.columns
       - if @contract.projects.any?
         b Projekty
         br

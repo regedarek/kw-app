@@ -18,7 +18,7 @@
           a aria-selected="true" href="#new" Dane dokumentu
         - if can?(:accept, @contract) || can?(:prepayment, @contract) || can?(:finish, @contract)
           li.tabs-title.is-active
-            a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja merytoryczna
+            a data-tabs-target="preaccepted" href="#preaccepted" Akceptacja rozliczenia
         - if can?(:finish, @contract)
           li.tabs-title
             a data-tabs-target="admin" href="#admin" Administracja

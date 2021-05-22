@@ -19,6 +19,7 @@ module Settlement
     belongs_to :contract_template, class_name: 'Settlement::ContractTemplateRecord', optional: true
 
     belongs_to :acceptor, class_name: 'Db::User', foreign_key: :acceptor_id
+    belongs_to :closer, class_name: 'Db::User', foreign_key: :closer_id
     belongs_to :checker, class_name: 'Db::User', foreign_key: :checker_id
     belongs_to :creator, class_name: 'Db::User', foreign_key: :creator_id
     belongs_to :contractor, class_name: 'Settlement::ContractorRecord', foreign_key: :contractor_id

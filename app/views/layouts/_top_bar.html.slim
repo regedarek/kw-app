@@ -86,16 +86,21 @@
                 li= link_to 'Wysłane ofery', sponsorship_requests_path
                 li= link_to 'Zniżki i rabaty', discounts_path
 
+          - if current_user.roles.include?('competitions')
+            li
+              = link_to 'Zawody', admin_path
+              ul.menu.vertical
+                li= link_to 'Zawody', admin_competitions_path
+                li= link_to 'Kalendarz zawodów', competitions_path
+
           - if current_user.roles.include?('tech')
             li
               = link_to 'Techniczne', admin_path
               ul.menu.vertical
                 li= link_to 'Historia zmian', admin_versions_path
                 li= link_to 'Konkursy fotograficzne', admin_editions_path
-
                 li= link_to 'Zawody', admin_competitions_path
                 li= link_to 'Kontrakty', activities_contracts_path
-                li= link_to 'Kalendarz zawodów', competitions_path
                 li = link_to 'Importowanie', admin_importing_index_path
                 li = link_to 'Problemy', 'https://app.honeybadger.io/projects/54689/faults?q=-is%3Aresolved+-is%3Aignored'
 

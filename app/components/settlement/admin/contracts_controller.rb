@@ -128,6 +128,7 @@ module Settlement
             notifiable_type: 'Settlement::ContractRecord'
           )
         end
+        ::Settlement::ContractMailer.state_changed(contract).deliver_later
 
         redirect_back(
           fallback_location: admin_contracts_path,
@@ -156,6 +157,7 @@ module Settlement
             notifiable_type: 'Settlement::ContractRecord'
           )
         end
+        ::Settlement::ContractMailer.state_changed(contract).deliver_later
 
         redirect_back(
           fallback_location: admin_contracts_path,
@@ -170,6 +172,8 @@ module Settlement
         return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj działalności" unless contract.substantive_type && contract.area_type && contract.payout_type
 
         contract.finish!
+        contract.update(closer_id: updater_id)
+        ::Settlement::ContractMailer.state_changed(contract).deliver_later
 
         redirect_back(
           fallback_location: admin_contract_path(contract.id),
@@ -197,7 +201,7 @@ module Settlement
         params
           .require(:contract)
           .permit(
-            :group_type, :payout_type, :acceptor_id, :event_id, :period_date, :contract_template_id,
+            :group_type, :payout_type, :closer_id, :acceptor_id, :event_id, :period_date, :contract_template_id,
             :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date, :activity_type,
             :title, :description, :cost, :state, :document_number, :internal_number, :checker_id,
             :contractor_id, attachments: [], event_ids: [], user_ids: [], project_ids: [], photos_attributes: [:file, :filename, :user_id]

@@ -25,6 +25,7 @@ module Settlement
     optional(:area_type).maybe
     optional(:acceptor_id).maybe
     optional(:checker_id).maybe
+    optional(:closer_id).maybe
     optional(:substantive_type).maybe
     optional(:state).maybe
     optional(:financial_type).maybe
