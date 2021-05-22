@@ -48,7 +48,7 @@ module Settlement
         order_by << "WHEN state='#{status}' THEN #{index}"
       end
       order_by << 'END'
-      order(Arel.sql(order_by.join(' ')))
+      order(Arel.sql(order_by.join(' '))).order(created_at: :desc)
     }
 
     def self.ransortable_attributes(auth_object = nil)
