@@ -2,9 +2,11 @@
   = link_to photo.file.url, download: File.basename(photo.file.path) do
     - if can?(:manage, photo)
     .callout
-      = File.basename(photo.file.path)
+      = image_tag('file.jpg', class: 'thumbnail', width: '90px')
       = link_to upload_path(photo.id), data: { confirm: 'Jesteś pewien?' }, method: :delete, class: 'thumb-close-button' do
         span style='color: red; font-size: 40px;' aria-hidden="true"  &times;
+      br
+      = File.basename(photo.file.path)
 
   br
 - attachments.select{|photo| MimeMagic.by_path(photo.file.path)&.image? }.each_with_index do |photo, i|
