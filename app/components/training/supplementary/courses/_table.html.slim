@@ -22,7 +22,7 @@ table
       tr
         td.text-center = image_tag "#{course.category}.png", size: '40x40'
         td.text-left style='white-space: normal;'
-          = link_to course.name, polish_event_slug_path(course.slug)
+          = link_to course.name, polish_event_slug_path(course.slug) if course.slug.present?
         td.text-center
           - if course.web?
             = link_to course.place do
