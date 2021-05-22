@@ -10,7 +10,7 @@ table.stack
       th.text-center width='160px'
         = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
       th.text-center width='160px'
-        = sort_link(@q, :state, 'Status', default_order: :desc)
+        = sort_link(@q, :custom_state, 'Status')
       th.text-center width='110px'
         = sort_link(@q, :cost, 'Kwota', default_order: :desc)
       th.text-center width='140px'

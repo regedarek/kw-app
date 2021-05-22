@@ -1,7 +1,7 @@
 .callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : 'primary'}")
   .row
     .large-3.columns
-      b Sprawdził
+      b Sprawdzono
       br
       - if @contract.checker
         = @contract.checker.display_name
@@ -9,7 +9,7 @@
         | Nie sprawdzono
 
     .large-3.columns
-      b Zaakceptował
+      b Akceptacja merytoryczna
       br
       - if @contract.acceptor
         = @contract.acceptor.display_name
@@ -24,7 +24,7 @@
           li = link_to @contract.projects.first.name, admin_project_path(@contract.projects.first.id)
 .row
   .large-6.columns
-    .callout class=("#{@contract.preclosed? || @contract.closed? ? 'success' : @errors ? 'alert' : 'warning'}")
+    .callout class=("#{@contract.preclosed? || @contract.closed? || @contract.accepted? ? 'success' : @errors ? 'alert' : 'primary'}")
       .row
         .large-12.columns
           b= f.label :group_type
@@ -54,8 +54,6 @@
         - if @contract.new? && can?(:accept, @contract)
           .large-12.columns.text-right
             br
-            = check_box_tag :verify, :accept
-            = label_tag :verify, 'Sprawdź'
             - if @errors && @errors.key?(:accepted_fields)
               .callout.warning
                 | Musisz wypełnić pola Sekcja, Aktywność i Impreza, a jeżeli to szkolenie to projekty
@@ -71,38 +69,39 @@
           .large-12.columns.text-right
             br
             = check_box_tag :verify, :prepayment
-            = label_tag :verify, 'Zaakceptuj'
+            = label_tag :verify, 'Akceptacja merytoryczna'
             - if @errors && @errors.key?(:accepted_fields)
               .callout.warning
                 | Musisz wypełnić pola Sekcja, Aktywność i Impreza
 
   .large-6.columns
-    .callout class=("#{@contract.closed? ? 'success' : @errors ? 'alert' : 'warning'}")
-      .row
-        .large-12.columns
-          b= f.label :substantive_type
-          = f.select :substantive_type,
-            Settlement::ContractRecord.substantive_types_select, selected: @contract.substantive_type, include_blank: true
+    - unless @contract.new? || @contract.accepted?
+      .callout class=("#{@contract.closed? ? 'success' : @errors ? 'alert' : 'warning'}")
+        .row
+          .large-12.columns
+            b= f.label :substantive_type
+            = f.select :substantive_type,
+              Settlement::ContractRecord.substantive_types_select, selected: @contract.substantive_type, include_blank: true
 
-      .row
-        .large-12.columns
-          b= f.label :area_type
-          = f.select :area_type,
-            Settlement::ContractRecord.area_types_select, selected: @contract.area_type, include_blank: true
+        .row
+          .large-12.columns
+            b= f.label :area_type
+            = f.select :area_type,
+              Settlement::ContractRecord.area_types_select, selected: @contract.area_type, include_blank: true
 
-      .row
-        .large-12.columns
-          b= f.label :financial_type
-          = f.select :financial_type,
-            Settlement::ContractRecord.financial_types_select, selected: @contract.financial_type, include_blank: true
+        .row
+          .large-12.columns
+            b= f.label :financial_type
+            = f.select :financial_type,
+              Settlement::ContractRecord.financial_types_select, selected: @contract.financial_type, include_blank: true
 
-      .row
-        - if @contract.preclosed? && can?(:finish, @contract)
-          .large-12.columns.text-right
-            br
-            = check_box_tag :verify, :finish
-            = label_tag :verify, 'Rozlicz'
+        .row
+          - if @contract.preclosed? && can?(:finish, @contract)
+            .large-12.columns.text-right
+              br
+              = check_box_tag :verify, :finish
+              = label_tag :verify, 'Akceptacja finansowa'
 
-            - if @errors && @errors.key?(:closed_fields)
-              .callout.warning
-                | Musisz wypełnić pola Rodzaj wydatku, Obszar, Rodzaj płatności
+              - if @errors && @errors.key?(:closed_fields)
+                .callout.warning
+                  | Musisz wypełnić pola Rodzaj wydatku, Obszar, Rodzaj działalności

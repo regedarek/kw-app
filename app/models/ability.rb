@@ -44,7 +44,7 @@ class Ability
 
   def not_active
     can :manage, Db::Activities::MountainRoute, user_id: user.id
-    can [:read, :update], Settlement::ContractRecord, creator_id: user.id
+    can [:read, :update], Settlement::ContractRecord, creator_id: user.id, state: [:new, :accepted]
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable_type: ['Db::Activities::MountainRoute'], uploadable: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable_type: 'Settlement::ContractRecord', uploadable: { creator_id: user.id }
@@ -153,7 +153,7 @@ class Ability
     can :search, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord
+    can :update, Settlement::ContractRecord, state: [:new, :accepted]
     can :create, Training::Supplementary::CourseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
@@ -167,9 +167,10 @@ class Ability
   def financial_management
     can :read, PaperTrail::Version
     can :search, Settlement::ContractRecord
+    can :export, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord
+    can :update, Settlement::ContractRecord, state: [:new, :accepted]
     can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Settlement::ProjectRecord
@@ -181,6 +182,7 @@ class Ability
     can :destroy, Settlement::ContractRecord
     can :update, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
+    can :export, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
     can :manage, Settlement::ContractorRecord
     can :manage, Settlement::ProjectRecord

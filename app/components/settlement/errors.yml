@@ -16,8 +16,8 @@ pl:
     accepted_fields: nie wszystkie wypełnione 
     accepted_group: sprawdzajacy
     preclosed_group: akceptujacy
-    closed_fields: Rodzaj wydatku, Obszar i Rodzaj płatności
-    unique_nip: nip juz istnieje
+    closed_fields: Rodzaj wydatku, Obszar i Rodzaj działalności
+    unique_nip: nip juz istnieje lub ma błędny format
     nip_if_fv: kontrahent musi mieć podany nip
     group_type_presence: nie może być puste
     payout_type_presence: nie może być puste

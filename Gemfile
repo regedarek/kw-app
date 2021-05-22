@@ -6,9 +6,11 @@ gem 'bootsnap', require: false
 gem 'rails', '>= 5.2.3', '< 6.0'
 gem 'pg'
 gem 'sass-rails'
+gem 'nip_pesel_regon'
 gem 'active_model_serializers'
 gem 'strava-ruby-client'
 gem 'polylines'
+gem "rolify"
 gem 'flag-icons-rails'
 gem 'uglifier'
 gem 'coffee-rails'

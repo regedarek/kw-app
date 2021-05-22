@@ -1,0 +1,64 @@
+wb = xlsx_package.workbook
+contract_attributes = %i(
+  title
+  description
+  cost
+  period_date
+  preclosed_date
+  document_number
+  internal_number
+  document_type
+  contractor_id
+  creator_id
+  group_type
+  financial_type
+  substantive_type
+  payout_type
+  event_type
+  activity_type
+  created_at
+  updated_at
+)
+contract_type_attributes = %i(
+  document_type
+  group_type
+  financial_type
+  substantive_type
+  payout_type
+  event_type
+  activity_type
+)
+wb.styles do |style|
+  highlight_cell_options = {
+    fg_color: 'FFFFFF',
+    b: true,
+    bg_color: '004586',
+    alignment: { horizontal: :center, vertical: :center, wrap_text: true }
+  }
+  wb.add_worksheet(name: "Rozliczenia") do |sheet|
+    human_contract_attributes = contract_attributes.map do |attr|
+        case attr
+        when *contract_type_attributes
+          I18n.t("activerecord.attributes.settlement/contract_record.#{attr}")
+        else
+          Settlement::ContractRecord.human_attribute_name(attr)
+        end
+    end
+    sheet.add_row(human_contract_attributes, style: style.add_style(highlight_cell_options))
+    @results.each do |profile|
+      contract_values = contract_attributes.map do |attr|
+        case attr
+        when *contract_type_attributes
+          I18n.t(profile.read_attribute(attr), scope: "activerecord.attributes.settlement/contract_record.#{attr.to_s}s")
+        when :creator_id
+          Db::User.find(profile.read_attribute(attr))&.display_name
+        when :contractor_id
+          Settlement::ContractorRecord.find(profile.read_attribute(attr))&.name
+        else
+          profile.read_attribute(attr)
+        end
+      end
+      sheet.add_row(contract_values)
+    end
+  end
+end

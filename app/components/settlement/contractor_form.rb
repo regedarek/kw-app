@@ -1,5 +1,6 @@
 require 'i18n'
 require 'dry-validation'
+require 'nip_pesel_regon'
 
 module Settlement
   ContractorForm = Dry::Validation.Params do
@@ -20,7 +21,11 @@ module Settlement
       if nip.nil? || nip.empty?
         true
       else
-        !Settlement::ContractorRecord.exists?(nip: nip)
+        if NipPeselRegon::Validator::Nip.new(nip).valid?
+          !Settlement::ContractorRecord.exists?(nip: nip)
+        else
+          false
+        end
       end
     end
   end

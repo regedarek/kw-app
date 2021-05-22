@@ -3,15 +3,26 @@ module Settlement
     class ContractsController < ::Admin::BaseController
       include EitherMatcher
       append_view_path 'app/components'
+      respond_to :html, :xlsx
 
       def index
         authorize! :read, Settlement::ContractRecord
 
+        status_order = params[:q]&.key?(:s) ? (params[:q][:s].include?('custom_state') ? params[:q][:s] : 'custom_state asc') : 'custom_state asc'
+
         @q = Settlement::ContractRecord.accessible_by(current_ability)
         @q = @q.where.not(state: ['closed']) unless params[:q]
         @q = @q.ransack(params[:q])
-        @q.sorts = ['state desc', 'created_at desc'] if @q.sorts.empty?
-        @contracts = @q.result(distinct: true).includes([:acceptor, :creator, :checker]).page(params[:page])
+        @results = @q.result.order_by_state(status_order).includes([:acceptor, :creator, :checker])
+        @contracts = @results.page(params[:page])
+
+        respond_with do |format|
+          format.html
+          format.xlsx do
+            disposition = "attachment; filename=rozliczenia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
+            response.headers['Content-Disposition'] = disposition
+          end
+        end
       end
 
       def history
@@ -156,7 +167,7 @@ module Settlement
         contract = Settlement::ContractRecord.find(params[:id])
         authorize! :finish, Settlement::ContractRecord
 
-        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj płatności" unless contract.substantive_type && contract.area_type && contract.payout_type
+        return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj działalności" unless contract.substantive_type && contract.area_type && contract.payout_type
 
         contract.finish!
 

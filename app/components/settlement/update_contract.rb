@@ -23,7 +23,9 @@ module Settlement
         period_date: Date.civil(period_date_year, period_date_month, 1)
       ) if period_date_month && period_date_year
       contract.update(contractor_id: form_outputs[:contractor_name].first.to_i) if form_outputs.to_h.key?(:contractor_name)
-      contract.update(checker_id: updater_id, state: 'accepted') if verify == 'accept'
+      contract.update(
+        checker_id: updater_id, state: 'accepted'
+      ) if form_outputs[:activity_type].present? && form_outputs[:group_type].present? && form_outputs[:event_type].present? && !contract.checker_id && contract.new?
       contract.update(acceptor_id: updater_id, state: 'preclosed') if verify == 'prepayment'
       contract.update(state: 'closed') if verify == 'finish'
 

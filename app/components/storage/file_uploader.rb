@@ -9,7 +9,7 @@ module Storage
       storage :file
     end
 
-    process :auto_orient
+    process :auto_orient, :if => :image?
 
     version :large, :if => :image? do
       process resize_to_fill: [250, 250]

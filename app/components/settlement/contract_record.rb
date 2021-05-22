@@ -14,7 +14,7 @@ module Settlement
     enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
     enum substantive_type: [:salary, :other_substantive, :materials, :equipment, :finantial_costs, :rewards, :printing, :insurance]
     enum area_type: [:marketing, :it, :accomodation, :administration, :reservations, :training, :image, :integration, :associations, :mountain_actions, :general, :library]
-    enum financial_type: [:opp_paid, :opp_unpaid, :internal]
+    enum financial_type: [:opp_paid, :opp_unpaid, :internal, :economic_activity]
 
     belongs_to :contract_template, class_name: 'Settlement::ContractTemplateRecord', optional: true
 
@@ -36,6 +36,25 @@ module Settlement
 
     has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
     accepts_nested_attributes_for :photos
+
+    STATUS_ASC_ORDERS = ['new', 'accepted', 'preclosed', 'closed'].freeze
+    STATUS_DESC_ORDERS = STATUS_ASC_ORDERS.reverse.freeze
+    STATUSES_ORDER_MAP = { "custom_state asc" => STATUS_ASC_ORDERS, "custom_state desc" => STATUS_DESC_ORDERS}
+
+    scope :order_by_state, -> (status_order) {
+      order_by = ['CASE']
+      STATUSES_ORDER_MAP[status_order].each_with_index do |status, index|
+        order_by << "WHEN state='#{status}' THEN #{index}"
+      end
+      order_by << 'END'
+      order(Arel.sql(order_by.join(' ')))
+    }
+
+    def self.ransortable_attributes(auth_object = nil)
+        ransackable_attributes(auth_object) + %w(
+          order_by_state
+        )
+    end
 
     workflow_column :state
     workflow do

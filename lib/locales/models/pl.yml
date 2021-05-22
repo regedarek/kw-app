@@ -189,10 +189,11 @@ pl:
           accepted: Sprawdzony
           preclosed: Zaaceptowany
           closed: Rozliczony
-        financial_type: Rodzaj płatności
+        financial_type: Rodzaj działalności
         financial_types:
           opp_paid: OPP odpłatna
           opp_unpaid: OPP nieodpłatna
+          economic_activity: Działalność gospodarcza
           internal: Administracja
         document_types:
           fv: Faktura

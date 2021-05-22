@@ -1,6 +1,8 @@
 .text-right
+  - if can? :export, Settlement::ContractRecord
+    = link_to 'Export', admin_contracts_path(params.permit!.merge(format: "xlsx")), class: 'button alert'
   - if can? :read, PaperTrail::Version
-    = link_to 'Archiwum', admin_contracts_path(q: { state_eq_any: [:closed], document_date_gteq: '2021-01-01', s: 'internal_number desc' }), class: 'button alert'
+    = link_to 'Archiwum', admin_contracts_path(q: { state_eq_any: [:closed], s: 'internal_number desc' }), class: 'button alert'
     = link_to 'Analiza', "/rozliczenia/analiza/#{Date.today.year}", class: 'button secondary'
     = link_to 'Historia', history_admin_contracts_path, class: 'button secondary'
   - if can? :read, Settlement::ProjectRecord

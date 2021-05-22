@@ -57,7 +57,7 @@
         .large-12.columns
             = render 'attachments/box', attachments: @contract.photos
 
-      = f.submit "Zaktualizuj rozliczenie", class: 'button'
+      = f.submit "Zaktualizuj lub/oraz zaakceptuj rozliczenie", class: 'button success'
       = link_to 'pokaż rozliczenie', admin_contract_path(@contract.id), class: 'button secondary'
       = link_to 'pokaż kontrahenta', admin_contractor_path(@contract.contractor_id), class: 'button secondary'
       = link_to 'wróć do rozliczeń', admin_contracts_path, class: 'button secondary'
