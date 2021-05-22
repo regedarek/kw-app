@@ -171,7 +171,7 @@ class Ability
     can :export, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord, state: [:new, :accepted]
+    can :update, Settlement::ContractRecord, state: [:new, :accepted, :preclosed]
     can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Settlement::ProjectRecord
