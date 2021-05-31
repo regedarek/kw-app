@@ -171,8 +171,8 @@ module Settlement
 
         return redirect_to edit_admin_contract_path(contract.id), alert: "Wypełnij pola Rodzaj wydatku, Obszar i Rodzaj działalności" unless contract.substantive_type && contract.area_type && contract.payout_type
 
-        contract.finish!
-        contract.update(closer_id: updater_id)
+        contract.finish! if contract.preclosed?
+        contract.update(closer_id: current_user.id)
         ::Settlement::ContractMailer.state_changed(contract).deliver_later
 
         redirect_back(
