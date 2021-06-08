@@ -154,7 +154,7 @@ class Ability
     can :search, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord, state: [:new, :accepted]
+    can :manage, Settlement::ContractRecord, state: [:new, :accepted]
     can :create, Training::Supplementary::CourseRecord
     can :manage, Management::ProjectRecord
     cannot :destroy, Settlement::ContractRecord
@@ -171,7 +171,7 @@ class Ability
     can :export, Settlement::ContractRecord
     can :accept, Settlement::ContractRecord
     can :read, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord, state: [:new, :accepted, :preclosed]
+    can :manage, Settlement::ContractRecord, state: [:new, :accepted, :preclosed]
     can :prepayment, Settlement::ContractRecord
     cannot :destroy, Settlement::ContractRecord
     can :manage, Settlement::ProjectRecord
@@ -181,7 +181,7 @@ class Ability
     can :read, PaperTrail::Version
     can :read, Settlement::ContractRecord
     can :destroy, Settlement::ContractRecord
-    can :update, Settlement::ContractRecord
+    can :manage, Settlement::ContractRecord
     can :search, Settlement::ContractRecord
     can :export, Settlement::ContractRecord
     can :finish, Settlement::ContractRecord
