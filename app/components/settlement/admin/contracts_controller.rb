@@ -92,7 +92,6 @@ module Settlement
 
       def update
         @contract = Settlement::ContractRecord.find(params[:id])
-        authorize! :update, @contract
 
         either(update_record) do |result|
           result.success do |contract|

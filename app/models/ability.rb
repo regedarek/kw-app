@@ -24,7 +24,7 @@ class Ability
     admin if role?('admin')
 
     management if role?('management')
-    secondary_management if role?('secondary_management') || role?('stj') || role?('sww') || role?('snw') || role?('kw')
+    secondary_management if role?('secondary_management')
     financial_management if role?('financial_management')
     office_king if role?('office_king')
   end
