@@ -18,8 +18,6 @@ module Settlement
       end
 
       def create
-        authorize! :create, Settlement::ContractorRecord
-
         either(create_record) do |result|
           result.success do |a|
             if params[:quick]
