@@ -1,93 +1,15 @@
+.row
+  .large-12.columns
+    = link_to 'Tabela narciarskich dzików', narciarskie_dziki_path, class: 'button warning large expanded'
+
 .column
+  - setting = Management::SettingsRecord.find_by(path: request.path)
+
   .row
-    .large-6.columns
-      h4 Regulamin programu ‘Narciarskie Dziki Sezonu’
+    .large-12.columns
+      h4 = setting.name
 
   .row
     .large-12.columns
       .callout
-        b Wprowadzenie. 
-        | Program ma na celu zmotywować i zintegrować sekcyjną społeczność do dzielenia się informacjami na temat aktualnych warunków narciarskich oraz wprowadzić zdrową rywalizację w celu poprawy kondycji. Polega na regularnym dodawaniu swoich aktywności narciarskich z pokonanym przewyższeniem oraz opcjonalnie zdjęciami, co umożliwia przegląd ostatnich tur w klubowym panelu. Przy okazji każdy uczestniczący w akcji klubowicz, ma możliwość wygrać sekcyjny gadżet.
-      ol
-        li
-          <b>Przejście narciarskie</b> - zwane dalej turą jest to aktywność, która składa się z:
-          ul
-            li <b>nazwy</b> - subiektywny opis aktywności np. ‘Niedziela w Tatrach’
-            li <b>daty</b> - data w której zostało pokonane przewyższenie, możemy też podać dzień rozpoczęcia wyjazdu aby podać sumaryczne przewyższenie dla całego wyjazdu
-            li <b>pokonanego przewyższenia</b> - sumaryczne przewyższenie tury
-            li <b>subiektywnej oceny przejścia</b>
-            li <b>uczestników</b> - koledzy z klubu oraz inne osoby
-            li uwag na temat napotkanych <b>aktualnych warunków narciarskich</b>
-            li <b>zdjęć z tury</b>
-            li <b>tracka GPS</b>
-        li
-          <b>Dodawanie tur.</b>
-          ul
-            li tury dodawać można za pomocą <a href='/przejscia/narciarstwo'>formularza</a> na stronie panelu klubowego.
-            li tury mogą dodawać tylko członkowie klubu z opłaconą składką
-            li dodający może dodać do tury innych członków klubu z rozwijanej listy
-            li przewyższenie zostanie dodane <b>wszystkim członkom zespołu</b>
-            li aby tura była zakwalifikowana do programu musi dotyczyć obecnego miesiąca, czyli tury z obecnego miesiąca dodajemy do 2 dnia kolejnego miesiąca
-            li nieistotne jest dokładne miejsce aktywności w nazwie lub opisie możemy podać np. Myślenice, Beskidy, Tatry, Pilsko, Dolina Białej Wody, Zjazd z Świnickiej Przełęczy, Haute Route, Trawers Tatr itp.
-            li starajmy się aby tylko jedna osoba z zespołu dodawała turę do systemu aby <b>uniknąć podwójnego naliczanie metrów</b>
-            li można nie publikować tury zaznaczając odpowiednią opcję w formularzu, wtedy nie pojawi się ona w tabeli przejść klubowych natomiast zostanie policzone jej przewyższenie
-            li tury na stoku możemy oznaczać jako tury treningowe jednak nie wliczają się one do kategorii górskiej i open
-            li obowiązuje zasada <b>fair-play</b> i dystansu do siebie
-        li <b>Tablica ‘Narciarskie dziki sezonu’</b>
-        | Nad listą przejść klubowych jest widoczna tablica, która zawiera trzy tabele:
-        ul
-          li 5 osób z największym sumarycznym przewyższeniem w poprzednim miesiącu
-          li 5 osób z największym sumarycznym przewyższeniem w obecnym miesiącu
-          li 5 osób z największym sumarycznym przewyższeniem w obecnym sezonie
-        | Sezony są wyznaczone datami:
-        ul
-          li <b>Zima</b> - od 1 grudnia do 29 lutego
-          li <b>Wiosna</b> - od 1 marca do 30 kwietnia
-        | Cały czas trwania programu wyznaczamy od <b>1 grudnia 2018 do 30 kwietnia 2019.</b>
-        br
-        | Potem jeździmy już tylko dla przyjemności.
-        li <b>Tabela Open</b>
-        | Tabela Open opiera się o <b>kontrakty</b> i <b>dzikometry</b>.
-        ul
-          li
-            <b>kontrakt</b> - wykonanie zadania z 
-            = link_to 'listy konktraktów', kontrakty_path
-          li <b>dzikometry</b> - metry przewyższenia przejścia + punkty za kontrakt
-        | Klasyfikacja opiera się na sumie <b>dzikometrów</b> za wszystkie przejścia w sezonie.
-        li <b>Klasyfikacja, publikacja.</b>
-        ul
-          li <b>Podsumowanie miesiąca.</b> Rozpoczynając od 1 stycznia, na początku każdego miesiąca będziemy publikować w klubowych mediach(grupa i fb) 5 osób z najwyższym sumarycznym przewyższeniem z poprzedniego miesiąca. W poście będzie też kolaż z wybranych zdjęć dodanych do przejść w poprzednim miesiącu.
-          li <b>Podsumowanie kwartalne.</b> Ogłosimy też Dzika Zimy(grudzień, styczeń, luty) i Dzika Wiosny(marzec, kwiecień).
-          li <b>Podsumowanie sezonu.</b> Na MAS 2019 zostanie ogłoszony Narciarski Dzik Sezonu 2018/2019 kategorii Open.
-        li <b>Nagrody i losowanie.</b>
-        ul
-          li <b>Dzik miesiąca</b> otrzyma wybrany przez przewodniczącego owoc miesiąca do odebrania na wybranym wydarzeniu sekcyjnym
-          li <b>Dzik Zimy/Wiosny</b>. - czapkę SNW
-          li <b>Dzik sezonu</b> - nagroda niespodzianka.
-          li <b>Strzelec miesiąca</b> - spośród wszystkich przejść z danego miesiąca zawierających przynajmniej jedno zdjęcie, zbieramy wszystkich uczestników i wśród nich losujemy nagrodę niespodziankę.
-          li <b>Tura sezonu</b> - przejście z największą ilością bicków z całego sezonu - uścisk dłoni przewodniczącego sekcji, który będzie ją wychwalał tu i tam, obowiązek zorganizowania slajdowiska
-          li Nagroda za wybitny <b>zjazd z całego sezonu</b> - czapka SNW
-          li <b>Fotograf sezonu</b> - autor wybranego zdjęcia z całego sezonu dodanego do przejścia - czapka SNW
-          li
-            b Można zdobyć w sezonie tylko jedną czapkę i jeden pokrowiec.
-        li
-          b Grupa sportowa - metry za boisko
-          br
-          | Dla grupy sportowej jest widoczna dodatkowa tabela zawierająca metry treningowe za przejścia po utwardzonych trasach.
-          br
-          | Nie są one wliczane do kategorii Narciarskie Dziki oraz Open.
-  .row
-    .large-6.columns
-      h4 Regulamin programu ‘Dzikie kontrakty’
-
-  .row
-    .large-12.columns
-      ol
-        li W programie <b>Dzikie Kontrakty</b> mogą wziąć udział (dobrowolnie) wszyscy uczestnicy programu dziki, będącymi członkami kw kraków.
-        li Program <b>Dzikie Kontrakty</b> obowiązuje dla wszystkich wycieczek zrealizowanych w sezonie 2019/2020 (można wtórnie uzupełnić kontrakty dla wycieczek już zrealizowanych)
-        li Program ma na celu propagowanie budowania rzetelnej wiedzy o planowaniu i wykorzystywaniu nart w turystyce górskiej i zakłada sumienną realizację wycieczek narciarskich spełniających kryteria kontraktów przez jego uczestników.
-        li Uczestnik może zrealizować każdy z kontraktów tylko jeden raz w ciągu sezonu. W przypadku udziału w kilku grupowych wycieczkach z tym samym kontraktem, na konto uczestnika dany kontrakt zostanie przypisany tylko jeden raz.
-        li Kontraktów nie można łączyć. W przypadku spełnienia kryteriów dwóch lub więcej kontraktów, uczestnik wybiera jeden kontrakt, który będzie miał zastosowanie dla danej wycieczki (np. ten najkorzystniejszy ze względu na najwyższą punktację).
-        li Kontrakt dotyczący ilości zjazdów (nr 4, 8 i 9) dodajemy po dokonaniu ostatniego, z podaniem w opisie linków do pozostałych zjazdów. Do całkowitej sumy zjazdów, można zaliczyć zjazdy zakwalifikowane w innych kontraktach.
-        li Przed skorzystaniem z programu &quot;DzikieKontrakty&quot; skonsultuj się z lekarzem lub bardziej doświadczonym kolegą narciarzem i upewnij się czy dasz radę ;)
-        li Program <b>Dzikie Kontakty</b> to przede wszystkim ZABAWA.
+        = sanitize setting.content
