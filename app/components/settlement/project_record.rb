@@ -42,7 +42,7 @@ module Settlement
 
     def income_sum
       project_items.includes(:accountable).where(accountable_type: Settlement::ProjectItemRecord::INCOME_ITEMS).inject(0) do |sum, item|
-        sum += item.accountable.income_sum
+        sum += item.accountable&.income_sum&.to_f
       end
     end
 
