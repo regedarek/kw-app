@@ -20,11 +20,27 @@ module Settlement
     end
 
     def income_cost
-      cost || accountable.income_sum
+      if cost
+        cost
+      else
+        if accountable
+          accountable.income_sum
+        else
+          0
+        end
+      end
     end
 
     def outcome_cost
-      cost || accountable.cost
+      if cost
+        cost
+      else
+        if accountable
+          accountable.cost
+        else
+          0
+        end
+      end
     end
   end
 end
