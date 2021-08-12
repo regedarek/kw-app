@@ -61,7 +61,8 @@
                 - @project.project_items.incomes.each do |item|
                   tr style='background-color: #e1faea;'
                     td.text-left
-                      = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
+                      - if item
+                        = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
                     td.text-right width='110px'
                       = number_to_currency(item.income_cost, unit: 'zł')
 
