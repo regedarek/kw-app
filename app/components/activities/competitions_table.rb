@@ -50,11 +50,11 @@ module Activities
     end
 
     def table_from_year
-      2020
+      2021
     end
 
     def table_to_year
-      2021
+      2022
     end
 
     def month_days(table_month)
