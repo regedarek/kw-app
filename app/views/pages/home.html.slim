@@ -19,9 +19,9 @@
                 td width='5%'
                   - if information.starred?
                     i.fi.fi-star style='color: #ffae00'
-                td width='20%'
+                td width='15%'
                   = I18n.t(information.news_type)
-                td width='50%'
+                td width='55%'
                   = link_to information.name, information_path(information.slug)
                 td.text-right  width='25%'
                   = information.created_at.to_date
