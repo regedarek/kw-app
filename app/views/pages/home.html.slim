@@ -34,12 +34,12 @@
               tr
                 td width='15%'
                   = link_to route.climbing_date, activities_mountain_route_path(route.id)
-                td width='35%'
+                td width='30%'
                   = route.name
-                td.text-center width='25%'
+                td.text-center width='15%'
                   - if route.area.present?
                     = route.area
-                td.text-right width='25%'
+                td.text-right width='40%'
                   = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
 
     .large-4.columns
