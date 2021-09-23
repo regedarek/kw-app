@@ -79,6 +79,7 @@ end
 
 group :development do
   gem 'brakeman', require: false
+  gem "rbnacl-libsodium"
   gem 'rbnacl'
   gem 'net-ssh', '>= 6.0.2'
   gem 'ed25519', '>= 1.2', '< 2.0'
