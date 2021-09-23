@@ -16,14 +16,14 @@
           table.stack
             - Management::News::InformationRecord.order(starred: :desc, created_at: :desc).limit(3).each do |information|
               tr style=("#{information.starred? ? 'background-color: #fffddf' : nil}")
-                td width='25px'
+                td width='5%'
                   - if information.starred?
                     i.fi.fi-star style='color: #ffae00'
-                td width='110px'
+                td width='20%'
                   = I18n.t(information.news_type)
-                td
+                td width='50%'
                   = link_to information.name, information_path(information.slug)
-                td.text-right width='110px'
+                td.text-right  width='25%'
                   = information.created_at.to_date
       .row
         .large-12.columns
@@ -32,24 +32,23 @@
           table.stack
             - Db::Activities::MountainRoute.where(hidden: false).includes(:colleagues).order(created_at: :desc).limit(5).each do |route|
               tr
-                td width='110px'
+                td width='15%'
                   = link_to route.climbing_date, activities_mountain_route_path(route.id)
-                td
+                td width='35%'
                   = route.name
-                td.text-center
+                td.text-center width='25%'
                   - if route.area.present?
                     = route.area
-                td.text-right
+                td.text-right width='25%'
                   = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
 
-
-    .large-4.columns      
+    .large-4.columns
       .row
         .large-12.columns
           = link_to supplementary_courses_path do
             h4 Nadchodzące wydarzenia
           div(id="events_component")
-          
+
       - if Training::Supplementary::Repository.new.future_courses_of_user(current_user).any?
         .row
           .large-12.columns
@@ -92,11 +91,11 @@
   .row
     .large-6.columns.text-left
       = link_to 'Polityka prywatności', 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html'
-      |  
+      |
       = link_to 'Regulamin', '/wydarzenia/regulamin'
-      |  
+      |
       = link_to 'Dane klubu', 'https://kw.krakow.pl/o-klubie/dane-klubu.html'
-      |  
+      |
       = link_to 'Darowizny', 'https://kw.krakow.pl/o-klubie/1-na-dzialalnosc-kw.html'
     .large-6.columns.text-right
       = image_tag 'dotpay.png', width: '80px'
