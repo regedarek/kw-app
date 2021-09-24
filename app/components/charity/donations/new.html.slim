@@ -1,54 +1,53 @@
 .column
-  .show-for-medium
-    .row
-      .large-12.colummns
-        = form_for @donation, as: :donation, url: donations_path do |f|
-          - if @donation.errors.any?
-            .callout.alert
-              ul
-                - form.errors.full_messages.each do |msg|
-                  li= msg
+  .row
+    .large-12.colummns
+      = form_for @donation, as: :donation, url: donations_path do |f|
+        - if @donation.errors.any?
+          .callout.alert
+            ul
+              - form.errors.full_messages.each do |msg|
+                li= msg
 
-          - if user_signed_in?
-            .row
-              .large-3.columns
-                b= f.label :display_name
-                = f.text_field :display_name, value: current_user.display_name
-          - else
-            .row
-              .large-3.columns
-                b= f.label :display_name
-                = f.text_field :display_name
-
+        - if user_signed_in?
           .row
             .large-3.columns
-              b= f.label :action_type, 'Cel dotacji'
-              - if request.path == '/dla-mariusza'
-                = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'mariusz'
-              - elsif request.path == '/na-ryse'
-                = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'crack'
-              - else
-                = f.select :action_type, Charity::DonationRecord.action_types_select, selected: @donation.action_type, include_blank: true
+              b= f.label :display_name
+              = f.text_field :display_name, value: current_user.display_name
+        - else
           .row
             .large-3.columns
-              b= f.label :cost
-              = f.number_field :cost
+              b= f.label :display_name
+              = f.text_field :display_name
 
-              = f.submit 'Przekaż', class: 'button'
+        .row
+          .large-3.columns
+            b= f.label :action_type, 'Cel dotacji'
+            - if request.path == '/dla-mariusza'
+              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'mariusz'
+            - elsif request.path == '/na-ryse'
+              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'crack'
+            - else
+              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: @donation.action_type, include_blank: true
+        .row
+          .large-3.columns
+            b= f.label :cost
+            = f.number_field :cost
+
+            = f.submit 'Przekaż', class: 'button'
 
 .row
-  .large-12.colummns
-    .row
-      .large-6.columns.text-left
-        = link_to 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html' do
-          span.label.secondary Polityka prywatności
-        = link_to '/wydarzenia/regulamin' do
-          span.label.secondary Regulamin
-        = link_to 'https://kw.krakow.pl/o-klubie/dane-klubu.html' do
-          span.label.secondary Dane klubu
-        = link_to 'https://kw.krakow.pl/o-klubie/1-na-dzialalnosc-kw.html' do
-          span.label.secondary Darowizny
-      .large-6.columns.text-right
-        = image_tag 'dotpay.png', width: '50px'
-        = image_tag 'visa.png', width: '50px'
-        = image_tag 'mastercard.png', width: '50px'
+.large-12.colummns
+  .row
+    .large-6.columns.text-left
+      = link_to 'https://kw.krakow.pl/o-klubie/polityka-prywatnosci.html' do
+        span.label.secondary Polityka prywatności
+      = link_to '/wydarzenia/regulamin' do
+        span.label.secondary Regulamin
+      = link_to 'https://kw.krakow.pl/o-klubie/dane-klubu.html' do
+        span.label.secondary Dane klubu
+      = link_to 'https://kw.krakow.pl/o-klubie/1-na-dzialalnosc-kw.html' do
+        span.label.secondary Darowizny
+    .large-6.columns.text-right
+      = image_tag 'dotpay.png', width: '50px'
+      = image_tag 'visa.png', width: '50px'
+      = image_tag 'mastercard.png', width: '50px'
