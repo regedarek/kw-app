@@ -8,6 +8,7 @@
 
       define! do
         required(:cost).filled(:str?)
+        required(:action_type).filled(:str?)
         required(:display_name).filled(:str?)
         optional(:user_id).filled
       end

@@ -12,7 +12,14 @@ module Charity
       return Left(message: 'Kwota i imie i nazwisko musi być uzupełnione!') unless form_outputs.success?
 
       donation = repository.create_donation(form_outputs: form_outputs)
-      donation.update description: "Wsprarcie Memoriału Jana Strzeleckiego od #{donation.display_name}"
+      if donation.crack?
+        donation.update description: "Darowizna na rzecz Klubu Wysokogórskiego Kraków - Rysa od #{donation.display_name}"
+      end
+
+      if donation.mariusz?
+        donation.update description: "Darowizna na pomoc społeczną rodziny Mariusza Norweckiego od #{donation.display_name}"
+      end
+
       payment = donation.payment
       Right(payment: payment)
     end

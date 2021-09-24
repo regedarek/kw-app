@@ -19,6 +19,11 @@
               .large-3.columns
                 b= f.label :display_name
                 = f.text_field :display_name
+
+          .row
+            .large-3.columns
+              b= f.label :action_type, 'Cel dotacji'
+              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: @donation.action_type, include_blank: true
           .row
             .large-3.columns
               b= f.label :cost

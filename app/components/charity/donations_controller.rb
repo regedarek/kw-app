@@ -32,6 +32,7 @@ module Charity
         .permit(
           :cost,
           :user_id,
+          :action_type,
           :display_name
         )
     end

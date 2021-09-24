@@ -4,8 +4,18 @@ module Charity
     has_one :payment, as: :payable, dependent: :destroy, class_name: 'Db::Payment'
     belongs_to :user, class_name: 'Db::User'
 
+    enum action_type: [:mariusz, :crack]
+
     def payment_type
-      :donations
+      if crack?
+        :donations_other
+      else
+        :donations
+      end
+    end
+
+    def self.action_types_select
+      Charity::DonationRecord.action_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.charity/donation_record.action_types'), w] }
     end
   end
 end

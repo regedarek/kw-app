@@ -47,6 +47,8 @@ module Payments
           Rails.application.secrets.dotpay_reservations_id
         when :trainings
           Rails.application.secrets.dotpay_trainings_id
+        when :donations_other
+          Rails.application.secrets.dotpay_donations_other_id
         when :donations
           Rails.application.secrets.dotpay_donations_id
         when :club_trips

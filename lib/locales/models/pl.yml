@@ -133,6 +133,10 @@ pl:
       settlement/project_record: Rozliczenie
       settlement/contractor_record: Kontrahent
     attributes:
+      charity/donation_record:
+        action_types:
+          mariusz: Dla Mariusza
+          crack: Rysa na Bronxie
       shop/order_record:
         states:
           new: Nowe
