@@ -20,7 +20,7 @@
               - if can? :obecni, Management::Voting::CaseRecord
                 li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
 
-          li= link_to 'Darowizny', new_donation_path
+          li= link_to 'Darowizny', '/darowizny'
 
           - if current_user.roles.include?('office') || current_user.roles.include?('settings')
             li
