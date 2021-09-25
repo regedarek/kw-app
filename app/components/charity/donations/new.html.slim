@@ -28,12 +28,20 @@
               = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'crack'
             - else
               = f.select :action_type, Charity::DonationRecord.action_types_select, selected: @donation.action_type, include_blank: true
+
         .row
           .large-12.columns
             b= f.label :cost, 'Kwota w polskich złotych*'
             = f.number_field :cost
 
-            = f.submit 'Przekaż', class: 'button'
+        .row
+          .large-12.columns
+            = f.check_box :terms_of_service
+            = f.label :terms_of_service, 'Akceptuję regulamin darowizn'
+
+        .row
+          .large-12.columns
+            = f.submit 'Przekaż darowiznę', class: 'button success'
 
   .large-6.columns
     .callout

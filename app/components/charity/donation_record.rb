@@ -6,6 +6,8 @@ module Charity
 
     enum action_type: [:mariusz, :crack]
 
+    validates_acceptance_of :terms_of_service
+
     def payment_type
       if crack?
         :donations_other

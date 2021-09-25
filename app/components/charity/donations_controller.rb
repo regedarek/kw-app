@@ -33,7 +33,8 @@ module Charity
           :cost,
           :user_id,
           :action_type,
-          :display_name
+          :display_name,
+          :terms_of_service
         )
     end
   end

@@ -11,6 +11,7 @@
         required(:action_type).filled(:str?)
         required(:display_name).filled(:str?)
         optional(:user_id).filled
+        required(:terms_of_service).filled(eql?: '1')
       end
     end
   end

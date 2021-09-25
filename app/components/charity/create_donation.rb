@@ -9,6 +9,7 @@ module Charity
 
     def call(raw_inputs:)
       form_outputs = form.call(raw_inputs.to_unsafe_h)
+      return Left(message: 'Zaakceptuj regulamin darowizn') if form_outputs.errors.key?(:terms_of_service)
       return Left(message: 'Kwota i cel dotacji musi być uzupełnione!') unless form_outputs.success?
 
       donation = repository.create_donation(form_outputs: form_outputs)
