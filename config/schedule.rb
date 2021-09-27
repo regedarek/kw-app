@@ -9,7 +9,7 @@ every '*/30 8-23 * * *' do
 end
 
 every 6.hours do
-  rake :store_topr
+  #rake :store_topr
 end
 
 every '30 4 * * *' do
