@@ -11,14 +11,15 @@
           = link_to root_path, style: 'padding: 0 1rem;' do
             = image_tag('logo_kw_krakow.jpg', style: 'max-height: 35px;')
         - if user_signed_in?
-          li
-            = link_to 'Walne zebranie', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
-            ul.menu.vertical
-              li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/walne-zebranie-czlonkow-klubu-29-wrzesnia-2021'
-              li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
-              li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
-              - if can? :obecni, Management::Voting::CaseRecord
-                li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
+          - if false
+            li
+              = link_to 'Walne zebranie', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
+              ul.menu.vertical
+                li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/walne-zebranie-czlonkow-klubu-29-wrzesnia-2021'
+                li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
+                li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
+                - if can? :obecni, Management::Voting::CaseRecord
+                  li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
 
           li= link_to 'Darowizny', '/darowizny'
 
@@ -114,31 +115,30 @@
     .top-bar-right
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         - if user_signed_in?
-          - if false
-            li
-              = link_to 'Programy', root_path
-              ul.menu.vertical
-                li= link_to 'KSKS', '/trening/skimo'
-                li= link_to 'Tabela górskie dziki', gorskie_dziki_path
-                li= link_to 'Tabela narciarske dziki', narciarskie_dziki_path
-                li= link_to 'Narciarskie Kontrakty', '/narciarskie-dziki/kontrakty'
-            li
-              = link_to 'Funkcjonalności', root_path
-              ul.menu.vertical
-                li= link_to 'Baza uchwał', resolutions_path
-                li= link_to 'Biblioteka', biblioteka_path
-                li= link_to 'Wypożyczalnia', new_reservation_path
-                li= link_to 'Sklepik Klubowy', '/sklepik'
+          li
+            = link_to 'Programy', root_path
+            ul.menu.vertical
+              li= link_to 'KSKS', '/trening/skimo'
+              li= link_to 'Tabela górskie dziki', gorskie_dziki_path
+              li= link_to 'Tabela narciarske dziki', narciarskie_dziki_path
+              li= link_to 'Narciarskie Kontrakty', '/narciarskie-dziki/kontrakty'
+          li
+            = link_to 'Funkcjonalności', root_path
+            ul.menu.vertical
+              li= link_to 'Baza uchwał', resolutions_path
+              li= link_to 'Biblioteka', biblioteka_path
+              li= link_to 'Wypożyczalnia', new_reservation_path
+              li= link_to 'Sklepik Klubowy', '/sklepik'
 
-                li= link_to 'Serwis Narciarski', '/serwis-narciarski/regulamin'
-                li= link_to 'Baza klubowiczów', '/klubowicze'
-                li= link_to 'Kontakty klubowe', '/kontakty'
-                li= link_to 'Rozliczenia', admin_contracts_path
-                li= link_to 'Zniżki i rabaty', discounts_path
+              li= link_to 'Serwis Narciarski', '/serwis-narciarski/regulamin'
+              li= link_to 'Baza klubowiczów', '/klubowicze'
+              li= link_to 'Kontakty klubowe', '/kontakty'
+              li= link_to 'Rozliczenia', admin_contracts_path
+              li= link_to 'Zniżki i rabaty', discounts_path
 
-            li= link_to 'Przejścia', '/przejscia', class: 'button success'
-            li= link_to 'Projekty', '/projekty', class: 'button warning'
-            li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
+          li= link_to 'Przejścia', '/przejscia', class: 'button success'
+          li= link_to 'Projekty', '/projekty', class: 'button warning'
+          li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
         - else
           li.show-for-medium
             - unless user_signed_in?
@@ -149,21 +149,20 @@
                 li= link_to 'Zapisz się do klubu!', '/zgloszenie'
 
         - if user_signed_in?
-          - if false
-            li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
-            li#cart  data={ userId: current_user.id }
-            li.remove-arrow data-behaviour='js-notifications'
-              = link_to '#', data: { behaviour: 'js-notifications-mark-as-read' } do
-                .show-for-small-only
-                  | Nowe powiadomienia (
-                  b data-behaviour='js-notifications-unread-count'
-                  | )
-                .show-for-medium style='color: red'
-                  i.fi.fi-flag
-                  |  
-                  span data-behaviour='js-notifications-unread-count'
-                    = NotificationCenter::NotificationRecord.where(recipient: current_user).unread.count
-              ul.menu.vertical data-behaviour='js-notifications-items'
+          li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
+          li#cart  data={ userId: current_user.id }
+          li.remove-arrow data-behaviour='js-notifications'
+            = link_to '#', data: { behaviour: 'js-notifications-mark-as-read' } do
+              .show-for-small-only
+                | Nowe powiadomienia (
+                b data-behaviour='js-notifications-unread-count'
+                | )
+              .show-for-medium style='color: red'
+                i.fi.fi-flag
+                |  
+                span data-behaviour='js-notifications-unread-count'
+                  = NotificationCenter::NotificationRecord.where(recipient: current_user).unread.count
+            ul.menu.vertical data-behaviour='js-notifications-items'
         - if can? :manage, Mailboxer::Conversation
           li.remove-arrow = link_to conversations_path, style: 'padding: 0rem 1rem;padding-right: 0;' do
             .show-for-medium style='color: green'

@@ -4,8 +4,6 @@ module Activities
     before_action :authenticate_user!, only: [:create, :update, :destroy]
 
    def index
-      return redirect_to root_path, alert: 'Tymczasowo zablokowane'
-
       authorize! :read, ::Db::Activities::MountainRoute
 
       # hotfix
