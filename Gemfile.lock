@@ -144,7 +144,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.8)
-    connection_pool (2.2.3)
+    connection_pool (2.2.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.6)
@@ -437,7 +437,7 @@ GEM
       ffi
     rbnacl-libsodium (1.0.16)
       rbnacl (>= 3.0.1)
-    redis (4.2.5)
+    redis (4.4.0)
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.1)
@@ -491,7 +491,7 @@ GEM
     semantic_range (2.3.1)
     sendgrid-ruby (6.4.0)
       ruby_http_client (~> 3.4)
-    sidekiq (6.1.2)
+    sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
