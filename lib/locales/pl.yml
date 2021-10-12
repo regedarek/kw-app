@@ -12,6 +12,10 @@ pl:
   start_end_date_html: "<b>Termin kursu</b>: Od %{start_date} do %{end_date}"
   from_date_html: "<b>Od</b>: %{start_date}"
   to_date_html: "<b>Do</b>: %{end_date}"
+  currency_type:
+    pln: PLN
+    euro: EURO
+    usd: USD
   business:
     mailer:
       charge_link: Kliknij tutaj aby opłacić zadatek w naszym systemie płatności!
@@ -151,6 +155,7 @@ pl:
   payout_type:
     to_contractor: Płatność na konto kontrahenta
     return: Zwrot na konto rozliczanego
+    credit_card: Karta klubowa
   substantive_type:
     office: Biuro KW
     substantive_taxes: Księgowowść/Podatki

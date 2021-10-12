@@ -187,7 +187,12 @@ pl:
         group_type: Sekcja
         activity_type: Aktywność
         course_type_id: Rodzaj kursu
+        currency_type: Waluta
         state: Status
+        currency_types:
+          pln: PLN
+          euro: EURO
+          usd: USD
         states:
           new: Nowy
           accepted: Sprawdzony
@@ -257,6 +262,7 @@ pl:
         payout_types:
           to_contractor: Płatność na konto kontrahenta
           return: Zwrot na konto rozliczanego
+          credit_card: Karta Klubowa
         cost: Kwota rozliczenia
       activities/mountain_route:
         name: nazwa drogi

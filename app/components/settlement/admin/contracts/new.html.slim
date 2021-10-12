@@ -36,7 +36,7 @@
             include_blank: true
 
       .row
-        .large-3.columns
+        .large-2.columns
           b= f.label :document_number, 'Numer dokumentu*'
           = f.text_field :document_number
 
@@ -52,12 +52,13 @@
           b= f.label :payout_type, 'Rodzaj płatności*'
           = f.select :payout_type, Settlement::ContractRecord.payout_types.map { |w, _| [I18n.t(w, scope: :payout_type), w] }, include_blank: true
 
-        .large-3.columns
+        .large-2.columns
           b= f.label :cost, "Kwota rozliczenia*"
-          .input-group
-            = f.number_field :cost, step: 0.01, class: 'input-group-field'
-            span.input-group-label
-                | zł
+          = f.number_field :cost, step: 0.01, class: 'input-group-field'
+
+        .large-2.columns
+          b= f.label :currency_type, 'Waluta*'
+          = f.select :currency_type, Settlement::ContractRecord.currency_types.map { |w, _| [I18n.t(w, scope: :currency_type), w] }
 
       .row
         .large-12.columns

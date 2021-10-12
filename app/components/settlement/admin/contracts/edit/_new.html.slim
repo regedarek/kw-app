@@ -12,7 +12,7 @@
       { style: 'width: 100%', class: 'js-contractor-select' }
 
 .row
-  .large-3.columns
+  .large-2.columns
     b= f.label :document_number
     = f.text_field :document_number
 
@@ -30,9 +30,11 @@
     = f.select :payout_type,
       Settlement::ContractRecord.payout_types_select, include_blank: true
 
-  .large-3.columns
+  .large-2.columns
     b= f.label :cost, "Kwota rozliczenia*"
-    .input-group
-      = f.number_field :cost, step: 0.01, class: 'input-group-field'
-      span.input-group-label
-          | zł
+    = f.number_field :cost, step: 0.01, class: 'input-group-field'
+
+  .large-2.columns
+    b= f.label :currency_type
+    = f.select :currency_type,
+      Settlement::ContractRecord.currency_types_select, include_blank: true

@@ -1,1 +1,2 @@
-= link_to item.accountable.title, admin_contract_path(item.accountable_id)
+- if item.accountable
+  = link_to item.accountable.title, admin_contract_path(item.accountable_id)

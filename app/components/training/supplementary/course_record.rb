@@ -20,7 +20,7 @@ module Training
       has_many :conversation_items, as: :messageable, class_name: '::Messaging::ConversationItemRecord', :dependent => :destroy
       has_many :conversations, :through => :conversation_items, :dependent => :destroy
 
-      has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord'
+      has_many :project_items, as: :accountable, class_name: '::Settlement::ProjectItemRecord', :dependent => :destroy
       has_many :projects, through: :project_items
 
       has_many :contract_events, class_name: 'Settlement::ContractEventsRecord', foreign_key: :event_id

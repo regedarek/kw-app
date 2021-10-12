@@ -63,7 +63,7 @@
                     td.text-left
                       - if item
                         = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
-                    td.text-right width='110px'
+                    td.text-right
                       = number_to_currency(item.income_cost, unit: 'zł')
 
           .large-6.columns
@@ -75,7 +75,7 @@
                   tr style='background-color: #f7e4e1;'
                     td.text-left
                       = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
-                    td.text-right width='110px'
+                    td.text-right
                       = number_to_currency(item.outcome_cost, unit: 'zł')
 
       #incomes.tabs-panel

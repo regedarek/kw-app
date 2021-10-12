@@ -1,18 +1,21 @@
 .callout
   .row
     .large-8.columns
-      h4 Wydarzenie
-      - contract = item.accountable
-      = link_to item.accountable.title, admin_contract_path(item.accountable.id)
-      br
-      = sanitize "<b>Kwota rozliczenia</b>: #{number_to_currency(contract&.cost, unit: 'zł')}"
-      - if item.cost
+      - if item.accountable
+        h4 Wydarzenie
+        - contract = item.accountable
+        = link_to item.accountable.title, admin_contract_path(item.accountable.id)
         br
-        = sanitize "<b>Kwota dotycząca projektu</b>: #{number_to_currency(item&.cost, unit: 'zł')}"
-      br
-      = sanitize "<b>Utworzył</b>: #{contract&.creator&.display_name}"
-      br
-      = sanitize "<b>Dotyczy</b>: #{contract&.contractor&.name}"
+        = sanitize "<b>Kwota rozliczenia</b>: #{number_to_currency(contract&.cost, unit: 'zł')}"
+        - if item.cost
+          br
+          = sanitize "<b>Kwota dotycząca projektu</b>: #{number_to_currency(item&.cost, unit: 'zł')}"
+        br
+        = sanitize "<b>Utworzył</b>: #{contract&.creator&.display_name}"
+        br
+        = sanitize "<b>Dotyczy</b>: #{contract&.contractor&.name}"
+      - else
+        | Brak
 
     .large-4.columns
       = form_for item, as: :project_item, url: admin_project_item_path(item.id), method: :put do |f|

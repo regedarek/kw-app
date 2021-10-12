@@ -14,6 +14,7 @@ module Settlement
     required(:cost).filled(:float?)
     required(:document_type).filled
     required(:payout_type).filled
+    required(:currency_type).filled
     required(:document_date).filled(:str?)
     required(:document_number).filled(:str?)
     required(:description).maybe(:str?)

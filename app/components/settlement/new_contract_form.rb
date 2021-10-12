@@ -13,6 +13,7 @@ module Settlement
     required(:document_date).filled(:str?)
     optional(:document_type).maybe(:str?)
     optional(:payout_type).maybe(:str?)
+    required(:currency_type).filled(:str?)
     required(:cost).filled(:float?)
     required(:description).maybe(:str?)
     optional(:contract_template_id).maybe(:int?)

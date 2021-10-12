@@ -39,7 +39,7 @@
       .row
         .large-6.columns
           b Kwota rozliczenia: 
-          = number_to_currency(@contract.cost, unit: 'zł')
+          = number_to_currency(@contract.cost, unit: @contract.currency_type.upcase)
 
       .row
         .large-12.columns
