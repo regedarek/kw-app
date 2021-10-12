@@ -31,14 +31,11 @@ table.hover
             - else
               span.label.warning = sign_up.first_payment.amount
         td.text-center
-          - if !sign_up.course&.packages?
-            - if sign_up.second_payment
-              - if sign_up.second_payment.paid?
-                span.label.success = sign_up.second_payment.amount
-              - else
-                span.label.warning = sign_up.second_payment.amount
-          - else
-            span.label.secondary Nie dotyczy
+          - if sign_up.second_payment
+            - if sign_up.second_payment.paid?
+              span.label.success = sign_up.second_payment.amount
+            - else
+              span.label.warning = sign_up.second_payment.amount
         td.text-center
           - if !sign_up.course&.packages?
             - if sign_up.list
