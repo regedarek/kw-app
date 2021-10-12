@@ -90,7 +90,11 @@ module Business
       return false if @sign_up.payments.count >= 2
 
       @sign_up.accept!
-      @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_second_cost)
+      if @sign_up.course.packages?
+        @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.package_type.cost - @sign_up.course.payment_first_cost)
+      else
+        @sign_up.payments.create(dotpay_id: SecureRandom.hex(13), amount: @sign_up.course.payment_second_cost)
+      end
       ::Business::SignUpMailer.sign_up_second(@sign_up.id).deliver_later
 
       redirect_to edit_business_sign_up_path(@sign_up.id), notice: 'Zaakceptowano zaliczkę i wysłano drugi link!'

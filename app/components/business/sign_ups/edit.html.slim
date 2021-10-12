@@ -61,7 +61,7 @@
       .large-4.columns
         = link_to 'kursy', courses_path, class: 'secondary button large expanded'
   .large-6.columns
-    - if @sign_up.course.packages?
+    - if false && @sign_up.course.packages?
       .row
         .large-12.columns
           .callout
@@ -84,12 +84,20 @@
                     span.dashboard-table-timestamp= @sign_up.equipment_at.strftime("%d/%m/%Y %H:%M")
               .large-6.columns
                 h5 Reszta
-                - if @sign_up.second_payment
-                  = render 'payment', payment: @sign_up.second_payment, number: 2
+                - if @sign_up.course.packages?
+                  - if @sign_up.second_payment
+                    = render 'payment', payment: @sign_up.second_payment, number: 2
+                  - else
+                    = "#{@sign_up.package_type.cost - @sign_up.course.payment_first_cost} zł"
+                    br
+                    = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
                 - else
-                  = "#{@sign_up.course.payment_second_cost} zł"
-                  br
-                  = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
+                  - if @sign_up.second_payment
+                    = render 'payment', payment: @sign_up.second_payment, number: 2
+                  - else
+                    = "#{@sign_up.course.payment_second_cost} zł"
+                    br
+                    = link_to 'Zaakceptuj i wyślij link', send_second_business_sign_up_path(@sign_up.id), method: :post
 
     - if @sign_up.list
       .row

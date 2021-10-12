@@ -147,7 +147,7 @@ pl:
         phone: Telefon
         expired_at: Wygaśnie
         rodo: Dane osobowe
-        rules: Regulaminu kursów
+        rules: Regulamin kursów
         danger: Świadomość
         business_course_package_type_id: Pakiet
         data: Przetwarzanie danych
