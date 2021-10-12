@@ -173,6 +173,7 @@ module Business
         activity_type: activity_type,
         logo: logo,
         display_name: name,
+        instructor_name: instructor ? instructor.display_name : "",
         free_seats: max_seats ? max_seats - sign_ups_count : 0,
         sign_up_url: event_url
       )
