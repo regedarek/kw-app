@@ -77,7 +77,7 @@
                       = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
                     td.text-right
                       - if item.accountable_type == "Settlement::ContractRecord"
-                        = number_to_currency(item.outcome_cost, unit: item.accountable.currency_type.upcase)
+                        = number_to_currency(item.outcome_cost, unit: 'PLN')
                       - else
                         = number_to_currency(item.outcome_cost, unit: 'PLN')
 
