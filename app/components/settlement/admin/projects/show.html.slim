@@ -30,13 +30,13 @@
       .row
         .large-4.columns
           b Bilans: 
-          = number_to_currency(@project.balance, unit: 'zł')
+          = number_to_currency(@project.balance, unit: 'PLN')
         .large-4.columns
           b Wpływy: 
-          = number_to_currency(@project.income_sum, unit: 'zł')
+          = number_to_currency(@project.income_sum, unit: 'PLN')
         .large-4.columns
           b Koszty: 
-          = number_to_currency(@project.outcome_sum, unit: 'zł')
+          = number_to_currency(@project.outcome_sum, unit: 'PLN')
 
 .row
   .large-12.columns
@@ -54,7 +54,7 @@
       #overview.tabs-panel.is-active
         .row
           .large-6.columns
-            h5 = "Wpływy (#{number_to_currency(@project.income_sum, :unit => "zł")})"
+            h5 = "Wpływy (#{number_to_currency(@project.income_sum, :unit => "PLN")})"
 
             table
               tbody
@@ -64,10 +64,10 @@
                       - if item
                         = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
                     td.text-right
-                      = number_to_currency(item.income_cost, unit: 'zł')
+                      = number_to_currency(item.income_cost, unit: 'PLN')
 
           .large-6.columns
-            h5 = "Koszty (#{number_to_currency(@project.outcome_sum, :unit => "zł")})"
+            h5 = "Koszty (#{number_to_currency(@project.outcome_sum, :unit => "PLN")})"
 
             table
               tbody
@@ -76,7 +76,10 @@
                     td.text-left
                       = render "settlement/admin/projects/items/#{item.accountable_type.underscore}_link", item: item
                     td.text-right
-                      = number_to_currency(item.outcome_cost, unit: 'zł')
+                      - if item.accountable_type == "Settlement::ContractRecord"
+                        = number_to_currency(item.outcome_cost, unit: item.accountable.currency_type.upcase)
+                      - else
+                        = number_to_currency(item.outcome_cost, unit: 'PLN')
 
       #incomes.tabs-panel
         .row
@@ -154,7 +157,7 @@
                               = f.submit 'Dodaj kurs', class: 'button expanded'
 
       #outcomes.tabs-panel
-        h5 = "Koszty (#{number_to_currency(@project.outcome_sum, unit: 'zł')})"
+        h5 = "Koszty (#{number_to_currency(@project.outcome_sum, unit: 'PLN')})"
         .row
           .large-6.columns
             - @project.project_items.includes(accountable: [:creator, :contractor]).where(accountable_type: 'Settlement::ContractRecord').each do |item|

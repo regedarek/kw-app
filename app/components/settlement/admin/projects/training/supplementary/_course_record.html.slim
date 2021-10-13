@@ -5,7 +5,7 @@
         h5 Wydarzenie
         = link_to item.accountable&.name_with_date, item.accountable
         br
-        = sanitize "<b>Kwota</b>: #{number_to_currency(item.income_cost, unit: 'zł')}"
+        = sanitize "<b>Kwota</b>: #{number_to_currency(item.income_cost, unit: 'PLN')}"
         br
         = sanitize "<b>Koordynator</b>: #{item.accountable.organizer.display_name}"
         br

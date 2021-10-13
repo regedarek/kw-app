@@ -6,10 +6,10 @@
         - contract = item.accountable
         = link_to item.accountable.title, admin_contract_path(item.accountable.id)
         br
-        = sanitize "<b>Kwota rozliczenia</b>: #{number_to_currency(contract&.cost, unit: 'zł')}"
+        = sanitize "<b>Kwota rozliczenia</b>: #{number_to_currency(contract&.cost, unit: contract.currency_type.upcase)}"
         - if item.cost
           br
-          = sanitize "<b>Kwota dotycząca projektu</b>: #{number_to_currency(item&.cost, unit: 'zł')}"
+          = sanitize "<b>Kwota dotycząca projektu</b>: #{number_to_currency(item&.cost, unit: 'PLN')}"
         br
         = sanitize "<b>Utworzył</b>: #{contract&.creator&.display_name}"
         br

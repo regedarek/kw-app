@@ -4,11 +4,11 @@
       h5 Kurs SA
       = link_to item.accountable.name_with_date, item.accountable
       br
-      = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.price, unit: 'zł')}"
+      = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.price, unit: 'PLN')}"
       br
-      = sanitize "<b>Zadatek</b>: #{number_to_currency(item.accountable.payment_first_cost, unit: 'zł')}"
+      = sanitize "<b>Zadatek</b>: #{number_to_currency(item.accountable.payment_first_cost, unit: 'PLN')}"
       br
-      = sanitize "<b>Reszta</b>: #{number_to_currency(item.accountable.payment_second_cost, unit: 'zł')}"
+      = sanitize "<b>Reszta</b>: #{number_to_currency(item.accountable.payment_second_cost, unit: 'PLN')}"
       br
       = sanitize "<b>Koordynator</b>: #{item.accountable.coordinator.display_name}"
       - if item.accountable.instructor

@@ -6,8 +6,8 @@
       .text-right
         - if sign_up.payment
           - if sign_up.payment.paid?
-            span.label.success= number_to_currency(sign_up.cost, unit: 'zł')
+            span.label.success= number_to_currency(sign_up.cost, unit: 'PLN')
           - else
-            span.label.alert= number_to_currency(sign_up.cost, unit: 'zł')
+            span.label.alert= number_to_currency(sign_up.cost, unit: 'PLN')
         - else
-          span.label.warning= number_to_currency(sign_up.cost, unit: 'zł')
+          span.label.warning= number_to_currency(sign_up.cost, unit: 'PLN')

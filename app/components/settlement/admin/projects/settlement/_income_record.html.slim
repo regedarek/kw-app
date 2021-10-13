@@ -4,7 +4,7 @@
       h5 Bezpośrednia wpłata
       = sanitize "<b>Nazwa</b>: #{item.accountable.name}"
       br
-      = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.cost, unit: 'zł')}"
+      = sanitize "<b>Kwota</b>: #{number_to_currency(item.accountable.cost, unit: 'PLN')}"
       br
       .callout
         = sanitize item.accountable.description
