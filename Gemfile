@@ -47,7 +47,7 @@ gem 'axlsx_rails'
 gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'carrierwave'
 gem 'fog-openstack', require: "fog/openstack"
-gem 'mini_magick'
+gem "mini_magick", ">= 4.9.4"
 gem 'omniauth-google-oauth2', '~> 0.6.0'
 gem 'google_calendar'
 gem 'koala'

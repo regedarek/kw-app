@@ -325,7 +325,7 @@ GEM
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
-    mini_magick (4.8.0)
+    mini_magick (4.11.0)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -342,7 +342,6 @@ GEM
     net-ssh (6.1.0)
     netrc (0.11.0)
     nio4r (2.5.2)
-    nip_pesel_regon (1.0.0.rc2)
     nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
@@ -624,10 +623,9 @@ DEPENDENCIES
   listen (~> 3.0)
   mailboxer!
   mailgun-ruby (~> 1.1.6)
-  mini_magick
+  mini_magick (>= 4.9.4)
   nested_form_fields
   net-ssh (>= 6.0.2)
-  nip_pesel_regon
   omniauth-google-oauth2 (~> 0.6.0)
   pagy
   paper_trail
