@@ -85,9 +85,10 @@
         = f.hidden_field :remember_me, value: true
 
         = f.submit "Zaloguj się", class: 'button large expanded'
-        p.text-center
-          | lub
-        = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path(protocol: 'https'), class: 'button secondary large expanded'
+        - if Rails.env.development?
+          p.text-center
+            | lub
+          = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path(protocol: 'https'), class: 'button secondary large expanded'
   .row
     .large-6.columns.text-left
       p
