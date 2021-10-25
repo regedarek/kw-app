@@ -39,6 +39,8 @@ wb.styles do |style|
     human_contract_attributes = contract_attributes.map do |attr|
         case attr
         when *contract_type_attributes
+          return nil unless attr.present?
+
           I18n.t("activerecord.attributes.settlement/contract_record.#{attr}")
         else
           Settlement::ContractRecord.human_attribute_name(attr)
