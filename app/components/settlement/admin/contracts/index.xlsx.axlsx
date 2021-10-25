@@ -3,19 +3,25 @@ contract_attributes = %i(
   title
   description
   cost
-  period_date
-  preclosed_date
   document_number
   internal_number
   document_type
   contractor_id
   creator_id
+  acceptor_id
+  contractor_id
+  checker_id
+  closer_id
   group_type
   financial_type
   substantive_type
   payout_type
   event_type
   activity_type
+  currency_type
+  period_date
+  document_date
+  preclosed_date
   created_at
   updated_at
 )
@@ -49,11 +55,13 @@ wb.styles do |style|
       contract_values = contract_attributes.map do |attr|
         case attr
         when *contract_type_attributes
-          return nil unless attr.present?
+          return nil unless profile.read_attribute(attr).present?
 
           I18n.t(profile.read_attribute(attr), scope: "activerecord.attributes.settlement/contract_record.#{attr.to_s}s")
         when :creator_id
           Db::User.find_by(id: profile.read_attribute(attr))&.display_name
+        when :description
+          ActionView::Base.full_sanitizer.sanitize(profile.read_attribute(attr))
         when :contractor_id
           Settlement::ContractorRecord.find_by(id: profile.read_attribute(attr))&.name
         else
