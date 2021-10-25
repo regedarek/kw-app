@@ -1,5 +1,6 @@
 wb = xlsx_package.workbook
 contract_attributes = %i(
+  id
   title
   description
   cost
@@ -55,10 +56,18 @@ wb.styles do |style|
       contract_values = contract_attributes.map do |attr|
         case attr
         when *contract_type_attributes
-          return nil unless profile.read_attribute(attr).present?
-
-          I18n.t(profile.read_attribute(attr), scope: "activerecord.attributes.settlement/contract_record.#{attr.to_s}s")
+          if profile.read_attribute(attr).present?
+            I18n.t(profile.read_attribute(attr), scope: "activerecord.attributes.settlement/contract_record.#{attr.to_s}s")
+          else
+            ''
+          end
         when :creator_id
+          Db::User.find_by(id: profile.read_attribute(attr))&.display_name
+        when :checker_id
+          Db::User.find_by(id: profile.read_attribute(attr))&.display_name
+        when :acceptor_id
+          Db::User.find_by(id: profile.read_attribute(attr))&.display_name
+        when :closer_id
           Db::User.find_by(id: profile.read_attribute(attr))&.display_name
         when :description
           ActionView::Base.full_sanitizer.sanitize(profile.read_attribute(attr))
