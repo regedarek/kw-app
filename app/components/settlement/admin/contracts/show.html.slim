@@ -8,7 +8,10 @@
       .row
         .large-12.columns
           b Kontrahent: 
-          = link_to @contract.contractor.name, admin_contractor_path(@contract.contractor.id)
+          - if @contract.contractor
+            = link_to @contract.contractor.name, admin_contractor_path(@contract.contractor.id)
+          - else
+            | Brak kontrahenta
 
       .row
         .large-12.columns
