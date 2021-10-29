@@ -12,6 +12,7 @@ contract_attributes = %i(
   acceptor_id
   contractor_id
   checker_id
+  project_id
   closer_id
   group_type
   financial_type
@@ -67,6 +68,8 @@ wb.styles do |style|
           Db::User.find_by(id: profile.read_attribute(attr))&.display_name
         when :acceptor_id
           Db::User.find_by(id: profile.read_attribute(attr))&.display_name
+        when :project_id
+          Settlement::ProjectRecord.find_by(id: profile.read_attribute(attr))&.name
         when :closer_id
           Db::User.find_by(id: profile.read_attribute(attr))&.display_name
         when :description
