@@ -183,8 +183,31 @@
                   | Jest już po terminie, kiedy możliwe było zapisanie się?
               - else
                 - if @limiter.sign_ups_reached?
-                  .callout.warning
-                    | Limit miejsc został wyczerpany.
+                  - if @course.reserve_list
+                    = form_for :sign_up, url: supplementary_sign_ups_path do |z|
+                      = z.hidden_field :course_id, value: @course.id
+                      = z.text_field :name, placeholder: 'Imię i nazwisko'
+                      = z.email_field :email, placeholder: "E-mail"
+                      - if @course.price
+                        - if @course.packages
+                          = z.select :supplementary_course_package_type_id,
+                          @course.package_types.where(membership: false).collect {|pt| [pt.name_with_cost, pt.id]},
+                          include_blank: 'Wybierz pakiet'
+                      - if @course.question
+                        .callout.warning
+                          | Odpowiedz na pytanie zadane w opisie wydarzenia
+                        = z.text_field :question, placeholder: 'Odpowiedź na pytanie'
+                      - else
+                        = z.hidden_field :question, value: nil
+                      = z.submit 'Zapisz na listę rezerwową', class: 'button large secondary expanded'
+                      .callout.secondary
+                        | Limit miejsc został wyczerpany ale możesz zapisać się na 
+                        | listę rezerwową i poczekać na zwiększenie limitu.
+                        br
+                        b Jeżeli zwolni się miejsce zostaniesz powiadomiony e-mailem.
+                  - else
+                    .callout.warning
+                      | Limit miejsc został wyczerpany.
                 - else
                   .callout.secondary
                     | Twój e-mail wykasujemy z bazy zaraz po zakończeniu wydarzenia.
