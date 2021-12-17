@@ -7,13 +7,26 @@ module Membership
         if form.valid?
           last_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
           current_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.year)
+          profile = Db::Profile.find_by(kw_id: kw_id)
           base_cost = if last_year_fee.present? && last_year_fee.payment.paid?
-                   150
-                 elsif current_year_fee.present? && current_year_fee.payment.paid?
-                   150
-                 else
-                   200
-                 end
+            if profile && (profile.youth? || profile.position.include?("retired"))
+              100
+            else
+              150
+            end
+          elsif current_year_fee.present? && current_year_fee.payment.paid?
+            if profile && (profile.youth? || profile.position.include?("retired"))
+              100
+            else
+              150
+            end
+          else
+            if profile && (profile.youth? || profile.position.include?("retired"))
+              150
+            else
+              200
+            end
+          end
           plastic_cost = form.plastic ? 15 : 0
           cost = base_cost + plastic_cost
 
