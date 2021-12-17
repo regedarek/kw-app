@@ -8,11 +8,11 @@ module Membership
           last_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.last_year.year)
           current_year_fee = Db::Membership::Fee.find_by(kw_id: kw_id, year: Date.today.year)
           base_cost = if last_year_fee.present? && last_year_fee.payment.paid?
-                   100
-                 elsif current_year_fee.present? && current_year_fee.payment.paid?
-                   100
-                 else
                    150
+                 elsif current_year_fee.present? && current_year_fee.payment.paid?
+                   150
+                 else
+                   200
                  end
           plastic_cost = form.plastic ? 15 : 0
           cost = base_cost + plastic_cost
