@@ -13,7 +13,7 @@ module Db
       end
 
       def description
-        if cost == 150
+        if cost == 200
           "Składka członkowska za rok #{year} oraz opłata reaktywacyjna od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{kw_id}"
         else
           "Składka członkowska za rok #{year} od #{user.first_name} #{user.last_name} nr legitymacji klubowej: #{kw_id}"
