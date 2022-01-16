@@ -35,6 +35,7 @@ module Business
     validates :start_date, :max_seats, presence: true
     validates :price, :description, :payment_first_cost, :payment_second_cost, presence: true
     validates :course_type, presence: true
+    validates :slug, presence: true, allow_blank: false
     validate :max_seats_size
 
     friendly_id :slug_candidates, use: :slugged
