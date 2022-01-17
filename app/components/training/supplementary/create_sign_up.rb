@@ -19,14 +19,14 @@ module Training
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
 
           if course.last_fee_paid
-            return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).active?
+            return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).supplementary_training_active?
           end
 
           if course.packages
             package = Training::Supplementary::PackageTypeRecord.find(form_outputs[:supplementary_course_package_type_id])
 
             if package.membership
-              return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).active?
+              return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).supplementary_training_active?
             end
           end
 

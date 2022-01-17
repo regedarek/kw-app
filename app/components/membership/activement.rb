@@ -18,6 +18,27 @@ module Membership
       return profile.created_at.year
     end
 
+    def supplementary_training_active?
+      return false unless user
+      return true if profile_has_been_released?(user)
+      return false unless user.membership_fees.any?
+      return false unless user.membership_fees.where(year: prev_year..next_year).any?
+
+      if current_year_fee
+        if Date.current.between?(Date.current.beginning_of_year, Date.current.end_of_year)
+          return true if current_year_fee.payment.paid? if current_year_fee.payment
+        end
+      end
+
+      if next_year_fee
+        if Date.current.between?(Date.new(Date.current.year, 11, 15), Date.current.next_year.end_of_year)
+          return true if next_year_fee.payment.paid? if next_year_fee.payment
+        end
+      end
+
+      return false
+    end
+
     def active?
       return false unless user
       return true if profile_has_been_released?(user)
