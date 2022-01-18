@@ -17,8 +17,9 @@ b Koordynator wydarzenia:
 br
 - if @sign_up.course.price
   - if @sign_up.course.packages
-    b Opłata: 
-    = "#{@sign_up.package_type.name} - #{@sign_up.package_type.cost} zł"
+    - if @sign_up.package_type
+      b Opłata: 
+      = "#{@sign_up.package_type.name} - #{@sign_up.package_type.cost} zł"
   - else
     b Opłata: 
     = @sign_up.course.price_kw
