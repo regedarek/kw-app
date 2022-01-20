@@ -45,14 +45,14 @@
           .large-2.columns
             = f.label :participant_country_1, t('.participant_country_1')
             = f.select :participant_country_1,
-              options_for_select([["Polska", 'pl'], ["Slovakia", 'sk']]),
+              options_for_select([["Polska", 'pl'], ["Slovakia", 'sk']], @sign_up.try(:participant_country_1)),
               {include_blank: true},
               {}
 
           - if @competition.license_id_required?
             .large-3.columns
               = f.label :participant_license_id_1, t('.participant_license_id_1')
-              = f.text_field :participant_license_id_1
+              = f.text_field :participant_license_id_1, required: true, value: 0
 
   .callout.primary
     .row

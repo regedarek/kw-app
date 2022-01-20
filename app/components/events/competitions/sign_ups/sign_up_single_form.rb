@@ -30,9 +30,22 @@ module Events
          optional(:participant_kw_id_1)
          required(:terms_of_service).filled
          required(:participant_country_1).filled
+         required(:participant_license_id_1).filled
 
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)
+         end
+
+         validate(participant_license_1_filled: [:participant_country_1, :participant_license_id_1]) do |participant_country_1, participant_license_id_1|
+           if participant_country_1 == 'pl'
+             if participant_license_id_1 == '0'
+               false
+             else
+              participant_license_id_1.present?
+             end
+           else
+             true
+           end
          end
         end
       end

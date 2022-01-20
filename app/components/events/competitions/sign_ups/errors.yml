@@ -3,6 +3,7 @@ en:
     tshirt_size_1_presence: Tshirt size 1 has to be filled
     tshirt_size_2_presence: Tshirt size 2 has to be filled
     terms_of_service_true: Musisz zaakceptować regulamin!
+    participant_license_1_filled: Musisz podać poprawny numer licencji PZA!
     rules:
       team_name:
         filled?: Team name has to be filled
@@ -74,6 +75,8 @@ en:
         filled?: Choose t-shirt size 1
       tshirt_size_2:
         filled?: Choose t-shirt size 2
+      participant_country_1:
+        filled?: Wybierz kraj 1
       participant_gender_1:
         filled?: Choose gender 1
       participant_gender_2:
@@ -105,6 +108,7 @@ pl:
     tshirt_size_1_presence: Wybierz rozmiar koszulki 1
     tshirt_size_2_presence: Wybierz rozmiar koszulki 2
     terms_of_service_true: Musisz zaakceptować regulamin!
+    participant_license_1_filled: Musisz podać numer licencji PZA 1
     active_kw_id_1: Musisz podać numer legitymacji klubu 1 z opłaconą składką
     active_kw_id_2: Musisz podać numer legitymacji klubu 2 z opłaconą składką
     remarks:
@@ -120,6 +124,8 @@ pl:
         filled?: Wybierz rozmiar koszulki 2
       participant_license_filled:
         filled?: Licencja PZA 1 musi zostać wypełniona
+      participant_country_1:
+        filled?: Wybierz kraj 1
       participant_gender_1:
         filled?: Płeć 1 musi zostać wybrana
       participant_gender_2:
