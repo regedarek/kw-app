@@ -130,6 +130,8 @@ module Events
             :participant_team_2,
             :participant_gender_1,
             :participant_gender_2,
+            :participant_country_1,
+            :participant_license_id_1,
             :competition_package_type_1_id,
             :competition_package_type_2_id,
             :teammate_id,

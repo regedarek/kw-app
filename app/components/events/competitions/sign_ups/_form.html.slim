@@ -77,10 +77,6 @@
           .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
             = f.label :participant_kw_id_1, t('.participant_kw_id_1')
             = f.number_field :participant_kw_id_1
-
-        .large-2.columns
-          = f.label :participant_license_id_1, t('.participant_kw_id_1')
-          = f.number_field :participant_license_id_1
       - else
         .large-2.columns
           = f.label :competition_package_type_1_id, t('.competition_package_type_id_1')
