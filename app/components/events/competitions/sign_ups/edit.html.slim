@@ -29,6 +29,22 @@
           .large-3.columns
             = f.label :teammate_id, t('.teammate_id')
             = f.number_field :teammate_id
+
+          - if @competition.single?
+            - if @competition.country_required?
+              .large-2.columns
+                = f.label :participant_country_1, t('.participant_country_1')
+                = f.select :participant_country_1,
+                  options_for_select([["Polska", 'pl'], ["Slovakia", 'sk']], @sign_up.try(:participant_country_1)),
+                  {include_blank: true},
+                  {}
+
+
+              - if @competition.license_id_required?
+                .large-3.columns
+                  = f.label :participant_license_id_1, t('.participant_license_id_1')
+                  = f.text_field :participant_license_id_1
+
       .callout.primary
         .row
           .large-3.columns

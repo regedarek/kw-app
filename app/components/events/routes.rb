@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "zawody/*name" => 'events/competitions/sign_ups#index'
+  get "zawody/*name" => 'events/competitions/sign_ups#index', as: :zawody
 
   scope module: 'events' do
     resources :competitions, only: [] do

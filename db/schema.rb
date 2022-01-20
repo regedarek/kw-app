@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_225024) do
+ActiveRecord::Schema.define(version: 2022_01_20_184001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_225024) do
     t.text "alert"
     t.boolean "accept_first", default: false, null: false
     t.datetime "close_payment"
+    t.boolean "license_id_required", default: false, null: false
+    t.boolean "country_required", default: false, null: false
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|
@@ -363,6 +365,10 @@ ActiveRecord::Schema.define(version: 2021_10_12_225024) do
     t.string "tshirt_size_2"
     t.datetime "sent_at"
     t.datetime "expired_at"
+    t.integer "participant_license_id_1"
+    t.integer "participant_license_id_2"
+    t.integer "participant_country_2"
+    t.integer "participant_country_1"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -118,6 +118,8 @@ pl:
         filled?: Wybierz rozmiar koszulki 1
       tshirt_size_2:
         filled?: Wybierz rozmiar koszulki 2
+      participant_license_filled:
+        filled?: Licencja PZA 1 musi zostać wypełniona
       participant_gender_1:
         filled?: Płeć 1 musi zostać wybrana
       participant_gender_2:

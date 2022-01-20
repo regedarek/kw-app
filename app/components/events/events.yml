@@ -32,6 +32,8 @@ pl:
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
           participant_email_1: E-mail 1*
+          participant_country_1: Kraj zawodnika 1
+          participant_license_id_1: Licencja PZA*
           tshirt_size_1: Koszulka 1*
           tshirt_size_2: Koszulka 2*
           tshirt_url: Rozmiarówka
@@ -67,6 +69,8 @@ pl:
           participant_gender_1: Płeć 1*
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
+          participant_license_id_1: Licencja PZA*
+          participant_country_1: Kraj zawodnika 1
           participant_email_1: E-mail 1*
           tshirt_size_1: Koszulka 1*
           tshirt_size_2: Koszulka 2*
@@ -109,6 +113,7 @@ en:
           participant_gender: Gender*
           participant_gender_man: Male
           participant_gender_woman: Female
+          participant_license_id_1: Licencja PZA*
           participant_email: E-mail*
           competition_package_type_id: Package*
           single: Looking for partner?

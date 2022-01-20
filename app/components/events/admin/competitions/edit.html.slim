@@ -93,7 +93,9 @@
             = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
 
       .row
-        .large-6.columns
+        .large-4.columns
           = f.submit 'Zapisz', class: 'button expanded large'
-        .large-6.columns
+        .large-4.columns
+          = link_to 'zapisy', zawody_path(@competition.edition_sym), class: 'button expanded large success'
+        .large-4.columns
           = link_to 'powrót', admin_competitions_path, class: 'button expanded large warning'
