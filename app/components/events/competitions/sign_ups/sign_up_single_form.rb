@@ -36,8 +36,8 @@ module Events
            ActiveRecord::Type::Boolean.new.cast(terms)
          end
 
-         validate(participant_license_1_filled: [:participant_country_1, :participant_license_id_1]) do |participant_country_1, participant_license_id_1|
-           if participant_country_1 == 'pl'
+         validate(participant_license_1_filled: [:participant_country_1, :participant_license_id_1, :competition_package_type_1_id]) do |participant_country_1, participant_license_id_1, competition_package_type_1_id|
+           if participant_country_1 == 'pl' && Events::Db::CompetitionPackageTypeRecord.find(competition_package_type_1_id).name == 'Puchar Polski'
              if participant_license_id_1 == '0'
                false
              else

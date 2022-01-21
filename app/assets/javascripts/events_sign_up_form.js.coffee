@@ -10,6 +10,8 @@ class KwApp.EventsSignUpForm
     @$el.find('.js-player-2').toggle(!@$el.find('.js-single-check-box').prop('checked'))
 
   togglePackageField1: (e) =>
+    console.log 'test'
+
     if $('option:selected', e.currentTarget).data('membership')
       @$el.find('.js-package-1-field').show()
     else
