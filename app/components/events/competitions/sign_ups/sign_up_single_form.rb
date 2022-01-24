@@ -29,8 +29,8 @@ module Events
          required(:competition_package_type_1_id).filled
          optional(:participant_kw_id_1)
          required(:terms_of_service).filled
-         required(:participant_country_1).filled
-         required(:participant_license_id_1).filled
+         optional(:participant_country_1).maybe
+         optional(:participant_license_id_1).maybe
 
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)
