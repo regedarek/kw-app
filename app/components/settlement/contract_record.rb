@@ -7,7 +7,7 @@ module Settlement
     mount_uploaders :attachments, Settlement::AttachmentUploader
     serialize :attachments, JSON
 
-    enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes]
+    enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes, :insurance]
     enum payout_type: [:to_contractor, :return, :credit_card]
     enum currency_type: [:pln, :euro, :usd]
     enum group_type: [:kw, :snw, :sww, :stj]
