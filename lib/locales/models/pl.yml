@@ -211,7 +211,7 @@ pl:
           bill: Rachunek
           volunteering: Umowa wolontariatu
           charities: Darowizna
-          insurance: Polisa ubezpieczeniowa
+          insurance_policy: Polisa ubezpieczeniowa
           taxes: Podatki
         group_types:
           kw: Ogólnoklubowe
