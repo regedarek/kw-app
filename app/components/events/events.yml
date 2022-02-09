@@ -79,7 +79,7 @@ pl:
           tshirt_size_1: Koszulka 1*
           tshirt_size_2: Koszulka 2*
           tshirt_url: Rozmiarówka
-          medical_rules: Posiadam oświadczenie medyczne
+          medical_rules: Posiadam zaświadczenie lekarskie o braku przeciwwskazań do udziału w zawodach w narciarstwie wysokogórskim
           competition_package_type_id_1: Pakiet 1*
           single: Poszukuję partnera
           participant_birthyear_1: Rok urodzenia 1* (RRRR)
@@ -102,7 +102,7 @@ pl:
           participant_team: Organizacja 2
           remarks: Uwagi do organizatorów
           remarks_placeholder: "przykład: Proszę o rezerwację noclegów dla dwóch osób z pt/sb i sb/nd."
-          terms_of_service: Akceptuję regulamin
+          terms_of_service: Akceptuję regulamin Memoriału Jana Strzeleckiego
           participant_kw_id: Nr legitymacji klubu 2*
           submit: Wyślij zgłoszenie
 
