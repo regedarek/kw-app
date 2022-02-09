@@ -69,6 +69,8 @@ en:
     rules:
       remarks:
         filled?: Please let us know in Remarks section about accomodation you need
+      participant_phone_1:
+        filled?: Phone number 1 cannot be empty
       participant_name_1:
         filled?: First and last name 1 cannot be empty
       tshirt_size_1:
@@ -116,6 +118,8 @@ pl:
     rules:
       remarks:
         filled?: Prosimy abyś podał informacje o potrzebnym zakwaterowaniu i rozmiarze koszulek
+      participant_phone_1:
+        filled?: Telefon 1 nie może być pusty
       participant_name_1:
         filled?: Imię i nazwisko 1 nie może być puste
       tshirt_size_1:

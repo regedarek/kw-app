@@ -21,15 +21,7 @@ module Events
 
       def create
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-        form = if @competition.single?
-                 Events::Competitions::SignUps::SignUpSingleForm.new
-               else
-                 if params[:sign_up][:single] == '1'
-                   Events::Competitions::SignUps::SignUpTeamSingleForm
-                 else
-                   Events::Competitions::SignUps::SignUpTeamForm
-                 end
-               end
+        form = ::Events::Competitions::SignUps::IndividualForm.new
 
         either(create_record(form)) do |result|
           result.success do
@@ -101,7 +93,7 @@ module Events
       def update_record
         Events::Competitions::SignUps::Update.new(
           Events::Competitions::Repository.new,
-          Events::Competitions::SignUps::CreateForm.new
+          Events::Competitions::SignUps::IndividualForm.new
         ).call(competition_id: params[:competition_id], sign_up_record_id: params[:id], raw_inputs: params[:sign_up])
       end
 
@@ -117,6 +109,7 @@ module Events
             :participant_name_1,
             :participant_name_2,
             :participant_gender_1,
+            :participant_phone_1,
             :participant_gender_2,
             :participant_email_1,
             :participant_email_2,
@@ -128,13 +121,12 @@ module Events
             :participant_city_2,
             :participant_team_1,
             :participant_team_2,
-            :participant_gender_1,
-            :participant_gender_2,
             :participant_country_1,
             :participant_license_id_1,
             :competition_package_type_1_id,
             :competition_package_type_2_id,
             :teammate_id,
+            :rescuer,
             :expired_at,
             :tshirt_size_1,
             :tshirt_size_2,

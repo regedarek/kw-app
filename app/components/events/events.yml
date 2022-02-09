@@ -28,7 +28,9 @@ pl:
           top_info: Zgłoś zespół i zapłać za obydwa pakiety startowe.
           team_name: Nazwa zespołu(bądźcie kreatywni!)
           participant_name_1: Imię i nazwisko 1*
+          rescuer: Ratownik
           participant_gender_1: Płeć 1*
+          participant_phone_1: Telefon 1*
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
           participant_email_1: E-mail 1*
@@ -67,9 +69,11 @@ pl:
           team_name: Nazwa zespołu(bądźcie kreatywni!)
           participant_name_1: Imię i nazwisko 1*
           participant_gender_1: Płeć 1*
+          rescuer: Ratownik
+          participant_phone_1: Telefon 1*
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
-          participant_license_id_1: Licencja PZA*
+          participant_license_id_1: Licencja PZA
           participant_country_1: Kraj zawodnika 1
           participant_email_1: E-mail 1*
           tshirt_size_1: Koszulka 1*

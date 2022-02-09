@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_20_184001) do
+ActiveRecord::Schema.define(version: 2022_02_09_220910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -369,6 +369,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_184001) do
     t.integer "participant_license_id_2"
     t.integer "participant_country_2"
     t.integer "participant_country_1"
+    t.boolean "rescuer", default: false, null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

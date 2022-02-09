@@ -16,21 +16,6 @@
   = link_to image_tag('en.png'), { locale: :en }
 
 = form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: competition_sign_ups_path do |f|
-  - if @competition.team_name
-    .row
-      .large-12.columns
-        - if @errors && @errors.select { |key, value| key.to_s.include?('team_name') }.any?
-          .callout.alert
-            ul
-              - @errors.select { |key, value| key.to_s.include?('team_name') }.each do |error|
-                li= error.last.to_sentence
-
-    .callout.warning
-      .row
-        .large-12.columns
-          = f.label :team_name, t('.team_name')
-          = f.text_field :team_name
-
   .row
     .large-12.columns
       - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?
@@ -54,18 +39,13 @@
             = f.label :participant_kw_id_1, t('.participant_kw_id_1')
             = f.number_field :participant_kw_id_1
 
-        - if @competition.country_required?
-          .large-3.columns
-            = f.label :participant_country_1, t('.participant_country_1')
-            = f.select :participant_country_1,
-              options_for_select([["Polska", 'pl'], ["Slovakia", 'sk']], @sign_up.try(:participant_country_1)),
-              {include_blank: true},
-              {}
+        .large-3.columns
+          = f.label :rescuer, t('.rescuer')
+          = f.check_box :rescuer
 
-          - if @competition.license_id_required?
-            .large-3.columns
-              = f.label :participant_license_id_1, t('.participant_license_id_1')
-              = f.number_field :participant_license_id_1, required: true, value: 0
+        .large-3.columns
+          = f.label :participant_license_id_1, t('.participant_license_id_1')
+          = f.number_field :participant_license_id_1
 
       - else
         .large-2.columns
@@ -90,13 +70,17 @@
 
   .callout.primary
     .row
-      .large-6.columns
+      .large-4.columns
         = f.label :participant_name_1, t('.participant_name_1')
         = f.text_field :participant_name_1
 
-      .large-6.columns
+      .large-4.columns
         = f.label :participant_email_1, t('.participant_email_1')
         = f.text_field :participant_email_1
+
+      .large-4.columns
+        = f.label :participant_phone_1, t('.participant_phone_1')
+        = f.text_field :participant_phone_1
 
 
     .row
@@ -124,72 +108,6 @@
             - else
               = t('.tshirt_size_1')
           = f.text_field :tshirt_size_1
-
-  - if @competition.single?
-    = f.hidden_field :participant_name_2
-    = f.hidden_field :tshirt_size_2
-    = f.hidden_field :participant_gender_2
-    = f.hidden_field :participant_email_2
-    = f.hidden_field :participant_kw_id_2
-    = f.hidden_field :participant_birth_year_2
-    = f.hidden_field :competition_package_type_2_id
-  - else
-    .js-player-2
-      .row
-        .large-12.columns
-          - if @errors && @errors.values.any?
-            - if @errors.select { |key, value| key.to_s.include?('_2') }.any?
-              .callout.alert
-                ul
-                  - @errors.select { |key, value| key.to_s.include?('_2') }.each do |error|
-                    li= error.last.to_sentence
-      .callout.secondary
-        .row
-          .large-4.columns
-            = f.label :participant_name_2, t('.participant_name')
-            = f.text_field :participant_name_2
-
-          .large-3.columns
-            = f.label :participant_email_2, t('.participant_email')
-            = f.text_field :participant_email_2
-
-          .large-3.columns
-            = f.label :competition_package_type_2_id, t('.competition_package_type_id')
-            = f.select :competition_package_type_2_id,
-              options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_2_id)),
-              {include_blank: true},
-              {class: 'js-package-2-select'}
-
-          .large-2.columns
-            .js-package-2-field style=(@sign_up.package_type_2_membership? ? 'display: visible' : 'display: none' )
-              = f.label :participant_kw_id_2, t('.participant_kw_id')
-              = f.text_field :participant_kw_id_2
-
-        .row
-          .large-2.columns
-            = f.label :participant_gender_2, t('.participant_gender')
-            = f.select :participant_gender_2, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_2)), include_blank: true
-
-          .large-2.columns
-            = f.label :participant_birth_year_2, t('.participant_birthyear')
-            = f.text_field :participant_birth_year_2
-
-          .large-2.columns
-            = f.label :participant_city_2, t('.participant_city')
-            = f.text_field :participant_city_2
-
-          .large-3.columns
-            = f.label :participant_team_2, t('.participant_team')
-            = f.text_field :participant_team_2
-
-          .large-3.columns
-            - if @competition.tshirt_url?
-              = f.label :tshirt_size_2 do
-                - if @competition.tshirt_url.present?
-                  = "#{t('.tshirt_size_2')} (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
-                - else
-                  = t('.tshirt_size_2')
-              = f.text_field :tshirt_size_2
 
   .callout
     .row
