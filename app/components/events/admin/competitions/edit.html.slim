@@ -75,17 +75,20 @@
             = f.label 'Logo nad formularzem'
             = f.file_field :baner
 
-            = f.label 'Zasady dodane na dole formularza'
-            = f.trix_editor :rules, style: 'min-height: 280px'
-
-            = f.label 'Treść e-maila z linkiem do zapisów'
-            = f.trix_editor :email_text, style: 'min-height: 280px'
-
             = f.label 'Aktualności'
             = f.trix_editor :alert, style: 'min-height: 280px'
 
-            = f.label 'Oświadczenie medyczne'
+            = f.label 'Zasady dodane na dole formularza'
+            = f.trix_editor :rules, style: 'min-height: 280px'
+
+            = f.label 'Tekst pod regulaminem'
+            = f.trix_editor :rules_text, style: 'min-height: 280px'
+
+            = f.label 'Tekst pod oświadczeniem medycznym'
             = f.trix_editor :medical_rules_text, style: 'min-height: 280px'
+
+            = f.label 'Treść e-maila z linkiem do zapisów'
+            = f.trix_editor :email_text, style: 'min-height: 280px'
 
       .row
         .large-12.columns
