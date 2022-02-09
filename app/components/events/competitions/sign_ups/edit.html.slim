@@ -196,6 +196,11 @@
 
         .row
           .large-12.columns
+            = f.check_box :medical_rules, { checked: true }
+            = f.label :medical_rules, t('.medical_rules')
+
+        .row
+          .large-12.columns
             small = @competition.rules.html_safe
 
         .row
