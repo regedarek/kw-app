@@ -54,7 +54,7 @@ pl:
           tshirt_size_1: Koszulka 1*
           tshirt_size_2: Koszulka 2*
           tshirt_url: Rozmiarówka
-          competition_package_type_id: Pakiet 2*
+          competition_package_type_id: Pakiet*
           single: Poszukuję partnera
           participant_birthyear: Rok urodzenia 2* (RRRR)
           participant_city: Miasto 2
@@ -94,7 +94,7 @@ pl:
           tshirt_size_1: Koszulka 1*
           tshirt_size_2: Koszulka 2*
           tshirt_url: Rozmiarówka
-          competition_package_type_id: Pakiet 2*
+          competition_package_type_id: Pakiet *
           single: Poszukuję partnera
           participant_birthyear: Rok urodzenia 2* (RRRR)
           participant_city: Miasto 2
