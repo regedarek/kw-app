@@ -84,6 +84,9 @@
             = f.label 'Aktualności'
             = f.trix_editor :alert, style: 'min-height: 280px'
 
+            = f.label 'Oświadczenie medyczne'
+            = f.trix_editor :medical_rules_text, style: 'min-height: 280px'
+
       .row
         .large-12.columns
           - if @competition.baner.present?
