@@ -119,9 +119,9 @@
   .callout.warning
     .row
       .large-12.columns
+        small = sanitize @competition.rules_text
         = f.check_box :terms_of_service
         = f.label :terms_of_service, t('.terms_of_service')
-        small = sanitize @competition.rules_text
 
     .row
       .large-12.columns
