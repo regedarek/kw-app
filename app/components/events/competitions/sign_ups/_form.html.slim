@@ -123,11 +123,12 @@
         = f.check_box :terms_of_service
         = f.label :terms_of_service, t('.terms_of_service')
 
-    .row
-      .large-12.columns
-        = f.check_box :medical_rules
-        = f.label :medical_rules, t('.medical_rules')
-        small = sanitize @competition.medical_rules_text
+    - if false
+      .row
+        .large-12.columns
+          = f.check_box :medical_rules
+          = f.label :medical_rules, t('.medical_rules')
+          small = sanitize @competition.medical_rules_text
 
   .row
     .large-12.columns

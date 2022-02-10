@@ -39,9 +39,9 @@ module Events
            ActiveRecord::Type::Boolean.new.cast(terms)
          end
 
-         validate(medical_rules_true: [:medical_rules]) do |terms|
-           ActiveRecord::Type::Boolean.new.cast(terms)
-         end
+        #validate(medical_rules_true: [:medical_rules]) do |terms|
+        #  ActiveRecord::Type::Boolean.new.cast(terms)
+        #end
         end
       end
     end
