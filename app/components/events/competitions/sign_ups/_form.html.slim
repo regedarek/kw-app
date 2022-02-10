@@ -108,17 +108,19 @@
               - else
                 = t('.tshirt_size_1')
             = f.text_field :tshirt_size_1
-    .callout
-      .row
-        .large-12.columns
-          small = sanitize @competition.weekend_nights_text
 
-          = f.check_box :friday_night
-          = f.label :friday_night, t('.friday_night')
+    - if @competition.weekend_nights?
+      .callout
+        .row
+          .large-12.columns
+            small = sanitize @competition.weekend_nights_text
+
+            = f.check_box :friday_night
+            = f.label :friday_night, t('.friday_night')
 
 
-          = f.check_box :saturday_night
-          = f.label :saturday_night, t('.saturday_night')
+            = f.check_box :saturday_night
+            = f.label :saturday_night, t('.saturday_night')
 
     .callout
       .row
