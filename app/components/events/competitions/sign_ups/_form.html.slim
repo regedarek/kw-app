@@ -83,7 +83,6 @@
           = f.label :participant_phone_1, t('.participant_phone_1')
           = f.text_field :participant_phone_1
 
-
       .row
         .large-2.columns
           = f.label :participant_gender_1, t('.participant_gender_1')
@@ -109,6 +108,17 @@
               - else
                 = t('.tshirt_size_1')
             = f.text_field :tshirt_size_1
+    .callout
+      .row
+        .large-12.columns
+          small = sanitize @competition.weekend_nights_text
+
+          = f.check_box :friday_night
+          = f.label :friday_night, t('.friday_night')
+
+
+          = f.check_box :saturday_night
+          = f.label :saturday_night, t('.saturday_night')
 
     .callout
       .row

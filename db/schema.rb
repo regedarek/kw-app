@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_073540) do
+ActiveRecord::Schema.define(version: 2022_02_10_082900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,8 @@ ActiveRecord::Schema.define(version: 2022_02_10_073540) do
     t.text "medical_rules_text"
     t.text "rules_text"
     t.datetime "sign_up_starts_at"
+    t.boolean "weekend_nights", default: false, null: false
+    t.text "weekend_nights_text"
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|
@@ -373,6 +375,8 @@ ActiveRecord::Schema.define(version: 2022_02_10_073540) do
     t.integer "participant_country_2"
     t.integer "participant_country_1"
     t.boolean "rescuer", default: false, null: false
+    t.boolean "friday_night", default: false, null: false
+    t.boolean "saturday_night", default: false, null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

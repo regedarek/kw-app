@@ -27,6 +27,16 @@
       .callout.primary
         .row
           .large-3.columns
+            = f.label :friday_night, t('.friday_night')
+            = f.check_box :friday_night
+
+          .large-3.columns
+            = f.label :saturday_night, t('.saturday_night')
+            = f.check_box :saturday_night
+
+      .callout.primary
+        .row
+          .large-3.columns
             = f.label :rescuer, t('.rescuer')
             = f.check_box :rescuer
 
@@ -193,11 +203,6 @@
           .large-12.columns
             = f.check_box :terms_of_service, { checked: true }
             = f.label :terms_of_service, t('.terms_of_service')
-
-        .row
-          .large-12.columns
-            = f.check_box :medical_rules, { checked: true }
-            = f.label :medical_rules, t('.medical_rules')
 
         .row
           .large-12.columns

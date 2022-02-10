@@ -10,6 +10,8 @@ sign_up_attributes = %i(
   participant_kw_id_1
   participant_license_id_1
   rescuer
+  friday_night
+  saturday_night
   remarks
 )
 wb.styles do |style|

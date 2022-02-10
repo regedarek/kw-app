@@ -127,6 +127,8 @@ module Events
             :competition_package_type_2_id,
             :teammate_id,
             :rescuer,
+            :friday_night,
+            :saturday_night,
             :expired_at,
             :tshirt_size_1,
             :tshirt_size_2,

@@ -32,6 +32,8 @@ module Events
          required(:participant_birth_year_1).filled
          required(:competition_package_type_1_id).filled
          required(:rescuer).filled
+         optional(:friday_night)
+         optional(:saturday_night)
          required(:terms_of_service).filled
          #required(:medical_rules).filled
 
