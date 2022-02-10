@@ -33,7 +33,7 @@ module Events
          required(:competition_package_type_1_id).filled
          required(:rescuer).filled
          required(:terms_of_service).filled
-         required(:medical_rules).filled
+         #required(:medical_rules).filled
 
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)
