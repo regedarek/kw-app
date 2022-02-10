@@ -51,6 +51,10 @@
             = f.label 'Zamknij płatność'
             = f.datetime_field :close_payment
 
+          .callout.primary
+            = f.label 'Start zapisów'
+            = f.datetime_field :sign_up_starts_at
+
         .large-9.columns
           .callout.primary
             = f.nested_fields_for :package_types do |ff|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_233035) do
+ActiveRecord::Schema.define(version: 2022_02_10_073540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 2022_02_09_233035) do
     t.boolean "country_required", default: false, null: false
     t.text "medical_rules_text"
     t.text "rules_text"
+    t.datetime "sign_up_starts_at"
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|
