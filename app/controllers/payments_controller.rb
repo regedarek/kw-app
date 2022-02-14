@@ -45,10 +45,10 @@ class PaymentsController < ApplicationController
 
     if payment.payable.is_a?(Events::Db::SignUpRecord)
       unless payment.payable
-        return redirect_to('https://panel.kw.krakow.pl/zawody/strzelecki-2022', alert: 'Twój zapis został usunięty, spróbuj zapisać się ponownie!')
+        return redirect_to(competition_sign_ups_path(payment.payable.competition_record.id), alert: 'Twój zapis został usunięty, spróbuj zapisać się ponownie!')
       end
       if ::Events::Competitions::SignUps::Limiter.new(payment.payable.competition_record).reached?
-        return redirect_to('https://panel.kw.krakow.pl/zawody/strzelecki-2022', alert: 'Limit zapisów został wykorzystany!')
+        return redirect_to(competition_sign_ups_path(payment.payable.competition_record.id), alert: 'Limit zapisów został wykorzystany!')
       end
     end
     if payment.payable.is_a?(Training::Supplementary::SignUpRecord)
