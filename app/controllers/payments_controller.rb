@@ -42,6 +42,15 @@ class PaymentsController < ApplicationController
 
   def charge
     payment = Db::Payment.find(params[:id])
+
+    if payment.payable.is_a?(Events::Db::SignUpRecord)
+      unless payment.payable
+        return redirect_to('https://panel.kw.krakow.pl/zawody/strzelecki-2022', alert: 'Twój zapis został usunięty, spróbuj zapisać się ponownie!')
+      end
+      if ::Events::Competitions::SignUps::Limiter.new(payment.payable.competition_record).reached?
+        return redirect_to('https://panel.kw.krakow.pl/zawody/strzelecki-2022', alert: 'Limit zapisów został wykorzystany!')
+      end
+    end
     if payment.payable.is_a?(Training::Supplementary::SignUpRecord)
       unless payment.payable
         return redirect_to(supplementary_course_path(payment.payable.course.id), alert: 'Twój zapis został usunięty, spróbuj zapisać się ponownie!')
