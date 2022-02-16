@@ -22,6 +22,7 @@ pl:
           names: Zawodnicy
           name: Zawodnik
           team_name: Zespół
+          package: Pakiet
           city: Miasto
           organization: Organizacja
         edit:

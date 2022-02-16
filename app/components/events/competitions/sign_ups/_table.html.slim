@@ -3,7 +3,7 @@ table.stack
     tr
       th width="4%"
         = t('.nr')
-      th width="35%"
+      th width="20%"
         - if @competition.team_name
           = t('.team_name')
         - else
@@ -12,8 +12,9 @@ table.stack
           - else
             = t('.names')
       th = t('.city')
+      th = t('.package')
       th = t('.organization')
-      th width='15%'
+      th width='10%'
         = t('.paid')
       - if can? :manage, Events::Db::SignUpRecord
         th width='8%'
@@ -28,6 +29,7 @@ table.stack
           - else
             = [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
         td = [sign_up.participant_city_1, sign_up.participant_city_2].compact.reject(&:empty?).to_sentence
+        td = [sign_up.package_type_1&.name, sign_up.package_type_2&.name].compact.reject(&:empty?).to_sentence
         td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
         td.text-center
           - if sign_up.payment.paid?
