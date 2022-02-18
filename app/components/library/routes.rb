@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :library do
     resources :items
     resources :authors
+    resources :item_reservations
   end
 
   get 'biblioteka', to: 'library/items#index', as: :biblioteka

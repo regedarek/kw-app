@@ -13,6 +13,9 @@ module Library
     has_many :item_authors, class_name: '::Library::ItemAuthorsRecord', foreign_key: :item_id
     has_many :authors, class_name: '::Library::AuthorRecord', through: :item_authors, foreign_key: :author_id, dependent: :destroy
 
+    has_many :library_item_reservations, class_name: '::Library::ItemReservationRecord', foreign_key: :item_id
+    has_many :library_reservators, class_name: '::Db::User', through: :library_item_reservations, foreign_key: :user_id, dependent: :destroy, source: :user
+
     has_many :item_tags, class_name: '::Library::ItemTagsRecord', foreign_key: :item_id
     has_many :tags, class_name: '::Library::TagRecord', through: :item_tags, foreign_key: :tag_id, dependent: :destroy
 

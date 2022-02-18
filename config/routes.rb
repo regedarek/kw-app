@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get 'wiadomosci' => 'messaging/conversations#index'
   get 'wypozyczalnia/regulamin' => 'pages#show', id: 'rules'
+  get 'biblioteka/regulamin' => 'pages#show', id: 'rules'
   get 'serwis-narciarski/regulamin' => 'pages#show', id: 'rules'
   get 'wydarzenia/regulamin' => 'pages#show', id: 'rules'
   get 'glosowania/dane-osobowe' => 'pages#show', id: 'rules'

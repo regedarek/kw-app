@@ -57,6 +57,9 @@ class Db::User < ActiveRecord::Base
     through: :route_colleagues,
     class_name: 'Db::Activities::MountainRoute'
 
+  has_many :library_item_reservations, class_name: '::Library::ItemReservationRecord', foreign_key: :user_id
+  has_many :library_reservations, class_name: '::Library::ItemReservationRecord', through: :library_item_reservations, foreign_key: :item_id, dependent: :destroy
+
   has_many :vote_users, class_name: 'Management::Voting::VoteUsersRecord', foreign_key: :user_id
   has_many :member_votes, through: :vote_users, foreign_key: :vote_id, dependent: :destroy, source: :vote
 
