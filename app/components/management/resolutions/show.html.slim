@@ -2,7 +2,10 @@
   .large-6.columns
     .row
       .large-8.columns
-        h3 = "[#{@resolution.number}] #{@resolution.name}"
+        - if @resolution.number
+          h3 = "[#{@resolution.number}] #{@resolution.name}"
+        - else
+          h3 = @resolution.name
 
       .large-4.columns.text-right
         br
