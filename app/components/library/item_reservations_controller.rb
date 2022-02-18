@@ -25,7 +25,7 @@ module Library
     private
 
     def reservation_params
-      params.require(:library_item_reservation).permit(:item_id, :user_id, :returned_at, :caution)
+      params.require(:library_item_reservation).permit(:item_id, :user_id, :received_at, :caution, :description)
     end
   end
 end

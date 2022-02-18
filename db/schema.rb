@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_082900) do
+ActiveRecord::Schema.define(version: 2022_02_18_135542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,6 +423,15 @@ ActiveRecord::Schema.define(version: 2022_02_10_082900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id", "author_id"], name: "index_library_item_authors_on_item_id_and_author_id", unique: true
+  end
+
+  create_table "library_item_reservations", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "user_id", null: false
+    t.date "returned_at"
+    t.date "received_at", null: false
+    t.integer "caution"
+    t.text "description"
   end
 
   create_table "library_item_tags", force: :cascade do |t|

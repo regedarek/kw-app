@@ -66,51 +66,62 @@
                 button.close-button aria-label=("Close reveal") data-close="" type="button" 
                   span aria-hidden="true"  &times;
 
-    .row
-      .large-12.columns
-        table
-          tr
-            th Kiedy?
-            th Kto?
-            th Kaucja
-            th
-          - @item.library_item_reservations.each do |reservation|
+    - if user_signed_in? && current_user.roles.include?('library')
+      .row
+        .large-12.columns
+          table
             tr
-              td
-                = reservation.received_at
-              td
-                = "#{reservation.user.display_name}"
-              td
-                = reservation.caution
-              td.text-right
-                = link_to library_item_reservation_path(reservation.id), style: 'padding: 5px', data: { confirm: 'Jestes pewien?' }, method: :delete do
-                  i.fi.fi-trash
+              th Kiedy?
+              th Kto?
+              th width='20px' Kaucja
+              th
+            - @item.library_item_reservations.each do |reservation|
+              tr
+                td
+                  = reservation.received_at
+                td
+                  span data-tooltip='' tabindex="1" title="#{reservation.description}" data-allow-html="true"
+                    span= "#{reservation.user.display_name}"
+                td
+                  - if reservation.caution
+                    = "#{reservation.caution} zł"
+                td.text-right
+                  = link_to library_item_reservation_path(reservation.id), style: 'padding: 5px', data: { confirm: 'Jestes pewien?' }, method: :delete do
+                    i.fi.fi-trash
 
 
-    .row
-      .large-12.columns
-        = form_for Library::ItemReservationRecord.new, as: :library_item_reservation, url: library_item_reservations_path, html: { class: '' } do |f|
-          = f.hidden_field :item_id, value: @item.id
-          .row
-            .large-12.columns
-              = f.label :user_id, 'Klubowicz'
-              = f.select :user_id,
-                Db::User.all.map { |u| [u.display_name, u.id] },
-                {include_blank: true },
-                { class: 'js-select-multiple', required: true, include_blank: true }
+      .row
+        .large-12.columns
+          = form_for Library::ItemReservationRecord.new, as: :library_item_reservation, url: library_item_reservations_path, html: { class: '' } do |f|
+            = f.hidden_field :item_id, value: @item.id
+            .row
+              .large-12.columns
+                = f.label :user_id, 'Klubowicz'
+                = f.select :user_id,
+                  Db::User.all.map { |u| [u.display_name, u.id] },
+                  {include_blank: true },
+                  { class: 'js-select-multiple', required: true, include_blank: true }
 
-          .row
-            .large-6.columns
-              = f.label :received_at, 'Wypożyczono'
-              = f.date_field :received_at, value: Date.today
+            .row
+              .large-6.columns
+                = f.label :received_at, 'Wypożyczono'
+                = f.date_field :received_at, value: Date.today
 
-            .large-6.columns
-              = f.label :caution, 'Kaucja'
-              = f.number_field :caution
+              .large-6.columns
+                = f.label :caution, 'Kaucja'
+                = f.number_field :caution
 
-          .row
-            .large-6.columns
-              = f.submit 'Przekaż', class: 'button success'
+            .row
+              .large-12.columns
+                = f.label :description, 'Uwagi'
+                #blank-toolbar hidden="" 
+                = f.hidden_field :description, id: 'description_body'
+                trix-editor input='description_body' toolbar="blank-toolbar"
+                br
+
+            .row
+              .large-6.columns
+                = f.submit 'Przekaż', class: 'button success'
 
 .row
   .large-12.columns
