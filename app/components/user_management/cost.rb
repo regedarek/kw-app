@@ -6,7 +6,7 @@ module UserManagement
     include AttributedObject::Strict
 
     attribute :first_fee, :integer, default: 50
-    attribute :year_fee, :integer, default: 100
+    attribute :year_fee, :integer, default: 150
     attribute :plastic, :boolean, default: false
 
     def sum
