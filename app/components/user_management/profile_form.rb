@@ -19,6 +19,7 @@ module UserManagement
     attribute :acomplished_courses, ArrayOf(:string), default: []
     attribute :main_discussion_group, :boolean
     attribute :sections, ArrayOf(:string), default: []
+    attribute :positions, ArrayOf(:string), default: []
     attribute :terms_of_service, :boolean, default: false
     attribute :plastic, :boolean, default: false
 
@@ -26,6 +27,12 @@ module UserManagement
               :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
     validate :email_uniq
+
+    def youth?
+      return false unless birth_date
+
+      Date.today.year - birth_date.to_date <= 26
+    end
 
     def email_uniq
       errors.add(:email, "zostało już zajęte") if Db::Profile.exists?(email: email)
