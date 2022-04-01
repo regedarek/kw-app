@@ -31,7 +31,7 @@ module UserManagement
     def youth?
       return false unless birth_date
 
-      Date.today.year - birth_date.to_date <= 26
+      Date.today.year - birth_date&.to_date&.year <= 26
     end
 
     def email_uniq
