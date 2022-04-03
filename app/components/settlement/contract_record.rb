@@ -9,7 +9,7 @@ module Settlement
 
     enum document_type: [:fv, :work, :service, :bill, :volunteering, :charities, :taxes, :insurance_policy]
     enum payout_type: [:to_contractor, :return, :credit_card]
-    enum currency_type: [:pln, :euro, :usd]
+    enum currency_type: [:pln, :eur, :usd]
     enum group_type: [:kw, :snw, :sww, :stj]
     enum event_type: [:not_event, :other_event, :mjs, :mas, :mo, :kfg]
     enum activity_type: [:courses, :competitions, :other_activity, :maintenance, :supplementary_trainings]
