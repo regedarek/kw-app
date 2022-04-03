@@ -14,3 +14,15 @@
 - if contract.closed?
   span.label.success.alert
     = I18n.t(contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')
+  - if contract.document_deliver?
+    span.label.success
+      | O
+  - else
+    span.label.alert
+      | O
+  - if contract.accountant_deliver?
+    span.label.success
+      | K
+  - else
+    span.label.alert
+      | K
