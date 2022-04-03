@@ -8,10 +8,10 @@ table.stack
       th.text-left width='300px'
         = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
       th.text-center width='160px'
-        = sort_link(@q, :creator, 'Kto utworzył?', default_order: :desc)
+        = sort_link(@q, :contractor, 'Kontrahent', default_order: :desc)
       th.text-center width='160px'
         = sort_link(@q, :custom_state, 'Status')
-      th.text-center width='130px'
+      th.text-right width='130px'
         = sort_link(@q, :cost, 'Kwota', default_order: :desc)
       th.text-center width='140px'
         | Zmień status
@@ -30,10 +30,10 @@ table.stack
           - else
             = link_to contract.title, admin_contract_path(contract.id)
         td.text-center
-          - if contract.creator
-            = link_to contract.creator.display_name, "/klubowicze/#{contract.creator.kw_id}"
+          - if contract.contractor
+            = link_to contract.contractor.name, admin_contractor_path(contract.contractor_id)
         td.text-center = render 'state_bagde', contract: contract, class_value: nil
-        td.text-center = number_to_currency(contract.cost, unit: contract.currency_type.upcase)
+        td.text-right = number_to_currency(contract.cost, unit: contract.currency_type.upcase)
         td.text-center = render 'state_link', contract: contract, class_value: nil
         td.text-center.large-text-right
           - if can? :update, contract

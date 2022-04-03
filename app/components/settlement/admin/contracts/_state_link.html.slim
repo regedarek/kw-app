@@ -1,15 +1,15 @@
 - if contract.new? && can?(:accept, contract)
   - if contract.activity_type.present? && contract.group_type.present? && contract.event_type.present?
-    = link_to 'Sprawdź', accept_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+    = link_to 'Sprawdź', accept_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value, data: { confirm: 'Czy napewno?' }
   - else
     = link_to 'Uzupełnij', edit_admin_contract_path(contract.id, anchor: 'preaccepted'), class: class_value
 - if contract.accepted? && can?(:prepayment, contract)
   - if contract.activity_type.present? && contract.group_type.present? && contract.event_type.present?
-    = link_to 'Zaakceptuj', prepayment_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+    = link_to 'Zaakceptuj', prepayment_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value, data: { confirm: 'Czy napewno?' }
   - else
     = link_to 'Uzupełnij', edit_admin_contract_path(contract.id, anchor: 'preaccepted'), class: class_value
 - if contract.preclosed? && can?(:finish, contract)
   - if contract.substantive_type.present? && contract.financial_type.present? && contract.area_type.present?
-    = link_to 'Rozlicz', finish_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value
+    = link_to 'Rozlicz', finish_admin_contract_path(contract.id, anchor: 'preaccepted'), method: :put, class: class_value, data: { confirm: 'Czy napewno?' }
   - else
     = link_to 'Uzupełnij', edit_admin_contract_path(contract.id, anchor: 'preaccepted'), class: class_value

@@ -137,6 +137,17 @@
           - if @contract.financial_type
             = I18n.t(@contract.financial_type, scope: 'activerecord.attributes.settlement/contract_record.financial_types')
 
+    - if @contract.closed?
+      .callout
+        .row
+          .large-12.columns
+            b Dostarczono oryginał dokumentów: 
+            = @contract.document_deliver? ? 'Tak' : 'Nie'
+        .row
+          .large-12.columns
+            b Doręczono księgowej: 
+            = @contract.accountant_deliver? ? 'Tak' : 'Nie'
+
     - if @contract.description
       .row
         .large-12.columns

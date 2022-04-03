@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_134632) do
+ActiveRecord::Schema.define(version: 2022_04_03_151955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,6 +291,8 @@ ActiveRecord::Schema.define(version: 2022_04_03_134632) do
     t.integer "currency_type", default: 0, null: false
     t.string "bank_account"
     t.string "bank_account_owner"
+    t.boolean "document_deliver", default: false, null: false
+    t.boolean "accountant_deliver", default: false, null: false
     t.index ["internal_number", "period_date"], name: "index_contracts_on_internal_number_and_period_date", unique: true
   end
 

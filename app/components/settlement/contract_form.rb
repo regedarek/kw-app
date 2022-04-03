@@ -24,6 +24,8 @@ module Settlement
     optional(:activity_type).maybe
     optional(:event_type).maybe
     optional(:area_type).maybe
+    optional(:document_deliver).maybe
+    optional(:accountant_deliver).maybe
     optional(:acceptor_id).maybe
     optional(:checker_id).maybe
     optional(:closer_id).maybe

@@ -113,3 +113,11 @@
               - if @errors && @errors.key?(:closed_fields)
                 .callout.warning
                   | Musisz wypełnić pola Rodzaj wydatku, Obszar, Rodzaj działalności
+
+  .large-6.columns
+    - if @contract.closed?
+      .callout
+        = f.check_box :document_deliver
+        = f.label :document_deliver, 'Dostarczono oryginał dokumentów'
+        = f.check_box :accountant_deliver
+        = f.label :accountant_deliver, 'Doręczono księgowej'

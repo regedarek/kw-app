@@ -13,7 +13,7 @@ module Settlement
         @q = Settlement::ContractRecord.accessible_by(current_ability)
         @q = @q.where.not(state: ['closed']) unless params[:q]
         @q = @q.ransack(params[:q])
-        @results = @q.result.order_by_state(status_order).includes([:acceptor, :creator, :checker])
+        @results = @q.result.order_by_state(status_order).includes([:acceptor, :creator, :checker, :contractor])
         @contracts = @results.page(params[:page])
 
         respond_with do |format|
@@ -201,7 +201,7 @@ module Settlement
           .require(:contract)
           .permit(
             :group_type, :payout_type, :closer_id, :acceptor_id, :event_id, :period_date, :contract_template_id, :currency_type,
-            :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date, :activity_type,
+            :substantive_type, :financial_type, :document_type, :area_type, :event_type, :document_date, :activity_type, :document_deliver, :accountant_deliver,
             :title, :description, :cost, :state, :document_number, :internal_number, :checker_id, :bank_account, :bank_account_owner,
             :contractor_id, attachments: [], event_ids: [], user_ids: [], project_ids: [], photos_attributes: [:file, :filename, :user_id]
           )

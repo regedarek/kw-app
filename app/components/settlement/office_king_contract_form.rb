@@ -18,6 +18,8 @@ module Settlement
     required(:document_date).filled(:str?)
     required(:document_number).filled(:str?)
     required(:description).maybe(:str?)
+    optional(:document_deliver).maybe
+    optional(:accountant_deliver).maybe
     optional(:attachments).maybe
     optional(:photos_attributes).maybe
     optional(:group_type).maybe

@@ -181,6 +181,8 @@ pl:
         checker_id: Sprawdzajacy
         document_number: Numer dokumentu
         internal_number: Number wewnętrzny
+        accountant_deliver: Doręczono księgowej
+        document_deliver: Dostarczono oryginał dokumentów
         internal_number_uniq: Number wewnętrzny
         attachments: Załączniki
         photos_attributes: Załączniki
@@ -192,6 +194,7 @@ pl:
         currency_types:
           pln: PLN
           euro: EURO
+          eur: EURO
           usd: USD
         states:
           new: Nowy
