@@ -21,7 +21,7 @@ module Settlement
     optional(:contract_template_id).maybe(:int?)
     required(:user_ids).each(:str?)
     optional(:project_ids).maybe
-    required(:photos_attributes).filled
+    optional(:photos_attributes).maybe
 
     validate(payout_type_presence: [:contract_template_id, :payout_type]) do |contract_template_id, payout_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
@@ -88,6 +88,18 @@ module Settlement
         Settlement::ContractorRecord.find_by(id: contractor_id).nip?
       else
         true
+      end
+    end
+
+    validate(photos_presence: [:document_type, :photos_attributes]) do |document_type, photos_attributes|
+      if ['charities'].include?(document_type)
+        true
+      else
+        if photos_attributes
+          photos_attributes.reject(&:empty?).any?
+        else
+          false
+        end
       end
     end
 

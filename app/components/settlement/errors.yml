@@ -8,6 +8,7 @@ pl:
         payout_type_presence: Rodzaj płatności
         bank_account_presence: Numer konta do zwrotu
         project_presence: Projekty
+        photos_presence: Załączniki
         accepted_fields: "pola do sprawdzenia "
         closed_fields: "Status Rozliczony wymaga wypełnionych pól "
         accepted_group: w tym statusie musi być wybrany
@@ -24,6 +25,7 @@ pl:
     payout_type_presence: nie może być puste
     bank_account_presence: nie może być puste
     project_presence: musi być wybrany
+    photos_presence: nie mogą być puste
     document_type_presence: nie może być puste
     key?: brakuje
   dry_validation:
