@@ -84,7 +84,7 @@
         .row
           .large-12.columns
             b Kwota rozliczenia w PLN: 
-            - money = Money.from_cents(@contract.cost * 1000, @contract.currency_type.upcase)
+            - money = Money.from_cents(@contract.cost * 100, @contract.currency_type.upcase)
             - exchange_date = money.bank.update_rates
             = "#{number_to_currency(money.exchange_to("PLN"), unit: 'PLN')} [#{exchange_date.to_date}]"
 
