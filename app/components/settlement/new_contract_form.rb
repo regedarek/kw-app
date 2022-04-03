@@ -84,7 +84,7 @@ module Settlement
     validate(nip_if_fv: [:contract_template_id, :contractor_id, :document_type]) do |contract_template_id, contractor_id, document_type|
       document_type_1 = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)&.document_type || document_type
 
-      if ['fv', 'bill'].include?(document_type_1)
+      if ['fv'].include?(document_type_1)
         Settlement::ContractorRecord.find_by(id: contractor_id).nip?
       else
         true
