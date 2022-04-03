@@ -121,3 +121,5 @@
         = f.label :document_deliver, 'Dostarczono oryginał dokumentów'
         = f.check_box :accountant_deliver
         = f.label :accountant_deliver, 'Doręczono księgowej'
+        b= f.label :closed_at, 'Data rozliczenia'
+        = f.date_field :closed_at

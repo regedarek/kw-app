@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :contracts do
         collection do
           get :history
+          get :archive
         end
         member do
           get :download_attachment

@@ -25,6 +25,24 @@ module Settlement
         end
       end
 
+      def archive
+        authorize! :read, Settlement::ContractRecord
+
+        @q = Settlement::ContractRecord.accessible_by(current_ability)
+        @q = @q.ransack(params[:q])
+
+        @results = @q.result.includes([:acceptor, :creator, :checker, :contractor])
+        @contracts = @results.page(params[:page])
+
+        respond_with do |format|
+          format.html
+          format.xlsx do
+            disposition = "attachment; filename=rozliczenia_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.xlsx"
+            response.headers['Content-Disposition'] = disposition
+          end
+        end
+      end
+
       def history
         @versions = PaperTrail::Version.includes(:item).where(item_type: ["Settlement::ContractorRecord", "Settlement::ContractRecord"]).order(created_at: :desc).page(params[:page]).per(10)
       end

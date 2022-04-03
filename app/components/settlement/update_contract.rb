@@ -41,6 +41,12 @@ module Settlement
         contract.update(state: 'closed', closer_id: updater_id)
       end
 
+      unless contract.closed_at.present?
+        if form_outputs[:document_deliver] == '1' && form_outputs[:accountant_deliver] == '1'
+          contract.update(closed_at: Time.current)
+        end
+      end
+
       office_king_ids = Db::User.where(":name = ANY(roles)", name: "office_king").map(&:id)
       financial_ids = Db::User.where(":name = ANY(roles)", name: "financial_management").map(&:id)
       contract_user_ids = contract.users.map(&:id)

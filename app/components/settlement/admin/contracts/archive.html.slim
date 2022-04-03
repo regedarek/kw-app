@@ -1,0 +1,68 @@
+.columns
+  .row
+    .large-2.columns
+      h3 Rozliczenia
+    .large-10.columns
+      = render 'settlement/admin/contracts/menu'
+
+  - if can? :search, Settlement::ContractRecord
+    .row
+      .large-12.columns
+        .callout
+          = render 'search'
+  - else
+    .row
+      .large-12.columns
+        .callout
+          = render 'small_search'
+
+  .row
+    .large-12.columns
+      table.stack
+        thead
+          tr
+            th.text-center width='90px'
+              = sort_link(@q, :created_at, 'ID', default_order: :desc)
+            th.text-center width='110px'
+              = sort_link(@q, :updated_at, 'Data ostatniej zmiany', default_order: :desc)
+            th.text-left width='300px'
+              = sort_link(@q, :name, 'Nazwa - numer', default_order: :desc)
+            th.text-center width='160px'
+              = sort_link(@q, :contractor, 'Kontrahent', default_order: :desc)
+            th.text-center width='160px'
+              = sort_link(@q, :custom_state, 'Status')
+            th.text-center width='160px'
+              = sort_link(@q, :closed_at, 'Data rozliczenia')
+            th.text-right width='130px'
+              = sort_link(@q, :cost, 'Kwota', default_order: :desc)
+            th.text-right width='70px' Akcje
+        tbody
+          - @contracts.each_with_index do |contract, i|
+            tr
+              td.text-center
+                - if contract.internal_number && contract.period_date
+                  = "#{contract.internal_number}/#{contract.period_date.year}"
+              td.text-center = contract.document_date
+              td.text-left
+                - if contract.description
+                  span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
+                    = link_to contract.title, admin_contract_path(contract.id)
+                - else
+                  = link_to contract.title, admin_contract_path(contract.id)
+              td.text-center
+                - if contract.contractor
+                  = link_to contract.contractor.name, admin_contractor_path(contract.contractor_id)
+              td.text-center = render 'state_bagde', contract: contract, class_value: nil
+              td.text-center = contract.closed_at&.to_date
+              td.text-right = number_to_currency(contract.cost, unit: contract.currency_type.upcase)
+              td.text-center.large-text-right
+                - if can? :update, contract
+                  = link_to edit_admin_contract_path(contract.id), style: 'padding: 5px' do
+                    i.fi.fi-page-edit
+                - if can? :destroy, contract
+                  = link_to admin_contract_path(contract.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
+                    i.fi.fi-trash
+
+  .row
+    .large-12.columns
+      = paginate @contracts
