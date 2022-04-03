@@ -32,7 +32,7 @@ module Settlement
         @q = @q.ransack(params[:q])
 
         @results = @q.result.includes([:acceptor, :creator, :checker, :contractor])
-        @contracts = @results.page(params[:page])
+        @contracts = @results.order(updated_at: :desc).page(params[:page])
 
         respond_with do |format|
           format.html

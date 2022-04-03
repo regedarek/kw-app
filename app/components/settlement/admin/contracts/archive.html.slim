@@ -42,7 +42,7 @@
               td.text-center
                 - if contract.internal_number && contract.period_date
                   = "#{contract.internal_number}/#{contract.period_date.year}"
-              td.text-center = contract.document_date
+              td.text-center = contract.updated_at.to_date
               td.text-left
                 - if contract.description
                   span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
