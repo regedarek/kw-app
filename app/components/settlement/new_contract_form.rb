@@ -32,6 +32,14 @@ module Settlement
       end
     end
 
+    validate(bank_account_presence: [:bank_account, :payout_type]) do |bank_account, payout_type|
+      if payout_type == 'return'
+        !!bank_account
+      else
+        true
+      end
+    end
+
     validate(document_type_presence: [:contract_template_id, :document_type]) do |contract_template_id, document_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
