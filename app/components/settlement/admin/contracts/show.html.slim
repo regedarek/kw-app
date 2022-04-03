@@ -57,10 +57,11 @@
       - if @contract.return?
         - if @contract.bank_account_owner?
           .row
-            .large-6.columns
+            .large-12.columns
               b Numer konta do zwrotu: 
               = @contract.bank_account
-            .large-6.columns
+          .row
+            .large-12.columns
               b Właściciel rachunku: 
               = @contract.bank_account_owner
         - else
