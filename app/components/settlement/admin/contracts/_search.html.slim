@@ -94,6 +94,13 @@
           Settlement::ContractRecord.search_event_types_select,
           { selected:  params.dig(:q, :event_type_eq_any) },
           { multiple: true }
+  .row
+    .large-6.columns
+      = f.label :document_deliver_true, 'Dostarczono oryginał dokumentów'
+      = f.select :document_deliver_true, [nil, ['Tak', true], ['Nie', 'false']]
+    .large-6.columns
+      = f.label :accountant_deliver_true, 'Doręczono księgowej'
+      = f.select :accountant_deliver_true, [nil, ['Tak', true], ['Nie', 'false']]
 
   .row
     .large-2.columns
