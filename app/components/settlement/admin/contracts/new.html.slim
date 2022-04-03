@@ -61,9 +61,13 @@
           = f.select :currency_type, Settlement::ContractRecord.currency_types.map { |w, _| [I18n.t(w, scope: :currency_type), w] }
 
       .row
-        .large-12.columns
+        .large-6.columns
           b= f.label :bank_account, 'Numer konta bankowego do zwrotu'
           = f.text_field :bank_account
+
+        .large-6.columns
+          b= f.label :bank_account_owner, 'Opcjonalnie właściciel rachunku do zwrotu'
+          = f.text_field :bank_account_owner
 
       .row
         .large-12.columns

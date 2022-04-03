@@ -36,22 +36,6 @@
 
       .row
         .large-12.columns
-          b Płatność: 
-          = I18n.t @contract.payout_type, scope: :payout_type
-
-      - if @contract.return?
-        .row
-          .large-12.columns
-            b Numer konta do zwrotu: 
-            = @contract.bank_account
-
-      .row
-        .large-6.columns
-          b Kwota rozliczenia: 
-          = number_to_currency(@contract.cost, unit: @contract.currency_type.upcase)
-
-      .row
-        .large-12.columns
           b Kto utworzył rozliczenie: 
           = @contract.creator&.display_name
 
@@ -64,6 +48,31 @@
         .large-12.columns
           b Status: 
           = render 'state_bagde', contract: @contract, class_value: ''
+
+    .callout
+      .row
+        .large-12.columns
+          b Płatność: 
+          = I18n.t @contract.payout_type, scope: :payout_type
+      - if @contract.return?
+        - if @contract.bank_account_owner?
+          .row
+            .large-6.columns
+              b Numer konta do zwrotu: 
+              = @contract.bank_account
+            .large-6.columns
+              b Właściciel rachunku: 
+              = @contract.bank_account_owner
+        - else
+          .row
+            .large-12.columns
+              b Numer konta do zwrotu: 
+              = @contract.bank_account
+
+      .row
+        .large-6.columns
+          b Kwota rozliczenia: 
+          = number_to_currency(@contract.cost, unit: @contract.currency_type.upcase)
 
     .callout class=("#{@contract.preclosed? ? 'success' : 'alert'}")
       .row

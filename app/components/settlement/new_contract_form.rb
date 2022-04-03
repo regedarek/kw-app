@@ -10,6 +10,7 @@ module Settlement
     required(:contractor_id).filled(:int?)
     optional(:group_type).maybe(:str?)
     optional(:bank_account).maybe(:str?)
+    optional(:bank_account_owner).maybe(:str?)
     required(:document_number).filled(:str?)
     required(:document_date).filled(:str?)
     optional(:document_type).maybe(:str?)
