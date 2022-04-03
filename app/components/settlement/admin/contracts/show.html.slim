@@ -46,6 +46,11 @@
 
       .row
         .large-12.columns
+          b Data ostatniej zmiany: 
+          = @contract.updated_at.strftime("%d-%m-%Y %H:%M")
+
+      .row
+        .large-12.columns
           b Status: 
           = render 'state_bagde', contract: @contract, class_value: ''
       - if @contract.closed?
