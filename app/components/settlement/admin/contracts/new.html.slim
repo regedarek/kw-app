@@ -62,6 +62,11 @@
 
       .row
         .large-12.columns
+          b= f.label :bank_account, 'Numer konta bankowego do zwrotu'
+          = f.text_field :bank_account
+
+      .row
+        .large-12.columns
           = f.label :description, "Uwagi do rozliczenia"
           = f.hidden_field :description, id: 'description_body'
           trix-editor input='description_body' style='min-height: 200px'
