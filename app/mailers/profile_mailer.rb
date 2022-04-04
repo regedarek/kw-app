@@ -42,15 +42,15 @@ class ProfileMailer < ApplicationMailer
 
     pdf = Prawn::Document.new
     pdf.define_grid(columns: 3, rows: 10)
-    pdf.grid(0,0).bounding_box do
-      pdf.image "#{Rails.root}/app/assets/images/kw-logo.png", position: :center, scale: 0.18
-    end
-    pdf.grid(0,1).bounding_box do
-      pdf.image "#{Rails.root}/app/assets/images/opp-logo.png", position: :center, scale: 0.1
-    end
-    pdf.grid(0,2).bounding_box do
-      pdf.image "#{Rails.root}/app/assets/images/pza-logo.png", position: :center, scale: 0.2
-    end
+   #pdf.grid(0,0).bounding_box do
+   #  pdf.image "#{Rails.root}/app/assets/images/kw-logo.png", position: :center, scale: 0.18
+   #end
+   #pdf.grid(0,1).bounding_box do
+   #  pdf.image "#{Rails.root}/app/assets/images/opp-logo.png", position: :center, scale: 0.1
+   #end
+   #pdf.grid(0,2).bounding_box do
+   #  pdf.image "#{Rails.root}/app/assets/images/pza-logo.png", position: :center, scale: 0.2
+   #end
     pdf.grid([1,0], [1,2]).bounding_box do
       pdf.stroke_horizontal_rule
       pdf.move_down 5
