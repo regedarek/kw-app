@@ -29,8 +29,12 @@ module Management
       def accept
         authorize! :read, Management::Voting::CaseRecord
 
+        unless Date.today == '18-05-2022'.to_date
+          return redirect_to walne_cases_path, alert: 'Akceptacja obecności będzie możliwa dopiero w dniu spotkania!'
+        end
+
         unless Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, presence_date: '18-05-2022'.to_date)
-          Management::Voting::CasePresenceRecord.create(user_id: current_user.id, presence_date: '18-05-2022'.to_date, accepted_terms: true) if Date.today == '18-05-2022'.to_date
+          Management::Voting::CasePresenceRecord.create(user_id: current_user.id, presence_date: '18-05-2022'.to_date, accepted_terms: true)
         end
 
         redirect_to walne_cases_path, notice: 'Zaakceptowano warunki'
