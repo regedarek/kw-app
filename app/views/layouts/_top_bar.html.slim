@@ -11,15 +11,14 @@
           = link_to root_path, style: 'padding: 0 1rem;' do
             = image_tag('logo_kw_krakow.jpg', style: 'max-height: 35px;')
         - if user_signed_in?
-          - if false
-            li
-              = link_to 'Walne zebranie', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
-              ul.menu.vertical
-                li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/walne-zebranie-czlonkow-klubu-29-wrzesnia-2021'
-                li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
-                li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
-                - if can? :obecni, Management::Voting::CaseRecord
-                  li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
+          li
+            = link_to 'Walne zebranie', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
+            ul.menu.vertical
+              li= link_to 'Zawiadomienie', 'https://panel.kw.krakow.pl/informacje/zawiadomienie-o-zwolaniu-sprawozdawczo-wyborczego-walnego-zebrania-czlonkow-kw-krakow-na-dzien-18-maja-2022-godzina-17-30'
+              li= link_to 'Instrukcja komunikacji', 'https://panel.kw.krakow.pl/glosowania/instrukcja'
+              li= link_to 'Wyniki głosowań', 'https://panel.kw.krakow.pl/glosowania/walne', style: 'color: red'
+              - if can? :obecni, Management::Voting::CaseRecord
+                li= link_to 'Administracja', 'https://panel.kw.krakow.pl/glosowania/obecni', style: 'color: red'
 
           li= link_to 'Darowizny', '/darowizny'
 
