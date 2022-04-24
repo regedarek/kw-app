@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_161635) do
+ActiveRecord::Schema.define(version: 2022_04_24_191524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,7 +157,8 @@ ActiveRecord::Schema.define(version: 2022_04_03_161635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accepted_terms", default: false, null: false
-    t.index ["user_id"], name: "index_case_presences_on_user_id", unique: true
+    t.date "presence_date", null: false
+    t.index ["user_id", "presence_date"], name: "index_case_presences_on_user_id_and_presence_date", unique: true
   end
 
   create_table "comments", force: :cascade do |t|

@@ -9,8 +9,8 @@ module Management
       def obecni
         authorize! :obecni, Management::Voting::CaseRecord
 
-        @obecni = Management::Voting::CasePresenceRecord.includes(:user).all
-        @pelnomocnictwa = Management::Voting::CommissionRecord.includes(:authorized, :owner).all
+        @obecni = Management::Voting::CasePresenceRecord.includes(:user).where(presence_date: '18-05-2022'.to_date)
+        @pelnomocnictwa = Management::Voting::CommissionRecord.includes(:authorized, :owner).where(created_at: Date.today.all_year)
 
         respond_with do |format| format.html
           format.xlsx do
@@ -29,8 +29,8 @@ module Management
       def accept
         authorize! :read, Management::Voting::CaseRecord
 
-        unless Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id)
-          Management::Voting::CasePresenceRecord.create(user_id: current_user.id, accepted_terms: true)
+        unless Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, presence_date: '18-05-2022'.to_date)
+          Management::Voting::CasePresenceRecord.create(user_id: current_user.id, presence_date: '18-05-2022'.to_date, accepted_terms: true) if Date.today == '18-05-2022'.to_date
         end
 
         redirect_to walne_cases_path, notice: 'Zaakceptowano warunki'
