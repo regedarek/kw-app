@@ -9,11 +9,22 @@
 .row
   .large-6.columns
     | Obecni na walnym:  
-    b = Management::Voting::CasePresenceRecord.count
+    b = @obecni.count
     |  |  
     | Pełnomocnictwa:  
-    b = Management::Voting::CommissionRecord.count
+    b = @pelnomocnictwa.count
 br
+
+.row
+  .large-6.columns
+    = form_for Management::Voting::CasePresenceRecord.new, as: :case_presence, url: case_presences_path, method: :post do |f|
+      .row
+        .large-12.columns
+          = f.select :user_id,
+            Db::User.all.map { |u| [u.display_name, u.id] },
+            {include_blank: true },
+            { class: 'js-select-multiple', required: true, include_blank: true }
+          = f.submit 'Dodaj uczestnika', class: 'button expanded'
 
 .row
   .large-12.columns

@@ -60,26 +60,32 @@
     .row
       .large-12.columns
         - if current_user.active_and_regular?
-          - if @case.voting?
-              - if @repository.authorized?(current_user.id)
-                = render "management/voting/cases/forms/authorized"
-              - else
-                - if @repository.voted?(@case.id, current_user.id)
-                  .callout.secondary
-                    h5 = current_user.display_name
-                    | Głos został oddany.
-                    br
-                    = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: current_user.id
+          - if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, presence_date: '18-05-2022'.to_date, cerber_id: nil)
+            - if @case.voting?
+                - if @repository.authorized?(current_user.id)
+                  = render "management/voting/cases/forms/authorized"
                 - else
-                  - if @case.members?
+                  - if @repository.voted?(@case.id, current_user.id)
+                    .callout.secondary
+                      h5 = current_user.display_name
+                      | Głos został oddany.
+                      br
+                      = render "management/voting/cases/my_voting/#{@case.voting_type}", user_id: current_user.id
+                  - else
+                    - if @case.members?
+                      .row
+                        .large-12.columns
+                          .callout.warning
+                            | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
                     .row
-                      .large-12.columns
-                        .callout.warning
-                          | Aby się wstrzymać oddaj pusty głos lub nie głosuj.
-                  .row
-                    .large-6.columns
-                      h5 Głosowanie
-                      = render "management/voting/cases/forms/#{@case.voting_type}", user_id: current_user.id, commission: false
+                      .large-6.columns
+                        h5 Głosowanie
+                        = render "management/voting/cases/forms/#{@case.voting_type}", user_id: current_user.id, commission: false
+          - else
+            - if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, presence_date: '18-05-2022'.to_date)
+              .callout.secondary
+                h5 = current_user.display_name
+                | Nie możesz głosować online będąc fizycznie na zebraniu.
     .row
       .large-12.columns
           = link_to 'powrót do pozostałych głosowań', '/glosowania/walne', class: 'button secondary expanded'

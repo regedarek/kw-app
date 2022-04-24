@@ -1,6 +1,7 @@
 wb = xlsx_package.workbook
 case_presence_attributes = %i(
   user_id
+  cerber_id
   accepted_terms
   created_at
 )
@@ -28,6 +29,8 @@ wb.styles do |style|
           case attr
           when :user_id
             presence.user.display_name
+          when :cerber_id
+            presence.cerber&.display_name || "online"
           else
             presence.read_attribute(attr)
           end

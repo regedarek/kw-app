@@ -75,6 +75,7 @@ pl:
     attributes:
       management/voting/case_presence_record:
         user_id: Członek
+        cerber_id: Kto wpuścił
         accepted_terms: Zapoznał się
         created_at: Przybył
       management/voting/commission_record:

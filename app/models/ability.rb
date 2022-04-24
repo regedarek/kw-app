@@ -99,6 +99,7 @@ class Ability
   def voting
     can :obecni, Management::Voting::CaseRecord
     can :approve_for_all, Management::Voting::CaseRecord
+    can :manage, Management::Voting::CasePresenceRecord
     can :manage, Management::Voting::CaseRecord
     can :hide, Management::Voting::CaseRecord
   end
