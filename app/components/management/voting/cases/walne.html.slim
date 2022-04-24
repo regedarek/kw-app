@@ -1,18 +1,21 @@
-- setting = Management::SettingsRecord.find_by(path: '/glosowania/walne')
+- setting = Management::SettingsRecord.find_by(path: '/glosowania/transmisja')
 - if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, accepted_terms: true, presence_date: '18-05-2022'.to_date)
   .row
     .large-6.columns
-      h3 Głosowania Walnego Zebrania członków KW Kraków
+      h3 Walne Zebranie członków KW Kraków
 
+  .row
     - if can? :read, Management::Voting::CaseRecord
       - if setting
-        .large-2.columns
+        .large-12.columns
             = link_to 'Transmisja wideo', setting.back_url, class: 'button success expanded large', target: :_blank
+  .row
     - if can? :read, Management::Voting::CaseRecord
-      .large-2.columns
-          = link_to 'Instrukcja', '/glosowania/instrukcja', class: 'button warning expanded large', target: :_blank
+      .large-12.columns
+          = link_to 'Instrukcja', '/glosowania/instrukcja', class: 'button warning expanded medium', target: :_blank
+  .row
     - if can? :create, Management::Voting::CaseRecord
-      .large-2.columns
+      .large-12.columns
           = link_to 'Dodaj głosowanie, uchwałę', new_case_path, class: 'button expanded medium'
 
   .row
