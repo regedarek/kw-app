@@ -65,7 +65,7 @@ pl:
           terms_of_service: Akceptuję regulamin
           participant_kw_id: Nr legitymacji klubu 2*
           submit: Edytuj zgłoszenie
-        form:
+        team_form:
           top_info: Zgłoś zespół i zapłać za obydwa pakiety startowe.
           team_name: Nazwa zespołu(bądźcie kreatywni!)
           participant_name_1: Imię i nazwisko 1*

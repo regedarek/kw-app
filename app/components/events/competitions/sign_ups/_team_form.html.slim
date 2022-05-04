@@ -1,0 +1,187 @@
+- if @competition.baner_url.present?
+  .text-center
+    = image_tag @competition.baner_url
+- else
+  h3 = @competition.name
+
+.callout.primary.text-center
+  = link_to image_tag('pl.png'), { locale: :pl }
+  |
+  = link_to image_tag('en.png'), { locale: :en }
+
+= form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: competition_sign_ups_path do |f|
+  - if @competition.team_name
+    .callout.warning
+      .row
+        .large-12.columns
+          = f.label :team_name, t('.team_name')
+          = f.text_field :team_name
+
+  .row
+    .large-12.columns
+      - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?
+        .callout.alert
+          ul
+            - @errors.select { |key, value| key.to_s.include?('_1') }.each do |error|
+              li= error.last.to_sentence
+  .callout.primary
+    .row
+      .large-3.columns
+        = f.label :participant_name_1, t('.participant_name_1')
+        = f.text_field :participant_name_1
+
+      .large-3.columns
+        = f.label :participant_email_1, t('.participant_email_1')
+        = f.text_field :participant_email_1
+
+      - if @competition.single?
+        .large-2.columns
+          = f.label :competition_package_type_1_id, t('.competition_package_type_id')
+          = f.select :competition_package_type_1_id,
+            options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
+            {include_blank: true},
+            {class: 'js-package-1-select'}
+          = f.hidden_field :single, value: true
+
+        .large-2.columns
+          .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
+            = f.label :participant_kw_id_1, t('.participant_kw_id_1')
+            = f.number_field :participant_kw_id_1
+      - else
+        .large-2.columns
+          = f.label :competition_package_type_1_id, t('.competition_package_type_id_1')
+          = f.select :competition_package_type_1_id,
+            options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
+            {include_blank: true},
+            {class: 'js-package-1-select'}
+
+        .large-2.columns
+          .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
+            = f.label :participant_kw_id_1, t('.participant_kw_id_1')
+            = f.number_field :participant_kw_id_1
+
+        .large-2.columns
+          br
+          - if @competition.matrimonial_office?
+            = f.check_box :single, class: 'js-single-check-box'
+            = f.label :single, t('.single')
+          - else
+            = f.hidden_field :single, value: false
+
+    .row
+      .large-2.columns
+        = f.label :participant_gender_1, t('.participant_gender_1')
+        = f.select :participant_gender_1, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_1)), include_blank: true
+
+      .large-2.columns
+        = f.label :participant_birth_year_1, t('.participant_birthyear_1')
+        = f.text_field :participant_birth_year_1
+
+      .large-2.columns
+        = f.label :participant_city_1, t('.participant_city_1')
+        = f.text_field :participant_city_1
+
+      .large-3.columns
+        = f.label :participant_team_1, t('.participant_team_1')
+        = f.text_field :participant_team_1
+
+      .large-3.columns
+        - if @competition.tshirt_url?
+          = f.label :tshirt_size_1 do
+            - if @competition.tshirt_url.present?
+              = "#{t('.tshirt_size_1')} (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
+            - else
+              = t('.tshirt_size_1')
+          = f.text_field :tshirt_size_1
+
+  - if @competition.single?
+    = f.hidden_field :participant_name_2
+    = f.hidden_field :tshirt_size_2
+    = f.hidden_field :participant_gender_2
+    = f.hidden_field :participant_email_2
+    = f.hidden_field :participant_kw_id_2
+    = f.hidden_field :participant_birth_year_2
+    = f.hidden_field :competition_package_type_2_id
+  - else
+    .js-player-2
+      .row
+        .large-12.columns
+          - if @errors && @errors.values.any?
+            .callout.alert
+              ul
+                - @errors.select { |key, value| key.to_s.include?('_2') }.each do |error|
+                  li= error.last.to_sentence
+      .callout.secondary
+        .row
+          .large-4.columns
+            = f.label :participant_name_2, t('.participant_name')
+            = f.text_field :participant_name_2
+
+          .large-3.columns
+            = f.label :participant_email_2, t('.participant_email')
+            = f.text_field :participant_email_2
+
+          .large-3.columns
+            = f.label :competition_package_type_2_id, t('.competition_package_type_id')
+            = f.select :competition_package_type_2_id,
+              options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_2_id)),
+              {include_blank: true},
+              {class: 'js-package-2-select'}
+
+          .large-2.columns
+            .js-package-2-field style=(@sign_up.package_type_2_membership? ? 'display: visible' : 'display: none' )
+              = f.label :participant_kw_id_2, t('.participant_kw_id')
+              = f.text_field :participant_kw_id_2
+
+        .row
+          .large-2.columns
+            = f.label :participant_gender_2, t('.participant_gender')
+            = f.select :participant_gender_2, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_2)), include_blank: true
+
+          .large-2.columns
+            = f.label :participant_birth_year_2, t('.participant_birthyear')
+            = f.text_field :participant_birth_year_2
+
+          .large-2.columns
+            = f.label :participant_city_2, t('.participant_city')
+            = f.text_field :participant_city_2
+
+          .large-3.columns
+            = f.label :participant_team_2, t('.participant_team')
+            = f.text_field :participant_team_2
+
+          .large-3.columns
+            - if @competition.tshirt_url?
+              = f.label :tshirt_size_2 do
+                - if @competition.tshirt_url.present?
+                  = "#{t('.tshirt_size_2')} (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
+                - else
+                  = t('.tshirt_size_2')
+              = f.text_field :tshirt_size_2
+
+  .callout
+    .row
+      .large-12.columns
+        = f.label :remarks, t('.remarks')
+        = f.text_area :remarks, placeholder: t('.remarks_placeholder')
+
+  .row
+    .large-12.columns
+      - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.any?
+        .callout.alert
+          ul
+            - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.each do |error|
+              li= error.last.to_sentence
+
+  .callout.warning
+    .row
+      .large-12.columns
+        = f.check_box :terms_of_service
+        = f.label :terms_of_service, t('.terms_of_service')
+
+    .row
+      .large-12.columns
+        small = @competition.rules.html_safe
+
+  = f.submit t('.submit'), class: 'button expanded large'
+

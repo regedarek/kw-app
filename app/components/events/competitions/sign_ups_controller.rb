@@ -21,7 +21,8 @@ module Events
 
       def create
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-        form = ::Events::Competitions::SignUps::IndividualForm.new
+        form = ::Events::Competitions::SignUps::SignUpTeamForm
+        #form = ::Events::Competitions::SignUps::IndividualForm.new
 
         either(create_record(form)) do |result|
           result.success do
@@ -40,16 +41,19 @@ module Events
       def edit
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         @sign_up = Events::Db::SignUpRecord.find(params[:id])
+        @team = true
         authorize! :update, Events::Db::SignUpRecord
       end
 
       def update
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         @sign_up = Events::Db::SignUpRecord.find(params[:id])
+        @team = true
+        @form = ::Events::Competitions::SignUps::SignUpTeamForm
 
         authorize! :update, Events::Db::SignUpRecord
 
-        either(update_record) do |result|
+        either(update_record(@form)) do |result|
           result.success do
             redirect_to edit_competition_sign_up_path(competition_id: params[:competition_id], id: @sign_up.id), flash: { notice: t('.success') }
           end
@@ -90,10 +94,10 @@ module Events
         ).call(competition_id: params[:competition_id], raw_inputs: params[:sign_up])
       end
 
-      def update_record
+      def update_record(form)
         Events::Competitions::SignUps::Update.new(
           Events::Competitions::Repository.new,
-          Events::Competitions::SignUps::IndividualForm.new
+          form
         ).call(competition_id: params[:competition_id], sign_up_record_id: params[:id], raw_inputs: params[:sign_up])
       end
 
