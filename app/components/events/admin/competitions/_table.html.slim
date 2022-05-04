@@ -4,8 +4,6 @@ table.stack
       th ID
       th width=350 Nazwa
       th Opcje płatności
-      th Nazwa zespołu?
-      th Zespołowe?
       th Zapisy
       th width=150
   tbody
@@ -14,8 +12,6 @@ table.stack
         td = competition.id
         td = link_to competition.name, competition_sign_ups_path(competition)
         td = competition.package_types.map(&:name).to_sentence
-        td = competition.team_name ? 'Tak' : 'Nie'
-        td = competition.single? ? 'Nie' : 'Tak'
         td.text-center
           - if competition.closed?
             = link_to 'Zamknięte',
