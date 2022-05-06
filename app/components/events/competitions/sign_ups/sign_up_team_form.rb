@@ -12,6 +12,7 @@ module Events
         optional(:team_name).maybe(:str?)
         optional(:single).maybe
         required(:participant_name_1).filled(:str?)
+        required(:participant_phone_1).filled(:str?)
         required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
         optional(:competition_package_type_1_id).filled(:int?)
         optional(:participant_kw_id_1).maybe(:int?)
@@ -36,6 +37,7 @@ module Events
         end
 
         required(:participant_name_2).filled(:str?)
+        required(:participant_phone_2).filled(:str?)
         required(:participant_email_2).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
         required(:competition_package_type_2_id).filled(:int?)
         optional(:participant_kw_id_2).maybe(:int?)

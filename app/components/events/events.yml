@@ -32,6 +32,7 @@ pl:
           rescuer: Ratownik
           participant_gender_1: Płeć 1*
           participant_phone_1: Telefon 1*
+          participant_phone_2: Telefon 2*
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
           participant_email_1: E-mail 1*
@@ -74,6 +75,7 @@ pl:
           saturday_night: Nocleg w Schronisku Roztoka z soboty na niedzielę
           rescuer: Ratownik
           participant_phone_1: Telefon 1*
+          participant_phone_2: Telefon 2*
           participant_gender_man: Mężczyzna
           participant_gender_woman: Kobieta
           participant_license_id_1: Licencja PZA

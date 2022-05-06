@@ -120,6 +120,8 @@ pl:
     rules:
       remarks:
         filled?: Prosimy abyś podał informacje o potrzebnym zakwaterowaniu i rozmiarze koszulek
+      participant_phone_2:
+        filled?: Telefon 2 nie może być pusty
       participant_phone_1:
         filled?: Telefon 1 nie może być pusty
       participant_name_1:

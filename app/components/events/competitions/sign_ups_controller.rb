@@ -114,6 +114,7 @@ module Events
             :participant_name_2,
             :participant_gender_1,
             :participant_phone_1,
+            :participant_phone_2,
             :participant_gender_2,
             :participant_email_1,
             :participant_email_2,

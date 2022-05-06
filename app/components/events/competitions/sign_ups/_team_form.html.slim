@@ -34,6 +34,10 @@
         = f.label :participant_email_1, t('.participant_email_1')
         = f.text_field :participant_email_1
 
+      .large-3.columns
+        = f.label :participant_phone_1, t('.participant_phone_1')
+        = f.text_field :participant_phone_1
+
       - if @competition.single?
         .large-2.columns
           = f.label :competition_package_type_1_id, t('.competition_package_type_id')
@@ -48,7 +52,7 @@
             = f.label :participant_kw_id_1, t('.participant_kw_id_1')
             = f.number_field :participant_kw_id_1
       - else
-        .large-2.columns
+        .large-3.columns
           = f.label :competition_package_type_1_id, t('.competition_package_type_id_1')
           = f.select :competition_package_type_1_id,
             options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
@@ -113,13 +117,17 @@
                   li= error.last.to_sentence
       .callout.secondary
         .row
-          .large-4.columns
+          .large-3.columns
             = f.label :participant_name_2, t('.participant_name')
             = f.text_field :participant_name_2
 
           .large-3.columns
             = f.label :participant_email_2, t('.participant_email')
             = f.text_field :participant_email_2
+
+          .large-3.columns
+            = f.label :participant_phone_2, t('.participant_phone_2')
+            = f.text_field :participant_phone_2
 
           .large-3.columns
             = f.label :competition_package_type_2_id, t('.competition_package_type_id')
