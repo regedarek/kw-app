@@ -10,7 +10,7 @@ module Events
           to: @sign_up.participant_email_1,
           cc: [@sign_up.competition_record.organizer_email, @sign_up.participant_email_2].compact,
           from: @sign_up.competition_record.organizer_email,
-          subject: "Zapisałeś się na zawody KW Kraków: #{@sign_up.competition_record.name}!"
+          subject: "Twoje zgłoszenie na zawody KW Kraków: #{@sign_up.competition_record.name}!"
         ).tap do |message|
           message.mailgun_options = {
             "mailable_id" => @sign_up.id,
@@ -27,7 +27,7 @@ module Events
           to: @sign_up.participant_email_1,
           cc: [@sign_up.competition_record.organizer_email, @sign_up.participant_email_2].compact,
           from: @sign_up.competition_record.organizer_email,
-          subject: "Zgłosiłeś się zawody KW Kraków: #{@sign_up.competition_record.name}!"
+          subject: "Twoje zgłoszenie na zawody KW Kraków: #{@sign_up.competition_record.name}!"
         ).tap do |message|
           message.mailgun_options = {
             "mailable_id" => @sign_up.id,
