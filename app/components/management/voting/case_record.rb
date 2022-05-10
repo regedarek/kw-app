@@ -25,6 +25,7 @@ module Management
           event :finish, :transitions_to => :finished
         end
         state :finished
+        state :archived
       end
     end
   end
