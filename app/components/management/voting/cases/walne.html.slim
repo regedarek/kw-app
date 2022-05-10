@@ -22,6 +22,11 @@
     .large-12.columns
       = render 'table', cases: @cases
 
+  - if current_user.roles.include?('voting')
+    .row
+      .large-12.columns
+        = render 'table', cases: @archived_cases
+
   .row
     .large-12.columns
       | Obecni na walnym:  

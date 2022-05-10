@@ -24,6 +24,7 @@ module Management
         authorize! :read, Management::Voting::CaseRecord
 
         @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').where.not(state: 'archived').accessible_by(current_ability).order(number: :asc, acceptance_date: :asc)
+        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle', state: 'archived').where.not(state: 'archived').accessible_by(current_ability).order(number: :asc, acceptance_date: :asc)
       end
 
       def accept
@@ -44,6 +45,7 @@ module Management
         authorize! :read, Management::Voting::CaseRecord
 
         @cases = Management::Voting::CaseRecord.where(meeting_type: 'manage').accessible_by(current_ability).order(created_at: :desc)
+        @archived_cases = Management::Voting::CaseRecord.where(meeting_type: 'manage', state: 'archived').accessible_by(current_ability).order(created_at: :desc)
       end
 
       def new
