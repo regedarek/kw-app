@@ -100,7 +100,7 @@ class Ability
     can :obecni, Management::Voting::CaseRecord
     can :approve_for_all, Management::Voting::CaseRecord
     can :manage, Management::Voting::CasePresenceRecord
-    can :manage, Management::Voting::CaseRecord
+    can :manage, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished', 'archived']
     can :hide, Management::Voting::CaseRecord
   end
 
