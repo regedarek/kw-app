@@ -24,6 +24,7 @@ contract_attributes = %i(
   period_date
   document_date
   preclosed_date
+  photos
   created_at
   updated_at
 )
@@ -76,6 +77,8 @@ wb.styles do |style|
           ActionView::Base.full_sanitizer.sanitize(profile.read_attribute(attr))
         when :contractor_id
           Settlement::ContractorRecord.find_by(id: profile.read_attribute(attr))&.name
+        when :photos
+          profile.photos.map{|f| "#{Rails.application.routes.default_url_options[:host]}#{f.file_url}" }.join(", ")
         else
           profile.read_attribute(attr)
         end
