@@ -54,7 +54,7 @@ wb.styles do |style|
         end
     end
     sheet.add_row(human_contract_attributes, style: style.add_style(highlight_cell_options))
-    Settlement::ContractRecord.accessible_by(current_ability).each do |profile|
+    Settlement::ContractRecord.includes([:photos, :acceptor, :creator, :checker, :contractor]).accessible_by(current_ability).each do |profile|
       contract_values = contract_attributes.map do |attr|
         case attr
         when *contract_type_attributes
