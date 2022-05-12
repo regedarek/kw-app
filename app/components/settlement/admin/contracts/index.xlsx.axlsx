@@ -78,7 +78,11 @@ wb.styles do |style|
         when :contractor_id
           Settlement::ContractorRecord.find_by(id: profile.read_attribute(attr))&.name
         when :photos
-          profile.photos.map{|f| "#{Rails.application.routes.default_url_options[:host]}#{f.file_url}" }.join(", ")
+          if Rails.env.development?
+            profile.photos.map{|f| "#{Rails.application.routes.default_url_options[:host]}#{f.file_url}" }.join(", ")
+          else
+            profile.photos.map(&:file_url).join(", ")
+          end
         else
           profile.read_attribute(attr)
         end
