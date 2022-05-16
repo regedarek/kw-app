@@ -19,6 +19,8 @@ sign_up_attributes = %i(
   participant_gender_2
   participant_kw_id_2
   participant_license_id_2
+  tshirt_size_1
+  tshirt_size_2
   rescuer
   friday_night
   saturday_night
