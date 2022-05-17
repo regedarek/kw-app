@@ -1,11 +1,12 @@
 table.hover
   thead
     tr
-      th.text-left  width='15%' Numer legitymacji
+      th.text-left  width='10%' Numer legitymacji
       th.text-left  width='35%' Imię i nazwisko
-      th.text-center width='25%' Zaakceptowano warunki
+      th.text-center width='5%' Zaakceptowano warunki
       th.text-center width='25%' Kto wpuścił?
-      th.text-center width='25%' Kiedy?
+      th.text-center width='20%' Kiedy?
+      th.text-center width='20%'
   tbody
     - obecni.each do |presence|
       tr
@@ -14,3 +15,6 @@ table.hover
         td.text-center = presence.accepted_terms? ? 'Tak' : 'Nie'
         td.text-center = presence.cerber&.display_name || 'online'
         td.text-center = presence.created_at&.in_time_zone&.strftime("%m/%d/%Y %H:%M")
+        td
+          = link_to case_presence_path(presence.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Czy napewno usunąć?' } do
+            i.fi.fi-trash

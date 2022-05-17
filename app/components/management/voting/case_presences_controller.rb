@@ -7,7 +7,7 @@ module Management
       def create
         authorize! :manage, Management::Voting::CasePresenceRecord
 
-        @case_presence = Management::Voting::CasePresenceRecord.new(case_presence_params)
+        @case_presence = Management::Voting::CasePresenceRecord.find_or_initialize_by(case_presence_params)
 
         @case_presence.cerber = current_user
         @case_presence.presence_date = '18-05-2022'.to_date
@@ -18,6 +18,13 @@ module Management
         else
           redirect_to '/glosowania/obecni', alert: "Nie Dodano!"
         end
+      end
+
+      def destroy
+        @case_presence = Management::Voting::CasePresenceRecord.find(params[:id])
+
+        @case_presence.destroy
+        redirect_to '/glosowania/obecni', notice: "Usunięto!"
       end
 
       private

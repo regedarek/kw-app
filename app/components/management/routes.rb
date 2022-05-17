@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     scope module: 'voting' do
       get 'glosowania/pelnomocnictwo' => 'commissions#new'
       resources :commissions, only: [:new, :create]
-      resources :case_presences, only: :create
+      resources :case_presences, only: [:create, :destroy]
       resources :cases, path: 'glosowania' do
         collection do
           get :walne, as: :walne
