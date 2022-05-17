@@ -1,5 +1,5 @@
 - setting = Management::SettingsRecord.find_by(path: '/glosowania/transmisja')
-- if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, accepted_terms: true, presence_date: '18-05-2022'.to_date) || current_user.roles.include?('voting')
+- if Management::Voting::CasePresenceRecord.exists?(user_id: current_user.id, accepted_terms: true, presence_date: '18-05-2022'.to_date)
   .row
     .large-6.columns
       h3 Walne Zebranie członków KW Kraków
