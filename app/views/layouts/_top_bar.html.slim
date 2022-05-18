@@ -107,7 +107,6 @@
         - else
           li.show-for-small-only= link_to 'Przejścia', '/przejscia'
           li.show-for-small-only = link_to 'Projekty', projects_path
-          li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path
           li.show-for-small-only= link_to t('.administration.login'), new_user_session_path
           li.show-for-small-only= link_to t('.administration.signup'), zarejestruj_path
 
@@ -131,7 +130,6 @@
               li= link_to 'Rozliczenia', admin_contracts_path
               li= link_to 'Zniżki i rabaty', discounts_path
 
-          li= link_to 'Przejścia', '/przejscia', class: 'button success'
           li= link_to 'Projekty', '/projekty', class: 'button warning'
           li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
         - else
@@ -143,27 +141,6 @@
                 li= link_to t('.administration.login'), new_user_session_path
                 li= link_to 'Zapisz się do klubu!', '/zgloszenie'
 
-        - if user_signed_in?
-          li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
-          li#cart  data={ userId: current_user.id }
-          li.remove-arrow data-behaviour='js-notifications'
-            = link_to '#', data: { behaviour: 'js-notifications-mark-as-read' } do
-              .show-for-small-only
-                | Nowe powiadomienia (
-                b data-behaviour='js-notifications-unread-count'
-                | )
-              .show-for-medium style='color: red'
-                i.fi.fi-flag
-                |  
-                span data-behaviour='js-notifications-unread-count'
-                  = NotificationCenter::NotificationRecord.where(recipient: current_user).unread.count
-            ul.menu.vertical data-behaviour='js-notifications-items'
-        - if can? :manage, Mailboxer::Conversation
-          li.remove-arrow = link_to conversations_path, style: 'padding: 0rem 1rem;padding-right: 0;' do
-            .show-for-medium style='color: green'
-              i.fi.fi-mail
-            .show-for-small-only
-              | Wiadomości
 
         - if user_signed_in?
           li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do
