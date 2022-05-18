@@ -7,8 +7,12 @@
   .row
     - if can? :read, Management::Voting::CaseRecord
       - if setting
-        .large-12.columns
+        .large-8.columns
             = link_to 'Transmisja wideo', setting.back_url, class: 'button success expanded large', target: :_blank
+        .large-4.columns
+          .callout.success
+            b HASŁO do transmisji WEBEX : WPemRaBS322
+
   .row
     - if can? :read, Management::Voting::CaseRecord
       .large-12.columns
