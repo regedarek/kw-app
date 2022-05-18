@@ -12,7 +12,13 @@ table.hover
   tbody
     - cases.each do |c|
       tr style=("#{c.voting? ? 'background-color: #e1faea' : nil}")
-        td.text-left = link_to c.name, case_path(c)
+        - if c.draft? || c.unactive?
+          - if can?(:edit, c)
+            td.text-left = link_to c.name, case_path(c)
+          - else
+            td.text-left = c.name
+        - else
+          td.text-left = link_to c.name, case_path(c)
         td.text-center = c.acceptance_date&.in_time_zone&.strftime("%m/%d/%Y o %H:%M")
         td.text-center = c.number
         td.text-center
