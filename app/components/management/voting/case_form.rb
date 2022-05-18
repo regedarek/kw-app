@@ -17,6 +17,7 @@ module Management
       optional(:hidden).maybe(:bool?)
       optional(:acceptance_date).maybe(:time?)
       optional(:destrciption).maybe(:str?)
+      optional(:final_voting_result).maybe(:str?)
       optional(:who_ids).maybe
       optional(:number).maybe(:str?)
       optional(:doc_url).maybe(:str?)

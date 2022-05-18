@@ -67,6 +67,13 @@ module Admin
       redirect_to root_path, notice: 'Zalogowano'
     end
 
+    def destroy
+      user = Db::User.friendly.find(params[:id])
+      user.destroy
+
+      redirect_to admin_users_path, notice: "Usunięto #{user.display_name}"
+    end
+
     private
 
     def authorize_admin

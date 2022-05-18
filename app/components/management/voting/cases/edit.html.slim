@@ -24,6 +24,15 @@
       b= f.label :state, 'Status'
       = f.select :state, Management::Voting::CaseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @case_record.state
   = render 'form', f: f
+
+  - if @case_record.circle?
+    .row
+      .large-12.columns
+        .callout
+          .row
+            .large-12.columns
+              = f.label :final_voting_result, 'Ostateczne wyniki'
+              = f.trix_editor :final_voting_result, style: 'min-height: 150px'
   .row
     .large-4.columns
       = f.label :hidden, "Ukryj uchwałę, głosowanie"

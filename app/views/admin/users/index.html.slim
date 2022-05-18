@@ -53,8 +53,8 @@
             th width='15%' Imię i nazwisko
             th width='20%' E-mail
             th width='15%' Zostań
-            th width='25%' Role
             th width='10%' Ostatnie składki
+            th width='10%'
         tbody
           - @users.each do |user|
             tr
@@ -66,11 +66,13 @@
               td= link_to user.display_name, edit_admin_user_path(user)
               td= mail_to user.email, user.email
               td= link_to 'Zaloguj jako', become_admin_user_path(user.id), method: :post
-              td.text-center= user.roles.to_sentence
               td.text-center
                 - if user.membership_fees.any?
                   - user.membership_fees.includes(:payment).last(2).each do |fee|
                     - paid = fee.payment.present? && fee.payment.paid?
                     span class=(paid ? 'label success' : 'label warning')
                       = fee.year
+              td.text-center
+                = link_to admin_user_path(user.id), style: 'padding: 5px', method: :delete, data: { confirm: 'Jestes pewien?' } do
+                  i.fi.fi-trash
       = paginate @users

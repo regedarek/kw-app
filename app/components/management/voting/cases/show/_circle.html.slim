@@ -54,8 +54,14 @@
               p#demo data-expired="#{@case.acceptance_date}"
         - if @case.finished?
           .callout class="success"
-            h5 = "Wyniki"
-            = render "management/voting/cases/voting_results/#{@case.voting_type}"
+            - if @case.final_voting_result.present?
+              h5 = "Suma głosów z sali oraz głosowania online"
+              .row
+                .large-12.columns
+                  = sanitize @case.final_voting_result
+            - else
+              h5 = "Wyniki głosowania online"
+              = render "management/voting/cases/voting_results/#{@case.voting_type}"
 
     .row
       .large-12.columns

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_085736) do
+ActiveRecord::Schema.define(version: 2022_05_18_110219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -547,6 +547,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_085736) do
     t.integer "meeting_type", default: 0, null: false
     t.boolean "public", default: false, null: false
     t.integer "position"
+    t.string "final_voting_result"
     t.index ["slug"], name: "index_management_cases_on_slug", unique: true
   end
 
