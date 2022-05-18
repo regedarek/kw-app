@@ -23,8 +23,8 @@ module Management
       def walne
         authorize! :read, Management::Voting::CaseRecord
 
-        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').where.not(state: 'archived').order(number: :asc, acceptance_date: :asc)
-        @archived_cases = Management::Voting::CaseRecord.where(meeting_type: 'circle', state: 'archived').order(number: :asc, acceptance_date: :asc)
+        @cases = Management::Voting::CaseRecord.where(meeting_type: 'circle').where.not(state: 'archived').order(position: :asc, acceptance_date: :asc)
+        @archived_cases = Management::Voting::CaseRecord.where(meeting_type: 'circle', state: 'archived').order(position: :asc, acceptance_date: :asc)
       end
 
       def accept
@@ -196,7 +196,7 @@ module Management
       def case_params
         params
           .require(:case)
-          .permit(:name, :hidden, :number, :state, :destrciption, :meeting_type, :voting_type, :creator_id, :doc_url, :public, :hide_votes, :acceptance_date, attachments: [], who_ids: [])
+          .permit(:name, :position, :hidden, :number, :state, :destrciption, :meeting_type, :voting_type, :creator_id, :doc_url, :public, :hide_votes, :acceptance_date, attachments: [], who_ids: [])
       end
     end
   end

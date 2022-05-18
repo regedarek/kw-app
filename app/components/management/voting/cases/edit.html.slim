@@ -8,15 +8,19 @@
 
 = form_for @case_record, as: :case, url: case_path(@case_record.id) do |f|
   .row
-    .large-4.columns
+    .large-3.columns
       b= f.label :number, 'Numer uchwały, głosowania'
       = f.text_field :number
+
+    .large-2.columns
+      b= f.label :position, 'Pozycja na liście'
+      = f.number_field :position
 
     .large-2.columns
       = f.label :meeting_type, 'Typ głosowania'
       = f.select :meeting_type, [['Walne', 'circle'],['Zarządowe', 'manage']]
 
-    .large-6.columns
+    .large-5.columns
       b= f.label :state, 'Status'
       = f.select :state, Management::Voting::CaseRecord.workflow_spec.states.keys.map{|k| [I18n.t(k), k] }, selected: @case_record.state
   = render 'form', f: f
