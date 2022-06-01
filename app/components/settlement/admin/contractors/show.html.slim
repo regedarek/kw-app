@@ -14,8 +14,8 @@
           table
             thead
               tr
-                th.text-center width='50px'
-                  = sort_link(@q, :internal_number, 'ID', default_order: :desc)
+                th.text-center width='90px'
+                  = sort_link(@q, :created_at, 'ID', default_order: :desc)
                 th.text-center Nazwa
                 th.text-center width='110px'
                   = sort_link(@q, :document_date, 'Data dokumentu', default_order: :desc)
@@ -25,7 +25,9 @@
             tbody
               - @contracts.each do |contract|
                 tr
-                  td.text-left = link_to contract.internal_number, admin_contract_path(contract.id)
+                  td.text-left
+                    - if contract.internal_number && contract.period_date
+                      = "#{contract.internal_number}/#{contract.period_date.year}"
                   td.text-left
                     - if contract.description
                       span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
