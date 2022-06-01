@@ -2,7 +2,7 @@
   .large-12.columns
     h3 = @contractor.name
 
-  .large-6.columns
+  .large-8.columns
     - if @contractor.description
       .row
         .large-12.columns
@@ -14,18 +14,27 @@
           table
             thead
               tr
-                th.text-center width='30px'
+                th.text-center width='50px'
                   = sort_link(@q, :internal_number, 'ID', default_order: :desc)
                 th.text-center Nazwa
-                th.text-center Data
-                th.text-center Kwota
+                th.text-center width='110px'
+                  = sort_link(@q, :document_date, 'Data dokumentu', default_order: :desc)
+                th.text-center width='110px'
+                  = sort_link(@q, :updated_at, 'Aktualizacja', default_order: :desc)
+                th.text-center width='120px' Kwota
             tbody
               - @contracts.each do |contract|
                 tr
                   td.text-left = link_to contract.internal_number, admin_contract_path(contract.id)
-                  td.text-left = link_to contract.title, admin_contract_path(contract.id)
-                  td.text-left width='140px' = contract.document_date.to_date
-                  td.text-left width='80px' = contract.cost
+                  td.text-left
+                    - if contract.description
+                      span data-tooltip='' tabindex="1" title="#{contract.document_number} <br> #{contract.description}" data-allow-html="true" class='has-tip'
+                        = link_to contract.title, admin_contract_path(contract.id)
+                    - else
+                      = link_to contract.title, admin_contract_path(contract.id)
+                  td.text-left = contract.document_date.to_date
+                  td.text-left = contract.updated_at.to_date
+                  td.text-right = number_to_currency(contract.cost, unit: contract.currency_type.upcase)
 
     .row
       - if can?(:update, @contractor)
@@ -36,7 +45,7 @@
       .large-4.columns
         = link_to 'powrót do rozliczeń', admin_contracts_path, class: 'button secondary'
 
-  .large-6.columns
+  .large-4.columns
     - if @contractor.logo.present?
       .row
         .large-6.columns
