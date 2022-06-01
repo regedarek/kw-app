@@ -48,7 +48,7 @@ module Settlement
         @contractor = Settlement::ContractorRecord.find(params[:id])
         @q = @contractor.contracts
         @q = @q.ransack(params[:q])
-        @q.sorts = ['updated_at desc'] if @q.sorts.empty?
+        @q.sorts = ['updated_at desc', 'document_date desc'] if @q.sorts.empty?
         @contracts = @q.result(distinct: true).page(params[:page])
       end
 
