@@ -18,7 +18,7 @@ module Api
       if user
         render json: user, serializer: UserManagement::MemberSerializer
       else
-        render json: { kw_id: :null, active: false }
+        render json: { active: false }
       end
     end
   end

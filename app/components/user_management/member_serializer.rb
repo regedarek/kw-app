@@ -1,6 +1,6 @@
 module UserManagement
   class MemberSerializer < ActiveModel::Serializer
-    attributes :kw_id, :display_name, :active
+    attributes :active
 
     def active
       Membership::Activement.new(user: self.object).active?
