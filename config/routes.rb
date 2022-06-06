@@ -66,7 +66,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :users, only: [:show]
+    resources :users, only: [:show] do
+      member do 
+        get :member
+      end
+    end
     resources :payments, only: [] do
       collection do
         post :status
