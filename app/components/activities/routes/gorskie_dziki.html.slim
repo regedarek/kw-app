@@ -96,8 +96,8 @@
                 th width='50%' kto?
                 th width='10%' bicków
             tbody
-              - start_date = DateTime.new(2021, 07, 1)
-              - end_date = DateTime.new(2021, 9, 30)
+              - start_date = DateTime.new(2022, 06, 1)
+              - end_date = DateTime.new(2022, 11, 30)
               - range = start_date..end_date
               - @best_route_of_season.first(5).each do |route|
                 tr
@@ -120,8 +120,8 @@
                 th kto?
                 th width='15%' odkrytych
             tbody
-              - start_date = DateTime.new(2021, 07, 1)
-              - end_date = DateTime.new(2021, 9, 30)
+              - start_date = DateTime.new(2022, 06, 1)
+              - end_date = DateTime.new(2022, 11, 30)
               - range = start_date..end_date
               - @tatra_uniqe.first(5).each do |user|
                 tr
