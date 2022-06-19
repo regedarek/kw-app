@@ -1,7 +1,7 @@
 module Activities
   class MountainRouteRecord < ActiveRecord::Base
     before_save :save_boar_length, if: :ski?
-    enum route_type: [:ski, :regular_climbing, :winter_climbing]
+    enum route_type: [:ski, :regular_climbing, :sport_climbing, :trad_climbing]
 
     mount_uploaders :attachments, AttachmentUploader
     serialize :attachments, JSON

@@ -67,6 +67,7 @@ module Activities
       authorize! :create, ::Db::Activities::MountainRoute
 
       @route = Db::Activities::MountainRoute.new(colleague_ids: [current_user.id], rating: 2)
+      @route.route_type = :regular_climbing
     end
 
     def show
@@ -101,7 +102,7 @@ module Activities
 
     def create
       @route = Db::Activities::MountainRoute.new(route_params)
-      @route.route_type = :regular_climbing
+
       @route.user_id = current_user.id
 
       return redirect_to activities_mountain_routes_path, alert: t('.has_to_be_signed_in') unless user_signed_in?

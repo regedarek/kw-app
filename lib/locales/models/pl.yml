@@ -356,8 +356,15 @@ pl:
         rating_one: fuj, nie polecam
         rating_two: warta przejścia
         rating_three: piękna droga
+        regular_climbing: Górskie wspinanie
+        winter_climbing: Zimowe wspinanie
+        sport_climbing: Sportowe wspinanie
+        trad_climbing: Tradowe wspinanie
+        ski: Narciarstwo Wysokogórskie
         route_type_regular_climbing: Letnie wspinanie
         route_type_winter_climbing: Zimowe wspinanie
+        route_type_sport_climbing: Sportowe wspinanie
+        route_type_trad_climbing: Tradowe wspinanie
         route_type_ski: Narciarstwo Wysokogórskie
         topo: topo drogi(link)
       db/mas/sign_up:

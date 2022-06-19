@@ -6,7 +6,7 @@
     .row
       .large-12.columns
         b rodzaj przejścia: 
-        = I18n.t(@route.route_type)
+        = I18n.t(@route.route_type, scope: 'activerecord.attributes.db/activities/mountain_route')
 
     .row
       - if @route.climbing_date.present?

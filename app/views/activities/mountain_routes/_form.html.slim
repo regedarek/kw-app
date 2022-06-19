@@ -10,6 +10,10 @@
   .large-12.columns
     .callout.primary
       .row
+        .large-3.columns
+          = f.label :route_type, 'rodzaj wspinaczki'
+          = f.select :route_type, Activities::MountainRouteRecord.route_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.db/activities/mountain_route'), w] }, selected: @route.route_type, include_blank: true
+
         .large-4.columns
           = f.label :name, 'nazwa drogi, grani*'
           = f.text_field :name
@@ -22,34 +26,38 @@
           = f.label :length, 'długość drogi w metrach'
           = f.number_field :length
 
-        .large-3.columns
-          = f.label :peak, 'szczyt'
-          = f.text_field :peak
-
         .large-1.columns
           = f.label :difficulty, 'trudność'
           = f.text_field :difficulty
 
+.row
+  .large-12.columns
+    .callout
+      | Drogi oznaczone jako przejścia górskie liczą się do Górskich Dzików, drogi oznaczone jako wspinanie TRADowe liczą się do ligi tradowej.
 
 .row
   .large-12.columns
     .callout
       .row
-        .large-4.columns
+        .large-3.columns
           = f.label :colleague_ids, 'partnerzy z klubu'
           = f.select :colleague_ids,
             Db::User.all.map { |u| [u.display_name, u.id] },
             { },
             { class: 'js-select-multiple', multiple: true }
 
-        .large-4.columns
+        .large-3.columns
           = f.label :partners, 'partnerzy spoza klubu'
           = f.text_field :partners
 
-        .large-4.columns
+        .large-3.columns
           span data-tooltip="" tabindex="1" title=("Jeżeli to nie ty jesteś autorem zdjęć podaj autora lub zostaw puste jeżeli to ty")
             = f.label :photograph, 'kto jest autorem zdjęć?'
           = f.text_field :photograph
+
+        .large-3.columns
+          = f.label :peak, 'szczyt'
+          = f.text_field :peak
 
 .row
 

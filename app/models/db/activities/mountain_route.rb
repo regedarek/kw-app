@@ -7,7 +7,7 @@ module Db
 
       #searchkick word_start: %i[name] unless Rails.env.production?
 
-      enum route_type: [:ski, :regular_climbing]
+      enum route_type: [:ski, :regular_climbing, :sport_climbing, :trad_climbing]
       friendly_id :slug_candidates, use: :slugged
 
       mount_uploaders :attachments, AttachmentUploader
@@ -17,7 +17,7 @@ module Db
       def self.model_name
         ActiveModel::Name.new(self, nil, "Activities::MountainRoute")
       end
-      scope :climbing, -> { where(route_type: [:regular_climbing, :winter_climbing], training: false) }
+      scope :climbing, -> { where(route_type: [:regular_climbing, :winter_climbing, :sport_climbing, :trad_climbing], training: false) }
       scope :skis, -> { where(route_type: :ski, training: false) }
       scope :boars, -> { where(training: [false, true]) }
 
