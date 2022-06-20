@@ -2,7 +2,7 @@ module Activities
   class Repository
     def fetch_prev_month(route_type = 'regular_climbing')
       range_climbing_date = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
-      range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 10.days)
+      range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 5.days)
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil })

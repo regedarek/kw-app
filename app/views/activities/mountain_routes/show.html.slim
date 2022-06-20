@@ -3,16 +3,26 @@
     h3 = @route.name
 .row
   .large-6.columns
+    .callout
+      .row
+        .large-6.columns
+          - if @route.climbing_date.present?
+            .large-12.columns
+              b data przejścia: 
+              = @route.climbing_date
+
+        .large-6.columns
+          - if @route.created_at.present?
+            .large-12.columns
+              b data wpisu: 
+              = @route.created_at.to_date
+        .large-12.columns
+          | Przejścia do dzików można dodawać tylko do 5 dnia kolejnego miesiąca.
+
     .row
       .large-12.columns
         b rodzaj przejścia: 
         = I18n.t(@route.route_type, scope: 'activerecord.attributes.db/activities/mountain_route')
-
-    .row
-      - if @route.climbing_date.present?
-        .large-12.columns
-          b data przejścia: 
-          = @route.climbing_date
 
     .row
       - if @route.difficulty.present?
