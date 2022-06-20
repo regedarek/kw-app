@@ -67,8 +67,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [:show] do
-      member do 
-        get :member
+      collection do 
+        get :active
       end
     end
     resources :payments, only: [] do

@@ -12,8 +12,8 @@ module Api
       render json: user, serializer: UserManagement::UserSerializer
     end
 
-    def member
-      user = Db::User.find_by(kw_id: params[:id])
+    def active
+      user = Db::User.find_by(email: params[:email])
 
       if user
         render json: user, serializer: UserManagement::MemberSerializer
