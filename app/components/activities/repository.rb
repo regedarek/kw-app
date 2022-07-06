@@ -5,7 +5,7 @@ module Activities
       range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 5.days)
       ::Db::User
         .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
+        .where.not(mountain_routes: { id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'] })
         .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range_climbing_date, created_at: range_created_at })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
         .group(:id)
@@ -16,7 +16,7 @@ module Activities
       range = Time.now.beginning_of_month..Time.now.end_of_month
       ::Db::User
         .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
+        .where.not(mountain_routes: { id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'] })
         .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
         .group(:id)
@@ -27,7 +27,7 @@ module Activities
       range = start_date..end_date
       ::Db::User
         .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
+        .where.not(mountain_routes: { id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'] })
         .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
         .group(:id)
@@ -37,7 +37,7 @@ module Activities
     def best_route_of_season(route_type = 'regular_climbing')
       range = start_date..end_date
       us = ::Db::Activities::MountainRoute
-        .where.not(id: nil, length: nil)
+        .where.not(id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'])
         .where(route_type: route_type, climbing_date: range, created_at: range)
         .select('id, name, slug, MAX(hearts_count) AS max_mountain_routes_hearts_count')
         .group(:id)
@@ -48,7 +48,7 @@ module Activities
       range = start_date..end_date
       us = ::Db::User
         .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
+        .where.not(mountain_routes: { id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'] })
         .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.hearts_count) AS total_mountain_routes_hearts_count')
         .group(:id)
@@ -57,14 +57,14 @@ module Activities
 
     def respect_for(user)
       range = start_date..end_date
-      user.mountain_routes.where.not(id: nil, length: nil).where(route_type: 'regular_climbing', climbing_date: range, created_at: range).sum(:hearts_count)
+      user.mountain_routes.where.not(id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III']).where(route_type: 'regular_climbing', climbing_date: range, created_at: range).sum(:hearts_count)
     end
 
     def tatra_uniqe(route_type = 'regular_climbing')
       range = start_date..end_date
       ::Db::User
         .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
+        .where.not(mountain_routes: { id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'] })
         .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
         .where("mountain_routes.description LIKE ?", "%#exploratortatr%").uniq
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#exploratortatr%'").count }.reverse!
@@ -74,7 +74,7 @@ module Activities
       range = start_date..end_date
       ::Db::User
         .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil })
+        .where.not(mountain_routes: { id: nil, length: nil, difficulty: [nil, 'I', 'II', 'III', 'III+', '+III'] })
         .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
         .where("mountain_routes.description LIKE ?", "%#dziadekgienek%").uniq
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#dziadekgienek%'").count }.reverse!
