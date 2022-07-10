@@ -42,6 +42,12 @@
                 td.text-right width='40%'
                   = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
 
+      .row
+        .large-8.columns
+          iframe allowtransparency="" frameborder="0" height="300" scrolling="no" src="https://www.strava.com/clubs/196119/latest-rides/75295ce71d41602551067350da9ee568bd4a4b1e?show_rides=true" width="100%" 
+        .large-4.columns
+          iframe allowtransparency="" frameborder="0" height="300" scrolling="no" src="https://www.strava.com/clubs/196119/latest-rides/75295ce71d41602551067350da9ee568bd4a4b1e?show_rides=false" width="100%" 
+
     .large-4.columns
       .row
         .large-12.columns
@@ -62,15 +68,6 @@
                       = course.start_date.to_date
                   td
                     = link_to course.name, supplementary_course_path(course.id)
-      .row
-        .large-12.columns
-          = link_to projects_path do
-            h4 Projekty do wzięcia
-          table.stack
-            - Management::ProjectRecord.where(state: :unassigned).order(created_at: :desc).limit(5).each do |project|
-              tr
-                td
-                  = link_to project.name, project_path(project.slug)
 
 - else
   .row
