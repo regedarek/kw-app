@@ -3,25 +3,6 @@
 
 body
   .row
-    .col-md-5.col-xs-12
-      .flag_list
-        ul
-          - Activities::CompetitionRecord.countries.keys.each do |country|
-            li
-              = link_to "https://skimo.pl/kalendarz?country=#{country}" do
-                = flag_icon(table.country_iso(country), squared: true, class: 'flag')
-    .col-md-2.col-xs-12
-      .clear_filter
-        = link_to 'wyczyść filtr', "https://skimo.pl/kalendarz"
-    .col-md-5.col-xs-12
-
-      .serie_list.pull-right
-        ul
-          - Activities::CompetitionRecord.series.keys.each do |serie|
-            li.serie
-              = link_to "https://skimo.pl/kalendarz?series=#{serie}" do
-                b = serie.upcase
-  .row
     .col-md-12
       table.kalendarz-zawodow style=("border-width: 1px 0 0 1px;") 
         thead
