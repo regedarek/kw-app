@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.0.1'
+ruby '2.6.6'
 
 # setup
 gem 'bootsnap', require: false
