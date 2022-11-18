@@ -40,7 +40,7 @@
     .large-6.columns
       .callout.primary
         = f.label :supplementary_course_package_type_id
-        = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost
+        = f.collection_select :supplementary_course_package_type_id, @sign_up.course.package_types, :id, :name_with_cost, { include_blank: 'Wybierz pakiet' }, {}
 
   - if @sign_up.course.question
     .large-6.columns
