@@ -2,14 +2,19 @@ module Library
   class ItemsController < ApplicationController
     include EitherMatcher
     append_view_path 'app/components'
+    before_action :authenticate_user!
 
     def index
+      redirect_to root_path, alert: "Musisz być aktywnym członkiem klubu" unless Membership::Activement.new(user: current_user).active?
+
       @q = ::Library::ItemRecord.ransack(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
       @items = @q.result.page(params[:page]).per(20)
     end
 
     def show
+      redirect_to root_path, alert: "Musisz być aktywnym członkiem klubu" unless Membership::Activement.new(user: current_user).active?
+
       @item = Library::ItemRecord.friendly.find(params[:id])
     end
 
@@ -28,10 +33,14 @@ module Library
     end
 
     def edit
+      redirect_to root_path, alert: "Musisz być aktywnym członkiem klubu" unless Membership::Activement.new(user: current_user).active?
+
       @item = Library::ItemRecord.friendly.find(params[:id])
     end
 
     def update
+      redirect_to root_path, alert: "Musisz być aktywnym członkiem klubu" unless Membership::Activement.new(user: current_user).active?
+
       @item = Library::ItemRecord.find(params[:id])
 
       if @item.update(item_params)
