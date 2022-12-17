@@ -120,11 +120,11 @@ module Training
       end
 
       def start_date
-        start_date = DateTime.new(2018, 11, 1)
+        start_date = DateTime.new(2022, 12, 1)
       end
 
       def end_date
-        end_date = DateTime.new(2019, 5, 1)
+        end_date = DateTime.new(2023, 5, 1)
       end
     end
   end
