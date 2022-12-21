@@ -13,6 +13,11 @@ module Charity
       return Left(message: 'Kwota i cel dotacji musi być uzupełnione!') unless form_outputs.success?
 
       donation = repository.create_donation(form_outputs: form_outputs)
+
+      if donation.ski_service?
+        donation.update description: "Darowizna na rzecz Klubu Wysokogórskiego Kraków - Sprzęt serwisowy od #{donation.display_name}"
+      end
+
       if donation.crack?
         donation.update description: "Darowizna na rzecz Klubu Wysokogórskiego Kraków - Rysa od #{donation.display_name}"
       end

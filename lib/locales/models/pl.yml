@@ -138,6 +138,7 @@ pl:
         action_types:
           mariusz: Dla Mariusza
           crack: Rysa na Bronxie
+          ski_service: Serwis Narciarski(1 para nart)
       shop/order_record:
         states:
           new: Nowe

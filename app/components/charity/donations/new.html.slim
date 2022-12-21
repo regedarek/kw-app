@@ -26,12 +26,16 @@
               = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'mariusz'
             - elsif request.path == '/na-ryse'
               = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'crack'
+            - elsif request.path == '/serwis-narciarski'
+              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'ski_service'
             - else
               = f.select :action_type, Charity::DonationRecord.action_types_select, selected: @donation.action_type, include_blank: true
 
         .row
           .large-12.columns
             b= f.label :cost, 'Kwota w polskich złotych*'
+            - if request.path == '/serwis-narciarski'
+              b Kwota za jedną parę nart to 10 zł
             = f.number_field :cost
 
         .row

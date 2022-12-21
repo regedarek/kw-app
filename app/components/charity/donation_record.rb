@@ -4,12 +4,12 @@ module Charity
     has_one :payment, as: :payable, dependent: :destroy, class_name: 'Db::Payment'
     belongs_to :user, class_name: 'Db::User'
 
-    enum action_type: [:mariusz, :crack]
+    enum action_type: [:mariusz, :crack, :ski_service]
 
     validates_acceptance_of :terms_of_service
 
     def payment_type
-      if crack?
+      if crack? || ski_service?
         :donations_other
       else
         :donations
