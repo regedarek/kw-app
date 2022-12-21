@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get 'darowizny' => 'charity/donations#new'
   get 'dla-mariusza' => 'charity/donations#new', as: :mariusz
   get 'na-ryse' => 'charity/donations#new', as: :na_ryse
+  get 'serwis-narciarski' => 'charity/donations#new', as: :serwis_narciarski
   get 'ksiazka-karola' => 'charity/donations#new'
 end
