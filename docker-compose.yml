@@ -1,12 +1,14 @@
 version: '3'
 services:
   redis:
-    image: 'redis:5-alpine'
+    image: 'redis:7-alpine'
     command: redis-server  --requirepass +eA8tga96sbquDe9CLL3yUZMNdHM6prSwD6kj1vXO4nzPPudDkxh4U+/LMtOWd+Wd72s9MnXNZqCKZeh
     ports:
       - '6379:6379'
     volumes:
       - 'redis:/data'
+    sysctls:
+      - net.core.somaxconn=4096
   sidekiq:
     depends_on:
       - 'db'
