@@ -15,7 +15,7 @@ module Training
             user_id: user.id,
             map_summary_polyline: activity.map.summary_polyline,
             name: name || activity.name,
-            hidden: false,
+            hidden: true,
             time: activity.moving_time_in_hours_s,
             distance: activity.distance_in_kilometers,
             route_type: our_type(activity.type),
