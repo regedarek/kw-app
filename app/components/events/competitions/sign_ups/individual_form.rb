@@ -23,6 +23,7 @@ module Events
          optional(:team_name)
          optional(:teammate_id)
          optional(:remarks)
+         optional(:license_number)
          optional(:participant_kw_id_1)
          optional(:participant_license_id_1)
          optional(:participant_team_1)
@@ -31,7 +32,7 @@ module Events
          required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1).filled
          required(:competition_package_type_1_id).filled
-         required(:rescuer).filled
+         optional(:rescuer)
          optional(:friday_night)
          optional(:saturday_night)
          required(:terms_of_service).filled

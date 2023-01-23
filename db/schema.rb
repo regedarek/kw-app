@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_110219) do
+ActiveRecord::Schema.define(version: 2023_01_23_165431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_110219) do
     t.boolean "rescuer", default: false, null: false
     t.boolean "friday_night", default: false, null: false
     t.boolean "saturday_night", default: false, null: false
+    t.integer "license_number"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -16,6 +16,7 @@ module Events
         required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
         optional(:competition_package_type_1_id).filled(:int?)
         optional(:participant_kw_id_1).maybe(:int?)
+        optional(:license_number).maybe(:int?)
         required(:participant_gender_1).filled(:int?)
         required(:participant_birth_year_1).filled(:int?, gt?: 1920)
         optional(:tshirt_size_1).maybe

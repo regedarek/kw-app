@@ -110,8 +110,12 @@
             = f.text_field :participant_birth_year_1
 
           .large-2.columns
-            = f.label :participant_city_1, t('.participant_city_1')
-            = f.text_field :participant_city_1
+            = f.label :license_number, "Licencja"
+            = f.number_field :license_number
+
+          .large-2.columns
+            = f.label :participant_phone_1, "Telefon"
+            = f.text_field :participant_phone_1
 
           .large-3.columns
             = f.label :participant_team_1, t('.participant_team_1')

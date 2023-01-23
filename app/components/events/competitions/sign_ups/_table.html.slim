@@ -11,7 +11,7 @@ table.stack
             = t('.name')
           - else
             = t('.names')
-      th = t('.city')
+      th Licencja
       th = t('.package')
       th = t('.organization')
       th width='12%'
@@ -28,7 +28,7 @@ table.stack
             span.dashboard-table-timestamp= [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
           - else
             = [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
-        td = [sign_up.participant_city_1, sign_up.participant_city_2].compact.reject(&:empty?).to_sentence
+        td = sign_up.license_number
         td = [sign_up.package_type_1&.name, sign_up.package_type_2&.name].compact.reject(&:empty?).to_sentence
         td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
         td.text-center
