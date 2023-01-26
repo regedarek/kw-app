@@ -13,7 +13,7 @@ module Payments
           control: @payment.dotpay_id,
           language: 'pl',
           redirection_type: 0,
-          url: Rails.application.secrets.dotpay_back_url,
+          url: Rails.application.secrets.dotpay_back_24_url,
           urlc: Rails.application.secrets.dotpay_urlc
         }
       end
