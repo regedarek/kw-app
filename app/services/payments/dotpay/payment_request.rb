@@ -33,7 +33,7 @@ module Payments
             Failure.new(:wrong_payment_url, message: 'Błędny link płatności, skonktaktuj się z administratorem.')
           end
         else
-          Failure.new(:dotpay_request_error, message: 'Błąd podczas generowania linka płatności skontaktuj sie z administratorem.')
+          Failure.new(:dotpay_request_error, message: 'Błąd podczas generowania linka płatności skontaktuj sie z administratorem.', body: JSON.parse(response.body))
         end
       end
 
