@@ -74,7 +74,7 @@ Rails.application.routes.draw do
     resources :payments, only: [] do
       collection do
         post :status
-        post :thank_you
+        get :thank_you
       end
     end
   end
