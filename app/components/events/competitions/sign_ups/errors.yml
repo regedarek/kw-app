@@ -3,7 +3,7 @@ en:
     tshirt_size_1_presence: Tshirt size 1 has to be filled
     tshirt_size_2_presence: Tshirt size 2 has to be filled
     terms_of_service_true: Musisz zaakceptować regulamin!
-    medical_rules_true: Zaznacz oświadczenie o posiadaniu zaświadczenia lekarskiego!
+    medical_rules_true: Musisz zaakceptować klauzulę informacyjną!
     participant_license_1_filled: Musisz podać poprawny numer licencji PZA!
     rules:
       team_name:

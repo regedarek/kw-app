@@ -13,7 +13,7 @@ module Events
       belongs_to :competition_record,
         class_name: 'Events::Db::CompetitionRecord'
       validates_acceptance_of :terms_of_service
-      #validates_acceptance_of :medical_rules
+      validates_acceptance_of :medical_rules
       has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
 
       def gender_1

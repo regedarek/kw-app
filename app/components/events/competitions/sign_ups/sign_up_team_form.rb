@@ -64,6 +64,7 @@ module Events
 
         optional(:remarks).maybe(:str?)
         required(:terms_of_service).value(:true?)
+        required(:medical_rules).value(:true?)
       end
     end
   end

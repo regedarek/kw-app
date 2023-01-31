@@ -70,6 +70,10 @@
               = f.hidden_field :single, value: true
 
             .large-2.columns
+              = f.label :rescuer, t('.rescuer')
+              = f.check_box :rescuer
+
+            .large-2.columns
               .js-package-1-field
                 = f.label :participant_kw_id_1, t('.participant_kw_id_1')
                 = f.number_field :participant_kw_id_1
@@ -82,6 +86,10 @@
                 options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
                 {include_blank: true},
                 {class: 'js-package-1-select'}
+
+            .large-2.columns
+              = f.label :rescuer, t('.rescuer')
+              = f.check_box :rescuer
 
             .large-2.columns
               .js-package-1-field style=(@sign_up.package_type_1_membership? ? 'display: visible' : 'display: none' )
@@ -220,6 +228,8 @@
           .large-12.columns
             = f.check_box :terms_of_service, { checked: true }
             = f.label :terms_of_service, t('.terms_of_service')
+            = f.check_box :medical_rules, { checked: true }
+            = f.label :medical_rules, t('.medical_rules')
 
         .row
           .large-12.columns

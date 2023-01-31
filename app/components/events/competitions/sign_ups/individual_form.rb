@@ -36,15 +36,15 @@ module Events
          optional(:friday_night)
          optional(:saturday_night)
          required(:terms_of_service).filled
-         #required(:medical_rules).filled
+         required(:medical_rules).filled
 
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)
          end
 
-        #validate(medical_rules_true: [:medical_rules]) do |terms|
-        #  ActiveRecord::Type::Boolean.new.cast(terms)
-        #end
+         validate(medical_rules_true: [:medical_rules]) do |terms|
+           ActiveRecord::Type::Boolean.new.cast(terms)
+         end
         end
       end
     end
