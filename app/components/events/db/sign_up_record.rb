@@ -21,13 +21,29 @@ module Events
 
         case
         when participant_birth_year_1.to_i.between?(2005, 2006)
-          "Junior Młodszy (U18)"
+          if participant_gender_1 == 1
+            "Junior Młodszy (U18)"
+          else
+            "Juniorka Młodsza (U18)"
+          end
         when participant_birth_year_1.to_i.between?(2003, 2004)
-          "Junior (U20)"
+          if participant_gender_1 == 1
+            "Junior (U20)"
+          else
+            "Juniorka (U20)"
+          end
         when participant_birth_year_1.to_i.between?(1974, 2002)
-          "Senior"
+          if participant_gender_1 == 1
+            "Senior"
+          else
+            "Seniorka"
+          end
         when participant_birth_year_1.to_i.between?(1900, 1973)
-          "Nestor"
+          if participant_gender_1 == 1
+            "Nestor"
+          else
+            "Nestorka"
+          end
         else
           "ERROR"
         end
