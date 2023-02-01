@@ -16,6 +16,23 @@ module Events
       validates_acceptance_of :medical_rules
       has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
 
+      def sport_category_1
+        return nil unless participant_birth_year_1.present?
+
+        case
+        when participant_birth_year_1.to_i.between?(2005, 2006)
+          "Junior Młodszy (U18)"
+        when participant_birth_year_1.to_i.between?(2003, 2004)
+          "Junior (U20)"
+        when participant_birth_year_1.to_i.between?(1974, 2002)
+          "Senior"
+        when participant_birth_year_1.to_i.between?(1900, 1973)
+          "Nestor"
+        else
+          "ERROR"
+        end
+      end
+
       def gender_1
         if participant_gender_1 == 1
           'Mężczyzna'

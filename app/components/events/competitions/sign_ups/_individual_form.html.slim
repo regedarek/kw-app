@@ -87,8 +87,9 @@
         = f.number_field :participant_birth_year_1, max: 2006
 
       .large-2.columns
-        = f.label :participant_license_id_1, "Numer licencji(PL)"
-        = f.number_field :participant_license_id_1
+        - unless params[:locale] == 'en'
+          = f.label :participant_license_id_1, "Numer licencji(PL)"
+          = f.number_field :participant_license_id_1
 
       .large-3.columns
         = f.label :participant_team_1, t('.participant_team_1')

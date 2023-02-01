@@ -1,14 +1,29 @@
 wb = xlsx_package.workbook
 sign_up_attributes = %i(
+  team_name
   participant_name_1
   participant_email_1
   participant_phone_1
   participant_birth_year_1
+  participant_city_1
   participant_team_1
+  participant_gender_1
   participant_kw_id_1
   participant_license_id_1
+  participant_name_2
+  participant_email_2
+  participant_phone_2
+  participant_birth_year_2
+  participant_city_2
+  participant_team_2
+  participant_gender_2
+  participant_kw_id_2
+  participant_license_id_2
   tshirt_size_1
+  tshirt_size_2
   rescuer
+  friday_night
+  saturday_night
   remarks
 )
 wb.styles do |style|
@@ -21,12 +36,12 @@ wb.styles do |style|
   wb.add_worksheet(name: "#{@competition.edition_sym}") do |sheet|
     default_attributes = sign_up_attributes.map do |attr|
       Events::Db::CompetitionRecord.human_attribute_name(attr)
-    end.push("Kategoria sportowa", 'Płeć', 'Pakiet', 'Płatność', 'Utworzono', 'Opłacono')
+    end.push('Pakiet', 'Płatność', 'Utworzono', 'Opłacono')
     sheet.add_row(default_attributes, style: style.add_style(highlight_cell_options))
     @competition.sign_ups_records.each do |sign_up|
       default_values = sign_up_attributes.map do |attr|
         sign_up.read_attribute(attr)
-      end.push(sign_up.sport_category_1, sign_up.gender_1, Events::Db::CompetitionPackageTypeRecord.find_by(id: sign_up.competition_package_type_1_id).name, sign_up.payment.prepaid?, sign_up.created_at, sign_up.payment&.updated_at)
+      end.push(Events::Db::CompetitionPackageTypeRecord.find_by(id: sign_up.competition_package_type_1_id).name, sign_up.payment.prepaid?, sign_up.created_at, sign_up.payment&.updated_at)
       sheet.add_row(default_values)
     end
   end
