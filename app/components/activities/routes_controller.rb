@@ -34,7 +34,7 @@ module Activities
     def narciarskie_dziki
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 
-      @prev_prev_month_leaders = ski_repository.fetch_specific_month(2022, Date.today.month - 2)
+      @prev_prev_month_leaders = ski_repository.fetch_specific_month(2023, 1)
       @prev_month_leaders = ski_repository.fetch_prev_month
       @current_month_leaders = ski_repository.fetch_current_month
       @season_leaders = ski_repository.fetch_season
