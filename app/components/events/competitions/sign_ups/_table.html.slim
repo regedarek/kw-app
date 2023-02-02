@@ -12,9 +12,9 @@ table.stack
           - else
             = t('.names')
       th Kategoria
-      th = t('.package')
+      th Podkategorie
       th = t('.organization')
-      th width='12%'
+      th width='14%'
         = t('.paid')
       - if can? :manage, Events::Db::SignUpRecord
         th width='8%'
@@ -29,7 +29,7 @@ table.stack
           - else
             = [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
         td = sign_up.sport_category_1
-        td = [sign_up.package_type_1&.name, sign_up.package_type_2&.name].compact.reject(&:empty?).to_sentence
+        td = [(sign_up.rescuer? ? "Ratownik" : ""), (sign_up.package_type_1_membership? ? "KW Kraków" : "")].compact.join(', ')
         td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
         td.text-center
           - if sign_up.payment.paid?
