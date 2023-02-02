@@ -27,7 +27,7 @@
         = f.text_field :participant_phone_1
 
       .large-4.columns
-        = f.label :participant_gender_1, "Płeć | Gender"
+        = f.label :participant_gender_1, "Płeć | Gender *"
         = f.select :participant_gender_1, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_1)), include_blank: true
 
       .large-4.columns
@@ -41,7 +41,7 @@
   .callout.success
     .row
       .large-6.columns
-        = f.label :competition_package_type_1_id, "Pakiet | Package*"
+        = f.label :competition_package_type_1_id, "Pakiet | Package *"
         = f.select :competition_package_type_1_id,
           options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
           {include_blank: true},
