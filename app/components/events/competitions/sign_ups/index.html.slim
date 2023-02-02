@@ -32,16 +32,18 @@
         .callout.primary
           .row
             - if limiter.limit > 0
-              .large-3.columns
+              .large-2.columns
                 b = t('.limit')
                 = limiter.limit
-            .large-3.columns
+            .large-2.columns
               b = t('.persons')
               = limiter.persons
-            - unless @competition.single?
-              .large-3.columns
-                b = t('.teams')
-                = limiter.teams.count
+            .large-2.columns
+              b KW Kraków: 
+              = limiter.membership.count
+            .large-2.columns
+              b Ratowników: 
+              = limiter.rescuers.count
             .large-3.columns
               b = t('.waiting')
               = limiter.waiting.count

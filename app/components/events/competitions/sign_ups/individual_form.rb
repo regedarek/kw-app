@@ -24,7 +24,7 @@ module Events
          optional(:teammate_id)
          optional(:remarks)
          optional(:license_number)
-         optional(:participant_kw_id_1)
+         optional(:participant_kw_id_1).maybe(:str?)
          optional(:participant_license_id_1)
          optional(:participant_team_1)
          required(:participant_phone_1).filled
@@ -37,6 +37,13 @@ module Events
          optional(:saturday_night)
          required(:terms_of_service).filled
          required(:medical_rules).filled
+         validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
+           if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
+             ::Membership::Activement.new(user: ::Db::User.find_by(kw_id: kw_id)).active?
+           else
+             true
+           end
+         end
 
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)

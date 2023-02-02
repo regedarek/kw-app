@@ -42,6 +42,21 @@ module Events
             .where(single: false, payments: { state: 'prepaid' })
         end
 
+        def rescuers
+          @competition
+            .sign_ups_records
+            .includes([:payment, :emails])
+            .where(rescuer: true, payments: { state: 'prepaid' })
+        end
+
+        def membership
+          @competition
+            .sign_ups_records
+            .includes([:payment, :emails])
+            .where(payments: { state: 'prepaid' })
+            .select(&:package_type_1_membership?)
+        end
+
         def waiting
           @competition
             .sign_ups_records
