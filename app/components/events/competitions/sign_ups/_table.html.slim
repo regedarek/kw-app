@@ -3,14 +3,7 @@ table.stack
     tr
       th width="4%"
         = t('.nr')
-      th width="20%"
-        - if @competition.team_name
-          = t('.team_name')
-        - else
-          - if @competition.single
-            = t('.name')
-          - else
-            = t('.names')
+      th width="20%" = t('.name')
       th Kategoria
       th Podkategorie
       th = t('.organization')
@@ -22,15 +15,10 @@ table.stack
     - sign_ups.each_with_index do |sign_up, index|
       tr
         td = index + 1
-        td
-          - if sign_up.team_name.present?
-            h6.dashboard-table-text = sign_up.team_name
-            span.dashboard-table-timestamp= [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
-          - else
-            = [sign_up.participant_name_1, sign_up.participant_name_2].compact.reject(&:empty?).to_sentence
+        td = sign_up.participant_name_1
         td = sign_up.sport_category_1
-        td = [(sign_up.rescuer? ? "Ratownik" : ""), (sign_up.package_type_1_membership? ? "KW Kraków" : "")].compact.join(', ')
-        td = [sign_up.participant_team_1, sign_up.participant_team_2].compact.reject(&:empty?).to_sentence
+        td = [(sign_up.rescuer? ? "Ratownik" : nil), (sign_up.package_type_1_membership? ? "KW Kraków" : nil)].compact.join(', ')
+        td = sign_up.participant_team_1
         td.text-center
           - if sign_up.payment.paid?
             .label.success = t("prepaid")
@@ -51,4 +39,3 @@ table.stack
                 i.fi-page-edit
               = link_to competition_sign_up_path(competition_id: @competition, id: sign_up), method: :delete, class: 'item', data: { confirm: 'Napewno chcesz usunąć?' } do
                 i.fi-trash
-
