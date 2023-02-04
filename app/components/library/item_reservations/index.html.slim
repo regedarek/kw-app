@@ -1,0 +1,35 @@
+.row
+  .large-12.columns
+    table
+      tr
+        th Co?
+        th Kiedy?
+        th width='250px' Kto?
+        th width='250px' Odebrał?
+        th Zwrot
+        th width='90px'
+      - @reservations.each do |reservation|
+        tr
+          td
+            = link_to reservation.item.title, ksiazka_path(reservation.item.slug)
+          td
+            = reservation.received_at
+          td
+            span data-tooltip='' tabindex="1" title="#{reservation.description}" data-allow-html="true"
+              span= "#{reservation.user.display_name}"
+          td
+            = reservation.back_by&.display_name
+          td
+            - if reservation.back_at.present?
+              b style="color: green" = reservation.back_at
+            - else
+              b style="color: orange" = reservation.returned_at
+          td.text-right
+            = link_to library_item_reservation_path(reservation.id), style: 'padding: 5px', data: { confirm: 'Jestes pewien?' }, method: :delete do
+              i.fi.fi-trash
+            - unless reservation.back_at.present?
+              = link_to return_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
+                i.fi.fi-refresh
+
+      .text-center
+        = paginate @reservations

@@ -72,9 +72,9 @@
           table
             tr
               th Kiedy?
-              th Kto?
-              th width='20px' Kaucja
-              th
+              th width='250px' Kto?
+              th Zwrot
+              th width='90px'
             - @item.library_item_reservations.each do |reservation|
               tr
                 td
@@ -83,12 +83,16 @@
                   span data-tooltip='' tabindex="1" title="#{reservation.description}" data-allow-html="true"
                     span= "#{reservation.user.display_name}"
                 td
-                  - if reservation.caution
-                    = "#{reservation.caution} zł"
+                  - if reservation.back_at.present?
+                    b style="color: green" = reservation.back_at
+                  - else
+                    b style="color: orange" = reservation.returned_at
                 td.text-right
                   = link_to library_item_reservation_path(reservation.id), style: 'padding: 5px', data: { confirm: 'Jestes pewien?' }, method: :delete do
                     i.fi.fi-trash
-
+                  - unless reservation.back_at.present?
+                    = link_to return_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
+                      i.fi.fi-refresh
 
       .row
         .large-12.columns
@@ -108,8 +112,8 @@
                 = f.date_field :received_at, value: Date.today
 
               .large-6.columns
-                = f.label :caution, 'Kaucja'
-                = f.number_field :caution
+                = f.label :returned_at, 'Zwrot do'
+                = f.date_field :returned_at, value: Date.today + 7.days
 
             .row
               .large-12.columns

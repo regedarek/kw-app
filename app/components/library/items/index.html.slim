@@ -41,9 +41,10 @@
             th Tytuł
             th Autorzy
             th width='30px' Czytelnia?
+            th width='40px' W klubie?
             th width='30px' Rok Wydania
             - if can? :update, Library::ItemRecord
-              th width='20px' Akcje
+              th width='90px' Akcje
         tbody
           - @items.each do |item|
             tr
@@ -58,13 +59,18 @@
                   = render partial: 'library/authors/link', collection: item.authors, spacer_template: 'shared/comma'
               td.text-center
                 = I18n.t item.reading_room
+              td.text-center
+                = I18n.t item.on_place?
               td
                 - if item.publishment_at
                   = item.publishment_at.strftime("%Y")
-              - if can? :update, Library::ItemRecord
-                td.text-right
+              td.text-right
+                - if can? :update, Library::ItemRecord
                   = link_to edit_library_item_path(item.id), style: 'padding: 5px' do
                     i.fi.fi-page-edit
+                - if can? :destroy, Library::ItemRecord
+                  = link_to library_item_path(item.id), style: 'padding: 5px', data: { confirm: "Czy aby napewno?" }, method: :delete do
+                    i.fi.fi-trash
 
       .text-center
         = paginate @items

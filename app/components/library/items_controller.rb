@@ -50,6 +50,13 @@ module Library
       end
     end
 
+    def destroy
+      @item = Library::ItemRecord.find(params[:id])
+      @item.destroy
+
+      redirect_to library_items_path, notice: 'Usunięto!'
+    end
+
     private
 
     def item_params

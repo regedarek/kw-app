@@ -19,6 +19,10 @@ module Library
     has_many :item_tags, class_name: '::Library::ItemTagsRecord', foreign_key: :item_id
     has_many :tags, class_name: '::Library::TagRecord', through: :item_tags, foreign_key: :tag_id, dependent: :destroy
 
+    def on_place?
+      !library_item_reservations.where(back_at: nil).any?
+    end
+
     def authors_names=(ids)
       self.author_ids = ids
     end
