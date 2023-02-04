@@ -1,11 +1,12 @@
 .column
   .row
-    .large-6.columns
+    .large-4.columns
       .text-left
         h4 Biblioteka
-    .large-6.columns
+    .large-8.columns
       .text-right
         - if can? :create, Library::ItemRecord
+          =link_to 'Aktualne wypożyczenia', biblioteka_wypozyczenia_path, class: 'button success'
           =link_to 'Dodaj egzemplarz', new_library_item_path, class: 'button'
           =link_to 'Dodaj autora', new_library_author_path, class: 'button'
           =link_to 'Dodaj tagi', admin_tags_path, class: 'button'
