@@ -53,26 +53,27 @@
           = f.label :participant_kw_id_1, t('.participant_kw_id_1')
           = f.number_field :participant_kw_id_1
 
-  .callout.secondary
-    .row
-      .large-4.columns
-          br
-          = f.check_box :rescuer
-          = f.label :rescuer, "Ratownik | Rescuer"
 
-      .large-4.columns
+  .row
+    .large-6.columns
+      .callout.secondary
+          = f.label :rescuer, "Ratownik | Rescuer"
+          = f.check_box :rescuer
+
+    .large-6.columns
+      .callout.secondary
         - unless params[:locale] == 'en'
-          = f.label :participant_license_id_1, "Licencja(PL) | Not needed"
+          = f.label :participant_license_id_1, "Licencja zawodnicza PZA | Only for competitors from Poland"
           = f.number_field :participant_license_id_1
 
+    - if @competition.tshirt_url?
       .large-4.columns
-        - if @competition.tshirt_url?
-          = f.label :tshirt_size_1 do
-            - if @competition.tshirt_url.present?
-              = "T-Shirt Size * (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
-            - else
-              = "T-Shirt Size *"
-          = f.text_field :tshirt_size_1
+        = f.label :tshirt_size_1 do
+          - if @competition.tshirt_url.present?
+            = "T-Shirt Size * (#{link_to(t('.tshirt_url'), @competition.tshirt_url, target: :_blank)})".html_safe
+          - else
+            = "T-Shirt Size *"
+        = f.text_field :tshirt_size_1
 
   .callout
     .row
@@ -93,9 +94,11 @@
       .large-12.columns
         = f.label :terms_of_service, t('.terms_of_service')
         = f.check_box :terms_of_service
+        small = @competition.rules_text.html_safe
         br
         = f.label :medical_rules, t('.medical_rules')
         = f.check_box :medical_rules
+        small = @competition.medical_rules_text.html_safe
 
     .row
       .large-12.columns
