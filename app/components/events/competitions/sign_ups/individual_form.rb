@@ -28,6 +28,7 @@ module Events
          optional(:participant_license_id_1)
          optional(:participant_team_1)
          required(:participant_phone_1).filled
+         required(:participant_phone_2).filled
          required(:participant_gender_1).filled
          required(:participant_email_1).filled(:str?, format?: /.@.+[.][a-z]{2,}/i)
          required(:participant_birth_year_1).filled

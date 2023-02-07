@@ -3,6 +3,7 @@ sign_up_attributes = %i(
   participant_name_1
   participant_email_1
   participant_phone_1
+  participant_phone_2
   participant_birth_year_1
   participant_team_1
   participant_kw_id_1

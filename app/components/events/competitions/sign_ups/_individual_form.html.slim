@@ -10,21 +10,26 @@
       - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?
         .callout.alert
           ul
-            - @errors.select { |key, value| key.to_s.include?('_1') }.each do |error|
+            - @errors.select { |key, value| key.to_s.include?('_1') || key.to_s == 'participant_phone_2' }.each do |error|
               li= error.last.to_sentence
   .callout.primary
     .row
-      .large-4.columns
+      .large-3.columns
         = f.label :participant_name_1, "Imię i Nazwisko | Full Name *"
         = f.text_field :participant_name_1
 
-      .large-4.columns
+      .large-3.columns
         = f.label :participant_email_1, "E-mail *"
         = f.text_field :participant_email_1
 
-      .large-4.columns
-        = f.label :participant_phone_1, "Telefon | Phone *"
+      .large-3.columns
+        = f.label :participant_phone_1, "Telefon 1| Phone *"
         = f.text_field :participant_phone_1
+
+      .large-3.columns
+        span data-tooltip='' tabindex="1" title="Numer do osoby kontaktowej w razie wypadku | Phone number of the person to be notified in case of emergency" data-allow-html="true"
+          = f.label :participant_phone_2, "Telefon 2 ICE *"
+        = f.text_field :participant_phone_2
 
       .large-4.columns
         = f.label :participant_gender_1, "Płeć | Gender *"
