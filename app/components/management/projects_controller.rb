@@ -4,15 +4,20 @@ module Management
     append_view_path 'app/components'
 
     def index
+      authorize! :read, Management::ProjectRecord
+
       @projects = Management::ProjectRecord.includes(:users).order(created_at: :desc)
     end
 
     def new
       @project = Management::ProjectRecord.new
+      authorize! :manage, @project
       @users = []
     end
 
     def create
+      authorize! :manage, Management::ProjectRecord
+
       either(create_record) do |result|
         result.success do
           redirect_to projects_path, flash: { notice: 'Utworzono projekt' }
@@ -28,6 +33,8 @@ module Management
     end
 
     def show
+      authorize! :read, @project
+
       @project = Management::ProjectRecord.friendly.find(params[:id])
     end
 
@@ -57,6 +64,7 @@ module Management
 
     def destroy
       project = Management::ProjectRecord.friendly.find(params[:id])
+      authorize! :manage, @project
       project.destroy
 
       redirect_to projects_path, notice: 'Usunięto'

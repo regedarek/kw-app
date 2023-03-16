@@ -57,6 +57,7 @@ class Ability
   end
 
   def active
+    can :read, Management::ProjectRecord
     can :read, Management::ResolutionRecord, state: 'published'
     can :read, Marketing::DiscountRecord
     can :read, Training::Activities::ContractRecord
