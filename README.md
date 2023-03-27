@@ -13,6 +13,7 @@ docker-compose run web bundle exec rake db:migrate
 docker-compose run web bundle exec rake db:seed
 docker-compose run web yarn install
 docker-compose up
+
 ```
 
 Go to [localhost:3002](http://localhost:3002). Enjoy!
