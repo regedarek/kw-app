@@ -52,7 +52,7 @@
 
       .large-2.columns
         = f.label :participant_birth_year_1, "Rok urodzenia 1"
-        = f.number_field :participant_birth_year_1, max: 2006
+        = f.number_field :participant_birth_year_1, max: Date.today.year - 18
 
       .large-3.columns
         - if @competition.tshirt_url?
@@ -113,7 +113,7 @@
 
           .large-2.columns
             = f.label :participant_birth_year_2, "Rok urodzenia 2"
-            = f.text_field :participant_birth_year_2
+            = f.number_field :participant_birth_year_2, max: Date.today.year - 18
 
           .large-3.columns
             - if @competition.tshirt_url?
