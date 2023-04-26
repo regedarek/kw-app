@@ -36,14 +36,18 @@
                 b = t('.limit')
                 = limiter.limit
             .large-2.columns
-              b = t('.persons')
+              b Zapisanych osób: 
               = limiter.persons
+            .large-2.columns
+              b Zespołów: 
+              = limiter.teams.count
             .large-2.columns
               b KW Kraków: 
               = limiter.membership.count
-            .large-2.columns
-              b Ratowników: 
-              = limiter.rescuers.count
+            - if false
+              .large-2.columns
+                b Ratowników: 
+                = limiter.rescuers.count
             .large-3.columns
               b = t('.waiting')
               = limiter.waiting.count
@@ -51,10 +55,10 @@
       .large-12.columns
         - if @competition.single
           h4= t('.participants_signed_in')
-          = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
+          = render 'mas_table', sign_ups: limiter.singles.order('payments.updated_at')
         - else
           h4= t('.teams_signed_in')
-          = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
+          = render 'mas_table', sign_ups: limiter.teams.order('payments.updated_at')
 
     - if @competition.matrimonial_office?
       .row
@@ -65,9 +69,9 @@
       .row
         .large-12.columns
           h4 = t('.looking_list')
-          = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
+          = render 'mas_table', sign_ups: limiter.singles.order('payments.updated_at')
 
     .row
       .large-12.columns
         h4 = t('.second_list')
-        = render 'table', sign_ups: limiter.waiting.order(:created_at)
+        = render 'mas_table', sign_ups: limiter.waiting.order(:created_at)

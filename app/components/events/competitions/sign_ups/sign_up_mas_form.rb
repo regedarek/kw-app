@@ -4,7 +4,7 @@ require 'dry-validation'
 module Events
   module Competitions
     module SignUps
-      SignUpTeamForm = Dry::Validation.Params do
+      SignUpMasForm = Dry::Validation.Params do
         configure { config.messages_file = 'app/components/events/competitions/sign_ups/errors.yml' }
         configure { config.messages = :i18n }
         configure { option :competition_id }

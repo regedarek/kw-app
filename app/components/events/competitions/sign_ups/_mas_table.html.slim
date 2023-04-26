@@ -1,0 +1,34 @@
+table.stack
+  thead
+    tr
+      th width="4%"
+        = t('.nr')
+      th width="20%" Nazwa zespołu
+      th.text-center width='14%' Płatność
+      - if can? :manage, Events::Db::SignUpRecord
+        th width='8%'
+  tbody
+    - sign_ups.each_with_index do |sign_up, index|
+      tr
+        td = index + 1
+        td = sign_up.team_name
+        td.text-center
+          - if sign_up.payment.paid?
+            .label.success = t("prepaid")
+          -else
+            .label.warning = t("#{sign_up.payment.state}")
+        - if can? :manage, Events::Db::SignUpRecord
+          td
+            .icon-bar.five-up
+              = link_to send_email_competition_sign_up_path(competition_id: @competition, id: sign_up), method: :put, class: 'item', style: 'margin: 5px' do
+                - if sign_up.sent_at
+                  - if sign_up.emails.any? && sign_up.emails.all?(&:delivered?)
+                    i.fi-mail style='color: green'
+                  - else
+                    i.fi-mail style='color: red'
+                - else
+                  i.fi-mail
+              = link_to edit_competition_sign_up_path(competition_id: @competition, id: sign_up), class: 'item', style: 'margin: 5px' do
+                i.fi-page-edit
+              = link_to competition_sign_up_path(competition_id: @competition, id: sign_up), method: :delete, class: 'item', data: { confirm: 'Napewno chcesz usunąć?' } do
+                i.fi-trash
