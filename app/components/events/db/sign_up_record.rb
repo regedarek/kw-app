@@ -49,6 +49,12 @@ module Events
         end
       end
 
+      def team_category
+        return "Męska" if participant_gender_1 == "1" && participant_gender_2 == "1"
+        return "Kobieca" if participant_gender_1 == "2" && participant_gender_2 == "2"
+        return "Mix"
+      end
+
       def gender_1
         if participant_gender_1 == "1"
           'Mężczyzna'

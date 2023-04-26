@@ -48,7 +48,7 @@
     .row
       .large-2.columns
         = f.label :participant_gender_1, "Płeć 1"
-        = f.select :participant_gender_1, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_1)), include_blank: true
+        = f.select :participant_gender_1, options_for_select([['Mężczyzna', 1], ['Kobieta', 2]], @sign_up.try(:participant_gender_1)), include_blank: true
 
       .large-2.columns
         = f.label :participant_birth_year_1, "Rok urodzenia 1"
@@ -109,7 +109,7 @@
         .row
           .large-2.columns
             = f.label :participant_gender_2, "Płeć 2"
-            = f.select :participant_gender_2, options_for_select([[t('.participant_gender_man'), 1], [t('.participant_gender_woman'), 2]], @sign_up.try(:participant_gender_2)), include_blank: true
+            = f.select :participant_gender_2, options_for_select([['Mężczyzna', 1], ['Kobieta', 2]], @sign_up.try(:participant_gender_2)), include_blank: true
 
           .large-2.columns
             = f.label :participant_birth_year_2, "Rok urodzenia 2"
