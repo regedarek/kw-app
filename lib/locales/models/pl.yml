@@ -43,6 +43,7 @@ pl:
         accepted: Zaakceptowano
         postal_code: Kod pocztowy
         photo: Zdjęcie do legitymacji
+        course_cert: Certyfikat ukończenia kursu
         main_address: Adres zameldowania
         optional_address: Ulica, numer domu i mieszkania
         phone: Telefon

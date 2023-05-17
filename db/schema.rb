@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_04_145638) do
+ActiveRecord::Schema.define(version: 2023_05_17_104320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -869,6 +869,7 @@ ActiveRecord::Schema.define(version: 2023_02_04_145638) do
     t.string "photo"
     t.string "locale", default: "pl", null: false
     t.integer "gender"
+    t.string "course_cert"
     t.index ["kw_id"], name: "index_profiles_on_kw_id", unique: true
   end
 

@@ -132,6 +132,23 @@
           = link_to @profile.photo.url do
             = image_tag @profile.photo.thumb.url
 
+    - if @profile.course_cert.present?
+      .large-6.columns
+        .callout
+          - if MimeMagic.by_path(@profile.course_cert.path).image?
+            - unless @profile.course_cert.blank? || @profile.course_cert.thumb.blank?
+              = image_tag @profile.course_cert.thumb.url, class: 'thumbnail', data: { toggle: "cert-photo" }
+
+              div id="cert-photo" class="full reveal" data-reveal="" 
+                = image_tag @profile.course_cert.url
+                button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                  span aria-hidden="true"  &times;
+          - else
+            = link_to @profile.course_cert.url, download: File.basename(@profile.course_cert.file.path) do
+              = image_tag('file.jpg', class: 'thumbnail')
+              |  
+              = File.basename(@profile.course_cert.file.path)
+
   - if @profile.list
     .row
       .large-6.columns 

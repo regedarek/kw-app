@@ -105,7 +105,7 @@ module Admin
       ProfileMailer.apply(@profile).deliver_later
       @profile.update(sent_at: Time.zone.now)
 
-      redirect_to admin_profile_path(@profile.id), notice: 'Wysłano ponownie e-mail zgłoszeniowy!'
+      redirect_to admin_profile_path(@profile.id), notice: 'Wysłano e-mail zgłoszeniowy z linkiem do płatności!'
     end
 
     def accept

@@ -71,6 +71,10 @@
           = f.label "profile_acomplished_courses_#{course}".to_sym
           br
 
+        = f.label :course_cert
+        = f.file_field :course_cert
+        | Jeśli nie posiadasz certyfikatu, załącz jakikolwiek potwierdzenie odbycia kursu lub skontaktuj się z naszym biurem.
+
   .row
     .large-6.columns
       = f.check_box :main_discussion_group, checked: true

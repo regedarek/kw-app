@@ -15,6 +15,7 @@ module UserManagement
     attribute :optional_address, :string
     attribute :phone, :string
     attribute :photo, :string
+    attribute :course_cert, :string
     attribute :recommended_by, ArrayOf(:string), default: []
     attribute :acomplished_courses, ArrayOf(:string), default: []
     attribute :main_discussion_group, :boolean
@@ -27,6 +28,13 @@ module UserManagement
               :city, :postal_code, :acomplished_courses, :phone, presence: true
     validates :terms_of_service, acceptance: true
     validate :email_uniq
+    validate :course_cert_needed?
+
+    def course_cert_needed?
+      return true if acomplished_courses.any?{ |course| ["instructors", "other_club", "list"].include?(course) }
+
+      errors.add(:course_cert, "musi zostać dołączone") unless course_cert.presence
+    end
 
     def youth?
       return false unless birth_date

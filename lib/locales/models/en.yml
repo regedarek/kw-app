@@ -39,6 +39,7 @@ en:
         accepted: Accepted
         postal_code: Postal code
         photo: Photo to ID card
+        course_cert: Course Certificate
         main_address: Main address
         optional_address: Contact address
         phone: Phone

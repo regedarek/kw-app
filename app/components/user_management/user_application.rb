@@ -1,7 +1,7 @@
 module UserManagement
   class UserApplication
     class << self
-      def create(form:, photo:)
+      def create(form:, photo:, course_cert:)
         return Failure.new(:invalid, form: form) if form.invalid?
 
         profile = Db::Profile.create(
@@ -26,12 +26,10 @@ module UserManagement
           plastic: form.plastic
         )
         profile.update(photo: photo) if photo
+        profile.update(course_cert: course_cert) if course_cert
         profile.create_payment(dotpay_id: SecureRandom.hex(13))
         if profile.acomplished_courses.include?('list')
           ProfileMailer.list(profile).deliver_later
-        else
-          ProfileMailer.apply(profile).deliver_later
-          profile.update(sent_at: Time.zone.now)
         end
         return Success.new
       end
