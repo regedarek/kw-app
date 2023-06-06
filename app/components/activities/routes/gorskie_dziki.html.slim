@@ -7,7 +7,7 @@
     .callout.primary
       .row
         .large-4.columns
-          - if Date.today.month >= 6
+          - if Date.today.month >= 7
             h5 = I18n.t('date.month_names')[Date.today.month - 1] + (" #{Date.today.year}")
             table.stack
               thead
@@ -27,7 +27,7 @@
                     td.text-center = user.total_mountain_routes_length
 
         .large-4.columns
-          - if Date.today.month >= 7
+          - if Date.today.month >= 6
             h5 = I18n.t('date.month_names')[Date.today.month] + (" #{Date.today.year}")
             table.stack
               thead
