@@ -112,6 +112,8 @@
             ul.menu.vertical
               li= link_to 'KSKS', '/trening/skimo'
               li= link_to 'Tabela Górskie Dziki', gorskie_dziki_path
+              - if current_user.roles.include?('kamper')
+                li= link_to 'KW Park4Night', '/kamper'
           li
             = link_to 'Funkcjonalności', root_path
             ul.menu.vertical
