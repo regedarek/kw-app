@@ -96,8 +96,8 @@
                 th width='50%' kto?
                 th width='10%' bicków
             tbody
-              - start_date = DateTime.new(2022, 06, 1)
-              - end_date = DateTime.new(2022, 11, 30)
+              - start_date = Activities::Repository.new.start_date
+              - end_date = Activities::Repository.new.end_date
               - range = start_date..end_date
               - @best_route_of_season.first(5).each do |route|
                 tr
