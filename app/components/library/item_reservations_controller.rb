@@ -21,7 +21,7 @@ module Library
     def return
       reservation = Library::ItemReservationRecord.find(params[:id])
 
-      if reservation.update(back_at: Time.now, back_by: current_user.id)
+      if reservation.update(back_at: Time.now, back_by_id: current_user.id)
         redirect_to library_item_path(reservation.item_id), notice: 'Zwrócono!'
       else
         redirect_to library_item_path(reservation.item_id), alert: 'Problem'
