@@ -39,6 +39,11 @@
     .large-6.columns
       = f.label :roles, "Role: #{Db::User::ROLES}"
       = f.text_field :roles
+  .hr
+    .row
+      .large-12.columns
+        = f.label :password, "Zmień hasło"
+        = f.text_field :password
   .row
     .large-3.columns
       = f.submit 'Zaktualizuj użytkownika', class: 'button large expanded'
