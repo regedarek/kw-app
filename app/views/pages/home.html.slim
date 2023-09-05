@@ -9,22 +9,23 @@
 
   .row
     .large-8.columns
-      .row
-        .large-12.columns
-          = link_to informations_path do
-            h4 Biuletyny, sprawozdania, ogłoszenia
-          table.stack
-            - Management::News::InformationRecord.order(starred: :desc, created_at: :desc).limit(3).each do |information|
-              tr style=("#{information.starred? ? 'background-color: #fffddf' : nil}")
-                td width='5%'
-                  - if information.starred?
-                    i.fi.fi-star style='color: #ffae00'
-                td width='15%'
-                  = I18n.t(information.news_type)
-                td width='55%'
-                  = link_to information.name, information_path(information.slug)
-                td.text-right  width='25%'
-                  = information.created_at.to_date
+      - if false
+        .row
+          .large-12.columns
+            = link_to informations_path do
+              h4 Biuletyny, sprawozdania, ogłoszenia
+            table.stack
+              - Management::News::InformationRecord.order(starred: :desc, created_at: :desc).limit(3).each do |information|
+                tr style=("#{information.starred? ? 'background-color: #fffddf' : nil}")
+                  td width='5%'
+                    - if information.starred?
+                      i.fi.fi-star style='color: #ffae00'
+                  td width='15%'
+                    = I18n.t(information.news_type)
+                  td width='55%'
+                    = link_to information.name, information_path(information.slug)
+                  td.text-right  width='25%'
+                    = information.created_at.to_date
       .row
         .large-12.columns
           = link_to activities_mountain_routes_path do
