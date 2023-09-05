@@ -82,8 +82,10 @@
         = f.hidden_field :remember_me, value: true
 
         = f.submit "Zaloguj się", class: 'button large expanded'
-        = link_to "Zapomniałeś hasła?", new_password_path(Db::User.new), class: 'button warning large expanded'
+        | Jeżeli chcesz zapomniałeś i chcesz zmienić hasło skontaktuj się z nami przez: kw@kw.krakow.pl
+
         - if Rails.env.development?
+          = link_to "Zapomniałeś hasła?", new_password_path(Db::User.new), class: 'button warning large expanded'
           p.text-center
             | lub
           = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path(protocol: 'https'), class: 'button secondary large expanded'

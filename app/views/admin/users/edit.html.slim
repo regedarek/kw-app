@@ -42,8 +42,8 @@
   .hr
     .row
       .large-12.columns
-        = f.label :password, "Zmień hasło"
-        = f.text_field :password
+        = label_tag :password, "Zmień hasło"
+        = text_field_tag :password
   .row
     .large-3.columns
       = f.submit 'Zaktualizuj użytkownika', class: 'button large expanded'

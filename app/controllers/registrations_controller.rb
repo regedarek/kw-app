@@ -18,7 +18,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update_resource(resource, params)
+    resource.reset_password(params[:password], params[:password]) if params[:password].present?
     resource.update_without_password(params)
+
     if resource.strava_token && resource.strava_subscribe?
       if strava_client(resource.strava_client_id, resource.strava_client_secret).push_subscriptions.any?
       else

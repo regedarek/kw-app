@@ -23,6 +23,9 @@ module Admin
 
       roles = user_params.slice(:roles)['roles'].split(' ')
       snw_groups = user_params.slice(:snw_groups)['snw_groups'].split(' ')
+
+      @user.reset_password(params[:password], params[:password]) if params[:password].present?
+
       if @user.update(user_params)
         @user.update roles: roles, snw_groups: snw_groups
         flash[:notice] = 'Zaktualizowano!'
@@ -82,7 +85,7 @@ module Admin
 
     def user_params
       params.require(:user).permit(
-        :password, :kw_id, :email,:first_name, :last_name, :phone, :roles, :snw_groups, :admin, :author_number, :snw_blog, :gender
+        :kw_id, :email,:first_name, :last_name, :phone, :roles, :snw_groups, :admin, :author_number, :snw_blog, :gender
       )
     end
   end
