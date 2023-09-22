@@ -15,6 +15,8 @@ module Business
     end
 
     def history
+      authorize! :manage, Business::CourseRecord
+
       @versions = PaperTrail::Version
         .includes(:item)
         .where(
