@@ -3,8 +3,8 @@ table.stack
     - if @q.present?
       tr
         th width='5%'
-        th width='7%' = sort_link(@q, :climbing_date, 'kiedy?')
-        th width='20%' = sort_link(@q, :name, 'nazwa przejścia')
+        th width='9%' = sort_link(@q, :climbing_date, 'kiedy?')
+        th width='18%' = sort_link(@q, :name, 'nazwa przejścia')
         th width='2%' wycena
         - if user_signed_in?
           th width='17%' = sort_link(@q, :partners, 'skład zespołu')
