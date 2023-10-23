@@ -23,7 +23,7 @@
       - @reservations.each do |reservation|
         tr
           td
-            = link_to reservation.item.title, ksiazka_path(reservation.item.slug)
+            = link_to "#{reservation.item.number} #{reservation.item.title}", ksiazka_path(reservation.item.slug)
           td
             = reservation.received_at
           td
