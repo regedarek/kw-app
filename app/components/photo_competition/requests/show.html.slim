@@ -22,7 +22,7 @@
             b= @request.likes.count
             b  ]
         .large-12.columns
-          = link_to 'wróc do zdjęć', edition_path(@request.edition)
+          = link_to 'wróc do zdjęć', "/konkurs/#{@request.edition.code}/glosowanie"
 
         - if user_signed_in? && current_user.roles.include?('photo_competition')
           .large-12.columns
