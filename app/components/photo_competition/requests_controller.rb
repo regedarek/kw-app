@@ -34,7 +34,12 @@ module PhotoCompetition
       return redirect_to root_url, alert: 'Musisz być zalogowany i mieć dostęp do zdjęć!' unless user_signed_in? && current_user.roles.include?('photo_competition')
 
       @request = PhotoCompetition::RequestRecord.find(params[:id])
-      @request.update(accepted: true)
+
+      if @request.accepted?
+        @request.update(accepted: false)
+      else
+        @request.update(accepted: true)
+      end
 
       redirect_to edition_path(id: @request.edition.id), notice: 'Zdjęcie zostało zaakceptowane!'
     end

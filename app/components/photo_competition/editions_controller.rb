@@ -4,7 +4,7 @@ module PhotoCompetition
 
     def show
       @edition = PhotoCompetition::EditionRecord.find_by!(code: params[:edition_code])
-      @photo_requests = PhotoCompetition::RequestRecord.where(edition: @edition)
+      @photo_requests = PhotoCompetition::RequestRecord.where(edition_record_id: @edition.id)
         .includes(:category, :edition).order(likes_count: :desc).page(params[:page]).per(20)
     end
   end

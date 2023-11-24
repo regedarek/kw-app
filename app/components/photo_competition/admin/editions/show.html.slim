@@ -44,6 +44,8 @@
               td
                  - if request.accepted?
                   | Tak
+                  br
+                  = link_to 'OdAkceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
                  - else
                   = link_to 'Akceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
               td
