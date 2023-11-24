@@ -1,5 +1,7 @@
 class LikesController < ApplicationController
   def create
+    return redirect_back(fallback_location: root_path, alert: 'Możesz oddać tylko jeden głos!') if current_user.likes.any?
+
     @like = current_user.likes.new(like_params)
     @like.save
 
