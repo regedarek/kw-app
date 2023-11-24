@@ -7,6 +7,10 @@
       = image_tag asset_path('kw-bg-home.jpg')
   br
 
+  .row
+    .large-12.columns
+      = link_to "Głosowanie 2023 na zdjęcia trwa!", "/konkurs/kasprzyk_2023", class: 'button large warning expanded'
+
   - if user_signed_in? && current_user.roles.include?('photo_competition')
     .row
       .large-12.columns
