@@ -10,8 +10,6 @@ module PhotoCompetition
     end
 
     def show
-      return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in? && current_user.roles.include?('photo_competition')
-
       @edition = PhotoCompetition::EditionRecord.find_by(code: params[:edition_id])
       @request = PhotoCompetition::RequestRecord.find(params[:id])
     end
@@ -30,6 +28,15 @@ module PhotoCompetition
       else
         render :new
       end
+    end
+
+    def accept
+      return redirect_to root_url, alert: 'Musisz być zalogowany i mieć dostęp do zdjęć!' unless user_signed_in? && current_user.roles.include?('photo_competition')
+
+      @request = PhotoCompetition::RequestRecord.find(params[:id])
+      @request.update(accepted: true)
+
+      redirect_to edition_path(id: @request.edition.id), notice: 'Zdjęcie zostało zaakceptowane!'
     end
 
     private

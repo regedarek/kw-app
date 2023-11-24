@@ -32,8 +32,9 @@
                   li= link_to 'Baza klubowiczów', admin_profiles_path
                   li= link_to 'Baza składek', admin_membership_fees_path
                   li= link_to 'Baza uchwał', resolutions_path
-
                   li= link_to 'Darowizny', admin_donations_path
+                - if current_user.roles.include?('photo_competition')
+                  li= link_to 'Konkursy fotograficzne', admin_editions_path
 
                 - if can? :manage, Db::Reservation
                   li= link_to 'Wypożyczalnia', admin_reservations_path
@@ -86,12 +87,12 @@
                 li= link_to 'Zawody', admin_competitions_path
                 li= link_to 'Kalendarz zawodów', competitions_path
 
+
           - if current_user.roles.include?('tech')
             li
               = link_to 'Techniczne', admin_path
               ul.menu.vertical
                 li= link_to 'Historia zmian', admin_versions_path
-                li= link_to 'Konkursy fotograficzne', admin_editions_path
                 li= link_to 'Zawody', admin_competitions_path
                 li= link_to 'Kontrakty', activities_contracts_path
                 li = link_to 'Importowanie', admin_importing_index_path
@@ -110,6 +111,7 @@
           li
             = link_to 'Programy', root_path
             ul.menu.vertical
+              li= link_to 'Konkurs Fotograficzny 2023', '/konkurs/edycja-2023/glosowanie'
               li= link_to 'KSKS', '/trening/skimo'
               li= link_to 'Tabela Górskie Dziki', gorskie_dziki_path
               - if current_user.roles.include?('kamper')

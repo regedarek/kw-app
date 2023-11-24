@@ -1,26 +1,45 @@
 .column
   .row
-    .large-12.columns
-      h3 = @request.title
-      = link_to 'wróc', admin_edition_path(@request.edition)
-    - if @request.description
-      .large-12.columns
-        b Kategoria: 
-        = @request.category.name
-    .large-12.columns
-      b Rejon: 
-      = @request.area
-    .large-12.columns
-      b Opis: 
-      = @request.description
-    .large-12.columns
-      b Nazwa pliku: 
-      = File.basename(@request.file.path)
-    .large-12.columns
-      b Oryginalna nazwa pliku: 
-      = @request.original_filename
-    .large-12.columns
-      b Kto?: 
-      = @request.user.display_name
-    .large-12.columns
-      = image_tag @request.file.url
+    .large-6.columns
+      .row
+        .large-12.columns
+          h3 = @request.title
+        .large-12.columns
+          b Kategoria: 
+          = @request.category.name
+        - if @request.description.present?
+          .large-12.columns
+            .callout
+              = @request.description
+        - if @request.area
+          .large-12.columns
+            b Rejon: 
+            = @request.area
+        .large-6.columns
+          .callout
+            = render partial: 'likes/button', locals: { likeable: @request }
+            b Ilość polubień: [ 
+            b= @request.likes.count
+            b  ]
+        .large-12.columns
+          = link_to 'wróc do zdjęć', edition_path(@request.edition)
+
+        - if user_signed_in? && current_user.roles.include?('photo_competition')
+          .large-12.columns
+            b Nazwa pliku: 
+            = File.basename(@request.file.path)
+          .large-12.columns
+            b Oryginalna nazwa pliku: 
+            = @request.original_filename
+          .large-12.columns
+            b Kto?: 
+            = @request.user.display_name
+          .large-12.columns
+            = link_to 'wróc do administracji', admin_edition_path(@request.edition)
+
+    .large-6.columns
+      .row
+        .large-12.columns
+          = image_tag @request.file.url
+
+

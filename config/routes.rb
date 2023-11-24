@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/blog/routes.rb")
 
   resources :photos, only: :index
+  resources :likes, only: %i[create destroy]
 
   namespace :activities, path: '/' do
     resources :mountain_routes, path: 'przejscia' do

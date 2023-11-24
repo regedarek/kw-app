@@ -7,6 +7,8 @@ module PhotoCompetition
     belongs_to :user, class_name: 'Db::User'
     belongs_to :category, class_name: '::PhotoCompetition::CategoryRecord', foreign_key: :category_record_id
 
+    has_many :likes, as: :likeable, class_name: 'Like', dependent: :destroy
+
     validates :edition, :user, :category, :file, presence: true
     validates :title, presence: true, if: :title_needed?
     validates :area, presence: true, if: :area_needed?

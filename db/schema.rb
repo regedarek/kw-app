@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_104320) do
+ActiveRecord::Schema.define(version: 2023_11_24_161227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -476,6 +476,17 @@ ActiveRecord::Schema.define(version: 2023_05_17_104320) do
     t.integer "type"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "likeable_type", null: false
+    t.bigint "likeable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.index ["user_id", "likeable_type", "likeable_id"], name: "index_likes_on_user_id_and_likeable_type_and_likeable_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
@@ -793,6 +804,8 @@ ActiveRecord::Schema.define(version: 2023_05_17_104320) do
     t.string "area"
     t.string "title"
     t.string "original_filename"
+    t.integer "likes_count", default: 0, null: false
+    t.boolean "accepted", default: false, null: false
   end
 
   create_table "photos", id: :serial, force: :cascade do |t|
@@ -1251,6 +1264,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_104320) do
     t.string "snow_surface"
   end
 
+  add_foreign_key "likes", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"

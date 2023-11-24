@@ -30,7 +30,9 @@
             th width='30%' Tytuł
             th width='30%' Nazwa Pliku
             th width='30%' Zgłaszający
+            th width='15%' Zaakceptowane
             th width='15%' Zdjęcie
+
         tbody
           - @photo_requests.each_with_index do |request, i|
             tr
@@ -39,6 +41,11 @@
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td = File.basename(request.file.path)
               td = request.user.display_name
+              td
+                 - if request.accepted?
+                  | Tak
+                 - else
+                  = link_to 'Akceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
               td
                 = image_tag request.file.thumb.url
       = paginate @photo_requests
