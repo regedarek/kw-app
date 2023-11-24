@@ -1,8 +1,10 @@
 .column
   .row
-    .large-12.columns
+    .large-6.columns
       b Kategorie: 
       = @edition.categories.map(&:name).join(', ')
+    .large-6.columns.text-right
+      = link_to "Zgłoś zdjęcie!", "/konkurs/#{@edition.code}", class: 'button'
 
   .row
     .large-12.columns
