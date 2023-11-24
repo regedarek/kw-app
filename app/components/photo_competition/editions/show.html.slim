@@ -1,11 +1,6 @@
 .column
   .row
     .large-12.columns
-      b Symbol: 
-      = @edition.code
-
-  .row
-    .large-12.columns
       b Kategorie: 
       = @edition.categories.map(&:name).join(', ')
 
@@ -14,16 +9,14 @@
       table.stack
         thead
           tr
-            th width='5%' ID
-            th width='15%' Kategoria
+            th width='25%' Kategoria
             th width='30%' Tytuł
             th width='30%'
             th width='30%' Polubień
             th width='15%' Zdjęcie
         tbody
-          - @photo_requests.each_with_index do |request, i|
+          - @photo_requests.each do |request|
             tr
-              td = i + 1
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td = render partial: 'likes/button', locals: { likeable: request }
