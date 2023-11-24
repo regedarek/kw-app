@@ -9,7 +9,7 @@ module PhotoCompetition
 
       def show
         @edition = PhotoCompetition::EditionRecord.find(params[:id])
-        @photo_requests = PhotoCompetition::RequestRecord.includes(:category, :edition, :user).where(edition_record_id: @edition.id)
+        @photo_requests = PhotoCompetition::RequestRecord.includes(:category, :edition, :user).where(edition_record_id: @edition.id).order(accepted: :asc)
         @q = @photo_requests.order(:created_at).ransack(params[:q])
         @photo_requests = @q.result(distinct: true).page(params[:page])
       end
