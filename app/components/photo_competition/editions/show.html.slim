@@ -14,7 +14,11 @@
             th width='25%' Kategoria
             th width='30%' Tytuł
             th width='30%'
-            th width='30%' Polubień
+            - if user_signed_in? && current_user.roles.include?('photo_competition')
+              th width='30%' Polubień
+            - else
+              - if Date.today >= '15-12-2023'.to_date
+                th width='30%' Polubień
             th width='15%' Zdjęcie
         tbody
           - @photo_requests.each do |request|
@@ -22,8 +26,13 @@
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td = render partial: 'likes/button', locals: { likeable: request }
-              td
-                b= request.likes.count
+              - if user_signed_in? && current_user.roles.include?('photo_competition')
+                td
+                  b= request.likes.count
+              - else
+                - if Date.today >= '15-12-2023'.to_date
+                  td
+                    b= request.likes.count
               td
                 = image_tag request.file.thumb.url
 

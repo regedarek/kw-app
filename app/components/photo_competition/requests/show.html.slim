@@ -16,8 +16,8 @@
             b Rejon: 
             = @request.area
         .large-6.columns
-          .callout
-            = render partial: 'likes/button', locals: { likeable: @request }
+          = render partial: 'likes/button', locals: { likeable: @request }
+          - if user_signed_in? && current_user.roles.include?('photo_competition')
             b Ilość polubień: [ 
             b= @request.likes.count
             b  ]
