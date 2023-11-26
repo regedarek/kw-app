@@ -6,10 +6,14 @@ module YearlyPrize
       before_action :set_edition
 
       def new
+        return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in?
+
         @request = @edition.yearly_prize_requests.new
       end
 
       def create
+        return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in?
+
         @request = @edition.yearly_prize_requests.new(request_params)
         @request.author = current_user
 
