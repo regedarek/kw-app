@@ -1,12 +1,13 @@
 .row
   .large-12.columns
-    h3 = @edition.name
+    h3 = "#{@edition.name} #{@edition.year}"
 
 .row
   .large-12.columns
     - if !@edition.closed || params[:closed] == 'false'
-      .callout.primary
-        b Najważniejsze uwagi
+      - if false
+        .callout.primary
+          b Najważniejsze uwagi
 
       = form_for @request, as: :request, url: yearly_prize_requests_path, html: { multipart: true } do |f|
         - if @request.errors.any?
@@ -33,7 +34,9 @@
           .large-12.columns
             .callout
               = f.label :author_description, "Uzasadnienie zgłoszenia"
-              = f.trix_editor :author_description, style: 'min-height: 150px'
+              = f.hidden_field :author_description, id: 'description_body'
+              trix-editor input='description_body'
+              br
 
         .row
           .large-12.columns
@@ -43,8 +46,9 @@
         .row
           .large-6.columns
             = f.submit 'Zgłoś do konkursu', class: 'button large expanded'
-          .large-6.columns
-            = link_to 'Regulamin konkursu', 'https://panel.kw.krakow.pl/osemka/regulamin', class: 'button large expanded alert'
+          - if false
+            .large-6.columns
+              = link_to 'Regulamin konkursu', 'https://panel.kw.krakow.pl/osemka/regulamin', class: 'button large expanded alert'
 
     - else
       .callout.warning
