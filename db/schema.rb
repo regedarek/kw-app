@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_27_100427) do
+ActiveRecord::Schema.define(version: 2023_11_27_100429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1279,11 +1279,20 @@ ActiveRecord::Schema.define(version: 2023_11_27_100427) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "closed", default: false, null: false
+  end
+
+  create_table "yearly_prize_request_users", force: :cascade do |t|
+    t.bigint "yearly_prize_request_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_yearly_prize_request_users_on_user_id"
+    t.index ["yearly_prize_request_id"], name: "index_yearly_prize_request_users_on_yearly_prize_request_id"
   end
 
   create_table "yearly_prize_requests", force: :cascade do |t|
     t.bigint "yearly_prize_edition_id", null: false
-    t.bigint "user_id", null: false
     t.text "author_description"
     t.integer "author_id", null: false
     t.text "prize_jury_description"
@@ -1291,8 +1300,8 @@ ActiveRecord::Schema.define(version: 2023_11_27_100427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "yearly_prize_category_id", null: false
+    t.string "attachments"
     t.index ["author_id"], name: "index_yearly_prize_requests_on_author_id"
-    t.index ["user_id"], name: "index_yearly_prize_requests_on_user_id"
     t.index ["yearly_prize_category_id"], name: "index_yearly_prize_requests_on_yearly_prize_category_id"
     t.index ["yearly_prize_edition_id"], name: "index_yearly_prize_requests_on_yearly_prize_edition_id"
   end
@@ -1303,6 +1312,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_100427) do
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "product_fields", "product_types"
   add_foreign_key "yearly_prize_categories", "yearly_prize_editions"
-  add_foreign_key "yearly_prize_requests", "users"
+  add_foreign_key "yearly_prize_request_users", "users"
+  add_foreign_key "yearly_prize_request_users", "yearly_prize_requests"
   add_foreign_key "yearly_prize_requests", "yearly_prize_editions"
 end

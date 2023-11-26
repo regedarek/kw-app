@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/shop/routes.rb")
   load Rails.root.join("app/components/storage/routes.rb")
   load Rails.root.join("app/components/marketing/routes.rb")
+  load Rails.root.join("app/components/yearly_prize/routes.rb")
   load Rails.root.join("app/components/training/bluebook/routes.rb")
   load Rails.root.join("app/components/scrappers/routes.rb")
   load Rails.root.join("app/components/notification_center/routes.rb")
