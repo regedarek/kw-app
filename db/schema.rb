@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_24_161227) do
+ActiveRecord::Schema.define(version: 2023_11_27_100427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1264,9 +1264,45 @@ ActiveRecord::Schema.define(version: 2023_11_24_161227) do
     t.string "snow_surface"
   end
 
+  create_table "yearly_prize_categories", force: :cascade do |t|
+    t.bigint "yearly_prize_edition_id", null: false
+    t.text "description"
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["yearly_prize_edition_id"], name: "index_yearly_prize_categories_on_yearly_prize_edition_id"
+  end
+
+  create_table "yearly_prize_editions", force: :cascade do |t|
+    t.integer "year", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "yearly_prize_requests", force: :cascade do |t|
+    t.bigint "yearly_prize_edition_id", null: false
+    t.bigint "user_id", null: false
+    t.text "author_description"
+    t.integer "author_id", null: false
+    t.text "prize_jury_description"
+    t.integer "likes_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "yearly_prize_category_id", null: false
+    t.index ["author_id"], name: "index_yearly_prize_requests_on_author_id"
+    t.index ["user_id"], name: "index_yearly_prize_requests_on_user_id"
+    t.index ["yearly_prize_category_id"], name: "index_yearly_prize_requests_on_yearly_prize_category_id"
+    t.index ["yearly_prize_edition_id"], name: "index_yearly_prize_requests_on_yearly_prize_edition_id"
+  end
+
   add_foreign_key "likes", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "product_fields", "product_types"
+  add_foreign_key "yearly_prize_categories", "yearly_prize_editions"
+  add_foreign_key "yearly_prize_requests", "users"
+  add_foreign_key "yearly_prize_requests", "yearly_prize_editions"
 end
