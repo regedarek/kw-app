@@ -14,6 +14,5 @@
     .input-group-button
       = f.submit 'Zapłać', class: 'button'
   .input-group
-    - if false
-      = f.label :plastic, 'Plastikowa legitymacja (+15zł)'
-      = f.check_box :plastic
+    = f.label :plastic, 'Plastikowa legitymacja (+15zł)'
+    = f.check_box :plastic
