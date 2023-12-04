@@ -31,7 +31,7 @@ module YearlyPrize
       end
 
       def request_params
-        params.require(:request).permit(:name, :yearly_prize_edition_id, :yearly_prize_category_id, user_ids: [], attachments: [])
+        params.require(:request).permit(:name, :yearly_prize_edition_id, :author_description, :prize_jury_description, :yearly_prize_category_id, user_ids: [], attachments: [])
       end
     end
   end
