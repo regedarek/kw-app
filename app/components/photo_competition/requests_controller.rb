@@ -37,11 +37,13 @@ module PhotoCompetition
 
       if @request.accepted?
         @request.update(accepted: false)
+
+        redirect_to "/admin/editions/#{@request.edition.id}", notice: 'Zdjęcie zostało odakceptowane!'
       else
         @request.update(accepted: true)
-      end
 
-      redirect_to edition_path(id: @request.edition.id), notice: 'Zdjęcie zostało zaakceptowane!'
+        redirect_to "/admin/editions/#{@request.edition.id}", notice: 'Zdjęcie zostało zaakceptowane!'
+      end
     end
 
     private
