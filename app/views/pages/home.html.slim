@@ -11,9 +11,10 @@
     .large-12.columns
       = link_to "Zgłoś klubowicza do Klubowej Ósemki 2023!", "/osemka/2023/zgloszenie", class: 'button large success expanded'
 
-  .row
-    .large-12.columns
-      = link_to "Głosowanie Konkursu Fotograficznego im. Piotra Kasprzyka na zdjęcia 2023 trwa!", "/konkurs/kasprzyk_2023/glosowanie", class: 'button large warning expanded'
+  - if PhotoCompetition::EditionRecord.last.closed?
+    .row
+      .large-12.columns
+        = link_to "Głosowanie Konkursu Fotograficznego im. Piotra Kasprzyka na zdjęcia 2023 trwa!", "/konkurs/kasprzyk_2023/glosowanie", class: 'button large warning expanded'
 
   .row
     .large-8.columns
