@@ -2,9 +2,12 @@
   .row
     .large-6.columns
       b Kategorie: 
-      = @edition.categories.map(&:name).join(', ')
+      - @edition.categories.each do |category|
+        = link_to category.name, "/konkurs/#{@edition.code}/glosowanie?category_record_id=#{category.id}"
+        |  | 
     .large-6.columns.text-right
-      = link_to "Zgłoś zdjęcie!", "/konkurs/#{@edition.code}", class: 'button'
+      - unless @edition.closed?
+        = link_to "Zgłoś zdjęcie!", "/konkurs/#{@edition.code}", class: 'button'
 
   .row
     .large-12.columns
@@ -21,7 +24,7 @@
                 th width='30%' Polubień
             th width='15%' Zdjęcie
         tbody
-          - @photo_requests.each do |request|
+          - @photo_requests.each_with_index do |request, i|
             tr
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
@@ -34,6 +37,13 @@
                   td
                     b= request.likes.count
               td
-                = image_tag request.file.thumb.url
+                - photo = request.file
+                - unless photo.blank? || photo.thumb.blank?
+                  = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+                  div id="photo-#{i}" class="full reveal" data-reveal="" 
+                    = image_tag photo.url
+                    button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                      span aria-hidden="true"  &times;
 
       = paginate @photo_requests
