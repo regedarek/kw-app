@@ -17,7 +17,7 @@ module PhotoCompetition
         @photo_requests = @photo_requests.where(category_record_id: params[:category_record_id]) if params[:category_record_id].present?
 
         @q = @photo_requests.order(:created_at).ransack(params[:q])
-        @photo_requests = @q.result(distinct: true).page(params[:page])
+        @photo_requests = @q.result(distinct: true).page(params[:page]).per(10)
       end
     end
   end
