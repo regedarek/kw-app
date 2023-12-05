@@ -1,0 +1,50 @@
+.column
+  .row
+    .large-6.columns
+      .row
+        .large-12.columns
+          h3 = @request.users.collect(&:display_name)
+        .large-12.columns
+          b Kategoria: 
+          = @request.yearly_prize_category.name
+
+        .large-12.columns
+          b Autor: 
+          = @request.author.display_name
+
+        - if @request.author_description.present?
+          .large-12.columns
+            .callout
+              = simple_format @request.author_description
+
+        - if @request.prize_jury_description.present?
+          .large-12.columns
+            .callout
+              = simple_format @request.prize_jury_description
+
+        .large-12.columns
+          - if @request.attachments.any?
+            .row
+              .large-12.columns
+                b Załączniki: 
+                ul.no-bullet
+                  - @request.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+                    li
+                      = link_to attachment.url, download: File.basename(attachment.file.path), target: :_blank do
+                        = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                        |  
+                        = File.basename(attachment.file.path)
+                  - @request.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+                    - unless photo.blank? || photo.thumb.blank?
+                      li
+                        = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+                        |  
+                        = link_to photo.url, download: File.basename(photo.file.path), target: :_blank do
+                          = File.basename(photo.file.path)
+
+                      div id="photo-#{i}" class="reveal" data-reveal="" 
+                        = image_tag photo.url
+                        button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                          span aria-hidden="true"  &times;
+
+          = link_to 'wróc do zgloszen', "/osemka/#{Date.today.year}"

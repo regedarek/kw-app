@@ -9,11 +9,7 @@
 
   .row
     .large-12.columns
-      = link_to "Zgłoszenie do konkursu fotograficznego 2023 na zdjęcia trwa!", "/konkurs/kasprzyk_2023", class: 'button large warning expanded'
-
-  .row
-    .large-12.columns
-      = link_to "Zgłoś do klubowicza do Klubowej Ósemki 2023!", "/osemka/2023/zgloszenie", class: 'button large success expanded'
+      = link_to "Zgłoś klubowicza do Klubowej Ósemki 2023!", "/osemka/2023/zgloszenie", class: 'button large success expanded'
 
   - if user_signed_in? && current_user.roles.include?('photo_competition')
     .row

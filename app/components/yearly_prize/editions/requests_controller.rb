@@ -5,6 +5,16 @@ module YearlyPrize
 
       before_action :set_edition
 
+      def index
+        return redirect_to root_url, alert: 'Musisz być zalogowany i mieć dostęp do zgloszen!' unless user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
+
+        @requests = @edition.yearly_prize_requests.includes(:author, :yearly_prize_category).order(created_at: :desc)
+      end
+
+      def show
+        @request = @edition.yearly_prize_requests.find(params[:request_id])
+      end
+
       def new
         return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in?
 
