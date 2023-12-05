@@ -51,5 +51,13 @@
                  - else
                   = link_to 'Akceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
               td
-                = image_tag request.file.thumb.url
+                - photo = request.file
+                - unless photo.blank? || photo.thumb.blank?
+                  = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
+
+                  div id="photo-#{i}" class="full reveal" data-reveal="" 
+                    = image_tag photo.url
+                    button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                      span aria-hidden="true"  &times;
+
       = paginate @photo_requests
