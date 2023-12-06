@@ -29,7 +29,11 @@
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td.text-center
-                - unless current_user.likes.includes(:likeable).any?{|like| like.likeable.category == request.category}
+                - if current_user.likes.includes(:likeable).any?{|like| like.likeable.category == request.category}
+                  - like = current_user.likes.find_by(likeable: request)
+                  - if like.present?
+                    = button_to("Odlub!", like_path(id: like.id), class:"button alert", method: :delete)
+                - else
                   = render partial: 'likes/button', locals: { likeable: request }
               - if user_signed_in? && current_user.roles.include?('photo_competition')
                 td.text-center
