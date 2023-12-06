@@ -2,9 +2,10 @@ class LikesController < ApplicationController
   def create
     case like_params[:likeable_type]
     when  "PhotoCompetition::RequestRecord"
-      category = PhotoCompetition::RequestRecord.find(like_params[:likeable_id]).category
-      if current_user.likes.any?{|like| like.likeable.category == category}
-        return redirect_back(fallback_location: root_path, alert: 'Możesz oddać tylko jeden głos w kategorii!') if current_user.likes.any?
+      edition = PhotoCompetition::RequestRecord.find(like_params[:likeable_id]).edition
+
+      if current_user.likes.select{|like| like.likeable.edition == edition}.count >= 3
+        return redirect_back(fallback_location: root_path, alert: 'Możesz oddać tylko 3 głosy w tej edycji!')
       end
     end
 
