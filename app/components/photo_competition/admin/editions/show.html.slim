@@ -41,13 +41,11 @@
               td = i + 1
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
-              td = File.basename(request.file.path)
+              td = link_to File.basename(request.file.path), request.file.url, target: :_blank
               td = request.user.display_name
               td
                  - if request.accepted?
-                  | Tak
-                  br
-                  = link_to 'OdAkceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
+                  = link_to 'Zbanuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put, style: "color: red;"
                  - else
                   = link_to 'Akceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
               td
