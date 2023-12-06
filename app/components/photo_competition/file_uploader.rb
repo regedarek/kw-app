@@ -21,7 +21,7 @@ module PhotoCompetition
     end
 
     version :preview do
-      process resize_to_fit: [800, 600]
+      process resize_to_fit: [1024, 1024]
 
       def store_dir
         "photo_competitions/#{model.edition.code}/preview/#{model.category.name.parameterize.underscore}"
@@ -33,7 +33,13 @@ module PhotoCompetition
     end
 
     def filename
-      "#{secure_token}.#{file.extension}" if original_filename.present?
+      if original_filename
+        if model && model.read_attribute(mounted_as).present?
+          model.read_attribute(mounted_as)
+        else
+          "#{secure_token}.#{file.extension}" if original_filename.present?
+        end
+      end
     end
 
     protected
