@@ -14,36 +14,31 @@
       table.stack
         thead
           tr
-            th width='25%' Kategoria
-            th width='30%' Tytuł
-            th width='30%'
+            th width='30%' Kategoria
+            th width='45%' Tytuł
+            th.text-center width='10%'
             - if user_signed_in? && current_user.roles.include?('photo_competition')
-              th width='30%' Polubień
+              th.text-center width='8%' Polubień
             - else
               - if Date.today >= '15-12-2023'.to_date
-                th width='30%' Polubień
+                th.text-center width='8%' Polubień
             th width='15%' Zdjęcie
         tbody
           - @photo_requests.each_with_index do |request, i|
             tr
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
-              td = render partial: 'likes/button', locals: { likeable: request }
+              td.text-center
+                - unless current_user.likes.includes(:likeable).any?{|like| like.likeable.category == request.category}
+                  = render partial: 'likes/button', locals: { likeable: request }
               - if user_signed_in? && current_user.roles.include?('photo_competition')
-                td
+                td.text-center
                   b= request.likes.count
               - else
                 - if Date.today >= '15-12-2023'.to_date
-                  td
+                  td.text-center
                     b= request.likes.count
               td
-                - photo = request.file
-                - unless photo.blank? || photo.thumb.blank?
-                  = image_tag photo.thumb.url, class: 'thumbnail', data: { toggle: "photo-#{i}" }
-
-                  div id="photo-#{i}" class="full reveal" data-reveal="" 
-                    = image_tag photo.url
-                    button.close-button aria-label=("Close reveal") data-close="" type="button" 
-                      span aria-hidden="true"  &times;
+                = render 'photos/photos', photos: [request.file], take: 1
 
       = paginate @photo_requests
