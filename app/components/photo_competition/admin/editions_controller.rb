@@ -4,15 +4,23 @@ module PhotoCompetition
       append_view_path 'app/components'
 
       def index
+
         @editions = PhotoCompetition::EditionRecord.order(updated_at: :desc)
       end
 
       def show
         @edition = PhotoCompetition::EditionRecord.find(params[:id])
-        @photo_requests = PhotoCompetition::RequestRecord
-          .includes(:category, :edition, :user)
-          .where(edition_record_id: @edition.id)
-          .order(accepted: :asc)
+        if params[:accepted] == 'false'
+          @photo_requests = PhotoCompetition::RequestRecord
+            .includes(:category, :edition, :user)
+            .where(edition_record_id: params[:id], accepted: false)
+            .order(accepted: :asc)
+        else
+          @photo_requests = PhotoCompetition::RequestRecord
+            .includes(:category, :edition, :user)
+            .where(edition_record_id: params[:id], accepted: true)
+            .order(accepted: :asc)
+        end
 
         @photo_requests = @photo_requests.where(category_record_id: params[:category_record_id]) if params[:category_record_id].present?
 
