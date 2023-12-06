@@ -29,7 +29,7 @@
               td = request.category.name
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td.text-center
-                - if current_user.likes.includes(:likeable).any?{|like| like.likeable.category == request.category}
+                - if current_user.likes.select{|like| like.likeable.edition == @edition}.count >= 3
                   - like = current_user.likes.find_by(likeable: request)
                   - if like.present?
                     = button_to("Odlub!", like_path(id: like.id), class:"button alert", method: :delete)
