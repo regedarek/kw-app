@@ -7,6 +7,7 @@
           th width='15%' Kategoria
           th width='15%' Autor
           th width='20%' Zgłoszeni
+          th width='20%' Zaakceptowane
 
       tbody
         - @requests.each_with_index do |request, i|
@@ -14,4 +15,5 @@
             td = link_to request.id, yearly_prize_request_path(year: request.yearly_prize_edition.year, request_id: request.id)
             td = request.yearly_prize_category.name
             td = request.author.display_name
-            td = request.users.collect(&:display_name)
+            td = request.users.collect(&:display_name)&.to_sentence
+            td = request.accepted

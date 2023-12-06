@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_27_100429) do
+ActiveRecord::Schema.define(version: 2023_12_06_170559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1301,6 +1301,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_100429) do
     t.datetime "updated_at", null: false
     t.integer "yearly_prize_category_id", null: false
     t.string "attachments"
+    t.boolean "accepted", default: false
     t.index ["author_id"], name: "index_yearly_prize_requests_on_author_id"
     t.index ["yearly_prize_category_id"], name: "index_yearly_prize_requests_on_yearly_prize_category_id"
     t.index ["yearly_prize_edition_id"], name: "index_yearly_prize_requests_on_yearly_prize_edition_id"

@@ -1,0 +1,65 @@
+.row
+  .large-12.columns
+    h3 = "#{@edition.name} #{@edition.year}"
+
+.row
+  .large-12.columns
+    - if !@edition.closed || params[:closed] == 'false'
+      - if false
+        .callout.primary
+          b Najważniejsze uwagi
+
+      = form_for @request, as: :request, url: "/osemka/#{@edition.year}/zgloszenie/#{@request.id}", html: { multipart: true } do |f|
+        - if @request.errors.any?
+          .callout.alert
+            ul
+              - @request.errors.full_messages.each do |msg|
+                li= msg
+
+        .row
+          .large-12.columns
+            b= f.label :yearly_prize_category_id, "Kategoria"
+            = f.select :yearly_prize_category_id, @edition.yearly_prize_categories.map {|c| [c.name, c.id]}, include_blank: true
+
+        .row
+          .large-12.columns
+            = f.label :user_ids, 'Klubowicze'
+            = f.select :user_ids,
+              Db::User.all.map { |u| [u.display_name, u.id] },
+              {include_blank: true },
+              { class: 'js-select-multiple', required: true, multiple: true }
+        br
+
+        .row
+          .large-12.columns
+            .callout
+              = simple_format @request.author_description
+
+        .row
+          .large-12.columns
+            .callout
+              = f.label :prize_jury_description, "Uzasadnienie zgłoszenia"
+              = f.hidden_field :prize_jury_description, id: 'description_body'
+              trix-editor input='description_body'
+              br
+
+        .row
+          .large-12.columns
+            = f.label :attachments, 'Załączniki'
+            = f.file_field :attachments, multiple: true
+
+        .row
+          .large-12.columns
+            = f.label :accepted, 'Zaakceptowano'
+            = f.check_box :accepted
+
+        .row
+          .large-6.columns
+            = f.submit 'Zgłoś do konkursu', class: 'button large expanded'
+          - if false
+            .large-6.columns
+              = link_to 'Regulamin konkursu', 'https://panel.kw.krakow.pl/osemka/regulamin', class: 'button large expanded alert'
+
+    - else
+      .callout.warning
+        | Zgłoszenia do tegorocznej Ósemki zostały zamknięte!

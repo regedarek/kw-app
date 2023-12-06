@@ -6,9 +6,11 @@ module YearlyPrize
       before_action :set_edition
 
       def index
-        return redirect_to root_url, alert: 'Musisz być zalogowany i mieć dostęp do zgloszen!' unless user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
-
-        @requests = @edition.yearly_prize_requests.includes(:author, :yearly_prize_category).order(created_at: :desc)
+        if user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
+          @requests = @edition.yearly_prize_requests.includes(:author, :yearly_prize_category).order(created_at: :desc)
+        else
+          @requests = @edition.yearly_prize_requests.where(accepted: true).includes(:author, :yearly_prize_category).order(created_at: :desc)
+        end
       end
 
       def show
@@ -19,6 +21,24 @@ module YearlyPrize
         return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in?
 
         @request = @edition.yearly_prize_requests.new
+      end
+
+      def edit
+        return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
+
+        @request = @edition.yearly_prize_requests.find(params[:request_id])
+      end
+
+      def update
+        return redirect_to root_url, alert: 'Musisz być zalogowany!' unless user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
+
+        @request = @edition.yearly_prize_requests.find(params[:request_id])
+
+        if @request.update(request_params)
+          redirect_to yearly_prize_edition_requests_path(@edition.year), notice: 'Nominacja została zaktualizowana!'
+        else
+          render :edit
+        end
       end
 
       def create
@@ -41,7 +61,7 @@ module YearlyPrize
       end
 
       def request_params
-        params.require(:request).permit(:name, :yearly_prize_edition_id, :author_description, :prize_jury_description, :yearly_prize_category_id, user_ids: [], attachments: [])
+        params.require(:request).permit(:name, :yearly_prize_edition_id, :author_description, :prize_jury_description, :yearly_prize_category_id, :accepted, user_ids: [], attachments: [])
       end
     end
   end
