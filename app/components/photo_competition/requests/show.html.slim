@@ -34,6 +34,13 @@
           .large-12.columns
             b Kto?: 
             = @request.user.display_name
+          .large-6.columns
+            b Wersje: 
+            - @request.versions.where(event: "update").each do |version|
+              .callout.primary
+                = Db::User.find_by(id: version.version_author)&.display_name
+                br
+                = version.changeset
           .large-12.columns
             = link_to 'wróc do administracji', admin_edition_path(@request.edition)
 

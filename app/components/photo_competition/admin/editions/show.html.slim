@@ -30,8 +30,9 @@
             th width='5%' ID
             th width='15%' Kategoria
             th width='30%' Tytuł
-            th width='30%' Nazwa Pliku
-            th width='30%' Zgłaszający
+            th width='20%' Nazwa Pliku
+            th width='15%' Zgłaszający
+            th width='15%' Edytujacy
             th width='15%' Zaakceptowane
             th width='15%' Zdjęcie
 
@@ -43,6 +44,7 @@
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td = link_to File.basename(request.file.path), request.file.url, target: :_blank
               td = request.user.display_name
+              td = Db::User.find_by(id: request.versions.last.version_author)&.display_name
               td
                  - if request.accepted?
                   = link_to 'Zbanuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put, style: "color: red;"
