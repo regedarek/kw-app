@@ -20,6 +20,14 @@ module PhotoCompetition
       end
     end
 
+    version :preview do
+      process resize_to_fit: [800, 600]
+
+      def store_dir
+        "photo_competitions/#{model.edition.code}/preview/#{model.category.name.parameterize.underscore}"
+      end
+    end
+
     def store_dir
       "photo_competitions/#{model.edition.code}/#{model.category.name.parameterize.underscore}"
     end
