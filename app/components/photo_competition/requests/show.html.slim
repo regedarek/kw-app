@@ -30,7 +30,7 @@
             = File.basename(@request.file.path)
           .large-12.columns
             b Oryginalna nazwa pliku: 
-            = @request.original_filename
+            = link_to @request.original_filename, @request.file.url, target: :_blank
           .large-12.columns
             b Kto?: 
             = @request.user.display_name
