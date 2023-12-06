@@ -38,7 +38,7 @@
             b Wersje: 
             - @request.versions.where(event: "update").each do |version|
               .callout.primary
-                = Db::User.find_by(id: version.version_author)&.display_name
+                = Db::User.find_by(id: version&.version_author)&.display_name
                 br
                 = version.changeset
           .large-12.columns

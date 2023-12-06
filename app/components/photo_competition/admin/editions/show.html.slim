@@ -44,7 +44,7 @@
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
               td = link_to File.basename(request.file.path), request.file.url, target: :_blank
               td = request.user.display_name
-              td = Db::User.find_by(id: request.versions.last.version_author)&.display_name
+              td = Db::User.find_by(id: request.versions&.last&.version_author)&.display_name
               td
                  - if request.accepted?
                   = link_to 'Zbanuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put, style: "color: red;"
