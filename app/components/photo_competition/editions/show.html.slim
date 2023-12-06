@@ -43,6 +43,6 @@
                   td.text-center
                     b= request.likes.count
               td
-                = render 'photos/photos', photos: [request.file], take: 1
+                = render 'photos/photos_preview', photos: [request.file], take: 1
 
       = paginate @photo_requests
