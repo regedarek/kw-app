@@ -51,6 +51,6 @@
                  - else
                   = link_to 'Akceptuj', accept_edition_request_path(request, edition_id: @edition.id), method: :put
               td
-                = render 'photos/photos', photos: [request.file], take: 1
+                = render 'photos/photos_preview', photos: [request.file], take: 1
 
       = paginate @photo_requests
