@@ -7,14 +7,15 @@
         |  | 
     .large-4.columns.text-right
       - if @edition.closed?
-        = link_to "Zgłoś zdjęcie!", "/konkurs/#{@edition.code}", class: 'button'
-      - else
         b Polubione: 
         - current_user.likes.select{|like| like.likeable.edition == @edition}.each_with_index do |like, index|
           - photo = like.likeable.file
           - if photo.thumb && photo.thumb.url
             = link_to edition_request_path(like.likeable, edition_id: @edition) do
               = image_tag photo.thumb.url, class: 'dashboard-table-image'
+      - else
+        = link_to "Zgłoś zdjęcie!", "/konkurs/#{@edition.code}", class: 'button'
+
   br
 
   .row
