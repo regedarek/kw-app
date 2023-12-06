@@ -6,10 +6,14 @@ module YearlyPrize
       before_action :set_edition
 
       def index
-        if user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
-          @requests = @edition.yearly_prize_requests.includes(:author, :yearly_prize_category).order(created_at: :desc)
+        if user_signed_in?
+          if (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
+            @requests = @edition.yearly_prize_requests.includes(:author, :yearly_prize_category).order(likes_count: :asc, created_at: :desc)
+          else
+            @requests = @edition.yearly_prize_requests.where(accepted: true).includes(:author, :yearly_prize_category).order(created_at: :desc)
+          end
         else
-          @requests = @edition.yearly_prize_requests.where(accepted: true).includes(:author, :yearly_prize_category).order(created_at: :desc)
+          return redirect_to root_url, alert: 'Musisz być zalogowany!'
         end
       end
 

@@ -1,11 +1,11 @@
 <% like = current_user.likes.find_by(likeable: likeable) %>
 
 <% if like.nil? %>
-  <%=button_to("Polub!", likes_path,  class:"button success",
+  <%=button_to(button_text_like, likes_path,  class:"button success",
   params:{ like: {likeable_id: likeable.id,
   likeable_type: likeable.class.to_s}})%>
 <% else %>
-  <%=button_to("Odlub!", like_path(like),
+  <%=button_to(button_text_unlike, like_path(like),
   class:"button alert",
   method: :delete)%>
 <% end %>

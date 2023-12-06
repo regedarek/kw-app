@@ -4,6 +4,8 @@ class Db::YearlyPrizeRequest < ApplicationRecord
   mount_uploaders :attachments, YearlyPrize::AttachmentUploader
   serialize :attachments, JSON
 
+  has_paper_trail
+
   belongs_to :author, class_name: 'Db::User', foreign_key: :author_id
   belongs_to :yearly_prize_edition, class_name: 'Db::YearlyPrizeEdition', foreign_key: :yearly_prize_edition_id
   belongs_to :yearly_prize_category, class_name: 'Db::YearlyPrizeCategory', foreign_key: :yearly_prize_category_id

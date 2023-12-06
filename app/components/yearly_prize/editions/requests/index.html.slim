@@ -1,19 +1,72 @@
+- if false
+  .row
+    .large-12.columns
+      table.stack
+        thead
+          tr
+            th width='5%' ID
+            th width='15%' Kategoria
+            th width='15%' Autor
+            th width='20%' Zgłoszeni
+            th width='20%' Zaakceptowane
+
+        tbody
+          - @requests.each_with_index do |request, i|
+            tr
+              td = link_to request.id, yearly_prize_request_path(year: request.yearly_prize_edition.year, request_id: request.id)
+              td = request.yearly_prize_category.name
+              td = request.author.display_name
+              td = request.users.collect(&:display_name)&.to_sentence
+              td = request.accepted
+
 .row
   .large-12.columns
-    table.stack
-      thead
-        tr
-          th width='5%' ID
-          th width='15%' Kategoria
-          th width='15%' Autor
-          th width='20%' Zgłoszeni
-          th width='20%' Zaakceptowane
+    - @requests.each_with_index do |request, i|
+      .callout.large
+        .row
+          .large-8.columns
+            h5 = request.users.collect(&:display_name)&.to_sentence
+            h8.subheader = request.yearly_prize_category.name
+            - if request.prize_jury_description.present?
+              p
+                = simple_format request.prize_jury_description
+            - else
+              p
+                = simple_format request.author_description
+            p
+              b= request.author.display_name
+          .large-4.columns
+            - if request.attachments.any?
+              .row
+                .large-12.columns
+                  b Załączniki: 
+                  ul.no-bullet
+                    - request.attachments.select{|file| !MimeMagic.by_path(file.path).image? }.each do |attachment|
+                      li
+                        = link_to attachment.url, download: File.basename(attachment.file.path), target: :_blank do
+                          = image_tag('file.jpg', class: 'thumbnail', size: '50x50')
+                          |  
+                          = File.basename(attachment.file.path).truncate(30)
+                    - request.attachments.select{|file| MimeMagic.by_path(file.path).image? }.each_with_index do |photo, i|
+                      - unless photo.blank? || photo.thumb.blank?
+                        li
+                          = image_tag photo.thumb.url, size: '50x50', class: 'thumbnail', data: { toggle: "photo-#{i}" }
+                          |  
+                          = link_to photo.url, download: File.basename(photo.file.path), target: :_blank do
+                            = File.basename(photo.file.path).truncate(30)
 
-      tbody
-        - @requests.each_with_index do |request, i|
-          tr
-            td = link_to request.id, yearly_prize_request_path(year: request.yearly_prize_edition.year, request_id: request.id)
-            td = request.yearly_prize_category.name
-            td = request.author.display_name
-            td = request.users.collect(&:display_name)&.to_sentence
-            td = request.accepted
+                        div id="photo-#{i}" class="reveal" data-reveal="" 
+                          = image_tag photo.url
+                          button.close-button aria-label=("Close reveal") data-close="" type="button" 
+                            span aria-hidden="true"  &times;
+
+            = render partial: 'likes/button', locals: { likeable: request, button_text_like: "Zagłosuj za przyznaniem 8semki!", button_text_unlike: "Cofnij swój głos za przyznaniem 8semki!" }
+
+          - if user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
+            .row
+              .large-12.columns
+                = link_to 'edytuj', "/osemka/#{request.yearly_prize_edition.year}/zgloszenie/#{request.id}/edit"
+                |  | 
+                b Ilość polubień: [ 
+                b= request.likes.count
+                b  ]

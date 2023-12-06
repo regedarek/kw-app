@@ -34,7 +34,7 @@
                   - if like.present?
                     = button_to("Odlub!", like_path(id: like.id), class:"button alert", method: :delete)
                 - else
-                  = render partial: 'likes/button', locals: { likeable: request }
+                  = render partial: 'likes/button', locals: { likeable: request, button_text_like: "Polub!", button_text_unlike: "Odlub!" }
               - if user_signed_in? && current_user.roles.include?('photo_competition')
                 td.text-center
                   b= request.likes.count
