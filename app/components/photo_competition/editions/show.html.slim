@@ -19,34 +19,34 @@
   br
 
   .row.align-middle
-    .large-12.columns
-      - @photo_requests.each_with_index do |request, index|
-        .large-3.columns.large-expand
-          .callout
-            .card
-              .card-divider = request.category.name.truncate(27)
-              - photo = request.file
-              .text-center
-                = image_tag photo.preview.url, data: { open: "reveal-#{photo.model.id}-#{index}", 'img-src': photo.preview.url }
-              div id="reveal-#{photo.model.id}-#{index}" class='js-photo-reveal reveal' data-reveal="" data-img-src="#{photo.preview.url}" data-index="-#{photo.model.id}-#{index}"
-                h3 Ładuję...
-              .card-section
-                h5 = link_to request.title, edition_request_path(request, edition_id: @edition)
-                p = request.description
+    - @photo_requests.each_with_index do |request, index|
+      .large-3.columns.large-expand
+        .callout
+          .card
+            .card-divider
+              b= request.category.name.truncate(12)
+            - photo = request.file
+            .text-center
+              = image_tag photo.preview.url, data: { open: "reveal-#{photo.model.id}-#{index}", 'img-src': photo.preview.url }
+            div id="reveal-#{photo.model.id}-#{index}" class='js-photo-reveal reveal' data-reveal="" data-img-src="#{photo.preview.url}" data-index="-#{photo.model.id}-#{index}"
+              h3 Ładuję...
+            .card-section
+              h5 = link_to request.title, edition_request_path(request, edition_id: @edition)
+              p = request.description.truncate(200)
 
-              .card-section
-                - if current_user.likes.select{|like| like.likeable.edition == @edition}.count >= 3
-                  - like = current_user.likes.find_by(likeable: request)
-                  - if like.present?
-                    = button_to("Odlub!", like_path(id: like.id), class:"button alert expanded", method: :delete)
-                - else
-                  = render partial: 'likes/button', locals: { likeable: request, button_text_like: "Polub!", button_text_unlike: "Odlub!" }
+            .card-section
+              - if current_user.likes.select{|like| like.likeable.edition == @edition}.count >= 3
+                - like = current_user.likes.find_by(likeable: request)
+                - if like.present?
+                  = button_to("Odlub!", like_path(id: like.id), class:"button alert expanded", method: :delete)
+              - else
+                = render partial: 'likes/button', locals: { likeable: request, button_text_like: "Polub!", button_text_unlike: "Odlub!" }
 
-                - if user_signed_in? && current_user.roles.include?('photo_competition')
+              - if user_signed_in? && current_user.roles.include?('photo_competition')
+                b= request.likes.count
+              - else
+                - if Date.today >= '15-12-2023'.to_date
                   b= request.likes.count
-                - else
-                  - if Date.today >= '15-12-2023'.to_date
-                    b= request.likes.count
 
   .row
     .large-12.columns
