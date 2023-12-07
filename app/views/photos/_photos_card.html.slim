@@ -1,0 +1,5 @@
+- photos.take(take).each_with_index do |photo, index|
+  - if photo.preview && photo.preview.url
+    = image_tag photo.preview.url, data: { open: "reveal-#{photo.model.id}-#{index}", 'img-src': photo.preview.url }, style: "height: 150px"
+    div id="reveal-#{photo.model.id}-#{index}" class='js-photo-reveal reveal' data-reveal="" data-img-src="#{photo.preview.url}" data-index="-#{photo.model.id}-#{index}"
+      h3 Ładuję...
