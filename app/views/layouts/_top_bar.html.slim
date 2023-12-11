@@ -111,7 +111,7 @@
             = link_to 'Programy', root_path
             ul.menu.vertical
               - if user_signed_in?
-                  li= link_to 'Klubowa Ósemka 2023', '/osemka/2023'
+                li= link_to 'Klubowa Ósemka 2023', '/osemka/2023'
                 - if PhotoCompetition::EditionRecord.last.closed?
                   li= link_to 'Konkurs Fotograficzny 2023', '/konkurs/kasprzyk_2023/glosowanie'
               - if current_user.roles.include?('photo_competition')
