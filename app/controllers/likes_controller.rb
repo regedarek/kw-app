@@ -7,6 +7,12 @@ class LikesController < ApplicationController
       if current_user.likes.where(likeable_type: "PhotoCompetition::RequestRecord").select{|like| like.likeable.edition == edition}.count >= 3
         return redirect_back(fallback_location: root_path, alert: 'Możesz oddać tylko 3 głosy w tej edycji!')
       end
+    when  "Db::YearlyPrizeRequest"
+      edition = Db::YearlyPrizeRequest.find(like_params[:likeable_id]).yearly_prize_edition
+
+      if current_user.likes.where(likeable_type: "Db::YearlyPrizeRequest").select{|like| like.likeable.yearly_prize_edition == edition}.count >= 1
+        return redirect_back(fallback_location: root_path, alert: 'Możesz oddać tylko 1 głos w tej edycji!')
+      end
     end
 
     @like = current_user.likes.new(like_params)
