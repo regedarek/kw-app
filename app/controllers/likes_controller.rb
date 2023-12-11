@@ -4,7 +4,7 @@ class LikesController < ApplicationController
     when  "PhotoCompetition::RequestRecord"
       edition = PhotoCompetition::RequestRecord.find(like_params[:likeable_id]).edition
 
-      if current_user.likes.select{|like| like.likeable.edition == edition}.count >= 3
+      if current_user.likes.where(likeable_type: "PhotoCompetition::RequestRecord").select{|like| like.likeable.edition == edition}.count >= 3
         return redirect_back(fallback_location: root_path, alert: 'Możesz oddać tylko 3 głosy w tej edycji!')
       end
     end

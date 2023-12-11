@@ -8,7 +8,7 @@
     .large-4.columns.text-right
       - if @edition.closed?
         b Polubione: 
-        - current_user.likes.select{|like| like.likeable.edition == @edition}.each_with_index do |like, index|
+        - current_user.likes.where(likeable_type: "PhotoCompetition::RequestRecord").select{|like| like.likeable.edition == @edition}.each_with_index do |like, index|
           - photo = like.likeable.file
           - if photo.thumb && photo.thumb.url
             = link_to edition_request_path(like.likeable, edition_id: @edition) do
@@ -35,8 +35,8 @@
               p = request.description.truncate(200)
 
             .card-section
-              - if current_user.likes.select{|like| like.likeable.edition == @edition}.count >= 3
-                - like = current_user.likes.find_by(likeable: request)
+              - if current_user.likes.where(likeable_type: "PhotoCompetition::RequestRecord").select{|like| like.likeable.edition == @edition}.count >= 3
+                - like = current_user.likes.where(likeable_type: "PhotoCompetition::RequestRecord").find_by(likeable: request)
                 - if like.present?
                   = button_to("Odlub!", like_path(id: like.id), class:"button alert expanded", method: :delete)
               - else
