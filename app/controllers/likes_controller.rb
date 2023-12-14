@@ -15,6 +15,8 @@ class LikesController < ApplicationController
       end
     end
 
+    return redirect_back(fallback_location: root_path, alert: 'Koniec głosowania!')
+
     @like = current_user.likes.new(like_params)
     @like.save
 
