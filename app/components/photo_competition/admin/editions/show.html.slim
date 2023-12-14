@@ -40,9 +40,9 @@
           - @photo_requests.each_with_index do |request, i|
             tr
               td = i + 1
-              td = request.category.name
+              td = request.category.name.truncate(12)
               td = link_to request.title, edition_request_path(request, edition_id: @edition)
-              td = link_to File.basename(request.file.path), request.file.url, target: :_blank
+              td = request.likes_count
               td = request.user.display_name
               td = Db::User.find_by(id: request.versions&.last&.version_author)&.display_name
               td
