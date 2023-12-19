@@ -5,6 +5,12 @@
         h3 = @contract.title
 
     .callout
+      - if @contract.internal_number && @contract.period_date
+        .row
+          .large-12.columns
+            b ID: 
+            = "#{@contract.internal_number}/#{@contract.period_date.year}"
+
       .row
         .large-12.columns
           b Kontrahent: 
