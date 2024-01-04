@@ -143,6 +143,7 @@
               - unless user_signed_in?
                 li= link_to t('.administration.login'), new_user_session_path
                 li= link_to 'Zapisz się do klubu!', '/zgloszenie'
+                li= link_to "Zapomniałeś hasła?", new_password_path(Db::User.new)
 
         - if user_signed_in?
           li.show-for-small-only= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
@@ -177,4 +178,5 @@
               li= link_to 'Twoje zamówienia', '/zamowienia', class: 'button secondary'
               li= link_to 'Twój profil', user_path(current_user.kw_id), class: 'button secondary'
               li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button secondary'
+
               li= link_to t('.administration.logout'), destroy_user_session_path, class: 'button secondary'

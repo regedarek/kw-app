@@ -72,8 +72,7 @@
     .callout
       .row
         .large-12.columns
-          = f.label :password
-          = f.password_field :password
+          | Aby zmienić hasło musisz się wylogować i wejść na stronę: Zapomniałeś Hasła?
 
     .callout
       .row
@@ -130,8 +129,7 @@
       .large-6.columns
         = f.submit "Zaktualizuj", class: 'button'
       .large-6.columns.text-right
-        - if false
-          = link_to "Zapomniałeś hasła?", new_password_path(resource_name), class: 'button warning'
+
         = link_to "Usuń konto", registration_path(resource_name),
           data: { confirm: "To zatwierdzone przez twój mózg działanie?" }, method: :delete, class: 'button alert'
 

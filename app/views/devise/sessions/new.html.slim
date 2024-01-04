@@ -11,12 +11,12 @@
         = f.hidden_field :remember_me, value: true
 
         = f.submit "Zaloguj się", class: 'button large expanded'
-        | Jeżeli chcesz zapomniałeś i chcesz zmienić hasło skontaktuj się z nami przez: biuro@kw.krakow.pl
+
         - if Rails.env.development?
           p.text-center
             | lub
           = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path(protocol: 'https'), class: 'button secondary large expanded'
-          |
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
           = link_to "Zapomniałeś hasła?", new_password_path(resource_name), class: 'button warning large expanded'
+        | Jeżeli masz problem z kontem skontaktuj się z nami przez: biuro małpa kw.krakow.pl
 
