@@ -12,6 +12,7 @@ module Library
       reservation = Library::ItemReservationRecord.new(reservation_params)
 
       if reservation.save
+        reservation.item.touch
         redirect_to library_item_path(reservation.item_id), notice: 'Dodano'
       else
         redirect_to library_item_path(reservation.item_id), alert: 'Problem'
@@ -22,6 +23,7 @@ module Library
       reservation = Library::ItemReservationRecord.find(params[:id])
 
       if reservation.update(back_at: Time.now, back_by: current_user)
+        reservation.item.touch
         redirect_to library_item_path(reservation.item_id), notice: 'Zwrócono!'
       else
         redirect_to library_item_path(reservation.item_id), alert: 'Problem'
@@ -36,6 +38,15 @@ module Library
       else
         redirect_to library_item_path(reservation.item_id), alert: 'Problem'
       end
+    end
+
+
+    def remind
+      reservation = Library::ItemReservationRecord.find(params[:id])
+
+      ReservationMailer.remind_library_item(reservation).deliver_later
+
+      redirect_to library_item_path(reservation.item_id), notice: 'Przypomniano!'
     end
 
     private

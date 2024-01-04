@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :item_reservations do
       member do
         put :return
+        put :remind
       end
     end
   end

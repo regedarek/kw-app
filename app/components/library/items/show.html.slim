@@ -93,6 +93,9 @@
                   - unless reservation.back_at.present?
                     = link_to return_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
                       i.fi.fi-refresh
+                  - unless reservation.back_at.present?
+                    = link_to remind_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
+                      i.fi.fi-mail
 
       .row
         .large-12.columns

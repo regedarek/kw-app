@@ -1,0 +1,20 @@
+h3= "Rezerwacja ##{@reservation.id}"
+
+h2= "Do kiedy powinienieś oddać przedmiot: #{@reservation.returned_at.to_date}"
+
+b Kto: 
+= "#{@reservation.user.first_name} #{@reservation.user.last_name}"
+br
+b Co: 
+= @reservation.item.title
+br
+br
+= "Przypominamy o oddaniu przedmiotu w terminie."
+br
+= "Aby skontaktować się z opiekunem możesz po prostu odpowiedzieć na ten email."
+br
+= '----------------------------------------------------------'
+br
+i
+  small
+    = 'Biblioteka Klubu Wysokogórskiego Kraków'

@@ -14,11 +14,16 @@
   .large-12.columns
     table
       tr
-        th Co?
-        th width='150px' Kiedy?
-        th width='250px' Kto?
-        th width='250px' Odebrał?
-        th width='150px' Zwrot
+        th
+          = sort_link(@q, :item_id, 'Co?', default_order: :desc)
+        th width='150px'
+          = sort_link(@q, :received_at, 'Kiedy?', default_order: :desc)
+        th width='250px'
+          = sort_link(@q, :user_id, 'Kto?', default_order: :desc)
+        th width='250px'
+          = sort_link(@q, :back_by, 'Odebrał?', default_order: :desc)
+        th width='150px'
+          = sort_link(@q, :back_at, 'Zwrot?', default_order: :desc)
         th width='90px'
       - @reservations.each do |reservation|
         tr
@@ -42,6 +47,9 @@
             - unless reservation.back_at.present?
               = link_to return_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
                 i.fi.fi-refresh
+            - unless reservation.back_at.present?
+              = link_to remind_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
+                i.fi.fi-mail
 
       .text-center
         = paginate @reservations
