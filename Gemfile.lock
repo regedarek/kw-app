@@ -99,7 +99,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bcrypt (3.1.16)
+    bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.0)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
@@ -150,7 +150,7 @@ GEM
     crass (1.0.6)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.7.1)
+    devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -444,9 +444,9 @@ GEM
     redis (4.2.5)
     request_store (1.5.0)
       rack (>= 1.4)
-    responders (3.0.1)
-      actionpack (>= 5.0)
-      railties (>= 5.0)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -600,7 +600,7 @@ DEPENDENCIES
   carrierwave
   chronic
   coffee-rails
-  devise
+  devise (~> 4.7.3)
   dotenv-rails
   dry-container
   dry-matcher
@@ -670,4 +670,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.15
+   2.3.26
