@@ -63,9 +63,37 @@
                 - if item.authors.any?
                   = render partial: 'library/authors/link', collection: item.authors, spacer_template: 'shared/comma'
               td.text-center
-                = I18n.t item.reading_room
+                .show-for-large-up.hide-for-small-only.hide-for-medium-only
+                  - if item.reading_room
+                    | Tak
+                  - else
+                    | Nie
+                .show-for-small-only
+                  - if item.reading_room
+                    | Czytelnia
+                  - else
+                    | Można wypożyczyć
+                .show-for-medium-only
+                  - if item.reading_room
+                    | Czytelnia
+                  - else
+                    | Można wypożyczyć
               td.text-center
-                = I18n.t item.on_place?
+                .show-for-large-up.hide-for-small-only.hide-for-medium-only
+                  - if item.on_place?
+                    | Tak
+                  - else
+                    | Nie
+                .show-for-small-only
+                  - if item.on_place?
+                    | Dostępna w Klubie
+                  - else
+                    | Brak w Klubie
+                .show-for-medium-only
+                  - if item.on_place?
+                    | Dostępna w Klubie
+                  - else
+                    | Brak w Klubie
               td
                 - if item.publishment_at
                   = item.publishment_at.strftime("%Y")
