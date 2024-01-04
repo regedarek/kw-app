@@ -38,12 +38,16 @@
         thead
           tr
             th width='110px' Typ
-            th width='90px' Numer
-            th Tytuł
+            th width='90px'
+              = sort_link(@q, :item_id, 'Numer', default_order: :desc)
+            th
+              = sort_link(@q, :title, 'Tytuł', default_order: :desc)
             th Autorzy
-            th width='30px' Czytelnia?
+            th width='30px'
+              = sort_link(@q, :reading_room, 'Czytelnia?', default_order: :desc)
             th width='40px' W klubie?
-            th width='30px' Rok Wydania
+            th width='30px'
+              = sort_link(@q, :publishment_at, 'Rok Wydania', default_order: :desc)
             - if can? :update, Library::ItemRecord
               th width='90px' Akcje
         tbody
