@@ -19,7 +19,7 @@ module Membership
           'brak' => other_ids
           }
       else
-        @fees = current_user.membership_fees.includes(:payment).order(:year)
+        @fees = current_user.membership_fees.includes(:payment).order(year: :desc)
         @form = Membership::FeeForm.new(kw_id: current_user.kw_id)
       end
     end
@@ -38,6 +38,18 @@ module Membership
       result.invalid { |form:| render :index, form: form }
       result.wrong_payment { redirect_to membership_fees_path, alert: 'Skontaktuj sie z administratorem.' }
       result.else_fail!
+    end
+
+    def destroy
+      fee = current_user.membership_fees.find(params[:id])
+
+      if fee.payment.present? && fee.payment.paid?
+        redirect_to membership_fees_path, alert: 'Nie można usunąć opłaconego wpisu.'
+      else
+        fee.destroy
+
+        redirect_to membership_fees_path, notice: 'Składka została usunięta.'
+      end
     end
 
     private

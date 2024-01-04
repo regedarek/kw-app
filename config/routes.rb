@@ -106,7 +106,7 @@ Rails.application.routes.draw do
   end
 
   namespace :membership, path: 'klub' do
-    resources :fees, path: 'skladki', only: [:index, :create]
+    resources :fees, path: 'skladki', only: [:index, :create, :destroy]
   end
 
   namespace :admin do

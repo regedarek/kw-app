@@ -5,6 +5,7 @@ table.stack
       th Kwota
       th Plastik
       th Płatność
+      th
   tbody
     - fees.each do |fee|
       tr
@@ -20,3 +21,8 @@ table.stack
               span.label.success Zapłacone
             - else
               = link_to "Zapłać", charge_payment_path(fee.payment)
+        td.text-right
+          - unless fee.payment.present? && fee.payment.paid?
+            = link_to membership_fee_path(fee), data: { confirm: 'Jestes pewien?' }, method: :delete do
+              i.fi.fi-trash
+
