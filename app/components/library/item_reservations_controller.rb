@@ -5,7 +5,7 @@ module Library
     def index
       @q = Library::ItemReservationRecord.includes(:item, :user, :back_by).ransack(params[:q])
       @q.sorts = 'back_at desc' if @q.sorts.empty?
-      @reservations = @q.result.page(params[:page]).per(20)
+      @reservations = @q.result(distinct: true).page(params[:page]).per(20)
     end
 
     def create

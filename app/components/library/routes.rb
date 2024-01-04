@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'biblioteka/wypozyczenia', to: 'library/item_reservations#index', as: :biblioteka_wypozyczenia
+  get 'biblioteka/wypozyczenia', to: 'library/item_reservations#index', as: :biblioteka_wypozyczenia, params: { q: { back_at_null: true, returned_at_lteq: Date.tomorrow } }
   namespace :library do
     resources :items
     resources :authors

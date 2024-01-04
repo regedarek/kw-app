@@ -12,6 +12,34 @@
 
 .row
   .large-12.columns
+    .callout
+      = search_form_for @q, url: library_item_reservations_path, class: 'js-send-on-enter' do |f|
+        .row
+          .large-3.columns
+            = f.label :item_item_id_eq, 'Numer egzemplarza'
+            = f.search_field :item_item_id_eq
+          .large-3.columns
+            = f.label :back_at_null, 'Status'
+            = f.select :back_at_null, [['Wszystkie', nil], ['Do zwrotu', true], ['Zwrócone', 'false']]
+          .large-3.columns
+            = f.label :user_first_name_or_user_last_name_cont, 'Wypożyczył'
+            = f.search_field :user_first_name_or_user_last_name_cont
+          .large-3.columns
+            = f.label :back_by_first_name_or_back_by_last_name_cont, 'Odebrał'
+            = f.search_field :back_by_first_name_or_back_by_last_name_cont
+        .row
+          .large-2.columns
+            = f.label :returned_at_gteq, 'Zwrot Od Dnia'
+            = f.date_field :returned_at_gteq
+          .large-2.columns
+            = f.label :returned_at_lteq, 'Zwrot Do Dnia'
+            = f.date_field :returned_at_lteq
+          .large-2.columns
+            br
+            = f.submit 'Szukaj', class: 'button expanded'
+
+.row
+  .large-12.columns
     table
       tr
         th
@@ -19,7 +47,7 @@
         th width='150px'
           = sort_link(@q, :received_at, 'Kiedy?', default_order: :desc)
         th width='250px'
-          = sort_link(@q, :user_id, 'Kto?', default_order: :desc)
+          = sort_link(@q, :user_id, 'Wypożyczył', default_order: :desc)
         th width='250px'
           = sort_link(@q, :back_by, 'Odebrał?', default_order: :desc)
         th width='150px'
@@ -48,7 +76,7 @@
               = link_to return_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
                 i.fi.fi-refresh
             - unless reservation.back_at.present?
-              = link_to remind_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put do
+              = link_to remind_library_item_reservation_path(reservation.id), style: 'padding: 5px', method: :put, data: { confirm: "Wysłać przypomnienie?" } do
                 i.fi.fi-mail
 
       .text-center
