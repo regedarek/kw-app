@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_06_170559) do
+ActiveRecord::Schema.define(version: 2024_01_17_163302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,18 @@ ActiveRecord::Schema.define(version: 2023_12_06_170559) do
     t.date "presence_date", null: false
     t.integer "cerber_id"
     t.index ["user_id", "presence_date"], name: "index_case_presences_on_user_id_and_presence_date", unique: true
+  end
+
+  create_table "club_meetings_ideas", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.bigint "user_id", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_club_meetings_ideas_on_name", unique: true
+    t.index ["slug"], name: "index_club_meetings_ideas_on_slug", unique: true
+    t.index ["user_id"], name: "index_club_meetings_ideas_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -1307,6 +1319,7 @@ ActiveRecord::Schema.define(version: 2023_12_06_170559) do
     t.index ["yearly_prize_edition_id"], name: "index_yearly_prize_requests_on_yearly_prize_edition_id"
   end
 
+  add_foreign_key "club_meetings_ideas", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"

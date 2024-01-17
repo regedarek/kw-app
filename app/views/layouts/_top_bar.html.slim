@@ -110,6 +110,7 @@
           li
             = link_to 'Programy', root_path
             ul.menu.vertical
+              li= link_to 'Tabela Narciarskie Dziki', narciarskie_dziki_path
               - if user_signed_in?
                 li= link_to 'Klubowa Ósemka 2023', '/osemka/2023'
                 - if PhotoCompetition::EditionRecord.last.closed?
@@ -117,12 +118,16 @@
               - if current_user.roles.include?('photo_competition')
                 li= link_to 'Konkurs Fotograficzny Administracja', admin_editions_path
               li= link_to 'KSKS', '/trening/skimo'
+
               li= link_to 'Tabela Górskie Dziki', gorskie_dziki_path
               - if current_user.roles.include?('kamper')
                 li= link_to 'KW Park4Night', '/kamper'
           li
             = link_to 'Funkcjonalności', root_path
             ul.menu.vertical
+              li= link_to 'Zgloś prezentację!', '/prezentacje/zglos'
+              - if current_user.roles.include?('club_meetings') || current_user.admin?
+                li= link_to 'Zgłoszone prezentacje', '/ideas'
               li= link_to 'Baza uchwał', resolutions_path
               li= link_to 'Biblioteka', biblioteka_path
               li= link_to 'Wypożyczalnia', new_reservation_path

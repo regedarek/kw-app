@@ -1,0 +1,15 @@
+table.stack
+  thead
+    tr
+      th width='25%' Pomysł
+      th width='25%' Kiedy
+      th width='25%' Kto?
+  tbody
+    - ideas.each do |idea|
+      tr
+        td
+          = link_to idea.name, idea_path(idea)
+        td
+          = idea.created_at.to_date
+        td
+          = idea.user.display_name

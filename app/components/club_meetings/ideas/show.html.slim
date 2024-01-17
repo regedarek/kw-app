@@ -1,0 +1,22 @@
+.column.row
+  .row
+    .large-12.columns
+      h4 = @idea.name
+
+  .row
+    .large-12.columns
+      h5 = @idea.created_at.to_date
+
+  .row
+    .large-12.columns
+      - if @idea.description.present?
+        b Opis:  
+        = @idea.description
+        br
+
+  .row
+    .large-12.columns
+      - if @idea.photos.any?
+        .row
+          .large-12.columns
+            = render 'attachments/box', attachments: @idea.photos

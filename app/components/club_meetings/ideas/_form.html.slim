@@ -1,0 +1,30 @@
+= form_for @idea, as: :idea, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if @idea.errors.any?
+        .callout.alert
+          ul
+            - @idea.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name, "Tytuł"
+      = f.text_field :name
+
+  .row
+    .large-12.columns
+      .callout
+        | W opisie podaj nazwę pomysłu, swój kontakt oraz dostępne dla Ciebie daty
+      = f.label :description, "Opis"
+      = f.trix_editor :description, style: 'min-height: 150px'
+
+  .row
+    .large-4.columns
+      .callout
+        b= f.label :attachments, "Załączniki"
+        = f.fields_for :photos_attributes do |p|
+          = p.file_field :file, multiple: true, name: 'idea[photos_attributes][][file]'
+  .row
+    .large-12.columns
+      = f.submit "Zgłoś pomysł prezentacji", class: 'button'
