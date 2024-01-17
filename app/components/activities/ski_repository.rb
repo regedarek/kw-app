@@ -122,11 +122,11 @@ module Activities
     end
 
     def start_date
-      DateTime.new(2022, 12, 01)
+      DateTime.new(2023, 12, 01)
     end
 
     def end_date
-      DateTime.new(2023, 4, 30)
+      DateTime.new(2024, 4, 30)
     end
 
     private
