@@ -10,7 +10,7 @@ module Charity
 
     def payment_type
       if crack? || ski_service?
-        :donations_other
+        :trainings
       else
         :donations
       end
