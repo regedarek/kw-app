@@ -34,7 +34,7 @@ class NarciarskieDzikiComponent extends React.Component {
   }
   
   componentDidMount() {
-    const route = '/api/routes/2023/' + this.props.type + (this.props.gender ? `?gender=${this.props.gender}` : "");
+    const route = '/api/routes/2024/' + this.props.type + (this.props.gender ? `?gender=${this.props.gender}` : "");
     window.fetch(route)
       .then(response => response.json())
       .then(data => {
