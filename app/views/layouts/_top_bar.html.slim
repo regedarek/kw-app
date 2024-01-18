@@ -128,7 +128,6 @@
               li= link_to 'Zgloś prezentację!', '/prezentacje/zglos'
               - if current_user.roles.include?('club_meetings') || current_user.admin?
                 li= link_to 'Zgłoszone prezentacje', '/ideas'
-              li= link_to 'Baza uchwał', resolutions_path
               li= link_to 'Biblioteka', biblioteka_path
               li= link_to 'Wypożyczalnia', new_reservation_path
               li= link_to 'Serwis Narciarski', '/serwis-narciarski/regulamin'

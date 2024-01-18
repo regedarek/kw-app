@@ -7,14 +7,15 @@
       = image_tag asset_path('kw-bg-home.jpg')
   br
 
-  .row
-    .large-12.columns
-      = link_to "Głosowanie Klubowej Ósemki 2023!", "/osemka/2023", class: 'button large success expanded'
-
-  - if PhotoCompetition::EditionRecord.last.closed?
+  - if false
     .row
       .large-12.columns
-        = link_to "Głosowanie Konkursu Fotograficznego im. Piotra Kasprzyka na zdjęcia 2023 trwa!", "/konkurs/kasprzyk_2023/glosowanie", class: 'button large warning expanded'
+        = link_to "Głosowanie Klubowej Ósemki 2023!", "/osemka/2023", class: 'button large success expanded'
+
+    - if PhotoCompetition::EditionRecord.last.closed?
+      .row
+        .large-12.columns
+          = link_to "Głosowanie Konkursu Fotograficznego im. Piotra Kasprzyka na zdjęcia 2023 trwa!", "/konkurs/kasprzyk_2023/glosowanie", class: 'button large warning expanded'
 
   .row
     .large-8.columns
