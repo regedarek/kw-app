@@ -15,6 +15,9 @@
   .callout.primary
     .row
       .large-3.columns
+        = f.label :participant_country_1, "Kraj/Country"
+        = f.select :participant_country_1, options_for_select([["Polska", 'pl'], ["Slovakia", "sk"], ["Other", "other"]], @sign_up.try(:participant_country_1)), include_blank: true
+      .large-3.columns
         = f.label :participant_name_1, "Imię i Nazwisko | Full Name *"
         = f.text_field :participant_name_1
 
@@ -97,11 +100,14 @@
   .callout.warning
     .row
       .large-12.columns
-        = f.label :terms_of_service, t('.terms_of_service')
+        = f.label :terms_of_service do
+          | Zapoznałam/em się z treścią <a href='https://docs.google.com/document/d/1s9eJXVtwJMdFM5fM1WMFOh1SHx-HYpSz/edit?usp=sharing&ouid=116540995097749909610&rtpof=true&sd=true'>Regulaminu</a> XXXVI Memoriału Jana Strzeleckiego w narciarstwie wysokogórskim, akceptuję jego postanowienia i będę stosować się do nich podczas rozgrywania zawodów.
         = f.check_box :terms_of_service
         small = @competition.rules_text.html_safe
         br
-        = f.label :medical_rules, t('.medical_rules')
+        = f.label :medical_rules
+          | Zapoznałam/em się z <a href='https://drive.google.com/file/d/194BCCSDV9N4Bw0johfh2n7QO7BoVNP9T/view?usp=sharing'>klauzulą informacyjną</a> dotyczącą przetwarzania moich danych osobowych i wyrażam zgodę na ich przetwarzanie w związku z moim uczestnictwem w XXXVI Memoriale Jana Strzeleckiego w narciarstwie wysokogórskim.
+
         = f.check_box :medical_rules
         small = @competition.medical_rules_text.html_safe
 

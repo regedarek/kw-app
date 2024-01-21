@@ -3,7 +3,7 @@ module Events
     class SignUpRecord < ActiveRecord::Base
       self.table_name = 'events_sign_ups'
 
-      enum participant_country_1: [:pl, :sk], _prefix: :country_1
+      enum participant_country_1: [:pl, :sk, :other], _prefix: :country_1
       enum participant_country_2: [:pl, :sk], _prefix: :country_2
 
       has_one :payment,

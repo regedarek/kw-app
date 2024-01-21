@@ -22,8 +22,8 @@ module Events
       def create
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         #form = ::Events::Competitions::SignUps::SignUpTeamForm
-        form = ::Events::Competitions::SignUps::SignUpMasForm
-        #form = ::Events::Competitions::SignUps::IndividualForm
+        #form = ::Events::Competitions::SignUps::SignUpMasForm
+        form = ::Events::Competitions::SignUps::IndividualForm.new
 
         either(create_record(form)) do |result|
           result.success do
@@ -42,16 +42,16 @@ module Events
       def edit
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         @sign_up = Events::Db::SignUpRecord.find(params[:id])
-        @team = true
+        @team = false
         authorize! :update, Events::Db::SignUpRecord
       end
 
       def update
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         @sign_up = Events::Db::SignUpRecord.find(params[:id])
-        @team = true
-        @form = ::Events::Competitions::SignUps::SignUpTeamForm
-        #@form = ::Events::Competitions::SignUps::IndividualForm.new
+        @team = false
+        #@form = ::Events::Competitions::SignUps::SignUpTeamForm
+        @form = ::Events::Competitions::SignUps::IndividualForm.new
 
         authorize! :update, Events::Db::SignUpRecord
 

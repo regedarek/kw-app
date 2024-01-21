@@ -18,6 +18,7 @@ module Events
 
         define! do
          required(:participant_name_1).filled
+         required(:participant_country_1).filled
          optional(:tshirt_size_1).filled
          optional(:participant_city_1)
          optional(:team_name)

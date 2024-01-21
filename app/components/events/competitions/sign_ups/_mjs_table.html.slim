@@ -1,8 +1,9 @@
 table.stack
   thead
     tr
-      th width="4%" = t('.nr')
-      th width="10%" Kraj/Country
+      th width="4%"
+        = t('.nr')
+      th width="5%"
       th width="20%" = t('.name')
       th Kategoria PP
       th Kategoria MJS
@@ -16,9 +17,9 @@ table.stack
       tr
         td = index + 1
         td
-          - if sign_up.participant_country_1 == :pl
+          - if sign_up.participant_country_1 == 'pl'
             = image_tag('pl.png')
-          - if sign_up.participant_country_1 == :sk
+          - if sign_up.participant_country_1 == 'sk'
             = image_tag('sk.png')
         td = sign_up.participant_name_1
         td = sign_up.sport_category_1
@@ -43,4 +44,4 @@ table.stack
               = link_to edit_competition_sign_up_path(competition_id: @competition, id: sign_up), class: 'item', style: 'margin: 5px' do
                 i.fi-page-edit
               = link_to competition_sign_up_path(competition_id: @competition, id: sign_up), method: :delete, class: 'item', data: { confirm: 'Napewno chcesz usunąć?' } do
-                i.fi-trash
+                i
