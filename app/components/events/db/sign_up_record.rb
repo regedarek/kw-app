@@ -20,19 +20,19 @@ module Events
         return nil unless participant_birth_year_1.present?
 
         case
-        when participant_birth_year_1.to_i.between?(2005, 2006)
+        when participant_birth_year_1.to_i.between?(2006, 2007)
           if participant_gender_1 == "1"
             "Junior Młodszy (U18)"
           else
             "Juniorka Młodsza (U18)"
           end
-        when participant_birth_year_1.to_i.between?(2003, 2004)
+        when participant_birth_year_1.to_i.between?(2004, 2005)
           if participant_gender_1 == "1"
             "Junior (U20)"
           else
             "Juniorka (U20)"
           end
-        when participant_birth_year_1.to_i.between?(1974, 2002)
+        when participant_birth_year_1.to_i.between?(1974, 2003)
           if participant_gender_1 == "1"
             "Senior"
           else
