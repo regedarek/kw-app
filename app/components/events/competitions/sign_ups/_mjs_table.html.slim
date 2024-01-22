@@ -7,9 +7,8 @@ table.stack
       th width="20%" = t('.name')
       th Kategoria PP
       th Kategoria MJS
-      th = t('.organization')
-      th width='14%'
-        = t('.paid')
+      th Organizacja
+      th width='14%' Płatność
       - if can? :manage, Events::Db::SignUpRecord
         th width='8%'
   tbody
@@ -44,4 +43,4 @@ table.stack
               = link_to edit_competition_sign_up_path(competition_id: @competition, id: sign_up), class: 'item', style: 'margin: 5px' do
                 i.fi-page-edit
               = link_to competition_sign_up_path(competition_id: @competition, id: sign_up), method: :delete, class: 'item', data: { confirm: 'Napewno chcesz usunąć?' } do
-                i
+                i.fi-trash
