@@ -55,7 +55,7 @@
       .large-12.columns
         - if @competition.single
           h4= t('.participants_signed_in')
-          = render 'mas_table', sign_ups: limiter.singles.order('payments.updated_at')
+          = render 'mjs_table', sign_ups: limiter.singles.order('payments.updated_at')
         - else
           h4= t('.teams_signed_in')
           = render 'mas_table', sign_ups: limiter.teams.order('payments.updated_at')
