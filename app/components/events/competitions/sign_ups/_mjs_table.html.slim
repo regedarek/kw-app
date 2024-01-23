@@ -16,10 +16,8 @@ table.stack
       tr
         td = index + 1
         td
-          - if sign_up.participant_country_1 == 'pl'
-            = image_tag('pl.png')
-          - if sign_up.participant_country_1 == 'sk'
-            = image_tag('sk.png')
+          - unless sign_up.participant_country_1 == 'other'
+            = image_tag("#{sign_up.participant_country_1}.png")
         td = sign_up.participant_name_1
         td = sign_up.sport_category_1
         td = [(sign_up.rescuer? ? "Ratownik" : nil), (sign_up.package_type_1_membership? ? "KW Kraków" : nil)].compact.join(', ')
