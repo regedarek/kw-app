@@ -9,8 +9,10 @@
 #  close_payment       :datetime
 #  closed              :boolean          default(FALSE), not null
 #  country_required    :boolean          default(FALSE), not null
+#  custom_form         :string
 #  edition_sym         :string           not null
 #  email_text          :text             not null
+#  en_email_text       :text
 #  event_date          :datetime
 #  license_id_required :boolean          default(FALSE), not null
 #  limit               :integer          default(0), not null

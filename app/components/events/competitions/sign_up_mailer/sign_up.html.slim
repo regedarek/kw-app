@@ -1,7 +1,13 @@
-| Hej!
-br
-br
-= link_to 'Kliknij tutaj, aby opłacić wpisowe na zawody!', charge_payment_url(@sign_up.payment.id)
-br/
-br/
-= sanitize @sign_up.competition_record.email_text
+- if @sign_up.participant_country_1 == 'pl'
+  | Hej!
+  br
+  br
+  = link_to 'Kliknij tutaj, aby opłacić wpisowe na zawody!', charge_payment_url(@sign_up.payment.id)
+  br/
+  br/
+  = sanitize @sign_up.competition_record.email_text
+- else
+  | Hello!
+  br
+  br
+  = sanitize @sign_up.competition_record.en_email_text

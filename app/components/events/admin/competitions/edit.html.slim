@@ -58,6 +58,10 @@
             = f.label 'Start zapisów'
             = f.datetime_field :sign_up_starts_at
 
+          .callout.primary
+            = f.label 'Specjalny Formularz?'
+            = f.text_field :custom_form
+
         .large-9.columns
           .callout.primary
             = f.nested_fields_for :package_types do |ff|
@@ -96,6 +100,9 @@
 
             = f.label 'Treść e-maila z linkiem do zapisów'
             = f.trix_editor :email_text, style: 'min-height: 280px'
+
+            = f.label 'Treść e-maila z informacją o płatności po angielsku'
+            = f.trix_editor :en_email_text, style: 'min-height: 280px'
 
             = f.label 'Treść tekstu dotycząca noclegów'
             = f.trix_editor :weekend_nights_text, style: 'min-height: 280px'

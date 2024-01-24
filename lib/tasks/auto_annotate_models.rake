@@ -9,7 +9,7 @@ if Rails.env.development?
     Annotate.set_defaults(
       'active_admin'                => 'false',
       'additional_file_patterns'    => [ ],
-      'routes'                      => 'true',
+      'routes'                      => 'false',
       'models'                      => 'true',
       'position_in_routes'          => 'before',
       'position_in_class'           => 'before',
