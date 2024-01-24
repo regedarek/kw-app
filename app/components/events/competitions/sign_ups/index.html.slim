@@ -23,7 +23,7 @@
     - if (@competition.sign_up_starts_at.present? && @competition.sign_up_starts_at < Time.zone.now ) || (user_signed_in? && current_user.roles.include?('competitions'))
       .row
         .large-12.columns
-          = link_to t('.sign_up'), new_competition_sign_up_path(@competition),
+          = link_to "Zapisz się | Sign Up!", new_competition_sign_up_path(@competition),
           class: 'button large primary expanded'
 
   - if (@competition.sign_up_starts_at.present? && @competition.sign_up_starts_at < Time.zone.now ) || (user_signed_in? && current_user.roles.include?('competitions'))
