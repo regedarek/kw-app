@@ -33,7 +33,7 @@ append :linked_files,  "config/database.yml", "config/secrets.yml"
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 2
 
 # capistrano
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
