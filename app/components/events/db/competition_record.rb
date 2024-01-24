@@ -49,6 +49,15 @@ module Events
         reject_if: proc { |attributes| attributes[:name].blank? },
         allow_destroy: true
 
+      def form
+        case custom_form
+        when 'mjs'
+          ::Events::Competitions::SignUps::MjsForm.new
+        else
+          ::Events::Competitions::SignUps::SignUpSingleForm.new
+        end
+      end
+
       def closed_or_limit_reached?
         closed? || limit_reached?
       end

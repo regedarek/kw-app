@@ -13,7 +13,7 @@
       .row
         .large-3.columns
           = f.label :participant_country_1, "Kraj/Country"
-          = f.select :participant_country_1, options_for_select([["Polska", 'pl'], ["Slovakia", "sk"], ["Other", "other"]], @sign_up.try(:participant_country_1)), include_blank: true
+          = f.select :participant_country_1, options_for_select([["Polska", 'pl'], ["Slovakia", "sk"], ["Czechy", 'cz'], ["Niemcy", 'de'], ["Ukraina", 'ua'], ["Other", "other"]], @sign_up.try(:participant_country_1)), include_blank: true
       - if @competition.team_name
         .callout.warning
           .row

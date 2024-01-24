@@ -21,11 +21,8 @@ module Events
 
       def create
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
-        #form = ::Events::Competitions::SignUps::SignUpTeamForm
-        #form = ::Events::Competitions::SignUps::SignUpMasForm
-        form = ::Events::Competitions::SignUps::IndividualForm.new
 
-        either(create_record(form)) do |result|
+        either(create_record(@competition.form)) do |result|
           result.success do
             @sign_up = Events::Db::SignUpRecord.new(sign_up_params)
             redirect_to competition_sign_ups_path(params[:competition_id]), flash: { notice: t('.success') }
@@ -50,12 +47,10 @@ module Events
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         @sign_up = Events::Db::SignUpRecord.find(params[:id])
         @team = false
-        #@form = ::Events::Competitions::SignUps::SignUpTeamForm
-        @form = ::Events::Competitions::SignUps::IndividualForm.new
 
         authorize! :update, Events::Db::SignUpRecord
 
-        either(update_record(@form)) do |result|
+        either(update_record(@competition.form)) do |result|
           result.success do
             redirect_to edit_competition_sign_up_path(competition_id: params[:competition_id], id: @sign_up.id), flash: { notice: t('.success') }
           end

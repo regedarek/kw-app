@@ -23,12 +23,12 @@
         = f.text_field :participant_email_1
 
       .large-3.columns
-        = f.label :participant_phone_1, "Telefon 1| Phone *"
+        = f.label :participant_phone_1, "Telefon Kontaktowy | Your Phone *"
         = f.text_field :participant_phone_1
 
       .large-3.columns
         span data-tooltip='' tabindex="1" title="Numer do osoby kontaktowej w razie wypadku | Phone number of the person to be notified in case of emergency" data-allow-html="true"
-          = f.label :participant_phone_2, "Telefon 2 ICE *"
+          = f.label :participant_phone_2, "Telefon ICE | Phone ICE *"
         = f.text_field :participant_phone_2
 
       .large-2.columns
@@ -117,4 +117,4 @@
       .large-12.columns
         small = @competition.rules.html_safe
 
-  = f.submit t('.submit'), class: 'button expanded large'
+  = f.submit "Zapisz się! | Sign Up!", class: 'button expanded large'

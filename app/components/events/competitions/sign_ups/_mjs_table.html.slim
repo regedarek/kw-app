@@ -16,7 +16,7 @@ table.stack
       tr
         td = index + 1
         td
-          - unless sign_up.participant_country_1 == 'other'
+          - unless sign_up.participant_country_1 == 'other' || sign_up.participant_country_1.nil?
             = image_tag("#{sign_up.participant_country_1}.png")
         td = sign_up.participant_name_1
         td = sign_up.sport_category_1

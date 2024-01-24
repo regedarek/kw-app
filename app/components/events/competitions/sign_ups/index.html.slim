@@ -53,12 +53,12 @@
               = limiter.waiting.count
     .row
       .large-12.columns
-        - if @competition.single
+        - if @competition.custom_form
           h4= t('.participants_signed_in')
-          = render 'mjs_table', sign_ups: limiter.singles.order('payments.updated_at')
+          = render "#{@competition.custom_form}_table", sign_ups: limiter.singles.order('payments.updated_at')
         - else
-          h4= t('.teams_signed_in')
-          = render 'mas_table', sign_ups: limiter.teams.order('payments.updated_at')
+          h4= t('.participants_signed_in')
+          = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
 
     - if @competition.matrimonial_office?
       .row
@@ -69,9 +69,12 @@
       .row
         .large-12.columns
           h4 = t('.looking_list')
-          = render 'mas_table', sign_ups: limiter.singles.order('payments.updated_at')
+          = render 'table', sign_ups: limiter.singles.order('payments.updated_at')
 
     .row
       .large-12.columns
         h4 = t('.second_list')
-        = render 'mjs_table', sign_ups: limiter.waiting.order(:created_at)
+        - if @competition.custom_form
+          = render "#{@competition.custom_form}_table", sign_ups: limiter.waiting.order(:created_at)
+        - else
+          = render "table", sign_ups: limiter.waiting.order(:created_at)
