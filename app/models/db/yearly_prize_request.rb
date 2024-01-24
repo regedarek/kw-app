@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: yearly_prize_requests
+#
+#  id                       :bigint           not null, primary key
+#  accepted                 :boolean          default(FALSE)
+#  attachments              :string
+#  author_description       :text
+#  likes_count              :integer          default(0), not null
+#  prize_jury_description   :text
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  author_id                :integer          not null
+#  yearly_prize_category_id :integer          not null
+#  yearly_prize_edition_id  :bigint           not null
+#
+# Indexes
+#
+#  index_yearly_prize_requests_on_author_id                 (author_id)
+#  index_yearly_prize_requests_on_yearly_prize_category_id  (yearly_prize_category_id)
+#  index_yearly_prize_requests_on_yearly_prize_edition_id   (yearly_prize_edition_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (yearly_prize_edition_id => yearly_prize_editions.id)
+#
 class Db::YearlyPrizeRequest < ApplicationRecord
   self.table_name = 'yearly_prize_requests'
 

@@ -1,3 +1,41 @@
+# == Schema Information
+#
+# Table name: mountain_routes
+#
+#  id                   :integer          not null, primary key
+#  area                 :string
+#  attachments          :string
+#  boar_length          :integer          default(0)
+#  climbing_date        :date
+#  description          :text
+#  difficulty           :string
+#  distance             :float
+#  gps_tracks           :string
+#  hearts_count         :integer          default(0)
+#  hidden               :boolean          default(FALSE), not null
+#  length               :integer
+#  map_summary_polyline :string
+#  mountains            :string
+#  name                 :string
+#  partners             :string
+#  peak                 :string
+#  photograph           :string
+#  rating               :integer
+#  route_type           :integer          default("ski")
+#  slug                 :string
+#  time                 :string
+#  training             :boolean          default(FALSE), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  strava_id            :string
+#  user_id              :integer
+#
+# Indexes
+#
+#  index_mountain_routes_on_climbing_date  (climbing_date)
+#  index_mountain_routes_on_slug           (slug) UNIQUE
+#  index_mountain_routes_on_user_id        (user_id)
+#
 module Activities
   class MountainRouteRecord < ActiveRecord::Base
     before_save :save_boar_length, if: :ski?

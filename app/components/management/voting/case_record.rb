@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: management_cases
+#
+#  id                  :bigint           not null, primary key
+#  acceptance_date     :datetime
+#  attachments         :string
+#  destrciption        :text
+#  doc_url             :string
+#  final_voting_result :string
+#  hidden              :boolean          default(FALSE), not null
+#  hide_votes          :boolean          default(FALSE), not null
+#  meeting_type        :integer          default("manage"), not null
+#  name                :string           not null
+#  number              :string
+#  position            :integer
+#  public              :boolean          default(FALSE), not null
+#  slug                :string           not null
+#  state               :string           default("draft"), not null
+#  voting_type         :integer          default("document"), not null
+#  who_ids             :string           is an Array
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  creator_id          :integer          not null
+#
+# Indexes
+#
+#  index_management_cases_on_slug  (slug) UNIQUE
+#
 module Management
   module Voting
     class CaseRecord < ActiveRecord::Base

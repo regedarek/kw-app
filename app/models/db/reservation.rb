@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: reservations
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  state      :string           default("reserved")
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  start_date :date
+#  end_date   :date
+#  remarks    :text
+#  canceled   :boolean          default(FALSE)
+#  photos     :string
+#
 class Db::Reservation < ActiveRecord::Base
   include Workflow
 

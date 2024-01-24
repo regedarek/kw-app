@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: photo_competitions
+#
+#  id         :integer          not null, primary key
+#  closed     :boolean          default(FALSE), not null
+#  code       :string           not null
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 module PhotoCompetition
   class EditionRecord < ActiveRecord::Base
     self.table_name = 'photo_competitions'

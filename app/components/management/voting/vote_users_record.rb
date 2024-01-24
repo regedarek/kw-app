@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: management_vote_users
+#
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#  vote_id    :integer
+#
 module Management
   module Voting
     class VoteUsersRecord < ActiveRecord::Base

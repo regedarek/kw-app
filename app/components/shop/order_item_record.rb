@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: shop_order_items
+#
+#  id           :bigint           not null, primary key
+#  quantity     :integer          default(1), not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  item_id      :integer          not null
+#  item_kind_id :integer          not null
+#  order_id     :integer          not null
+#  user_id      :integer          not null
+#
 module Shop
   class OrderItemRecord < ActiveRecord::Base
     self.table_name = 'shop_order_items'

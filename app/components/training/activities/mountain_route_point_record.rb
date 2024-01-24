@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: mountain_route_points
+#
+#  id                :bigint           not null, primary key
+#  description       :text
+#  lat               :decimal(10, 6)   not null
+#  lng               :decimal(10, 6)   not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  mountain_route_id :integer          not null
+#
 module Training
   module Activities
     class MountainRoutePointRecord < ActiveRecord::Base

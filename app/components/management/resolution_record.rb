@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: management_resolutions
+#
+#  id          :bigint           not null, primary key
+#  description :text
+#  name        :string           not null
+#  number      :string           not null
+#  passed_date :date
+#  slug        :string           not null
+#  state       :string           default("draft"), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 module Management
   class ResolutionRecord < ActiveRecord::Base
     include Workflow

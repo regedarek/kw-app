@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id               :bigint           not null, primary key
+#  attachments      :string
+#  benefits         :text
+#  description      :text
+#  estimated_time   :text
+#  group_type       :integer          default("kw"), not null
+#  know_how         :text
+#  name             :string           not null
+#  needed_knowledge :text
+#  slug             :string
+#  state            :string           default("draft")
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  coordinator_id   :integer
+#
+# Indexes
+#
+#  index_projects_on_slug  (slug) UNIQUE
+#
 module Management
   class ProjectRecord < ActiveRecord::Base
     include Workflow

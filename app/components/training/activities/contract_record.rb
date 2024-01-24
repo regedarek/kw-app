@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: activities_contracts
+#
+#  id          :bigint           not null, primary key
+#  description :text
+#  name        :string           not null
+#  score       :integer          default(0), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 module Training
   module Activities
     class ContractRecord < ActiveRecord::Base

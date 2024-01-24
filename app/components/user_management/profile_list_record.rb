@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: profile_lists
+#
+#  id           :bigint           not null, primary key
+#  accepted     :boolean          default(FALSE), not null
+#  attachments  :string
+#  description  :text
+#  section_type :integer          not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  acceptor_id  :integer
+#  profile_id   :integer          not null
+#
 module UserManagement
   class ProfileListRecord < ActiveRecord::Base
     self.table_name = 'profile_lists'

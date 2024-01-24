@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: shop_items
+#
+#  id          :bigint           not null, primary key
+#  description :text
+#  name        :string
+#  slug        :string           not null
+#  state       :string           default("draft"), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 module Shop
   class ItemRecord < ActiveRecord::Base
     extend FriendlyId

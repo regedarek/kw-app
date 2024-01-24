@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: contract_users
+#
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  contract_id :integer          not null
+#  user_id     :integer          not null
+#
 module Settlement
   class ContractUsersRecord < ActiveRecord::Base
     self.table_name = 'contract_users'

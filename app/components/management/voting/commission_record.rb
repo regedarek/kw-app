@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: management_commissions
+#
+#  id            :bigint           not null, primary key
+#  approval      :boolean          default(FALSE), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  authorized_id :integer          not null
+#  owner_id      :integer          not null
+#
+# Indexes
+#
+#  index_management_commissions_on_owner_id  (owner_id) UNIQUE
+#
 module Management
   module Voting
     class CommissionRecord < ActiveRecord::Base

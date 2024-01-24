@@ -1,3 +1,47 @@
+# == Schema Information
+#
+# Table name: contracts
+#
+#  id                   :bigint           not null, primary key
+#  accountant_deliver   :boolean          default(FALSE), not null
+#  activity_type        :integer
+#  area_type            :integer
+#  attachments          :string
+#  bank_account         :string
+#  bank_account_owner   :string
+#  closed_at            :datetime
+#  cost                 :float
+#  currency_type        :integer          default("pln"), not null
+#  description          :text
+#  document_date        :date
+#  document_deliver     :boolean          default(FALSE), not null
+#  document_number      :string
+#  document_type        :integer
+#  event_type           :integer
+#  financial_type       :integer
+#  group_type           :integer
+#  internal_number      :integer
+#  payout_type          :integer
+#  period_date          :date
+#  preclosed_date       :datetime
+#  state                :string           default("new"), not null
+#  substantive_type     :integer
+#  title                :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  acceptor_id          :integer
+#  checker_id           :integer
+#  closer_id            :integer
+#  contract_template_id :integer
+#  contractor_id        :integer
+#  creator_id           :integer          not null
+#  event_id             :integer
+#  preacceptor_id       :integer
+#
+# Indexes
+#
+#  index_contracts_on_internal_number_and_period_date  (internal_number,period_date) UNIQUE
+#
 module Settlement
   class ContractRecord < ActiveRecord::Base
     include Workflow

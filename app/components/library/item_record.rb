@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: library_items
+#
+#  id             :bigint           not null, primary key
+#  attachments    :string
+#  autors         :string
+#  description    :text
+#  doc_type       :integer
+#  number         :string
+#  publishment_at :date
+#  reading_room   :boolean
+#  slug           :string           not null
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  area_id        :integer
+#  item_id        :integer
+#
 module Library
   class ItemRecord < ActiveRecord::Base
     extend FriendlyId

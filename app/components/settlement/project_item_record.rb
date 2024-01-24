@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: settlement_project_items
+#
+#  id               :bigint           not null, primary key
+#  accountable_type :string           not null
+#  cost             :float
+#  accountable_id   :integer          not null
+#  project_id       :integer
+#  user_id          :integer
+#
+# Indexes
+#
+#  index_settlement_project_items_on_accountable_id_and_project_id  (accountable_id,project_id) UNIQUE
+#  index_settlement_project_items_on_user_id                        (user_id)
+#
 module Settlement
   class ProjectItemRecord < ActiveRecord::Base
     INCOME_ITEMS = ['Business::CourseRecord', 'Settlement::IncomeRecord', 'Training::Supplementary::CourseRecord'].freeze

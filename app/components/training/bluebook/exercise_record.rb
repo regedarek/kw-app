@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: training_exercises
+#
+#  id          :bigint           not null, primary key
+#  description :text
+#  group_type  :integer
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 module Training
   module Bluebook
     class ExerciseRecord < ActiveRecord::Base

@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: business_sign_ups
+#
+#  id                              :bigint           not null, primary key
+#  alternative_email               :string
+#  birthdate                       :date
+#  birthplace                      :string
+#  code                            :string           default("512cb69ed5f44d7f"), not null
+#  email                           :string
+#  equipment_at                    :datetime
+#  expired_at                      :datetime
+#  name                            :string
+#  paid_email_sent_at              :datetime
+#  phone                           :string           not null
+#  question                        :string
+#  sent_at                         :datetime
+#  state                           :string           default("new"), not null
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#  admin_id                        :integer
+#  business_course_package_type_id :integer
+#  course_id                       :integer
+#  send_user_id                    :integer
+#  user_id                         :integer
+#
 module Business
   class SignUpRecord < ActiveRecord::Base
     acts_as_messageable

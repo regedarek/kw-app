@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: marketing_discounts
+#
+#  id            :bigint           not null, primary key
+#  amount        :integer
+#  amount_body   :string
+#  amount_text   :string
+#  amount_type   :integer
+#  attachments   :string
+#  category_type :integer
+#  description   :string
+#  link          :string
+#  logo          :string
+#  slug          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  contractor_id :integer          not null
+#  user_id       :integer
+#
 module Marketing
   class DiscountRecord < ActiveRecord::Base
     extend FriendlyId

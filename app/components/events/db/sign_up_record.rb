@@ -1,3 +1,46 @@
+# == Schema Information
+#
+# Table name: events_sign_ups
+#
+#  id                            :integer          not null, primary key
+#  expired_at                    :datetime
+#  friday_night                  :boolean          default(FALSE), not null
+#  license_number                :integer
+#  participant_birth_year_1      :string
+#  participant_birth_year_2      :string
+#  participant_city_1            :string
+#  participant_city_2            :string
+#  participant_country_1         :integer
+#  participant_country_2         :integer
+#  participant_email_1           :string
+#  participant_email_2           :string
+#  participant_gender_1          :string
+#  participant_gender_2          :string
+#  participant_kw_id_1           :integer
+#  participant_kw_id_2           :integer
+#  participant_license_id_1      :integer
+#  participant_license_id_2      :integer
+#  participant_name_1            :string
+#  participant_name_2            :string
+#  participant_phone_1           :string
+#  participant_phone_2           :string
+#  participant_team_1            :string
+#  participant_team_2            :string
+#  remarks                       :text
+#  rescuer                       :boolean          default(FALSE), not null
+#  saturday_night                :boolean          default(FALSE), not null
+#  sent_at                       :datetime
+#  single                        :boolean          default(FALSE), not null
+#  team_name                     :string
+#  tshirt_size_1                 :string
+#  tshirt_size_2                 :string
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  competition_package_type_1_id :integer          not null
+#  competition_package_type_2_id :integer
+#  competition_record_id         :integer          not null
+#  teammate_id                   :integer
+#
 module Events
   module Db
     class SignUpRecord < ActiveRecord::Base

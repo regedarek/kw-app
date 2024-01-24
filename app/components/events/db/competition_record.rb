@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: competitions
+#
+#  id                  :integer          not null, primary key
+#  accept_first        :boolean          default(FALSE), not null
+#  alert               :text
+#  baner               :string
+#  close_payment       :datetime
+#  closed              :boolean          default(FALSE), not null
+#  country_required    :boolean          default(FALSE), not null
+#  edition_sym         :string           not null
+#  email_text          :text             not null
+#  event_date          :datetime
+#  license_id_required :boolean          default(FALSE), not null
+#  limit               :integer          default(0), not null
+#  matrimonial_office  :boolean          default(FALSE), not null
+#  medical_rules_text  :text
+#  name                :string
+#  organizer_email     :string           default("kw@kw.krakow.pl"), not null
+#  rules               :string
+#  rules_text          :text
+#  sign_up_starts_at   :datetime
+#  single              :boolean          default(FALSE), not null
+#  team_name           :boolean          default(FALSE), not null
+#  tshirt_url          :string
+#  weekend_nights      :boolean          default(FALSE), not null
+#  weekend_nights_text :text
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
 module Events
   module Db
     class CompetitionRecord < ActiveRecord::Base

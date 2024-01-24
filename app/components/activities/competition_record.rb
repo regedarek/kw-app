@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: activities_competitions
+#
+#  id            :bigint           not null, primary key
+#  bold          :boolean          default(FALSE), not null
+#  category_type :integer
+#  country       :integer          not null
+#  description   :text
+#  end_date      :date
+#  name          :string           not null
+#  series        :integer
+#  slug          :string           not null
+#  start_date    :date
+#  state         :string           default("draft"), not null
+#  website       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  creator_id    :integer
+#
 module Activities
   class CompetitionRecord < ActiveRecord::Base
     include Workflow

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: business_instructors
+#
+#  id           :bigint           not null, primary key
+#  active       :boolean          default(TRUE), not null
+#  attachements :string
+#  description  :string
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  kw_id        :integer
+#
 module Business
   class InstructorRecord < ActiveRecord::Base
     self.table_name = 'business_instructors'

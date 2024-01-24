@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: activities_route_contracts
+#
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  contract_id :integer          not null
+#  route_id    :integer          not null
+#
 module Training
   module Activities
     class RouteContractsRecord < ActiveRecord::Base

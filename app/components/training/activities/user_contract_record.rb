@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: training_user_contracts
+#
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  contract_id :integer          not null
+#  route_id    :integer          not null
+#  user_id     :integer          not null
+#
+# Indexes
+#
+#  user_route_contract_unique  (user_id,route_id,contract_id) UNIQUE
+#
 module Training
   module Activities
     class UserContractRecord < ActiveRecord::Base

@@ -1,3 +1,49 @@
+# == Schema Information
+#
+# Table name: supplementary_courses
+#
+#  id                   :integer          not null, primary key
+#  accepted             :boolean          default(FALSE)
+#  active               :boolean          default(FALSE), not null
+#  application_date     :datetime
+#  baner                :string
+#  baner_type           :integer          default("baner_mountain_climbing"), not null
+#  cash                 :boolean          default(FALSE), not null
+#  category             :integer          default("kw"), not null
+#  conversation_at      :datetime
+#  email_remarks        :text
+#  end_application_date :datetime
+#  end_date             :datetime
+#  expired_hours        :integer          default(0), not null
+#  kind                 :integer          default("other"), not null
+#  last_fee_paid        :boolean          default(FALSE), not null
+#  limit                :integer          default(0), not null
+#  name                 :string
+#  one_day              :boolean          default(TRUE), not null
+#  open                 :boolean          default(TRUE), not null
+#  packages             :boolean          default(FALSE)
+#  paid_email           :text
+#  participants         :text             default([]), is an Array
+#  payment_type         :integer          default("trainings"), not null
+#  place                :string
+#  price                :boolean          default(FALSE), not null
+#  price_kw             :integer
+#  price_non_kw         :integer
+#  question             :boolean          default(FALSE), not null
+#  remarks              :text
+#  reserve_list         :boolean          default(FALSE), not null
+#  send_manually        :boolean          default(FALSE), not null
+#  slug                 :string           not null
+#  start_date           :datetime
+#  state                :integer          default("draft"), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  organizator_id       :integer
+#
+# Indexes
+#
+#  index_supplementary_courses_on_slug  (slug) UNIQUE
+#
 module Training
   module Supplementary
     class CourseRecord < ActiveRecord::Base

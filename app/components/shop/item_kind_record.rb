@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: shop_item_kinds
+#
+#  id       :bigint           not null, primary key
+#  name     :string
+#  price    :float
+#  quantity :integer          default(1), not null
+#  item_id  :integer          not null
+#
 module Shop
   class ItemKindRecord < ActiveRecord::Base
     self.table_name = 'shop_item_kinds'

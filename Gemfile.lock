@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/ctran/annotate_models.git
+  revision: 5d01c4171990c4fe7b9b0977b05ce14a98209e53
+  specs:
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
+
+GIT
   remote: https://github.com/jgroeneveld/attributed_object.git
   revision: 4bbf4a20c26b36d9f26597bef236a104b142cb92
   specs:
@@ -583,6 +591,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   airbrake
+  annotate!
   appsignal
   attributed_object!
   axlsx (= 2.1.0.pre)!

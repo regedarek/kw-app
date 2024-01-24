@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: settlement_projects
+#
+#  id          :bigint           not null, primary key
+#  area_type   :integer          default("other_budget"), not null
+#  description :text
+#  name        :string           not null
+#  state       :string           default("open"), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer          not null
+#
 module Settlement
   class ProjectRecord < ActiveRecord::Base
     include Workflow

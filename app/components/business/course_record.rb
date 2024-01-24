@@ -1,3 +1,38 @@
+# == Schema Information
+#
+# Table name: business_courses
+#
+#  id                   :bigint           not null, primary key
+#  cash                 :boolean          default(FALSE), not null
+#  description          :text
+#  email_first_content  :text
+#  email_second_content :text
+#  ends_at              :datetime
+#  equipment            :text
+#  instructor           :string
+#  max_seats            :integer
+#  packages             :boolean          default(FALSE), not null
+#  payment_first_cost   :integer          default(0), not null
+#  payment_second_cost  :integer          default(0), not null
+#  price                :integer
+#  sa_title             :string
+#  seats                :integer          default(0), not null
+#  sign_up_url          :string
+#  slug                 :string           not null
+#  starts_at            :datetime
+#  state                :string           default("draft"), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  coordinator_id       :integer
+#  course_type_id       :integer
+#  creator_id           :integer
+#  event_id             :integer
+#  instructor_id        :integer
+#
+# Indexes
+#
+#  index_business_courses_on_slug  (slug) UNIQUE
+#
 module Business
   class CourseRecord < ActiveRecord::Base
     include Workflow

@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: photo_requests
+#
+#  id                 :integer          not null, primary key
+#  accepted           :boolean          default(FALSE), not null
+#  area               :string
+#  description        :string
+#  file               :string
+#  likes_count        :integer          default(0), not null
+#  original_filename  :string
+#  title              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  category_record_id :integer          not null
+#  edition_record_id  :integer          not null
+#  user_id            :integer          not null
+#
 module PhotoCompetition
   class RequestRecord < ActiveRecord::Base
     self.table_name = 'photo_requests'

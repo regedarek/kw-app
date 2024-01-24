@@ -1,4 +1,7 @@
 charity = Charity::DonationRecord.last
+
+return unless charity.present?
+
 payment = charity.payment
 
 params = Payments::Dotpay::AdaptPayment.new(payment: payment).to_params

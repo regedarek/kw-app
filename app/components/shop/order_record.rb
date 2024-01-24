@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: shop_orders
+#
+#  id         :bigint           not null, primary key
+#  state      :string           default("new"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
 module Shop
   class OrderRecord < ActiveRecord::Base
     include Workflow

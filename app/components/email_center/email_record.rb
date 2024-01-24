@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: emails
+#
+#  id            :bigint           not null, primary key
+#  delivered_at  :datetime
+#  mailable_type :string           not null
+#  state         :string           default("sent")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  mailable_id   :integer          not null
+#  message_id    :string           not null
+#
 module EmailCenter
   class EmailRecord < ActiveRecord::Base
     include Workflow

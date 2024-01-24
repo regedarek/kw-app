@@ -85,6 +85,7 @@ group :development do
   gem 'net-ssh', '>= 6.0.2'
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+  gem 'annotate', git: 'https://github.com/ctran/annotate_models.git'
 end
 
 group :development, :test do

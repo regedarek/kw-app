@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: contractors
+#
+#  id              :bigint           not null, primary key
+#  contact_name    :string
+#  description     :text
+#  email           :string
+#  logo            :string
+#  name            :string
+#  nip             :string
+#  phone           :string
+#  profession_type :integer          default("no_profession"), not null
+#  reason_type     :integer          default("both"), not null
+#  www             :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 module Settlement
   class ContractorRecord < ActiveRecord::Base
     has_paper_trail

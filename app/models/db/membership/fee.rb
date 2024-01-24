@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: membership_fees
+#
+#  id         :integer          not null, primary key
+#  cost       :integer          not null
+#  plastic    :boolean          default(FALSE), not null
+#  year       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  creator_id :integer
+#  kw_id      :integer
+#
+# Indexes
+#
+#  index_membership_fees_on_kw_id  (kw_id)
+#
 module Db
   module Membership
     class Fee < ActiveRecord::Base

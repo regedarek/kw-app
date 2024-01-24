@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: library_tags
+#
+#  id          :bigint           not null, primary key
+#  description :text
+#  name        :string
+#  type        :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  parent_id   :integer
+#
 module Library
   class TagRecord < ActiveRecord::Base
     self.table_name = 'library_tags'

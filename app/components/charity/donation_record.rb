@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: donations
+#
+#  id           :integer          not null, primary key
+#  action_type  :integer
+#  cost         :integer
+#  description  :string
+#  display_name :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#
+# Indexes
+#
+#  index_donations_on_user_id  (user_id)
+#
 module Charity
   class DonationRecord < ActiveRecord::Base
     self.table_name = 'donations'

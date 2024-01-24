@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: supplementary_sign_ups
+#
+#  id                                   :integer          not null, primary key
+#  code                                 :string           default("64019b257f9e3f0a"), not null
+#  email                                :string
+#  expired_at                           :datetime
+#  name                                 :string
+#  paid_email_sent_at                   :datetime
+#  question                             :string
+#  sent_at                              :datetime
+#  created_at                           :datetime         not null
+#  updated_at                           :datetime         not null
+#  admin_id                             :integer
+#  course_id                            :integer
+#  sent_user_id                         :integer
+#  supplementary_course_package_type_id :integer
+#  user_id                              :integer
+#
+# Indexes
+#
+#  index_supplementary_sign_ups_on_course_id_and_user_id  (course_id,user_id) UNIQUE
+#
 module Training
   module Supplementary
     class SignUpRecord < ActiveRecord::Base

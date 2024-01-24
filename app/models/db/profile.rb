@@ -1,3 +1,47 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id                    :integer          not null, primary key
+#  accepted              :boolean          default(FALSE)
+#  accepted_at           :datetime
+#  acomplished_courses   :text             default([]), is an Array
+#  added                 :boolean          default(FALSE)
+#  application_date      :date
+#  birth_date            :date
+#  birth_place           :string
+#  city                  :string
+#  cost                  :integer
+#  course_cert           :string
+#  date_of_death         :date
+#  email                 :string
+#  first_name            :string
+#  gender                :integer
+#  last_name             :string
+#  locale                :string           default("pl"), not null
+#  main_address          :string
+#  main_discussion_group :boolean          default(FALSE)
+#  optional_address      :string
+#  pesel                 :string
+#  phone                 :string
+#  photo                 :string
+#  plastic               :boolean          default(FALSE), not null
+#  position              :text             default([]), is an Array
+#  postal_code           :string
+#  profession            :string
+#  recommended_by        :text             default([]), is an Array
+#  remarks               :text
+#  sections              :text             default([]), is an Array
+#  sent_at               :datetime
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  acceptor_id           :integer
+#  kw_id                 :integer
+#
+# Indexes
+#
+#  index_profiles_on_kw_id  (kw_id) UNIQUE
+#
 module Db
   class Profile < ActiveRecord::Base
     RECOMMENDED_BY = %w(google facebook friends festival poster course)

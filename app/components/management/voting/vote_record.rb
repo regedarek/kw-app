@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: management_votes
+#
+#  id            :bigint           not null, primary key
+#  commission    :boolean          default(FALSE), not null
+#  decision      :string           default("approved"), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  authorized_id :integer
+#  case_id       :integer          not null
+#  user_id       :integer          not null
+#
+# Indexes
+#
+#  index_management_votes_on_user_id_and_case_id  (user_id,case_id) UNIQUE
+#
 module Management
   module Voting
     class VoteRecord < ActiveRecord::Base

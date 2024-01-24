@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id           :integer          not null, primary key
+#  display_name :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  description  :text
+#  rentable     :boolean          default(FALSE)
+#  owner        :integer          default("kw")
+#  cost         :integer          default(0)
+#  rentable_id  :integer
+#
 class Db::Item < ActiveRecord::Base
   enum owner: [:kw, :snw, :sww, :instructors]
   has_many :reservation_items

@@ -1,3 +1,59 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  access_token           :string
+#  admin                  :boolean          default(FALSE), not null
+#  author_number          :integer
+#  avatar                 :string
+#  boars                  :boolean          default(TRUE), not null
+#  climbing_boars         :boolean          default(TRUE), not null
+#  curator                :boolean          default(FALSE), not null
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :inet
+#  description            :text
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  facebook_url           :string
+#  first_name             :string
+#  gender                 :integer
+#  hide                   :boolean          default(FALSE)
+#  instagram_url          :string
+#  last_name              :string
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :inet
+#  phone                  :string
+#  refresh_token          :string
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  roles                  :text             default([]), is an Array
+#  sign_in_count          :integer          default(0), not null
+#  ski_hater              :boolean          default(FALSE), not null
+#  slug                   :string
+#  snw_blog               :boolean          default(FALSE), not null
+#  snw_groups             :string           default([]), is an Array
+#  strava_access_token    :string
+#  strava_client_secret   :string
+#  strava_expires_at      :datetime
+#  strava_refresh_token   :string
+#  strava_subscribe       :boolean          default(FALSE), not null
+#  warnings               :integer          default(0)
+#  website_url            :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  kw_id                  :integer
+#  strava_athlete_id      :string
+#  strava_client_id       :string
+#  strava_subscription_id :string
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
+#
 class Db::User < ActiveRecord::Base
   acts_as_messageable
   extend FriendlyId

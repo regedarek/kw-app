@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: library_item_reservations
+#
+#  id          :bigint           not null, primary key
+#  back_at     :date
+#  back_by     :integer
+#  caution     :integer
+#  description :text
+#  received_at :date             not null
+#  returned_at :date
+#  item_id     :integer          not null
+#  user_id     :integer          not null
+#
 module Library
   class ItemReservationRecord < ActiveRecord::Base
     self.table_name = 'library_item_reservations'

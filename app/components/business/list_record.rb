@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: business_lists
+#
+#  id                :bigint           not null, primary key
+#  alternative_email :string
+#  birthdate         :date
+#  birthplace        :string
+#  description       :text
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  sign_up_id        :integer          not null
+#
 module Business
   class ListRecord < ActiveRecord::Base
     self.table_name = 'business_lists'

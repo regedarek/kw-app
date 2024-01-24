@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: marketing_sponsorship_requests
+#
+#  id            :bigint           not null, primary key
+#  attachments   :string
+#  description   :string
+#  doc_url       :string
+#  sent_at       :datetime
+#  state         :string           default("draft"), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  contractor_id :integer          not null
+#  user_id       :integer          not null
+#
 module Marketing
   class SponsorshipRequestRecord < ActiveRecord::Base
     include Workflow

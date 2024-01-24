@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: snw_applies
+#
+#  id             :bigint           not null, primary key
+#  attachments    :string
+#  avalanche      :boolean          default(FALSE), not null
+#  avalanche_date :date
+#  courses        :string
+#  cv             :string           not null
+#  first_aid      :boolean          default(FALSE), not null
+#  skills         :string
+#  state          :string           default("new"), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  kw_id          :integer          not null
+#
 module Management
   module Snw
     class SnwApplyRecord < ActiveRecord::Base

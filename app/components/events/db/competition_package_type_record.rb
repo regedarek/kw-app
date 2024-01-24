@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: competition_package_types
+#
+#  id                    :integer          not null, primary key
+#  cost                  :integer          not null
+#  membership            :boolean          default(FALSE), not null
+#  name                  :string           not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  competition_record_id :integer          not null
+#
 module Events
   module Db
     class CompetitionPackageTypeRecord < ActiveRecord::Base

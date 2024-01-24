@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: management_informations
+#
+#  id          :bigint           not null, primary key
+#  attachments :string
+#  description :text
+#  group_type  :integer          default("kw"), not null
+#  name        :string           not null
+#  news_type   :integer          default("magazine"), not null
+#  slug        :string
+#  starred     :boolean          default(FALSE), not null
+#  url         :string
+#  web         :boolean          default(FALSE), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 module Management
   module News
     class InformationRecord < ActiveRecord::Base
