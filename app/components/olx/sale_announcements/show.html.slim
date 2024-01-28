@@ -15,8 +15,8 @@
           b Cena: 
           = ActionController::Base.helpers.number_with_precision((@sale_announcement.price), precision: 2,  strip_insignificant_zeros: true)
 
-    .large-3.columns
-      - if user_signed_in? && current_user == @sale_announcement.user
+    - if user_signed_in? && current_user == @sale_announcement.user
+      .large-3.columns
         - if @sale_announcement.archived?
           = form_for @sale_announcement, as: :sale_announcement, url: olx_sale_announcement_path(@sale_announcement) do |f|
             = f.hidden_field :archived, value: false
@@ -26,9 +26,16 @@
             = f.hidden_field :archived, value: true
             = f.submit "Archiwizuj", class: 'button alert expanded'
 
-    .large-3.columns
-      - if user_signed_in? && current_user == @sale_announcement.user
-        = link_to "Edytuj", edit_olx_sale_announcement_path(@sale_announcement), class: "button expanded"
+      .large-3.columns
+          = link_to "Edytuj", edit_olx_sale_announcement_path(@sale_announcement), class: "button expanded"
+    - else
+      .large-6.columns
+        - if @sale_announcement.archived?
+          .callout.alert.small
+            .text-center Nieaktualne
+        - else
+          .callout.success.small
+            .text-center Aktualne
 
   .row
     - if @sale_announcement.description.present?
@@ -39,6 +46,17 @@
   .row
     .large-12.columns
       = render 'storage/shared/files', attachments: @sale_announcement.photos.collect(&:file)
+
+  - if user_signed_in?
+    .row
+      .large-12.columns
+        h5 Komentarze
+        = render 'messaging/comments/comments', commentable: @sale_announcement
+
+    .row
+      .large-12.columns
+        .callout
+          = render 'messaging/comments/form', commentable: @sale_announcement
 
   .row
     .large-12.columns
