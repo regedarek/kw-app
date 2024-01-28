@@ -119,6 +119,10 @@ module Db
         self.colleague_ids = ids
       end
 
+      def primary_photo
+        photos.first
+      end
+
       attr_reader :colleagues_names
     end
   end

@@ -1,0 +1,39 @@
+= form_for sale_announcement, as: :sale_announcement, url: path do |f|
+  - if @errors
+    .row
+      .large-12.columns
+        .callout.alert data-closable=""
+          ul
+            - sale_announcement.errors.each do |key,value|
+              li
+                = "#{I18n.t("#{key}", scope: "activerecord.attributes.olx/sale_announcement_record")} #{value.to_sentence}, "
+          button.close-button aria-label=t('close_alert') data-close="" type="button" 
+            span aria-hidden="true"  &times;
+
+  .row
+    .large-6.columns
+      b= f.label :name, 'Nazwa*'
+      = f.text_field :name
+
+    .large-6.columns
+      b= f.label :price, "Cena"
+      = f.number_field :price, step: 0.01, class: 'input-group-field'
+
+  .row
+    .large-12.columns
+      = f.label :description, "Opis ogłoszenia"
+      = f.hidden_field :description, id: 'description_body'
+      trix-editor input='description_body' style='min-height: 200px'
+
+  br
+  .callout
+    .row
+      .large-3.columns
+        = f.label :photos_attributes, "Zdjęcia"
+        = f.fields_for :photos_attributes do |p|
+          = p.file_field :file, multiple: true, name: 'sale_announcement[photos_attributes][][file]'
+
+  .row
+    br
+    .large-12.columns
+      = f.submit submit_text, class: 'button large expanded'

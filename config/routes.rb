@@ -703,6 +703,7 @@ Rails.application.routes.draw do
   load Rails.root.join("app/components/management/snw/routes.rb")
   load Rails.root.join("app/components/blog/routes.rb")
   load Rails.root.join("app/components/club_meetings/routes.rb")
+  load Rails.root.join("app/components/olx/routes.rb")
 
   resources :photos, only: :index
   resources :likes, only: %i[create destroy]

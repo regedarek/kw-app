@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_24_171818) do
+ActiveRecord::Schema.define(version: 2024_01_28_111608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -960,6 +960,17 @@ ActiveRecord::Schema.define(version: 2024_01_24_171818) do
     t.index ["colleague_id", "mountain_route_id"], name: "index_route_colleagues_on_colleague_id_and_mountain_route_id", unique: true
   end
 
+  create_table "sale_announcements", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id"
+    t.text "description"
+    t.float "price"
+    t.boolean "archived", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sale_announcements_on_user_id"
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "name", null: false
     t.text "content"
@@ -1327,6 +1338,7 @@ ActiveRecord::Schema.define(version: 2024_01_24_171818) do
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "product_fields", "product_types"
+  add_foreign_key "sale_announcements", "users"
   add_foreign_key "yearly_prize_categories", "yearly_prize_editions"
   add_foreign_key "yearly_prize_request_users", "users"
   add_foreign_key "yearly_prize_request_users", "yearly_prize_requests"

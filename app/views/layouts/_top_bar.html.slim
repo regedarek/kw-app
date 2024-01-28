@@ -107,6 +107,7 @@
     .top-bar-right
       ul.dropdown.menu.vertical.medium-horizontal data-dropdown-menu=''
         - if user_signed_in?
+
           li
             = link_to 'Programy', root_path
             ul.menu.vertical
@@ -140,7 +141,7 @@
               li= link_to 'Zniżki i rabaty', discounts_path
 
           li= link_to 'Przejścia', '/przejscia', class: 'button success'
-          li= link_to 'Projekty', '/projekty', class: 'button warning'
+          li = link_to 'Giełda', olx_sale_announcements_path, class: 'button warning'
           li.show-for-medium= link_to 'Wydarzenia', wydarzenia_path, class: 'button alert'
         - else
           li.show-for-medium

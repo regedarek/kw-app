@@ -38,6 +38,13 @@
                     = information.created_at.to_date
       .row
         .large-12.columns
+          = link_to activities_mountain_routes_path(q: { s: "hearts_count desc" }) do
+            h4 Najlepsze przejścia
+            - Db::Activities::MountainRoute.includes(:photos).where(hidden: false).order(hearts_count: :desc).limit(5).each do |record|
+              - if record.photos.any?
+                = link_to activities_mountain_route_path(record) do
+                  = image_tag record.primary_photo.file.thumb.url, class: 'thumbnail'
+
           = link_to activities_mountain_routes_path do
             h4 Ostatnio dodane przejścia
           table.stack
@@ -54,6 +61,15 @@
                   = route.colleagues.map(&:display_name).compact.push(route.partners).compact.reject(&:empty?).to_sentence
 
     .large-4.columns
+      .row
+        .large-12.columns
+          = link_to olx_sale_announcements_path do
+            h4 Giełda Klubowa
+            - ::Olx::SaleAnnouncementRecord.includes([:photos]).where(archived: false).or(::Olx::SaleAnnouncementRecord.includes([:photos]).where(user: current_user, archived: true)).distinct.order(updated_at: :desc).each do |record|
+              - if record.photos.any?
+                = link_to olx_sale_announcement_path(record) do
+                  = image_tag record.primary_photo.file.thumb.url, class: 'thumbnail'
+
       .row
         .large-12.columns
           = link_to supplementary_courses_path do
@@ -78,9 +94,9 @@
     .large-12.columns
       .row
         .large-8.columns
-          iframe allowtransparency="" frameborder="0" height="300" scrolling="no" src="https://www.strava.com/clubs/196119/latest-rides/75295ce71d41602551067350da9ee568bd4a4b1e?show_rides=true" width="100%" 
+          iframe allowtransparency="" frameborder="0" height="300" scrolling="no" src="https://www.strava.com/clubs/196119/latest-rides/75295ce71d41602551067350da9ee568bd4a4b1e?show_rides=true" width="100%"
         .large-4.columns
-          iframe allowtransparency="" frameborder="0" height="300" scrolling="no" src="https://www.strava.com/clubs/196119/latest-rides/75295ce71d41602551067350da9ee568bd4a4b1e?show_rides=false" width="100%" 
+          iframe allowtransparency="" frameborder="0" height="300" scrolling="no" src="https://www.strava.com/clubs/196119/latest-rides/75295ce71d41602551067350da9ee568bd4a4b1e?show_rides=false" width="100%"
 
 - else
   .row

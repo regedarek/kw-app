@@ -1,0 +1,45 @@
+.columns
+  .row
+    .large-12.columns
+      h3 = @sale_announcement.name
+
+  .row
+    .large-3.columns
+      .callout.small
+        b Ogłaszający: 
+        = @sale_announcement.user.display_name
+
+    .large-3.columns
+      - if @sale_announcement.price.present?
+        .callout.small
+          b Cena: 
+          = ActionController::Base.helpers.number_with_precision((@sale_announcement.price), precision: 2,  strip_insignificant_zeros: true)
+
+    .large-3.columns
+      - if user_signed_in? && current_user == @sale_announcement.user
+        - if @sale_announcement.archived?
+          = form_for @sale_announcement, as: :sale_announcement, url: olx_sale_announcement_path(@sale_announcement) do |f|
+            = f.hidden_field :archived, value: false
+            = f.submit "Aktywuj", class: 'button success expanded'
+        - else
+          = form_for @sale_announcement, as: :sale_announcement, url: olx_sale_announcement_path(@sale_announcement) do |f|
+            = f.hidden_field :archived, value: true
+            = f.submit "Archiwizuj", class: 'button alert expanded'
+
+    .large-3.columns
+      - if user_signed_in? && current_user == @sale_announcement.user
+        = link_to "Edytuj", edit_olx_sale_announcement_path(@sale_announcement), class: "button expanded"
+
+  .row
+    - if @sale_announcement.description.present?
+      .large-12.columns
+        .callout.small
+          = sanitize @sale_announcement.description
+
+  .row
+    .large-12.columns
+      = render 'storage/shared/files', attachments: @sale_announcement.photos.collect(&:file)
+
+  .row
+    .large-12.columns
+      = link_to 'Powrót', olx_sale_announcements_path
