@@ -3,6 +3,8 @@ module Storage
     include CarrierWave::MiniMagick
     process :save_content_type_and_size_in_model
 
+    before :cache, :check_mimetype
+
     if Rails.env.production? || Rails.env.staging?
       storage :fog
     else
@@ -23,11 +25,25 @@ module Storage
       process resize_to_fill: [50, 50]
     end
 
+
     def store_dir
       "uploads/#{model.uploadable_id}/#{model.uploadable_type}/#{model.id}"
     end
 
     protected
+
+    def check_mimetype(file)
+      if model.content_type.start_with?('image')
+        unless allowed_image_mime_types.include? file.content_type
+          raise CarrierWave::IntegrityError, 'is an invalid file type'
+        end
+      end
+    end
+
+    def allowed_image_mime_types
+      %w(image/jpeg image/jpg image/png image/gif application/pdf)
+    end
+
 
     def auto_orient
       manipulate! do |image|

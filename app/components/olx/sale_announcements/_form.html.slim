@@ -1,12 +1,12 @@
 = form_for sale_announcement, as: :sale_announcement, url: path do |f|
-  - if @errors
+  - if sale_announcement.errors
     .row
       .large-12.columns
         .callout.alert data-closable=""
           ul
             - sale_announcement.errors.each do |key,value|
               li
-                = "#{I18n.t("#{key}", scope: "activerecord.attributes.olx/sale_announcement_record")} #{value.to_sentence}, "
+                = "#{key}: #{value}"
           button.close-button aria-label=t('close_alert') data-close="" type="button" 
             span aria-hidden="true"  &times;
 
