@@ -68,7 +68,8 @@
             - ::Olx::SaleAnnouncementRecord.includes([:photos]).where(archived: false).or(::Olx::SaleAnnouncementRecord.includes([:photos]).where(user: current_user, archived: true)).distinct.order(updated_at: :desc).each do |record|
               - if record.photos.any?
                 = link_to olx_sale_announcement_path(record) do
-                  = image_tag record.primary_photo.file.thumb.url, class: 'thumbnail'
+                  - if record.primary_photo.present? && record.primary_photo.file
+                    = image_tag record.primary_photo.file.thumb.url, class: 'thumbnail'
 
       .row
         .large-12.columns
