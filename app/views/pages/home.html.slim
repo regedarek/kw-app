@@ -65,7 +65,7 @@
         .large-12.columns
           = link_to olx_sale_announcements_path do
             h4 Giełda Klubowa
-            - ::Olx::SaleAnnouncementRecord.includes([:photos]).where(archived: false).or(::Olx::SaleAnnouncementRecord.includes([:photos]).where(user: current_user, archived: true)).distinct.order(updated_at: :desc).limit(6).each do |record|
+            - ::Olx::SaleAnnouncementRecord.includes([:photos]).where(archived: false).or(::Olx::SaleAnnouncementRecord.includes([:photos]).where(user: current_user, archived: true)).distinct.order(updated_at: :desc).limit(8).each do |record|
               - if record.photos.any?
                 = link_to olx_sale_announcement_path(record) do
                   = image_tag record.primary_photo.file.medium.url, class: 'thumbnail', style: "height: 80px;"
