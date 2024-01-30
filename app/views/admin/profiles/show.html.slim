@@ -193,6 +193,9 @@
       .callout class="#{@activement.active? ? 'success' : 'alert'}"
         b Legitymacja plastikowa: 
         = @profile.plastic ? 'Tak' : 'Nie'
+        - Db::Membership::Fee.where(kw_id: @profile.kw_id).each do |fee|
+          = "#{fee.year} - #{fee.plastic? ? 'Tak' : 'Nie'}"
+          br
         br
 
         - if @profile.kw_id.present?
