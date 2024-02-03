@@ -13,10 +13,14 @@ module Olx
     end
 
     def new
+      return redirect_to root_path, notice: "Zaloguj się" unless user_signed_in?
+
       @sale_announcement = Olx::SaleAnnouncementRecord.new
     end
 
     def create
+      return redirect_to root_path, notice: "Zaloguj się" unless user_signed_in?
+
       @sale_announcement = Olx::SaleAnnouncementRecord.new(announcement_params)
       @sale_announcement.user = current_user
 
