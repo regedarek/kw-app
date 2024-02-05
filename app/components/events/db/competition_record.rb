@@ -14,6 +14,7 @@
 #  email_text          :text             not null
 #  en_email_text       :text
 #  event_date          :datetime
+#  info_above_sign_ups :text
 #  license_id_required :boolean          default(FALSE), not null
 #  limit               :integer          default(0), not null
 #  matrimonial_office  :boolean          default(FALSE), not null

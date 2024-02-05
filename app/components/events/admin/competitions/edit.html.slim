@@ -98,6 +98,9 @@
             = f.label 'Tekst pod oświadczeniem medycznym'
             = f.trix_editor :medical_rules_text, style: 'min-height: 280px'
 
+            = f.label 'Tekst nad zapisami'
+            = f.trix_editor :info_above_sign_ups, style: 'min-height: 280px'
+
             = f.label 'Treść e-maila z linkiem do zapisów'
             = f.trix_editor :email_text, style: 'min-height: 280px'
 

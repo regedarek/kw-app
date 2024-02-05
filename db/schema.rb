@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_28_111608) do
+ActiveRecord::Schema.define(version: 2024_02_05_205041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(version: 2024_01_28_111608) do
     t.text "weekend_nights_text"
     t.text "en_email_text"
     t.string "custom_form"
+    t.text "info_above_sign_ups"
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|

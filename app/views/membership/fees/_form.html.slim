@@ -13,6 +13,7 @@
     = f.number_field :year, min: 2023, max: 2024, class: 'input-group-field', value: 2023
     .input-group-button
       = f.submit 'Zapłać', class: 'button'
-  .input-group
-    = f.label :plastic, 'Plastikowa legitymacja (+15zł)'
-    = f.check_box :plastic
+  - if Management::SettingsRecord.find_by(path: 'plastic')&.content == 'Tak'
+    .input-group
+      = f.label :plastic, 'Plastikowa legitymacja (+15zł)'
+      = f.check_box :plastic
