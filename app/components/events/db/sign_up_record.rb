@@ -75,13 +75,13 @@ module Events
           else
             "Juniorka (U20)"
           end
-        when participant_birth_year_1.to_i.between?(1974, 2003)
+        when participant_birth_year_1.to_i.between?(1975, 2003)
           if participant_gender_1 == "1"
             "Senior"
           else
             "Seniorka"
           end
-        when participant_birth_year_1.to_i.between?(1900, 1973)
+        when participant_birth_year_1.to_i.between?(1900, 1974)
           if participant_gender_1 == "1"
             "Nestor"
           else
