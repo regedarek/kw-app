@@ -1,47 +1,9 @@
 .column
   .row
-    .large-12.columns
-      = form_for :competition, url: admin_competitions_path, method: :post do |f|
-        .row
-          .large-12.columns
-
-        .callout.primary
-          .row
-            .large-3.columns
-              = f.label 'Nazwa'
-              = f.text_field :name
-
-            .large-3.columns
-              = f.label 'Nazwa zespołu?'
-              = f.check_box :team_name
-
-            .large-2.columns
-              = f.label 'Indywidualne?'
-              = f.check_box :single
-
-            .large-3.columns
-              = f.label 'Edycja'
-              = f.text_field :edition_sym
-
-          .row
-            .large-2.columns
-              = f.label 'Rozmiarówka'
-              = f.text_field :tshirt_url
-
-            .large-2.columns
-              = f.label 'Baner'
-              = f.file_field :baner
-
-            .large-4.columns
-              = f.label 'Treść e-maila'
-              = f.text_area :email_text
-
-            .large-4.columns
-              = f.label 'Zasady'
-              = f.text_area :rules
-
-        = f.submit 'Utwórz', class: 'button expanded large'
-
+    .large-6.columns
+      = link_to "Nowe zawody", new_admin_competition_path, class: "button expanded"
+    .large-6.columns
+      = link_to "Zakończone zawody", admin_competitions_path(archive: true), class: "button expanded warning"
   .row
     .large-12.columns
       = render 'table', competitions: @competitions

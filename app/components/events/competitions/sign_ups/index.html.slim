@@ -78,3 +78,6 @@
           = render "#{@competition.custom_form}_table", sign_ups: limiter.waiting.order(:created_at)
         - else
           = render "table", sign_ups: limiter.waiting.order(:created_at)
+
+    .row
+      .large-12.columns

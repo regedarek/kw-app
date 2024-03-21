@@ -1,127 +1,137 @@
-.row
-  .large-12.columns
-    = form_for @competition, as: :competition, url: admin_competition_path(@competition), method: :put do |f|
-      .row
-        .large-12.columns
-          .callout.primary
-            .row
-              .large-3.columns
-                = f.label 'Nazwa'
-                = f.text_field :name
+= form_for @competition, as: :competition, url: admin_competition_path(@competition), method: :put do |f|
+  .row
+    .large-12.columns
+      .callout.primary
+        .row
+          .large-3.columns
+            = f.label 'Nazwa'
+            = f.text_field :name
 
-              .large-3.columns
-                = f.label 'Unikalny symbol zawodów'
-                = f.text_field :edition_sym
+          .large-3.columns
+            = f.label 'Unikalny symbol zawodów'
+            = f.text_field :edition_sym
 
-              .large-2.columns
-                = f.label 'Limit miejsc'
-                = f.number_field :limit
-
-              .large-2.columns
-                = f.label 'Rozmiarówka'
-                = f.text_field :tshirt_url
-
-              .large-2.columns
-                = f.label 'Email organizatora'
-                = f.text_field :organizer_email
-
-      .row
-        .large-3.columns
-          .callout.primary
-            = f.check_box :team_name
-            = f.label 'Nazwa zespołu?'
-            br
-            = f.check_box :single
-            = f.label 'Indywidualne?'
-            br
-            = f.check_box :closed
-            = f.label 'Zamknięte?'
-            br
-            = f.check_box :matrimonial_office
-            = f.label 'Biuro matrymonialne?'
-            br
-            = f.check_box :accept_first
-            = f.label 'Zaakceptuj najpierw?'
-            br
-            = f.check_box :weekend_nights
-            = f.label 'Noclegi?'
-
-          .callout.primary
-            = f.label 'Data wydarzenia'
-            = f.datetime_field :event_date
-
-          .callout.primary
-            = f.label 'Zamknij płatność'
-            = f.datetime_field :close_payment
-
-          .callout.primary
-            = f.label 'Start zapisów'
-            = f.datetime_field :sign_up_starts_at
-
-          .callout.primary
+          .large-2.columns
             = f.label 'Specjalny Formularz?'
             = f.text_field :custom_form
 
-        .large-9.columns
-          .callout.primary
-            = f.nested_fields_for :package_types do |ff|
-              .large-5.columns
-                = ff.label :name, "Nazwa"
-                = ff.text_field :name
-              .large-3.columns
-                = ff.label :name, "Koszt"
-                = ff.number_field :cost
-              .large-3.columns
-                br
-                = ff.check_box :membership
-                = ff.label :membership, 'Sprawdź składkę'
-              .large-1.columns
-                br
-                = ff.remove_nested_fields_link
-            = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
-      .row
-        .large-12.columns
-          .callout
-            = f.label 'Logo nad formularzem'
-            = f.file_field :baner
 
-            = f.label 'Aktualności'
-            = f.trix_editor :alert, style: 'min-height: 280px'
+          .large-2.columns
+            = f.label 'Rozmiarówka'
+            = f.text_field :tshirt_url
 
-            = f.label 'Zasady dodane na dole formularza'
-            = f.trix_editor :rules, style: 'min-height: 280px'
+          .large-2.columns
+            = f.label 'Email organizatora'
+            = f.text_field :organizer_email
 
-            = f.label 'Tekst pod regulaminem'
-            = f.trix_editor :rules_text, style: 'min-height: 280px'
+  .row
+    .large-12.columns
+      .callout.primary
+        .row
+          .large-3.columns
+            = f.label 'Data wydarzenia'
+            = f.datetime_field :event_date
 
-            = f.label 'Tekst pod oświadczeniem medycznym'
-            = f.trix_editor :medical_rules_text, style: 'min-height: 280px'
+          .large-3.columns
+            = f.label 'Start zapisów'
+            = f.datetime_field :sign_up_starts_at
 
-            = f.label 'Tekst nad zapisami'
-            = f.trix_editor :info_above_sign_ups, style: 'min-height: 280px'
+          .large-3.columns
+            = f.label 'Zamknij płatność'
+            = f.datetime_field :close_payment
 
-            = f.label 'Treść e-maila z linkiem do zapisów'
-            = f.trix_editor :email_text, style: 'min-height: 280px'
+          .large-3.columns
+            = f.label 'Limit miejsc'
+            = f.number_field :limit
 
-            = f.label 'Treść e-maila z informacją o płatności po angielsku'
-            = f.trix_editor :en_email_text, style: 'min-height: 280px'
+  .row
+    .large-3.columns
+      .callout.primary
+        = f.check_box :team_name
+        = f.label 'Nazwa zespołu?'
+        br
+        = f.check_box :single
+        = f.label 'Indywidualne?'
+        - if false
+          br
+          = f.check_box :matrimonial_office
+          = f.label 'Biuro matrymonialne?'
+        br
+        = f.check_box :accept_first
+        = f.label 'Zaakceptuj najpierw?'
+        br
+        = f.check_box :closed
+        = f.label 'Zamknięte?'
+        - if false
+          br
+          = f.check_box :weekend_nights
+          = f.label 'Noclegi?'
+        br
+        = f.label 'Baner nad formularzem'
+        = f.file_field :baner
+        i <small>Koniecznie w kształcie prostokąta, gdyż będzie na całej szerokości strony.</small>
 
-            = f.label 'Treść tekstu dotycząca noclegów'
-            = f.trix_editor :weekend_nights_text, style: 'min-height: 280px'
 
-      .row
-        .large-12.columns
-          - if @competition.baner.present?
-            .text-center
-              = image_tag @competition&.baner&.url
-          .callout
-            = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
+    .large-9.columns
+      .callout.primary
+        = f.nested_fields_for :package_types do |ff|
+          .large-5.columns
+            = ff.label :name, "Nazwa"
+            = ff.text_field :name
+          .large-3.columns
+            = ff.label :name, "Koszt"
+            = ff.number_field :cost
+          .large-3.columns
+            br
+            = ff.check_box :membership
+            = ff.label :membership, 'Sprawdź składkę'
+          .large-1.columns
+            br
+            = ff.remove_nested_fields_link
+        = f.add_nested_fields_link :package_types, 'Dodaj pakiet'
 
-      .row
-        .large-4.columns
-          = f.submit 'Zapisz', class: 'button expanded large'
-        .large-4.columns
-          = link_to 'zapisy', zawody_path(@competition.edition_sym), class: 'button expanded large success'
-        .large-4.columns
-          = link_to 'powrót', admin_competitions_path, class: 'button expanded large warning'
+  .row
+    .large-12.columns
+      .callout
+        = f.label 'Aktualności'
+        p
+          | Informacja bieżąca pod banerem zawodów. Np. numer telefonu, ważna zmiana, przypomnienie o terminie zakończenie zawodów.
+        = f.trix_editor :alert, style: 'min-height: 280px'
+
+        = f.label 'Zasady dodane na dole formularza'
+        = f.trix_editor :rules, style: 'min-height: 280px'
+
+        = f.label 'Tekst pod regulaminem'
+        = f.trix_editor :rules_text, style: 'min-height: 280px'
+
+        = f.label 'Tekst pod oświadczeniem medycznym'
+        = f.trix_editor :medical_rules_text, style: 'min-height: 280px'
+
+        = f.label 'Tekst nad zapisami'
+        = f.trix_editor :info_above_sign_ups, style: 'min-height: 280px'
+
+        = f.label 'Treść e-maila z linkiem do zapisów'
+        = f.trix_editor :email_text, style: 'min-height: 280px'
+
+        = f.label 'Treść e-maila z informacją o płatności po angielsku'
+        = f.trix_editor :en_email_text, style: 'min-height: 280px'
+
+        = f.label 'Treść tekstu dotycząca noclegów'
+        = f.trix_editor :weekend_nights_text, style: 'min-height: 280px'
+
+  .row
+    .large-12.columns
+      - if @competition.baner.present?
+        .text-center
+          = image_tag @competition&.baner&.url
+      .callout
+        = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
+
+  .row
+    .large-4.columns
+      = f.submit 'Zapisz', class: 'button expanded large'
+    .large-4.columns
+      = link_to 'zapisy', zawody_path(@competition.edition_sym), class: 'button expanded large success'
+    .large-4.columns
+      = link_to 'powrót', admin_competitions_path, class: 'button expanded large warning'

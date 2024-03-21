@@ -7,12 +7,16 @@ module Events
 
       def index
         if params[:archive]
-          @competitions = Events::Db::CompetitionRecord.all
+          @competitions = Events::Db::CompetitionRecord.includes(:package_types).all.order("event_date DESC nulls last")
         else
-          @competitions = Events::Db::CompetitionRecord.where('event_date >= ?', Time.now).or(
-            Events::Db::CompetitionRecord.where(event_date: nil)
-          )
+          @competitions = Events::Db::CompetitionRecord.includes(:package_types).where('event_date >= ?', Time.now).or(
+            Events::Db::CompetitionRecord.includes(:package_types).where(event_date: nil)
+          ).order("event_date DESC nulls last")
         end
+      end
+
+      def new
+        @competition = Events::Db::CompetitionRecord.new
       end
 
       def edit
@@ -47,6 +51,8 @@ module Events
       end
 
       def create
+        @competition = Events::Db::CompetitionRecord.new(competition_params)
+
         either(create_record) do |result|
           result.success do
             redirect_to admin_competitions_path, flash: { notice: 'Utworzono zawody' }
@@ -54,7 +60,7 @@ module Events
 
           result.failure do |errors|
             flash[:error] = errors.values.join(", ")
-            redirect_to admin_competitions_path, flash: { alert: 'Błąd' }
+            render :new
           end
         end
       end
