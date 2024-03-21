@@ -1,5 +1,16 @@
-.column.row
-  - if @competition.custom_form.present?
-    = render "#{@competition.custom_form}_form", form: @form, url: competition_sign_up_path(competition_id: @competition, id: @sign_up.id), method: :put
-  - else
-    = render "form", form: @form, url: competition_sign_up_path(competition_id: @competition, id: @sign_up.id), method: :put
+.column
+  .row
+    .large-12.columns
+      - if @sign_up.payment.paid?
+        .label.success = t("prepaid")
+      -else
+        = link_to mark_as_paid_payment_path(@sign_up.payment.id), method: :put, data: { confirm: 'Czy napewno chcesz oznaczyć jako opłacono?' } do
+          .label.warning = t("#{@sign_up.payment.state}")
+
+  .row
+    .large-12.columns
+      - if @competition.custom_form.present?
+        = render "#{@competition.custom_form}_form", form: @form, url: competition_sign_up_path(competition_id: @competition, id: @sign_up.id), method: :put
+      - else
+        = render "form", form: @form, url: competition_sign_up_path(competition_id: @competition, id: @sign_up.id), method: :put
+
