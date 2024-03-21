@@ -1,18 +1,20 @@
 table.stack
   thead
     tr
-      th ID
-      th width=350 Nazwa
-      th Opcje płatności
-      th Zapisy
+      th width=50 ID
+      th Nazwa
+      th.text-right width=200 Start zapisów
+      th.text-right width=200 Termin zawodów
+      th.text-right width=100 Status
       th width=150
   tbody
     - competitions.each do |competition|
       tr
         td = competition.id
         td = link_to competition.name, competition_sign_ups_path(competition)
-        td = competition.package_types.map(&:name).to_sentence
-        td.text-center
+        td.text-right = competition.sign_up_starts_at&.to_formatted_s(:short)
+        td.text-right = competition.event_date&.to_date
+        td.text-right
           - if competition.closed?
             = link_to 'Zamknięte',
             toggle_closed_admin_competition_path(competition.id), method: :put,
@@ -22,7 +24,7 @@ table.stack
             toggle_closed_admin_competition_path(competition.id), method: :put,
             class: 'label success'
         td.text-center
-          = link_to 'Edytuj', edit_admin_competition_path(competition) 
-          |  | 
-          = link_to 'XLSX', admin_competition_path(competition, format: :xlsx) 
+          = link_to 'Edytuj', edit_admin_competition_path(competition)
+          |  |
+          = link_to 'XLSX', admin_competition_path(competition, format: :xlsx)
 

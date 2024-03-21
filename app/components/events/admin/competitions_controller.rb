@@ -7,10 +7,10 @@ module Events
 
       def index
         if params[:archive]
-          @competitions = Events::Db::CompetitionRecord.includes(:package_types).all.order("event_date DESC nulls last")
+          @competitions = Events::Db::CompetitionRecord.all.order("event_date DESC nulls last")
         else
-          @competitions = Events::Db::CompetitionRecord.includes(:package_types).where('event_date >= ?', Time.now).or(
-            Events::Db::CompetitionRecord.includes(:package_types).where(event_date: nil)
+          @competitions = Events::Db::CompetitionRecord.where('event_date >= ?', Time.now).or(
+            Events::Db::CompetitionRecord.where(event_date: nil)
           ).order("event_date DESC nulls last")
         end
       end
