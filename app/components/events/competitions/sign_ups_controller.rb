@@ -46,7 +46,6 @@ module Events
       def update
         @competition = Events::Db::CompetitionRecord.find_by(id: params[:competition_id])
         @sign_up = Events::Db::SignUpRecord.find(params[:id])
-        @team = false
 
         authorize! :update, Events::Db::SignUpRecord
 
@@ -125,6 +124,7 @@ module Events
             :participant_team_1,
             :participant_team_2,
             :participant_country_1,
+            :participant_country_2,
             :participant_license_id_1,
             :competition_package_type_1_id,
             :competition_package_type_2_id,

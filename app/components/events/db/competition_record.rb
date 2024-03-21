@@ -54,8 +54,10 @@ module Events
         case custom_form
         when 'mjs'
           ::Events::Competitions::SignUps::MjsForm.new
+        when 'mas'
+          ::Events::Competitions::SignUps::MasForm.new
         else
-          ::Events::Competitions::SignUps::SignUpSingleForm.new
+          ::Events::Competitions::SignUps::DefaultForm.new
         end
       end
 

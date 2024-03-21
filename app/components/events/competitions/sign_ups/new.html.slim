@@ -1,5 +1,5 @@
 .column.row
   - if @competition.custom_form.present?
-    = render "#{@competition.custom_form}_form", form: @form
+    = render "#{@competition.custom_form}_form", form: @form, url: competition_sign_ups_path, method: :post
   - else
-    = render "form", form: @form
+    = render "form", form: @form, url: competition_sign_ups_path, method: :post

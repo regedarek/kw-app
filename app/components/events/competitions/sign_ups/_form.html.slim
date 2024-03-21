@@ -16,7 +16,7 @@
     |
     = link_to image_tag('en.png'), { locale: :en }
 
-  = form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: competition_sign_ups_path do |f|
+  = form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: url, method: method do |f|
     .row
       .large-12.columns
         - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?

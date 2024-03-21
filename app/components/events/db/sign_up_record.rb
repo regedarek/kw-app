@@ -47,7 +47,7 @@ module Events
       self.table_name = 'events_sign_ups'
 
       enum participant_country_1: [:pl, :sk, :cz, :de, :ua, :other], _prefix: :country_1
-      enum participant_country_2: [:pl, :sk], _prefix: :country_2
+      enum participant_country_2: [:pl, :sk, :cz, :de, :ua, :other], _prefix: :country_2
 
       has_one :payment,
         as: :payable,
@@ -142,6 +142,18 @@ module Events
 
       def payment_type
         :trainings
+      end
+
+      def participant_clubs
+        [participant_team_1, participant_team_2].compact.join(' / ')
+      end
+
+      def participant_names
+        [participant_name_1, participant_name_2].compact.join(' / ')
+      end
+
+      def participant_cities
+        [participant_city_1, participant_city_2].compact.join(' / ')
       end
 
       def description

@@ -8,7 +8,7 @@ end
 module Events
   module Competitions
     module SignUps
-      class SignUpSingleForm < Dry::Validation::Schema
+      class DefaultForm < Dry::Validation::Schema
         configure do
           config.messages = :i18n
           config.messages_file = 'app/components/events/competitions/sign_ups/errors.yml'

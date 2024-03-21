@@ -5,6 +5,7 @@ table.stack
         = t('.nr')
       th width="20%" Nazwa zespołu
       th width="20%" Kategoria
+      th width="20%" Klub
       th.text-center width='14%' Płatność
       - if can? :manage, Events::Db::SignUpRecord
         th width='8%'
@@ -12,8 +13,16 @@ table.stack
     - sign_ups.each_with_index do |sign_up, index|
       tr
         td = index + 1
-        td = sign_up.team_name
+        td
+          span data-tooltip='' tabindex="1" title="#{sign_up.participant_names}" data-allow-html="true" class='has-tip'
+            = sign_up.team_name
         td = sign_up.team_category
+        td
+          - if sign_up.participant_cities.present?
+            span data-tooltip='' tabindex="1" title="#{sign_up.participant_cities}" data-allow-html="true" class='has-tip'
+              = sign_up.participant_clubs
+          - else
+            = sign_up.participant_clubs
         td.text-center
           - if sign_up.payment.paid?
             .label.success = t("prepaid")
