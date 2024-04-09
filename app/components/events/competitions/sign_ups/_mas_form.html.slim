@@ -57,7 +57,16 @@
         = f.text_field :participant_city_1
 
     .row
-      .large-6.columns
+      .large-3.columns
+        - if @competition.tshirt_url?
+          = f.label :tshirt_size_1 do
+            - if @competition.tshirt_url.present?
+              = "Rozmiar Koszulki 1 | T-shirt Size 1 (#{link_to("LINK", @competition.tshirt_url, target: :_blank)})".html_safe
+            - else
+              | Rozmiar Koszulki 1 | T-shirt Size 1
+          = f.text_field :tshirt_size_1
+
+      .large-3.columns
         = f.label :competition_package_type_1_id, "Pakiet 1 | Package 1"
         = f.select :competition_package_type_1_id,
           options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_1_id)),
@@ -105,7 +114,16 @@
         = f.text_field :participant_city_2
 
     .row
-      .large-6.columns
+      .large-3.columns
+        - if @competition.tshirt_url?
+          = f.label :tshirt_size_2 do
+            - if @competition.tshirt_url.present?
+              = "Rozmiar Koszulki 2 | T-shirt Size 2 (#{link_to("LINK", @competition.tshirt_url, target: :_blank)})".html_safe
+            - else
+              | Rozmiar Koszulki 2 | T-shirt Size 2
+          = f.text_field :tshirt_size_2
+
+      .large-3.columns
         = f.label :competition_package_type_2_id, "Pakiet 2 | Package 2"
         = f.select :competition_package_type_2_id,
           options_for_select(@competition.package_types.collect {|p| ["#{p.name} (#{p.cost} zł)", p.id, {'data-membership'=> p.membership}] }, @sign_up.try(:competition_package_type_2_id)),
