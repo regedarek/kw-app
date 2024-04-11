@@ -160,10 +160,11 @@
           = f.check_box :terms_of_service
           small = @competition.rules_text.html_safe
 
-  .callout.warning
-    .row
-      .large-12.columns
-        small = @competition.rules.html_safe
+  - if @competition.rules.present?
+    .callout.warning
+      .row
+        .large-12.columns
+          small = @competition.rules.html_safe
 
   = f.submit "Zapisz się! | Sign Up!", class: 'button expanded large'
 
