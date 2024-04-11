@@ -55,7 +55,10 @@
       .large-12.columns
         - if @competition.custom_form
           h4= t('.participants_signed_in')
-          = render "#{@competition.custom_form}_table", sign_ups: limiter.singles.order('payments.updated_at')
+          - if @competition.single?
+            = render "#{@competition.custom_form}_table", sign_ups: limiter.singles.order('payments.updated_at')
+          - else
+            = render "#{@competition.custom_form}_table", sign_ups: limiter.teams.order('payments.updated_at')
         - else
           h4= t('.participants_signed_in')
           = render 'table', sign_ups: limiter.teams.order('payments.updated_at')
