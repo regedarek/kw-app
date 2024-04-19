@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'przejscia/tradowe' => 'activities/mountain_routes#new', as: :new_trad_route, defaults: { route_type: 'trad_climbing' }
   get "routes" => 'activities/routes#index'
   get "gorskie-dziki/regulamin" => 'activities/routes#gorskie_dziki_regulamin', as: :gorskie_dziki_regulamin
   get "gorskie-dziki" => 'activities/routes#gorskie_dziki', as: :gorskie_dziki

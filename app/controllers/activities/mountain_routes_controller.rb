@@ -67,7 +67,7 @@ module Activities
       authorize! :create, ::Db::Activities::MountainRoute
 
       @route = Db::Activities::MountainRoute.new(colleague_ids: [current_user.id], rating: 2)
-      @route.route_type = :regular_climbing
+      @route.route_type = params.fetch(:route_type, :regular_climbing)
     end
 
     def show
