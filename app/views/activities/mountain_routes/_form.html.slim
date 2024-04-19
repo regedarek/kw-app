@@ -40,11 +40,17 @@
             = f.text_field :difficulty
 
         .js-route-kurtyka-difficulty
-          .large-1.columns
+          .large-1.columns.end
             = f.label :kurtyka_difficulty, 'trudność'
             = f.select :kurtyka_difficulty,
               Db::Activities::MountainRoute.kurtyka_difficulties.map { |w, _| [w, w] },
               { selected: @route.kurtyka_difficulty, include_blank: true }, { class: '' }
+
+          .large-2.columns.end
+            = f.label :climb_style, 'styl'
+            = f.select :climb_style,
+              Db::Activities::MountainRoute.climb_styles.map { |w, _| [w, w] },
+              { selected: @route.climb_style, include_blank: true }, { class: '' }
 
 .row
   .large-12.columns

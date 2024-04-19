@@ -6,6 +6,7 @@
 #  area                 :string
 #  attachments          :string
 #  boar_length          :integer          default(0)
+#  climb_style          :integer
 #  climbing_date        :date
 #  description          :text
 #  difficulty           :string
@@ -13,6 +14,7 @@
 #  gps_tracks           :string
 #  hearts_count         :integer          default(0)
 #  hidden               :boolean          default(FALSE), not null
+#  kurtyka_difficulty   :integer
 #  length               :integer
 #  map_summary_polyline :string
 #  mountains            :string

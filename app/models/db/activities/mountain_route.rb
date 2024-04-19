@@ -6,6 +6,7 @@
 #  area                 :string
 #  attachments          :string
 #  boar_length          :integer          default(0)
+#  climb_style          :integer
 #  climbing_date        :date
 #  description          :text
 #  difficulty           :string
@@ -45,6 +46,10 @@ module Db
       before_save :save_boar_length, if: :ski?
 
       #searchkick word_start: %i[name] unless Rails.env.production?
+
+      enum climb_style: {
+        'HP': 0, 'Flash': 1, 'OS': 2
+      }
 
       enum kurtyka_difficulty: {
         'III': 0, 'IV': 1, 'IV+': 2, 'V': 3, 'V+': 4, 'VI': 5, 'VI+': 6, 'VI.1': 7,
