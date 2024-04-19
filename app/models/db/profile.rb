@@ -55,7 +55,7 @@ module Db
     end
 
     mount_uploader :photo, ::UserManagement::PhotoUploader
-    mount_uploader :course_cert, ::UserManagement::AttachmentUploader
+    mount_uploader :course_cert, AttachmentUploader
 
     has_one :payment, as: :payable, dependent: :destroy
     has_one :list, class_name: 'UserManagement::ProfileListRecord'

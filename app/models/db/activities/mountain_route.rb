@@ -13,6 +13,7 @@
 #  gps_tracks           :string
 #  hearts_count         :integer          default(0)
 #  hidden               :boolean          default(FALSE), not null
+#  kurtyka_difficulty   :integer
 #  length               :integer
 #  map_summary_polyline :string
 #  mountains            :string
@@ -44,6 +45,12 @@ module Db
       before_save :save_boar_length, if: :ski?
 
       #searchkick word_start: %i[name] unless Rails.env.production?
+
+      enum kurtyka_difficulty: {
+        'III': 0, 'IV': 1, 'IV+': 2, 'V': 3, 'V+': 4, 'VI': 5, 'VI+': 6, 'VI.1': 7,
+        'VI.1+': 8, 'VI.2': 9, 'VI.2+': 10, 'VI.3': 11, 'VI.3+': 12, 'VI.4': 13, 'VI.4+': 14,
+        'VI.5': 15
+      }
 
       enum route_type: [:ski, :regular_climbing, :sport_climbing, :trad_climbing]
       friendly_id :slug_candidates, use: :slugged
