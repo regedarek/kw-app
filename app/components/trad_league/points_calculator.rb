@@ -10,7 +10,7 @@ module TradLeague
       return 0 if route.kurtyka_difficulty.nil?
 
       case route.climb_style
-      when 'HP'
+      when 'RP'
         hp_points[route.kurtyka_difficulty]
       when 'Flash'
         flash_points[route.kurtyka_difficulty]
