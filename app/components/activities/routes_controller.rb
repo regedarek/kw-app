@@ -3,6 +3,12 @@ module Activities
     include EitherMatcher
     append_view_path 'app/components'
 
+    def liga_tradowa
+      authorize! :see_dziki, ::Db::Activities::MountainRoute
+
+      @season_leaders = Db::User.includes(:mountain_routes).where.not(mountain_routes: { kurtyka_difficulty: nil }).where(mountain_routes: { climbing_date: Date.today.beginning_of_year..Date.today.end_of_year }).sort_by { |user| -TradLeague::UserSeasonCalculator.new(user: user).call }
+    end
+
     def gorskie_dziki
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 

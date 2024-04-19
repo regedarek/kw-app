@@ -40,10 +40,12 @@
           .large-3.columns
             - if [12, 1, 2, 3, 4].include?(Date.today.month)
               = link_to 'Narciarskie Dziki', narciarskie_dziki_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
+              = link_to 'Liga Tradowa', liga_tradowa_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
             - else
-              = link_to 'Liga Tradowa', gorskie_dziki_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
+              = link_to 'Liga Tradowa', liga_tradowa_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
               = link_to 'Górskie Dziki', gorskie_dziki_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
-            = link_to 'Eksport', activities_mountain_routes_path(format: :xlsx), class: 'button alert', style: 'height: 55px; line-height: 30px;'
+            - if false
+              = link_to 'Eksport', activities_mountain_routes_path(format: :xlsx), class: 'button alert', style: 'height: 55px; line-height: 30px;'
       .large-3.columns
         - if user_signed_in?
           .button-hover-reveal-wrapper

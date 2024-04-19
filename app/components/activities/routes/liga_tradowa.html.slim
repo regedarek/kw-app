@@ -1,0 +1,44 @@
+.row
+  .large-12.columns
+    = link_to 'Regulamin ligi tradowej', liga_tradowa_regulamin_path, class: 'button warning large expanded'
+
+.row style="margin-bottom: 1rem;"
+  .large-12.columns
+    h4 Liga Tradowa 2024
+    .row
+      .large-12.columns
+        table.stack
+          thead
+            tr
+              th.text-center
+              th.text-center width="25%" kto?
+              th.text-center width='35%' ostatnia droga
+              th.text-center width='15%' punktów
+              th.text-center width='15%' dróg
+              th.text-center width='15%' bicków
+          tbody
+            - @season_leaders.each do |user|
+              tr
+                td.text-center.hide-for-small-only
+                  = link_to user_path(kw_id: user.kw_id) do
+                    - if user.avatar.present?
+                      = image_tag(user.avatar.url, class: 'topbar-avatar-image')
+                    - else
+                      = image_tag('default-avatar.png', class: 'topbar-avatar-image')
+                td.text-center
+                  = link_to user.display_name, user_path(kw_id: user.kw_id)
+                td.text-center
+                  - last_route = user.mountain_routes.where(route_type: 'trad_climbing').where.not(kurtyka_difficulty: nil).order(climbing_date: :desc).first
+                  = link_to last_route.name, "/przejscia/#{last_route.slug}"
+                td.text-center
+                  .show-for-small-only
+                    b Punkty
+                  = TradLeague::UserSeasonScoresPresenter.new(user: user).points
+                td.text-center
+                  .show-for-small-only
+                    b Drogi
+                  = TradLeague::UserSeasonScoresPresenter.new(user: user).routes_count
+                td.text-center
+                  .show-for-small-only
+                    b Bicki
+                  = TradLeague::UserSeasonScoresPresenter.new(user: user).hearts_count
