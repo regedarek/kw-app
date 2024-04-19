@@ -29,6 +29,10 @@
         .large-12.columns
           b trudność: 
           = @route.difficulty
+      - if @route.kurtyka_difficulty.present?
+        .large-12.columns
+          b trudność w skali Kurtyki: 
+          = @route.kurtyka_difficulty
       - if @route.route_type == 'ski'
         = render 'ski_route', ski_route: @route
       - else

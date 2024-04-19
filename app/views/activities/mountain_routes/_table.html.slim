@@ -30,7 +30,10 @@ table.stack
           h6.dashboard-table-text= link_to route.name, activities_mountain_route_path(route)
           span.dashboard-table-timestamp= truncate(route.peak, length: 25)
         td.text-center
-          = route.difficulty
+          - if route.sport_climbing? || route.trad_climbing?
+            = route.kurtyka_difficulty
+          - else
+            = route.difficulty
         - if user_signed_in?
           td.text-center.large-text-left
             - truncation = 46

@@ -128,7 +128,7 @@ module Activities
     private
 
     def route_params
-      params.require(:route).permit(:peak, :photograph, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :route_type, :rating, :hidden, colleague_ids: [], attachments: [], photos_attributes: [:file, :filename])
+      params.require(:route).permit(:peak, :photograph, :climb_style, :kurtyka_difficulty, :mountains, :length, :area, :name, :description, :difficulty, :partners, :time, :climbing_date, :route_type, :rating, :hidden, colleague_ids: [], attachments: [], photos_attributes: [:file, :filename])
     end
   end
 end

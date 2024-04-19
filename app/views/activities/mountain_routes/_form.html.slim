@@ -10,11 +10,13 @@
   .large-12.columns
     .callout.primary
       .row
-        .large-3.columns
+        .large-2.columns
           = f.label :route_type, 'rodzaj wspinaczki'
-          = f.select :route_type, Activities::MountainRouteRecord.route_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.db/activities/mountain_route'), w] }, selected: @route.route_type, include_blank: true
+          = f.select :route_type,
+            Activities::MountainRouteRecord.route_types.map { |w, _| [I18n.t(w, scope: 'activerecord.attributes.db/activities/mountain_route'), w] },
+            { selected: @route.route_type, include_blank: true }, { class: 'js-sport-type' }
 
-        .large-4.columns
+        .large-3.columns
           = f.label :name, 'nazwa drogi, grani*'
           = f.text_field :name
 
@@ -22,52 +24,67 @@
           = f.label :climbing_date, 'data przejścia*'
           = f.date_field :climbing_date, value: @route.climbing_date
 
-        .large-2.columns
-          = f.label :length, 'długość drogi w metrach'
-          = f.number_field :length
+        .js-route-length
+          .large-2.columns
+            = f.label :length, 'długość drogi w metrach'
+            = f.number_field :length
 
-        .large-1.columns
-          = f.label :difficulty, 'trudność'
-          = f.text_field :difficulty
+        .js-route-area
+          .large-2.columns
+            = f.label :area, 'rejon'
+            = f.text_field :area
+
+        .js-route-custom-difficulty
+          .large-1.columns
+            = f.label :difficulty, 'trudność'
+            = f.text_field :difficulty
+
+        .js-route-kurtyka-difficulty
+          .large-1.columns
+            = f.label :kurtyka_difficulty, 'trudność'
+            = f.select :kurtyka_difficulty,
+              Db::Activities::MountainRoute.kurtyka_difficulties.map { |w, _| [w, w] },
+              { selected: @route.kurtyka_difficulty, include_blank: true }, { class: '' }
 
 .row
   .large-12.columns
     .callout
       | Drogi oznaczone jako przejścia górskie liczą się do Górskich Dzików, drogi oznaczone jako wspinanie TRADowe liczą się do ligi tradowej.
 
+.js-route-partners
+  .row
+    .large-12.columns
+      .callout
+        .row
+          .large-3.columns
+            = f.label :colleague_ids, 'partnerzy z klubu'
+            = f.select :colleague_ids,
+              Db::User.all.map { |u| [u.display_name, u.id] },
+              { },
+              { class: 'js-select-multiple', multiple: true }
+
+          .large-3.columns
+            = f.label :partners, 'partnerzy spoza klubu'
+            = f.text_field :partners
+
+          .large-3.columns
+            span data-tooltip="" tabindex="1" title=("Jeżeli to nie ty jesteś autorem zdjęć podaj autora lub zostaw puste jeżeli to ty")
+              = f.label :photograph, 'kto jest autorem zdjęć?'
+            = f.text_field :photograph
+
+          .large-3.columns
+            = f.label :peak, 'szczyt'
+            = f.text_field :peak
+
 .row
-  .large-12.columns
-    .callout
-      .row
-        .large-3.columns
-          = f.label :colleague_ids, 'partnerzy z klubu'
-          = f.select :colleague_ids,
-            Db::User.all.map { |u| [u.display_name, u.id] },
-            { },
-            { class: 'js-select-multiple', multiple: true }
+  .js-route-hidden
+    .large-3.columns
+      .callout.secondary
+        = f.check_box :hidden
+        = f.label :hidden do
+          span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne tylko w na twojej stronie głównej.") Widoczne tylko dla mnie
 
-        .large-3.columns
-          = f.label :partners, 'partnerzy spoza klubu'
-          = f.text_field :partners
-
-        .large-3.columns
-          span data-tooltip="" tabindex="1" title=("Jeżeli to nie ty jesteś autorem zdjęć podaj autora lub zostaw puste jeżeli to ty")
-            = f.label :photograph, 'kto jest autorem zdjęć?'
-          = f.text_field :photograph
-
-        .large-3.columns
-          = f.label :peak, 'szczyt'
-          = f.text_field :peak
-
-.row
-
-  .large-3.columns
-    .callout.secondary
-      = f.check_box :hidden
-      = f.label :hidden do
-        span data-tooltip="" tabindex="1" title=("Przejście będzie widoczne tylko w na twojej stronie głównej.") Widoczne tylko dla mnie
-
-  .large-6.columns
+  .large-6.columns.end
     .callout.success
       legend.legend subiektywna ocena urody drogi*
 
