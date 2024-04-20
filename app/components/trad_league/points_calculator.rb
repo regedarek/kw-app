@@ -46,8 +46,7 @@ module TradLeague
 
     def flash_points
       {
-        'III' => 0,
-        'III+' => 1,
+        'III' => 1,
         'IV' => 2,
         'IV+' => 4,
         'V' => 6,
@@ -68,8 +67,7 @@ module TradLeague
 
     def onsight_points
       {
-        'III' => 1,
-        'III+' => 2,
+        'III' => 2,
         'IV' => 3,
         'IV+' => 6,
         'V' => 9,
