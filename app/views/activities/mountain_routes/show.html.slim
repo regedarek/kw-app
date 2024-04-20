@@ -25,6 +25,11 @@
         = I18n.t(@route.route_type, scope: 'activerecord.attributes.db/activities/mountain_route')
 
     .row
+      .large-12.columns
+        b rejon: 
+        = @route.area
+
+    .row
       - if @route.difficulty.present?
         .large-12.columns
           b trudność: 
