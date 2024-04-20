@@ -145,15 +145,15 @@ module Events
       end
 
       def participant_clubs
-        [participant_team_1, participant_team_2].reject(&:empty?).compact.join(' / ')
+        [participant_team_1, participant_team_2].map(&:to_s).reject(&:empty?).compact.join(' / ')
       end
 
       def participant_names
-        [participant_name_1, participant_name_2].reject(&:empty?).compact.join(' / ')
+        [participant_name_1, participant_name_2].map(&:to_s).reject(&:empty?).compact.join(' / ')
       end
 
       def participant_cities
-        [participant_city_1, participant_city_2].reject(&:empty?).compact.join(' / ')
+        [participant_city_1, participant_city_2].map(&:to_s).reject(&:empty?).compact.join(' / ')
       end
 
       def description
