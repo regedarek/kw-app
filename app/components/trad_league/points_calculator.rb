@@ -63,7 +63,7 @@ module TradLeague
       }
     end
 
-    def flash_points
+    def onsight_points
       {
         'IV' => 3,
         'IV+' => 6,
