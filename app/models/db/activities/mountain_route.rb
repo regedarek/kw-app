@@ -106,6 +106,10 @@ module Db
         case route_type.to_sym
         when :ski
           :snw
+        when :trad_climbing
+          :trad
+        when :sport_climbing
+          :sport
         else
           :sww
         end
