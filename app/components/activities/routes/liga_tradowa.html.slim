@@ -31,7 +31,8 @@
                   = link_to user.display_name, user_path(kw_id: user.kw_id)
                 td.text-center
                   - last_route = user.mountain_routes.where(route_type: 'trad_climbing').where.not(kurtyka_difficulty: nil).order(climbing_date: :desc).first
-                  = link_to last_route.name, "/przejscia/#{last_route.slug}"
+                  - if last_route
+                    = link_to last_route.name, "/przejscia/#{last_route.slug}"
                 td.text-center
                   .show-for-small-only
                     b Punkty
