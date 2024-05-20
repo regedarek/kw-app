@@ -10,7 +10,7 @@
           | 100 zł
         - else
           | 150 zł
-    = f.number_field :year, min: 2023, max: 2024, class: 'input-group-field', value: 2023
+    = f.number_field :year, min: 2024, max: 2025, class: 'input-group-field', value: 2024
     .input-group-button
       = f.submit 'Zapłać', class: 'button'
   - if Management::SettingsRecord.find_by(path: 'plastic')&.content == "<div>Tak</div>"

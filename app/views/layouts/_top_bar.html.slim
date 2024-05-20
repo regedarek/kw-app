@@ -113,10 +113,10 @@
             ul.menu.vertical
               - if [12, 1, 2, 3, 4, 5].include?(Date.today.month)
                 li= link_to 'Narciarskie Dziki', narciarskie_dziki_path
-                li= link_to 'Liga Tradowa', liga_tradowa_path
+                li= link_to 'Tradowe Dziki', tradowe_dziki_path
               - else
                 li= link_to 'Górskie Dziki', gorskie_dziki_path
-                li= link_to 'Liga Tradowa', liga_tradowa_path
+                li= link_to 'Tradowe Dziki', tradowe_dziki_path
               - if user_signed_in?
                 li= link_to 'Klubowa Ósemka 2023', '/osemka/2023'
                 - if PhotoCompetition::EditionRecord.last.closed?

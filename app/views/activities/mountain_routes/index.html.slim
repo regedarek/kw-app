@@ -6,6 +6,11 @@
       .large-2.columns
         = f.search_field :climbing_date_year_equals, style: 'height: 55px', placeholder: 'Od roku(2018)'
 
+      .large-2.columns
+        = f.select :route_type_eq,
+          Activities::MountainRouteRecord.route_types.map { |w, i| [I18n.t(w, scope: 'activerecord.attributes.db/activities/mountain_route'), i] },
+          { selected:  params.dig(:q, :route_type_eq) }, { style: 'height: 55px', :onchange => 'this.form.submit()'}
+
       - if false
         .large-2.columns
           .hide-for-large
@@ -38,7 +43,7 @@
 
       - if user_signed_in?
         .text-center
-          .large-5.columns
+          .large-3.columns
             - if [12, 1, 2, 3, 4].include?(Date.today.month)
               = link_to 'Narciarskie Dziki', narciarskie_dziki_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
               = link_to 'Tradowe Dziki', liga_tradowa_path, class: 'button warning', style: 'height: 55px; line-height: 30px;'
