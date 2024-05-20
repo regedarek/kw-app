@@ -9,7 +9,7 @@
       .large-2.columns
         = f.select :route_type_eq,
           Activities::MountainRouteRecord.route_types.map { |w, i| [I18n.t(w, scope: 'activerecord.attributes.db/activities/mountain_route'), i] },
-          { selected:  params.dig(:q, :route_type_eq) }, { style: 'height: 55px', :onchange => 'this.form.submit()'}
+          { selected: params.dig(:q, :route_type_eq), include_blank: true }, { style: 'height: 55px', :onchange => 'this.form.submit()'}
 
       - if false
         .large-2.columns
