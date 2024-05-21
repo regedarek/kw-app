@@ -25,20 +25,24 @@
 #  last_sign_in_ip        :inet
 #  phone                  :string
 #  refresh_token          :string
+#  regular_climbing       :boolean          default(TRUE), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  roles                  :text             default([]), is an Array
 #  sign_in_count          :integer          default(0), not null
+#  ski                    :boolean          default(TRUE), not null
 #  ski_hater              :boolean          default(FALSE), not null
 #  slug                   :string
 #  snw_blog               :boolean          default(FALSE), not null
 #  snw_groups             :string           default([]), is an Array
+#  sport_climbing         :boolean          default(FALSE), not null
 #  strava_access_token    :string
 #  strava_client_secret   :string
 #  strava_expires_at      :datetime
 #  strava_refresh_token   :string
 #  strava_subscribe       :boolean          default(FALSE), not null
+#  trad_climbing          :boolean          default(FALSE), not null
 #  warnings               :integer          default(0)
 #  website_url            :string
 #  created_at             :datetime         not null

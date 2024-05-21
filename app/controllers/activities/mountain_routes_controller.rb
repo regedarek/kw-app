@@ -11,6 +11,10 @@ module Activities
         params[:route_type] = 'regular_climbing'
       end
 
+      unless params.dig(:q, :route_type_eq_any).present?
+        params[:q] = { route_type_eq_any: session[:route_types] }
+      end
+
       @q = Db::Activities::MountainRoute.ransack(params[:q])
 
       @routes = @q.result(distinct: true)
