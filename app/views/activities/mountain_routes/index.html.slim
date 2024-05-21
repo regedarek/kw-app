@@ -54,19 +54,39 @@
             label Dodaj przejście
             = link_to 'Wspinaczka', wspinaczka_path, class: 'button-hover-reveal'
             = link_to 'Narciarstwo', narciarstwo_path, class: 'button-hover-reveal'
-    .row
-      .large-3.columns
-        = check_box_tag 'q[route_type_eq_any][]', 0, params.dig(:q, :route_type_eq_any)&.include?("0"), {:onchange => 'this.form.submit()'}
-        label Narty
-      .large-3.columns
-        = check_box_tag 'q[route_type_eq_any][]', 1, params.dig(:q, :route_type_eq_any)&.include?("1"), {:onchange => 'this.form.submit()'}
-        label Wspinanie górskie
-      .large-3.columns
-        = check_box_tag 'q[route_type_eq_any][]', 3, params.dig(:q, :route_type_eq_any)&.include?("3"), {:onchange => 'this.form.submit()'}
-        label Wspinanie tradowe
-      .large-3.columns
-        = check_box_tag 'q[route_type_eq_any][]', 2, params.dig(:q, :route_type_eq_any)&.include?("2"), {:onchange => 'this.form.submit()'}
-        label Wspinanie sportowe
+    .hide-for-large
+      .row
+        .large-3.columns
+
+          = check_box_tag 'q[route_type_eq_any][]', 0, params.dig(:q, :route_type_eq_any)&.include?("0"), {:onchange => 'this.form.submit()'}
+          label Narty
+
+
+          = check_box_tag 'q[route_type_eq_any][]', 1, params.dig(:q, :route_type_eq_any)&.include?("1"), {:onchange => 'this.form.submit()'}
+          label W Górskie
+
+
+          = check_box_tag 'q[route_type_eq_any][]', 3, params.dig(:q, :route_type_eq_any)&.include?("3"), {:onchange => 'this.form.submit()'}
+          label W Tradowe
+
+
+          = check_box_tag 'q[route_type_eq_any][]', 2, params.dig(:q, :route_type_eq_any)&.include?("2"), {:onchange => 'this.form.submit()'}
+          label W Sportowe
+
+    .show-for-large
+      .row
+        .large-3.columns
+          = check_box_tag 'q[route_type_eq_any][]', 0, params.dig(:q, :route_type_eq_any)&.include?("0"), {:onchange => 'this.form.submit()'}
+          label Narty
+        .large-3.columns
+          = check_box_tag 'q[route_type_eq_any][]', 1, params.dig(:q, :route_type_eq_any)&.include?("1"), {:onchange => 'this.form.submit()'}
+          label Wspinanie górskie
+        .large-3.columns
+          = check_box_tag 'q[route_type_eq_any][]', 3, params.dig(:q, :route_type_eq_any)&.include?("3"), {:onchange => 'this.form.submit()'}
+          label Wspinanie tradowe
+        .large-3.columns
+          = check_box_tag 'q[route_type_eq_any][]', 2, params.dig(:q, :route_type_eq_any)&.include?("2"), {:onchange => 'this.form.submit()'}
+          label Wspinanie sportowe
 
   .row
     .large-12.columns
