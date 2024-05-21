@@ -1,15 +1,10 @@
 .column
   = search_form_for @q, url: activities_mountain_routes_path, class: 'js-send-on-enter' do |f|
     .row
-      .large-2.columns
+      .large-3.columns
         = f.search_field :name_or_description_or_area_or_peak_or_mountains_or_partners_or_colleagues_full_name_cont, placeholder: 'wyszukaj drogę, przejście, rejon, osobę', style: 'height: 55px'
-      .large-2.columns
+      .large-3.columns
         = f.search_field :climbing_date_year_equals, style: 'height: 55px', placeholder: 'Od roku(2018)'
-
-      .large-2.columns
-        = f.select :route_type_eq,
-          Activities::MountainRouteRecord.route_types.map { |w, i| [I18n.t(w, scope: 'activerecord.attributes.db/activities/mountain_route'), i] },
-          { selected: params.dig(:q, :route_type_eq), include_blank: true }, { style: 'height: 55px', :onchange => 'this.form.submit()'}
 
       - if false
         .large-2.columns
@@ -59,6 +54,19 @@
             label Dodaj przejście
             = link_to 'Wspinaczka', wspinaczka_path, class: 'button-hover-reveal'
             = link_to 'Narciarstwo', narciarstwo_path, class: 'button-hover-reveal'
+    .row
+      .large-3.columns
+        = check_box_tag 'q[route_type_eq_any][]', 0, params.dig(:q, :route_type_eq_any)&.include?("0"), {:onchange => 'this.form.submit()'}
+        label Narty
+      .large-3.columns
+        = check_box_tag 'q[route_type_eq_any][]', 1, params.dig(:q, :route_type_eq_any)&.include?("1"), {:onchange => 'this.form.submit()'}
+        label Wspinanie górskie
+      .large-3.columns
+        = check_box_tag 'q[route_type_eq_any][]', 3, params.dig(:q, :route_type_eq_any)&.include?("3"), {:onchange => 'this.form.submit()'}
+        label Wspinanie tradowe
+      .large-3.columns
+        = check_box_tag 'q[route_type_eq_any][]', 2, params.dig(:q, :route_type_eq_any)&.include?("2"), {:onchange => 'this.form.submit()'}
+        label Wspinanie sportowe
 
   .row
     .large-12.columns

@@ -25,6 +25,8 @@ module Activities
       @my_training_routes = @routes.where(user_id: current_user.id, training: true).page(params[:training_page]).per(15)
       @my_strava_routes = @routes.where.not(strava_id: nil).where(user_id: current_user.id, hidden: true).page(params[:strava_page]).per(15)
 
+      session[:route_types] = params.dig(:q, :route_type_eq_any) || []
+
       @routes = @routes.where(hidden: false)
       @routes = @routes.page(params[:page]).per(15)
 

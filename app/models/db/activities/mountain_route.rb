@@ -58,6 +58,7 @@ module Db
       }
 
       enum route_type: [:ski, :regular_climbing, :sport_climbing, :trad_climbing]
+
       friendly_id :slug_candidates, use: :slugged
 
       mount_uploaders :attachments, AttachmentUploader
