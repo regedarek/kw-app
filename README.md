@@ -18,6 +18,14 @@ docker-compose up
 
 Go to [localhost:3002](http://localhost:3002). Enjoy!
 
+### Deployment & Server
+
+```
+ssh deploy@51.68.141.247
+bundle exec cap production deploy
+```
+
+
 ### Development
 
 Web (panel) [localhost:3002](http://localhost:3002)
