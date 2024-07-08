@@ -42,6 +42,10 @@ module UserManagement
       Date.today.year - birth_date&.to_date&.year <= 26
     end
 
+    def retired?
+      positions.include?("retired")
+    end
+
     def email_uniq
       errors.add(:email, "zostało już zajęte") if Db::Profile.exists?(email: email)
     end

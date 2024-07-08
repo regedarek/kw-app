@@ -17,7 +17,7 @@ module UserManagement
       private
 
       def year_fee(profile)
-        if profile && (profile.youth? || profile.position.include?("retired"))
+        if profile && (profile.youth? || profile.retired?)
           Date.current.between?(Date.new(Date.current.year, 9, 1), Date.new(Date.current.year, 11, 15)) ? 50 : 100
         else
           Date.current.between?(Date.new(Date.current.year, 9, 1), Date.new(Date.current.year, 11, 15)) ? 75 : 150
