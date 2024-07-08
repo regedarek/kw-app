@@ -92,6 +92,10 @@ module Db
       Date.today.year - birth_date.year <= 26
     end
 
+    def retired?
+      position.include?("retired")
+    end
+
     def kw_id_accepted
       if kw_id.present? && !accepted
         errors.add(:kw_id, "nie może być podany jeżeli nie zaakceptowano profilu")
