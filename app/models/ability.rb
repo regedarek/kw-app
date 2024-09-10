@@ -72,8 +72,6 @@ class Ability
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
     can :read, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
     can :index, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
-    can :read, Db::Activities::MountainRoute
-    can :index, Db::Activities::MountainRoute
     can :read, Scrappers::ShmuRecord
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     cannot :destroy, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
@@ -83,6 +81,8 @@ class Ability
     can :create, Settlement::ContractRecord
     can :manage, Mailboxer::Conversation
     cannot :analiza, Settlement::ContractRecord
+    can :read, Db::Activities::MountainRoute
+    can :index, Db::Activities::MountainRoute
   end
 
   def active_and_regular
