@@ -19,6 +19,7 @@ class KwApp.MountainRoutes
       @$el.find('.js-route-custom-difficulty').show()
       @$el.find('.js-route-partners').show()
       @$el.find('.js-route-hidden').show()
+      @$el.find('.js-route-area').show()
 
   toggleSportType: (e) =>
     if $.inArray($('option:selected', e.currentTarget).text(), ['Sportowe wspinanie', 'Tradowe wspinanie']) > -1
