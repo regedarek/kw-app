@@ -45,6 +45,7 @@ class Ability
   def not_active
     can :manage, Db::Activities::MountainRoute, user_id: user.id
     can :read, Settlement::ContractRecord, creator_id: user.id
+    can :index, Settlement::ContractRecord, creator_id: user.id
     can :update, Settlement::ContractRecord, creator_id: user.id, state: [:new, :accepted]
     can [:read], Settlement::ContractRecord, contract_users: { user_id: user.id }
     can :manage, Storage::UploadRecord, uploadable_type: ['Db::Activities::MountainRoute'], uploadable: { user_id: user.id }
@@ -59,8 +60,10 @@ class Ability
   def active
     can :read, Management::ProjectRecord
     can :read, Management::ResolutionRecord, state: 'published'
+    can :index, Management::ResolutionRecord, state: 'published'
     can :read, Marketing::DiscountRecord
     can :read, Training::Activities::ContractRecord
+    can :index, Training::Activities::ContractRecord
     can :create, Settlement::ContractorRecord
     can :see_dziki, Db::Activities::MountainRoute
     can :create, Db::Profile
@@ -68,7 +71,9 @@ class Ability
     can :create, Management::Snw::SnwApplyRecord
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
     can :read, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
+    can :index, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
     can :read, Db::Activities::MountainRoute
+    can :index, Db::Activities::MountainRoute
     can :read, Scrappers::ShmuRecord
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     cannot :destroy, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
