@@ -316,10 +316,6 @@ GEM
       addressable
       faraday
       json (>= 1.8)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -442,9 +438,6 @@ GEM
       activerecord (>= 5.0)
       activesupport (>= 5.0)
       i18n
-    rb-fsevent (0.10.3)
-    rb-inotify (0.10.0)
-      ffi (~> 1.0)
     rbnacl (7.1.1)
       ffi
     rbnacl-libsodium (1.0.16)
@@ -478,7 +471,6 @@ GEM
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
     ruby-rc4 (0.1.5)
-    ruby_dep (1.5.0)
     ruby_http_client (3.5.2)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
@@ -635,7 +627,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   koala
-  listen (~> 3.0)
   mailboxer!
   mailgun-ruby (~> 1.1.6)
   mini_magick (>= 4.9.4)
