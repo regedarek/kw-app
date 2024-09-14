@@ -78,10 +78,10 @@ class Ability
     can :create, Settlement::ContractRecord
     can :manage, Mailboxer::Conversation
     cannot :analiza, Settlement::ContractRecord
+    can [:read, :index, :see_dziki], Db::Activities::MountainRoute
     can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     cannot :destroy, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
     can :destroy, Db::Activities::MountainRoute, user_id: user.id
-    can [:read, :index, :see_dziki], Db::Activities::MountainRoute
   end
 
   def active_and_regular
