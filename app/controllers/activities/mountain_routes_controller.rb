@@ -25,11 +25,9 @@ module Activities
       @routes = @q.result(distinct: true)
 
       @routes = @routes
-        .includes(:route_colleagues).where(hidden: false)
+        .where(hidden: false)
         .or(
-          @routes.includes(:route_colleagues).where(user_id: current_user.id, hidden: true)
-        ).or(
-          @routes.includes(:route_colleagues).where(route_colleagues: {colleague_id: current_user.id}, hidden: true)
+          @routes.where(user_id: current_user.id, hidden: true)
         )
 
       @routes = @routes.includes([:colleagues, :photos]).order(climbing_date: :desc)
