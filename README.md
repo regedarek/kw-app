@@ -28,6 +28,11 @@ bundle exec cap production deploy
 
 ### Development
 
+Debugging
+```
+docker attach $(docker-compose ps -q web)
+```
+
 Web (panel) [localhost:3002](http://localhost:3002)
 
 MailCatcher (mail debugging tool) [localhost:1080](http://localhost:1080)

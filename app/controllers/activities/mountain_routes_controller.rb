@@ -12,15 +12,15 @@ module Activities
       end
 
       unless params.dig(:q, :route_type_eq_any).present?
-        params[:q] = { route_type_eq_any: session[:route_types] }
+        params[:q][:route_type_eq_any] = session[:route_types] || ['1', '2', '3', '0']
       end
 
       @q = Db::Activities::MountainRoute.ransack(params[:q])
 
       @routes = @q.result(distinct: true)
-      @routes = @routes.where(hidden: false)
+      @routes = @routes.where(hidden: false).or(@routes.where(user_id: current_user.id, hidden: true))
       @routes = @routes.where(route_type: params[:route_type]) if params[:route_type]
-      @route = @routes.accessible_by(current_ability)
+      @routes = @routes.accessible_by(current_ability)
       @routes = @routes.includes([:colleagues, :photos]).order(climbing_date: :desc)
 
       @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true).page(params[:hidden_page]).per(15)

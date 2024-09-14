@@ -44,6 +44,8 @@ class Ability
 
   def not_active
     can :manage, Db::Activities::MountainRoute, user_id: user.id
+    cannot :create, Db::Activities::MountainRoute
+    cannot :see_dziki, Db::Activities::MountainRoute
     can :read, Settlement::ContractRecord, creator_id: user.id
     can :index, Settlement::ContractRecord, creator_id: user.id
     can :update, Settlement::ContractRecord, creator_id: user.id, state: [:new, :accepted]
@@ -52,9 +54,7 @@ class Ability
     can :manage, Storage::UploadRecord, uploadable_type: 'Settlement::ContractRecord', uploadable: { creator_id: user.id }
     can :manage, Messaging::CommentRecord, user_id: user.id
     cannot :read, Management::Voting::CaseRecord
-    cannot :see_dziki, Db::Activities::MountainRoute
     cannot :analiza, Settlement::ContractRecord
-    cannot :create, Db::Activities::MountainRoute
   end
 
   def active
@@ -65,7 +65,7 @@ class Ability
     can :read, Training::Activities::ContractRecord
     can :index, Training::Activities::ContractRecord
     can :create, Settlement::ContractorRecord
-    can :see_dziki, Db::Activities::MountainRoute
+
     can :create, Db::Profile
     can :read, Shop::OrderRecord
     can :create, Management::Snw::SnwApplyRecord
@@ -73,16 +73,15 @@ class Ability
     can :read, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
     can :index, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
     can :read, Scrappers::ShmuRecord
-    can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
-    cannot :destroy, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
-    can :destroy, Db::Activities::MountainRoute, user_id: user.id
     can :manage, Management::ProjectRecord, project_users: { user_id: user.id }
     can :see_user_name, Db::User
     can :create, Settlement::ContractRecord
     can :manage, Mailboxer::Conversation
     cannot :analiza, Settlement::ContractRecord
-    can :read, Db::Activities::MountainRoute
-    can :index, Db::Activities::MountainRoute
+    can :manage, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
+    cannot :destroy, Db::Activities::MountainRoute, route_colleagues: { colleague_id: user.id }
+    can :destroy, Db::Activities::MountainRoute, user_id: user.id
+    can [:read, :index, :see_dziki], Db::Activities::MountainRoute
   end
 
   def active_and_regular
