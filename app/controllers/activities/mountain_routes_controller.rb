@@ -18,8 +18,15 @@ module Activities
       @q = Db::Activities::MountainRoute.ransack(params[:q])
 
       @routes = @q.result(distinct: true)
-      @routes = @routes.where(hidden: false).or(@routes.where(user_id: current_user.id, hidden: true))
-      @routes = @routes.where(route_type: params[:route_type]) if params[:route_type]
+
+      @routes = @routes
+        .includes(:route_colleagues).where(hidden: false)
+        .or(
+          @routes.includes(:route_colleagues).where(user_id: current_user.id, hidden: true)
+        ).or(
+          @routes.includes(:route_colleagues).where(route_colleagues: {colleague_id: current_user.id}, hidden: true)
+        )
+
       @routes = @routes.includes([:colleagues, :photos]).order(climbing_date: :desc)
 
       @my_hidden_routes = @routes.where(user_id: current_user.id, hidden: true).page(params[:hidden_page]).per(15)
