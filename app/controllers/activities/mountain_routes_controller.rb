@@ -13,10 +13,10 @@ module Activities
 
       unless params.dig(:q, :route_type_eq_any).present?
         if params[:q].present?
-          params[:q][:route_type_eq_any] = session[:route_types] || ['1', '2', '3', '0']
+          params[:q][:route_type_eq_any] = session[:route_types] || [1, 2, 3, 0]
         else
           params[:q] ||= {}
-          params[:q][:route_type_eq_any] = session[:route_types] || ['1', '2', '3', '0']
+          params[:q][:route_type_eq_any] = session[:route_types] || [1, 2, 3, 0]
         end
       end
 
