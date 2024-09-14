@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_21_093621) do
+ActiveRecord::Schema.define(version: 2024_09_14_094812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1081,6 +1081,8 @@ ActiveRecord::Schema.define(version: 2024_05_21_093621) do
     t.integer "user_id"
     t.string "content_type"
     t.string "file_size"
+    t.datetime "created_at", default: -> { "now()" }, null: false
+    t.datetime "updated_at", default: -> { "now()" }, null: false
     t.index ["uploadable_id", "uploadable_type"], name: "index_storage_uploads_on_uploadable_id_and_uploadable_type"
     t.index ["user_id"], name: "index_storage_uploads_on_user_id"
   end

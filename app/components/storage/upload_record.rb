@@ -7,6 +7,8 @@
 #  file            :string           not null
 #  file_size       :string
 #  uploadable_type :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #  uploadable_id   :integer          not null
 #  user_id         :integer
 #

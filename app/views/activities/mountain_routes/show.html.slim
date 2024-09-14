@@ -106,7 +106,7 @@
     - if @route.photos.any?
       .row
         .large-12.columns
-          = render 'attachments/box', attachments: @route.photos
+          = render 'attachments/box', attachments: @route.photos.order(created_at: :asc)
 
     - if @route.attachments.any?
       .row
