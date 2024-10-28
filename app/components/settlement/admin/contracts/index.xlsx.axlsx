@@ -20,6 +20,7 @@ contract_attributes = %i(
   payout_type
   event_type
   activity_type
+  area_type
   currency_type
   period_date
   document_date
@@ -32,6 +33,7 @@ contract_type_attributes = %i(
   document_type
   group_type
   financial_type
+  area_type
   substantive_type
   payout_type
   event_type
