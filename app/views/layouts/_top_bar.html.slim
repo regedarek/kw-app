@@ -118,9 +118,8 @@
                 li= link_to 'Górskie Dziki', gorskie_dziki_path
                 li= link_to 'Tradowe Dziki', tradowe_dziki_path
               - if user_signed_in?
-                li= link_to 'Klubowa Ósemka 2023', '/osemka/2023'
-                - if PhotoCompetition::EditionRecord.last.closed?
-                  li= link_to 'Konkurs Fotograficzny 2023', '/konkurs/kasprzyk_2023/glosowanie'
+                li= link_to 'Klubowa Ósemka 2024', '/osemka/2024'
+                li= link_to 'Konkurs Fotograficzny 2024', '/konkurs/kasprzyk_2024/glosowanie'
               - if current_user.roles.include?('photo_competition')
                 li= link_to 'Konkurs Fotograficzny Administracja', admin_editions_path
               li= link_to 'KSKS', '/trening/skimo'
