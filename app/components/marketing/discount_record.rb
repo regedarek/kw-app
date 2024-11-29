@@ -4,7 +4,6 @@
 #
 #  id            :bigint           not null, primary key
 #  amount        :integer
-#  amount_body   :string
 #  amount_text   :string
 #  amount_type   :integer
 #  attachments   :string

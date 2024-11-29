@@ -27,6 +27,8 @@
             li
               = link_to 'Biuro', admin_path
               ul.menu.vertical
+                - if current_user.roles.include?('photo_competition')
+                  li= link_to 'Konkurs Fotograficzny Administracja', admin_editions_path
                 - if current_user.roles.include?('office')
                   li= link_to 'Baza użytkowników', admin_users_path
                   li= link_to 'Baza klubowiczów', admin_profiles_path
@@ -118,10 +120,9 @@
                 li= link_to 'Górskie Dziki', gorskie_dziki_path
                 li= link_to 'Tradowe Dziki', tradowe_dziki_path
               - if user_signed_in?
-                li= link_to 'Klubowa Ósemka 2024', '/osemka/2024'
-                li= link_to 'Konkurs Fotograficzny 2024', '/konkurs/kasprzyk_2024/glosowanie'
-              - if current_user.roles.include?('photo_competition')
-                li= link_to 'Konkurs Fotograficzny Administracja', admin_editions_path
+                li= link_to 'Klubowa Ósemka', '/osemka/2024'
+                li= link_to 'Konkurs Fotograficzny', '/konkurs/kasprzyk_2024/glosowanie'
+
               li= link_to 'KSKS', '/trening/skimo'
 
               li= link_to 'Tabela Górskie Dziki', gorskie_dziki_path

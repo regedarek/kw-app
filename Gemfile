@@ -79,7 +79,9 @@ group :development, :staging do
 end
 
 group :development do
+  gem 'listen'
   gem 'brakeman', require: false
+  gem "ffi", "< 1.17.0"
   gem "rbnacl-libsodium"
   gem 'rbnacl'
   gem 'net-ssh', '>= 6.0.2'

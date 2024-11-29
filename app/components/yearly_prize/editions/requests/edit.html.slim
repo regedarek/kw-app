@@ -56,9 +56,10 @@
         .row
           .large-6.columns
             = f.submit 'Zgłoś do konkursu', class: 'button large expanded'
-          - if false
-            .large-6.columns
-              = link_to 'Regulamin konkursu', 'https://panel.kw.krakow.pl/osemka/regulamin', class: 'button large expanded alert'
+          .large-3.columns
+            = link_to 'Tegoroczne zgłoszenia', "/osemka/#{@edition.year}", class: 'button large expanded secondary'
+          .large-3.columns
+            = link_to 'Regulamin konkursu', 'https://panel.kw.krakow.pl/osemka/regulamin', class: 'button large expanded alert'
 
     - else
       .callout.warning

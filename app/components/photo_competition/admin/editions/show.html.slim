@@ -9,6 +9,10 @@
     .large-4.columns
       .text-right
         = link_to 'Dodaj zdjęcie', new_edition_request_path(edition_id: @edition.code), class: 'button'
+        - unless params[:accepted] == 'false'
+          = link_to 'Do zaakceptowania', admin_edition_path(id: @edition.id, accepted: false), class: 'button warning'
+        - else
+          = link_to 'Zaakceptowane', admin_edition_path(id: @edition.id), class: 'button success'
 
   .row
     .large-12.columns

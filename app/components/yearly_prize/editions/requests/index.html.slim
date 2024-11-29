@@ -8,6 +8,7 @@
             th width='15%' Kategoria
             th width='15%' Autor
             th width='20%' Zgłoszeni
+            th width='20%' Głosowanie
             th width='20%' Zaakceptowane
 
         tbody
@@ -17,7 +18,14 @@
               td = request.yearly_prize_category.name
               td = request.author.display_name
               td = request.users.collect(&:display_name)&.to_sentence
-              td = request.accepted
+              td = I18n.t (request.votable)
+              td = I18n.t (request.accepted)
+
+.row
+  .large-4.columns
+    h3= "Klubowa Ósemka #{@edition.year}"
+  .large-8.columns
+    = link_to "Zgłoś tegoroczną Ósemkę!", "/osemka/#{@edition.year}/zgloszenie", class: "button float-right"
 
 .row
   .large-12.columns
@@ -60,7 +68,7 @@
                           button.close-button aria-label=("Close reveal") data-close="" type="button" 
                             span aria-hidden="true"  &times;
 
-          - if false
+          - if request.yearly_prize_edition.votable?
             = render partial: 'likes/button', locals: { likeable: request, button_text_like: "Zagłosuj za przyznaniem 8semki!", button_text_unlike: "Cofnij swój głos za przyznaniem 8semki!" }
 
           - if user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))
