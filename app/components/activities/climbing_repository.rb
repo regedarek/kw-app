@@ -1,20 +1,20 @@
 module Activities
-  class Repository
-    def fetch_prev_month(route_type = 'regular_climbing')
-      range_climbing_date = Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month
-      range_created_at = Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 5.days)
+  class ClimbingRepository
+    def fetch_prev_month
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
-        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range_climbing_date, created_at: range_created_at })
+        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month, created_at: Time.now.prev_month.beginning_of_month..(Time.now.prev_month.end_of_month + 5.days) })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
 
-    def fetch_current_month(route_type = 'regular_climbing')
-      range = Time.now.beginning_of_month..Time.now.end_of_month
-      range_created_at = Time.now.beginning_of_month..(Time.now.end_of_month + 5.days)
+    def fetch_current_month
+      ::Db::User .joins(:mountain_routes) .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty }) .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: Time.now.beginning_of_month..Time.now.end_of_month, created_at: Time.now.beginning_of_month..(Time.now.end_of_month + 5.days) }) .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length') .group(:id) .order('total_mountain_routes_length DESC')
+    end
+
+    def fetch_season
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
@@ -24,19 +24,7 @@ module Activities
         .order('total_mountain_routes_length DESC')
     end
 
-    def fetch_season(route_type = 'regular_climbing')
-      range = start_date..end_date
-      ::Db::User
-        .joins(:mountain_routes)
-        .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
-        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
-        .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
-        .group(:id)
-        .order('total_mountain_routes_length DESC')
-    end
-
-    def best_route_of_season(route_type = 'regular_climbing')
-      range = start_date..end_date
+    def best_route_of_season
       us = ::Db::Activities::MountainRoute
         .where.not(id: nil, length: nil, difficulty: excluded_difficulty)
         .where(route_type: route_type, climbing_date: range, created_at: range)
@@ -45,8 +33,7 @@ module Activities
         .order('max_mountain_routes_hearts_count DESC')
     end
 
-    def best_of_season(route_type = 'regular_climbing')
-      range = start_date..end_date
+    def best_of_season
       us = ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
@@ -57,12 +44,10 @@ module Activities
     end
 
     def respect_for(user)
-      range = start_date..end_date
       user.mountain_routes.where.not(id: nil, length: nil, difficulty: excluded_difficulty).where(route_type: 'regular_climbing', climbing_date: range, created_at: range).sum(:hearts_count)
     end
 
-    def tatra_uniqe(route_type = 'regular_climbing')
-      range = start_date..end_date
+    def tatra_uniqe
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
@@ -71,22 +56,35 @@ module Activities
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#exploratortatr%'").count }.reverse!
     end
 
-    def dziadek_gienek(route_type = 'regular_climbing')
-      range = start_date..end_date
+    def dziadek_gienek
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
-        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range_created_at })
         .where("mountain_routes.description LIKE ?", "%#dziadekgienek%").uniq
         .sort_by { |u| u.mountain_routes.where("description LIKE '%#dziadekgienek%'").count }.reverse!
     end
 
     def start_date
-      start_date = DateTime.new(2024, 06, 1)
+      DateTime.new(2024, 06, 1).beginning_of_day
     end
 
     def end_date
-      end_date = DateTime.new(2024, 12, 1)
+      DateTime.new(2024, 11, 30).end_of_day
+    end
+
+    private
+
+    def route_type
+      'regular_climbing'
+    end
+
+    def range
+      start_date..end_date
+    end
+
+    def range_created_at
+      start_date..(end_date + 5.days)
     end
 
     def excluded_difficulty

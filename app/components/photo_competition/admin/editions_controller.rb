@@ -26,6 +26,25 @@ module PhotoCompetition
         @q = @photo_requests.order(likes_count: :desc, updated_at: :desc).ransack(params[:q])
         @photo_requests = @q.result(distinct: true).page(params[:page]).per(10)
       end
+
+      def edit
+        @edition = PhotoCompetition::EditionRecord.find(params[:id])
+      end
+
+      def update
+        @edition = PhotoCompetition::EditionRecord.find(params[:id])
+        if @edition.update(edition_params)
+          redirect_to admin_editions_path, notice: 'Edition was successfully updated.'
+        else
+          render :edit
+        end
+      end
+
+      private
+
+      def edition_params
+        params.require(:edition).permit(:name, :code, :closed)
+      end
     end
   end
 end

@@ -47,7 +47,7 @@
                     td.text-center = user.total_mountain_routes_length
 
         .large-4.columns
-          h5 = "sezon #{Activities::Repository.new.start_date.year}"
+          h5 = "sezon #{Activities::ClimbingRepository.new.start_date.year}"
           table.stack
             thead
               tr
@@ -96,8 +96,8 @@
                 th width='50%' kto?
                 th width='10%' bicków
             tbody
-              - start_date = Activities::Repository.new.start_date
-              - end_date = Activities::Repository.new.end_date
+              - start_date = Activities::ClimbingRepository.new.start_date
+              - end_date = Activities::ClimbingRepository.new.end_date
               - range = start_date..end_date
               - @best_route_of_season.first(5).each do |route|
                 tr
@@ -135,7 +135,7 @@
 
 .row
   .large-12.columns
-    h5 = "Tabela sezonu #{Activities::Repository.new.start_date.year}"
+    h5 = "Tabela sezonu #{Activities::ClimbingRepository.new.start_date.year}"
     table.stack
       thead
         tr
@@ -161,6 +161,6 @@
               - if user.mountain_routes.any?
                 = link_to user.mountain_routes.last.name, activities_mountain_route_path(user.mountain_routes.last.id)
             td.large-text-right
-              = Activities::Repository.new.respect_for(user)
+              = Activities::ClimbingRepository.new.respect_for(user)
             td.text-center.large-text-right = user.total_mountain_routes_length
           - i += 1

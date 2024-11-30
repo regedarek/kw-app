@@ -1,0 +1,15 @@
+.column
+  .row
+    .large-12.columns
+      .callout
+        b Klubowe Osemki
+
+  .row
+    .large-12.columns
+      ul
+        - @editions.each do |edition|
+          li = link_to edition.year, edit_admin_yearly_prize_edition_path(edition)
+
+  .row
+    .large-12.columns
+      = button_to "Dodaj #{Date.today.year}", admin_yearly_prize_editions_path(yearly_prize_edition: { year: Date.today.year }), method: :post unless Db::YearlyPrizeEdition.exists?(year: Date.today.year)

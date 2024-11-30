@@ -1,0 +1,25 @@
+= form_for record, as: :category, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if record.errors.any?
+        .callout.alert
+          ul
+            - record.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      .callout.primary
+        .row
+          .large-3.columns
+            = @edition.name
+          .large-3.columns
+            = f.label :name
+            = f.text_field :name
+          .large-3.columns
+            = f.label :mandatory_fields
+            = f.text_field :mandatory_fields
+
+  .row
+    .large-12.columns
+      = f.submit 'Dodaj', class: 'button large expanded'

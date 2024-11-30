@@ -29,6 +29,7 @@
               ul.menu.vertical
                 - if current_user.roles.include?('photo_competition')
                   li= link_to 'Konkurs Fotograficzny Administracja', admin_editions_path
+                  li= link_to 'Konkurs Ósemka Administracja', admin_yearly_prize_editions_path
                 - if current_user.roles.include?('office')
                   li= link_to 'Baza użytkowników', admin_users_path
                   li= link_to 'Baza klubowiczów', admin_profiles_path

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  scope module: 'yearly_prize' do
+    namespace :admin do
+      resources :yearly_prize_editions, only: [:index, :new, :create, :show, :edit, :update]
+    end
+  end
+
   get "/osemka/:year" => "yearly_prize/editions/requests#index", as: :yearly_prize_edition_requests
   get "/osemka/:year/zgloszenie" => "yearly_prize/editions/requests#new", as: :yearly_prize
   post "/osemka/:year/zgloszenie" => "yearly_prize/editions/requests#create", as: :yearly_prize_requests

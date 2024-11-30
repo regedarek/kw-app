@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :editions
+      resources :editions do
+        resources :categories, only: [:new, :create, :edit, :update], controller: 'editions/categories'
+      end
     end
   end
 

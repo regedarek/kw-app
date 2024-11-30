@@ -1,0 +1,32 @@
+= form_for record, as: :yearly_prize_edition, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if record.errors.any?
+        .callout.alert
+          ul
+            - record.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      .callout.primary
+        .row
+          .large-3.columns
+            = f.label :description
+            = f.text_field :description
+
+          .large-3.columns
+            = f.label :name
+            = f.text_field :name
+
+          .large-4.columns
+            = f.check_box :votable
+            = f.label :votable, 'Mozna glosowac?'
+
+          .large-4.columns
+            = f.check_box :closed
+            = f.label :closed, 'Zamkniete?'
+
+  .row
+    .large-12.columns
+      = f.submit 'Edytuj', class: 'button large expanded'

@@ -12,12 +12,12 @@ module Activities
     def gorskie_dziki
       authorize! :see_dziki, ::Db::Activities::MountainRoute
 
-      @prev_month_leaders = repository.fetch_prev_month
-      @current_month_leaders = repository.fetch_current_month
-      @season_leaders = repository.fetch_season
-      @best_of_season = repository.best_of_season
-      @best_route_of_season = repository.best_route_of_season
-      @tatra_uniqe = repository.tatra_uniqe
+      @prev_month_leaders = climbing_repository.fetch_prev_month
+      @current_month_leaders = climbing_repository.fetch_current_month
+      @season_leaders = climbing_repository.fetch_season
+      @best_of_season = climbing_repository.best_of_season
+      @best_route_of_season = climbing_repository.best_route_of_season
+      @tatra_uniqe = climbing_repository.tatra_uniqe
     end
 
     def gorskie_dziki_regulamin; end
@@ -60,8 +60,8 @@ module Activities
 
     private
 
-    def repository
-      @repository ||= Repository.new
+    def climbing_repository
+      @climbing_repository ||= ::Activities::ClimbingRepository.new
     end
 
     def ski_repository

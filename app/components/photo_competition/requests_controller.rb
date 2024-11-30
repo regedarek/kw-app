@@ -42,7 +42,7 @@ module PhotoCompetition
       else
         @request.update(accepted: true)
 
-        redirect_to "/admin/editions/#{@request.edition.id}", notice: 'Zdjęcie zostało zaakceptowane!'
+        redirect_to "/admin/editions/#{@request.edition.id}?accepted=false", notice: 'Zdjęcie zostało zaakceptowane!'
       end
     end
 

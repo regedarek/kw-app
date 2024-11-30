@@ -1,0 +1,27 @@
+= form_for record, as: :edition, url: url, method: method do |f|
+  .row
+    .large-12.columns
+      - if record.errors.any?
+        .callout.alert
+          ul
+            - record.errors.full_messages.each do |msg|
+              li= msg
+
+  .row
+    .large-12.columns
+      .callout.primary
+        .row
+          .large-3.columns
+            = f.label :code
+            = f.text_field :code
+          .large-3.columns
+            = f.label :name
+            = f.text_field :name
+
+          .large-4.columns
+            = f.check_box :closed
+            = f.label :closed, 'Zamkniete i gotowe do glosowania'
+
+  .row
+    .large-12.columns
+      = f.submit 'Edytuj', class: 'button large expanded'
