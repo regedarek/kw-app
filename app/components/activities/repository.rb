@@ -14,16 +14,17 @@ module Activities
 
     def fetch_current_month(route_type = 'regular_climbing')
       range = Time.now.beginning_of_month..Time.now.end_of_month
+      range_created_at = Time.now.beginning_of_month..(Time.now.end_of_month + 5.days)
       ::Db::User
         .joins(:mountain_routes)
         .where.not(mountain_routes: { id: nil, length: nil, difficulty: excluded_difficulty })
-        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range })
+        .where(climbing_boars: true, mountain_routes: { route_type: route_type, climbing_date: range, created_at: range_created_at })
         .select('users.kw_id, users.id, users.avatar, SUM(mountain_routes.length) AS total_mountain_routes_length')
         .group(:id)
         .order('total_mountain_routes_length DESC')
     end
 
-    def fetch_season(route_type = 'regular_climbing', start_date=DateTime.new(2024, 06, 1), end_date=DateTime.new(2024, 11, 30))
+    def fetch_season(route_type = 'regular_climbing')
       range = start_date..end_date
       ::Db::User
         .joins(:mountain_routes)
@@ -85,7 +86,7 @@ module Activities
     end
 
     def end_date
-      end_date = DateTime.new(2024, 11, 30)
+      end_date = DateTime.new(2024, 12, 1)
     end
 
     def excluded_difficulty
