@@ -4,7 +4,7 @@ module PhotoCompetition
       append_view_path 'app/components'
 
       def index
-        @editions = PhotoCompetition::EditionRecord.order(updated_at: :desc)
+        @editions = PhotoCompetition::EditionRecord.order(created_at: :desc)
       end
 
       def show

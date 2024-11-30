@@ -675,6 +675,7 @@ Rails.application.routes.draw do
   get 'glosowania/instrukcja' => 'pages#show', id: 'rules'
   get 'narciarskie-dziki/regulamin' => 'pages#show', id: 'rules'
   get 'liga-tradowa/regulamin' => 'pages#show', id: 'rules'
+  get 'osemka/regulamin' => 'pages#show', id: 'rules'
   get 'konkurs_kasprzyka/regulamin' => 'pages#show', id: 'rules'
   get 'instrukcje/wydarzenia' => 'pages#show', id: 'rules'
   get 'kontakty' => 'pages#show', id: 'kontakty'
