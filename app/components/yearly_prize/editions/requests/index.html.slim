@@ -68,7 +68,7 @@
                           button.close-button aria-label=("Close reveal") data-close="" type="button" 
                             span aria-hidden="true"  &times;
 
-          - if request.yearly_prize_edition.votable?
+          - if request.yearly_prize_edition.start_voting_date.present? && Time.current >= request.yearly_prize_edition.start_voting_date
             = render partial: 'likes/button', locals: { likeable: request, button_text_like: "Zagłosuj za przyznaniem 8semki!", button_text_unlike: "Cofnij swój głos za przyznaniem 8semki!" }
 
           - if user_signed_in? && (current_user.roles.include?('management') || current_user.roles.include?('secondary_management') || current_user.roles.include?('office'))

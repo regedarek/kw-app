@@ -11,21 +11,22 @@
     .large-12.columns
       .callout.primary
         .row
-          .large-3.columns
+          .large-2.columns
             = f.label :description
             = f.text_field :description
 
-          .large-3.columns
+          .large-2.columns
             = f.label :name
             = f.text_field :name
-
-          .large-4.columns
-            = f.check_box :votable
-            = f.label :votable, 'Mozna glosowac?'
-
-          .large-4.columns
+          .large-2.columns
+            = f.label :start_voting_date
+            = f.datetime_field :start_voting_date
+          .large-2.columns
+            = f.label :end_voting_date
+            = f.datetime_field :end_voting_date
+          .large-2.columns
             = f.check_box :closed
-            = f.label :closed, 'Zamkniete?'
+            = f.label :closed, 'Konkurs zamkniety'
 
   .row
     .large-12.columns

@@ -43,7 +43,7 @@ module PhotoCompetition
       private
 
       def edition_params
-        params.require(:edition).permit(:name, :code, :closed)
+        params.require(:edition).permit(:name, :code, :closed, :start_voting_date, :end_voting_date)
       end
     end
   end

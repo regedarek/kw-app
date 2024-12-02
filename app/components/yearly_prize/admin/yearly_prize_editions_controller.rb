@@ -36,7 +36,7 @@ module YearlyPrize
       private
 
       def edition_params
-        params.require(:yearly_prize_edition).permit(:name, :votable, :year, :closed, :description)
+        params.require(:yearly_prize_edition).permit(:name, :year, :closed, :description, :start_voting_date, :end_voting_date)
       end
     end
   end

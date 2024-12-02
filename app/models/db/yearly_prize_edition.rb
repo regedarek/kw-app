@@ -2,14 +2,16 @@
 #
 # Table name: yearly_prize_editions
 #
-#  id          :bigint           not null, primary key
-#  closed      :boolean          default(FALSE), not null
-#  description :text
-#  name        :string           not null
-#  votable     :boolean          default(FALSE), not null
-#  year        :integer          not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                :bigint           not null, primary key
+#  closed            :boolean          default(FALSE), not null
+#  description       :text
+#  end_voting_date   :datetime
+#  name              :string           not null
+#  start_voting_date :datetime
+#  votable           :boolean          default(FALSE), not null
+#  year              :integer          not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 class Db::YearlyPrizeEdition < ApplicationRecord
   self.table_name = 'yearly_prize_editions'
