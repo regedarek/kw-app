@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_02_095346) do
+ActiveRecord::Schema.define(version: 2024_12_04_141614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -400,6 +400,7 @@ ActiveRecord::Schema.define(version: 2024_12_02_095346) do
     t.boolean "friday_night", default: false, null: false
     t.boolean "saturday_night", default: false, null: false
     t.integer "license_number"
+    t.string "participant_first_name_1"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

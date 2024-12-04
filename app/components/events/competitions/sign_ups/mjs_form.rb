@@ -17,6 +17,7 @@ module Events
         configure { option :competition_id }
 
         define! do
+         required(:participant_first_name_1).filled
          required(:participant_name_1).filled
          required(:participant_country_1).filled
          optional(:tshirt_size_1).filled

@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 sign_up_attributes = %i(
-  participant_name_1 participant_name_2
+  participant_first_name_1 participant_name_1 participant_name_2
   participant_email_1 participant_email_2
   participant_birth_year_1 participant_birth_year_2
   participant_city_1 participant_city_2

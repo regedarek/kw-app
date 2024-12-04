@@ -14,6 +14,7 @@
 #  participant_country_2         :integer
 #  participant_email_1           :string
 #  participant_email_2           :string
+#  participant_first_name_1      :string
 #  participant_gender_1          :string
 #  participant_gender_2          :string
 #  participant_kw_id_1           :integer
@@ -156,9 +157,13 @@ module Events
         [participant_city_1, participant_city_2].map(&:to_s).reject(&:empty?).compact.join(' / ')
       end
 
+      def participant_name
+        participant_first_name_1.present? ? "#{participant_first_name_1} #{participant_name_1}" : participant_name_1
+      end
+
       def description
         if single
-          "Wpisowe nr #{id} na zawody #{competition_record.name} od #{participant_name_1}"
+          "Wpisowe nr #{id} na zawody #{competition_record.name} od #{participant_name}"
         else
           "Wpisowe nr #{id} na zawody #{competition_record.name} od #{participant_name_1} oraz #{participant_name_2}"
         end

@@ -106,6 +106,7 @@ module Events
           .require(:sign_up)
           .permit(
             :team_name,
+            :participant_first_name_1,
             :participant_name_1,
             :participant_name_2,
             :participant_gender_1,

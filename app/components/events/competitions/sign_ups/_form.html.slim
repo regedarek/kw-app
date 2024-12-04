@@ -72,6 +72,10 @@
     .callout.primary
       .row
         .large-4.columns
+          = f.label :participant_first_name_1, t('.participant_first_name_1')
+          = f.text_field :participant_first_name_1
+
+        .large-4.columns
           = f.label :participant_name_1, t('.participant_name_1')
           = f.text_field :participant_name_1
 
