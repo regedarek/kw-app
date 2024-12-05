@@ -46,7 +46,7 @@
 
       .large-3.columns
         = f.label :participant_birth_year_1, "Rok urodzenia 1 | Birthdate (RRRR) 1 *"
-        = f.number_field :participant_birth_year_1, max: 2007
+        = f.number_field :participant_birth_year_1, max: Date.today.year - 17
 
       .large-3.columns
         = f.label :participant_team_1, "Organizacja 1 | Club 1"
@@ -103,7 +103,7 @@
 
       .large-3.columns
         = f.label :participant_birth_year_2, "Rok urodzenia 2 | Birthdate (RRRR) 2 *"
-        = f.number_field :participant_birth_year_2, max: 2007
+        = f.number_field :participant_birth_year_2, max: Date.today.year - 17
 
       .large-3.columns
         = f.label :participant_team_2, "Organizacja 2 | Club 2"
