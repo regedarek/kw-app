@@ -110,7 +110,7 @@
     .row
       .large-12.columns
         = f.label :terms_of_service do
-          | Zapoznałam/em się z treścią <a href='https://docs.google.com/document/d/1s9eJXVtwJMdFM5fM1WMFOh1SHx-HYpSz/edit?usp=sharing&ouid=116540995097749909610&rtpof=true&sd=true'>Regulaminu</a> XXXVI Memoriału Jana Strzeleckiego w narciarstwie wysokogórskim, akceptuję jego postanowienia i będę stosować się do nich podczas rozgrywania zawodów.
+          | Zapoznałam/em się z treścią Regulaminu Memoriału Jana Strzeleckiego w narciarstwie wysokogórskim, akceptuję jego postanowienia i będę stosować się do nich podczas rozgrywania zawodów.
         - if @sign_up.persisted?
           = f.check_box :terms_of_service, checked: 'checked'
         - else
@@ -118,7 +118,7 @@
         small = @competition.rules_text.html_safe
         br
         = f.label :medical_rules
-          | Zapoznałam/em się z <a href='https://drive.google.com/file/d/194BCCSDV9N4Bw0johfh2n7QO7BoVNP9T/view?usp=sharing'>klauzulą informacyjną</a> dotyczącą przetwarzania moich danych osobowych i wyrażam zgodę na ich przetwarzanie w związku z moim uczestnictwem w XXXVI Memoriale Jana Strzeleckiego w narciarstwie wysokogórskim.
+          | Zapoznałam/em się z klauzulą informacyjną dotyczącą przetwarzania moich danych osobowych i wyrażam zgodę na ich przetwarzanie w związku z moim uczestnictwem w Memoriale Jana Strzeleckiego w narciarstwie wysokogórskim.
 
         - if @sign_up.persisted?
           = f.check_box :medical_rules, checked: 'checked'
