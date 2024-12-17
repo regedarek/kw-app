@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_04_141614) do
+ActiveRecord::Schema.define(version: 2024_12_17_160742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2024_12_04_141614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "membership", default: false, null: false
+    t.integer "junior_year"
   end
 
   create_table "competitions", id: :serial, force: :cascade do |t|

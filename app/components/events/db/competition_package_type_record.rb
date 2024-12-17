@@ -4,6 +4,7 @@
 #
 #  id                    :integer          not null, primary key
 #  cost                  :integer          not null
+#  junior_year           :integer
 #  membership            :boolean          default(FALSE), not null
 #  name                  :string           not null
 #  created_at            :datetime         not null
