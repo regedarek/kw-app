@@ -47,8 +47,8 @@ module Events
     class SignUpRecord < ActiveRecord::Base
       self.table_name = 'events_sign_ups'
 
-      enum participant_country_1: [:pl, :sk, :cz, :de, :ua, :other], _prefix: :country_1
-      enum participant_country_2: [:pl, :sk, :cz, :de, :ua, :other], _prefix: :country_2
+      enum participant_country_1: [:pl, :sk, :cz, :de, :ua, :it, :fr, :at, :ch, :esp, :ro, :gr, :other], _prefix: :country_1
+      enum participant_country_2: [:pl, :sk, :cz, :de, :ua, :it, :fr, :at, :ch, :esp, :ro, :gr, :other], _prefix: :country_2
 
       has_one :payment,
         as: :payable,
@@ -59,6 +59,10 @@ module Events
       validates_acceptance_of :terms_of_service
       validates_acceptance_of :medical_rules
       has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
+
+      def self.human_enum(enum, options = {})
+        [["Polska", 'pl'], ["Slovakia", "sk"], ["Czech", 'cz'], ["Germany", 'de'], ["Austria", "at"], ["Italy", "it"], ["France", "fr"], ["Spain", "esp"], ["Romania", "ro"], ["Ukraine", 'ua'], ["Other", "other"]]
+      end
 
       def sport_category_1
         return nil unless participant_birth_year_1.present?
