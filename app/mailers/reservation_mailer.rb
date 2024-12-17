@@ -5,7 +5,7 @@ class ReservationMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      from: 'kw@kw.krakow.pl',
+      from: 'biuro@kw.krakow.pl',
       subject: "Zarezerwowano: #{reservation.items.map(&:display_name).to_sentence}"
     )
   end
@@ -18,7 +18,7 @@ class ReservationMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      from: 'kw@kw.krakow.pl',
+      from: 'biuro@kw.krakow.pl',
       subject: "Przypominamy o oddaniu: #{reservation.items.map(&:display_name).to_sentence}"
     )
   end

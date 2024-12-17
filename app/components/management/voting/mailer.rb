@@ -19,7 +19,7 @@ module Management
 
         mail(
           to: @user.email,
-          from: 'kw@kw.krakow.pl',
+          from: 'biuro@kw.krakow.pl',
           subject: "Nowe głosowanie: #{@case.name} ##{@case.id}",
           reply_to: Management::Voting::Repository.new.management_users.map(&:email)
         )

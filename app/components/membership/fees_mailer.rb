@@ -5,7 +5,7 @@ module Membership
     def yearly_reminder(emails)
       mail(
         bcc: emails,
-        from: 'kw@kw.krakow.pl',
+        from: 'biuro@kw.krakow.pl',
         subject: "Przypomnienie opłacenia składki członkowskiej KW Kraków za rok #{Date.today.year}"
       )
     end

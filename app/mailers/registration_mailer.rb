@@ -6,7 +6,7 @@ class RegistrationMailer < ApplicationMailer
     I18n.with_locale(I18n.locale) do
       mail(
         to: @user.email,
-        from: 'kw@kw.krakow.pl',
+        from: 'biuro@kw.krakow.pl',
         subject: t('.subject')
       )
     end
