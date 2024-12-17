@@ -6,7 +6,7 @@ module Settlement
       @acceptors = Db::User.where(":name = ANY(roles)", name: "financial_management")
 
       mail(
-        to: ([@contract.creator.email] + @contract.users.map(&:email) + @acceptors.map(&:email) + @office_kings.map(&:email)).uniq,
+        to: ([@contract.creator.email] + @contract.users.map(&:email)).uniq,
         from: 'rozliczenia@kw.krakow.pl',
         subject: "Nowe rozliczenie: #{@contract.title} ##{contract.internal_number}/#{contract.period_date.year}"
       )
@@ -18,7 +18,7 @@ module Settlement
       @acceptors = Db::User.where(":name = ANY(roles)", name: "financial_management")
 
       mail(
-        to: ([@contract.creator.email] + @contract.users.map(&:email) + @acceptors.map(&:email) + @office_kings.map(&:email)).uniq,
+        to: ([@contract.creator.email] + @contract.users.map(&:email)).uniq,
         from: 'rozliczenia@kw.krakow.pl',
         subject: "Rozliczenie: #{@contract.title} ##{contract.internal_number}/#{contract.period_date.year} zmieniło status na #{I18n.t(@contract.state, scope: 'activerecord.attributes.settlement/contract_record.states')}"
       )
