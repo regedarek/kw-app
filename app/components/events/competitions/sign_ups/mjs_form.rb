@@ -48,6 +48,16 @@ module Events
            end
          end
 
+         validate(correct_junior_category_1: [:participant_birth_year_1, :competition_package_type_1_id]) do |year, package_id|
+           package = Events::Db::CompetitionPackageTypeRecord.find(package_id)
+
+           if package.junior_year.present? && package.junior_year > year.to_i
+            false
+           else
+             true
+           end
+         end
+
          validate(terms_of_service_true: [:terms_of_service]) do |terms|
            ActiveRecord::Type::Boolean.new.cast(terms)
          end

@@ -63,6 +63,7 @@ en:
 
 en:
   errors:
+    correct_junior_category_1: Participant 1 is older than Junior category
     active_kw_id_1: Have to fill KW Kraków membership id 1
     active_kw_id_2: Have to fill KW Kraków membership id 1
     remarks:
@@ -115,6 +116,7 @@ pl:
     terms_of_service_true: Musisz zaakceptować regulamin!
     medical_rules_true: Zapoznaj się z klauzulą informacyjną dotyczącą przetwarzania danych osobowych!
     participant_license_1_filled: Musisz podać numer licencji PZA 1
+    correct_junior_category_1: Uczestnik 1 jest starszy niż kategoria Junior
     active_kw_id_1: Musisz podać numer legitymacji klubu 1 z opłaconą składką
     active_kw_id_2: Musisz podać numer legitymacji klubu 2 z opłaconą składką
     remarks:

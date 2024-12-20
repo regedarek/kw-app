@@ -66,27 +66,29 @@ module Events
 
       def sport_category_1
         return nil unless participant_birth_year_1.present?
+        return nil unless competition_record.event_date.present?
+        event_year = competition_record.event_date.year
 
         case
-        when participant_birth_year_1.to_i.between?(Date.today.year - 18, Date.today.year - 17)
+        when participant_birth_year_1.to_i.between?(event_year - 18, event_year - 17)
           if participant_gender_1 == "1"
             "Junior Młodszy (U18)"
           else
             "Juniorka Młodsza (U18)"
           end
-        when participant_birth_year_1.to_i.between?(Date.today.year - 20, Date.today.year - 19)
+        when participant_birth_year_1.to_i.between?(event_year - 20, event_year - 19)
           if participant_gender_1 == "1"
             "Junior (U20)"
           else
             "Juniorka (U20)"
           end
-        when participant_birth_year_1.to_i.between?(Date.today.year - 49, Date.today.year - 21)
+        when participant_birth_year_1.to_i.between?(event_year - 49, event_year - 21)
           if participant_gender_1 == "1"
             "Senior"
           else
             "Seniorka"
           end
-        when participant_birth_year_1.to_i.between?(1900, Date.today.year - 50)
+        when participant_birth_year_1.to_i.between?(1900, event_year - 50)
           if participant_gender_1 == "1"
             "Nestor"
           else

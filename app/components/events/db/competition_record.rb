@@ -50,6 +50,8 @@ module Events
         reject_if: proc { |attributes| attributes[:name].blank? },
         allow_destroy: true
 
+      validates :event_date, presence: true
+
       def form
         case custom_form
         when 'mjs'
