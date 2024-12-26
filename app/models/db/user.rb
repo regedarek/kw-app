@@ -68,8 +68,7 @@ class Db::User < ActiveRecord::Base
   ROLES = %w(training_contracts business_courses library reservations routes admin events courses shop competitions office tech donations photo_competition management secondary_management financial_management marketing projects)
   SNW_GROUPS = %w(mjs instructors management sport authors gear support)
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable
 
   validates :phone, :kw_id, :first_name, :last_name, presence: true
   validates :kw_id, :email, uniqueness: true

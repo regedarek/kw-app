@@ -3,19 +3,21 @@ ruby '2.7.0'
 
 # setup
 gem 'bootsnap', require: false
-gem 'rails', '6.0.0'
-gem 'pg'
+gem 'rails', '6.1.0'
+gem 'pg', '~> 1.1'
 gem 'active_model_serializers'
 
 gem 'strava-ruby-client'
 gem 'polylines'
 gem "rolify"
+gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'flag-icons-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'pdf-reader'
-gem 'nokogiri', '1.8.5'
-gem "loofah", "< 2.21.0" 
+gem 'nokogiri', '1.12.5'
+gem "loofah"
 gem 'jquery-rails'
 gem 'mailboxer', github: 'regedarek/mailboxer', branch: 'kw_app'
 gem 'rails-jquery-tokeninput'
@@ -25,8 +27,7 @@ gem 'griddler'
 gem "griddler-sendgrid"
 gem 'sendgrid-ruby'
 gem 'nested_form_fields'
-gem 'honeybadger', '~> 3.1'
-gem 'trix-rails', '2.1.0', require: 'trix'
+gem 'trix-rails', require: 'trix'
 gem 'friendly_id', '~> 5.2.4'
 gem 'foundation-rails', '~> 6.4.3.0'
 gem 'airbrake'
@@ -43,13 +44,10 @@ gem 'kaminari'
 gem 'pagy'
 gem 'whenever', require: false
 gem 'rubyzip', '>= 1.2.1'
-gem 'axlsx', '2.1.0.pre', git: 'https://github.com/randym/axlsx.git'
-gem 'axlsx_rails'
 gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'carrierwave'
 gem 'fog-openstack', require: "fog/openstack"
 gem "mini_magick", ">= 4.9.4"
-gem 'omniauth-google-oauth2', '~> 0.6.0'
 gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'
@@ -58,12 +56,13 @@ gem 'cancancan', '~> 3.3.0'
 gem 'select2-foundation'
 
 # Dry-rb
-gem 'dry-container'
-gem 'dry-matcher'
-gem 'dry-monads'
-gem 'dry-validation'
-gem 'dry-types'
-gem 'dry-struct', require: false
+gem 'dry-core', '0.4.4'
+gem 'dry-container', '0.7.2'
+gem 'dry-matcher', '0.6.0'
+gem 'dry-monads', '0.3.1'
+gem 'dry-validation', '0.13.1'
+gem 'dry-types', '0.14.0'
+gem 'dry-struct', '0.6.0', require: false
 
 gem 'sidekiq'
 gem 'sidekiq-failures'
@@ -83,7 +82,8 @@ group :development do
   gem "ffi", "< 1.17.0"
   gem "rbnacl-libsodium"
   gem 'rbnacl'
-  gem 'net-ssh', '>= 6.0.2'
+  gem 'net-ssh', '>= 7.0'
+  gem 'thor', '>= 1.2'
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'annotate', git: 'https://github.com/ctran/annotate_models.git'
@@ -95,8 +95,4 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'webmock'
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rbenv'
 end
