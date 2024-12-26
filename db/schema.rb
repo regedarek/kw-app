@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_17_160742) do
+ActiveRecord::Schema.define(version: 2024_12_26_180715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.integer "course_id"
     t.string "name"
     t.string "email"
-    t.string "code", default: "dc14cce987f7f54b", null: false
+    t.string "code", default: "512cb69ed5f44d7f", null: false
     t.datetime "expired_at"
     t.datetime "sent_at"
     t.integer "admin_id"
@@ -516,7 +516,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code", default: "04b41981e27a7041", null: false
+    t.string "code", default: "0b0367353bdde73e", null: false
   end
 
   create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
@@ -647,6 +647,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "category_type"
+    t.string "amount_body"
     t.string "amount_text"
   end
 
@@ -1174,7 +1175,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "3575717639915f7a", null: false
+    t.string "code", default: "64019b257f9e3f0a", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"

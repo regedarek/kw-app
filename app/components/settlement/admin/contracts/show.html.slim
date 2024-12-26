@@ -97,13 +97,6 @@
             b Kwota rozliczenia w oryginalnej walucie: 
             = number_to_currency(@contract.cost, unit: @contract.currency_type.upcase)
 
-        .row
-          .large-12.columns
-            b Kwota rozliczenia w PLN: 
-            - money = Money.from_cents(@contract.cost * 100, @contract.currency_type.upcase)
-            - exchange_date = money.bank.update_rates
-            = "#{number_to_currency(money.exchange_to("PLN"), unit: 'PLN')} [#{exchange_date.to_date}]"
-
     .callout class=("#{@contract.preclosed? ? 'success' : 'alert'}")
       .row
         .large-12.columns
