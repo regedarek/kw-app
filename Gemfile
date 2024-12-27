@@ -3,10 +3,10 @@ ruby '2.7.0'
 
 # setup
 gem 'bootsnap', require: false
-gem 'rails', '6.1.0'
+gem 'rails', '7.0.0'
 gem 'pg', '~> 1.1'
 gem 'active_model_serializers'
-
+gem "sprockets-rails"
 gem 'strava-ruby-client'
 gem 'polylines'
 gem "rolify"
@@ -32,10 +32,10 @@ gem 'friendly_id', '~> 5.2.4'
 gem 'foundation-rails', '~> 6.4.3.0'
 gem 'airbrake'
 gem 'high_voltage'
-gem 'devise', '~> 4.7.3'
+gem 'devise', '~> 4.8.1'
 gem 'paper_trail'
 gem 'slim-rails'
-gem 'ransack', '2.4.1'
+gem 'ransack', '2.5.0'
 gem 'searchkick'
 gem 'workflow'
 gem 'money'
@@ -47,7 +47,7 @@ gem 'rubyzip', '>= 1.2.1'
 gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/attributed_object.git'
 gem 'carrierwave'
 gem 'fog-openstack', require: "fog/openstack"
-gem "mini_magick", ">= 4.9.4"
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f' 
 gem 'google_calendar'
 gem 'koala'
 gem 'prawn-rails'

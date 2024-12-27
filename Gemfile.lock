@@ -13,6 +13,13 @@ GIT
     attributed_object (0.4.0)
 
 GIT
+  remote: https://github.com/mimemagicrb/mimemagic.git
+  revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  specs:
+    mimemagic (0.3.5)
+
+GIT
   remote: https://github.com/regedarek/mailboxer.git
   revision: 27acabebfedb27ab3b34d17104c4660e26671119
   branch: kw_app
@@ -28,40 +35,41 @@ GEM
     TimezoneParser (0.3.3)
       insensitive_hash
       tzinfo
-    actioncable (6.1.0)
-      actionpack (= 6.1.0)
-      activesupport (= 6.1.0)
+    actioncable (7.0.0)
+      actionpack (= 7.0.0)
+      activesupport (= 7.0.0)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.1.0)
-      actionpack (= 6.1.0)
-      activejob (= 6.1.0)
-      activerecord (= 6.1.0)
-      activestorage (= 6.1.0)
-      activesupport (= 6.1.0)
+    actionmailbox (7.0.0)
+      actionpack (= 7.0.0)
+      activejob (= 7.0.0)
+      activerecord (= 7.0.0)
+      activestorage (= 7.0.0)
+      activesupport (= 7.0.0)
       mail (>= 2.7.1)
-    actionmailer (6.1.0)
-      actionpack (= 6.1.0)
-      actionview (= 6.1.0)
-      activejob (= 6.1.0)
-      activesupport (= 6.1.0)
+    actionmailer (7.0.0)
+      actionpack (= 7.0.0)
+      actionview (= 7.0.0)
+      activejob (= 7.0.0)
+      activesupport (= 7.0.0)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.1.0)
-      actionview (= 6.1.0)
-      activesupport (= 6.1.0)
-      rack (~> 2.0, >= 2.0.9)
+    actionpack (7.0.0)
+      actionview (= 7.0.0)
+      activesupport (= 7.0.0)
+      rack (~> 2.0, >= 2.2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.1.0)
-      actionpack (= 6.1.0)
-      activerecord (= 6.1.0)
-      activestorage (= 6.1.0)
-      activesupport (= 6.1.0)
+    actiontext (7.0.0)
+      actionpack (= 7.0.0)
+      activerecord (= 7.0.0)
+      activestorage (= 7.0.0)
+      activesupport (= 7.0.0)
+      globalid (>= 0.6.0)
       nokogiri (>= 1.8.5)
-    actionview (6.1.0)
-      activesupport (= 6.1.0)
+    actionview (7.0.0)
+      activesupport (= 7.0.0)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
@@ -71,27 +79,26 @@ GEM
       activemodel (>= 4.1)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
-    activejob (6.1.0)
-      activesupport (= 6.1.0)
+    activejob (7.0.0)
+      activesupport (= 7.0.0)
       globalid (>= 0.3.6)
-    activemodel (6.1.0)
-      activesupport (= 6.1.0)
-    activerecord (6.1.0)
-      activemodel (= 6.1.0)
-      activesupport (= 6.1.0)
-    activestorage (6.1.0)
-      actionpack (= 6.1.0)
-      activejob (= 6.1.0)
-      activerecord (= 6.1.0)
-      activesupport (= 6.1.0)
-      marcel (~> 0.3.1)
-      mimemagic (~> 0.3.2)
-    activesupport (6.1.0)
+    activemodel (7.0.0)
+      activesupport (= 7.0.0)
+    activerecord (7.0.0)
+      activemodel (= 7.0.0)
+      activesupport (= 7.0.0)
+    activestorage (7.0.0)
+      actionpack (= 7.0.0)
+      activejob (= 7.0.0)
+      activerecord (= 7.0.0)
+      activesupport (= 7.0.0)
+      marcel (~> 1.0)
+      mini_mime (>= 1.1.0)
+    activesupport (7.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     afm (0.2.2)
@@ -157,7 +164,7 @@ GEM
     date (3.4.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.7.3)
+    devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -304,17 +311,13 @@ GEM
       net-smtp
     mailgun-ruby (1.1.11)
       rest-client (~> 2.0.2)
-    marcel (0.3.3)
-      mimemagic (~> 0.3.2)
+    marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
     mime-types (3.6.0)
       logger
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.1203)
-    mimemagic (0.3.10)
-      nokogiri (~> 1)
-      rake
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     mini_portile2 (2.6.1)
@@ -375,21 +378,20 @@ GEM
       rack
     rack-test (2.2.0)
       rack (>= 1.3)
-    rails (6.1.0)
-      actioncable (= 6.1.0)
-      actionmailbox (= 6.1.0)
-      actionmailer (= 6.1.0)
-      actionpack (= 6.1.0)
-      actiontext (= 6.1.0)
-      actionview (= 6.1.0)
-      activejob (= 6.1.0)
-      activemodel (= 6.1.0)
-      activerecord (= 6.1.0)
-      activestorage (= 6.1.0)
-      activesupport (= 6.1.0)
+    rails (7.0.0)
+      actioncable (= 7.0.0)
+      actionmailbox (= 7.0.0)
+      actionmailer (= 7.0.0)
+      actionpack (= 7.0.0)
+      actiontext (= 7.0.0)
+      actionview (= 7.0.0)
+      activejob (= 7.0.0)
+      activemodel (= 7.0.0)
+      activerecord (= 7.0.0)
+      activestorage (= 7.0.0)
+      activesupport (= 7.0.0)
       bundler (>= 1.15.0)
-      railties (= 6.1.0)
-      sprockets-rails (>= 2.0.0)
+      railties (= 7.0.0)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -398,14 +400,15 @@ GEM
       loofah (~> 2.19, >= 2.19.1)
     rails-jquery-tokeninput (0.2.6)
       jquery-rails (>= 2)
-    railties (6.1.0)
-      actionpack (= 6.1.0)
-      activesupport (= 6.1.0)
+    railties (7.0.0)
+      actionpack (= 7.0.0)
+      activesupport (= 7.0.0)
       method_source
-      rake (>= 0.8.7)
+      rake (>= 12.2)
       thor (~> 1.0)
+      zeitwerk (~> 2.5)
     rake (13.2.1)
-    ransack (2.4.1)
+    ransack (2.5.0)
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
       i18n
@@ -570,7 +573,7 @@ DEPENDENCIES
   caxlsx_rails
   chronic
   coffee-rails
-  devise (~> 4.7.3)
+  devise (~> 4.8.1)
   dry-container (= 0.7.2)
   dry-core (= 0.4.4)
   dry-matcher (= 0.6.0)
@@ -597,7 +600,7 @@ DEPENDENCIES
   loofah
   mailboxer!
   mailgun-ruby (~> 1.1.6)
-  mini_magick (>= 4.9.4)
+  mimemagic!
   money
   nested_form_fields
   net-ssh (>= 7.0)
@@ -608,9 +611,9 @@ DEPENDENCIES
   pg (~> 1.1)
   polylines
   prawn-rails
-  rails (= 6.1.0)
+  rails (= 7.0.0)
   rails-jquery-tokeninput
-  ransack (= 2.4.1)
+  ransack (= 2.5.0)
   rbnacl
   rbnacl-libsodium
   rolify
@@ -624,6 +627,7 @@ DEPENDENCIES
   sidekiq-failures
   slim-rails
   spring
+  sprockets-rails
   strava-ruby-client
   thor (>= 1.2)
   timecop
