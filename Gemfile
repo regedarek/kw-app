@@ -9,6 +9,7 @@ gem 'active_model_serializers'
 gem "sprockets-rails"
 gem 'strava-ruby-client'
 gem 'polylines'
+gem 'kamal'
 gem "rolify"
 gem 'caxlsx'
 gem 'caxlsx_rails'

@@ -172,6 +172,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
     domain_name (0.6.20240107)
+    dotenv (2.8.1)
     dry-configurable (0.7.0)
       concurrent-ruby (~> 1.0)
     dry-container (0.7.2)
@@ -278,6 +279,17 @@ GEM
     jsonapi-renderer (0.2.2)
     jwt (2.10.1)
       base64
+    kamal (1.9.2)
+      activesupport (>= 7.0)
+      base64 (~> 0.2)
+      bcrypt_pbkdf (~> 1.0)
+      concurrent-ruby (~> 1.2)
+      dotenv (~> 2.8)
+      ed25519 (~> 1.2)
+      net-ssh (~> 7.0)
+      sshkit (>= 1.23.0, < 2.0)
+      thor (~> 1.2)
+      zeitwerk (~> 2.5)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -338,6 +350,10 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
+    net-scp (4.0.0)
+      net-ssh (>= 2.6.5, < 8.0.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
     net-smtp (0.5.0)
       net-protocol
     net-ssh (7.3.0)
@@ -347,6 +363,7 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    ostruct (0.6.1)
     pagy (6.5.0)
     paper_trail (14.0.0)
       activerecord (>= 6.0)
@@ -511,6 +528,12 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    sshkit (1.23.2)
+      base64
+      net-scp (>= 1.1.2)
+      net-sftp (>= 2.1.2)
+      net-ssh (>= 2.8.0)
+      ostruct
     ssrf_filter (1.2.0)
     strava-ruby-client (2.1.0)
       activesupport
@@ -594,6 +617,7 @@ DEPENDENCIES
   high_voltage
   jqplot-rails
   jquery-rails
+  kamal
   kaminari
   koala
   listen
