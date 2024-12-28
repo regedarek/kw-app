@@ -95,5 +95,5 @@ group :development, :test do
   gem 'webmock'
 end
 
-gem 'thruster', group: [:development, :production]
+gem 'thruster', "0.1.8", require: false, group: [:development, :production]
 gem "kamal", "~> 2.3", require: false
