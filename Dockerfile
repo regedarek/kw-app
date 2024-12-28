@@ -1,22 +1,43 @@
-FROM ruby:2.7.0-alpine3.11
+ARG RUBY_VERSION=3.0.7
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
-RUN apk update
-RUN apk upgrade
-RUN apk add --update build-base nodejs postgresql-dev tzdata git imagemagick gcompat libxml2-dev curl-dev yarn libsodium-dev
-RUN apk update && apk add -u yarn
+# Rails app lives here
+WORKDIR /rails
 
-ENV app /usr/src/kw-app/
-RUN mkdir $app
-WORKDIR $app
+# Install base packages
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libpq-dev postgresql-client build-essential bash bash-completion git pkg-config tzdata imagemagick libsodium-dev libxml2-dev nodejs && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-ENV BUNDLER_VERSION 2.2.15
-ENV BUNDLE_PATH /kw-app-gems
+# Set production environment
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/rails/tmp/cache" \
+    BUNDLE_WITHOUT=""
 
-RUN gem install bundler -v 2.2.15
-RUN bundle config --global github.https true
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
 
-ADD . $app
+# Copy application code
+COPY . .
 
-EXPOSE 3002
+RUN ls -l /rails/bin
 
-CMD rm -f tmp/pids/server.pid && bundle exec rails s -p 3002 -b 0.0.0.0
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+# Final stage for app image
+FROM base
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER 1000:1000
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["./bin/docker-entrypoint"]
+
+# Start server via Thruster by default, this can be overwritten at runtime
+EXPOSE 3000
+CMD ["./bin/thrust", "./bin/rails", "server"]

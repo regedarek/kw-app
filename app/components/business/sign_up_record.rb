@@ -6,7 +6,7 @@
 #  alternative_email               :string
 #  birthdate                       :date
 #  birthplace                      :string
-#  code                            :string           default("512cb69ed5f44d7f"), not null
+#  code                            :string           default("58044b12dce6f737"), not null
 #  email                           :string
 #  equipment_at                    :datetime
 #  expired_at                      :datetime

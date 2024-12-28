@@ -1,4 +1,9 @@
-
+$secondary-color: #f8b400;
+$primary-color: #f5a623;
+$white: #fff;
+$body-font-color: #333;
+$dark-gray: #333;
+$medium-gray: #999;
 $card-product-hover-transition: all 0.2s ease;
 
 .card-product {
@@ -110,7 +115,7 @@ $card-product-hover-transition: all 0.2s ease;
 
 
 /* Large and up */
-@include breakpoint(large) {
+@media (min-width: 1024px) {
   .card-profile-stats {
     .card-profile-stats-intro {
       align-items: center;

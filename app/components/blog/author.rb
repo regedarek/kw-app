@@ -1,7 +1,7 @@
 require 'dry-struct'
 
 module Types
-  include Dry::Types.module
+  include Dry.Types(default: :nominal)
 end
 
 module Blog

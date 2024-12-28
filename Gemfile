@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.0'
+ruby '3.0.7'
 
 # setup
 gem 'bootsnap', require: false
@@ -7,9 +7,8 @@ gem 'rails', '7.0.0'
 gem 'pg', '~> 1.1'
 gem 'active_model_serializers'
 gem "sprockets-rails"
-gem 'strava-ruby-client'
+gem 'puma'
 gem 'polylines'
-gem 'kamal'
 gem "rolify"
 gem 'caxlsx'
 gem 'caxlsx_rails'
@@ -57,25 +56,23 @@ gem 'cancancan', '~> 3.3.0'
 gem 'select2-foundation'
 
 # Dry-rb
-gem 'dry-core', '0.4.4'
-gem 'dry-container', '0.7.2'
-gem 'dry-matcher', '0.6.0'
-gem 'dry-monads', '0.3.1'
-gem 'dry-validation', '0.13.1'
-gem 'dry-types', '0.14.0'
-gem 'dry-struct', '0.6.0', require: false
+gem 'dry-core'
+gem 'dry-configurable', '1.0.0'
+gem 'dry-container'
+gem 'dry-equalizer'
+gem 'dry-logic'
+gem 'dry-matcher'
+gem 'dry-monads', '~> 1.3'
+gem 'dry-validation', '~> 1.0'
+gem 'dry-types'
+gem 'dry-struct', require: false
 
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'appsignal'
 
 gem 'jqplot-rails'
-
-gem 'webpacker', '~> 5.x'
-
-group :development, :staging do
-  gem 'faker'
-end
+gem 'faker'
 
 group :development do
   gem 'listen'
@@ -97,3 +94,6 @@ group :development, :test do
   gem 'spring'
   gem 'webmock'
 end
+
+gem "thruster", require: false
+gem "kamal", "~> 2.3", require: false

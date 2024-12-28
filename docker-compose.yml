@@ -1,55 +1,90 @@
 services:
-  redis:
-    image: 'redis:7-alpine'
-    command: redis-server  --requirepass +eA8tga96sbquDe9CLL3yUZMNdHM6prSwD6kj1vXO4nzPPudDkxh4U+/LMtOWd+Wd72s9MnXNZqCKZeh
-    ports:
-      - '6379:6379'
-    volumes:
-      - 'redis:/data'
-    sysctls:
-      - net.core.somaxconn=4096
-  sidekiq:
-    depends_on:
-      - 'db'
-      - 'redis'
+  app:
+    command: ./bin/thrust ./bin/rails server -p 3002 -b 0.0.0.0
     build: .
-    command: bundle exec sidekiq -q default -q mailers
-    volumes:
-      - .:/usr/src/kw-app
-      - .:/usr/src/kw-app/tmp
-      - gems:/kw-app-gems
     environment:
+      - DB_HOST=postgres
+      - PGUSER=dev-user
+      - DB_PASSWORD=dev-password
+      - DB_USER=dev-user
+      - DB_USERNAME=dev-user
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
-  db:
+    volumes:
+      - .:/rails
+      - kw-app-cache:/rails/tmp/cache
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+      - redis
+      - mailcatcher
+    tty: true
+    stdin_open: true
+    networks:
+      - my_local_dev_network
+
+  postgres:
+    container_name: kw-app-postgres-10
     image: 'postgres:10.3-alpine'
     volumes:
-      - 'data-volume:/var/lib/postgresql/data'
+      - kw-app-postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=dev-user
+      - POSTGRES_PASSWORD=dev-password
+      - PG_USER=dev-user
+    ports:
+        - "5432:5432"
+    networks:
+      - my_local_dev_network
+
+  sidekiq:
+    container_name: kw-app-sidekiq
+    depends_on:
+      - postgres
+      - redis
+    build: .
+    command: ./bin/sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/rails
+      - .:/rails/tmp/cache
+    environment:
+      - DB_HOST=postgres
+      - PGUSER=dev-user
+      - DB_PASSWORD=dev-password
+      - DB_USER=dev-user
+      - DB_USERNAME=dev-user
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+    stdin_open: true
+    tty: true
+    networks:
+      - my_local_dev_network
+
   mailcatcher:
     image: schickling/mailcatcher
     ports:
       - "1025:1025"
       - "1080:1080"
-  app:
-    command: >
-      sh -c "(bundle check || bundle install) &&
-      rm -f tmp/pids/server.pid && bundle exec rails s -p 3002 -b 0.0.0.0"
-    build: .
-    links:
-      - mailcatcher
-      - redis
-    volumes:
-      - .:/usr/src/kw-app
-      - gems:/kw-app-gems
-    ports:
-      - "3002:3002"
-    depends_on:
-      - db
-      - redis
-    tty: true
-    stdin_open: true
-    environment:
-      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
-volumes:
+    networks:
+      - my_local_dev_network
+
   redis:
-  data-volume:
-  gems:
+    container_name: kw-app-redis
+    image: 'redis:7-alpine'
+    command: redis-server  --requirepass +eA8tga96sbquDe9CLL3yUZMNdHM6prSwD6kj1vXO4nzPPudDkxh4U+/LMtOWd+Wd72s9MnXNZqCKZeh
+    ports:
+      - '6379:6379'
+    volumes:
+      - kw-app-redis-data:/var/lib/redis/data
+    sysctls:
+      - net.core.somaxconn=4096
+    networks:
+      - my_local_dev_network
+
+volumes:
+  kw-app-redis-data:
+  kw-app-postgres:
+  kw-app-cache:
+
+networks:
+  my_local_dev_network:
+    name: my_local_dev_network

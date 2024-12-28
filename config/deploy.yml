@@ -1,0 +1,76 @@
+service: kw-app
+image: regedarek/kw-app
+
+builder:
+  dockerfile: Dockerfile.production
+  arch: amd64
+
+servers:
+  web:
+    hosts:
+      - 146.59.44.70
+    options:
+      network: "private"
+
+proxy:
+  ssl: true
+  app_port: 3000
+  host: nowypanel.kw.krakow.pl
+  healthcheck:
+    path: /up
+    interval: 2
+    timeout: 2
+
+registry:
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  clear:
+    RAILS_ENV: production
+    RACK_ENV: production
+    DB_HOST: kw-app-postgres
+    DB_PORT: 5432
+  secret:
+    - RAILS_ENV
+    - SECRET_KEY_BASE
+    - RAILS_MASTER_KEY
+    - PRODUCTION_DATABASE_NAME
+    - PRODUCTION_DATABASE_USERNAME
+    - PRODUCTION_DATABASE_PASSWORD
+    - PRODUCTION_DATABASE_HOST
+    - REDIS_URL_SIDEKIQ
+    - STRAVA_CLIENT
+    - STRAVA_SECRET
+    - DOTPAY_PASSWORD
+    - MAILGUN_LOGIN
+    - MAILGUN_PASSWORD
+    - OPENSTACK_TENANT
+    - OPENSTACK_USERNAME
+    - OPENSTACK_API_KEY
+    - METEOBLUE_KEY
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
+
+ssh:
+  user: ubuntu
+
+accessories:
+  postgres:
+    image: postgres:16.0
+    host: 146.59.44.70
+    port: "127.0.0.1:5432:5432"
+    env:
+      clear:
+        POSTGRES_USER: "${POSTGRES_USER}"
+        POSTGRES_DB: "${POSTGRES_DB}"
+      secret:
+        - POSTGRES_PASSWORD
+    files:
+      - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/postgresql/data
+    options:
+      network: "private"

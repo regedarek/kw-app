@@ -1,3 +1,8 @@
+module Payments
+  module Dotpay
+    class Testing; end
+  end
+end
 charity = Charity::DonationRecord.last
 
 return unless charity.present?

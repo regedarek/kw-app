@@ -1,6 +1,4 @@
 - if user_signed_in? && current_user.active?
-  = javascript_pack_tag 'homepage_components'
-  = stylesheet_pack_tag 'homepage_components'
   div(id="test")
   .row
     .large-12.columns style='text-align: center'
@@ -123,10 +121,6 @@
         = f.hidden_field :remember_me, value: true
 
         = f.submit "Zaloguj się", class: 'button large expanded'
-        - if Rails.env.development?
-          p.text-center
-            | lub
-          = link_to "Zaloguj przez Google", user_google_oauth2_omniauth_authorize_path(protocol: 'https'), class: 'button secondary large expanded'
         = link_to "Zapomniałeś hasła?", new_password_path(Db::User.new), class: 'button warning large expanded'
         | Jeżeli masz problem z kontem skontaktuj się z nami przez: biuro małpa kw.krakow.pl
 

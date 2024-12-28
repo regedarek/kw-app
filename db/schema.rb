@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.integer "course_id"
     t.string "name"
     t.string "email"
-    t.string "code", default: "512cb69ed5f44d7f", null: false
+    t.string "code", default: "4e194d5acc458ac8", null: false
     t.datetime "expired_at"
     t.datetime "sent_at"
     t.integer "admin_id"
@@ -409,7 +409,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: 6
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -499,7 +499,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.bigint "likeable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
     t.index ["user_id", "likeable_type", "likeable_id"], name: "index_likes_on_user_id_and_likeable_type_and_likeable_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
@@ -516,7 +516,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code", default: "0b0367353bdde73e", null: false
+    t.string "code", default: "acf1c00cd0980aca", null: false
   end
 
   create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
@@ -647,7 +647,6 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "category_type"
-    t.string "amount_body"
     t.string "amount_text"
   end
 
@@ -958,7 +957,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
   create_table "route_colleagues", id: :serial, force: :cascade do |t|
@@ -1175,7 +1174,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "64019b257f9e3f0a", null: false
+    t.string "code", default: "d68f206643841dfe", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"
@@ -1276,7 +1275,8 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type", null: false
+    t.string "item_type"
+    t.string "{:null=>false}"
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"

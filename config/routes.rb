@@ -650,6 +650,7 @@
 
 require 'sidekiq/web'
 Rails.application.routes.draw do
+
   devise_for :users,
     class_name: 'Db::User',
     controllers: {
@@ -681,30 +682,7 @@ Rails.application.routes.draw do
   get '/wydarzenia/webinary', to: redirect { |path_params, req| "/supplementary/courses?category=web" }
   get '/marketing', to: redirect { |path_params, req| "/sponsorship_requests" }
 
-  load Rails.root.join("app/components/events/routes.rb")
-  load Rails.root.join("app/components/shop/routes.rb")
-  load Rails.root.join("app/components/storage/routes.rb")
-  load Rails.root.join("app/components/marketing/routes.rb")
-  load Rails.root.join("app/components/yearly_prize/routes.rb")
-  load Rails.root.join("app/components/training/bluebook/routes.rb")
-  load Rails.root.join("app/components/scrappers/routes.rb")
-  load Rails.root.join("app/components/notification_center/routes.rb")
-  load Rails.root.join("app/components/email_center/routes.rb")
-  load Rails.root.join("app/components/activities/routes.rb")
-  load Rails.root.join("app/components/messaging/routes.rb")
-  load Rails.root.join("app/components/management/routes.rb")
-  load Rails.root.join("app/components/membership/admin/routes.rb")
-  load Rails.root.join("app/components/training/routes.rb")
-  load Rails.root.join("app/components/charity/routes.rb")
-  load Rails.root.join("app/components/photo_competition/routes.rb")
-  load Rails.root.join("app/components/settlement/routes.rb")
-  load Rails.root.join("app/components/user_management/routes.rb")
-  load Rails.root.join("app/components/library/routes.rb")
-  load Rails.root.join("app/components/business/routes.rb")
-  load Rails.root.join("app/components/management/snw/routes.rb")
-  load Rails.root.join("app/components/blog/routes.rb")
-  load Rails.root.join("app/components/club_meetings/routes.rb")
-  load Rails.root.join("app/components/olx/routes.rb")
+  draw(:custom_endpoints)
 
   resources :photos, only: :index
   resources :likes, only: %i[create destroy]
@@ -832,5 +810,6 @@ Rails.application.routes.draw do
   get 'warunki' => 'scrappers/scrappers#index'
   get 'trening/skimo' => 'pages#show', id: 'skimo'
 
+  get '/up', to: 'health_check#show'
   root to: 'pages#show', id: 'home'
 end

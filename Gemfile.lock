@@ -123,23 +123,23 @@ GEM
     bigdecimal (3.1.9)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (5.4.1)
+    brakeman (6.2.2)
+      racc
     builder (3.3.0)
     byebug (11.1.3)
     cancancan (3.3.0)
-    carrierwave (2.2.0)
-      activemodel (>= 5.0.0)
-      activesupport (>= 5.0.0)
+    carrierwave (3.1.0)
+      activemodel (>= 6.0.0)
+      activesupport (>= 6.0.0)
       addressable (~> 2.6)
       image_processing (~> 1.1)
-      mimemagic (>= 0.3.0)
-      mini_mime (>= 0.1.3)
+      marcel (~> 1.0.0)
       ssrf_filter (~> 1.0)
     case_transform (0.2)
       activesupport
-    caxlsx (3.0.4)
+    caxlsx (4.2.0)
       htmlentities (~> 4.3, >= 4.3.4)
-      mimemagic (~> 0.3)
+      marcel (~> 1.0)
       nokogiri (~> 1.10, >= 1.10.4)
       rubyzip (>= 1.3.0, < 3)
     caxlsx_rails (0.6.4)
@@ -172,56 +172,69 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
     domain_name (0.6.20240107)
-    dotenv (2.8.1)
-    dry-configurable (0.7.0)
+    dotenv (3.1.7)
+    dry-configurable (1.0.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-container (0.11.0)
       concurrent-ruby (~> 1.0)
-    dry-container (0.7.2)
+    dry-core (1.0.2)
       concurrent-ruby (~> 1.0)
-      dry-configurable (~> 0.1, >= 0.1.3)
-    dry-core (0.4.4)
-      concurrent-ruby (~> 1.0)
+      logger
+      zeitwerk (~> 2.6)
     dry-equalizer (0.3.0)
-    dry-inflector (0.3.0)
-    dry-logic (0.6.1)
+    dry-inflector (1.1.0)
+    dry-initializer (3.1.1)
+    dry-logic (1.5.0)
       concurrent-ruby (~> 1.0)
-      dry-core (~> 0.2)
-      dry-equalizer (~> 0.2)
-    dry-matcher (0.6.0)
-    dry-monads (0.3.1)
-      dry-core
-      dry-equalizer
-    dry-struct (0.6.0)
-      dry-core (~> 0.4, >= 0.4.3)
-      dry-equalizer (~> 0.2)
-      dry-types (~> 0.13)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-matcher (1.0.0)
+      dry-core (~> 1.0, < 2)
+    dry-monads (1.6.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-schema (1.12.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 1.0, < 2)
+      dry-core (~> 1.0, < 2)
+      dry-initializer (~> 3.0)
+      dry-logic (>= 1.4, < 2)
+      dry-types (>= 1.7, < 2)
+      zeitwerk (~> 2.6)
+    dry-struct (1.6.0)
+      dry-core (~> 1.0, < 2)
+      dry-types (>= 1.7, < 2)
       ice_nine (~> 0.11)
-    dry-types (0.14.0)
+      zeitwerk (~> 2.6)
+    dry-types (1.7.2)
+      bigdecimal (~> 3.0)
       concurrent-ruby (~> 1.0)
-      dry-container (~> 0.3)
-      dry-core (~> 0.4, >= 0.4.4)
-      dry-equalizer (~> 0.2)
-      dry-inflector (~> 0.1, >= 0.1.2)
-      dry-logic (~> 0.5, >= 0.5)
-    dry-validation (0.13.1)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0)
+      dry-logic (~> 1.4)
+      zeitwerk (~> 2.6)
+    dry-validation (1.10.0)
       concurrent-ruby (~> 1.0)
-      dry-configurable (~> 0.1, >= 0.1.3)
-      dry-core (~> 0.2, >= 0.2.1)
-      dry-equalizer (~> 0.2)
-      dry-logic (~> 0.5, >= 0.5.0)
-      dry-types (~> 0.14.0)
+      dry-core (~> 1.0, < 2)
+      dry-initializer (~> 3.0)
+      dry-schema (>= 1.12, < 2)
+      zeitwerk (~> 2.6)
     ed25519 (1.3.0)
     erubi (1.13.1)
     excon (1.2.2)
     execjs (2.10.0)
-    faker (3.4.2)
+    faker (3.5.1)
       i18n (>= 1.8.11, < 2)
-    faraday (2.8.1)
-      base64
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
+    faraday (2.12.2)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
     faraday-multipart (1.1.0)
       multipart-post (~> 2.0)
-    faraday-net_http (3.0.2)
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
     ffi (1.16.3)
     flag-icons-rails (3.4.6.1)
       sass-rails
@@ -258,7 +271,7 @@ GEM
     hashdiff (1.1.2)
     hashery (2.1.2)
     hashie (5.0.0)
-    high_voltage (3.1.2)
+    high_voltage (4.0.0)
     htmlentities (4.3.4)
     http-cookie (1.0.8)
       domain_name (~> 0.5)
@@ -279,17 +292,17 @@ GEM
     jsonapi-renderer (0.2.2)
     jwt (2.10.1)
       base64
-    kamal (1.9.2)
+    kamal (2.4.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
       bcrypt_pbkdf (~> 1.0)
       concurrent-ruby (~> 1.2)
-      dotenv (~> 2.8)
+      dotenv (~> 3.1)
       ed25519 (~> 1.2)
-      net-ssh (~> 7.0)
+      net-ssh (~> 7.3)
       sshkit (>= 1.23.0, < 2.0)
-      thor (~> 1.2)
-      zeitwerk (~> 2.5)
+      thor (~> 1.3)
+      zeitwerk (>= 2.6.18, < 3.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -343,7 +356,9 @@ GEM
       coffee-rails (>= 3.2.1)
       jquery-rails
       rails (>= 3.2.0)
-    net-imap (0.3.7)
+    net-http (0.6.0)
+      uri
+    net-imap (0.4.18)
       date
       net-protocol
     net-pop (0.1.2)
@@ -365,8 +380,8 @@ GEM
     orm_adapter (0.5.0)
     ostruct (0.6.1)
     pagy (6.5.0)
-    paper_trail (14.0.0)
-      activerecord (>= 6.0)
+    paper_trail (16.0.0)
+      activerecord (>= 6.1)
       request_store (~> 1.4)
     pdf-core (0.10.0)
     pdf-reader (2.13.0)
@@ -388,11 +403,11 @@ GEM
       prawn-table
     prawn-table (0.2.2)
       prawn (>= 1.3.0, < 3.0.0)
-    public_suffix (5.1.1)
+    public_suffix (6.0.1)
+    puma (6.5.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.10)
-    rack-proxy (0.7.7)
-      rack
     rack-test (2.2.0)
       rack (>= 1.3)
     rails (7.0.0)
@@ -458,10 +473,10 @@ GEM
     rspec-mocks (3.13.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (6.1.5)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      railties (>= 6.1)
+    rspec-rails (7.1.0)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
       rspec-core (~> 3.13)
       rspec-expectations (~> 3.13)
       rspec-mocks (~> 3.13)
@@ -471,7 +486,6 @@ GEM
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
-    ruby2_keywords (0.0.5)
     ruby_http_client (3.5.5)
     rubyzip (2.3.2)
     sass (3.4.25)
@@ -485,8 +499,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    searchkick (5.2.4)
-      activemodel (>= 5.2)
+    searchkick (5.3.1)
+      activemodel (>= 6.1)
       hashie
     select2-foundation (0.1.1)
       foundation-rails (>= 5, < 7)
@@ -494,7 +508,6 @@ GEM
       sass (>= 3.3.0, < 3.5)
       select2-rails (~> 4.0)
     select2-rails (4.0.13)
-    semantic_range (3.1.0)
     sendgrid-ruby (6.7.0)
       ruby_http_client (~> 3.4)
     sidekiq (7.3.7)
@@ -535,14 +548,10 @@ GEM
       net-ssh (>= 2.8.0)
       ostruct
     ssrf_filter (1.2.0)
-    strava-ruby-client (2.1.0)
-      activesupport
-      faraday (>= 2.0)
-      faraday-multipart (>= 1.0)
-      hashie
     temple (0.10.3)
     thor (1.3.2)
     thread_safe (0.3.6)
+    thruster (0.1.9)
     tilt (2.5.0)
     timecop (0.9.10)
     timeout (0.4.3)
@@ -554,6 +563,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
+    uri (1.0.2)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -564,11 +574,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webpacker (5.4.4)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -597,13 +602,16 @@ DEPENDENCIES
   chronic
   coffee-rails
   devise (~> 4.8.1)
-  dry-container (= 0.7.2)
-  dry-core (= 0.4.4)
-  dry-matcher (= 0.6.0)
-  dry-monads (= 0.3.1)
-  dry-struct (= 0.6.0)
-  dry-types (= 0.14.0)
-  dry-validation (= 0.13.1)
+  dry-configurable (= 1.0.0)
+  dry-container
+  dry-core
+  dry-equalizer
+  dry-logic
+  dry-matcher
+  dry-monads (~> 1.3)
+  dry-struct
+  dry-types
+  dry-validation (~> 1.0)
   ed25519 (>= 1.2, < 2.0)
   faker
   ffi (< 1.17.0)
@@ -617,7 +625,7 @@ DEPENDENCIES
   high_voltage
   jqplot-rails
   jquery-rails
-  kamal
+  kamal (~> 2.3)
   kaminari
   koala
   listen
@@ -635,6 +643,7 @@ DEPENDENCIES
   pg (~> 1.1)
   polylines
   prawn-rails
+  puma
   rails (= 7.0.0)
   rails-jquery-tokeninput
   ransack (= 2.5.0)
@@ -652,19 +661,18 @@ DEPENDENCIES
   slim-rails
   spring
   sprockets-rails
-  strava-ruby-client
   thor (>= 1.2)
+  thruster
   timecop
   trix-rails
   uglifier
   virtus
   webmock
-  webpacker (~> 5.x)
   whenever
   workflow
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 3.0.7p220
 
 BUNDLED WITH
-   2.3.26
+   2.2.33

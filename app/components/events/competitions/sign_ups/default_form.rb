@@ -2,7 +2,7 @@ require 'dry-validation'
 require 'dry-types'
 Dry::Types.load_extensions(:maybe)
 module Types
-  include Dry::Types.module
+  include Dry.Types(default: :nominal)
 end
 
 module Events
