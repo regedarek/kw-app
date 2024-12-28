@@ -1,0 +1,16 @@
+.column
+  .row
+    .large-12.columns style='text-align: center'
+      = image_tag asset_path('kw-bg.jpg')
+  br
+  .row
+    .large-10.columns
+      .callout
+        = I18n.t(:profiles_new_info)
+    .large-2.columns
+      .callout.text-center
+        = link_to image_tag('pl.png'), new_profile_path(locale: :pl)
+        |    
+        = link_to image_tag('en.png'), new_profile_path(locale: :en)
+
+  = render 'form', profile: @profile

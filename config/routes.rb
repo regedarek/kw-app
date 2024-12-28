@@ -683,6 +683,7 @@ Rails.application.routes.draw do
   get '/marketing', to: redirect { |path_params, req| "/sponsorship_requests" }
 
   draw(:custom_endpoints)
+  draw(:profile_creation_endpoints)
 
   resources :photos, only: :index
   resources :likes, only: %i[create destroy]

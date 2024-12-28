@@ -67,6 +67,7 @@ module Db
     validates :email, uniqueness: true, allow_blank: true, allow_nil: true
     validates :kw_id, uniqueness: true, allow_blank: true, allow_nil: true
     validate :kw_id_accepted
+    validates :terms_of_service, acceptance: true
 
     ransacker :recommended_by do
       Arel.sql("array_to_string(recommended_by, ',')")
