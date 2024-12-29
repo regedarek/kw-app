@@ -2,7 +2,7 @@
 
 ### Prerequisites
 
-docker-compose
+docker, kamal ,docker-compose
 
 ### First build
 
