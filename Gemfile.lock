@@ -579,7 +579,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    workflow (3.1.1)
+    workflow (1.2.0)
     zeitwerk (2.6.18)
 
 PLATFORMS
@@ -669,7 +669,7 @@ DEPENDENCIES
   virtus
   webmock
   whenever
-  workflow
+  workflow (~> 1.2)
 
 RUBY VERSION
    ruby 3.0.7p220
