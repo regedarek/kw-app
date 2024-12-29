@@ -3,7 +3,7 @@
 # Table name: membership_fees
 #
 #  id         :integer          not null, primary key
-#  cost       :integer          not null
+#  cost       :integer          default(100), not null
 #  plastic    :boolean          default(FALSE), not null
 #  year       :string
 #  created_at :datetime

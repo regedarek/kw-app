@@ -11,6 +11,7 @@
 #  cash                 :boolean          default(FALSE), not null
 #  category             :integer          default("kw"), not null
 #  conversation_at      :datetime
+#  email                :string
 #  email_remarks        :text
 #  end_application_date :datetime
 #  end_date             :datetime
