@@ -2,7 +2,7 @@
 
 ### Prerequisites
 
-Docker-compose
+docker-compose
 
 ### First build
 
@@ -11,7 +11,6 @@ Within terminal:
 docker-compose run web bundle exec rake db:create
 docker-compose run web bundle exec rake db:migrate
 docker-compose run web bundle exec rake db:seed
-docker-compose run web yarn install
 docker-compose up
 
 ```
