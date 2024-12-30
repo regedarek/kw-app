@@ -1,3 +1,5 @@
+<% require "dotenv"; Dotenv.load(".env") %>
+
 service: kw-app
 image: regedarek/kw-app
 
@@ -23,7 +25,7 @@ proxy:
 
 registry:
   username:
-    - KAMAL_REGISTRY_USERNAME
+    - regedarek
   password:
     - KAMAL_REGISTRY_PASSWORD
 
@@ -34,6 +36,8 @@ env:
     DB_HOST: kw-app-postgres
     DB_PORT: 5432
   secret:
+    - KAMAL_REGISTRY_USERNAME
+    - KAMAL_REGISTRY_PASSWORD
     - RAILS_ENV
     - SECRET_KEY_BASE
     - RAILS_MASTER_KEY

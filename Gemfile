@@ -57,12 +57,13 @@ gem 'select2-foundation'
 
 # Dry-rb
 gem 'dry-core'
-gem 'dry-configurable', '1.0.0'
+gem 'dry-configurable', '1.2.0'
 gem 'dry-container'
 gem 'dry-equalizer'
 gem 'dry-logic'
-gem 'dry-matcher'
+gem 'dry-matcher', '1.0.0'
 gem 'dry-monads', '~> 1.3'
+gem 'dry-schema', '~> 1.13.4'
 gem 'dry-validation', '~> 1.0'
 gem 'dry-types'
 gem 'dry-struct', require: false
@@ -96,4 +97,4 @@ group :development, :test do
 end
 
 gem 'thruster', "0.1.8", require: false, group: [:development, :production]
-gem "kamal", "~> 2.3", require: false
+gem "kamal", "~> 2.3", require: false, group: [:tools]
