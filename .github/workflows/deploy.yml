@@ -16,6 +16,9 @@ jobs:
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
       KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
       SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
