@@ -15,7 +15,7 @@ jobs:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
       KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
-      KAMAL_REGISTRY_USERNAME: ${{ secrets.SECRET_KEY_BASE }}
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
