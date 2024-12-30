@@ -1,5 +1,3 @@
-<% require "dotenv"; Dotenv.load(".env") %>
-
 service: kw-app
 image: regedarek/kw-app
 
@@ -25,7 +23,7 @@ proxy:
 
 registry:
   username:
-    - regedarek
+    - KAMAL_REGISTRY_USERNAME
   password:
     - KAMAL_REGISTRY_PASSWORD
 
