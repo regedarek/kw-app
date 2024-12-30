@@ -1,7 +1,5 @@
 module Settlement
   class UpdateContract
-    include Dry::Monads::Either::Mixin
-
     def initialize(repository, form)
       @repository = repository
       @form = form
@@ -14,7 +12,7 @@ module Settlement
       else
         form_outputs = "::Settlement::ContractForm".constantize.with(record: contract, verify: verify).call(raw_inputs.to_h)
       end
-      return Left(form_outputs.messages) unless form_outputs.success?
+      return Failure(form_outputs.messages) unless form_outputs.success?
 
       period_date_month = form_outputs.to_h.delete(:"period_date(2i)").try :to_i
       period_date_year = form_outputs.to_h.delete(:"period_date(1i)").try :to_i
@@ -61,7 +59,7 @@ module Settlement
         )
       end
 
-      Right(contract)
+      Success(contract)
     end
 
     private

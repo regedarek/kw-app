@@ -1,16 +1,12 @@
 module Training
   module Supplementary
-    class CreatePackageForm < Dry::Validation::Schema
-      configure do
-        config.messages = :i18n
-        config.messages_file = 'app/components/training/errors.yml'
-        config.type_specs = true
-      end
+    class CreatePackageForm < Dry::Validation::Contract
+      config.messages.load_paths << 'app/components/training/errors.yml'
 
-      define! do
-        required(:name).filled(:str?)
-        required(:cost).filled
-        required(:course_id).filled
+      params do
+      required(:name).filled(:string)
+      required(:cost).filled
+      required(:course_id).filled
       end
     end
   end

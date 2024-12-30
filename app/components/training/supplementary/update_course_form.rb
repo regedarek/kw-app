@@ -1,32 +1,32 @@
 module Training
   module Supplementary
-    class UpdateCourseForm < Dry::Validation::Schema
-      configure do
+    class UpdateCourseForm < Dry::Validation::Contract
         option :record
-        config.messages = :i18n
-        config.messages_file = 'app/components/training/errors.yml'
-        config.type_specs = true
-        config.namespace = :course
+        config.messages.load_paths << 'app/components/training/errors.yml'
+        config.messages.namespace = :course
 
-        def unique?(attr_name, value)
-          record.class.where.not(id: record.id).where(attr_name => value).empty?
-        end
-
-        def slug?(value)
+        register_macro(:slug?) do
           ! /\A[a-z0-9-]+\z/.match(value).nil?
         end
-      end
 
-      define! do
-        required(:name).filled(:str?)
-        required(:slug).filled(:slug?, unique?:(:slug), max_size?: 31)
-        required(:place).filled(:str?)
-        optional(:email_remarks).maybe(:str?)
-        optional(:paid_email).maybe(:str?)
-        optional(:question).maybe(:bool?)
-        optional(:send_manually).maybe(:bool?)
+        register_macro(:unique?) do |macro:|
+          ko = macro.args[0]
+          record.class.where.not(id: record.id).where(ko => value).empty?
+        end
+
+        params do
+        required(:name).filled(:string)
+        required(:slug).filled(:string, max_size?: 31)
+        required(:place).filled(:string)
+        optional(:email_remarks).maybe(:string)
+        optional(:paid_email).maybe(:string)
+        optional(:question).maybe(:bool)
+        optional(:send_manually).maybe(:bool)
         required(:payment_type).filled
+        end
+
+        rule(:slug).validate(:slug?)
+        rule(:slug).validate(unique?: :slug)
       end
-    end
   end
 end

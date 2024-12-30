@@ -1,7 +1,5 @@
 module Settlement
   class CreateContract
-    include Dry::Monads::Either::Mixin
-
     def initialize(repository, form)
       @repository = repository
       @form = form
@@ -9,7 +7,7 @@ module Settlement
 
     def call(raw_inputs:, creator_id:)
       form_outputs = form.call(raw_inputs.to_unsafe_h)
-      return Left(form_outputs.messages(locale: :pl)) unless form_outputs.success?
+      return Failure(form_outputs.messages(locale: :pl)) unless form_outputs.success?
 
       contract = repository.create_contract(form_outputs: form_outputs, creator_id: creator_id)
 
@@ -29,7 +27,7 @@ module Settlement
       end
 
       ::Settlement::ContractMailer.notify(contract).deliver_later
-      return Right(contract)
+      return Success(contract)
     end
 
     private

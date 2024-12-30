@@ -1,7 +1,6 @@
 module Training
   module Supplementary
     class CreateSignUp
-      include Dry::Monads::Either::Mixin
 
       def initialize(repository, form)
         @repository = repository
@@ -10,23 +9,23 @@ module Training
 
       def call(raw_inputs:)
         form_outputs = form.call(raw_inputs)
-        return Left(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
+        return Failure(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
 
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
-        return Left(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
+        return Failure(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
         if raw_inputs.include?(:user_id)
           user = ::Db::User.find(form_outputs[:user_id])
           fee = ::Db::Membership::Fee.find_by(kw_id: user.kw_id, year: Date.today.year)
 
           if course.last_fee_paid
-            return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).supplementary_training_active?
+            return Failure(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).supplementary_training_active?
           end
 
           if course.packages
             package = Training::Supplementary::PackageTypeRecord.find(form_outputs[:supplementary_course_package_type_id])
 
             if package.membership
-              return Left(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).supplementary_training_active?
+              return Failure(fee: I18n.t('.not_last_fee')) unless Membership::Activement.new(user: user).supplementary_training_active?
             end
           end
 
@@ -42,7 +41,7 @@ module Training
             package = Training::Supplementary::PackageTypeRecord.find(form_outputs[:supplementary_course_package_type_id])
 
             if package.membership
-              return Left(fee: I18n.t('.not_last_fee'))
+              return Failure(fee: I18n.t('.not_last_fee'))
             end
           end
 
@@ -63,7 +62,7 @@ module Training
           Training::Supplementary::SignUpMailer.sign_up(sign_up.id).deliver_later
           sign_up.update(sent_at: Time.zone.now)
         end
-        Right(:success)
+        Success(:success)
       end
 
       private

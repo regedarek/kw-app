@@ -1,16 +1,11 @@
-require 'i18n'
-require 'dry-validation'
-
 module Training
   module Activities
-    SkiRouteForm = Dry::Validation.Params do
-      configure do
-        config.messages = :i18n
-        config.messages_file = 'app/components/training/errors.yml'
-        config.namespace = :ski_route
-      end
+    class SkiRouteForm < Dry::Validation::Contract
+      config.messages.load_paths << 'app/components/training/errors.yml'
+      config.messages.namespace = :ski_route
 
-      required(:name).filled(:str?)
+        params do 
+      required(:name).filled(:string)
       required(:climbing_date).filled
       required(:colleague_ids).filled
       optional(:rating).filled
@@ -22,9 +17,10 @@ module Training
       optional(:description)
       optional(:contract_ids)
       optional(:attachments)
-      optional(:photos_attributes).maybe
-      optional(:gps_tracks).maybe
-      validate(gps_tracks_extension: :gps_tracks) do |tracks|
+      optional(:photos_attributes)
+      optional(:gps_tracks)
+        end
+      rule(:gps_tracks) do |tracks|
         if tracks.present?
           tracks.all? do |track|
             File.extname(track.original_filename) == '.gpx'

@@ -2,40 +2,40 @@ require 'i18n'
 require 'dry-validation'
 
 module Settlement
-  CheckContractForm = Dry::Validation.Params do
-    configure { config.messages_file = 'app/components/settlement/errors.yml' }
-    configure { config.messages = :i18n }
-    configure do
-      option :record
-      option :verify
+  class CheckContractForm < Dry::Validation::Contract
+    config.messages.load_paths << 'app/components/settlement/errors.yml'
+
+    option :record
+    option :verify
+
+    params do
+      required(:title).filled(:string)
+      required(:cost).filled(:float)
+      required(:document_type).filled
+      required(:payout_type).filled
+      required(:document_date).filled(:string)
+      required(:document_number).filled(:string)
+      required(:description).maybe(:string)
+      optional(:attachments)
+      optional(:photos_attributes)
+      optional(:group_type)
+      optional(:activity_type)
+      optional(:event_type)
+      optional(:area_type)
+      optional(:acceptor_id)
+      optional(:checker_id)
+      optional(:closer_id)
+      optional(:substantive_type)
+      optional(:state)
+      optional(:financial_type)
+      optional(:period_date)
+      optional(:project_ids)
+      optional(:contractor_id).maybe(:integer)
+      optional(:'period_date(1i)')
+      optional(:'period_date(2i)')
     end
 
-    required(:title).filled(:str?)
-    required(:cost).filled(:float?)
-    required(:document_type).filled
-    required(:payout_type).filled
-    required(:document_date).filled(:str?)
-    required(:document_number).filled(:str?)
-    required(:description).maybe(:str?)
-    optional(:attachments).maybe
-    optional(:photos_attributes).maybe
-    optional(:group_type).maybe
-    optional(:activity_type).maybe
-    optional(:event_type).maybe
-    optional(:area_type).maybe
-    optional(:acceptor_id).maybe
-    optional(:checker_id).maybe
-    optional(:closer_id).maybe
-    optional(:substantive_type).maybe
-    optional(:state).maybe
-    optional(:financial_type).maybe
-    optional(:period_date).maybe
-    optional(:project_ids).maybe
-    optional(:contractor_id).maybe(:int?)
-    optional(:'period_date(1i)').maybe
-    optional(:'period_date(2i)').maybe
-
-    validate(accepted_group: [:state, :checker_id]) do |state, checker_id|
+    rule(:state, :checker_id) do |state, checker_id|
       if ['accepted', 'preclosed', 'closed'].include?(state)
         checker_id.present?
       else
@@ -43,7 +43,7 @@ module Settlement
       end
     end
 
-    validate(preclosed_group: [:state, :acceptor_id]) do |state, acceptor_id|
+    rule(:state, :acceptor_id) do |state, acceptor_id|
       if ['preclosed', 'closed'].include?(state)
         acceptor_id.present?
       else
@@ -51,7 +51,7 @@ module Settlement
       end
     end
 
-    validate(accepted_fields: [:activity_type, :group_type, :event_type, :state]) do |activity_type, group_type, event_type, state|
+    rule(:activity_type, :group_type, :event_type, :state) do |activity_type, group_type, event_type, state|
       if ['accepted', 'preclosed', 'closed'].include?(state) || ['accept', 'prepayment'].include?(verify)
         activity_type.present? && group_type.present? && event_type.present?
       else
@@ -59,7 +59,7 @@ module Settlement
       end
     end
 
-    validate(closed_fields: [:substantive_type, :financial_type, :area_type, :state]) do |substantive_type, financial_type, area_type, state|
+    rule(:substantive_type, :financial_type, :area_type, :state) do |substantive_type, financial_type, area_type, state|
       if ['closed'].include?(state) || ['finish'].include?(verify)
         substantive_type.present? && financial_type.present? && area_type.present?
       else

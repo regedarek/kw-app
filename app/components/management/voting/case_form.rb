@@ -1,28 +1,26 @@
-require 'i18n'
-require 'dry-validation'
-
 module Management
   module Voting
-    CaseForm = Dry::Validation.Params do
-      configure { config.messages_file = 'app/components/management/errors.yml' }
-      configure { config.messages = :i18n }
+    class CaseForm < Dry::Validation::Contract
+      config.messages.load_paths << 'app/components/management/errors.yml'
 
-      required(:name).filled(:str?)
-      required(:creator_id).filled(:int?)
-      required(:voting_type).filled(:str?)
-      optional(:public).maybe(:bool?)
+      params do
+      required(:name).filled(:string)
+      required(:creator_id).filled(:integer)
+      required(:voting_type).filled(:string)
+      optional(:public).maybe(:bool)
       optional(:meeting_type).filled
-      optional(:state).maybe
-      optional(:position).maybe
-      optional(:hidden).maybe(:bool?)
-      optional(:acceptance_date).maybe(:time?)
-      optional(:destrciption).maybe(:str?)
-      optional(:final_voting_result).maybe(:str?)
-      optional(:who_ids).maybe
-      optional(:number).maybe(:str?)
-      optional(:doc_url).maybe(:str?)
-      optional(:hide_votes).maybe(:bool?)
-      optional(:attachments).maybe
+      optional(:state)
+      optional(:position)
+      optional(:hidden).maybe(:bool)
+      optional(:acceptance_date).maybe(:date_time)
+      optional(:destrciption).maybe(:string)
+      optional(:final_voting_result).maybe(:string)
+      optional(:who_ids)
+      optional(:number).maybe(:string)
+      optional(:doc_url).maybe(:string)
+      optional(:hide_votes).maybe(:bool)
+      optional(:attachments)
+      end
     end
   end
 end

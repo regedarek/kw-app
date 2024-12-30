@@ -1,7 +1,6 @@
 module Management
   module Voting
     class CreateCommission
-      include Dry::Monads::Either::Mixin
 
       def initialize(form)
         @form = form
@@ -13,9 +12,9 @@ module Management
         if commission_record.save
           Management::Voting::Mailer.notify_commission(commission_record.id).deliver_later
 
-          Right(commission_record)
+          Success(commission_record)
         else
-          Left(commission_record.errors.full_messages)
+          Failure(commission_record.errors.full_messages)
         end
       end
 

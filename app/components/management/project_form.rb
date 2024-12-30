@@ -1,20 +1,18 @@
-require 'i18n'
-require 'dry-validation'
-
 module Management
-  ProjectForm = Dry::Validation.Params do
-    configure { config.messages_file = 'app/components/management/errors.yml' }
-    configure { config.messages = :i18n }
+  class ProjectForm < Dry::Validation::Contract
+    config.messages.load_paths << 'app/components/management/errors.yml'
 
-    required(:name).filled(:str?)
-    optional(:state).maybe
-    optional(:description).maybe(:str?)
-    optional(:needed_knowledge).maybe(:str?)
-    optional(:benefits).maybe(:str?)
-    optional(:estimated_time).maybe(:str?)
-    optional(:know_how).maybe(:str?)
-    optional(:attachments).maybe
-    optional(:attachments).maybe
-    optional(:users_names).maybe
+    schema do
+      required(:name).filled(:string)
+      optional(:state)
+      optional(:description).maybe(:string)
+      optional(:needed_knowledge).maybe(:string)
+      optional(:benefits).maybe(:string)
+      optional(:estimated_time).maybe(:string)
+      optional(:know_how).maybe(:string)
+      optional(:attachments)
+      optional(:attachments)
+      optional(:users_names)
+    end
   end
 end

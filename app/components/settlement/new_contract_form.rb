@@ -1,29 +1,27 @@
-require 'i18n'
-require 'dry-validation'
-
 module Settlement
-  NewContractForm = Dry::Validation.Params do
-    configure { config.messages_file = 'app/components/settlement/errors.yml' }
-    configure { config.messages = :i18n }
+  class NewContractForm < Dry::Validation::Contract
+    config.messages.load_paths << 'app/components/settlement/errors.yml'
 
-    required(:title).filled(:str?)
-    required(:contractor_id).filled(:int?)
-    optional(:group_type).maybe(:str?)
-    optional(:bank_account).maybe(:str?)
-    optional(:bank_account_owner).maybe(:str?)
-    required(:document_number).filled(:str?)
-    required(:document_date).filled(:str?)
-    optional(:document_type).maybe(:str?)
-    optional(:payout_type).maybe(:str?)
-    required(:currency_type).filled(:str?)
-    required(:cost).filled(:float?)
-    required(:description).maybe(:str?)
-    optional(:contract_template_id).maybe(:int?)
-    required(:user_ids).each(:str?)
-    optional(:project_ids).maybe
-    optional(:photos_attributes).maybe
+    params do
+    required(:title).filled(:string)
+    required(:contractor_id).filled(:integer)
+    optional(:group_type).maybe(:string)
+    optional(:bank_account).maybe(:string)
+    optional(:bank_account_owner).maybe(:string)
+    required(:document_number).filled(:string)
+    required(:document_date).filled(:string)
+    optional(:document_type).maybe(:string)
+    optional(:payout_type).maybe(:string)
+    required(:currency_type).filled(:string)
+    required(:cost).filled(:float)
+    required(:description).maybe(:string)
+    optional(:contract_template_id).maybe(:integer)
+    required(:user_ids).each(:string)
+    optional(:project_ids)
+    optional(:photos_attributes)
+    end
 
-    validate(payout_type_presence: [:contract_template_id, :payout_type]) do |contract_template_id, payout_type|
+    rule(:contract_template_id, :payout_type) do |contract_template_id, payout_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
       if template&.payout_type
@@ -33,7 +31,7 @@ module Settlement
       end
     end
 
-    validate(bank_account_presence: [:bank_account, :payout_type]) do |bank_account, payout_type|
+    rule(:bank_account, :payout_type) do |bank_account, payout_type|
       if payout_type == 'return'
         !!bank_account
       else
@@ -41,7 +39,7 @@ module Settlement
       end
     end
 
-    validate(document_type_presence: [:contract_template_id, :document_type]) do |contract_template_id, document_type|
+    rule(:contract_template_id, :document_type) do |contract_template_id, document_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
       if template&.document_type
@@ -51,7 +49,7 @@ module Settlement
       end
     end
 
-    validate(document_type_presence: [:contract_template_id, :document_type]) do |contract_template_id, document_type|
+    rule(:contract_template_id, :document_type) do |contract_template_id, document_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
       if template&.document_type
@@ -61,7 +59,7 @@ module Settlement
       end
     end
 
-    validate(group_type_presence: [:contract_template_id, :group_type]) do |contract_template_id, group_type|
+    rule(:contract_template_id, :group_type) do |contract_template_id, group_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
       if template&.group_type
@@ -71,7 +69,7 @@ module Settlement
       end
     end
 
-    validate(group_type_presence: [:contract_template_id, :group_type]) do |contract_template_id, group_type|
+    rule(:contract_template_id, :group_type) do |contract_template_id, group_type|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
       if template&.group_type
@@ -81,7 +79,7 @@ module Settlement
       end
     end
 
-    validate(nip_if_fv: [:contract_template_id, :contractor_id, :document_type]) do |contract_template_id, contractor_id, document_type|
+    rule(:contract_template_id, :contractor_id, :document_type) do |contract_template_id, contractor_id, document_type|
       document_type_1 = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)&.document_type || document_type
 
       if ['fv'].include?(document_type_1)
@@ -91,7 +89,7 @@ module Settlement
       end
     end
 
-    validate(photos_presence: [:document_type, :photos_attributes]) do |document_type, photos_attributes|
+    rule(:document_type, :photos_attributes) do |document_type, photos_attributes|
       if ['charities'].include?(document_type)
         true
       else
@@ -103,7 +101,7 @@ module Settlement
       end
     end
 
-    validate(project_presence: [:contract_template_id, :project_ids]) do |contract_template_id, project_ids|
+    rule(:contract_template_id, :project_ids) do |contract_template_id, project_ids|
       template = Settlement::ContractTemplateRecord.find_by(id: contract_template_id)
 
       if template

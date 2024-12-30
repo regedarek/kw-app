@@ -53,7 +53,7 @@ en:
     max_size?: "size cannot be greater than %{num}"
     min_size?: "size cannot be less than %{num}"
     none?: "cannot be defined"
-    str?: "must be a string"
+    string?: "must be a string"
     type?: "must be %{type}"
     size?:
       arg:

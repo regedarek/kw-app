@@ -1,18 +1,16 @@
-require 'i18n'
-require 'dry-validation'
-
 module Management
   module Voting
-    VoteForm = Dry::Validation.Params do
-      configure { config.messages_file = 'app/components/management/errors.yml' }
-      configure { config.messages = :i18n }
+    class VoteForm < Dry::Validation::Contract
+      config.messages.load_paths << 'app/components/management/errors.yml'
 
-      optional(:decision).maybe(:str?)
-      optional(:user_ids).maybe
-      required(:case_id).filled(:int?)
-      required(:user_id).filled(:int?)
-      required(:commission).filled(:bool?)
-      required(:authorized_id).filled(:int?)
+      params do
+      optional(:decision).maybe(:string)
+      optional(:user_ids)
+      required(:case_id).filled(:integer)
+      required(:user_id).filled(:integer)
+      required(:commission).filled(:bool)
+      required(:authorized_id).filled(:integer)
+      end
     end
   end
 end

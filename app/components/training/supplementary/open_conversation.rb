@@ -1,7 +1,6 @@
 module Training
   module Supplementary
     class OpenConversation
-      include Dry::Monads::Either::Mixin
 
       def initialize(repository)
         @repository = repository
@@ -9,8 +8,8 @@ module Training
 
       def call(course_id:)
         course = Training::Supplementary::CourseRecord.find(course_id)
-        return Left(:already_exists) if course.conversation_at
-        return Left(:no_participants) unless repository.users_signed_in(course_id).any?
+        return Failure(:already_exists) if course.conversation_at
+        return Failure(:no_participants) unless repository.users_signed_in(course_id).any?
 
         receipt = course.organizer.send_message(
           repository.users_signed_in(course_id),
@@ -24,7 +23,7 @@ module Training
         )
         course.update(conversation_at: Time.current)
 
-        Right(:success)
+        Success(:success)
       end
 
       private

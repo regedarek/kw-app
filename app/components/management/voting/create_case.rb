@@ -1,7 +1,6 @@
 module Management
   module Voting
     class CreateCase
-      include Dry::Monads::Either::Mixin
 
       def initialize(form)
         @form = form
@@ -9,7 +8,7 @@ module Management
 
       def call(raw_inputs:)
         form_outputs = form.call(raw_inputs.to_unsafe_h)
-        return Left(form_outputs.messages.values) unless form_outputs.success?
+        return Failure(form_outputs.messages.values) unless form_outputs.success?
 
         case_record = Management::Voting::CaseRecord.create(form_outputs.to_h)
         case_record.update meeting_type: 1
@@ -28,7 +27,7 @@ module Management
           Management::Voting::Mailer.notify(case_record.id, user.id).deliver_later
         end unless case_record.hide_votes?
 
-        Right(:success)
+        Success(:success)
       end
 
       private
