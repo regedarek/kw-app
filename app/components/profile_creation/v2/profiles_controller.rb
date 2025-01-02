@@ -10,6 +10,7 @@ module ProfileCreation
       end
 
       def create
+        I18n.locale = params[:locale] || I18n.default_locale
         Dry::Matcher::ResultMatcher.(ProfileCreation::Operation::Create.new.(params: params.to_unsafe_h)) do |result|
           result.success do |profile|
             redirect_to root_path, notice: t('.success')
@@ -21,6 +22,7 @@ module ProfileCreation
 
           result.failure :invalid do |code, profile|
             @profile = profile
+            I18n.locale = profile.locale
             render :new
           end
 

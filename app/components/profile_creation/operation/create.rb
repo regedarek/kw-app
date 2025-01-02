@@ -18,7 +18,7 @@ class ProfileCreation::Operation::Create
       .fmap { |params| params.to_h }
       .or do |contract|
         profile = Db::Profile.new(contract.to_h[:profile])
-        contract.errors(locale: params[:locale]).each do |error|
+        contract.errors(locale: profile.locale).each do |error|
           profile.errors.add(error.path.excluding(:profile).sole, error.text)
         end
         Failure([ :invalid, profile ])
