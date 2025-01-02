@@ -294,6 +294,9 @@ pl:
         city: Miejscowość
         position: Status
         remarks: Uwagi
+        gender: Płeć
+        photo: Zdjęcie
+        terms_of_service: Akceptuję regulamin
         date_of_death: Data śmierci
         profile_position_candidate: Kandydat
         profile_position_regular: Członek zwyczajny
