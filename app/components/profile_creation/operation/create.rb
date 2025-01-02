@@ -15,7 +15,7 @@ class ProfileCreation::Operation::Create
     ProfileCreation::Contract::Create.new
     .call(params)
       .to_monad
-      .fmap { |params| params.to_h[:profile] }
+      .fmap { |params| params.to_h[:profile].except(:terms_of_service) }
       .or do |contract|
         profile = Db::Profile.new(contract.to_h[:profile])
         contract.errors(locale: profile.locale).each do |error|

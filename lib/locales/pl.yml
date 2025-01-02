@@ -5,6 +5,8 @@ pl:
   create: utwórz
   update: zmiana
   destroy: usuń
+  errors:
+    taken: "już zajęte"
   course_seats_html: "<b>Zapisanych osób</b>: %{seats}"
   course_max_seats_html: "<b>Ilość wszystkich miejsc</b>: %{max_seats}"
   course_price_html: "<b>Cena kursu</b>: %{price} zł"
