@@ -14,3 +14,7 @@ Rails.application.config.assets.precompile += %w( kalendarz.css flag-icon.scss)
 #Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets')
 
+Rails.application.config.sass.preferred_syntax = :sass
+Rails.application.config.sass.line_comments = false
+Rails.application.config.sass.cache = false
+

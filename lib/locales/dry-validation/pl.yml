@@ -1,0 +1,7 @@
+pl:
+  dry_validation:
+    errors:
+      rules:
+        first_name:
+          filled?: "nie może być puste"
+      filled?: "nie może być puste"

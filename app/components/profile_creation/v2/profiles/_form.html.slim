@@ -19,13 +19,9 @@
             = f.label :first_name
             = f.text_field :first_name
 
-          - invalid = @errors&.error?('profile.last_name')
           .large-3.columns
             = f.label :last_name
             = f.text_field :last_name
-            - if invalid
-              - @errors.errors[:profile][:last_name].each do |message|
-                = message
 
           .large-4.columns
             = f.label :email
