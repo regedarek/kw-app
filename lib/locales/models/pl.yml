@@ -320,6 +320,7 @@ pl:
         sections: Proszę zaznaczyć sekcje, w których zamierzasz działać.
         application_date: Data wstąpienia
         profession: Zawód
+        course_cert: Certyfikat kursu
         profile_sections_snw: Sekcja Narciarstwa Wysokogórskiego
         profile_sections_stj: Sekcja Taternictwa Jaskiniowego
         profile_sections_sww: Sekcja Wspinaczki Wysokogórskiej

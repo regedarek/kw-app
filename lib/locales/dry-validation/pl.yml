@@ -1,4 +1,6 @@
 pl:
   dry_validation:
     errors:
+      taken?: "już zajęte"
+      included_in?: "musi być jednym z: %{list}"
       true?: "musi być prawdą"

@@ -1,4 +1,7 @@
 en:
   dry_validation:
     errors:
+      included_in?: "must be one of: %{list}"
       true?: "must be true"
+      false?: "must be false"
+      taken?: "has already been taken"
