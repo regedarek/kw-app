@@ -6,6 +6,7 @@
           ul
             - profile.errors.full_messages.each do |msg|
               li= msg
+
   = f.hidden_field :locale, value: I18n.locale
 
   .row
