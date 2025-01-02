@@ -1,0 +1,4 @@
+pl:
+  dry_validation:
+    errors:
+      true?: "musi być prawdą"

@@ -1,0 +1,4 @@
+en:
+  dry_validation:
+    errors:
+      true?: "must be true"
