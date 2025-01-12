@@ -86,9 +86,10 @@
       .callout.primary
         = f.label :sections
         - Db::Profile::SECTIONS.each do |section|
-          = f.check_box :sections, { multiple: true, checked: form.sections.include?(section) }, section.to_sym, nil
-          = f.label "profile_sections_#{section}".to_sym
-          br
+          - unless section == 'gtw'
+            = f.check_box :sections, { multiple: true, checked: form.sections.include?(section) }, section.to_sym, nil
+            = f.label "profile_sections_#{section}".to_sym
+            br
 
     .large-6.columns
       .callout.secondary
