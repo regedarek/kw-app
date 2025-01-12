@@ -23,7 +23,7 @@ public/*
 .env
 cron_log.log
 latest.dump
-
+/.kamal
 .DS_Store
 
 /public/packs
