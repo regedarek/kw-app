@@ -8,7 +8,7 @@ module Activities
 
       year = Date.new(params.fetch(:year, Date.current.year).to_i, 1, 1)
 
-      @season_leaders = Db::User.includes(:mountain_routes).where.not(mountain_routes: { kurtyka_difficulty: nil }).where(mountain_routes: { route_type: 'trad_climbing', climbing_date: year.beginning_of_year..year.end_of_year }).sort_by { |user| -TradLeague::UserSeasonCalculator.new(user: user).call }
+      @season_leaders = Db::User.includes(:mountain_routes).where.not(mountain_routes: { kurtyka_difficulty: nil }).where(mountain_routes: { route_type: 'trad_climbing', climbing_date: year.beginning_of_year..year.end_of_year }).sort_by { |user| -TradLeague::UserSeasonCalculator.new(user: user, year: year.year).call }
     end
 
     def gorskie_dziki
