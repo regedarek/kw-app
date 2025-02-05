@@ -1,9 +1,10 @@
 module TradLeague
   class UserSeasonScoresPresenter
-    attr_reader :user
+    attr_reader :user, :year
 
-    def initialize(user:)
+    def initialize(user:, year: Date.today.year)
       @user = user
+      @year = Date.new(year.to_i, 1, 1)
     end
 
     def call
@@ -15,7 +16,7 @@ module TradLeague
     end
 
     def points
-      TradLeague::UserSeasonCalculator.new(user: user).call
+      TradLeague::UserSeasonCalculator.new(user: user, year: year.year).call
     end
 
     def routes_count
@@ -31,7 +32,7 @@ module TradLeague
     def routes
       Db::Activities::MountainRoute.where(
         user_id: user.id,
-        climbing_date: Date.today.beginning_of_year..Date.today.end_of_year,
+        climbing_date: year.beginning_of_year..year.end_of_year,
         route_type: 'trad_climbing'
       ).where.not(kurtyka_difficulty: nil)
     end
