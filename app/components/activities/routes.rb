@@ -28,6 +28,6 @@ Rails.application.routes.draw do
   get "gorskie-dziki" => 'activities/routes#gorskie_dziki', as: :gorskie_dziki
   get "tradowe-dziki" => 'activities/routes#liga_tradowa', as: :tradowe_dziki
   get "narciarskie-dziki" => 'activities/routes#narciarskie_dziki', as: :narciarskie_dziki
-  get "liga-tradowa" => 'activities/routes#liga_tradowa', as: :liga_tradowa
+  get "liga-tradowa/:year" => 'activities/routes#liga_tradowa', as: :liga_tradowa
   get "narciarskie-dziki/:year/:month" => 'activities/routes#narciarskie_dziki_month', as: :narciarskie_dziki_month
 end

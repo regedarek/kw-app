@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.integer "course_id"
     t.string "name"
     t.string "email"
-    t.string "code", default: "dc14cce987f7f54b", null: false
+    t.string "code", default: "e25902af54d1a5c8", null: false
     t.datetime "expired_at"
     t.datetime "sent_at"
     t.integer "admin_id"
@@ -516,7 +516,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code", default: "04b41981e27a7041", null: false
+    t.string "code", default: "a4cae3e24c9b78a1", null: false
   end
 
   create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
@@ -1174,7 +1174,7 @@ ActiveRecord::Schema.define(version: 2024_12_17_160742) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "3575717639915f7a", null: false
+    t.string "code", default: "aabe7e693a125b4b", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"
