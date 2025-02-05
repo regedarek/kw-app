@@ -29,10 +29,14 @@ module TradLeague
 
     private
 
+    def period
+      year.beginning_of_year..Date.new(year.year, 12, 15)
+    end
+
     def routes
       Db::Activities::MountainRoute.where(
         user_id: user.id,
-        climbing_date: year.beginning_of_year..year.end_of_year,
+        climbing_date: period,
         route_type: 'trad_climbing'
       ).where.not(kurtyka_difficulty: nil)
     end
