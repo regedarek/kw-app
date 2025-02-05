@@ -13,6 +13,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/.kamal/
 !/log/.keep
 /tmp
 /cache/*
