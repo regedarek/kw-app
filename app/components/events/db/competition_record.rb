@@ -21,6 +21,7 @@
 #  medical_rules_text  :text
 #  name                :string
 #  organizer_email     :string           default("kw@kw.krakow.pl"), not null
+#  results_url         :string
 #  rules               :string
 #  rules_text          :text
 #  sign_up_starts_at   :datetime

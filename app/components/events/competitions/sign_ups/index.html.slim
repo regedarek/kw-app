@@ -26,6 +26,12 @@
           = link_to "Zapisz się | Sign Up!", new_competition_sign_up_path(@competition),
           class: 'button large primary expanded'
 
+  - if (@competition.event_date.present? && @competition.event_date < Time.zone.now )
+    .row
+      .large-12.columns
+        - if @competition.results_url.present?
+          = link_to "Nieoficjalne wyniki na żywo", @competition.results_url, class: "button large warning expanded", target: "_blank"
+
   - if (@competition.sign_up_starts_at.present? && @competition.sign_up_starts_at < Time.zone.now ) || (user_signed_in? && current_user.roles.include?('competitions'))
     .row
       .large-12.columns
