@@ -15,9 +15,10 @@ module Events
           format.html
           format.json do
             sign_ups = @competition.sign_ups_records.where.not(start_number: nil).map do |sign_up|
+              name = 
               {
                 number: sign_up.start_number,
-                name: sign_up.participant_name,
+                name: "#{sign_up.participant_name} [#{sign_up.sport_category_1}]",
                 first_name: sign_up.participant_first_name_1,
                 last_name: sign_up.participant_name_1,
                 sport_category: sign_up.sport_category_1,
