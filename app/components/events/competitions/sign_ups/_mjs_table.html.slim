@@ -14,7 +14,7 @@ table.stack
   tbody
     - sign_ups.each_with_index do |sign_up, index|
       tr
-        - if @competition.sign_up_starts_at.present? && @competition.sign_up_starts_at < Time.zone.now
+        - if @competition.close_payment.present? && @competition.close_payment < Time.zone.now
           td = index + 1
         - else
           td = sign_up.start_number
