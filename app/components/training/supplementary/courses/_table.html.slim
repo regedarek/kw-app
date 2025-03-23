@@ -58,7 +58,7 @@ table
         td.text-center.show-for-small-only
           - if user_signed_in?
             - if current_user.admin? || current_user.id == course.organizator_id
-              = link_to t('.show'), polish_event_slug_path(course.slug)
+              = link_to t('.show'), polish_event_slug_path(course.slug.present? ? course.slug : course.id)
               br
               = link_to t('.edit'), edit_supplementary_course_path(course.id)
 
@@ -69,6 +69,6 @@ table
               div id="example-dropdown-#{course.id}" class="dropdown-pane" data-dropdown=""
                 ul.menu.vertical
                   li= link_to 'Duplikuj', new_supplementary_course_path(course: course.attributes, dup: true)
-                  li= link_to t('.show'), polish_event_slug_path(course.slug)
+                  li= link_to t('.show'), polish_event_slug_path(course.slug.present? ? course.slug : course.id)
                   li= link_to t('.edit'), edit_supplementary_course_path(course.id)
                   li= link_to t('.destroy'), supplementary_course_path(course.id), method: :delete
