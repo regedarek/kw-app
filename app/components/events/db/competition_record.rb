@@ -59,6 +59,8 @@ module Events
           ::Events::Competitions::SignUps::MjsForm.new
         when 'mas'
           ::Events::Competitions::SignUps::MasForm.new
+        when 'tshirt'
+          ::Events::Competitions::SignUps::TshirtForm.new
         else
           ::Events::Competitions::SignUps::DefaultForm.new
         end
