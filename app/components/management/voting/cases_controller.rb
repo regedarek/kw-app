@@ -9,7 +9,7 @@ module Management
       def obecni
         authorize! :obecni, Management::Voting::CaseRecord
 
-        @obecni = Management::Voting::CasePresenceRecord.includes(:user, :cerber).where(presence_date: '14-05-2025'.to_date)
+        @obecni = Management::Voting::CasePresenceRecord.includes(:user, :cerber).where(presence_date: Date.today.all_year)
         @pelnomocnictwa = Management::Voting::CommissionRecord.includes(:authorized, :owner).where(created_at: Date.today.all_year)
 
         respond_with do |format| format.html
