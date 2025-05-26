@@ -66,11 +66,11 @@ module Activities
     end
 
     def start_date
-      DateTime.new(2024, 06, 1).beginning_of_day
+      DateTime.new(Date.current.year, 6, 1).beginning_of_day
     end
 
     def end_date
-      DateTime.new(2024, 11, 30).end_of_day
+      DateTime.new(Date.current.year, 11, 30).end_of_day
     end
 
     private
