@@ -26,6 +26,10 @@ module Charity
         donation.update description: "Darowizna na pomoc społeczną rodziny Mariusza Norweckiego od #{donation.display_name}"
       end
 
+      if donation.michal?
+        donation.update description: "Darowizna na tablicę upamiętniającą Michała Wojarskiego od #{donation.display_name}"
+      end
+
       payment = donation.payment
       Right(payment: payment)
     end

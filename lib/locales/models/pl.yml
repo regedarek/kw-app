@@ -137,6 +137,7 @@ pl:
     attributes:
       charity/donation_record:
         action_types:
+          michal: Tablica dla Michała
           mariusz: Dla Mariusza
           crack: Rysa na Bronxie
           ski_service: Serwis Narciarski
