@@ -26,7 +26,13 @@ module Charity
     validates_acceptance_of :terms_of_service
 
     def payment_type
-      :trainings
+      if action_type == 'mariusz'
+        :donations
+      elsif action_type == 'crack'
+        :donations_other
+      else
+        :trainings
+      end
     end
 
     def self.action_types_select
