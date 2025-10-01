@@ -26,11 +26,7 @@ module Charity
     validates_acceptance_of :terms_of_service
 
     def payment_type
-      if crack? || ski_service?
-        :trainings
-      else
-        :donations_other
-      end
+      :trainings
     end
 
     def self.action_types_select
