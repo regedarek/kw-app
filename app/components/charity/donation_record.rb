@@ -29,7 +29,7 @@ module Charity
       if crack? || ski_service?
         :trainings
       else
-        :donations
+        :donations_other
       end
     end
 
