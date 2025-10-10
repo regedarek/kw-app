@@ -31,7 +31,7 @@ module Charity
       elsif action_type == 'crack'
         :donations_other
       else
-        :trainings
+        :donations
       end
     end
 
