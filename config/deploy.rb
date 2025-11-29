@@ -12,6 +12,14 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/kw-app"
+
+# SSH options - Use 1Password SSH agent with explicit config file
+set :ssh_options, {
+  forward_agent: true,
+  auth_methods: %w(publickey),
+  keys_only: false,
+  config: File.expand_path('~/.ssh/config')
+}
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
 # Default value for :format is :airbrussh.
