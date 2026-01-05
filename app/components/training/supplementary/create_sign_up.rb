@@ -9,7 +9,7 @@ module Training
 
       def call(raw_inputs:)
         form_outputs = form.call(raw_inputs)
-        return Failure(form_outputs.messages(locale: I18n.locale)) unless form_outputs.success?
+        return Failure(:invalid, errors: form_outputs.errors.to_h) unless form_outputs.success?
 
         course = Training::Supplementary::CourseRecord.find(form_outputs[:course_id])
         return Failure(email: I18n.t('.email_not_unique')) if Training::Supplementary::SignUpRecord.exists?(course_id: form_outputs[:course_id], email: form_outputs[:email])
