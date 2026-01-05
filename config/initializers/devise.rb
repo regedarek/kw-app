@@ -258,7 +258,7 @@ Devise.setup do |config|
 
   # ==> Warden configuration
   config.warden do |manager|
-    manager.after_set_user do |user, auth, opts|
+    manager.after_authentication do |user, auth, opts|
       # Ensure user is fully loaded with all attributes after authentication
       if user && user.kw_id.nil?
         begin
