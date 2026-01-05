@@ -1,12 +1,56 @@
 require 'rails_helper'
+require 'webmock/rspec'
 
 describe Membership::PayFee do
   before(:each) { Db::Membership::Fee.destroy_all }
   before do
     Factories::User.create!(kw_id: 1111)
+    
+    # Stub external Dotpay API calls
+    stub_request(:post, /ssl\.dotpay\.pl/).
+      to_return(status: 200, body: '{"payment_url":"http://example.com/payment"}', headers: {'Content-Type' => 'application/json'})
   end
 
   describe '.pay' do
+    context 'Result keyword argument handling' do
+      it 'returns invalid result with form as keyword argument when form is invalid' do
+        # Create an invalid form (missing year)
+        form = Membership::FeeForm.new(kw_id: 1111, plastic: false)
+        expect(form.valid?).to be false
+
+        result = Membership::PayFee.pay(kw_id: 1111, form: form)
+
+        # This test ensures the Result class properly passes keyword arguments
+        # It should not raise ArgumentError: missing keyword: :form
+        expect do
+          result.invalid { |form:| 
+            expect(form).to eq(form)
+            expect(form.errors).to be_present
+          }
+        end.not_to raise_error
+
+        expect(result.invalid?).to be true
+      end
+
+      it 'returns success result with payment as keyword argument when form is valid' do
+        form = Membership::FeeForm.new(kw_id: 1111, year: (Date.today.year + 1).to_s, plastic: false)
+        expect(form.valid?).to be true
+
+        result = Membership::PayFee.pay(kw_id: 1111, form: form)
+
+        # This test ensures the Result class properly passes keyword arguments
+        # It should not raise ArgumentError: missing keyword: :payment
+        captured_payment = nil
+        expect do
+          result.success { |payment:| 
+            captured_payment = payment
+          }
+        end.not_to raise_error
+        
+        expect(captured_payment).to be_a(Db::Payment)
+        expect(captured_payment.dotpay_id).to be_present
+      end
+    end
     xit 'no payments, pay for current' do
       form = Membership::FeeForm.new(year: 2017)
       expect(Db::Membership::Fee.count).to eq(0)

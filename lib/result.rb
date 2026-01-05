@@ -27,7 +27,12 @@ class Result
     @was_checked = false
 
     define_singleton_method(name) do |&block|
-      block.call(*@args)
+      # Handle keyword arguments: if we have a single hash argument, pass it as keywords
+      if @args.size == 1 && @args.first.is_a?(Hash)
+        block.call(**@args.first)
+      else
+        block.call(*@args)
+      end
       @was_called = true
     end
 
