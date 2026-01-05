@@ -22,7 +22,7 @@ services:
     tty: true
     stdin_open: true
     networks:
-      - my_local_dev_network
+      - kw-app-network
 
   postgres:
     container_name: kw-app-postgres-10
@@ -36,7 +36,7 @@ services:
     ports:
         - "5433:5432"
     networks:
-      - my_local_dev_network
+      - kw-app-network
 
   sidekiq:
     container_name: kw-app-sidekiq
@@ -59,7 +59,7 @@ services:
     stdin_open: true
     tty: true
     networks:
-      - my_local_dev_network
+      - kw-app-network
 
   mailcatcher:
     image: schickling/mailcatcher
@@ -67,7 +67,7 @@ services:
       - "1025:1025"
       - "1080:1080"
     networks:
-      - my_local_dev_network
+      - kw-app-network
 
   redis:
     container_name: kw-app-redis
@@ -80,7 +80,7 @@ services:
     sysctls:
       - net.core.somaxconn=4096
     networks:
-      - my_local_dev_network
+      - kw-app-network
 
 volumes:
   kw-app-redis-data:
@@ -89,5 +89,5 @@ volumes:
   kw-app-tmp:
 
 networks:
-  my_local_dev_network:
-    name: my_local_dev_network
+  kw-app-network:
+    name: kw-app-network
