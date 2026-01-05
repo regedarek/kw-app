@@ -13,3 +13,10 @@ class Failure < Result
     yield if failure?
   end
 end
+
+# Kernel method to allow Failure(...) syntax
+module Kernel
+  def Failure(*args)
+    ::Failure.new(*args)
+  end
+end

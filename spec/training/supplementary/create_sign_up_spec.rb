@@ -1,4 +1,7 @@
 require 'rails_helper'
+require 'result'
+require 'failure'
+require 'success'
 
 RSpec.describe Training::Supplementary::CreateSignUp do
   let(:repository) { Training::Supplementary::Repository.new }

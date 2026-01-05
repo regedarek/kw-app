@@ -13,3 +13,10 @@ class Success < Result
     true # success is always handled so it does not break when its not checked
   end
 end
+
+# Kernel method to allow Success(...) syntax
+module Kernel
+  def Success(*args)
+    ::Success.new(*args)
+  end
+end
