@@ -76,8 +76,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  #config.skip_session_storage = [:http_auth]
-  config.skip_session_storage = [:disable]
+  config.skip_session_storage = [:http_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -126,10 +125,10 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 2.years
+  config.remember_for = 2.weeks
 
   # Invalidates all the remember me tokens when the user signs out.
-  config.expire_all_remember_me_on_sign_out = false
+  config.expire_all_remember_me_on_sign_out = true
 
   # If true, extends the user's remember period when remembered via cookie.
   config.extend_remember_period = true
@@ -256,6 +255,20 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  # ==> Warden configuration
+  config.warden do |manager|
+    manager.after_set_user do |user, auth, opts|
+      # Ensure user is fully loaded with all attributes after authentication
+      if user && user.kw_id.nil?
+        begin
+          user.reload
+        rescue ActiveRecord::RecordNotFound
+          auth.logout
+        end
+      end
+    end
+  end
 end
 require 'devise/mailer'
 
