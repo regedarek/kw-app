@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+# Check if bundle is up to date, install if needed
+if [ -f "Gemfile" ]; then
+  echo "Checking bundle..."
+  bundle check || bundle install --no-cache
+fi
+
+exec "${@}"

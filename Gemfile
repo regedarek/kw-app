@@ -50,6 +50,7 @@ gem 'fog-openstack', require: "fog/openstack"
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f' 
 gem 'google_calendar'
 gem 'koala'
+gem 'strava-ruby-client'
 gem 'prawn-rails'
 gem 'chronic'
 gem 'cancancan', '~> 3.3.0'

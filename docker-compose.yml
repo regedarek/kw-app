@@ -11,7 +11,6 @@ services:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
     volumes:
       - .:/rails
-      - kw-app-bundle:/usr/local/bundle
       - kw-app-tmp:/rails/tmp
     ports:
       - "3002:3002"
@@ -47,7 +46,6 @@ services:
     command: ./bin/sidekiq -C config/sidekiq.yml
     volumes:
       - .:/rails
-      - kw-app-bundle:/usr/local/bundle
       - kw-app-tmp:/rails/tmp
     environment:
       - DB_HOST=postgres
@@ -85,7 +83,6 @@ services:
 volumes:
   kw-app-redis-data:
   kw-app-postgres:
-  kw-app-bundle:
   kw-app-tmp:
 
 networks:
