@@ -179,7 +179,7 @@
 
         - if user_signed_in?
           li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do
-            - if current_user.avatar.present?
+            - if current_user.read_attribute(:avatar).present?
               = image_tag(current_user.avatar.url, class: 'topbar-avatar-image')
             - else
               = image_tag('default-avatar.png', class: 'topbar-avatar-image')
