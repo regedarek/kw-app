@@ -16,6 +16,7 @@ module Events
          required(:tshirt_size_1).filled(:string)
          required(:competition_package_type_1_id).filled(:integer)
          optional(:participant_phone_1).maybe(:string)
+         optional(:participant_kw_id_1).maybe(:integer)
         end
 
         rule(:participant_kw_id_1, :competition_package_type_1_id) do
