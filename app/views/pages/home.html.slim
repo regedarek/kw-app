@@ -67,7 +67,7 @@
 
       .row
         .large-12.columns
-          = link_to liga_tradowa_path do
+          = link_to liga_tradowa_path(year: Date.today.year) do
             h4 Tradowe Dziki
           table
             - Db::User.includes(:mountain_routes).where.not(mountain_routes: { kurtyka_difficulty: nil }).where(mountain_routes: { climbing_date: Date.today.beginning_of_year..Date.today.end_of_year }).sort_by { |user| -TradLeague::UserSeasonCalculator.new(user: user).call }.take(5).each do |user|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_26_180715) do
+ActiveRecord::Schema.define(version: 2025_02_28_110735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.integer "course_id"
     t.string "name"
     t.string "email"
-    t.string "code", default: "267521e87223be9a", null: false
+    t.string "code", default: "e25902af54d1a5c8", null: false
     t.datetime "expired_at"
     t.datetime "sent_at"
     t.integer "admin_id"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.text "en_email_text"
     t.string "custom_form"
     t.text "info_above_sign_ups"
+    t.string "results_url"
   end
 
   create_table "competiton_photo_sets", id: :serial, force: :cascade do |t|
@@ -402,6 +403,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.boolean "saturday_night", default: false, null: false
     t.integer "license_number"
     t.string "participant_first_name_1"
+    t.integer "start_number"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -516,7 +518,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code", default: "9847b8bc431afe1f", null: false
+    t.string "code", default: "a4cae3e24c9b78a1", null: false
   end
 
   create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
@@ -1176,7 +1178,7 @@ ActiveRecord::Schema.define(version: 2024_12_26_180715) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "email"
-    t.string "code", default: "779d2af7232c9725", null: false
+    t.string "code", default: "aabe7e693a125b4b", null: false
     t.integer "supplementary_course_package_type_id"
     t.datetime "expired_at"
     t.datetime "sent_at"

@@ -3,28 +3,16 @@ table.stack
     tr
       th width="4%"
         = t('.nr')
-      th width="5%"
-      th width="20%" Imię i Nazwisko
-      th Kategoria PP
-      th Kategoria MJS
-      th Organizacja
-      th width='14%' Płatność
+      th width="35%" Kto?
+      th.text-center width='14%' Płatność
       - if can? :manage, Events::Db::SignUpRecord
         th width='8%'
   tbody
     - sign_ups.each_with_index do |sign_up, index|
       tr
-        - if @competition.close_payment.present? && @competition.close_payment > Time.zone.now
-          td = index + 1
-        - else
-          td = sign_up.start_number
+        td = index + 1
         td
-          - unless sign_up.participant_country_1 == 'other' || sign_up.participant_country_1.nil?
-            = image_tag("#{sign_up.participant_country_1}.png")
-        td = sign_up.participant_name
-        td = sign_up.sport_category_1
-        td = [(sign_up.rescuer? ? "Ratownik" : nil), (sign_up.package_type_1_membership? ? "KW Kraków" : nil)].compact.join(', ')
-        td = sign_up.participant_team_1
+          = sign_up.participant_names
         td.text-center
           - if sign_up.payment.paid?
             .label.success = t("prepaid")

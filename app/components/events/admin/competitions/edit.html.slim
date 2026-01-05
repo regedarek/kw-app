@@ -123,6 +123,12 @@
         = f.label 'Treść tekstu dotycząca noclegów'
         = f.trix_editor :weekend_nights_text, style: 'min-height: 280px'
 
+
+  .row
+    .large-12.columns
+      = f.label "Lista wynikow"
+      = f.text_field :results_url
+
   .row
     .large-12.columns
       - if @competition.baner.present?

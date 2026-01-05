@@ -6,7 +6,7 @@
 
 .row style="margin-bottom: 1rem;"
   .large-12.columns
-    h4 Tradowe Dziki 2024
+    h4 = "Liga Tradowa #{params.fetch(:year)}"
     .row
       .large-12.columns
         table.stack
@@ -36,12 +36,12 @@
                 td.text-center
                   .show-for-small-only
                     b Punkty
-                  = TradLeague::UserSeasonScoresPresenter.new(user: user).points
+                  = TradLeague::UserSeasonScoresPresenter.new(user: user, year: params[:year]).points
                 td.text-center
                   .show-for-small-only
                     b Drogi
-                  = TradLeague::UserSeasonScoresPresenter.new(user: user).routes_count
+                  = TradLeague::UserSeasonScoresPresenter.new(user: user, year: params[:year]).routes_count
                 td.text-center
                   .show-for-small-only
                     b Bicki
-                  = TradLeague::UserSeasonScoresPresenter.new(user: user).hearts_count
+                  = TradLeague::UserSeasonScoresPresenter.new(user: user, year: params[:year]).hearts_count

@@ -70,6 +70,7 @@
       .callout
         = (@competition.sign_ups_records.map(&:participant_email_1) + @competition.sign_ups_records.map(&:participant_email_2)).reject(&:blank?).join(', ')
 
+
   .row
     .large-6.columns
       = f.submit 'Zapisz', class: 'button expanded large'

@@ -3,7 +3,7 @@
 # Table name: supplementary_sign_ups
 #
 #  id                                   :integer          not null, primary key
-#  code                                 :string           default("779d2af7232c9725"), not null
+#  code                                 :string           default("aabe7e693a125b4b"), not null
 #  email                                :string
 #  expired_at                           :datetime
 #  name                                 :string

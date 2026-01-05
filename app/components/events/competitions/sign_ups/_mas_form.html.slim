@@ -9,23 +9,33 @@
     = sanitize @competition.info_above_sign_ups
 
 = form_for :sign_up, html: { class: 'js-events-sign-up-form' }, url: url, method: method do |f|
-  .row
-    .large-12.columns
-      - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?
-        .callout.alert
-          ul
-            - @errors.select { |key, value| key.to_s.include?('_1') || key.to_s == 'participant_phone_2' }.each do |error|
-              li= error.last.to_sentence
-
   .callout.warning
+    .row
+      .large-12.columns
+        - if @errors && @errors.select { |key, value| key.to_s.include?('team_name') }.any?
+          .callout.alert
+            ul
+              - @errors.select { |key, value| key.to_s.include?('team_name') }.each do |error|
+                li= error.last.to_sentence
     .row
       .large-12.columns
         = f.label :team_name, "Nazwa zespołu | Team name - Bądź creatywny! | Be creative!"
         = f.text_field :team_name
   .callout.primary
     .row
+      .large-12.columns
+        - if @errors && @errors.select { |key, value| key.to_s.include?('_1') }.any?
+          .callout.alert
+            ul
+              - @errors.select { |key, value| key.to_s.include?('_1') }.each do |error|
+                li= error.last.to_sentence
+    .row
       .large-3.columns
-        = f.label :participant_name_1, "Imię i Nazwisko 1| Full Name 1 *"
+        = f.label :participant_gender_1, "Płeć 1 | Gender 1 *"
+        = f.select :participant_gender_1, options_for_select([["Mężczyzna | Men", 1], ["Kobieta | Women", 2]], @sign_up.try(:participant_gender_1)), include_blank: true
+
+      .large-3.columns
+        = f.label :participant_name_1, "Imię i Nazwisko 1| Name and Surname 1 *"
         = f.text_field :participant_name_1
 
       .large-3.columns
@@ -35,24 +45,16 @@
       .large-3.columns
         = f.label :participant_phone_1, "Telefon Kontaktowy 1 | Your Phone 1 *"
         = f.text_field :participant_phone_1
-
-      .large-3.columns
-        = f.label :participant_country_1, "Kraj 1 | Country 1 *"
-        = f.select :participant_country_1, options_for_select([["Polska", 'pl'], ["Slovakia", "sk"], ["Czech", 'cz'], ["Germany", 'de'], ["Ukraine", 'ua'], ["Other", "other"]], @sign_up.try(:participant_country_1)), include_blank: true
     .row
-      .large-3.columns
-        = f.label :participant_gender_1, "Płeć 1 | Gender 1 *"
-        = f.select :participant_gender_1, options_for_select([["Mężczyzna | Men", 1], ["Kobieta | Women", 2]], @sign_up.try(:participant_gender_1)), include_blank: true
-
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_birth_year_1, "Rok urodzenia 1 | Birthdate (RRRR) 1 *"
-        = f.number_field :participant_birth_year_1, max: Date.today.year - 17
+        = f.number_field :participant_birth_year_1, max: Date.today.year - 17, min: 1900
 
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_team_1, "Organizacja 1 | Club 1"
         = f.text_field :participant_team_1
 
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_team_1, "Miasto 1 | Club 1"
         = f.text_field :participant_city_1
 
@@ -64,7 +66,7 @@
               = "Rozmiar Koszulki 1 | T-shirt Size 1 (#{link_to("LINK", @competition.tshirt_url, target: :_blank)})".html_safe
             - else
               | Rozmiar Koszulki 1 | T-shirt Size 1
-          = f.text_field :tshirt_size_1
+          = f.select :tshirt_size_1, options_for_select( [ ["Men XS", "MXS"], ["Men S", "MS"], ["Men M", "MM"], ["Men L", "ML"], ["Men XL", "MXL"], ["Men 2XL", "M2XL"], ["Men 3XL", "M3XL"], ["Men 4XL", "M4XL"], ["Men 5XL", "M5XL"], ["Women XS", "WXS"], ["Women S", "WS"], ["Women M", "WM"], ["Women L", "WL"], ["Women XL", "WXL"], ["Women 2XL", "W2XL"], ["Women 3XL", "W3XL"], ["Women 4XL", "W4XL"], ["Women 5XL", "W5XL"] ] , @sign_up.try(:tshirt_size_1)), include_blank: true
 
       .large-3.columns
         = f.label :competition_package_type_1_id, "Pakiet 1 | Package 1"
@@ -80,8 +82,19 @@
 
   .callout.secondary
     .row
+      .large-12.columns
+        - if @errors && @errors.select { |key, value| key.to_s.include?('_2') }.any?
+          .callout.alert
+            ul
+              - @errors.select { |key, value| key.to_s.include?('_2') }.each do |error|
+                li= error.last.to_sentence
+    .row
       .large-3.columns
-        = f.label :participant_name_2, "Imię i Nazwisko 2 | Full Name 2 *"
+        = f.label :participant_gender_2, "Płeć 2 | Gender 2 *"
+        = f.select :participant_gender_2, options_for_select([["Mężczyzna | Men", 1], ["Kobieta | Women", 2]], @sign_up.try(:participant_gender_2)), include_blank: true
+
+      .large-3.columns
+        = f.label :participant_name_2, "Imię i Nazwisko 2 | Name and Surname 2 *"
         = f.text_field :participant_name_2
 
       .large-3.columns
@@ -92,24 +105,16 @@
         = f.label :participant_phone_2, "Telefon Kontaktowy 2 | Your Phone 2 *"
         = f.text_field :participant_phone_2
 
-      .large-3.columns
-        = f.label :participant_country_2, "Kraj 2 | Country 2 *"
-        = f.select :participant_country_2, options_for_select([["Polska", 'pl'], ["Slovakia", "sk"], ["Czech", 'cz'], ["Germany", 'de'], ["Ukraine", 'ua'], ["Other", "other"]], @sign_up.try(:participant_country_2)), include_blank: true
-
     .row
-      .large-3.columns
-        = f.label :participant_gender_2, "Płeć 2 | Gender 2 *"
-        = f.select :participant_gender_2, options_for_select([["Mężczyzna | Men", 1], ["Kobieta | Women", 2]], @sign_up.try(:participant_gender_1)), include_blank: true
-
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_birth_year_2, "Rok urodzenia 2 | Birthdate (RRRR) 2 *"
-        = f.number_field :participant_birth_year_2, max: Date.today.year - 17
+        = f.number_field :participant_birth_year_2, max: Date.today.year - 17, min: 1900
 
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_team_2, "Organizacja 2 | Club 2"
         = f.text_field :participant_team_2
 
-      .large-3.columns
+      .large-4.columns
         = f.label :participant_team_1, "Miasto 2 | Club 2"
         = f.text_field :participant_city_2
 
@@ -121,7 +126,7 @@
               = "Rozmiar Koszulki 2 | T-shirt Size 2 (#{link_to("LINK", @competition.tshirt_url, target: :_blank)})".html_safe
             - else
               | Rozmiar Koszulki 2 | T-shirt Size 2
-          = f.text_field :tshirt_size_2
+          = f.select :tshirt_size_2, options_for_select( [ ["Men XS", "MXS"], ["Men S", "MS"], ["Men M", "MM"], ["Men L", "ML"], ["Men XL", "MXL"], ["Men 2XL", "M2XL"], ["Men 3XL", "M3XL"], ["Men 4XL", "M4XL"], ["Men 5XL", "M5XL"], ["Women XS", "WXS"], ["Women S", "WS"], ["Women M", "WM"], ["Women L", "WL"], ["Women XL", "WXL"], ["Women 2XL", "W2XL"], ["Women 3XL", "W3XL"], ["Women 4XL", "W4XL"], ["Women 5XL", "W5XL"] ] , @sign_up.try(:tshirt_size_2)), include_blank: true
 
       .large-3.columns
         = f.label :competition_package_type_2_id, "Pakiet 2 | Package 2"
@@ -143,10 +148,10 @@
 
   .row
     .large-12.columns
-      - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.any?
+      - if @errors && @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') && !key.to_s.include?('team_name') }.any?
         .callout.alert
           ul
-            - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') }.each do |error|
+            - @errors.select { |key, value| !key.to_s.include?('_1') && !key.to_s.include?('_2') && !key.to_s.include?('team_name') }.each do |error|
               li= error.last.to_sentence
 
   - if action_name == 'edit'
@@ -156,7 +161,7 @@
       .row
         .large-12.columns
           = f.label :terms_of_service do
-            | Zapoznałam/em się z treścią <a href='https://mas.kw.krakow.pl/xvregulamin/'>regulaminu</a> Memoriału.
+            | Zapoznałam/em się z treścią Regulaminu zawodów.
           = f.check_box :terms_of_service
           small = @competition.rules_text.html_safe
 

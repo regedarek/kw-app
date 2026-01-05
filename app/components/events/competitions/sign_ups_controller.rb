@@ -10,6 +10,26 @@ module Events
         else
           Events::Db::CompetitionRecord.find_by!(id: params[:competition_id])
         end
+
+        respond_to do |format|
+          format.html
+          format.json do
+            sign_ups = @competition.sign_ups_records.where.not(start_number: nil).map do |sign_up|
+              name = 
+              {
+                number: sign_up.start_number,
+                name: "#{sign_up.participant_name} [#{sign_up.sport_category_1}]",
+                first_name: sign_up.participant_first_name_1,
+                last_name: sign_up.participant_name_1,
+                sport_category: sign_up.sport_category_1,
+                gender: sign_up.gender_1,
+                clubs: sign_up.participant_clubs,
+                cities: sign_up.participant_cities,
+              }
+            end
+            render json: sign_ups
+          end
+        end
       end
 
       def new
@@ -114,6 +134,7 @@ module Events
             :participant_phone_2,
             :participant_gender_2,
             :license_number,
+            :start_number,
             :participant_email_1,
             :participant_email_2,
             :participant_kw_id_1,

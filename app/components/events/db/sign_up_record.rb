@@ -32,6 +32,7 @@
 #  saturday_night                :boolean          default(FALSE), not null
 #  sent_at                       :datetime
 #  single                        :boolean          default(FALSE), not null
+#  start_number                  :integer
 #  team_name                     :string
 #  tshirt_size_1                 :string
 #  tshirt_size_2                 :string
@@ -61,7 +62,7 @@ module Events
       has_many :emails, as: :mailable, class_name: 'EmailCenter::EmailRecord', dependent: :destroy
 
       def self.human_enum(enum, options = {})
-        [["Polska", 'pl'], ["Slovakia", "sk"], ["Czech", 'cz'], ["Germany", 'de'], ["Austria", "at"], ["Italy", "it"], ["France", "fr"], ["Spain", "esp"], ["Romania", "ro"], ["Ukraine", 'ua'], ["Other", "other"]]
+        [["Polska", 'pl'], ["Slovakia", "sk"], ["Czech", 'cz'], ["Germany", 'de'], ["Austria", "at"], ["Greece", "gr"], ["Italy", "it"], ["France", "fr"], ["Spain", "esp"], ["Romania", "ro"], ["Ukraine", 'ua'], ["Other", "other"]]
       end
 
       def sport_category_1

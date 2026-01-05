@@ -18,7 +18,7 @@ module Events
          required(:terms_of_service).filled
 
          required(:participant_name_1).filled
-         required(:participant_country_1).filled
+         optional(:participant_country_1).maybe(:str?)
          optional(:tshirt_size_1).filled
          optional(:participant_city_1)
          optional(:participant_kw_id_1).maybe(:string)
@@ -30,7 +30,7 @@ module Events
          required(:competition_package_type_1_id).filled
 
          required(:participant_name_2).filled
-         required(:participant_country_2).filled
+         optional(:participant_country_2).maybe(:str?)
          optional(:tshirt_size_2).filled
          optional(:participant_city_2)
          optional(:participant_kw_id_2).maybe(:string)
