@@ -11,7 +11,8 @@ services:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
     volumes:
       - .:/rails
-      - kw-app-cache:/rails/tmp/cache
+      - kw-app-bundle:/usr/local/bundle
+      - kw-app-tmp:/rails/tmp
     ports:
       - "3002:3002"
     depends_on:
@@ -33,7 +34,7 @@ services:
       - POSTGRES_PASSWORD=dev-password
       - PG_USER=dev-user
     ports:
-        - "5432:5432"
+        - "5433:5432"
     networks:
       - my_local_dev_network
 
@@ -46,7 +47,8 @@ services:
     command: ./bin/sidekiq -C config/sidekiq.yml
     volumes:
       - .:/rails
-      - .:/rails/tmp/cache
+      - kw-app-bundle:/usr/local/bundle
+      - kw-app-tmp:/rails/tmp
     environment:
       - DB_HOST=postgres
       - PGUSER=dev-user
@@ -72,7 +74,7 @@ services:
     image: 'redis:7-alpine'
     command: redis-server  --requirepass +eA8tga96sbquDe9CLL3yUZMNdHM6prSwD6kj1vXO4nzPPudDkxh4U+/LMtOWd+Wd72s9MnXNZqCKZeh
     ports:
-      - '6379:6379'
+      - '6380:6379'
     volumes:
       - kw-app-redis-data:/var/lib/redis/data
     sysctls:
@@ -83,7 +85,8 @@ services:
 volumes:
   kw-app-redis-data:
   kw-app-postgres:
-  kw-app-cache:
+  kw-app-bundle:
+  kw-app-tmp:
 
 networks:
   my_local_dev_network:

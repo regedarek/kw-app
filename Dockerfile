@@ -11,7 +11,6 @@ RUN apt-get update -qq && \
 
 # Set production environment
 ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/rails/tmp/cache" \
     BUNDLE_WITHOUT=""
 
 # Install application gems
