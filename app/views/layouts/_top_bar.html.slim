@@ -177,7 +177,7 @@
             .show-for-small-only
               | Wiadomości
 
-        - if user_signed_in? && current_user&.kw_id
+        - if user_signed_in?
           li.remove-arrow = link_to user_path(current_user.kw_id), style: 'padding: 0rem 1rem;' do
             - if current_user.avatar.present?
               = image_tag(current_user.avatar.url, class: 'topbar-avatar-image')

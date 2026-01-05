@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
   before_action :set_paper_trail_whodunnit
-  before_action :ensure_user_loaded
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     Appsignal.set_error(exception)
@@ -45,33 +44,5 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_remember_me(resource)
     remember_me resource
-  end
-
-  def ensure_user_loaded
-    return unless user_signed_in?
-    
-    begin
-      # Check if current_user is properly loaded
-      if current_user.nil?
-        Rails.logger.error "ERROR: user_signed_in? is true but current_user is nil"
-        sign_out_all_scopes
-        return
-      end
-      
-      # Check if kw_id is missing
-      if current_user.kw_id.nil?
-        Rails.logger.error "ERROR: User #{current_user.id} (#{current_user.email}) has nil kw_id - reloading from database"
-        current_user.reload
-        
-        if current_user.kw_id.nil?
-          Rails.logger.error "ERROR: User #{current_user.id} still has nil kw_id after reload - data integrity issue"
-        end
-      end
-    rescue ActiveRecord::RecordNotFound => e
-      Rails.logger.error "ERROR: Session references non-existent user: #{e.message}"
-      sign_out_all_scopes
-    rescue => e
-      Rails.logger.error "ERROR in ensure_user_loaded: #{e.class} - #{e.message}\n#{e.backtrace.first(5).join("\n")}"
-    end
   end
 end

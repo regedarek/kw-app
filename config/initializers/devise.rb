@@ -125,10 +125,10 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 2.weeks
+  config.remember_for = 2.years
 
   # Invalidates all the remember me tokens when the user signs out.
-  config.expire_all_remember_me_on_sign_out = true
+  config.expire_all_remember_me_on_sign_out = false
 
   # If true, extends the user's remember period when remembered via cookie.
   config.extend_remember_period = true
@@ -256,19 +256,6 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
-
-# Warden hooks - must be after Devise.setup
-Warden::Manager.after_set_user do |user, auth, opts|
-  # Ensure user is fully loaded with all attributes after authentication
-  if user && user.kw_id.nil?
-    begin
-      user.reload
-    rescue ActiveRecord::RecordNotFound
-      auth.logout
-    end
-  end
-end
-
 require 'devise/mailer'
 
 module Devise
