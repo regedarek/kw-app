@@ -8,27 +8,25 @@ end
 module Events
   module Competitions
     module SignUps
-      class TshirtForm < Dry::Validation::Schema
-        configure do
-          config.messages = :i18n
-          config.messages_file = 'app/components/events/competitions/sign_ups/errors.yml'
-          config.type_specs = true
+      class TshirtForm < Dry::Validation::Contract
+        option :competition_id
+
+        params do
+         required(:participant_name_1).filled(:string)
+         required(:tshirt_size_1).filled(:string)
+         required(:competition_package_type_1_id).filled(:integer)
+         optional(:participant_phone_1).maybe(:string)
         end
-        configure { option :competition_id }
 
-        define! do
-         required(:participant_name_1).filled
-         required(:tshirt_size_1).filled
-         required(:competition_package_type_1_id).filled
-         optional(:participant_phone_1).maybe(:str?)
-
-         validate(active_kw_id_1: [:participant_kw_id_1, :competition_package_type_1_id]) do |kw_id, package_id|
-           if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
-             ::Membership::Activement.new(user: ::Db::User.find_by(kw_id: kw_id)).active?
-           else
-             true
-           end
-         end
+        rule(:participant_kw_id_1, :competition_package_type_1_id) do
+          package_id = values[:competition_package_type_1_id]
+          kw_id = values[:participant_kw_id_1]
+          
+          if Events::Db::CompetitionPackageTypeRecord.find(package_id).membership?
+            unless ::Membership::Activement.new(user: ::Db::User.find_by(kw_id: kw_id)).active?
+              key.failure('must be an active member')
+            end
+          end
         end
       end
     end
