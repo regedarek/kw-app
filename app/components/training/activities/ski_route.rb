@@ -8,7 +8,7 @@ module Training
   module Activities
     class SkiRoute < Dry::Struct
       attribute :id, Types::Strict::Integer.optional
-      attribute :route_type, Types::Strict::String.default('ski')
+      attribute :route_type, Types::Strict::String.default('ski'.freeze)
       attribute :name, Types::Strict::String
       attribute :climbing_date, Types::Strict::Date
       attribute :hidden, Types::Strict::Bool
