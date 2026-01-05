@@ -22,10 +22,8 @@
         .row
           .large-12.columns
             b= f.label :action_type, 'Cel dotacji'
-            - if request.path == '/dla-mariusza'
-              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'mariusz'
-            - elsif request.path == '/na-ryse'
-              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'crack'
+            - if request.path == '/tablica-dla-michala'
+              = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'michal'
             - elsif request.path == '/serwis-narciarski'
               = f.select :action_type, Charity::DonationRecord.action_types_select, selected: 'ski_service'
             - else

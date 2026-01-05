@@ -1,3 +1,6 @@
+# Set SSH_AUTH_SOCK for 1Password SSH agent (must be before any SSH connections)
+ENV['SSH_AUTH_SOCK'] = "#{ENV['HOME']}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
 # Load DSL and set up stages
 require "capistrano/setup"
 

@@ -684,6 +684,7 @@ Rails.application.routes.draw do
 
   draw(:custom_endpoints)
   draw(:profile_creation_endpoints)
+  draw(:charity_endpoints)
 
   resources :photos, only: :index
   resources :likes, only: %i[create destroy]

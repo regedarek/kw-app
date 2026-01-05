@@ -16,12 +16,8 @@ module Charity
         donation.update description: "Darowizna na rzecz Klubu Wysokogórskiego Kraków - Sprzęt serwisowy od #{donation.display_name}"
       end
 
-      if donation.crack?
-        donation.update description: "Darowizna na rzecz Klubu Wysokogórskiego Kraków - Rysa od #{donation.display_name}"
-      end
-
-      if donation.mariusz?
-        donation.update description: "Darowizna na pomoc społeczną rodziny Mariusza Norweckiego od #{donation.display_name}"
+      if donation.michal?
+        donation.update description: "Darowizna na tablicę upamiętniającą Michała Wojarskiego od #{donation.display_name}"
       end
 
       payment = donation.payment
