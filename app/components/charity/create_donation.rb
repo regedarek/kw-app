@@ -6,9 +6,13 @@ module Charity
     end
 
     def call(raw_inputs:)
-      form_outputs = form.call(raw_inputs.to_unsafe_h)
-      return Failure(message: 'Zaakceptuj regulamin darowizn') if form_outputs.errors.key?(:terms_of_service)
-      return Failure(message: 'Kwota i cel dotacji musi być uzupełnione!') unless form_outputs.success?
+      # Convert ActionController::Parameters to hash if needed
+      inputs = raw_inputs.respond_to?(:to_unsafe_h) ? raw_inputs.to_unsafe_h : raw_inputs
+      form_outputs = form.call(inputs)
+      
+      # Check for terms_of_service validation error
+      return Failure(:invalid, message: 'Zaakceptuj regulamin darowizn') if form_outputs.errors.to_h.key?(:terms_of_service)
+      return Failure(:invalid, message: 'Kwota i cel dotacji musi być uzupełnione!') unless form_outputs.success?
 
       donation = repository.create_donation(form_outputs: form_outputs)
 

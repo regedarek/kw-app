@@ -10,8 +10,8 @@ module Charity
       either(create_record) do |result|
         result.success { |payment:| redirect_to charge_payment_path(payment.id) }
 
-        result.failure do |errors|
-          flash[:error] = errors.values.join(", ")
+        result.invalid do |message:|
+          flash[:error] = message
           redirect_to michal_path
         end
       end
