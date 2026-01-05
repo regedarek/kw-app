@@ -56,9 +56,13 @@ docker-compose exec -T postgres psql -U dev-user -c "CREATE DATABASE kw_app_test
 docker-compose run --rm -T app bundle exec rake db:migrate db:seed
 ```
 
-### 4. Start all services
+### 4. Install JavaScript dependencies (yarn)
 ```bash
+# Start the services first
 docker-compose up -d
+
+# Install yarn packages (requires python2 for node-sass)
+docker-compose exec -T --user root app bash -c "apt-get update && apt-get install -y python2 && ln -sf /usr/bin/python2 /usr/bin/python && yarn install && chown -R rails:rails /rails/node_modules"
 ```
 
 ### 5. Verify everything is running
@@ -170,6 +174,17 @@ docker-compose build
 docker-compose up -d
 ```
 
+### Run yarn install (if package.json changes)
+**Note: The service is called `app`, not `web`**
+
+```bash
+# If python2 is already installed in container
+docker-compose exec -T --user root app bash -c "yarn install && chown -R rails:rails /rails/node_modules"
+
+# If python2 is not installed (first time or after rebuild)
+docker-compose exec -T --user root app bash -c "apt-get update && apt-get install -y python2 && ln -sf /usr/bin/python2 /usr/bin/python && yarn install && chown -R rails:rails /rails/node_modules"
+```
+
 ### Access PostgreSQL directly
 ```bash
 docker-compose exec postgres psql -U dev-user kw_app_development
@@ -204,6 +219,14 @@ If migrations fail with "database does not exist":
 If you see "the input device is not a TTY" error:
 - Add `-T` flag: `docker-compose exec -T app bundle exec rake db:migrate`
 - Or use `docker-compose run --rm app` instead
+
+### Yarn/Node-sass Issues
+If yarn install fails with python errors:
+- node-sass requires Python 2, not Python 3
+- Install python2 in the container: `docker-compose exec -T --user root app apt-get update && apt-get install -y python2`
+- Create symlink: `docker-compose exec -T --user root app ln -sf /usr/bin/python2 /usr/bin/python`
+- Run as root user to avoid permission issues: `--user root`
+- Fix ownership after: `chown -R rails:rails /rails/node_modules`
 
 ### Clean Start (Nuclear Option)
 ```bash
