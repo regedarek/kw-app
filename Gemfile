@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
-ruby '3.0.7'
+ruby '3.2.2'
 
 # setup
 gem 'bootsnap', require: false
-gem 'rails', '7.0.0'
+gem 'rails', '~> 7.0.8'
+gem 'logger'
 gem 'pg', '~> 1.1'
 gem 'active_model_serializers'
 gem "sprockets-rails"
