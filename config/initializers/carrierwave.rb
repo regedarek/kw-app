@@ -2,6 +2,7 @@ require "fog/openstack"
 
 if Rails.env.staging? || Rails.env.production?
   CarrierWave.configure do |config|
+    config.fog_provider = 'fog/openstack'
     config.fog_credentials = {
       provider: 'openstack',
       openstack_api_key: Rails.application.secrets.openstack_api_key,
@@ -9,17 +10,14 @@ if Rails.env.staging? || Rails.env.production?
       openstack_auth_url: "https://auth.cloud.ovh.net/",
       openstack_region: 'WAW',
       connection_options: {
-        connect_timeout: 30,
-        read_timeout: 30,
-        write_timeout: 30
+        connect_timeout: 60,
+        read_timeout: 60,
+        write_timeout: 60,
+        persistent: true
       }
     }
     config.asset_host = Rails.application.secrets.openstack_asset_host
     config.fog_directory = "kw-app-cloud-#{Rails.env}"
     config.fog_public = false
-    
-    # Enable attribute caching to avoid repeated OpenStack API calls
-    config.enable_processing = true
-    config.cache_storage = :file
   end
 end
