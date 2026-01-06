@@ -1,3 +1,7 @@
+require 'result'
+require 'failure'
+require 'success'
+
 module Charity
   class CreateDonation
     def initialize(repository, form)

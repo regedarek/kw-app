@@ -7,14 +7,18 @@ module Charity
     end
 
     def create
-      either(create_record) do |result|
-        result.success { |payment:| redirect_to charge_payment_path(payment.id) }
-
-        result.invalid do |message:|
-          flash[:error] = message
-          redirect_to michal_path
-        end
+      result = create_record
+      
+      result.success do |payment:|
+        redirect_to charge_payment_path(payment.id)
       end
+      
+      result.invalid do |message:|
+        flash[:error] = message
+        redirect_to michal_path
+      end
+      
+      result.else_fail!
     end
 
     private
