@@ -20,11 +20,6 @@ if Rails.env.staging? || Rails.env.production?
     }
     config.asset_host = Rails.application.secrets.openstack_asset_host
     config.fog_directory = "kw-app-cloud-#{Rails.env}"
-    config.fog_public = true
-    
-    # Use asset_host for URLs instead of making API calls to OpenStack
-    config.fog_attributes = {
-      'Cache-Control' => 'public, max-age=31536000'
-    }
+    config.fog_public = false
   end
 end

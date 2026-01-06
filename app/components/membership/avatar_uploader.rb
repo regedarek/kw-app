@@ -17,5 +17,11 @@ module Membership
     def store_dir
       "membership/avatars/#{model.id}"
     end
+
+    # Override fog_public for avatars to avoid signed URL generation and API calls
+    # When fog_public is true, CarrierWave uses asset_host directly without checking OpenStack
+    def fog_public
+      true
+    end
   end
 end
