@@ -46,8 +46,8 @@ gem 'pagy'
 gem 'whenever', require: false
 gem 'rubyzip', '>= 1.2.1'
 gem 'attributed_object', require: false, git: 'https://github.com/jgroeneveld/attributed_object.git'
-gem 'carrierwave'
-gem 'fog-openstack', require: "fog/openstack"
+gem 'carrierwave', '~> 3.1.2'
+gem 'fog-openstack', '~> 1.1.5', require: "fog/openstack"
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f' 
 gem 'google_calendar'
 gem 'koala'

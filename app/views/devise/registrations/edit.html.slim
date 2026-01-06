@@ -11,7 +11,7 @@
       .large-3.columns
         .callout
           - if current_user.avatar.present?
-            = image_tag(current_user.avatar.url, class: 'card-profile-stats-intro-pic')
+            = image_tag(safe_avatar_url(current_user), class: 'card-profile-stats-intro-pic')
             br
             br
           .callout
