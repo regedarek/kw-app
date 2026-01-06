@@ -17,7 +17,10 @@ if use_cloud_storage?
         connect_timeout: 60,
         read_timeout: 60,
         write_timeout: 60,
-        persistent: true
+        persistent: false,
+        # Add instrumentation callbacks for debugging
+        instrumentor: ActiveSupport::Notifications,
+        instrumentor_name: 'excon'
       }
     }
     config.asset_host = Rails.application.secrets.openstack_asset_host
@@ -33,6 +36,26 @@ if use_cloud_storage?
     config.fog_public = false
     
     Rails.logger.info "CarrierWave: Using OpenStack fog storage with container: #{container_name}"
+    Rails.logger.info "CarrierWave: persistent=false, timeouts=60s"
+  end
+  
+  # Subscribe to Excon events for connection monitoring
+  ActiveSupport::Notifications.subscribe('excon.request') do |name, start, finish, id, payload|
+    duration = ((finish - start) * 1000).round(2)
+    if duration > 5000
+      Rails.logger.warn "[EXCON] Slow request: #{duration}ms to #{payload[:host]}#{payload[:path]}"
+    end
+    if payload[:response]
+      status = payload[:response][:status]
+      if status >= 500
+        Rails.logger.error "[EXCON] Server error #{status}: #{payload[:host]}#{payload[:path]}"
+      end
+    end
+  end
+  
+  ActiveSupport::Notifications.subscribe('excon.error') do |name, start, finish, id, payload|
+    Rails.logger.error "[EXCON] Connection error: #{payload[:error].class} - #{payload[:error].message}"
+    Rails.logger.error "[EXCON] Host: #{payload[:host]}, Path: #{payload[:path]}"
   end
 else
   Rails.logger.info "CarrierWave: Using local file storage"
