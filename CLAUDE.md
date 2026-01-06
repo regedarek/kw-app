@@ -15,7 +15,7 @@ All version control operations must be performed by human developers.
 
 ### Production Server
 ```bash
-ssh deploy@51.68.141.247
+ssh ubuntu@146.59.44.70
 ```
 
 ### Key Information
