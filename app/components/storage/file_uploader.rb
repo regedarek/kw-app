@@ -1,15 +1,9 @@
 module Storage
-  class FileUploader < CarrierWave::Uploader::Base
+  class FileUploader < ApplicationUploader
     include CarrierWave::MiniMagick
     process :save_content_type_and_size_in_model
 
     before :cache, :check_mimetype
-
-    if Rails.env.production? || Rails.env.staging?
-      storage :fog
-    else
-      storage :file
-    end
 
     process :auto_orient, :if => :image?
 

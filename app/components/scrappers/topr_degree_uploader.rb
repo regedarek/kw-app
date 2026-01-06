@@ -1,16 +1,10 @@
 module Scrappers
-  class ToprDegreeUploader < CarrierWave::Uploader::Base
+  class ToprDegreeUploader < ApplicationUploader
     include CarrierWave::MiniMagick
     process :set_content_type
 
     def set_content_type(*args)
       self.file.instance_variable_set(:@content_type, 'image/jpeg')
-    end
-
-    if Rails.env.production? || Rails.env.staging?
-      storage :fog
-    else
-      storage :file
     end
 
     version :normal do

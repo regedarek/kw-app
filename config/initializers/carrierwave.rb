@@ -1,6 +1,11 @@
 require "fog/openstack"
 
-if Rails.env.staging? || Rails.env.production?
+# Helper method to determine if cloud storage should be used
+def use_cloud_storage?
+  Rails.env.staging? || Rails.env.production? || ENV['USE_CLOUD_STORAGE'].to_s == 'true'
+end
+
+if use_cloud_storage?
   CarrierWave.configure do |config|
     config.fog_provider = 'fog/openstack'
     config.fog_credentials = {
@@ -17,7 +22,19 @@ if Rails.env.staging? || Rails.env.production?
       }
     }
     config.asset_host = Rails.application.secrets.openstack_asset_host
-    config.fog_directory = "kw-app-cloud-#{Rails.env}"
+    
+    # Use staging container in development when USE_CLOUD_STORAGE is enabled
+    container_name = if Rails.env.development? && ENV['USE_CLOUD_STORAGE'].to_s == 'true'
+                       "kw-app-cloud-staging"
+                     else
+                       "kw-app-cloud-#{Rails.env}"
+                     end
+    
+    config.fog_directory = container_name
     config.fog_public = false
+    
+    Rails.logger.info "CarrierWave: Using OpenStack fog storage with container: #{container_name}"
   end
+else
+  Rails.logger.info "CarrierWave: Using local file storage"
 end

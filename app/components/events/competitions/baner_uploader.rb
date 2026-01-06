@@ -1,13 +1,7 @@
 module Events
   module Competitions
-    class BanerUploader < CarrierWave::Uploader::Base
+    class BanerUploader < ApplicationUploader
       include CarrierWave::MiniMagick
-
-      if Rails.env.production? || Rails.env.staging?
-        storage :fog
-      else
-        storage :file
-      end
 
       process resize_to_limit: [1200, -1]
 

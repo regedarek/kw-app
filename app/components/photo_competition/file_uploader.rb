@@ -1,12 +1,6 @@
 module PhotoCompetition
-  class FileUploader < CarrierWave::Uploader::Base
+  class FileUploader < ApplicationUploader
     include CarrierWave::MiniMagick
-
-    if Rails.env.production? || Rails.env.staging?
-      storage :fog
-    else
-      storage :file
-    end
 
     def extension_whitelist
       %w(jpg jpeg png)

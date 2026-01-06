@@ -1,12 +1,6 @@
 module Membership
-  class AvatarUploader < CarrierWave::Uploader::Base
+  class AvatarUploader < ApplicationUploader
     include CarrierWave::MiniMagick
-
-    if Rails.env.production? || Rails.env.staging?
-      storage :fog
-    else
-      storage :file
-    end
 
     process resize_to_limit: [250, 250]
 
