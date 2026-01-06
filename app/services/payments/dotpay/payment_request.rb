@@ -30,10 +30,10 @@ module Payments
           if payment_url.present?
             Success.new(payment_url: payment_url)
           else
-            Failure.new(:wrong_payment_url, message: 'Błędny link płatności, skonktaktuj się z administratorem.')
+            Failure.new(:wrong_payment_url, { message: 'Błędny link płatności, skonktaktuj się z administratorem.' })
           end
         else
-          Failure.new(:dotpay_request_error, message: 'Błąd podczas generowania linka płatności skontaktuj sie z administratorem.', body: JSON.parse(response.body))
+          Failure.new(:dotpay_request_error, { message: 'Błąd podczas generowania linka płatności skontaktuj sie z administratorem.' })
         end
       end
 
