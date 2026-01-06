@@ -34,7 +34,7 @@ module ClubMeetings
     validates :user, presence: true
 
     has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, reject_if: proc { |attributes| attributes[:file].blank? }
 
     def slug_candidates
       [

@@ -81,7 +81,7 @@ module Settlement
     has_many :projects, through: :project_items
 
     has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, reject_if: proc { |attributes| attributes[:file].blank? }
 
     STATUS_ASC_ORDERS = ['new', 'accepted', 'preclosed', 'closed'].freeze
     STATUS_DESC_ORDERS = STATUS_ASC_ORDERS.reverse.freeze

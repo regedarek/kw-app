@@ -22,7 +22,7 @@ module Management
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
     has_many :attachments, as: :uploadable, class_name: 'Storage::UploadRecord'
-    accepts_nested_attributes_for :attachments
+    accepts_nested_attributes_for :attachments, reject_if: proc { |attributes| attributes[:file].blank? }
 
     workflow_column :state
     workflow do

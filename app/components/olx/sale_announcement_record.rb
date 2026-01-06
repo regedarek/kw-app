@@ -30,7 +30,7 @@ module Olx
     has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord', dependent: :destroy
     has_many :comments, as: :commentable, class_name: 'Messaging::CommentRecord'
 
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, reject_if: proc { |attributes| attributes[:file].blank? }
 
     def primary_photo
       photos.first

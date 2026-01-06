@@ -82,7 +82,7 @@ module Db
       has_many :training_contracts, class_name: 'Training::Activities::UserContractRecord', foreign_key: :route_id
 
       has_many :photos, as: :uploadable, class_name: 'Storage::UploadRecord'
-      accepts_nested_attributes_for :photos
+      accepts_nested_attributes_for :photos, reject_if: proc { |attributes| attributes[:file].blank? }
 
       validates :name, :rating, :climbing_date, presence: true
 
