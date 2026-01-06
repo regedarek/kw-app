@@ -10,16 +10,17 @@ if Rails.env.staging? || Rails.env.production?
       openstack_auth_url: "https://auth.cloud.ovh.net/",
       openstack_region: 'WAW',
       connection_options: {
-        connect_timeout: 2,
-        read_timeout: 2,
-        write_timeout: 5,
-        persistent: false,
-        retry_limit: 0,
-        omit_default_port: true
+        connect_timeout: 5,
+        read_timeout: 5,
+        write_timeout: 5
       }
     }
     config.asset_host = Rails.application.secrets.openstack_asset_host
     config.fog_directory = "kw-app-cloud-#{Rails.env}"
     config.fog_public = false
+    
+    # Enable attribute caching to avoid repeated OpenStack API calls
+    config.enable_processing = true
+    config.cache_storage = :file
   end
 end
