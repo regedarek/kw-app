@@ -1,4 +1,14 @@
-- if user_signed_in? && current_user.active?
+- if user_signed_in? && !current_user.active?
+  .row
+    .large-12.columns
+      .callout.alert style='text-align: center; padding: 3rem 2rem;'
+        i.fi.fi-alert style='font-size: 3rem; color: #cc4b37;'
+        h3 style='margin-top: 1rem; margin-bottom: 1rem;' Nie masz opłaconej składki na dany rok!
+        p style='font-size: 1.1rem; margin-bottom: 1.5rem;'
+          | Aby uzyskać pełny dostęp do systemu, opłać składkę członkowską.
+        = link_to "Przejdź do opłacenia składki", "#{root_path}klub/skladki", class: 'button large success'
+
+- elsif user_signed_in? && current_user.active?
   div(id="test")
   .row
     .large-12.columns style='text-align: center'
