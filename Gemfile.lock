@@ -268,6 +268,9 @@ GEM
       fog-json (>= 1.0)
     formatador (1.2.3)
       reline
+    foundation-icons-sass-rails (3.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     foundation-rails (6.4.3.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -651,6 +654,7 @@ DEPENDENCIES
   ffi (< 1.17.0)
   flag-icons-rails
   fog-openstack (~> 1.1.5)
+  foundation-icons-sass-rails
   foundation-rails (~> 6.4.3.0)
   friendly_id (~> 5.2.4)
   google_calendar

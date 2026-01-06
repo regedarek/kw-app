@@ -106,7 +106,7 @@
               - else
                 span.label.warning nie opłacono
             td.large-text-center = fee.cost
-            td.large-text-center
-              = link_to admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Jestes pewien?' } do
+            td.text-center
+              = link_to admin_membership_fee_path(fee.id), method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć tę składkę?' } do
                 i.fi-trash
     = paginate @membership_fees
