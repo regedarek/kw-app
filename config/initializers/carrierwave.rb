@@ -7,7 +7,6 @@ end
 
 if use_cloud_storage?
   CarrierWave.configure do |config|
-    config.fog_provider = 'fog/openstack'
     config.fog_credentials = {
       provider: 'openstack',
       openstack_api_key: Rails.application.secrets.openstack_api_key,
