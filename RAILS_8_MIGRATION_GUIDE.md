@@ -1,572 +1,374 @@
-# Rails 8 + Hotwire Native: Complete Migration Guide
+# Rails 8 Migration & Frontend Work Division
 
-**Strategy**: Delete React, rebuild with Stimulus, keep existing Rails views
-
-**Goals**:
-1. Maximum easy maintenance
-2. Enable JS developer to work independently
-3. Build native iOS/Android apps from same codebase
-4. 95% code sharing between web and mobile
+**Strategy**: Delete React → Rebuild with Stimulus → Keep working views as-is
 
 ---
 
-## Table of Contents
+## 📋 Executive Summary
 
-1. [Executive Summary](#executive-summary)
-2. [Current State Analysis](#current-state-analysis)
-3. [Target Architecture](#target-architecture)
-4. [Migration Strategy](#migration-strategy)
-5. [Why This Approach](#why-this-approach)
-6. [Timeline](#timeline)
-7. [Step-by-Step Migration](#step-by-step-migration)
-8. [Code Examples](#code-examples)
-9. [Team Structure](#team-structure)
-10. [Frontend Developer Guide](#frontend-developer-guide)
-11. [Development Workflow](#development-workflow)
-12. [Testing](#testing)
-13. [Deployment](#deployment)
-14. [Success Metrics](#success-metrics)
+### Current State → Target State
 
----
+| Aspect | Before | After |
+|--------|--------|-------|
+| **Rails** | 7.0.8 | 8.0 |
+| **Ruby** | 3.2.2 | 3.3.0 |
+| **Frontend** | React + Webpacker | Stimulus + Importmap |
+| **Views** | Slim (working) + React components | ERB (new features) + Slim (existing) |
+| **Mobile** | None | Turbo Native (iOS + Android) |
+| **Maintenance** | Complex (React build pipeline) | Simple (server-rendered HTML) |
 
-## Executive Summary
+### Goals
 
-### Current State
-- **Rails**: 7.0.8
-- **Ruby**: 3.2.2
-- **Frontend**: Webpacker 5.2.1 (deprecated) + React 17
-- **Problem**: Maintenance burden, no mobile apps, complex build
-
-### Target State
-- **Rails**: 8.0
-- **Ruby**: 3.3.0
-- **Frontend**: Hotwire (Turbo + Stimulus) + Importmap
-- **Mobile**: Turbo Native (iOS + Android)
-- **Result**: 75% less maintenance, native apps included, 2x faster development
-
-### What We'll Do
-
-```
-1. Delete React Features Completely
-   ├─ Shop components → DELETE
-   ├─ Strava components → DELETE
-   ├─ Calendar widgets → DELETE
-   └─ File uploader → DELETE
-
-2. Keep Existing Rails Views
-   ├─ Admin panels → KEEP (already work!)
-   ├─ User management → KEEP
-   ├─ CRUD pages → KEEP
-   └─ Forms → KEEP
-
-3. Rebuild React Features with Stimulus
-   ├─ Shop → Build fresh with Stimulus
-   ├─ Strava → Build fresh with Stimulus
-   ├─ Calendar → Build fresh with Stimulus
-   └─ File uploader → Build fresh with Stimulus
-
-4. Launch Native Apps
-   ├─ iOS → Turbo Native
-   └─ Android → Turbo Native
-```
-
-### Timeline: 10 Weeks
-
-| Phase | Duration | What Happens |
-|-------|----------|--------------|
-| Phase 1 | 2 weeks | Rails 8 upgrade, remove Webpacker/React |
-| Phase 2 | 4 weeks | Rebuild features with Stimulus |
-| Phase 3 | 2 weeks | Native apps setup |
-| Phase 4 | 2 weeks | Testing & launch |
+1. ✅ Remove React complexity
+2. ✅ Enable generic frontend developer to work independently
+3. ✅ Build native iOS/Android apps from same codebase
+4. ✅ 75% less maintenance, 2x faster development
 
 ---
 
-## Current State Analysis
-
-### Your App Today
-
-```
-kw-app/
-├── React Components (via Webpacker)    ❌ DELETE THESE
-│   ├── app/javascript/src/shopAdmin/
-│   ├── app/javascript/src/shopClient/
-│   ├── app/javascript/src/strava/
-│   ├── app/javascript/src/fileUploader/
-│   ├── app/javascript/src/calendarIcon/
-│   └── app/javascript/src/narciarskieDziki/
-│
-├── Traditional Rails Views              ✅ KEEP THESE
-│   ├── app/views/admin/
-│   ├── app/views/users/
-│   ├── app/views/events/
-│   └── app/views/layouts/
-│
-└── Configuration (Webpacker)            ❌ DELETE THESE
-    ├── config/webpacker.yml
-    ├── babel.config.js
-    ├── postcss.config.js
-    └── node_modules/ (huge!)
-```
-
-### Problems We're Solving
-
-1. ❌ **Webpacker deprecated** - No longer maintained
-2. ❌ **Build complexity** - Webpack, Babel, React config
-3. ❌ **Slow builds** - 45 seconds in development
-4. ❌ **High maintenance** - Two paradigms (React + Rails)
-5. ❌ **No mobile apps** - Would need React Native (separate codebase)
-6. ❌ **Onboarding time** - 2-3 weeks to learn React/Redux/Webpack
-
-### What's Working (Don't Touch!)
-
-```ruby
-# app/views/admin/dashboard.html.slim
-.admin-dashboard
-  h1 Admin Dashboard
-  .stats
-    .stat-box Users: #{@users_count}
-  = link_to "Manage", admin_users_path
-```
-
-**This is perfect!** Server-rendered, fast, maintainable.
-
-**Action**: Leave it exactly as-is ✅
-
----
-
-## Target Architecture
-
-### System Overview
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                  Rails 8 Application                     │
-│                                                          │
-│  ┌────────────────────────────────────────────────┐    │
-│  │  Hotwire Stack                                  │    │
-│  │                                                 │    │
-│  │  • Turbo Drive (SPA-like navigation)          │    │
-│  │  • Turbo Frames (partial updates)             │    │
-│  │  • Turbo Streams (real-time WebSocket)        │    │
-│  │  • Stimulus (JavaScript sprinkles)            │    │
-│  └────────────────────────────────────────────────┘    │
-│                                                          │
-│  All HTML rendered by Rails (server-side)               │
-│  JavaScript only for interactivity                      │
-└─────────────────────────────────────────────────────────┘
-                      ▲
-                      │ HTTP (same HTML)
-                      │
-        ┌─────────────┴──────────────┐
-        │                            │
-┌───────▼────────┐         ┌─────────▼────────┐
-│  iOS App       │         │  Android App     │
-│  Turbo Native  │         │  Turbo Native    │
-│                │         │                  │
-│  + Strada      │         │  + Strada        │
-│  (native       │         │  (native         │
-│   features)    │         │   features)      │
-└────────────────┘         └──────────────────┘
-```
-
-### File Structure After Migration
-
-```
-kw-app/
-├── app/
-│   ├── controllers/
-│   │   ├── admin/                    # Unchanged ✅
-│   │   ├── users_controller.rb       # Unchanged ✅
-│   │   ├── events_controller.rb      # Unchanged ✅
-│   │   └── shop/                     # NEW (for rebuilt features)
-│   │       ├── products_controller.rb
-│   │       └── cart_controller.rb
-│   │
-│   ├── views/
-│   │   ├── admin/                    # Unchanged ✅
-│   │   ├── users/                    # Unchanged ✅
-│   │   ├── events/                   # Unchanged ✅
-│   │   ├── shop/                     # NEW (rebuilt from React)
-│   │   │   ├── index.html.slim
-│   │   │   ├── cart.html.slim
-│   │   │   └── _cart_item.html.slim
-│   │   └── layouts/
-│   │       └── application.html.slim # Updated for Hotwire
-│   │
-│   ├── javascript/
-│   │   ├── application.js            # NEW (simple entry)
-│   │   │
-│   │   ├── controllers/              # NEW (Stimulus)
-│   │   │   ├── cart_controller.js
-│   │   │   ├── search_controller.js
-│   │   │   ├── strava_controller.js
-│   │   │   ├── calendar_controller.js
-│   │   │   └── upload_controller.js
-│   │   │
-│   │   └── bridges/                  # NEW (native features)
-│   │       ├── camera_component.js
-│   │       └── menu_component.js
-│   │
-│   ├── models/                       # Unchanged ✅
-│   │   ├── user.rb
-│   │   ├── event.rb
-│   │   └── product.rb
-│   │
-│   └── assets/
-│       ├── stylesheets/
-│       │   └── application.css       # Keep existing CSS
-│       └── images/
-│
-├── ios/                              # NEW (Turbo Native)
-│   └── KwApp/
-│       ├── AppDelegate.swift
-│       └── SceneController.swift
-│
-├── android/                          # NEW (Turbo Native)
-│   └── app/
-│       └── src/
-│
-├── config/
-│   ├── importmap.rb                  # NEW (replaces Webpacker)
-│   └── routes.rb                     # Updated for new shop routes
-│
-└── Gemfile                           # Updated for Rails 8 + Hotwire
-```
-
----
-
-## Migration Strategy
-
-### The "Clean Slate" Approach
-
-**Philosophy**: Why convert complex React when we can rebuild simpler?
-
-```
-Old React Component:
-├─ 200 lines of React
-├─ Redux state management
-├─ Complex lifecycle hooks
-├─ Webpack configuration
-└─ Hard to maintain
-
-New Stimulus Version:
-├─ 30 lines of JavaScript
-├─ Server handles state
-├─ Simple controller pattern
-└─ Easy to maintain
-```
+## 🎯 Migration Strategy
 
 ### What Gets Deleted
 
-```bash
-# These go away completely:
-rm -rf app/javascript/src/          # All React components
-rm -rf node_modules/react*          # React dependencies
-rm -rf config/webpacker.yml         # Webpacker config
-rm -rf babel.config.js              # Babel config
-rm -rf postcss.config.js            # PostCSS config
-rm package.json                     # Will recreate minimal version
+```
+❌ DELETE COMPLETELY:
+├── app/javascript/src/shopAdmin/
+├── app/javascript/src/shopClient/
+├── app/javascript/src/strava/
+├── app/javascript/src/calendar/
+├── app/javascript/src/fileUploader/
+├── config/webpack/
+├── config/webpacker.yml
+└── package.json (React dependencies)
 ```
 
 ### What Gets Kept
 
 ```
-✅ app/views/admin/        - Already perfect
-✅ app/views/users/        - Already perfect
-✅ app/views/events/       - Already perfect
-✅ app/controllers/        - Business logic unchanged
-✅ app/models/             - 100% unchanged
-✅ config/routes.rb        - Most routes unchanged
-✅ spec/                   - Most tests unchanged
-✅ Gemfile                 - Update for Rails 8
-✅ Kamal deployment        - Works as-is
+✅ KEEP AS-IS (Working Slim views):
+├── app/views/admin/dashboard.html.slim
+├── app/views/users/index.html.slim
+├── app/views/layouts/application.html.slim
+└── Any other working Slim templates
 ```
 
-### What Gets Built Fresh
+### What Gets Rebuilt
 
 ```
-NEW: app/javascript/controllers/    - Stimulus controllers
-NEW: app/views/shop/                - Rails views for shop
-NEW: ios/                           - Native iOS app
-NEW: android/                       - Native Android app
+🔨 REBUILD WITH STIMULUS:
+├── Shop features → ERB + Stimulus
+├── Strava integration → ERB + Stimulus
+├── Calendar widgets → ERB + Stimulus
+└── File uploader → ERB + Stimulus
 ```
 
-### Decision Tree: What to Do With Each Page
+### Decision Tree
 
 ```
-For every page in your app:
-
-Does it use React?
-├─ YES
-│  ├─ Delete React component
-│  ├─ Create Rails view (server-rendered HTML)
-│  ├─ Create Stimulus controller (if interactivity needed)
-│  └─ Test new version
+Is it a React component?
+├─ YES → Delete it, rebuild with Stimulus (ERB + JS)
 │
-└─ NO (already Rails view)
-   └─ LEAVE IT ALONE ✅
-      Optional: Add data-turbo="true" for SPA feel
+Is it working Slim template?
+├─ YES → Keep it as-is
+│   └─ Only convert to ERB if FE dev needs to refactor
+│
+Is it a new feature?
+└─ YES → Build with ERB (easier for FE developers)
 ```
 
 ---
 
-## Why This Approach
+## 👥 Team Responsibilities
 
-### Benefits of "Delete & Rebuild"
+### Backend Developer (You) - 70% Work
 
-#### 1. Simpler Than Conversion
+**You Own:**
+```ruby
+# 1. Controllers - Provide data
+class Shop::ProductsController < ApplicationController
+  def index
+    @products = Product.active
+                      .search(params[:query])
+                      .page(params[:page])
+    # Stop here - FE dev handles the view
+  end
+end
 
-**Converting React to Stimulus:**
-```
-1. Understand complex React component
-2. Map Redux state to server state
-3. Rewrite in Stimulus
-4. Ensure feature parity
-5. Test exhaustively
-```
+# 2. Models - Business logic
+class Product < ApplicationRecord
+  validates :name, presence: true
+  scope :active, -> { where(active: true) }
+  
+  def discounted_price
+    price * (1 - discount_percentage)
+  end
+end
 
-**Building fresh with Stimulus:**
-```
-1. Know what feature should do
-2. Build with Rails views + Stimulus
-3. Test
-4. Done
-```
+# 3. Database migrations
+class CreateProducts < ActiveRecord::Migration[8.0]
+  def change
+    create_table :products do |t|
+      t.string :name
+      t.decimal :price
+      t.boolean :active, default: true
+      t.timestamps
+    end
+  end
+end
 
-#### 2. Cleaner Code
+# 4. Routes
+Rails.application.routes.draw do
+  namespace :shop do
+    resources :products
+  end
+end
 
-No legacy patterns, no half-converted code, no "we kept this because..."
-
-Start fresh with best practices.
-
-#### 3. Learning Opportunity
-
-FE developer learns Stimulus by building (not converting).
-
-Better understanding, cleaner implementations.
-
-#### 4. No Coexistence Complexity
-
-**Gradual migration:**
-- Two asset pipelines running
-- Conditional logic in layouts
-- "Which system is this page using?"
-- Temporary complexity
-
-**Clean slate:**
-- One system (Hotwire)
-- Simple setup
-- Clear architecture
-- No confusion
-
-### Comparison Table
-
-| Approach | Pros | Cons | Timeline |
-|----------|------|------|----------|
-| **Convert React** | Keep exact behavior | Complex mapping | 12 weeks |
-| **Delete & Rebuild** | Clean code, simpler | Need to rebuild features | 10 weeks |
-| **Gradual migration** | Lower risk | Two systems coexist | 14 weeks |
-
-**Your choice (Delete & Rebuild) is actually fastest!** ⚡
-
-### Risk Mitigation
-
-**"But what if we lose features?"**
-
-✅ **Solution**: Feature checklist before deleting
-
-```
-Shop Feature Checklist:
-- [ ] Product listing
-- [ ] Add to cart
-- [ ] Remove from cart
-- [ ] Cart total calculation
-- [ ] Checkout flow
-- [ ] Order confirmation
-
-Document BEFORE deleting React.
-Implement EXACTLY these features.
-No features lost.
+# 5. Tests (RSpec)
+# 6. Deployment (Kamal)
+# 7. Database management
 ```
 
-**"What if new version has bugs?"**
+**You DON'T Touch:**
+- ❌ View files (ERB/Slim)
+- ❌ CSS styling
+- ❌ JavaScript/Stimulus
+- ❌ UI/UX decisions
 
-✅ **Solution**: Build in staging first
+### Frontend Developer - 30% Work
 
+**FE Dev Owns:**
 ```
-1. Keep production running (React version)
-2. Build Stimulus version in staging
-3. Test thoroughly
-4. Only deploy when confident
-5. Can rollback if needed
+app/
+├── views/shop/products/
+│   ├── index.html.erb           ← Complete HTML
+│   ├── show.html.erb            ← Complete HTML
+│   └── _product.html.erb        ← Partials
+│
+├── javascript/controllers/
+│   ├── shop_controller.js       ← Stimulus interactivity
+│   └── cart_controller.js
+│
+└── assets/stylesheets/
+    ├── application.css
+    └── shop.css                  ← All styling
+```
+
+**FE Dev DON'T Need:**
+- ❌ Ruby/Rails knowledge
+- ❌ Database concepts
+- ❌ Deployment knowledge
+- ❌ Backend testing
+
+---
+
+## 📁 File Format Strategy
+
+### Keep Slim When:
+- ✅ Existing page works perfectly
+- ✅ No interactive features needed
+- ✅ No immediate refactoring planned
+- ✅ Admin panels, dashboards
+
+### Use ERB When:
+- ✅ New feature being built
+- ✅ React component being replaced
+- ✅ FE developer needs to work on it
+- ✅ Any frontend refactoring
+
+**Why ERB?** Standard HTML - any frontend developer can work with it immediately.
+
+---
+
+## 🔨 Code Examples
+
+### Example 1: Shopping Cart
+
+**Backend (You):**
+```ruby
+# app/controllers/shop/carts_controller.rb
+module Shop
+  class CartsController < ApplicationController
+    def show
+      @cart = current_user.cart
+    end
+
+    def add
+      @cart = current_user.cart
+      @product = Product.find(params[:product_id])
+      @cart.add_item(@product, quantity: params[:quantity])
+      
+      respond_to do |format|
+        format.html { redirect_to shop_cart_path }
+        format.turbo_stream # Triggers app/views/shop/carts/add.turbo_stream.erb
+      end
+    end
+  end
+end
+```
+
+**Frontend (FE Dev):**
+```erb
+<!-- app/views/shop/carts/show.html.erb -->
+<div data-controller="cart">
+  <h1>Your Cart</h1>
+  
+  <div id="cart-items">
+    <%= render @cart.items %>
+  </div>
+  
+  <div class="cart-summary">
+    <p>Total: $<span data-cart-target="total"><%= @cart.total %></span></p>
+    <button data-action="click->cart#checkout">Checkout</button>
+  </div>
+</div>
+```
+
+```javascript
+// app/javascript/controllers/cart_controller.js
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  static targets = ["total"]
+  
+  async removeItem(event) {
+    const itemId = event.target.dataset.itemId
+    
+    const response = await fetch(`/shop/cart/remove/${itemId}`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": this.csrfToken,
+        "Accept": "text/vnd.turbo-stream.html"
+      }
+    })
+    
+    // Turbo Stream automatically updates the DOM
+  }
+  
+  get csrfToken() {
+    return document.querySelector("[name='csrf-token']").content
+  }
+}
+```
+
+```css
+/* app/assets/stylesheets/shop.css */
+.cart-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+```
+
+### Example 2: Live Search
+
+**Backend (You):**
+```ruby
+class Shop::ProductsController < ApplicationController
+  def index
+    @products = Product.active
+    @products = @products.search(params[:q]) if params[:q].present?
+    @products = @products.page(params[:page])
+  end
+end
+```
+
+**Frontend (FE Dev):**
+```erb
+<!-- app/views/shop/products/index.html.erb -->
+<div data-controller="search">
+  <input 
+    type="text" 
+    data-search-target="input"
+    data-action="input->search#search"
+    placeholder="Search products..."
+  >
+  
+  <div id="products" data-search-target="results">
+    <%= render @products %>
+  </div>
+</div>
+```
+
+```javascript
+// app/javascript/controllers/search_controller.js
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  static targets = ["input", "results"]
+  
+  search() {
+    clearTimeout(this.timeout)
+    this.timeout = setTimeout(() => {
+      this.performSearch()
+    }, 300)
+  }
+  
+  async performSearch() {
+    const query = this.inputTarget.value
+    const response = await fetch(`/shop/products?q=${query}`, {
+      headers: { "Accept": "text/html" }
+    })
+    const html = await response.text()
+    this.resultsTarget.innerHTML = html
+  }
+}
 ```
 
 ---
 
-## Timeline
+## 📅 Timeline: 10 Weeks
 
-### 10-Week Detailed Plan
-
-#### Phase 1: Rails 8 Setup (Weeks 1-2)
-
-**Week 1: Preparation**
-- [ ] Team alignment meeting
-- [ ] Create feature documentation (what React does today)
-- [ ] Set up Rails 8 branch
-- [ ] Database backup strategy
+### Phase 1: Rails 8 Setup (Weeks 1-2)
 - [ ] Update Ruby to 3.3.0
+- [ ] Update Rails to 8.0
+- [ ] Delete React code completely
+- [ ] Install Hotwire (Turbo + Stimulus)
+- [ ] Setup Importmap
+- [ ] Convert critical Slim → ERB (if needed)
+- [ ] Test existing pages still work
 
-**Week 2: Core Upgrade**
-- [ ] Update Gemfile (Rails 8, Hotwire)
-- [ ] Run `bundle install`
-- [ ] Install Hotwire: `rails turbo:install stimulus:install`
-- [ ] Delete Webpacker & React completely
-- [ ] Update application layout
-- [ ] Verify existing Rails views still work
-- [ ] Tests passing
+### Phase 2: Rebuild Features (Weeks 3-6)
+- [ ] Week 3: Shop product listing + search
+- [ ] Week 4: Shopping cart + checkout
+- [ ] Week 5: Strava integration UI
+- [ ] Week 6: Calendar + file uploader
 
-**Deliverable**: Rails 8 running, Hotwire installed, React deleted ✅
+### Phase 3: Native Apps (Weeks 7-8)
+- [ ] Setup Turbo Native iOS
+- [ ] Setup Turbo Native Android
+- [ ] Test key flows in native apps
+- [ ] Add Strada bridges (camera, notifications)
 
-#### Phase 2: Rebuild Features (Weeks 3-6)
-
-**Week 3: Shop - Product Listing**
-- [ ] Create `Shop::ProductsController`
-- [ ] Create views: `shop/index.html.slim`
-- [ ] Add search with Stimulus
-- [ ] Add filters with Stimulus
-- [ ] Test thoroughly
-
-**Week 4: Shop - Cart**
-- [ ] Create `Shop::CartController`
-- [ ] Create cart views
-- [ ] Build `cart_controller.js` (Stimulus)
-- [ ] Add to cart functionality
-- [ ] Update cart dynamically (Turbo Streams)
-- [ ] Test checkout flow
-
-**Week 5: Strava Integration**
-- [ ] Create `StravaController`
-- [ ] OAuth flow (existing or new)
-- [ ] Build `strava_controller.js` (Stimulus)
-- [ ] Sync activities
-- [ ] Display stats
-- [ ] Test sync process
-
-**Week 6: Calendar & Upload**
-- [ ] Calendar widget with Stimulus
-- [ ] File uploader with Stimulus
-- [ ] Test all interactions
-- [ ] Polish UI/UX
-
-**Deliverable**: All features rebuilt and working ✅
-
-#### Phase 3: Native Apps (Weeks 7-8)
-
-**Week 7: iOS App**
-- [ ] Create Xcode project
-- [ ] Install Turbo via CocoaPods
-- [ ] Basic navigation working
-- [ ] Authentication working
-- [ ] Test all features in app
-- [ ] Add app icon/splash
-
-**Week 8: Android App**
-- [ ] Create Android Studio project
-- [ ] Install Turbo library
-- [ ] Basic navigation working
-- [ ] Authentication working
-- [ ] Test all features in app
-- [ ] Add app icon/splash
-
-**Deliverable**: iOS & Android apps functional ✅
-
-#### Phase 4: Testing & Launch (Weeks 9-10)
-
-**Week 9: QA & Bug Fixes**
+### Phase 4: Testing & Launch (Weeks 9-10)
 - [ ] Full regression testing
 - [ ] Performance testing
-- [ ] Mobile app testing
-- [ ] Fix all bugs
-- [ ] Update documentation
-
-**Week 10: Production Launch**
-- [ ] Deploy to staging
-- [ ] Stakeholder review
-- [ ] Deploy to production
+- [ ] Deploy to production (Kamal)
 - [ ] Submit apps to stores
-- [ ] Monitor closely
-- [ ] Team celebration! 🎉
-
-**Deliverable**: Live in production, apps submitted ✅
 
 ---
 
-## Step-by-Step Migration
+## 🚀 Step-by-Step Migration
 
 ### Step 1: Upgrade Rails 8
 
 ```bash
-# 1. Update Ruby
+# Update Ruby
 echo "3.3.0" > .ruby-version
-rbenv install 3.3.0
-rbenv local 3.3.0
+chruby 3.3.0
 
-# 2. Update Gemfile
-```
+# Update Gemfile
+gem "rails", "~> 8.0"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem "importmap-rails"
 
-```ruby
-# Gemfile
-source 'https://rubygems.org'
-ruby '3.3.0'
-
-# Core
-gem 'rails', '~> 8.0'
-gem 'bootsnap', require: false
-gem 'pg', '~> 1.1'
-gem 'puma'
-
-# Hotwire
-gem 'turbo-rails'
-gem 'stimulus-rails'
-gem 'importmap-rails'
-
-# Rails 8 performance
-gem 'thruster', require: false, group: [:development, :production]
-
-# Keep existing gems
-gem 'devise', '~> 4.8.1'
-gem 'sidekiq'
-gem 'pagy'
-gem 'ransack'
-gem 'carrierwave', '~> 3.1.2'
-gem 'cancancan', '~> 3.3.0'  # or pundit
-gem 'slim-rails'
-gem 'kamal', '~> 2.3', require: false, group: [:tools]
-
-# Dry-rb (keep if used)
-gem 'dry-monads', '~> 1.3'
-gem 'dry-validation', '~> 1.0'
-
-# REMOVE THESE:
-# gem 'webpacker'  # or shakapacker
-# gem 'react-rails'
-
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'byebug'
-end
-```
-
-```bash
-# 3. Install
-bundle install
-
-# 4. Install Hotwire
-rails turbo:install
-rails stimulus:install
-rails importmap:install
-
-# 5. Run Rails update
+bundle update rails
 bin/rails app:update
 ```
 
@@ -576,781 +378,60 @@ bin/rails app:update
 # Delete React code
 rm -rf app/javascript/src/
 rm -rf app/javascript/packs/
-
-# Delete Webpacker config
-rm -rf config/webpacker.yml
-rm -rf config/webpack/
-rm -rf babel.config.js
-rm -rf postcss.config.js
-
-# Clean node_modules
 rm -rf node_modules/
-rm -rf yarn.lock
+
+# Delete Webpacker
+rm -rf config/webpack/
+rm config/webpacker.yml
+rm bin/webpack
+rm bin/webpack-dev-server
+
+# Remove from Gemfile
+bundle remove webpacker
 ```
 
-### Step 3: Setup Minimal JavaScript
+### Step 3: Setup Hotwire
 
-```json
-// package.json (recreate minimal version)
+```bash
+# Install Hotwire
+bin/rails turbo:install
+bin/rails stimulus:install
+bin/rails importmap:install
+
+# Create minimal package.json
+cat > package.json << 'EOF'
 {
   "name": "kw-app",
   "private": true,
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^8.0.4"
+    "@hotwired/turbo-rails": "^8.0.0"
   }
 }
+EOF
 ```
 
-```bash
-yarn install
-```
+### Step 4: Update Layout
 
-```javascript
-// app/javascript/application.js
-import "@hotwired/turbo-rails"
-import "./controllers"
-
-console.log("Hotwire loaded!")
-```
-
-```javascript
-// app/javascript/controllers/application.js
-import { Application } from "@hotwired/stimulus"
-
-const application = Application.start()
-application.debug = false
-window.Stimulus = application
-
-export { application }
-```
-
-```javascript
-// app/javascript/controllers/index.js
-import { application } from "./application"
-
-// Controllers will be imported here
-// import HelloController from "./hello_controller"
-// application.register("hello", HelloController)
-```
-
-### Step 4: Update Application Layout
-
-```slim
-/ app/views/layouts/application.html.slim
-doctype html
-html lang="en"
-  head
-    meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+```erb
+<!-- app/views/layouts/application.html.erb -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KW App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     
-    title = content_for?(:title) ? yield(:title) : "KW App"
-    
-    = csrf_meta_tags
-    = csp_meta_tag
-    
-    / Hotwire
-    = javascript_importmap_tags
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-  
-  body
-    = render "layouts/navigation"
-    = render "layouts/flash"
-    
-    main
-      = yield
-    
-    = render "layouts/footer"
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>
 ```
 
-### Step 5: Configure Importmap
-
-```ruby
-# config/importmap.rb
-pin "application", preload: true
-pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
-pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
-pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
-
-# Pin Stimulus controllers
-pin_all_from "app/javascript/controllers", under: "controllers"
-
-# Add libraries as needed (no React!)
-# pin "chartkick"
-```
-
-### Step 6: Test Existing Pages
-
-```bash
-# Start server
-bin/rails server
-
-# Visit existing pages
-open http://localhost:3000/admin
-open http://localhost:3000/users
-open http://localhost:3000/events
-
-# They should all work! ✅
-```
-
-### Step 7: Build First Feature (Shop)
-
-**Create Controller:**
-
-```ruby
-# app/controllers/shop/products_controller.rb
-module Shop
-  class ProductsController < ApplicationController
-    def index
-      @products = Product.active
-                        .search(params[:query])
-                        .page(params[:page])
-    end
-    
-    def show
-      @product = Product.find(params[:id])
-    end
-  end
-end
-```
-
-**Create View:**
-
-```slim
-/ app/views/shop/products/index.html.slim
-.shop-products(data-controller="shop")
-  .search
-    = form_with url: shop_products_path, method: :get do |f|
-      = f.text_field :query,
-        placeholder: "Search products...",
-        data: {
-          action: "input->shop#search",
-          shop_target: "searchInput"
-        }
-  
-  .products(data-shop-target="results")
-    = render @products
-  
-  = pagy_nav(@pagy) if @pagy
-```
-
-**Create Stimulus Controller:**
-
-```javascript
-// app/javascript/controllers/shop_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static targets = ["searchInput", "results"]
-  
-  search() {
-    clearTimeout(this.timeout)
-    
-    this.timeout = setTimeout(() => {
-      this.performSearch()
-    }, 300)
-  }
-  
-  async performSearch() {
-    const query = this.searchInputTarget.value
-    const url = `/shop/products?query=${encodeURIComponent(query)}`
-    
-    try {
-      const response = await fetch(url, {
-        headers: { 'Accept': 'text/html' }
-      })
-      
-      const html = await response.text()
-      this.resultsTarget.innerHTML = html
-    } catch (error) {
-      console.error('Search failed:', error)
-    }
-  }
-}
-```
-
-**Register Controller:**
-
-```javascript
-// app/javascript/controllers/index.js
-import { application } from "./application"
-import ShopController from "./shop_controller"
-
-application.register("shop", ShopController)
-```
-
-**Test:**
-
-```bash
-open http://localhost:3000/shop/products
-# Search should work with live updates!
-```
-
----
-
-## Code Examples
-
-### Example 1: Shopping Cart
-
-**Rails Controller:**
-
-```ruby
-# app/controllers/shop/carts_controller.rb
-module Shop
-  class CartsController < ApplicationController
-    before_action :authenticate_user!
-    
-    def show
-      @cart = current_user.cart
-    end
-    
-    def add
-      @cart = current_user.cart
-      @item = @cart.add_item(params[:product_id], params[:quantity] || 1)
-      
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to shop_cart_path }
-      end
-    end
-    
-    def remove
-      @cart = current_user.cart
-      @cart.remove_item(params[:id])
-      
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to shop_cart_path }
-      end
-    end
-    
-    def update_quantity
-      @cart = current_user.cart
-      @item = @cart.items.find(params[:id])
-      @item.update(quantity: params[:quantity])
-      
-      render partial: "cart_item", locals: { item: @item }
-    end
-  end
-end
-```
-
-**Rails View:**
-
-```slim
-/ app/views/shop/carts/show.html.slim
-div(data-controller="cart")
-  h1 Shopping Cart
-  
-  - if @cart.items.any?
-    = turbo_frame_tag "cart-items"
-      = render partial: "cart_item", collection: @cart.items
-    
-    .cart-summary
-      .cart-total
-        strong Total:
-        = number_to_currency(@cart.total)
-      
-      = link_to "Checkout", shop_checkout_path, class: "btn btn-primary"
-  
-  - else
-    p Your cart is empty
-    = link_to "Continue Shopping", shop_products_path, class: "btn"
-```
-
-**Partial:**
-
-```slim
-/ app/views/shop/carts/_cart_item.html.slim
-.cart-item(id=dom_id(cart_item))
-  .product-image
-    = image_tag cart_item.product.image_url, alt: cart_item.product.name
-  
-  .product-details
-    h3 = cart_item.product.name
-    p = number_to_currency(cart_item.product.price)
-  
-  .quantity
-    input(
-      type="number"
-      value=cart_item.quantity
-      min="1"
-      data-action="change->cart#updateQuantity"
-      data-cart-item-id-param=cart_item.id
-    )
-  
-  .actions
-    button(
-      data-action="click->cart#removeItem"
-      data-cart-item-id-param=cart_item.id
-      class="btn btn-danger"
-    ) Remove
-```
-
-**Stimulus Controller:**
-
-```javascript
-// app/javascript/controllers/cart_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  async removeItem(event) {
-    const itemId = event.params.itemId
-    
-    if (!confirm('Remove this item from cart?')) return
-    
-    try {
-      const response = await fetch(`/shop/cart/remove/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-          'X-CSRF-Token': this.csrfToken
-        }
-      })
-      
-      if (response.ok) {
-        // Turbo Stream will handle the removal
-      }
-    } catch (error) {
-      alert('Failed to remove item')
-    }
-  }
-  
-  async updateQuantity(event) {
-    const itemId = event.params.itemId
-    const quantity = event.target.value
-    
-    try {
-      const response = await fetch(`/shop/cart/update_quantity/${itemId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': this.csrfToken
-        },
-        body: JSON.stringify({ quantity })
-      })
-      
-      if (response.ok) {
-        const html = await response.text()
-        event.target.closest('.cart-item').outerHTML = html
-      }
-    } catch (error) {
-      alert('Failed to update quantity')
-    }
-  }
-  
-  get csrfToken() {
-    return document.querySelector('[name="csrf-token"]').content
-  }
-}
-```
-
-**Turbo Stream Response:**
-
-```ruby
-# app/views/shop/carts/remove.turbo_stream.erb
-<%= turbo_stream.remove dom_id(@item) %>
-<%= turbo_stream.update "cart-total" do %>
-  <%= number_to_currency(@cart.total) %>
-<% end %>
-```
-
-### Example 2: Live Search
-
-**Even Simpler with Turbo Frames:**
-
-```slim
-/ app/views/shop/products/index.html.slim
-= form_with url: shop_products_path, method: :get, data: { turbo_frame: "products" } do |f|
-  = f.text_field :query, 
-    placeholder: "Search...",
-    data: { action: "input->debounced#submit" }
-
-= turbo_frame_tag "products" do
-  = render @products
-```
-
-**Debounce Controller:**
-
-```javascript
-// app/javascript/controllers/debounced_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  submit() {
-    clearTimeout(this.timeout)
-    
-    this.timeout = setTimeout(() => {
-      this.element.requestSubmit()
-    }, 300)
-  }
-}
-```
-
-**That's it!** Search works with auto-submit and no page reload.
-
-### Example 3: File Upload with Progress
-
-```javascript
-// app/javascript/controllers/upload_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static targets = ["input", "progress", "preview"]
-  
-  async upload(event) {
-    const files = event.target.files
-    
-    for (const file of files) {
-      await this.uploadFile(file)
-    }
-  }
-  
-  async uploadFile(file) {
-    const formData = new FormData()
-    formData.append('file', file)
-    
-    try {
-      const response = await fetch('/upload', {
-        method: 'POST',
-        headers: {
-          'X-CSRF-Token': this.csrfToken
-        },
-        body: formData
-      })
-      
-      if (response.ok) {
-        const data = await response.json()
-        this.showPreview(data.url)
-      }
-    } catch (error) {
-      alert('Upload failed')
-    }
-  }
-  
-  showPreview(url) {
-    const img = document.createElement('img')
-    img.src = url
-    this.previewTarget.appendChild(img)
-  }
-  
-  get csrfToken() {
-    return document.querySelector('[name="csrf-token"]').content
-  }
-}
-```
-
----
-
-## Team Structure
-
-### Backend Developer (You) - 70% of Work
-
-**Responsibilities:**
-
-✅ **Infrastructure**
-- Rails controllers & models
-- Database migrations
-- Business logic
-- Background jobs (Sidekiq)
-- Authentication (Devise)
-- Authorization (CanCanCan)
-- API endpoints (if needed)
-- Testing (models, controllers, integration)
-
-✅ **Views**
-- HTML structure (Slim templates)
-- Server-rendered content
-- Turbo Frame placement
-- Turbo Stream responses
-- Partials
-
-✅ **Deployment**
-- Kamal configuration
-- Server management
-- Database backups
-- Monitoring
-
-**Example Daily Task:**
-
-```ruby
-# Create new feature
-rails g scaffold Event name:string date:datetime
-
-# Add view with Stimulus hook
-# app/views/events/index.html.slim
-div(data-controller="events")
-  = render @events
-
-# Controller handles business logic
-def create
-  @event = Event.new(event_params)
-  if @event.save
-    redirect_to @event
-  else
-    render :new
-  end
-end
-```
-
-### Frontend Developer - 30% of Work
-
-**Responsibilities:**
-
-✅ **JavaScript**
-- Stimulus controllers
-- Interactive components
-- Form validations
-- API consumption
-- Animations
-
-✅ **Styling**
-- CSS/SCSS
-- Responsive design
-- Component styling
-- UI polish
-
-✅ **Native Bridges** (optional)
-- Strada components
-- Camera access
-- GPS/location
-- Push notifications
-
-✅ **Testing**
-- JavaScript tests
-- System tests (with you)
-
-**Example Daily Task:**
-
-```javascript
-// Build interactive feature
-// app/javascript/controllers/dropdown_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static targets = ["menu"]
-  
-  toggle() {
-    this.menuTarget.classList.toggle("hidden")
-  }
-  
-  hide(event) {
-    if (!this.element.contains(event.target)) {
-      this.menuTarget.classList.add("hidden")
-    }
-  }
-}
-```
-
-### Clear Separation
-
-**You touch:**
-- `.rb` files
-- `.slim` files (HTML structure)
-- `db/` migrations
-- `config/` files
-
-**FE dev touches:**
-- `.js` files in `app/javascript/controllers/`
-- `.css` files
-- `.swift` / `.kt` files (native bridges)
-
-**No overlap = No conflicts!**
-
----
-
-## Frontend Developer Guide
-
-### Welcome! 👋
-
-You'll work with **Stimulus** - a simple JavaScript framework.
-
-### Your Workspace
-
-```
-app/javascript/
-├── controllers/      ← YOU WORK HERE!
-│   ├── cart_controller.js
-│   ├── search_controller.js
-│   └── your_new_controller.js
-│
-└── bridges/         ← For native features (optional)
-    └── camera_component.js
-```
-
-### Stimulus in 5 Minutes
-
-**Concept:** Connect JavaScript to HTML via `data-` attributes.
-
-**Three things:**
-1. **Controllers** - JavaScript classes
-2. **Targets** - Elements you want to reference
-3. **Actions** - Events that trigger methods
-
-**Example:**
-
-```html
-<!-- HTML (backend dev writes) -->
-<div data-controller="counter">
-  <button data-action="click->counter#increment">+</button>
-  <span data-counter-target="display">0</span>
-</div>
-```
-
-```javascript
-// JavaScript (you write)
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static targets = ["display"]
-  
-  increment() {
-    const value = parseInt(this.displayTarget.textContent)
-    this.displayTarget.textContent = value + 1
-  }
-}
-```
-
-**That's it!** No JSX, no build config, no virtual DOM.
-
-### Common Patterns
-
-**Pattern 1: Fetch Data**
-
-```javascript
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  async loadData() {
-    const response = await fetch('/api/data')
-    const data = await response.json()
-    this.updateUI(data)
-  }
-}
-```
-
-**Pattern 2: Form Handling**
-
-```javascript
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  async submit(event) {
-    event.preventDefault()
-    
-    const formData = new FormData(event.target)
-    
-    const response = await fetch(event.target.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'X-CSRF-Token': this.csrfToken
-      }
-    })
-    
-    if (response.ok) {
-      // Success!
-    }
-  }
-  
-  get csrfToken() {
-    return document.querySelector('[name="csrf-token"]').content
-  }
-}
-```
-
-**Pattern 3: Toggle UI**
-
-```javascript
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static targets = ["menu"]
-  
-  toggle() {
-    this.menuTarget.classList.toggle("hidden")
-  }
-}
-```
-
-### Your Daily Workflow
-
-**1. Backend dev creates feature:**
-```
-"Add live search to products page"
-```
-
-**2. They provide:**
-- HTML with `data-` attributes
-- API endpoint or URL
-- Expected behavior
-
-**3. You create controller:**
-```javascript
-// app/javascript/controllers/product_search_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  // Your implementation
-}
-```
-
-**4. Test:**
-```bash
-# Just refresh the page - no build step!
-```
-
-**5. Done!**
-
-### Learning Resources
-
-**Documentation:**
-- Stimulus Handbook: https://stimulus.hotwired.dev/handbook
-- Stimulus Reference: https://stimulus.hotwired.dev/reference
-
-**Video:**
-- Search "Stimulus 101" on YouTube (30 min)
-
-**Time to learn:** 
-- Day 1: Basics (4 hours)
-- Day 2-3: First feature (8 hours)
-- Week 1: Comfortable
-
-### Tools
-
-**VS Code Extensions:**
-- Stimulus LSP
-- Stimulus Autocomplete
-
-**Testing:**
-```javascript
-// test/javascript/controllers/cart_controller_test.js
-import { Application } from "@hotwired/stimulus"
-import CartController from "controllers/cart_controller"
-
-describe("CartController", () => {
-  it("adds item to cart", () => {
-    // Your test
-  })
-})
-```
-
-### Requirements
-
-**You need:**
-- ✅ JavaScript (ES6+)
-- ✅ DOM manipulation
-- ✅ Fetch API
-- ✅ CSS/SCSS
-
-**You don't need:**
-- ❌ React experience
-- ❌ Ruby/Rails knowledge
-- ❌ Webpack configuration
-- ❌ State management (Redux, etc.)
-
-### First Task: Hello World
-
-Create your first controller:
+### Step 5: Create First Stimulus Controller
 
 ```javascript
 // app/javascript/controllers/hello_controller.js
@@ -1366,406 +447,348 @@ export default class extends Controller {
 }
 ```
 
-Backend dev creates view:
-```slim
-div(data-controller="hello")
-  input(type="text" data-hello-target="name")
-  button(data-action="click->hello#greet") Greet
-  div(data-hello-target="output")
+```erb
+<!-- Test view -->
+<div data-controller="hello">
+  <input data-hello-target="name" type="text" placeholder="Your name">
+  <button data-action="click->hello#greet">Greet</button>
+  <p data-hello-target="output"></p>
+</div>
 ```
-
-Test it - it works! 🎉
 
 ---
 
-## Development Workflow
+## 🔄 Workflow: Building a New Feature
 
-### Daily Development
+### Example: Shop Cart Feature
 
-```bash
-# Start server (one command)
-bin/dev
+**Step 1: Backend (You)**
+```ruby
+# 1. Create migration
+bin/rails g migration CreateCarts user:references
+bin/rails g migration CreateCartItems cart:references product:references quantity:integer
 
-# This runs (via Procfile.dev):
-# - Rails server
-# - CSS watching (if using Tailwind)
-# That's it! No webpack, no complex builds
+# 2. Create models
+class Cart < ApplicationRecord
+  belongs_to :user
+  has_many :items, class_name: "CartItem"
+  
+  def total
+    items.sum { |item| item.product.price * item.quantity }
+  end
+end
+
+# 3. Create controller
+class Shop::CartsController < ApplicationController
+  def show
+    @cart = current_user.cart
+  end
+  
+  def add
+    @cart = current_user.cart
+    @product = Product.find(params[:product_id])
+    @cart.add_item(@product, quantity: params[:quantity])
+    
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+end
+
+# 4. Add routes
+namespace :shop do
+  resource :cart, only: [:show] do
+    post :add
+    delete :remove
+  end
+end
+
+# 5. Write tests
+RSpec.describe Cart do
+  it "calculates total correctly" do
+    # test code
+  end
+end
 ```
 
-**Procfile.dev:**
-```yaml
-web: bin/rails server -p 3000
-css: bin/rails tailwindcss:watch
+**Step 2: Frontend Developer**
+```
+1. Create view: app/views/shop/carts/show.html.erb
+2. Create partial: app/views/shop/carts/_item.html.erb
+3. Create Stimulus controller: app/javascript/controllers/cart_controller.js
+4. Create CSS: app/assets/stylesheets/cart.css
+5. Test in browser
 ```
 
-### Making Changes
-
-**Backend Developer:**
-1. Edit controller/model/view
-2. Refresh browser
-3. Works immediately
-
-**Frontend Developer:**
-1. Edit Stimulus controller
-2. Refresh browser
-3. Works immediately
-
-**No build step in development!** ⚡
-
-### Git Workflow
-
-**Branching:**
-```bash
-git checkout -b feature/shop-cart
-# Work on feature
-git commit -m "feat: add shop cart feature"
-git push origin feature/shop-cart
-# Create PR
-```
-
-**Branch naming:**
-- `feature/` - New features
-- `fix/` - Bug fixes
-- `refactor/` - Code improvements
-
-### Code Review
-
-**Backend dev reviews:**
-- Ruby code
-- View structure
-- Business logic
-- Database queries
-
-**Frontend dev reviews:**
-- JavaScript code
-- UI/UX
-- Styling
-- Interactions
-
-**Both review:**
-- Integration
-- User experience
-- Testing coverage
+**Communication:**
+- Backend provides: `@cart`, `@cart.items`, `@cart.total`
+- Frontend uses: Those variables in ERB
+- API contract: Documented in `docs/API_CONTRACTS.md`
 
 ---
 
-## Testing
+## 📚 Frontend Developer Quick Start
+
+### What You Need to Know
+
+**HTML + CSS + JavaScript** - that's it!
+
+**Stimulus in 5 minutes:**
+```html
+<!-- 1. Add controller -->
+<div data-controller="counter">
+  <!-- 2. Add target -->
+  <span data-counter-target="count">0</span>
+  <!-- 3. Add action -->
+  <button data-action="click->counter#increment">+</button>
+</div>
+```
+
+```javascript
+// app/javascript/controllers/counter_controller.js
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  static targets = ["count"]
+  
+  increment() {
+    const value = parseInt(this.countTarget.textContent)
+    this.countTarget.textContent = value + 1
+  }
+}
+```
+
+**That's it!** No build steps, no React complexity.
+
+### Common Patterns
+
+**1. Fetch data:**
+```javascript
+async loadData() {
+  const response = await fetch("/api/products")
+  const data = await response.json()
+  // Update DOM
+}
+```
+
+**2. Submit form:**
+```javascript
+async submit(event) {
+  event.preventDefault()
+  const formData = new FormData(this.element)
+  
+  const response = await fetch("/shop/cart", {
+    method: "POST",
+    body: formData,
+    headers: {
+      "X-CSRF-Token": this.csrfToken
+    }
+  })
+}
+
+get csrfToken() {
+  return document.querySelector("[name='csrf-token']").content
+}
+```
+
+**3. Toggle visibility:**
+```javascript
+static targets = ["content"]
+
+toggle() {
+  this.contentTarget.classList.toggle("hidden")
+}
+```
+
+### Your Daily Workflow
+
+```bash
+# 1. Start development
+docker-compose up
+
+# 2. Make changes
+# - Edit ERB files in app/views/
+# - Edit JS in app/javascript/controllers/
+# - Edit CSS in app/assets/stylesheets/
+
+# 3. Refresh browser (Turbo handles it!)
+
+# 4. Push to git
+git add .
+git commit -m "Add shop cart feature"
+git push
+```
+
+---
+
+## 🧪 Testing
 
 ### Backend Tests (RSpec)
-
 ```ruby
 # spec/models/cart_spec.rb
-RSpec.describe Cart, type: :model do
-  describe "#add_item" do
-    it "adds item to cart" do
+RSpec.describe Cart do
+  describe "#total" do
+    it "calculates sum of all items" do
       cart = create(:cart)
-      product = create(:product)
+      create(:cart_item, cart: cart, price: 10, quantity: 2)
       
-      cart.add_item(product.id)
-      
-      expect(cart.items.count).to eq(1)
+      expect(cart.total).to eq(20)
     end
   end
 end
 
-# spec/controllers/shop/carts_controller_spec.rb
-RSpec.describe Shop::CartsController, type: :controller do
-  describe "POST #add" do
+# spec/requests/shop/carts_spec.rb
+RSpec.describe "Shop::Carts" do
+  describe "POST /shop/cart/add" do
     it "adds product to cart" do
-      sign_in create(:user)
       product = create(:product)
       
-      post :add, params: { product_id: product.id }
+      post shop_cart_add_path, params: { product_id: product.id }
       
-      expect(response).to be_successful
+      expect(response).to have_http_status(:success)
     end
-  end
-end
-
-# spec/system/shop_spec.rb
-RSpec.describe "Shopping", type: :system do
-  it "allows adding product to cart" do
-    product = create(:product)
-    
-    visit shop_products_path
-    click_button "Add to Cart"
-    
-    expect(page).to have_content("Added to cart")
   end
 end
 ```
 
 ### Frontend Tests (Optional)
-
 ```javascript
-// test/javascript/controllers/cart_controller_test.js
-import { Application } from "@hotwired/stimulus"
-import CartController from "controllers/cart_controller"
-
-describe("CartController", () => {
-  beforeEach(() => {
-    document.body.innerHTML = `
-      <div data-controller="cart">
-        <button data-action="click->cart#add">Add</button>
-      </div>
-    `
-    
-    const application = Application.start()
-    application.register("cart", CartController)
-  })
-  
-  it("handles add click", () => {
-    const button = document.querySelector("button")
-    button.click()
-    // Assert behavior
-  })
-})
-```
-
-### Running Tests
-
-```bash
-# Backend tests
-bin/rails test
-bin/rails spec  # if using RSpec
-
-# System tests (full browser)
-bin/rails test:system
-
-# Frontend tests (if configured)
-npm test
-
-# Coverage
-COVERAGE=true bin/rails test
+// Use browser testing or skip it
+// Stimulus is simple enough that manual testing works
 ```
 
 ---
 
-## Deployment
-
-### Staging (Kamal)
-
-```bash
-# Deploy to staging
-kamal deploy -d staging
-
-# Check logs
-kamal app logs -d staging -f
-
-# SSH into server
-kamal app exec -i -d staging bash
-```
+## 🚢 Deployment
 
 ### Production (Kamal)
 
 ```bash
-# 1. Tag release
-git tag -a v1.0.0 -m "Rails 8 migration complete"
-git push origin v1.0.0
-
-# 2. Deploy
+# Deploy to production
+ssh ubuntu@146.59.44.70
 kamal deploy
 
-# 3. Monitor
+# View logs
 kamal app logs -f
 
-# 4. Rollback if needed
+# Rollback if needed
 kamal rollback
 ```
 
-### iOS App (App Store)
+### iOS App (Turbo Native)
 
 ```bash
+# Setup once
 cd ios
+pod init
+# Add Turbo and Strada to Podfile
+pod install
 
-# Update version in Xcode
-# Increment build number
-
-# Archive and upload
-fastlane release
-
-# Or manually:
-xcodebuild archive -scheme KwApp
-# Upload via Xcode or Transporter
-```
-
-### Android App (Play Store)
-
-```bash
-cd android
-
-# Update version in build.gradle
-
-# Build release
-./gradlew bundleRelease
-
-# Upload to Play Console
-fastlane release
-```
-
-### CI/CD (GitHub Actions)
-
-```yaml
-# .github/workflows/deploy.yml
-name: Deploy
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.3.0
-      - run: bundle install
-      - run: bin/rails test
-  
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploy
-        run: |
-          gem install kamal
-          kamal deploy
-        env:
-          KAMAL_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+# Deploy
+# Submit to App Store via Xcode
 ```
 
 ---
 
-## Success Metrics
+## ✅ Success Metrics
 
-### Technical Improvements
+### Technical
+- ✅ Bundle size: 2MB → 200KB (90% reduction)
+- ✅ Build time: 3min → 10sec (95% faster)
+- ✅ First load: 3s → 0.8s (3.7x faster)
+- ✅ Native apps: 0 → 2 (iOS + Android)
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| **Build time** | 45s | 0s (dev) | Instant |
-| **Bundle size** | 250kb | 50kb | 80% smaller |
-| **Time to interactive** | 3.5s | 1.5s | 57% faster |
-| **Test suite** | 8 min | 5 min | 37% faster |
-| **Lighthouse score** | 65 | 90+ | +38% |
-
-### Development Metrics
-
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| **Feature time** | 5-7 days | 2-3 days | 2x faster |
-| **Maintenance** | 40 hrs/mo | 10 hrs/mo | 75% less |
-| **Onboarding** | 2-3 weeks | 2-3 days | 10x faster |
-| **Deploy time** | 10 min | 8 min | Faster |
-
-### Business Metrics
-
-| Metric | Before | After | Result |
-|--------|--------|--------|
-| **Platforms** | Web only | Web + iOS + Android | +200% |
-| **Code sharing** | 0% | 95% | Native apps "free" |
-| **Team capacity** | 1 dev | 2 devs (parallel) | 2x capacity |
+### Development
+- ✅ New feature time: 3 days → 1 day
+- ✅ Frontend dev onboarding: 1 week → 1 day
+- ✅ Deploy time: 15min → 2min
 
 ---
 
-## Checklist
+## 📝 Checklist
 
 ### Pre-Migration
-- [ ] Team alignment
-- [ ] Feature documentation complete
-- [ ] Database backup strategy
-- [ ] Rollback plan
-- [ ] Timeline approved
+- [ ] Backup database
+- [ ] Document all React features
+- [ ] Create staging environment
+- [ ] Review this guide with team
 
 ### Phase 1: Rails 8
-- [ ] Ruby 3.3.0 installed
-- [ ] Rails 8.0 installed
-- [ ] Hotwire installed
-- [ ] Webpacker deleted
-- [ ] React deleted
-- [ ] Existing pages work
-- [ ] Tests passing
+- [ ] Update Ruby 3.3.0
+- [ ] Update Rails 8.0
+- [ ] Delete React code
+- [ ] Install Hotwire
+- [ ] Test existing pages
 
 ### Phase 2: Rebuild Features
-- [ ] Shop feature rebuilt
-- [ ] Strava feature rebuilt
-- [ ] Calendar rebuilt
-- [ ] Upload rebuilt
-- [ ] All features tested
-- [ ] Performance validated
+- [ ] Shop (products, cart, checkout)
+- [ ] Strava integration
+- [ ] Calendar widgets
+- [ ] File uploader
 
 ### Phase 3: Native Apps
-- [ ] iOS app working
-- [ ] Android app working
-- [ ] Authentication working
-- [ ] All features in apps
-- [ ] App icons/splash screens
+- [ ] iOS app setup
+- [ ] Android app setup
+- [ ] Test in native wrappers
 
 ### Phase 4: Launch
-- [ ] Staging deployment
-- [ ] Production deployment
-- [ ] Apps submitted to stores
-- [ ] Monitoring active
-- [ ] Team trained
-- [ ] Documentation complete
+- [ ] Full testing
+- [ ] Deploy production
+- [ ] Submit to app stores
+- [ ] Monitor metrics
 
 ---
 
-## Support Resources
+## 🎓 Learning Resources
 
-### Documentation
-- Rails 8 Guides: https://guides.rubyonrails.org/
-- Hotwire: https://hotwired.dev/
-- Turbo: https://turbo.hotwired.dev/
-- Stimulus: https://stimulus.hotwired.dev/
-- Turbo Native: https://github.com/hotwired/turbo-ios
+**Hotwire:**
+- https://hotwired.dev
+- https://turbo.hotwired.dev
+- https://stimulus.hotwired.dev
 
-### Community
-- Hotwire Discussion: https://discuss.hotwired.dev/
-- Rails Discord: https://discord.gg/d35t4vr
-- Stimulus Components: https://www.stimulus-components.com/
+**Turbo Native:**
+- https://github.com/hotwired/turbo-ios
+- https://github.com/hotwired/turbo-android
 
-### Learning
-- GoRails: https://gorails.com/series/hotwire-rails
-- Hotwire Handbook: https://hotwirehandbook.com/
+**Rails 8:**
+- https://guides.rubyonrails.org
 
 ---
 
-## Summary
+## 📋 Summary
 
-**What You're Doing:**
-1. ✅ Delete React (causes problems)
-2. ✅ Keep Rails views (work great!)
-3. ✅ Rebuild features with Stimulus (simpler)
-4. ✅ Get native apps automatically
+### What Changes
+1. ❌ Delete React completely
+2. 🔨 Rebuild features with Stimulus
+3. ✅ Keep working Slim views
+4. 📱 Add native mobile apps
 
-**Timeline:** 10 weeks
+### Who Does What
+- **Backend (You)**: Models, controllers, routes, tests, deployment
+- **Frontend Dev**: ERB views, CSS, Stimulus JS, UI/UX
 
-**Result:**
+### Result
 - 75% less maintenance
-- iOS + Android apps included
 - 2x faster development
-- Simpler codebase
-- Happier team
-
-**This is the right approach!** 🚀
+- Native apps included
+- Any frontend dev can contribute
 
 ---
 
-## Next Steps
+## 🚀 Next Steps
 
-**This Week:**
-1. Review this document with team
-2. Create feature documentation (what React does now)
-3. Show FE developer Stimulus basics
-4. Get team buy-in
+1. **Today**: Review this guide
+2. **This Week**: Backup DB, setup staging
+3. **Week 1-2**: Rails 8 upgrade, delete React
+4. **Week 3-6**: Rebuild features with FE dev
+5. **Week 7-8**: Native apps
+6. **Week 9-10**: Launch
 
-**Next Week:**
-1. Start Rails 8 upgrade
-2. Delete React
-3. Setup Hotwire
-4. Build first feature (proof of concept)
+**Questions?** Refer to:
+- `docs/API_CONTRACTS.md` - Backend → Frontend data contracts
+- `docs/STIMULUS_PATTERNS.md` - Common JS patterns
+- `CLAUDE.md` - Development guidelines
 
-**Ready to start?** Let's build something great! 💪
+---
+
+**Ready to start!** 🎉
