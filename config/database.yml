@@ -11,6 +11,14 @@ development:
   <<: *default
   database: kw_app_development
 
+staging:
+  <<: *default
+  database: <%= ENV.fetch('STAGING_DATABASE_NAME', 'kw_app_staging') %>
+  username: <%= ENV.fetch('STAGING_DATABASE_USERNAME', 'staging_user') %>
+  password: <%= ENV["STAGING_DATABASE_PASSWORD"] %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+  port: <%= ENV.fetch('DB_PORT', 5432) %>
+
 production:
   <<: *default
   database: kw_app_production
