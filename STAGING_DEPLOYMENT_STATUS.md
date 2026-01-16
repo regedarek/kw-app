@@ -2,7 +2,7 @@
 
 **Date:** 2026-01-16  
 **Environment:** Raspberry Pi 5 (pi5main.local)  
-**Status:** Successfully deployed and running
+**Status:** ✅ Successfully deployed and fully functional with styles
 
 ## Quick Access
 - **URL:** http://192.168.1.110 (internal network)
@@ -21,10 +21,12 @@
 1. **Fixed CarrierWave initializer** - Changed logic to respect `USE_CLOUD_STORAGE=false` in staging (commit `8853430a`)
 2. **Configured staging environment** - Added staging database config in `config/database.yml`
 3. **Deployed with Kamal** - Zero-downtime deployment using Docker containers
+4. **Enabled static file serving** - Added `RAILS_SERVE_STATIC_FILES=true` to serve CSS/JS assets (commit `bc4da3d3`)
 
 ## Configuration
 - **Rails env:** staging
 - **Storage:** Local file storage (cloud storage disabled)
+- **Assets:** Served directly by Rails (static file serving enabled)
 - **Database:** kw_app_staging @ kw-app-staging-postgres
 - **Cache/Jobs:** Redis @ kw-app-staging-redis
 - **Networks:** `kamal` (proxy) + `private` (db/redis)
@@ -67,5 +69,9 @@ ssh rege@pi5main.local "docker logs kw-app-staging-postgres --tail 50"
 - **Performance:** Pi on WiFi (~10 Mbps). Consider Ethernet for faster deployments.
 - **Secrets:** Stored in `.kamal/secrets-staging` (not committed)
 - **Docker Hub:** Images pushed as `regedarek/kw-app:latest-staging` and commit-tagged
-- **Proxy Host:** Configured for IP address (192.168.1.110) - change in `config/deploy.staging.yml` if IP changes
-- **Access:** Use IP address directly in browser - hostname resolution may not work without /etc/hosts entry
+- **Proxy Host:** Configured for `pi5main.local` hostname
+- **Browser Compatibility:** 
+  - ✅ Safari: Works perfectly with `http://pi5main.local`
+  - ✅ Chrome: Works with hostname and IP
+  - ⚠️ Brave: Requires disabling "Secure DNS" in settings for local network access
+- **Assets:** CSS/JS files load correctly via `RAILS_SERVE_STATIC_FILES=true`
