@@ -15,10 +15,7 @@ servers:
 proxy:
   ssl: false
   app_port: 3000
-  host: 
-    - pi5main.local
-    - 192.168.1.110
-    - localhost
+  host: 192.168.1.110
   healthcheck:
     path: /up
     interval: 10
