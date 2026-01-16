@@ -9,15 +9,12 @@ servers:
   web:
     hosts:
       - pi5main.local
-    labels:
-      traefik.http.routers.kw-app-staging.rule: "Host(`pi5main.local`) || Host(`192.168.1.110`)"
     options:
       network: "private"
 
 proxy:
   ssl: false
   app_port: 3000
-  host: pi5main.local
   healthcheck:
     path: /up
     interval: 10
