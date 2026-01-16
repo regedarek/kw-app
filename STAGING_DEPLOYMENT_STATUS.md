@@ -5,17 +5,17 @@
 **Status:** Successfully deployed and running
 
 ## Quick Access
-- **URL:** http://pi5main.local (internal network)
+- **URL:** http://192.168.1.110 (internal network)
 - **SSH:** `ssh rege@pi5main.local`
-- **Healthcheck:** `curl -H "Host: pi5main.local" http://pi5main.local/up` → Returns `OK`
+- **Healthcheck:** `curl http://192.168.1.110/up` → Returns `OK`
 
 ## Deployed Services
 | Service | Image | Status | Port | Container |
 |---------|-------|--------|------|-----------|
-| App | regedarek/kw-app:8853430a | ✅ Running | 3000 | fa958468f5de |
-| Proxy | kamal-proxy:v0.8.4 | ✅ Running | 80/443 | f0f219649c15 |
-| PostgreSQL | postgres:16.0 | ✅ Healthy | 5433→5432 | 17389b2e74da |
-| Redis | redis:7-alpine | ✅ Healthy | 6381→6379 | 4664afe76067 |
+| App | regedarek/kw-app:latest-staging | ✅ Running | 3000 | 525d067b8b22 |
+| Proxy | kamal-proxy:v0.8.4 | ✅ Running | 80/443 | kamal-proxy |
+| PostgreSQL | postgres:16.0 | ✅ Healthy | 5433→5432 | kw-app-staging-postgres |
+| Redis | redis:7-alpine | ✅ Healthy | 6381→6379 | kw-app-staging-redis |
 
 ## Key Changes Made
 1. **Fixed CarrierWave initializer** - Changed logic to respect `USE_CLOUD_STORAGE=false` in staging (commit `8853430a`)
@@ -47,8 +47,9 @@ ssh rege@pi5main.local "docker ps"     # Check containers
 
 ## Logs & Monitoring
 ```bash
-# App logs
-ssh rege@pi5main.local "docker logs fa958468f5de -f"
+# App logs (get current container ID first)
+ssh rege@pi5main.local "docker ps | grep kw-app-staging-web"
+ssh rege@pi5main.local "docker logs -f kw-app-staging-web-staging-latest-staging"
 
 # All services
 ssh rege@pi5main.local "docker ps -a"
@@ -66,4 +67,5 @@ ssh rege@pi5main.local "docker logs kw-app-staging-postgres --tail 50"
 - **Performance:** Pi on WiFi (~10 Mbps). Consider Ethernet for faster deployments.
 - **Secrets:** Stored in `.kamal/secrets-staging` (not committed)
 - **Docker Hub:** Images pushed as `regedarek/kw-app:latest-staging` and commit-tagged
-- **Local commits:** 5 commits ahead of origin/develop (not pushed)
+- **Proxy Host:** Configured for IP address (192.168.1.110) - change in `config/deploy.staging.yml` if IP changes
+- **Access:** Use IP address directly in browser - hostname resolution may not work without /etc/hosts entry
