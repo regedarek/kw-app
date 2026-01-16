@@ -23,7 +23,7 @@ module Marketing
     extend FriendlyId
     self.table_name = 'marketing_discounts'
     enum amount_type: [:percentages]
-    enum category_type: [:shop, :climbing_hall]
+    enum category_type: [:climbing_hall]
 
     mount_uploaders :attachments, Management::AttachmentUploader
     serialize :attachments, JSON

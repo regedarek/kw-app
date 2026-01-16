@@ -1,9 +1,0 @@
-table.stack
-  thead
-    tr
-      th width='25%' Przedmiot
-  tbody
-    - items.each do |item|
-      tr
-        td
-          = link_to item.name, shop_admin_item_path(item.id)

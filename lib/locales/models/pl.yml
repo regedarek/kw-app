@@ -131,7 +131,7 @@ pl:
       db/profile: Profil
       mas_sign_up_form: Formularz zapisów
       settlement/contract_record: Rozliczenie
-      shop/order_record: Zamówienie
+
       settlement/project_record: Rozliczenie
       settlement/contractor_record: Kontrahent
     attributes:
@@ -141,10 +141,7 @@ pl:
           mariusz: Dla Mariusza
           crack: Rysa na Bronxie
           ski_service: Serwis Narciarski
-      shop/order_record:
-        states:
-          new: Nowe
-          closed: Zamknięte
+
       business/sign_up_record:
         name: Imię i nazwisko
         email: E-mail

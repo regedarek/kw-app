@@ -4,8 +4,6 @@ module Seeding
   class Seeder
     class << self
       def seed!
-        Shop::OrderRecord.destroy_all
-        Shop::ItemRecord.destroy_all
         Db::Membership::Fee.destroy_all
         Factories::Membership::Fee.mass_create!(range: (1..20), state: 'prepaid', cash: false)
         Factories::Membership::Fee.mass_create!(range: (21..40), state: 'unpaid', cash: true)

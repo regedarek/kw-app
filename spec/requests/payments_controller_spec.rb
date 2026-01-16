@@ -10,7 +10,6 @@ RSpec.describe PaymentsController, type: :controller do
     allow(Db::Payment).to receive(:find).with(payment.id.to_s).and_return(payment)
     allow(payment).to receive(:is_a?).with(Events::Db::SignUpRecord).and_return(false)
     allow(payment).to receive(:is_a?).with(Training::Supplementary::SignUpRecord).and_return(false)
-    allow(payment).to receive(:is_a?).with(Shop::OrderRecord).and_return(false)
   end
 
   describe 'POST #charge' do

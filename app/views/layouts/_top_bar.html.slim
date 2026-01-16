@@ -40,12 +40,6 @@
 
                 - if can? :manage, Db::Reservation
                   li= link_to 'Wypożyczalnia', admin_reservations_path
-                - if current_user.roles.include?('shop')
-                  li
-                    = link_to 'Sklepik', admin_path
-                    ul.menu.vertical
-                      li= link_to 'Zamówienia', shop_admin_orders_path
-                      li= link_to 'Przedmioty', '/sklepik-admin'
                 - if can? :manage, Db::Reservation
                   li= link_to 'Przedmioty', admin_items_path
                 - if can? :manage, Management::SettingsRecord
@@ -185,7 +179,6 @@
               = image_tag('default-avatar.png', class: 'topbar-avatar-image')
             ul.menu.vertical
               li= link_to 'Twoje składki', membership_fees_path, class: 'button alert'
-              li= link_to 'Twoje zamówienia', '/zamowienia', class: 'button secondary'
               li= link_to 'Twój profil', user_path(current_user.kw_id), class: 'button secondary'
               li= link_to 'Edytuj dane', edit_user_registration_path, class: 'button secondary'
 

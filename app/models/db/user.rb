@@ -65,7 +65,7 @@ class Db::User < ActiveRecord::Base
   mount_uploader :avatar, ::Membership::AvatarUploader
 
   enum gender: [:male, :female]
-  ROLES = %w(training_contracts business_courses library reservations routes admin events courses shop competitions office tech donations photo_competition management secondary_management financial_management marketing projects)
+  ROLES = %w(training_contracts business_courses library reservations routes admin events courses competitions office tech donations photo_competition management secondary_management financial_management marketing projects)
   SNW_GROUPS = %w(mjs instructors management sport authors gear support)
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -80,8 +80,6 @@ class Db::User < ActiveRecord::Base
   scope :hidden, -> { Db::User.where(hide: true) }
   scope :not_hidden, -> { Db::User.where(hide: false) }
   scope :active, -> { Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { state: 'prepaid'} ).or(Db::User.includes(membership_fees: :payment).where(membership_fees: { year: [(Date.today.year - 1), Date.today.year] }, payments: { cash: true} )) }
-
-  has_many :orders, dependent: :destroy, class_name: '::Shop::OrderRecord', foreign_key: :user_id
 
   has_many :courses, dependent: :destroy, class_name: '::Business::CourseRecord', foreign_key: :coordinator_id
   has_one  :profile, foreign_key: :kw_id, primary_key: :kw_id

@@ -67,7 +67,6 @@ class Ability
     can :create, Settlement::ContractorRecord
 
     can :create, Db::Profile
-    can :read, Shop::OrderRecord
     can :create, Management::Snw::SnwApplyRecord
     can :manage, Management::Snw::SnwApplyRecord, kw_id: user.kw_id
     can :read, Management::Voting::CaseRecord, state: ['unactive', 'voting', 'finished'], hidden: false
@@ -139,7 +138,6 @@ class Ability
     can :manage, Management::ResolutionRecord
     can :manage, Settlement::ContractorRecord
     can :manage, Db::User
-    can :manage, Shop::OrderRecord
     can :manage, Db::Membership::Fee
     can :manage, Db::Profile
     can :manage, PaperTrail::Version
