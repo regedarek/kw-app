@@ -10,7 +10,7 @@ servers:
     hosts:
       - pi5main.local
     labels:
-      traefik.http.routers.kw-app-staging.rule: "Host(`pi5main.local`)"
+      traefik.http.routers.kw-app-staging.rule: "Host(`pi5main.local`) || Host(`192.168.1.110`)"
     options:
       network: "private"
 
