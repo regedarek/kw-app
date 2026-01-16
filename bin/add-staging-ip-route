@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Script to add secondary proxy route for IP address access
+# This allows accessing the staging app via both pi5main.local and 192.168.1.110
+
+set -e
+
+PI_HOST="pi5main.local"
+PI_USER="rege"
+PI_IP="192.168.1.110"
+
+echo "🔧 Adding secondary proxy route for IP address access..."
+
+# Get the current app container name/ID
+CONTAINER_TARGET=$(ssh ${PI_USER}@${PI_HOST} "docker ps --filter 'name=kw-app-staging-web-staging-latest' --format '{{.Names}}' | head -1")
+
+if [ -z "$CONTAINER_TARGET" ]; then
+  echo "❌ Error: Could not find running app container"
+  exit 1
+fi
+
+echo "📦 Found container: ${CONTAINER_TARGET}"
+
+# Add secondary route for IP address
+echo "➕ Adding route: ${PI_IP} → ${CONTAINER_TARGET}:3000"
+ssh ${PI_USER}@${PI_HOST} "docker exec kamal-proxy kamal-proxy deploy kw-app-staging-web-staging-ip --target=${CONTAINER_TARGET}:3000 --host=${PI_IP}"
+
+# Verify routes
+echo ""
+echo "✅ Proxy routes configured:"
+ssh ${PI_USER}@${PI_HOST} "docker exec kamal-proxy kamal-proxy list"
+
+echo ""
+echo "🌐 You can now access the app via:"
+echo "   - http://pi5main.local"
+echo "   - http://${PI_IP}"
