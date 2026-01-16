@@ -2,7 +2,13 @@ require "fog/openstack"
 
 # Helper method to determine if cloud storage should be used
 def use_cloud_storage?
-  Rails.env.staging? || Rails.env.production? || ENV['USE_CLOUD_STORAGE'].to_s == 'true'
+  # Production always uses cloud storage
+  # Staging and development only use it if explicitly enabled via env var
+  if Rails.env.production?
+    true
+  else
+    ENV['USE_CLOUD_STORAGE'].to_s == 'true'
+  end
 end
 
 if use_cloud_storage?
