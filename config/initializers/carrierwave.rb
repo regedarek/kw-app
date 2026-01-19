@@ -18,6 +18,7 @@ CarrierWave.configure do |config|
       instrumentor_name: 'excon'
     }
   }
+  # Use asset_host from credentials
   config.asset_host = Rails.application.credentials.dig(:openstack, :asset_host)
   
   # Use environment-specific container
