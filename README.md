@@ -35,12 +35,65 @@ docker-compose ps
 
 Go to [localhost:3002](http://localhost:3002). Enjoy!
 
-### Deployment & Server
+### Environments & Deployment
 
+#### Staging (Raspberry Pi - Manual Deployment)
+
+**SSH Access:**
+```bash
+ssh rege@pi5main.local
 ```
-ssh deploy@51.68.141.247
-bundle exec cap production deploy
+
+**Manual Deployment:**
+```bash
+# SSH into the Raspberry Pi
+ssh rege@pi5main.local
+
+# Navigate to project directory
+cd ~/kw-app
+
+# Pull latest changes
+git pull origin staging
+
+# Deploy with Kamal (staging environment)
+kamal deploy -d staging
 ```
+
+**Environment Details:**
+- Host: `pi5main.local`
+- Architecture: ARM64
+- User: `rege`
+- Services: PostgreSQL (port 5433), Redis (port 6381)
+
+#### Production (VPS - Automated Deployment)
+
+**SSH Access:**
+```bash
+ssh ubuntu@146.59.44.70
+```
+
+**Deployment:**
+- **Automated**: Push to `main` branch triggers GitHub Actions workflow
+- **Manual**: SSH into server and run `kamal deploy -d production` if needed
+
+**GitHub Actions:**
+- Automatic deployment on push to `main`
+- Runs tests before deployment
+- Zero-downtime deployment via Kamal
+
+**View Logs:**
+```bash
+# SSH into production server
+ssh ubuntu@146.59.44.70
+
+# View app logs
+kamal app logs -f -d production
+```
+
+**Environment Details:**
+- Host: `146.59.44.70`
+- User: `ubuntu`
+- Deployment: Automated via GitHub Actions
 
 
 ### Development
