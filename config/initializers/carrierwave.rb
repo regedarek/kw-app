@@ -15,8 +15,8 @@ if use_cloud_storage?
   CarrierWave.configure do |config|
     config.fog_credentials = {
       provider: 'openstack',
-      openstack_api_key: Rails.application.secrets.openstack_api_key,
-      openstack_username: Rails.application.secrets.openstack_username,
+      openstack_api_key: ENV.fetch('OPENSTACK_API_KEY') { Rails.application.credentials.dig(:openstack, :api_key) },
+      openstack_username: ENV.fetch('OPENSTACK_USERNAME') { Rails.application.credentials.dig(:openstack, :username) },
       openstack_auth_url: "https://auth.cloud.ovh.net/",
       openstack_region: 'WAW',
       connection_options: {
@@ -29,7 +29,7 @@ if use_cloud_storage?
         instrumentor_name: 'excon'
       }
     }
-    config.asset_host = Rails.application.secrets.openstack_asset_host
+    config.asset_host = ENV.fetch('OPENSTACK_ASSET_HOST') { Rails.application.credentials.dig(:openstack, :asset_host) }
     
     # Use staging container in development when USE_CLOUD_STORAGE is enabled
     container_name = if Rails.env.development? && ENV['USE_CLOUD_STORAGE'].to_s == 'true'
