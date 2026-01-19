@@ -19,7 +19,7 @@ proxy:
   healthcheck:
     path: /up
     interval: 10
-    timeout: 10
+    timeout: 30
 
 registry:
   username:
