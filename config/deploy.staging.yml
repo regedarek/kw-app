@@ -9,8 +9,6 @@ servers:
   web:
     hosts:
       - pi5main.local
-    options:
-      network: "private"
 
 proxy:
   ssl: false
@@ -56,8 +54,6 @@ accessories:
         - POSTGRES_PASSWORD
     directories:
       - data-staging:/var/lib/postgresql/data
-    options:
-      network: "private"
 
   redis:
     image: redis:7-alpine
@@ -69,5 +65,3 @@ accessories:
         - REDIS_PASSWORD
     directories:
       - redis-data-staging:/data
-    options:
-      network: "private"
