@@ -73,11 +73,11 @@ ssh ubuntu@146.59.44.70
 ```
 
 **Deployment:**
-- **Automated**: Push to `main` branch triggers GitHub Actions workflow
+- **Automated**: Push to `secrets-management` branch triggers GitHub Actions workflow
 - **Manual**: SSH into server and run `kamal deploy -d production` if needed
 
 **GitHub Actions:**
-- Automatic deployment on push to `main`
+- Automatic deployment on push to `secrets-management`
 - Runs tests before deployment
 - Zero-downtime deployment via Kamal
 
