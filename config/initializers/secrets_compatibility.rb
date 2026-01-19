@@ -10,7 +10,7 @@ module SecretsCompatibility
   
   # Dotpay
   def dotpay_base_url
-    super.presence || 'https://ssl.dotpay.pl/s2/login/api/v1/'
+    super.presence || Rails.application.credentials.dig(:payment, :dotpay_base_url) || 'https://ssl.dotpay.pl/s2/login/api/v1/'
   end
   
   def dotpay_login
@@ -21,8 +21,12 @@ module SecretsCompatibility
     super.presence || ENV.fetch('DOTPAY_PASSWORD') { Rails.application.credentials.dig(:payment, :dotpay_password) }
   end
   
-  def dotpay_back_24_url
+  def dotpay_back_url
     super.presence || ENV.fetch('DOTPAY_BACK_URL') { Rails.application.credentials.dig(:payment, :dotpay_back_url) }
+  end
+  
+  def dotpay_back_24_url
+    super.presence || ENV.fetch('DOTPAY_BACK_24_URL') { Rails.application.credentials.dig(:payment, :dotpay_back_24_url) }
   end
   
   def dotpay_urlc
@@ -51,6 +55,10 @@ module SecretsCompatibility
   
   def dotpay_club_trips_id
     super.presence || ENV.fetch('DOTPAY_CLUB_TRIPS_ID') { Rails.application.credentials.dig(:payment, :dotpay_club_trips_id) }
+  end
+  
+  def dotpay_shop_id
+    super.presence || ENV.fetch('DOTPAY_SHOP_ID') { Rails.application.credentials.dig(:payment, :dotpay_shop_id) }
   end
   
   # OpenStack
@@ -88,12 +96,30 @@ module SecretsCompatibility
   end
   
   # Strava
-  def strava_client_id
+  def strava_client
     super.presence || ENV.fetch('STRAVA_CLIENT') { Rails.application.credentials.dig(:strava, :client_id) }
   end
   
-  def strava_client_secret
+  def strava_secret
     super.presence || ENV.fetch('STRAVA_SECRET') { Rails.application.credentials.dig(:strava, :client_secret) }
+  end
+  
+  # Pages
+  def strzelecki_page
+    super.presence || Rails.application.credentials.dig(:pages, :strzelecki)
+  end
+  
+  def mas_page
+    super.presence || Rails.application.credentials.dig(:pages, :mas)
+  end
+  
+  def localtunnel
+    super.presence || Rails.application.credentials.dig(:pages, :localtunnel)
+  end
+  
+  # Google
+  def google_analytics
+    super.presence || Rails.application.credentials.dig(:google, :analytics)
   end
 end
 
