@@ -8,7 +8,7 @@ builder:
 servers:
   web:
     hosts:
-      - pi5main.local
+      - localhost
 
 proxy:
   ssl: false
@@ -44,7 +44,7 @@ ssh:
 accessories:
   postgres:
     image: postgres:16.0
-    host: pi5main.local
+    host: localhost
     port: "5433:5432"
     env:
       clear:
@@ -57,7 +57,7 @@ accessories:
 
   redis:
     image: redis:7-alpine
-    host: pi5main.local
+    host: localhost
     port: "6381:6379"
     cmd: "redis-server --requirepass ${REDIS_PASSWORD}"
     env:
