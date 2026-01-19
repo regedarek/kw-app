@@ -286,11 +286,11 @@ module Seeding
             'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800',  # Climbing gear
             'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800',  # Camping equipment
             'https://images.unsplash.com/photo-1486218119243-13883505764c?w=800',  # Hiking boots
-            'https://images.unsplash.com/photo-1602826347885-fbaa4c6d3ba5?w=800',  # Backpack
-            'https://images.unsplash.com/photo-1606404934811-e09e70b1c6c4?w=800',  # Climbing rope
-            'https://images.unsplash.com/photo-1622260614927-3833a8f3e725?w=800',  # Carabiners
+            'https://images.unsplash.com/photo-1622260614153-03223fb72052?w=800',  # Backpack
+            'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800',  # Climbing rope
+            'https://images.unsplash.com/photo-1624623278313-a930126a11c3?w=800',  # Carabiners
             'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',  # Tent
-            'https://images.unsplash.com/photo-1609130462259-13c9c5e89f41?w=800',  # Sleeping bag
+            'https://images.unsplash.com/photo-1520095972714-909e91b038e5?w=800',  # Sleeping bag
             'https://images.unsplash.com/photo-1578608712688-36b5be8823dc?w=800'   # Mountain bike
           ]
           
