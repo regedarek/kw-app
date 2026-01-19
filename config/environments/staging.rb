@@ -5,6 +5,9 @@ Rails.application.configure do
   config.cache_classes = true
 
   config.time_zone = 'Warsaw'
+  
+  # Allow requests from staging domain
+  config.hosts << "panel.taterniczek.pl"
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -57,7 +60,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "kw_app_#{Rails.env}"
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'https://kw-app-staging.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'https://panel.taterniczek.pl' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: ENV.fetch('MAILGUN_API_KEY') { Rails.application.credentials.dig(:mailgun, :api_key) },

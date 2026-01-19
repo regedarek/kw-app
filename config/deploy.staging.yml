@@ -15,7 +15,7 @@ servers:
 proxy:
   ssl: false
   app_port: 3000
-  host: pi5main.local
+  host: panel.taterniczek.pl
   healthcheck:
     path: /up
     interval: 10
