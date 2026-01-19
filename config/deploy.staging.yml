@@ -1,5 +1,5 @@
 service: kw-app-staging
-image: ghcr.io/regedarek/kw-app
+image: regedarek/kw-app
 
 builder:
   dockerfile: Dockerfile.production
@@ -22,7 +22,6 @@ proxy:
     timeout: 10
 
 registry:
-  server: ghcr.io
   username:
     - KAMAL_REGISTRY_USERNAME
   password:
