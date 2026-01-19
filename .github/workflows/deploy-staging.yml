@@ -34,12 +34,17 @@ jobs:
           fi
           ruby -v
       
+      - name: Setup Ruby gem paths
+        run: |
+          echo "GEM_HOME=$(ruby -r rubygems -e 'puts Gem.user_dir')" >> $GITHUB_ENV
+          echo "$(ruby -r rubygems -e 'puts Gem.user_dir')/bin" >> $GITHUB_PATH
+      
       - name: Install Kamal
         run: |
           if ! command -v kamal &> /dev/null; then
             gem install kamal --no-document
           fi
-          kamal version || true
+          kamal version
       
       - name: Login to Docker Hub
         run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
