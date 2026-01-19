@@ -1,0 +1,47 @@
+name: Deploy Staging
+concurrency:
+  group: staging
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - secrets-management
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Runs on Pi itself
+    env:
+      DOCKER_BUILDKIT: 1
+      KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_STAGING }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD_STAGING }}
+      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_STAGING }}
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: false
+      
+      - name: Install Kamal
+        run: gem install kamal
+      
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
+      
+      - name: Release deploy lock
+        run: kamal lock release -d staging || true
+      
+      - name: Deploy to staging
+        run: kamal deploy -d staging
+      
+      - name: Cleanup old Docker images
+        run: kamal prune all -d staging || true
+        continue-on-error: true
