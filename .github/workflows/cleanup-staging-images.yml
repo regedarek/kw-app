@@ -1,0 +1,24 @@
+name: Cleanup Staging Images
+
+on:
+  workflow_run:
+    workflows: ["Deploy Staging"]
+    types: [completed]
+  schedule:
+    - cron: '0 3 * * *'  # Daily at 3 AM UTC
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Delete old container images (keep 3 latest)
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'kw-app'
+          package-type: 'container'
+          min-versions-to-keep: 3
+          ignore-versions: '^(latest|production)$'
+          token: ${{ secrets.GITHUB_TOKEN }}

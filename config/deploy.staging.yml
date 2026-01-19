@@ -1,8 +1,9 @@
 service: kw-app-staging
-image: regedarek/kw-app
+image: ghcr.io/regedarek/kw-app
 
 builder:
   dockerfile: Dockerfile.production
+  multiarch: false
   arch: arm64
 
 servers:
@@ -21,12 +22,15 @@ proxy:
     interval: 10
     timeout: 10
 
-# Registry login disabled - already logged in manually
-# registry:
-#   username:
-#     - KAMAL_REGISTRY_USERNAME
-#   password:
-#     - KAMAL_REGISTRY_PASSWORD
+registry:
+  server: ghcr.io
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Keep only 3 containers on host
+retain_containers: 3
 
 env:
   clear:
@@ -37,24 +41,7 @@ env:
     USE_CLOUD_STORAGE: false
     RAILS_SERVE_STATIC_FILES: true
   secret:
-    - SECRET_KEY_BASE
     - RAILS_MASTER_KEY
-    - STAGING_DATABASE_NAME
-    - STAGING_DATABASE_USERNAME
-    - STAGING_DATABASE_PASSWORD
-    - REDIS_URL_SIDEKIQ
-    - STRAVA_CLIENT
-    - STRAVA_SECRET
-    - DOTPAY_PASSWORD
-    - MAILGUN_LOGIN
-    - MAILGUN_PASSWORD
-    - OPENSTACK_TENANT
-    - OPENSTACK_USERNAME
-    - OPENSTACK_API_KEY
-    - METEOBLUE_KEY
-    - POSTGRES_USER
-    - POSTGRES_PASSWORD
-    - POSTGRES_DB
 
 ssh:
   user: rege
@@ -66,20 +53,23 @@ accessories:
     port: "5433:5432"
     env:
       clear:
-        POSTGRES_USER: "staging_user"
-        POSTGRES_DB: "kw_app_staging"
+        POSTGRES_USER: staging_user
+        POSTGRES_DB: kw_app_staging
       secret:
         - POSTGRES_PASSWORD
     directories:
       - data-staging:/var/lib/postgresql/data
     options:
       network: "private"
-  
+
   redis:
     image: redis:7-alpine
     host: pi5main.local
     port: "6381:6379"
     cmd: "redis-server --requirepass ${REDIS_PASSWORD}"
+    env:
+      secret:
+        - REDIS_PASSWORD
     directories:
       - redis-data-staging:/data
     options:

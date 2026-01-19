@@ -27,6 +27,9 @@ registry:
   password:
     - KAMAL_REGISTRY_PASSWORD
 
+# Keep only 3 containers on host
+retain_containers: 3
+
 env:
   clear:
     RAILS_ENV: production
@@ -34,27 +37,7 @@ env:
     DB_HOST: kw-app-postgres
     DB_PORT: 5432
   secret:
-    - KAMAL_REGISTRY_USERNAME
-    - KAMAL_REGISTRY_PASSWORD
-    - RAILS_ENV
-    - SECRET_KEY_BASE
     - RAILS_MASTER_KEY
-    - PRODUCTION_DATABASE_NAME
-    - PRODUCTION_DATABASE_USERNAME
-    - PRODUCTION_DATABASE_PASSWORD
-    - PRODUCTION_DATABASE_HOST
-    - REDIS_URL_SIDEKIQ
-    - STRAVA_CLIENT
-    - STRAVA_SECRET
-    - DOTPAY_PASSWORD
-    - MAILGUN_LOGIN
-    - MAILGUN_PASSWORD
-    - OPENSTACK_TENANT
-    - OPENSTACK_USERNAME
-    - OPENSTACK_API_KEY
-    - METEOBLUE_KEY
-    - POSTGRES_USER
-    - POSTGRES_PASSWORD
 
 ssh:
   user: ubuntu
@@ -66,8 +49,8 @@ accessories:
     port: "127.0.0.1:5432:5432"
     env:
       clear:
-        POSTGRES_USER: "${POSTGRES_USER}"
-        POSTGRES_DB: "${POSTGRES_DB}"
+        POSTGRES_USER: production_user
+        POSTGRES_DB: kw_app_production
       secret:
         - POSTGRES_PASSWORD
     files:
