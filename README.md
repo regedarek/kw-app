@@ -128,6 +128,46 @@ docker-compose exec -T postgres psql -U dev-user -c "CREATE DATABASE kw_app_deve
 docker-compose run --rm -T app bundle exec rake db:migrate db:seed
 ```
 
+### Managing Secrets & Credentials
+
+This project uses **Rails encrypted credentials** to manage sensitive configuration.
+
+**Editing Credentials:**
+
+```bash
+# Development credentials
+docker-compose exec app bash -c "EDITOR=vim bin/rails credentials:edit --environment development"
+
+# Staging credentials
+docker-compose exec app bash -c "EDITOR=vim bin/rails credentials:edit --environment staging"
+
+# Production credentials (when needed)
+docker-compose exec app bash -c "EDITOR=vim bin/rails credentials:edit --environment production"
+```
+
+**Alternative - Interactive shell:**
+```bash
+# Open container shell
+docker-compose exec app bash
+
+# Inside container, edit credentials
+EDITOR=vim bin/rails credentials:edit --environment development
+```
+
+**View credentials (read-only):**
+```bash
+docker-compose exec -T app bin/rails credentials:show --environment development
+docker-compose exec -T app bin/rails credentials:show --environment staging
+```
+
+**Important Notes:**
+- Master keys are stored in `config/credentials/*.key` (gitignored)
+- Never commit master keys to git
+- Store master keys securely in a password manager
+- Credentials files (`.yml.enc`) are encrypted and safe to commit
+
+For detailed migration information, see [docs/RAILS_ENCRYPTED_CREDENTIALS.md](docs/RAILS_ENCRYPTED_CREDENTIALS.md)
+
 For more details, see [DOCKER_SETUP.md](DOCKER_SETUP.md)
 
 
