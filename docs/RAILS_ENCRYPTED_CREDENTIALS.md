@@ -28,8 +28,6 @@ env:
   secret:
     - KAMAL_REGISTRY_USERNAME
     - KAMAL_REGISTRY_PASSWORD
-    - RAILS_ENV
-    - SECRET_KEY_BASE
     - RAILS_MASTER_KEY
     - PRODUCTION_DATABASE_NAME
     - PRODUCTION_DATABASE_USERNAME
@@ -239,9 +237,6 @@ openstack:
 
 google:
   static_maps_api_key: <api_key>
-
-meteoblue:
-  api_key: <api_key>
 
 # Feature flags (optional)
 features:
@@ -709,7 +704,6 @@ env:
     # - OPENSTACK_TENANT
     # - OPENSTACK_USERNAME
     # - OPENSTACK_API_KEY
-    # - METEOBLUE_KEY
 ```
 
 ### Step 23: Update `.env` Template
