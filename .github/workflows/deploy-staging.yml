@@ -25,13 +25,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2.2
-          bundler-cache: false
+      - name: Check and install Ruby if needed
+        run: |
+          if ! command -v ruby &> /dev/null; then
+            echo "Ruby not found, installing..."
+            sudo apt-get update -qq
+            sudo apt-get install -y ruby-full
+          fi
+          ruby -v
       
       - name: Install Kamal
-        run: gem install kamal
+        run: |
+          if ! command -v kamal &> /dev/null; then
+            gem install kamal --no-document
+          fi
+          kamal version || true
       
       - name: Login to Docker Hub
         run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
