@@ -36,7 +36,6 @@ env:
     RACK_ENV: staging
     DB_HOST: kw-app-staging-postgres
     DB_PORT: 5432
-    USE_CLOUD_STORAGE: false
     RAILS_SERVE_STATIC_FILES: true
   secret:
     - RAILS_MASTER_KEY
