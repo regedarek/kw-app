@@ -50,19 +50,19 @@ jobs:
         run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
       
       - name: Release deploy lock
-        run: kamal lock release -d staging || true
+        run: kamal lock release -c config/deploy.staging.yml || true
       
       - name: Remove stale kamal-proxy routes
         run: docker exec kamal-proxy kamal-proxy remove kw-app-staging-web-staging 2>&1 || echo "No existing routes to remove"
       
       - name: Boot accessories (postgres and redis)
         run: |
-          kamal accessory boot postgres -d staging || echo "Postgres already running"
-          kamal accessory boot redis -d staging || echo "Redis already running"
+          kamal accessory boot postgres -c config/deploy.staging.yml || echo "Postgres already running"
+          kamal accessory boot redis -c config/deploy.staging.yml || echo "Redis already running"
       
       - name: Deploy to staging
-        run: kamal deploy -d staging
+        run: kamal deploy -c config/deploy.staging.yml
       
       - name: Cleanup old Docker images
-        run: kamal prune all -d staging || true
+        run: kamal prune all -c config/deploy.staging.yml || true
         continue-on-error: true
