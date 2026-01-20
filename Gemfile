@@ -100,4 +100,4 @@ group :development, :test do
 end
 
 gem 'thruster', "0.1.8", require: false, group: [:development, :production]
-gem "kamal", "~> 2.3", require: false, group: [:tools]
+gem "kamal", "~> 2.10", require: false, group: [:tools]
