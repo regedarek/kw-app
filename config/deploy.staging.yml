@@ -8,7 +8,7 @@ builder:
 servers:
   web:
     hosts:
-      - localhost
+      - pi5main.local
 
 deploy_timeout: 180
 
@@ -46,7 +46,7 @@ accessories:
   postgres:
     service: kw-app-staging-postgres
     image: postgres:16.0
-    host: localhost
+    host: pi5main.local
     port: "5433:5432"
     env:
       clear:
@@ -60,7 +60,7 @@ accessories:
   redis:
     service: kw-app-staging-redis
     image: redis:7-alpine
-    host: localhost
+    host: pi5main.local
     port: "6381:6379"
     env:
       secret:
