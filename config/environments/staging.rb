@@ -6,8 +6,8 @@ Rails.application.configure do
 
   config.time_zone = 'Warsaw'
   
-  # Allow requests from staging domain
-  config.hosts << "panel.taterniczek.pl"
+  # Allow all hosts in staging for healthchecks from kamal-proxy (uses container IDs)
+  config.hosts.clear
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
