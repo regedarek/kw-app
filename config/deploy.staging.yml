@@ -9,8 +9,6 @@ servers:
   web:
     hosts:
       - localhost
-    options:
-      network: "kamal"
 
 deploy_timeout: 180
 
@@ -58,8 +56,6 @@ accessories:
         - POSTGRES_PASSWORD
     directories:
       - data-staging:/var/lib/postgresql/data
-    options:
-      network: "kamal"
 
   redis:
     service: kw-app-staging-redis
@@ -72,5 +68,3 @@ accessories:
     cmd: sh -c 'redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes --dir /data'
     directories:
       - redis-data-staging:/data
-    options:
-      network: "kamal"
