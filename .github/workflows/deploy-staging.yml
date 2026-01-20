@@ -1,0 +1,68 @@
+name: Deploy Staging
+concurrency:
+  group: staging
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - secrets-management
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Runs on Pi itself
+    env:
+      DOCKER_BUILDKIT: 1
+      KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_STAGING }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD_STAGING }}
+      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_STAGING }}
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check and install Ruby if needed
+        run: |
+          if ! command -v ruby &> /dev/null; then
+            echo "Ruby not found, installing..."
+            sudo apt-get update -qq
+            sudo apt-get install -y ruby-full
+          fi
+          ruby -v
+      
+      - name: Setup Ruby gem paths
+        run: |
+          echo "GEM_HOME=$(ruby -r rubygems -e 'puts Gem.user_dir')" >> $GITHUB_ENV
+          echo "$(ruby -r rubygems -e 'puts Gem.user_dir')/bin" >> $GITHUB_PATH
+      
+      - name: Install Kamal
+        run: |
+          if ! command -v kamal &> /dev/null; then
+            gem install kamal --no-document
+          fi
+          kamal version
+      
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
+      
+      - name: Release deploy lock
+        run: kamal lock release -c config/deploy.staging.yml || true
+      
+      - name: Remove stale kamal-proxy routes
+        run: docker exec kamal-proxy kamal-proxy remove kw-app-staging-web-staging 2>&1 || echo "No existing routes to remove"
+      
+      - name: Boot accessories (postgres and redis)
+        run: |
+          kamal accessory boot postgres -c config/deploy.staging.yml || echo "Postgres already running"
+          kamal accessory boot redis -c config/deploy.staging.yml || echo "Redis already running"
+      
+      - name: Deploy to staging
+        run: kamal deploy -c config/deploy.staging.yml
+      
+      - name: Cleanup old Docker images
+        run: kamal prune all -c config/deploy.staging.yml || true
+        continue-on-error: true

@@ -9,24 +9,25 @@ servers:
   web:
     hosts:
       - pi5main.local
-    options:
-      network: "private"
+
+deploy_timeout: 180
 
 proxy:
   ssl: false
   app_port: 3000
-  host: pi5main.local
+  host: panel.taterniczek.pl
   healthcheck:
     path: /up
     interval: 10
     timeout: 10
 
-# Registry login disabled - already logged in manually
-# registry:
-#   username:
-#     - KAMAL_REGISTRY_USERNAME
-#   password:
-#     - KAMAL_REGISTRY_PASSWORD
+registry:
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+retain_containers: 3
 
 env:
   clear:
@@ -34,53 +35,36 @@ env:
     RACK_ENV: staging
     DB_HOST: kw-app-staging-postgres
     DB_PORT: 5432
-    USE_CLOUD_STORAGE: false
     RAILS_SERVE_STATIC_FILES: true
   secret:
-    - SECRET_KEY_BASE
     - RAILS_MASTER_KEY
-    - STAGING_DATABASE_NAME
-    - STAGING_DATABASE_USERNAME
-    - STAGING_DATABASE_PASSWORD
-    - REDIS_URL_SIDEKIQ
-    - STRAVA_CLIENT
-    - STRAVA_SECRET
-    - DOTPAY_PASSWORD
-    - MAILGUN_LOGIN
-    - MAILGUN_PASSWORD
-    - OPENSTACK_TENANT
-    - OPENSTACK_USERNAME
-    - OPENSTACK_API_KEY
-    - METEOBLUE_KEY
-    - POSTGRES_USER
-    - POSTGRES_PASSWORD
-    - POSTGRES_DB
 
 ssh:
   user: rege
 
 accessories:
   postgres:
+    service: kw-app-staging-postgres
     image: postgres:16.0
     host: pi5main.local
     port: "5433:5432"
     env:
       clear:
-        POSTGRES_USER: "staging_user"
-        POSTGRES_DB: "kw_app_staging"
+        POSTGRES_USER: staging_user
+        POSTGRES_DB: kw_app_staging
       secret:
         - POSTGRES_PASSWORD
     directories:
       - data-staging:/var/lib/postgresql/data
-    options:
-      network: "private"
-  
+
   redis:
+    service: kw-app-staging-redis
     image: redis:7-alpine
     host: pi5main.local
     port: "6381:6379"
-    cmd: "redis-server --requirepass ${REDIS_PASSWORD}"
+    env:
+      secret:
+        - REDIS_PASSWORD
+    cmd: sh -c 'redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes --dir /data'
     directories:
       - redis-data-staging:/data
-    options:
-      network: "private"

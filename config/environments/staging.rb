@@ -5,6 +5,9 @@ Rails.application.configure do
   config.cache_classes = true
 
   config.time_zone = 'Warsaw'
+  
+  # Allow all hosts in staging for healthchecks from kamal-proxy (uses container IDs)
+  config.hosts.clear
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -29,7 +32,7 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = 'http://assets.example.com'
+  config.action_controller.asset_host = 'http://panel.taterniczek.pl'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -57,11 +60,11 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "kw_app_#{Rails.env}"
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'https://kw-app-staging.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'https://panel.taterniczek.pl' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key: Rails.application.secrets.mailgun_api_key,
-    domain: 'sandboxcda67a5d28394ec3b9ed5e3164523822.mailgun.org',
+    api_key: ENV.fetch('MAILGUN_API_KEY') { Rails.application.credentials.dig(:mailgun, :api_key) },
+    domain: ENV.fetch('MAILGUN_DOMAIN') { Rails.application.credentials.dig(:mailgun, :domain) },
   }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -90,3 +93,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+Rails.application.routes.default_url_options[:host] = 'http://panel.taterniczek.pl'

@@ -221,6 +221,133 @@ module Seeding
             training: Faker::Boolean.boolean(true_ratio: 0.3)
           )
         end
+        
+        # Add test images to last 3 mountain routes (only in development/staging)
+        if Rails.env.development? || Rails.env.staging?
+          require 'open-uri'
+          require 'tempfile'
+          
+          puts "Adding test images to last 3 mountain routes..."
+          
+          # Sample mountain/climbing images from Unsplash
+          image_urls = [
+            'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',  # Mountain landscape
+            'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800',  # Rock climbing
+            'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800'   # Mountain peak
+          ]
+          
+          Db::Activities::MountainRoute.last(3).each_with_index do |route, index|
+            begin
+              image_url = image_urls[index % image_urls.length]
+              
+              # Download image to tempfile
+              tempfile = Tempfile.new(['mountain', '.jpg'])
+              tempfile.binmode
+              URI.open(image_url) do |image|
+                tempfile.write(image.read)
+              end
+              tempfile.rewind
+              
+              # Create Storage::UploadRecord with the image
+              # This will automatically create small/medium/large versions via Storage::FileUploader
+              upload = Storage::UploadRecord.create!(
+                uploadable: route,
+                user: route.user,
+                file: tempfile,
+                content_type: 'image/jpeg'
+              )
+              
+              puts "  ✓ Added image to route: #{route.name} (#{upload.file.large.url})"
+              
+              tempfile.close
+              tempfile.unlink
+              
+              # Small delay to avoid rate limiting
+              sleep 2
+            rescue => e
+              puts "  ✗ Failed to add image to route #{route.name}: #{e.message}"
+            end
+          end
+          
+          puts "Finished adding test images!"
+        end
+        
+        # Add 3 sale announcements with 3 images each (only in development/staging)
+        if Rails.env.development? || Rails.env.staging?
+          require 'open-uri'
+          require 'tempfile'
+          
+          puts "Creating sale announcements with images..."
+          
+          Olx::SaleAnnouncementRecord.destroy_all
+          
+          # Sample product images from Unsplash
+          gear_images = [
+            'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800',  # Climbing gear
+            'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800',  # Camping equipment
+            'https://images.unsplash.com/photo-1486218119243-13883505764c?w=800',  # Hiking boots
+            'https://images.unsplash.com/photo-1622260614153-03223fb72052?w=800',  # Backpack
+            'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800',  # Climbing rope
+            'https://images.unsplash.com/photo-1624623278313-a930126a11c3?w=800',  # Carabiners
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',  # Tent
+            'https://images.unsplash.com/photo-1520095972714-909e91b038e5?w=800',  # Sleeping bag
+            'https://images.unsplash.com/photo-1578608712688-36b5be8823dc?w=800'   # Mountain bike
+          ]
+          
+          announcements = [
+            { name: 'Zestaw asekuracyjny (7 ekspresów + lina 70m)', description: 'Kompletny zestaw do wspinaczki skalnej. Ekspres w dobrym stanie, lina używana ale sprawna. Idealny na początek przygody ze wspinaczką.', price: 450.0 },
+            { name: 'Buty wspinaczkowe La Sportiva rozmiar 42', description: 'Bardzo wygodne buty wspinaczkowe, lekko używane. Świetnie sprawdzają się na dłuższych drogach. Sprzedaję bo za małe.', price: 280.0 },
+            { name: 'Plecak górski 65L + materac', description: 'Solidny plecak turystyczny z systemem wentylacji pleców. W zestawie samonośny materac. Kilka wypraw w Tatrach, stan bardzo dobry.', price: 320.0 }
+          ]
+          
+          announcements.each_with_index do |announcement_data, index|
+            user = Db::User.all.sample
+            
+            announcement = Olx::SaleAnnouncementRecord.create!(
+              name: announcement_data[:name],
+              description: announcement_data[:description],
+              price: announcement_data[:price],
+              user: user,
+              archived: false
+            )
+            
+            # Add 3 images to each announcement
+            3.times do |img_index|
+              begin
+                image_url = gear_images[(index * 3 + img_index) % gear_images.length]
+                
+                # Download image to tempfile
+                tempfile = Tempfile.new(['gear', '.jpg'])
+                tempfile.binmode
+                URI.open(image_url) do |image|
+                  tempfile.write(image.read)
+                end
+                tempfile.rewind
+                
+                # Create Storage::UploadRecord with the image
+                upload = Storage::UploadRecord.create!(
+                  uploadable: announcement,
+                  user: user,
+                  file: tempfile,
+                  content_type: 'image/jpeg'
+                )
+                
+                puts "  ✓ Added image #{img_index + 1}/3 to: #{announcement.name}"
+                
+                tempfile.close
+                tempfile.unlink
+                
+                # Small delay to avoid rate limiting
+                sleep 2
+              rescue => e
+                puts "  ✗ Failed to add image to announcement #{announcement.name}: #{e.message}"
+              end
+            end
+          end
+          
+          puts "Finished creating #{announcements.count} sale announcements!"
+        end
+        
         Management::News::InformationRecord.destroy_all
         45.times do
           Management::News::InformationRecord.create(

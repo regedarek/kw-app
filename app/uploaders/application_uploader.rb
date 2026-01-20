@@ -1,16 +1,11 @@
 # Base uploader class for all CarrierWave uploaders
-# Centralizes storage configuration to use cloud storage in production/staging
-# or when USE_CLOUD_STORAGE=true in development
+# Uses cloud storage (OpenStack) for all environments
 #
 # Automatically detects and stores MIME type on upload to avoid reading
 # file content from OpenStack on every page render (which causes EOFError)
 class ApplicationUploader < CarrierWave::Uploader::Base
-  # Use cloud storage in production/staging, or in development when USE_CLOUD_STORAGE=true
-  if Rails.env.production? || Rails.env.staging? || ENV['USE_CLOUD_STORAGE'] == 'true'
-    storage :fog
-  else
-    storage :file
-  end
+  # Always use cloud storage
+  storage :fog
   
   # Automatically detect and store content type after upload
   # This prevents EOFError by avoiding file reads during rendering

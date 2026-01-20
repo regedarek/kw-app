@@ -48,6 +48,14 @@ latest.dump
 
 /config/credentials/production.key
 
+# Ansible temporary files
+/ansible/**/*.retry
+/tmp/staging_credentials.yml
+/tmp/generated_secrets.yml
+
+# Bitwarden session (never commit)
+.bw_session
+
 public/*.csv
 /public/packs
 /public/packs-test
@@ -55,3 +63,9 @@ public/*.csv
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.env.backup
+docs/current_env_backup.txt
+
+/config/credentials/development.key
+/config/credentials/staging.key
+.ansible-secrets-reference.txt

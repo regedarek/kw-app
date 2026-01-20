@@ -4,17 +4,10 @@ services:
     build: .
     environment:
       - DB_HOST=postgres
-      - PGUSER=dev-user
-      - DB_PASSWORD=dev-password
-      - DB_USER=dev-user
-      - DB_USERNAME=dev-user
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
-      - USE_CLOUD_STORAGE=${USE_CLOUD_STORAGE:-false}
-      - OPENSTACK_TENANT=${OPENSTACK_TENANT}
-      - OPENSTACK_USERNAME=${OPENSTACK_USERNAME}
-      - OPENSTACK_API_KEY=${OPENSTACK_API_KEY}
     volumes:
       - .:/rails
+      - kw-app-bundle:/usr/local/bundle
       - kw-app-tmp:/rails/tmp
     ports:
       - "3002:3002"
@@ -35,7 +28,6 @@ services:
     environment:
       - POSTGRES_USER=dev-user
       - POSTGRES_PASSWORD=dev-password
-      - PG_USER=dev-user
     ports:
         - "5433:5432"
     networks:
@@ -50,18 +42,11 @@ services:
     command: ./bin/sidekiq -C config/sidekiq.yml
     volumes:
       - .:/rails
+      - kw-app-bundle:/usr/local/bundle
       - kw-app-tmp:/rails/tmp
     environment:
       - DB_HOST=postgres
-      - PGUSER=dev-user
-      - DB_PASSWORD=dev-password
-      - DB_USER=dev-user
-      - DB_USERNAME=dev-user
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
-      - USE_CLOUD_STORAGE=${USE_CLOUD_STORAGE:-false}
-      - OPENSTACK_TENANT=${OPENSTACK_TENANT}
-      - OPENSTACK_USERNAME=${OPENSTACK_USERNAME}
-      - OPENSTACK_API_KEY=${OPENSTACK_API_KEY}
     stdin_open: true
     tty: true
     networks:
@@ -91,6 +76,7 @@ services:
 volumes:
   kw-app-redis-data:
   kw-app-postgres:
+  kw-app-bundle:
   kw-app-tmp:
 
 networks:
