@@ -1,0 +1,180 @@
+---
+- name: Prepare Raspberry Pi for Kamal Deployment
+  hosts: staging_pi
+  
+  vars_files:
+    - vars/bitwarden_refs.yml
+  
+  tasks:
+    - name: Verify Bitwarden CLI is available
+      delegate_to: localhost
+      command: which bw
+      register: bw_check
+      failed_when: bw_check.rc != 0
+      changed_when: false
+      
+    - name: Verify BW_SESSION is set
+      delegate_to: localhost
+      shell: echo $BW_SESSION
+      register: bw_session_check
+      failed_when: bw_session_check.stdout == ""
+      changed_when: false
+      
+    - name: Fetch sudo password from Bitwarden
+      delegate_to: localhost
+      shell: bw get password "{{ bw_pi_sudo }}"
+      environment:
+        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
+      register: sudo_password_raw
+      no_log: true
+      changed_when: false
+    
+    - name: Set sudo password
+      set_fact:
+        ansible_become_pass: "{{ sudo_password_raw.stdout }}"
+      no_log: true
+    
+    - name: Update apt cache
+      become: yes
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    
+    - name: Fix broken package state
+      become: yes
+      command: dpkg --configure -a
+      ignore_errors: yes
+    
+    - name: Install required system packages
+      become: yes
+      apt:
+        name:
+          - docker.io
+          - curl
+          - python3-pip
+          - python3-docker
+        state: present
+    
+    - name: Verify Docker Python module is available
+      become: yes
+      command: python3 -c "import docker"
+      register: docker_python_check
+      ignore_errors: yes
+    
+    - name: Add user to docker group
+      become: yes
+      user:
+        name: "{{ staging_user }}"
+        groups: docker
+        append: yes
+    
+    - name: Enable and start Docker service
+      become: yes
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+    
+    - name: Reset SSH connection to apply docker group
+      meta: reset_connection
+    
+    - name: Create kamal directory
+      become: yes
+      become_user: "{{ staging_user }}"
+      file:
+        path: /home/{{ staging_user }}/.kamal
+        state: directory
+        mode: '0755'
+    
+    - name: Create tmp directory for kamal clones
+      become: yes
+      file:
+        path: /tmp/kamal-clones
+        state: directory
+        mode: '0755'
+    
+    - name: Clean old kamal clone directories
+      become: yes
+      shell: find /tmp/kamal-clones -type d -mtime +1 -exec rm -rf {} + 2>/dev/null || true
+      changed_when: false
+    
+    - name: Check if kamal-proxy is running
+      become: yes
+      docker_container_info:
+        name: kamal-proxy
+      register: kamal_proxy_info
+      ignore_errors: yes
+    
+    - name: Pull kamal-proxy image if not present
+      become: yes
+      docker_image:
+        name: basecamp/kamal-proxy
+        tag: latest
+        source: pull
+      when: kamal_proxy_info.exists is not defined or not kamal_proxy_info.exists
+    
+    - name: Fetch Docker registry credentials from Bitwarden
+      delegate_to: localhost
+      shell: bw get username "{{ bw_docker_registry }}"
+      environment:
+        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
+      register: docker_registry_username_raw
+      no_log: true
+      changed_when: false
+      failed_when: docker_registry_username_raw.rc != 0
+    
+    - name: Fetch Docker registry password from Bitwarden
+      delegate_to: localhost
+      shell: bw get password "{{ bw_docker_registry }}"
+      environment:
+        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
+      register: docker_registry_password_raw
+      no_log: true
+      changed_when: false
+      failed_when: docker_registry_password_raw.rc != 0
+    
+    - name: Set Docker registry credentials
+      set_fact:
+        docker_registry_username: "{{ docker_registry_username_raw.stdout }}"
+        docker_registry_password: "{{ docker_registry_password_raw.stdout }}"
+      no_log: true
+    
+    - name: Verify credentials were fetched
+      assert:
+        that:
+          - docker_registry_username != ""
+          - docker_registry_password != ""
+        fail_msg: "Failed to fetch Docker registry credentials from Bitwarden"
+    
+    - name: Create .docker directory
+      become: yes
+      become_user: "{{ staging_user }}"
+      file:
+        path: /home/{{ staging_user }}/.docker
+        state: directory
+        mode: '0700'
+    
+    - name: Login to Docker Hub on Pi (via command)
+      shell: |
+        echo "{{ docker_registry_password }}" | docker login -u "{{ docker_registry_username }}" --password-stdin
+      args:
+        executable: /bin/bash
+      no_log: true
+      register: docker_login_result
+      failed_when: docker_login_result.rc != 0
+    
+    - name: Verify Docker login succeeded
+      debug:
+        msg: "✅ Docker Hub login successful"
+      when: docker_login_result.rc == 0
+    
+    - name: Display preparation status
+      debug:
+        msg:
+          - "✅ Server preparation complete!"
+          - "   - Docker installed and running"
+          - "   - User '{{ staging_user }}' added to docker group"
+          - "   - Required packages installed"
+          - "   - Kamal directories created"
+          - ""
+          - "Server ready for accessory deployment."
