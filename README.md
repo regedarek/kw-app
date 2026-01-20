@@ -23,10 +23,6 @@ docker-compose exec -T postgres psql -U dev-user -c "CREATE DATABASE kw_app_test
 # 4. Run migrations and seed
 docker-compose run --rm -T app bundle exec rake db:migrate db:seed
 
-# 5. Install JavaScript dependencies (yarn)
-docker-compose up -d
-docker-compose exec -T --user root app bash -c "apt-get update && apt-get install -y python2 && ln -sf /usr/bin/python2 /usr/bin/python && yarn install && chown -R rails:rails /rails/node_modules"
-
 # 6. Verify everything is running
 docker-compose ps
 ```
