@@ -10,7 +10,7 @@ servers:
     hosts:
       - 146.59.44.70
     options:
-      network: "private"
+      network: "kamal"
 
 proxy:
   ssl: true
@@ -58,4 +58,4 @@ accessories:
     directories:
       - data:/var/lib/postgresql/data
     options:
-      network: "private"
+      network: "kamal"
