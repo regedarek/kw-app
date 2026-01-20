@@ -10,6 +10,8 @@ servers:
     hosts:
       - localhost
 
+deploy_timeout: 180
+
 proxy:
   ssl: false
   app_port: 3000
@@ -17,7 +19,7 @@ proxy:
   healthcheck:
     path: /up
     interval: 10
-    timeout: 30
+    timeout: 10
 
 registry:
   username:
@@ -25,7 +27,6 @@ registry:
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# Keep only 3 containers on host
 retain_containers: 3
 
 env:
@@ -43,6 +44,7 @@ ssh:
 
 accessories:
   postgres:
+    service: kw-app-staging-postgres
     image: postgres:16.0
     host: localhost
     port: "5433:5432"
@@ -56,12 +58,13 @@ accessories:
       - data-staging:/var/lib/postgresql/data
 
   redis:
+    service: kw-app-staging-redis
     image: redis:7-alpine
     host: localhost
     port: "6381:6379"
-    cmd: "redis-server --requirepass ${REDIS_PASSWORD}"
     env:
       secret:
         - REDIS_PASSWORD
+    cmd: sh -c 'redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes --dir /data'
     directories:
       - redis-data-staging:/data
