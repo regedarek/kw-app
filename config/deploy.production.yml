@@ -1,6 +1,9 @@
 service: kw-app
 image: regedarek/kw-app
 
+# Use production destination for secrets
+destination: production
+
 builder:
   dockerfile: Dockerfile.production
   arch: amd64
