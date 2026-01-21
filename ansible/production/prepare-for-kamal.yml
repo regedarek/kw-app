@@ -2,6 +2,8 @@
 # This playbook prepares the server infrastructure (Docker, security, networking)
 # After running this playbook, perform FIRST deployment with:
 #   kamal setup -d production
+# Then run this playbook again to configure PostgreSQL roles:
+#   ansible-playbook ansible/production/prepare-for-kamal.yml -i ansible/inventory/production.ini --tags postgres-roles
 # Subsequent deployments use:
 #   kamal deploy -d production
 
@@ -10,6 +12,10 @@
   
   vars_files:
     - vars/bitwarden_refs.yml
+  
+  vars:
+    postgres_container: "kw-app-postgres"
+    postgres_user: "production_user"
   
   tasks:
     - name: Verify Bitwarden CLI is available
@@ -482,6 +488,101 @@
       debug:
         msg: "⚠️  REBOOT REQUIRED - Run 'ssh ubuntu@{{ production_host }} sudo reboot' after this playbook completes"
       when: reboot_check.stat.exists
+    
+    # ============================================
+    # PHASE 6: POSTGRESQL ROLE CONFIGURATION
+    # (Run after kamal accessory boot postgres)
+    # ============================================
+    
+    - name: Check if PostgreSQL container exists
+      become: yes
+      docker_container_info:
+        name: "{{ postgres_container }}"
+      register: postgres_info
+      ignore_errors: yes
+      tags: [postgres-roles]
+    
+    - name: Skip PostgreSQL role setup if container not running
+      debug:
+        msg: "ℹ️  PostgreSQL container not running yet. Run 'kamal accessory boot postgres -d production' first, then re-run this playbook with --tags postgres-roles"
+      when: postgres_info.exists is not defined or not postgres_info.exists or postgres_info.container.State.Status != 'running'
+      tags: [postgres-roles]
+    
+    - name: Check if deploy role already exists
+      become: yes
+      command: >
+        docker exec {{ postgres_container }}
+        psql -U {{ postgres_user }} -d postgres
+        -tAc "SELECT 1 FROM pg_roles WHERE rolname='deploy'"
+      register: deploy_role_check
+      changed_when: false
+      failed_when: false
+      when: postgres_info.exists is defined and postgres_info.exists and postgres_info.container.State.Status == 'running'
+      tags: [postgres-roles]
+    
+    - name: Set deploy role exists fact
+      set_fact:
+        deploy_role_exists: "{{ deploy_role_check.stdout == '1' }}"
+      when: deploy_role_check is not skipped
+      tags: [postgres-roles]
+    
+    - name: Create deploy role for migration compatibility
+      become: yes
+      command: >
+        docker exec {{ postgres_container }}
+        psql -U {{ postgres_user }} -d postgres
+        -c "CREATE ROLE deploy LOGIN;"
+      when: 
+        - postgres_info.exists is defined
+        - postgres_info.exists
+        - postgres_info.container.State.Status == 'running'
+        - deploy_role_check is not skipped
+        - deploy_role_check.stdout != '1'
+      register: create_deploy_role
+      tags: [postgres-roles]
+    
+    - name: Grant production_user privileges to deploy role
+      become: yes
+      command: >
+        docker exec {{ postgres_container }}
+        psql -U {{ postgres_user }} -d postgres
+        -c "GRANT production_user TO deploy;"
+      when: 
+        - postgres_info.exists is defined
+        - postgres_info.exists
+        - postgres_info.container.State.Status == 'running'
+        - deploy_role_check is not skipped
+        - deploy_role_check.stdout != '1'
+      register: grant_deploy_role
+      tags: [postgres-roles]
+    
+    - name: Display PostgreSQL role configuration status
+      debug:
+        msg:
+          - "✅ PostgreSQL deploy role configured successfully!"
+          - ""
+          - "PURPOSE:"
+          - "   The 'deploy' role ensures database dumps from old production"
+          - "   (which used 'deploy' user) can be restored without ownership errors."
+          - "   This prevents 'ERROR: role deploy does not exist' during migration."
+          - ""
+          - "MIGRATION READY:"
+          - "   You can now run: bin/migrate-database-to-new-prod --force"
+      when: 
+        - postgres_info.exists is defined
+        - postgres_info.exists
+        - create_deploy_role is changed
+      tags: [postgres-roles]
+    
+    - name: Display deploy role already exists message
+      debug:
+        msg: "ℹ️  Deploy role already exists, no action needed"
+      when: 
+        - postgres_info.exists is defined
+        - postgres_info.exists
+        - deploy_role_check is not skipped
+        - deploy_role_check.stdout == '1'
+      tags: [postgres-roles]
   
   # ============================================
   # HANDLERS
