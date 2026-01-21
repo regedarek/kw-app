@@ -1,0 +1,65 @@
+name: Deploy Production
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+      KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_PRODUCTION }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD_PRODUCTION }}
+      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_PRODUCTION }}
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: false
+      
+      - name: Install Kamal
+        run: |
+          gem install kamal --no-document
+          kamal version
+      
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}" > ~/.ssh/kamal_production_ed25519
+          chmod 600 ~/.ssh/kamal_production_ed25519
+          ssh-keyscan -H 146.59.44.70 >> ~/.ssh/known_hosts
+      
+      - name: Configure SSH for Kamal
+        run: |
+          cat > ~/.ssh/config << EOF
+          Host 146.59.44.70
+            User ubuntu
+            IdentityFile ~/.ssh/kamal_production_ed25519
+            StrictHostKeyChecking no
+          EOF
+          chmod 600 ~/.ssh/config
+      
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
+      
+      - name: Release deploy lock
+        run: kamal lock release -d production || true
+      
+      - name: Deploy to production
+        run: kamal deploy -d production
+      
+      - name: Cleanup old Docker images
+        run: kamal prune all -d production || true
+        continue-on-error: true
