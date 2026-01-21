@@ -1,4 +1,10 @@
 ---
+# This playbook prepares the server infrastructure (Docker, security, networking)
+# After running this playbook, perform FIRST deployment with:
+#   kamal setup -d production
+# Subsequent deployments use:
+#   kamal deploy -d production
+
 - name: Prepare Production VPS for Kamal Deployment
   hosts: production_vps
   
