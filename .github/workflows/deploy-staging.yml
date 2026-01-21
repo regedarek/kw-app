@@ -6,7 +6,7 @@ concurrency:
 on:
   push:
     branches:
-      - deploy
+      - develop
   workflow_dispatch:
 
 jobs:
