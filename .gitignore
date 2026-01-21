@@ -32,7 +32,12 @@ tags
 .idea
 
 # Ignore the default SQLite database.
-.kamal/secrets
+# Kamal sensitive configs (SSH config, hooks, custom scripts)
+# Note: .kamal/secrets-* files ARE committed (they only contain Bitwarden fetch commands)
+.kamal/ssh-config
+.kamal/hooks/
+.kamal/bw-unlock.sh
+.kamal/apps/
 
 # Ignore all logfiles and tempfiles.
 /cache/*
@@ -42,7 +47,7 @@ public/*
 .env
 cron_log.log
 latest.dump
-/.kamal
+
 .DS_Store
 **/.DS_Store
 
