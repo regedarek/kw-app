@@ -16,6 +16,7 @@ proxy:
   ssl: false
   host: panel.taterniczek.pl
   healthcheck:
+    path: /up
     interval: 10
     timeout: 10
 
