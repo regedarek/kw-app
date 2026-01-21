@@ -55,3 +55,14 @@ accessories:
       - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
       - data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    host: 146.59.44.70
+    port: "127.0.0.1:6379:6379"
+    env:
+      secret:
+        - REDIS_PASSWORD
+    cmd: sh -c 'redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes --dir /data'
+    directories:
+      - redis-data:/data
