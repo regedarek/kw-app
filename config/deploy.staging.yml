@@ -36,7 +36,7 @@ accessories:
     host: pi5main.local
     port: "5433:5432"
     options:
-      network: kw-app-network
+      network: "kw-app-network"
     env:
       clear:
         POSTGRES_USER: staging_user
@@ -52,7 +52,7 @@ accessories:
     host: pi5main.local
     port: "6381:6379"
     options:
-      network: kw-app-network
+      network: "kw-app-network"
     env:
       secret:
         - REDIS_PASSWORD

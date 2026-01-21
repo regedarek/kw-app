@@ -13,6 +13,10 @@ env:
   clear:
     RAILS_ENV: production
     RACK_ENV: production
+    POSTGRES_USER: production_user
+    POSTGRES_DB: kw_app_production
+  secret:
+    - POSTGRES_PASSWORD
 
 ssh:
   user: ubuntu
@@ -22,8 +26,9 @@ accessories:
     image: postgres:16.0
     host: 146.59.44.70
     port: "127.0.0.1:5432:5432"
+    cmd: postgres
     options:
-      network: kw-app-network
+      network: "kw-app-network"
     env:
       clear:
         POSTGRES_USER: production_user
@@ -40,7 +45,7 @@ accessories:
     host: 146.59.44.70
     port: "127.0.0.1:6379:6379"
     options:
-      network: kw-app-network
+      network: "kw-app-network"
     env:
       secret:
         - REDIS_PASSWORD

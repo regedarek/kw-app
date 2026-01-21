@@ -33,4 +33,4 @@ proxy:
 servers:
   web:
     options:
-      network: kw-app-network
+      network: "kw-app-network"
