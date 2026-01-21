@@ -107,7 +107,7 @@
         rule: allow
         port: '80'
         proto: tcp
-        comment: 'HTTP for Let''s Encrypt / Cloudflare'
+        comment: 'HTTP for Let Encrypt and Cloudflare'
     
     - name: Allow HTTPS (port 443)
       become: yes
