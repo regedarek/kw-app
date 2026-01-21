@@ -1,0 +1,25 @@
+---
+# Bitwarden item references (not secrets themselves, just item names/paths)
+# These reference items stored in your Bitwarden vault
+
+# Infrastructure bootstrap secrets (needed before Rails exists)
+bw_db_bootstrap: "kw-app-production-database-bootstrap"
+bw_vps_sudo: "kw-app-production-vps-sudo"
+bw_docker_registry: "kw-app-production-docker-registry"
+bw_rails_master_key: "kw-app-production-master-key"
+
+# Server configuration (non-secret values)
+production_host: "146.59.44.70"
+production_hostname: "nowypanel.kw.krakow.pl"
+production_user: "ubuntu"
+
+# Container versions
+postgres_version: "16.0"
+redis_version: "7-alpine"
+
+# Database configuration
+database_name: "kw_app_production"
+database_user: "production_user"
+
+# Docker network
+docker_network: "kamal"
