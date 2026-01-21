@@ -29,3 +29,8 @@ proxy:
     path: /up
     interval: 2
     timeout: 2
+
+servers:
+  web:
+    options:
+      network: kw-app-network
