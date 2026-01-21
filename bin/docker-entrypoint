@@ -12,6 +12,9 @@ if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   echo "MASTER_KEY=${RAILS_MASTER_KEY}"
   echo "DB_HOST=${DB_HOST}"
 
+  # Remove stale PID file if it exists
+  rm -f /rails/tmp/pids/server.pid
+
   ./bin/rails db:prepare
 fi
 
