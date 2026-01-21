@@ -6,6 +6,7 @@
 - **NAS**: FriendlyElec CM3588 (local network)
 - **Raspberry Pi 5**: Mini rack (local network) - **Backup Orchestrator**
 - **Laptop**: Developer workstation
+- **Old Production Server**: 51.68.141.247 (migration source)
 
 ## Backup Flow (Automated)
 
@@ -31,6 +32,49 @@ Keeps 3 latest backups on each location
 - **CM3588 NAS**: 3 latest dumps (primary backup archive)
 
 ## Restore Scenarios
+
+### Scenario 0: Initial Migration from Old Production Server
+
+**Use Case**: One-time migration from old prod (51.68.141.247) to new prod (146.59.44.70)
+
+**Location of dumps on old server**: `deploy@51.68.141.247:~/baza_dump/sql/`
+
+**Available dumps**:
+- `kw_app_production-20260104-000001.sql`
+- `kw_app_production-20260111-000001.sql`
+- `kw_app_production-20260114-142622.sql`
+- `kw_app_production-20260118-000001.sql` (latest)
+
+**Command**:
+```bash
+# Migrate latest dump from old to new production
+bin/migrate-database-to-new-prod
+
+# Or specify a specific dump
+bin/migrate-database-to-new-prod --dump kw_app_production-20260118-000001.sql
+
+# Dry run (download and verify, but don't restore)
+bin/migrate-database-to-new-prod --dry-run
+```
+
+**Process**:
+1. SSH to old prod server (51.68.141.247)
+2. List available dumps, select latest (or specified dump)
+3. Compress dump if not already compressed (add .gz)
+4. Download to laptop `/tmp/migration-dump.sql.gz`
+5. Verify dump integrity (not corrupted)
+6. Upload to new prod server `/tmp/`
+7. Restore via `kamal accessory exec postgres`
+8. Verify restore (count tables, check recent records)
+9. Clean up temp files on laptop and new prod
+10. **Keep original on old server** (don't delete)
+
+**After Migration**:
+- Set up automated backups (Phase 1 & 2)
+- Old server dumps remain as archive
+- New automated flow takes over
+
+---
 
 ### Scenario 1: Fresh Production Server Setup
 
@@ -375,6 +419,38 @@ fi
 
 ---
 
+## Migration Script Details
+
+### `bin/migrate-database-to-new-prod`
+
+**Purpose**: One-time migration from old production server to new production server
+
+**Features**:
+- Auto-detects latest dump on old server
+- Handles both compressed (.gz) and uncompressed (.sql) dumps
+- Compresses uncompressed dumps automatically
+- Progress indicators for download/upload
+- Integrity checks (file size, gzip test)
+- Database verification after restore
+- Cleanup on success or failure
+- Option to keep dump on new server for future reference
+
+**Requirements**:
+- SSH access to old prod: `deploy@51.68.141.247`
+- SSH access to new prod: `ubuntu@146.59.44.70`
+- Kamal setup completed on new prod
+- Postgres accessory running on new prod
+- Sufficient disk space on laptop `/tmp/` (at least 2x dump size)
+
+**Safety Features**:
+- `--dry-run` mode for testing
+- Does NOT delete dumps from old server
+- Confirmation prompts before destructive actions
+- Automatic rollback on failure
+- Detailed logging
+
+---
+
 ## Disaster Recovery Scenarios
 
 ### Scenario A: Production Database Corrupted
@@ -472,6 +548,15 @@ fi
 
 ## Quick Reference
 
+### Migrate from Old Production (One-Time)
+```bash
+# Download latest dump from old server and restore to new
+bin/migrate-database-to-new-prod
+
+# Dry run (test without restoring)
+bin/migrate-database-to-new-prod --dry-run
+```
+
 ### Create Backup (Manual)
 ```bash
 ssh ubuntu@146.59.44.70 "sudo /usr/local/bin/backup-db.sh"
@@ -515,10 +600,13 @@ This strategy provides:
 - ✅ **Simple maintenance** and monitoring
 
 Next steps:
-1. Implement Phase 1 (prod server backup script)
-2. Implement Phase 2 (Pi5 orchestrator)
-3. Implement Phase 3 (laptop restore scripts)
-4. Set up AppSignal integration
-5. Configure AppSignal alerts
-6. Test end-to-end
-7. Verify monitoring is working
+1. **FIRST**: Run migration from old production server
+   - `bin/migrate-database-to-new-prod`
+   - Verify data on new production
+2. Implement Phase 1 (prod server backup script)
+3. Implement Phase 2 (Pi5 orchestrator)
+4. Implement Phase 3 (laptop restore scripts)
+5. Set up AppSignal integration
+6. Configure AppSignal alerts
+7. Test end-to-end
+8. Verify monitoring is working
