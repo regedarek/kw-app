@@ -1,8 +1,8 @@
+# Staging-specific configuration overrides
+
 service: kw-app-staging
-image: regedarek/kw-app
 
 builder:
-  dockerfile: Dockerfile.production
   arch: arm64
 
 servers:
@@ -14,30 +14,17 @@ deploy_timeout: 180
 
 proxy:
   ssl: false
-  app_port: 3000
   host: panel.taterniczek.pl
   healthcheck:
-    path: /up
     interval: 10
     timeout: 10
-
-registry:
-  username:
-    - KAMAL_REGISTRY_USERNAME
-  password:
-    - KAMAL_REGISTRY_PASSWORD
-
-retain_containers: 3
 
 env:
   clear:
     RAILS_ENV: staging
     RACK_ENV: staging
     DB_HOST: kw-app-staging-postgres
-    DB_PORT: 5432
     RAILS_SERVE_STATIC_FILES: true
-  secret:
-    - RAILS_MASTER_KEY
 
 ssh:
   user: rege

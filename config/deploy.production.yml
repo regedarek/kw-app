@@ -1,9 +1,4 @@
-service: kw-app
-image: regedarek/kw-app
-
-builder:
-  dockerfile: Dockerfile.production
-  arch: amd64
+# Production-specific configuration overrides
 
 servers:
   web:
@@ -12,30 +7,12 @@ servers:
 
 proxy:
   ssl: true
-  app_port: 3000
   host: nowypanel.kw.krakow.pl
-  healthcheck:
-    path: /up
-    interval: 2
-    timeout: 2
-
-registry:
-  username:
-    - KAMAL_REGISTRY_USERNAME
-  password:
-    - KAMAL_REGISTRY_PASSWORD
-
-# Keep only 3 containers on host
-retain_containers: 3
 
 env:
   clear:
     RAILS_ENV: production
     RACK_ENV: production
-    DB_HOST: kw-app-postgres
-    DB_PORT: 5432
-  secret:
-    - RAILS_MASTER_KEY
 
 ssh:
   user: ubuntu
