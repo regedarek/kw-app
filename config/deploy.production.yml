@@ -16,6 +16,7 @@ env:
     POSTGRES_USER: production_user
     POSTGRES_DB: kw_app_production
   secret:
+    - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
 
 ssh:
