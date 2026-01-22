@@ -6,7 +6,7 @@
 bw_db_bootstrap: "kw-app-staging-database-bootstrap"
 bw_redis_bootstrap: "kw-app-staging-redis-bootstrap"
 bw_pi_sudo: "kw-app-staging-pi-sudo"
-bw_docker_registry: "kw-app-staging-docker-registry"
+bw_docker_registry: "docker-registry-credentials"
 bw_rails_master_key: "kw-app-staging-master-key"
 
 # Server configuration (non-secret values)
