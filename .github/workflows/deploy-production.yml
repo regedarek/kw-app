@@ -51,6 +51,9 @@ jobs:
           BW_CLIENTSECRET: ${{ secrets.BW_CLIENTSECRET }}
           BW_PASSWORD: ${{ secrets.BW_PASSWORD }}
         run: |
+          # Logout first if already logged in
+          bw logout || true
+          
           # Login with API credentials
           bw login --apikey
           
