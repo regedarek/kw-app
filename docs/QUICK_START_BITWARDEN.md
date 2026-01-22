@@ -121,7 +121,7 @@ Verify Bitwarden items exist:
 bw list items --session $BW_SESSION | jq -r '.[].name' | grep kw-app
 
 # Should show:
-# kw-app-production-docker-registry
+# docker-registry-credentials
 # kw-app-staging-master-key
 # kw-app-staging-database-bootstrap
 # kw-app-staging-redis-bootstrap

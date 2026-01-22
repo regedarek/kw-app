@@ -165,7 +165,7 @@ ansible_python_interpreter=/usr/bin/python3
 ---
 # Bitwarden item references
 bw_vps_sudo: "kw-app-production-vps-sudo"
-bw_docker_registry: "kw-app-production-docker-registry"
+bw_docker_registry: "docker-registry-credentials"
 bw_rails_master_key: "kw-app-production-master-key"
 bw_db_bootstrap: "kw-app-production-database-bootstrap"
 
@@ -217,7 +217,7 @@ Create in Bitwarden vault:
 | Item Name | Type | Content |
 |-----------|------|---------|
 | `kw-app-production-vps-sudo` | Password | Ubuntu sudo password |
-| `kw-app-production-docker-registry` | Login | Docker Hub username/password |
+| `docker-registry-credentials` | Login | Docker Hub username/password |
 | `kw-app-production-master-key` | Note | Rails master key from `config/credentials/production.key` |
 | `kw-app-production-database-bootstrap` | Password | PostgreSQL password (strong, random) |
 
@@ -229,7 +229,7 @@ bw sync --session "$BW_SESSION"
 
 # Test each item
 bw get password "kw-app-production-vps-sudo" --session "$BW_SESSION"
-bw get username "kw-app-production-docker-registry" --session "$BW_SESSION"
+bw get username "docker-registry-credentials" --session "$BW_SESSION"
 bw get notes "kw-app-production-master-key" --session "$BW_SESSION"
 bw get password "kw-app-production-database-bootstrap" --session "$BW_SESSION"
 ```
@@ -339,8 +339,8 @@ ansible-playbook ansible/production/prepare-for-kamal.yml \
 ```bash
 export BW_SESSION=$(bw unlock --raw)
 
-export KAMAL_REGISTRY_USERNAME=$(bw get username "kw-app-production-docker-registry" --session "$BW_SESSION")
-export KAMAL_REGISTRY_PASSWORD=$(bw get password "kw-app-production-docker-registry" --session "$BW_SESSION")
+export KAMAL_REGISTRY_USERNAME=$(bw get username "docker-registry-credentials" --session "$BW_SESSION")
+export KAMAL_REGISTRY_PASSWORD=$(bw get password "docker-registry-credentials" --session "$BW_SESSION")
 export RAILS_MASTER_KEY=$(bw get notes "kw-app-production-master-key" --session "$BW_SESSION")
 export POSTGRES_PASSWORD=$(bw get password "kw-app-production-database-bootstrap" --session "$BW_SESSION")
 ```

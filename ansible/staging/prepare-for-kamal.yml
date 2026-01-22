@@ -165,7 +165,7 @@
     
     - name: Fetch Docker registry credentials from Bitwarden
       delegate_to: localhost
-      shell: bw get username "{{ bw_docker_registry }}"
+      shell: bw get username docker-registry-credentials
       environment:
         BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
       register: docker_registry_username_raw
@@ -175,7 +175,7 @@
     
     - name: Fetch Docker registry password from Bitwarden
       delegate_to: localhost
-      shell: bw get password "{{ bw_docker_registry }}"
+      shell: bw get password docker-registry-credentials
       environment:
         BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
       register: docker_registry_password_raw

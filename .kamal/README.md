@@ -55,7 +55,7 @@ Secrets are stored in Bitwarden items under the "KW APP" folder:
 
 ### Production Items
 
-- **kw-app-production-docker-registry**
+- **docker-registry-credentials**
   - Type: Login
   - Username: Docker Hub username
   - Password: Docker Hub access token
@@ -101,7 +101,7 @@ Secrets files use command substitution with direct `bw` CLI commands to fetch va
 # Example from secrets.production
 RAILS_MASTER_KEY=$(bw get item kw-app-production-master-key | jq -r '.notes')
 POSTGRES_PASSWORD=$(bw get item kw-app-production-database-bootstrap | jq -r '.login.password')
-KAMAL_REGISTRY_USERNAME=$(bw get item kw-app-production-docker-registry | jq -r '.login.username')
+KAMAL_REGISTRY_USERNAME=$(bw get item docker-registry-credentials | jq -r '.login.username')
 ```
 
 When you run `kamal deploy`, Kamal executes these shell commands in the secrets files and injects the fetched values into containers as environment variables.
@@ -147,7 +147,7 @@ export BW_SESSION="new-token"
 
 ```bash
 # Test fetching Docker password
-bw get item kw-app-production-docker-registry | jq -r '.login.password'
+bw get item docker-registry-credentials | jq -r '.login.password'
 
 # Test fetching Rails master key
 bw get item kw-app-production-master-key | jq -r '.notes'
