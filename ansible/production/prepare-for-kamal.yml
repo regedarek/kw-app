@@ -18,25 +18,25 @@
     postgres_user: "production_user"
   
   tasks:
-    - name: Verify Bitwarden CLI is available
+    - name: Verify Bitwarden Secrets Manager CLI is available
       delegate_to: localhost
-      command: which bw
-      register: bw_check
-      failed_when: bw_check.rc != 0
+      command: which bws
+      register: bws_check
+      failed_when: bws_check.rc != 0
       changed_when: false
       
-    - name: Verify BW_SESSION is set
+    - name: Verify BWS_ACCESS_TOKEN is set
       delegate_to: localhost
-      shell: echo $BW_SESSION
-      register: bw_session_check
-      failed_when: bw_session_check.stdout == ""
+      shell: echo $BWS_ACCESS_TOKEN
+      register: bws_token_check
+      failed_when: bws_token_check.stdout == ""
       changed_when: false
       
-    - name: Fetch sudo password from Bitwarden
+    - name: Fetch sudo password from Bitwarden Secrets Manager
       delegate_to: localhost
-      shell: bw get password "{{ bw_vps_sudo }}"
+      shell: bws secret get "{{ bws_vps_sudo_uuid }}" --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value'
       environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
+        BWS_ACCESS_TOKEN: "{{ lookup('env', 'BWS_ACCESS_TOKEN') }}"
       register: sudo_password_raw
       no_log: true
       changed_when: false
@@ -392,29 +392,29 @@
       when: kamal_proxy_info.exists is not defined or not kamal_proxy_info.exists
     
     # ============================================
-    # PHASE 5: DOCKER HUB LOGIN
+    # PHASE 6: DOCKER REGISTRY LOGIN
     # ============================================
     
-    - name: Fetch Docker registry credentials from Bitwarden
+    - name: Fetch Docker registry username from Bitwarden Secrets Manager
       delegate_to: localhost
-      shell: bw get username "{{ bw_docker_registry }}"
+      shell: bws secret get "{{ bws_registry_username_uuid }}" --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value'
       environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
+        BWS_ACCESS_TOKEN: "{{ lookup('env', 'BWS_ACCESS_TOKEN') }}"
       register: docker_registry_username_raw
       no_log: true
       changed_when: false
       failed_when: docker_registry_username_raw.rc != 0
-    
-    - name: Fetch Docker registry password from Bitwarden
+      
+    - name: Fetch Docker registry password from Bitwarden Secrets Manager
       delegate_to: localhost
-      shell: bw get password "{{ bw_docker_registry }}"
+      shell: bws secret get "{{ bws_registry_password_uuid }}" --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value'
       environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
+        BWS_ACCESS_TOKEN: "{{ lookup('env', 'BWS_ACCESS_TOKEN') }}"
       register: docker_registry_password_raw
       no_log: true
       changed_when: false
       failed_when: docker_registry_password_raw.rc != 0
-    
+      
     - name: Set Docker registry credentials
       set_fact:
         docker_registry_username: "{{ docker_registry_username_raw.stdout }}"

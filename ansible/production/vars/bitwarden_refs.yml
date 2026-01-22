@@ -1,12 +1,12 @@
 ---
-# Bitwarden item references (not secrets themselves, just item names/paths)
-# These reference items stored in your Bitwarden vault
+# Bitwarden Secrets Manager UUIDs
+# These are the UUIDs of secrets stored in Bitwarden Secrets Manager
+# Get these values by running: bws secret list --access-token "YOUR_TOKEN"
 
-# Infrastructure bootstrap secrets (needed before Rails exists)
-bw_db_bootstrap: "kw-app-production-database-bootstrap"
-bw_vps_sudo: "kw-app-production-vps-sudo"
-bw_docker_registry: "docker-registry-credentials"
-bw_rails_master_key: "kw-app-production-master-key"
+# Infrastructure secrets (UUIDs from Bitwarden Secrets Manager)
+bws_vps_sudo_uuid: "45e88671-20f8-4c23-ae00-b3da011bafdc"  # kw-app-production-vps-sudo-password
+bws_registry_username_uuid: "6e77be63-a052-4594-9585-b3da01100ce9"  # registry-username (shared)
+bws_registry_password_uuid: "6ff8b019-a3e4-4571-85fc-b3da01106838"  # registry-password (shared)
 
 # Server configuration (non-secret values)
 production_host: "146.59.44.70"
@@ -22,4 +22,4 @@ database_name: "kw_app_production"
 database_user: "production_user"
 
 # Docker network
-docker_network: "kamal"
+docker_network: "kw-app-network"

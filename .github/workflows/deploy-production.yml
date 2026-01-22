@@ -18,63 +18,50 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # Install dependencies
-      - name: Install Bitwarden CLI and jq
+      # Install Bitwarden Secrets Manager CLI
+      - name: Install Bitwarden Secrets Manager CLI
         run: |
+          if ! command -v bws &> /dev/null; then
+            echo "Installing Bitwarden Secrets Manager CLI v1.0.0..."
+            
+            # Download x86_64 binary for v1.0.0 (GitHub hosted runners are x86_64)
+            curl -L -o bws-x86_64-unknown-linux-gnu.zip \
+              "https://github.com/bitwarden/sdk-sm/releases/download/bws-v1.0.0/bws-x86_64-unknown-linux-gnu-1.0.0.zip"
+            
+            unzip -o bws-x86_64-unknown-linux-gnu.zip
+            chmod +x bws
+            sudo mv bws /usr/local/bin/
+            rm bws-x86_64-unknown-linux-gnu.zip
+          else
+            echo "✅ Bitwarden Secrets Manager CLI already installed"
+          fi
+          
+          bws --version
+      
+      # Fetch secrets from Bitwarden Secrets Manager
+      - name: Get Secrets from Bitwarden
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN_PRODUCTION }}
+        run: |
+          echo "Fetching secrets from Bitwarden Secrets Manager..."
+          
           # Install jq for JSON parsing
-          if ! command -v jq &> /dev/null; then
-            echo "Installing jq..."
-            sudo apt-get update -qq
-            sudo apt-get install -y jq
-          else
-            echo "✅ jq already installed"
-          fi
+          sudo apt-get update -qq
+          sudo apt-get install -y jq
           
-          # Install Bitwarden CLI
-          if ! command -v bw &> /dev/null; then
-            echo "Installing Bitwarden CLI..."
-            wget -O bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
-            unzip -o bw.zip
-            chmod +x bw
-            sudo mv bw /usr/local/bin/
-          else
-            echo "✅ Bitwarden CLI already installed"
-          fi
+          # Fetch each secret by ID and export as environment variable
+          export KAMAL_REGISTRY_USERNAME=$(bws secret get ${{ secrets.BW_SECRET_REGISTRY_USERNAME }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export KAMAL_REGISTRY_PASSWORD=$(bws secret get ${{ secrets.BW_SECRET_REGISTRY_PASSWORD }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export RAILS_MASTER_KEY=$(bws secret get ${{ secrets.BW_SECRET_PRODUCTION_MASTER_KEY }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export POSTGRES_PASSWORD=$(bws secret get ${{ secrets.BW_SECRET_PRODUCTION_POSTGRES_PASSWORD }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export REDIS_PASSWORD=$(bws secret get ${{ secrets.BW_SECRET_PRODUCTION_REDIS_PASSWORD }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
           
-          echo "Bitwarden CLI version: $(bw --version)"
-          echo "jq version: $(jq --version)"
-      
-      # Login and unlock Bitwarden, export BW_SESSION for Kamal secrets files
-      - name: Authenticate with Bitwarden
-        env:
-          BW_CLIENTID: ${{ secrets.BW_CLIENTID }}
-          BW_CLIENTSECRET: ${{ secrets.BW_CLIENTSECRET }}
-          BW_PASSWORD: ${{ secrets.BW_PASSWORD }}
-        run: |
-          # Logout first if already logged in
-          bw logout || true
-          
-          # Login with API credentials
-          bw login --apikey
-          
-          # Unlock and get session token
-          export BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
-          echo "BW_SESSION=$BW_SESSION" >> $GITHUB_ENV
-          
-          # Verify we're unlocked
-          bw unlock --check
-          
-          echo "✅ Bitwarden authenticated successfully"
-      
-      # Test that secrets can be fetched (without deploying)
-      - name: Test secret fetching
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
-        run: |
-          echo "🧪 Testing secret fetching from Bitwarden..."
-          
-          # Source the secrets file to test fetching
-          source .kamal/secrets.production
+          # Save to GITHUB_ENV for subsequent steps
+          echo "KAMAL_REGISTRY_USERNAME=$KAMAL_REGISTRY_USERNAME" >> $GITHUB_ENV
+          echo "KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD" >> $GITHUB_ENV
+          echo "RAILS_MASTER_KEY=$RAILS_MASTER_KEY" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> $GITHUB_ENV
+          echo "REDIS_PASSWORD=$REDIS_PASSWORD" >> $GITHUB_ENV
           
           # Verify secrets are set (without exposing values)
           [[ -n "$KAMAL_REGISTRY_USERNAME" ]] && echo "✅ KAMAL_REGISTRY_USERNAME fetched" || { echo "❌ KAMAL_REGISTRY_USERNAME missing"; exit 1; }
@@ -84,7 +71,7 @@ jobs:
           [[ -n "$REDIS_PASSWORD" ]] && echo "✅ REDIS_PASSWORD fetched" || { echo "❌ REDIS_PASSWORD missing"; exit 1; }
           
           echo ""
-          echo "✅ All secrets fetched successfully from Bitwarden!"
+          echo "✅ All secrets fetched successfully from Bitwarden Secrets Manager!"
       
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -175,26 +162,15 @@ jobs:
           fi
       
       - name: Login to Docker Hub
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
         run: |
-          # Fetch registry credentials from Bitwarden
-          source .kamal/secrets.production
-          echo "$KAMAL_REGISTRY_PASSWORD" | docker login -u "$KAMAL_REGISTRY_USERNAME" --password-stdin
+          echo "${{ env.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ env.KAMAL_REGISTRY_USERNAME }}" --password-stdin
       
       - name: Release deploy lock
         run: kamal lock release -d production || true
       
       - name: Deploy to production
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
         run: kamal deploy -d production
       
       - name: Cleanup old Docker images
         run: kamal prune all -d production || true
         continue-on-error: true
-      
-      # Logout from Bitwarden
-      - name: Logout from Bitwarden
-        if: always()
-        run: bw logout || true
