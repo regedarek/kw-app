@@ -100,19 +100,65 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          
+          # Verify secret is present
+          if [ -z "${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}" ]; then
+            echo "❌ Error: PRODUCTION_SSH_PRIVATE_KEY secret is not set"
+            echo "Please add this secret in GitHub repository settings"
+            exit 1
+          fi
+          
+          echo "✅ PRODUCTION_SSH_PRIVATE_KEY secret is present"
+          
+          # Write SSH private key (ensure proper newlines)
           echo "${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}" > ~/.ssh/kamal_production_ed25519
+          
+          # Ensure the key ends with a newline
+          echo "" >> ~/.ssh/kamal_production_ed25519
+          
+          # Set correct permissions
           chmod 600 ~/.ssh/kamal_production_ed25519
+          
+          # Verify key format
+          if ! ssh-keygen -l -f ~/.ssh/kamal_production_ed25519 > /dev/null 2>&1; then
+            echo "❌ Error: SSH key is not valid"
+            echo "Key fingerprint check failed. Please verify PRODUCTION_SSH_PRIVATE_KEY secret."
+            exit 1
+          fi
+          
+          echo "✅ SSH key validated successfully"
+          
+          # Add server to known hosts
           ssh-keyscan -H 146.59.44.70 >> ~/.ssh/known_hosts
       
       - name: Configure SSH for Kamal
         run: |
-          cat > ~/.ssh/config << EOF
+          cat > ~/.ssh/config << 'EOF'
           Host 146.59.44.70
             User ubuntu
             IdentityFile ~/.ssh/kamal_production_ed25519
-            StrictHostKeyChecking no
+            StrictHostKeyChecking accept-new
+            IdentitiesOnly yes
           EOF
           chmod 600 ~/.ssh/config
+          
+          echo "SSH configuration:"
+          cat ~/.ssh/config
+      
+      - name: Test SSH connection
+        run: |
+          echo "Testing SSH connection to production server..."
+          if ssh -o ConnectTimeout=10 -o BatchMode=yes ubuntu@146.59.44.70 'echo "✅ SSH connection successful"'; then
+            echo "SSH authentication working correctly"
+          else
+            echo "❌ SSH connection failed"
+            echo "Please verify:"
+            echo "  1. PRODUCTION_SSH_PRIVATE_KEY secret is set correctly"
+            echo "  2. The corresponding public key is in ~/.ssh/authorized_keys on the server"
+            echo "  3. The server allows SSH key authentication"
+            exit 1
+          fi
       
       - name: Login to Docker Hub
         env:
