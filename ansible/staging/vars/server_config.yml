@@ -1,0 +1,18 @@
+---
+# Server configuration for staging environment
+# Secrets are now managed via GitHub Actions and Bitwarden Secrets Manager
+
+staging_host: "pi5main.local"
+staging_hostname: "panel.taterniczek.pl"
+staging_user: "rege"
+
+# Container versions
+postgres_version: "16"
+redis_version: "7-alpine"
+
+# Database configuration
+database_name: "kw_app_staging"
+database_user: "postgres"
+
+# Docker network
+docker_network: "kamal"

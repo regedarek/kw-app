@@ -3,39 +3,22 @@
   hosts: staging_pi
   
   vars_files:
-    - vars/bitwarden_refs.yml
+    - vars/server_config.yml
   
   vars:
     postgres_container: "kw-app-staging-postgres"
     postgres_user: "staging_user"
   
   tasks:
-    - name: Verify Bitwarden CLI is available
-      delegate_to: localhost
-      command: which bw
-      register: bw_check
-      failed_when: bw_check.rc != 0
-      changed_when: false
+    - name: Prompt for sudo password
+      pause:
+        prompt: "Enter sudo password for {{ staging_user }}"
+        echo: no
+      register: sudo_password_prompt
       
-    - name: Verify BW_SESSION is set
-      delegate_to: localhost
-      shell: echo $BW_SESSION
-      register: bw_session_check
-      failed_when: bw_session_check.stdout == ""
-      changed_when: false
-      
-    - name: Fetch sudo password from Bitwarden
-      delegate_to: localhost
-      shell: bw get password "{{ bw_pi_sudo }}"
-      environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
-      register: sudo_password_raw
-      no_log: true
-      changed_when: false
-    
     - name: Set sudo password
       set_fact:
-        ansible_become_pass: "{{ sudo_password_raw.stdout }}"
+        ansible_become_pass: "{{ sudo_password_prompt.user_input }}"
       no_log: true
     
     - name: Update apt cache
@@ -83,51 +66,6 @@
     - name: Reset SSH connection to apply docker group
       meta: reset_connection
     
-    - name: Check if Node.js is installed
-      command: node --version
-      register: node_check
-      ignore_errors: yes
-      changed_when: false
-    
-    - name: Add NodeSource repository for Node.js 20.x
-      become: yes
-      shell: |
-        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-      args:
-        creates: /etc/apt/sources.list.d/nodesource.list
-      when: node_check.rc != 0
-    
-    - name: Install Node.js
-      become: yes
-      apt:
-        name: nodejs
-        state: present
-        update_cache: yes
-      when: node_check.rc != 0
-    
-    - name: Check if Bitwarden CLI is installed
-      command: bw --version
-      register: bw_check
-      ignore_errors: yes
-      changed_when: false
-    
-    - name: Install Bitwarden CLI via npm
-      become: yes
-      npm:
-        name: "@bitwarden/cli"
-        global: yes
-        state: present
-      when: bw_check.rc != 0
-    
-    - name: Verify Bitwarden CLI installation
-      command: bw --version
-      register: bw_version_check
-      changed_when: false
-    
-    - name: Display Bitwarden CLI version
-      debug:
-        msg: "✅ Bitwarden CLI installed via npm: {{ bw_version_check.stdout }}"
-    
     - name: Create kamal directory
       become: yes
       become_user: "{{ staging_user }}"
@@ -163,38 +101,22 @@
         source: pull
       when: kamal_proxy_info.exists is not defined or not kamal_proxy_info.exists
     
-    - name: Fetch Docker registry credentials from Bitwarden
-      delegate_to: localhost
-      shell: bw get username docker-registry-credentials
-      environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
-      register: docker_registry_username_raw
-      no_log: true
-      changed_when: false
-      failed_when: docker_registry_username_raw.rc != 0
-    
-    - name: Fetch Docker registry password from Bitwarden
-      delegate_to: localhost
-      shell: bw get password docker-registry-credentials
-      environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
-      register: docker_registry_password_raw
-      no_log: true
-      changed_when: false
-      failed_when: docker_registry_password_raw.rc != 0
+    - name: Prompt for Docker registry username
+      pause:
+        prompt: "Enter Docker Hub username"
+      register: docker_username_prompt
+      
+    - name: Prompt for Docker registry password
+      pause:
+        prompt: "Enter Docker Hub password/token"
+        echo: no
+      register: docker_password_prompt
     
     - name: Set Docker registry credentials
       set_fact:
-        docker_registry_username: "{{ docker_registry_username_raw.stdout }}"
-        docker_registry_password: "{{ docker_registry_password_raw.stdout }}"
+        docker_registry_username: "{{ docker_username_prompt.user_input }}"
+        docker_registry_password: "{{ docker_password_prompt.user_input }}"
       no_log: true
-    
-    - name: Verify credentials were fetched
-      assert:
-        that:
-          - docker_registry_username != ""
-          - docker_registry_password != ""
-        fail_msg: "Failed to fetch Docker registry credentials from Bitwarden"
     
     - name: Create .docker directory
       become: yes
@@ -219,60 +141,10 @@
       when: docker_login_result.rc == 0
     
     # ============================================
-    # KAMAL SECRETS FILE CONFIGURATION
+    # NOTE: Secrets are now managed via GitHub Actions
+    # and Bitwarden Secrets Manager. This playbook only
+    # prepares the server infrastructure.
     # ============================================
-    
-    - name: Fetch Rails master key from Bitwarden
-      delegate_to: localhost
-      shell: bw get item kw-app-staging-master-key --session $BW_SESSION | jq -r '.notes'
-      environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
-      register: rails_master_key_raw
-      no_log: true
-      changed_when: false
-    
-    - name: Fetch PostgreSQL password from Bitwarden
-      delegate_to: localhost
-      shell: bw get password "{{ bw_db_bootstrap }}"
-      environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
-      register: postgres_password_raw
-      no_log: true
-      changed_when: false
-    
-    - name: Fetch Redis password from Bitwarden
-      delegate_to: localhost
-      shell: bw get password "{{ bw_redis_bootstrap }}"
-      environment:
-        BW_SESSION: "{{ lookup('env', 'BW_SESSION') }}"
-      register: redis_password_raw
-      no_log: true
-      changed_when: false
-    
-    - name: Create Kamal secrets file on Pi
-      copy:
-        content: |
-          # ⚠️  WARNING: This file contains hardcoded secrets!
-          # Staging environment - local network only
-          # Generated by Ansible from Bitwarden
-          
-          # Rails master key
-          RAILS_MASTER_KEY={{ rails_master_key_raw.stdout }}
-          
-          # Docker Registry credentials
-          KAMAL_REGISTRY_USERNAME={{ docker_registry_username }}
-          KAMAL_REGISTRY_PASSWORD={{ docker_registry_password }}
-          
-          # PostgreSQL credentials
-          POSTGRES_PASSWORD={{ postgres_password_raw.stdout }}
-          
-          # Redis credentials
-          REDIS_PASSWORD={{ redis_password_raw.stdout }}
-        dest: /home/{{ staging_user }}/.kamal/secrets.staging
-        owner: "{{ staging_user }}"
-        group: "{{ staging_user }}"
-        mode: '0600'
-      no_log: true
     
     - name: Display preparation status
       debug:
@@ -282,7 +154,10 @@
           - "   - User '{{ staging_user }}' added to docker group"
           - "   - Required packages installed"
           - "   - Kamal directories created"
-          - "   - Secrets file created at ~/.kamal/secrets.staging"
+          - "   - Docker Hub login configured"
+          - ""
+          - "ℹ️  IMPORTANT: Secrets are managed via GitHub Actions"
+          - "   Deploy using: git push origin develop"
           - ""
           - "Server ready for accessory deployment."
     
