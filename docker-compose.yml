@@ -73,6 +73,19 @@ services:
     networks:
       - kw-app-network
 
+  playwright:
+    container_name: kw-app-playwright
+    image: mcr.microsoft.com/playwright:v1.57.0-noble
+    command: /bin/sh -c "npx -y playwright@1.57.0 run-server --port 8080 --host 0.0.0.0"
+    ports:
+      - '8080:8080'
+    networks:
+      - kw-app-network
+    init: true
+    ipc: host
+    user: pwuser
+    working_dir: /home/pwuser
+
 volumes:
   kw-app-redis-data:
   kw-app-postgres:
