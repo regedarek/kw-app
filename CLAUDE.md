@@ -1,183 +1,212 @@
-# Claude AI Agent Guidelines for kw-app
+# Claude AI Guidelines for kw-app
+
+> Context and behavioral guidelines for AI assistants. **For commands**, see [.agents](.agents)
+
+---
 
 ## 🚫 Restrictions
 
-**NEVER perform git operations:**
-- ❌ `git commit`
-- ❌ `git push`
-- ❌ `git pull`
-- ❌ `git merge`
-- ❌ Any other git commands that modify repository state
+**Require approval:**
+- Production database modifications or data deletion
+- Modifying deployment configs (`config/deploy.*.yml`)
+- Destructive git operations (commit, push, pull, merge, rebase, reset)
+- Ask once per thread, then freely use approved operations
 
-All version control operations must be performed by human developers.
+**Never:**
+- Hardcode secrets/credentials
+- Remove security features
 
-## 🔐 SSH Access
+---
 
-### Production Server
-```bash
-ssh ubuntu@146.59.44.70
+## 📖 Project Context
+
+**kw-app** is a Rails monolith with background jobs (Sidekiq), file uploads (CarrierWave), containerized deployment (Docker + Kamal).
+
+**Architecture:**
+- Monolithic Rails app
+- Background jobs via Sidekiq
+- PostgreSQL + Redis
+- Zero-downtime deployment via Kamal
+
+**Key patterns:**
+- Service objects in `app/services/` for complex logic
+- Background jobs in `app/jobs/` for async tasks
+
+---
+
+## 🎯 AI Working Guidelines
+
+### Docker Rules
+
+**Use `-T` flag for non-interactive commands:**
+- Tests, migrations, rake tasks: `docker-compose exec -T app bundle exec rspec`
+
+**No `-T` flag for interactive:**
+- Rails console, bash: `docker-compose exec app bundle exec rails console`
+
+**Always check containers first:** `docker-compose ps`
+If not running: `docker-compose up -d`
+
+### Testing
+
+- Always write tests for new features
+- Run before suggesting complete: `docker-compose exec -T app bundle exec rspec`
+- Use FactoryBot for test data
+
+### Migrations
+
+1. Test locally first
+2. Make reversible (use `up`/`down` or reversible methods)
+3. Review SQL it generates
+4. Test on staging before production
+5. Separate data migrations from schema changes
+
+### Code Organization
+
+- **Business logic**: Models first, extract to `app/services/` when complex
+- **Controllers**: Thin, delegate to models/services
+- **Background jobs**: `app/jobs/` for anything >500ms
+- **File naming**: Services: `resource/action.rb`, Jobs: `resource_action_job.rb`
+
+### Debugging
+
+1. Check logs (see .agents)
+2. Reproduce locally
+3. Add logging/pry breakpoints
+4. Fix root cause, not symptoms
+5. Write test first (TDD)
+
+### Secrets
+
+- Stored in `config/credentials/*.yml.enc` (encrypted)
+- Master keys in Bitwarden (never commit)
+- Edit: `docker-compose exec app bash -c "EDITOR=vim bin/rails credentials:edit --environment development"`
+
+---
+
+## 🔄 Common Workflows
+
+### Adding Gem
+1. Edit `Gemfile`
+2. Restart: `docker-compose restart app sidekiq` (auto-installs via entrypoint)
+3. Verify in logs
+
+### Debugging Production
+1. Check logs
+2. Reproduce locally
+3. Fix and test in development
+4. Deploy to staging, verify
+5. Human deploys to production
+
+### Database Changes
+1. Write migration
+2. Test: `rake db:migrate` then `rake db:rollback`
+3. Review `db/schema.rb`
+4. Write tests
+5. Deploy to staging first
+
+### New Features
+1. Write failing test (TDD)
+2. Implement minimal code
+3. Refactor
+4. Run full test suite
+5. Manual testing
+
+---
+
+## 💻 Rails Console Scripts
+
+**When user asks to "write a console script" or similar:**
+
+1. **Provide inline Ruby code** for copy/paste into `rails console`
+2. **Always wrap in `ActiveRecord::Base.logger.silence do ... end`** to keep output clean
+3. **Format as single code block** ready for immediate execution
+4. **Include minimal comments** only if logic is complex
+
+**Example format:**
+```ruby
+ActiveRecord::Base.logger.silence do
+  User.where(active: true).find_each do |user|
+    user.update(status: 'verified')
+  end
+  puts "Done!"
+end
 ```
 
-### Key Information
-- **Deployment tool**: Kamal (Docker-based deployment)
-- **Infrastructure**: OpenStack
-- **File storage**: CarrierWave
-- **Containerization**: Docker
+**Do NOT:**
+- Create `.rb` files or use `rails runner`
+- Run commands unless explicitly asked
+- Provide verbose explanations before the code
 
-## 📋 Viewing Logs
+**Local infrastructure info in `.agents`:**
+- All infrastructure details (chruby, docker, ports) are in `.agents`
+- Reference `.agents` for exact commands - don't guess or try variations
+- Commands work with local setup (chruby 3.2.2, docker-compose)
 
-### Local Development Logs
+---
 
-**Docker Compose Logs:**
-```bash
-# Follow all service logs
-docker-compose logs -f
+## 🧠 Decision Making
 
-# Follow specific service (app)
-docker-compose logs -f app
+**Background jobs when:**
+- >500ms operations
+- External API calls
+- Email/file processing
+- Batch operations
 
-# View last 100 lines
-docker-compose logs --tail=100 app
+**Service objects when:**
+- Logic spans multiple models
+- Complex business rules (>20 lines)
+- External integrations
 
-# View Postgres logs
-docker-compose logs -f postgres
+**Cache when:**
+- Expensive queries run frequently
+- External API responses (with TTL)
+- Complex calculations
 
-# View Redis logs
-docker-compose logs -f redis
-```
+---
 
-**Attach to Running Container:**
-```bash
-docker attach $(docker-compose ps -q app)
-```
+## 📝 Conventions
 
-**Rails Logs Inside Container:**
-```bash
-docker-compose exec app tail -f log/development.log
-docker-compose exec app tail -f log/test.log
-```
+**Naming:**
+- Models: `User`, `BlogPost` (singular)
+- Controllers: `UsersController` (plural)
+- Services: `User::Create`, `Report::Generate`
+- Jobs: `UserNotificationJob`
 
-**Non-Interactive Commands (use `-T` flag):**
-```bash
-# When running commands from scripts or CI/CD (disables pseudo-TTY)
-docker-compose exec -T app bundle exec rails runner "puts 'Hello'"
-docker-compose exec -T app bundle exec rake db:migrate:status
-```
+**Testing:**
+- Model specs: Validations, associations, methods
+- Controller specs: Request/response, authorization
+- Service specs: Business logic
+- Integration specs: Complex flows
 
-### Production Logs (via Kamal)
+---
 
-**After SSH into server:**
-```bash
-# View app logs
-kamal app logs
+## 🚀 Deployment
 
-# Follow logs (real-time)
-kamal app logs -f
+**Staging (Raspberry Pi):**
+- ARM64 architecture
+- Limited memory (~4GB) - run DB tasks separately
+- Manual deployment
+- Test before production
 
-# View specific container logs
-docker logs <container-id>
+**Production (VPS):**
+- x86_64 architecture
+- Automated via GitHub Actions (push to `deploy` branch)
+- Zero-downtime (Kamal rolling restart)
+- Migrations run before new containers
 
-# Follow specific container
-docker logs -f <container-id>
+**Important:**
+- Pi has memory limits (large seeds may fail)
+- GitHub Actions handles testing + deployment
+- CarrierWave config in `config/initializers/carrierwave.rb`
+- Sidekiq web UI at `/sidekiq`
 
-# List running containers
-docker ps
-```
+---
 
-## 🛠️ Common Debugging Commands
+## 📚 References
 
-```bash
-# Check service status
-docker-compose ps
-
-# Restart services
-docker-compose restart app
-
-# View Sidekiq logs (background jobs)
-docker-compose logs -f app | grep -i sidekiq
-
-# Rails console (interactive)
-docker-compose exec app bundle exec rails console
-
-# Check disk space (production)
-df -h
-
-# Check memory usage (production)
-free -m
-```
-
-## 💎 Gem Management Workflow
-
-### Understanding the Setup
-- **Bundle volume**: `kw-app-bundle:/usr/local/bundle` persists gems across container restarts
-- **Code volume**: `.:/rails` mounts local code for live development
-- **Auto-install**: `bin/docker-entrypoint` runs `bundle check || bundle install` on startup
-- **Result**: Gems are automatically installed/updated when containers start with new Gemfile
-
-### Adding/Removing Gems
-
-**Step 1: Edit Gemfile**
-```bash
-# Edit Gemfile on your host machine
-vim Gemfile  # or your preferred editor
-```
-
-**Step 2: Restart containers (auto-installs gems)**
-```bash
-# Stop and start services (bundle install runs automatically)
-docker-compose restart app sidekiq
-
-# Or if you prefer a full restart:
-docker-compose down
-docker-compose up -d
-```
-
-**Step 3: Verify installation**
-```bash
-# Check logs to see bundle install output
-docker-compose logs app | grep -A 20 "Checking bundle"
-
-# List installed gems
-docker-compose exec -T app bundle list | grep gem-name
-```
-
-### Troubleshooting Gem Issues
-
-**If gems aren't installing:**
-```bash
-# 1. Check entrypoint logs
-docker-compose logs app | head -50
-
-# 2. Remove bundle volume and restart (nuclear option)
-docker-compose down
-docker volume rm kw-app_kw-app-bundle
-docker-compose up -d
-
-# 3. Manual bundle install
-docker-compose exec app bundle install
-```
-
-**If Gemfile.lock conflicts:**
-```bash
-# Update Gemfile.lock in container, then copy back
-docker-compose exec app bundle update gem-name
-docker cp $(docker-compose ps -q app):/rails/Gemfile.lock ./Gemfile.lock
-```
-
-## 📦 Technology Stack Reference
-
-- **chruby**: Ruby version manager (used for Ruby version switching)
-- **Kamal**: Modern deployment tool (successor to Capistrano for Docker)
-- **OpenStack**: Cloud infrastructure platform
-- **CarrierWave**: File upload/storage gem for Rails
-- **Docker**: Containerization platform
-- **PostgreSQL**: Primary database (port 5433 locally)
-- **Redis**: Cache/queue backend (port 6380 locally)
-- **Sidekiq**: Background job processing
-
-## ⚠️ Important Notes
-
-- Always verify changes in development before suggesting production modifications
-- Database migrations should be reviewed carefully before execution
-- CarrierWave uploads stored according to configuration (check `config/initializers/carrierwave.rb`)
-- Kamal deployments are zero-downtime by default
+- Commands: [.agents](.agents)
+- Setup: [README.md](README.md)
+- Server provisioning: [ansible/README.md](ansible/README.md)
+- Docker: [docs/DOCKER_SETUP.md](docs/DOCKER_SETUP.md)
+- Credentials: [docs/RAILS_ENCRYPTED_CREDENTIALS.md](docs/RAILS_ENCRYPTED_CREDENTIALS.md)
