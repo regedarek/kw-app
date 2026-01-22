@@ -1,34 +1,49 @@
-require "fog/openstack"
+# Set USE_LOCAL_STORAGE=true environment variable to use local file storage in development
+# This avoids ad blocker issues with OpenStack URLs
+USE_LOCAL_STORAGE = ENV['USE_LOCAL_STORAGE'] == 'true' && Rails.env.development?
 
-# Always use cloud storage (OpenStack) for all environments
-CarrierWave.configure do |config|
-  config.fog_credentials = {
-    provider: 'openstack',
-    openstack_api_key: Rails.application.credentials.dig(:openstack, :api_key),
-    openstack_username: Rails.application.credentials.dig(:openstack, :username),
-    openstack_auth_url: "https://auth.cloud.ovh.net/",
-    openstack_region: 'WAW',
-    connection_options: {
-      connect_timeout: 60,
-      read_timeout: 60,
-      write_timeout: 60,
-      persistent: false,
-      # Add instrumentation callbacks for debugging
-      instrumentor: ActiveSupport::Notifications,
-      instrumentor_name: 'excon'
+if USE_LOCAL_STORAGE
+  # Use local file storage for development
+  CarrierWave.configure do |config|
+    config.storage = :file
+    config.root = Rails.root.join('public')
+    config.asset_host = "http://localhost:3002"
+    Rails.logger.info "CarrierWave: Using local file storage"
+  end
+else
+  require "fog/openstack"
+
+  # Use cloud storage (OpenStack)
+  CarrierWave.configure do |config|
+    config.fog_credentials = {
+      provider: 'openstack',
+      openstack_api_key: Rails.application.credentials.dig(:openstack, :api_key),
+      openstack_username: Rails.application.credentials.dig(:openstack, :username),
+      openstack_auth_url: "https://auth.cloud.ovh.net/",
+      openstack_region: 'WAW',
+      connection_options: {
+        connect_timeout: 60,
+        read_timeout: 60,
+        write_timeout: 60,
+        persistent: false,
+        # Add instrumentation callbacks for debugging
+        instrumentor: ActiveSupport::Notifications,
+        instrumentor_name: 'excon'
+      }
     }
-  }
-  # Use asset_host from credentials
-  config.asset_host = Rails.application.credentials.dig(:openstack, :asset_host)
-  
-  # Use environment-specific container
-  container_name = "kw-app-cloud-#{Rails.env}"
-  
-  config.fog_directory = container_name
-  config.fog_public = false
-  
-  Rails.logger.info "CarrierWave: Using OpenStack fog storage with container: #{container_name}"
-  Rails.logger.info "CarrierWave: persistent=false, timeouts=60s"
+    # Use asset_host from credentials (strip trailing slash to prevent double slashes)
+    config.asset_host = Rails.application.credentials.dig(:openstack, :asset_host)&.chomp('/')
+    
+    # Use environment-specific container
+    container_name = "kw-app-cloud-#{Rails.env}"
+    
+    config.fog_directory = container_name
+    # Use public URLs in development, private in production
+    config.fog_public = Rails.env.development?
+    
+    Rails.logger.info "CarrierWave: Using OpenStack fog storage with container: #{container_name}"
+    Rails.logger.info "CarrierWave: persistent=false, timeouts=60s"
+  end
 end
 
 # Subscribe to Excon events for connection monitoring
@@ -49,3 +64,27 @@ ActiveSupport::Notifications.subscribe('excon.error') do |name, start, finish, i
   Rails.logger.error "[EXCON] Connection error: #{payload[:error].class} - #{payload[:error].message}"
   Rails.logger.error "[EXCON] Host: #{payload[:host]}, Path: #{payload[:path]}"
 end
+
+# Fix CarrierWave::Storage::Fog::File blank? issue
+# The Fog::File object returns size: 0 and empty?: true even when files exist in OpenStack
+# This causes blank? to return true incorrectly
+# We override blank? and present? to check URL presence instead
+module CarrierWave
+  module Storage
+    class Fog
+      class File
+        def blank?
+          # For Fog storage, check if URL is blank instead of relying on size/empty?
+          # which don't work correctly with lazy-loaded remote files
+          url.blank?
+        end
+        
+        def present?
+          !blank?
+        end
+      end
+    end
+  end
+end
+
+Rails.logger.info "CarrierWave: Patched Fog::File blank?/present? to use URL presence check"

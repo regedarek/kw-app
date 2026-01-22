@@ -57,4 +57,14 @@ class ApplicationUploader < CarrierWave::Uploader::Base
     else nil
     end
   end
+  
+  public
+  
+  # Check if file exists in Fog storage
+  # CarrierWave's blank? method incorrectly returns true for Fog files
+  # because it checks file.size which returns 0 for lazy-loaded Fog objects
+  # Use this method instead of !blank? when checking if Fog files exist
+  def fog_present?
+    url.present?
+  end
 end
