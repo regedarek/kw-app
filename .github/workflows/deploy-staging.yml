@@ -107,9 +107,7 @@ jobs:
       - name: Release deploy lock
         run: kamal lock release -d staging || true
       
-      - name: Remove stale kamal-proxy routes
-        run: docker exec kamal-proxy kamal-proxy remove kw-app-staging-web-staging 2>&1 || echo "No existing routes to remove"
-      
+
       - name: Boot accessories (postgres and redis)
         run: |
           kamal accessory boot postgres -d staging || echo "Postgres already running"

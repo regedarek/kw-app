@@ -13,7 +13,7 @@ servers:
 deploy_timeout: 180
 
 proxy:
-  ssl: false
+  ssl: true
   host: panel.taterniczek.pl
   healthcheck:
     path: /up
