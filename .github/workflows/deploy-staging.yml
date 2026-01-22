@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       
       # Install dependencies (self-hosted runner may already have these)
-      - name: Install Bitwarden CLI and jq
+      - name: Install jq and setup Bitwarden CLI via Docker
         run: |
           # Install jq for JSON parsing
           if ! command -v jq &> /dev/null; then
@@ -30,22 +30,23 @@ jobs:
             echo "✅ jq already installed"
           fi
           
-          # Install Bitwarden CLI via npm (works on all architectures)
-          if ! command -v bw &> /dev/null; then
-            echo "Installing Bitwarden CLI via npm..."
-            
-            # Check if npm is installed
-            if ! command -v npm &> /dev/null; then
-              echo "Installing Node.js and npm..."
-              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-              sudo apt-get install -y nodejs
-            fi
-            
-            # Install Bitwarden CLI globally
-            sudo npm install -g @bitwarden/cli
-          else
-            echo "✅ Bitwarden CLI already installed"
-          fi
+          # Remove old bw binaries if present
+          sudo rm -f /usr/local/bin/bw
+          
+          # Create Bitwarden CLI Docker wrapper
+          sudo tee /usr/local/bin/bw > /dev/null <<'EOF'
+          #!/bin/bash
+          # Bitwarden CLI wrapper using Docker
+          docker run --rm -i \
+            -v ~/.config/Bitwarden\ CLI:/root/.config/Bitwarden\ CLI \
+            -e BW_SESSION="${BW_SESSION}" \
+            bitwarden/cli:latest "$@"
+          EOF
+          
+          sudo chmod +x /usr/local/bin/bw
+          
+          # Pull Bitwarden CLI Docker image
+          docker pull bitwarden/cli:latest
           
           echo "Bitwarden CLI version: $(bw --version)"
           echo "jq version: $(jq --version)"

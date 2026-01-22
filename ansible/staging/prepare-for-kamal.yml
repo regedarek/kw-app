@@ -57,6 +57,7 @@
           - curl
           - python3-pip
           - python3-docker
+          - jq
         state: present
     
     - name: Verify Docker Python module is available
@@ -81,6 +82,53 @@
     
     - name: Reset SSH connection to apply docker group
       meta: reset_connection
+    
+    - name: Remove old Bitwarden CLI binaries if present
+      become: yes
+      file:
+        path: /usr/local/bin/bw
+        state: absent
+      ignore_errors: yes
+    
+    - name: Remove Node.js if installed (we'll use Docker for bw CLI)
+      become: yes
+      apt:
+        name:
+          - nodejs
+        state: absent
+        autoremove: yes
+      ignore_errors: yes
+    
+    - name: Create Bitwarden CLI Docker wrapper script
+      become: yes
+      copy:
+        content: |
+          #!/bin/bash
+          # Bitwarden CLI wrapper using Docker
+          # This avoids installing Node.js on the server
+          
+          docker run --rm -i \
+            -v ~/.config/Bitwarden\ CLI:/root/.config/Bitwarden\ CLI \
+            -e BW_SESSION="${BW_SESSION}" \
+            bitwarden/cli:latest "$@"
+        dest: /usr/local/bin/bw
+        mode: '0755'
+    
+    - name: Pull Bitwarden CLI Docker image
+      become: yes
+      docker_image:
+        name: bitwarden/cli
+        tag: latest
+        source: pull
+    
+    - name: Test Bitwarden CLI wrapper
+      command: bw --version
+      register: bw_version_check
+      changed_when: false
+    
+    - name: Display Bitwarden CLI version
+      debug:
+        msg: "✅ Bitwarden CLI installed via Docker: {{ bw_version_check.stdout }}"
     
     - name: Create kamal directory
       become: yes
