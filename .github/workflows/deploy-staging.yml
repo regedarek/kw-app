@@ -26,7 +26,7 @@ jobs:
             
             # Download ARM64 binary for v1.0.0
             curl -L -o bws-aarch64-unknown-linux-gnu.zip \
-              "https://github.com/bitwarden/sdk/releases/download/bws-v1.0.0/bws-aarch64-unknown-linux-gnu-1.0.0.zip"
+              "https://github.com/bitwarden/sdk-sm/releases/download/bws-v1.0.0/bws-aarch64-unknown-linux-gnu-1.0.0.zip"
             
             unzip -o bws-aarch64-unknown-linux-gnu.zip
             chmod +x bws
