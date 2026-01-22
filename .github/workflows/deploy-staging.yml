@@ -24,8 +24,13 @@ jobs:
           if ! command -v bws &> /dev/null; then
             echo "Installing Bitwarden Secrets Manager CLI..."
             
+            # Get latest version
+            BWS_VERSION=$(curl -s https://api.github.com/repos/bitwarden/sdk/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+            echo "Latest BWS version: $BWS_VERSION"
+            
             # Download ARM64 binary
-            curl -LO https://github.com/bitwarden/sdk/releases/latest/download/bws-aarch64-unknown-linux-gnu.zip
+            curl -L -o bws-aarch64-unknown-linux-gnu.zip \
+              "https://github.com/bitwarden/sdk/releases/download/${BWS_VERSION}/bws-aarch64-unknown-linux-gnu-${BWS_VERSION}.zip"
             
             unzip -o bws-aarch64-unknown-linux-gnu.zip
             chmod +x bws
