@@ -146,6 +146,20 @@ jobs:
           echo "SSH configuration:"
           cat ~/.ssh/config
       
+      - name: Start SSH agent and add key
+        run: |
+          # Start SSH agent
+          eval $(ssh-agent -s)
+          
+          # Add the SSH key to the agent
+          ssh-add ~/.ssh/kamal_production_ed25519
+          
+          # Export SSH_AUTH_SOCK for subsequent steps
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> $GITHUB_ENV
+          
+          echo "✅ SSH agent started and key added"
+      
       - name: Test SSH connection
         run: |
           echo "Testing SSH connection to production server..."
