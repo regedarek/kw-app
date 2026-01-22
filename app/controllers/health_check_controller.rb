@@ -1,7 +1,10 @@
 class HealthCheckController < ApplicationController
-  rescue_from(Exception) { render head: 503, body: 'Service Unavailable' }
+  skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, if: :devise_controller?
+  
+  rescue_from(Exception) { render plain: 'Service Unavailable', status: :service_unavailable }
 
   def show
-    render head: 200, body: 'OK'
+    render plain: 'OK', status: :ok
   end
 end
