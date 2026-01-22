@@ -2,14 +2,14 @@
   "dependencies": {
     "@babel/preset-react": "^7.12.10",
     "@rails/webpacker": "5.2.1",
-    "axios": "^0.21.1",
+    "axios": "^0.30.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "draft-js": "^0.11.7",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-calendar-icon": "^0.9.4",
     "react-dom": "^17.0.1",
-    "react-draft-wysiwyg": "^1.14.5",
+    "react-draft-wysiwyg": "^1.15.0",
     "react-quill": "^1.3.5",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
@@ -19,6 +19,6 @@
     "whatwg-fetch": "^3.5.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^5.2.1"
   }
 }
