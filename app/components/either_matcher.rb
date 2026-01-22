@@ -1,7 +1,7 @@
-require 'dry/matcher/either_matcher'
+require 'dry/matcher/result_matcher'
 
 module EitherMatcher
   def either(*args, &block)
-    Dry::Matcher::EitherMatcher.call(*args, &block)
+    Dry::Matcher::ResultMatcher.call(*args, &block)
   end
 end

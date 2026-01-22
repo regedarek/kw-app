@@ -2,7 +2,7 @@ module Training
   module Supplementary
     class CoursesController < ApplicationController
       respond_to :html, :xlsx
-      include EitherMatcher
+      include Dry::Monads[:result]
       append_view_path 'app/components'
 
       def index
@@ -49,16 +49,16 @@ module Training
       end
 
       def create
-        either(create_record) do |result|
-          result.success do
-            redirect_to wydarzenia_path, flash: { notice: 'Utworzono wydarzenie' }
+        case create_record
+        in Success()
+          redirect_to wydarzenia_path, flash: { notice: 'Utworzono wydarzenie' }
+        in Failure(errors)
+          @course = Training::Supplementary::CourseRecord.new(course_params)
+          @errors = errors.map do |field, messages|
+            field_name = Training::Supplementary::CourseRecord.human_attribute_name(field)
+            messages.map { |msg| "#{field_name} #{msg}" }
           end
-
-          result.failure do |errors|
-            @course = Training::Supplementary::CourseRecord.new(course_params)
-            @errors = errors.values
-            render :new
-          end
+          render :new
         end
       end
 
@@ -86,7 +86,7 @@ module Training
       def create_record
         Training::Supplementary::CreateCourse.new(
           Training::Supplementary::Repository.new,
-          Training::Supplementary::CreateCourseForm.new
+          Training::Supplementary::CreateCourseForm
         ).call(raw_inputs: course_params)
       end
 
