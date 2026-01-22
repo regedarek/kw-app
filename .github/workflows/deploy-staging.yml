@@ -30,6 +30,9 @@ jobs:
             echo "✅ jq already installed"
           fi
           
+          # Remove old Docker wrapper if present
+          sudo rm -f /usr/local/bin/bw
+          
           # Install Node.js if not present (required for npm Bitwarden CLI)
           if ! command -v node &> /dev/null; then
             echo "Installing Node.js..."
