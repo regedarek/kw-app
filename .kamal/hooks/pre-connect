@@ -1,72 +1,50 @@
 #!/usr/bin/env bash
-# Pre-connect hook: Check if Bitwarden is unlocked before deployment
+# Pre-connect hook: Runs before Kamal deployment
 # This runs locally before any deployment commands
 
 set -e
 
-# Skip in CI/CD environments (BW_SESSION is set by GitHub Actions)
+# Skip all checks in CI/CD environments
 if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
   exit 0
 fi
 
-# Check if Bitwarden CLI is installed
-if ! command -v bw &> /dev/null; then
-  echo "❌ Bitwarden CLI is not installed" >&2
+# For local deployments, just verify environment variables are set
+echo "🔍 Checking local deployment prerequisites..." >&2
+
+# Check if required environment variables are set
+if [ -z "$KAMAL_REGISTRY_USERNAME" ]; then
+  echo "❌ KAMAL_REGISTRY_USERNAME is not set" >&2
   echo "" >&2
-  echo "Install with:" >&2
-  echo "  brew install bitwarden-cli" >&2
+  echo "For local deployment, export the required secrets:" >&2
+  echo "  export KAMAL_REGISTRY_USERNAME=\"your-username\"" >&2
+  echo "  export KAMAL_REGISTRY_PASSWORD=\"your-password\"" >&2
+  echo "  export RAILS_MASTER_KEY=\"your-master-key\"" >&2
+  echo "  export POSTGRES_PASSWORD=\"your-postgres-password\"" >&2
+  echo "  export REDIS_PASSWORD=\"your-redis-password\"" >&2
   echo "" >&2
   exit 1
 fi
 
-# Check if jq is installed
-if ! command -v jq &> /dev/null; then
-  echo "❌ jq is not installed (required for parsing Bitwarden responses)" >&2
-  echo "" >&2
-  echo "Install with:" >&2
-  echo "  brew install jq" >&2
-  echo "" >&2
+if [ -z "$KAMAL_REGISTRY_PASSWORD" ]; then
+  echo "❌ KAMAL_REGISTRY_PASSWORD is not set" >&2
   exit 1
 fi
 
-# Check Bitwarden status
-BW_STATUS=$(bw status 2>/dev/null | jq -r '.status' 2>/dev/null || echo "error")
-
-if [ "$BW_STATUS" = "unauthenticated" ]; then
-  echo "❌ Not logged in to Bitwarden" >&2
-  echo "" >&2
-  echo "Login first:" >&2
-  echo "  bw login" >&2
-  echo "" >&2
+if [ -z "$RAILS_MASTER_KEY" ]; then
+  echo "❌ RAILS_MASTER_KEY is not set" >&2
   exit 1
 fi
 
-if [ "$BW_STATUS" = "locked" ] && [ -z "$BW_SESSION" ]; then
-  echo "❌ Bitwarden is locked and no BW_SESSION is set" >&2
-  echo "" >&2
-  echo "Unlock Bitwarden first:" >&2
-  echo "  export BW_SESSION=\$(bw unlock --raw)" >&2
-  echo "" >&2
-  echo "Then run your kamal command again." >&2
-  echo "" >&2
+if [ -z "$POSTGRES_PASSWORD" ]; then
+  echo "❌ POSTGRES_PASSWORD is not set" >&2
   exit 1
 fi
 
-# Verify unlock status
-if [ -z "$BW_SESSION" ]; then
-  # Try to get session if unlocked but not exported
-  if bw unlock --check &>/dev/null; then
-    echo "✅ Bitwarden is unlocked" >&2
-  else
-    echo "❌ Bitwarden unlock check failed" >&2
-    echo "" >&2
-    echo "Unlock Bitwarden first:" >&2
-    echo "  export BW_SESSION=\$(bw unlock --raw)" >&2
-    echo "" >&2
-    exit 1
-  fi
-else
-  echo "✅ Bitwarden session ready" >&2
+if [ -z "$REDIS_PASSWORD" ]; then
+  echo "❌ REDIS_PASSWORD is not set" >&2
+  exit 1
 fi
 
+echo "✅ All required environment variables are set" >&2
 exit 0
