@@ -33,11 +33,15 @@ tags
 
 # Ignore the default SQLite database.
 # Kamal sensitive configs (SSH config, hooks, custom scripts)
-# Note: .kamal/secrets-* files ARE committed (they only contain Bitwarden fetch commands)
 .kamal/ssh-config
 .kamal/hooks/
 .kamal/bw-unlock.sh
 .kamal/apps/
+
+# Kamal secrets - generated locally from Bitwarden, DO NOT COMMIT
+.kamal/secrets.staging
+.kamal/secrets.production
+.kamal/secrets-common
 
 # Ignore all logfiles and tempfiles.
 /cache/*
@@ -45,9 +49,6 @@ public/*
 .ruby-gemset
 .ruby-version
 .env
-.env.*
-.env.staging
-.env.production
 cron_log.log
 latest.dump
 
