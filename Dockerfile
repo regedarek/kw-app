@@ -6,13 +6,8 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libpq-dev postgresql-client build-essential bash bash-completion git pkg-config tzdata imagemagick libsodium-dev libxml2-dev nodejs npm && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libpq-dev postgresql-client build-essential bash bash-completion git pkg-config tzdata imagemagick libsodium-dev libxml2-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Install Playwright CLI
-RUN npm install -g playwright@1.48.0 && \
-    npx playwright install --with-deps chromium && \
-    rm -rf /root/.npm /tmp/*
 
 # Set production environment
 ENV RAILS_ENV="development" \
