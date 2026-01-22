@@ -240,27 +240,17 @@ module Seeding
             begin
               image_url = image_urls[index % image_urls.length]
               
-              # Download image to tempfile
-              tempfile = Tempfile.new(['mountain', '.jpg'])
-              tempfile.binmode
-              URI.open(image_url) do |image|
-                tempfile.write(image.read)
-              end
-              tempfile.rewind
-              
-              # Create Storage::UploadRecord with the image
-              # This will automatically create small/medium/large versions via Storage::FileUploader
-              upload = Storage::UploadRecord.create!(
+              # Create Storage::UploadRecord with remote URL
+              # CarrierWave will download and process it automatically
+              upload = Storage::UploadRecord.new(
                 uploadable: route,
                 user: route.user,
-                file: tempfile,
                 content_type: 'image/jpeg'
               )
+              upload.remote_file_url = image_url
+              upload.save!
               
-              puts "  ✓ Added image to route: #{route.name} (#{upload.file.large.url})"
-              
-              tempfile.close
-              tempfile.unlink
+              puts "  ✓ Added image to route: #{route.name}"
               
               # Small delay to avoid rate limiting
               sleep 2
@@ -316,26 +306,17 @@ module Seeding
               begin
                 image_url = gear_images[(index * 3 + img_index) % gear_images.length]
                 
-                # Download image to tempfile
-                tempfile = Tempfile.new(['gear', '.jpg'])
-                tempfile.binmode
-                URI.open(image_url) do |image|
-                  tempfile.write(image.read)
-                end
-                tempfile.rewind
-                
-                # Create Storage::UploadRecord with the image
-                upload = Storage::UploadRecord.create!(
+                # Create Storage::UploadRecord with remote URL
+                # CarrierWave will download and process it automatically
+                upload = Storage::UploadRecord.new(
                   uploadable: announcement,
                   user: user,
-                  file: tempfile,
                   content_type: 'image/jpeg'
                 )
+                upload.remote_file_url = image_url
+                upload.save!
                 
                 puts "  ✓ Added image #{img_index + 1}/3 to: #{announcement.name}"
-                
-                tempfile.close
-                tempfile.unlink
                 
                 # Small delay to avoid rate limiting
                 sleep 2
