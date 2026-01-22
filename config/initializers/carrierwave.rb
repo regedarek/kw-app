@@ -44,8 +44,8 @@ else
     end
     
     config.fog_directory = container_name
-    # Use public URLs in development, private in production
-    config.fog_public = Rails.env.development?
+    # Use public URLs in development and staging, private in production
+    config.fog_public = Rails.env.development? || Rails.env.staging?
     
     Rails.logger.info "CarrierWave: Using OpenStack fog storage with container: #{container_name}"
     Rails.logger.info "CarrierWave: persistent=false, timeouts=60s"
