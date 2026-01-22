@@ -38,10 +38,8 @@ tags
 .kamal/hooks/*
 !.kamal/hooks/pre-connect
 
-# Kamal secrets - local overrides are gitignored, templates are committed
-.kamal/secrets-common.local
-.kamal/secrets.staging.local
-.kamal/secrets.production.local
+# Kamal secrets files are committed (fetch directly from Bitwarden)
+# No .local files needed anymore
 
 # Ignore all logfiles and tempfiles.
 /cache/*

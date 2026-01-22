@@ -14,14 +14,74 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: 1
-      KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
-      KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_PRODUCTION }}
-      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD_PRODUCTION }}
-      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_PRODUCTION }}
 
     steps:
       - uses: actions/checkout@v4
+      
+      # Install dependencies
+      - name: Install Bitwarden CLI and jq
+        run: |
+          # Install jq for JSON parsing
+          if ! command -v jq &> /dev/null; then
+            echo "Installing jq..."
+            sudo apt-get update -qq
+            sudo apt-get install -y jq
+          else
+            echo "✅ jq already installed"
+          fi
+          
+          # Install Bitwarden CLI
+          if ! command -v bw &> /dev/null; then
+            echo "Installing Bitwarden CLI..."
+            wget -O bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
+            unzip -o bw.zip
+            chmod +x bw
+            sudo mv bw /usr/local/bin/
+          else
+            echo "✅ Bitwarden CLI already installed"
+          fi
+          
+          echo "Bitwarden CLI version: $(bw --version)"
+          echo "jq version: $(jq --version)"
+      
+      # Login and unlock Bitwarden, export BW_SESSION for Kamal secrets files
+      - name: Authenticate with Bitwarden
+        env:
+          BW_CLIENTID: ${{ secrets.BW_CLIENTID }}
+          BW_CLIENTSECRET: ${{ secrets.BW_CLIENTSECRET }}
+          BW_PASSWORD: ${{ secrets.BW_PASSWORD }}
+        run: |
+          # Login with API credentials
+          bw login --apikey
+          
+          # Unlock and get session token
+          export BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
+          echo "BW_SESSION=$BW_SESSION" >> $GITHUB_ENV
+          
+          # Verify we're unlocked
+          bw unlock --check
+          
+          echo "✅ Bitwarden authenticated successfully"
+      
+      # Test that secrets can be fetched (without deploying)
+      - name: Test secret fetching
+        env:
+          BW_SESSION: ${{ env.BW_SESSION }}
+        run: |
+          echo "🧪 Testing secret fetching from Bitwarden..."
+          
+          # Source the secrets file to test fetching
+          source .kamal/secrets.production
+          
+          # Verify secrets are set (without exposing values)
+          [[ -n "$KAMAL_REGISTRY_USERNAME" ]] && echo "✅ KAMAL_REGISTRY_USERNAME fetched" || { echo "❌ KAMAL_REGISTRY_USERNAME missing"; exit 1; }
+          [[ -n "$KAMAL_REGISTRY_PASSWORD" ]] && echo "✅ KAMAL_REGISTRY_PASSWORD fetched" || { echo "❌ KAMAL_REGISTRY_PASSWORD missing"; exit 1; }
+          [[ -n "$RAILS_MASTER_KEY" ]] && echo "✅ RAILS_MASTER_KEY fetched (length: ${#RAILS_MASTER_KEY})" || { echo "❌ RAILS_MASTER_KEY missing"; exit 1; }
+          [[ -n "$POSTGRES_PASSWORD" ]] && echo "✅ POSTGRES_PASSWORD fetched" || { echo "❌ POSTGRES_PASSWORD missing"; exit 1; }
+          [[ -n "$REDIS_PASSWORD" ]] && echo "✅ REDIS_PASSWORD fetched" || { echo "❌ REDIS_PASSWORD missing"; exit 1; }
+          
+          echo ""
+          echo "✅ All secrets fetched successfully from Bitwarden!"
       
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -52,14 +112,26 @@ jobs:
           chmod 600 ~/.ssh/config
       
       - name: Login to Docker Hub
-        run: echo "${{ secrets.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.KAMAL_REGISTRY_USERNAME }}" --password-stdin
+        env:
+          BW_SESSION: ${{ env.BW_SESSION }}
+        run: |
+          # Fetch registry credentials from Bitwarden
+          source .kamal/secrets.production
+          echo "$KAMAL_REGISTRY_PASSWORD" | docker login -u "$KAMAL_REGISTRY_USERNAME" --password-stdin
       
       - name: Release deploy lock
         run: kamal lock release -d production || true
       
       - name: Deploy to production
+        env:
+          BW_SESSION: ${{ env.BW_SESSION }}
         run: kamal deploy -d production
       
       - name: Cleanup old Docker images
         run: kamal prune all -d production || true
         continue-on-error: true
+      
+      # Logout from Bitwarden
+      - name: Logout from Bitwarden
+        if: always()
+        run: bw logout || true
