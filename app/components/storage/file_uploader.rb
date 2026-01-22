@@ -21,9 +21,9 @@ module Storage
 
 
     def store_dir
-      # Replace :: with / to create proper directory structure and avoid URL encoding issues
-      sanitized_type = model.uploadable_type.gsub('::', '/')
-      "uploads/#{model.uploadable_id}/#{sanitized_type}/#{model.id}"
+      # Keep :: in path for backwards compatibility with existing files in OpenStack
+      # URLs will encode :: as %3A%3A which is standard and works correctly
+      "uploads/#{model.uploadable_id}/#{model.uploadable_type}/#{model.id}"
     end
 
     protected
