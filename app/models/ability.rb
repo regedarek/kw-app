@@ -64,6 +64,8 @@ class Ability
     can :read, Marketing::DiscountRecord
     can :read, Training::Activities::ContractRecord
     can :index, Training::Activities::ContractRecord
+    can :read, Training::Supplementary::CourseRecord
+    can :index, Training::Supplementary::CourseRecord
     can :create, Settlement::ContractorRecord
 
     can :create, Db::Profile
@@ -109,7 +111,7 @@ class Ability
   end
 
   def events
-    can :create, Training::Supplementary::CourseRecord
+    can :manage, Training::Supplementary::CourseRecord
   end
 
   def admin

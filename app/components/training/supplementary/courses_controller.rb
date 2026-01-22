@@ -6,6 +6,8 @@ module Training
       append_view_path 'app/components'
 
       def index
+        authorize! :index, Training::Supplementary::CourseRecord
+        
         @active_courses = Training::Supplementary::Repository.new.fetch_active_courses(category: params[:category], kind: params[:kind])
         @draft_courses = Training::Supplementary::Repository.new.fetch_draft_courses(category: params[:category], kind: params[:kind])
         @inactive_courses = Training::Supplementary::Repository.new.fetch_inactive_courses(category: params[:category], kind: params[:kind])
@@ -26,6 +28,8 @@ module Training
       end
 
       def show
+        authorize! :read, Training::Supplementary::CourseRecord
+        
         record = Training::Supplementary::CourseRecord.friendly.find(params[:id]) rescue Training::Supplementary::CourseRecord.find_by!(slug: params[:id])
         @course = Training::Supplementary::Course.from_record(record)
         @limiter = Training::Supplementary::Limiter.new(@course)
