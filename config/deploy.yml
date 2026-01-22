@@ -16,11 +16,6 @@ registry:
 # Keep only 3 containers on host
 retain_containers: 3
 
-# Boot configuration for zero-downtime deployments
-boot:
-  limit: 100%  # Deploy all servers simultaneously (only 1 server in production)
-  wait: 10     # Wait 10 seconds after container starts before health checks begin
-
 env:
   clear:
     DB_HOST: kw-app-postgres

@@ -5,6 +5,9 @@ servers:
     hosts:
       - 146.59.44.70
 
+# Allow enough time for migrations and deployment (default is 30s)
+deploy_timeout: 300
+
 proxy:
   ssl: true
   host: nowypanel.kw.krakow.pl
