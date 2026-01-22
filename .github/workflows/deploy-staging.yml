@@ -18,17 +18,65 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # Get secrets from Bitwarden Secrets Manager
-      - name: Get Secrets
-        uses: bitwarden/sm-action@v2
-        with:
-          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
-          secrets: |
-            ${{ secrets.BW_SECRET_REGISTRY_USERNAME }} > KAMAL_REGISTRY_USERNAME
-            ${{ secrets.BW_SECRET_REGISTRY_PASSWORD }} > KAMAL_REGISTRY_PASSWORD
-            ${{ secrets.BW_SECRET_STAGING_MASTER_KEY }} > RAILS_MASTER_KEY
-            ${{ secrets.BW_SECRET_STAGING_POSTGRES_PASSWORD }} > POSTGRES_PASSWORD
-            ${{ secrets.BW_SECRET_STAGING_REDIS_PASSWORD }} > REDIS_PASSWORD
+      # Install Bitwarden Secrets Manager CLI
+      - name: Install Bitwarden Secrets Manager CLI
+        run: |
+          if ! command -v bws &> /dev/null; then
+            echo "Installing Bitwarden Secrets Manager CLI..."
+            
+            # Download ARM64 binary
+            curl -LO https://github.com/bitwarden/sdk/releases/latest/download/bws-aarch64-unknown-linux-gnu.zip
+            
+            unzip -o bws-aarch64-unknown-linux-gnu.zip
+            chmod +x bws
+            sudo mv bws /usr/local/bin/
+            rm bws-aarch64-unknown-linux-gnu.zip
+          else
+            echo "✅ Bitwarden Secrets Manager CLI already installed"
+          fi
+          
+          bws --version
+      
+      # Fetch secrets from Bitwarden Secrets Manager
+      - name: Get Secrets from Bitwarden
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
+        run: |
+          echo "Fetching secrets from Bitwarden Secrets Manager..."
+          
+          # Fetch each secret by ID and export as environment variable
+          export KAMAL_REGISTRY_USERNAME=$(bws secret get ${{ secrets.BW_SECRET_REGISTRY_USERNAME }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export KAMAL_REGISTRY_PASSWORD=$(bws secret get ${{ secrets.BW_SECRET_REGISTRY_PASSWORD }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export RAILS_MASTER_KEY=$(bws secret get ${{ secrets.BW_SECRET_STAGING_MASTER_KEY }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export POSTGRES_PASSWORD=$(bws secret get ${{ secrets.BW_SECRET_STAGING_POSTGRES_PASSWORD }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          export REDIS_PASSWORD=$(bws secret get ${{ secrets.BW_SECRET_STAGING_REDIS_PASSWORD }} --access-token "$BWS_ACCESS_TOKEN" | jq -r '.value')
+          
+          # Save to GITHUB_ENV for subsequent steps
+          echo "KAMAL_REGISTRY_USERNAME=$KAMAL_REGISTRY_USERNAME" >> $GITHUB_ENV
+          echo "KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD" >> $GITHUB_ENV
+          echo "RAILS_MASTER_KEY=$RAILS_MASTER_KEY" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> $GITHUB_ENV
+          echo "REDIS_PASSWORD=$REDIS_PASSWORD" >> $GITHUB_ENV
+          
+          # Verify secrets are set (without exposing values)
+          [[ -n "$KAMAL_REGISTRY_USERNAME" ]] && echo "✅ KAMAL_REGISTRY_USERNAME fetched" || { echo "❌ KAMAL_REGISTRY_USERNAME missing"; exit 1; }
+          [[ -n "$KAMAL_REGISTRY_PASSWORD" ]] && echo "✅ KAMAL_REGISTRY_PASSWORD fetched" || { echo "❌ KAMAL_REGISTRY_PASSWORD missing"; exit 1; }
+          [[ -n "$RAILS_MASTER_KEY" ]] && echo "✅ RAILS_MASTER_KEY fetched (length: ${#RAILS_MASTER_KEY})" || { echo "❌ RAILS_MASTER_KEY missing"; exit 1; }
+          [[ -n "$POSTGRES_PASSWORD" ]] && echo "✅ POSTGRES_PASSWORD fetched" || { echo "❌ POSTGRES_PASSWORD missing"; exit 1; }
+          [[ -n "$REDIS_PASSWORD" ]] && echo "✅ REDIS_PASSWORD fetched" || { echo "❌ REDIS_PASSWORD missing"; exit 1; }
+          
+          echo ""
+          echo "✅ All secrets fetched successfully from Bitwarden Secrets Manager!"
+      
+      - name: Install jq
+        run: |
+          if ! command -v jq &> /dev/null; then
+            echo "Installing jq..."
+            sudo apt-get update -qq
+            sudo apt-get install -y jq
+          else
+            echo "✅ jq already installed"
+          fi
       
       - name: Check and install Ruby if needed
         run: |
