@@ -11,89 +11,24 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Runs on Pi itself
+    runs-on: self-hosted
     env:
       DOCKER_BUILDKIT: 1
 
     steps:
       - uses: actions/checkout@v4
       
-      # Install dependencies (self-hosted runner may already have these)
-      - name: Install jq and Bitwarden CLI
-        run: |
-          # Install jq for JSON parsing
-          if ! command -v jq &> /dev/null; then
-            echo "Installing jq..."
-            sudo apt-get update -qq
-            sudo apt-get install -y jq
-          else
-            echo "✅ jq already installed"
-          fi
-          
-          # Remove old Docker wrapper if present
-          sudo rm -f /usr/local/bin/bw
-          
-          # Install Node.js if not present (required for npm Bitwarden CLI)
-          if ! command -v node &> /dev/null; then
-            echo "Installing Node.js..."
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-          else
-            echo "✅ Node.js already installed ($(node --version))"
-          fi
-          
-          # Install Bitwarden CLI via npm (works on ARM64)
-          if ! command -v bw &> /dev/null; then
-            echo "Installing Bitwarden CLI..."
-            sudo npm install -g @bitwarden/cli
-          else
-            echo "✅ Bitwarden CLI already installed"
-          fi
-          
-          echo "Bitwarden CLI version: $(bw --version)"
-          echo "jq version: $(jq --version)"
-      
-      # Login and unlock Bitwarden, export BW_SESSION for Kamal secrets files
-      - name: Authenticate with Bitwarden
-        env:
-          BW_CLIENTID: ${{ secrets.BW_CLIENTID }}
-          BW_CLIENTSECRET: ${{ secrets.BW_CLIENTSECRET }}
-          BW_PASSWORD: ${{ secrets.BW_PASSWORD }}
-        run: |
-          # Logout first if already logged in
-          bw logout || true
-          
-          # Login with API credentials
-          bw login --apikey
-          
-          # Unlock and get session token
-          export BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
-          echo "BW_SESSION=$BW_SESSION" >> $GITHUB_ENV
-          
-          # Verify we're unlocked
-          bw unlock --check
-          
-          echo "✅ Bitwarden authenticated successfully"
-      
-      # Test that secrets can be fetched (without deploying)
-      - name: Test secret fetching
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
-        run: |
-          echo "🧪 Testing secret fetching from Bitwarden..."
-          
-          # Source the secrets file to test fetching
-          source .kamal/secrets.staging
-          
-          # Verify secrets are set (without exposing values)
-          [[ -n "$KAMAL_REGISTRY_USERNAME" ]] && echo "✅ KAMAL_REGISTRY_USERNAME fetched" || { echo "❌ KAMAL_REGISTRY_USERNAME missing"; exit 1; }
-          [[ -n "$KAMAL_REGISTRY_PASSWORD" ]] && echo "✅ KAMAL_REGISTRY_PASSWORD fetched" || { echo "❌ KAMAL_REGISTRY_PASSWORD missing"; exit 1; }
-          [[ -n "$RAILS_MASTER_KEY" ]] && echo "✅ RAILS_MASTER_KEY fetched (length: ${#RAILS_MASTER_KEY})" || { echo "❌ RAILS_MASTER_KEY missing"; exit 1; }
-          [[ -n "$POSTGRES_PASSWORD" ]] && echo "✅ POSTGRES_PASSWORD fetched" || { echo "❌ POSTGRES_PASSWORD missing"; exit 1; }
-          [[ -n "$REDIS_PASSWORD" ]] && echo "✅ REDIS_PASSWORD fetched" || { echo "❌ REDIS_PASSWORD missing"; exit 1; }
-          
-          echo ""
-          echo "✅ All secrets fetched successfully from Bitwarden!"
+      # Get secrets from Bitwarden Secrets Manager
+      - name: Get Secrets
+        uses: bitwarden/sm-action@v2
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          secrets: |
+            ${{ secrets.BW_SECRET_REGISTRY_USERNAME }} > KAMAL_REGISTRY_USERNAME
+            ${{ secrets.BW_SECRET_REGISTRY_PASSWORD }} > KAMAL_REGISTRY_PASSWORD
+            ${{ secrets.BW_SECRET_STAGING_MASTER_KEY }} > RAILS_MASTER_KEY
+            ${{ secrets.BW_SECRET_STAGING_POSTGRES_PASSWORD }} > POSTGRES_PASSWORD
+            ${{ secrets.BW_SECRET_STAGING_REDIS_PASSWORD }} > REDIS_PASSWORD
       
       - name: Check and install Ruby if needed
         run: |
@@ -117,12 +52,8 @@ jobs:
           kamal version
       
       - name: Login to Docker Hub
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
         run: |
-          # Fetch registry credentials from Bitwarden
-          source .kamal/secrets.staging
-          echo "$KAMAL_REGISTRY_PASSWORD" | docker login -u "$KAMAL_REGISTRY_USERNAME" --password-stdin
+          echo "${{ env.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ env.KAMAL_REGISTRY_USERNAME }}" --password-stdin
       
       - name: Release deploy lock
         run: kamal lock release -d staging || true
@@ -131,22 +62,13 @@ jobs:
         run: docker exec kamal-proxy kamal-proxy remove kw-app-staging-web-staging 2>&1 || echo "No existing routes to remove"
       
       - name: Boot accessories (postgres and redis)
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
         run: |
           kamal accessory boot postgres -d staging || echo "Postgres already running"
           kamal accessory boot redis -d staging || echo "Redis already running"
       
       - name: Deploy to staging
-        env:
-          BW_SESSION: ${{ env.BW_SESSION }}
         run: kamal deploy -d staging
       
       - name: Cleanup old Docker images
         run: kamal prune all -d staging || true
         continue-on-error: true
-      
-      # Logout from Bitwarden
-      - name: Logout from Bitwarden
-        if: always()
-        run: bw logout || true
