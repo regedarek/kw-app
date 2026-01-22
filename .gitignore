@@ -45,6 +45,9 @@ public/*
 .ruby-gemset
 .ruby-version
 .env
+.env.*
+.env.staging
+.env.production
 cron_log.log
 latest.dump
 
