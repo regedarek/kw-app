@@ -417,6 +417,10 @@ GEM
       ruby-rc4
       ttfunk
     pg (1.5.9)
+    playwright-ruby-client (1.57.1)
+      base64
+      concurrent-ruby (>= 1.1.6)
+      mime-types (>= 3.0)
     polylines (0.4.0)
     prawn (2.5.0)
       matrix (~> 0.4)
@@ -681,6 +685,7 @@ DEPENDENCIES
   paper_trail
   pdf-reader
   pg (~> 1.1)
+  playwright-ruby-client
   polylines
   prawn-rails
   puma

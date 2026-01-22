@@ -97,6 +97,7 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'webmock'
+  gem 'playwright-ruby-client'
 end
 
 gem 'thruster', "0.1.8", require: false, group: [:development, :production]
