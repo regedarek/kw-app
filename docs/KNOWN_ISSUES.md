@@ -5,6 +5,84 @@
 
 ---
 
+## 🏗️ Architectural Decisions
+
+### ✅ Migration from Custom Result to dry-monads
+
+**Decision Date:** 2024  
+**Status:** ✅ In Progress
+
+**Context:**
+The codebase had a custom `Result`/`Success`/`Failure` pattern in `lib/` that was incompatible with `Dry::Matcher::EitherMatcher`. The `either()` helper in controllers expected `Dry::Monads::Result`, causing `NoMethodError: undefined method 'success?' for false:FalseClass`.
+
+**Decision:**
+Migrate all services from custom Result classes to `Dry::Monads[:result]`.
+
+**Migration Pattern:**
+
+```ruby
+# ❌ OLD (Custom Result)
+require 'result'
+require 'failure'
+require 'success'
+
+class SomeService
+  def call(params:)
+    return Failure(:invalid, errors: form_errors) unless valid?
+    Success(:success)
+  end
+end
+
+# ✅ NEW (dry-monads)
+require 'dry/monads'
+
+class SomeService
+  include Dry::Monads[:result]
+  
+  def call(params:)
+    return Failure(form_errors) unless valid?
+    Success()
+  end
+end
+```
+
+**Controller Pattern:**
+
+```ruby
+# Controllers use either() with dry-monads Result
+def create
+  either(create_record) do |result|
+    result.success do
+      redirect_to path, notice: 'Success'
+    end
+    
+    result.failure do |errors|
+      @errors = errors.values
+      render :new
+    end
+  end
+end
+```
+
+**Benefits:**
+- Compatible with `Dry::Matcher::EitherMatcher`
+- Standard dry-rb pattern used across ecosystem
+- Simpler API: `Success()` / `Failure(value)`
+- Better integration with dry-validation and other dry-rb gems
+
+**Action Items:**
+- [x] Migrate `Training::Supplementary::CreateCourse` to dry-monads
+- [x] Update `.agents/refactor-agent.md` with migration guide
+- [ ] Migrate remaining services using custom Result
+- [ ] Eventually deprecate `lib/result.rb`, `lib/success.rb`, `lib/failure.rb`
+- [ ] Consider removing `app/components/either_matcher.rb` (use dry-matcher directly)
+
+**References:**
+- [dry-monads Documentation](https://dry-rb.org/gems/dry-monads/)
+- [Refactor Agent Guide](.agents/refactor-agent.md) - See "Migrating from Custom Result"
+
+---
+
 ## 🔧 Active Issues
 
 ### ❌ `NoMethodError: undefined method 'with'` in Dry::Validation::Contract
@@ -48,38 +126,43 @@ class SomeForm < Dry::Validation::Contract
   # ...
 end
 
-# Service must require result/failure/success files
-require 'result'
-require 'failure'
-require 'success'
+# ✅ BETTER (dry-monads - PREFERRED)
+require 'dry/monads'
+
+class SomeService
+  include Dry::Monads[:result]
+  
+  def call(raw_inputs:)
+    form_outputs = SomeForm.new(record: record).call(raw_inputs)
+    return Failure(form_outputs.errors.to_h) unless form_outputs.success?
+    
+    Success()
+  end
+end
 ```
 
 **Additional Fix Required:**
-Also need to use `.errors.to_h` instead of `.messages` for dry-validation results, and wrap in proper Failure pattern:
+Also need to use `.errors.to_h` instead of `.messages` for dry-validation results:
 
 ```ruby
 # ❌ WRONG
 return Failure(form_outputs.messages) unless form_outputs.success?
 
-# ✅ CORRECT
-return Failure(:invalid, errors: form_outputs.errors.to_h) unless form_outputs.success?
-
-# Service must include requires at the top
-require 'result'
-require 'failure'
-require 'success'
+# ✅ CORRECT (with dry-monads)
+return Failure(form_outputs.errors.to_h) unless form_outputs.success?
 ```
 
 **Action Items:**
-- [x] Fix `Training::Supplementary::CreateCourse` (`.with()` → `.new()`, add requires)
+- [x] Fix `Training::Supplementary::CreateCourse` (migrated to dry-monads)
 - [x] Write spec for `Training::Supplementary::CreateCourse`
-- [ ] Fix `Settlement::UpdateContract` (lines 11 & 13)
-- [ ] Fix `Events::Competitions::SignUps::Create` (line 11)
-- [ ] Fix `Events::Competitions::SignUps::Update` (line 12)
+- [x] Expand form schema to accept all controller params
+- [ ] Fix `Settlement::UpdateContract` (lines 11 & 13) - migrate to dry-monads
+- [ ] Fix `Events::Competitions::SignUps::Create` (line 11) - migrate to dry-monads
+- [ ] Fix `Events::Competitions::SignUps::Update` (line 12) - migrate to dry-monads
 - [ ] Write specs for all fixed services
 - [ ] Audit all services using `Dry::Validation::Contract` for `.with()` calls
 - [ ] Audit all services for `.messages` vs `.errors.to_h` usage
-- [ ] Audit all services for `.messages(locale:)` vs `.errors.to_h` usage
+- [ ] Migrate all services from custom Result to dry-monads
 
 **Search Commands:**
 ```bash

@@ -27,6 +27,149 @@ You are an expert in refactoring Rails code following SOLID principles and dry-r
   - `app/models/db/` – ActiveRecord models
   - `app/services/` – Legacy services (prefer operations)
 
+## ⚠️ IMPORTANT: Migrating from Custom Result to dry-monads
+
+**We are migrating away from:**
+- Custom `Result`/`Success`/`Failure` classes in `lib/`
+- `EitherMatcher` helper in `app/components/either_matcher.rb`
+
+**We are migrating to:**
+- `Dry::Monads[:result]` with `Success()` and `Failure()`
+- Direct use of `Dry::Matcher::EitherMatcher` in controllers
+
+### Migration Pattern
+
+**OLD Pattern (Custom Result):**
+```ruby
+# Service
+require 'result'
+require 'failure'
+require 'success'
+
+class SomeService
+  def call(params:)
+    return Failure(:invalid, errors: errors) unless valid?
+    Success(:success)
+  end
+end
+
+# Controller
+def create
+  result = create_record
+  
+  result.success do
+    redirect_to path, notice: 'Success'
+  end
+  
+  result.invalid do |errors:|
+    @errors = errors.values
+    render :new
+  end
+end
+```
+
+**NEW Pattern (dry-monads):**
+```ruby
+# Service
+require 'dry/monads'
+
+class SomeService
+  include Dry::Monads[:result]
+  
+  def call(params:)
+    return Failure(errors) unless valid?
+    Success()
+  end
+end
+
+# Controller (with either matcher)
+def create
+  either(create_record) do |result|
+    result.success do
+      redirect_to path, notice: 'Success'
+    end
+    
+    result.failure do |errors|
+      @errors = errors.values
+      render :new
+    end
+  end
+end
+```
+
+### Key Differences
+
+1. **Include the mixin:**
+   ```ruby
+   include Dry::Monads[:result]
+   ```
+
+2. **Simpler Success/Failure:**
+   ```ruby
+   # OLD
+   Success(:success)
+   Failure(:invalid, errors: {name: ['required']})
+   
+   # NEW
+   Success()  # or Success(value)
+   Failure({name: ['required']})
+   ```
+
+3. **Controller handling:**
+   ```ruby
+   # Use either() with result.success / result.failure
+   either(operation_call) do |result|
+     result.success { |value| ... }
+     result.failure { |error| ... }
+   end
+   ```
+
+4. **Pattern matching (alternative):**
+   ```ruby
+   case operation_call
+   in Success(value)
+     # handle success
+   in Failure(error)
+     # handle failure
+   end
+   ```
+
+### When Refactoring Services
+
+**Checklist:**
+- [ ] Replace `require 'result'/'failure'/'success'` with `require 'dry/monads'`
+- [ ] Add `include Dry::Monads[:result]` to service
+- [ ] Change `Success(:success)` to `Success()` or `Success(value)`
+- [ ] Change `Failure(:type, key: value)` to `Failure(value)`
+- [ ] Update controller to use `either()` or pattern matching
+- [ ] Update specs to check `result.success?` / `result.failure`
+- [ ] Run tests to verify behavior unchanged
+
+### Validation Forms
+
+Forms using `Dry::Validation::Contract` need options passed via `.new()`:
+
+```ruby
+# Form definition
+class SomeForm < Dry::Validation::Contract
+  option :record, default: -> { nil }  # Define options
+  
+  params do
+    required(:name).filled(:string)
+  end
+end
+
+# Service usage
+form_result = SomeForm.new(record: record).call(params)
+return Failure(form_result.errors.to_h) unless form_result.success?
+```
+
+**Common mistakes to avoid:**
+- ❌ Don't use `.with()` - method doesn't exist
+- ❌ Don't use `form_result.messages` - use `.errors.to_h`
+- ✅ Pass options to `.new()` not `.with()`
+- ✅ Use `.errors.to_h` for error hash
+
 ## When to Refactor
 
 ### ✅ Refactor When:
@@ -730,3 +873,5 @@ docker-compose exec -T app bundle exec rspec --format documentation
 - **Extract complexity** - into well-named operations
 - **Use dry-rb patterns** - monads for error handling, contracts for validation
 - **Apply SOLID** - single responsibility, open/closed, etc.
+- **Migrate to dry-monads** - replace custom Result classes with Dry::Monads[:result]
+- **Check KNOWN_ISSUES.md** - for common migration issues and solutions
