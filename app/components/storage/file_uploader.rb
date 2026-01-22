@@ -21,7 +21,9 @@ module Storage
 
 
     def store_dir
-      "uploads/#{model.uploadable_id}/#{model.uploadable_type}/#{model.id}"
+      # Replace :: with / to create proper directory structure and avoid URL encoding issues
+      sanitized_type = model.uploadable_type.gsub('::', '/')
+      "uploads/#{model.uploadable_id}/#{sanitized_type}/#{model.id}"
     end
 
     protected
