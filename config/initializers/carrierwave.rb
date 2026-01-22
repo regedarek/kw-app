@@ -31,11 +31,17 @@ else
         instrumentor_name: 'excon'
       }
     }
-    # Use asset_host from credentials (strip trailing slash to prevent double slashes)
-    config.asset_host = Rails.application.credentials.dig(:openstack, :asset_host)&.chomp('/')
-    
     # Use environment-specific container
     container_name = "kw-app-cloud-#{Rails.env}"
+    
+    # asset_host should NOT include the container name when using Fog storage
+    # Fog automatically adds the container to the URL
+    # Strip container name from asset_host if present
+    raw_asset_host = Rails.application.credentials.dig(:openstack, :asset_host)
+    if raw_asset_host
+      # Remove container name and trailing slash if present
+      config.asset_host = raw_asset_host.sub(/\/#{container_name}\/?$/, '').chomp('/')
+    end
     
     config.fog_directory = container_name
     # Use public URLs in development, private in production
