@@ -1,7 +1,7 @@
 module Training
   module Supplementary
     class CreateCourseForm < Dry::Validation::Contract
-        option :record
+        option :record, default: -> { nil }
         config.messages.load_paths << 'app/components/training/errors.yml'
         config.messages.namespace = :course
 
