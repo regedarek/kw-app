@@ -1,50 +1,16 @@
 #!/usr/bin/env bash
-# Pre-connect hook: Runs before Kamal deployment
-# This runs locally before any deployment commands
+# Pre-connect hook: Runs before Kamal deployment commands
+# This is intentionally minimal - all secret management is handled
+# by GitHub Actions (CI/CD) or manual exports (local deployments)
 
 set -e
 
-# Skip all checks in CI/CD environments
+# Skip in CI/CD - GitHub Actions handles everything
 if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
   exit 0
 fi
 
-# For local deployments, just verify environment variables are set
-echo "🔍 Checking local deployment prerequisites..." >&2
+# For local deployments, you can add checks here if needed
+# For now, we trust the user has sourced .kamal/env.staging.example
 
-# Check if required environment variables are set
-if [ -z "$KAMAL_REGISTRY_USERNAME" ]; then
-  echo "❌ KAMAL_REGISTRY_USERNAME is not set" >&2
-  echo "" >&2
-  echo "For local deployment, export the required secrets:" >&2
-  echo "  export KAMAL_REGISTRY_USERNAME=\"your-username\"" >&2
-  echo "  export KAMAL_REGISTRY_PASSWORD=\"your-password\"" >&2
-  echo "  export RAILS_MASTER_KEY=\"your-master-key\"" >&2
-  echo "  export POSTGRES_PASSWORD=\"your-postgres-password\"" >&2
-  echo "  export REDIS_PASSWORD=\"your-redis-password\"" >&2
-  echo "" >&2
-  exit 1
-fi
-
-if [ -z "$KAMAL_REGISTRY_PASSWORD" ]; then
-  echo "❌ KAMAL_REGISTRY_PASSWORD is not set" >&2
-  exit 1
-fi
-
-if [ -z "$RAILS_MASTER_KEY" ]; then
-  echo "❌ RAILS_MASTER_KEY is not set" >&2
-  exit 1
-fi
-
-if [ -z "$POSTGRES_PASSWORD" ]; then
-  echo "❌ POSTGRES_PASSWORD is not set" >&2
-  exit 1
-fi
-
-if [ -z "$REDIS_PASSWORD" ]; then
-  echo "❌ REDIS_PASSWORD is not set" >&2
-  exit 1
-fi
-
-echo "✅ All required environment variables are set" >&2
 exit 0
