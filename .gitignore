@@ -41,6 +41,9 @@ tags
 # Kamal secrets files are committed (fetch directly from Bitwarden)
 # No .local files needed anymore
 
+# Local environment files with secrets (keep .example files)
+.kamal/env.staging
+
 # Ignore all logfiles and tempfiles.
 /cache/*
 public/*
