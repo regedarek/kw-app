@@ -89,6 +89,7 @@ class Db::User < ActiveRecord::Base
 
   has_many :comments, class_name: 'Messaging::CommentRecord'
   has_many :notifications, class_name: 'NotificationCenter::NotificationRecord', foreign_key: :recipient_id
+  has_many :sale_announcements, class_name: 'Olx::SaleAnnouncementRecord', foreign_key: :user_id, dependent: :destroy
 
   has_many :accepted_contracts, class_name: 'Settlement::ContractRecord'
   has_many :created_contracts, class_name: 'Settlement::ContractRecord'
