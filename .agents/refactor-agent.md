@@ -31,11 +31,12 @@ You are an expert in refactoring Rails code following SOLID principles and dry-r
 
 **We are migrating away from:**
 - Custom `Result`/`Success`/`Failure` classes in `lib/`
-- `EitherMatcher` helper in `app/components/either_matcher.rb`
+- `Dry::Matcher::EitherMatcher` (deprecated)
 
 **We are migrating to:**
 - `Dry::Monads[:result]` with `Success()` and `Failure()`
-- Direct use of `Dry::Matcher::EitherMatcher` in controllers
+- `Dry::Matcher::ResultMatcher` via `either()` helper in controllers
+- `EitherMatcher` helper updated to use `ResultMatcher` internally
 
 ### Migration Pattern
 
@@ -874,4 +875,5 @@ docker-compose exec -T app bundle exec rspec --format documentation
 - **Use dry-rb patterns** - monads for error handling, contracts for validation
 - **Apply SOLID** - single responsibility, open/closed, etc.
 - **Migrate to dry-monads** - replace custom Result classes with Dry::Monads[:result]
+- **Use ResultMatcher** - `either()` helper now uses `Dry::Matcher::ResultMatcher` (not deprecated EitherMatcher)
 - **Check KNOWN_ISSUES.md** - for common migration issues and solutions
