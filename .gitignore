@@ -35,7 +35,6 @@ tags
 # Kamal sensitive configs (SSH config, hooks, custom scripts)
 .kamal/ssh-config
 .kamal/hooks/
-.kamal/bw-unlock.sh
 .kamal/apps/
 
 # Kamal secrets - generated locally from Bitwarden, DO NOT COMMIT
