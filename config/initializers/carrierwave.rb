@@ -34,18 +34,21 @@ else
     # Use environment-specific container
     container_name = "kw-app-cloud-#{Rails.env}"
     
-    # asset_host should NOT include the container name when using Fog storage
-    # Fog automatically adds the container to the URL
-    # Strip container name from asset_host if present
-    raw_asset_host = Rails.application.credentials.dig(:openstack, :asset_host)
-    if raw_asset_host
-      # Remove container name and trailing slash if present
-      config.asset_host = raw_asset_host.sub(/\/#{container_name}\/?$/, '').chomp('/')
-    end
-    
     config.fog_directory = container_name
     # Use public URLs in development and staging, private in production
     config.fog_public = Rails.env.development? || Rails.env.staging?
+    
+    # Only set asset_host for production (private URLs with authentication)
+    # For public URLs (dev/staging), let Fog generate them automatically
+    if Rails.env.production?
+      # asset_host should NOT include the container name when using Fog storage
+      # Fog automatically adds the container to the URL
+      raw_asset_host = Rails.application.credentials.dig(:openstack, :asset_host)
+      if raw_asset_host
+        # Remove container name and trailing slash if present
+        config.asset_host = raw_asset_host.sub(/\/#{container_name}\/?$/, '').chomp('/')
+      end
+    end
     
     Rails.logger.info "CarrierWave: Using OpenStack fog storage with container: #{container_name}"
     Rails.logger.info "CarrierWave: persistent=false, timeouts=60s"
