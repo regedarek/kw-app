@@ -64,7 +64,7 @@ echo ""
 
 # Function to create common secrets file
 create_common_secrets() {
-    local secrets_file=".kamal/secrets-common"
+    local secrets_file=".kamal/secrets-common.local"
     
     echo "📝 Creating ${secrets_file}..."
     
@@ -88,7 +88,7 @@ EOF
 # Function to fetch and create environment-specific secrets file
 create_secrets_file() {
     local env=$1
-    local secrets_file=".kamal/secrets.${env}"
+    local secrets_file=".kamal/secrets.${env}.local"
     
     echo "📝 Creating ${secrets_file}..."
     
@@ -132,10 +132,10 @@ else
 fi
 
 echo ""
-echo "✅ Done! Your secrets are stored in .kamal/secrets.* files"
+echo "✅ Done! Your secrets are stored in .kamal/secrets.*.local files"
 echo ""
-echo "Kamal will automatically load these files when you deploy:"
+echo "Kamal will automatically load these local files when you deploy:"
 echo "  kamal deploy -d staging"
 echo "  kamal deploy -d production"
 echo ""
-echo "⚠️  These files are in .gitignore - don't commit them!"
+echo "⚠️  These .local files are in .gitignore - don't commit them!"
