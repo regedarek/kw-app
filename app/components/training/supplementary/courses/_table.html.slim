@@ -36,7 +36,11 @@ table
             = course.start_date&.strftime("%d/%m/%Y ")
             - unless course.start_date&.hour == 00
               b = course.start_date&.strftime("%H:%M")
-        td.text-center = link_to course.organizer, user_path(Db::User.find(course.organizator_id).kw_id)
+        td.text-center
+          - if course.organizator_id && (org_user = Db::User.find_by(id: course.organizator_id))
+            = link_to course.organizer, user_path(org_user.kw_id)
+          - else
+            = course.organizer
         td.text-center
           - if course.price_kw && course.price_non_kw
             = "#{course.price_kw}/#{course.price_non_kw}"
