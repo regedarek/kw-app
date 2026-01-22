@@ -30,13 +30,19 @@ jobs:
             echo "✅ jq already installed"
           fi
           
-          # Install Bitwarden CLI
+          # Install Bitwarden CLI via npm (works on all architectures)
           if ! command -v bw &> /dev/null; then
-            echo "Installing Bitwarden CLI..."
-            wget -O bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
-            unzip -o bw.zip
-            chmod +x bw
-            sudo mv bw /usr/local/bin/
+            echo "Installing Bitwarden CLI via npm..."
+            
+            # Check if npm is installed
+            if ! command -v npm &> /dev/null; then
+              echo "Installing Node.js and npm..."
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            fi
+            
+            # Install Bitwarden CLI globally
+            sudo npm install -g @bitwarden/cli
           else
             echo "✅ Bitwarden CLI already installed"
           fi
