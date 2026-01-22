@@ -83,52 +83,50 @@
     - name: Reset SSH connection to apply docker group
       meta: reset_connection
     
-    - name: Remove old Bitwarden CLI binaries if present
-      become: yes
-      file:
-        path: /usr/local/bin/bw
-        state: absent
+    - name: Check if Node.js is installed
+      command: node --version
+      register: node_check
       ignore_errors: yes
+      changed_when: false
     
-    - name: Remove Node.js if installed (we'll use Docker for bw CLI)
+    - name: Add NodeSource repository for Node.js 20.x
+      become: yes
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+      args:
+        creates: /etc/apt/sources.list.d/nodesource.list
+      when: node_check.rc != 0
+    
+    - name: Install Node.js
       become: yes
       apt:
-        name:
-          - nodejs
-        state: absent
-        autoremove: yes
+        name: nodejs
+        state: present
+        update_cache: yes
+      when: node_check.rc != 0
+    
+    - name: Check if Bitwarden CLI is installed
+      command: bw --version
+      register: bw_check
       ignore_errors: yes
+      changed_when: false
     
-    - name: Create Bitwarden CLI Docker wrapper script
+    - name: Install Bitwarden CLI via npm
       become: yes
-      copy:
-        content: |
-          #!/bin/bash
-          # Bitwarden CLI wrapper using Docker
-          # This avoids installing Node.js on the server
-          
-          docker run --rm -i \
-            -v ~/.config/Bitwarden\ CLI:/root/.config/Bitwarden\ CLI \
-            -e BW_SESSION="${BW_SESSION}" \
-            bitwarden/cli:latest "$@"
-        dest: /usr/local/bin/bw
-        mode: '0755'
+      npm:
+        name: "@bitwarden/cli"
+        global: yes
+        state: present
+      when: bw_check.rc != 0
     
-    - name: Pull Bitwarden CLI Docker image
-      become: yes
-      docker_image:
-        name: bitwarden/cli
-        tag: latest
-        source: pull
-    
-    - name: Test Bitwarden CLI wrapper
+    - name: Verify Bitwarden CLI installation
       command: bw --version
       register: bw_version_check
       changed_when: false
     
     - name: Display Bitwarden CLI version
       debug:
-        msg: "✅ Bitwarden CLI installed via Docker: {{ bw_version_check.stdout }}"
+        msg: "✅ Bitwarden CLI installed via npm: {{ bw_version_check.stdout }}"
     
     - name: Create kamal directory
       become: yes
