@@ -116,8 +116,13 @@ jobs:
           
           echo "✅ SSH key validated successfully"
           
-          # Add server to known hosts
-          ssh-keyscan -H 146.59.44.70 >> ~/.ssh/known_hosts
+          # Add server to known hosts with all key types
+          echo "Adding server to known_hosts..."
+          ssh-keyscan -H 146.59.44.70 > ~/.ssh/known_hosts 2>/dev/null
+          
+          echo "✅ Server fingerprints added to known_hosts"
+          echo "Known hosts content:"
+          cat ~/.ssh/known_hosts
       
       - name: Configure SSH for Kamal
         run: |
@@ -125,7 +130,8 @@ jobs:
           Host 146.59.44.70
             User ubuntu
             IdentityFile ~/.ssh/kamal_production_ed25519
-            StrictHostKeyChecking accept-new
+            StrictHostKeyChecking yes
+            UserKnownHostsFile ~/.ssh/known_hosts
             IdentitiesOnly yes
           EOF
           chmod 600 ~/.ssh/config
