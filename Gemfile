@@ -17,7 +17,7 @@ gem 'flag-icons-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'pdf-reader'
-gem 'nokogiri', '1.12.5'
+gem 'nokogiri', '1.18.9'
 gem "loofah"
 gem 'jquery-rails'
 gem 'mailboxer', github: 'regedarek/mailboxer', branch: 'kw_app'

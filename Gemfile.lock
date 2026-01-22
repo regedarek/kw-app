@@ -369,7 +369,7 @@ GEM
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
-    mini_portile2 (2.6.1)
+    mini_portile2 (2.8.9)
     minitest (6.0.1)
       prism (~> 1.5)
     money (6.19.0)
@@ -400,8 +400,8 @@ GEM
     net-ssh (7.3.0)
     netrc (0.11.0)
     nio4r (2.7.5)
-    nokogiri (1.12.5)
-      mini_portile2 (~> 2.6.1)
+    nokogiri (1.18.9)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
@@ -496,7 +496,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.4.0)
+    rexml (3.4.2)
     rolify (6.0.1)
     rspec-core (3.13.2)
       rspec-support (~> 3.13.0)
@@ -603,7 +603,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
-    uri (1.0.2)
+    uri (1.0.4)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -680,7 +680,7 @@ DEPENDENCIES
   money
   nested_form_fields
   net-ssh (>= 7.0)
-  nokogiri (= 1.12.5)
+  nokogiri (= 1.18.9)
   pagy
   paper_trail
   pdf-reader
