@@ -3,7 +3,7 @@ require 'playwright'
 
 module Playwright
   class BaseHelper
-    attr_reader :playwright, :browser, :page
+    attr_reader :browser, :page
 
     def initialize(headless: true, slow_mo: 0)
       @headless = headless
@@ -13,12 +13,11 @@ module Playwright
     end
 
     def start
-      ::Playwright.create(playwright_cli_executable_path: 'playwright') do |playwright|
-        @playwright = playwright
-        @browser = playwright.chromium.launch(
-          headless: @headless,
-          slow_mo: @slow_mo
-        )
+      # Connect to playwright server via WebSocket
+      endpoint = ENV.fetch('PLAYWRIGHT_WS_ENDPOINT', 'ws://playwright:8080/')
+      
+      ::Playwright.connect_to_browser_server(endpoint) do |browser|
+        @browser = browser
         @page = browser.new_page
         
         setup_event_listeners
@@ -30,12 +29,12 @@ module Playwright
     end
 
     def close
+      @page&.close
       @browser&.close
     end
 
     def goto(url)
-      page.goto(url)
-      page.wait_for_load_state('networkidle')
+      page.goto(url, waitUntil: 'networkidle')
     end
 
     def screenshot(name)
@@ -50,7 +49,7 @@ module Playwright
 
     def click(selector)
       page.click(selector)
-      page.wait_for_load_state('networkidle')
+      page.wait_for_load_state
     end
 
     def fill(selector, value)

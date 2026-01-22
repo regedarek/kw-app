@@ -19,7 +19,7 @@ module Playwright
     }.freeze
 
     BASE_URLS = {
-      development: 'http://localhost:3002',
+      development: 'http://app:3002',
       staging: 'http://panel.taterniczek.pl',
       production: 'https://production-url.com' # TODO: Update with actual production URL
     }.freeze

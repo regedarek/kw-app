@@ -42,13 +42,21 @@ You are an expert in browser automation using Playwright to reproduce and debug 
 ### Setup (One-Time)
 
 ```bash
-# Gem already in Gemfile, just rebuild
-docker-compose build app
-docker-compose up -d
+# 1. Playwright server is in docker-compose.yml, just start it
+docker-compose up -d playwright
 
-# Create directories
+# 2. Create directories for screenshots
 mkdir -p tmp/playwright/screenshots
+
+# 3. Test connection
+docker-compose exec -T app bundle exec rails runner "$(cat tmp/playwright/test_connection.rb)"
 ```
+
+**How it works:**
+- Separate `playwright` service runs official Playwright Docker image
+- Ruby app connects via WebSocket (`ws://playwright:8080/`)
+- No npm/Node.js needed in Rails container
+- Fast, clean, production-ready setup
 
 ### Basic Usage with Helpers
 
@@ -166,6 +174,8 @@ helper.errors                         # Array of page errors
 5. **Verify fix**: Re-run script
 6. **Clean up**: Delete script after confirmation
 
+**Important:** Use `http://app:3002` for development (not `localhost:3002`) - the Playwright container connects via Docker network.
+
 ### Script Naming
 
 ✅ Good:
@@ -251,6 +261,26 @@ rm tmp/playwright/screenshots/*
 rm -rf tmp/playwright/
 ```
 
+## Architecture
+
+```
+┌─────────────────┐      WebSocket (ws://playwright:8080/)      ┌──────────────────┐
+│   Rails App     │ ────────────────────────────────────────────▶│  Playwright      │
+│   (app)         │                                               │  Server          │
+│                 │◀────────────────────────────────────────────│  (official       │
+│  - Ruby code    │         Browser automation commands          │   Docker image)  │
+│  - Helpers      │                                               │  - Chromium      │
+│  - Scripts      │                                               │  - WebSocket API │
+└─────────────────┘                                               └──────────────────┘
+        │
+        │ Docker network: http://app:3002
+        ▼
+┌─────────────────┐
+│   Your App      │
+│   (port 3002)   │
+└─────────────────┘
+```
+
 ## Remember
 
 - Scripts in `tmp/playwright/` are **temporary** - delete after fix
@@ -259,3 +289,4 @@ rm -rf tmp/playwright/
 - Take screenshots for evidence
 - Clean up when done
 - Use `require File.join(Rails.root, ...)` instead of `require_relative`
+- Development URLs use `http://app:3002` (Docker network), not `localhost`
