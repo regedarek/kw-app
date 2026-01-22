@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Pre-connect hook: Check if required secrets files exist
+# This runs locally before any deployment commands
+
+set -e
+
+# Skip in CI/CD environments (secrets are provided as environment variables)
+if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
+  exit 0
+fi
+
+# Get the destination from command args
+DESTINATION=""
+for arg in "$@"; do
+  if [ "$arg" = "staging" ] || [ "$arg" = "production" ]; then
+    DESTINATION="$arg"
+    break
+  fi
+done
+
+# Check if secrets files exist
+MISSING_FILES=()
+
+if [ ! -f ".kamal/secrets-common" ]; then
+  MISSING_FILES+=(".kamal/secrets-common")
+fi
+
+if [ -n "$DESTINATION" ] && [ ! -f ".kamal/secrets.$DESTINATION" ]; then
+  MISSING_FILES+=(".kamal/secrets.$DESTINATION")
+fi
+
+# If any files are missing, show error
+if [ ${#MISSING_FILES[@]} -gt 0 ]; then
+  echo "⚠️  Missing required secrets files:" >&2
+  for file in "${MISSING_FILES[@]}"; do
+    echo "  - $file" >&2
+  done
+  echo "" >&2
+  echo "💡 Generate secrets from Bitwarden:" >&2
+  
+  if [ -n "$DESTINATION" ]; then
+    echo "  .kamal/bw-fetch-secrets.sh $DESTINATION" >&2
+  else
+    echo "  .kamal/bw-fetch-secrets.sh all" >&2
+  fi
+  
+  echo "" >&2
+  echo "Then run your kamal command again." >&2
+  echo "" >&2
+  exit 1
+fi
+
+# All files exist
+exit 0

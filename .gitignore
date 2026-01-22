@@ -11,7 +11,6 @@ tags
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-/.kamal/
 !/log/.keep
 !/tmp/.keep
 
@@ -32,10 +31,12 @@ tags
 .idea
 
 # Ignore the default SQLite database.
-# Kamal sensitive configs (SSH config, hooks, custom scripts)
+# Kamal sensitive configs (SSH config, custom scripts)
 .kamal/ssh-config
-.kamal/hooks/
 .kamal/apps/
+# Ignore all hooks except pre-connect
+.kamal/hooks/*
+!.kamal/hooks/pre-connect
 
 # Kamal secrets - generated locally from Bitwarden, DO NOT COMMIT
 .kamal/secrets.staging
