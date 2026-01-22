@@ -19,7 +19,7 @@ retain_containers: 3
 # Boot configuration for zero-downtime deployments
 boot:
   limit: 100%  # Deploy all servers simultaneously (only 1 server in production)
-  wait: 30     # Wait 30 seconds for app to boot before switching traffic
+  wait: 10     # Wait 10 seconds after container starts before health checks begin
 
 env:
   clear:
@@ -32,9 +32,8 @@ proxy:
   app_port: 3000
   healthcheck:
     path: /up
-    interval: 10      # Check every 10 seconds (less aggressive)
-    timeout: 10       # Allow 10 seconds for response (Rails boot time)
-    max_attempts: 10  # Try 10 times before giving up (100 seconds total)
+    interval: 2       # Check every 2 seconds during deployment
+    timeout: 5        # Wait up to 5 seconds for each health check response
 
 servers:
   web:
