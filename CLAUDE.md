@@ -70,11 +70,13 @@ If not running: `docker-compose up -d`
 
 ### Debugging
 
-1. Check logs (see .agents/README.md)
-2. Reproduce locally
-3. Add logging/pry breakpoints
-4. Fix root cause, not symptoms
-5. Write test first (TDD)
+1. **Check [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md)** for documented migration issues
+2. Check logs (see .agents/README.md)
+3. Reproduce locally
+4. Add logging/pry breakpoints
+5. Fix root cause, not symptoms
+6. Write test first (TDD)
+7. **Update KNOWN_ISSUES.md** if you discover a new pattern/bug
 
 ### Secrets
 
@@ -208,6 +210,7 @@ end
 
 - Commands: [AGENTS.md](AGENTS.md)
 - Setup: [README.md](README.md)
+- Known Issues: [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) ⚠️ **Check first when debugging!**
 - Server provisioning: [ansible/README.md](ansible/README.md)
 - Docker: [docs/DOCKER_SETUP.md](docs/DOCKER_SETUP.md)
 - Credentials: [docs/RAILS_ENCRYPTED_CREDENTIALS.md](docs/RAILS_ENCRYPTED_CREDENTIALS.md)
