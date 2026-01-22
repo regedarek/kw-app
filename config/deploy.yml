@@ -27,8 +27,8 @@ proxy:
   app_port: 3000
   healthcheck:
     path: /up
-    interval: 2
-    timeout: 2
+    interval: 2       # Check every 2 seconds during deployment
+    timeout: 5        # Wait up to 5 seconds for each health check response
 
 servers:
   web:
