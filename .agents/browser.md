@@ -261,6 +261,27 @@ rm tmp/playwright/screenshots/*
 rm -rf tmp/playwright/
 ```
 
+## Testing with curl
+
+For HTTP-level debugging without browser automation, use curl. 
+
+**See [@debug agent](.agents/debug.md)** for complete curl authentication guide including:
+- Proper Devise authentication with CSRF tokens
+- Cookie handling (`-c` and `-b` flags)
+- Common mistakes and how to avoid them
+- Debugging redirects and flash messages
+- One-liners for quick testing
+
+**Quick example:**
+```bash
+# See @debug agent for full details on proper authentication
+docker-compose exec -T app bash -c "
+  TOKEN=\$(curl -s -c /tmp/c.txt http://app:3002/users/sign_in | grep -o 'name=\"authenticity_token\" value=\"[^\"]*\"' | cut -d'\"' -f4); 
+  curl -s -c /tmp/c.txt -b /tmp/c.txt -X POST http://app:3002/users/sign_in -d \"authenticity_token=\$TOKEN\" -d 'user[email]=dariusz.finster@gmail.com' -d 'user[password]=test' -H 'Accept: text/html' >/dev/null; 
+  curl -s -b /tmp/c.txt -H 'Accept: text/html' http://app:3002/wydarzenia | head -30
+"
+```
+
 ## Architecture
 
 ```
