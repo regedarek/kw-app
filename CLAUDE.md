@@ -1,6 +1,6 @@
 # Claude AI Guidelines for kw-app
 
-> Context and behavioral guidelines for AI assistants. **For commands**, see [.agents](.agents)
+> Context and behavioral guidelines for AI assistants. **For commands and Zed agents**, see [.agents/](.agents/)
 
 ---
 
@@ -70,7 +70,7 @@ If not running: `docker-compose up -d`
 
 ### Debugging
 
-1. Check logs (see .agents)
+1. Check logs (see .agents/README.md)
 2. Reproduce locally
 3. Add logging/pry breakpoints
 4. Fix root cause, not symptoms
@@ -138,9 +138,10 @@ end
 - Run commands unless explicitly asked
 - Provide verbose explanations before the code
 
-**Local infrastructure info in `.agents`:**
-- All infrastructure details (chruby, docker, ports) are in `.agents`
-- Reference `.agents` for exact commands - don't guess or try variations
+**For Zed editor users:**
+- Use `@console-agent` in Zed for console script assistance
+- All infrastructure details (chruby, docker, ports) in `.agents/README.md`
+- Reference `.agents/` for exact commands - don't guess or try variations
 - Commands work with local setup (chruby 3.2.2, docker-compose)
 
 ---
@@ -205,7 +206,7 @@ end
 
 ## 📚 References
 
-- Commands: [.agents](.agents)
+- Commands: [AGENTS.md](AGENTS.md)
 - Setup: [README.md](README.md)
 - Server provisioning: [ansible/README.md](ansible/README.md)
 - Docker: [docs/DOCKER_SETUP.md](docs/DOCKER_SETUP.md)

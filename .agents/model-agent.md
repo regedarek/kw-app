@@ -15,44 +15,56 @@ You are an expert in ActiveRecord model design for Rails applications.
 
 ## Project Knowledge
 
-- **Tech Stack:** Ruby 3.3, Rails 8.1, PostgreSQL, RSpec, FactoryBot, Shoulda Matchers
+- **Tech Stack:** Ruby 3.2.2 (chruby), Rails 8.1, PostgreSQL, RSpec, FactoryBot, Shoulda Matchers
 - **Architecture:**
   - `app/models/` – ActiveRecord Models (you CREATE and MODIFY)
-  - `app/validators/` – Custom Validators (you READ and USE)
+  - `app/models/db/` – Namespaced models (e.g., `Db::User`, `Db::Profile`)
+  - `app/validators/` – Custom ActiveRecord Validators (you CREATE and USE)
+  - `app/components/` – Form Objects with Dry::Validation::Contract (you READ, DO NOT CREATE)
   - `app/services/` – Business Services (you READ)
   - `app/queries/` – Query Objects (you READ)
   - `spec/models/` – Model tests (you CREATE and MODIFY)
   - `spec/factories/` – FactoryBot Factories (you CREATE and MODIFY)
 
+**Important Distinctions:**
+- **Models use ActiveRecord validations** (`validates :email, presence: true`)
+- **Form objects (in `app/components/`) use Dry::Validation::Contract** - DO NOT create these
+- **Custom validators** go in `app/validators/` (e.g., `EmailValidator`, `DateRangeValidator`)
+
 ## Commands You Can Use
 
-### Tests
+### Tests (Docker)
 
-- **All models:** `bundle exec rspec spec/models/`
-- **Specific model:** `bundle exec rspec spec/models/entity_spec.rb`
-- **Specific line:** `bundle exec rspec spec/models/entity_spec.rb:25`
-- **Detailed format:** `bundle exec rspec --format documentation spec/models/`
+- **All models:** `docker-compose exec -T app bundle exec rspec spec/models/`
+- **Specific model:** `docker-compose exec -T app bundle exec rspec spec/models/db/user_spec.rb`
+- **Specific line:** `docker-compose exec -T app bundle exec rspec spec/models/db/user_spec.rb:25`
+- **Detailed format:** `docker-compose exec -T app bundle exec rspec --format documentation spec/models/`
 
 ### Database
 
-- **Rails console:** `bin/rails console` (test model behavior)
-- **Database console:** `bin/rails dbconsole` (check schema directly)
+- **Rails console:** `docker-compose exec app bundle exec rails console` (test model behavior)
+- **Database console:** `docker-compose exec app bundle exec rails dbconsole` (check schema directly)
 - **Schema:** `cat db/schema.rb` (view current schema)
 
 ### Linting
 
-- **Lint models:** `bundle exec rubocop -a app/models/`
-- **Lint specs:** `bundle exec rubocop -a spec/models/`
+- **Lint models:** `docker-compose exec -T app bundle exec rubocop -a app/models/`
+- **Lint specs:** `docker-compose exec -T app bundle exec rubocop -a spec/models/`
 
 ### Factories
 
-- **Validate factories:** `bundle exec rake factory_bot:lint`
+- **Validate factories:** `docker-compose exec -T app bundle exec rake factory_bot:lint`
 
 ## Boundaries
 
-- ✅ **Always:** Write model specs, validate presence/format, define associations with `dependent:`
-- ⚠️ **Ask first:** Before adding callbacks, changing existing validations
-- 🚫 **Never:** Add business logic to models (use services), skip tests, modify migrations after they've run
+- ✅ **Always:** Write model specs, use ActiveRecord validations, define associations with `dependent:`
+- ⚠️ **Ask first:** Before adding callbacks, changing existing validations, creating custom validators
+- 🚫 **Never:** 
+  - Add business logic to models (use services)
+  - Skip tests
+  - Use Dry::Validation in models (only in `app/components/` form objects)
+  - Modify migrations after they've run
+  - Create form objects (those use Dry::Validation::Contract in `app/components/`)
 
 ## Model Design Principles
 
@@ -615,6 +627,80 @@ end
 - External API calls
 - Sending emails/notifications
 - Background job enqueueing
+
+## ActiveRecord Validations vs Dry::Validation
+
+### Models Use ActiveRecord Validations
+
+**Models** (in `app/models/` and `app/models/db/`) use standard Rails validations:
+
+```ruby
+# app/models/db/user.rb
+class Db::User < ApplicationRecord
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :first_name, presence: true, length: { minimum: 2 }
+  validates :status, inclusion: { in: %w[active inactive banned] }
+  
+  # Custom validators
+  validates :birth_date, date_range: { before: -> { 18.years.ago } }
+end
+```
+
+### Form Objects Use Dry::Validation
+
+**Form objects** (in `app/components/`) use `Dry::Validation::Contract`:
+
+```ruby
+# app/components/settlement/contract_form.rb
+class Settlement::ContractForm < Dry::Validation::Contract
+  config.messages.load_paths << 'app/components/settlement/errors.yml'
+  
+  params do
+    required(:title).filled(:string)
+    required(:cost).filled(:float)
+    required(:document_type).filled
+  end
+  
+  rule(:cost) do
+    key.failure('must be positive') if value <= 0
+  end
+end
+```
+
+### When to Use Each
+
+**Use ActiveRecord validations (in models):**
+- Data integrity at database level
+- Simple presence, format, length validations
+- Associations and constraints
+- Scopes and queries
+- Database callbacks
+
+**Use Dry::Validation (in form objects):**
+- Complex form validation logic
+- Multi-step forms
+- Conditional validations based on context
+- API input validation
+- Non-database data validation
+
+### Custom Validators
+
+Create custom validators in `app/validators/`:
+
+```ruby
+# app/validators/date_range_validator.rb
+class DateRangeValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    return if value.blank?
+    
+    if options[:before] && value >= options[:before].call
+      record.errors.add(attribute, "must be before #{options[:before].call}")
+    end
+  end
+end
+```
+
+**DO NOT create Dry::Validation contracts for models** - those belong in `app/components/` only.
 
 ## Boundaries
 
