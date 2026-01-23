@@ -20,6 +20,18 @@ module KwApp
     # config.eager_load_paths << Rails.root.join("extras")
     #
 
-    config.autoload_paths += ["#{Rails.root}/lib"]
+    # Configure lib/ directory for autoloading (Rails 7.0 manual setup)
+    # Note: Rails 7.1+ can use config.autoload_lib(ignore: %w[...]) instead
+    lib = root.join("lib")
+    config.autoload_paths += [lib]
+    config.eager_load_paths += [lib]
+    
+    # Ignore non-code subdirectories in lib/
+    Rails.autoloaders.main.ignore(
+      lib.join("tasks"),
+      lib.join("seeding"),
+      lib.join("playwright"),
+      lib.join("locales")
+    )
   end
 end
