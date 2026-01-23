@@ -7,15 +7,15 @@ module Membership
     end
 
     def payment_year
-      #return Date.current.next_year.year if Date.current.between?(Date.new(Date.current.year, 11, 15), Date.current.end_of_year)
+      return Date.current.next_year.year if Date.current.between?(Date.new(Date.current.year, 11, 15), Date.current.end_of_year)
 
-      return Date.current.year
+      Date.current.year
     end
 
     def profile_payment_year(profile)
-      #return profile.created_at.next_year.year if profile.created_at.between?(Date.new(profile.created_at.year, 11, 15), profile.created_at.end_of_year)
+      return profile.created_at.next_year.year if profile.created_at.between?(Date.new(profile.created_at.year, 11, 15), profile.created_at.end_of_year)
 
-      return profile.created_at.year
+      profile.created_at.year
     end
 
     def supplementary_training_active?
@@ -46,9 +46,7 @@ module Membership
       return false unless user.membership_fees.where(year: prev_year..next_year).any?
 
       if current_year_fee
-        #if Date.current.between?(Date.new(Date.current.prev_year.year, 11, 15), Date.current.end_of_year)
-          return true if current_year_fee.payment.paid? if current_year_fee.payment
-        #end
+        return true if current_year_fee.payment.paid? if current_year_fee.payment
       end
 
       if prev_year_fee
@@ -57,11 +55,11 @@ module Membership
         end
       end
 
-     #if next_year_fee
-     #  if Date.current.between?(Date.new(Date.current.year, 11, 15), Date.current.next_year.end_of_year)
-     #    return true if next_year_fee.payment.paid? if next_year_fee.payment
-     #  end
-     #end
+      if next_year_fee
+        if Date.current.between?(Date.new(Date.current.year, 11, 15), Date.current.next_year.end_of_year)
+          return true if next_year_fee.payment.paid? if next_year_fee.payment
+        end
+      end
 
       return false
     end

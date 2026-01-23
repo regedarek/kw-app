@@ -148,7 +148,7 @@ RSpec.describe Training::Supplementary::CreateCourse do
       end
 
       it 'creates a course with organizer' do
-        organizer = Factories::User.create!
+        organizer = create(:user)
         
         raw_inputs = {
           name: 'Organized Course',

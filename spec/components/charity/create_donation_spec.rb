@@ -7,7 +7,7 @@ RSpec.describe Charity::CreateDonation do
   let(:repository) { Charity::Repository.new }
   let(:form) { Charity::DonationForm.new }
   let(:service) { described_class.new(repository, form) }
-  let!(:user) { Factories::User.create! }
+  let!(:user) { create(:user) }
 
   describe '#call' do
     context 'when form validation fails' do

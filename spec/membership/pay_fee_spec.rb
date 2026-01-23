@@ -2,14 +2,18 @@ require 'rails_helper'
 require 'webmock/rspec'
 
 describe Membership::PayFee do
-  before(:each) { Db::Membership::Fee.destroy_all }
+  let!(:user) { create(:user, kw_id: 1111) }
+  
   before do
-    Factories::User.create!(kw_id: 1111)
+    Db::Membership::Fee.destroy_all
+    Timecop.freeze('2017-06-15'.to_date)
     
     # Stub external Dotpay API calls
     stub_request(:post, /ssl\.dotpay\.pl/).
       to_return(status: 200, body: '{"payment_url":"http://example.com/payment"}', headers: {'Content-Type' => 'application/json'})
   end
+  
+  after { Timecop.return }
 
   describe '.pay' do
     context 'Result keyword argument handling' do
@@ -51,83 +55,138 @@ describe Membership::PayFee do
         expect(captured_payment.dotpay_id).to be_present
       end
     end
-    xit 'no payments, pay for current' do
-      form = Membership::FeeForm.new(year: 2017)
+    it 'no payments, pay for current' do
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2017', plastic: false)
+      expect(form.valid?).to be true
+      
       expect(Db::Membership::Fee.count).to eq(0)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(1)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111, year: 2017).cost).to eq(150)
+      
+      fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2017)
+      expect(fee.cost).to eq(200) # Gap in payments (no previous year) = regular 200 PLN
+      expect(fee.payment).to be_present
+      expect(fee.payment.dotpay_id).to be_present
     end
 
-    xit 'no payments, pay for next' do
-      form = Membership::FeeForm.new(year: 2018)
+    it 'no payments, pay for next' do
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2018', plastic: false)
+      expect(form.valid?).to be true
+      
       expect(Db::Membership::Fee.count).to eq(0)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(1)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111, year: 2018).cost).to eq(150)
+      
+      fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2018)
+      expect(fee.cost).to eq(200) # Gap in payments (no previous year) = regular 200 PLN
+      expect(fee.payment).to be_present
     end
 
-    xit 'last year payment, pay for current' do
-      fee = Db::Membership::Fee.create!(kw_id: 1111, year: 2016)
-      order = Orders::CreateOrder.new(service: fee).create
-      order.payment.charge!
+    it 'last year payment, pay for current' do
+      # Create paid membership for last year (2016) using factory
+      last_year_fee = create(:membership_fee, :paid, kw_id: 1111, year: 2016)
+      expect(last_year_fee.payment.paid?).to be true
 
-      form = Membership::FeeForm.new(year: 2017)
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2017', plastic: false)
       expect(Db::Membership::Fee.count).to eq(1)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(2)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111).cost).to eq(100)
+      
+      current_fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2017)
+      expect(current_fee.cost).to eq(150) # Continuous payment = regular 150 PLN
     end
 
-    xit 'current payment, pay for next year' do
-      fee = Db::Membership::Fee.create!(kw_id: 1111, year: 2017)
-      order = Orders::CreateOrder.new(service: fee).create
-      order.payment.charge!
+    it 'current payment, pay for next year' do
+      # Create paid membership for current year (2017) using factory
+      current_fee = create(:membership_fee, :paid, kw_id: 1111, year: 2017)
+      expect(current_fee.payment.paid?).to be true
 
-      form = Membership::FeeForm.new(year: 2018)
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2018', plastic: false)
       expect(Db::Membership::Fee.count).to eq(1)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(2)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111).cost).to eq(100)
+      
+      next_fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2018)
+      expect(next_fee.cost).to eq(150) # Current year paid, prepaying next = regular 150 PLN
     end
 
-    xit 'last year payment by cash, pay for current' do
-      fee = Db::Membership::Fee.create!(kw_id: 1111, year: 2016)
-      order = Orders::CreateOrder.new(service: fee).create
-      order.payment.update(cash: true)
+    it 'last year payment by cash, pay for current' do
+      # Create cash-paid membership for last year (2016) using factory
+      last_year_fee = create(:membership_fee, :cash, kw_id: 1111, year: 2016)
+      expect(last_year_fee.payment.cash?).to be true
+      expect(last_year_fee.payment.paid?).to be true
 
-      form = Membership::FeeForm.new(year: 2017)
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2017', plastic: false)
       expect(Db::Membership::Fee.count).to eq(1)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(2)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111).cost).to eq(100)
+      
+      current_fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2017)
+      expect(current_fee.cost).to eq(150) # Continuous payment (cash counts) = regular 150 PLN
     end
 
-    xit 'last year payment, pay for next' do
-      Db::Membership::Fee.create!(kw_id: 1111, year: 2016)
-      form = Membership::FeeForm.new(year: 2018)
+    it 'last year payment, pay for next' do
+      # Create unpaid membership for last year (2016) - payment exists but not paid
+      last_year_fee = create(:membership_fee, :unpaid, kw_id: 1111, year: 2016)
+      expect(last_year_fee.payment.paid?).to be false
+      
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2018', plastic: false)
       expect(Db::Membership::Fee.count).to eq(1)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(2)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111).cost).to eq(150)
+      
+      next_fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2018)
+      expect(next_fee.cost).to eq(200) # Gap in payments (2016 unpaid, skipping 2017) = regular 200 PLN
     end
 
-    xit 'gap in payments, pay for current' do
-      Db::Membership::Fee.create!(kw_id: 1111, year: 2014)
-      form = Membership::FeeForm.new(year: 2017)
+    it 'gap in payments, pay for current' do
+      # Create unpaid membership for 2014 (large gap)
+      old_fee = create(:membership_fee, :unpaid, kw_id: 1111, year: 2014)
+      
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2017', plastic: false)
       expect(Db::Membership::Fee.count).to eq(1)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(2)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111).cost).to eq(150)
+      
+      current_fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2017)
+      expect(current_fee.cost).to eq(200) # Gap in payments (2014 to 2017) = regular 200 PLN
     end
 
-    xit 'gap in payments, pay for next' do
-      Db::Membership::Fee.create!(kw_id: 1111, year: 2014)
-      form = Membership::FeeForm.new(year: 2018)
+    it 'gap in payments, pay for next' do
+      # Create unpaid membership for 2014 (large gap)
+      old_fee = create(:membership_fee, :unpaid, kw_id: 1111, year: 2014)
+      
+      form = Membership::FeeForm.new(kw_id: 1111, year: '2018', plastic: false)
       expect(Db::Membership::Fee.count).to eq(1)
-      Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      result = Membership::PayFee.pay(kw_id: 1111, form: form)
+      
+      expect(result.success?).to be true
       expect(Db::Membership::Fee.count).to eq(2)
-      expect(Db::Membership::Fee.find_by(kw_id: 1111).cost).to eq(150)
+      
+      next_fee = Db::Membership::Fee.find_by(kw_id: 1111, year: 2018)
+      expect(next_fee.cost).to eq(200) # Gap in payments (2014 to 2018) = regular 200 PLN
     end
   end
 end

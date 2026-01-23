@@ -76,7 +76,6 @@ gem 'sidekiq-failures'
 gem 'appsignal'
 
 gem 'jqplot-rails'
-gem 'faker'
 
 group :development do
   gem 'listen'
@@ -92,12 +91,20 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'timecop'
+  gem 'rspec-rails', '~> 7.1'
+  gem 'factory_bot_rails', '~> 6.4'
+  gem 'faker', '~> 3.5'
+  gem 'shoulda-matchers', '~> 6.4'
+  gem 'timecop', '~> 0.9'
   gem 'byebug'
   gem 'spring'
-  gem 'webmock'
+  gem 'webmock', '~> 3.24'
   gem 'playwright-ruby-client'
+end
+
+group :test do
+  gem 'database_cleaner-active_record', '~> 2.2'
+  gem 'simplecov', '~> 0.22', require: false
 end
 
 gem 'thruster', "0.1.8", require: false, group: [:development, :production]

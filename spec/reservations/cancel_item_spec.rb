@@ -1,27 +1,33 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe Reservations::CancelItem do
-  let!(:item) { Factories::Item.create! }
-  xit 'removes item from reservation' do
-    reservation = Factories::Reservation.create!(item_ids: [item.id])
+RSpec.describe Reservations::CancelItem do
+  let!(:item) { create(:item) }
+  
+  it 'removes item from reservation and deletes reservation when last item and unpaid' do
+    reservation = create(:reservation, :with_specific_item, item: item)
+    reservation.create_payment(dotpay_id: SecureRandom.hex(13), state: 'unpaid')
+    expect(reservation.items.count).to eq(1)
+    
+    reservation_id = reservation.id
 
-    result = nil
-    expect do
-      result = described_class.from(reservation_id: reservation.id).delete(item_id: item.id)
-    end.to change { reservation.items.count }.from(1).to(0)
+    result = described_class.from(reservation_id: reservation_id).delete(item_id: item.id)
 
     expect(result.success?).to eq(true)
+    # When last item is removed and payment is unpaid, the entire reservation is deleted
+    expect(Db::Reservation.exists?(reservation_id)).to be false
   end
 
   it 'if reservation not exists throws error' do
-    result = described_class.from(reservation_id: 1).delete(item_id: item.id)
+    result = described_class.from(reservation_id: 999999).delete(item_id: item.id)
 
     expect(result.reservation_not_exist?).to eq(true)
   end
 
   it 'if item not exists throws error' do
-    reservation = Factories::Reservation.create!
-    result = described_class.from(reservation_id: 1).delete(item_id: 2)
+    reservation = create(:reservation)
+    result = described_class.from(reservation_id: reservation.id).delete(item_id: 999999)
 
     expect(result.item_not_exist?).to eq(true)
   end

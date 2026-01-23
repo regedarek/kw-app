@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Charity::DonationsController, type: :controller do
-  let!(:user) { Factories::User.create! }
+  let!(:user) { create(:user) }
 
   before do
     sign_in user

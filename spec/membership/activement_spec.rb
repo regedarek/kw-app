@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Membership::Activement do
   after { Timecop.return }
-  let!(:user) { Factories::User.create! }
+  let!(:user) { create(:user) }
 
   describe '#payment_year' do
     context '01-01 - 15-11' do
@@ -43,7 +43,7 @@ describe Membership::Activement do
 
     context 'with prev year' do
       before do
-        Factories::Membership::Fee.create!(kw_id: user.kw_id, year: 2015)
+        create(:membership_fee, :prepaid, kw_id: user.kw_id, year: 2015)
       end
 
       context 'this year 01.01 - 15.11' do
@@ -71,7 +71,7 @@ describe Membership::Activement do
 
     context 'with next year' do
       before do
-        Factories::Membership::Fee.create!(kw_id: user.kw_id, year: 2017)
+        create(:membership_fee, :prepaid, kw_id: user.kw_id, year: 2017)
       end
 
       context 'this year 01.01 - 14.11' do
@@ -100,7 +100,7 @@ describe Membership::Activement do
     context 'with too old membership_fees' do
       before do
         Timecop.freeze('2016-06-19'.to_date)
-        Factories::Membership::Fee.create!(kw_id: user.kw_id, year: 2014)
+        create(:membership_fee, :prepaid, kw_id: user.kw_id, year: 2014)
       end
 
       it do
@@ -112,7 +112,7 @@ describe Membership::Activement do
     context 'with too futher membership_fees' do
       before do
         Timecop.freeze('2016-06-19'.to_date)
-        Factories::Membership::Fee.create!(kw_id: user.kw_id, year: 2018)
+        create(:membership_fee, :prepaid, kw_id: user.kw_id, year: 2018)
       end
 
       it do
@@ -123,11 +123,9 @@ describe Membership::Activement do
 
     context 'with only current year fee prepaid' do
       before do
-        Factories::Membership::Fee.create!(
+        create(:membership_fee, :prepaid,
           kw_id: user.kw_id,
-          year: 2016,
-          cash: false,
-          state: 'prepaid'
+          year: 2016
         )
       end
 
@@ -212,11 +210,9 @@ describe Membership::Activement do
     context 'dotpay unpaid for this year' do
       before do
         Timecop.freeze('2016-01-16'.to_date)
-        Factories::Membership::Fee.create!(
+        create(:membership_fee, :unpaid,
           kw_id: user.kw_id,
-          year: 2016,
-          cash: false,
-          state: 'unpaid'
+          year: 2016
         )
       end
 
@@ -229,11 +225,9 @@ describe Membership::Activement do
     context 'cash prepaid for this year' do
       before do
         Timecop.freeze('2016-01-16'.to_date)
-        Factories::Membership::Fee.create!(
+        create(:membership_fee, :cash,
           kw_id: user.kw_id,
-          year: 2016,
-          cash: true,
-          state: 'unpaid'
+          year: 2016
         )
       end
 
@@ -246,11 +240,9 @@ describe Membership::Activement do
     context 'cash unpaid for this year' do
       before do
         Timecop.freeze('2016-01-16'.to_date)
-        Factories::Membership::Fee.create!(
+        create(:membership_fee, :unpaid,
           kw_id: user.kw_id,
-          year: 2016,
-          cash: false,
-          state: 'unpaid'
+          year: 2016
         )
       end
 
