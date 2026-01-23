@@ -124,6 +124,7 @@ pl:
     messages:
       accepted: musi zostać zaakceptowane
       blank: nie może być puste
+      required: jest wymagane
       confirmation: nie zgadza się z polem %{attribute}
       empty: nie może być puste
       equal_to: musi być równe %{count}
@@ -163,6 +164,12 @@ pl:
         many: "%{model} nie został zachowany z powodu %{count} błędów"
         one: "%{model} nie został zachowany z powodu jednego błędu"
         other: "%{model} nie został zachowany z powodu %{count} błędów"
+  activerecord:
+    errors:
+      messages:
+        required: jest wymagane
+        blank: nie może być puste
+        taken: zostało już zajęte
   helpers:
     select:
       prompt: Proszę wybrać

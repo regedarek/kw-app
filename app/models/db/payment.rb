@@ -21,7 +21,7 @@ module Db
     include Workflow
     has_paper_trail
 
-    belongs_to :payable, polymorphic: true
+    belongs_to :payable, polymorphic: true, optional: true
 
     workflow_column :state
     workflow do

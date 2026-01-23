@@ -72,7 +72,7 @@ module Training
 
       has_many :contract_events, class_name: 'Settlement::ContractEventsRecord', foreign_key: :event_id
       has_many :contracts, through: :contract_events, foreign_key: :contract_id, dependent: :destroy
-      belongs_to :organizer, class_name: 'Db::User', foreign_key: :organizator_id
+      belongs_to :organizer, class_name: 'Db::User', foreign_key: :organizator_id, optional: true
 
       scope :upcoming, lambda { where("start_date >= ?", Date.today).order("start_date") }
 
