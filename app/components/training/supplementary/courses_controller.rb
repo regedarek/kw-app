@@ -57,7 +57,7 @@ module Training
           @errors = errors.map do |field, messages|
             field_name = Training::Supplementary::CourseRecord.human_attribute_name(field)
             messages.map { |msg| "#{field_name} #{msg}" }
-          end
+          end.flatten
           render :new
         end
       end
@@ -84,10 +84,12 @@ module Training
       private
 
       def create_record
+        # Convert ActionController::Parameters to hash for Dry::Validation
+        # Dry::Validation cannot read from Parameters objects directly
         Training::Supplementary::CreateCourse.new(
           Training::Supplementary::Repository.new,
           Training::Supplementary::CreateCourseForm
-        ).call(raw_inputs: course_params)
+        ).call(raw_inputs: course_params.to_unsafe_h)
       end
 
       def course_params

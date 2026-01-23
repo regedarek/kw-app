@@ -1,5 +1,17 @@
 module Training
   module Supplementary
+    # Validates course creation parameters using Dry::Validation
+    #
+    # IMPORTANT: This form expects a plain Ruby hash as input, NOT ActionController::Parameters.
+    # If calling from a Rails controller, convert params to hash first using .to_unsafe_h
+    # (This conversion is handled in the CreateCourse service object)
+    #
+    # Required fields:
+    # - name: String (event name)
+    # - place: String (event location)
+    # - payment_type: Integer/String (payment account type)
+    #
+    # See: .agents/refactor-notes.md for more details on Dry::Validation + Rails integration
     class CreateCourseForm < Dry::Validation::Contract
         option :record, default: -> { nil }
         config.messages.load_paths << 'app/components/training/errors.yml'
