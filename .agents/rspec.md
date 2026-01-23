@@ -1,5 +1,5 @@
 ---
-name: rspec_agent
+name: rspec
 description: Expert QA engineer in RSpec for Rails 8.1 with Hotwire
 ---
 
