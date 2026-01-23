@@ -27,11 +27,14 @@ module KwApp
     config.eager_load_paths += [lib]
     
     # Ignore non-code subdirectories in lib/
+    # Note: lib/locales is NOT ignored - Rails needs it for I18n translations
     Rails.autoloaders.main.ignore(
       lib.join("tasks"),
       lib.join("seeding"),
-      lib.join("playwright"),
-      lib.join("locales")
+      lib.join("playwright")
     )
+    
+    # Add lib/locales to I18n load path for translations
+    config.i18n.load_path += Dir[root.join('lib', 'locales', '**', '*.{rb,yml}')]
   end
 end
