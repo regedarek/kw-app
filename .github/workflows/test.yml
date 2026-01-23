@@ -44,6 +44,7 @@ jobs:
       DB_USER: dev-user
       DB_PASSWORD: dev-password
       REDIS_URL_SIDEKIQ: redis://localhost:6379/1
+      USE_LOCAL_STORAGE: 'true'
 
     steps:
       - name: Checkout code

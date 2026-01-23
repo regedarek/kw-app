@@ -1,14 +1,15 @@
 # Set USE_LOCAL_STORAGE=true environment variable to use local file storage in development
 # This avoids ad blocker issues with OpenStack URLs
-USE_LOCAL_STORAGE = ENV['USE_LOCAL_STORAGE'] == 'true' && Rails.env.development?
+# Always use local storage in test environment
+USE_LOCAL_STORAGE = (ENV['USE_LOCAL_STORAGE'] == 'true' && Rails.env.development?) || Rails.env.test?
 
 if USE_LOCAL_STORAGE
-  # Use local file storage for development
+  # Use local file storage for development and test
   CarrierWave.configure do |config|
     config.storage = :file
     config.root = Rails.root.join('public')
-    config.asset_host = "http://localhost:3002"
-    Rails.logger.info "CarrierWave: Using local file storage"
+    config.asset_host = Rails.env.test? ? nil : "http://localhost:3002"
+    Rails.logger.info "CarrierWave: Using local file storage (#{Rails.env})"
   end
 else
   require "fog/openstack"
