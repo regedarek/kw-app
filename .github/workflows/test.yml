@@ -1,0 +1,76 @@
+name: Test Suite
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:10.3-alpine
+        env:
+          POSTGRES_USER: dev-user
+          POSTGRES_PASSWORD: dev-password
+          POSTGRES_DB: kw_app_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      DB_HOST: localhost
+      DB_USER: dev-user
+      DB_PASSWORD: dev-password
+      REDIS_URL_SIDEKIQ: redis://localhost:6379/1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: true
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libpq-dev
+
+      - name: Setup test database
+        run: |
+          bundle exec rake db:create
+          bundle exec rake db:schema:load
+
+      - name: Run RSpec tests
+        run: |
+          bundle exec rspec --format documentation --format progress
+
+      - name: Test Summary
+        if: always()
+        run: |
+          echo "✅ Test suite execution completed"
+          echo "Check the logs above for detailed results"
