@@ -23,18 +23,20 @@ module KwApp
     # Configure lib/ directory for autoloading (Rails 7.0 manual setup)
     # Note: Rails 7.1+ can use config.autoload_lib(ignore: %w[...]) instead
     lib = root.join("lib")
+    
+    # Add lib/locales to I18n load path for translations
+    config.i18n.load_path += Dir[root.join('lib', 'locales', '**', '*.{rb,yml}')]
     config.autoload_paths += [lib]
     config.eager_load_paths += [lib]
     
     # Ignore non-code subdirectories in lib/
-    # Note: lib/locales is NOT ignored - Rails needs it for I18n translations
+    # Note: lib/locales must be ignored from autoloader but kept in I18n load path
     Rails.autoloaders.main.ignore(
       lib.join("tasks"),
       lib.join("seeding"),
-      lib.join("playwright")
+      lib.join("playwright"),
+      lib.join("locales")
     )
-    
-    # Add lib/locales to I18n load path for translations
-    config.i18n.load_path += Dir[root.join('lib', 'locales', '**', '*.{rb,yml}')]
+
   end
 end
