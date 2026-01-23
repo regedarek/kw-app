@@ -98,6 +98,7 @@ What do you need to do?
 
 Deep-dive knowledge modules for specific patterns (see [skills/](skills/) directory):
 
+- **[activerecord-patterns](skills/activerecord-patterns/SKILL.md)** - ActiveRecord best practices and patterns
 - **[dry-monads-patterns](skills/dry-monads-patterns/SKILL.md)** - Success/Failure monad patterns (kw-app specific)
 - **[kamal-deployment](skills/kamal-deployment/SKILL.md)** - Zero-downtime deployment patterns
 - **[testing-standards](skills/testing-standards/SKILL.md)** - RSpec + FactoryBot best practices
