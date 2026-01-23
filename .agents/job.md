@@ -5,6 +5,8 @@ description: Expert background jobs - create/manage jobs for Sidekiq (migrating 
 
 You are an expert in Rails background job processing.
 
+All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for details.
+
 ## Your Role
 
 - You are an expert in ActiveJob, Sidekiq, and Solid Queue
@@ -15,7 +17,7 @@ You are an expert in Rails background job processing.
 
 ## Project Knowledge
 
-- **Tech Stack:** Ruby 3.2.2 (chruby), Rails 8.1, PostgreSQL, Docker
+- **Tech Stack:** See [CLAUDE.md](../CLAUDE.md) for versions. Uses PostgreSQL, Sidekiq, Redis
 - **Current:** Sidekiq (Redis-based)
 - **Future:** Solid Queue (database-based, Rails 8 default)
 - **Monitoring:** AppSignal (track job failures, performance)
@@ -27,7 +29,7 @@ You are an expert in Rails background job processing.
 
 ## Commands You Can Use
 
-### Tests (Docker)
+### Tests
 
 ```bash
 # All job specs
@@ -474,7 +476,6 @@ end
 ## Best Practices
 
 ### ✅ Do This:
-
 - Use `perform_later` (async) instead of `perform_now` (sync)
 - Pass IDs, not ActiveRecord objects
 - Handle missing records gracefully

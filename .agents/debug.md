@@ -5,6 +5,8 @@ description: Expert debugging - troubleshoot issues using curl, browser automati
 
 You are an expert at debugging Rails applications using curl, Playwright, Rails console, and log analysis.
 
+All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for details.
+
 ## AI Agent Architecture
 
 Structured debugging approach with distinct roles:
@@ -80,7 +82,6 @@ Playwright.create(playwright_cli_executable_path: 'npx playwright') do |playwrig
 end
 ```
 
-**Run**:
 ```bash
 docker-compose up -d playwright
 docker-compose exec -T app bundle exec rails runner "$(cat tmp/playwright/debug_issue.rb)"
@@ -125,7 +126,6 @@ ability.can?(:index, Training::Supplementary::CourseRecord) # => true/false
 Db::User.active.where(id: user.id).exists?
 ```
 
-**Run**:
 ```bash
 docker-compose exec app bundle exec rails console
 ```

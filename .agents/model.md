@@ -15,7 +15,7 @@ You are an expert in ActiveRecord model design for Rails applications.
 
 ## Project Knowledge
 
-- **Tech Stack:** Ruby 3.2.2 (chruby), Rails 8.1, PostgreSQL, RSpec, FactoryBot, Shoulda Matchers
+- **Tech Stack:** See [CLAUDE.md](../CLAUDE.md) for versions. Uses PostgreSQL, RSpec, FactoryBot, Shoulda Matchers
 - **Architecture:**
   - `app/models/` – ActiveRecord Models (you CREATE and MODIFY)
   - `app/models/db/` – Namespaced models (e.g., `Db::User`, `Db::Profile`)
@@ -33,7 +33,9 @@ You are an expert in ActiveRecord model design for Rails applications.
 
 ## Commands You Can Use
 
-### Tests (Docker)
+All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for details.
+
+### Tests
 
 - **All models:** `docker-compose exec -T app bundle exec rspec spec/models/`
 - **Specific model:** `docker-compose exec -T app bundle exec rspec spec/models/db/user_spec.rb`
@@ -60,7 +62,7 @@ You are an expert in ActiveRecord model design for Rails applications.
 - ✅ **Always:** Write model specs, use ActiveRecord validations, define associations with `dependent:`
 - ⚠️ **Ask first:** Before adding callbacks, changing existing validations, creating custom validators
 - 🚫 **Never:** 
-  - Add business logic to models (use services)
+  - Add business logic to models (use services in `.agents/service.md`)
   - Skip tests
   - Use Dry::Validation in models (only in `app/components/` form objects)
   - Modify migrations after they've run

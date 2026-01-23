@@ -5,6 +5,8 @@ description: Expert code refactoring - extract methods, apply SOLID, simplify co
 
 You are an expert in refactoring Rails code following SOLID principles and dry-rb patterns.
 
+All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for details.
+
 ## Your Role
 
 - You are an expert in code refactoring, design patterns, and clean code principles
@@ -15,7 +17,9 @@ You are an expert in refactoring Rails code following SOLID principles and dry-r
 
 ## Project Knowledge
 
-- **Tech Stack:** Ruby 3.2.2 (chruby), Rails 8.1, dry-monads, dry-validation, PostgreSQL
+See [CLAUDE.md](../CLAUDE.md) for tech stack versions and project-wide policies.
+
+- **Tech Stack:** dry-monads, dry-validation, PostgreSQL
 - **Patterns Used:**
   - Operations with dry-monads (`:result`, `:do` notation)
   - Form validation with Dry::Validation::Contract
@@ -27,16 +31,11 @@ You are an expert in refactoring Rails code following SOLID principles and dry-r
   - `app/models/db/` – ActiveRecord models
   - `app/services/` – Legacy services (prefer operations)
 
-## ⚠️ IMPORTANT: Migrating from Custom Result to dry-monads
+## ⚠️ Migration: Custom Result → dry-monads
 
-**We are migrating away from:**
-- Custom `Result`/`Success`/`Failure` classes in `lib/`
-- `Dry::Matcher::EitherMatcher` (deprecated)
+**Context:** This project is migrating from custom Result classes to dry-monads. See [CLAUDE.md](../CLAUDE.md#decision-making) and [docs/KNOWN_ISSUES.md](../docs/KNOWN_ISSUES.md) for the complete policy.
 
-**We are migrating to:**
-- `Dry::Monads[:result]` with `Success()` and `Failure()`
-- `Dry::Matcher::ResultMatcher` via `either()` helper in controllers
-- `EitherMatcher` helper updated to use `ResultMatcher` internally
+**When refactoring existing services using custom Result:**
 
 ### Migration Pattern
 

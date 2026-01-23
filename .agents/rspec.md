@@ -19,6 +19,8 @@ You are an expert QA engineer specialized in RSpec testing for modern Rails appl
 
 ## Commands
 
+All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for why this is mandatory.
+
 ```bash
 # All tests (quiet mode - default)
 docker-compose exec -T app bundle exec rspec
@@ -39,10 +41,9 @@ docker-compose exec -T app bundle exec rspec --profile 10
 docker-compose exec -T app bundle exec rake db:test:prepare
 ```
 
-**Important:** 
-- Always use `-T` flag for non-interactive commands (tests, rake tasks)
-- By default, tests run in quiet mode (log level: `:warn`) - SQL queries and debug logs are hidden
-- Set `VERBOSE_TESTS=true` to enable full debug output including SQL queries and ActiveRecord logs
+**Test verbosity:**
+- Default: quiet mode (log level `:warn`) - SQL queries and debug logs hidden
+- Verbose: `VERBOSE_TESTS=true` - shows SQL queries, ActiveRecord logs, cache hits
 - Use verbose mode only when debugging specific issues
 
 ## Test Structure
@@ -460,57 +461,20 @@ end
 
 ## Known Issues
 
-- Check `docs/KNOWN_ISSUES.md` before debugging failures
+See [docs/KNOWN_ISSUES.md](../docs/KNOWN_ISSUES.md) - **check this first when debugging!**
+
+Quick reference:
 - Payment workflow uses `charge!` to transition unpaid → prepaid
 - User `roles` is PostgreSQL array, not method
 - Reservations don't use Orders table (dropped 2017)
 - CanCan authorization in request specs results in redirects, not 403
 
-## Verbose Test Output
 
-By default, tests run in **quiet mode** to reduce noise:
-- Log level set to `:warn`
-- SQL queries hidden
-- ActiveRecord debug logs suppressed
-- Only warnings, errors, and RSpec output shown
-
-**When to use verbose mode:**
-```bash
-# Enable verbose output to debug test failures
-VERBOSE_TESTS=true bundle exec rspec spec/models/user_spec.rb
-
-# In CI/GitHub Actions - add to workflow env
-env:
-  VERBOSE_TESTS: 'true'
-```
-
-**What verbose mode shows:**
-- All SQL queries with parameters
-- ActiveRecord cache hits
-- Database load operations
-- Full debug-level Rails logs
-- SASS deprecation warnings
-
-**Default (quiet) output:**
-```
-User
-  #full_name
-    returns concatenated name (0.02s)
-  ✓ 135 examples, 0 failures
-```
-
-**Verbose output:**
-```
-[12:57:35.450] DEBUG |   Db::User Load (0.3ms)  SELECT "users".* ...
-[12:57:35.452] DEBUG |   CACHE Db::Membership::Fee Load (0.0ms) ...
-User
-  #full_name
-    returns concatenated name (0.02s)
-  ✓ 135 examples, 0 failures
-```
 
 ## Resources
 
 - RSpec: https://rspec.info/
 - FactoryBot: https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md
 - Better Specs: https://www.betterspecs.org/
+- Known Issues: [docs/KNOWN_ISSUES.md](../docs/KNOWN_ISSUES.md)
+- Service patterns: [.agents/service.md](service.md)

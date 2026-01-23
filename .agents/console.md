@@ -24,8 +24,7 @@ When user specifies an environment ("development", "staging", "production"), ope
 
 ## Infrastructure
 
-**Ruby version:** 3.2.2 (chruby)
-**Docker:** All commands run in containerized environment
+**All commands use Docker** - see [CLAUDE.md](../CLAUDE.md) for Docker vs native Ruby details.
 
 ### Console Access Commands
 
@@ -34,17 +33,8 @@ When user specifies an environment ("development", "staging", "production"), ope
 docker-compose exec app bundle exec rails console
 ```
 
-**Staging (Raspberry Pi via Kamal):**
-```bash
-# From local machine with chruby
-zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d staging -i --reuse "bin/rails console"'
-```
-
-**Production (VPS via Kamal):**
-```bash
-# From local machine with chruby
-zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d production -i --reuse "bin/rails console"'
-```
+**Staging/Production (via Kamal):**
+See [CLAUDE.md](../CLAUDE.md#environment-setup) for Kamal commands with `--reuse` flag.
 
 ### Running Code Directly
 
@@ -217,3 +207,5 @@ You have access to kw-app's Rails application with:
 - CarrierWave for file uploads
 
 **Models are namespaced under `Db::`** (e.g., `Db::User`, `Db::Profile`, `Db::Item`)
+
+**Service objects:** See `.agents/service.md` for dry-monads patterns (required for all new services)

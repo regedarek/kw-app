@@ -4,6 +4,15 @@
 
 ---
 
+## 📦 Project Versions
+
+**Ruby:** 3.2.2  
+**Rails:** 7.0.8  
+**PostgreSQL:** 10.3  
+**Redis:** 7  
+
+---
+
 ## 🚫 Restrictions
 
 **Require approval:**
@@ -38,11 +47,22 @@
 
 ### Environment Setup
 
-⚠️ **CRITICAL - Local vs CI:**
-- **Local machine**: Uses chruby + native Ruby 3.2.2 (NOT docker-compose)
-- **CI/GitHub Actions**: Uses docker-compose with `-T` flag
-- For local commands, run directly: `bundle exec rspec`, `rails console`, etc.
-- See `.agents/README.md` for exact local setup details
+⚠️ **CRITICAL - Docker vs Native Ruby:**
+- **Docker (99% of commands)**: Use `docker-compose exec -T app` for ALL app commands
+  - Tests: `docker-compose exec -T app bundle exec rspec`
+  - Console: `docker-compose exec app bundle exec rails console`
+  - Rake tasks: `docker-compose exec -T app bundle exec rake`
+  - Rails runner: `docker-compose exec -T app bundle exec rails runner`
+- **Native Ruby (Kamal ONLY)**: Local machine uses chruby 3.2.2 for deployment
+  - Kamal staging: `zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d staging -i --reuse "bin/rails console"'`
+  - Kamal production: `zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d production -i --reuse "bin/rails console"'`
+  - **`--reuse` flag**: Reuses existing SSH connection, doesn't require registry credentials
+- **CI/GitHub Actions**: Uses docker-compose with `-T` flag (same as local)
+
+**Why?**
+- App runs in Docker (Ruby 3.2.2 + Rails 7.0.8) with consistent environment
+- Kamal deployment tool runs on host machine with native chruby Ruby
+- **Why "Run tests outside Docker" is forbidden**: Tests need the full Docker environment (PostgreSQL, Redis, exact gem versions). Running tests on host would use wrong Ruby version (system Ruby 2.6.10 ≠ app Ruby 3.2.2) and miss container dependencies.
 
 ### Docker Commands (CI/GitHub Actions Only)
 
@@ -57,10 +77,20 @@
 
 ### Testing
 
+⚠️ **CRITICAL:** Always use Docker for tests!
+
+- **Run tests:** `docker-compose exec -T app bundle exec rspec`
+- **Specific file:** `docker-compose exec -T app bundle exec rspec spec/models/user_spec.rb`
+- **Specific line:** `docker-compose exec -T app bundle exec rspec spec/models/user_spec.rb:25`
 - Always write tests for new features
-- Run full test suite before suggesting complete: `bundle exec rspec` (local) or `docker-compose exec -T app bundle exec rspec` (CI)
 - Use FactoryBot for test data
-- Verify tests pass in CI before considering work complete
+- Verify tests pass before considering work complete
+
+**Why Docker is mandatory for tests:**
+- System Ruby (2.6.10) ≠ App Ruby (3.2.2)
+- Tests need PostgreSQL 10.3 and Redis 7 from containers
+- Exact gem versions from container's bundle
+- Consistent CI/local environment
 
 **Test Output Verbosity:**
 - By default, tests run in **quiet mode** (log level: `:warn`) - SQL queries and debug logs hidden
@@ -158,9 +188,8 @@ end
 
 **For Zed editor users:**
 - Use `@console-agent` in Zed for console script assistance
-- All infrastructure details (chruby, docker, ports) in `.agents/README.md`
-- Reference `.agents/` for exact commands - don't guess or try variations
-- Commands work with local setup (chruby 3.2.2, native Ruby - NOT docker-compose)
+- Reference `.agents/*.md` for specialized patterns (models, services, jobs, debugging, etc.)
+- All commands use Docker except Kamal deployment
 
 ---
 
@@ -176,6 +205,12 @@ end
 - Logic spanning multiple models
 - Complex business rules (>20 lines)
 - External integrations
+
+**Service Pattern (dry-monads REQUIRED):**
+- **NEW services**: MUST use `dry-monads` with `:result` and `:do` notation
+- **Legacy services**: Migrate from custom `Result` classes to `dry-monads` when touched
+- Return `Success(value)` or `Failure(error)`
+- See `.agents/service.md` and `docs/KNOWN_ISSUES.md` for patterns
 
 **Implement caching for:**
 - Expensive queries run frequently
@@ -225,9 +260,8 @@ end
 
 ## 📚 References
 
-- Commands: [AGENTS.md](AGENTS.md)
-- Setup: [README.md](README.md)
-- Known Issues: [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) ⚠️ **Check first when debugging!**
-- Server provisioning: [ansible/README.md](ansible/README.md)
-- Docker: [docs/DOCKER_SETUP.md](docs/DOCKER_SETUP.md)
-- Credentials: [docs/RAILS_ENCRYPTED_CREDENTIALS.md](docs/RAILS_ENCRYPTED_CREDENTIALS.md)
+- **Specialized Agents:** `.agents/*.md` (console, model, service, rspec, debug, browser, job, refactor)
+- **Setup:** [README.md](README.md)
+- **Known Issues:** [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) ⚠️ **Check first when debugging!**
+- **Server provisioning:** [ansible/README.md](ansible/README.md)
+- **Credentials:** [docs/RAILS_ENCRYPTED_CREDENTIALS.md](docs/RAILS_ENCRYPTED_CREDENTIALS.md)
