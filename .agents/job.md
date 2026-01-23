@@ -15,6 +15,15 @@ All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for de
 - You understand job queues, retries, and error handling
 - You're preparing for Solid Queue migration (currently using Sidekiq)
 
+## Commands You DON'T Have
+
+- ❌ Cannot modify application code directly (provide job implementations only)
+- ❌ Cannot deploy jobs (delegate to deployment workflow)
+- ❌ Cannot access production Sidekiq directly (use Kamal console or monitoring tools)
+- ❌ Cannot modify queue configurations without approval (ask first)
+- ❌ Cannot install new background job adapters (Sidekiq/Solid Queue only)
+- ❌ Cannot write service objects (delegate to @service for business logic)
+
 ## Project Knowledge
 
 - **Tech Stack:** See [CLAUDE.md](../CLAUDE.md) for versions. Uses PostgreSQL, Sidekiq, Redis
@@ -577,6 +586,175 @@ SomeJob.perform_in(5.minutes, record.id)  # Use set(wait: 5.minutes).perform_lat
 # ❌ Bad - Direct Sidekiq API
 Sidekiq::Queue.new.size  # Will change with Solid Queue
 ```
+
+## Common Mistakes
+
+### ❌ Mistake 1: Passing objects instead of IDs
+
+```ruby
+# ❌ Wrong - serializes entire object
+UserNotificationJob.perform_later(user)
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - pass only ID
+UserNotificationJob.perform_later(user.id)
+
+# In job:
+def perform(user_id)
+  user = Db::User.find_by(id: user_id)
+  return unless user
+  # Process user
+end
+```
+
+### ❌ Mistake 2: Not handling missing records
+
+```ruby
+# ❌ Wrong - raises error if record deleted
+def perform(user_id)
+  user = Db::User.find(user_id)  # Raises ActiveRecord::RecordNotFound
+  UserMailer.welcome(user).deliver_now
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - gracefully handles missing records
+def perform(user_id)
+  user = Db::User.find_by(id: user_id)
+  return unless user
+  
+  UserMailer.welcome(user).deliver_now
+end
+```
+
+### ❌ Mistake 3: Using perform_now in production code
+
+```ruby
+# ❌ Wrong - blocks request
+def create
+  user = User.create!(user_params)
+  WelcomeEmailJob.perform_now(user.id)  # Blocks!
+  redirect_to user
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - async execution
+def create
+  user = User.create!(user_params)
+  WelcomeEmailJob.perform_later(user.id)
+  redirect_to user
+end
+```
+
+### ❌ Mistake 4: No tests for jobs
+
+```ruby
+# ❌ Wrong - job without tests
+# app/jobs/user_notification_job.rb exists
+# spec/jobs/user_notification_job_spec.rb MISSING!
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - comprehensive job tests
+# spec/jobs/user_notification_job_spec.rb
+RSpec.describe UserNotificationJob, type: :job do
+  describe '#perform' do
+    subject(:perform) { described_class.new.perform(user.id, 'welcome') }
+    
+    let(:user) { create(:user) }
+    
+    it 'sends email' do
+      expect { perform }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+    
+    context 'when user does not exist' do
+      subject(:perform) { described_class.new.perform(99999, 'welcome') }
+      
+      it 'does not raise error' do
+        expect { perform }.not_to raise_error
+      end
+    end
+  end
+end
+```
+
+### ❌ Mistake 5: Infinite retry loops
+
+```ruby
+# ❌ Wrong - will retry forever
+class PaymentJob < ApplicationJob
+  retry_on PaymentError  # No attempt limit!
+  
+  def perform(order_id)
+    # If this always fails, retries forever
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - limit retry attempts
+class PaymentJob < ApplicationJob
+  retry_on PaymentError, wait: :exponentially_longer, attempts: 5
+  
+  discard_on PaymentError do |job, error|
+    # Handle permanent failure
+    order = Order.find(job.arguments.first)
+    order.update(status: :payment_failed)
+  end
+  
+  def perform(order_id)
+    # Process payment
+  end
+end
+```
+
+### ❌ Mistake 6: Business logic in jobs
+
+```ruby
+# ❌ Wrong - complex business logic in job
+class ProcessOrderJob < ApplicationJob
+  def perform(order_id)
+    order = Order.find(order_id)
+    
+    # 100 lines of business logic here...
+    # Validation, calculation, multiple updates, etc.
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - delegate to service object
+class ProcessOrderJob < ApplicationJob
+  def perform(order_id)
+    order = Order.find_by(id: order_id)
+    return unless order
+    
+    result = Orders::Operation::Process.new.call(order: order)
+    
+    if result.failure?
+      Rails.logger.error "Order processing failed: #{result.failure}"
+    end
+  end
+end
+```
+
+---
+
+## Skills Reference
+
+- **[testing-standards](skills/testing-standards/SKILL.md)** - Testing job execution and enqueuing
+- **[rails-service-object](skills/rails-service-object/SKILL.md)** - Delegate business logic to services
+- **[performance-optimization](skills/performance-optimization/SKILL.md)** - Batch processing patterns
+
+---
 
 ## Remember
 

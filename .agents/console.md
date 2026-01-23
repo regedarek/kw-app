@@ -53,6 +53,15 @@ zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d staging
 zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d production --reuse "bin/rails runner \"CODE_HERE\""'
 ```
 
+## Commands You DON'T Have
+
+- ❌ Cannot create `.rb` files (provide inline code only)
+- ❌ Cannot modify database schema (delegate to @model for migrations)
+- ❌ Cannot commit changes to git (console is for queries/scripts only)
+- ❌ Cannot deploy code (delegate to Kamal deployment workflow)
+- ❌ Cannot run tests (delegate to @rspec)
+- ❌ Cannot install gems (console scripts use existing gems only)
+
 ## Code Format Rules
 
 ### ALWAYS Follow This Pattern
@@ -209,3 +218,123 @@ You have access to kw-app's Rails application with:
 **Models are namespaced under `Db::`** (e.g., `Db::User`, `Db::Profile`, `Db::Item`)
 
 **Service objects:** See `.agents/service.md` for dry-monads patterns (required for all new services)
+
+---
+
+## Common Mistakes
+
+### ❌ Mistake 1: Running on host instead of Docker
+
+```bash
+# ❌ Wrong - runs with system Ruby
+rails runner "puts User.count"
+```
+
+**Fix:**
+```bash
+# ✅ Correct - runs in Docker
+docker-compose exec -T app bundle exec rails runner "puts User.count"
+```
+
+### ❌ Mistake 2: Not using find_each for large datasets
+
+```ruby
+# ❌ Wrong - loads all records into memory
+ActiveRecord::Base.logger.silence do
+  User.all.each do |user|
+    user.process
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - batches of 1000
+ActiveRecord::Base.logger.silence do
+  User.find_each do |user|
+    user.process
+  end
+end
+```
+
+### ❌ Mistake 3: Forgetting logger.silence
+
+```ruby
+# ❌ Wrong - verbose SQL output
+User.where(active: true).find_each do |user|
+  user.update(status: 'verified')
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - clean output
+ActiveRecord::Base.logger.silence do
+  User.where(active: true).find_each do |user|
+    user.update(status: 'verified')
+  end
+end
+```
+
+### ❌ Mistake 4: No confirmation output
+
+```ruby
+# ❌ Wrong - no feedback
+ActiveRecord::Base.logger.silence do
+  User.where(verified: false).update_all(verified: true)
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - shows result
+ActiveRecord::Base.logger.silence do
+  count = User.where(verified: false).update_all(verified: true)
+  puts "Verified #{count} users"
+end
+```
+
+### ❌ Mistake 5: Using wrong model namespace
+
+```ruby
+# ❌ Wrong - models are namespaced
+ActiveRecord::Base.logger.silence do
+  User.count  # Error: uninitialized constant User
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - use Db:: namespace
+ActiveRecord::Base.logger.silence do
+  Db::User.count
+end
+```
+
+### ❌ Mistake 6: Destructive operation without preview
+
+```ruby
+# ❌ Wrong - immediately deletes
+ActiveRecord::Base.logger.silence do
+  User.where("created_at < ?", 1.year.ago).destroy_all
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - preview first
+ActiveRecord::Base.logger.silence do
+  to_delete = User.where("created_at < ?", 1.year.ago)
+  puts "Will delete #{to_delete.count} users"
+  puts to_delete.pluck(:email).first(10)
+  puts "\nConfirm? Then run: to_delete.destroy_all"
+end
+```
+
+---
+
+## Skills Reference
+
+- **[testing-standards](skills/testing-standards/SKILL.md)** - If you need to test console scripts
+- **[activerecord-patterns](skills/activerecord-patterns/SKILL.md)** - Model query patterns
+- **[performance-optimization](skills/performance-optimization/SKILL.md)** - Batch processing, N+1 prevention

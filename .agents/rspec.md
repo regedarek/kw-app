@@ -60,6 +60,15 @@ Your scope:
 - ⚠️ Ask before: Modifying rails_helper.rb or support/ files
 ```
 
+## Commands You DON'T Have
+
+- ❌ Cannot modify application code (provide test-driven feedback only)
+- ❌ Cannot deploy code (tests verify before deployment)
+- ❌ Cannot run tests on host (MUST use Docker)
+- ❌ Cannot skip failing tests (must fix or mark as pending with reason)
+- ❌ Cannot modify production database (tests use test database only)
+- ❌ Cannot install gems without approval (use existing test stack)
+
 ---
 
 ## Quick Start
@@ -548,6 +557,165 @@ describe 'validations' do
   end
 end
 ```
+
+---
+
+## Common Mistakes
+
+### ❌ Mistake 1: Running tests on host instead of Docker
+
+```bash
+# ❌ Wrong - uses system Ruby (2.6.10), wrong gems
+bundle exec rspec
+```
+
+**Fix:**
+```bash
+# ✅ Correct - uses Docker Ruby (3.2.2)
+docker-compose exec -T app bundle exec rspec
+```
+
+### ❌ Mistake 2: Not using FactoryBot
+
+```ruby
+# ❌ Wrong - hardcoded test data
+RSpec.describe User do
+  it 'has a name' do
+    user = User.create!(email: 'test@test.com', name: 'Test')
+    expect(user.name).to eq('Test')
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - use factories
+RSpec.describe User do
+  it 'has a name' do
+    user = create(:user, name: 'Test')
+    expect(user.name).to eq('Test')
+  end
+end
+```
+
+### ❌ Mistake 3: Testing too much in one example
+
+```ruby
+# ❌ Wrong - multiple unrelated assertions
+it 'creates user and sends email and updates stats' do
+  expect { operation.call }.to change(User, :count).by(1)
+  expect(UserMailer).to have_received(:welcome)
+  expect(Stats.user_count).to eq(1)
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - focused examples
+it 'creates a user' do
+  expect { operation.call }.to change(User, :count).by(1)
+end
+
+it 'sends welcome email' do
+  operation.call
+  expect(UserMailer).to have_received(:welcome)
+end
+
+it 'updates user count' do
+  operation.call
+  expect(Stats.user_count).to eq(1)
+end
+```
+
+### ❌ Mistake 4: Not using build for validation tests
+
+```ruby
+# ❌ Wrong - hits database unnecessarily
+RSpec.describe User do
+  it 'validates presence of email' do
+    user = create(:user, email: nil)
+    expect(user).not_to be_valid
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - use build (no DB hit)
+RSpec.describe User do
+  it 'validates presence of email' do
+    user = build(:user, email: nil)
+    expect(user).not_to be_valid
+  end
+end
+```
+
+### ❌ Mistake 5: Missing test for dry-monads Success/Failure
+
+```ruby
+# ❌ Wrong - not checking monad type
+it 'creates user' do
+  result = operation.call(params: params)
+  expect(result.value!).to be_a(User)
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - check Success/Failure explicitly
+it 'returns Success with user' do
+  result = operation.call(params: params)
+  
+  expect(result).to be_success
+  expect(result.success).to be_a(User)
+end
+
+context 'with invalid params' do
+  it 'returns Failure with errors' do
+    result = operation.call(params: invalid_params)
+    
+    expect(result).to be_failure
+    expect(result.failure).to be_a(Hash)
+  end
+end
+```
+
+### ❌ Mistake 6: Not cleaning up test data
+
+```ruby
+# ❌ Wrong - data persists between tests
+before(:all) do
+  @user = create(:user)
+end
+
+it 'test 1' do
+  # Uses @user
+end
+
+it 'test 2' do
+  # @user still exists, may cause issues
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - fresh data per test
+before(:each) do
+  @user = create(:user)
+end
+
+# OR use let
+let(:user) { create(:user) }
+```
+
+---
+
+## Skills Reference
+
+- **[testing-standards](skills/testing-standards/SKILL.md)** - Comprehensive testing patterns
+- **[dry-monads-patterns](skills/dry-monads-patterns/SKILL.md)** - Testing dry-monads operations
+- **[rails-service-object](skills/rails-service-object/SKILL.md)** - Testing service objects
+- **[activerecord-patterns](skills/activerecord-patterns/SKILL.md)** - Testing models
 
 ---
 

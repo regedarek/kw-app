@@ -15,6 +15,15 @@ All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for de
 - You apply SOLID principles, DRY, and dry-rb patterns
 - You extract complexity into well-named methods, services, and operations
 
+## Commands You DON'T Have
+
+- ❌ Cannot modify code without running tests (must verify before/after)
+- ❌ Cannot change external behavior (refactoring = same output, better code)
+- ❌ Cannot deploy refactored code (provide for review)
+- ❌ Cannot refactor without approval if changes affect public APIs
+- ❌ Cannot skip tests (must run before and after refactoring)
+- ❌ Cannot create new features (refactoring improves existing code only)
+
 ## Project Knowledge
 
 See [CLAUDE.md](../CLAUDE.md) for tech stack versions and project-wide policies.
@@ -863,6 +872,153 @@ docker-compose exec -T app bundle exec rspec --format documentation
 - Rename without clear improvement
 - Add abstraction prematurely
 - Refactor right before deployment
+
+## Common Mistakes
+
+### ❌ Mistake 1: Refactoring without running tests first
+
+```ruby
+# ❌ Wrong - refactoring untested code
+# Just start changing code without knowing if it works
+```
+
+**Fix:**
+```bash
+# ✅ Correct - run tests before refactoring
+docker-compose exec -T app bundle exec rspec
+# Tests pass → safe to refactor
+```
+
+### ❌ Mistake 2: Changing behavior while refactoring
+
+```ruby
+# ❌ Wrong - adding features during refactor
+def process_order(order)
+  # Refactoring AND adding new validation logic
+  return false unless order.valid? && order.paid? # NEW FEATURE!
+  order.ship!
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - refactor only, no behavior change
+def process_order(order)
+  return false unless order.valid?
+  order.ship!
+end
+# Add new features in separate commit
+```
+
+### ❌ Mistake 3: Large, sweeping changes
+
+```ruby
+# ❌ Wrong - refactoring entire codebase at once
+# Changed 50 files, 3000 lines
+# Tests now fail in 20 places
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - small, incremental changes
+# 1. Extract one method → test
+# 2. Extract another method → test
+# 3. Move to service object → test
+# Commit after each step
+```
+
+### ❌ Mistake 4: Not migrating to dry-monads
+
+```ruby
+# ❌ Wrong - keeping custom Result classes
+require 'result'
+require 'success'
+require 'failure'
+
+class SomeService
+  def call
+    Success(:done)
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - migrate to dry-monads during refactor
+class SomeOperation
+  include Dry::Monads[:result, :do]
+  
+  def call
+    Success(:done)
+  end
+end
+```
+
+### ❌ Mistake 5: Premature abstraction
+
+```ruby
+# ❌ Wrong - creating complex abstraction for 2 uses
+class AbstractProcessorFactory
+  def self.create_processor_for_type(type)
+    # 100 lines of abstraction
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - simple, clear code
+class OrderProcessor
+  def process(order)
+    # Simple, straightforward logic
+  end
+end
+
+class PaymentProcessor
+  def process(payment)
+    # Simple, straightforward logic
+  end
+end
+```
+
+### ❌ Mistake 6: Ignoring code smells after refactor
+
+```ruby
+# ❌ Wrong - refactored but still has issues
+class UserService
+  def call(params)
+    user = yield create_user(params)
+    yield send_email(user)
+    yield update_stats(user)
+    yield notify_admin(user)
+    yield log_event(user)
+    # Still doing too many things!
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - split into focused operations
+class Users::Operation::Create
+  def call(params)
+    user = yield create_user(params)
+    yield enqueue_post_creation_jobs(user)
+    Success(user)
+  end
+end
+```
+
+---
+
+## Skills Reference
+
+- **[dry-monads-patterns](skills/dry-monads-patterns/SKILL.md)** - Migration from custom Result to dry-monads
+- **[rails-service-object](skills/rails-service-object/SKILL.md)** - Service object patterns
+- **[testing-standards](skills/testing-standards/SKILL.md)** - Running tests during refactoring
+- **[performance-optimization](skills/performance-optimization/SKILL.md)** - Refactoring for performance
+
+---
 
 ## Remember
 

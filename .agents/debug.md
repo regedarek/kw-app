@@ -27,6 +27,15 @@ Structured debugging approach with distinct roles:
 4. **Analyze**: Check auth, validations, business logic
 5. **Fix**: Minimal patch + test
 
+## Commands You DON'T Have
+
+- ❌ Cannot modify code directly (provide analysis and recommendations)
+- ❌ Cannot write tests (delegate to @rspec for regression tests)
+- ❌ Cannot deploy fixes (provide patch for review)
+- ❌ Cannot access production database directly (use staging or Kamal console)
+- ❌ Cannot install debugging gems without approval (use existing tools)
+- ❌ Cannot modify database schema (delegate to @model for migrations)
+
 ---
 
 ## Tool 1: curl for HTTP Debugging
@@ -212,3 +221,105 @@ docker-compose logs -f app | grep "ERROR\|DEBUG"
 - [ ] Verified fix with reproduction script
 - [ ] Removed debug logs
 - [ ] Wrote test to prevent regression
+
+---
+
+## Common Mistakes
+
+### ❌ Mistake 1: Not reproducing the issue first
+
+```bash
+# ❌ Wrong - jumping to fix without reproduction
+# Just reading code and guessing the problem
+```
+
+**Fix:**
+```bash
+# ✅ Correct - reproduce first with curl or Playwright
+curl -b cookies.txt http://localhost:3002/problem-path
+# OR write Playwright script to reproduce
+```
+
+### ❌ Mistake 2: Leaving debug logs in code
+
+```ruby
+# ❌ Wrong - committing debug statements
+def index
+  Rails.logger.info "→ DEBUG: current_user=#{current_user&.email}"
+  # ... action code
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - remove all debug logs before commit
+def index
+  # ... clean action code
+end
+```
+
+### ❌ Mistake 3: Testing on host instead of Docker
+
+```bash
+# ❌ Wrong - wrong Ruby version, no dependencies
+rails console
+```
+
+**Fix:**
+```bash
+# ✅ Correct - use Docker
+docker-compose exec app bundle exec rails console
+```
+
+### ❌ Mistake 4: Not checking logs before diving into code
+
+```bash
+# ❌ Wrong - reading all code to find issue
+```
+
+**Fix:**
+```bash
+# ✅ Correct - check logs first
+docker-compose logs app --tail=200 | grep -i error
+docker-compose logs app | grep "GET \"/problem-path\"" -A 20
+```
+
+### ❌ Mistake 5: Forgetting authentication in curl
+
+```bash
+# ❌ Wrong - no cookies, always redirects to login
+curl http://localhost:3002/protected-path
+```
+
+**Fix:**
+```bash
+# ✅ Correct - login first, save cookies
+curl -c cookies.txt http://localhost:3002/users/sign_in > login.html
+TOKEN=$(grep -o 'name="authenticity_token" value="[^"]*"' login.html | cut -d'"' -f4)
+curl -c cookies.txt -b cookies.txt -X POST http://localhost:3002/users/sign_in \
+  -d "authenticity_token=$TOKEN" -d "user[email]=EMAIL" -d "user[password]=PASS"
+curl -b cookies.txt http://localhost:3002/protected-path
+```
+
+### ❌ Mistake 6: Not verifying the fix
+
+```bash
+# ❌ Wrong - applying fix without testing
+# Made code change, didn't run reproduction script again
+```
+
+**Fix:**
+```bash
+# ✅ Correct - verify fix with original reproduction
+# Run curl/Playwright script again to confirm issue is resolved
+curl -b cookies.txt http://localhost:3002/problem-path
+# Should now work correctly
+```
+
+---
+
+## Skills Reference
+
+- **[testing-standards](skills/testing-standards/SKILL.md)** - Writing regression tests
+- **[performance-optimization](skills/performance-optimization/SKILL.md)** - If debugging performance issues
+- **[activerecord-patterns](skills/activerecord-patterns/SKILL.md)** - If debugging database queries

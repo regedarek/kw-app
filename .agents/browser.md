@@ -15,6 +15,15 @@ All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for de
 - Use helpers from `lib/playwright/` for reusable functionality
 - Take screenshots and capture errors for debugging
 
+## Commands You DON'T Have
+
+- ❌ Cannot modify application code (provide analysis and reproduction only)
+- ❌ Cannot write tests directly (delegate to @rspec for test files)
+- ❌ Cannot deploy fixes (provide reproduction for developers)
+- ❌ Cannot access production database (use Playwright for UI testing only)
+- ❌ Cannot install npm packages (use existing Playwright setup)
+- ❌ Cannot create permanent automation scripts (tmp/ only, delete after)
+
 ## Project Knowledge
 
 - **Tech Stack:** See [CLAUDE.md](../CLAUDE.md) for versions. Uses Hotwire (Turbo + Stimulus), Playwright
@@ -303,6 +312,119 @@ docker-compose exec -T app bash -c "
 │   (port 3002)   │
 └─────────────────┘
 ```
+
+## Common Mistakes
+
+### ❌ Mistake 1: Using localhost instead of Docker network URL
+
+```ruby
+# ❌ Wrong - Playwright container can't reach localhost
+helper.goto("http://localhost:3002/wydarzenia")
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Use Docker network hostname
+helper.goto("http://app:3002/wydarzenia")
+# OR use helper method
+helper.goto("#{helper.base_url}/wydarzenia")
+```
+
+### ❌ Mistake 2: Using require_relative instead of File.join
+
+```ruby
+# ❌ Wrong - doesn't work with rails runner
+require_relative '../../lib/playwright/login_helper'
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - works with rails runner
+require File.join(Rails.root, 'lib', 'playwright', 'login_helper')
+```
+
+### ❌ Mistake 3: Not keeping browser open for inspection
+
+```ruby
+# ❌ Wrong - browser closes immediately
+Playwright::LoginHelper.new(environment: :development).start do |helper|
+  helper.login
+  helper.goto("#{helper.base_url}/wydarzenia")
+  helper.screenshot("page")
+  # Browser closes here!
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - add sleep to inspect manually
+Playwright::LoginHelper.new(environment: :development, headless: false).start do |helper|
+  helper.login
+  helper.goto("#{helper.base_url}/wydarzenia")
+  helper.screenshot("page")
+  sleep 10  # Browser stays open
+end
+```
+
+### ❌ Mistake 4: Committing temporary scripts
+
+```bash
+# ❌ Wrong - scripts committed to git
+git add tmp/playwright/test_issue.rb
+git commit -m "Add test script"
+```
+
+**Fix:**
+```bash
+# ✅ Correct - delete after use
+rm tmp/playwright/test_issue.rb
+# tmp/ is gitignored, but clean up anyway
+```
+
+### ❌ Mistake 5: Not checking for redirects
+
+```ruby
+# ❌ Wrong - assumes navigation worked
+helper.goto("#{helper.base_url}/wydarzenia")
+helper.click('.some-button')  # May fail if redirected
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - check URL after navigation
+target = "#{helper.base_url}/wydarzenia"
+helper.goto(target)
+if helper.current_url != target
+  puts "⚠️  Redirected to: #{helper.current_url}"
+  # Check flash messages, investigate why
+end
+```
+
+### ❌ Mistake 6: Ignoring console errors
+
+```ruby
+# ❌ Wrong - not checking for JS errors
+helper.goto("#{helper.base_url}/wydarzenia")
+helper.screenshot("page")
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - capture console logs and errors
+helper.goto("#{helper.base_url}/wydarzenia")
+puts "Console logs: #{helper.console_logs.inspect}"
+puts "Errors: #{helper.errors.inspect}"
+helper.screenshot("page")
+```
+
+---
+
+## Skills Reference
+
+- **[testing-standards](skills/testing-standards/SKILL.md)** - If writing automated tests after reproduction
+- **[performance-optimization](skills/performance-optimization/SKILL.md)** - If debugging performance issues
+
+---
 
 ## Remember
 

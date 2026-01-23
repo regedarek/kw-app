@@ -465,6 +465,175 @@ end
 
 ---
 
+## Common Mistakes
+
+### ❌ Mistake 1: Not including `:do` notation
+
+```ruby
+# ❌ Wrong - Missing :do
+class MyOperation
+  include Dry::Monads[:result]  # Missing :do!
+  
+  def call
+    user = yield find_user  # ERROR: yield without :do
+    Success(user)
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct
+class MyOperation
+  include Dry::Monads[:result, :do]  # Include :do
+  
+  def call
+    user = yield find_user
+    Success(user)
+  end
+end
+```
+
+### ❌ Mistake 2: Using deprecated Result classes
+
+```ruby
+# ❌ Wrong - Custom Result (DEPRECATED)
+require 'result'
+require 'success'
+require 'failure'
+
+class Users::SomeService
+  def call
+    return Failure(:invalid, errors: {}) unless valid?
+    Success(:success)
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - dry-monads
+class Users::Operation::SomeOperation
+  include Dry::Monads[:result, :do]
+  
+  def call
+    return Failure([:invalid, {}]) unless valid?
+    Success(:success)
+  end
+end
+```
+
+### ❌ Mistake 3: Mixing exceptions with monads
+
+```ruby
+# ❌ Wrong - Mixing paradigms
+def call
+  user = yield find_user
+  raise "Invalid user" unless user.valid?  # BAD!
+  Success(user)
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Use monads consistently
+def call
+  user = yield find_user
+  return Failure(:invalid_user) unless user.valid?
+  Success(user)
+end
+```
+
+### ❌ Mistake 4: Not handling Failure in controller
+
+```ruby
+# ❌ Wrong - Assumes always success
+def create
+  result = MyOperation.new.call(params: params)
+  redirect_to result.success  # CRASHES on Failure!
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Handle both cases
+def create
+  result = MyOperation.new.call(params: params)
+  
+  case result
+  in Success(data)
+    redirect_to data
+  in Failure(error)
+    render :new, alert: error
+  end
+end
+```
+
+### ❌ Mistake 5: No tests for operation
+
+```ruby
+# ❌ Wrong - Operation without tests
+# app/components/users/operation/create.rb exists
+# spec/components/users/operation/create_spec.rb MISSING!
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Always write tests
+# spec/components/users/operation/create_spec.rb
+RSpec.describe Users::Operation::Create do
+  describe '#call' do
+    context 'with valid params' do
+      it 'returns Success with user' do
+        result = described_class.new.call(params: valid_params)
+        expect(result).to be_success
+      end
+    end
+    
+    context 'with invalid params' do
+      it 'returns Failure with errors' do
+        result = described_class.new.call(params: invalid_params)
+        expect(result).to be_failure
+      end
+    end
+  end
+end
+```
+
+### ❌ Mistake 6: Too many responsibilities (God operation)
+
+```ruby
+# ❌ Wrong - Does everything
+class Users::Operation::Process
+  def call
+    # Validates
+    # Creates user
+    # Sends email
+    # Updates stats
+    # Logs analytics
+    # Notifies admin
+    # ... 500 more lines
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Split responsibilities
+class Users::Operation::Create
+  include Dry::Monads[:result, :do]
+  
+  def call(params:)
+    user = yield create_user(params)
+    yield Users::Operation::SendWelcomeEmail.new.call(user: user)
+    yield Users::Operation::UpdateStats.new.call(user: user)
+    Success(user)
+  end
+end
+```
+
+---
+
 ## Resources
 
 - [dry-monads Documentation](https://dry-rb.org/gems/dry-monads/)
@@ -472,3 +641,7 @@ end
 - [Railway Oriented Programming](https://fsharpforfunandprofit.com/rop/)
 - [CLAUDE.md](../CLAUDE.md) - Project-wide policies
 - [docs/KNOWN_ISSUES.md](../docs/KNOWN_ISSUES.md) - Known patterns and solutions
+- **Skills Library**:
+  - [dry-monads-patterns](skills/dry-monads-patterns/SKILL.md) - Deep dive on dry-monads
+  - [rails-service-object](skills/rails-service-object/SKILL.md) - Service architecture patterns
+  - [testing-standards](skills/testing-standards/SKILL.md) - Testing best practices
