@@ -116,9 +116,15 @@ jobs:
           
           echo "✅ SSH key validated successfully"
           
+          # Clear any existing known_hosts to avoid conflicts
+          rm -f ~/.ssh/known_hosts
+          
           # Add server to known hosts with all key types
           echo "Adding server to known_hosts..."
-          ssh-keyscan -H 146.59.44.70 > ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -H -t rsa,ecdsa,ed25519 146.59.44.70 >> ~/.ssh/known_hosts 2>/dev/null
+          
+          # Ensure proper permissions
+          chmod 644 ~/.ssh/known_hosts
           
           echo "✅ Server fingerprints added to known_hosts"
           echo "Known hosts content:"
@@ -130,7 +136,7 @@ jobs:
           Host 146.59.44.70
             User ubuntu
             IdentityFile ~/.ssh/kamal_production_ed25519
-            StrictHostKeyChecking yes
+            StrictHostKeyChecking accept-new
             UserKnownHostsFile ~/.ssh/known_hosts
             IdentitiesOnly yes
           EOF
@@ -138,20 +144,34 @@ jobs:
           
           echo "SSH configuration:"
           cat ~/.ssh/config
+          
+          # Verify known_hosts still exists and has content
+          if [ -f ~/.ssh/known_hosts ] && [ -s ~/.ssh/known_hosts ]; then
+            echo "✅ known_hosts file exists and has content ($(wc -l < ~/.ssh/known_hosts) lines)"
+          else
+            echo "❌ Warning: known_hosts file is missing or empty"
+            exit 1
+          fi
       
       - name: Start SSH agent and add key
         run: |
-          # Start SSH agent
-          eval $(ssh-agent -s)
+          # Start SSH agent and capture output
+          ssh-agent -s > /tmp/ssh_agent_env
+          source /tmp/ssh_agent_env
           
           # Add the SSH key to the agent
           ssh-add ~/.ssh/kamal_production_ed25519
           
-          # Export SSH_AUTH_SOCK for subsequent steps
+          # List loaded keys for verification
+          ssh-add -l
+          
+          # Export SSH_AUTH_SOCK and SSH_AGENT_PID for subsequent steps
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> $GITHUB_ENV
           
           echo "✅ SSH agent started and key added"
+          echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
+          echo "SSH_AGENT_PID: $SSH_AGENT_PID"
       
       - name: Test SSH connection
         run: |
@@ -175,7 +195,24 @@ jobs:
         run: kamal lock release -d production || true
       
       - name: Deploy to production
-        run: kamal deploy -d production
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
+        run: |
+          # Verify SSH agent is still available
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            echo "❌ SSH_AUTH_SOCK not set, SSH agent may have stopped"
+            exit 1
+          fi
+          
+          if ! ssh-add -l > /dev/null 2>&1; then
+            echo "❌ SSH agent has no keys loaded"
+            exit 1
+          fi
+          
+          echo "✅ SSH agent verified with $(ssh-add -l | wc -l) key(s)"
+          
+          # Run kamal deploy
+          kamal deploy -d production
       
       - name: Cleanup old Docker images
         run: kamal prune all -d production || true
