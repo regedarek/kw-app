@@ -36,28 +36,37 @@
 
 ## 🎯 AI Working Guidelines
 
-### Docker Rules
+### Environment Setup
 
-⚠️ **CRITICAL - Local Environment:**
-- **Local machine uses chruby + native Ruby 3.2.2** (NOT docker-compose)
-- Docker is ONLY used in CI/CD (GitHub Actions)
+⚠️ **CRITICAL - Local vs CI:**
+- **Local machine**: Uses chruby + native Ruby 3.2.2 (NOT docker-compose)
+- **CI/GitHub Actions**: Uses docker-compose with `-T` flag
 - For local commands, run directly: `bundle exec rspec`, `rails console`, etc.
 - See `.agents/README.md` for exact local setup details
 
-**CI/GitHub Actions - Use `-T` flag for non-interactive commands:**
+### Docker Commands (CI/GitHub Actions Only)
+
+**Use `-T` flag for non-interactive commands:**
 - Tests, migrations, rake tasks: `docker-compose exec -T app bundle exec rspec`
 
-**CI/GitHub Actions - No `-T` flag for interactive:**
+**No `-T` flag for interactive commands:**
 - Rails console, bash: `docker-compose exec app bundle exec rails console`
 
-**CI/GitHub Actions - Always check containers first:** `docker-compose ps`
-If not running: `docker-compose up -d`
+**Always check containers first:** `docker-compose ps`
+**When not running:** `docker-compose up -d`
 
 ### Testing
 
 - Always write tests for new features
-- Run before suggesting complete: `docker-compose exec -T app bundle exec rspec`
+- Run full test suite before suggesting complete: `bundle exec rspec` (local) or `docker-compose exec -T app bundle exec rspec` (CI)
 - Use FactoryBot for test data
+- Verify tests pass in CI before considering work complete
+
+**Test Output Verbosity:**
+- By default, tests run in **quiet mode** (log level: `:warn`) - SQL queries and debug logs hidden
+- Enable verbose output for debugging: `VERBOSE_TESTS=true bundle exec rspec`
+- Verbose mode shows: SQL queries, ActiveRecord logs, cache hits, SASS warnings
+- Use verbose mode only when debugging specific issues
 
 ### Migrations
 
@@ -82,13 +91,14 @@ If not running: `docker-compose up -d`
 4. Add logging/pry breakpoints
 5. Fix root cause, not symptoms
 6. Write test first (TDD)
-7. **Update KNOWN_ISSUES.md** if you discover a new pattern/bug
+7. **Update KNOWN_ISSUES.md** when you discover a new pattern/bug
 
 ### Secrets
 
 - Stored in `config/credentials/*.yml.enc` (encrypted)
 - Master keys in Bitwarden (never commit)
-- Edit: `docker-compose exec app bash -c "EDITOR=vim bin/rails credentials:edit --environment development"`
+- Edit locally: `EDITOR=vim bin/rails credentials:edit --environment development`
+- Edit in CI: `docker-compose exec app bash -c "EDITOR=vim bin/rails credentials:edit --environment development"`
 
 ---
 
@@ -96,7 +106,7 @@ If not running: `docker-compose up -d`
 
 ### Adding Gem
 1. Edit `Gemfile`
-2. Restart: `docker-compose restart app sidekiq` (auto-installs via entrypoint)
+2. Restart containers: `docker-compose restart app sidekiq` (auto-installs via entrypoint)
 3. Verify in logs
 
 ### Debugging Production
@@ -129,9 +139,9 @@ If not running: `docker-compose up -d`
 1. **Provide inline Ruby code** for copy/paste into `rails console`
 2. **Always wrap in `ActiveRecord::Base.logger.silence do ... end`** to keep output clean
 3. **Format as single code block** ready for immediate execution
-4. **Include minimal comments** only if logic is complex
+4. **Include minimal comments** only when logic is complex
 
-**Example format:**
+**Recommended format:**
 ```ruby
 ActiveRecord::Base.logger.silence do
   User.where(active: true).find_each do |user|
@@ -141,10 +151,10 @@ ActiveRecord::Base.logger.silence do
 end
 ```
 
-**Do NOT:**
-- Create `.rb` files or use `rails runner`
-- Run commands unless explicitly asked
-- Provide verbose explanations before the code
+**Avoid:**
+- Creating `.rb` files or using `rails runner`
+- Running commands without explicit user request
+- Verbose explanations before the code
 
 **For Zed editor users:**
 - Use `@console-agent` in Zed for console script assistance
@@ -156,18 +166,18 @@ end
 
 ## 🧠 Decision Making
 
-**Background jobs when:**
-- >500ms operations
+**Use background jobs for:**
+- Operations taking >500ms
 - External API calls
 - Email/file processing
 - Batch operations
 
-**Service objects when:**
-- Logic spans multiple models
+**Use service objects for:**
+- Logic spanning multiple models
 - Complex business rules (>20 lines)
 - External integrations
 
-**Cache when:**
+**Implement caching for:**
 - Expensive queries run frequently
 - External API responses (with TTL)
 - Complex calculations
@@ -204,11 +214,11 @@ end
 - Zero-downtime (Kamal rolling restart)
 - Migrations run before new containers
 
-**Important:**
-- Pi has memory limits (large seeds may fail)
-- GitHub Actions handles testing + deployment
-- CarrierWave config in `config/initializers/carrierwave.rb`
-- Sidekiq web UI at `/sidekiq`
+**Key considerations:**
+- Pi has memory limits (run large seeds in batches)
+- GitHub Actions handles testing + deployment automatically
+- CarrierWave uses local storage in test, OpenStack in production
+- Sidekiq web UI available at `/sidekiq`
 
 ---
 

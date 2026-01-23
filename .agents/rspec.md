@@ -20,8 +20,11 @@ You are an expert QA engineer specialized in RSpec testing for modern Rails appl
 ## Commands
 
 ```bash
-# All tests
+# All tests (quiet mode - default)
 docker-compose exec -T app bundle exec rspec
+
+# All tests (verbose mode - shows SQL queries and debug logs)
+docker-compose exec -T app env VERBOSE_TESTS=true bundle exec rspec
 
 # Specific file/line
 docker-compose exec -T app bundle exec rspec spec/models/user_spec.rb
@@ -36,7 +39,11 @@ docker-compose exec -T app bundle exec rspec --profile 10
 docker-compose exec -T app bundle exec rake db:test:prepare
 ```
 
-**Important:** Always use `-T` flag for non-interactive commands (tests, rake tasks)
+**Important:** 
+- Always use `-T` flag for non-interactive commands (tests, rake tasks)
+- By default, tests run in quiet mode (log level: `:warn`) - SQL queries and debug logs are hidden
+- Set `VERBOSE_TESTS=true` to enable full debug output including SQL queries and ActiveRecord logs
+- Use verbose mode only when debugging specific issues
 
 ## Test Structure
 
@@ -458,6 +465,49 @@ end
 - User `roles` is PostgreSQL array, not method
 - Reservations don't use Orders table (dropped 2017)
 - CanCan authorization in request specs results in redirects, not 403
+
+## Verbose Test Output
+
+By default, tests run in **quiet mode** to reduce noise:
+- Log level set to `:warn`
+- SQL queries hidden
+- ActiveRecord debug logs suppressed
+- Only warnings, errors, and RSpec output shown
+
+**When to use verbose mode:**
+```bash
+# Enable verbose output to debug test failures
+VERBOSE_TESTS=true bundle exec rspec spec/models/user_spec.rb
+
+# In CI/GitHub Actions - add to workflow env
+env:
+  VERBOSE_TESTS: 'true'
+```
+
+**What verbose mode shows:**
+- All SQL queries with parameters
+- ActiveRecord cache hits
+- Database load operations
+- Full debug-level Rails logs
+- SASS deprecation warnings
+
+**Default (quiet) output:**
+```
+User
+  #full_name
+    returns concatenated name (0.02s)
+  ✓ 135 examples, 0 failures
+```
+
+**Verbose output:**
+```
+[12:57:35.450] DEBUG |   Db::User Load (0.3ms)  SELECT "users".* ...
+[12:57:35.452] DEBUG |   CACHE Db::Membership::Fee Load (0.0ms) ...
+User
+  #full_name
+    returns concatenated name (0.02s)
+  ✓ 135 examples, 0 failures
+```
 
 ## Resources
 

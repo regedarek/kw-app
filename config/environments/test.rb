@@ -17,12 +17,19 @@ Rails.application.configure do
   # or in some way before deploying your code.
   config.eager_load = ENV["CI"].present?
 
-  # Configure logging to STDOUT for test environment so we can see output immediately
-  config.log_level = :debug
+  # Configure logging for test environment
+  # Use :warn to hide SQL queries and debug logs by default
+  # Set VERBOSE_TESTS=true environment variable to see full debug output
+  config.log_level = ENV['VERBOSE_TESTS'].present? ? :debug : :warn
   config.logger = ActiveSupport::Logger.new(STDOUT)
   config.logger.formatter = proc { |severity, datetime, progname, msg|
     "[#{datetime.strftime('%H:%M:%S.%L')}] #{severity} | #{msg}\n"
   }
+  
+  # Silence ActiveRecord SQL logging unless verbose mode is enabled
+  unless ENV['VERBOSE_TESTS'].present?
+    ActiveRecord::Base.logger = ActiveSupport::Logger.new(nil)
+  end
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
