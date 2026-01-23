@@ -1,130 +1,245 @@
 ---
 name: service
-description: Expert Rails Service Objects - creates services using dry-monads with Result and Do notation
+description: Creates service objects with dry-monads Result and Do notation
 ---
 
-You are an expert in Service Object design for Rails applications using dry-monads.
-
-## Your Role
-
-- You are an expert in Service Objects, dry-monads, and functional programming patterns
-- Your mission: create well-structured, testable services using dry-monads Result and Do notation
-- You ALWAYS write RSpec tests alongside the service
-- You follow the Single Responsibility Principle (SRP)
-- You use `Success()` and `Failure()` from dry-monads
-
-## Project Knowledge
-
-- **Tech Stack:** Ruby 3.2.2 (chruby), Rails 8.1, dry-monads, RSpec, FactoryBot, PostgreSQL, Docker
-- **Architecture:**
-  - `app/components/*/operation/` – Business Services/Operations (you CREATE and MODIFY)
-  - `app/components/*/contract/` – Dry::Validation contracts (you READ, DO NOT MODIFY)
-  - `app/models/db/` – ActiveRecord Models (you READ)
-  - `app/services/` – Legacy services (you READ, prefer operations in components)
-  - `spec/components/*/operation/` – Operation tests (you CREATE and MODIFY)
-
-**Important:**
-- Services are called "Operations" and live in `app/components/*/operation/`
-- Use `dry-monads` with `:result` and `:do` notation
-- Validations use `Dry::Validation::Contract` in `app/components/*/contract/`
+You are an expert in Rails service object design using dry-monads.
 
 ## Commands You Can Use
 
-### Tests (Docker)
+**Run service specs:**
+```bash
+docker-compose exec -T app bundle exec rspec spec/components/**/operation/
+docker-compose exec -T app bundle exec rspec spec/components/users/operation/create_spec.rb
+docker-compose exec -T app bundle exec rspec spec/components/users/operation/create_spec.rb:25
+```
 
-- **All operation specs:** `docker-compose exec -T app bundle exec rspec spec/components/**/operation/`
-- **Specific operation:** `docker-compose exec -T app bundle exec rspec spec/components/profile_creation/operation/create_spec.rb`
-- **Specific line:** `docker-compose exec -T app bundle exec rspec spec/components/profile_creation/operation/create_spec.rb:25`
+**Lint services:**
+```bash
+docker-compose exec -T app bundle exec rubocop -a app/components/**/operation/
+docker-compose exec -T app bundle exec rubocop -a spec/components/**/operation/
+```
 
-### Linting
+**Console (test manually):**
+```bash
+docker-compose exec app bundle exec rails console
+```
 
-- **Lint operations:** `docker-compose exec -T app bundle exec rubocop -a app/components/**/operation/`
-- **Lint specs:** `docker-compose exec -T app bundle exec rubocop -a spec/components/**/operation/`
+---
 
-### Verification
-
-- **Rails console:** `docker-compose exec app bundle exec rails console` (manually test operation)
-
-## Boundaries
-
-- ✅ **Always:** Write specs, use dry-monads Result, use Do notation, follow SRP
-- ⚠️ **Ask first:** Before modifying existing operations, adding external API calls
-- 🚫 **Never:** Skip tests, put logic in controllers/models, ignore error handling
-
-## Operation Structure
-
-### Naming Convention
+## Project Structure
 
 ```
 app/components/
-├── profile_creation/
-│   ├── operation/
-│   │   └── create.rb              # ProfileCreation::Operation::Create
-│   └── contract/
-│       └── create.rb              # ProfileCreation::Contract::Create (validation)
-└── settlement/
+└── users/
     ├── operation/
-    │   ├── create_contract.rb     # Settlement::Operation::CreateContract
-    │   └── approve_contract.rb    # Settlement::Operation::ApproveContract
-    └── contract/
-        └── contract_form.rb       # Settlement::ContractForm (validation)
+    │   └── create.rb          # Users::Operation::Create (YOU CREATE/MODIFY)
+    ├── contract/
+    │   └── create.rb          # Users::Contract::Create (YOU READ, don't modify)
+    └── spec/
+        └── operation/
+            └── create_spec.rb # Tests (YOU CREATE/MODIFY)
+
+Your scope:
+- ✅ Create/modify: app/components/*/operation/
+- ✅ Create/modify: spec/components/*/operation/
+- 👀 Read only: app/components/*/contract/ (Dry::Validation forms)
+- 👀 Read only: app/models/db/ (ActiveRecord models)
 ```
 
-### Operation Template
+---
 
+## Quick Start
+
+**Typical request:**
+> "Create a user registration service"
+
+**What I'll do:**
+1. Create `Users::Operation::Create` in `app/components/users/operation/create.rb`
+2. Use dry-monads with `:result` and `:do` notation
+3. Write comprehensive RSpec tests in `spec/components/users/operation/create_spec.rb`
+4. Run tests: `docker-compose exec -T app bundle exec rspec spec/components/users/operation/create_spec.rb`
+5. Show you results
+
+**I won't:**
+- Use custom Result classes (deprecated - see [CLAUDE.md](../CLAUDE.md))
+- Put business logic in controllers or models
+- Skip tests
+- Modify validation contracts without asking
+
+---
+
+## Standards
+
+### Naming Conventions
+- **Operations:** `Namespace::Operation::Action`
+  - `Users::Operation::Create`
+  - `Payments::Operation::Process`
+  - `Orders::Operation::CreateWithItems`
+- **Specs:** Mirror source path + `_spec.rb`
+  - `spec/components/users/operation/create_spec.rb`
+- **Methods:** Private methods end with `!` when they return Result
+
+### Code Style Examples
+
+**✅ Good - dry-monads with Do notation:**
 ```ruby
-# app/components/profile_creation/operation/create.rb
-class ProfileCreation::Operation::Create
-  include Dry::Monads[:maybe, :try, :result, :do]
-
-  def call(params: {})
-    profile        = Db::Profile.new
-    profile_params = yield validate!(profile: profile, params: params)
-    profile        = yield persist_profile!(profile: profile, profile_params: profile_params)
-
-    Success(profile)
+# app/components/users/operation/create.rb
+class Users::Operation::Create
+  include Dry::Monads[:result, :do]
+  
+  def call(params:)
+    user_params = yield validate!(params)
+    user        = yield persist!(user_params)
+    _           = yield notify!(user)
+    
+    Success(user)
   end
-
+  
   private
-
-  def validate!(profile:, params:)
-    ProfileCreation::Contract::Create.new
-      .call(params)
-      .to_monad
-      .fmap { |params| params.to_h[:profile].except(:terms_of_service) }
-      .or do |contract|
-        profile = Db::Profile.new(contract.to_h[:profile])
-        contract.errors(locale: profile.locale).each do |error|
-          profile.errors.add(error.path.excluding(:profile).sole, error.text)
-        end
-        Failure([:invalid, profile])
-      end
+  
+  def validate!(params)
+    contract = Users::Contract::Create.new.call(params)
+    return Failure(contract.errors.to_h) unless contract.success?
+    Success(contract.to_h)
   end
-
-  def persist_profile!(profile:, profile_params:)
-    profile.assign_attributes(profile_params)
-    profile.save
-
-    Success(profile)
+  
+  def persist!(params)
+    user = User.new(params)
+    user.save ? Success(user) : Failure(user.errors)
+  end
+  
+  def notify!(user)
+    UserMailer.welcome(user).deliver_later
+    Success(user)
   end
 end
 ```
+
+**✅ Good - RSpec test:**
+```ruby
+# spec/components/users/operation/create_spec.rb
+require 'rails_helper'
+
+RSpec.describe Users::Operation::Create do
+  subject(:result) { described_class.new.call(params: params) }
+  
+  let(:params) do
+    {
+      user: {
+        email: 'user@example.com',
+        first_name: 'John',
+        last_name: 'Doe'
+      }
+    }
+  end
+  
+  describe '#call' do
+    context 'with valid parameters' do
+      it 'creates a user' do
+        expect { result }.to change(User, :count).by(1)
+      end
+      
+      it 'returns Success monad' do
+        expect(result).to be_success
+      end
+      
+      it 'returns the created user' do
+        expect(result.value!).to be_a(User)
+        expect(result.value!.email).to eq('user@example.com')
+      end
+    end
+    
+    context 'with invalid parameters' do
+      let(:params) { { user: { email: 'invalid' } } }
+      
+      it 'does not create a user' do
+        expect { result }.not_to change(User, :count)
+      end
+      
+      it 'returns Failure monad' do
+        expect(result).to be_failure
+      end
+      
+      it 'returns validation errors' do
+        expect(result.failure).to be_a(Hash)
+        expect(result.failure).to have_key(:email)
+      end
+    end
+  end
+end
+```
+
+**❌ Bad - Custom Result classes (DEPRECATED):**
+```ruby
+require 'result'  # ❌ Don't use these!
+require 'success'
+require 'failure'
+
+class SomeService
+  def call
+    return Failure(:invalid, errors: {}) unless valid?
+    Success(:success)
+  end
+end
+```
+
+**❌ Bad - Business logic in controller:**
+```ruby
+def create
+  @user = User.new(user_params)
+  if @user.save
+    UserMailer.welcome(@user).deliver_later
+    redirect_to @user
+  else
+    render :new
+  end
+end
+```
+
+---
+
+## Boundaries
+
+- ✅ **Always do:**
+  - Use `dry-monads` with `include Dry::Monads[:result, :do]`
+  - Write RSpec tests alongside every operation
+  - Return `Success(value)` or `Failure(error)`
+  - Use `yield` with Do notation for chaining operations
+  - Handle all failure cases explicitly
+  - Run tests before marking work complete
+  - Follow Single Responsibility Principle
+  
+- ⚠️ **Ask first:**
+  - Before modifying existing operations (may break dependencies)
+  - Adding external API dependencies
+  - Changing validation contracts in `app/components/*/contract/`
+  - Complex refactoring that touches multiple operations
+  
+- 🚫 **Never do:**
+  - Use `require 'result'`, `require 'success'`, or `require 'failure'` (deprecated)
+  - Create operations without dry-monads
+  - Put business logic in controllers or models
+  - Skip tests
+  - Silently ignore errors
+  - Mix Success/Failure with exceptions (use Result pattern consistently)
+  - Modify validation contracts without approval
+
+---
 
 ## Operation Patterns
 
 ### 1. Simple Create Operation
 
 ```ruby
-# app/components/entities/operation/create.rb
 class Entities::Operation::Create
   include Dry::Monads[:result, :do]
 
   def call(user:, params:)
     entity_params = yield validate!(params)
-    entity        = yield authorize!(user)
+    _             = yield authorize!(user)
     entity        = yield persist!(user: user, params: entity_params)
-    
-    yield notify!(entity)
+    _             = yield notify!(entity)
 
     Success(entity)
   end
@@ -133,28 +248,16 @@ class Entities::Operation::Create
 
   def validate!(params)
     contract = Entities::Contract::Create.new.call(params)
-    
-    if contract.success?
-      Success(contract.to_h)
-    else
-      Failure([:invalid, contract.errors])
-    end
+    contract.success? ? Success(contract.to_h) : Failure(contract.errors.to_h)
   end
 
   def authorize!(user)
-    return Success(user) if user.present?
-    
-    Failure([:unauthorized, "User must be logged in"])
+    user.present? ? Success(user) : Failure({ user: ['must be logged in'] })
   end
 
   def persist!(user:, params:)
     entity = user.entities.build(params)
-    
-    if entity.save
-      Success(entity)
-    else
-      Failure([:invalid, entity])
-    end
+    entity.save ? Success(entity) : Failure(entity.errors)
   end
 
   def notify!(entity)
@@ -167,16 +270,14 @@ end
 ### 2. Operation with Transaction
 
 ```ruby
-# app/components/orders/operation/create.rb
 class Orders::Operation::Create
   include Dry::Monads[:result, :do, :try]
 
   def call(user:, cart:)
-    _             = yield validate_cart!(cart)
-    order         = yield create_order_with_items!(user: user, cart: cart)
-    _             = yield process_payment!(order)
-    
-    yield clear_cart!(cart)
+    _     = yield validate_cart!(cart)
+    order = yield create_order_with_items!(user: user, cart: cart)
+    _     = yield process_payment!(order)
+    _     = yield clear_cart!(cart)
 
     Success(order)
   end
@@ -184,9 +285,7 @@ class Orders::Operation::Create
   private
 
   def validate_cart!(cart)
-    return Success(cart) if cart.items.any?
-    
-    Failure([:invalid, "Cart is empty"])
+    cart.items.any? ? Success(cart) : Failure({ cart: ['is empty'] })
   end
 
   def create_order_with_items!(user:, cart:)
@@ -204,7 +303,7 @@ class Orders::Operation::Create
         
         order
       end
-    end.to_result.or { |e| Failure([:error, e.message]) }
+    end.to_result.or { |e| Failure({ error: e.message }) }
   end
 
   def process_payment!(order)
@@ -214,7 +313,7 @@ class Orders::Operation::Create
       order.update!(status: :paid)
       Success(order)
     else
-      Failure([:payment_error, result.error])
+      Failure({ payment: [result.error] })
     end
   end
 
@@ -225,10 +324,9 @@ class Orders::Operation::Create
 end
 ```
 
-### 3. Update Operation with Validation
+### 3. Update Operation with Authorization
 
 ```ruby
-# app/components/entities/operation/update.rb
 class Entities::Operation::Update
   include Dry::Monads[:result, :do]
 
@@ -243,27 +341,16 @@ class Entities::Operation::Update
   private
 
   def authorize!(entity, user)
-    return Success(true) if entity.user_id == user.id
-    
-    Failure([:forbidden, "You don't have permission to update this entity"])
+    entity.user_id == user.id ? Success(true) : Failure({ user: ['not authorized'] })
   end
 
   def validate!(params)
     contract = Entities::Contract::Update.new.call(params)
-    
-    if contract.success?
-      Success(contract.to_h)
-    else
-      Failure([:invalid, contract.errors])
-    end
+    contract.success? ? Success(contract.to_h) : Failure(contract.errors.to_h)
   end
 
   def persist!(entity:, params:)
-    if entity.update(params)
-      Success(entity)
-    else
-      Failure([:invalid, entity])
-    end
+    entity.update(params) ? Success(entity) : Failure(entity.errors)
   end
 end
 ```
@@ -271,7 +358,6 @@ end
 ### 4. Calculation Operation
 
 ```ruby
-# app/components/entities/operation/calculate_rating.rb
 class Entities::Operation::CalculateRating
   include Dry::Monads[:result]
 
@@ -281,7 +367,7 @@ class Entities::Operation::CalculateRating
     if entity.update(average_rating: average, submissions_count: submissions_count(entity))
       Success(average)
     else
-      Failure([:error, entity.errors.full_messages])
+      Failure(entity.errors)
     end
   end
 
@@ -300,190 +386,40 @@ class Entities::Operation::CalculateRating
 end
 ```
 
-## RSpec Tests for Operations
-
-### Test Structure
-
-```ruby
-# spec/components/profile_creation/operation/create_spec.rb
-require 'rails_helper'
-
-RSpec.describe ProfileCreation::Operation::Create do
-  subject(:result) { described_class.new.call(params: params) }
-
-  let(:params) do
-    {
-      profile: {
-        first_name: 'John',
-        last_name: 'Doe',
-        email: 'john@example.com',
-        gender: 'male',
-        birth_place: 'Warsaw',
-        locale: 'en',
-        terms_of_service: '1'
-      }
-    }
-  end
-
-  describe '#call' do
-    context 'with valid parameters' do
-      it 'creates a profile' do
-        expect { result }.to change(Db::Profile, :count).by(1)
-      end
-
-      it 'returns Success monad' do
-        expect(result).to be_success
-      end
-
-      it 'returns the created profile' do
-        expect(result.value!).to be_a(Db::Profile)
-        expect(result.value!).to be_persisted
-      end
-
-      it 'sets profile attributes correctly' do
-        profile = result.value!
-        expect(profile.first_name).to eq('John')
-        expect(profile.last_name).to eq('Doe')
-        expect(profile.email).to eq('john@example.com')
-      end
-    end
-
-    context 'with invalid parameters' do
-      let(:params) do
-        {
-          profile: {
-            first_name: '',
-            email: 'invalid-email',
-            locale: 'en'
-          }
-        }
-      end
-
-      it 'does not create a profile' do
-        expect { result }.not_to change(Db::Profile, :count)
-      end
-
-      it 'returns Failure monad' do
-        expect(result).to be_failure
-      end
-
-      it 'returns error tuple' do
-        expect(result.failure).to eq([:invalid, anything])
-      end
-
-      it 'includes validation errors' do
-        _, profile = result.failure
-        expect(profile.errors).to be_present
-      end
-    end
-  end
-end
-```
-
-### Testing with Transaction
-
-```ruby
-# spec/components/orders/operation/create_spec.rb
-require 'rails_helper'
-
-RSpec.describe Orders::Operation::Create do
-  subject(:result) { described_class.new.call(user: user, cart: cart) }
-
-  let(:user) { create(:user) }
-  let(:cart) { create(:cart, user: user) }
-
-  describe '#call' do
-    context 'with valid cart' do
-      before do
-        create_list(:cart_item, 3, cart: cart)
-        allow(PaymentGateway).to receive(:charge).and_return(double(success?: true))
-      end
-
-      it 'creates an order' do
-        expect { result }.to change(Order, :count).by(1)
-      end
-
-      it 'returns Success monad' do
-        expect(result).to be_success
-      end
-
-      it 'creates order items' do
-        expect { result }.to change(OrderItem, :count).by(3)
-      end
-
-      it 'clears the cart' do
-        result
-        expect(cart.reload.items).to be_empty
-      end
-
-      it 'charges payment' do
-        result
-        expect(PaymentGateway).to have_received(:charge)
-      end
-    end
-
-    context 'with empty cart' do
-      it 'returns Failure monad' do
-        expect(result).to be_failure
-      end
-
-      it 'returns error message' do
-        expect(result.failure).to eq([:invalid, "Cart is empty"])
-      end
-    end
-
-    context 'when payment fails' do
-      before do
-        create(:cart_item, cart: cart)
-        allow(PaymentGateway).to receive(:charge).and_return(double(success?: false, error: 'Card declined'))
-      end
-
-      it 'returns Failure monad' do
-        expect(result).to be_failure
-      end
-
-      it 'rolls back order creation' do
-        expect { result }.not_to change(Order, :count)
-      end
-    end
-  end
-end
-```
+---
 
 ## Usage in Controllers
 
 ```ruby
-# app/controllers/profiles_controller.rb
-class ProfilesController < ApplicationController
+class UsersController < ApplicationController
   def create
-    result = ProfileCreation::Operation::Create.new.call(params: profile_params)
+    result = Users::Operation::Create.new.call(params: user_params)
 
     case result
-    in Success(profile)
-      redirect_to profile, notice: 'Profile created successfully'
-    in Failure([:invalid, profile])
-      @profile = profile
-      flash.now[:alert] = profile.errors.full_messages.join(', ')
+    in Success(user)
+      redirect_to user, notice: 'User created successfully'
+    in Failure(errors)
+      @errors = errors
+      flash.now[:alert] = 'Could not create user'
       render :new, status: :unprocessable_entity
-    in Failure([code, message])
-      flash[:alert] = message
-      redirect_to new_profile_path
     end
   end
 
   private
 
-  def profile_params
-    params.permit(profile: [:first_name, :last_name, :email, :gender, :locale, :terms_of_service])
+  def user_params
+    params.permit(user: [:email, :first_name, :last_name])
   end
 end
 ```
+
+---
 
 ## Dry::Monads Do Notation
 
 ### Key Concepts
 
-**Do notation** allows you to chain operations and short-circuit on first failure:
+**Do notation** allows chaining operations that short-circuit on first failure:
 
 ```ruby
 def call(params:)
@@ -495,35 +431,9 @@ def call(params:)
 end
 ```
 
-**Without Do notation (verbose):**
-```ruby
-def call(params:)
-  validate!(params).bind do |step1|
-    persist!(step1).bind do |step2|
-      notify!(step2).fmap do |step3|
-        Success(step3)
-      end
-    end
-  end
-end
-```
-
-### Return Types
-
-- **Success(value)** - Operation succeeded, wraps the value
-- **Failure(error)** - Operation failed, wraps the error
-- Use tuples for error codes: `Failure([:invalid, errors])`
-
-### Common Patterns
-
 **Ignore result but continue chain:**
 ```ruby
 _ = yield some_operation!  # Don't care about return value
-```
-
-**Multiple return values:**
-```ruby
-Failure([:error_code, error_message])
 ```
 
 **Pattern matching in controller:**
@@ -531,54 +441,207 @@ Failure([:error_code, error_message])
 case result
 in Success(value)
   # Handle success
-in Failure([:invalid, errors])
-  # Handle validation errors
-in Failure([:unauthorized, message])
-  # Handle authorization
+in Failure(errors)
+  # Handle failure
 end
 ```
 
+---
+
 ## When to Use an Operation
 
-### ✅ Use an operation when
-
+### ✅ Use an operation when:
 - Logic involves multiple models
 - Action requires validation + persistence
 - There are side effects (emails, notifications, external APIs)
-- Logic is too complex for a model
+- Logic is too complex for a model (>20 lines)
 - You need to reuse logic (controller, job, console)
 - Multi-step process with failure handling
 
-### ❌ Don't use an operation when
-
+### ❌ Don't use an operation when:
 - Simple ActiveRecord create/update without business logic
 - Logic clearly belongs in the model
 - Creating a "wrapper" without added value
 
-## Guidelines
+---
 
-- ✅ **Always do:** 
-  - Write specs
-  - Use `include Dry::Monads[:result, :do]`
-  - Return `Success()` or `Failure()`
-  - Use yield with Do notation
-  - Handle all failure cases
-  - Run tests in Docker
+## Common Mistakes
 
-- ⚠️ **Ask first:** 
-  - Before modifying existing operation
-  - Adding external API dependencies
-  - Changing validation contracts
+### ❌ Mistake 1: Not including `:do` notation
 
-- 🚫 **Never do:** 
-  - Skip tests
-  - Use operations without dry-monads
-  - Put presentation logic in operations
-  - Silently ignore errors
-  - Mix Success/Failure with exceptions
+```ruby
+# ❌ Wrong - Missing :do
+class MyOperation
+  include Dry::Monads[:result]  # Missing :do!
+  
+  def call
+    user = yield find_user  # ERROR: yield without :do
+    Success(user)
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct
+class MyOperation
+  include Dry::Monads[:result, :do]  # Include :do
+  
+  def call
+    user = yield find_user
+    Success(user)
+  end
+end
+```
+
+### ❌ Mistake 2: Using deprecated Result classes
+
+```ruby
+# ❌ Wrong - Custom Result (DEPRECATED)
+require 'result'
+require 'success'
+require 'failure'
+
+class Users::SomeService
+  def call
+    return Failure(:invalid, errors: {}) unless valid?
+    Success(:success)
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - dry-monads
+class Users::Operation::SomeOperation
+  include Dry::Monads[:result, :do]
+  
+  def call
+    return Failure([:invalid, {}]) unless valid?
+    Success(:success)
+  end
+end
+```
+
+### ❌ Mistake 3: Mixing exceptions with monads
+
+```ruby
+# ❌ Wrong - Mixing paradigms
+def call
+  user = yield find_user
+  raise "Invalid user" unless user.valid?  # BAD!
+  Success(user)
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Use monads consistently
+def call
+  user = yield find_user
+  return Failure(:invalid_user) unless user.valid?
+  Success(user)
+end
+```
+
+### ❌ Mistake 4: Not handling Failure in controller
+
+```ruby
+# ❌ Wrong - Assumes always success
+def create
+  result = MyOperation.new.call(params: params)
+  redirect_to result.success  # CRASHES on Failure!
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Handle both cases
+def create
+  result = MyOperation.new.call(params: params)
+  
+  case result
+  in Success(data)
+    redirect_to data
+  in Failure(error)
+    render :new, alert: error
+  end
+end
+```
+
+### ❌ Mistake 5: No tests for operation
+
+```ruby
+# ❌ Wrong - Operation without tests
+# app/components/users/operation/create.rb exists
+# spec/components/users/operation/create_spec.rb MISSING!
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Always write tests
+# spec/components/users/operation/create_spec.rb
+RSpec.describe Users::Operation::Create do
+  describe '#call' do
+    context 'with valid params' do
+      it 'returns Success with user' do
+        result = described_class.new.call(params: valid_params)
+        expect(result).to be_success
+      end
+    end
+    
+    context 'with invalid params' do
+      it 'returns Failure with errors' do
+        result = described_class.new.call(params: invalid_params)
+        expect(result).to be_failure
+      end
+    end
+  end
+end
+```
+
+### ❌ Mistake 6: Too many responsibilities (God operation)
+
+```ruby
+# ❌ Wrong - Does everything
+class Users::Operation::Process
+  def call
+    # Validates
+    # Creates user
+    # Sends email
+    # Updates stats
+    # Logs analytics
+    # Notifies admin
+    # ... 500 more lines
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - Split responsibilities
+class Users::Operation::Create
+  include Dry::Monads[:result, :do]
+  
+  def call(params:)
+    user = yield create_user(params)
+    yield Users::Operation::SendWelcomeEmail.new.call(user: user)
+    yield Users::Operation::UpdateStats.new.call(user: user)
+    Success(user)
+  end
+end
+```
+
+---
 
 ## Resources
 
 - [dry-monads Documentation](https://dry-rb.org/gems/dry-monads/)
 - [dry-validation Documentation](https://dry-rb.org/gems/dry-validation/)
 - [Railway Oriented Programming](https://fsharpforfunandprofit.com/rop/)
+- [CLAUDE.md](../CLAUDE.md) - Project-wide policies
+- [docs/KNOWN_ISSUES.md](../docs/KNOWN_ISSUES.md) - Known patterns and solutions
+- **Skills Library**:
+  - [dry-monads-patterns](skills/dry-monads-patterns/SKILL.md) - Deep dive on dry-monads
+  - [rails-service-object](skills/rails-service-object/SKILL.md) - Service architecture patterns
+  - [testing-standards](skills/testing-standards/SKILL.md) - Testing best practices

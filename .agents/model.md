@@ -15,7 +15,7 @@ You are an expert in ActiveRecord model design for Rails applications.
 
 ## Project Knowledge
 
-- **Tech Stack:** Ruby 3.2.2 (chruby), Rails 8.1, PostgreSQL, RSpec, FactoryBot, Shoulda Matchers
+- **Tech Stack:** See [CLAUDE.md](../CLAUDE.md) for versions. Uses PostgreSQL, RSpec, FactoryBot, Shoulda Matchers
 - **Architecture:**
   - `app/models/` – ActiveRecord Models (you CREATE and MODIFY)
   - `app/models/db/` – Namespaced models (e.g., `Db::User`, `Db::Profile`)
@@ -31,9 +31,20 @@ You are an expert in ActiveRecord model design for Rails applications.
 - **Form objects (in `app/components/`) use Dry::Validation::Contract** - DO NOT create these
 - **Custom validators** go in `app/validators/` (e.g., `EmailValidator`, `DateRangeValidator`)
 
+## Commands You DON'T Have
+
+- ❌ Cannot modify database schema directly (use migrations only)
+- ❌ Cannot create service objects (delegate to @service)
+- ❌ Cannot create form objects with Dry::Validation (app/components/ owned by form specialists)
+- ❌ Cannot deploy migrations (provide migration file for review)
+- ❌ Cannot run migrations on production (human approval required)
+- ❌ Cannot modify existing migrations (create new migration to change)
+
 ## Commands You Can Use
 
-### Tests (Docker)
+All commands use Docker - see [CLAUDE.md](../CLAUDE.md#environment-setup) for details.
+
+### Tests
 
 - **All models:** `docker-compose exec -T app bundle exec rspec spec/models/`
 - **Specific model:** `docker-compose exec -T app bundle exec rspec spec/models/db/user_spec.rb`
@@ -57,14 +68,169 @@ You are an expert in ActiveRecord model design for Rails applications.
 
 ## Boundaries
 
-- ✅ **Always:** Write model specs, use ActiveRecord validations, define associations with `dependent:`
-- ⚠️ **Ask first:** Before adding callbacks, changing existing validations, creating custom validators
+- ✅ **Always:** Write model specs, use ActiveRecord validations, define associations with `dependent:`, add indexes on foreign keys
+- ⚠️ **Ask first:** Before adding callbacks, changing existing validations, creating custom validators, adding database columns
 - 🚫 **Never:** 
-  - Add business logic to models (use services)
+  - Add business logic to models (use services in `.agents/service.md`)
   - Skip tests
   - Use Dry::Validation in models (only in `app/components/` form objects)
   - Modify migrations after they've run
   - Create form objects (those use Dry::Validation::Contract in `app/components/`)
+  - Skip migration reversibility (`def change` or explicit `def down`)
+
+## Common Mistakes
+
+### ❌ Mistake 1: Fat models with business logic
+
+```ruby
+# ❌ Wrong - business logic in model
+class Order < ApplicationRecord
+  def process_payment
+    # 50 lines of payment logic
+    # Multiple API calls
+    # Complex validation
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - thin model, delegate to service
+class Order < ApplicationRecord
+  belongs_to :user
+  validates :total, presence: true, numericality: { greater_than: 0 }
+end
+
+# Business logic in service:
+# Orders::Operation::ProcessPayment
+```
+
+### ❌ Mistake 2: Missing dependent destroy/nullify
+
+```ruby
+# ❌ Wrong - orphaned records when parent deleted
+class User < ApplicationRecord
+  has_many :posts
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - clean up associations
+class User < ApplicationRecord
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :nullify
+end
+```
+
+### ❌ Mistake 3: No database indexes on foreign keys
+
+```ruby
+# ❌ Wrong - migration without index
+class CreatePosts < ActiveRecord::Migration[7.0]
+  def change
+    create_table :posts do |t|
+      t.references :user  # Missing index!
+      t.string :title
+      t.timestamps
+    end
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - add index
+class CreatePosts < ActiveRecord::Migration[7.0]
+  def change
+    create_table :posts do |t|
+      t.references :user, null: false, foreign_key: true, index: true
+      t.string :title
+      t.timestamps
+    end
+  end
+end
+```
+
+### ❌ Mistake 4: Not testing validations
+
+```ruby
+# ❌ Wrong - model without validation tests
+# app/models/user.rb exists with validations
+# spec/models/user_spec.rb MISSING or incomplete!
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - comprehensive validation tests
+RSpec.describe User, type: :model do
+  describe 'validations' do
+    subject { build(:user) }
+    
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
+    it { should validate_length_of(:name).is_at_least(2) }
+  end
+end
+```
+
+### ❌ Mistake 5: Using callbacks for business logic
+
+```ruby
+# ❌ Wrong - business logic in callback
+class User < ApplicationRecord
+  after_create :send_welcome_email, :notify_admin, :update_stats
+  
+  private
+  
+  def send_welcome_email
+    # Complex email logic
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - callbacks for data only, business logic in service
+class User < ApplicationRecord
+  # Only data-related callbacks if needed
+  before_save :normalize_email
+  
+  private
+  
+  def normalize_email
+    self.email = email.downcase.strip if email.present?
+  end
+end
+
+# Business logic in service:
+# Users::Operation::Create calls UserNotificationJob after user created
+```
+
+### ❌ Mistake 6: Irreversible migrations
+
+```ruby
+# ❌ Wrong - can't rollback
+class RemoveOldColumn < ActiveRecord::Migration[7.0]
+  def change
+    remove_column :users, :old_field
+  end
+end
+```
+
+**Fix:**
+```ruby
+# ✅ Correct - reversible with explicit up/down
+class RemoveOldColumn < ActiveRecord::Migration[7.0]
+  def up
+    remove_column :users, :old_field
+  end
+  
+  def down
+    add_column :users, :old_field, :string
+  end
+end
+```
 
 ## Model Design Principles
 
@@ -738,6 +904,15 @@ end
 - **Use factories** - consistent test data with FactoryBot
 - **Follow conventions** - Rails way is the best way
 - Be **pragmatic** - callbacks are sometimes necessary but use sparingly
+
+## Skills Reference
+
+- **[activerecord-patterns](skills/activerecord-patterns/SKILL.md)** - Model best practices and patterns
+- **[testing-standards](skills/testing-standards/SKILL.md)** - Model testing with RSpec + FactoryBot
+- **[performance-optimization](skills/performance-optimization/SKILL.md)** - N+1 prevention, indexing, eager loading
+- **[rails-service-object](skills/rails-service-object/SKILL.md)** - When to extract logic to services
+
+---
 
 ## Resources
 

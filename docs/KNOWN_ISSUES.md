@@ -10,13 +10,18 @@
 ### ✅ Migration from Custom Result to dry-monads
 
 **Decision Date:** 2024  
-**Status:** ✅ In Progress
+**Status:** 🔄 In Progress (Mandatory for all new code)
 
 **Context:**
 The codebase had a custom `Result`/`Success`/`Failure` pattern in `lib/` that was incompatible with `Dry::Matcher::EitherMatcher`. The `either()` helper in controllers expected `Dry::Monads::Result`, causing `NoMethodError: undefined method 'success?' for false:FalseClass`.
 
 **Decision:**
-Migrate all services from custom Result classes to `Dry::Monads[:result]`.
+**ALL new services MUST use `Dry::Monads[:result]`. Legacy services using custom Result will be migrated as they're touched.**
+
+**Policy:**
+- ✅ **NEW services**: MUST use `dry-monads` with `:result` and `:do` notation
+- 🔄 **EXISTING services**: Migrate from custom `Result` to `dry-monads` when modifying
+- 🚫 **NEVER**: Create new services with custom `Result` classes
 
 **Migration Pattern:**
 
@@ -72,10 +77,20 @@ end
 
 **Action Items:**
 - [x] Migrate `Training::Supplementary::CreateCourse` to dry-monads
-- [x] Update `.agents/refactor-agent.md` with migration guide
-- [ ] Migrate remaining services using custom Result
+- [x] Update `.agents/refactor.md` with migration guide
+- [x] Update CLAUDE.md to mandate dry-monads for new services
+- [ ] Audit all services in `app/components/*/operation/` for custom Result usage
+- [ ] Migrate remaining services using custom Result (as they're touched)
 - [ ] Eventually deprecate `lib/result.rb`, `lib/success.rb`, `lib/failure.rb`
 - [ ] Consider removing `app/components/either_matcher.rb` (use dry-matcher directly)
+
+**How to Identify Legacy Services:**
+```bash
+# Find services still using custom Result
+grep -r "require 'result'" app/components/
+grep -r "require 'success'" app/components/
+grep -r "require 'failure'" app/components/
+```
 
 **References:**
 - [dry-monads Documentation](https://dry-rb.org/gems/dry-monads/)
@@ -175,7 +190,7 @@ grep -r "form_outputs\.messages" app/components/
 
 ### ❌ `NoMethodError: undefined method 'success?' for false:FalseClass` with `either()` helper
 
-**Status:** ✅ Resolved
+**Status:** ✅ Resolved (Pattern documented for future migrations)
 
 **Affected Files:**
 - ✅ `app/components/training/supplementary/courses_controller.rb` - **FIXED**
@@ -188,6 +203,8 @@ Did you mean? Success
 
 **Root Cause:**
 The `either()` helper from `EitherMatcher` expects `Dry::Monads::Either` results, but our service objects return custom `Result` objects (Success/Failure from `lib/result.rb`). When `EitherMatcher` tries to call `.success?` on our `Result`, it hits the `method_missing` which returns `false`, causing the error.
+
+**This is why we're migrating to dry-monads for ALL services.**
 
 **Incorrect Pattern:**
 ```ruby
@@ -233,6 +250,7 @@ end
 - [x] Update form to accept all permitted parameters
 - [x] Write comprehensive specs (10 tests)
 - [ ] Audit other controllers using `either()` with custom Result objects
+- [ ] Migrate all services to dry-monads to prevent this pattern entirely
 
 ---
 
