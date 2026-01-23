@@ -17,6 +17,9 @@ Rails.application.configure do
   # Allow Docker container hostnames for Playwright and internal requests
   config.hosts << "app"
   config.hosts << "localhost"
+  # Allow RSpec test host (tests run in development environment due to Dockerfile)
+  config.hosts << "www.example.com"
+  config.hosts << "example.com"
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

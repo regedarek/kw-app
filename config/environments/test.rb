@@ -4,17 +4,25 @@ require "active_support/core_ext/integer/time"
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
+require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Turn false under Spring and add config.action_view.cache_template_loading = true
+  # Turn false under Spring and add config.action_view.cache_template_loading = true.
   config.cache_classes = true
 
   # Eager loading loads your whole application. When running a single test locally,
-  # this probably isn't necessary. It's a good idea to do in a continuous integration
-  # system, or in some way before deploying your code.
+  # this may not be necessary. It's a good idea to do in a continuous integration system,
+  # or in some way before deploying your code.
   config.eager_load = ENV["CI"].present?
+
+  # Configure logging to STDOUT for test environment so we can see output immediately
+  config.log_level = :debug
+  config.logger = ActiveSupport::Logger.new(STDOUT)
+  config.logger.formatter = proc { |severity, datetime, progname, msg|
+    "[#{datetime.strftime('%H:%M:%S.%L')}] #{severity} | #{msg}\n"
+  }
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
@@ -34,9 +42,12 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Disable host authorization in test environment
+  # Clear hosts array to allow all hosts (Rails 7 behavior)
   config.hosts.clear
-  config.hosts << "www.example.com"
-  config.hosts << "example.com"
+  
+  # Add test hosts for request specs
+  config.hosts << 'www.example.com'
+  config.hosts << 'example.com'
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test

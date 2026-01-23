@@ -1,12 +1,26 @@
 # frozen_string_literal: true
 
-ENV['RAILS_ENV'] ||= 'test'
+# FORCE test environment (Docker sets RAILS_ENV=development by default)
+ENV['RAILS_ENV'] = 'test'
 
 require 'spec_helper'
 require_relative '../config/environment'
 
 # Prevent running tests in production
 abort("The Rails environment is running in production!") if Rails.env.production?
+
+# ⚠️ CRITICAL: Verify Rails environment
+# Due to Docker setting RAILS_ENV=development in Dockerfile, tests run in development by default.
+# This is intentional - development.rb must include test hosts (www.example.com, example.com).
+# If you see 403 "Blocked hosts" errors, check config/environments/development.rb includes test hosts.
+unless Rails.env.development? || Rails.env.test?
+  abort("Tests are running in #{Rails.env} environment! Expected development or test.")
+end
+
+if Rails.env.development?
+  puts "⚠️  Tests are running in DEVELOPMENT environment (expected due to Docker RAILS_ENV=development)"
+  puts "⚠️  Ensure config/environments/development.rb includes: config.hosts << 'www.example.com'"
+end
 
 require 'rspec/rails'
 
@@ -21,12 +35,40 @@ RSpec.configure do |config|
   # Disable if using DatabaseCleaner with truncation strategy
   config.use_transactional_fixtures = true
 
-  # Clear test log before suite
+  # Verify test environment before running suite
   config.before(:suite) do
-    File.open("#{Rails.root}/log/test.log", 'w') { |file| file.truncate(0) }
+    unless Rails.env.test?
+      abort("ERROR: Tests are running in #{Rails.env} environment! Must be 'test'.\n" \
+            "Fix: Ensure ENV['RAILS_ENV'] = 'test' is set in rails_helper.rb")
+    end
+  end
+
+  # Use expect syntax (not should)
+  # Verify environment configuration before running tests
+  config.before(:suite) do
+    puts "\n" + "=" * 80
+    puts "🧪 TEST SUITE STARTING"
+    puts "=" * 80
+    puts "Rails environment: #{Rails.env}"
+    puts "ENV['RAILS_ENV']: #{ENV['RAILS_ENV']}"
+    puts "config.hosts: #{Rails.application.config.hosts.inspect}"
     
-    # Allow all hosts in tests (disable host authorization)
-    Rails.application.config.hosts.clear if Rails.application.config.respond_to?(:hosts)
+    # Verify test hosts are allowed (critical for development environment)
+    required_hosts = ['www.example.com', 'example.com']
+    missing_hosts = required_hosts - Rails.application.config.hosts.map(&:to_s)
+    
+    if missing_hosts.any?
+      puts "❌ ERROR: Required test hosts missing from config.hosts:"
+      missing_hosts.each { |host| puts "   - #{host}" }
+      puts "\nAdd to config/environments/#{Rails.env}.rb:"
+      missing_hosts.each { |host| puts "  config.hosts << '#{host}'" }
+      puts "\nThen restart: docker-compose restart app"
+      abort("Test hosts not configured! See message above.")
+    else
+      puts "✅ Test hosts configured correctly"
+    end
+    
+    puts "=" * 80 + "\n"
   end
 
   # Use expect syntax (not should)

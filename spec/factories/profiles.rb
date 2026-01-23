@@ -18,6 +18,12 @@ FactoryBot.define do
     acomplished_courses { ['basic'] }
     main_discussion_group { true }
     sections { ['sww'] }
+    accepted { true }
+    
+    # Set kw_id after creation when accepted
+    after(:create) do |profile|
+      profile.update_column(:kw_id, profile.user.kw_id) if profile.user
+    end
     
     trait :youth do
       birth_date { 18.years.ago }
@@ -63,6 +69,7 @@ FactoryBot.define do
       acomplished_courses { ['basic'] }
       main_discussion_group { true }
       sections { ['sww'] }
+      accepted { true }
     end
   end
   

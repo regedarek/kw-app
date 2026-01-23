@@ -30,3 +30,5 @@ production:
 test:
   <<: *default
   database: kw_app_test
+  username: <%= ENV.fetch('DB_USER', 'dev-user') %>
+  password: <%= ENV.fetch('DB_PASSWORD', 'dev-password') %>
