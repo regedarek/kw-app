@@ -205,12 +205,13 @@ end
 **Staging (Raspberry Pi):**
 - ARM64 architecture
 - Limited memory (~4GB) - run DB tasks separately
-- Manual deployment
+- Automated via GitHub Actions (push to `develop` branch)
+- Self-hosted runner on the Pi
 - Test before production
 
 **Production (VPS):**
 - x86_64 architecture
-- Automated via GitHub Actions (push to `deploy` branch)
+- Automated via GitHub Actions (push to `main` branch)
 - Zero-downtime (Kamal rolling restart)
 - Migrations run before new containers
 
