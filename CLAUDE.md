@@ -38,13 +38,19 @@
 
 ### Docker Rules
 
-**Use `-T` flag for non-interactive commands:**
+⚠️ **CRITICAL - Local Environment:**
+- **Local machine uses chruby + native Ruby 3.2.2** (NOT docker-compose)
+- Docker is ONLY used in CI/CD (GitHub Actions)
+- For local commands, run directly: `bundle exec rspec`, `rails console`, etc.
+- See `.agents/README.md` for exact local setup details
+
+**CI/GitHub Actions - Use `-T` flag for non-interactive commands:**
 - Tests, migrations, rake tasks: `docker-compose exec -T app bundle exec rspec`
 
-**No `-T` flag for interactive:**
+**CI/GitHub Actions - No `-T` flag for interactive:**
 - Rails console, bash: `docker-compose exec app bundle exec rails console`
 
-**Always check containers first:** `docker-compose ps`
+**CI/GitHub Actions - Always check containers first:** `docker-compose ps`
 If not running: `docker-compose up -d`
 
 ### Testing
@@ -144,7 +150,7 @@ end
 - Use `@console-agent` in Zed for console script assistance
 - All infrastructure details (chruby, docker, ports) in `.agents/README.md`
 - Reference `.agents/` for exact commands - don't guess or try variations
-- Commands work with local setup (chruby 3.2.2, docker-compose)
+- Commands work with local setup (chruby 3.2.2, native Ruby - NOT docker-compose)
 
 ---
 
