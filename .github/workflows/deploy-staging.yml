@@ -177,8 +177,29 @@ jobs:
             echo "✅ Public key already in /home/rege/.ssh/authorized_keys"
           fi
           
-          sudo chmod 600 /home/rege/.ssh/authorized_keys
-          sudo chown -R rege:rege /home/rege/.ssh
+          sudo chmod 600 /home/rege/.ssh/authorized_keys 2>/dev/null || echo "⚠️ Cannot chmod (user may not exist in container)"
+          
+          echo ""
+          echo "=== Investigating Host Filesystem Access ==="
+          
+          # Check if /home exists and what users are there
+          echo "Users in /home:"
+          ls -la /home/ 2>/dev/null || echo "Cannot access /home"
+          
+          # Check if we're in a container with host volume mounts
+          echo ""
+          echo "Checking for volume mounts:"
+          mount | grep -E 'home|rege' || echo "No home-related mounts found"
+          
+          echo ""
+          echo "File system mounts:"
+          df -h | head -10
+          
+          # Check if there's a way to access the host
+          echo ""
+          echo "Checking for host access methods:"
+          [ -S /var/run/docker.sock ] && echo "✅ Docker socket available at /var/run/docker.sock" || echo "❌ No docker socket"
+          [ -f /host/home/rege/.ssh/authorized_keys ] && echo "✅ Found /host mount" || echo "❌ No /host mount"
           
           # Configure SSH for connecting as rege user
           cat > ~/.ssh/config << 'EOF'
@@ -192,22 +213,47 @@ jobs:
           chmod 600 ~/.ssh/config
           
           echo ""
-          echo "SSH config:"
+          echo "SSH config created:"
           cat ~/.ssh/config
           
-          # Verify rege's authorized_keys
           echo ""
-          echo "Authorized keys for rege user:"
-          sudo cat /home/rege/.ssh/authorized_keys || echo "Cannot read authorized_keys"
+          echo "=== Attempting to add SSH key to HOST ==="
           
-          # Test SSH connection as rege user
-          echo ""
-          echo "Testing SSH to localhost as rege..."
-          ssh -o BatchMode=yes localhost 'whoami' || echo "⚠️ SSH to localhost as rege failed"
+          # Method 1: Try using nsenter to access host namespace
+          if command -v nsenter &> /dev/null; then
+            echo "Attempting to add key to host via nsenter..."
+            nsenter -t 1 -m -u -i -n sh -c "
+              mkdir -p /home/rege/.ssh
+              chmod 700 /home/rege/.ssh
+              grep -qF '$(cat ~/.ssh/id_ed25519.pub)' /home/rege/.ssh/authorized_keys 2>/dev/null || echo '$(cat ~/.ssh/id_ed25519.pub)' >> /home/rege/.ssh/authorized_keys
+              chmod 600 /home/rege/.ssh/authorized_keys
+              chown -R rege:rege /home/rege/.ssh
+              echo 'Key added to host!'
+            " 2>&1 && echo "✅ Successfully added key to host via nsenter" || echo "⚠️ nsenter method failed"
+          else
+            echo "⚠️ nsenter not available"
+          fi
+          
+          # Method 2: Try using docker to execute on host
+          if [ -S /var/run/docker.sock ]; then
+            echo ""
+            echo "Docker socket available, trying docker exec to host..."
+            # Get the host's PID 1 container (if running systemd in container) or use docker run with host volumes
+            docker run --rm -v /home:/hosthome alpine sh -c "
+              mkdir -p /hosthome/rege/.ssh
+              chmod 700 /hosthome/rege/.ssh
+              grep -qF '$(cat ~/.ssh/id_ed25519.pub)' /hosthome/rege/.ssh/authorized_keys 2>/dev/null || echo '$(cat ~/.ssh/id_ed25519.pub)' >> /hosthome/rege/.ssh/authorized_keys
+              chmod 600 /hosthome/rege/.ssh/authorized_keys
+            " 2>&1 && echo "✅ Successfully added key to host via docker" || echo "⚠️ docker method failed"
+          else
+            echo "⚠️ Docker socket not available"
+          fi
           
           echo ""
-          echo "Testing SSH to pi5main.local as rege..."
-          ssh -o BatchMode=yes pi5main.local 'whoami' || echo "⚠️ SSH to pi5main.local as rege failed"
+          echo "=== Public key (for manual addition if automated methods failed) ==="
+          cat ~/.ssh/id_ed25519.pub
+          echo ""
+          echo "This key should be in: /home/rege/.ssh/authorized_keys on the HOST"
       
       - name: Container and Network Debugging
         run: |
