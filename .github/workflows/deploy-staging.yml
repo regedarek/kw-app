@@ -209,40 +209,80 @@ jobs:
           echo "Testing SSH to pi5main.local as rege..."
           ssh -o BatchMode=yes pi5main.local 'whoami' || echo "⚠️ SSH to pi5main.local as rege failed"
       
-      - name: Additional SSH Debugging
+      - name: Container and Network Debugging
         run: |
-          echo "=== SSH Configuration Debug ==="
-          
-          # Check SSH daemon config
-          echo "SSH daemon status:"
-          sudo systemctl status ssh --no-pager || true
+          echo "=== Environment Detection ==="
+          echo "Running in container: $([ -f /.dockerenv ] && echo 'YES' || echo 'NO')"
+          echo "Hostname: $(hostname)"
+          echo "Current user: $(whoami)"
           
           echo ""
-          echo "SSH daemon config (relevant lines):"
-          sudo grep -E '^(PubkeyAuthentication|PasswordAuthentication|PermitRootLogin|AuthorizedKeysFile)' /etc/ssh/sshd_config || true
+          echo "=== Network Information ==="
+          echo "Container IP addresses:"
+          ip addr show || ifconfig -a || true
           
-          # Check file permissions
           echo ""
+          echo "Default gateway (host IP):"
+          ip route | grep default || route -n || true
+          
+          # Try to determine host IP
+          HOST_IP=$(ip route | grep default | awk '{print $3}' | head -1)
+          echo "Detected host IP: $HOST_IP"
+          
+          echo ""
+          echo "=== DNS Resolution ==="
+          echo "Resolving pi5main.local:"
+          getent hosts pi5main.local || nslookup pi5main.local || true
+          
+          echo ""
+          echo "=== Testing Network Connectivity ==="
+          echo "Ping localhost:"
+          ping -c 2 localhost || true
+          
+          echo ""
+          echo "Ping host IP ($HOST_IP):"
+          ping -c 2 $HOST_IP || true
+          
+          echo ""
+          echo "Ping pi5main.local:"
+          ping -c 2 pi5main.local || true
+          
+          echo ""
+          echo "=== Testing SSH Port ==="
+          echo "Checking SSH port 22 on localhost:"
+          nc -zv localhost 22 2>&1 || timeout 2 bash -c "</dev/tcp/localhost/22" 2>&1 || echo "Port 22 not open on localhost"
+          
+          echo ""
+          echo "Checking SSH port 22 on host IP ($HOST_IP):"
+          nc -zv $HOST_IP 22 2>&1 || timeout 2 bash -c "</dev/tcp/$HOST_IP/22" 2>&1 || echo "Port 22 not open on $HOST_IP"
+          
+          echo ""
+          echo "Checking SSH port 22 on pi5main.local:"
+          nc -zv pi5main.local 22 2>&1 || timeout 2 bash -c "</dev/tcp/pi5main.local/22" 2>&1 || echo "Port 22 not open on pi5main.local"
+          
+          echo ""
+          echo "=== SSH Key Information ==="
           echo "SSH directory permissions:"
           ls -la ~/.ssh/
           
           echo ""
-          echo "SSH key fingerprints:"
+          echo "SSH key fingerprint:"
           ssh-keygen -lf ~/.ssh/id_ed25519.pub
           
-          # Check if we can read our own authorized_keys
           echo ""
-          echo "Can read authorized_keys:"
-          cat ~/.ssh/authorized_keys | wc -l
-          
-          # Try manual SSH with full debug output
-          echo ""
-          echo "=== Attempting SSH with full debug ==="
-          ssh -vvv -o BatchMode=yes -o ConnectTimeout=5 localhost 'hostname' 2>&1 | tail -50 || true
+          echo "Public key content:"
+          cat ~/.ssh/id_ed25519.pub
           
           echo ""
-          echo "=== Attempting SSH to pi5main.local with full debug ==="
-          ssh -vvv -o BatchMode=yes -o ConnectTimeout=5 pi5main.local 'hostname' 2>&1 | tail -50 || true
+          echo "=== Testing SSH Connection with Verbose Output ==="
+          echo "Attempting SSH to pi5main.local as rege user..."
+          ssh -vvv -o BatchMode=yes -o ConnectTimeout=10 rege@pi5main.local 'whoami && hostname' 2>&1 || true
+          
+          echo ""
+          echo "Attempting SSH to host IP as rege user..."
+          if [ -n "$HOST_IP" ]; then
+            ssh -vvv -o BatchMode=yes -o ConnectTimeout=10 rege@$HOST_IP 'whoami && hostname' 2>&1 || true
+          fi
       
       - name: Login to Docker Hub
         run: |
