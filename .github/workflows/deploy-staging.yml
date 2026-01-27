@@ -79,6 +79,15 @@ jobs:
             echo "✅ jq already installed"
           fi
       
+      - name: Configure hostname resolution
+        run: |
+          # Since the runner is on the Pi itself, map pi5main.local to localhost
+          echo "127.0.0.1 pi5main.local" | sudo tee -a /etc/hosts
+          echo "✅ Added pi5main.local to /etc/hosts"
+          
+          # Verify DNS resolution
+          getent hosts pi5main.local || echo "Warning: DNS lookup failed, but /etc/hosts should work"
+      
       - name: Set up Ruby 3.2.2 with ruby-build
         run: |
           RUBY_VERSION="3.2.2"
@@ -127,6 +136,33 @@ jobs:
             gem install kamal --no-document
           fi
           kamal version
+      
+      - name: Set up SSH for localhost
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          
+          # Generate SSH key if it doesn't exist
+          if [ ! -f ~/.ssh/id_ed25519 ]; then
+            ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -C "github-actions-runner"
+          fi
+          
+          # Add public key to authorized_keys
+          cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
+          chmod 600 ~/.ssh/authorized_keys
+          
+          # Configure SSH for passwordless localhost access
+          cat > ~/.ssh/config << 'EOF'
+          Host pi5main.local localhost 127.0.0.1
+            User rege
+            IdentityFile ~/.ssh/id_ed25519
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+          chmod 600 ~/.ssh/config
+          
+          # Test SSH connection
+          ssh -o BatchMode=yes rege@pi5main.local 'echo "✅ SSH to pi5main.local works"' || echo "⚠️ SSH test failed, but continuing..."
       
       - name: Login to Docker Hub
         run: |
