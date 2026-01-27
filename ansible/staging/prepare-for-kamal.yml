@@ -41,6 +41,7 @@
           - python3-pip
           - python3-docker
           - jq
+          - btop
         state: present
     
     - name: Verify Docker Python module is available
