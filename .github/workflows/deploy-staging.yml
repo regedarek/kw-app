@@ -79,19 +79,11 @@ jobs:
             echo "✅ jq already installed"
           fi
       
-      - name: Check and install Ruby if needed
-        run: |
-          if ! command -v ruby &> /dev/null; then
-            echo "Ruby not found, installing..."
-            sudo apt-get update -qq
-            sudo apt-get install -y ruby-full
-          fi
-          ruby -v
-      
-      - name: Setup Ruby gem paths
-        run: |
-          echo "GEM_HOME=$(ruby -r rubygems -e 'puts Gem.user_dir')" >> $GITHUB_ENV
-          echo "$(ruby -r rubygems -e 'puts Gem.user_dir')/bin" >> $GITHUB_PATH
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: false
       
       - name: Install Kamal
         run: |
