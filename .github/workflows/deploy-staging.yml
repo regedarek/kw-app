@@ -79,11 +79,47 @@ jobs:
             echo "✅ jq already installed"
           fi
       
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2.2'
-          bundler-cache: false
+      - name: Set up Ruby 3.2.2 with ruby-build
+        run: |
+          RUBY_VERSION="3.2.2"
+          RUBY_INSTALL_DIR="/opt/hostedtoolcache/Ruby/${RUBY_VERSION}/arm64"
+          
+          # Check if Ruby is already installed in tool cache
+          if [ -f "${RUBY_INSTALL_DIR}.complete" ]; then
+            echo "✅ Ruby ${RUBY_VERSION} already installed in tool cache"
+          else
+            echo "Installing Ruby ${RUBY_VERSION} to tool cache..."
+            
+            # Install ruby-build if not present
+            if ! command -v ruby-build &> /dev/null; then
+              echo "Installing ruby-build..."
+              git clone https://github.com/rbenv/ruby-build.git /tmp/ruby-build
+              sudo /tmp/ruby-build/install.sh
+              rm -rf /tmp/ruby-build
+            fi
+            
+            # Install build dependencies
+            sudo apt-get update -qq
+            sudo apt-get install -y build-essential libssl-dev libreadline-dev zlib1g-dev
+            
+            # Create tool cache directory
+            sudo mkdir -p /opt/hostedtoolcache/Ruby
+            sudo chown -R $USER:$USER /opt/hostedtoolcache
+            
+            # Build Ruby
+            ruby-build ${RUBY_VERSION} ${RUBY_INSTALL_DIR}
+            
+            # Mark as complete
+            touch ${RUBY_INSTALL_DIR}.complete
+            
+            echo "✅ Ruby ${RUBY_VERSION} installed successfully"
+          fi
+          
+          # Add Ruby to PATH
+          echo "${RUBY_INSTALL_DIR}/bin" >> $GITHUB_PATH
+          
+          # Verify installation
+          ${RUBY_INSTALL_DIR}/bin/ruby -v
       
       - name: Install Kamal
         run: |
