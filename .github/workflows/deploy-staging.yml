@@ -139,68 +139,75 @@ jobs:
       
       - name: Set up SSH for localhost
         run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          
           # Debug: Check current user context
           echo "Current user: $(whoami)"
           echo "Home directory: $HOME"
           echo "User ID: $(id)"
+          echo "Target SSH user from Kamal config: rege"
           
-          # Check if SSH server is running
-          if ! systemctl is-active --quiet ssh; then
-            echo "⚠️ SSH server not running, attempting to start..."
-            sudo systemctl start ssh || echo "Failed to start SSH server"
-          else
-            echo "✅ SSH server is running"
-          fi
+          # Generate SSH key for root user (runner)
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           
-          # Generate SSH key if it doesn't exist
           if [ ! -f ~/.ssh/id_ed25519 ]; then
             ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -C "github-actions-runner"
-            echo "✅ Generated new SSH key"
+            echo "✅ Generated new SSH key for root"
           else
-            echo "✅ SSH key already exists"
+            echo "✅ SSH key already exists for root"
           fi
           
-          # Show public key
-          echo "Public key:"
+          # Show the public key that needs to be authorized
+          echo ""
+          echo "Public key to authorize:"
           cat ~/.ssh/id_ed25519.pub
           
-          # Add public key to authorized_keys (avoid duplicates)
-          touch ~/.ssh/authorized_keys
-          if ! grep -qF "$(cat ~/.ssh/id_ed25519.pub)" ~/.ssh/authorized_keys; then
-            cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
-            echo "✅ Added public key to authorized_keys"
-          else
-            echo "✅ Public key already in authorized_keys"
-          fi
-          chmod 600 ~/.ssh/authorized_keys
+          # Add root's public key to rege user's authorized_keys
+          # This allows root (runner) to SSH as rege user
+          echo ""
+          echo "Adding root's public key to rege user's authorized_keys..."
+          sudo mkdir -p /home/rege/.ssh
+          sudo chmod 700 /home/rege/.ssh
+          sudo touch /home/rege/.ssh/authorized_keys
           
-          # Configure SSH for passwordless localhost access
+          # Add key if not already present
+          if ! sudo grep -qF "$(cat ~/.ssh/id_ed25519.pub)" /home/rege/.ssh/authorized_keys 2>/dev/null; then
+            sudo sh -c "cat ~/.ssh/id_ed25519.pub >> /home/rege/.ssh/authorized_keys"
+            echo "✅ Added root's public key to /home/rege/.ssh/authorized_keys"
+          else
+            echo "✅ Public key already in /home/rege/.ssh/authorized_keys"
+          fi
+          
+          sudo chmod 600 /home/rege/.ssh/authorized_keys
+          sudo chown -R rege:rege /home/rege/.ssh
+          
+          # Configure SSH for connecting as rege user
           cat > ~/.ssh/config << 'EOF'
           Host pi5main.local localhost 127.0.0.1
+            User rege
             IdentityFile ~/.ssh/id_ed25519
             StrictHostKeyChecking no
             UserKnownHostsFile /dev/null
-            LogLevel DEBUG3
+            IdentitiesOnly yes
           EOF
           chmod 600 ~/.ssh/config
           
-          # Test SSH connection to localhost first
           echo ""
-          echo "Testing SSH to localhost..."
-          ssh -v -o BatchMode=yes localhost 'echo "✅ SSH to localhost works"' 2>&1 | tail -20 || echo "⚠️ SSH to localhost failed"
+          echo "SSH config:"
+          cat ~/.ssh/config
           
-          # Test SSH connection to pi5main.local
+          # Verify rege's authorized_keys
           echo ""
-          echo "Testing SSH to pi5main.local..."
-          ssh -v -o BatchMode=yes pi5main.local 'echo "✅ SSH to pi5main.local works"' 2>&1 | tail -20 || echo "⚠️ SSH to pi5main.local failed"
+          echo "Authorized keys for rege user:"
+          sudo cat /home/rege/.ssh/authorized_keys || echo "Cannot read authorized_keys"
           
-          # Show authorized_keys for verification
+          # Test SSH connection as rege user
           echo ""
-          echo "Authorized keys:"
-          cat ~/.ssh/authorized_keys
+          echo "Testing SSH to localhost as rege..."
+          ssh -o BatchMode=yes localhost 'whoami' || echo "⚠️ SSH to localhost as rege failed"
+          
+          echo ""
+          echo "Testing SSH to pi5main.local as rege..."
+          ssh -o BatchMode=yes pi5main.local 'whoami' || echo "⚠️ SSH to pi5main.local as rege failed"
       
       - name: Additional SSH Debugging
         run: |
