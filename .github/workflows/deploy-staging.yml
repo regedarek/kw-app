@@ -142,43 +142,141 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           
+          # Debug: Check current user context
+          echo "Current user: $(whoami)"
+          echo "Home directory: $HOME"
+          echo "User ID: $(id)"
+          
+          # Check if SSH server is running
+          if ! systemctl is-active --quiet ssh; then
+            echo "⚠️ SSH server not running, attempting to start..."
+            sudo systemctl start ssh || echo "Failed to start SSH server"
+          else
+            echo "✅ SSH server is running"
+          fi
+          
           # Generate SSH key if it doesn't exist
           if [ ! -f ~/.ssh/id_ed25519 ]; then
             ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -C "github-actions-runner"
+            echo "✅ Generated new SSH key"
+          else
+            echo "✅ SSH key already exists"
           fi
           
-          # Add public key to authorized_keys
-          cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
+          # Show public key
+          echo "Public key:"
+          cat ~/.ssh/id_ed25519.pub
+          
+          # Add public key to authorized_keys (avoid duplicates)
+          touch ~/.ssh/authorized_keys
+          if ! grep -qF "$(cat ~/.ssh/id_ed25519.pub)" ~/.ssh/authorized_keys; then
+            cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
+            echo "✅ Added public key to authorized_keys"
+          else
+            echo "✅ Public key already in authorized_keys"
+          fi
           chmod 600 ~/.ssh/authorized_keys
           
           # Configure SSH for passwordless localhost access
           cat > ~/.ssh/config << 'EOF'
           Host pi5main.local localhost 127.0.0.1
-            User rege
             IdentityFile ~/.ssh/id_ed25519
             StrictHostKeyChecking no
             UserKnownHostsFile /dev/null
+            LogLevel DEBUG3
           EOF
           chmod 600 ~/.ssh/config
           
-          # Test SSH connection
-          ssh -o BatchMode=yes rege@pi5main.local 'echo "✅ SSH to pi5main.local works"' || echo "⚠️ SSH test failed, but continuing..."
+          # Test SSH connection to localhost first
+          echo ""
+          echo "Testing SSH to localhost..."
+          ssh -v -o BatchMode=yes localhost 'echo "✅ SSH to localhost works"' 2>&1 | tail -20 || echo "⚠️ SSH to localhost failed"
+          
+          # Test SSH connection to pi5main.local
+          echo ""
+          echo "Testing SSH to pi5main.local..."
+          ssh -v -o BatchMode=yes pi5main.local 'echo "✅ SSH to pi5main.local works"' 2>&1 | tail -20 || echo "⚠️ SSH to pi5main.local failed"
+          
+          # Show authorized_keys for verification
+          echo ""
+          echo "Authorized keys:"
+          cat ~/.ssh/authorized_keys
+      
+      - name: Additional SSH Debugging
+        run: |
+          echo "=== SSH Configuration Debug ==="
+          
+          # Check SSH daemon config
+          echo "SSH daemon status:"
+          sudo systemctl status ssh --no-pager || true
+          
+          echo ""
+          echo "SSH daemon config (relevant lines):"
+          sudo grep -E '^(PubkeyAuthentication|PasswordAuthentication|PermitRootLogin|AuthorizedKeysFile)' /etc/ssh/sshd_config || true
+          
+          # Check file permissions
+          echo ""
+          echo "SSH directory permissions:"
+          ls -la ~/.ssh/
+          
+          echo ""
+          echo "SSH key fingerprints:"
+          ssh-keygen -lf ~/.ssh/id_ed25519.pub
+          
+          # Check if we can read our own authorized_keys
+          echo ""
+          echo "Can read authorized_keys:"
+          cat ~/.ssh/authorized_keys | wc -l
+          
+          # Try manual SSH with full debug output
+          echo ""
+          echo "=== Attempting SSH with full debug ==="
+          ssh -vvv -o BatchMode=yes -o ConnectTimeout=5 localhost 'hostname' 2>&1 | tail -50 || true
+          
+          echo ""
+          echo "=== Attempting SSH to pi5main.local with full debug ==="
+          ssh -vvv -o BatchMode=yes -o ConnectTimeout=5 pi5main.local 'hostname' 2>&1 | tail -50 || true
       
       - name: Login to Docker Hub
         run: |
           echo "${{ env.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ env.KAMAL_REGISTRY_USERNAME }}" --password-stdin
       
-      - name: Release deploy lock
-        run: kamal lock release -d staging || true
+      - name: Check Kamal Configuration
+        run: |
+          echo "=== Kamal Configuration Debug ==="
+          
+          echo "Kamal config file:"
+          cat config/deploy.staging.yml
+          
+          echo ""
+          echo "Kamal version:"
+          kamal version
+          
+          echo ""
+          echo "Testing Kamal SSH connectivity:"
+          kamal config -d staging || true
       
-
+      - name: Release deploy lock
+        run: |
+          echo "=== Releasing Kamal deploy lock ==="
+          kamal lock release -d staging || true
+      
+      - name: Test Kamal SSH Connection
+        run: |
+          echo "=== Testing Kamal's SSH connection ==="
+          echo "This will show the actual SSH error from Kamal..."
+          kamal app exec -d staging 'echo "SSH works!"' || echo "⚠️ Kamal SSH test failed - see error above"
+      
       - name: Boot accessories (postgres and redis)
         run: |
-          kamal accessory boot postgres -d staging || echo "Postgres already running"
-          kamal accessory boot redis -d staging || echo "Redis already running"
+          echo "=== Booting accessories ==="
+          kamal accessory boot postgres -d staging || echo "Postgres already running or failed"
+          kamal accessory boot redis -d staging || echo "Redis already running or failed"
       
       - name: Deploy to staging
-        run: kamal deploy -d staging
+        run: |
+          echo "=== Starting Kamal deployment ==="
+          kamal deploy -d staging --verbose
       
       - name: Cleanup old Docker images
         run: kamal prune all -d staging || true
