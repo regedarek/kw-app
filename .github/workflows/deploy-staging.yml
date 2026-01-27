@@ -81,12 +81,9 @@ jobs:
       
       - name: Configure hostname resolution
         run: |
-          # Since the runner is on the Pi itself, map pi5main.local to localhost
+          # Map pi5main.local to localhost for runner container
           echo "127.0.0.1 pi5main.local" | sudo tee -a /etc/hosts
           echo "✅ Added pi5main.local to /etc/hosts"
-          
-          # Verify DNS resolution
-          getent hosts pi5main.local || echo "Warning: DNS lookup failed, but /etc/hosts should work"
       
       - name: Set up Ruby 3.2.2 with ruby-build
         run: |
@@ -137,71 +134,31 @@ jobs:
           fi
           kamal version
       
-      - name: Set up SSH for localhost
+      - name: Set up SSH for deployment
         run: |
-          # Debug: Check current user context
-          echo "Current user: $(whoami)"
-          echo "Home directory: $HOME"
-          echo "User ID: $(id)"
-          echo "Target SSH user from Kamal config: rege"
-          
-          # Generate SSH key for root user (runner)
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           
+          # Generate SSH key if not exists
           if [ ! -f ~/.ssh/id_ed25519 ]; then
             ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -C "github-actions-runner"
-            echo "✅ Generated new SSH key for root"
+            echo "✅ Generated new SSH key"
           else
-            echo "✅ SSH key already exists for root"
+            echo "✅ SSH key already exists"
           fi
           
-          # Show the public key that needs to be authorized
-          echo ""
-          echo "Public key to authorize:"
-          cat ~/.ssh/id_ed25519.pub
+          # Add runner's public key to host's authorized_keys using Docker volume mount
+          # This allows the runner container to SSH to the host as user 'rege'
+          echo "Adding SSH key to host..."
+          docker run --rm -v /home:/hosthome alpine sh -c "
+            mkdir -p /hosthome/rege/.ssh
+            chmod 700 /hosthome/rege/.ssh
+            grep -qF '$(cat ~/.ssh/id_ed25519.pub)' /hosthome/rege/.ssh/authorized_keys 2>/dev/null || echo '$(cat ~/.ssh/id_ed25519.pub)' >> /hosthome/rege/.ssh/authorized_keys
+            chmod 600 /hosthome/rege/.ssh/authorized_keys
+          "
+          echo "✅ SSH key added to host"
           
-          # Add root's public key to rege user's authorized_keys
-          # This allows root (runner) to SSH as rege user
-          echo ""
-          echo "Adding root's public key to rege user's authorized_keys..."
-          sudo mkdir -p /home/rege/.ssh
-          sudo chmod 700 /home/rege/.ssh
-          sudo touch /home/rege/.ssh/authorized_keys
-          
-          # Add key if not already present
-          if ! sudo grep -qF "$(cat ~/.ssh/id_ed25519.pub)" /home/rege/.ssh/authorized_keys 2>/dev/null; then
-            sudo sh -c "cat ~/.ssh/id_ed25519.pub >> /home/rege/.ssh/authorized_keys"
-            echo "✅ Added root's public key to /home/rege/.ssh/authorized_keys"
-          else
-            echo "✅ Public key already in /home/rege/.ssh/authorized_keys"
-          fi
-          
-          sudo chmod 600 /home/rege/.ssh/authorized_keys 2>/dev/null || echo "⚠️ Cannot chmod (user may not exist in container)"
-          
-          echo ""
-          echo "=== Investigating Host Filesystem Access ==="
-          
-          # Check if /home exists and what users are there
-          echo "Users in /home:"
-          ls -la /home/ 2>/dev/null || echo "Cannot access /home"
-          
-          # Check if we're in a container with host volume mounts
-          echo ""
-          echo "Checking for volume mounts:"
-          mount | grep -E 'home|rege' || echo "No home-related mounts found"
-          
-          echo ""
-          echo "File system mounts:"
-          df -h | head -10
-          
-          # Check if there's a way to access the host
-          echo ""
-          echo "Checking for host access methods:"
-          [ -S /var/run/docker.sock ] && echo "✅ Docker socket available at /var/run/docker.sock" || echo "❌ No docker socket"
-          [ -f /host/home/rege/.ssh/authorized_keys ] && echo "✅ Found /host mount" || echo "❌ No /host mount"
-          
-          # Configure SSH for connecting as rege user
+          # Configure SSH client
           cat > ~/.ssh/config << 'EOF'
           Host pi5main.local localhost 127.0.0.1
             User rege
@@ -212,164 +169,22 @@ jobs:
           EOF
           chmod 600 ~/.ssh/config
           
-          echo ""
-          echo "SSH config created:"
-          cat ~/.ssh/config
-          
-          echo ""
-          echo "=== Attempting to add SSH key to HOST ==="
-          
-          # Method 1: Try using nsenter to access host namespace
-          if command -v nsenter &> /dev/null; then
-            echo "Attempting to add key to host via nsenter..."
-            nsenter -t 1 -m -u -i -n sh -c "
-              mkdir -p /home/rege/.ssh
-              chmod 700 /home/rege/.ssh
-              grep -qF '$(cat ~/.ssh/id_ed25519.pub)' /home/rege/.ssh/authorized_keys 2>/dev/null || echo '$(cat ~/.ssh/id_ed25519.pub)' >> /home/rege/.ssh/authorized_keys
-              chmod 600 /home/rege/.ssh/authorized_keys
-              chown -R rege:rege /home/rege/.ssh
-              echo 'Key added to host!'
-            " 2>&1 && echo "✅ Successfully added key to host via nsenter" || echo "⚠️ nsenter method failed"
-          else
-            echo "⚠️ nsenter not available"
-          fi
-          
-          # Method 2: Try using docker to execute on host
-          if [ -S /var/run/docker.sock ]; then
-            echo ""
-            echo "Docker socket available, trying docker exec to host..."
-            # Get the host's PID 1 container (if running systemd in container) or use docker run with host volumes
-            docker run --rm -v /home:/hosthome alpine sh -c "
-              mkdir -p /hosthome/rege/.ssh
-              chmod 700 /hosthome/rege/.ssh
-              grep -qF '$(cat ~/.ssh/id_ed25519.pub)' /hosthome/rege/.ssh/authorized_keys 2>/dev/null || echo '$(cat ~/.ssh/id_ed25519.pub)' >> /hosthome/rege/.ssh/authorized_keys
-              chmod 600 /hosthome/rege/.ssh/authorized_keys
-            " 2>&1 && echo "✅ Successfully added key to host via docker" || echo "⚠️ docker method failed"
-          else
-            echo "⚠️ Docker socket not available"
-          fi
-          
-          echo ""
-          echo "=== Public key (for manual addition if automated methods failed) ==="
-          cat ~/.ssh/id_ed25519.pub
-          echo ""
-          echo "This key should be in: /home/rege/.ssh/authorized_keys on the HOST"
-      
-      - name: Container and Network Debugging
-        run: |
-          echo "=== Environment Detection ==="
-          echo "Running in container: $([ -f /.dockerenv ] && echo 'YES' || echo 'NO')"
-          echo "Hostname: $(hostname)"
-          echo "Current user: $(whoami)"
-          
-          echo ""
-          echo "=== Network Information ==="
-          echo "Container IP addresses:"
-          ip addr show || ifconfig -a || true
-          
-          echo ""
-          echo "Default gateway (host IP):"
-          ip route | grep default || route -n || true
-          
-          # Try to determine host IP
-          HOST_IP=$(ip route | grep default | awk '{print $3}' | head -1)
-          echo "Detected host IP: $HOST_IP"
-          
-          echo ""
-          echo "=== DNS Resolution ==="
-          echo "Resolving pi5main.local:"
-          getent hosts pi5main.local || nslookup pi5main.local || true
-          
-          echo ""
-          echo "=== Testing Network Connectivity ==="
-          echo "Ping localhost:"
-          ping -c 2 localhost || true
-          
-          echo ""
-          echo "Ping host IP ($HOST_IP):"
-          ping -c 2 $HOST_IP || true
-          
-          echo ""
-          echo "Ping pi5main.local:"
-          ping -c 2 pi5main.local || true
-          
-          echo ""
-          echo "=== Testing SSH Port ==="
-          echo "Checking SSH port 22 on localhost:"
-          nc -zv localhost 22 2>&1 || timeout 2 bash -c "</dev/tcp/localhost/22" 2>&1 || echo "Port 22 not open on localhost"
-          
-          echo ""
-          echo "Checking SSH port 22 on host IP ($HOST_IP):"
-          nc -zv $HOST_IP 22 2>&1 || timeout 2 bash -c "</dev/tcp/$HOST_IP/22" 2>&1 || echo "Port 22 not open on $HOST_IP"
-          
-          echo ""
-          echo "Checking SSH port 22 on pi5main.local:"
-          nc -zv pi5main.local 22 2>&1 || timeout 2 bash -c "</dev/tcp/pi5main.local/22" 2>&1 || echo "Port 22 not open on pi5main.local"
-          
-          echo ""
-          echo "=== SSH Key Information ==="
-          echo "SSH directory permissions:"
-          ls -la ~/.ssh/
-          
-          echo ""
-          echo "SSH key fingerprint:"
-          ssh-keygen -lf ~/.ssh/id_ed25519.pub
-          
-          echo ""
-          echo "Public key content:"
-          cat ~/.ssh/id_ed25519.pub
-          
-          echo ""
-          echo "=== Testing SSH Connection with Verbose Output ==="
-          echo "Attempting SSH to pi5main.local as rege user..."
-          ssh -vvv -o BatchMode=yes -o ConnectTimeout=10 rege@pi5main.local 'whoami && hostname' 2>&1 || true
-          
-          echo ""
-          echo "Attempting SSH to host IP as rege user..."
-          if [ -n "$HOST_IP" ]; then
-            ssh -vvv -o BatchMode=yes -o ConnectTimeout=10 rege@$HOST_IP 'whoami && hostname' 2>&1 || true
-          fi
+          echo "✅ SSH configured"
       
       - name: Login to Docker Hub
         run: |
           echo "${{ env.KAMAL_REGISTRY_PASSWORD }}" | docker login -u "${{ env.KAMAL_REGISTRY_USERNAME }}" --password-stdin
       
-      - name: Check Kamal Configuration
-        run: |
-          echo "=== Kamal Configuration Debug ==="
-          
-          echo "Kamal config file:"
-          cat config/deploy.staging.yml
-          
-          echo ""
-          echo "Kamal version:"
-          kamal version
-          
-          echo ""
-          echo "Testing Kamal SSH connectivity:"
-          kamal config -d staging || true
-      
       - name: Release deploy lock
-        run: |
-          echo "=== Releasing Kamal deploy lock ==="
-          kamal lock release -d staging || true
-      
-      - name: Test Kamal SSH Connection
-        run: |
-          echo "=== Testing Kamal's SSH connection ==="
-          echo "This will show the actual SSH error from Kamal..."
-          kamal app exec -d staging 'echo "SSH works!"' || echo "⚠️ Kamal SSH test failed - see error above"
+        run: kamal lock release -d staging || true
       
       - name: Boot accessories (postgres and redis)
         run: |
-          echo "=== Booting accessories ==="
-          kamal accessory boot postgres -d staging || echo "Postgres already running or failed"
-          kamal accessory boot redis -d staging || echo "Redis already running or failed"
+          kamal accessory boot postgres -d staging || echo "Postgres already running"
+          kamal accessory boot redis -d staging || echo "Redis already running"
       
       - name: Deploy to staging
-        run: |
-          echo "=== Starting Kamal deployment ==="
-          kamal deploy -d staging --verbose
+        run: kamal deploy -d staging
       
       - name: Cleanup old Docker images
         run: kamal prune all -d staging || true
