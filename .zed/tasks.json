@@ -1,0 +1,142 @@
+[
+  {
+    "label": "Run All Tests",
+    "command": "docker-compose exec -T app bundle exec rspec",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Run Current Test File",
+    "command": "docker-compose exec -T app bundle exec rspec \"$ZED_RELATIVE_FILE\"",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Run Test at Line",
+    "command": "docker-compose exec -T app bundle exec rspec \"$ZED_RELATIVE_FILE:$ZED_ROW\"",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Run Tests (Verbose)",
+    "command": "docker-compose exec -T app env VERBOSE_TESTS=true bundle exec rspec \"$ZED_RELATIVE_FILE\"",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Rails Console",
+    "command": "docker-compose exec app bundle exec rails console",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "RuboCop (Auto-fix Current File)",
+    "command": "docker-compose exec -T app bundle exec rubocop -a \"$ZED_RELATIVE_FILE\"",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "RuboCop (All Files)",
+    "command": "docker-compose exec -T app bundle exec rubocop",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "DB Migrate",
+    "command": "docker-compose exec -T app bundle exec rake db:migrate",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "DB Rollback",
+    "command": "docker-compose exec -T app bundle exec rake db:rollback",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "DB Migrate Status",
+    "command": "docker-compose exec -T app bundle exec rake db:migrate:status",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "View App Logs",
+    "command": "docker-compose logs -f app",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "View Sidekiq Logs",
+    "command": "docker-compose logs -f sidekiq",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Docker: Start All",
+    "command": "docker-compose up -d",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Docker: Restart App",
+    "command": "docker-compose restart app sidekiq",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Docker: Status",
+    "command": "docker-compose ps",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Brakeman (Security Scan)",
+    "command": "docker-compose exec -T app bundle exec brakeman",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Bundle Audit",
+    "command": "docker-compose exec -T app bundle exec bundle-audit check --update",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Rails Routes",
+    "command": "docker-compose exec -T app bundle exec rails routes",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Staging Console (Kamal)",
+    "command": "zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d staging -i --reuse \"bin/rails console\"'",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Production Console (Kamal)",
+    "command": "zsh -c 'source ~/.zshrc && chruby 3.2.2 && bundle exec kamal app exec -d production -i --reuse \"bin/rails console\"'",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  }
+]

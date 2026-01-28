@@ -1,0 +1,219 @@
+# kw-app — AI Rules
+
+You are an AI coding agent operating inside the kw-app project.
+You MUST follow these rules at all times.
+
+---
+
+## 1. Scope and Authority
+
+These rules define:
+- architectural constraints
+- workflow discipline
+- naming conventions
+- testing and quality requirements
+
+You MUST NOT:
+- invent alternative architectures
+- bypass documented workflows
+- inline large code templates unless explicitly requested
+- execute commands without proper environment flags
+- create multiple documents per one AI session
+
+Procedural details, commands, and examples live in documentation files.
+You MUST reference them, not duplicate them.
+
+---
+
+## 2. Architecture (MANDATORY)
+
+This project uses **Rails 7 + dry-rb** with operations-based architecture.
+
+You MUST respect the following layering:
+
+```
+Request → Controller → Operation → Model → Database
+               ↓           ↓
+            Form/      Validation
+           Contract
+```
+
+### Layer Responsibilities
+
+| Layer | Location | Responsibility |
+|-------|----------|----------------|
+| Models | `app/models/db/` | Thin ActiveRecord (associations, validations, scopes) |
+| Operations | `app/components/*/operation/` | Business logic (dry-monads) |
+| Contracts/Forms | `app/components/*/contract/` | Input validation (dry-validation) |
+| Controllers | `app/controllers/` | Thin HTTP adapters |
+| Jobs | `app/jobs/` | Background processing (Sidekiq) |
+
+Full architecture details: `docs/ARCHITECTURE.md`
+
+---
+
+## 3. dry-monads (MANDATORY for Operations)
+
+All service objects/operations MUST use dry-monads.
+
+You MUST:
+- Include `Dry::Monads[:result, :do]`
+- Return `Success(value)` or `Failure(error)`
+- Use `yield` for chaining operations
+
+You MUST NOT:
+- Use custom `Result`, `Success`, `Failure` classes from `lib/` (DEPRECATED)
+- Use `require 'result'` or similar
+
+Pattern reference: `.agents/skills/dry-monads-patterns/SKILL.md`
+
+---
+
+## 4. Naming Conventions (STRICT)
+
+| Component | Pattern | Example |
+|-----------|---------|---------|
+| Model | `Db::Resource` | `app/models/db/user.rb` |
+| Operation | `Namespace::Operation::Action` | `app/components/users/operation/create.rb` |
+| Contract | `Namespace::ContractForm` | `app/components/users/create_form.rb` |
+| Job | `ActionJob` | `app/jobs/user_notification_job.rb` |
+| Spec | mirrors source + `_spec.rb` | `spec/components/users/operation/create_spec.rb` |
+
+File paths MUST mirror namespaces.
+
+---
+
+## 5. Docker Execution (MANDATORY)
+
+All application commands MUST run inside Docker.
+
+You MUST use:
+- `docker-compose exec -T app bundle exec ...` for non-interactive commands
+- `docker-compose exec app bundle exec ...` for interactive commands (console)
+
+You MUST NOT:
+- Run `bundle exec rspec` on host (wrong Ruby version)
+- Run `rails console` on host
+
+Exception: Kamal deployment commands use native Ruby with `chruby 3.2.2`.
+
+Exact commands: `docs/DEV_COMMANDS.md`
+
+---
+
+## 6. Feature Development Workflow
+
+When the user mentions `@feature` or requests a new feature:
+
+You MUST follow the workflow defined in: `docs/FEATURE_WORKFLOW.md`
+
+You MUST:
+1. Ask clarifying questions ONE BY ONE (wait for answer)
+2. Propose a solution before implementing
+3. Wait for explicit approval before writing code
+4. Write and run tests before declaring completion
+
+You MUST NOT skip phases.
+
+---
+
+## 7. Testing Discipline (NON-NEGOTIABLE)
+
+- All features MUST include tests
+- Tests MUST be written before declaring completion
+- Tests MUST run in Docker: `docker-compose exec -T app bundle exec rspec`
+- All test failures MUST be fixed before completion
+
+Testing patterns: `.agents/rspec.md`
+
+---
+
+## 8. Permission Boundaries
+
+### ✅ Always Do
+- Use Docker for ALL app commands
+- Write tests for new features
+- Use dry-monads for operations
+- Check `docs/KNOWN_ISSUES.md` before debugging
+- Run tests before marking work complete
+
+### ⚠️ Ask First (Once Per Thread)
+- Production database modifications
+- Deployment config changes (`config/deploy.*.yml`)
+- Git operations (commit, push, merge, rebase)
+- Database migrations (must be reversible)
+- Adding gems to Gemfile
+- Modifying existing validations or associations
+
+### 🚫 Never Do
+- Hardcode secrets or credentials
+- Remove security features
+- Run tests outside Docker
+- Use custom Result classes (deprecated)
+- Skip tests
+- Modify `vendor/`, `node_modules/`, `.git/`
+- Commit `*.key` files
+
+---
+
+## 9. Code Quality Gates
+
+Before completing any task:
+- Linter passes (RuboCop)
+- Tests pass
+- Architecture boundaries respected
+- Frozen string literals present (Ruby files)
+
+Quality commands: `docs/DEV_COMMANDS.md`
+
+---
+
+## 10. Code Templates
+
+When generating new components, use templates from: `templates/`
+
+---
+
+## 11. Output Expectations
+
+- Prefer small, focused diffs
+- Explain architectural decisions briefly
+- Never generate speculative or placeholder code
+- Ask for clarification when requirements are ambiguous
+- Reference documentation instead of repeating it
+
+---
+
+## 12. Documentation References
+
+| Document | Purpose |
+|----------|---------|
+| `docs/ARCHITECTURE.md` | Full architecture details |
+| `docs/DEV_COMMANDS.md` | All shell commands |
+| `docs/FEATURE_WORKFLOW.md` | @feature workflow phases |
+| `docs/KNOWN_ISSUES.md` | Known bugs and solutions |
+| `AGENTS.md` | Available agents and routing |
+| `.agents/` | Individual agent specifications |
+| `.agents/skills/` | Deep-dive knowledge modules |
+| `templates/` | Code templates |
+
+---
+
+## 13. Tech Stack Reference
+
+| Component | Version |
+|-----------|---------|
+| Ruby | 3.2.2 |
+| Rails | 7.0.8 |
+| PostgreSQL | 10.3 |
+| Redis | 7 |
+| Sidekiq | Background jobs |
+| dry-monads | Operations |
+| dry-validation | Form validation |
+| RSpec | Testing |
+| Docker | Development |
+| Kamal | Deployment |
+
+---
+
+These rules override default AI behavior.
