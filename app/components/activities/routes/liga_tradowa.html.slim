@@ -31,6 +31,9 @@ css:
   .sub-table td.no-wrap  { white-space: nowrap; }
   .sub-table td.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 0; }
 
+  .gp-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.1rem 0.35rem; border-radius: 3px; background: #e8f0e8; color: #4a8a4a; letter-spacing: 0.03em; }
+  .style-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.1rem 0.35rem; border-radius: 3px; background: #e8eeff; color: #4a6ac4; letter-spacing: 0.03em; }
+
   .avatar-img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
   .thumb-img  { width: 44px; height: 44px; object-fit: cover; object-position: center; border-radius: 5px; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.25); display: block; cursor: pointer; }
   .thumb-row  { display: inline-flex; gap: 0.3rem; align-items: center; flex-wrap: nowrap; }
@@ -244,6 +247,7 @@ javascript:
                   col style="width:7rem;"
                   col style="width:22%;"
                   col style="width:5rem;"
+                  col style="width:4rem;"
                   col
                   col style="width:5.5rem;"
                   col style="width:9rem;"
@@ -252,6 +256,7 @@ javascript:
                     th data
                     th droga
                     th trudność
+                    th.text-center styl
                     th rejon
                     th.text-center punkty
                     th zdjęcia
@@ -266,10 +271,19 @@ javascript:
                         = link_to route.name, "/przejscia/#{route.slug}", style: 'color:#1a73e8; font-weight:500;'
                       td style="color:#555;"
                         = route.kurtyka_difficulty
+                      td.text-center
+                        - if route.climb_style.present?
+                          - if route.climb_style == 'Greenpoint'
+                            span.gp-badge GP
+                          - else
+                            span.style-badge = route.climb_style
                       td.truncate style="color:#555;"
                         = route.area
                       td.text-center style="font-weight:600;"
-                        = route_pts.to_i > 0 ? route_pts : '—'
+                        - if route.climb_style == 'Greenpoint'
+                          span.gp-badge GP
+                        - else
+                          = route_pts.to_i > 0 ? route_pts : '—'
                       td
                         - if route_photos.any?
                           span.thumb-row
@@ -320,11 +334,20 @@ javascript:
               .liga-sub-item-header
                 .liga-sub-item-name
                   = link_to route.name, "/przejscia/#{route.slug}"
-                .liga-sub-item-pts = route_pts.to_i > 0 ? "#{route_pts} pkt" : '—'
+                .liga-sub-item-pts
+                  - if route.climb_style == 'Greenpoint'
+                    span.gp-badge GP
+                  - else
+                    = route_pts.to_i > 0 ? "#{route_pts} pkt" : '—'
               .liga-sub-item-meta
                 span = route.climbing_date.strftime('%Y-%m-%d')
                 - if route.kurtyka_difficulty.present?
                   span = route.kurtyka_difficulty
+                - if route.climb_style.present?
+                  - if route.climb_style == 'Greenpoint'
+                    span.gp-badge GP
+                  - else
+                    span.style-badge = route.climb_style
                 - if route.area.present?
                   span = route.area
               - if route_photos.any?
